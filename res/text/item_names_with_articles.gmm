@@ -1723,7 +1723,7 @@
 	</row>
 	<row id="pl_msg_00000393_00430" index="430">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">a {COLOR 255}Rule Book{COLOR 0}</language>
+		<language name="English">a {COLOR 255}Infinite Candy{COLOR 0}</language>
 	</row>
 	<row id="pl_msg_00000393_00431" index="431">
 		<attribute name="window_context_name">used</attribute>
