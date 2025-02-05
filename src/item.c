@@ -879,6 +879,8 @@ static s32 ItemPartyParam_Get(ItemPartyParam *partyParam, enum ItemDataParam att
         return (s32)partyParam->reviveAll;
     case ITEM_PARAM_LEVEL_UP:
         return (s32)partyParam->levelUp;
+    case ITEM_PARAM_EDGE_LEVEL:
+        return (s32)partyParam->edgeLevel;
     case ITEM_PARAM_EVOLVE:
         return (s32)partyParam->evolve;
     case ITEM_PARAM_ATK_STAGES:
