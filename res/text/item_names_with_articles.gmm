@@ -1863,7 +1863,7 @@
 	</row>
 	<row id="pl_msg_00000393_00465" index="465">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">a {COLOR 255}Vs. Recorder{COLOR 0}</language>
+		<language name="English">a {COLOR 255}Training Kit{COLOR 0}</language>
 	</row>
 	<row id="pl_msg_00000393_00466" index="466">
 		<attribute name="window_context_name">used</attribute>
