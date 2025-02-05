@@ -2578,6 +2578,19 @@ static int ApplyItemEffectOnPokemon(GameWindowLayout *param0)
         return 31;
     }
 
+    if ((Item_Get(v0, 25) != 0)) {
+        Pokemon *v1 = Party_GetPokemonBySlotIndex(param0->unk_5A4->unk_00, param0->unk_B11);
+        if (Pokemon_GetValue(v1, MON_DATA_LEVEL, NULL) < 100) {
+            sub_020852B8(param0);
+        } else {
+            sub_02082708(param0, 105, 1);
+            param0->unk_B11 = 7;
+            param0->unk_B00 = sub_02085348;
+        }
+        Heap_FreeToHeap(v0);
+        return 5;
+    }
+
     if ((Item_Get(v0, 34) != 0) || (Item_Get(v0, 35) != 0)) {
         Heap_FreeToHeap(v0);
         sub_020866A0(param0, 0);
