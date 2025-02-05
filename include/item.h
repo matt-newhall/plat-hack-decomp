@@ -48,6 +48,7 @@ typedef struct ItemPartyParam {
     s8 friendshipLow;
     s8 friendshipMed;
     s8 friendshipHigh;
+    u8 edgeLevel : 1;
     u8 padding[2];
 } ItemPartyParam;
 
@@ -142,6 +143,7 @@ enum ItemDataParam {
     ITEM_PARAM_FRIENDSHIP_LOW,
     ITEM_PARAM_FRIENDSHIP_MED,
     ITEM_PARAM_FRIENDSHIP_HIGH,
+    ITEM_PARAM_EDGE_LEVEL,
 };
 
 /**
