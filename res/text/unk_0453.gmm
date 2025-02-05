@@ -855,4 +855,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The {STRVAR_1 8, 0, 0} cannot be\ngiven here.\n</language>
 	</row>
+	<row id="pl_msg_00000453_00205" index="205">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was trained to its limits!</language>
+	</row>
 </body>

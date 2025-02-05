@@ -2603,6 +2603,19 @@ static int ApplyItemEffectOnPokemon(GameWindowLayout *param0)
         return 6;
     }
 
+    if (Item_Get(v0, 59) != 0) {
+        Pokemon *v1 = Party_GetPokemonBySlotIndex(param0->unk_5A4->unk_00, param0->unk_B11);
+        if (Pokemon_GetExpToNextLevel(v1) < 2) {
+            sub_02082708(param0, 105, 1);
+            param0->unk_B11 = 7;
+            param0->unk_B00 = sub_02085348;
+        } else {
+            sub_020852B8(param0);
+        }
+        Heap_FreeToHeap(v0);
+        return 5;
+    }
+
     if (CheckItemEffectsOnPartyMember(param0->unk_5A4->unk_00, param0->unk_5A4->unk_24, param0->unk_B11, 0, 12) == 1) {
         Bag_TryRemoveItem(param0->unk_5A4->unk_04, param0->unk_5A4->unk_24, 1, 12);
 

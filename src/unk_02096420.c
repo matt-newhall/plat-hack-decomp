@@ -336,6 +336,15 @@ u8 ApplyItemEffectsToPokemon(Pokemon *param0, u16 param1, u16 param2, u16 param3
 
     v1[2] = Pokemon_GetValue(param0, MON_DATA_LEVEL, NULL);
 
+    if (Item_Get(v0, 59) != 0) {
+        if (v1[2] < 100) {
+            Pokemon_IncreaseValue(param0, MON_DATA_EXP, Pokemon_GetExpToNextLevel(param0)-1);
+            v2 = 1;
+        }
+
+        v3 = 1;
+    }
+
     if (Item_Get(v0, 25) != 0) {
         if (v1[2] < 100) {
             Pokemon_IncreaseValue(param0, MON_DATA_EXP, Pokemon_GetExpToNextLevel(param0));

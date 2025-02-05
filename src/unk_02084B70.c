@@ -75,6 +75,11 @@ static u8 Item_GetUseEffect(u16 param0)
         return 2;
     }
 
+    if (Item_Get(v0, 59) != 0) {
+        Heap_FreeToHeap(v0);
+        return 29;
+    }
+
     v1 = Item_Get(v0, 15);
     v1 += (Item_Get(v0, 16) << 1);
     v1 += (Item_Get(v0, 17) << 2);
@@ -348,6 +353,13 @@ static void sub_02084E58(GameWindowLayout *param0, u16 param1, u32 param2)
     case 27:
         MessageLoader_GetStrbuf(param0->unk_69C, 69, param0->unk_6A4);
         break;
+    case 29:
+        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 205);
+
+        StringTemplate_SetNickname(param0->unk_6A0, 0, Pokemon_GetBoxPokemon(v0));
+        StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
+        Strbuf_Free(v1);
+        break;
     default:
         MessageLoader_GetStrbuf(param0->unk_69C, 105, param0->unk_6A4);
     }
@@ -381,6 +393,7 @@ void sub_020852B8(GameWindowLayout *param0)
     case 25:
     case 26:
     case 27:
+    case 29:
         param0->unk_B00 = sub_02085384;
         break;
     case 18:
