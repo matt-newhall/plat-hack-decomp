@@ -3390,6 +3390,12 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
             if (itemEffect == HOLD_EFFECT_ENDURE && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
             }
+
+            // need to check if the attacker ignores sturdy
+            if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY
+                && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
+                DEFENDER_TURN_FLAGS.enduring = TRUE;
+            }
         }
 
         if ((DEFENDER_TURN_FLAGS.enduring || DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
