@@ -3391,8 +3391,7 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
             }
 
-            // need to check if the attacker ignores sturdy
-            if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_STURDY
+            if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE
                 && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
                 DEFENDER_TURN_FLAGS.enduring = TRUE;
             }
