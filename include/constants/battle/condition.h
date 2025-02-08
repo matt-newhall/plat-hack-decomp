@@ -133,7 +133,8 @@
     | FIELD_CONDITION_SANDSTORM                            \
     | FIELD_CONDITION_SUNNY                                \
     | FIELD_CONDITION_HAILING                              \
-    | FIELD_CONDITION_DEEP_FOG)
+    | FIELD_CONDITION_DEEP_FOG                             \
+    | FIELD_CONDITION_MAGMA_STORM_PERM)
 #define FIELD_CONDITION_SOLAR_DOWN (FIELD_CONDITION_RAINING \
     | FIELD_CONDITION_SANDSTORM                             \
     | FIELD_CONDITION_HAILING                               \
