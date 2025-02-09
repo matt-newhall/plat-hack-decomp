@@ -1266,7 +1266,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed *= 2;
     }
 
-    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND) {
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && Battler_Side(battleSys, battler1) == BATTLER_THEM)) {
         battler1Speed *= 2;
     }
 
@@ -1332,7 +1333,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler2Speed *= 2;
     }
 
-    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_TAILWIND) {
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_TAILWIND
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && Battler_Side(battleSys, battler2) == BATTLER_THEM)) {
         battler2Speed *= 2;
     }
 
@@ -3698,6 +3700,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 case OVERWORLD_WEATHER_TWISTED_DIMENSIONS:
                     subscript = subscript_overworld_twisted_dimensions;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_TAILWIND:
+                    subscript = subscript_overworld_tailwind;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
