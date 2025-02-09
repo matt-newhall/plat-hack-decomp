@@ -3710,7 +3710,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
-                case OVERWORLD_WEATHER_TAILWIND:
+                case OVERWORLD_WEATHER_CLEAR_13:
                     subscript = subscript_overworld_tailwind;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
