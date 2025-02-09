@@ -3697,6 +3697,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
+                case OVERWORLD_WEATHER_TWISTED_DIMENSIONS:
+                    subscript = subscript_overworld_twisted_dimensions;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
                 default:
                     break;
                 }
