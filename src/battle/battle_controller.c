@@ -2631,7 +2631,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
                 ATTACKING_MON.statusVolatile -= (1 << VOLATILE_CONDITION_CONFUSION_SHIFT);
 
                 if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION) {
-                    if (BattleSystem_RandNext(battleSys) & 1) {
+                    if (BattleSystem_RandNext(battleSys) <= 0xAAAA) {
                         LOAD_SUBSEQ(subscript_confused);
                         battleCtx->commandNext = battleCtx->command;
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
