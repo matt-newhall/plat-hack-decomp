@@ -5516,7 +5516,11 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
         return FALSE;
     }
 
-    if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM)) {
+    if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
+        return FALSE;
+    }
+
+    if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
         return TRUE;
     }
 
