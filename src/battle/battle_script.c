@@ -5792,7 +5792,8 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
     if (NO_CLOUD_NINE) {
         if (WEATHER_IS_MAGMA_STORM
             && battleCtx->battleMons[battler].curHP
-            && Battler_Side(battleSys, battler) == BATTLER_US) {
+            && Battler_Side(battleSys, battler) == BATTLER_US
+            && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
             battleCtx->msgMoveTemp = MOVE_MAGMA_STORM;
             battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
         }
