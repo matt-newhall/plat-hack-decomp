@@ -59,4 +59,5 @@ ppRestored:u8
 friendshipLow:s8
 friendshipMed:s8
 friendshipHigh:s8
+edgeLevel:u8.1:bool
 partyparampad:pad2

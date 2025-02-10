@@ -1885,7 +1885,7 @@
 	</row>
 	<row id="pl_msg_00000391_00465" index="465">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">An amazing device that can record a\nbattle either between friends or at a\nspecial battle facility.</language>
+		<language name="English">A specialized training program.\nIt raises a Pokémon’s experience\nto just before its next level.</language>
 	</row>
 	<row id="pl_msg_00000391_00466" index="466">
 		<attribute name="window_context_name">used</attribute>

@@ -35,7 +35,7 @@ static int sub_02085384(void *param0);
 static int sub_02085424(void *param0);
 static int sub_020855C4(void *param0);
 static int sub_02085704(void *param0);
-static int sub_02085A70(void *param0);
+static int Item_UseEffect_LevelUp(void *param0);
 static int sub_02085C50(void *param0);
 static void sub_02086590(GameWindowLayout *param0, Pokemon *param1, u32 param2);
 static int sub_02086438(void *param0);
@@ -48,7 +48,7 @@ static int sub_02086008(void *param0);
 static int sub_02086060(void *param0);
 static int sub_020860AC(void *param0);
 
-static u8 sub_02084B70(u16 param0)
+static u8 Item_GetUseEffect(u16 param0)
 {
     ItemData *v0;
     s32 v1;
@@ -73,6 +73,11 @@ static u8 sub_02084B70(u16 param0)
     if (Item_Get(v0, 25) != 0) {
         Heap_FreeToHeap(v0);
         return 2;
+    }
+
+    if (Item_Get(v0, 59) != 0) {
+        Heap_FreeToHeap(v0);
+        return 29;
     }
 
     v1 = Item_Get(v0, 15);
@@ -225,7 +230,7 @@ static void sub_02084E58(GameWindowLayout *param0, u16 param1, u32 param2)
     v0 = Party_GetPokemonBySlotIndex(param0->unk_5A4->unk_00, param0->unk_B11);
     StringTemplate_SetNickname(param0->unk_6A0, 0, Pokemon_GetBoxPokemon(v0));
 
-    switch (sub_02084B70(param1)) {
+    switch (Item_GetUseEffect(param1)) {
     case 4:
         v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 65);
         StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
@@ -348,6 +353,13 @@ static void sub_02084E58(GameWindowLayout *param0, u16 param1, u32 param2)
     case 27:
         MessageLoader_GetStrbuf(param0->unk_69C, 69, param0->unk_6A4);
         break;
+    case 29:
+        v1 = MessageLoader_GetNewStrbuf(param0->unk_69C, 205);
+
+        StringTemplate_SetNickname(param0->unk_6A0, 0, Pokemon_GetBoxPokemon(v0));
+        StringTemplate_Format(param0->unk_6A0, param0->unk_6A4, v1);
+        Strbuf_Free(v1);
+        break;
     default:
         MessageLoader_GetStrbuf(param0->unk_69C, 105, param0->unk_6A4);
     }
@@ -355,14 +367,14 @@ static void sub_02084E58(GameWindowLayout *param0, u16 param1, u32 param2)
 
 void sub_020852B8(GameWindowLayout *param0)
 {
-    switch (sub_02084B70(param0->unk_5A4->unk_24)) {
+    switch (Item_GetUseEffect(param0->unk_5A4->unk_24)) {
     case 0:
     case 28:
         break;
     case 1:
         break;
     case 2:
-        param0->unk_B00 = sub_02085A70;
+        param0->unk_B00 = Item_UseEffect_LevelUp;
         break;
     case 3:
     case 4:
@@ -381,6 +393,7 @@ void sub_020852B8(GameWindowLayout *param0)
     case 25:
     case 26:
     case 27:
+    case 29:
         param0->unk_B00 = sub_02085384;
         break;
     case 18:
@@ -654,7 +667,7 @@ int sub_02085804(GameWindowLayout *param0)
     return 7;
 }
 
-static int sub_02085A70(void *param0)
+static int Item_UseEffect_LevelUp(void *param0)
 {
     GameWindowLayout *v0;
     Pokemon *v1;
