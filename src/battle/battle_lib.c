@@ -3684,6 +3684,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     break;
 
                 case OVERWORLD_WEATHER_HARSH_SUN:
+                case OVERWORLD_WEATHER_SUNNY:
                     subscript = subscript_overworld_sun;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
