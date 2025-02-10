@@ -1570,7 +1570,13 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
-    battleCtx->damage *= battleCtx->criticalMul;
+    if (battleCtx->criticalMul > 1) {
+        if (battleCtx->criticalMul == 2) {
+            battleCtx->damage = (battleCtx->damage * 3) / 2;
+        } else {
+            battleCtx->damage *= 2;
+        }
+    }
 
     if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_HP_DRAIN_ON_ATK) {
         battleCtx->damage = battleCtx->damage * (100 + Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0)) / 100;
@@ -6436,7 +6442,14 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage /= SpeciesData_GetFormValue(DEFENDING_MON.species, DEFENDING_MON.formNum, SPECIES_DATA_BASE_DEF);
     battleCtx->damage /= 50;
     battleCtx->damage += 2;
-    battleCtx->damage *= battleCtx->criticalMul;
+
+    if (battleCtx->criticalMul > 1) {
+        if (battleCtx->criticalMul == 2) {
+            battleCtx->damage = (battleCtx->damage * 3) / 2;
+        } else {
+            battleCtx->damage *= 2;
+        }
+    }
 
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
         battleCtx->damage = battleCtx->damage * 15 / 10;
