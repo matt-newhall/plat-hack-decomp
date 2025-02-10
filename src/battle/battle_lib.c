@@ -1252,7 +1252,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
         battler1Speed = battler1Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
-        battler1Speed /= 4;
+        battler1Speed /= 2;
     }
 
     if (battler1Ability == ABILITY_SLOW_START
@@ -1318,7 +1318,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY)) {
         battler2Speed = battler2Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
-        battler2Speed /= 4;
+        battler2Speed /= 2;
     }
 
     if (battler2Ability == ABILITY_SLOW_START
