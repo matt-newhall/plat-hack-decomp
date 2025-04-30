@@ -7935,20 +7935,28 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
-    // Must keep C89-style declaration to match
-    int i, j;
+    int i, j, k;
     u8 defender, defenderType1, defenderType2;
     u8 monType1, monType2;
-    u16 monSpecies;
-    u16 move;
-    int moveType;
-    u8 battlersDisregarded;
-    u8 score, maxScore; // BUG: Post-KO Switch-In AI Scoring Overflow (see docs/bugs_and_glitches.md)
-    u8 picked = 6;
+    u16 moveBattler;
+    u16 moveDefender;
+    int damageToTarget;
+    int damageToSelf;
+    u8 score, maxScore;
+    u8 picked;
     u8 slot1, slot2;
-    u32 moveStatusFlags;
+    u8 firstNotDead;
+    u8 isDead;
+    s8 highestPriorityMove;
     int partySize;
-    Pokemon *mon;
+    Pokemon *battlerPokemon;
+    u16 battlerPokemonSpecies;
+    u16 battlerPokemonCurHP;
+    u16 battlerPokemonSpeed;
+    Pokemon *defenderPokemon;
+    u16 defenderPokemonCurHP;
+    u16 defenderPokemonSpeed;
+    s8 defenderHighestMovePriority;
     BattleContext *battleCtx = BattleSystem_Context(battleSys);
 
     slot1 = battler;
@@ -7960,113 +7968,37 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     }
 
     defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    defenderPokemon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[defender]);
     partySize = BattleSystem_PartyCount(battleSys, battler);
-    battlersDisregarded = 0;
-
-    // Stage 1: Loop through all the party slots and find the one with the most favorable
-    // offensive type-matchup against the chosen defender which also has a super-effective
-    // move against that defender. Choose the Pokemon with the highest such score, breaking
-    // ties by party-order. If no such Pokemon exists, proceed to Stage 2.
-    //
-    // Mono-type Pokemon are regarded as being dual-type of the same type.
-    while (battlersDisregarded != 0x3F) {
-        maxScore = 0;
-        picked = 6;
-
-        for (i = 0; i < partySize; i++) {
-            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
-            monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
-
-            if (monSpecies != SPECIES_NONE
-                && monSpecies != SPECIES_EGG
-                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
-                && (battlersDisregarded & FlagIndex(i)) == FALSE
-                && battleCtx->selectedPartySlot[slot1] != i
-                && battleCtx->selectedPartySlot[slot2] != i
-                && i != battleCtx->aiSwitchedPartySlot[slot1]
-                && i != battleCtx->aiSwitchedPartySlot[slot2]) {
-                defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
-                defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
-                monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
-                monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
-
-                score = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
-                score += BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
-
-                if (maxScore < score) {
-                    maxScore = score;
-                    picked = i;
-                }
-            } else {
-                battlersDisregarded |= FlagIndex(i);
-            }
-        }
-
-        if (picked != 6) {
-            // Determine if this mon has any super-effective moves against the defender
-            mon = BattleSystem_PartyPokemon(battleSys, battler, picked);
-
-            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
-                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
-
-                if (move) {
-                    moveStatusFlags = 0;
-                    BattleSystem_CalcEffectiveness(battleCtx,
-                        move,
-                        moveType,
-                        Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                        Battler_Ability(battleCtx, defender),
-                        Battler_HeldItemEffect(battleCtx, defender),
-                        BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
-                        BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),
-                        &moveStatusFlags);
-
-                    if (moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE) {
-                        break;
-                    }
-                }
-            }
-
-            // If this mon has no moves which would be super-effective against the
-            // defender, mark it as disregarded and move to the next in priority.
-            if (i == LEARNED_MOVES_MAX) {
-                battlersDisregarded |= FlagIndex(picked);
-            } else {
-                return picked;
-            }
-        } else {
-            // No valid battlers to further-evaluate, break out
-            battlersDisregarded = 0x3F;
-        }
-    }
 
     maxScore = 0;
     picked = 6;
+    firstNotDead = 6;
 
-    // Stage 2: Loop through all the party slots and score them by how much damage would be done
-    // by the maximum non-critical roll of each of their moves if it were used by the battler
-    // which just fainted. Choose the Pokemon with the highest such score, breaking ties by
-    // party-order.
     for (i = 0; i < partySize; i++) {
-        mon = BattleSystem_PartyPokemon(battleSys, battler, i);
-        monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+        battlerPokemon = BattleSystem_PartyPokemon(battleSys, battler, i);
+        battlerPokemonSpecies = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES_EGG, NULL);
 
-        if (monSpecies != SPECIES_NONE
-            && monSpecies != SPECIES_EGG
-            && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+        if (battlerPokemonSpecies != SPECIES_NONE
+            && battlerPokemonSpecies != SPECIES_EGG
+            && Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL)
             && battleCtx->selectedPartySlot[slot1] != i
             && battleCtx->selectedPartySlot[slot2] != i
             && i != battleCtx->aiSwitchedPartySlot[slot1]
             && i != battleCtx->aiSwitchedPartySlot[slot2]) {
-            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
-                if (move && MOVE_DATA(move).power != 1) {
-                    score = BattleSystem_CalcMoveDamage(battleSys,
+            if (firstNotDead == 6) {
+                firstNotDead = i;
+            }
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                moveBattler = Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1 + j, NULL);
+                // battlerPriority = MOVE_DATA(moveBattler).priority;
+
+                if (moveBattler) {
+                    damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
-                        move,
+                        moveBattler,
                         battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
                         battleCtx->fieldConditionsMask,
                         0,
@@ -8075,30 +8007,86 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         defender,
                         1);
 
-                    moveStatusFlags = 0;
-                    score = BattleSystem_ApplyTypeChart(battleSys,
-                        battleCtx,
-                        move,
-                        moveType,
-                        battler,
-                        defender,
-                        score,
-                        &moveStatusFlags);
+                    defenderPokemonCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+                    battlerPokemonSpeed = Pokemon_GetValue(battlerPokemon, MON_DATA_SPEED, NULL);
+                    defenderPokemonSpeed = Pokemon_GetValue(defenderPokemon, MON_DATA_SPEED, NULL);
 
-                    if (moveStatusFlags & MOVE_STATUS_IMMUNE) {
-                        score = 0;
+                    isDead = 0;
+                    highestPriorityMove = -8;
+                    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
+                        moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + k, NULL);
+                        // defenderPriority = MOVE_DATA(moveBattler).priority;
+
+                        if (moveDefender) {
+                            damageToSelf = BattleSystem_CalcMoveDamage(battleSys,
+                                battleCtx,
+                                moveDefender,
+                                battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)],
+                                battleCtx->fieldConditionsMask,
+                                0,
+                                0,
+                                defender,
+                                battler,
+                                1);
+
+                            battlerPokemonCurHP = Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL);
+
+                            if (damageToSelf >= battlerPokemonCurHP) {
+                                // Battler can be OHKO'd by the defender
+                                isDead = 1;
+                                if (highestPriorityMove < defenderPriority) {
+                                    highestPriorityMove = defenderPriority
+                                }
+                            }
+                        }
                     }
-                }
 
-                if (maxScore < score) {
-                    maxScore = score;
-                    picked = i;
+                    // Check if AI is fast KO'd, and break out if so
+                    // TODO: Priority
+                    if ((defenderPokemonSpeed > battlerPokemonSpeed) && isDead) {
+                        break;
+                    }
+
+                    // AI isn't fast KO'd, so check if AI KO's the defender
+                    if (damageToTarget >= defenderPokemonCurHP) {
+                        // Battler KO's defender - check for fast/slow KO
+
+                        if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+                            // FAST KO
+                            // TODO: Pursuit, Trapping, Priority
+                            return i;
+                        } else {
+                            // SLOW KO
+                            if (maxScore < 240) {
+                                maxScore = 240;
+                                picked = i;
+                            }
+                        }
+                    } else {
+                        // Battler doesn't KO defender
+
+                        // NOTE: DEFENDER CAN STILL SLOW KO BATTLER HERE
+
+                        // Else, neither battler nor defender can OHKO each other. So check for other bullshit
+                        score = 100;
+                        // Do stuff
+                        if (maxScore < 100) {
+                            maxScore = 100;
+                            picked = i;
+                        }
+                    }
                 }
             }
         }
     }
 
-    return picked;
+    if (maxScore > 0) {
+        return picked;
+    } else if (firstNotDead < 6) {
+        return firstNotDead;
+    } else {
+        return 0;
+    }
 }
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)
