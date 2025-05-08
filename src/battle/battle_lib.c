@@ -7935,19 +7935,17 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
-    int i, j, k;
-    u8 defender, defenderType1, defenderType2;
-    u8 monType1, monType2;
+    int i, j;
+    u8 defender;
     u16 moveBattler;
     u16 moveDefender;
     int damageToTarget;
-    int damageToSelf;
     u8 score, maxScore;
     u8 picked;
     u8 slot1, slot2;
     u8 firstNotDead;
-    u8 isDead;
-    s8 highestPriorityMove;
+    u8 isTrainerKOAI, isAIKOTrainer, isPursuitKO;
+    int trainerMaxDamageToAI, aiMaxDamageToTrainer;
     int partySize;
     Pokemon *battlerPokemon;
     u16 battlerPokemonSpecies;
@@ -7956,8 +7954,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     Pokemon *defenderPokemon;
     u16 defenderPokemonCurHP;
     u16 defenderPokemonSpeed;
-    s8 defenderHighestMovePriority;
     BattleContext *battleCtx = BattleSystem_Context(battleSys);
+    u64 lhs, rhs;
+    // s8 highestPriorityMove;
+    // s8 defenderHighestMovePriority;
 
     slot1 = battler;
     if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
@@ -7991,9 +7991,53 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 firstNotDead = i;
             }
 
+            battlerPokemonCurHP = Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL);
+            defenderPokemonCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+
+            trainerMaxDamageToAI = 0;
+            isTrainerKOAI = 0;
+            score = 0;
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + j, NULL);
+
+                if (moveDefender) {
+                    damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        moveDefender,
+                        battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)],
+                        battleCtx->fieldConditionsMask,
+                        0,
+                        0,
+                        defender,
+                        battler,
+                        1);
+
+                    if (damageToTarget >= battlerPokemonCurHP) {
+                        // AI can be OHKO'd by the player
+                        isTrainerKOAI = 1;
+                    }
+
+                    if (damageToTarget > trainerMaxDamageToAI) {
+                        trainerMaxDamageToAI = damageToTarget;
+                    }
+                }
+            }
+
+            battlerPokemonSpeed = Pokemon_GetValue(battlerPokemon, MON_DATA_SPEED, NULL);
+            defenderPokemonSpeed = Pokemon_GetValue(defenderPokemon, MON_DATA_SPEED, NULL);
+
+            if (isTrainerKOAI && (defenderPokemonSpeed > battlerPokemonSpeed)) {
+                // AI is fast KO'd by player
+                continue;
+            }
+
+            aiMaxDamageToTrainer = 0;
+            isAIKOTrainer = 0;
+            isPursuitKO = 0;
+
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 moveBattler = Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1 + j, NULL);
-                // battlerPriority = MOVE_DATA(moveBattler).priority;
 
                 if (moveBattler) {
                     damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
@@ -8007,75 +8051,74 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         defender,
                         1);
 
-                    defenderPokemonCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
-                    battlerPokemonSpeed = Pokemon_GetValue(battlerPokemon, MON_DATA_SPEED, NULL);
-                    defenderPokemonSpeed = Pokemon_GetValue(defenderPokemon, MON_DATA_SPEED, NULL);
-
-                    isDead = 0;
-                    highestPriorityMove = -8;
-                    for (k = 0; k < LEARNED_MOVES_MAX; k++) {
-                        moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + k, NULL);
-                        // defenderPriority = MOVE_DATA(moveBattler).priority;
-
-                        if (moveDefender) {
-                            damageToSelf = BattleSystem_CalcMoveDamage(battleSys,
-                                battleCtx,
-                                moveDefender,
-                                battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)],
-                                battleCtx->fieldConditionsMask,
-                                0,
-                                0,
-                                defender,
-                                battler,
-                                1);
-
-                            battlerPokemonCurHP = Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL);
-
-                            if (damageToSelf >= battlerPokemonCurHP) {
-                                // Battler can be OHKO'd by the defender
-                                isDead = 1;
-                                if (highestPriorityMove < defenderPriority) {
-                                    highestPriorityMove = defenderPriority
-                                }
-                            }
-                        }
-                    }
-
-                    // Check if AI is fast KO'd, and break out if so
-                    // TODO: Priority
-                    if ((defenderPokemonSpeed > battlerPokemonSpeed) && isDead) {
-                        break;
-                    }
-
-                    // AI isn't fast KO'd, so check if AI KO's the defender
                     if (damageToTarget >= defenderPokemonCurHP) {
-                        // Battler KO's defender - check for fast/slow KO
-
-                        if (battlerPokemonSpeed >= defenderPokemonSpeed) {
-                            // FAST KO
-                            // TODO: Pursuit, Trapping, Priority
-                            return i;
-                        } else {
-                            // SLOW KO
-                            if (maxScore < 240) {
-                                maxScore = 240;
-                                picked = i;
-                            }
+                        if (moveBattler == MOVE_PURSUIT) {
+                            isPursuitKO = 1;
                         }
-                    } else {
-                        // Battler doesn't KO defender
+                        // AI can OHKO the player
+                        isAIKOTrainer = 1;
+                    }
 
-                        // NOTE: DEFENDER CAN STILL SLOW KO BATTLER HERE
-
-                        // Else, neither battler nor defender can OHKO each other. So check for other bullshit
-                        score = 100;
-                        // Do stuff
-                        if (maxScore < 100) {
-                            maxScore = 100;
-                            picked = i;
-                        }
+                    if (damageToTarget > aiMaxDamageToTrainer) {
+                        aiMaxDamageToTrainer = damageToTarget;
                     }
                 }
+            }
+
+            if (isAIKOTrainer && (battlerPokemonSpeed >= defenderPokemonSpeed)) {
+                if (isPursuitKO) {
+                    return i;
+                }
+                score = 6;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (isAIKOTrainer) {
+                score = 5;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            lhs = (u64)aiMaxDamageToTrainer * (u64)battlerPokemonCurHP;
+            rhs = (u64)trainerMaxDamageToAI * (u64)defenderPokemonCurHP;
+
+            if (lhs >= rhs) {
+                // AI deals more damage to player than it takes
+                if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+                    score = 4;
+                    if (score > maxScore) {
+                        maxScore = score;
+                        picked = i;
+                    }
+                    continue;
+                }
+                score = 3;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+                score = 2;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (1 > maxScore) {
+                maxScore = 1;
+                picked = i;
             }
         }
     }
