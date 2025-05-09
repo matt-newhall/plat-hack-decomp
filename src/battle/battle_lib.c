@@ -8086,9 +8086,21 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             if (isAIKOTrainer && (battlerPokemonSpeed >= defenderPokemonSpeed)) {
+                if (Battler_IsTrapped(battleSys, battleCtx, defender)) {
+                    return i;
+                }
                 if (isPursuitKO) {
                     return i;
                 }
+                score = 7;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (isAIKOTrainer && isPursuitKO) {
                 score = 6;
                 if (score > maxScore) {
                     maxScore = score;
