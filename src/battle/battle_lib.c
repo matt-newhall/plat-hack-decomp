@@ -8008,6 +8008,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             isTrainerKOAI = 0;
             score = 0;
 
+            BattleSystem_InitBattleMon(battleSys, battleCtx, battler, i);
+
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + j, NULL);
 
@@ -8022,6 +8024,15 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         defender,
                         battler,
                         1);
+
+                    damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        moveDefender,
+                        NULL,
+                        defender,
+                        battler,
+                        damageToTarget,
+                        &battleCtx->moveStatusFlags);
 
                     if (damageToTarget >= battlerPokemonCurHP) {
                         // AI can be OHKO'd by the player
@@ -8060,6 +8071,15 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         battler,
                         defender,
                         1);
+
+                    damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        moveBattler,
+                        NULL,
+                        battler,
+                        defender,
+                        damageToTarget,
+                        &battleCtx->moveStatusFlags);
 
                     if (damageToTarget >= defenderPokemonCurHP) {
                         if (moveBattler == MOVE_PURSUIT) {
