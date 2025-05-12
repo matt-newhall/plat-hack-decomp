@@ -1252,7 +1252,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
         battler1Speed = battler1Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
-        battler1Speed /= 4;
+        battler1Speed /= 2;
     }
 
     if (battler1Ability == ABILITY_SLOW_START
@@ -1318,7 +1318,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY)) {
         battler2Speed = battler2Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
-        battler2Speed /= 4;
+        battler2Speed /= 2;
     }
 
     if (battler2Ability == ABILITY_SLOW_START
@@ -2485,7 +2485,6 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_GHOST, TYPE_NORMAL, TYPE_MULTI_IMMUNE },
     { TYPE_GHOST, TYPE_PSYCHIC, TYPE_MULTI_SUPER_EFF },
     { TYPE_GHOST, TYPE_DARK, TYPE_MULTI_NOT_VERY_EFF },
-    { TYPE_GHOST, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_GHOST, TYPE_GHOST, TYPE_MULTI_SUPER_EFF },
     { TYPE_DRAGON, TYPE_DRAGON, TYPE_MULTI_SUPER_EFF },
     { TYPE_DRAGON, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
@@ -2493,7 +2492,6 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_DARK, TYPE_PSYCHIC, TYPE_MULTI_SUPER_EFF },
     { TYPE_DARK, TYPE_GHOST, TYPE_MULTI_SUPER_EFF },
     { TYPE_DARK, TYPE_DARK, TYPE_MULTI_NOT_VERY_EFF },
-    { TYPE_DARK, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_FIRE, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_WATER, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_ELECTRIC, TYPE_MULTI_NOT_VERY_EFF },
