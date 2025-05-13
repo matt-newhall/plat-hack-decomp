@@ -306,6 +306,7 @@ static BOOL BtlCmd_CheckCurMoveIsType(BattleSystem *battleSys, BattleContext *ba
 static BOOL BtlCmd_LoadArchivedMonData(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -565,7 +566,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CheckCurMoveIsType,
     BtlCmd_LoadArchivedMonData,
     BtlCmd_RefreshMonData,
-    BtlCmd_End
+    BtlCmd_End,
+    BtlCmd_IsTailwindWeather
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1562,7 +1564,13 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
-    battleCtx->damage *= battleCtx->criticalMul;
+    if (battleCtx->criticalMul > 1) {
+        if (battleCtx->criticalMul == 2) {
+            battleCtx->damage = (battleCtx->damage * 3) / 2;
+        } else {
+            battleCtx->damage *= 2;
+        }
+    }
 
     if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_HP_DRAIN_ON_ATK) {
         battleCtx->damage = battleCtx->damage * (100 + Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0)) / 100;
@@ -5790,6 +5798,14 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
     int type2 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL);
 
     if (NO_CLOUD_NINE) {
+        if (WEATHER_IS_MAGMA_STORM
+            && battleCtx->battleMons[battler].curHP
+            && Battler_Side(battleSys, battler) == BATTLER_US
+            && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+            battleCtx->msgMoveTemp = MOVE_MAGMA_STORM;
+            battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
+        }
+
         if (WEATHER_IS_SAND
             && type1 != TYPE_ROCK && type2 != TYPE_ROCK
             && type1 != TYPE_STEEL && type2 != TYPE_STEEL
@@ -6428,7 +6444,14 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage /= SpeciesData_GetFormValue(DEFENDING_MON.species, DEFENDING_MON.formNum, SPECIES_DATA_BASE_DEF);
     battleCtx->damage /= 50;
     battleCtx->damage += 2;
-    battleCtx->damage *= battleCtx->criticalMul;
+
+    if (battleCtx->criticalMul > 1) {
+        if (battleCtx->criticalMul == 2) {
+            battleCtx->damage = (battleCtx->damage * 3) / 2;
+        } else {
+            battleCtx->damage *= 2;
+        }
+    }
 
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
         battleCtx->damage = battleCtx->damage * 15 / 10;
@@ -9680,6 +9703,28 @@ static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     battleCtx->battleProgressFlag = TRUE;
     return BattleSystem_PopScript(battleCtx);
+}
+
+/**
+ * @brief Checks if tailwind weather is active.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int inBattler = BattleScript_Read(battleCtx);
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+
+    if ((WEATHER_IS_TAILWIND)
+        && (Battler_Side(battleSys, battler) == BATTLER_THEM)) {
+        battleCtx->moveTemp = MOVE_TAILWIND;
+    } else {
+        battleCtx->moveTemp = 0;
+    }
+
+    return FALSE;
 }
 
 /**

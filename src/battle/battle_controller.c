@@ -908,6 +908,7 @@ enum FieldCondCheckState {
     FIELD_COND_CHECK_STATE_HAILING,
     FIELD_COND_CHECK_STATE_DEEP_FOG,
     FIELD_COND_CHECK_STATE_GRAVITY,
+    FIELD_COND_CHECK_STATE_MAGMA_STORM,
 
     FIELD_COND_CHECK_END
 };
@@ -1230,6 +1231,17 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
                     PrepareSubroutineSequence(battleCtx, subscript_gravity_end);
                     state = STATE_BREAK_OUT;
                 }
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_MAGMA_STORM:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) {
+                PrepareSubroutineSequence(battleCtx, subscript_weather_continues);
+
+                battleCtx->scriptTemp = BATTLE_ANIMATION_DAMAGE_MAGMA_STORM;
+                state = STATE_BREAK_OUT;
             }
 
             battleCtx->fieldConditionCheckState++;
@@ -1818,11 +1830,13 @@ static void BattleController_CheckSideConditions(BattleSystem *battleSys, Battle
         // fall-through
 
     case SIDE_COND_CHECK_STATE_TRICK_ROOM:
-        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
-            battleCtx->fieldConditionsMask -= (1 << FIELD_CONDITION_TRICK_ROOM_SHIFT);
-            if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) == FALSE) {
-                PrepareSubroutineSequence(battleCtx, subscript_trick_room_end);
-                return;
+        if (!(battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM_PERM)) {
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+                battleCtx->fieldConditionsMask -= (1 << FIELD_CONDITION_TRICK_ROOM_SHIFT);
+                if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) == FALSE) {
+                    PrepareSubroutineSequence(battleCtx, subscript_trick_room_end);
+                    return;
+                }
             }
         }
 
@@ -2617,7 +2631,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
                 ATTACKING_MON.statusVolatile -= (1 << VOLATILE_CONDITION_CONFUSION_SHIFT);
 
                 if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_CONFUSION) {
-                    if (BattleSystem_RandNext(battleSys) & 1) {
+                    if (BattleSystem_RandNext(battleSys) <= 0xAAAA) {
                         LOAD_SUBSEQ(subscript_confused);
                         battleCtx->commandNext = battleCtx->command;
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -3389,6 +3403,11 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
 
             if (itemEffect == HOLD_EFFECT_ENDURE && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
+            }
+
+            if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE
+                && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
+                DEFENDER_TURN_FLAGS.enduring = TRUE;
             }
         }
 
