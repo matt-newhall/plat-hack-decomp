@@ -6694,6 +6694,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if (attackerParams.ability == ABILITY_NORMALIZE) {
         moveType = TYPE_NORMAL;
+        if (move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+            movePower = movePower * 12 / 10;
+        }
     } else if (inType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;
     } else {
