@@ -5090,4 +5090,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The Distortion World’s {STRVAR_1 1, 0, 0}\nappeared!\r</language>
 	</row>
+	<row id="pl_msg_00000368_01269" index="1269">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nprevents its Attack\ffrom being lowered!</language>
+	</row>
+	<row id="pl_msg_00000368_01270" index="1270">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 5, 1, 0} prevents its\fAttack from being lowered!</language>
+	</row>
+	<row id="pl_msg_00000368_01271" index="1271">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 5, 1, 0} prevents its\fAttack from being lowered!</language>
+	</row>
 </body>
