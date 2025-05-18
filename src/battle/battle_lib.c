@@ -7979,8 +7979,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     u16 defenderPokemonSpeed;
     BattleContext *battleCtx;
     u64 lhs, rhs;
-    // s8 highestPriorityMove;
-    // s8 defenderHighestMovePriority;
+    u32 species;
 
     battleCtx = BattleSystem_Context(battleSys);
 
@@ -8066,6 +8065,11 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             if (isTrainerKOAI && (defenderPokemonSpeed > battlerPokemonSpeed)) {
                 // AI is fast KO'd by player
                 continue;
+            }
+
+            species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+            if (species == SPECIES_WOBBUFFET || species == SPECIES_WYNAUT || species == SPECIES_DITTO) {
+                return 3;
             }
 
             aiMaxDamageToTrainer = 0;
