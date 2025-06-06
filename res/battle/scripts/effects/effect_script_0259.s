@@ -9,6 +9,7 @@ _000:
     GoTo _022
 
 _014:
+    UpdateVar OPCODE_FLAG_OFF, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_TRICK_ROOM_PERM
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_TRICK_ROOM
     // {0} restored the twisted dimensions!
     BufferMessage BattleStrings_Text_PokemonRestoredTheTwistedDimensions_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
