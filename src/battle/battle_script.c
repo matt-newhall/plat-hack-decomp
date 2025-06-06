@@ -5790,6 +5790,14 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
     int type2 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL);
 
     if (NO_CLOUD_NINE) {
+        if (WEATHER_IS_MAGMA_STORM
+            && battleCtx->battleMons[battler].curHP
+            && Battler_Side(battleSys, battler) == BATTLER_US
+            && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+            battleCtx->msgMoveTemp = MOVE_MAGMA_STORM;
+            battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
+        }
+
         if (WEATHER_IS_SAND
             && type1 != TYPE_ROCK && type2 != TYPE_ROCK
             && type1 != TYPE_STEEL && type2 != TYPE_STEEL

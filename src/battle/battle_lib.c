@@ -3692,6 +3692,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
+                case OVERWORLD_WEATHER_SOMEWHAT_RED:
+                    subscript = subscript_overworld_somewhat_red;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
                 default:
                     break;
                 }
@@ -5509,6 +5514,14 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
 
     if (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_SWITCH) {
         return FALSE;
+    }
+
+    if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
+        return FALSE;
+    }
+
+    if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+        return TRUE;
     }
 
     if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TRAPPED)

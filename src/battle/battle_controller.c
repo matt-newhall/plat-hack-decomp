@@ -908,6 +908,7 @@ enum FieldCondCheckState {
     FIELD_COND_CHECK_STATE_HAILING,
     FIELD_COND_CHECK_STATE_DEEP_FOG,
     FIELD_COND_CHECK_STATE_GRAVITY,
+    FIELD_COND_CHECK_STATE_MAGMA_STORM,
 
     FIELD_COND_CHECK_END
 };
@@ -1230,6 +1231,17 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
                     PrepareSubroutineSequence(battleCtx, subscript_gravity_end);
                     state = STATE_BREAK_OUT;
                 }
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_MAGMA_STORM:
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) {
+                PrepareSubroutineSequence(battleCtx, subscript_weather_continues);
+
+                battleCtx->scriptTemp = BATTLE_ANIMATION_DAMAGE_MAGMA_STORM;
+                state = STATE_BREAK_OUT;
             }
 
             battleCtx->fieldConditionCheckState++;
