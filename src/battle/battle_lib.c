@@ -1252,7 +1252,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
         battler1Speed = battler1Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler1].status & MON_CONDITION_PARALYSIS) {
-        battler1Speed /= 4;
+        battler1Speed /= 2;
     }
 
     if (battler1Ability == ABILITY_SLOW_START
@@ -1266,7 +1266,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed *= 2;
     }
 
-    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND) {
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler1)] & SIDE_CONDITION_TAILWIND
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && Battler_Side(battleSys, battler1) == BATTLER_THEM)) {
         battler1Speed *= 2;
     }
 
@@ -1318,7 +1319,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY)) {
         battler2Speed = battler2Speed * 15 / 10;
     } else if (battleCtx->battleMons[battler2].status & MON_CONDITION_PARALYSIS) {
-        battler2Speed /= 4;
+        battler2Speed /= 2;
     }
 
     if (battler2Ability == ABILITY_SLOW_START
@@ -1332,7 +1333,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler2Speed *= 2;
     }
 
-    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_TAILWIND) {
+    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler2)] & SIDE_CONDITION_TAILWIND
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && Battler_Side(battleSys, battler2) == BATTLER_THEM)) {
         battler2Speed *= 2;
     }
 
@@ -2485,7 +2487,6 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_GHOST, TYPE_NORMAL, TYPE_MULTI_IMMUNE },
     { TYPE_GHOST, TYPE_PSYCHIC, TYPE_MULTI_SUPER_EFF },
     { TYPE_GHOST, TYPE_DARK, TYPE_MULTI_NOT_VERY_EFF },
-    { TYPE_GHOST, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_GHOST, TYPE_GHOST, TYPE_MULTI_SUPER_EFF },
     { TYPE_DRAGON, TYPE_DRAGON, TYPE_MULTI_SUPER_EFF },
     { TYPE_DRAGON, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
@@ -2493,7 +2494,6 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_DARK, TYPE_PSYCHIC, TYPE_MULTI_SUPER_EFF },
     { TYPE_DARK, TYPE_GHOST, TYPE_MULTI_SUPER_EFF },
     { TYPE_DARK, TYPE_DARK, TYPE_MULTI_NOT_VERY_EFF },
-    { TYPE_DARK, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_FIRE, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_WATER, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_ELECTRIC, TYPE_MULTI_NOT_VERY_EFF },
@@ -3492,6 +3492,18 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
         moveType = CURRENT_MOVE_DATA.type;
     }
 
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE
+        && moveType == TYPE_ELECTRIC
+        && attacker != defender) {
+            subscript = subscript_absorb_and_spatk_up_1_stage;
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN) == TRUE
+        && moveType == TYPE_WATER
+        && attacker != defender) {
+            subscript = subscript_absorb_and_spatk_up_1_stage;
+    }
+
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE
         && moveType == TYPE_ELECTRIC
         && attacker != defender) {
@@ -3683,12 +3695,28 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     break;
 
                 case OVERWORLD_WEATHER_HARSH_SUN:
+                case OVERWORLD_WEATHER_SUNNY:
                     subscript = subscript_overworld_sun;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
                 case OVERWORLD_WEATHER_TRICK_ROOM:
                     subscript = subscript_overworld_trick_room;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_SOMEWHAT_RED:
+                    subscript = subscript_overworld_somewhat_red;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_TWISTED_DIMENSIONS:
+                    subscript = subscript_overworld_twisted_dimensions;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_CLEAR_13:
+                    subscript = subscript_overworld_tailwind;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
@@ -5511,6 +5539,14 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
         return FALSE;
     }
 
+    if (MON_HAS_TYPE(battler, TYPE_GHOST)) {
+        return FALSE;
+    }
+
+    if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+        return TRUE;
+    }
+
     if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TRAPPED)
         || (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)) {
         result = TRUE;
@@ -6670,6 +6706,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if (attackerParams.ability == ABILITY_NORMALIZE) {
         moveType = TYPE_NORMAL;
+        if (move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+            movePower = movePower * 12 / 10;
+        }
     } else if (inType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;
     } else {
@@ -6792,11 +6831,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (attackerParams.ability == ABILITY_PLUS
-        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS)) {
+        && (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS) || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS) == 2)) {
         spAttackStat = spAttackStat * 150 / 100;
     }
     if (attackerParams.ability == ABILITY_MINUS
-        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS)) {
+        && (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS) || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS) == 2)) {
         spAttackStat = spAttackStat * 150 / 100;
     }
 
@@ -6918,6 +6957,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
             && (defenderParams.type1 == TYPE_ROCK || defenderParams.type2 == TYPE_ROCK)) {
             spDefenseStat = spDefenseStat * 15 / 10;
+        }
+
+        if ((fieldConditions & FIELD_CONDITION_HAILING)
+            && (defenderParams.type1 == TYPE_ICE || defenderParams.type2 == TYPE_ICE)) {
+            defenseStat = defenseStat * 15 / 10;
         }
 
         if ((fieldConditions & FIELD_CONDITION_SUNNY)
@@ -7914,21 +7958,30 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
-    // Must keep C89-style declaration to match
     int i, j;
-    u8 defender, defenderType1, defenderType2;
-    u8 monType1, monType2;
-    u16 monSpecies;
-    u16 move;
-    int moveType;
-    u8 battlersDisregarded;
-    u8 score, maxScore; // BUG: Post-KO Switch-In AI Scoring Overflow (see docs/bugs_and_glitches.md)
-    u8 picked = 6;
+    u8 defender;
+    u16 moveBattler;
+    u16 moveDefender;
+    int damageToTarget;
+    u8 score, maxScore;
+    u8 picked;
     u8 slot1, slot2;
-    u32 moveStatusFlags;
+    u8 firstNotDead;
+    u8 isTrainerKOAI, isAIKOTrainer, isPursuitKO;
+    int trainerMaxDamageToAI, aiMaxDamageToTrainer;
     int partySize;
-    Pokemon *mon;
-    BattleContext *battleCtx = BattleSystem_Context(battleSys);
+    Pokemon *battlerPokemon;
+    u16 battlerPokemonSpecies;
+    u16 battlerPokemonCurHP;
+    u16 battlerPokemonSpeed;
+    Pokemon *defenderPokemon;
+    u16 defenderPokemonCurHP;
+    u16 defenderPokemonSpeed;
+    BattleContext *battleCtx;
+    u64 lhs, rhs;
+    u32 species;
+
+    battleCtx = BattleSystem_Context(battleSys);
 
     slot1 = battler;
     if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_TAG)
@@ -7939,113 +7992,97 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     }
 
     defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
+    defenderPokemon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[defender]);
     partySize = BattleSystem_PartyCount(battleSys, battler);
-    battlersDisregarded = 0;
-
-    // Stage 1: Loop through all the party slots and find the one with the most favorable
-    // offensive type-matchup against the chosen defender which also has a super-effective
-    // move against that defender. Choose the Pokemon with the highest such score, breaking
-    // ties by party-order. If no such Pokemon exists, proceed to Stage 2.
-    //
-    // Mono-type Pokemon are regarded as being dual-type of the same type.
-    while (battlersDisregarded != 0x3F) {
-        maxScore = 0;
-        picked = 6;
-
-        for (i = 0; i < partySize; i++) {
-            mon = BattleSystem_PartyPokemon(battleSys, battler, i);
-            monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
-
-            if (monSpecies != SPECIES_NONE
-                && monSpecies != SPECIES_EGG
-                && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
-                && (battlersDisregarded & FlagIndex(i)) == FALSE
-                && battleCtx->selectedPartySlot[slot1] != i
-                && battleCtx->selectedPartySlot[slot2] != i
-                && i != battleCtx->aiSwitchedPartySlot[slot1]
-                && i != battleCtx->aiSwitchedPartySlot[slot2]) {
-                defenderType1 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL);
-                defenderType2 = BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL);
-                monType1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
-                monType2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
-
-                score = BattleSystem_TypeMatchupMultiplier(monType1, defenderType1, defenderType2);
-                score += BattleSystem_TypeMatchupMultiplier(monType2, defenderType1, defenderType2);
-
-                if (maxScore < score) {
-                    maxScore = score;
-                    picked = i;
-                }
-            } else {
-                battlersDisregarded |= FlagIndex(i);
-            }
-        }
-
-        if (picked != 6) {
-            // Determine if this mon has any super-effective moves against the defender
-            mon = BattleSystem_PartyPokemon(battleSys, battler, picked);
-
-            for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + i, NULL);
-                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
-
-                if (move) {
-                    moveStatusFlags = 0;
-                    BattleSystem_CalcEffectiveness(battleCtx,
-                        move,
-                        moveType,
-                        Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                        Battler_Ability(battleCtx, defender),
-                        Battler_HeldItemEffect(battleCtx, defender),
-                        BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
-                        BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),
-                        &moveStatusFlags);
-
-                    if (moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE) {
-                        break;
-                    }
-                }
-            }
-
-            // If this mon has no moves which would be super-effective against the
-            // defender, mark it as disregarded and move to the next in priority.
-            if (i == LEARNED_MOVES_MAX) {
-                battlersDisregarded |= FlagIndex(picked);
-            } else {
-                return picked;
-            }
-        } else {
-            // No valid battlers to further-evaluate, break out
-            battlersDisregarded = 0x3F;
-        }
-    }
 
     maxScore = 0;
     picked = 6;
+    firstNotDead = 6;
 
-    // Stage 2: Loop through all the party slots and score them by how much damage would be done
-    // by the maximum non-critical roll of each of their moves if it were used by the battler
-    // which just fainted. Choose the Pokemon with the highest such score, breaking ties by
-    // party-order.
     for (i = 0; i < partySize; i++) {
-        mon = BattleSystem_PartyPokemon(battleSys, battler, i);
-        monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES_EGG, NULL);
+        battlerPokemon = BattleSystem_PartyPokemon(battleSys, battler, i);
+        battlerPokemonSpecies = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES_EGG, NULL);
 
-        if (monSpecies != SPECIES_NONE
-            && monSpecies != SPECIES_EGG
-            && Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL)
+        if (battlerPokemonSpecies != SPECIES_NONE
+            && battlerPokemonSpecies != SPECIES_EGG
+            && Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL)
             && battleCtx->selectedPartySlot[slot1] != i
             && battleCtx->selectedPartySlot[slot2] != i
             && i != battleCtx->aiSwitchedPartySlot[slot1]
             && i != battleCtx->aiSwitchedPartySlot[slot2]) {
-            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
-                if (move && MOVE_DATA(move).power != 1) {
-                    score = BattleSystem_CalcMoveDamage(battleSys,
+            if (firstNotDead == 6) {
+                firstNotDead = i;
+            }
+
+            battlerPokemonCurHP = Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL);
+            defenderPokemonCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
+
+            trainerMaxDamageToAI = 0;
+            isTrainerKOAI = 0;
+            score = 0;
+
+            BattleSystem_InitBattleMon(battleSys, battleCtx, battler, i);
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + j, NULL);
+
+                if (moveDefender) {
+                    damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
-                        move,
+                        moveDefender,
+                        battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)],
+                        battleCtx->fieldConditionsMask,
+                        0,
+                        0,
+                        defender,
+                        battler,
+                        1);
+
+                    damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        moveDefender,
+                        NULL,
+                        defender,
+                        battler,
+                        damageToTarget,
+                        &battleCtx->moveStatusFlags);
+
+                    if (damageToTarget >= battlerPokemonCurHP) {
+                        // AI can be OHKO'd by the player
+                        isTrainerKOAI = 1;
+                    }
+
+                    if (damageToTarget > trainerMaxDamageToAI) {
+                        trainerMaxDamageToAI = damageToTarget;
+                    }
+                }
+            }
+
+            battlerPokemonSpeed = Pokemon_GetValue(battlerPokemon, MON_DATA_SPEED, NULL);
+            defenderPokemonSpeed = Pokemon_GetValue(defenderPokemon, MON_DATA_SPEED, NULL);
+
+            if (isTrainerKOAI && (defenderPokemonSpeed > battlerPokemonSpeed)) {
+                // AI is fast KO'd by player
+                continue;
+            }
+
+            species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+            if (species == SPECIES_WOBBUFFET || species == SPECIES_WYNAUT || species == SPECIES_DITTO) {
+                return 3;
+            }
+
+            aiMaxDamageToTrainer = 0;
+            isAIKOTrainer = 0;
+            isPursuitKO = 0;
+
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                moveBattler = Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1 + j, NULL);
+
+                if (moveBattler) {
+                    damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        moveBattler,
                         battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
                         battleCtx->fieldConditionsMask,
                         0,
@@ -8054,30 +8091,106 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         defender,
                         1);
 
-                    moveStatusFlags = 0;
-                    score = BattleSystem_ApplyTypeChart(battleSys,
+                    damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
-                        move,
-                        moveType,
+                        moveBattler,
+                        NULL,
                         battler,
                         defender,
-                        score,
-                        &moveStatusFlags);
+                        damageToTarget,
+                        &battleCtx->moveStatusFlags);
 
-                    if (moveStatusFlags & MOVE_STATUS_IMMUNE) {
-                        score = 0;
+                    if (damageToTarget >= defenderPokemonCurHP) {
+                        if (moveBattler == MOVE_PURSUIT) {
+                            isPursuitKO = 1;
+                        }
+                        // AI can OHKO the player
+                        isAIKOTrainer = 1;
+                    }
+
+                    if (damageToTarget > aiMaxDamageToTrainer) {
+                        aiMaxDamageToTrainer = damageToTarget;
                     }
                 }
+            }
 
-                if (maxScore < score) {
+            if (isAIKOTrainer && (battlerPokemonSpeed >= defenderPokemonSpeed)) {
+                if (Battler_IsTrapped(battleSys, battleCtx, defender)) {
+                    return i;
+                }
+                if (isPursuitKO) {
+                    return i;
+                }
+                score = 7;
+                if (score > maxScore) {
                     maxScore = score;
                     picked = i;
                 }
+                continue;
+            }
+
+            if (isAIKOTrainer && isPursuitKO) {
+                score = 6;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (isAIKOTrainer) {
+                score = 5;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            lhs = (u64)aiMaxDamageToTrainer * (u64)battlerPokemonCurHP;
+            rhs = (u64)trainerMaxDamageToAI * (u64)defenderPokemonCurHP;
+
+            if (lhs >= rhs) {
+                // AI deals more damage to player than it takes
+                if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+                    score = 4;
+                    if (score > maxScore) {
+                        maxScore = score;
+                        picked = i;
+                    }
+                    continue;
+                }
+                score = 3;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+                score = 2;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
+            if (1 > maxScore) {
+                maxScore = 1;
+                picked = i;
             }
         }
     }
 
-    return picked;
+    if (maxScore > 0) {
+        return picked;
+    } else if (firstNotDead < 6) {
+        return firstNotDead;
+    } else {
+        return 0;
+    }
 }
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)
