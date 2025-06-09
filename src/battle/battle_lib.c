@@ -3560,7 +3560,7 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
     case ABILITY_SHED_SKIN:
         if ((battleCtx->battleMons[battler].status & MON_CONDITION_ANY)
             && battleCtx->battleMons[battler].curHP
-            && BattleSystem_RandNext(battleSys) % 10 < 3) {
+            && BattleSystem_RandNext(battleSys) % 3 == 0) {
             if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) {
                 battleCtx->msgTemp = MSGCOND_SLEEP;
             } else if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY_POISON) {
