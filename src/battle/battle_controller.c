@@ -2249,7 +2249,7 @@ static BOOL BattleController_DecrementPP(BattleSystem *battleSys, BattleContext 
 {
     int ppCost = 1;
     if (ATTACKER_SELF_TURN_FLAGS.skipPressureCheck == FALSE && battleCtx->defender != BATTLER_NONE) {
-        if (battleCtx->moveTemp == MOVE_IMPRISON) {
+        if (battleCtx->moveTemp == MOVE_IMPRISON || battleCtx->moveTemp == MOVE_SNATCH) {
             ppCost += BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->attacker, ABILITY_PRESSURE);
         } else {
             switch (battleCtx->aiContext.moveTable[battleCtx->moveTemp].range) {
@@ -3117,7 +3117,6 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
             battleCtx->commandNext = battleCtx->command;
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
-            BattleSystem_DecPPForPressure(battleCtx, battler, battleCtx->attacker);
             return TRUE;
         }
     }
