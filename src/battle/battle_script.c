@@ -2883,6 +2883,11 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
         battleCtx->multiHitAccuracyCheck = flags;
     }
 
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
+        flags |= SYSCTL_SKIP_ACCURACY_CHECK;
+        battleCtx->multiHitAccuracyCheck = flags;
+    }
+
     return FALSE;
 }
 
