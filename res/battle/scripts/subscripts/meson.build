@@ -2,6 +2,8 @@ sub_seq_narc_order = files('sub_seq.order')
 
 subscript_files = files(
     'subscript_start_encounter.s',
+    'subscript_thaw_out.s',
+    'subscript_defrosted_by_move.s',
     'subscript_use_move.s',
     'subscript_update_hp.s',
     'subscript_escape.s',
@@ -30,8 +32,6 @@ subscript_files = files(
     'subscript_burn_damage.s',
     'subscript_freeze.s',
     'subscript_frozen.s',
-    'subscript_thaw_out.s',
-    'subscript_defrosted_by_move.s',
     'subscript_paralyze.s',
     'subscript_fully_paralyzed.s',
     'subscript_dream_eater.s',
