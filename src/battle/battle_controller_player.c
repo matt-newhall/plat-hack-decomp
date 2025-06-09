@@ -2898,7 +2898,7 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE) {
         accStages = 0;
     }
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE || Battler_Ability(battleCtx, attacker) == ABILITY_KEEN_EYE) {
         evaStages = 0;
     }
     if (MON_IS_IDENTIFIED(defender) && evaStages < 0) {
