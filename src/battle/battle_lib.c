@@ -8043,7 +8043,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             ai_species = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES, NULL);
-            if (ai_species == SPECIES_WOBBUFFET || ai_species == SPECIES_WYNAUT || ai_species == SPECIES_DITTO) {
+            if (((ai_species == SPECIES_WOBBUFFET || ai_species == SPECIES_WYNAUT) && MON_HAS_TYPE(battler, TYPE_GHOST)) || ai_species == SPECIES_DITTO) {
                 score = 3;
                 if (score > maxScore) {
                     maxScore = score;
