@@ -5102,4 +5102,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 5, 1, 0} prevents its\fAttack from being lowered!</language>
 	</row>
+	<row id="pl_msg_00000368_01272" index="1272">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\ndrastically rose!</language>
+	</row>
+	<row id="pl_msg_00000368_01273" index="1273">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\ndrastically rose!</language>
+	</row>
+	<row id="pl_msg_00000368_01274" index="1274">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\ndrastically rose!</language>
+	</row>
 </body>
