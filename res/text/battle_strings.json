@@ -8512,6 +8512,27 @@
         "{STRVAR_1 5, 1, 0} prevents its\f",
         "Attack from being lowered!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatDrasticallyRose_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "drastically rose!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatDrasticallyRose_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "drastically rose!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatDrasticallyRose_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "drastically rose!"
+      ]
     }
   ]
 }

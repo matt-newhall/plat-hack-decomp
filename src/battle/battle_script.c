@@ -2828,7 +2828,11 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
     battleCtx->battleStatusMask &= ~SYSCTL_FAIL_STAT_STAGE_CHANGE;
 
-    if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
+    if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_3_STAGES) {
+        statOffset = BATTLE_STAT_SPEED; // This is Tail Glow idk why this works i love spaghetti code
+        stageChange = 3;
+        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
         statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES;
         stageChange = -2;
         battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_DROP;
@@ -2867,10 +2871,16 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 battleCtx->msgBuffer.params[1] = battleCtx->msgItemTemp;
                 battleCtx->msgBuffer.params[2] = BATTLE_STAT_ATTACK + statOffset;
             } else {
-                SetupNicknameStatMsg(battleCtx,
-                    stageChange == 1 ? BattleStrings_Text_PokemonsStatRose_Ally : // "{0}'s {1} rose!"
-                        BattleStrings_Text_PokemonsStatSharplyRose_Ally, // "{0}'s {1} sharply rose!"
-                    statOffset);
+                int msgId;
+                if (stageChange == 1) {
+                    msgId = BattleStrings_Text_PokemonsStatRose_Ally;
+                } else if (stageChange == 3) {
+                    msgId = BattleStrings_Text_PokemonsStatDrasticallyRose_Ally;
+                } else {
+                    msgId = BattleStrings_Text_PokemonsStatSharplyRose_Ally;
+                }
+                // "{0}'s {1} rose!" or "{0}'s {1} sharply rose!" or "{0}'s {1} drastically rose!"
+                SetupNicknameStatMsg(battleCtx, msgId, statOffset);
             }
 
             mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
