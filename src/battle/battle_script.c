@@ -2871,11 +2871,15 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
             if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
                 hits = 5;
             } else {
-                hits = BattleSystem_RandNext(battleSys) & 3;
-                if (hits < 2) { // 2 or 3 hits
-                    hits += 2;
-                } else { // 4 or 5 hits
-                    hits = (BattleSystem_RandNext(battleSys) & 3) + 2;
+                int roll = BattleSystem_RandNext(battleSys) % 100;
+                if (roll < 35) {
+                    hits = 2;
+                } else if (roll < 70) {
+                    hits = 3;
+                } else if (roll < 85) {
+                    hits = 4;
+                } else {
+                    hits = 5;
                 }
             }
         }
