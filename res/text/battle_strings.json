@@ -8557,6 +8557,12 @@
         "{STRVAR_1 5, 1, 0} prevents it\f",
         "from being taunted!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_AnnounceWeatherDisabled",
+      "en_US": [
+        "The effects of weather disappeared."
+      ]
     }
   ]
 }
