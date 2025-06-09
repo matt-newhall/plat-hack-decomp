@@ -8488,6 +8488,30 @@
         "The Distortion World’s {STRVAR_1 1, 0, 0}\n",
         "appeared!\r"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_AbilityPreventsIntimidate_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "prevents its Attack\f",
+        "from being lowered!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AbilityPreventsIntimidate_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 5, 1, 0} prevents its\f",
+        "Attack from being lowered!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AbilityPreventsIntimidate_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 5, 1, 0} prevents its\f",
+        "Attack from being lowered!"
+      ]
     }
   ]
 }
