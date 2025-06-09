@@ -3843,7 +3843,6 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                     for (j = 0; j < maxBattlers; j++) {
                         if (BattleSystem_GetBattlerSide(battleSys, battler) != BattleSystem_GetBattlerSide(battleSys, j)
-                            && (battleCtx->battleMons[j].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) == FALSE
                             && battleCtx->battleMons[j].curHP) {
                             sumDef += battleCtx->battleMons[j].defense
                                 * sStatStageBoosts[battleCtx->battleMons[j].statBoosts[BATTLE_STAT_DEFENSE]].numerator
