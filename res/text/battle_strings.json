@@ -8533,6 +8533,30 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
         "drastically rose!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_AbilityPreventsTaunt_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "prevents it from\f",
+        "being taunted!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AbilityPreventsTaunt_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 5, 1, 0} prevents it\f",
+        "from being taunted!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AbilityPreventsTaunt_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 5, 1, 0} prevents it\f",
+        "from being taunted!"
+      ]
     }
   ]
 }
