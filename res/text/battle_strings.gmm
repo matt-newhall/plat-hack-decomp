@@ -5126,4 +5126,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 5, 1, 0} prevents it\ffrom being taunted!</language>
 	</row>
+	<row id="pl_msg_00000368_01278" index="1278">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The effects of weather disappeared.</language>
+	</row>
 </body>
