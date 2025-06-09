@@ -5114,4 +5114,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\ndrastically rose!</language>
 	</row>
+	<row id="pl_msg_00000368_01275" index="1275">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nprevents it from\fbeing taunted!</language>
+	</row>
+	<row id="pl_msg_00000368_01276" index="1276">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 5, 1, 0} prevents it\ffrom being taunted!</language>
+	</row>
+	<row id="pl_msg_00000368_01277" index="1276">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 5, 1, 0} prevents it\ffrom being taunted!</language>
+	</row>
 </body>
