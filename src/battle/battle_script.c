@@ -7525,7 +7525,11 @@ static BOOL BtlCmd_CalcWringOutPower(BattleSystem *battleSys, BattleContext *bat
 {
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->movePower = 1 + (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+    battleCtx->movePower = (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+
+    if (battleCtx->movePower == 0) {
+        battleCtx->movePower = 1;
+    }
 
     return FALSE;
 }
