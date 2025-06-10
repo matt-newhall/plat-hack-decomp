@@ -2227,7 +2227,7 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
         battleCtx->defender = battleCtx->attacker;
         battleCtx->msgBattlerTemp = battleCtx->defender;
 
-        battleCtx->hpCalcTemp = CALC_SELF_HIT(MOVE_POUND, 40);
+        battleCtx->hpCalcTemp = CALC_SELF_HIT(MOVE_STRUGGLE, 40);
         battleCtx->hpCalcTemp = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->hpCalcTemp);
         battleCtx->hpCalcTemp *= -1;
 
