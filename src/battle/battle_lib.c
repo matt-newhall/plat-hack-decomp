@@ -4519,8 +4519,10 @@ BOOL BattleSystem_SynchronizeStatus(BattleSystem *battleSys, BattleContext *batt
     }
 
     if (result == TRUE) {
-        if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_ANY_POISON) {
+        if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_POISON) {
             nextSeq = subscript_poison;
+        } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_TOXIC) {
+            nextSeq = subscript_badly_poison;
         } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_BURN) {
             nextSeq = subscript_burn;
         } else if (battleCtx->battleMons[battleCtx->msgBattlerTemp].status & MON_CONDITION_PARALYSIS) {
