@@ -3184,6 +3184,7 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
 
     if (itemEffect == HOLD_EFFECT_FLEE
         || (battleType & BATTLE_TYPE_NO_EXPERIENCE)
+        || MON_HAS_TYPE(battler, TYPE_GHOST)
         || Battler_Ability(battleCtx, battler) == ABILITY_RUN_AWAY) {
         return FALSE;
     }
