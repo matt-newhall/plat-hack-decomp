@@ -46,7 +46,7 @@ static const u16 sNoDamageCalcMoveEffects[] = {
 };
 
 static const u16 sAltPowerMoveEffects[] = {
-    BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS,
+    BATTLE_EFFECT_RANDOM_TYPE_BASED_ON_IVS,
     BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED,
     BATTLE_EFFECT_NATURAL_GIFT,
     BATTLE_EFFECT_JUDGEMENT,
@@ -2971,12 +2971,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_HIDDEN_POWER:
-        power = ((ivs[STAT_HP] & 2) >> 1)
-            | ((ivs[STAT_ATTACK] & 2) >> 0)
-            | ((ivs[STAT_DEFENSE] & 2) << 1)
-            | ((ivs[STAT_SPEED] & 2) << 2)
-            | ((ivs[STAT_SPECIAL_ATTACK] & 2) << 3)
-            | ((ivs[STAT_SPECIAL_DEFENSE] & 2) << 4);
         type = ((ivs[STAT_HP] & 1) >> 0)
             | ((ivs[STAT_ATTACK] & 1) << 1)
             | ((ivs[STAT_DEFENSE] & 1) << 2)
@@ -2984,7 +2978,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             | ((ivs[STAT_SPECIAL_ATTACK] & 1) << 4)
             | ((ivs[STAT_SPECIAL_DEFENSE] & 1) << 5);
 
-        power = power * 40 / 63 + 30;
         type = (type * 15 / 63) + 1;
 
         if (type >= TYPE_MYSTERY) {
