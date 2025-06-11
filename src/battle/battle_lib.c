@@ -4273,6 +4273,8 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
     case ABILITY_EFFECT_SPORE:
         if (ATTACKING_MON.curHP
             && ATTACKING_MON.status == MON_CONDITION_NONE
+            && BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_TYPE_1, NULL) != TYPE_GRASS
+            && BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_TYPE_2, NULL) != TYPE_GRASS
             && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
