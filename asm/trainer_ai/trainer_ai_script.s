@@ -210,7 +210,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_133, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_134, Basic_CheckCanRecoverHP
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS, Basic_CheckNonStandardDamageOrChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_TYPE_BASED_ON_IVS, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Basic_CheckRainDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Basic_CheckSunnyDay
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Basic_CheckBellyDrum
