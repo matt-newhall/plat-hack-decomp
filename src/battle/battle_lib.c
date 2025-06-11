@@ -4293,17 +4293,14 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
             && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
-            switch (BattleSystem_RandNext(battleSys) % 3) {
-            case 0:
-            default:
+            int rand = BattleSystem_RandNext(battleSys) % 30;
+
+            if (rand < 9) {
                 *subscript = subscript_poison;
-                break;
-            case 1:
+            } else if (rand < 19) {
                 *subscript = subscript_paralyze;
-                break;
-            case 2:
+            } else {
                 *subscript = subscript_fall_asleep;
-                break;
             }
 
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
