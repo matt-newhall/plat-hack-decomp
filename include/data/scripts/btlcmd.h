@@ -229,6 +229,7 @@ ScriptCommand(BTLCMD_LOADARCHIVEDMONDATA,         BtlCmd_LoadArchivedMonData)
 ScriptCommand(BTLCMD_REFRESHMONDATA,              BtlCmd_RefreshMonData)
 ScriptCommand(BTLCMD_END,                         BtlCmd_End)
 ScriptCommand(BTLCMD_ISTAILWINDWEATHER,           BtlCmd_IsTailwindWeather)
+ScriptCommand(BTLCMD_CALCTAUNTTURNS,              BtlCmd_CalcTauntTurns)
 
 // clang-format on
 

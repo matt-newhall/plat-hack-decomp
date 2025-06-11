@@ -1239,6 +1239,10 @@
     .long BTLCMD_ISTAILWINDWEATHER
     .endm
 
+    .macro CalcTauntTurns
+    .long BTLCMD_CALCTAUNTTURNS
+    .endm
+
     .text
     .globl _start
 _start:
