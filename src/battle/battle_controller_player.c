@@ -2849,7 +2849,11 @@ static BOOL BattleControllerPlayer_LoadQuickClawCheck(BattleSystem *battleSys, B
 
 static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
 {
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE
+        && move != MOVE_JUDGMENT
+        && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL
+        && move != MOVE_NATURAL_GIFT) {
         return TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
