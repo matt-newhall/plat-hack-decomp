@@ -3785,8 +3785,6 @@ static BOOL BtlCmd_ResetAllStatChanges(BattleSystem *battleSys, BattleContext *b
         for (int j = BATTLE_STAT_HP; j < BATTLE_STAT_MAX; j++) {
             battleCtx->battleMons[i].statBoosts[j] = 6;
         }
-
-        battleCtx->battleMons[i].statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
     }
 
     return FALSE;
