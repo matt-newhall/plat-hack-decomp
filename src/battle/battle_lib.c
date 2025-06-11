@@ -3510,7 +3510,6 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FLASH_FIRE) == TRUE
         && moveType == TYPE_FIRE
-        && (battleCtx->battleMons[defender].status & MON_CONDITION_FREEZE) == FALSE
         && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
         && (CURRENT_MOVE_DATA.power || battleCtx->moveCur == MOVE_WILL_O_WISP)) {
         subscript = subscript_absorb_and_boost_fire_type_moves;
