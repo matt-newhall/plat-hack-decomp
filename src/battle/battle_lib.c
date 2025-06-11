@@ -7802,9 +7802,7 @@ static const u16 sMovesCannotTriggerAnticipation[] = {
     BATTLE_EFFECT_40_DAMAGE_FLAT,
     BATTLE_EFFECT_LEVEL_DAMAGE_FLAT,
     BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL,
-    BATTLE_EFFECT_COUNTER,
-    BATTLE_EFFECT_MIRROR_COAT,
-    BATTLE_EFFECT_METAL_BURST,
+    BATTLE_EFFECT_HALVE_DEFENSE,
 };
 
 static BOOL MoveCannotTriggerAnticipation(BattleContext *battleCtx, int move)
