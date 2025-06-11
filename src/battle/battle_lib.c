@@ -1731,8 +1731,11 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
     int battler, moveType; // must declare these first to match
 
     if (battleCtx->defender == BATTLER_NONE
-        || Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE
         || Battler_Ability(battleCtx, attacker) == ABILITY_MOLD_BREAKER) {
+        return;
+    }
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         return;
     }
 
@@ -2574,7 +2577,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
     defenderItemPower = Battler_HeldItemPower(battleCtx, defender, ITEM_POWER_CHECK_ALL);
 
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_NORMAL;
     } else if (inType) {
         moveType = inType;
@@ -2682,7 +2685,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         return;
     }
 
-    if (attackerAbility == ABILITY_NORMALIZE) {
+    if (attackerAbility == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_NORMAL;
     } else if (inType) {
         moveType = inType;
@@ -3485,7 +3488,7 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 {
     int subscript = NULL, moveType;
 
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         moveType = TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         moveType = battleCtx->moveType;
@@ -4242,7 +4245,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
     case ABILITY_COLOR_CHANGE:
         u8 moveType;
 
-        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
             moveType = TYPE_NORMAL;
         } else if (battleCtx->moveType) {
             moveType = battleCtx->moveType;
@@ -6696,8 +6699,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = inPower;
     }
 
-    if (attackerParams.ability == ABILITY_NORMALIZE) {
+    if (attackerParams.ability == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_NORMAL;
+        movePower = movePower * 12 / 10;
     } else if (inType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;
     } else {
