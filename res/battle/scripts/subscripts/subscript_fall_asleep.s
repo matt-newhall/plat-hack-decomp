@@ -33,6 +33,15 @@ _077:
 
 _087:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _094
+    CompareVarToValue OPCODE_EQU, BTLVAR_CURRENT_MOVE, MOVE_SPORE, _090
+    CompareVarToValue OPCODE_EQU, BTLVAR_CURRENT_MOVE, MOVE_SLEEP_POWDER, _090
+    GoTo _091
+
+_090:
+    CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_TYPE_1, TYPE_GRASS, _202
+    CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_TYPE_2, TYPE_GRASS, _202
+
+_091:
     PrintAttackMessage 
     Wait 
 
@@ -92,6 +101,7 @@ _202:
     PrintAttackMessage 
     Wait 
     WaitButtonABTime 30
+    CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _329
 
 _221:
     // {0} stayed awake because of its {1}!
@@ -143,6 +153,10 @@ _319:
     WaitButtonABTime 30
     // {0} is protected by Safeguard!
     PrintMessage pl_msg_00000368_00200, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    GoTo _330
+
+_329:
+    PrintMessage pl_msg_00000368_00027, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
 
 _330:
     Wait 
