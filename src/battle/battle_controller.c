@@ -2846,7 +2846,7 @@ static BOOL BattleController_LoadQuickClawCheck(BattleSystem *battleSys, BattleC
 
 static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
 {
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         return TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
@@ -3622,7 +3622,7 @@ static void BattleController_LeftoverState29(BattleSystem *battleSys, BattleCont
 
 static inline int CalcCurrentMoveType(BattleContext *battleCtx)
 {
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         return TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
