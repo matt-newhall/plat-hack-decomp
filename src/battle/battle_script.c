@@ -6806,6 +6806,13 @@ static BOOL BtlCmd_TryBreakScreens(BattleSystem *battleSys, BattleContext *battl
     int jumpIfNoScreens = BattleScript_Read(battleCtx);
     int defending = Battler_Side(battleSys, battleCtx->defender);
 
+    if (MON_HAS_TYPE(battleCtx->defender, TYPE_GHOST)) {
+        if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SCRAPPY && !(battleCtx->battleMons[defending].statusVolatile & VOLATILE_CONDITION_FORESIGHT)) {
+            BattleScript_Iter(battleCtx, jumpIfNoScreens);
+            return FALSE;
+        }
+    }
+
     if ((battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_REFLECT)
         || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_LIGHT_SCREEN)) {
         battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_REFLECT;
