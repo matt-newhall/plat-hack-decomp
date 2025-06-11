@@ -307,6 +307,7 @@ static BOOL BtlCmd_LoadArchivedMonData(BattleSystem *battleSys, BattleContext *b
 static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -567,7 +568,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_LoadArchivedMonData,
     BtlCmd_RefreshMonData,
     BtlCmd_End,
-    BtlCmd_IsTailwindWeather
+    BtlCmd_IsTailwindWeather,
+    BtlCmd_CalcTauntTurns
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7463,6 +7465,29 @@ static BOOL BtlCmd_CalcPaybackPower(BattleSystem *battleSys, BattleContext *batt
         battleCtx->movePower = CURRENT_MOVE_DATA.power * 2;
     } else {
         battleCtx->movePower = CURRENT_MOVE_DATA.power;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Calculates the number of turns for Taunt to inflict.
+ *
+ * Taunt lasts for four turns if the target acted before the user, and three
+ * turns if the user acts before the target.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END) {
+        battleCtx->calcTemp = 4;
+    } else {
+        battleCtx->calcTemp = 3;
     }
 
     return FALSE;

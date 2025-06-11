@@ -1236,4 +1236,8 @@
     .long 223
     .endm
 
+    .macro CalcTauntTurns
+    .long 224
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
