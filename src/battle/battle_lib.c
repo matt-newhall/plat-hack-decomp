@@ -6717,7 +6717,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower *= 2;
     }
 
-    if (battleCtx->turnFlags[attacker].helpingHand) {
+    if (battleCtx->turnFlags[attacker].helpingHand && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         movePower = movePower * 15 / 10;
     }
 
