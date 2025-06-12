@@ -3496,6 +3496,18 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
         moveType = CURRENT_MOVE_DATA.type;
     }
 
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LIGHTNING_ROD) == TRUE
+        && moveType == TYPE_ELECTRIC
+        && attacker != defender) {
+            subscript = subscript_absorb_and_spatk_up_1_stage;
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_STORM_DRAIN) == TRUE
+        && moveType == TYPE_WATER
+        && attacker != defender) {
+            subscript = subscript_absorb_and_spatk_up_1_stage;
+    }
+
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE
         && moveType == TYPE_ELECTRIC
         && attacker != defender) {
