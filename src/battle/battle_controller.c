@@ -3239,8 +3239,8 @@ enum TryMoveState {
     TRY_MOVE_STATE_TRIGGER_REDIRECTION_ABILITIES,
     TRY_MOVE_STATE_CHECK_MOVE_HITS,
     TRY_MOVE_STATE_CHECK_MOVE_HIT_OVERRIDES,
-    TRY_MOVE_STATE_CHECK_TYPE_CHART,
     TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES,
+    TRY_MOVE_STATE_CHECK_TYPE_CHART,
 
     TRY_MOVE_END,
 };
@@ -3280,19 +3280,19 @@ static void BattleController_TryMove(BattleSystem *battleSys, BattleContext *bat
 
         battleCtx->tryMoveCheckState++;
 
-    case TRY_MOVE_STATE_CHECK_TYPE_CHART:
-        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_TYPE_CHART_CHECK) == FALSE
+    case TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES:
+        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
             && battleCtx->defender != BATTLER_NONE
-            && BattleController_CheckTypeChart(battleSys, battleCtx) == 1) {
+            && BattleController_TriggerImmunityAbilities(battleSys, battleCtx) == 1) {
             return;
         }
 
         battleCtx->tryMoveCheckState++;
 
-    case TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES:
-        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
+    case TRY_MOVE_STATE_CHECK_TYPE_CHART:
+        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_TYPE_CHART_CHECK) == FALSE
             && battleCtx->defender != BATTLER_NONE
-            && BattleController_TriggerImmunityAbilities(battleSys, battleCtx) == 1) {
+            && BattleController_CheckTypeChart(battleSys, battleCtx) == 1) {
             return;
         }
 
