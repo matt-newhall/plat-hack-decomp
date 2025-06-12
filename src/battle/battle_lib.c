@@ -6727,7 +6727,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower *= 2;
     }
 
-    if (battleCtx->turnFlags[attacker].helpingHand) {
+    if (battleCtx->turnFlags[attacker].helpingHand && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         movePower = movePower * 15 / 10;
     }
 
@@ -6739,7 +6739,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     moveClass = MOVE_DATA(move).class;
 
-    if (attackerParams.ability == ABILITY_HUGE_POWER || attackerParams.ability == ABILITY_PURE_POWER) {
+    if ((attackerParams.ability == ABILITY_HUGE_POWER || attackerParams.ability == ABILITY_PURE_POWER) && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         attackStat = attackStat * 2;
     }
     if (attackerParams.ability == ABILITY_SLOW_START
@@ -6823,7 +6823,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower /= 2;
     }
 
-    if (attackerParams.ability == ABILITY_HUSTLE) {
+    if (attackerParams.ability == ABILITY_HUSTLE && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         attackStat = attackStat * 150 / 100;
     }
     if (attackerParams.ability == ABILITY_GUTS && attackerParams.statusMask) {
@@ -6937,13 +6937,15 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (attackerParams.ability == ABILITY_RIVALRY
         && attackerParams.gender == defenderParams.gender
         && attackerParams.gender != GENDER_NONE
-        && defenderParams.gender != GENDER_NONE) {
+        && defenderParams.gender != GENDER_NONE
+        && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         movePower = movePower * 125 / 100;
     }
     if (attackerParams.ability == ABILITY_RIVALRY
         && attackerParams.gender != defenderParams.gender
         && attackerParams.gender != GENDER_NONE
-        && defenderParams.gender != GENDER_NONE) {
+        && defenderParams.gender != GENDER_NONE
+        && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         movePower = movePower * 75 / 100;
     }
 
