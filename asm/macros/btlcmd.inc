@@ -1232,4 +1232,8 @@
     .long 222
     .endm
 
+    .macro IsTailwindWeather
+    .long 223
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
