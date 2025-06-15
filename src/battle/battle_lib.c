@@ -3704,6 +3704,8 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     break;
 
                 case OVERWORLD_WEATHER_CLEAR_13:
+                    battleCtx->attacker = BATTLER_THEM;
+                    battleCtx->defender = BATTLER_US;
                     subscript = subscript_overworld_tailwind;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
