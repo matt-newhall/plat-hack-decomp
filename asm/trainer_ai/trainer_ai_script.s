@@ -1129,6 +1129,7 @@ Basic_CheckTailwind:
     ; If Trick Room is currently active or Tailwind is already active for the attacker's side
     ; of the field, score -10.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
+    IfFieldConditionsMask FIELD_CONDITION_TAILWIND_PERM, ScoreMinus10
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TAILWIND, ScoreMinus10
     PopOrEnd 
 
