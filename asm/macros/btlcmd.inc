@@ -1235,6 +1235,10 @@
     .long BTLCMD_END
     .endm
 
+    .macro IsTailwindWeather
+    .long BTLCMD_ISTAILWINDWEATHER
+    .endm
+
     .text
     .globl _start
 _start:
