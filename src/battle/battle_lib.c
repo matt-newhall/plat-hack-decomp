@@ -3565,6 +3565,7 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
     case ABILITY_SPEED_BOOST:
         if (battleCtx->battleMons[battler].curHP
             && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED] < 12
+            && !(battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] & SIDE_CONDITION_FLEE_FAILED)
             && battleCtx->battleMons[battler].moveEffectsData.fakeOutTurnNumber != battleCtx->totalTurns + 1) {
             battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_SPEED_UP_1_STAGE;
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
