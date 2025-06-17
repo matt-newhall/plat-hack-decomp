@@ -928,6 +928,22 @@ static inline void StepFieldConditionCheck(BattleContext *battleCtx, int state)
     }
 }
 
+static void TickDownTailwind(BattleContext *battleCtx, int side) {
+    const u32 tailwindFlags[] = {
+        SIDE_CONDITION_TAILWIND_3,
+        SIDE_CONDITION_TAILWIND_2,
+        SIDE_CONDITION_TAILWIND_1,
+        SIDE_CONDITION_TAILWIND_0,
+    };
+
+    for (int i = 0; i < 4; i++) {
+        if (battleCtx->sideConditionsMask[side] & tailwindFlags[i]) {
+            battleCtx->sideConditionsMask[side] &= ~tailwindFlags[i];
+            return;
+        }
+    }
+}
+
 static void BattleController_CheckFieldConditions(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int state = STATE_PROCESSING;
@@ -1040,7 +1056,7 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
                 side = battleCtx->fieldConditionCheckTemp;
 
                 if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) {
-                    battleCtx->sideConditionsMask[side] -= SIDE_CONDITION_TAILWIND_SHIFT;
+                    TickDownTailwind(battleCtx, side);
 
                     if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) == FALSE) {
                         PrepareSubroutineSequence(battleCtx, subscript_tailwind_end);
