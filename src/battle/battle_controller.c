@@ -1754,6 +1754,14 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
         }
     }
 
+    if (battleCtx->sideConditionsMask[0] & SIDE_CONDITION_FLEE_FAILED) {
+        battleCtx->sideConditionsMask[0] &= ~SIDE_CONDITION_FLEE_FAILED;
+    }
+    if (battleCtx->sideConditionsMask[1] & SIDE_CONDITION_FLEE_FAILED) {
+        battleCtx->sideConditionsMask[1] &= ~SIDE_CONDITION_FLEE_FAILED;
+    }
+
+
     battleCtx->monConditionCheckState = MON_COND_CHECK_START;
     battleCtx->monConditionCheckTemp = 0;
     battleCtx->command = BATTLE_CONTROL_CHECK_SIDE_CONDITIONS;
