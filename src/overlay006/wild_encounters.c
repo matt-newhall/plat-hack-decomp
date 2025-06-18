@@ -941,7 +941,7 @@ static void ModifyEncounterRateWithFlute(FieldSystem *fieldSystem, u8 *encounter
 // checks Synchronize, returns a random nature otherwise.
 static u8 GetNatureForWildMon(Pokemon *firstMon, const WildEncounters_FieldParams *encounterFieldParams)
 {
-    if (!encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE && LCRNG_RandMod(2) == 0) {
+    if (!encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE) {
         u32 leadPersonality = Pokemon_GetValue(firstMon, MON_DATA_PERSONALITY, NULL);
         return (u8)(leadPersonality % 25);
     }
@@ -1006,10 +1006,8 @@ static void CreateWildMonShinyWithGenderOrNature(const u16 species, const u8 lev
                 }
             }
         } else if (encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE) {
-            if (LCRNG_RandMod(2) == 0) {
-                firstMonNature = Pokemon_GetNature(firstPartyMon);
-                abilityInEffect = TRUE;
-            }
+            firstMonNature = Pokemon_GetNature(firstPartyMon);
+            abilityInEffect = TRUE;
         }
     }
 
