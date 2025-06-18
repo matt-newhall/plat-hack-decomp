@@ -1453,7 +1453,7 @@ static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldPar
 {
     int hasCompoundEyes = 0;
 
-    if (encounterFieldParams->isFirstMonEgg == FALSE && encounterFieldParams->firstMonAbility == ABILITY_COMPOUND_EYES) {
+    if (encounterFieldParams->isFirstMonEgg == FALSE && (encounterFieldParams->firstMonAbility == ABILITY_COMPOUND_EYES || encounterFieldParams->firstMonAbility == ABILITY_SUPER_LUCK)) {
         hasCompoundEyes = 1;
     }
 
