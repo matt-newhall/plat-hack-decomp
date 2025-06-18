@@ -108,7 +108,6 @@ static BOOL RepelPreventsEncounter(const u8 param0, const WildEncounters_FieldPa
 static void AddRoamerToEnemyParty(const u32 param0, Roamer *param1, FieldBattleDTO *param2);
 static BOOL TryEncounterRoamer(FieldSystem *fieldSystem, Roamer **param1);
 static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldParams *fieldParams, Pokemon *mon, FieldBattleDTO *battleParams);
-static u8 TryFindHigherLevelSlot(const EncounterSlot *encounterTable, const WildEncounters_FieldParams *fieldParams, const u8 encounterSlot);
 static void InitEncounterFieldParams(FieldSystem *fieldSystem, Pokemon *firstPartyMon, WildEncounters *encounterData, WildEncounters_FieldParams *param3);
 static void ModifyEncounterRateWithHeldItem(Pokemon *param0, u8 *param1);
 static void ModifyEncounterRateWithFlute(FieldSystem *fieldSystem, u8 *param1);
@@ -966,15 +965,6 @@ static u8 GetWildMonLevel(const EncounterSlot *slot, const WildEncounters_FieldP
     u8 levelRange = maxLevel - minLevel + 1;
     randRange = LCRNG_Next() % levelRange;
 
-    // Hustle and Vital Spirit give a 50% chance to force mons to be max level
-    if (!encounterFieldParams->isFirstMonEgg && (encounterFieldParams->firstMonAbility == ABILITY_HUSTLE || encounterFieldParams->firstMonAbility == ABILITY_VITAL_SPIRIT || encounterFieldParams->firstMonAbility == ABILITY_PRESSURE)) {
-        if (LCRNG_RandMod(2) == 0) {
-            return minLevel + randRange;
-        }
-
-        return maxLevel;
-    }
-
     return minLevel + randRange;
 }
 
@@ -1151,7 +1141,6 @@ static BOOL TryGenerateWildMon(
 
     switch (encounterType) {
         case ENCOUNTER_TYPE_GRASS:
-            encounterSlot = TryFindHigherLevelSlot(encounterTable, encounterFieldParams, encounterSlot);
             level = encounterTable[encounterSlot].maxLevel;
             break;
         case ENCOUNTER_TYPE_SURF:
@@ -1235,14 +1224,6 @@ void CreateWildMon_HoneyTree(FieldSystem *fieldSystem, FieldBattleDTO *battlePar
     u8 levelVariance = 15 - 5 + 1;
 
     u8 level = 5 + LCRNG_RandMod(levelVariance);
-
-    if (!encounterFieldParams.isFirstMonEgg && (encounterFieldParams.firstMonAbility == ABILITY_HUSTLE || encounterFieldParams.firstMonAbility == ABILITY_VITAL_SPIRIT || encounterFieldParams.firstMonAbility == ABILITY_PRESSURE)) {
-        if (LCRNG_RandMod(2) == 0) {
-            (void)0;
-        } else {
-            level = 15;
-        }
-    }
 
     HoneyTree_Unslather(fieldSystem);
     battleParams->battleStatusMask |= BATTLE_STATUS_HONEY_TREE;
@@ -1521,27 +1502,6 @@ static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldPar
     }
 
     return Party_AddPokemon(battleParams->parties[partySlot], mon);
-}
-
-static u8 TryFindHigherLevelSlot(const EncounterSlot *encounterTable, const WildEncounters_FieldParams *encounterFieldParams, const u8 encounterSlot)
-{
-    if (!encounterFieldParams->isFirstMonEgg && (encounterFieldParams->firstMonAbility == ABILITY_VITAL_SPIRIT || encounterFieldParams->firstMonAbility == ABILITY_HUSTLE || encounterFieldParams->firstMonAbility == ABILITY_PRESSURE)) {
-        if (LCRNG_RandMod(2) == 0) {
-            return encounterSlot;
-        }
-
-        u8 newSlot = encounterSlot;
-
-        for (u8 i = 0; i < MAX_GRASS_ENCOUNTERS; i++) {
-            if (encounterTable[i].species == encounterTable[newSlot].species && encounterTable[i].maxLevel > encounterTable[newSlot].maxLevel) {
-                newSlot = i;
-            }
-        }
-
-        return newSlot;
-    }
-
-    return encounterSlot;
 }
 
 static void InitEncounterFieldParams(FieldSystem *fieldSystem, Pokemon *firstPartyMon, WildEncounters *encounterData, WildEncounters_FieldParams *encounterFieldParams)
