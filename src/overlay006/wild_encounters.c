@@ -1058,7 +1058,7 @@ static void CreateWildMon(u16 species, u8 level, const int partyDest, const Wild
     }
 
     // 2/3 chance for Cute Charm to force the encounter to be the opposite gender of the lead, if possible.
-    if (hasRandomGender && !encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_CUTE_CHARM && LCRNG_RandMod(3) > 0) {
+    if (hasRandomGender && !encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_CUTE_CHARM && LCRNG_RandMod(100) < 66) {
         u8 gender = Pokemon_GetValue(firstPartyMon, MON_DATA_GENDER, NULL);
 
         if (gender == GENDER_FEMALE) {
