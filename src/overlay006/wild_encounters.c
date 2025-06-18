@@ -1352,7 +1352,7 @@ static u8 ModifyEncounterRateWithFieldParams(const BOOL isFishingEncounter, cons
                     newEncRate /= 2;
                 }
             } else if (encounterFieldParams->firstMonAbility == ABILITY_WHITE_SMOKE || encounterFieldParams->firstMonAbility == ABILITY_QUICK_FEET || encounterFieldParams->firstMonAbility == ABILITY_STENCH) {
-                newEncRate /= 2;
+                newEncRate /= 8;
             }
         }
 
