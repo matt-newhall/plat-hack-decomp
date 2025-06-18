@@ -1338,7 +1338,7 @@ static u8 ModifyEncounterRateWithFieldParams(const BOOL isFishingEncounter, cons
     if (!encounterFieldParams->isFirstMonEgg) {
         if (isFishingEncounter) {
             if (encounterFieldParams->firstMonAbility == ABILITY_STICKY_HOLD || encounterFieldParams->firstMonAbility == ABILITY_SUCTION_CUPS) {
-                newEncRate * 2; // BUG: Abilities do not Increase Fishing Encounter Rate (see docs/bugs_and_glitches.md)
+                newEncRate *= 2;
             }
         } else {
             if (encounterFieldParams->firstMonAbility == ABILITY_ARENA_TRAP || encounterFieldParams->firstMonAbility == ABILITY_NO_GUARD || encounterFieldParams->firstMonAbility == ABILITY_ILLUMINATE) {
