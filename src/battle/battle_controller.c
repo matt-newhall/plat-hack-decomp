@@ -928,6 +928,22 @@ static inline void StepFieldConditionCheck(BattleContext *battleCtx, int state)
     }
 }
 
+static void TickDownTailwind(BattleContext *battleCtx, int side) {
+    const u32 tailwindFlags[] = {
+        SIDE_CONDITION_TAILWIND_3,
+        SIDE_CONDITION_TAILWIND_2,
+        SIDE_CONDITION_TAILWIND_1,
+        SIDE_CONDITION_TAILWIND_0,
+    };
+
+    for (int i = 0; i < 4; i++) {
+        if (battleCtx->sideConditionsMask[side] & tailwindFlags[i]) {
+            battleCtx->sideConditionsMask[side] &= ~tailwindFlags[i];
+            return;
+        }
+    }
+}
+
 static void BattleController_CheckFieldConditions(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int state = STATE_PROCESSING;
@@ -1040,7 +1056,7 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
                 side = battleCtx->fieldConditionCheckTemp;
 
                 if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) {
-                    battleCtx->sideConditionsMask[side] -= SIDE_CONDITION_TAILWIND_SHIFT;
+                    TickDownTailwind(battleCtx, side);
 
                     if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) == FALSE) {
                         PrepareSubroutineSequence(battleCtx, subscript_tailwind_end);
@@ -1738,6 +1754,14 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
         }
     }
 
+    if (battleCtx->sideConditionsMask[0] & SIDE_CONDITION_FLEE_FAILED) {
+        battleCtx->sideConditionsMask[0] &= ~SIDE_CONDITION_FLEE_FAILED;
+    }
+    if (battleCtx->sideConditionsMask[1] & SIDE_CONDITION_FLEE_FAILED) {
+        battleCtx->sideConditionsMask[1] &= ~SIDE_CONDITION_FLEE_FAILED;
+    }
+
+
     battleCtx->monConditionCheckState = MON_COND_CHECK_START;
     battleCtx->monConditionCheckTemp = 0;
     battleCtx->command = BATTLE_CONTROL_CHECK_SIDE_CONDITIONS;
@@ -2224,7 +2248,7 @@ static int BattleController_CheckObedience(BattleSystem *battleSys, BattleContex
         battleCtx->defender = battleCtx->attacker;
         battleCtx->msgBattlerTemp = battleCtx->defender;
 
-        battleCtx->hpCalcTemp = CALC_SELF_HIT(MOVE_POUND, 40);
+        battleCtx->hpCalcTemp = CALC_SELF_HIT(MOVE_STRUGGLE, 40);
         battleCtx->hpCalcTemp = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->hpCalcTemp);
         battleCtx->hpCalcTemp *= -1;
 
@@ -2249,7 +2273,7 @@ static BOOL BattleController_DecrementPP(BattleSystem *battleSys, BattleContext 
 {
     int ppCost = 1;
     if (ATTACKER_SELF_TURN_FLAGS.skipPressureCheck == FALSE && battleCtx->defender != BATTLER_NONE) {
-        if (battleCtx->moveTemp == MOVE_IMPRISON) {
+        if (battleCtx->moveTemp == MOVE_IMPRISON || battleCtx->moveTemp == MOVE_SNATCH) {
             ppCost += BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->attacker, ABILITY_PRESSURE);
         } else {
             switch (battleCtx->aiContext.moveTable[battleCtx->moveTemp].range) {
@@ -2663,8 +2687,7 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
             break;
 
         case CHECK_STATUS_STATE_PARALYSIS:
-            if ((ATTACKING_MON.status & MON_CONDITION_PARALYSIS)
-                && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD) {
+            if (ATTACKING_MON.status & MON_CONDITION_PARALYSIS) {
                 if (BattleSystem_RandNext(battleSys) % 4 == 0) {
                     battleCtx->moveFailFlags[battleCtx->attacker].paralyzed = TRUE;
 
@@ -2847,7 +2870,7 @@ static BOOL BattleController_LoadQuickClawCheck(BattleSystem *battleSys, BattleC
 
 static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
 {
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         return TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
@@ -2895,7 +2918,7 @@ static int BattleController_CheckMoveHitAccuracy(BattleSystem *battleSys, Battle
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE) {
         accStages = 0;
     }
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE || Battler_Ability(battleCtx, attacker) == ABILITY_KEEN_EYE) {
         evaStages = 0;
     }
     if (MON_IS_IDENTIFIED(defender) && evaStages < 0) {
@@ -3117,7 +3140,6 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
             battleCtx->commandNext = battleCtx->command;
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
-            BattleSystem_DecPPForPressure(battleCtx, battler, battleCtx->attacker);
             return TRUE;
         }
     }
@@ -3241,8 +3263,8 @@ enum TryMoveState {
     TRY_MOVE_STATE_TRIGGER_REDIRECTION_ABILITIES,
     TRY_MOVE_STATE_CHECK_MOVE_HITS,
     TRY_MOVE_STATE_CHECK_MOVE_HIT_OVERRIDES,
-    TRY_MOVE_STATE_CHECK_TYPE_CHART,
     TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES,
+    TRY_MOVE_STATE_CHECK_TYPE_CHART,
 
     TRY_MOVE_END,
 };
@@ -3282,19 +3304,19 @@ static void BattleController_TryMove(BattleSystem *battleSys, BattleContext *bat
 
         battleCtx->tryMoveCheckState++;
 
-    case TRY_MOVE_STATE_CHECK_TYPE_CHART:
-        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_TYPE_CHART_CHECK) == FALSE
+    case TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES:
+        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
             && battleCtx->defender != BATTLER_NONE
-            && BattleController_CheckTypeChart(battleSys, battleCtx) == 1) {
+            && BattleController_TriggerImmunityAbilities(battleSys, battleCtx) == 1) {
             return;
         }
 
         battleCtx->tryMoveCheckState++;
 
-    case TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES:
-        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
+    case TRY_MOVE_STATE_CHECK_TYPE_CHART:
+        if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_TYPE_CHART_CHECK) == FALSE
             && battleCtx->defender != BATTLER_NONE
-            && BattleController_TriggerImmunityAbilities(battleSys, battleCtx) == 1) {
+            && BattleController_CheckTypeChart(battleSys, battleCtx) == 1) {
             return;
         }
 
@@ -3624,7 +3646,7 @@ static void BattleController_LeftoverState29(BattleSystem *battleSys, BattleCont
 
 static inline int CalcCurrentMoveType(BattleContext *battleCtx)
 {
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         return TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
@@ -4645,6 +4667,10 @@ static BOOL BattleController_CheckExtraFlinch(BattleSystem *battleSys, BattleCon
     BOOL result = FALSE;
     int itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
     int itemPower = Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0);
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE) {
+        itemPower = itemPower * 2;
+    }
 
     if (battleCtx->defender != BATTLER_NONE
         && itemEffect == HOLD_EFFECT_SOMETIMES_FLINCH

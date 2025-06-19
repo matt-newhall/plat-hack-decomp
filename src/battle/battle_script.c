@@ -307,6 +307,7 @@ static BOOL BtlCmd_LoadArchivedMonData(BattleSystem *battleSys, BattleContext *b
 static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -567,7 +568,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_LoadArchivedMonData,
     BtlCmd_RefreshMonData,
     BtlCmd_End,
-    BtlCmd_IsTailwindWeather
+    BtlCmd_IsTailwindWeather,
+    BtlCmd_CalcTauntTurns
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1546,7 +1548,7 @@ static BOOL BtlCmd_Wait(BattleSystem *battleSys, BattleContext *battleCtx)
 static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int moveType;
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         moveType = TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         moveType = battleCtx->moveType;
@@ -2871,17 +2873,26 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
             if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
                 hits = 5;
             } else {
-                hits = BattleSystem_RandNext(battleSys) & 3;
-                if (hits < 2) { // 2 or 3 hits
-                    hits += 2;
-                } else { // 4 or 5 hits
-                    hits = (BattleSystem_RandNext(battleSys) & 3) + 2;
+                int roll = BattleSystem_RandNext(battleSys) % 100;
+                if (roll < 35) {
+                    hits = 2;
+                } else if (roll < 70) {
+                    hits = 3;
+                } else if (roll < 85) {
+                    hits = 4;
+                } else {
+                    hits = 5;
                 }
             }
         }
 
         battleCtx->multiHitCounter = hits;
         battleCtx->multiHitNumHits = hits;
+        battleCtx->multiHitAccuracyCheck = flags;
+    }
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
+        flags |= SYSCTL_SKIP_ACCURACY_CHECK;
         battleCtx->multiHitAccuracyCheck = flags;
     }
 
@@ -3049,7 +3060,11 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
     battleCtx->battleStatusMask &= ~SYSCTL_FAIL_STAT_STAGE_CHANGE;
 
-    if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
+    if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_3_STAGES) {
+        statOffset = BATTLE_STAT_SPEED; // This is Tail Glow idk why this works i love spaghetti code
+        stageChange = 3;
+        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
         statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES;
         stageChange = -2;
         battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_DROP;
@@ -3088,8 +3103,16 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 battleCtx->msgBuffer.params[1] = battleCtx->msgItemTemp;
                 battleCtx->msgBuffer.params[2] = BATTLE_STAT_ATTACK + statOffset;
             } else {
-                // "{0}'s {1} rose!" or "{0}'s {1} sharply rose!"
-                SetupNicknameStatMsg(battleCtx, stageChange == 1 ? 750 : 753, statOffset);
+                int msgId;
+                if (stageChange == 1) {
+                    msgId = 750;
+                } else if (stageChange == 3) {
+                    msgId = 1272;
+                } else {
+                    msgId = 753;
+                }
+                // "{0}'s {1} rose!" or "{0}'s {1} sharply rose!" or "{0}'s {1} drastically rose!"
+                SetupNicknameStatMsg(battleCtx, msgId, statOffset);
             }
 
             mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
@@ -3766,8 +3789,6 @@ static BOOL BtlCmd_ResetAllStatChanges(BattleSystem *battleSys, BattleContext *b
         for (int j = BATTLE_STAT_HP; j < BATTLE_STAT_MAX; j++) {
             battleCtx->battleMons[i].statBoosts[j] = 6;
         }
-
-        battleCtx->battleMons[i].statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
     }
 
     return FALSE;
@@ -6243,13 +6264,6 @@ static BOOL BtlCmd_CalcHiddenPowerParams(BattleSystem *battleSys, BattleContext 
 {
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->movePower = ((ATTACKING_MON.hpIV & 2) >> 1)
-        | (ATTACKING_MON.attackIV & 2)
-        | ((ATTACKING_MON.defenseIV & 2) << 1)
-        | ((ATTACKING_MON.speedIV & 2) << 2)
-        | ((ATTACKING_MON.spAttackIV & 2) << 3)
-        | ((ATTACKING_MON.spDefenseIV & 2) << 4);
-
     battleCtx->moveType = (ATTACKING_MON.hpIV & 1)
         | ((ATTACKING_MON.attackIV & 1) << 1)
         | ((ATTACKING_MON.defenseIV & 1) << 2)
@@ -6257,7 +6271,6 @@ static BOOL BtlCmd_CalcHiddenPowerParams(BattleSystem *battleSys, BattleContext 
         | ((ATTACKING_MON.spAttackIV & 1) << 4)
         | ((ATTACKING_MON.spDefenseIV & 1) << 5);
 
-    battleCtx->movePower = battleCtx->movePower * 40 / 63 + 30;
     battleCtx->moveType = battleCtx->moveType * 15 / 63 + 1;
 
     if (battleCtx->moveType >= TYPE_MYSTERY) {
@@ -6794,6 +6807,13 @@ static BOOL BtlCmd_TryBreakScreens(BattleSystem *battleSys, BattleContext *battl
     BattleScript_Iter(battleCtx, 1);
     int jumpIfNoScreens = BattleScript_Read(battleCtx);
     int defending = Battler_Side(battleSys, battleCtx->defender);
+
+    if (MON_HAS_TYPE(battleCtx->defender, TYPE_GHOST)) {
+        if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SCRAPPY && !(battleCtx->battleMons[defending].statusVolatile & VOLATILE_CONDITION_FORESIGHT)) {
+            BattleScript_Iter(battleCtx, jumpIfNoScreens);
+            return FALSE;
+        }
+    }
 
     if ((battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_REFLECT)
         || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_LIGHT_SCREEN)) {
@@ -7450,6 +7470,29 @@ static BOOL BtlCmd_CalcPaybackPower(BattleSystem *battleSys, BattleContext *batt
     return FALSE;
 }
 
+/**
+ * @brief Calculates the number of turns for Taunt to inflict.
+ *
+ * Taunt lasts for four turns if the target acted before the user, and three
+ * turns if the user acts before the target.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END) {
+        battleCtx->calcTemp = 4;
+    } else {
+        battleCtx->calcTemp = 3;
+    }
+
+    return FALSE;
+}
+
 static const u8 sCurrentPPScaledPower[] = {
     200,
     80,
@@ -7504,7 +7547,11 @@ static BOOL BtlCmd_CalcWringOutPower(BattleSystem *battleSys, BattleContext *bat
 {
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->movePower = 1 + (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+    battleCtx->movePower = (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+
+    if (battleCtx->movePower == 0) {
+        battleCtx->movePower = 1;
+    }
 
     return FALSE;
 }
@@ -7638,7 +7685,7 @@ static BOOL BtlCmd_TrySuckerPunch(BattleSystem *battleSys, BattleContext *battle
     }
 
     if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
-        || (MOVE_DATA(move).power == 0 && DEFENDER_TURN_FLAGS.struggling == FALSE)) {
+        || (MOVE_DATA(move).power == 0 && DEFENDER_TURN_FLAGS.struggling == FALSE && move != MOVE_ME_FIRST)) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
