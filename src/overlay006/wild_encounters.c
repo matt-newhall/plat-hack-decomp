@@ -108,7 +108,6 @@ static BOOL RepelPreventsEncounter(const u8 param0, const WildEncounters_FieldPa
 static void AddRoamerToEnemyParty(const u32 param0, Roamer *param1, FieldBattleDTO *param2);
 static BOOL TryEncounterRoamer(FieldSystem *fieldSystem, Roamer **param1);
 static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldParams *fieldParams, Pokemon *mon, FieldBattleDTO *battleParams);
-static u8 TryFindHigherLevelSlot(const EncounterSlot *encounterTable, const WildEncounters_FieldParams *fieldParams, const u8 encounterSlot);
 static void InitEncounterFieldParams(FieldSystem *fieldSystem, Pokemon *firstPartyMon, WildEncounters *encounterData, WildEncounters_FieldParams *param3);
 static void ModifyEncounterRateWithHeldItem(Pokemon *param0, u8 *param1);
 static void ModifyEncounterRateWithFlute(FieldSystem *fieldSystem, u8 *param1);
@@ -941,7 +940,7 @@ static void ModifyEncounterRateWithFlute(FieldSystem *fieldSystem, u8 *encounter
 // checks Synchronize, returns a random nature otherwise.
 static u8 GetNatureForWildMon(Pokemon *firstMon, const WildEncounters_FieldParams *encounterFieldParams)
 {
-    if (!encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE && LCRNG_RandMod(2) == 0) {
+    if (!encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE) {
         u32 leadPersonality = Pokemon_GetValue(firstMon, MON_DATA_PERSONALITY, NULL);
         return (u8)(leadPersonality % 25);
     }
@@ -965,15 +964,6 @@ static u8 GetWildMonLevel(const EncounterSlot *slot, const WildEncounters_FieldP
 
     u8 levelRange = maxLevel - minLevel + 1;
     randRange = LCRNG_Next() % levelRange;
-
-    // Hustle and Vital Spirit give a 50% chance to force mons to be max level
-    if (!encounterFieldParams->isFirstMonEgg && (encounterFieldParams->firstMonAbility == ABILITY_HUSTLE || encounterFieldParams->firstMonAbility == ABILITY_VITAL_SPIRIT || encounterFieldParams->firstMonAbility == ABILITY_PRESSURE)) {
-        if (LCRNG_RandMod(2) == 0) {
-            return minLevel + randRange;
-        }
-
-        return maxLevel;
-    }
 
     return minLevel + randRange;
 }
@@ -1006,10 +996,8 @@ static void CreateWildMonShinyWithGenderOrNature(const u16 species, const u8 lev
                 }
             }
         } else if (encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE) {
-            if (LCRNG_RandMod(2) == 0) {
-                firstMonNature = Pokemon_GetNature(firstPartyMon);
-                abilityInEffect = TRUE;
-            }
+            firstMonNature = Pokemon_GetNature(firstPartyMon);
+            abilityInEffect = TRUE;
         }
     }
 
@@ -1060,7 +1048,7 @@ static void CreateWildMon(u16 species, u8 level, const int partyDest, const Wild
     }
 
     // 2/3 chance for Cute Charm to force the encounter to be the opposite gender of the lead, if possible.
-    if (hasRandomGender && !encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_CUTE_CHARM && LCRNG_RandMod(3) > 0) {
+    if (hasRandomGender && !encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_CUTE_CHARM && LCRNG_RandMod(100) < 66) {
         u8 gender = Pokemon_GetValue(firstPartyMon, MON_DATA_GENDER, NULL);
 
         if (gender == GENDER_FEMALE) {
@@ -1086,58 +1074,86 @@ static void CreateWildMon(u16 species, u8 level, const int partyDest, const Wild
     Heap_FreeToHeap(newEncounter);
 }
 
-static BOOL TryGenerateWildMon(Pokemon *firstPartyMon, const int fishingRodType, const WildEncounters_FieldParams *encounterFieldParams, const EncounterSlot *encounterTable, const u8 encounterType, const int partyDest, FieldBattleDTO *battleParams)
-{
-    BOOL forcedSlot;
+static BOOL TryMatchAbilitySlot(
+    Pokemon *firstPartyMon,
+    const WildEncounters_FieldParams *encounterFieldParams,
+    const EncounterSlot *encounterTable,
+    const int maxEncounters,
+    const u8 type,
+    const u16 ability,
+    u8 *outSlot
+) {
+    return TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, maxEncounters, type, ability, outSlot);
+}
+
+static u8 GetFallbackEncounterSlot(const u8 encounterType, const int fishingRodType) {
+    switch (encounterType) {
+        case ENCOUNTER_TYPE_GRASS: return GetGroundEncounterSlot();
+        case ENCOUNTER_TYPE_SURF:  return GetWaterEncounterSlot();
+        case ENCOUNTER_TYPE_FISHING: return GetRodEncounterSlot(fishingRodType);
+        default: GF_ASSERT(FALSE); return 0;
+    }
+}
+
+static BOOL TryFindAbilitySlot(
+    Pokemon *firstPartyMon,
+    const WildEncounters_FieldParams *encounterFieldParams,
+    const EncounterSlot *encounterTable,
+    const int maxEncounters,
+    const u8 encounterType,
+    const int fishingRodType,
+    u8 *outSlot
+) {
+    static const struct {
+        u8 type;
+        u16 ability;
+    } slotChecks[] = {
+        { TYPE_STEEL, ABILITY_MAGNET_PULL },
+        { TYPE_ELECTRIC, ABILITY_STATIC },
+        { TYPE_ELECTRIC, ABILITY_LIGHTNING_ROD },
+        { TYPE_FIRE, ABILITY_FLASH_FIRE },
+        { TYPE_WATER, ABILITY_STORM_DRAIN },
+    };
+
+    for (int i = 0; i < sizeof(slotChecks) / sizeof(slotChecks[0]); i++) {
+        if (TryMatchAbilitySlot(firstPartyMon, encounterFieldParams, encounterTable, maxEncounters, slotChecks[i].type, slotChecks[i].ability, outSlot)) {
+            return TRUE;
+        }
+    }
+
+    *outSlot = GetFallbackEncounterSlot(encounterType, fishingRodType);
+    return FALSE;
+}
+
+static BOOL TryGenerateWildMon(
+    Pokemon *firstPartyMon,
+    const int fishingRodType,
+    const WildEncounters_FieldParams *encounterFieldParams,
+    const EncounterSlot *encounterTable,
+    const u8 encounterType,
+    const int partyDest,
+    FieldBattleDTO *battleParams
+) {
     u8 encounterSlot = 0;
     u8 level = 0;
 
+    TryFindAbilitySlot(firstPartyMon, encounterFieldParams, encounterTable, MAX_GRASS_ENCOUNTERS, encounterType, fishingRodType, &encounterSlot);
+
     switch (encounterType) {
-    case ENCOUNTER_TYPE_GRASS:
-        forcedSlot = TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, MAX_GRASS_ENCOUNTERS, TYPE_STEEL, ABILITY_MAGNET_PULL, &encounterSlot);
-
-        if (!forcedSlot) {
-            forcedSlot = TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, MAX_GRASS_ENCOUNTERS, TYPE_ELECTRIC, ABILITY_STATIC, &encounterSlot);
-
-            if (!forcedSlot) {
-                encounterSlot = GetGroundEncounterSlot();
-            }
-        }
-
-        encounterSlot = TryFindHigherLevelSlot(encounterTable, encounterFieldParams, encounterSlot);
-        level = encounterTable[encounterSlot].maxLevel;
-        break;
-    case ENCOUNTER_TYPE_SURF:
-        // BUG: Magnet Pull doesn't function in water because its encounter slot gets overwritten when the Static check returns FALSE.
-        forcedSlot = TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, MAX_WATER_ENCOUNTERS, TYPE_STEEL, ABILITY_MAGNET_PULL, &encounterSlot);
-        forcedSlot = TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, MAX_WATER_ENCOUNTERS, TYPE_ELECTRIC, ABILITY_STATIC, &encounterSlot);
-
-        if (!forcedSlot) {
-            encounterSlot = GetWaterEncounterSlot();
-        }
-
-        level = GetWildMonLevel(&encounterTable[encounterSlot], encounterFieldParams);
-        break;
-    case ENCOUNTER_TYPE_FISHING:
-        // BUG: Magnet Pull doesn't function in water because its encounter slot gets overwritten when the Static check returns FALSE.
-        forcedSlot = TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, MAX_WATER_ENCOUNTERS, TYPE_STEEL, ABILITY_MAGNET_PULL, &encounterSlot);
-        forcedSlot = TryGetSlotForTypeMatchAbility(firstPartyMon, encounterFieldParams, encounterTable, MAX_WATER_ENCOUNTERS, TYPE_ELECTRIC, ABILITY_STATIC, &encounterSlot);
-
-        if (!forcedSlot) {
-            encounterSlot = GetRodEncounterSlot(fishingRodType);
-        }
-
-        level = GetWildMonLevel(&encounterTable[encounterSlot], encounterFieldParams);
-        break;
-    default:
-        GF_ASSERT(FALSE);
+        case ENCOUNTER_TYPE_GRASS:
+            level = encounterTable[encounterSlot].maxLevel;
+            break;
+        case ENCOUNTER_TYPE_SURF:
+        case ENCOUNTER_TYPE_FISHING:
+            level = GetWildMonLevel(&encounterTable[encounterSlot], encounterFieldParams);
+            break;
+        default:
+            GF_ASSERT(FALSE);
+            return FALSE;
     }
 
-    if (FirstMonAbilityPreventsEncounter(encounterFieldParams, firstPartyMon, level)) {
-        return FALSE;
-    }
-
-    if (RepelPreventsEncounter(level, encounterFieldParams) == TRUE) {
+    if (FirstMonAbilityPreventsEncounter(encounterFieldParams, firstPartyMon, level) ||
+        RepelPreventsEncounter(level, encounterFieldParams)) {
         return FALSE;
     }
 
@@ -1161,19 +1177,19 @@ static BOOL CreateWildMon_FromRadarKeepChain(const int species, const int level,
 }
 
 // Generates new encounter slot, so may or may not break the chain.
-static BOOL CreateWildMon_FromRadarNoChain(FieldSystem *fieldSystem, Pokemon *mon, const WildEncounters_FieldParams *encounterFieldParams, const EncounterSlot *encounterTable, const int partyDest, FieldBattleDTO *battleParams, const int species, const int level)
-{
+static BOOL CreateWildMon_FromRadarNoChain(
+    FieldSystem *fieldSystem,
+    Pokemon *mon,
+    const WildEncounters_FieldParams *encounterFieldParams,
+    const EncounterSlot *encounterTable,
+    const int partyDest,
+    FieldBattleDTO *battleParams,
+    const int species,
+    const int level
+) {
     u8 encounterSlot = 0;
 
-    u8 forcedSlot = TryGetSlotForTypeMatchAbility(mon, encounterFieldParams, encounterTable, MAX_GRASS_ENCOUNTERS, TYPE_STEEL, ABILITY_MAGNET_PULL, &encounterSlot);
-
-    if (forcedSlot == 0) {
-        forcedSlot = TryGetSlotForTypeMatchAbility(mon, encounterFieldParams, encounterTable, MAX_GRASS_ENCOUNTERS, TYPE_ELECTRIC, ABILITY_STATIC, &encounterSlot);
-
-        if (forcedSlot == 0) {
-            encounterSlot = GetGroundEncounterSlot();
-        }
-    }
+    TryFindAbilitySlot(mon, encounterFieldParams, encounterTable, MAX_GRASS_ENCOUNTERS, ENCOUNTER_TYPE_GRASS, 0, &encounterSlot);
 
     u8 newLevel = encounterTable[encounterSlot].maxLevel;
     int newSpecies = encounterTable[encounterSlot].species;
@@ -1208,14 +1224,6 @@ void CreateWildMon_HoneyTree(FieldSystem *fieldSystem, FieldBattleDTO *battlePar
     u8 levelVariance = 15 - 5 + 1;
 
     u8 level = 5 + LCRNG_RandMod(levelVariance);
-
-    if (!encounterFieldParams.isFirstMonEgg && (encounterFieldParams.firstMonAbility == ABILITY_HUSTLE || encounterFieldParams.firstMonAbility == ABILITY_VITAL_SPIRIT || encounterFieldParams.firstMonAbility == ABILITY_PRESSURE)) {
-        if (LCRNG_RandMod(2) == 0) {
-            (void)0;
-        } else {
-            level = 15;
-        }
-    }
 
     HoneyTree_Unslather(fieldSystem);
     battleParams->battleStatusMask |= BATTLE_STATUS_HONEY_TREE;
@@ -1330,7 +1338,7 @@ static u8 ModifyEncounterRateWithFieldParams(const BOOL isFishingEncounter, cons
     if (!encounterFieldParams->isFirstMonEgg) {
         if (isFishingEncounter) {
             if (encounterFieldParams->firstMonAbility == ABILITY_STICKY_HOLD || encounterFieldParams->firstMonAbility == ABILITY_SUCTION_CUPS) {
-                newEncRate * 2; // BUG: Abilities do not Increase Fishing Encounter Rate (see docs/bugs_and_glitches.md)
+                newEncRate *= 2;
             }
         } else {
             if (encounterFieldParams->firstMonAbility == ABILITY_ARENA_TRAP || encounterFieldParams->firstMonAbility == ABILITY_NO_GUARD || encounterFieldParams->firstMonAbility == ABILITY_ILLUMINATE) {
@@ -1344,7 +1352,7 @@ static u8 ModifyEncounterRateWithFieldParams(const BOOL isFishingEncounter, cons
                     newEncRate /= 2;
                 }
             } else if (encounterFieldParams->firstMonAbility == ABILITY_WHITE_SMOKE || encounterFieldParams->firstMonAbility == ABILITY_QUICK_FEET || encounterFieldParams->firstMonAbility == ABILITY_STENCH) {
-                newEncRate /= 2;
+                newEncRate /= 8;
             }
         }
 
@@ -1455,7 +1463,7 @@ static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldPar
 {
     int hasCompoundEyes = 0;
 
-    if (encounterFieldParams->isFirstMonEgg == FALSE && encounterFieldParams->firstMonAbility == ABILITY_COMPOUND_EYES) {
+    if (encounterFieldParams->isFirstMonEgg == FALSE && (encounterFieldParams->firstMonAbility == ABILITY_COMPOUND_EYES || encounterFieldParams->firstMonAbility == ABILITY_SUPER_LUCK)) {
         hasCompoundEyes = 1;
     }
 
@@ -1494,27 +1502,6 @@ static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldPar
     }
 
     return Party_AddPokemon(battleParams->parties[partySlot], mon);
-}
-
-static u8 TryFindHigherLevelSlot(const EncounterSlot *encounterTable, const WildEncounters_FieldParams *encounterFieldParams, const u8 encounterSlot)
-{
-    if (!encounterFieldParams->isFirstMonEgg && (encounterFieldParams->firstMonAbility == ABILITY_VITAL_SPIRIT || encounterFieldParams->firstMonAbility == ABILITY_HUSTLE || encounterFieldParams->firstMonAbility == ABILITY_PRESSURE)) {
-        if (LCRNG_RandMod(2) == 0) {
-            return encounterSlot;
-        }
-
-        u8 newSlot = encounterSlot;
-
-        for (u8 i = 0; i < MAX_GRASS_ENCOUNTERS; i++) {
-            if (encounterTable[i].species == encounterTable[newSlot].species && encounterTable[i].maxLevel > encounterTable[newSlot].maxLevel) {
-                newSlot = i;
-            }
-        }
-
-        return newSlot;
-    }
-
-    return encounterSlot;
 }
 
 static void InitEncounterFieldParams(FieldSystem *fieldSystem, Pokemon *firstPartyMon, WildEncounters *encounterData, WildEncounters_FieldParams *encounterFieldParams)
