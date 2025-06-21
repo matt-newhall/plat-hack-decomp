@@ -9438,8 +9438,7 @@ static BOOL BtlCmd_TryRestoreStatusOnSwitch(BattleSystem *battleSys, BattleConte
         int ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
         int status = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
 
-        if (battleCtx->battleMons[battler].ability != ABILITY_NATURAL_CURE
-            && Ability_ForbidsStatus(battleCtx, ability, status) == FALSE) {
+        if (battleCtx->battleMons[battler].ability != ABILITY_NATURAL_CURE) {
             BattleScript_Iter(battleCtx, jumpNoStatusRestore);
         }
     } else {
