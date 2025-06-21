@@ -4003,13 +4003,40 @@ static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, Ba
 static void BattleControllerPlayer_MoveEnd(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_NO_MOVES) == FALSE) {
-        if (BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battleCtx->attacker, FALSE) == TRUE
-            || (battleCtx->defender != BATTLER_NONE
-                && BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battleCtx->defender, FALSE) == TRUE)
-            || BattleControllerPlayer_AnyExpPayout(battleCtx, battleCtx->command, battleCtx->command) == TRUE
-            || BattleControllerPlayer_CheckBattleOver(battleSys, battleCtx) == TRUE) {
+        int nextSeqAttackerItem;
+        if (BattleSystem_TriggerHeldItemOnStatus(battleSys, battleCtx, battleCtx->attacker, &nextSeqAttackerItem) == TRUE) {
+            battleCtx->msgBattlerTemp = battleCtx->attacker;
+
+            LOAD_SUBSEQ(nextSeqAttackerItem);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
             return;
         }
+
+        int nextSeqDefenderItem;
+        if (battleCtx->defender != BATTLER_NONE
+            && BattleSystem_TriggerHeldItemOnStatus(battleSys, battleCtx, battleCtx->defender, &nextSeqDefenderItem) == TRUE) {
+            battleCtx->msgBattlerTemp = battleCtx->defender;
+
+            LOAD_SUBSEQ(nextSeqDefenderItem);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            return;
+        }
+
+
+        if (BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battleCtx->attacker, FALSE) == TRUE
+            || (battleCtx->defender != BATTLER_NONE
+                && BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battleCtx->defender, FALSE) == TRUE)) {
+            return;
+        }
+
+        if (BattleControllerPlayer_AnyExpPayout(battleCtx, battleCtx->command, battleCtx->command) == TRUE
+            || BattleControllerPlayer_CheckBattleOver(battleSys, battleCtx) == TRUE) {
+            return;
+        };
 
         int nextSeq = BattleSystem_TriggerEffectOnSwitch(battleSys, battleCtx);
         if (nextSeq) {
