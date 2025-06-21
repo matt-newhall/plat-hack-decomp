@@ -3645,8 +3645,8 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_PRESSURE,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
-    SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
+    SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS,
 
     SWITCH_IN_CHECK_STATE_DONE,
 };
@@ -4157,12 +4157,12 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             battleCtx->switchInCheckState++;
             break;
 
-        case SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS:
+        case SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS:
             for (i = 0; i < maxBattlers; i++) {
                 battler = battleCtx->monSpeedOrder[i];
 
-                if (BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battler, TRUE) == TRUE) {
-                    subscript = subscript_ability_forbids_status;
+                if (BattleSystem_TriggerHeldItemOnStatus(battleSys, battleCtx, battler, &subscript) == TRUE) {
+                    battleCtx->msgBattlerTemp = battler;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
                 }
@@ -4173,12 +4173,12 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             }
             break;
 
-        case SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS:
+        case SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS:
             for (i = 0; i < maxBattlers; i++) {
                 battler = battleCtx->monSpeedOrder[i];
 
-                if (BattleSystem_TriggerHeldItemOnStatus(battleSys, battleCtx, battler, &subscript) == TRUE) {
-                    battleCtx->msgBattlerTemp = battler;
+                if (BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battler, TRUE) == TRUE) {
+                    subscript = subscript_ability_forbids_status;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
                 }
