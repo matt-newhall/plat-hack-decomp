@@ -3421,6 +3421,23 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
             battleCtx->damage = (DEFENDING_MON.curHP - 1) * -1;
         }
 
+        if (DEFENDER_TURN_FLAGS.enduring == TRUE || DEFENDER_SELF_TURN_FLAGS.focusItemActivated == TRUE) {
+            if (itemEffect == HOLD_EFFECT_MAYBE_ENDURE) {
+                if ((BattleSystem_RandNext(battleSys) % 100) >= itemPower) {
+                    DEFENDER_SELF_TURN_FLAGS.focusItemActivated = FALSE;
+                }
+            }
+
+            if (itemEffect == HOLD_EFFECT_ENDURE && DEFENDING_MON.curHP != DEFENDING_MON.maxHP) {
+                DEFENDER_SELF_TURN_FLAGS.focusItemActivated = FALSE;
+            }
+
+            if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE
+                && DEFENDING_MON.curHP != DEFENDING_MON.maxHP) {
+                DEFENDER_TURN_FLAGS.enduring = FALSE;
+            }
+        }
+
         if (DEFENDER_TURN_FLAGS.enduring == 0) {
             if (itemEffect == HOLD_EFFECT_MAYBE_ENDURE && (BattleSystem_RandNext(battleSys) % 100) < itemPower) {
                 DEFENDER_SELF_TURN_FLAGS.focusItemActivated = TRUE;
@@ -3434,6 +3451,11 @@ static void BattleController_UpdateHP(BattleSystem *battleSys, BattleContext *ba
                 && DEFENDING_MON.curHP == DEFENDING_MON.maxHP) {
                 DEFENDER_TURN_FLAGS.enduring = TRUE;
             }
+        }
+
+        if (!DEFENDER_TURN_FLAGS.enduring && !DEFENDER_SELF_TURN_FLAGS.focusItemActivated) {
+            battleCtx->moveStatusFlags &= ~MOVE_STATUS_ENDURED;
+            battleCtx->moveStatusFlags &= ~MOVE_STATUS_ENDURED_ITEM;
         }
 
         if ((DEFENDER_TURN_FLAGS.enduring || DEFENDER_SELF_TURN_FLAGS.focusItemActivated)
