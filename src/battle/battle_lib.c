@@ -7009,6 +7009,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage /= stageDivisor;
         damage /= 50;
 
+        damage += 2;
+
         if ((attackerParams.statusMask & MON_CONDITION_BURN) && attackerParams.ability != ABILITY_GUTS) {
             damage /= 2;
         }
@@ -7053,6 +7055,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         damage /= stageDivisor;
         damage /= 50;
+
+        damage += 2;
 
         if ((sideConditions & SIDE_CONDITION_LIGHT_SCREEN) != FALSE
             && criticalMul == 1
@@ -7109,7 +7113,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage = damage * 15 / 10;
     }
 
-    return damage + 2;
+    return damage;
 }
 
 int BattleSystem_CalcDamageVariance(BattleSystem *battleSys, BattleContext *battleCtx, int damage)
