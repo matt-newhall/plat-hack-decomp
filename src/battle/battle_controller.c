@@ -4759,6 +4759,7 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_START = 0,
 
     AFTER_MOVE_HIT_STATE_RAGE = AFTER_MOVE_HIT_START,
+    AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
 
@@ -4793,6 +4794,39 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
         case AFTER_MOVE_HIT_STATE_RAGE:
             if ((ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_RAGE) && battleCtx->moveCur != MOVE_RAGE) {
                 ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RAGE;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE:
+            if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE) {
+                u8 moveType;
+
+                if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+                    moveType = TYPE_NORMAL;
+                } else if (battleCtx->moveType) {
+                    moveType = battleCtx->moveType;
+                } else {
+                    moveType = CURRENT_MOVE_DATA.type;
+                }
+
+                if (DEFENDING_MON.curHP
+                    && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+                    && battleCtx->moveCur != MOVE_STRUGGLE
+                    && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+                    && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+                    && CURRENT_MOVE_DATA.power
+                    && BattleMon_Get(battleCtx, battleCtx->defender, 27, NULL) != moveType
+                    && BattleMon_Get(battleCtx, battleCtx->defender, 28, NULL) != moveType) {
+                    battleCtx->msgTemp = moveType;
+                    battleCtx->msgBattlerTemp = battleCtx->defender;
+                    LOAD_SUBSEQ(subscript_color_change);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    machineState = STATE_BREAK_OUT;
+                }
             }
 
             battleCtx->afterMoveHitCheckState++;

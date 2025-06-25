@@ -4290,6 +4290,7 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
             && CURRENT_MOVE_DATA.power
+            && !(battleCtx->multiHitNumHits > 1)
             && BattleMon_Get(battleCtx, battleCtx->defender, 27, NULL) != moveType
             && BattleMon_Get(battleCtx, battleCtx->defender, 28, NULL) != moveType) {
             *subscript = subscript_color_change;
