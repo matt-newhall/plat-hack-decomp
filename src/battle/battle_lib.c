@@ -4235,6 +4235,25 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
         return result;
     }
 
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_STENCH) {
+        int effect = MOVE_DATA(battleCtx->moveCur).effect;
+
+        if (DEFENDING_MON.curHP
+            && !(effect == BATTLE_EFFECT_FLINCH_HIT)
+            && !(effect == BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH)
+            && !(effect == BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE)
+            && !(effect == BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT)
+            && !(effect == BATTLE_EFFECT_FLINCH_BURN_HIT)
+            && !(effect == BATTLE_EFFECT_FLINCH_FREEZE_HIT)
+            && !(effect == BATTLE_EFFECT_FLINCH_PARALYZE_HIT)
+            && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_SOMETIMES_FLINCH)
+            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_INNER_FOCUS) == FALSE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+            && BattleSystem_RandNext(battleSys) % 100 < 10) {
+            DEFENDING_MON.statusVolatile |= VOLATILE_CONDITION_FLINCH;
+        }
+    }
+
     switch (Battler_Ability(battleCtx, battleCtx->defender)) {
     case ABILITY_STATIC:
         if (ATTACKING_MON.curHP
