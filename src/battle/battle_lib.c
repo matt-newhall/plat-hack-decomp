@@ -6434,26 +6434,31 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
             }
         }
 
-        if (battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_CHERRIM
+        if (!(battleCtx->battleMons[battleCtx->msgBattlerTemp].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
+            && battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_CHERRIM
             && battleCtx->battleMons[battleCtx->msgBattlerTemp].curHP) {
             if (NO_CLOUD_NINE) {
-                if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM) == FALSE
+                if (((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM) == FALSE
+                    || (!(Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FLOWER_GIFT)))
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_SUNSHINE) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CHERRIM_FORM_OVERCAST;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
-                } else if (WEATHER_IS_SUN && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_OVERCAST) {
+                } else if (WEATHER_IS_SUN && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_OVERCAST
+                    && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FLOWER_GIFT) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CHERRIM_FORM_SUNSHINE;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
-                } else if (WEATHER_IS_RAIN && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_SUNSHINE) {
+                } else if (WEATHER_IS_RAIN && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_SUNSHINE
+                    && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FLOWER_GIFT) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CHERRIM_FORM_OVERCAST;
                     *subscript = subscript_form_change;
                     result = TRUE;
                     break;
-                } else if (WEATHER_IS_HAIL && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_SUNSHINE) {
+                } else if (WEATHER_IS_HAIL && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == CHERRIM_FORM_SUNSHINE
+                    && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FLOWER_GIFT) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CHERRIM_FORM_OVERCAST;
                     *subscript = subscript_form_change;
                     result = TRUE;
