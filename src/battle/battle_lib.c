@@ -6379,11 +6379,11 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
     for (i = 0; i < BattleSystem_GetMaxBattlers(battleSys); i++) {
         battleCtx->msgBattlerTemp = battleCtx->monSpeedOrder[i];
 
-        if (battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_CASTFORM
-            && battleCtx->battleMons[battleCtx->msgBattlerTemp].curHP
-            && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FORECAST) {
+        if (!(battleCtx->battleMons[battleCtx->msgBattlerTemp].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
+            && battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_CASTFORM
+            && battleCtx->battleMons[battleCtx->msgBattlerTemp].curHP) {
             if (NO_CLOUD_NINE) {
-                if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM) == FALSE
+                if (((battleCtx->fieldConditionsMask & FIELD_CONDITION_CASTFORM) == FALSE || (!(Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FORECAST)))
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_NORMAL
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_NORMAL) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_NORMAL;
@@ -6394,7 +6394,8 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     break;
                 } else if (WEATHER_IS_SUN
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_FIRE
-                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_FIRE) {
+                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_FIRE
+                    && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FORECAST) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_FIRE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_FIRE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CASTFORM_FORM_SUNNY;
@@ -6403,7 +6404,8 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     break;
                 } else if (WEATHER_IS_RAIN
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_WATER
-                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_WATER) {
+                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_WATER
+                    && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FORECAST) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_WATER;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_WATER;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CASTFORM_FORM_RAINY;
@@ -6412,7 +6414,8 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
                     break;
                 } else if (WEATHER_IS_HAIL
                     && battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 != TYPE_ICE
-                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_ICE) {
+                    && battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 != TYPE_ICE
+                    && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_FORECAST) {
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type1 = TYPE_ICE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].type2 = TYPE_ICE;
                     battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum = CASTFORM_FORM_SNOWY;
