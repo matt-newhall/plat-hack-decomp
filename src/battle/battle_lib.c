@@ -5894,6 +5894,14 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         break;
     }
 
+    if (DEFENDING_MON.heldItem == ITEM_JABOCA_BERRY) {
+        result = FALSE;
+    } else if (DEFENDING_MON.heldItem == ITEM_COBA_BERRY && battleCtx->moveType == TYPE_FLYING) {
+        result = FALSE;
+    } else if (DEFENDING_MON.heldItem == ITEM_TANGA_BERRY && battleCtx->moveType == TYPE_BUG) {
+        result = FALSE;
+    }
+
     if (result == TRUE) {
             battleCtx->scriptTemp = nextSeq;
 
