@@ -6754,17 +6754,17 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     GF_ASSERT(battleCtx->powerMul >= 10);
     movePower = movePower * battleCtx->powerMul / 10;
 
+    if (attackerParams.ability == ABILITY_TECHNICIAN
+        && (!(move == MOVE_STRUGGLE && inPower == 40))
+        && movePower <= 60) {
+        movePower = movePower * 15 / 10;
+    }
+
     if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE) && moveType == TYPE_ELECTRIC) {
         movePower *= 2;
     }
 
     if (battleCtx->turnFlags[attacker].helpingHand && (!(move == MOVE_STRUGGLE && inPower == 40))) {
-        movePower = movePower * 15 / 10;
-    }
-
-    if (attackerParams.ability == ABILITY_TECHNICIAN
-        && move != MOVE_STRUGGLE
-        && movePower <= 60) {
         movePower = movePower * 15 / 10;
     }
 
