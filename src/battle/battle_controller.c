@@ -2279,10 +2279,6 @@ static BOOL BattleController_DecrementPP(BattleSystem *battleSys, BattleContext 
             switch (battleCtx->aiContext.moveTable[battleCtx->moveTemp].range) {
             case RANGE_ALL_ADJACENT:
             case RANGE_FIELD:
-                // Number of mons on the field with Pressure
-                ppCost += BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_EXCEPT_ME, battleCtx->attacker, ABILITY_PRESSURE);
-                break;
-
             case RANGE_ADJACENT_OPPONENTS:
             case RANGE_OPPONENT_SIDE:
                 // Number of mons on the enemy side with Pressure
