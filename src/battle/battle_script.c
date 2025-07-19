@@ -6218,6 +6218,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     int species;
     int form;
     int level;
+    int movePower;
     Pokemon *mon;
 
     BattleScript_Iter(battleCtx, 1);
@@ -6244,6 +6245,12 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
     form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
     level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+
+    movePower = CURRENT_MOVE_DATA.power;
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_TECHNICIAN) {
+        movePower = movePower * 15 / 10;
+    }
 
     battleCtx->damage = SpeciesData_GetFormValue(species, form, SPECIES_DATA_BASE_ATK);
     battleCtx->damage *= CURRENT_MOVE_DATA.power;
