@@ -3111,7 +3111,9 @@ BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defend
 
     if (Battler_Ability(battleCtx, attacker) != ABILITY_MOLD_BREAKER) {
         if (Battler_Ability(battleCtx, defender) == ability) {
+            if (!((ability == ABILITY_STICKY_HOLD) && (BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL) <= 0))) {
             result = TRUE;
+            }
         }
     } else if (Battler_Ability(battleCtx, defender) == ability
         && battleCtx->selfTurnFlags[attacker].moldBreakerActivated == FALSE) {
