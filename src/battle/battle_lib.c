@@ -6459,7 +6459,8 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
             }
         }
 
-        if (battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_ARCEUS
+        if (!(battleCtx->battleMons[battleCtx->msgBattlerTemp].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
+            && battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_ARCEUS
             && battleCtx->battleMons[battleCtx->msgBattlerTemp].curHP
             && Battler_Ability(battleCtx, battleCtx->msgBattlerTemp) == ABILITY_MULTITYPE) {
             arceusForm = Pokemon_GetArceusTypeOf(Item_LoadParam(battleCtx->battleMons[battleCtx->msgBattlerTemp].heldItem, ITEM_PARAM_HOLD_EFFECT, HEAP_ID_BATTLE));
@@ -6472,7 +6473,8 @@ BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *batt
             }
         }
 
-        if (battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_GIRATINA
+        if (!(battleCtx->battleMons[battleCtx->msgBattlerTemp].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
+            && battleCtx->battleMons[battleCtx->msgBattlerTemp].species == SPECIES_GIRATINA
             && battleCtx->battleMons[battleCtx->msgBattlerTemp].curHP
             && battleCtx->battleMons[battleCtx->msgBattlerTemp].formNum == 1
             && ((battleCtx->battleMons[battleCtx->msgBattlerTemp].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
@@ -7711,7 +7713,8 @@ static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonP
         GF_ASSERT(FALSE);
     }
 
-    if (battleCtx->battleMons[battler].species == SPECIES_ARCEUS
+    if (!(battleCtx->battleMons[battleCtx->msgBattlerTemp].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
+        && battleCtx->battleMons[battler].species == SPECIES_ARCEUS
         && battleCtx->battleMons[battler].ability == ABILITY_MULTITYPE) {
         switch (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT)) {
         case HOLD_EFFECT_ARCEUS_FIRE:
