@@ -1233,10 +1233,11 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
-        // The speed-halving effect of these items are not ignored by any negation effect
         if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler1].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
+            if (!(battleCtx->battleMons[battler1].moveEffectsMask & MOVE_EFFECT_EMBARGO)) {
             battler1Speed /= 2;
             break;
+            }
         }
     }
 
@@ -1300,10 +1301,11 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
-        // The speed-halving effect of these items are not ignored by any negation effect
         if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler2].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
+            if (!(battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_EMBARGO)) {
             battler2Speed /= 2;
             break;
+            }
         }
     }
 
@@ -5893,12 +5895,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
     }
 
     if (result == TRUE) {
-        if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_KLUTZ
-            || (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_EMBARGO)) {
-            battleCtx->scriptTemp = 0;
-        } else {
             battleCtx->scriptTemp = nextSeq;
-        }
 
         battleCtx->msgItemTemp = battleCtx->battleMons[battler].heldItem;
         ATTACKER_SELF_TURN_FLAGS.statusFlags |= SELF_TURN_FLAG_PLUCK_BERRY;
@@ -6198,9 +6195,6 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         break;
     }
 
-    if (DEFENDING_MON.moveEffectsMask & MOVE_EFFECT_EMBARGO) {
-        battleCtx->flingScript = 0;
-    } else {
         battleCtx->msgItemTemp = battleCtx->battleMons[battler].heldItem;
 
         if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_NONE && battleCtx->flingScript) {
@@ -6208,7 +6202,6 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         }
 
         battleCtx->msgBattlerTemp = battleCtx->defender;
-    }
 
     return TRUE;
 }
