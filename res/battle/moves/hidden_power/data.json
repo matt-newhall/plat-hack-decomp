@@ -2,11 +2,11 @@
     "name": "Hidden Power",
     "class": "CLASS_SPECIAL",
     "type": "TYPE_NORMAL",
-    "power": 1,
+    "power": 60,
     "accuracy": 100,
     "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS",
+        "type": "BATTLE_EFFECT_RANDOM_TYPE_BASED_ON_IVS",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
