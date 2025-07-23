@@ -1398,6 +1398,9 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     if (battler1Priority == battler2Priority) {
+        BOOL isBattler1Stalled = battler1LaggingTail || battler1Ability == ABILITY_STALL;
+        BOOL isBattler2Stalled = battler2LaggingTail || battler2Ability == ABILITY_STALL;
+
         if (battler1QuickClaw && battler2QuickClaw) {
             if (battler1Speed < battler2Speed) {
                 result = COMPARE_SPEED_SLOWER;
@@ -1408,25 +1411,27 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
             result = COMPARE_SPEED_SLOWER;
         } else if (battler1QuickClaw && battler2QuickClaw == FALSE) {
             result = COMPARE_SPEED_FASTER;
-        } else if (battler1LaggingTail && battler2LaggingTail) {
+        } else if (isBattler1Stalled && isBattler2Stalled) {
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
             if (battler1Speed > battler2Speed) {
                 result = COMPARE_SPEED_SLOWER;
-            } else if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
+                }
+
+                if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
                 result = COMPARE_SPEED_TIE;
             }
-        } else if (battler1LaggingTail && battler2LaggingTail == FALSE) {
+            } else {
+                if (battler1Speed < battler2Speed) {
             result = COMPARE_SPEED_SLOWER;
-        } else if (battler1LaggingTail == FALSE && battler2LaggingTail) {
-            result = COMPARE_SPEED_FASTER;
-        } else if (battler1Ability == ABILITY_STALL && battler2Ability == ABILITY_STALL) {
-            if (battler1Speed > battler2Speed) {
-                result = COMPARE_SPEED_SLOWER;
-            } else if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
+                }
+
+                if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
                 result = COMPARE_SPEED_TIE;
             }
-        } else if (battler1Ability == ABILITY_STALL && battler2Ability != ABILITY_STALL) {
+            }
+        } else if (isBattler1Stalled && isBattler2Stalled == FALSE) {
             result = COMPARE_SPEED_SLOWER;
-        } else if (battler1Ability != ABILITY_STALL && battler2Ability == ABILITY_STALL) {
+        } else if (isBattler1Stalled == FALSE && isBattler2Stalled) {
             result = COMPARE_SPEED_FASTER;
         } else if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
             if (battler1Speed > battler2Speed) {
