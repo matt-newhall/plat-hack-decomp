@@ -1566,12 +1566,10 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
-    if (battleCtx->criticalMul > 1) {
         if (battleCtx->criticalMul == 2) {
             battleCtx->damage = (battleCtx->damage * 3) / 2;
-        } else {
-            battleCtx->damage *= 2;
-        }
+    } else if (battleCtx->criticalMul == 3) {
+        battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
 
     if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_HP_DRAIN_ON_ATK) {
@@ -6481,12 +6479,10 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage /= 50;
     battleCtx->damage += 2;
 
-    if (battleCtx->criticalMul > 1) {
         if (battleCtx->criticalMul == 2) {
             battleCtx->damage = (battleCtx->damage * 3) / 2;
-        } else {
-            battleCtx->damage *= 2;
-        }
+    } else if (battleCtx->criticalMul == 3) {
+        battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
 
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
