@@ -29,4 +29,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">infatuation</language>
 	</row>
+	<row id="pl_msg_00000219_00007" index="7">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">taunt</language>
+	</row>
+	<row id="pl_msg_00000219_00008" index="8">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">infatuation and taunt</language>
+	</row>
 </body>

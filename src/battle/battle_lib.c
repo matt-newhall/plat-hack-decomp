@@ -4472,8 +4472,18 @@ BOOL BattleSystem_RecoverStatusByAbility(BattleSystem *battleSys, BattleContext 
         break;
 
     case ABILITY_OBLIVIOUS:
-        if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_ATTRACT) {
+        BOOL isAttracted = battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_ATTRACT;
+        BOOL isTaunted = battleCtx->battleMons[battler].moveEffectsData.tauntedTurns;
+        if (isAttracted && isTaunted) {
+            battleCtx->msgTemp = MSGCOND_OBLIVIOUS_BOTH;
+            battleCtx->battleMons[battler].moveEffectsData.tauntedTurns = 0;
+            result = TRUE;
+        } else if (isAttracted) {
             battleCtx->msgTemp = MSGCOND_INFATUATION;
+            result = TRUE;
+        } else if (isTaunted) {
+            battleCtx->msgTemp = MSGCOND_TAUNTED;
+            battleCtx->battleMons[battler].moveEffectsData.tauntedTurns = 0;
             result = TRUE;
         }
         break;
