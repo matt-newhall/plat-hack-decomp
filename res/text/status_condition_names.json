@@ -28,6 +28,14 @@
     {
       "id": "pl_msg_00000219_00006",
       "en_US": "infatuation"
+    },
+    {
+      "id": "pl_msg_00000219_00007",
+      "en_US": "taunt"
+    },
+    {
+      "id": "pl_msg_00000219_00008",
+      "en_US": "infatuation and taunt"
     }
   ]
 }
