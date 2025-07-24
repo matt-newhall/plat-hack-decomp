@@ -3623,7 +3623,7 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == TRUE) {
         for (int i = 0; i < NELEMS(sSoundMoves); i++) {
-            if (sSoundMoves[i] == battleCtx->moveCur) {
+            if (sSoundMoves[i] == battleCtx->moveCur && attacker != defender) {
                 subscript = subscript_blocked_by_soundproof;
                 break;
             }
