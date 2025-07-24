@@ -85,7 +85,6 @@ typedef struct BattleMon {
 
     u32 weatherAbilityAnnounced : 1;
     u32 intimidateAnnounced : 1;
-    u32 traceAnnounced : 1;
     u32 downloadAnnounced : 1;
     u32 anticipationAnnounced : 1;
     u32 forewarnAnnounced : 1;
