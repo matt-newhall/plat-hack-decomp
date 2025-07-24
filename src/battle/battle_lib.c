@@ -46,7 +46,7 @@
 #include "unk_020366A0.h"
 #include "unk_0208C098.h"
 
-static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry);
+static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry, BOOL isAnticipation);
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum BattleSideEffectType type, u32 effect);
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus);
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry);
@@ -2527,10 +2527,11 @@ static const u8 sTypeMatchupMultipliers[][3] = {
  * @param attacker
  * @param defender
  * @param chartEntry    Index of the entry into the type-chart
+ * @param isAnticipation
  * @return TRUE if there are no active effects to override the given chart-entry,
  * FALSE if the chart-entry should be overriden
  */
-static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry)
+static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry, BOOL isAnticipation)
 {
     int itemEffect = Battler_HeldItemEffect(battleCtx, defender);
     BOOL result = TRUE;
@@ -2546,7 +2547,8 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
         result = FALSE;
     }
 
-    if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+    if (isAnticipation == FALSE
+        && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
         && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
         && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
@@ -2559,6 +2561,85 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
     }
 
     return result;
+}
+
+void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, BattleContext *battleCtx, int move, int attacker, int defender, u32 *moveStatusMask)
+{
+    int chartEntry;
+    u8 moveType;
+    int hpType;
+    u32 movePower;
+    u8 defenderItemEffect;
+
+    *moveStatusMask = 0;
+
+    if (move == MOVE_STRUGGLE) {
+        return;
+    }
+
+    defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
+
+    if (move == MOVE_HIDDEN_POWER) {
+        hpType = ((battleCtx->battleMons[attacker].hpIV & 1) >> 0)
+            | ((battleCtx->battleMons[attacker].attackIV & 1) << 1)
+            | ((battleCtx->battleMons[attacker].defenseIV & 1) << 2)
+            | ((battleCtx->battleMons[attacker].speedIV & 1) << 3)
+            | ((battleCtx->battleMons[attacker].spAttackIV & 1) << 4)
+            | ((battleCtx->battleMons[attacker].spDefenseIV & 1) << 5);
+        hpType = (hpType * 15 / 63) + 1;
+
+        if (hpType >= TYPE_MYSTERY) {
+            hpType++;
+        }
+        moveType = hpType;
+    } else {
+        moveType = MOVE_DATA(move).type;
+    }
+
+    movePower = MOVE_DATA(move).power;
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE
+        && moveType == TYPE_GROUND
+        && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
+        *moveStatusMask |= MOVE_STATUS_LEVITATED;
+    } else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
+        && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
+        && moveType == TYPE_GROUND
+        && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
+        *moveStatusMask |= MOVE_STATUS_MAGNET_RISE;
+    } else {
+        chartEntry = 0;
+
+        while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
+            if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
+                chartEntry++;
+                continue;
+            }
+
+            if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
+                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
+                    && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, TRUE) == TRUE) {
+                    ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], 0, TRUE, moveStatusMask);
+                }
+
+                if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                    && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
+                    && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, TRUE) == TRUE) {
+                    ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], 0, TRUE, moveStatusMask);
+                }
+            }
+
+            chartEntry++;
+        }
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WONDER_GUARD) == TRUE
+        && MoveIsOnDamagingTurn(battleCtx, move)
+        && ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE
+            || (*moveStatusMask & MOVE_STATUS_BASIC_EFFECTIVENESS) == MOVE_STATUS_BASIC_EFFECTIVENESS)
+        && movePower) {
+        *moveStatusMask |= MOVE_STATUS_WONDER_GUARD;
+    }
 }
 
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
@@ -2627,7 +2708,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 
             if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
                 if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
-                    && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+                    && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, FALSE) == TRUE) {
                     damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
                     if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
@@ -2637,7 +2718,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 
                 if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
                     && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
-                    && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry) == TRUE) {
+                    && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, FALSE) == TRUE) {
                     damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
 
                     if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
@@ -3912,7 +3993,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                                 if (move) {
                                     effectiveness = 0;
-                                    battleCtx->damage = BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, NULL, j, battler, battleCtx->damage, &effectiveness);
+                                    BattleSystem_GetTypeEffectivenessForAnticipation(battleSys, battleCtx, move, j, battler, &effectiveness);
 
                                     if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE
                                         && MoveCannotTriggerAnticipation(battleCtx, move) == FALSE
