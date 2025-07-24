@@ -97,7 +97,6 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 
     battleCtx->battleMons[battler].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battler].intimidateAnnounced = FALSE;
-    battleCtx->battleMons[battler].traceAnnounced = FALSE;
     battleCtx->battleMons[battler].downloadAnnounced = FALSE;
     battleCtx->battleMons[battler].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battler].forewarnAnnounced = FALSE;
@@ -3755,13 +3754,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 battleCtx->msgDefender = ChooseTraceTarget(battleSys, battleCtx, defender1, defender2);
 
-                if (battleCtx->battleMons[battler].traceAnnounced == FALSE
-                    && battleCtx->msgDefender != BATTLER_NONE
+                if (battleCtx->msgDefender != BATTLER_NONE
                     && battleCtx->battleMons[battler].curHP
                     && battleCtx->battleMons[battler].heldItem != ITEM_GRISEOUS_ORB
                     && battleCtx->battleMons[battleCtx->msgDefender].curHP
                     && Battler_Ability(battleCtx, battler) == ABILITY_TRACE) {
-                    battleCtx->battleMons[battler].traceAnnounced = TRUE;
                     battleCtx->msgBattlerTemp = battler;
                     subscript = subscript_trace;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
@@ -7860,11 +7857,13 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
 
     if (battleCtx->battleMons[defender1].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
+        && battleCtx->battleMons[defender1].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
+        && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
         // Both targets are eligible; choose randomly
         if (BattleSystem_RandNext(battleSys) & 1) {
@@ -7874,11 +7873,13 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         }
     } else if (battleCtx->battleMons[defender1].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
+        && battleCtx->battleMons[defender1].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE) {
         trace = defender1;
     } else if (battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
+        && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
         trace = defender2;

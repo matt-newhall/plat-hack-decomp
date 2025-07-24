@@ -5611,7 +5611,6 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
 
     ATTACKING_MON.weatherAbilityAnnounced = FALSE;
     ATTACKING_MON.intimidateAnnounced = FALSE;
-    ATTACKING_MON.traceAnnounced = FALSE;
     ATTACKING_MON.downloadAnnounced = FALSE;
     ATTACKING_MON.anticipationAnnounced = FALSE;
     ATTACKING_MON.forewarnAnnounced = FALSE;
