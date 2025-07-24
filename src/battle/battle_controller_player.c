@@ -3702,7 +3702,8 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
     case AFTER_MOVE_EFFECT_SYNCHRONIZE_STATUS:
         battleCtx->afterMoveEffectState++;
 
-        if (BattleSystem_SynchronizeStatus(battleSys, battleCtx, battleCtx->command) == TRUE) {
+        if (BattleSystem_SynchronizeStatus(battleSys, battleCtx, battleCtx->command) == TRUE
+            && !(battleCtx->moveCur == MOVE_PSYCHO_SHIFT)) {
             return;
         }
 
