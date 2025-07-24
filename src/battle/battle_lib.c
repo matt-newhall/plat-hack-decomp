@@ -1238,7 +1238,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
         if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler1].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
-            if (!(battleCtx->battleMons[battler1].moveEffectsMask & MOVE_EFFECT_EMBARGO)) {
+            if (!(battleCtx->battleMons[battler1].moveEffectsMask & MOVE_EFFECT_EMBARGO)
+                && ((!(battler1Ability == ABILITY_KLUTZ)) || (battler1Ability == ABILITY_KLUTZ && !(BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler1].heldItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED)))) {
             battler1Speed /= 2;
             break;
             }
@@ -1306,7 +1307,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
         if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler2].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
-            if (!(battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_EMBARGO)) {
+            if (!(battleCtx->battleMons[battler2].moveEffectsMask & MOVE_EFFECT_EMBARGO)
+                && ((!(battler2Ability == ABILITY_KLUTZ)) || (battler2Ability == ABILITY_KLUTZ && !(BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler2].heldItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_SPEED_DOWN_GROUNDED)))) {
             battler2Speed /= 2;
             break;
             }
