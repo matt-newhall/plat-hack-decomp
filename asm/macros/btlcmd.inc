@@ -1240,4 +1240,10 @@
     .long 224
     .endm
 
+    .macro CheckIsPerishSongAffected battler, jump
+    .long 225
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
