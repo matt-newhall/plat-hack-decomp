@@ -3696,7 +3696,7 @@ static void BattleController_AfterMoveEffects(BattleSystem *battleSys, BattleCon
     case AFTER_MOVE_EFFECT_SYNCHRONIZE_STATUS:
         battleCtx->afterMoveEffectState++;
 
-        if (BattleSystem_SynchronizeStatus(battleSys, battleCtx, battleCtx->command) == TRUE) {
+        if (BattleSystem_SynchronizeStatus(battleSys, battleCtx, battleCtx->command) == TRUE && !(battleCtx->moveCur == MOVE_PSYCHO_SHIFT || battleCtx->moveCur == MOVE_ROAR || battleCtx->moveCur == MOVE_WHIRLWIND)) {
             return;
         }
 
