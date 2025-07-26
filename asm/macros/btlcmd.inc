@@ -1243,6 +1243,12 @@
     .long BTLCMD_CALCTAUNTTURNS
     .endm
 
+    .macro CheckIsPerishSongAffected battler, jump
+    .long BTLCMD_CHECKISPERISHSONGAFFECTED
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:
