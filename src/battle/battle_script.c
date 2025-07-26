@@ -308,6 +308,7 @@ static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -569,7 +570,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_RefreshMonData,
     BtlCmd_End,
     BtlCmd_IsTailwindWeather,
-    BtlCmd_CalcTauntTurns
+    BtlCmd_CalcTauntTurns,
+    BtlCmd_CheckIsPerishSongAffected
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -5282,12 +5284,8 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
     if (battleCtx->moveCur == MOVE_HEAL_BELL) {
         battleCtx->msgMoveTemp = battleCtx->moveCur;
 
-        if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SOUNDPROOF) {
             ATTACKING_MON.status = MON_CONDITION_NONE;
             ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
-        } else {
-            battleCtx->calcTemp |= (SOUNDPROOF_SLOT_1 | NO_PARTNER_SLOT_1);
-        }
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
@@ -5732,7 +5730,7 @@ static BOOL BtlCmd_TryPerishSong(BattleSystem *battleSys, BattleContext *battleC
     for (int i = 0; i < maxBattlers; i++) {
         if ((battleCtx->battleMons[i].moveEffectsMask & MOVE_EFFECT_PERISH_SONG)
             || battleCtx->battleMons[i].curHP == 0
-            || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE) {
+            || (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE && (!(battleCtx->battleMons[battleCtx->attacker].personality == battleCtx->battleMons[i].personality)))) {
             ineligibleBattlers++;
         } else {
             battleCtx->battleMons[i].moveEffectsMask |= MOVE_EFFECT_PERISH_SONG;
@@ -8020,6 +8018,41 @@ static BOOL BtlCmd_CheckIgnorableAbility(BattleSystem *battleSys, BattleContext 
             BattleScript_Iter(battleCtx, jump);
             battleCtx->abilityMon = battler;
         }
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Checks if Perish Song is used on a valid target
+ *
+ * Inputs:
+ * 1. Input battler (or set of battlers) whose ability should be checked
+ * 2. GoTo distance if a battler in the input set meets the criteria
+ *
+ * Side effects:
+ * - CompareVarToValue any battler matches the criteria, battleCtx->abilityMon will be set
+ * to their identifier.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jump = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+
+    if (battleCtx->attacker == battler) {
+        BattleScript_Iter(battleCtx, jump);
+        battleCtx->abilityMon = battler;
+    } else if ((Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_SOUNDPROOF) == FALSE
+        || battleCtx->battleMons[battler].curHP == 0)) {
+        BattleScript_Iter(battleCtx, jump);
+        battleCtx->abilityMon = battler;
     }
 
     return FALSE;

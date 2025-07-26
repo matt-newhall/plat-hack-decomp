@@ -3573,6 +3573,9 @@ static u16 sSoundMoves[] = {
     MOVE_HYPER_VOICE,
     MOVE_BUG_BUZZ,
     MOVE_CHATTER,
+    MOVE_PERISH_SONG,
+    MOVE_HOWL,
+    MOVE_HEAL_BELL
 };
 
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
@@ -3623,7 +3626,7 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SOUNDPROOF) == TRUE) {
         for (int i = 0; i < NELEMS(sSoundMoves); i++) {
-            if (sSoundMoves[i] == battleCtx->moveCur) {
+            if (sSoundMoves[i] == battleCtx->moveCur && attacker != defender) {
                 subscript = subscript_blocked_by_soundproof;
                 break;
             }

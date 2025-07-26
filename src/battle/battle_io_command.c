@@ -693,7 +693,7 @@ static void ov16_0225C5E0(BattleSystem *battleSys, BattlerData *param1)
             v4 = Pokemon_GetValue(v1, MON_DATA_ABILITY, NULL);
         }
 
-        if ((v0->unk_02 != 215) || ((v0->unk_02 == 215) && (v4 != ABILITY_SOUNDPROOF))) {
+        if ((v0->unk_02 != 215) || ((v0->unk_02 == 215))) {
             Pokemon_SetValue(v1, MON_DATA_STATUS_CONDITION, (u8 *)&v5);
         }
     }
