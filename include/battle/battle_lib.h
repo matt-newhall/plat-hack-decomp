@@ -824,6 +824,14 @@ int Battler_CountMoves(BattleSystem *battleSys, BattleContext *battleCtx, int ba
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender);
 
 /**
+ * @brief Checks if selected move is a sound-based move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a sound-based move.
+ */
+BOOL BattleSystem_IsSoundMove(u16 move);
+
+/**
  * @brief Trigger an end-of-turn ability for the battler.
  *
  * If an end-of-turn ability is triggered, then the respective subscript will

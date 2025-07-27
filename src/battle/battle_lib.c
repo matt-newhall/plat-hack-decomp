@@ -3578,6 +3578,14 @@ static u16 sSoundMoves[] = {
     MOVE_HEAL_BELL
 };
 
+BOOL BattleSystem_IsSoundMove(u16 move) {
+    for (int i = 0; sSoundMoves[i] != 0; i++) {
+        if (sSoundMoves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+};
+
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
     int subscript = NULL, moveType;
