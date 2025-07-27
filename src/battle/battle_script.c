@@ -5310,7 +5310,7 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
 
-            if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
+            if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE && !(battleCtx->battleMons[partner].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)) {
                 battleCtx->battleMons[partner].status = MON_CONDITION_NONE;
                 battleCtx->battleMons[partner].statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
             }
