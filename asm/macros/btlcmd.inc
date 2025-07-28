@@ -883,9 +883,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro TryFeint jump_if_fail
+    .macro CheckIsPerishSongAffected battler, jump
     .long 156
-    .long (\jump_if_fail-.) / 4 - 1
+    .long \battler
+    .long (\jump-.) / 4 - 1
     .endm
 
     .macro CheckCanShareStatus jump_if_fail
@@ -1238,12 +1239,6 @@
 
     .macro CalcTauntTurns
     .long 224
-    .endm
-
-    .macro CheckIsPerishSongAffected battler, jump
-    .long 225
-    .long \battler
-    .long (\jump-.) / 4 - 1
     .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

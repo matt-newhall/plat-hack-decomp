@@ -239,7 +239,6 @@ static BOOL BtlCmd_TryCopycat(BattleSystem *battleSys, BattleContext *battleCtx)
 static BOOL BtlCmd_CalcPunishmentPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySuckerPunch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSideCondition(BattleSystem *battleSys, BattleContext *battleCtx);
-static BOOL BtlCmd_TryFeint(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckCanShareStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryLastResort(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryToxicSpikes(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -502,7 +501,7 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CalcPunishmentPower,
     BtlCmd_TrySuckerPunch,
     BtlCmd_CheckSideCondition,
-    BtlCmd_TryFeint,
+    BtlCmd_CheckIsPerishSongAffected,
     BtlCmd_CheckCanShareStatus,
     BtlCmd_TryLastResort,
     BtlCmd_TryToxicSpikes,
@@ -570,8 +569,7 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_RefreshMonData,
     BtlCmd_End,
     BtlCmd_IsTailwindWeather,
-    BtlCmd_CalcTauntTurns,
-    BtlCmd_CheckIsPerishSongAffected
+    BtlCmd_CalcTauntTurns
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7806,28 +7804,6 @@ static BOOL BtlCmd_CheckSideCondition(BattleSystem *battleSys, BattleContext *ba
 
     if (op == CHECK_SIDE_COND_VAL_NOT_ZERO && val) {
         BattleScript_Iter(battleCtx, jump);
-    }
-
-    return FALSE;
-}
-
-/**
- * @brief Check if the current move's target is Protecting itself.
- *
- * Inputs:
- * 1. The distance to jump if the target is not Protecting itself.
- *
- * @param battleSys
- * @param battleCtx
- * @return FALSE
- */
-static BOOL BtlCmd_TryFeint(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    BattleScript_Iter(battleCtx, 1);
-    int jumpOnFail = BattleScript_Read(battleCtx);
-
-    if (DEFENDER_TURN_FLAGS.protecting == FALSE) {
-        BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
     return FALSE;

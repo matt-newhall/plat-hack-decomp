@@ -10,6 +10,8 @@ _000:
     GoTo _019
 
 _015:
+    // Feint without Protect, skip showing the message
+    IfTurnFlag BTLSCR_DEFENDER, TURN_FLAG_PROTECTING, 0, _023
     // {0} fell for the feint!
     PrintMessage pl_msg_00000368_01048, TAG_NICKNAME, BTLSCR_DEFENDER
 
@@ -19,4 +21,6 @@ _019:
 
 _022:
     SetTurnFlag BTLSCR_DEFENDER, TURN_FLAG_PROTECTING, 0
+
+_023:
     End 
