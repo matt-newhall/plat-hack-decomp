@@ -886,9 +886,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro TryFeint jump_if_fail
-    .long BTLCMD_TRYFEINT
-    .long (\jump_if_fail-.) / 4 - 1
+    .macro CheckIsPerishSongAffected battler, jump
+    .long BTLCMD_CHECKISPERISHSONGAFFECTED
+    .long \battler
+    .long (\jump-.) / 4 - 1
     .endm
 
     .macro CheckCanShareStatus jump_if_fail
@@ -1241,12 +1242,6 @@
 
     .macro CalcTauntTurns
     .long BTLCMD_CALCTAUNTTURNS
-    .endm
-
-    .macro CheckIsPerishSongAffected battler, jump
-    .long BTLCMD_CHECKISPERISHSONGAFFECTED
-    .long \battler
-    .long (\jump-.) / 4 - 1
     .endm
 
     .text

@@ -161,7 +161,7 @@ ScriptCommand(BTLCMD_TRYCOPYCAT,                  BtlCmd_TryCopycat)
 ScriptCommand(BTLCMD_CALCPUNISHMENTPOWER,         BtlCmd_CalcPunishmentPower)
 ScriptCommand(BTLCMD_TRYSUCKERPUNCH,              BtlCmd_TrySuckerPunch)
 ScriptCommand(BTLCMD_CHECKSIDECONDITION,          BtlCmd_CheckSideCondition)
-ScriptCommand(BTLCMD_TRYFEINT,                    BtlCmd_TryFeint)
+ScriptCommand(BTLCMD_CHECKISPERISHSONGAFFECTED    BtlCmd_CheckIsPerishSongAffected)
 ScriptCommand(BTLCMD_CHECKCANSHARESTATUS,         BtlCmd_CheckCanShareStatus)
 ScriptCommand(BTLCMD_TRYLASTRESORT,               BtlCmd_TryLastResort)
 ScriptCommand(BTLCMD_TRYTOXICSPIKES,              BtlCmd_TryToxicSpikes)
@@ -230,7 +230,6 @@ ScriptCommand(BTLCMD_REFRESHMONDATA,              BtlCmd_RefreshMonData)
 ScriptCommand(BTLCMD_END,                         BtlCmd_End)
 ScriptCommand(BTLCMD_ISTAILWINDWEATHER,           BtlCmd_IsTailwindWeather)
 ScriptCommand(BTLCMD_CALCTAUNTTURNS,              BtlCmd_CalcTauntTurns)
-ScriptCommand(BTLCMD_CHECKISPERISHSONGAFFECTED    BtlCmd_CheckIsPerishSongAffected)
 
 // clang-format on
 
