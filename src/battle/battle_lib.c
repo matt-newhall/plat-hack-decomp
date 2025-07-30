@@ -2063,11 +2063,6 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
     if ((battleCtx->battleStatusMask & SYSCTL_BATON_PASS) == FALSE) {
         // Clear any Mean Look or Lock On effects from other active battlers
         for (i = 0; i < maxBattlers; i++) {
-            if ((battleCtx->battleMons[i].statusVolatile & VOLATILE_CONDITION_MEAN_LOOK)
-                && (battleCtx->battleMons[i].moveEffectsData.meanLookTarget == battler)) {
-                battleCtx->battleMons[i].statusVolatile &= ~VOLATILE_CONDITION_MEAN_LOOK;
-            }
-
             if ((battleCtx->battleMons[i].moveEffectsMask & MOVE_EFFECT_LOCK_ON)
                 && (battleCtx->battleMons[i].moveEffectsData.lockOnTarget == battler)) {
                 battleCtx->battleMons[i].moveEffectsMask &= ~MOVE_EFFECT_LOCK_ON;
@@ -2078,7 +2073,7 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
         battleCtx->battleMons[battler].statusVolatile = VOLATILE_CONDITION_NONE;
         battleCtx->battleMons[battler].moveEffectsMask = MOVE_EFFECT_NONE;
     } else {
-        // Baton Pass maintains Focus Energy, Mean Look, Confusion, Curse, Substitute,
+        // Baton Pass maintains Focus Energy, Confusion, Curse, Substitute,
         // and a variety of move effects (see constants/battle/moves.h)
         battleCtx->battleMons[battler].statusVolatile &= VOLATILE_CONDITION_BATON_PASSED;
         battleCtx->battleMons[battler].moveEffectsMask &= MOVE_EFFECT_BATON_PASSED;
@@ -2093,8 +2088,13 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    // Clear the effects of Attract and Bind sourced from the replaced battler
+    // Clear the effects of Attract, Mean Look and Bind sourced from the replaced battler
     for (i = 0; i < maxBattlers; i++) {
+        if ((battleCtx->battleMons[i].statusVolatile & VOLATILE_CONDITION_MEAN_LOOK)
+            && (battleCtx->battleMons[i].moveEffectsData.meanLookTarget == battler)) {
+            battleCtx->battleMons[i].statusVolatile &= ~VOLATILE_CONDITION_MEAN_LOOK;
+        }
+
         if (battleCtx->battleMons[i].statusVolatile & (FlagIndex(battler) << VOLATILE_CONDITION_ATTRACT_SHIFT)) {
             battleCtx->battleMons[i].statusVolatile &= FLAG_NEGATE(FlagIndex(battler) << VOLATILE_CONDITION_ATTRACT_SHIFT);
         }
@@ -2116,7 +2116,6 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
         battleCtx->battleMons[battler].moveEffectsData.substituteHP = moveEffects.substituteHP;
         battleCtx->battleMons[battler].moveEffectsData.lockOnTarget = moveEffects.lockOnTarget;
         battleCtx->battleMons[battler].moveEffectsData.perishSongTurns = moveEffects.perishSongTurns;
-        battleCtx->battleMons[battler].moveEffectsData.meanLookTarget = moveEffects.meanLookTarget;
         battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns = moveEffects.magnetRiseTurns;
         battleCtx->battleMons[battler].moveEffectsData.embargoTurns = moveEffects.embargoTurns;
         battleCtx->battleMons[battler].moveEffectsData.healBlockTurns = moveEffects.healBlockTurns;
