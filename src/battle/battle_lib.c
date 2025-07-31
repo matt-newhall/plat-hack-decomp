@@ -7267,6 +7267,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage = damage * 15 / 10;
     }
 
+    if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MINIMIZE)
+        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH)) {
+        damage = damage * 2;
+    }
+
     if ((battleCtx->battleStatusMask & SYSCTL_HIT_DURING_DIG) && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_UNDERGROUND)) {
         damage = damage * 2;
     }
