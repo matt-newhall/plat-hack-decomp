@@ -5554,8 +5554,7 @@ static BOOL BtlCmd_TryWhirlwind(BattleSystem *battleSys, BattleContext *battleCt
         // Check if there are more eligible mons in the back of the party.
         if (eligibleMons <= maxActiveMons) {
             BattleScript_Iter(battleCtx, jumpOnFail);
-        } else if (BattleSystem_CanWhirlwind(battleSys, battleCtx)) {
-            // Pick a random eligible mon from the back of the party.
+        } else {
             do {
                 do {
                     i = BattleSystem_RandNext(battleSys) % max;
@@ -5568,9 +5567,6 @@ static BOOL BtlCmd_TryWhirlwind(BattleSystem *battleSys, BattleContext *battleCt
                 || Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) == 0);
 
             battleCtx->switchedPartySlot[battleCtx->defender] = i;
-        } else {
-            // We failed the random Whirlwind check.
-            BattleScript_Iter(battleCtx, jumpOnFail);
         }
     } else if (BattleSystem_CanWhirlwind(battleSys, battleCtx) == FALSE) {
         BattleScript_Iter(battleCtx, jumpOnFail);

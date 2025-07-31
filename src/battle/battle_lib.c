@@ -3161,11 +3161,6 @@ BOOL BattleSystem_CanWhirlwind(BattleSystem *battleSys, BattleContext *battleCtx
 
     if (ATTACKING_MON.level >= DEFENDING_MON.level) {
         result = TRUE;
-    } else {
-        int tmp = (((BattleSystem_RandNext(battleSys) & 0xFF) * (ATTACKING_MON.level + DEFENDING_MON.level)) >> 8) + 1;
-        if (tmp > battleCtx->battleMons[battleCtx->defender].level / 4) {
-            result = TRUE;
-        }
     }
 
     return result;
