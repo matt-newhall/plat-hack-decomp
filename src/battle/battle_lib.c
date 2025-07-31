@@ -7276,6 +7276,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage = damage * 2;
     }
 
+    if ((battleCtx->battleStatusMask & SYSCTL_HIT_DURING_DIVE) && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_UNDERWATER)) {
+        damage = damage * 2;
+    }
+
     return damage;
 }
 
