@@ -11,9 +11,9 @@ _001:
     PrintBufferedMessage 
     Wait 
     WaitButtonABTime 30
-    Random 3, 3
+    Random 1, 5
     CheckItemHoldEffect CHECK_NOT_HAVE, BTLSCR_ATTACKER, HOLD_EFFECT_EXTEND_TRAPPING, _024
-    UpdateVar OPCODE_SET, BTLVAR_CALC_TEMP, 0x00000006
+    UpdateVar OPCODE_SET, BTLVAR_CALC_TEMP, 0x00000007
 
 _024:
     UpdateVar OPCODE_LEFT_SHIFT, BTLVAR_CALC_TEMP, 0x0000000D
