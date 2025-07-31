@@ -1490,7 +1490,7 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
                 battleCtx->battleMons[battler].statusVolatile -= (1 << VOLATILE_CONDITION_BIND_SHIFT);
 
                 if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_BIND) {
-                    battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
+                    battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 8);
                     LOAD_SUBSEQ(subscript_bind_effect);
                 } else {
                     LOAD_SUBSEQ(subscript_bind_end);
