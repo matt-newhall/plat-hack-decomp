@@ -1244,6 +1244,11 @@
     .long BTLCMD_CALCTAUNTTURNS
     .endm
 
+    .macro CheckImmuneGhost jump_if_fail
+    .long BTLCMD_CHECKIMMUNEGHOST
+    .long (\jump_if_fail)-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:
