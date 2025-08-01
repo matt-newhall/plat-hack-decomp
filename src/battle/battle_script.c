@@ -308,6 +308,7 @@ static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -569,7 +570,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_RefreshMonData,
     BtlCmd_End,
     BtlCmd_IsTailwindWeather,
-    BtlCmd_CalcTauntTurns
+    BtlCmd_CalcTauntTurns,
+    BtlCmd_CheckImmuneGhost
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7503,6 +7505,21 @@ static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battle
 
     return FALSE;
 }
+
+static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    if ((battleCtx->battleMons[battleCtx->defender].type1 == TYPE_GHOST || battleCtx->battleMons[battleCtx->defender].type2 == TYPE_GHOST)
+        && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SCRAPPY
+        || battleCtx->battleMons[battleCtx->defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
+}
+
 
 static const u8 sCurrentPPScaledPower[] = {
     200,
