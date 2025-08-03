@@ -3076,6 +3076,11 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
         }
     }
 
+    if (MON_HAS_TYPE(battleCtx->attacker, TYPE_POISON) && battleCtx->moveCur == MOVE_TOXIC) {
+        battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
+        return 0;
+    }
+
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_BYPASSED_ACCURACY) == FALSE
         && CURRENT_MOVE_DATA.range != RANGE_OPPONENT_SIDE
         && (((battleCtx->battleStatusMask & SYSCTL_HIT_DURING_FLY) == FALSE && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_AIRBORNE))
