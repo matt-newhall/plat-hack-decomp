@@ -4734,11 +4734,6 @@ static BOOL BtlCmd_TryMimic(BattleSystem *battleSys, BattleContext *battleCtx)
     } else {
         int i, j = -1;
         for (i = 0; i < 4; i++) {
-            // Don't try to copy a move that we already know
-            if (ATTACKING_MON.moves[i] == DEFENDER_LAST_MOVE) {
-                break;
-            }
-
             // Only replace the first instance of Mimic
             if (ATTACKING_MON.moves[i] == MOVE_MIMIC && j == -1) {
                 j = i;
@@ -4746,16 +4741,10 @@ static BOOL BtlCmd_TryMimic(BattleSystem *battleSys, BattleContext *battleCtx)
         }
 
         if (i == 4) {
-            // Copying a move we do not already know
             battleCtx->msgMoveTemp = DEFENDER_LAST_MOVE;
             ATTACKING_MON.moves[j] = battleCtx->msgMoveTemp;
 
-            // Max out the current PP at 5
-            if (MOVE_DATA(battleCtx->msgMoveTemp).pp < 5) {
                 ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
-            } else {
-                ATTACKING_MON.ppCur[j] = 5;
-            }
 
             ATTACKING_MON.moveEffectsData.mimickedMoveSlot |= FlagIndex(j);
 
