@@ -722,9 +722,10 @@
     .long (\jump_if_miss-.) / 4 - 1
     .endm
 
-    .macro TryTeleport jump_if_fail
+    .macro TryTeleport jump_if_fail, jump_if_wild
     .long 123
-    .long (\jump_if_fail-.) / 4 - 1
+    .long (\jump_if_fail-.) / 4 - 2
+    .long (\jump_if_wild-.) / 4 - 1
     .endm
 
     .macro BeatUp
