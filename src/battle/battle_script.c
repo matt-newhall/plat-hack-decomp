@@ -6294,6 +6294,7 @@ static BOOL BtlCmd_CopyStatStages(BattleSystem *battleSys, BattleContext *battle
         ATTACKING_MON.statBoosts[i] = DEFENDING_MON.statBoosts[i];
     }
 
+    ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
     ATTACKING_MON.statusVolatile |= (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_FOCUS_ENERGY);
 
     return FALSE;
