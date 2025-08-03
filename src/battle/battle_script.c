@@ -6161,6 +6161,7 @@ static BOOL BtlCmd_CheckMoveHit(BattleSystem *battleSys, BattleContext *battleCt
  *
  * Inputs:
  * 1. The distance to jump if the user is trapped for whatever reason.
+ * 1. The distance to jump if the user is successful but is a wild encounter.
  *
  * @param battleSys
  * @param battleCtx
@@ -6169,10 +6170,20 @@ static BOOL BtlCmd_CheckMoveHit(BattleSystem *battleSys, BattleContext *battleCt
 static BOOL BtlCmd_TryTeleport(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
-    int jumpIfTrapped = BattleScript_Read(battleCtx);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+    int jumpOnWild = BattleScript_Read(battleCtx);
 
+    if (BattleSystem_GetBattleType(battleSys) == (BATTLE_TYPE_SINGLES | BATTLE_TYPE_WILD_MON)
+        && (battleCtx->attacker != BATTLER_US)) {
     if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
-        BattleScript_Iter(battleCtx, jumpIfTrapped);
+            BattleScript_Iter(battleCtx, jumpOnFail);
+        } else {
+            BattleScript_Iter(battleCtx, jumpOnWild);
+        }
+    } else if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES|BATTLE_TYPE_2vs2|BATTLE_TYPE_AI)
+        && (BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) != BATTLER_US)
+        && (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_WILD_MON)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
     return FALSE;
