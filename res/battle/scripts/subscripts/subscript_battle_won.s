@@ -71,6 +71,7 @@ _135:
 
 _150:
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     End 
 

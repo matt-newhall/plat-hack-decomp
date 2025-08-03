@@ -309,6 +309,7 @@ static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *bat
 static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -571,7 +572,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_End,
     BtlCmd_IsTailwindWeather,
     BtlCmd_CalcTauntTurns,
-    BtlCmd_CheckImmuneGhost
+    BtlCmd_CheckImmuneGhost,
+    BtlCmd_SwitchToxic
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7507,6 +7509,26 @@ static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *batt
     }
 
     return FALSE;
+}
+
+static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    Party *party = BattleSystem_Party(battleSys, BATTLER_US);
+
+    for (int j = 0; j < Party_GetCurrentCount(party); j++) {
+        Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, j);
+        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+            if (Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_TOXIC) {
+                u32 condition = MON_CONDITION_POISON; 
+
+                Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &condition);
+            }
+        }
+    }
+
 }
 
 

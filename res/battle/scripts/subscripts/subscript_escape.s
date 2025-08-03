@@ -25,6 +25,7 @@ _055:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     UpdateVar OPCODE_FLAG_ON, BTLVAR_RESULT_MASK, BATTLE_RESULT_PLAYER_FLED
     End 
@@ -34,6 +35,7 @@ _065:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_RESULT_MASK, BATTLE_RESULT_TRY_FLEE_WAIT
     End 
@@ -43,6 +45,7 @@ _076:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_RESULT_MASK, BATTLE_RESULT_TRY_FLEE_WAIT
     End 
