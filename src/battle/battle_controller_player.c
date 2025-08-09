@@ -1113,7 +1113,11 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
                     battleCtx->msgBuffer.id = 533; // "{0}'s wish came true!"
                     battleCtx->msgBuffer.params[0] = side | (battleCtx->fieldConditions.wishTarget[side] << 8);
 
-                    battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[side].maxHP, 2);
+                    battleCtx->hpCalcTemp = battleCtx->fieldConditions.wishHealing[side];
+                    // Always heal at least 1 HP
+                    if (battleCtx->hpCalcTemp == 0) {
+                        battleCtx->hpCalcTemp = 1;
+                    }
 
                     PrepareSubroutineSequence(battleCtx, subscript_wish_heal);
                     state = STATE_BREAK_OUT;
