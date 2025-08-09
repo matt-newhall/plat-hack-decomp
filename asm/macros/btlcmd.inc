@@ -1254,6 +1254,10 @@
     .long BTLCMD_SWITCHTOXIC
     .endm
 
+    .macro SwapAbilities
+    .long BTLCMD_SWAPABILITIES
+    .endm
+
     .text
     .globl _start
 _start:

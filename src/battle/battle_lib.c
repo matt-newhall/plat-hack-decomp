@@ -3770,6 +3770,30 @@ enum SwitchInCheckResult {
     SWITCH_IN_CHECK_RESULT_DONE,
 };
 
+static int GetNextBattlerInOrder(BattleContext *battleCtx, int maxBattlers, int *currentIndex, int skillSwapAttacker)
+{
+    // First iteration: return skill swap attacker if applicable
+    if (*currentIndex == -1 && skillSwapAttacker != BATTLER_NONE) {
+        *currentIndex = 0;
+        return skillSwapAttacker;
+    }
+
+    // Subsequent iterations: go through normal speed order, skipping skill swapper
+    while (*currentIndex < maxBattlers) {
+        int battler = battleCtx->monSpeedOrder[*currentIndex];
+        (*currentIndex)++;
+
+        // Skip the skill swapper since we already checked it first
+        if (battler == skillSwapAttacker) {
+            continue;
+        }
+
+        return battler;
+    }
+
+    return BATTLER_NONE;
+}
+
 int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     // must declare C89-style to match
@@ -3778,8 +3802,16 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int result;
     int battler;
     int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+    int battlerSkillSwapper = BATTLER_NONE;
     subscript = NULL;
     result = SWITCH_IN_CHECK_RESULT_CONTINUE;
+
+
+    if (battleCtx->moveCur == MOVE_SKILL_SWAP) {
+        battlerSkillSwapper = battleCtx->attacker;
+    }
+
+    int iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
 
     do {
         switch (battleCtx->switchInCheckState) {
@@ -3852,8 +3884,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             break;
 
         case SWITCH_IN_CHECK_STATE_TRACE:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
                 int defender1 = BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_RIGHT);
                 int defender2 = BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_LEFT);
 
@@ -3871,14 +3902,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].weatherAbilityAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP) {
@@ -3927,15 +3958,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_INTIMIDATE:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
-
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
                 if (battleCtx->battleMons[battler].intimidateAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
                     && Battler_Ability(battleCtx, battler) == ABILITY_INTIMIDATE) {
@@ -3947,14 +3977,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_DOWNLOAD:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].downloadAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -3992,14 +4022,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_ANTICIPATION:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].anticipationAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4044,14 +4074,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_FOREWARN:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].forewarnAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4126,14 +4156,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_FRISK:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].friskAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4174,14 +4204,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_SLOW_START:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].slowStartAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4206,14 +4236,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_MOLD_BREAKER:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].moldBreakerAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4226,14 +4256,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_PRESSURE:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (battleCtx->battleMons[battler].pressureAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4246,9 +4276,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_FORM_CHANGE:
@@ -4260,8 +4291,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             break;
 
         case SWITCH_IN_CHECK_STATE_AMULET_COIN:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_MONEY_UP) {
                     battleCtx->prizeMoneyMul = 2;
@@ -4272,8 +4302,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             break;
 
         case SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (BattleSystem_TriggerHeldItemOnStatus(battleSys, battleCtx, battler, &subscript) == TRUE) {
                     battleCtx->msgBattlerTemp = battler;
@@ -4282,14 +4311,14 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS:
-            for (i = 0; i < maxBattlers; i++) {
-                battler = battleCtx->monSpeedOrder[i];
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
 
                 if (BattleSystem_RecoverStatusByAbility(battleSys, battleCtx, battler, TRUE) == TRUE) {
                     subscript = subscript_ability_forbids_status;
@@ -4298,9 +4327,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
-            if (i == maxBattlers) {
+            if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_DONE:

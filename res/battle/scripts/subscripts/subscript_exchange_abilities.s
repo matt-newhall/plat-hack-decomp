@@ -36,6 +36,7 @@ _120:
     UpdateMonData OPCODE_SET, BTLSCR_DEFENDER, BATTLEMON_SLOW_START_FINISHED, 0
 
 _148:
+    SwapAbilities
     // {0} swapped abilities with its target!
     PrintMessage BattleStrings_Text_PokemonSwappedAbilitiesWithItsTarget_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
     Wait 

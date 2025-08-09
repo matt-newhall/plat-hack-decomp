@@ -232,6 +232,7 @@ ScriptCommand(BTLCMD_ISTAILWINDWEATHER,           BtlCmd_IsTailwindWeather)
 ScriptCommand(BTLCMD_CALCTAUNTTURNS,              BtlCmd_CalcTauntTurns)
 ScriptCommand(BTLCMD_CHECKIMMUNEGHOST,            BtlCmd_CheckImmuneGhost)
 ScriptCommand(BTLCMD_SWITCHTOXIC,                 BtlCmd_SwitchToxic)
+ScriptCommand(BTLCMD_SWAPABILITIES,               BtlCmd_SwapAbilities)
 
 // clang-format on
 
