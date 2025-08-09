@@ -37,6 +37,7 @@ _120:
     UpdateMonData OPCODE_SET, BTLSCR_DEFENDER, BATTLEMON_SLOW_START_FINISHED, 0
 
 _148:
+    SwapAbilities
     // {0} swapped abilities with its target!
     PrintMessage pl_msg_00000368_00559, TAG_NICKNAME, BTLSCR_ATTACKER
     Wait 

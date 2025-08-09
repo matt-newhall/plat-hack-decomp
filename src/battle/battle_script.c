@@ -310,6 +310,7 @@ static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -573,7 +574,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_IsTailwindWeather,
     BtlCmd_CalcTauntTurns,
     BtlCmd_CheckImmuneGhost,
-    BtlCmd_SwitchToxic
+    BtlCmd_SwitchToxic,
+    BtlCmd_SwapAbilities
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7540,8 +7542,30 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
             }
         }
     }
-
 }
+
+static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    battleCtx->battleMons[battleCtx->defender].weatherAbilityAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].forewarnAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].moldBreakerAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].pressureAnnounced = FALSE;
+
+    battleCtx->battleMons[battleCtx->attacker].weatherAbilityAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].forewarnAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
+};
 
 
 static const u8 sCurrentPPScaledPower[] = {
