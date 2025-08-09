@@ -310,6 +310,7 @@ static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -573,7 +574,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_IsTailwindWeather,
     BtlCmd_CalcTauntTurns,
     BtlCmd_CheckImmuneGhost,
-    BtlCmd_SwitchToxic
+    BtlCmd_SwitchToxic,
+    BtlCmd_SwapAbilities
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1570,8 +1572,8 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
-        if (battleCtx->criticalMul == 2) {
-            battleCtx->damage = (battleCtx->damage * 3) / 2;
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
     } else if (battleCtx->criticalMul == 3) {
         battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
@@ -4746,7 +4748,7 @@ static BOOL BtlCmd_TryMimic(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->msgMoveTemp = DEFENDER_LAST_MOVE;
             ATTACKING_MON.moves[j] = battleCtx->msgMoveTemp;
 
-                ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
+            ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
 
             ATTACKING_MON.moveEffectsData.mimickedMoveSlot |= FlagIndex(j);
 
@@ -5276,8 +5278,8 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
     if (battleCtx->moveCur == MOVE_HEAL_BELL) {
         battleCtx->msgMoveTemp = battleCtx->moveCur;
 
-            ATTACKING_MON.status = MON_CONDITION_NONE;
-            ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+        ATTACKING_MON.status = MON_CONDITION_NONE;
+        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
@@ -5335,10 +5337,7 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
     u32 battleType = BattleSystem_BattleType(battleSys);
     int attackingSide = Battler_Side(battleSys, battleCtx->attacker);
 
-    if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
-        // AI trainers are unable to steal items outside of the Battle Frontier. PvP trainers can steal items.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
+    if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
         // The attacker has an item which has been suppressed.
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (DEFENDING_MON.heldItem == ITEM_GRISEOUS_ORB && (DEFENDING_MON.species == SPECIES_GIRATINA || ATTACKING_MON.species == SPECIES_GIRATINA)) {
@@ -6399,7 +6398,7 @@ static BOOL BtlCmd_TryTeleport(BattleSystem *battleSys, BattleContext *battleCtx
 
     if (BattleSystem_BattleType(battleSys) == (BATTLE_TYPE_SINGLES | BATTLE_TYPE_WILD_MON)
         && (battleCtx->attacker != BATTLER_US)) {
-    if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
+        if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
             BattleScript_Iter(battleCtx, jumpOnFail);
         } else {
             BattleScript_Iter(battleCtx, jumpOnWild);
@@ -6476,8 +6475,8 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage /= 50;
     battleCtx->damage += 2;
 
-        if (battleCtx->criticalMul == 2) {
-            battleCtx->damage = (battleCtx->damage * 3) / 2;
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
     } else if (battleCtx->criticalMul == 3) {
         battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
@@ -7534,14 +7533,36 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
         if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
             && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
             if (Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_TOXIC) {
-                u32 condition = MON_CONDITION_POISON; 
+                u32 condition = MON_CONDITION_POISON;
 
                 Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &condition);
             }
         }
     }
-
 }
+
+static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    battleCtx->battleMons[battleCtx->defender].weatherAbilityAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].forewarnAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].moldBreakerAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].pressureAnnounced = FALSE;
+
+    battleCtx->battleMons[battleCtx->attacker].weatherAbilityAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].forewarnAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
+};
 
 
 static const u8 sCurrentPPScaledPower[] = {

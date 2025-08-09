@@ -1251,4 +1251,8 @@
     .long 226
     .endm
 
+    .macro SwapAbilities
+    .long 227
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
