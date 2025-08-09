@@ -441,6 +441,18 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
 int Battler_SlotForMove(BattleMon *mon, u16 move);
 
 /**
+ * @brief Checks Anticipation type-effectiveness
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param move
+ * @param attacker
+ * @param defender
+ * @param[out] moveStatusMask
+ */
+void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, BattleContext *battleCtx, int move, int attacker, int defender, u32 *moveStatusMask);
+
+/**
  * @brief Apply type-chart effectiveness for a given move against its target.
  *
  * This encapsulates the following multipliers:
@@ -810,6 +822,14 @@ int Battler_CountMoves(BattleSystem *battleSys, BattleContext *battleCtx, int ba
  * @return A subscript to be loaded for any triggered effect.
  */
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender);
+
+/**
+ * @brief Checks if selected move is a sound-based move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a sound-based move.
+ */
+BOOL BattleSystem_IsSoundMove(u16 move);
 
 /**
  * @brief Trigger an end-of-turn ability for the battler.

@@ -239,7 +239,6 @@ static BOOL BtlCmd_TryCopycat(BattleSystem *battleSys, BattleContext *battleCtx)
 static BOOL BtlCmd_CalcPunishmentPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySuckerPunch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSideCondition(BattleSystem *battleSys, BattleContext *battleCtx);
-static BOOL BtlCmd_TryFeint(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckCanShareStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryLastResort(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryToxicSpikes(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -307,6 +306,11 @@ static BOOL BtlCmd_LoadArchivedMonData(BattleSystem *battleSys, BattleContext *b
 static BOOL BtlCmd_RefreshMonData(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_End(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -500,7 +504,7 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CalcPunishmentPower,
     BtlCmd_TrySuckerPunch,
     BtlCmd_CheckSideCondition,
-    BtlCmd_TryFeint,
+    BtlCmd_CheckIsPerishSongAffected,
     BtlCmd_CheckCanShareStatus,
     BtlCmd_TryLastResort,
     BtlCmd_TryToxicSpikes,
@@ -567,7 +571,11 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_LoadArchivedMonData,
     BtlCmd_RefreshMonData,
     BtlCmd_End,
-    BtlCmd_IsTailwindWeather
+    BtlCmd_IsTailwindWeather,
+    BtlCmd_CalcTauntTurns,
+    BtlCmd_CheckImmuneGhost,
+    BtlCmd_SwitchToxic,
+    BtlCmd_SwapAbilities
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1546,7 +1554,7 @@ static BOOL BtlCmd_Wait(BattleSystem *battleSys, BattleContext *battleCtx)
 static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int moveType;
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         moveType = TYPE_NORMAL;
     } else if (battleCtx->moveType) {
         moveType = battleCtx->moveType;
@@ -1564,12 +1572,10 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
-    if (battleCtx->criticalMul > 1) {
-        if (battleCtx->criticalMul == 2) {
-            battleCtx->damage = (battleCtx->damage * 3) / 2;
-        } else {
-            battleCtx->damage *= 2;
-        }
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
+    } else if (battleCtx->criticalMul == 3) {
+        battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
 
     if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_HP_DRAIN_ON_ATK) {
@@ -2871,17 +2877,26 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
             if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
                 hits = 5;
             } else {
-                hits = BattleSystem_RandNext(battleSys) & 3;
-                if (hits < 2) { // 2 or 3 hits
-                    hits += 2;
-                } else { // 4 or 5 hits
-                    hits = (BattleSystem_RandNext(battleSys) & 3) + 2;
+                int roll = BattleSystem_RandNext(battleSys) % 100;
+                if (roll < 35) {
+                    hits = 2;
+                } else if (roll < 70) {
+                    hits = 3;
+                } else if (roll < 85) {
+                    hits = 4;
+                } else {
+                    hits = 5;
                 }
             }
         }
 
         battleCtx->multiHitCounter = hits;
         battleCtx->multiHitNumHits = hits;
+        battleCtx->multiHitAccuracyCheck = flags;
+    }
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
+        flags |= SYSCTL_SKIP_ACCURACY_CHECK;
         battleCtx->multiHitAccuracyCheck = flags;
     }
 
@@ -3049,7 +3064,11 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
     battleCtx->battleStatusMask &= ~SYSCTL_FAIL_STAT_STAGE_CHANGE;
 
-    if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
+    if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_3_STAGES) {
+        statOffset = BATTLE_STAT_SPEED; // This is Tail Glow idk why this works i love spaghetti code
+        stageChange = 3;
+        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
         statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES;
         stageChange = -2;
         battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_DROP;
@@ -3088,8 +3107,16 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 battleCtx->msgBuffer.params[1] = battleCtx->msgItemTemp;
                 battleCtx->msgBuffer.params[2] = BATTLE_STAT_ATTACK + statOffset;
             } else {
-                // "{0}'s {1} rose!" or "{0}'s {1} sharply rose!"
-                SetupNicknameStatMsg(battleCtx, stageChange == 1 ? 750 : 753, statOffset);
+                int msgId;
+                if (stageChange == 1) {
+                    msgId = 750;
+                } else if (stageChange == 3) {
+                    msgId = 1272;
+                } else {
+                    msgId = 753;
+                }
+                // "{0}'s {1} rose!" or "{0}'s {1} sharply rose!" or "{0}'s {1} drastically rose!"
+                SetupNicknameStatMsg(battleCtx, msgId, statOffset);
             }
 
             mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
@@ -3120,6 +3147,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
                     result = 1;
                 } else if (AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_KEEN_EYE, BATTLE_STAT_ACCURACY)
+                    || AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_ILLUMINATE, BATTLE_STAT_ACCURACY)
                     || AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_HYPER_CUTTER, BATTLE_STAT_ATTACK)) {
                     if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
                         SetupNicknameAbilityNicknameAbilityMsg(battleCtx, 727); // "{0}'s {1} suppressed {2}'s {3}!"
@@ -3145,7 +3173,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_SHIELD_DUST) == TRUE
                     && battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT) {
                     result = 1;
-                } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE) {
+                } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))) {
                     result = 2;
                 }
             } else if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == 0) {
@@ -3766,8 +3794,6 @@ static BOOL BtlCmd_ResetAllStatChanges(BattleSystem *battleSys, BattleContext *b
         for (int j = BATTLE_STAT_HP; j < BATTLE_STAT_MAX; j++) {
             battleCtx->battleMons[i].statBoosts[j] = 6;
         }
-
-        battleCtx->battleMons[i].statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
     }
 
     return FALSE;
@@ -4712,11 +4738,6 @@ static BOOL BtlCmd_TryMimic(BattleSystem *battleSys, BattleContext *battleCtx)
     } else {
         int i, j = -1;
         for (i = 0; i < 4; i++) {
-            // Don't try to copy a move that we already know
-            if (ATTACKING_MON.moves[i] == DEFENDER_LAST_MOVE) {
-                break;
-            }
-
             // Only replace the first instance of Mimic
             if (ATTACKING_MON.moves[i] == MOVE_MIMIC && j == -1) {
                 j = i;
@@ -4724,16 +4745,10 @@ static BOOL BtlCmd_TryMimic(BattleSystem *battleSys, BattleContext *battleCtx)
         }
 
         if (i == 4) {
-            // Copying a move we do not already know
             battleCtx->msgMoveTemp = DEFENDER_LAST_MOVE;
             ATTACKING_MON.moves[j] = battleCtx->msgMoveTemp;
 
-            // Max out the current PP at 5
-            if (MOVE_DATA(battleCtx->msgMoveTemp).pp < 5) {
-                ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
-            } else {
-                ATTACKING_MON.ppCur[j] = 5;
-            }
+            ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
 
             ATTACKING_MON.moveEffectsData.mimickedMoveSlot |= FlagIndex(j);
 
@@ -5263,12 +5278,8 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
     if (battleCtx->moveCur == MOVE_HEAL_BELL) {
         battleCtx->msgMoveTemp = battleCtx->moveCur;
 
-        if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SOUNDPROOF) {
-            ATTACKING_MON.status = MON_CONDITION_NONE;
-            ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
-        } else {
-            battleCtx->calcTemp |= (SOUNDPROOF_SLOT_1 | NO_PARTNER_SLOT_1);
-        }
+        ATTACKING_MON.status = MON_CONDITION_NONE;
+        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
@@ -5292,7 +5303,7 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
 
-            if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
+            if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE && !(battleCtx->battleMons[partner].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)) {
                 battleCtx->battleMons[partner].status = MON_CONDITION_NONE;
                 battleCtx->battleMons[partner].statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
             }
@@ -5326,17 +5337,30 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
     u32 battleType = BattleSystem_BattleType(battleSys);
     int attackingSide = Battler_Side(battleSys, battleCtx->attacker);
 
-    if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
-        // AI trainers are unable to steal items outside of the Battle Frontier. PvP trainers can steal items.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
+    if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
         // The attacker has an item which has been suppressed.
         BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_MULTITYPE) {
-        // Either battler has Multitype.
+    } else if (DEFENDING_MON.heldItem == ITEM_GRISEOUS_ORB && (DEFENDING_MON.species == SPECIES_GIRATINA || ATTACKING_MON.species == SPECIES_GIRATINA)) {
+        // The defender is holding a Griseous Orb and either the attacker or defender is Giratina.
         BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (DEFENDING_MON.heldItem == ITEM_GRISEOUS_ORB) {
-        // The defender is holding a Griseous Orb.
+    } else if (((DEFENDING_MON.heldItem == ITEM_FLAME_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_SPLASH_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_ZAP_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_MEADOW_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_ICICLE_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_FIST_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_TOXIC_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_EARTH_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_SKY_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_MIND_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_INSECT_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_STONE_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_SPOOKY_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_DRACO_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_DREAD_PLATE)
+                || (DEFENDING_MON.heldItem == ITEM_IRON_PLATE))
+                && (DEFENDING_MON.species == SPECIES_ARCEUS || ATTACKING_MON.species == SPECIES_ARCEUS)) {
+        // The defender is holding a Plate and either the attacker or defender is Arceus.
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (DEFENDING_MON.moveEffectsData.custapBerry || DEFENDING_MON.moveEffectsData.quickClaw) {
         // The defender activated a Custap Berry or a Quick Claw this turn.
@@ -5522,8 +5546,7 @@ static BOOL BtlCmd_TryWhirlwind(BattleSystem *battleSys, BattleContext *battleCt
         // Check if there are more eligible mons in the back of the party.
         if (eligibleMons <= maxActiveMons) {
             BattleScript_Iter(battleCtx, jumpOnFail);
-        } else if (BattleSystem_CanWhirlwind(battleSys, battleCtx)) {
-            // Pick a random eligible mon from the back of the party.
+        } else {
             do {
                 do {
                     i = BattleSystem_RandNext(battleSys) % max;
@@ -5536,9 +5559,6 @@ static BOOL BtlCmd_TryWhirlwind(BattleSystem *battleSys, BattleContext *battleCt
                 || Pokemon_GetValue(mon, MON_DATA_CURRENT_HP, NULL) == 0);
 
             battleCtx->switchedPartySlot[battleCtx->defender] = i;
-        } else {
-            // We failed the random Whirlwind check.
-            BattleScript_Iter(battleCtx, jumpOnFail);
         }
     } else if (BattleSystem_CanWhirlwind(battleSys, battleCtx) == FALSE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
@@ -5576,7 +5596,6 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
 
     ATTACKING_MON.weatherAbilityAnnounced = FALSE;
     ATTACKING_MON.intimidateAnnounced = FALSE;
-    ATTACKING_MON.traceAnnounced = FALSE;
     ATTACKING_MON.downloadAnnounced = FALSE;
     ATTACKING_MON.anticipationAnnounced = FALSE;
     ATTACKING_MON.forewarnAnnounced = FALSE;
@@ -5698,7 +5717,7 @@ static BOOL BtlCmd_TryPerishSong(BattleSystem *battleSys, BattleContext *battleC
     for (int i = 0; i < maxBattlers; i++) {
         if ((battleCtx->battleMons[i].moveEffectsMask & MOVE_EFFECT_PERISH_SONG)
             || battleCtx->battleMons[i].curHP == 0
-            || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE) {
+            || (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE && (!(battleCtx->battleMons[battleCtx->attacker].personality == battleCtx->battleMons[i].personality)))) {
             ineligibleBattlers++;
         } else {
             battleCtx->battleMons[i].moveEffectsMask |= MOVE_EFFECT_PERISH_SONG;
@@ -6243,13 +6262,6 @@ static BOOL BtlCmd_CalcHiddenPowerParams(BattleSystem *battleSys, BattleContext 
 {
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->movePower = ((ATTACKING_MON.hpIV & 2) >> 1)
-        | (ATTACKING_MON.attackIV & 2)
-        | ((ATTACKING_MON.defenseIV & 2) << 1)
-        | ((ATTACKING_MON.speedIV & 2) << 2)
-        | ((ATTACKING_MON.spAttackIV & 2) << 3)
-        | ((ATTACKING_MON.spDefenseIV & 2) << 4);
-
     battleCtx->moveType = (ATTACKING_MON.hpIV & 1)
         | ((ATTACKING_MON.attackIV & 1) << 1)
         | ((ATTACKING_MON.defenseIV & 1) << 2)
@@ -6257,7 +6269,6 @@ static BOOL BtlCmd_CalcHiddenPowerParams(BattleSystem *battleSys, BattleContext 
         | ((ATTACKING_MON.spAttackIV & 1) << 4)
         | ((ATTACKING_MON.spDefenseIV & 1) << 5);
 
-    battleCtx->movePower = battleCtx->movePower * 40 / 63 + 30;
     battleCtx->moveType = battleCtx->moveType * 15 / 63 + 1;
 
     if (battleCtx->moveType >= TYPE_MYSTERY) {
@@ -6282,6 +6293,7 @@ static BOOL BtlCmd_CopyStatStages(BattleSystem *battleSys, BattleContext *battle
         ATTACKING_MON.statBoosts[i] = DEFENDING_MON.statBoosts[i];
     }
 
+    ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
     ATTACKING_MON.statusVolatile |= (DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_FOCUS_ENERGY);
 
     return FALSE;
@@ -6372,6 +6384,7 @@ static BOOL BtlCmd_CheckMoveHit(BattleSystem *battleSys, BattleContext *battleCt
  *
  * Inputs:
  * 1. The distance to jump if the user is trapped for whatever reason.
+ * 1. The distance to jump if the user is successful but is a wild encounter.
  *
  * @param battleSys
  * @param battleCtx
@@ -6380,10 +6393,20 @@ static BOOL BtlCmd_CheckMoveHit(BattleSystem *battleSys, BattleContext *battleCt
 static BOOL BtlCmd_TryTeleport(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
-    int jumpIfTrapped = BattleScript_Read(battleCtx);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+    int jumpOnWild = BattleScript_Read(battleCtx);
 
-    if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
-        BattleScript_Iter(battleCtx, jumpIfTrapped);
+    if (BattleSystem_BattleType(battleSys) == (BATTLE_TYPE_SINGLES | BATTLE_TYPE_WILD_MON)
+        && (battleCtx->attacker != BATTLER_US)) {
+        if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
+            BattleScript_Iter(battleCtx, jumpOnFail);
+        } else {
+            BattleScript_Iter(battleCtx, jumpOnWild);
+        }
+    } else if ((BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES|BATTLE_TYPE_2vs2|BATTLE_TYPE_AI)
+        && (Battler_Side(battleSys, battleCtx->attacker) != BATTLER_US)
+        && (BattleSystem_BattleType(battleSys) & BATTLE_TYPE_WILD_MON)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
     return FALSE;
@@ -6411,6 +6434,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     int species;
     int form;
     int level;
+    int movePower;
     Pokemon *mon;
 
     BattleScript_Iter(battleCtx, 1);
@@ -6438,6 +6462,12 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
     level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
 
+    movePower = CURRENT_MOVE_DATA.power;
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_TECHNICIAN) {
+        movePower = movePower * 15 / 10;
+    }
+
     battleCtx->damage = SpeciesData_GetFormValue(species, form, SPECIES_DATA_BASE_ATK);
     battleCtx->damage *= CURRENT_MOVE_DATA.power;
     battleCtx->damage *= ((level * 2 / 5) + 2);
@@ -6445,12 +6475,10 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage /= 50;
     battleCtx->damage += 2;
 
-    if (battleCtx->criticalMul > 1) {
-        if (battleCtx->criticalMul == 2) {
-            battleCtx->damage = (battleCtx->damage * 3) / 2;
-        } else {
-            battleCtx->damage *= 2;
-        }
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
+    } else if (battleCtx->criticalMul == 3) {
+        battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
 
     if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
@@ -6794,6 +6822,13 @@ static BOOL BtlCmd_TryBreakScreens(BattleSystem *battleSys, BattleContext *battl
     BattleScript_Iter(battleCtx, 1);
     int jumpIfNoScreens = BattleScript_Read(battleCtx);
     int defending = Battler_Side(battleSys, battleCtx->defender);
+
+    if (MON_HAS_TYPE(battleCtx->defender, TYPE_GHOST)) {
+        if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SCRAPPY && !(battleCtx->battleMons[defending].statusVolatile & VOLATILE_CONDITION_FORESIGHT)) {
+            BattleScript_Iter(battleCtx, jumpIfNoScreens);
+            return FALSE;
+        }
+    }
 
     if ((battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_REFLECT)
         || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_LIGHT_SCREEN)) {
@@ -7450,6 +7485,86 @@ static BOOL BtlCmd_CalcPaybackPower(BattleSystem *battleSys, BattleContext *batt
     return FALSE;
 }
 
+/**
+ * @brief Calculates the number of turns for Taunt to inflict.
+ *
+ * Taunt lasts for four turns if the target acted before the user, and three
+ * turns if the user acts before the target.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcTauntTurns(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END) {
+        battleCtx->calcTemp = 4;
+    } else {
+        battleCtx->calcTemp = 3;
+    }
+
+    return FALSE;
+}
+
+static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    if ((battleCtx->battleMons[battleCtx->defender].type1 == TYPE_GHOST || battleCtx->battleMons[battleCtx->defender].type2 == TYPE_GHOST)
+        && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SCRAPPY
+        || battleCtx->battleMons[battleCtx->defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
+}
+
+static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    Party *party = BattleSystem_Party(battleSys, BATTLER_US);
+
+    for (int j = 0; j < Party_GetCurrentCount(party); j++) {
+        Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, j);
+        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+            if (Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_TOXIC) {
+                u32 condition = MON_CONDITION_POISON;
+
+                Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &condition);
+            }
+        }
+    }
+}
+
+static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    battleCtx->battleMons[battleCtx->defender].weatherAbilityAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].forewarnAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].moldBreakerAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].pressureAnnounced = FALSE;
+
+    battleCtx->battleMons[battleCtx->attacker].weatherAbilityAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].forewarnAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
+};
+
+
 static const u8 sCurrentPPScaledPower[] = {
     200,
     80,
@@ -7504,7 +7619,11 @@ static BOOL BtlCmd_CalcWringOutPower(BattleSystem *battleSys, BattleContext *bat
 {
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->movePower = 1 + (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+    battleCtx->movePower = (120 * DEFENDING_MON.curHP) / DEFENDING_MON.maxHP;
+
+    if (battleCtx->movePower == 0) {
+        battleCtx->movePower = 1;
+    }
 
     return FALSE;
 }
@@ -7638,7 +7757,7 @@ static BOOL BtlCmd_TrySuckerPunch(BattleSystem *battleSys, BattleContext *battle
     }
 
     if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
-        || (MOVE_DATA(move).power == 0 && DEFENDER_TURN_FLAGS.struggling == FALSE)) {
+        || (MOVE_DATA(move).power == 0 && DEFENDER_TURN_FLAGS.struggling == FALSE && move != MOVE_ME_FIRST)) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
@@ -7742,28 +7861,6 @@ static BOOL BtlCmd_CheckSideCondition(BattleSystem *battleSys, BattleContext *ba
 
     if (op == CHECK_SIDE_COND_VAL_NOT_ZERO && val) {
         BattleScript_Iter(battleCtx, jump);
-    }
-
-    return FALSE;
-}
-
-/**
- * @brief Check if the current move's target is Protecting itself.
- *
- * Inputs:
- * 1. The distance to jump if the target is not Protecting itself.
- *
- * @param battleSys
- * @param battleCtx
- * @return FALSE
- */
-static BOOL BtlCmd_TryFeint(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    BattleScript_Iter(battleCtx, 1);
-    int jumpOnFail = BattleScript_Read(battleCtx);
-
-    if (DEFENDER_TURN_FLAGS.protecting == FALSE) {
-        BattleScript_Iter(battleCtx, jumpOnFail);
     }
 
     return FALSE;
@@ -7955,6 +8052,41 @@ static BOOL BtlCmd_CheckIgnorableAbility(BattleSystem *battleSys, BattleContext 
             BattleScript_Iter(battleCtx, jump);
             battleCtx->abilityMon = battler;
         }
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Checks if Perish Song is used on a valid target
+ *
+ * Inputs:
+ * 1. Input battler (or set of battlers) whose ability should be checked
+ * 2. GoTo distance if a battler in the input set meets the criteria
+ *
+ * Side effects:
+ * - CompareVarToValue any battler matches the criteria, battleCtx->abilityMon will be set
+ * to their identifier.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jump = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+
+    if (battleCtx->attacker == battler) {
+        BattleScript_Iter(battleCtx, jump);
+        battleCtx->abilityMon = battler;
+    } else if ((Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_SOUNDPROOF) == FALSE
+        || battleCtx->battleMons[battler].curHP == 0)) {
+        BattleScript_Iter(battleCtx, jump);
+        battleCtx->abilityMon = battler;
     }
 
     return FALSE;
@@ -9391,8 +9523,7 @@ static BOOL BtlCmd_TryRestoreStatusOnSwitch(BattleSystem *battleSys, BattleConte
         int ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
         int status = Pokemon_GetValue(mon, MON_DATA_STATUS_CONDITION, NULL);
 
-        if (battleCtx->battleMons[battler].ability != ABILITY_NATURAL_CURE
-            && Ability_ForbidsStatus(battleCtx, ability, status) == FALSE) {
+        if (battleCtx->battleMons[battler].ability != ABILITY_NATURAL_CURE) {
             BattleScript_Iter(battleCtx, jumpNoStatusRestore);
         }
     } else {
@@ -9419,9 +9550,14 @@ static BOOL BtlCmd_CheckSubstitute(BattleSystem *battleSys, BattleContext *battl
     int inBattler = BattleScript_Read(battleCtx);
     int jumpSubActive = BattleScript_Read(battleCtx);
 
+    if (battleCtx->attacker == battleCtx->defender && battleCtx->moveTemp == MOVE_ACUPRESSURE) {
+        return FALSE;
+    }
+
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
-    if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
-        || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT)) {
+    if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
+        || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT))
+        && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))) {
         BattleScript_Iter(battleCtx, jumpSubActive);
     }
 
