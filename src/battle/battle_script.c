@@ -6653,6 +6653,7 @@ static BOOL BtlCmd_TryWish(BattleSystem *battleSys, BattleContext *battleCtx)
     } else {
         battleCtx->fieldConditions.wishTurns[battleCtx->attacker] = 2;
         battleCtx->fieldConditions.wishTarget[battleCtx->attacker] = battleCtx->selectedPartySlot[battleCtx->attacker];
+        battleCtx->fieldConditions.wishHealing[battleCtx->attacker] = battleCtx->battleMons[battleCtx->attacker].maxHP / 2;
     }
 
     return FALSE;
