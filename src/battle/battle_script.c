@@ -1572,8 +1572,8 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
-        if (battleCtx->criticalMul == 2) {
-            battleCtx->damage = (battleCtx->damage * 3) / 2;
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
     } else if (battleCtx->criticalMul == 3) {
         battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
@@ -4748,7 +4748,7 @@ static BOOL BtlCmd_TryMimic(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->msgMoveTemp = DEFENDER_LAST_MOVE;
             ATTACKING_MON.moves[j] = battleCtx->msgMoveTemp;
 
-                ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
+            ATTACKING_MON.ppCur[j] = MOVE_DATA(battleCtx->msgMoveTemp).pp;
 
             ATTACKING_MON.moveEffectsData.mimickedMoveSlot |= FlagIndex(j);
 
@@ -5278,8 +5278,8 @@ static BOOL BtlCmd_TryPartyStatusRefresh(BattleSystem *battleSys, BattleContext 
     if (battleCtx->moveCur == MOVE_HEAL_BELL) {
         battleCtx->msgMoveTemp = battleCtx->moveCur;
 
-            ATTACKING_MON.status = MON_CONDITION_NONE;
-            ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
+        ATTACKING_MON.status = MON_CONDITION_NONE;
+        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_NIGHTMARE;
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             int partner = BattleScript_Battler(battleSys, battleCtx, BTLSCR_ATTACKER_PARTNER);
@@ -6401,7 +6401,7 @@ static BOOL BtlCmd_TryTeleport(BattleSystem *battleSys, BattleContext *battleCtx
 
     if (BattleSystem_BattleType(battleSys) == (BATTLE_TYPE_SINGLES | BATTLE_TYPE_WILD_MON)
         && (battleCtx->attacker != BATTLER_US)) {
-    if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
+        if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
             BattleScript_Iter(battleCtx, jumpOnFail);
         } else {
             BattleScript_Iter(battleCtx, jumpOnWild);
@@ -6478,8 +6478,8 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage /= 50;
     battleCtx->damage += 2;
 
-        if (battleCtx->criticalMul == 2) {
-            battleCtx->damage = (battleCtx->damage * 3) / 2;
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
     } else if (battleCtx->criticalMul == 3) {
         battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
@@ -7536,7 +7536,7 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
         if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
             && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
             if (Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_TOXIC) {
-                u32 condition = MON_CONDITION_POISON; 
+                u32 condition = MON_CONDITION_POISON;
 
                 Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &condition);
             }
