@@ -7418,6 +7418,9 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_COPYCAT,
     MOVE_ME_FIRST,
     MOVE_SWITCHEROO,
+    MOVE_TRANSFORM,
+    MOVE_SNORE,
+    MOVE_NATURE_POWER,
     FORBIDDEN_BY_METRONOME_DELIM,
 };
 
@@ -7436,11 +7439,6 @@ BOOL Move_CanBeMimicked(u16 move)
 BOOL Move_CanBeMetronomed(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u16 move)
 {
     int i = 0;
-
-    if (Move_FailsInHighGravity(battleSys, battleCtx, battler, move) == TRUE
-        || Move_HealBlocked(battleSys, battleCtx, battler, move) == TRUE) {
-        return FALSE;
-    }
 
     for (; sCannotMetronomeMoves[i] != FORBIDDEN_BY_METRONOME_DELIM; i++) {
         if (sCannotMetronomeMoves[i] == move) {
