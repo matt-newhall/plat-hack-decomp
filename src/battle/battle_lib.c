@@ -5889,60 +5889,52 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         break;
 
     case PLUCK_EFFECT_HP_RESTORE_DRY:
-        if (ATTACKING_MON.curHP != ATTACKING_MON.maxHP) {
-            battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
-            battleCtx->msgTemp = FLAVOR_DRY;
+        battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
+        battleCtx->msgTemp = FLAVOR_DRY;
 
-            if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_DRY) == -1) {
-                nextSeq = subscript_held_item_dislike_flavor;
-            } else {
-                nextSeq = subscript_held_item_hp_restore;
-            }
+        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_DRY) == -1) {
+            nextSeq = subscript_held_item_dislike_flavor;
+        } else {
+            nextSeq = subscript_held_item_hp_restore;
         }
 
         result = TRUE;
         break;
 
     case PLUCK_EFFECT_HP_RESTORE_SWEET:
-        if (ATTACKING_MON.curHP != ATTACKING_MON.maxHP) {
-            battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
-            battleCtx->msgTemp = FLAVOR_SWEET;
+        battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
+        battleCtx->msgTemp = FLAVOR_SWEET;
 
-            if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SWEET) == -1) {
-                nextSeq = subscript_held_item_dislike_flavor;
-            } else {
-                nextSeq = subscript_held_item_hp_restore;
-            }
+        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SWEET) == -1) {
+            nextSeq = subscript_held_item_dislike_flavor;
+        } else {
+            nextSeq = subscript_held_item_hp_restore;
         }
 
         result = TRUE;
         break;
 
     case PLUCK_EFFECT_HP_RESTORE_BITTER:
-        if (ATTACKING_MON.curHP != ATTACKING_MON.maxHP) {
-            battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
-            battleCtx->msgTemp = FLAVOR_BITTER;
+        battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
+        battleCtx->msgTemp = FLAVOR_BITTER;
 
-            if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_BITTER) == -1) {
-                nextSeq = subscript_held_item_dislike_flavor;
-            } else {
-                nextSeq = subscript_held_item_hp_restore;
-            }
+        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_BITTER) == -1) {
+            nextSeq = subscript_held_item_dislike_flavor;
+        } else {
+            nextSeq = subscript_held_item_hp_restore;
         }
 
         result = TRUE;
         break;
 
     case PLUCK_EFFECT_HP_RESTORE_SOUR:
-        if (ATTACKING_MON.curHP != ATTACKING_MON.maxHP) {
-            battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
-            battleCtx->msgTemp = FLAVOR_SOUR;
+        battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
+        battleCtx->msgTemp = FLAVOR_SOUR;
 
-            if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SOUR) == -1) {
-                nextSeq = subscript_held_item_dislike_flavor;
-            } else {
-                nextSeq = subscript_held_item_hp_restore;
-            }
+        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SOUR) == -1) {
+            nextSeq = subscript_held_item_dislike_flavor;
+        } else {
+            nextSeq = subscript_held_item_hp_restore;
         }
 
         result = TRUE;
