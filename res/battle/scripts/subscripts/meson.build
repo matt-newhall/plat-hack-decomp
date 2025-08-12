@@ -303,4 +303,5 @@ subscript_files = files(
     'subscript_overworld_tailwind.s',
     'subscript_user_atk_and_spatk_up_1_stage.s',
     'subscript_absorb_and_spatk_up_1_stage.s',
+    'subscript_fail_selfdestruct_kill_user.s',
 )
