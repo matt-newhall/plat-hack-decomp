@@ -2346,9 +2346,19 @@ static BOOL BattleController_HasNoTarget(BattleSystem *battleSys, BattleContext 
     BOOL solarMove = FALSE;
 
     if (NO_TARGET) {
-        LOAD_SUBSEQ(subscript_no_target);
-        battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
-        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        if (MOVE_DATA(battleCtx->moveCur).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
+            // battleCtx->battleStatusMask |= SYSCTL_MON_SELFDESTRUCTED;
+            // battleCtx->faintedMon = LowestBit((battleCtx->battleStatusMask & SYSCTL_MON_SELFDESTRUCTED) >> SYSCTL_MON_SELFDESTRUCTED_SHIFT);
+            // battleCtx->battleStatusMask &= ~SYSCTL_MON_SELFDESTRUCTED;
+            battleCtx->faintedMon = battleCtx->attacker;
+            LOAD_SUBSEQ(subscript_fail_selfdestruct_kill_user);
+            battleCtx->commandNext = BATTLE_CONTROL_TRIGGER_AFTER_HIT_EFFECTS;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        } else {
+            LOAD_SUBSEQ(subscript_no_target);
+            battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        }
 
         result = TRUE;
     }
