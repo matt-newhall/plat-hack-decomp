@@ -841,7 +841,7 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
             for (battler = 0; battler < maxBattlers; battler++) {
                 if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_RAGE)
                     && Battler_SelectedMove(battleCtx, battler) != MOVE_RAGE) {
-                    battleCtx->battleMons[battler].statusVolatile &= VOLATILE_CONDITION_RAGE;
+                    battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_RAGE;
                 }
             }
 
