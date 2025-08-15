@@ -25,6 +25,7 @@ typedef struct FieldConditions {
     int futureSightAttacker[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
+    s32 wishHealing[MAX_BATTLERS];
 } FieldConditions;
 
 typedef struct SideConditions {

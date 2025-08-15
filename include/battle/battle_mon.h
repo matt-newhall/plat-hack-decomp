@@ -8,7 +8,6 @@
 typedef struct MoveEffectsData {
     u32 disabledTurns : 3;
     u32 encoredTurns : 3;
-    u32 chargedTurns : 2;
     u32 tauntedTurns : 3;
     u32 protectSuccessTurns : 2;
     u32 perishSongTurns : 2;
@@ -85,7 +84,6 @@ typedef struct BattleMon {
 
     u32 weatherAbilityAnnounced : 1;
     u32 intimidateAnnounced : 1;
-    u32 traceAnnounced : 1;
     u32 downloadAnnounced : 1;
     u32 anticipationAnnounced : 1;
     u32 forewarnAnnounced : 1;
@@ -108,6 +106,7 @@ typedef struct BattleMon {
     u32 maxHP;
 
     u16 OTName[TRAINER_NAME_LEN + 1];
+    u16 recycleItem;
 
     u32 exp;
     u32 personality;

@@ -3,14 +3,6 @@
     .data
 
 _000:
-    TryRestoreStatusOnSwitch BTLSCR_PLAYER_SLOT_1, _007
-    UpdateMonData OPCODE_SET, BTLSCR_PLAYER_SLOT_1, BATTLEMON_STATUS, MON_CONDITION_NONE
-
-_007:
-    TryRestoreStatusOnSwitch BTLSCR_PLAYER_SLOT_2, _015
-    UpdateMonData OPCODE_SET, BTLSCR_PLAYER_SLOT_2, BATTLEMON_STATUS, MON_CONDITION_NONE
-
-_015:
     PlaySound BTLSCR_ATTACKER, 1791
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_BATTLE_TYPE, BATTLE_TYPE_FRONTIER, _065
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_BATTLE_TYPE, BATTLE_TYPE_LINK, _076
@@ -33,6 +25,7 @@ _055:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     UpdateVar OPCODE_FLAG_ON, BTLVAR_RESULT_MASK, BATTLE_RESULT_PLAYER_FLED
     End 
@@ -42,6 +35,7 @@ _065:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_RESULT_MASK, BATTLE_RESULT_TRY_FLEE_WAIT
     End 
@@ -51,6 +45,7 @@ _076:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
+    SwitchToxic 
     Wait 
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_RESULT_MASK, BATTLE_RESULT_TRY_FLEE_WAIT
     End 

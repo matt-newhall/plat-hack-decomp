@@ -1,7 +1,7 @@
 {
     "name": "Curse",
     "class": "CLASS_STATUS",
-    "type": "TYPE_MYSTERY",
+    "type": "TYPE_GHOST",
     "power": 0,
     "accuracy": 0,
     "pp": 10,
@@ -9,7 +9,7 @@
         "type": "BATTLE_EFFECT_CURSE",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_RANDOM_OPPONENT",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_HIDES_HP_GAUGES"
