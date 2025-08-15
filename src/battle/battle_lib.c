@@ -464,9 +464,6 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
     case BATTLEMON_ENCORED_TURNS:
         return battleMon->moveEffectsData.encoredTurns;
 
-    case BATTLEMON_CHARGED_TURNS:
-        return battleMon->moveEffectsData.chargedTurns;
-
     case BATTLEMON_TAUNTED_TURNS:
         return battleMon->moveEffectsData.tauntedTurns;
 
@@ -782,10 +779,6 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
         mon->moveEffectsData.encoredTurns = *(u8 *)buf;
         break;
 
-    case BATTLEMON_CHARGED_TURNS:
-        mon->moveEffectsData.chargedTurns = *(u8 *)buf;
-        break;
-
     case BATTLEMON_TAUNTED_TURNS:
         mon->moveEffectsData.tauntedTurns = *(u8 *)buf;
         break;
@@ -1068,10 +1061,6 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 
     case BATTLEMON_ENCORED_TURNS:
         mon->moveEffectsData.encoredTurns += val;
-        break;
-
-    case BATTLEMON_CHARGED_TURNS:
-        mon->moveEffectsData.chargedTurns += val;
         break;
 
     case BATTLEMON_TAUNTED_TURNS:
@@ -6907,6 +6896,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE) && moveType == TYPE_ELECTRIC) {
         movePower *= 2;
+        battleCtx->battleMons[attacker].moveEffectsMask &= ~MOVE_EFFECT_CHARGE;
     }
 
     if (battleCtx->turnFlags[attacker].helpingHand && (!(move == MOVE_STRUGGLE && inPower == 40))) {

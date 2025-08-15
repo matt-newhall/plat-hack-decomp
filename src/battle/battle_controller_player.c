@@ -1306,7 +1306,6 @@ enum MonCondCheckState {
     MON_COND_CHECK_STATE_DISABLE,
     MON_COND_CHECK_STATE_ENCORE,
     MON_COND_CHECK_STATE_LOCK_ON,
-    MON_COND_CHECK_STATE_CHARGE,
     MON_COND_CHECK_STATE_TAUNT,
     MON_COND_CHECK_STATE_MAGNET_RISE,
     MON_COND_CHECK_STATE_HEAL_BLOCK,
@@ -1650,15 +1649,6 @@ static void BattleControllerPlayer_CheckMonConditions(BattleSystem *battleSys, B
         case MON_COND_CHECK_STATE_LOCK_ON:
             if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_LOCK_ON) {
                 battleCtx->battleMons[battler].moveEffectsMask -= (1 << MOVE_EFFECT_LOCK_ON_SHIFT);
-            }
-
-            battleCtx->monConditionCheckState++;
-            break;
-
-        case MON_COND_CHECK_STATE_CHARGE:
-            if (battleCtx->battleMons[battler].moveEffectsData.chargedTurns
-                && --battleCtx->battleMons[battler].moveEffectsData.chargedTurns == 0) {
-                battleCtx->battleMons[battler].moveEffectsMask &= ~MOVE_EFFECT_CHARGE;
             }
 
             battleCtx->monConditionCheckState++;
