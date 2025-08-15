@@ -1654,11 +1654,6 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
             break;
 
         case MON_COND_CHECK_STATE_CHARGE:
-            if (battleCtx->battleMons[battler].moveEffectsData.chargedTurns
-                && --battleCtx->battleMons[battler].moveEffectsData.chargedTurns == 0) {
-                battleCtx->battleMons[battler].moveEffectsMask &= ~MOVE_EFFECT_CHARGE;
-            }
-
             battleCtx->monConditionCheckState++;
             break;
 
