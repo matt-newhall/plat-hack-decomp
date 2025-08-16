@@ -6436,8 +6436,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     int partyCount;
     int species;
     int form;
-    int level;
-    int movePower;
+    u16 movePower;
     Pokemon *mon;
 
     BattleScript_Iter(battleCtx, 1);
@@ -6463,30 +6462,28 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     mon = BattleSystem_PartyPokemon(battleSys, battleCtx->attacker, battleCtx->beatUpCounter);
     species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
     form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
-    level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
 
-    movePower = CURRENT_MOVE_DATA.power;
+    movePower = ((SpeciesData_GetFormValue(species, form, SPECIES_DATA_BASE_ATK) / CURRENT_MOVE_DATA.power) + 5);
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_TECHNICIAN) {
-        movePower = movePower * 15 / 10;
-    }
+    battleCtx->damage = BattleSystem_CalcMoveDamage(battleSys,
+                        battleCtx,
+                        MOVE_BEAT_UP,
+                        battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)],
+                        battleCtx->fieldConditionsMask,
+                        movePower,
+                        0,
+                        battleCtx->attacker,
+                        battleCtx->defender,
+                        battleCtx->criticalMul);
 
-    battleCtx->damage = SpeciesData_GetFormValue(species, form, SPECIES_DATA_BASE_ATK);
-    battleCtx->damage *= CURRENT_MOVE_DATA.power;
-    battleCtx->damage *= ((level * 2 / 5) + 2);
-    battleCtx->damage /= SpeciesData_GetFormValue(DEFENDING_MON.species, DEFENDING_MON.formNum, SPECIES_DATA_BASE_DEF);
-    battleCtx->damage /= 50;
-    battleCtx->damage += 2;
-
-    if (battleCtx->criticalMul == 2) {
-        battleCtx->damage = (battleCtx->damage * 3) / 2;
-    } else if (battleCtx->criticalMul == 3) {
-        battleCtx->damage = (battleCtx->damage * 9) / 4;
-    }
-
-    if (battleCtx->turnFlags[battleCtx->attacker].helpingHand) {
-        battleCtx->damage = battleCtx->damage * 15 / 10;
-    }
+    battleCtx->damage = BattleSystem_ApplyTypeChart(battleSys,
+                        battleCtx,
+                        MOVE_BEAT_UP,
+                        NULL,
+                        battleCtx->attacker,
+                        battleCtx->defender,
+                        battleCtx->damage,
+                        &battleCtx->moveStatusFlags);
 
     battleCtx->damage = BattleSystem_CalcDamageVariance(battleSys, battleCtx, battleCtx->damage);
     battleCtx->damage *= -1;
