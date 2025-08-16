@@ -3931,6 +3931,45 @@ static void BattleController_LoopSpreadMoves(BattleSystem *battleSys, BattleCont
         } while (battleCtx->battlerCounter < BattleSystem_MaxBattlers(battleSys));
 
         BattleIO_ClearMessageBox(battleSys);
+    } else if (CURRENT_MOVE_DATA.range == RANGE_USER_SIDE && battleCtx->moveCur == MOVE_HOWL
+        && battleCtx->battlerCounter < BattleSystem_MaxBattlers(battleSys)) {
+        // Loop over partners if using Howl
+        // No other moves target just _both_ of the user's mons, so this seemed like the best solution without adding a new range option
+        // which, admittedly, would probably have been better, but I wasn't sure how to implement.
+        battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
+
+        do {
+            int battler = battleCtx->monSpeedOrder[battleCtx->battlerCounter++];
+            if ((battleCtx->battlersSwitchingMask & FlagIndex(battler)) == FALSE
+                && battleCtx->battleMons[battler].curHP
+                && battler == BattleSystem_Partner(battleSys, battleCtx->attacker)
+                // Howl does not affect allies behind Substitute
+                && !((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
+                || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT))
+                && battler != battleCtx->attacker) {
+                if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_SOUNDPROOF) == TRUE) {
+                    // Do the Soundproof check here, otherwise we will consider the Soundproof Pokemon the
+                    // attacker, and in that case, Howl will execute properly.
+                    battleCtx->attacker = battler;
+                    battleCtx->defender = battler;
+                    LOAD_SUBSEQ(subscript_blocked_by_soundproof);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                    battleCtx->moveStatusFlags |= MOVE_STATUS_NO_MORE_WORK;
+                    battleCtx->battlerCounter = BattleSystem_MaxBattlers(battleSys);
+                } else {
+                    // When we find the (only) possible partner, redo the move, and then end.
+                    BattleSystem_SetupLoop(battleSys, battleCtx);
+                    battleCtx->attacker = battler;
+                    battleCtx->defender = battler;
+                    battleCtx->command = BATTLE_CONTROL_BEFORE_MOVE;
+                    battleCtx->battlerCounter = BattleSystem_MaxBattlers(battleSys);
+                }
+                break;
+            }
+        } while (battleCtx->battlerCounter < BattleSystem_MaxBattlers(battleSys));
+
+        BattleIO_ClearMessageBox(battleSys);
     } else {
         battleCtx->command = BATTLE_CONTROL_FAINT_AFTER_SELFDESTRUCT;
     }
