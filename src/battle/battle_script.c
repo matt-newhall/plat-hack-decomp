@@ -2750,6 +2750,7 @@ static BOOL BtlCmd_SwitchAndUpdateMon(BattleSystem *battleSys, BattleContext *ba
 
     BattleSystem_InitBattleMon(battleSys, battleCtx, battler, battleCtx->selectedPartySlot[battler]);
     BattleSystem_SwitchSlots(battleSys, battleCtx, battler, battleCtx->selectedPartySlot[battler]);
+    battleCtx->battleMons[battler].newlySwitched = TRUE;
 
     // cache the enemy's current HP (used for force-out moves like Whirlwind?)
     battleCtx->hpTemp = battleCtx->battleMons[BATTLER_ENEMY_1].curHP;
@@ -7477,7 +7478,7 @@ static BOOL BtlCmd_CalcPaybackPower(BattleSystem *battleSys, BattleContext *batt
 {
     BattleScript_Iter(battleCtx, 1);
 
-    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END) {
+    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END && battleCtx->battleMons[battleCtx->defender].newlySwitched == FALSE) {
         battleCtx->movePower = CURRENT_MOVE_DATA.power * 2;
     } else {
         battleCtx->movePower = CURRENT_MOVE_DATA.power;

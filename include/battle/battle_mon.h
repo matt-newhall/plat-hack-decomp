@@ -81,6 +81,7 @@ typedef struct BattleMon {
     u8 isShiny : 1;
     u8 padding0026_06 : 2;
     u8 ability;
+    u8 newlySwitched : 1;
 
     u32 weatherAbilityAnnounced : 1;
     u32 intimidateAnnounced : 1;

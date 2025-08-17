@@ -105,6 +105,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].friskAnnounced = FALSE;
     battleCtx->battleMons[battler].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
+    battleCtx->battleMons[battler].newlySwitched = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -367,6 +368,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
 
     case BATTLEMON_IS_SHINY:
         return battleMon->isShiny;
+
+    case BATTLEMON_HAS_SWITCHED:
+        return battleMon->newlySwitched;
 
     case BATTLEMON_CUR_PP_1:
     case BATTLEMON_CUR_PP_2:
@@ -672,6 +676,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 
     case BATTLEMON_IS_SHINY:
         mon->isShiny = *(u8 *)buf;
+        break;
+
+    case BATTLEMON_HAS_SWITCHED:
+        mon->newlySwitched = *(u8 *)buf;
         break;
 
     case BATTLEMON_CUR_PP_1:
