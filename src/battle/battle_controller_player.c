@@ -275,6 +275,7 @@ static void BattleControllerPlayer_InitCommandSelection(BattleSystem *battleSys,
     for (i = 0; i < maxBattlers; i++) {
         battleCtx->curCommandState[i] = 0;
         battleCtx->battleMons[i].moveEffectsTemp = battleCtx->battleMons[i].moveEffectsMask;
+        battleCtx->battleMons[i].newlySwitched = FALSE;
         battleCtx->recordedCommandFlags[i] = 0;
     }
 
