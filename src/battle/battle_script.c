@@ -5167,7 +5167,7 @@ static BOOL BtlCmd_TrySleepTalk(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     // Check for other invalid moves (only skip the PP check)
-    invalidMovesMask = BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battleCtx->attacker, invalidMovesMask, ~CHECK_INVALID_NO_PP);
+    invalidMovesMask = BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battleCtx->attacker, invalidMovesMask, ~(CHECK_INVALID_NO_PP | CHECK_INVALID_CHOICE_ITEM));
     if (invalidMovesMask == STRUGGLING_ALL) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
