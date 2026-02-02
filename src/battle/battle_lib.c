@@ -2913,6 +2913,25 @@ BOOL BattleContext_MoveFailed(BattleContext *battleCtx, int battler)
     return FALSE;
 }
 
+BOOL BattleContext_ThrashDisrupted(BattleContext *battleCtx, int battler)
+{
+    if (battleCtx->moveFailFlags[battler].paralyzed
+        || battleCtx->moveFailFlags[battler].noEffect
+        || battleCtx->moveFailFlags[battler].imprisoned
+        || battleCtx->moveFailFlags[battler].infatuated
+        || battleCtx->moveFailFlags[battler].disabled
+        || battleCtx->moveFailFlags[battler].taunted
+        || battleCtx->moveFailFlags[battler].flinched
+        || battleCtx->moveFailFlags[battler].gravity
+        || battleCtx->moveFailFlags[battler].confused
+        || (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
+        || (battleCtx->battleMons[battler].status & MON_CONDITION_FREEZE)) {
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 u8 BattleSystem_CountAliveBattlers(BattleSystem *battleSys, BattleContext *battleCtx, BOOL sameSide, int defender)
 {
     u8 count = 0;
