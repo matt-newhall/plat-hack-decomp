@@ -1580,10 +1580,15 @@ static void BattleControllerPlayer_CheckMonConditions(BattleSystem *battleSys, B
             if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_THRASH) {
                 battleCtx->battleMons[battler].statusVolatile -= (1 << VOLATILE_CONDITION_THRASH_SHIFT);
 
-                if (BattleContext_MoveFailed(battleCtx, battler)) {
+                BOOL wasDisrupted = BattleContext_ThrashDisrupted(battleCtx, battler);
+                BOOL shouldTriggerConfusion = ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_THRASH) == FALSE
+                    && (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CONFUSION) == FALSE);
+
+                if (wasDisrupted) {
                     battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_THRASH;
-                } else if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_THRASH) == FALSE
-                    && (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CONFUSION) == FALSE) {
+                }
+
+                if (shouldTriggerConfusion) {
                     battleCtx->sideEffectMon = battler;
 
                     PrepareSubroutineSequence(battleCtx, subscript_thrash_end);

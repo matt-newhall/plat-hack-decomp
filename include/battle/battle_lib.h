@@ -504,6 +504,16 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 BOOL BattleContext_MoveFailed(BattleContext *battleCtx, int battler);
 
 /**
+ * @brief Check if a battler's thrashing move was disrupted for the turn.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler's move failed to execute for the turn, FALSE
+ * otherwise.
+ */
+BOOL BattleContext_ThrashDisrupted(BattleContext *battleCtx, int battler);
+
+/**
  * @brief Count the number of targets hit by a move.
  *
  * @param battleSys
