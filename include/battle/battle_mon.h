@@ -127,6 +127,8 @@ typedef struct BattleMon {
     u32 moveEffectsMask;
     u32 moveEffectsTemp;
     MoveEffectsData moveEffectsData;
+
+    u8 isTightenedFocus;
 } BattleMon;
 
 #endif // POKEPLATINUM_BATTLE_MON_H

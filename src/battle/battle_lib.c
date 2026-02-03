@@ -106,6 +106,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
     battleCtx->battleMons[battler].newlySwitched = FALSE;
+    battleCtx->battleMons[battler].isTightenedFocus = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -568,6 +569,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
     case BATTLEMON_FORM_NUM:
         return battleMon->formNum;
 
+    case BATTLEMON_IS_TIGHTENED_FOCUS:
+        return battleMon->isTightenedFocus;
+
     case BATTLEMON_TEMP:
         return BattleMon_Get(battleCtx, battler, battleCtx->scriptTemp, buf);
 
@@ -918,6 +922,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
         mon->slowStartFinished = *(u8 *)buf;
         break;
 
+    case BATTLEMON_IS_TIGHTENED_FOCUS:
+        mon->isTightenedFocus = *(u8 *)buf;
+        break;
+
     case BATTLEMON_FORM_NUM:
         mon->formNum = *(u8 *)buf;
         break;
@@ -1136,6 +1144,10 @@ void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val)
 
     case BATTLEMON_SLOW_START_FINISHED:
         mon->slowStartFinished += val;
+        break;
+
+    case BATTLEMON_IS_TIGHTENED_FOCUS:
+        mon->isTightenedFocus += val;
         break;
 
     case BATTLEMON_FORM_NUM:

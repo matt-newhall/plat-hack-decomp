@@ -1255,4 +1255,8 @@
     .long 227
     .endm
 
+    .macro FocusPunchFailed
+    .long 228
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
