@@ -313,6 +313,7 @@ static BOOL BtlCmd_CheckIsPerishSongAffected(BattleSystem *battleSys, BattleCont
 static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -7316,6 +7317,8 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
             }
         }
     }
+
+    return FALSE;
 }
 
 static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7339,6 +7342,18 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
+
+    return FALSE;
+};
+
+static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    u8 moveSlot = ATTACKER_MOVE_SLOT;
+    ATTACKING_MON.ppCur[moveSlot]++;
+
+    return FALSE;
 };
 
 

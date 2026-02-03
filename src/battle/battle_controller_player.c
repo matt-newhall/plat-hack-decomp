@@ -822,7 +822,7 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
                 battleCtx->turnStartCheckTemp++;
 
                 if ((battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) == FALSE
-                    && Battler_SelectedMove(battleCtx, battler) == MOVE_FOCUS_PUNCH
+                    && (Battler_SelectedMove(battleCtx, battler) == MOVE_FOCUS_PUNCH || battleCtx->battleMons[battler].moveEffectsData.encoredMove == MOVE_FOCUS_PUNCH)
                     && Battler_CheckTruant(battleCtx, battler) == FALSE
                     && battleCtx->turnFlags[battler].struggling == FALSE) {
                     BattleController_EmitClearMessageBox(battleSys);
@@ -4039,10 +4039,15 @@ static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, Ba
             battleCtx->movePrev = MOVE_NONE;
         }
 
-        if (battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED) {
-            battleCtx->movePrevByBattler[battleCtx->attacker] = battleCtx->moveTemp;
-        } else {
+        BOOL focusPunchInterrupted =
+            battleCtx->moveTemp == MOVE_FOCUS_PUNCH &&
+            (battleCtx->turnFlags[battleCtx->attacker].physicalDamageAttackerMask != 0 ||
+            battleCtx->turnFlags[battleCtx->attacker].specialDamageAttackerMask != 0);
+
+        if (!(battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED)) {
             battleCtx->movePrevByBattler[battleCtx->attacker] = MOVE_NONE;
+        } else if (!focusPunchInterrupted) {
+            battleCtx->movePrevByBattler[battleCtx->attacker] = battleCtx->moveTemp;
         }
     }
 

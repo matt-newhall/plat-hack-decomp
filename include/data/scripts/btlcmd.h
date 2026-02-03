@@ -233,6 +233,7 @@ ScriptCommand(BTLCMD_CALCTAUNTTURNS,              BtlCmd_CalcTauntTurns)
 ScriptCommand(BTLCMD_CHECKIMMUNEGHOST,            BtlCmd_CheckImmuneGhost)
 ScriptCommand(BTLCMD_SWITCHTOXIC,                 BtlCmd_SwitchToxic)
 ScriptCommand(BTLCMD_SWAPABILITIES,               BtlCmd_SwapAbilities)
+ScriptCommand(BTLCMD_FOCUSPUNCHFAILED,            BtlCmd_FocusPunchFailed)
 
 // clang-format on
 

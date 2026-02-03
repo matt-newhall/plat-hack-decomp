@@ -1258,6 +1258,10 @@
     .long BTLCMD_SWAPABILITIES
     .endm
 
+    .macro FocusPunchFailed
+    .long BTLCMD_FOCUSPUNCHFAILED
+    .endm
+
     .text
     .globl _start
 _start:
