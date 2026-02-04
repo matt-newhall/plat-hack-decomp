@@ -4595,7 +4595,7 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
     if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE) {
         battleCtx->moveStatusFlags |= MOVE_STATUS_STURDY;
     } else {
-        if ((DEFENDING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON) == FALSE
+        if ((ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON) == FALSE
             && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NO_GUARD
             && Battler_Ability(battleCtx, battleCtx->defender) != ABILITY_NO_GUARD) {
             // Use the usual OHKO accuracy check: scale upwards with the difference between the attacker and
@@ -4608,8 +4608,8 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
                 hit = FALSE;
             }
         } else {
-            if (((DEFENDING_MON.moveEffectsData.lockOnTarget == battleCtx->attacker
-                     && (DEFENDING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON))
+            if (((ATTACKING_MON.moveEffectsData.lockOnTarget == battleCtx->defender
+                     && (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON))
                     || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NO_GUARD
                     || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_NO_GUARD)
                 && ATTACKING_MON.level >= DEFENDING_MON.level) {

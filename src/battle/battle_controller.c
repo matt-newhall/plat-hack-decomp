@@ -3066,7 +3066,7 @@ static int BattleController_CheckMoveHitOverrides(BattleSystem *battleSys, Battl
     }
 
     if ((battleCtx->battleStatusMask & SYSCTL_NONSTANDARD_ACC_CHECK) == FALSE
-        && (MON_IS_LOCKED_ONTO(attacker, defender)
+        && (MON_IS_LOCKED_ONTO(defender, attacker)
             || Battler_Ability(battleCtx, attacker) == ABILITY_NO_GUARD
             || Battler_Ability(battleCtx, defender) == ABILITY_NO_GUARD)) {
         battleCtx->moveStatusFlags &= ~MOVE_STATUS_MISSED;
