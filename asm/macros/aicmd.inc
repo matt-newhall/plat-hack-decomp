@@ -629,6 +629,13 @@
     .long \battler
     .endm
 
+    .macro IfLockOnTarget attacker, target, jump
+    .long AICMD_IFLOCKONTARGET
+    .long \attacker
+    .long \target
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry:req
