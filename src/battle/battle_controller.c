@@ -440,18 +440,6 @@ static void BattleController_CommandSelectionInput(BattleSystem *battleSys, Batt
                             battleCtx->curCommandState[i] = COMMAND_SELECTION_CLEAR_TOUCH_SCREEN;
                             battleCtx->nextCommandState[i] = COMMAND_SELECTION_STRUGGLE_MESSAGE;
                         }
-                    } else if (battleCtx->battleMons[i].moveEffectsData.encoredMove) {
-                        // Don't let the player select a move if they are under the effect of Encore
-                        battleCtx->moveSlot[i] = battleCtx->battleMons[i].moveEffectsData.encoredMoveSlot;
-                        battleCtx->moveSelected[i] = battleCtx->battleMons[i].moveEffectsData.encoredMove;
-                        battleCtx->battlerActions[i][BATTLE_ACTION_TEMP_VALUE] = 0;
-
-                        if (BattleSystem_BattleStatus(battleSys) & BATTLE_STATUS_RECORDING) {
-                            battleCtx->curCommandState[i] = COMMAND_SELECTION_WAIT;
-                        } else {
-                            battleCtx->curCommandState[i] = COMMAND_SELECTION_CLEAR_TOUCH_SCREEN;
-                            battleCtx->nextCommandState[i] = COMMAND_SELECTION_WAIT;
-                        }
                     } else {
                         battleCtx->curCommandState[i] = COMMAND_SELECTION_MOVE_SELECT_INIT;
                     }

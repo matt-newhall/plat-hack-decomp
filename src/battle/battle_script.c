@@ -5019,10 +5019,12 @@ static BOOL BtlCmd_TryEncore(BattleSystem *battleSys, BattleContext *battleCtx)
         && moveSlot != LEARNED_MOVES_MAX
         && DEFENDING_MON.ppCur[moveSlot]
         && DEFENDER_LAST_MOVE) {
+        BOOL hasTargetMoved = DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END;
+
         battleCtx->msgMoveTemp = DEFENDER_LAST_MOVE;
         DEFENDING_MON.moveEffectsData.encoredMove = battleCtx->msgMoveTemp;
         DEFENDING_MON.moveEffectsData.encoredMoveSlot = moveSlot;
-        DEFENDING_MON.moveEffectsData.encoredTurns = BattleSystem_RandNext(battleSys) % 5 + 3; // range: [3-7]
+        DEFENDING_MON.moveEffectsData.encoredTurns = hasTargetMoved ? 3 : 2;
     } else {
         battleCtx->moveStatusFlags |= MOVE_STATUS_FAILED;
         BattleScript_Iter(battleCtx, jumpOnFail);

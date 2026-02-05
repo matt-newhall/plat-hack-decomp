@@ -2308,6 +2308,12 @@ int BattleSystem_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battl
             invalidMoves |= FlagIndex(i);
         }
 
+        if (battleCtx->battleMons[battler].moveEffectsData.encoredMove
+            && (opMask & CHECK_INVALID_ENCORE)
+            && battleCtx->battleMons[battler].moves[i] != battleCtx->battleMons[battler].moveEffectsData.encoredMove) {
+            invalidMoves |= FlagIndex(i);
+        }
+
         if (Move_Imprisoned(battleSys, battleCtx, battler, battleCtx->battleMons[battler].moves[i])
             && (opMask & CHECK_INVALID_IMPRISONED)) {
             invalidMoves |= FlagIndex(i);
@@ -2346,7 +2352,13 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
 {
     BOOL result = TRUE;
 
-    if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_DISABLED) & FlagIndex(moveSlot)) {
+    if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ENCORE) & FlagIndex(moveSlot)) {
+        msgOut->tags = TAG_MOVE_MOVE;
+        msgOut->id = 911; // "The {0} allows the use of only {1}!"
+        msgOut->params[0] = MOVE_ENCORE;
+        msgOut->params[1] = battleCtx->battleMons[battler].moveEffectsData.encoredMove;
+        result = FALSE;
+    } else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_DISABLED) & FlagIndex(moveSlot)) {
         msgOut->tags = TAG_NICKNAME_MOVE;
         msgOut->id = 609; // "{0}'s {1} is disabled!"
         msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, battler);
@@ -7488,6 +7500,13 @@ static const u16 sCannotEncoreMoves[] = {
     MOVE_MIRROR_MOVE,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
+    MOVE_ASSIST,
+    MOVE_COPYCAT,
+    MOVE_ME_FIRST,
+    MOVE_METRONOME,
+    MOVE_NATURE_POWER,
+    MOVE_SLEEP_TALK,
+    MOVE_SNATCH,
 };
 
 BOOL Move_CanBeEncored(BattleContext *battleCtx, u16 move)
