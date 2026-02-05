@@ -3771,7 +3771,8 @@ static void BattleController_AfterMoveEffects(BattleSystem *battleSys, BattleCon
             && (DEFENDING_MON.status & MON_CONDITION_FREEZE)
             && (battleCtx->moveStatusFlags & MOVE_STATUS_MULTI_HIT_DISRUPTED) == FALSE
             && battleCtx->defender != battleCtx->attacker
-            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && DEFENDING_MON.curHP
             && moveType == TYPE_FIRE) {
             battleCtx->msgBattlerTemp = battleCtx->defender;
@@ -4732,7 +4733,8 @@ static BOOL BattleController_RageBuilding(BattleSystem *battleSys, BattleContext
         && (battleCtx->moveStatusFlags & MOVE_STATUS_MULTI_HIT_DISRUPTED) == FALSE
         && battleCtx->defender != battleCtx->attacker
         && DEFENDING_MON.curHP
-        && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+        && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+            || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
         && DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
         DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK]++;
 
@@ -4766,7 +4768,8 @@ static BOOL BattleController_CheckExtraFlinch(BattleSystem *battleSys, BattleCon
     if (battleCtx->defender != BATTLER_NONE
         && itemEffect == HOLD_EFFECT_SOMETIMES_FLINCH
         && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-        && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+        && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+            || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
         && (BattleSystem_RandNext(battleSys) % 100) < itemPower
         && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_TRIGGERS_KINGS_ROCK)
         && DEFENDING_MON.curHP) {
@@ -4879,7 +4882,8 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
                 if (DEFENDING_MON.curHP
                     && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
                     && battleCtx->moveCur != MOVE_STRUGGLE
-                    && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+                    && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                        || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
                     && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                     && CURRENT_MOVE_DATA.power
                     && BattleMon_Get(battleCtx, battleCtx->defender, 27, NULL) != moveType
