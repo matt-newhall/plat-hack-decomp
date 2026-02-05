@@ -6440,9 +6440,16 @@ static BOOL BtlCmd_TryTeleport(BattleSystem *battleSys, BattleContext *battleCtx
     int jumpOnFail = BattleScript_Read(battleCtx);
     int jumpOnWild = BattleScript_Read(battleCtx);
 
+    int itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
+
+    BattleMessage msg;
+
     if (BattleSystem_BattleType(battleSys) == (BATTLE_TYPE_SINGLES | BATTLE_TYPE_WILD_MON)
         && (battleCtx->attacker != BATTLER_US)) {
-        if (Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, NULL)) {
+        BOOL isTrapped = Battler_IsTrappedMsg(battleSys, battleCtx, battleCtx->attacker, &msg);
+
+        // Allow to flee with Ingrain
+        if (isTrapped && msg.id != 794 && itemEffect != HOLD_EFFECT_FLEE) {
             BattleScript_Iter(battleCtx, jumpOnFail);
         } else {
             BattleScript_Iter(battleCtx, jumpOnWild);
