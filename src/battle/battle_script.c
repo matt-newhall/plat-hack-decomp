@@ -4865,10 +4865,29 @@ static BOOL BtlCmd_Counter(BattleSystem *battleSys, BattleContext *battleCtx)
     int attackingSide = Battler_Side(battleSys, battleCtx->attacker);
     int defendingSide = Battler_Side(battleSys, lastAttacker);
 
-    if (ATTACKER_TURN_FLAGS.physicalDamageTakenFrom[lastAttacker]
+    if (lastAttacker != BATTLER_NONE
         && attackingSide != defendingSide
         && battleCtx->battleMons[lastAttacker].curHP) {
-        battleCtx->damage = ATTACKER_TURN_FLAGS.physicalDamageTakenFrom[lastAttacker] * 2;
+        int lastDamage = ATTACKER_TURN_FLAGS.physicalDamageTakenFrom[lastAttacker];
+
+        if (lastDamage == 0) {
+            battleCtx->damage = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                MOVE_COUNTER,
+                battleCtx->sideConditionsMask[Battler_Side(battleSys, lastAttacker)],
+                battleCtx->fieldConditionsMask,
+                1,
+                0,
+                battleCtx->attacker,
+                lastAttacker,
+                1);
+        } else {
+            battleCtx->damage = lastDamage * 2;
+        }
+
+        if (battleCtx->damage > -1) {
+            battleCtx->damage = -1;
+        }
 
         if (battleCtx->sideConditions[defendingSide].followMe && FOLLOW_ME_MON(defendingSide).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defendingSide);
@@ -4918,10 +4937,29 @@ static BOOL BtlCmd_MirrorCoat(BattleSystem *battleSys, BattleContext *battleCtx)
     int attackingSide = Battler_Side(battleSys, battleCtx->attacker);
     int defendingSide = Battler_Side(battleSys, lastAttacker);
 
-    if (ATTACKER_TURN_FLAGS.specialDamageTakenFrom[lastAttacker]
+    if (lastAttacker != BATTLER_NONE
         && attackingSide != defendingSide
         && battleCtx->battleMons[lastAttacker].curHP) {
-        battleCtx->damage = ATTACKER_TURN_FLAGS.specialDamageTakenFrom[lastAttacker] * 2;
+        int lastDamage = ATTACKER_TURN_FLAGS.specialDamageTakenFrom[lastAttacker];
+
+        if (lastDamage == 0) {
+            battleCtx->damage = BattleSystem_CalcMoveDamage(battleSys,
+                battleCtx,
+                MOVE_MIRROR_COAT,
+                battleCtx->sideConditionsMask[Battler_Side(battleSys, lastAttacker)],
+                battleCtx->fieldConditionsMask,
+                1,
+                0,
+                battleCtx->attacker,
+                lastAttacker,
+                1);
+        } else {
+            battleCtx->damage = lastDamage * 2;
+        }
+
+        if (battleCtx->damage > -1) {
+            battleCtx->damage = -1;
+        }
 
         if (battleCtx->sideConditions[defendingSide].followMe && FOLLOW_ME_MON(defendingSide).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defendingSide);
