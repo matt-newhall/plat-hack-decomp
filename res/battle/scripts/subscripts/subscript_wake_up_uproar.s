@@ -1,9 +1,10 @@
 #include "macros/btlcmd.inc"
 
+    .data
 
 _000:
-    // {0} woke up!
-    PrintMessage BattleStrings_Text_PokemonWokeUp_Ally, TAG_NICKNAME, BTLSCR_MSG_TEMP
+    // The uproar woke up the {0}!
+    PrintMessage BattleStrings_Text_TheUproarWokeUpThePokemon_Ally, TAG_NICKNAME, BTLSCR_MSG_TEMP
     Wait 
     SetHealthbarStatus BTLSCR_MSG_TEMP, BATTLE_ANIMATION_NONE
     WaitButtonABTime 30
