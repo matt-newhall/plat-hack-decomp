@@ -1523,29 +1523,9 @@ static void BattleController_CheckMonConditions(BattleSystem *battleSys, BattleC
 
         case MON_COND_CHECK_STATE_UPROAR:
             if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_UPROAR) {
-                u8 j;
-                for (j = 0; j < maxBattlers; j++) {
-                    if ((battleCtx->battleMons[j].status & MON_CONDITION_SLEEP)
-                        && battleCtx->battleMons[j].curHP
-                        && Battler_Ability(battleCtx, j) != ABILITY_SOUNDPROOF) {
-                        battleCtx->msgBattlerTemp = j;
-                        PrepareSubroutineSequence(battleCtx, subscript_wake_up);
-                        break;
-                    }
-                }
-
-                if (j != maxBattlers) {
-                    state = STATE_DONE;
-                    break;
-                }
-
                 battleCtx->battleMons[battler].statusVolatile -= (1 << VOLATILE_CONDITION_UPROAR_SHIFT);
 
-                if (BattleContext_MoveFailed(battleCtx, battler)) {
-                    i = subscript_uproar_end;
-                    battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_UPROAR;
-                    battleCtx->fieldConditionsMask &= ((FlagIndex(battler) << FIELD_CONDITION_UPROAR_SHIFT) ^ 0xFFFFFFFF);
-                } else if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_UPROAR) {
+                if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_UPROAR) {
                     i = subscript_uproar_continues;
                 } else {
                     i = subscript_uproar_end;
@@ -2465,11 +2445,10 @@ static BOOL BattleController_CheckStatusDisruption(BattleSystem *battleSys, Batt
 
         case CHECK_STATUS_STATE_SLEEP:
             if (ATTACKING_MON.status & MON_CONDITION_SLEEP) {
-                if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_UPROAR)
-                    && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SOUNDPROOF) {
+                if (battleCtx->fieldConditionsMask & FIELD_CONDITION_UPROAR) {
                     battleCtx->msgBattlerTemp = battleCtx->attacker;
 
-                    LOAD_SUBSEQ(subscript_wake_up);
+                    LOAD_SUBSEQ(subscript_wake_up_uproar);
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
                     result = CHECK_STATUS_GO_TO_SCRIPT;
@@ -3670,6 +3649,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_TOGGLE_VANISH_FLAG = AFTER_MOVE_EFFECT_START,
     AFTER_MOVE_EFFECT_SYNCHRONIZE_STATUS,
     AFTER_MOVE_EFFECT_TRIGGER_SWITCH_IN_EFFECTS,
+    AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
@@ -3721,6 +3701,35 @@ static void BattleController_AfterMoveEffects(BattleSystem *battleSys, BattleCon
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
             return;
+        }
+
+        battleCtx->afterMoveEffectState++;
+
+    case AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN:
+        u32 uproarCounter =
+            (battleCtx->battleMons[battleCtx->attacker].statusVolatile
+                & VOLATILE_CONDITION_UPROAR)
+            >> VOLATILE_CONDITION_UPROAR_SHIFT;
+
+        if (battleCtx->battleMons[battleCtx->attacker].statusVolatile & VOLATILE_CONDITION_UPROAR && uproarCounter == 3) {
+            int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+
+            u8 j;
+            for (j = 0; j < maxBattlers; j++) {
+                if ((battleCtx->battleMons[j].status & MON_CONDITION_SLEEP)
+                    && battleCtx->battleMons[j].curHP) {
+                    battleCtx->msgBattlerTemp = j;
+                    LOAD_SUBSEQ(subscript_wake_up);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+            }
+
+            if (j != maxBattlers) {
+                return;
+            }
         }
 
         battleCtx->afterMoveEffectState++;
@@ -4818,6 +4827,7 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
+    AFTER_MOVE_HIT_STATE_UPROAR,
 
     AFTER_MOVE_HIT_STATE_END
 };
@@ -4926,6 +4936,24 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
                 machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_UPROAR:
+            if (battleCtx->battleMons[battleCtx->attacker].statusVolatile & VOLATILE_CONDITION_UPROAR) {
+                if (BattleContext_MoveFailed(battleCtx, battleCtx->attacker) || battleCtx->moveStatusFlags & (MOVE_STATUS_NO_MORE_WORK | MOVE_STATUS_PROTECTED | MOVE_STATUS_WONDER_GUARD)) {
+                    battleCtx->msgBattlerTemp = battleCtx->attacker;
+                    LOAD_SUBSEQ(subscript_uproar_end);
+                    battleCtx->battleMons[battleCtx->attacker].statusVolatile &= ~VOLATILE_CONDITION_UPROAR;
+                    battleCtx->fieldConditionsMask &= ((FlagIndex(battleCtx->attacker) << FIELD_CONDITION_UPROAR_SHIFT) ^ 0xFFFFFFFF);
+
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    machineState = STATE_BREAK_OUT;
+                }
             }
 
             battleCtx->afterMoveHitCheckState++;
