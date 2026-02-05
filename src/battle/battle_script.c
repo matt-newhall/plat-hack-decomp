@@ -7443,6 +7443,11 @@ static BOOL BtlCmd_CalcGyroBallPower(BattleSystem *battleSys, BattleContext *bat
 {
     BattleScript_Iter(battleCtx, 1);
 
+    if (battleCtx->monSpeedValues[battleCtx->attacker] == 0) {
+        battleCtx->movePower = 1;
+        return FALSE;
+    }
+
     battleCtx->movePower = 1 + 25 * battleCtx->monSpeedValues[battleCtx->defender] / battleCtx->monSpeedValues[battleCtx->attacker];
     if (battleCtx->movePower > 150) {
         battleCtx->movePower = 150;
