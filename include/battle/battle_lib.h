@@ -1437,6 +1437,20 @@ BOOL BattleSystem_ShouldShowStatusEffect(BattleContext *battleCtx, int battler, 
 BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
 
 /**
+ * @brief Checks if Rest or Swallow are valid moves for Snatch
+ *
+ * This is a specific gen V+ effect that means Rest/Swallow can only be stolen
+ * if they would have had an effect when used by the original user.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler The original user of the move
+ * @param move MOVE_REST or MOVE_SWALLOW
+ * @return TRUE if rest/swallow can be snatched, FALSE otherwise.
+ */
+BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
+
+/**
  * @brief Decrement additional PP from the attacker's selected move if its
  * target has the Pressure ability.
  *

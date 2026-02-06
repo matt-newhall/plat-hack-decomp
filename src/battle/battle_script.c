@@ -10137,6 +10137,8 @@ static void *BattleScript_VarAddress(BattleSystem *battleSys, BattleContext *bat
         return &battleCtx->selfTurnFlags[battleCtx->attacker].shellBellDamageDealt;
     case BTLVAR_WAITING_BATTLERS:
         return &battleCtx->waitingBattlers;
+    case BTLVAR_MOVE_IS_STOLEN:
+        return &battleCtx->moveIsStolen;
     }
 
     return NULL;

@@ -7721,6 +7721,35 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
     return result;
 }
 
+BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move)
+{
+    if (move == MOVE_REST) {
+        if (battleCtx->battleMons[battler].curHP >= battleCtx->battleMons[battler].maxHP) {
+            return FALSE;
+        }
+
+        u32 ability = Battler_Ability(battleCtx, battler);
+        if (ability == ABILITY_INSOMNIA || ability == ABILITY_VITAL_SPIRIT) {
+            return FALSE;
+        }
+
+        if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) {
+            return FALSE;
+        }
+
+        return TRUE;
+    }
+
+    if (move == MOVE_SWALLOW) {
+        if (battleCtx->battleMons[battler].moveEffectsData.stockpileCount == 0) {
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    return TRUE;
+}
+
 void BattleSystem_DecPPForPressure(BattleContext *battleCtx, int attacker, int defender)
 {
     if (defender != BATTLER_NONE
