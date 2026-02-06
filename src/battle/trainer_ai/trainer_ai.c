@@ -2623,7 +2623,8 @@ static void AICmd_LoadRecycleItem(BattleSystem *battleSys, BattleContext *battle
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    AI_CONTEXT.calcTemp = battleCtx->recycleItem[battler];
+    int partySlot = battleCtx->selectedPartySlot[battler];
+    AI_CONTEXT.calcTemp = battleCtx->recycleItem[battler][partySlot];
 }
 
 static void AICmd_LoadTypeOfLoadedMove(BattleSystem *battleSys, BattleContext *battleCtx)

@@ -9411,7 +9411,13 @@ static BOOL BtlCmd_RemoveItem(BattleSystem *battleSys, BattleContext *battleCtx)
     int inBattler = BattleScript_Read(battleCtx);
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
-    battleCtx->recycleItem[battler] = battleCtx->battleMons[battler].heldItem;
+    int moveEffect = battleCtx->aiContext.moveTable[battleCtx->moveCur].effect;
+
+    // Don't recycle items lost to Pluck/Bug Bite
+    if (moveEffect != BATTLE_EFFECT_EAT_BERRY) {
+        int partySlot = battleCtx->selectedPartySlot[battler];
+        battleCtx->recycleItem[battler][partySlot] = battleCtx->battleMons[battler].heldItem;
+    }
     battleCtx->battleMons[battler].heldItem = ITEM_NONE;
 
     BattleMon_CopyToParty(battleSys, battleCtx, battler);
@@ -9438,9 +9444,12 @@ static BOOL BtlCmd_TryRecycle(BattleSystem *battleSys, BattleContext *battleCtx)
     BattleScript_Iter(battleCtx, 1);
     int jumpNoRecyclableItem = BattleScript_Read(battleCtx);
 
-    if (battleCtx->recycleItem[battleCtx->attacker]) {
-        battleCtx->msgItemTemp = battleCtx->recycleItem[battleCtx->attacker];
-        battleCtx->recycleItem[battleCtx->attacker] = ITEM_NONE;
+    int battler = battleCtx->attacker;
+    int partySlot = battleCtx->selectedPartySlot[battler];
+
+    if (battleCtx->recycleItem[battler][partySlot]) {
+        battleCtx->msgItemTemp = battleCtx->recycleItem[battler][partySlot];
+        battleCtx->recycleItem[battler][partySlot] = ITEM_NONE;
     } else {
         BattleScript_Iter(battleCtx, jumpNoRecyclableItem);
     }
