@@ -3651,6 +3651,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_SYNCHRONIZE_STATUS,
     AFTER_MOVE_EFFECT_TRIGGER_SWITCH_IN_EFFECTS,
     AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN,
+    AFTER_MOVE_EFFECT_KNOCK_OFF,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
@@ -3735,6 +3736,21 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
         }
 
         battleCtx->afterMoveEffectState++;
+
+    case AFTER_MOVE_EFFECT_KNOCK_OFF:
+        battleCtx->afterMoveEffectState++;
+
+        if (ATTACKING_MON.curHP 
+            && battleCtx->moveCur == MOVE_KNOCK_OFF) {
+            LOAD_SUBSEQ(subscript_knock_off);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            // Clear the flag so it doesn't trigger again
+            battleCtx->sideEffectIndirectFlags = 0;
+
+            return;
+        }
 
     case AFTER_MOVE_EFFECT_ATTACKER_ITEM:
         battleCtx->afterMoveEffectState++;

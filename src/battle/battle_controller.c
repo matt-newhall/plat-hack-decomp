@@ -1470,7 +1470,6 @@ void BattleController_EmitUpdatePartyMon(BattleSystem *battleSys, BattleContext 
     message.mimickedMoveSlot = battleCtx->battleMons[battler].moveEffectsData.mimickedMoveSlot;
     message.curHP = battleCtx->battleMons[battler].curHP;
     message.heldItem = battleCtx->battleMons[battler].heldItem;
-    message.knockedOffItemsMask = battleCtx->sideConditions[BattleSystem_GetBattlerSide(battleSys, battler)].knockedOffItemsMask;
     message.formNum = battleCtx->battleMons[battler].formNum;
     message.ability = battleCtx->battleMons[battler].ability;
 
