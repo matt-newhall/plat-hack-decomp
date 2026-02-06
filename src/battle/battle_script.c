@@ -5383,9 +5383,6 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
     if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
         // AI trainers are unable to steal items outside of the Battle Frontier. PvP trainers can steal items.
         BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) {
-        // The attacker has an item which has been suppressed.
-        BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (DEFENDING_MON.heldItem == ITEM_GRISEOUS_ORB && (DEFENDING_MON.species == SPECIES_GIRATINA || ATTACKING_MON.species == SPECIES_GIRATINA)) {
         // The defender is holding a Griseous Orb and either the attacker or defender is Giratina.
         BattleScript_Iter(battleCtx, jumpOnFail);
@@ -6660,13 +6657,8 @@ static BOOL BtlCmd_TrySwapItems(BattleSystem *battleSys, BattleContext *battleCt
     int jumpStickyHold = BattleScript_Read(battleCtx);
 
     u32 battleType = BattleSystem_BattleType(battleSys);
-    int attacking = Battler_Side(battleSys, battleCtx->attacker);
-    int defending = Battler_Side(battleSys, battleCtx->defender);
 
     if (Battler_Side(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if ((battleCtx->sideConditions[attacking].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker]))
-        || (battleCtx->sideConditions[defending].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->defender]))) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if ((ATTACKING_MON.heldItem == ITEM_NONE && DEFENDING_MON.heldItem == ITEM_NONE)
         || BattleSystem_NotHoldingMail(battleCtx, battleCtx->attacker) == FALSE
@@ -6953,7 +6945,6 @@ static BOOL BtlCmd_TryKnockOff(BattleSystem *battleSys, BattleContext *battleCtx
         battleCtx->msgBuffer.params[2] = DEFENDING_MON.heldItem;
 
         DEFENDING_MON.heldItem = ITEM_NONE;
-        battleCtx->sideConditions[defending].knockedOffItemsMask |= FlagIndex(battleCtx->selectedPartySlot[battleCtx->defender]);
     } else {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }

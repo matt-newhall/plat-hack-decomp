@@ -53,6 +53,7 @@ static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int ch
 static void UpateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
 static BOOL MoveIsOnDamagingTurn(BattleContext *battleCtx, int move);
 static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonParam paramID);
+static BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler);
 static void BattleAI_ClearKnownMoves(BattleContext *battleCtx, u8 battler);
 static void BattleAI_ClearKnownAbility(BattleContext *battleCtx, u8 battler);
 static void BattleAI_ClearKnownItem(BattleContext *battleCtx, u8 battler);
@@ -153,13 +154,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].timesDamaged = 0;
     battleCtx->battleMons[battler].trainerMessageFlags = 0;
 
-    int side = Battler_Side(battleSys, battler);
-    if (battleCtx->sideConditions[side].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battler])) {
-        battleCtx->battleMons[battler].heldItem = ITEM_NONE;
-        battleCtx->battleMons[battler].moveEffectsData.canUnburden = FALSE;
-    } else if (battleCtx->battleMons[battler].heldItem) {
-        battleCtx->battleMons[battler].moveEffectsData.canUnburden = TRUE;
-    }
+    battleCtx->battleMons[battler].moveEffectsData.canUnburden = battleCtx->battleMons[battler].heldItem ? TRUE : FALSE;
 }
 
 void BattleSystem_ReloadPokemon(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot)
@@ -3190,7 +3185,6 @@ BOOL BattleSystem_CanStealItem(BattleSystem *battleSys, BattleContext *battleCtx
     int side = Battler_Side(battleSys, battler);
 
     if (battleCtx->battleMons[battler].heldItem
-        && (battleCtx->sideConditions[side].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battler])) == FALSE
         && Item_IsMail(battleCtx->battleMons[battler].heldItem) == FALSE) {
         result = TRUE;
     }
@@ -5625,7 +5619,6 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
     case HOLD_EFFECT_DMG_USER_CONTACT_XFR:
         if (ATTACKING_MON.curHP
             && ATTACKING_MON.heldItem == ITEM_NONE
-            && (battleCtx->sideConditions[side].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) == FALSE
             && battleCtx->moveCur != MOVE_KNOCK_OFF
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
@@ -6507,6 +6500,41 @@ BOOL Battler_SubstituteWasHit(BattleContext *battleCtx, int battler)
     return result;
 }
 
+BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler)
+{
+    u16 item = battleCtx->battleMons[battler].heldItem;
+
+    if (item == ITEM_NONE) {
+        return FALSE;
+    }
+
+    if (((item == ITEM_FLAME_PLATE)
+        || (item == ITEM_SPLASH_PLATE)
+        || (item == ITEM_ZAP_PLATE)
+        || (item == ITEM_MEADOW_PLATE)
+        || (item == ITEM_ICICLE_PLATE)
+        || (item == ITEM_FIST_PLATE)
+        || (item == ITEM_TOXIC_PLATE)
+        || (item == ITEM_EARTH_PLATE)
+        || (item == ITEM_SKY_PLATE)
+        || (item == ITEM_MIND_PLATE)
+        || (item == ITEM_INSECT_PLATE)
+        || (item == ITEM_STONE_PLATE)
+        || (item == ITEM_SPOOKY_PLATE)
+        || (item == ITEM_DRACO_PLATE)
+        || (item == ITEM_DREAD_PLATE)
+        || (item == ITEM_IRON_PLATE))
+        && (DEFENDING_MON.species == SPECIES_ARCEUS)) {
+        return FALSE;
+    }
+
+    if (item == ITEM_GRISEOUS_ORB && DEFENDING_MON.species == SPECIES_GIRATINA) {
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
 BOOL BattleSystem_TrainerIsOT(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     TrainerInfo *trInfo = BattleSystem_TrainerInfo(battleSys, BATTLER_US);
@@ -7098,6 +7126,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 125 / 100;
     }
 
+    if (move == MOVE_KNOCK_OFF && Battler_CanRemoveItem(battleCtx, defender)) {
+        movePower = movePower * 150 / 100;
+    }
+
     if (attackerParams.ability == ABILITY_SIMPLE) {
         attackStage *= 2;
         if (attackStage < -6) {
@@ -7679,7 +7711,6 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
     if (defenderItemEffect == HOLD_EFFECT_DMG_USER_CONTACT_XFR
         && ATTACKING_MON.curHP
         && ATTACKING_MON.heldItem == ITEM_NONE
-        && (battleCtx->sideConditions[attackingSide].knockedOffItemsMask & FlagIndex(battleCtx->selectedPartySlot[battleCtx->attacker])) == FALSE
         && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
             || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
         && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {

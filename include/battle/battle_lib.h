@@ -1214,6 +1214,15 @@ u8 BattleContext_IOBufferVal(BattleContext *battleCtx, int battler);
 BOOL Battler_SubstituteWasHit(BattleContext *battleCtx, int battler);
 
 /**
+ * @brief Check if a Pokemon's held item can be removed with Knock Off.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the item can be removed, FALSE if not.
+ */
+BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler);
+
+/**
  * @brief Check if the player is the attacking Pokemon's OT.
  *
  * @param battleSys
