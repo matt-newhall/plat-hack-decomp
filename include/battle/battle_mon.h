@@ -107,7 +107,6 @@ typedef struct BattleMon {
     u32 maxHP;
 
     u16 OTName[TRAINER_NAME_LEN + 1];
-    u16 recycleItem;
 
     u32 exp;
     u32 personality;

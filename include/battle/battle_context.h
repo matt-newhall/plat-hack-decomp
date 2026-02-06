@@ -296,7 +296,7 @@ struct BattleContext {
     u8 fieldWeatherChecked;
     s16 hpTemp;
 
-    u16 recycleItem[MAX_BATTLERS];
+    u16 recycleItem[MAX_BATTLERS][MAX_PARTY_SIZE];
 
     u8 partyOrder[MAX_BATTLERS][MAX_PARTY_SIZE];
 
