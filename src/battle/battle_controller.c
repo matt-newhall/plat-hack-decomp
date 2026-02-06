@@ -3092,8 +3092,6 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
         && DEFENDER_TURN_FLAGS.magicCoat
         && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_MAGIC_COAT)) {
-        DEFENDER_TURN_FLAGS.magicCoat = FALSE;
-
         battleCtx->moveProtect[battleCtx->attacker] = FALSE;
         battleCtx->movePrevByBattler[battleCtx->attacker] = battleCtx->moveTemp;
         battleCtx->movePrev = battleCtx->moveTemp;
@@ -3916,9 +3914,14 @@ static void BattleController_LoopWhileFainted(BattleSystem *battleSys, BattleCon
 static void BattleController_LoopSpreadMoves(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     if (battleCtx->battleStatusMask2 & SYSCTL_MAGIC_COAT_REFLECTED) {
-        battleCtx->battleStatusMask2 &= ~SYSCTL_MAGIC_COAT_REFLECTED;
-        battleCtx->defender = battleCtx->attacker;
-        battleCtx->attacker = battleCtx->magicCoatMon;
+        // Only swap back if we're NOT still processing multi-target hits
+        if (!(CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) || battleCtx->battlerCounter >= BattleSystem_MaxBattlers(battleSys)) {
+            battleCtx->battleStatusMask2 &= ~SYSCTL_MAGIC_COAT_REFLECTED;
+            battleCtx->defender = battleCtx->attacker;
+            battleCtx->attacker = battleCtx->magicCoatMon;
+            battleCtx->battlerCounter = battleCtx->savedBattlerCounter;
+            battleCtx->savedBattlerCounter = 0;
+        }
     }
 
     BattleController_UpdateFlagsWhenHit(battleSys, battleCtx);

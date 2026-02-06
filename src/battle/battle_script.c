@@ -6810,7 +6810,9 @@ static BOOL BtlCmd_MagicCoat(BattleSystem *battleSys, BattleContext *battleCtx)
     if (battleCtx->sideConditions[target].followMe && FOLLOW_ME_MON(target).curHP) {
         battleCtx->defender = FOLLOW_ME_USER(target);
     } else if (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) {
-        battleCtx->defender = attacker;
+        battleCtx->savedBattlerCounter = battleCtx->battlerCounter;
+        battleCtx->battlerCounter = 0;
+        battleCtx->commandNext = BATTLE_CONTROL_LOOP_SPREAD_MOVES;
     } else {
         target = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveCur, TRUE, RANGE_SINGLE_TARGET);
         if (battleCtx->selfTurnFlags[target].lightningRodActivated || battleCtx->selfTurnFlags[target].stormDrainActivated) {
