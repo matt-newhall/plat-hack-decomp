@@ -3107,13 +3107,27 @@ static BOOL BattleControllerPlayer_MoveStolen(BattleSystem *battleSys, BattleCon
         return TRUE;
     }
 
+    // Can't steal the same move twice
+    if (battleCtx->moveIsStolen) {
+        return FALSE;
+    }
+
     for (i = 0; i < maxBattlers; i++) {
         battler = battleCtx->monSpeedOrder[i];
         if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
             && battleCtx->turnFlags[battler].snatching
             && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_SNATCH)) {
+
+            if (battleCtx->moveTemp == MOVE_REST || battleCtx->moveTemp == MOVE_SWALLOW) {
+                if (!BattleSystem_CanSnatchRestSwallow(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveTemp)) {
+                    continue;
+                }
+            }
+
             battleCtx->msgBattlerTemp = battler;
             battleCtx->turnFlags[battler].snatching = FALSE;
+
+            battleCtx->moveIsStolen = TRUE;
 
             if ((battleCtx->battleStatusMask & SYSCTL_REUSE_LAST_MOVE) == FALSE) {
                 battleCtx->moveProtect[battleCtx->attacker] = 0;
@@ -3258,6 +3272,8 @@ enum TryMoveState {
 
 static void BattleControllerPlayer_TryMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
+    battleCtx->moveIsStolen = FALSE;
+
     switch (battleCtx->tryMoveCheckState) {
     case TRY_MOVE_STATE_CHECK_VALID_TARGET:
         battleCtx->tryMoveCheckState++;

@@ -235,6 +235,7 @@ struct BattleContext {
     u8 battlerCounter;
     u8 beatUpCounter;
 
+    BOOL moveIsStolen;
     BOOL multiHitLoop;
     u32 multiHitCheckFlags;
     u32 multiHitAccuracyCheck;
