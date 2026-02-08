@@ -238,6 +238,7 @@ struct BattleContext {
 
     BOOL moveIsStolen;
     BOOL multiHitLoop;
+    BOOL skillSwapPending;
     u32 multiHitCheckFlags;
     u32 multiHitAccuracyCheck;
 
