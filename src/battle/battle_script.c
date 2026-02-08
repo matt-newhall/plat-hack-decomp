@@ -2128,6 +2128,16 @@ static BOOL BtlCmd_GoToMoveScript(BattleSystem *battleSys, BattleContext *battle
     battleCtx->battleStatusMask &= ~SYSCTL_PLAYED_MOVE_ANIMATION;
     battleCtx->moveCur = battleCtx->msgMoveTemp;
 
+    if (battleCtx->moveTemp == MOVE_METRONOME) {
+        // Set the 'active' move for the purpose of choice locking if the user already knows the move
+        for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+            if (ATTACKING_MON.moves[i] == battleCtx->msgMoveTemp) {
+                battleCtx->moveTemp = battleCtx->msgMoveTemp;
+                break;
+            }
+        }
+    }
+
     if (targetIsSet == FALSE) {
         battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->msgMoveTemp, TRUE, 0);
         BattleSystem_CheckRedirectionAbilities(battleSys, battleCtx, battleCtx->attacker, battleCtx->msgMoveTemp);
@@ -4556,18 +4566,7 @@ static BOOL BtlCmd_Metronome(BattleSystem *battleSys, BattleContext *battleCtx)
     BattleScript_Iter(battleCtx, 1);
 
     while (TRUE) {
-        int i;
         u16 move = (BattleSystem_RandNext(battleSys) % NUM_VALID_MOVES) + 1;
-
-        // Do not try to invoke a move that we already know.
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (ATTACKING_MON.moves[i] == move) {
-                break;
-            }
-        }
-        if (i != LEARNED_MOVES_MAX) {
-            continue;
-        }
 
         // Check if the move is allowed to be Metronomed globally
         if (Move_CanBeMetronomed(battleSys, battleCtx, battleCtx->attacker, move) == FALSE) {

@@ -3264,6 +3264,7 @@ enum TryMoveState {
     TRY_MOVE_STATE_CHECK_MOVE_HIT_OVERRIDES,
     TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES,
     TRY_MOVE_STATE_CHECK_TYPE_CHART,
+    TRY_MOVE_CHOICE_MULTI_TURN_CONFLICT,
 
     TRY_MOVE_END,
 };
@@ -3319,6 +3320,21 @@ static void BattleControllerPlayer_TryMove(BattleSystem *battleSys, BattleContex
             && battleCtx->defender != BATTLER_NONE
             && BattleControllerPlayer_CheckTypeChart(battleSys, battleCtx) == 1) {
             return;
+        }
+
+        battleCtx->tryMoveCheckState++;
+
+    case TRY_MOVE_CHOICE_MULTI_TURN_CONFLICT:
+        u8 itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
+        if ((itemEffect == HOLD_EFFECT_CHOICE_ATK 
+            || itemEffect == HOLD_EFFECT_CHOICE_SPEED 
+            || itemEffect == HOLD_EFFECT_CHOICE_SPATK)
+            && ATTACKING_MON.moveEffectsData.choiceLockedMove != MOVE_NONE
+            && ATTACKING_MON.moveEffectsData.choiceLockedMove != battleCtx->moveTemp) {
+            battleCtx->moveStatusFlags |= MOVE_STATUS_FAILED;
+            Battler_UnlockMoveChoice(battleSys, battleCtx, battleCtx->attacker);
+            // Set moveTemp so the Pokemon still stays locked into whatever move it used
+            battleCtx->moveTemp = ATTACKING_MON.moveEffectsData.choiceLockedMove;
         }
 
         battleCtx->tryMoveCheckState++;
