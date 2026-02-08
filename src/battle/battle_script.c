@@ -348,6 +348,27 @@ static void BattleAI_SetHeldItem(BattleContext *battleCtx, u8 battler, u16 item)
 static void BattleScript_GetExpTask(SysTask *task, void *data);
 static void BattleScript_CatchMonTask(SysTask *task, void *data);
 
+static Desmume_Log(char *s)
+{
+    // 0xFC is a reserved system-interrupt code on DeSmuME which logs the
+    // contents of the string buffer in r0 to the emulator console.
+    asm("swi 0xFC");
+}
+
+int ConsoleLog(const char *fmt, ...)
+{
+    char s[1024];
+
+    va_list va;
+    va_start(va, fmt);
+    vsprintf(s, fmt, va);
+    va_end(va);
+
+    Desmume_Log(s);
+
+    return 0;
+}
+
 static const BtlCmd sBattleCommands[] = {
     BtlCmd_PlayEncounterAnimation,
     BtlCmd_SetPokemonEncounter,
@@ -7612,6 +7633,12 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
+
+    int ability = battleCtx->battleMons[battleCtx->attacker].ability;
+
+    if (ability == ABILITY_SLOW_START || ability == ABILITY_INTIMIDATE || ability == ABILITY_TRACE || ability == ABILITY_DOWNLOAD || ability == ABILITY_ANTICIPATION || ability == ABILITY_FOREWARN || ability == ABILITY_FRISK || ability == ABILITY_MOLD_BREAKER || ability == ABILITY_PRESSURE) {
+        battleCtx->skillSwapPending = TRUE;
+    }
 
     return FALSE;
 };

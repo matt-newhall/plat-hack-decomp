@@ -3832,7 +3832,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     result = SWITCH_IN_CHECK_RESULT_CONTINUE;
 
 
-    if (battleCtx->moveCur == MOVE_SKILL_SWAP) {
+    if (battleCtx->skillSwapPending) {
         battlerSkillSwapper = battleCtx->attacker;
     }
 
@@ -3910,6 +3910,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_TRACE:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
+
                 int defender1 = BattleSystem_EnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_RIGHT);
                 int defender2 = BattleSystem_EnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_LEFT);
 
@@ -3935,6 +3940,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].weatherAbilityAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP) {
@@ -3991,6 +4000,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_INTIMIDATE:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
                 if (battleCtx->battleMons[battler].intimidateAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
                     && Battler_Ability(battleCtx, battler) == ABILITY_INTIMIDATE) {
@@ -4010,6 +4023,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_DOWNLOAD:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].downloadAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4055,6 +4072,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_ANTICIPATION:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].anticipationAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4107,6 +4128,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_FOREWARN:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].forewarnAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4189,6 +4214,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_FRISK:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].friskAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4237,6 +4266,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_SLOW_START:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].slowStartAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4266,6 +4299,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_MOLD_BREAKER:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].moldBreakerAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4286,6 +4323,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_PRESSURE:
             while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
 
                 if (battleCtx->battleMons[battler].pressureAnnounced == FALSE
                     && battleCtx->battleMons[battler].curHP
@@ -4357,7 +4398,10 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
         case SWITCH_IN_CHECK_STATE_DONE:
             battleCtx->switchInCheckState = 0;
-            result = SWITCH_IN_CHECK_RESULT_DONE;
+            if (battleCtx->skillSwapPending == FALSE) {
+                result = SWITCH_IN_CHECK_RESULT_DONE;
+            }
+            battleCtx->skillSwapPending = FALSE;
             break;
         }
     } while (result == SWITCH_IN_CHECK_RESULT_CONTINUE);
