@@ -15,7 +15,7 @@ _000:
 
 _021:
     GetMonBySpeedOrder BTLVAR_MSG_BATTLER_TEMP
-    CheckIgnorableAbility CHECK_NOT_HAVE, BTLSCR_MSG_TEMP, ABILITY_SOUNDPROOF, _037
+    CheckIsPerishSongAffected BTLSCR_MSG_TEMP, _037
     // {0}’s {1} blocks {2}!
     PrintMessage pl_msg_00000368_00689, TAG_NICKNAME_ABILITY_MOVE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     Wait 

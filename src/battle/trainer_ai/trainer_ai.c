@@ -45,7 +45,7 @@ static const u16 sRiskyMoves[] = {
 };
 
 static const u16 sAltPowerCalcMoves[] = {
-    BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS,
+    BATTLE_EFFECT_RANDOM_TYPE_BASED_ON_IVS,
     BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED,
     BATTLE_EFFECT_NATURAL_GIFT,
     BATTLE_EFFECT_JUDGEMENT,
@@ -176,6 +176,7 @@ static void AICmd_CheckIfHighestDamageWithPartner(BattleSystem *battleSys, Battl
 static void AICmd_IfBattlerFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfLockOnTarget(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -313,6 +314,7 @@ static const AICommandFunc sAICommandTable[] = {
     AICmd_IfBattlerFainted,
     AICmd_IfBattlerNotFainted,
     AICmd_LoadAbility,
+    AICmd_IfLockOnTarget,
 };
 
 void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u8 initScore)
@@ -2621,7 +2623,8 @@ static void AICmd_LoadRecycleItem(BattleSystem *battleSys, BattleContext *battle
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    AI_CONTEXT.calcTemp = battleCtx->recycleItem[battler];
+    int partySlot = battleCtx->selectedPartySlot[battler];
+    AI_CONTEXT.calcTemp = battleCtx->recycleItem[battler][partySlot];
 }
 
 static void AICmd_LoadTypeOfLoadedMove(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -2766,6 +2769,22 @@ static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx)
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
+}
+
+static void AICmd_IfLockOnTarget(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inAttacker = AIScript_Read(battleCtx);
+    int inTarget = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 attacker = AIScript_Battler(battleCtx, inAttacker);
+    u8 target = AIScript_Battler(battleCtx, inTarget);
+
+    if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_LOCK_ON)
+        && battleCtx->battleMons[attacker].moveEffectsData.lockOnTarget == target) {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 /**
@@ -3078,12 +3097,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_HIDDEN_POWER:
-        power = ((ivs[STAT_HP] & 2) >> 1)
-            | ((ivs[STAT_ATTACK] & 2) >> 0)
-            | ((ivs[STAT_DEFENSE] & 2) << 1)
-            | ((ivs[STAT_SPEED] & 2) << 2)
-            | ((ivs[STAT_SPECIAL_ATTACK] & 2) << 3)
-            | ((ivs[STAT_SPECIAL_DEFENSE] & 2) << 4);
         type = ((ivs[STAT_HP] & 1) >> 0)
             | ((ivs[STAT_ATTACK] & 1) << 1)
             | ((ivs[STAT_DEFENSE] & 1) << 2)
@@ -3091,7 +3104,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             | ((ivs[STAT_SPECIAL_ATTACK] & 1) << 4)
             | ((ivs[STAT_SPECIAL_DEFENSE] & 1) << 5);
 
-        power = power * 40 / 63 + 30;
         type = (type * 15 / 63) + 1;
 
         if (type >= TYPE_MYSTERY) {

@@ -1,4 +1,6 @@
 subscript_start_encounter
+subscript_thaw_out
+subscript_defrosted_by_move
 subscript_use_move
 subscript_update_hp
 subscript_escape
@@ -27,8 +29,6 @@ subscript_burn
 subscript_burn_damage
 subscript_freeze
 subscript_frozen
-subscript_thaw_out
-subscript_defrosted_by_move
 subscript_paralyze
 subscript_fully_paralyzed
 subscript_dream_eater
@@ -298,3 +298,7 @@ subscript_giratina_form_change
 subscript_overworld_somewhat_red
 subscript_overworld_twisted_dimensions
 subscript_overworld_tailwind
+subscript_user_atk_and_spatk_up_1_stage
+subscript_absorb_and_spatk_up_1_stage
+subscript_fail_selfdestruct_kill_user
+subscript_wake_up_uproar

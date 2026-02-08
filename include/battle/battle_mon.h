@@ -8,7 +8,6 @@
 typedef struct MoveEffectsData {
     u32 disabledTurns : 3;
     u32 encoredTurns : 3;
-    u32 chargedTurns : 2;
     u32 tauntedTurns : 3;
     u32 protectSuccessTurns : 2;
     u32 perishSongTurns : 2;
@@ -82,10 +81,10 @@ typedef struct BattleMon {
     u8 isShiny : 1;
     u8 padding0026_06 : 2;
     u8 ability;
+    u8 newlySwitched : 1;
 
     u32 weatherAbilityAnnounced : 1;
     u32 intimidateAnnounced : 1;
-    u32 traceAnnounced : 1;
     u32 downloadAnnounced : 1;
     u32 anticipationAnnounced : 1;
     u32 forewarnAnnounced : 1;
@@ -127,6 +126,8 @@ typedef struct BattleMon {
     u32 moveEffectsMask;
     u32 moveEffectsTemp;
     MoveEffectsData moveEffectsData;
+
+    u8 isTightenedFocus;
 } BattleMon;
 
 #endif // POKEPLATINUM_BATTLE_MON_H

@@ -1182,7 +1182,6 @@ void BattleIO_UpdatePartyMon(BattleSystem *battleSys, BattleContext *param1, int
     v0.unk_01_4 = param1->battleMons[param2].moveEffectsData.mimickedMoveSlot;
     v0.unk_02 = param1->battleMons[param2].curHP;
     v0.unk_0C = param1->battleMons[param2].heldItem;
-    v0.unk_08 = param1->sideConditions[Battler_Side(battleSys, param2)].knockedOffItemsMask;
     v0.unk_1C = param1->battleMons[param2].formNum;
     v0.unk_20 = param1->battleMons[param2].ability;
 

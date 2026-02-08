@@ -2,6 +2,8 @@ sub_seq_narc_order = files('sub_seq.order')
 
 subscript_files = files(
     'subscript_start_encounter.s',
+    'subscript_thaw_out.s',
+    'subscript_defrosted_by_move.s',
     'subscript_use_move.s',
     'subscript_update_hp.s',
     'subscript_escape.s',
@@ -30,8 +32,6 @@ subscript_files = files(
     'subscript_burn_damage.s',
     'subscript_freeze.s',
     'subscript_frozen.s',
-    'subscript_thaw_out.s',
-    'subscript_defrosted_by_move.s',
     'subscript_paralyze.s',
     'subscript_fully_paralyzed.s',
     'subscript_dream_eater.s',
@@ -301,4 +301,8 @@ subscript_files = files(
     'subscript_overworld_somewhat_red.s',
     'subscript_overworld_twisted_dimensions.s',
     'subscript_overworld_tailwind.s',
+    'subscript_user_atk_and_spatk_up_1_stage.s',
+    'subscript_absorb_and_spatk_up_1_stage.s',
+    'subscript_fail_selfdestruct_kill_user.s',
+    'subscript_wake_up_uproar.s',
 )

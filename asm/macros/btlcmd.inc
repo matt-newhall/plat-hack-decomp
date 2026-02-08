@@ -722,9 +722,10 @@
     .long (\jump_if_miss-.) / 4 - 1
     .endm
 
-    .macro TryTeleport jump_if_fail
+    .macro TryTeleport jump_if_fail, jump_if_wild
     .long 123
-    .long (\jump_if_fail-.) / 4 - 1
+    .long (\jump_if_fail-.) / 4 - 2
+    .long (\jump_if_wild-.) / 4 - 1
     .endm
 
     .macro BeatUp
@@ -883,9 +884,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro TryFeint jump_if_fail
+    .macro CheckIsPerishSongAffected battler, jump
     .long 156
-    .long (\jump_if_fail-.) / 4 - 1
+    .long \battler
+    .long (\jump-.) / 4 - 1
     .endm
 
     .macro CheckCanShareStatus jump_if_fail
@@ -1234,6 +1236,27 @@
 
     .macro IsTailwindWeather
     .long 223
+    .endm
+
+    .macro CalcTauntTurns
+    .long 224
+    .endm
+
+    .macro CheckImmuneGhost jump_if_fail
+    .long 225
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
+    .macro SwitchToxic
+    .long 226
+    .endm
+
+    .macro SwapAbilities
+    .long 227
+    .endm
+
+    .macro FocusPunchFailed
+    .long 228
     .endm
 
     .endif // ASM_BATTLE_SCRIPT_INC

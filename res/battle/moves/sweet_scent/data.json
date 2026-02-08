@@ -6,7 +6,7 @@
     "accuracy": 100,
     "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_EVA_DOWN",
+        "type": "BATTLE_EFFECT_EVA_DOWN_2",
         "chance": 0
     },
     "range": "RANGE_ADJACENT_OPPONENTS",

@@ -405,6 +405,7 @@ void BattleSystem_SetupNextTurn(BattleSystem *battleSys, BattleContext *battleCt
  * - CHECK_INVALID_IMPRISONED -> flag any of the battler's Imprisoned moves
  * - CHECK_INVALID_GRAVITY -> flag any of the battler's moves which fail in high gravity
  * - CHECK_INVALID_HEAL_BLOCK -> flag any of the battler's healing moves
+ * - CHECK_INVALID_ENCORE -> flag any of the battler's moves which aren't the encored move
  * - CHECK_INVALID_CHOICE_ITEM -> flag any of the battler's moves other than their choice-locked move
  *
  * @param battleSys
@@ -439,6 +440,18 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
  * @return The slot of the Pokemon's moveset containing the input move
  */
 int Battler_SlotForMove(BattleMon *mon, u16 move);
+
+/**
+ * @brief Checks Anticipation type-effectiveness
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param move
+ * @param attacker
+ * @param defender
+ * @param[out] moveStatusMask
+ */
+void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, BattleContext *battleCtx, int move, int attacker, int defender, u32 *moveStatusMask);
 
 /**
  * @brief Apply type-chart effectiveness for a given move against its target.
@@ -490,6 +503,16 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
  * otherwise.
  */
 BOOL BattleContext_MoveFailed(BattleContext *battleCtx, int battler);
+
+/**
+ * @brief Check if a battler's thrashing move was disrupted for the turn.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler's move failed to execute for the turn, FALSE
+ * otherwise.
+ */
+BOOL BattleContext_ThrashDisrupted(BattleContext *battleCtx, int battler);
 
 /**
  * @brief Count the number of targets hit by a move.
@@ -810,6 +833,14 @@ int Battler_CountMoves(BattleSystem *battleSys, BattleContext *battleCtx, int ba
  * @return A subscript to be loaded for any triggered effect.
  */
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender);
+
+/**
+ * @brief Checks if selected move is a sound-based move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a sound-based move.
+ */
+BOOL BattleSystem_IsSoundMove(u16 move);
 
 /**
  * @brief Trigger an end-of-turn ability for the battler.
@@ -1183,6 +1214,15 @@ u8 BattleContext_IOBufferVal(BattleContext *battleCtx, int battler);
 BOOL Battler_SubstituteWasHit(BattleContext *battleCtx, int battler);
 
 /**
+ * @brief Check if a Pokemon's held item can be removed with Knock Off.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the item can be removed, FALSE if not.
+ */
+BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler);
+
+/**
  * @brief Check if the player is the attacking Pokemon's OT.
  *
  * @param battleSys
@@ -1395,6 +1435,20 @@ BOOL BattleSystem_ShouldShowStatusEffect(BattleContext *battleCtx, int battler, 
  * FALSE otherwise.
  */
 BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
+
+/**
+ * @brief Checks if Rest or Swallow are valid moves for Snatch
+ *
+ * This is a specific gen V+ effect that means Rest/Swallow can only be stolen
+ * if they would have had an effect when used by the original user.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler The original user of the move
+ * @param move MOVE_REST or MOVE_SWALLOW
+ * @return TRUE if rest/swallow can be snatched, FALSE otherwise.
+ */
+BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 
 /**
  * @brief Decrement additional PP from the attacker's selected move if its

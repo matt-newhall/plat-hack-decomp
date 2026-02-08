@@ -210,7 +210,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_133, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_134, Basic_CheckCanRecoverHP
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_BASED_ON_IVS, Basic_CheckNonStandardDamageOrChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_TYPE_BASED_ON_IVS, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Basic_CheckRainDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Basic_CheckSunnyDay
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Basic_CheckBellyDrum
@@ -456,6 +456,7 @@ Basic_CheckLowStatStage_Accuracy:
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_KEEN_EYE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_ILLUMINATE, ScoreMinus10
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
     GoTo Basic_CheckClearBodyEffect
 
@@ -664,7 +665,13 @@ Basic_CheckAttackerAsleep:
 
 Basic_CheckLockOn:
     ; If the target is already Locked On, or either battler has No Guard, score -10.
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LOCK_ON, ScoreMinus10
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LOCK_ON, Basic_CheckLockOn_Target
+    GoTo Basic_CheckLockOn_NoGuard
+
+Basic_CheckLockOn_Target:
+    IfLockOnTarget AI_BATTLER_ATTACKER, AI_BATTLER_DEFENDER, ScoreMinus10
+
+Basic_CheckLockOn_NoGuard:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -3558,7 +3565,7 @@ Expert_Protect_CheckStatusConditions:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_Protect_ScorePlus2
     LoadBattleType 
     IfLoadedMask BATTLE_TYPE_DOUBLES, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LOCK_ON, Expert_Protect_ScorePlus2
+    IfLockOnTarget AI_BATTLER_DEFENDER, AI_BATTLER_ATTACKER, Expert_Protect_ScorePlus2
     IfRandomLessThan 85, Expert_Protect_ScorePlus2
     GoTo Expert_Protect_TryScoreMinus1
 
@@ -3578,7 +3585,7 @@ Expert_Protect_CheckEmptyChain:
     GoTo Expert_Protect_End
 
 Expert_Protect_CheckAttackerLockedOnto:
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LOCK_ON, Expert_Protect_End
+    IfLockOnTarget AI_BATTLER_DEFENDER, AI_BATTLER_ATTACKER, Expert_Protect_End
 
 Expert_Protect_ScoreMinus2:
     AddToMoveScore -2

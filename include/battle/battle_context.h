@@ -25,6 +25,7 @@ typedef struct FieldConditions {
     int futureSightAttacker[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
+    s32 wishHealing[MAX_BATTLERS];
 } FieldConditions;
 
 typedef struct SideConditions {
@@ -38,8 +39,7 @@ typedef struct SideConditions {
     u32 safeguardTurns : 3;
     u32 followMe : 1;
     u32 followMeUser : 2;
-    u32 knockedOffItemsMask : 6;
-    u32 padding00_1D : 3;
+    u32 padding00_1D : 9;
 
     u32 spikesLayers : 2;
     u32 toxicSpikesLayers : 2;
@@ -233,9 +233,12 @@ struct BattleContext {
     u8 multiHitCounter;
     u8 multiHitNumHits;
     u8 battlerCounter;
+    u8 savedBattlerCounter;
     u8 beatUpCounter;
 
+    BOOL moveIsStolen;
     BOOL multiHitLoop;
+    BOOL skillSwapPending;
     u32 multiHitCheckFlags;
     u32 multiHitAccuracyCheck;
 
@@ -296,7 +299,7 @@ struct BattleContext {
     u8 fieldWeatherChecked;
     s16 hpTemp;
 
-    u16 recycleItem[MAX_BATTLERS];
+    u16 recycleItem[MAX_BATTLERS][MAX_PARTY_SIZE];
 
     u8 partyOrder[MAX_BATTLERS][MAX_PARTY_SIZE];
 
