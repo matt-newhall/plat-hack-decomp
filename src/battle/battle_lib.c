@@ -3398,12 +3398,12 @@ BOOL Battler_CanEscape(BattleSystem *battleSys, BattleContext *battleCtx, int ba
     int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
     BOOL result = FALSE;
 
-    if (itemEffect == HOLD_EFFECT_FLEE) {
+    if (itemEffect == HOLD_EFFECT_FLEE && battleCtx->battleMons[battler].curHP) {
         battleCtx->turnFlags[battler].fleeing = 1;
         result = TRUE;
     } else if (battleType & BATTLE_TYPE_NO_EXPERIENCE) {
         result = TRUE;
-    } else if (Battler_Ability(battleCtx, battler) == ABILITY_RUN_AWAY) {
+    } else if (Battler_Ability(battleCtx, battler) == ABILITY_RUN_AWAY && battleCtx->battleMons[battler].curHP) {
         battleCtx->turnFlags[battler].fleeing = 2;
         result = TRUE;
     } else {
