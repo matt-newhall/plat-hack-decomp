@@ -8563,6 +8563,27 @@
       "en_US": [
         "The effects of weather disappeared."
       ]
+    },
+    {
+      "id": "BattleStrings_Text_LifeOrbRecoil_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} lost some of\n",
+        "its HP!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_LifeOrbRecoil_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} lost\n",
+        "some of its HP!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_LifeOrbRecoil_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} lost\n",
+        "some of its HP!"
+      ]
     }
   ]
 }
