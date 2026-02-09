@@ -109,7 +109,7 @@ static void AddRoamerToEnemyParty(const u32 param0, Roamer *param1, FieldBattleD
 static BOOL TryEncounterRoamer(FieldSystem *fieldSystem, Roamer **param1);
 static BOOL AddWildMonToParty(const int partySlot, const WildEncounters_FieldParams *fieldParams, Pokemon *mon, FieldBattleDTO *battleParams);
 static void InitEncounterFieldParams(FieldSystem *fieldSystem, Pokemon *firstPartyMon, WildEncounters *encounterData, WildEncounters_FieldParams *param3);
-static void ModifyEncounterRateWithHeldItem(Pokemon *param0, u8 *param1);
+static void ModifyEncounterRateWithHeldItem(FieldSystem *fieldSystem, Pokemon *param0, u8 *param1);
 static void ModifyEncounterRateWithFlute(FieldSystem *fieldSystem, u8 *param1);
 
 static const u8 UnownMostForms[] = {
@@ -266,7 +266,7 @@ BOOL WildEncounters_TryWildEncounter(FieldSystem *fieldSystem)
     encounterRate = ModifyEncounterRateWithFieldParams(FALSE, encounterRate, &encounterFieldParams, FieldOverworldState_GetWeather(SaveData_GetFieldOverworldState(fieldSystem->saveData)), firstPartyMon);
 
     ModifyEncounterRateWithFlute(fieldSystem, &encounterRate);
-    ModifyEncounterRateWithHeldItem(firstPartyMon, &encounterRate);
+    ModifyEncounterRateWithHeldItem(fieldSystem, firstPartyMon, &encounterRate);
 
     if (ShouldGetRandomEncounter(fieldSystem, encounterRate, tileBehavior)) {
         gettingEncounter = TRUE;
@@ -595,7 +595,7 @@ BOOL WildEncounters_TryMudEncounter(FieldSystem *fieldSystem, FieldBattleDTO **b
     encounterRate = ModifyEncounterRateWithFieldParams(FALSE, encounterRate, &encounterFieldParams, FieldOverworldState_GetWeather(SaveData_GetFieldOverworldState(fieldSystem->saveData)), firstPartyMon);
 
     ModifyEncounterRateWithFlute(fieldSystem, &encounterRate);
-    ModifyEncounterRateWithHeldItem(firstPartyMon, &encounterRate);
+    ModifyEncounterRateWithHeldItem(fieldSystem, firstPartyMon, &encounterRate);
 
     if (ShouldGetRandomEncounter(fieldSystem, encounterRate, tileBehavior)) {
         gettingEncounter = TRUE;
@@ -917,9 +917,34 @@ static u8 GetRodEncounterSlot(const int fishingRodType)
     return encSlot;
 }
 
-static void ModifyEncounterRateWithHeldItem(Pokemon *mon, u8 *encounterRate)
+static void ModifyEncounterRateWithHeldItem(FieldSystem *fieldSystem, Pokemon *mon, u8 *encounterRate)
 {
     u16 heldItem = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+    int ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+    int mapId = fieldSystem->location->mapId;
+    u16 weather = FieldSystem_GetWeather(fieldSystem, mapId);
+
+    if (ability == ABILITY_ILLUMINATE
+        || ability == ABILITY_ARENA_TRAP
+        || ability == ABILITY_NO_GUARD
+        || ability == ABILITY_STENCH
+        || ability == ABILITY_WHITE_SMOKE
+        || ability == ABILITY_QUICK_FEET) {
+        return;
+    }
+
+    if (ability == ABILITY_SAND_VEIL && weather == OVERWORLD_WEATHER_SANDSTORM) {
+        return;
+    }
+
+    if (ability == ABILITY_SNOW_CLOAK 
+        && (weather == OVERWORLD_WEATHER_SNOWING 
+            || weather == OVERWORLD_WEATHER_HEAVY_SNOW 
+            || weather == OVERWORLD_WEATHER_HAILING 
+            || weather == OVERWORLD_WEATHER_BLIZZARD)) {
+        return;
+    }
 
     if (heldItem == ITEM_CLEANSE_TAG || heldItem == ITEM_PURE_INCENSE) {
         *encounterRate = (*encounterRate * 2) / 3;
