@@ -4982,10 +4982,11 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
             if (battleCtx->defender != BATTLER_NONE
                 && itemEffect == HOLD_EFFECT_HP_RESTORE_ON_DMG
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-                && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
+                && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
                 && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
                 && battleCtx->attacker != battleCtx->defender
                 && ATTACKING_MON.curHP < ATTACKING_MON.maxHP
+                && !(ATTACKING_MON.moveEffectsData.healBlockTurns)
                 && ATTACKING_MON.curHP) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt * -1, itemPower);
                 battleCtx->msgBattlerTemp = battleCtx->attacker;
