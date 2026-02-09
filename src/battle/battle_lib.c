@@ -7066,7 +7066,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_PIKA_SPATK_UP
         && attackerParams.species == SPECIES_PIKACHU) {
-        movePower *= 2;
+        attackStat = attackStat *= 2;
+        spAttackStat = spAttackStat *= 2;
     }
     if (defenderParams.heldItemEffect == HOLD_EFFECT_DITTO_DEF_UP
         && defenderParams.species == SPECIES_DITTO) {
