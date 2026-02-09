@@ -5004,7 +5004,7 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
             if (itemEffect == HOLD_EFFECT_HP_DRAIN_ON_ATK
                 && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-                && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
+                && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
                 && CURRENT_MOVE_DATA.class != CLASS_STATUS
                 && ATTACKING_MON.curHP) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battleCtx->attacker].maxHP * -1, 10);

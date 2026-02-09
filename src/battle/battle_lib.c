@@ -7723,7 +7723,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 
     if (attackerItemEffect == HOLD_EFFECT_HP_DRAIN_ON_ATK
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
-        && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT)
+        && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
         && CURRENT_MOVE_DATA.class != CLASS_STATUS
         && ATTACKING_MON.curHP) {
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 10);

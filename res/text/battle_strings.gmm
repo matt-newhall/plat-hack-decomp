@@ -5130,4 +5130,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The effects of weather disappeared.</language>
 	</row>
+	<row id="pl_msg_00000368_01279" index="1279">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} lost some of\nits HP!</language>
+	</row>
+	<row id="pl_msg_00000368_01280" index="1280">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} lost\nsome of its HP!</language>
+	</row>
+	<row id="pl_msg_00000368_01281" index="1281">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} lost\nsome of its HP!</language>
+	</row>
 </body>
