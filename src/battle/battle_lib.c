@@ -5201,7 +5201,7 @@ BOOL BattleSystem_TriggerLeftovers(BattleSystem *battleSys, BattleContext *battl
     int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
     int itemPower = Battler_HeldItemPower(battleCtx, battler, ITEM_POWER_CHECK_ALL);
 
-    if (battleCtx->battleMons[battler].curHP) {
+    if (battleCtx->battleMons[battler].curHP && !(battleCtx->battleMons[battler].moveEffectsData.healBlockTurns)) {
         switch (itemEffect) {
         case HOLD_EFFECT_HP_RESTORE_GRADUAL:
             if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP)) {
