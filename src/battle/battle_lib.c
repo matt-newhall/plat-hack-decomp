@@ -7052,13 +7052,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_LATI_SPECIAL
         && (battleType & BATTLE_TYPE_FRONTIER) == FALSE
-        && (attackerParams.species == SPECIES_LATIOS || attackerParams.species == SPECIES_LATIAS)) {
-        spAttackStat = spAttackStat * 150 / 100;
-    }
-    if (defenderParams.heldItemEffect == HOLD_EFFECT_LATI_SPECIAL
-        && (battleType & BATTLE_TYPE_FRONTIER) == FALSE
-        && (defenderParams.species == SPECIES_LATIOS || defenderParams.species == SPECIES_LATIAS)) {
-        spDefenseStat = spDefenseStat * 150 / 100;
+        && (attackerParams.species == SPECIES_LATIOS || attackerParams.species == SPECIES_LATIAS)
+        && ((moveType == TYPE_DRAGON) || (moveType == TYPE_PSYCHIC))) {
+        movePower = movePower * 120 / 100;
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_CLAMPERL_SPATK
         && attackerParams.species == SPECIES_CLAMPERL) {
