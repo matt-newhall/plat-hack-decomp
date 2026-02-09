@@ -11382,7 +11382,7 @@ static const u8 sBasicBallMod[] = {
     20, // ITEM_ULTRA_BALL
     15, // ITEM_GREAT_BALL
     10, // ITEM_POKE_BALL
-    15, // ITEM_SAFARI_BALL
+    10, // ITEM_SAFARI_BALL
 };
 
 static const struct Fraction sSafariCatchRate[] = {
@@ -11437,7 +11437,7 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
         case ITEM_NET_BALL:
             if (type1 == TYPE_WATER || type2 == TYPE_WATER
                 || type1 == TYPE_BUG || type2 == TYPE_BUG) {
-                ballMod = 30;
+                ballMod = 35;
             }
             break;
 
@@ -11448,23 +11448,19 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
             break;
 
         case ITEM_NEST_BALL:
-            if (battleCtx->battleMons[battleCtx->defender].level < 40) {
-                ballMod = 40 - battleCtx->battleMons[battleCtx->defender].level;
-
-                if (ballMod < 10) {
-                    ballMod = 10;
-                }
+            if (battleCtx->battleMons[battleCtx->defender].level <= 29) {
+                ballMod = (41 - battleCtx->battleMons[battleCtx->defender].level) / 10;
             }
             break;
 
         case ITEM_REPEAT_BALL:
             if (BattleSystem_CaughtSpecies(battleSys, battleCtx->battleMons[battleCtx->defender].species) == TRUE) {
-                ballMod = 30;
+                ballMod = 35;
             }
             break;
 
         case ITEM_TIMER_BALL:
-            ballMod = 10 + battleCtx->totalTurns;
+            ballMod = 10 + (battleCtx->totalTurns * 3);
             if (ballMod > 40) {
                 ballMod = 40;
             }
@@ -11474,13 +11470,13 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
             if (BattleSystem_Time(battleSys) == TIME_NIGHT
                 || BattleSystem_Time(battleSys) == TIME_MIDNIGHT
                 || BattleSystem_Terrain(battleSys) == TERRAIN_CAVE) {
-                ballMod = 35;
+                ballMod = 30;
             }
             break;
 
         case ITEM_QUICK_BALL:
             if (battleCtx->totalTurns < 1) {
-                ballMod = 40;
+                ballMod = 50;
             }
             break;
         }
