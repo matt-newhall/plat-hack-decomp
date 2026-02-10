@@ -4837,17 +4837,25 @@ static BOOL BattleController_CheckExtraFlinch(BattleSystem *battleSys, BattleCon
     int itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
     int itemPower = Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0);
 
+    int effect = MOVE_DATA(battleCtx->moveCur).effect;
+
     if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SERENE_GRACE) {
         itemPower = itemPower * 2;
     }
 
     if (battleCtx->defender != BATTLER_NONE
         && itemEffect == HOLD_EFFECT_SOMETIMES_FLINCH
+        && !(effect == BATTLE_EFFECT_FLINCH_HIT)
+        && !(effect == BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH)
+        && !(effect == BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE)
+        && !(effect == BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT)
+        && !(effect == BATTLE_EFFECT_FLINCH_BURN_HIT)
+        && !(effect == BATTLE_EFFECT_FLINCH_FREEZE_HIT)
+        && !(effect == BATTLE_EFFECT_FLINCH_PARALYZE_HIT)
         && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
         && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
             || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
         && (BattleSystem_RandNext(battleSys) % 100) < itemPower
-        && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_TRIGGERS_KINGS_ROCK)
         && DEFENDING_MON.curHP) {
         battleCtx->sideEffectMon = battleCtx->defender;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
