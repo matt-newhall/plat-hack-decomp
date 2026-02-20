@@ -442,18 +442,6 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
 int Battler_SlotForMove(BattleMon *mon, u16 move);
 
 /**
- * @brief Checks Anticipation type-effectiveness
- *
- * @param battleSys
- * @param battleCtx
- * @param move
- * @param attacker
- * @param defender
- * @param[out] moveStatusMask
- */
-void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, BattleContext *battleCtx, int move, int attacker, int defender, u32 *moveStatusMask);
-
-/**
  * @brief Apply type-chart effectiveness for a given move against its target.
  *
  * This encapsulates the following multipliers:

@@ -52,10 +52,11 @@
 #define TRMSG_LAST_BATTLER_HALF_HP_FLAG   4
 
 static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry, BOOL isAnticipation);
+void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, BattleContext *battleCtx, int move, int attacker, int defender, u32 *moveStatusMask);
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum BattleSideEffectType type, u32 effect);
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus);
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry);
-static void UpateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
+static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
 static BOOL MoveIsOnDamagingTurn(BattleContext *battleCtx, int move);
 static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonParam paramID);
 static BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler);
@@ -2632,7 +2633,13 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
 
     movePower = MOVE_DATA(move).power;
 
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE
+    if (moveType == TYPE_GROUND
+        && defenderItemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+        && MON_HAS_TYPE(defender, TYPE_FLYING)
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        && !(battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN)) {
+        // Iron Ball - force 1x effectiveness
+    } else if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE
         && moveType == TYPE_GROUND
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
@@ -2716,7 +2723,13 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE
+    if (moveType == TYPE_GROUND
+        && defenderItemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+        && MON_HAS_TYPE(defender, TYPE_FLYING)
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        && !(battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN)) {
+        // Iron Ball - force 1x effectiveness
+    } else if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_LEVITATE) == TRUE
         && moveType == TYPE_GROUND
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
@@ -2814,7 +2827,13 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         moveType = MOVE_DATA(move).type;
     }
 
-    if (attackerAbility != ABILITY_MOLD_BREAKER
+    if (moveType == TYPE_GROUND
+        && defenderItemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+        && MON_HAS_TYPE(battleCtx->defender, TYPE_FLYING)
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        && !(battleCtx->battleMons[battleCtx->defender].moveEffectsMask & MOVE_EFFECT_INGRAIN)) {
+        // Iron Ball - force 1x effectiveness
+    } else if (attackerAbility != ABILITY_MOLD_BREAKER
         && defenderAbility == ABILITY_LEVITATE
         && moveType == TYPE_GROUND
         && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE
@@ -2836,13 +2855,13 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
             if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
                 if (sTypeMatchupMultipliers[chartEntry][1] == defenderType1
                     && NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
-                    UpateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
+                    UpdateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
                 }
 
                 if (sTypeMatchupMultipliers[chartEntry][1] == defenderType2
                     && defenderType1 != defenderType2
                     && NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
-                    UpateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
+                    UpdateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
                 }
             }
 
@@ -2864,8 +2883,8 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 /**
  * @brief Determines if there are no immunity-overriding effects in play.
  *
- * This only checks for the basic immunity-overriding effects: Iron Ball
- * and Gravity for Ground-type attacks against  Flying-type Pokemon.
+ * This now only checks for Gravity for Ground-type attacks against
+ * Flying-type Pokemon.
  *
  * @param battleCtx
  * @param itemEffect
@@ -2875,12 +2894,6 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry)
 {
     BOOL result = TRUE;
-
-    if (itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
-        && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
-        && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
-        result = FALSE;
-    }
 
     if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
         && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
@@ -2897,7 +2910,7 @@ static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int ch
  * @param mul
  * @param moveStatusMask
  */
-static void UpateMoveStatusForTypeMul(int mul, u32 *moveStatusMask)
+static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask)
 {
     switch (mul) {
     case TYPE_MULTI_IMMUNE:
