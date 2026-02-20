@@ -6091,23 +6091,21 @@
     {
       "id": "BattleStrings_Text_PokemonCuredItsStatusUsingItsItem_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} cured its {STRVAR_1 17, 2, 0}\n",
-        "status using its {STRVAR_1 8, 1, 0}!"
+        "{STRVAR_1 1, 0, 0} cured its status\n",
+        "using its {STRVAR_1 8, 1, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonCuredItsStatusUsingItsItem_Wild",
       "en_US": [
-        "The wild {STRVAR_1 1, 0, 0} cured its\n",
-        "{STRVAR_1 17, 2, 0} status\f",
+        "The wild {STRVAR_1 1, 0, 0} cured its status\n",
         "using its {STRVAR_1 8, 1, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonCuredItsStatusUsingItsItem_Foe",
       "en_US": [
-        "The foe’s {STRVAR_1 1, 0, 0} cured its\n",
-        "{STRVAR_1 17, 2, 0} status\f",
+        "The foe’s {STRVAR_1 1, 0, 0} cured its status\n",
         "using its {STRVAR_1 8, 1, 0}!"
       ]
     },
