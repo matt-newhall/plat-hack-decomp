@@ -855,7 +855,7 @@
 	</row>
 	<row id="pl_msg_00000646_00213" index="213">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">If it is the opposite\ngender of the user,\nthe foe becomes\ninfatuated and less\nlikely to attack.</language>
+		<language name="English">A target gets\ninfatuated,\ndisregards gender.\n\n</language>
 	</row>
 	<row id="pl_msg_00000646_00214" index="214">
 		<attribute name="window_context_name">used</attribute>

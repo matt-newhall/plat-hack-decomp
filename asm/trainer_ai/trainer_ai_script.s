@@ -740,22 +740,6 @@ Basic_CheckCannotAttract:
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus10
-    LoadGender AI_BATTLER_ATTACKER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCannotAttract_BothMale
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCannotAttract_BothFemale
-    GoTo ScoreMinus10
-
-Basic_CheckCannotAttract_BothMale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCannotAttract_Terminate
-    GoTo ScoreMinus10
-
-Basic_CheckCannotAttract_BothFemale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCannotAttract_Terminate
-    GoTo ScoreMinus10
-
-Basic_CheckCannotAttract_Terminate:
     PopOrEnd 
 
 Basic_CheckAlreadyUnderSafeguard:
