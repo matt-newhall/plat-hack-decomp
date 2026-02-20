@@ -3581,15 +3581,15 @@
 	</row>
 	<row id="pl_msg_00000368_00893" index="893">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} cured its {STRVAR_1 17, 2, 0}\nstatus using its {STRVAR_1 8, 1, 0}!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} cured its status\nusing its {STRVAR_1 8, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_00894" index="894">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} cured its\n{STRVAR_1 17, 2, 0} status\fusing its {STRVAR_1 8, 1, 0}!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} cured its status\nusing its {STRVAR_1 8, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_00895" index="895">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} cured its\n{STRVAR_1 17, 2, 0} status\fusing its {STRVAR_1 8, 1, 0}!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} cured its status\nusing its {STRVAR_1 8, 1, 0}!</language>
 	</row>
 	<row id="pl_msg_00000368_00896" index="896">
 		<attribute name="window_context_name">used</attribute>
