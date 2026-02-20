@@ -2847,6 +2847,13 @@ static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
         && move != MOVE_WEATHER_BALL
         && move != MOVE_NATURAL_GIFT) {
         return TYPE_NORMAL;
+    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_AERILATE
+        && MOVE_DATA(move).type == TYPE_NORMAL
+        && move != MOVE_JUDGMENT
+        && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL
+        && move != MOVE_NATURAL_GIFT) {
+        return TYPE_FLYING;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
     }
@@ -3694,6 +3701,13 @@ static inline int CalcCurrentMoveType(BattleContext *battleCtx)
 {
     if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
         return TYPE_NORMAL;
+    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_AERILATE
+        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
+        && battleCtx->moveCur != MOVE_JUDGMENT
+        && battleCtx->moveCur != MOVE_NATURAL_GIFT
+        && battleCtx->moveCur != MOVE_WEATHER_BALL
+        && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+        return TYPE_FLYING;
     } else if (battleCtx->moveType) {
         return battleCtx->moveType;
     }
@@ -4964,6 +4978,13 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                     && battleCtx->moveCur != MOVE_WEATHER_BALL
                     && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
                     moveType = TYPE_NORMAL;
+                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_AERILATE
+                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
+                    && battleCtx->moveCur != MOVE_JUDGMENT
+                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
+                    && battleCtx->moveCur != MOVE_WEATHER_BALL
+                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+                    moveType = TYPE_FLYING;
                 } else if (battleCtx->moveType) {
                     moveType = battleCtx->moveType;
                 } else {

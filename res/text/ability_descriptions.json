@@ -865,6 +865,13 @@
         "Reduces a sleeping foe’s\n",
         "HP."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00124",
+      "en_US": [
+        "All Normal type moves\n",
+        "become the Flying type."
+      ]
     }
   ]
 }
