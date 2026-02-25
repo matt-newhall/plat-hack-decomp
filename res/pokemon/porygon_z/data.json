@@ -36,7 +36,6 @@
             [ 1, "MOVE_TRICK_ROOM" ],
             [ 1, "MOVE_CONVERSION_2" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_CONVERSION" ],
             [ 1, "MOVE_NASTY_PLOT" ],
             [ 7, "MOVE_PSYBEAM" ],
             [ 12, "MOVE_AGILITY" ],

@@ -35,7 +35,6 @@
         "by_level": [
             [ 1, "MOVE_CONVERSION_2" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_CONVERSION" ],
             [ 1, "MOVE_SHARPEN" ],
             [ 7, "MOVE_PSYBEAM" ],
             [ 12, "MOVE_AGILITY" ],
