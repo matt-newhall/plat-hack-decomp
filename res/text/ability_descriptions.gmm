@@ -501,4 +501,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">All Normal type moves\nbecome the Flying type.</language>
 	</row>
+	<row id="pl_msg_00000612_00125" index="125">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Restores a little HP when\nwithdrawn from battle.</language>
+	</row>
 </body>

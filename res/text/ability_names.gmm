@@ -501,4 +501,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Aerilate</language>
 	</row>
+	<row id="pl_msg_00000610_00125" index="125">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Regenerator</language>
+	</row>
 </body>

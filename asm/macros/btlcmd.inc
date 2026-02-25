@@ -1259,4 +1259,10 @@
     .long 228
     .endm
 
+    .macro TryRegeneratorOnSwitch battler, jump_no_effect
+    .long 229
+    .long \battler
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
