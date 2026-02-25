@@ -234,6 +234,7 @@ ScriptCommand(BTLCMD_CHECKIMMUNEGHOST,            BtlCmd_CheckImmuneGhost)
 ScriptCommand(BTLCMD_SWITCHTOXIC,                 BtlCmd_SwitchToxic)
 ScriptCommand(BTLCMD_SWAPABILITIES,               BtlCmd_SwapAbilities)
 ScriptCommand(BTLCMD_FOCUSPUNCHFAILED,            BtlCmd_FocusPunchFailed)
+ScriptCommand(BTLCMD_TRYREGENERATORONSWITCH,      BtlCmd_TryRegeneratorOnSwitch)
 
 // clang-format on
 

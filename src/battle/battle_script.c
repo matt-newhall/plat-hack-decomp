@@ -314,6 +314,7 @@ static BOOL BtlCmd_CheckImmuneGhost(BattleSystem *battleSys, BattleContext *batt
 static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -7424,6 +7425,38 @@ static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *batt
     ATTACKING_MON.ppCur[moveSlot]++;
 
     return FALSE;
+};
+
+/**
+ * @brief Try to restore the battler's status on switch-out.
+ *
+ * Inputs:
+ * 1. The battler whose status should be restored.
+ * 2. The distance to jump if the battler has fainted, or the battler has no
+ * ability which would restore its status on switch-out.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpNoStatusRestore = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    if (battleCtx->battleMons[battler].curHP && battleCtx->selectedPartySlot[battler] != 6) {
+        int ability = Battler_Ability(battleCtx, battler);
+
+        if (ability != ABILITY_REGENERATOR) {
+            BattleScript_Iter(battleCtx, jumpNoStatusRestore);
+        }
+    } else {
+        BattleScript_Iter(battleCtx, jumpNoStatusRestore);
+    }
+
+    return 0;
 };
 
 

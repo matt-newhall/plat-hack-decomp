@@ -872,6 +872,13 @@
         "All Normal type moves\n",
         "become the Flying type."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00125",
+      "en_US": [
+        "Restores a little HP when\n",
+        "withdrawn from battle."
+      ]
     }
   ]
 }

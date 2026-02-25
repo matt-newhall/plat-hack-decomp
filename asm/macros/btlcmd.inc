@@ -1262,6 +1262,12 @@
     .long BTLCMD_FOCUSPUNCHFAILED
     .endm
 
+    .macro TryRegeneratorOnSwitch battler, jump_no_effect
+    .long BTLCMD_TRYREGENERATORONSWITCH
+    .long \battler
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:
