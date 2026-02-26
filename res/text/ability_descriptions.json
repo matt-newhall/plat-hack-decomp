@@ -928,6 +928,13 @@
         "All Normal type moves\n",
         "become the Electric type."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00133",
+      "en_US": [
+        "Becomes charged when hit,\n",
+        "powering Electric moves."
+      ]
     }
   ]
 }

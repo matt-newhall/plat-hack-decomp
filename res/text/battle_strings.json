@@ -8582,6 +8582,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} lost\n",
         "some of its HP!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_ElectromorphosisCharged_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was\n",
+        "charged with power!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_ElectromorphosisCharged_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} was\n",
+        "charged with power!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_ElectromorphosisCharged_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} was\n",
+        "charged with power!"
+      ]
     }
   ]
 }
