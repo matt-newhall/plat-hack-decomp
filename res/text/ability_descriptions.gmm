@@ -521,4 +521,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boosts certain moves’\npower in a sandstorm.</language>
 	</row>
+	<row id="pl_msg_00000612_00130" index="130">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Restores HP if hit by a\nGround-type move.</language>
+	</row>
 </body>

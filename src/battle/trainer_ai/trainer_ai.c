@@ -3788,6 +3788,8 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
         checkAbility = ABILITY_WATER_ABSORB;
     } else if (moveType == TYPE_ELECTRIC) {
         checkAbility = ABILITY_VOLT_ABSORB;
+    } else if (moveType == TYPE_GROUND) {
+        checkAbility = ABILITY_EARTH_EATER;
     } else {
         return ABILITY_NONE;
     }
