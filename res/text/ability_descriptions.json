@@ -879,6 +879,13 @@
         "Restores a little HP when\n",
         "withdrawn from battle."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00126",
+      "en_US": [
+        "Powers up moves that\n",
+        "are super effective."
+      ]
     }
   ]
 }
