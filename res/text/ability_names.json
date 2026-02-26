@@ -552,6 +552,10 @@
     {
       "id": "pl_msg_00000610_00137",
       "en_US": "Weak Armor"
+    },
+    {
+      "id": "pl_msg_00000610_00137",
+      "en_US": "Stamina"
     }
   ]
 }

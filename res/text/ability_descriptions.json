@@ -963,6 +963,13 @@
         "Physical attacks lower\n",
         "Defense and raise Speed."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00138",
+      "en_US": [
+        "Boosts the Defense stat\n",
+        "when hit by an attack."
+      ]
     }
   ]
 }
