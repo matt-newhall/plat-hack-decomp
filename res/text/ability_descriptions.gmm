@@ -577,4 +577,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Contact with the Pokémon\nscatters poison spikes.</language>
 	</row>
+	<row id="pl_msg_00000612_00144" index="144">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Protects from attacks\nthat lower Defense.</language>
+	</row>
 </body>

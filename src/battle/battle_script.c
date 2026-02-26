@@ -3202,6 +3202,14 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                     }
 
                     result = 1;
+                } else if (AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_BIG_PECKS, BATTLE_STAT_DEFENSE)) {
+                    if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
+                        SetupNicknameAbilityNicknameAbilityMsg(battleCtx, 727); // "{0}'s {1} suppressed {2}'s {3}!"
+                    } else {
+                        SetupNicknameAbilityStatMsg(battleCtx, 704, statOffset); // "{0}'s {1} prevents {2} loss!"
+                    }
+
+                    result = 1;
                 } else if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == 0) {
                     battleCtx->battleStatusMask |= SYSCTL_FAIL_STAT_STAGE_CHANGE;
 
