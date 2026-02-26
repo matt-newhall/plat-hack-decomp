@@ -526,8 +526,12 @@
       "en_US": "Earth Eater"
     },
     {
-      "id": "pl_msg_00000610_00130",
+      "id": "pl_msg_00000610_00131",
       "en_US": "Refrigerate"
+    },
+    {
+      "id": "pl_msg_00000610_00132",
+      "en_US": "Galvanize"
     }
   ]
 }

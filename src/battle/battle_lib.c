@@ -1761,7 +1761,12 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
         return;
     }
 
-    if ((Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE || Battler_Ability(battleCtx, attacker) == ABILITY_AERILATE || Battler_Ability(battleCtx, attacker) == ABILITY_REFRIGERATE)
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE
+        && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        return;
+    }
+
+    if ((Battler_Ability(battleCtx, attacker) == ABILITY_AERILATE || Battler_Ability(battleCtx, attacker) == ABILITY_REFRIGERATE)
         && MOVE_DATA(move).type == TYPE_NORMAL
         && move != MOVE_JUDGMENT
         && move != MOVE_HIDDEN_POWER
@@ -1778,6 +1783,12 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
     moveType = CalcMoveType(battleSys, battleCtx, attacker, move);
     if (moveType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;
+    }
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_GALVANIZE
+        && MOVE_DATA(move).type == TYPE_NORMAL
+        && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_ELECTRIC;
     }
 
     int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
@@ -2716,6 +2727,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         moveType = TYPE_FLYING;
     } else if (Battler_Ability(battleCtx, attacker) == ABILITY_REFRIGERATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_ICE;
+    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_GALVANIZE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_ELECTRIC;
     } else if (inType) {
         moveType = inType;
     } else {
@@ -2838,6 +2851,8 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         moveType = TYPE_FLYING;
     } else if (attackerAbility == ABILITY_REFRIGERATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_ICE;
+    } else if (attackerAbility == ABILITY_GALVANIZE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_ELECTRIC;
     } else if (inType) {
         moveType = inType;
     } else {
@@ -3671,6 +3686,8 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
         moveType = TYPE_FLYING;
     } else if (Battler_Ability(battleCtx, attacker) == ABILITY_REFRIGERATE && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         moveType = TYPE_ICE;
+    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_GALVANIZE && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+        moveType = TYPE_ELECTRIC;
     } else if (battleCtx->moveType) {
         moveType = battleCtx->moveType;
     } else {
@@ -4547,6 +4564,8 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
             moveType = TYPE_FLYING;
         } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_REFRIGERATE && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
             moveType = TYPE_ICE;
+        } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_GALVANIZE && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+            moveType = TYPE_ELECTRIC;
         } else if (battleCtx->moveType) {
             moveType = battleCtx->moveType;
         } else {
@@ -7075,6 +7094,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 12 / 10;
     } else if (attackerParams.ability == ABILITY_REFRIGERATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_ICE;
+        movePower = movePower * 12 / 10;
+    } else if (attackerParams.ability == ABILITY_GALVANIZE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_ELECTRIC;
         movePower = movePower * 12 / 10;
     } else if (inType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;

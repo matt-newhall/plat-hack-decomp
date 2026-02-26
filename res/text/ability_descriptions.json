@@ -921,6 +921,13 @@
         "All Normal type moves\n",
         "become the Ice type."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00132",
+      "en_US": [
+        "All Normal type moves\n",
+        "become the Electric type."
+      ]
     }
   ]
 }
