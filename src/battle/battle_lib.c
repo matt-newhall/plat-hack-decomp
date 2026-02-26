@@ -4857,6 +4857,7 @@ BOOL BattleSystem_RecoverStatusByAbility(BattleSystem *battleSys, BattleContext 
         }
         break;
 
+    case ABILITY_WATER_BUBBLE:
     case ABILITY_WATER_VEIL:
         if (battleCtx->battleMons[battler].status & MON_CONDITION_BURN) {
             battleCtx->msgTemp = MSGCOND_BURN;
@@ -4933,6 +4934,7 @@ BOOL Ability_ForbidsStatus(BattleContext *battleSys, int ability, int status)
         }
         break;
 
+    case ABILITY_WATER_BUBBLE:
     case ABILITY_WATER_VEIL:
         if (status & MON_CONDITION_BURN) {
             result = TRUE;
@@ -7675,7 +7677,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
-    if (defenderParams.curHP == defenderParams.maxHP && Battler_Ability(battleCtx, defender) == ABILITY_MULTISCALE) {
+    if (defenderParams.curHP == defenderParams.maxHP && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MULTISCALE)) {
         damage /= 2;
     }
 
@@ -7685,6 +7687,16 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if (friendGuardCount == 2 || (friendGuardCount == 1 && defenderParams.ability != ABILITY_FRIEND_GUARD)) {
             damage = damage * 3 / 4;
         }
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WATER_BUBBLE)
+        && moveType == TYPE_FIRE) {
+        damage /= 2;
+    }
+
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_WATER_BUBBLE
+        && moveType == TYPE_WATER) {
+        damage *= 2;
     }
 
     return damage;

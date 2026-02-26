@@ -593,4 +593,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Reduces damage done\nto allies.</language>
 	</row>
+	<row id="pl_msg_00000612_00148" index="148">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Halves Fire damage and\nboosts Water-type moves.</language>
+	</row>
 </body>

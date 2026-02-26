@@ -593,4 +593,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Friend Guard</language>
 	</row>
+	<row id="pl_msg_00000610_00148" index="148">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Water Bubble</language>
+	</row>
 </body>

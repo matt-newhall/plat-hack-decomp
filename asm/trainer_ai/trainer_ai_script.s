@@ -871,6 +871,7 @@ Basic_CheckCannotBurn:
     ; If the target cannot be burned for any reason, score -10.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus10
+    IfLoadedEqualTo ABILITY_WATER_BUBBLE, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
@@ -1252,6 +1253,7 @@ Basic_FlingBurn:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Basic_FlingBurn_AttackerChecks
     IfLoadedEqualTo ABILITY_WATER_VEIL, Basic_FlingBurn_AttackerChecks
+    IfLoadedEqualTo ABILITY_WATER_BUBBLE, Basic_FlingBurn_AttackerChecks
     PopOrEnd 
 
 Basic_FlingBurn_AttackerChecks:
@@ -1265,6 +1267,7 @@ Basic_FlingBurn_AttackerChecks:
     IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus5
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus5
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus5
+    IfLoadedEqualTo ABILITY_WATER_BUBBLE, ScoreMinus5
     IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
     AddToMoveScore 3
     PopOrEnd 
@@ -1332,6 +1335,7 @@ Basic_PsychoShift_Burn:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus10
+    IfLoadedEqualTo ABILITY_WATER_BUBBLE, ScoreMinus10
     GoTo Basic_PsychoShift_Terminate
 
 Basic_PsychoShift_Paralysis:
@@ -4265,6 +4269,7 @@ Expert_Trick_CheckOpponentForBurn:
     IfLoadedInTable Expert_Trick_BadOpponentItems, Expert_Trick_ScoreMinus3
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_WATER_VEIL, Expert_Trick_CheckAttackerForBurn
+    IfLoadedEqualTo ABILITY_WATER_BUBBLE, Expert_Trick_CheckAttackerForBurn
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_CheckAttackerForBurn
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_Trick_CheckAttackerForBurn
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Expert_Trick_CheckAttackerForBurn
@@ -4278,6 +4283,7 @@ Expert_Trick_CheckOpponentForBurn:
 Expert_Trick_CheckAttackerForBurn:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_WATER_VEIL, Expert_Trick_ScoreMinus3
+    IfLoadedEqualTo ABILITY_WATER_BUBBLE, Expert_Trick_ScoreMinus3
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_ScoreMinus3
     IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus5
     IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_Trick_ScoreMinus3
