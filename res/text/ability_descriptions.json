@@ -1005,6 +1005,13 @@
         "Contact with the Pokémon\n",
         "scatters poison spikes."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00144",
+      "en_US": [
+        "Protects from attacks\n",
+        "that lower Defense."
+      ]
     }
   ]
 }
