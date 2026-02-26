@@ -529,4 +529,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">All Normal type moves\nbecome the Ice type.</language>
 	</row>
+	<row id="pl_msg_00000612_00132" index="132">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">All Normal type moves\nbecome the Electric type.</language>
+	</row>
 </body>
