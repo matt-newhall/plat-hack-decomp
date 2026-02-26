@@ -949,6 +949,13 @@
         "Halves damage taken\n",
         "from physical moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00136",
+      "en_US": [
+        "Halves contact damage,\n",
+        "but weak to Fire."
+      ]
     }
   ]
 }

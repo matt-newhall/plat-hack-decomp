@@ -7570,6 +7570,16 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage *= 2;
     }
 
+    if (Battler_Ability(battleCtx, defender) == ABILITY_FLUFFY) {
+        if (moveType == TYPE_FIRE) {
+            damage *= 2;
+        }
+
+        if (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) {
+            damage /= 2;
+        }
+    }
+
     return damage;
 }
 
