@@ -5154,4 +5154,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was\ncharged with power!</language>
 	</row>
+	<row id="pl_msg_00000368_01285" index="1285">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s armor\nweakened!</language>
+	</row>
+	<row id="pl_msg_00000368_01286" index="1286">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s\narmor weakened!</language>
+	</row>
+	<row id="pl_msg_00000368_01287" index="1287">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\narmor weakened!</language>
+	</row>
 </body>

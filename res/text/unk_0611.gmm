@@ -549,4 +549,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">FLUFFY</language>
 	</row>
+	<row id="pl_msg_00000611_00137" index="137">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">WEAK ARMOR</language>
+	</row>
 </body>
