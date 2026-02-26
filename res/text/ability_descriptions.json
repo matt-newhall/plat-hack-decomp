@@ -886,6 +886,20 @@
         "Powers up moves that\n",
         "are super effective."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00127",
+      "en_US": [
+        "Boosts the Pokémon’s\n",
+        "Speed in hail."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00128",
+      "en_US": [
+        "Boosts the Pokémon’s\n",
+        "Speed in sand."
+      ]
     }
   ]
 }
