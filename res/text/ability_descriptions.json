@@ -1012,6 +1012,13 @@
         "Protects from attacks\n",
         "that lower Defense."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00145",
+      "en_US": [
+        "Halves the Pokémon’s\n",
+        "weight."
+      ]
     }
   ]
 }
