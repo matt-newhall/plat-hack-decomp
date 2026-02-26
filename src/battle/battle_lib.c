@@ -7245,6 +7245,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         defenseStat = defenseStat * 150 / 100;
     }
 
+    if (Battler_Ability(battleCtx, defender) == ABILITY_FUR_COAT && (!(move == MOVE_STRUGGLE && inPower == 40))) {
+        defenseStat = defenseStat * 2;
+    }
+
     if (attackerParams.ability == ABILITY_PLUS
         && (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_MINUS) || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_PLUS) == 2)) {
         spAttackStat = spAttackStat * 150 / 100;

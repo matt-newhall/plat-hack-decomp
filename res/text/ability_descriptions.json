@@ -942,6 +942,13 @@
         "Contact with the Pokémon\n",
         "lowers attacker’s Speed."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00135",
+      "en_US": [
+        "Halves damage taken\n",
+        "from physical moves."
+      ]
     }
   ]
 }
