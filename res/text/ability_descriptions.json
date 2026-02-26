@@ -907,6 +907,13 @@
         "Boosts certain moves’\n",
         "power in a sandstorm."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00130",
+      "en_US": [
+        "Restores HP if hit by a\n",
+        "Ground-type move."
+      ]
     }
   ]
 }
