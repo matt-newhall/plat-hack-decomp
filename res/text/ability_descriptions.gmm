@@ -561,4 +561,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Reduces damage when\nHP is full.</language>
 	</row>
+	<row id="pl_msg_00000612_00140" index="140">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Gives priority to\nFlying-type moves.</language>
+	</row>
 </body>
