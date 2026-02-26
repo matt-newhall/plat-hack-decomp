@@ -569,4 +569,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Sap Sipper</language>
 	</row>
+	<row id="pl_msg_00000610_00142" index="142">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Poison Touch</language>
+	</row>
 </body>

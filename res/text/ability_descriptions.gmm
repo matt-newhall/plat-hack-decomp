@@ -569,4 +569,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boosts Attack when hit\nby a Grass-type move.</language>
 	</row>
+	<row id="pl_msg_00000612_00142" index="142">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">May poison targets when a\nPokémon makes contact.</language>
+	</row>
 </body>
