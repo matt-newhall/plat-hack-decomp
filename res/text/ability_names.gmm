@@ -509,4 +509,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Neuroforce</language>
 	</row>
+	<row id="pl_msg_00000610_00127" index="127">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Slush Rush</language>
+	</row>
+	<row id="pl_msg_00000610_00128" index="128">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sand Rush</language>
+	</row>
 </body>
