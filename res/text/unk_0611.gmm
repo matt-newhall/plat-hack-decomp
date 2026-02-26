@@ -525,4 +525,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">EARTH EATER</language>
 	</row>
+	<row id="pl_msg_00000611_00131" index="131">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">REFRIGERATE</language>
+	</row>
 </body>

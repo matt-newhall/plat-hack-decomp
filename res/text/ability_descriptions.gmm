@@ -525,4 +525,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Restores HP if hit by a\nGround-type move.</language>
 	</row>
+	<row id="pl_msg_00000612_00131" index="131">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">All Normal type moves\nbecome the Ice type.</language>
+	</row>
 </body>

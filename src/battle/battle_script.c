@@ -1583,6 +1583,8 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         moveType = TYPE_NORMAL;
     } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_AERILATE && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
         moveType = TYPE_FLYING;
+    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_REFRIGERATE && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL && battleCtx->moveCur != MOVE_JUDGMENT && battleCtx->moveCur != MOVE_NATURAL_GIFT && battleCtx->moveCur != MOVE_WEATHER_BALL && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+        moveType = TYPE_ICE;
     } else if (battleCtx->moveType) {
         moveType = battleCtx->moveType;
     } else {
