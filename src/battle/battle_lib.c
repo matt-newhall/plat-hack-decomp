@@ -4761,6 +4761,20 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             result = TRUE;
         }
         break;
+
+    case ABILITY_JUSTIFIED:
+        if (DEFENDING_MON.curHP
+            && CURRENT_MOVE_DATA.type == TYPE_DARK
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
+            battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+            battleCtx->sideEffectMon = battleCtx->defender;
+            battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE;
+
+            *subscript = subscript_update_stat_stage;
+            result = TRUE;
+        }
+        break;
     }
 
     return result;

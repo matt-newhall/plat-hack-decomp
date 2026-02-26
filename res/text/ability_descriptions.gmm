@@ -601,4 +601,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Doubles damage if the\ntarget just switched in.</language>
 	</row>
+	<row id="pl_msg_00000612_00150" index="150">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Raises Attack when hit\nby a Dark-type move.</language>
+	</row>
 </body>

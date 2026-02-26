@@ -601,4 +601,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">STAKEOUT</language>
 	</row>
+	<row id="pl_msg_00000611_00150" index="150">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">JUSTIFIED</language>
+	</row>
 </body>
