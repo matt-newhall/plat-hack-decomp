@@ -892,7 +892,7 @@ int BattleSystem_RandomOpponent(BattleSystem *battleSys, BattleContext *battleCt
  * @return TRUE if the returned subscript param should be loaded for a
  * triggered effect.
  */
-BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
+BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
 
 /**
  * @brief Triggers a battler's ability which prevents an illegal status
@@ -1437,6 +1437,18 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
  * @return TRUE if rest/swallow can be snatched, FALSE otherwise.
  */
 BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
+
+/**
+ * @brief Trigger the attacker's ability after it uses a move that does damage.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param[out] subscript    Return-param for the subscript to be loaded for any
+ *                          triggered effect.
+ * @return TRUE if the returned subscript param should be loaded for a
+ * triggered effect.
+ */
+BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
 
 /**
  * @brief Decrement additional PP from the attacker's selected move if its

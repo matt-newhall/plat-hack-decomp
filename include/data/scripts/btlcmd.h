@@ -202,7 +202,7 @@ ScriptCommand(BTLCMD_LOADPARTYGAUGEGRAPHICS,      BtlCmd_LoadPartyGaugeGraphics)
 ScriptCommand(BTLCMD_FREEPARTYGAUGEGRAPHICS,      BtlCmd_FreePartyGaugeGraphics)
 ScriptCommand(BTLCMD_INCREMENTGAMERECORD,         BtlCmd_IncrementGameRecord)
 ScriptCommand(BTLCMD_RESTORESPRITE,               BtlCmd_RestoreSprite)
-ScriptCommand(BTLCMD_TRIGGERABILITYONHIT,         BtlCmd_TriggerAbilityOnHit)
+ScriptCommand(BTLCMD_TRIGGERDEFENDERABILITYONHIT, BtlCmd_TriggerDefenderAbilityOnHit)
 ScriptCommand(BTLCMD_SPRITETOOAM,                 BtlCmd_SpriteToOAM)
 ScriptCommand(BTLCMD_OAMTOSPRITE,                 BtlCmd_OAMToSprite)
 ScriptCommand(BTLCMD_CHECKBLACKOUT,               BtlCmd_CheckBlackOut)
@@ -235,6 +235,7 @@ ScriptCommand(BTLCMD_SWITCHTOXIC,                 BtlCmd_SwitchToxic)
 ScriptCommand(BTLCMD_SWAPABILITIES,               BtlCmd_SwapAbilities)
 ScriptCommand(BTLCMD_FOCUSPUNCHFAILED,            BtlCmd_FocusPunchFailed)
 ScriptCommand(BTLCMD_TRYREGENERATORONSWITCH,      BtlCmd_TryRegeneratorOnSwitch)
+ScriptCommand(BTLCMD_TRIGGERATTACKERABILITYONHIT, BtlCmd_TriggerAttackerAbilityOnHit)
 
 // clang-format on
 

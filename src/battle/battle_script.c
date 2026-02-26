@@ -281,7 +281,7 @@ static BOOL BtlCmd_LoadPartyGaugeGraphics(BattleSystem *battleSys, BattleContext
 static BOOL BtlCmd_FreePartyGaugeGraphics(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_IncrementGameRecord(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RestoreSprite(BattleSystem *battleSys, BattleContext *battleCtx);
-static BOOL BtlCmd_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SpriteToOAM(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_OAMToSprite(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckBlackOut(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -315,6 +315,7 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
 static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -9013,12 +9014,12 @@ static BOOL BtlCmd_RestoreSprite(BattleSystem *battleSys, BattleContext *battleC
  * @param battleCtx
  * @return FALSE
  */
-static BOOL BtlCmd_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx)
+static BOOL BtlCmd_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
     int jumpNoEffect = BattleScript_Read(battleCtx);
 
-    if (BattleSystem_TriggerAbilityOnHit(battleSys, battleCtx, &battleCtx->scriptTemp) == FALSE) {
+    if (BattleSystem_TriggerDefenderAbilityOnHit(battleSys, battleCtx, &battleCtx->scriptTemp) == FALSE) {
         BattleScript_Iter(battleCtx, jumpNoEffect);
     }
 
@@ -9299,6 +9300,32 @@ static BOOL BtlCmd_TryRecycle(BattleSystem *battleSys, BattleContext *battleCtx)
         battleCtx->recycleItem[battler][partySlot] = ITEM_NONE;
     } else {
         BattleScript_Iter(battleCtx, jumpNoRecyclableItem);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Triggers any abilities when a move hits its target.
+ *
+ * Inputs:
+ * 1. The distance to jump if there are no effects to trigger.
+ *
+ * Side effects:
+ * - battleCtx->scriptTemp will be set to the subroutine sequence to execute
+ * for any triggered effect.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpNoEffect = BattleScript_Read(battleCtx);
+
+    if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &battleCtx->scriptTemp) == FALSE) {
+        BattleScript_Iter(battleCtx, jumpNoEffect);
     }
 
     return FALSE;

@@ -4526,7 +4526,7 @@ int BattleSystem_RandomOpponent(BattleSystem *battleSys, BattleContext *battleCt
     return chosen;
 }
 
-BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
+BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
 {
     BOOL result = FALSE;
 
@@ -4537,26 +4537,6 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 
     if (Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == TRUE) {
         return result;
-    }
-
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_STENCH) {
-        int effect = MOVE_DATA(battleCtx->moveCur).effect;
-
-        if (DEFENDING_MON.curHP
-            && !(effect == BATTLE_EFFECT_FLINCH_HIT)
-            && !(effect == BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH)
-            && !(effect == BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE)
-            && !(effect == BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT)
-            && !(effect == BATTLE_EFFECT_FLINCH_BURN_HIT)
-            && !(effect == BATTLE_EFFECT_FLINCH_FREEZE_HIT)
-            && !(effect == BATTLE_EFFECT_FLINCH_PARALYZE_HIT)
-            && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_SOMETIMES_FLINCH)
-            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_INNER_FOCUS) == FALSE
-            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
-                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
-            && BattleSystem_RandNext(battleSys) % 100 < 10) {
-            DEFENDING_MON.statusVolatile |= VOLATILE_CONDITION_FLINCH;
-        }
     }
 
     switch (Battler_Ability(battleCtx, battleCtx->defender)) {
@@ -4782,6 +4762,44 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 
             *subscript = subscript_update_stat_stage;
             result = TRUE;
+        }
+        break;
+    }
+
+    return result;
+}
+
+BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
+{
+    BOOL result = FALSE;
+
+    // These two sentinels must be separate to match
+    if (battleCtx->defender == BATTLER_NONE) {
+        return result;
+    }
+
+    if (Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == TRUE) {
+        return result;
+    }
+
+    switch (Battler_Ability(battleCtx, battleCtx->attacker)) {
+    case ABILITY_STENCH:
+        int effect = MOVE_DATA(battleCtx->moveCur).effect;
+
+        if (DEFENDING_MON.curHP
+            && !(effect == BATTLE_EFFECT_FLINCH_HIT)
+            && !(effect == BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH)
+            && !(effect == BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE)
+            && !(effect == BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT)
+            && !(effect == BATTLE_EFFECT_FLINCH_BURN_HIT)
+            && !(effect == BATTLE_EFFECT_FLINCH_FREEZE_HIT)
+            && !(effect == BATTLE_EFFECT_FLINCH_PARALYZE_HIT)
+            && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_SOMETIMES_FLINCH)
+            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_INNER_FOCUS) == FALSE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+            && BattleSystem_RandNext(battleSys) % 100 < 10) {
+            DEFENDING_MON.statusVolatile |= VOLATILE_CONDITION_FLINCH;
         }
         break;
     }
