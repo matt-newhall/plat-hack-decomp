@@ -3252,8 +3252,14 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
             battleCtx->msgBuffer.id = 662; // "{0}'s {1} cuts {2}'s {3}!"
             battleCtx->msgBuffer.tags = TAG_NICKNAME_ABILITY_NICKNAME_STAT;
-            battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->attacker);
-            battleCtx->msgBuffer.params[1] = battleCtx->battleMons[battleCtx->attacker].ability;
+
+            if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SPEED_DOWN_1_STAGE) {
+                battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->defender);
+                battleCtx->msgBuffer.params[1] = battleCtx->battleMons[battleCtx->defender].ability;
+            } else {
+                battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->attacker);
+                battleCtx->msgBuffer.params[1] = battleCtx->battleMons[battleCtx->attacker].ability;
+            }
             battleCtx->msgBuffer.params[2] = BattleSystem_NicknameTag(battleCtx, battleCtx->sideEffectMon);
             battleCtx->msgBuffer.params[3] = BATTLE_STAT_ATTACK + statOffset;
         } else {

@@ -537,4 +537,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Becomes charged when hit,\npowering Electric moves.</language>
 	</row>
+	<row id="pl_msg_00000612_00134" index="134">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Contact with the Pokémon\nlowers attacker’s Speed.</language>
+	</row>
 </body>
