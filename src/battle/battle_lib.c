@@ -7100,6 +7100,13 @@ static const u16 sPunchingMoves[] = {
     MOVE_SKY_UPPERCUT
 };
 
+static const u16 sAuraAndPulseMoves[] = {
+    MOVE_WATER_PULSE,
+    MOVE_AURA_SPHERE,
+    MOVE_DARK_PULSE,
+    MOVE_DRAGON_PULSE
+};
+
 typedef struct DamageCalcParams {
     u16 species;
     s16 curHP;
@@ -7451,6 +7458,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     for (i = 0; i < NELEMS(sPunchingMoves); i++) {
         if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST) {
             movePower = movePower * 12 / 10;
+            break;
+        }
+    }
+
+    for (i = 0; i < NELEMS(sAuraAndPulseMoves); i++) {
+        if (sAuraAndPulseMoves[i] == move && attackerParams.ability == ABILITY_MEGA_LAUNCHER) {
+            movePower = movePower * 15 / 10;
             break;
         }
     }

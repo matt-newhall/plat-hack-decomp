@@ -585,4 +585,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Light Metal</language>
 	</row>
+	<row id="pl_msg_00000610_00146" index="146">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Mega Launcher</language>
+	</row>
 </body>
