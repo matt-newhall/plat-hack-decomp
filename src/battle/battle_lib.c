@@ -7593,6 +7593,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
+    if (defenderParams.curHP == defenderParams.maxHP && Battler_Ability(battleCtx, defender) == ABILITY_MULTISCALE) {
+        damage /= 2;
+    }
+
     return damage;
 }
 

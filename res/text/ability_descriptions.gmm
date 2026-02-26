@@ -557,4 +557,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boosts the Defense stat\nwhen hit by an attack.</language>
 	</row>
+	<row id="pl_msg_00000612_00139" index="139">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Reduces damage when\nHP is full.</language>
+	</row>
 </body>
