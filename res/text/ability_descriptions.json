@@ -998,6 +998,13 @@
         "May poison targets when a\n",
         "Pokémon makes contact."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00143",
+      "en_US": [
+        "Contact with the Pokémon\n",
+        "scatters poison spikes."
+      ]
     }
   ]
 }

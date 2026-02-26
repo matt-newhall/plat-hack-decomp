@@ -4764,6 +4764,14 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             result = TRUE;
         }
         break;
+
+    case ABILITY_TOXIC_DEBRIS:
+        if (CURRENT_MOVE_DATA.class == CLASS_PHYSICAL
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
+            *subscript = subscript_toxic_debris;
+            result = TRUE;
+        }
+        break;
     }
 
     return result;

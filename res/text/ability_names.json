@@ -572,6 +572,10 @@
     {
       "id": "pl_msg_00000610_00142",
       "en_US": "Poison Touch"
+    },
+    {
+      "id": "pl_msg_00000610_00143",
+      "en_US": "Toxic Debris"
     }
   ]
 }

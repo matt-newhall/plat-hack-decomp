@@ -8624,6 +8624,27 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s\n",
         "armor weakened!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_ToxicDebrisTriggered_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} scattered\n",
+        "poison spikes!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_ToxicDebrisTriggered_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "scattered poison spikes!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_ToxicDebrisTriggered_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "scattered poison spikes!"
+      ]
     }
   ]
 }

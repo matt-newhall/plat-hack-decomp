@@ -236,6 +236,7 @@ ScriptCommand(BTLCMD_SWAPABILITIES,               BtlCmd_SwapAbilities)
 ScriptCommand(BTLCMD_FOCUSPUNCHFAILED,            BtlCmd_FocusPunchFailed)
 ScriptCommand(BTLCMD_TRYREGENERATORONSWITCH,      BtlCmd_TryRegeneratorOnSwitch)
 ScriptCommand(BTLCMD_TRIGGERATTACKERABILITYONHIT, BtlCmd_TriggerAttackerAbilityOnHit)
+ScriptCommand(BTLCMD_TRYTOXICDEBRIS,              BtlCmd_TryToxicDebris)
 
 // clang-format on
 

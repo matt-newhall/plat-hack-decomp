@@ -1273,6 +1273,11 @@
     .long (\jump_no_effect-.) / 4 - 1
     .endm
 
+    .macro TryToxicDebris jump_no_effect
+    .long BTLCMD_TRYTOXICDEBRIS
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:
