@@ -314,6 +314,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
 static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -602,7 +603,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_SwapAbilities,
     BtlCmd_FocusPunchFailed,
     BtlCmd_TryRegeneratorOnSwitch,
-    BtlCmd_TriggerAttackerAbilityOnHit
+    BtlCmd_TriggerAttackerAbilityOnHit,
+    BtlCmd_TryToxicDebris
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -9558,6 +9560,36 @@ static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCo
     }
 
     return FALSE;
+}
+
+/**
+ * @brief Triggers any abilities when a move hits its target.
+ *
+ * Inputs:
+ * 1. The distance to jump if there are no effects to trigger.
+ *
+ * Side effects:
+ * - battleCtx->scriptTemp will be set to the subroutine sequence to execute
+ * for any triggered effect.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+    int attacking = Battler_Side(battleSys, battleCtx->defender) ^ 1;
+
+    if (battleCtx->sideConditions[attacking].toxicSpikesLayers == 2) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    } else {
+        battleCtx->sideConditionsMask[attacking] |= SIDE_CONDITION_TOXIC_SPIKES;
+        battleCtx->sideConditions[attacking].toxicSpikesLayers++;
+    }
+
+    return 0;
 }
 
 /**

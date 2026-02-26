@@ -308,4 +308,5 @@ subscript_files = files(
     'subscript_electromorphosis.s',
     'subscript_weak_armor.s',
     'subscript_absorb_and_attack_up_1_stage.s',
+    'subscript_toxic_debris.s',
 )

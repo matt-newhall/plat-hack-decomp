@@ -5166,4 +5166,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\narmor weakened!</language>
 	</row>
+	<row id="pl_msg_00000368_01288" index="1288">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0} scattered\npoison spikes!</language>
+	</row>
+	<row id="pl_msg_00000368_01289" index="1289">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nscattered poison spikes!</language>
+	</row>
+	<row id="pl_msg_00000368_01290" index="1290">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nscattered poison spikes!</language>
+	</row>
 </body>

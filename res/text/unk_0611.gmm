@@ -573,4 +573,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">POISON TOUCH</language>
 	</row>
+	<row id="pl_msg_00000611_00143" index="143">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">TOXIC DEBRIS</language>
+	</row>
 </body>
