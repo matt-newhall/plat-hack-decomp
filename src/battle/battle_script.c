@@ -7180,6 +7180,10 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
     int i = 0;
     int monWeight = DEFENDING_MON.weight;
 
+    if (DEFENDING_MON.ability == ABILITY_LIGHT_METAL) {
+        monWeight /= 2;
+    }
+
     for (; sWeightToPower[i][0] != 0xFFFF; i++) {
         if (sWeightToPower[i][0] >= monWeight) {
             break;

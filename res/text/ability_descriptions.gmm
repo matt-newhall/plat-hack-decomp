@@ -581,4 +581,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Protects from attacks\nthat lower Defense.</language>
 	</row>
+	<row id="pl_msg_00000612_00145" index="145">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Halves the Pokémon’s\nweight.</language>
+	</row>
 </body>
