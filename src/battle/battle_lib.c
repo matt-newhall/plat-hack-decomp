@@ -2790,6 +2790,10 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             if (attackerItemEffect == HOLD_EFFECT_POWER_UP_SE) {
                 damage = damage * (100 + attackerItemPower) / 100;
             }
+
+            if (Battler_Ability(battleCtx, attacker) == ABILITY_NEUROFORCE) {
+                damage = damage * 125 / 100;
+            }
         }
 
         if ((*moveStatusMask & MOVE_STATUS_NOT_VERY_EFFECTIVE) && movePower) {

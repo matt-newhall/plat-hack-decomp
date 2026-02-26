@@ -505,4 +505,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Restores a little HP when\nwithdrawn from battle.</language>
 	</row>
+	<row id="pl_msg_00000612_00126" index="126">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Powers up moves that\nare super effective.</language>
+	</row>
 </body>

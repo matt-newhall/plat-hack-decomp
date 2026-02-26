@@ -505,4 +505,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Regenerator</language>
 	</row>
+	<row id="pl_msg_00000610_00126" index="126">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Neuroforce</language>
+	</row>
 </body>
