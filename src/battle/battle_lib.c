@@ -3716,6 +3716,12 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
             subscript = subscript_absorb_and_spatk_up_1_stage;
     }
 
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SAP_SIPPER) == TRUE
+        && moveType == TYPE_GRASS
+        && attacker != defender) {
+            subscript = subscript_absorb_and_attack_up_1_stage;
+    }
+
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE
         && moveType == TYPE_ELECTRIC
         && attacker != defender) {

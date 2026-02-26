@@ -565,4 +565,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Gives priority to\nFlying-type moves.</language>
 	</row>
+	<row id="pl_msg_00000612_00141" index="141">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts Attack when hit\nby a Grass-type move.</language>
+	</row>
 </body>
