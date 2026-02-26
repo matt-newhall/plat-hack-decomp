@@ -7476,6 +7476,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower *= 2;
     }
 
+    if (battleType & BATTLE_TYPE_DOUBLES) {
+        int powerSpotCount  = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_POWER_SPOT);
+
+        if (powerSpotCount == 2 || (powerSpotCount == 1 && attackerParams.ability != ABILITY_POWER_SPOT)) {
+            movePower = movePower * 13 / 10;
+        }
+    }
+
     for (i = 0; i < NELEMS(sPunchingMoves); i++) {
         if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST) {
             movePower = movePower * 12 / 10;

@@ -609,4 +609,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">OVERCOAT</language>
 	</row>
+	<row id="pl_msg_00000611_00152" index="152">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">POWER SPOT</language>
+	</row>
 </body>
