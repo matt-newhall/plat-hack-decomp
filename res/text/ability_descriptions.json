@@ -1026,6 +1026,13 @@
         "Powers up aura and\n",
         "pulse moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00147",
+      "en_US": [
+        "Reduces damage done\n",
+        "to allies."
+      ]
     }
   ]
 }
