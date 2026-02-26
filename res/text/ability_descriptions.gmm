@@ -517,4 +517,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boosts the Pokémon’s\nSpeed in sand.</language>
 	</row>
+	<row id="pl_msg_00000612_00129" index="129">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts certain moves’\npower in a sandstorm.</language>
+	</row>
 </body>

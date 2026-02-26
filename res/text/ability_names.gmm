@@ -517,4 +517,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Sand Rush</language>
 	</row>
+	<row id="pl_msg_00000610_00129" index="129">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Sand Force</language>
+	</row>
 </body>
