@@ -605,4 +605,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Raises Attack when hit\nby a Dark-type move.</language>
 	</row>
+	<row id="pl_msg_00000612_00151" index="151">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Protects from sand,\nhail and powder.</language>
+	</row>
 </body>
