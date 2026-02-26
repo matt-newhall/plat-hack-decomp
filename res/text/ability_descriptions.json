@@ -1047,6 +1047,13 @@
         "Doubles damage if the\n",
         "target just switched in."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00150",
+      "en_US": [
+        "Raises Attack when hit\n",
+        "by a Dark-type move."
+      ]
     }
   ]
 }
