@@ -1040,6 +1040,13 @@
         "Halves fire damage and\n",
         "boosts Water-type moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00149",
+      "en_US": [
+        "Doubles damage if the\n",
+        "target just switched in."
+      ]
     }
   ]
 }
