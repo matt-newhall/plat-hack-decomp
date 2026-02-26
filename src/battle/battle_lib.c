@@ -1414,6 +1414,24 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
         battler1Priority = MOVE_DATA(battler1Move).priority;
         battler2Priority = MOVE_DATA(battler2Move).priority;
+
+        if (Battler_Ability(battleCtx, battler1) == ABILITY_GALE_WINGS) {
+            int battler1CurHP = BattleMon_Get(battleCtx, battler1, BATTLEMON_CUR_HP, NULL);
+            int battler1MaxHP = BattleMon_Get(battleCtx, battler1, BATTLEMON_MAX_HP, NULL);
+
+            if (MOVE_DATA(battler1Move).type == TYPE_FLYING && battler1CurHP == battler1MaxHP) {
+                battler1Priority += 1;
+            }
+        }
+
+        if (Battler_Ability(battleCtx, battler2) == ABILITY_GALE_WINGS) {
+            int battler2CurHP = BattleMon_Get(battleCtx, battler2, BATTLEMON_CUR_HP, NULL);
+            int battler2MaxHP = BattleMon_Get(battleCtx, battler2, BATTLEMON_MAX_HP, NULL);
+
+            if (MOVE_DATA(battler2Move).type == TYPE_FLYING && battler2CurHP == battler2MaxHP) {
+                battler2Priority += 1;
+            }
+        }
     }
 
     if (battler1Priority == battler2Priority) {

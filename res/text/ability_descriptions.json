@@ -977,6 +977,13 @@
         "Reduces damage when\n",
         "HP is full."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00140",
+      "en_US": [
+        "Gives priority to\n",
+        "Flying-type moves."
+      ]
     }
   ]
 }
