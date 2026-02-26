@@ -991,6 +991,13 @@
         "Boosts Attack when hit\n",
         "by a Grass-type move."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00142",
+      "en_US": [
+        "May poison targets when a\n",
+        "Pokémon makes contact."
+      ]
     }
   ]
 }
