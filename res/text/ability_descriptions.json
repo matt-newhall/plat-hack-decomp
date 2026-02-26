@@ -935,6 +935,13 @@
         "Becomes charged when hit,\n",
         "powering Electric moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00134",
+      "en_US": [
+        "Contact with the Pokémon\n",
+        "lowers attacker’s Speed."
+      ]
     }
   ]
 }
