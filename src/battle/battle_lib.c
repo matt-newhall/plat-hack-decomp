@@ -4763,7 +4763,6 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
 
     case ABILITY_WEAK_ARMOR:
         if (DEFENDING_MON.curHP
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
             && (CURRENT_MOVE_DATA.class == CLASS_PHYSICAL)
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
             battleCtx->sideEffectMon = battleCtx->defender;
