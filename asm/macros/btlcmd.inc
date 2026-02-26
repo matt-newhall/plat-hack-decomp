@@ -1101,7 +1101,7 @@
     .long \battler
     .endm
 
-    .macro TriggerAbilityOnHit jump_no_effect
+    .macro TriggerDefenderAbilityOnHit jump_no_effect
     .long 197
     .long (\jump_no_effect-.) / 4 - 1
     .endm
@@ -1262,6 +1262,11 @@
     .macro TryRegeneratorOnSwitch battler, jump_no_effect
     .long 229
     .long \battler
+    .long (\jump_no_effect-.) / 4 - 1
+    .endm
+
+    .macro TriggerAttackerAbilityOnHit jump_no_effect
+    .long 230
     .long (\jump_no_effect-.) / 4 - 1
     .endm
 

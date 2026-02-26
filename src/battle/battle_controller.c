@@ -3544,6 +3544,7 @@ enum AfterMoveMessageState {
     ONE_HIT_FORM_CHANGE,
     ONE_HIT_RAGE,
     ONE_HIT_TRIGGER_ABILITY,
+    ONE_HIT_TRIGGER_ATTACKER_ABILITY,
     ONE_HIT_EXTRA_FLINCH,
 
     MULTI_HIT_CRITICAL = 0,
@@ -3551,6 +3552,7 @@ enum AfterMoveMessageState {
     MULTI_HIT_FORM_CHANGE,
     MULTI_HIT_RAGE,
     MULTI_HIT_TRIGGER_ABILITY,
+    MULTI_HIT_TRIGGER_ATTACKER_ABILITY,
     MULTI_HIT_STATUS,
     MULTI_HIT_EXTRA_FLINCH,
 };
@@ -3602,11 +3604,23 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
             }
 
         case ONE_HIT_TRIGGER_ABILITY:
-            int abilitySeq;
+            int defenderAbilitySeq;
 
             battleCtx->afterMoveMessageState++;
-            if (BattleSystem_TriggerAbilityOnHit(battleSys, battleCtx, &abilitySeq) == TRUE) {
-                LOAD_SUBSEQ(abilitySeq);
+            if (BattleSystem_TriggerDefenderAbilityOnHit(battleSys, battleCtx, &defenderAbilitySeq) == TRUE) {
+                LOAD_SUBSEQ(defenderAbilitySeq);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                return;
+            }
+
+        case ONE_HIT_TRIGGER_ATTACKER_ABILITY:
+            int attackerAbilitySeq;
+
+            battleCtx->afterMoveMessageState++;
+            if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &attackerAbilitySeq) == TRUE) {
+                LOAD_SUBSEQ(attackerAbilitySeq);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
@@ -3662,11 +3676,23 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
             }
 
         case MULTI_HIT_TRIGGER_ABILITY:
-            int abilitySeq;
+            int defenderAbilitySeq;
 
             battleCtx->afterMoveMessageState++;
-            if (BattleSystem_TriggerAbilityOnHit(battleSys, battleCtx, &abilitySeq) == TRUE) {
-                LOAD_SUBSEQ(abilitySeq);
+            if (BattleSystem_TriggerDefenderAbilityOnHit(battleSys, battleCtx, &defenderAbilitySeq) == TRUE) {
+                LOAD_SUBSEQ(defenderAbilitySeq);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                return;
+            }
+
+        case MULTI_HIT_TRIGGER_ATTACKER_ABILITY:
+            int attackerAbilitySeq;
+
+            battleCtx->afterMoveMessageState++;
+            if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &attackerAbilitySeq) == TRUE) {
+                LOAD_SUBSEQ(attackerAbilitySeq);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
