@@ -589,4 +589,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Powers up aura and\npulse moves.</language>
 	</row>
+	<row id="pl_msg_00000612_00147" index="147">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Reduces damage done\nto allies.</language>
+	</row>
 </body>

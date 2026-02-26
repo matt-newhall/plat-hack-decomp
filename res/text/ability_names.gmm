@@ -589,4 +589,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Mega Launcher</language>
 	</row>
+	<row id="pl_msg_00000610_00147" index="147">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Friend Guard</language>
+	</row>
 </body>

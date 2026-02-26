@@ -7679,6 +7679,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage /= 2;
     }
 
+    if (battleType & BATTLE_TYPE_DOUBLES) {
+        int friendGuardCount  = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, defender, ABILITY_FRIEND_GUARD);
+
+        if (friendGuardCount == 2 || (friendGuardCount == 1 && defenderParams.ability != ABILITY_FRIEND_GUARD)) {
+            damage = damage * 3 / 4;
+        }
+    }
+
     return damage;
 }
 
