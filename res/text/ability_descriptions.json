@@ -956,6 +956,13 @@
         "Halves contact damage,\n",
         "but weak to Fire."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00137",
+      "en_US": [
+        "Physical attacks lower\n",
+        "Defense and raise Speed."
+      ]
     }
   ]
 }

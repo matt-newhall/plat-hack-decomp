@@ -8603,6 +8603,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} was\n",
         "charged with power!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_WeakArmorTriggered_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s armor\n",
+        "weakened!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_WeakArmorTriggered_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "armor weakened!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_WeakArmorTriggered_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "armor weakened!"
+      ]
     }
   ]
 }
