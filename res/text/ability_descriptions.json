@@ -1061,6 +1061,13 @@
         "Protects from sand,\n",
         "hail and powder."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00152",
+      "en_US": [
+        "Powers up moves used\n",
+        "by allies."
+      ]
     }
   ]
 }
