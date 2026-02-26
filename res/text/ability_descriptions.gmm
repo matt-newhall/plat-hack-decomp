@@ -533,4 +533,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">All Normal type moves\nbecome the Electric type.</language>
 	</row>
+	<row id="pl_msg_00000612_00133" index="133">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Becomes charged when hit,\npowering Electric moves.</language>
+	</row>
 </body>

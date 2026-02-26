@@ -4697,6 +4697,18 @@ BOOL BattleSystem_TriggerAbilityOnHit(BattleSystem *battleSys, BattleContext *ba
             result = TRUE;
         }
         break;
+
+    case ABILITY_ELECTROMORPHOSIS:
+        if (ATTACKING_MON.curHP
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
+            battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+            battleCtx->sideEffectMon = battleCtx->attacker;
+            battleCtx->msgBattlerTemp = battleCtx->defender;
+
+            *subscript = subscript_electromorphosis;
+            result = TRUE;
+        }
     }
 
     return result;

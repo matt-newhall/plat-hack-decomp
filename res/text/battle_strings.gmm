@@ -5142,4 +5142,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} lost\nsome of its HP!</language>
 	</row>
+	<row id="pl_msg_00000368_01282" index="1282">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was \ncharged with power!</language>
+	</row>
+	<row id="pl_msg_00000368_012832" index="1283">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was\ncharged with power!</language>
+	</row>
+	<row id="pl_msg_00000368_01284" index="1284">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was\ncharged with power!</language>
+	</row>
 </body>
