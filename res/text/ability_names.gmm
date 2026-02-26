@@ -553,4 +553,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Weak Armor</language>
 	</row>
+	<row id="pl_msg_00000610_00138" index="138">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Stamina</language>
+	</row>
 </body>
