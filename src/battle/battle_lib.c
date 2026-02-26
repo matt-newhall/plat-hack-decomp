@@ -7457,6 +7457,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 75 / 100;
     }
 
+    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END && battleCtx->battleMons[battleCtx->defender].newlySwitched == TRUE) {
+        movePower *= 2;
+    }
+
     for (i = 0; i < NELEMS(sPunchingMoves); i++) {
         if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST) {
             movePower = movePower * 12 / 10;

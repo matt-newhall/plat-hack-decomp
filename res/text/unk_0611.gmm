@@ -597,4 +597,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">WATER BUBBLE</language>
 	</row>
+	<row id="pl_msg_00000611_00149" index="149">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">STAKEOUT</language>
+	</row>
 </body>

@@ -597,4 +597,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Halves Fire damage and\nboosts Water-type moves.</language>
 	</row>
+	<row id="pl_msg_00000612_00149" index="149">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Doubles damage if the\ntarget just switched in.</language>
+	</row>
 </body>
