@@ -1054,6 +1054,13 @@
         "Raises Attack when hit\n",
         "by a Dark-type move."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00151",
+      "en_US": [
+        "Protects from sand,\n",
+        "hail and powder."
+      ]
     }
   ]
 }
