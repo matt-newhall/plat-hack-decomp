@@ -914,6 +914,13 @@
         "Restores HP if hit by a\n",
         "Ground-type move."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00131",
+      "en_US": [
+        "All Normal type moves\n",
+        "become the Ice type."
+      ]
     }
   ]
 }
