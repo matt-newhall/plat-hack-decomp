@@ -554,8 +554,12 @@
       "en_US": "Weak Armor"
     },
     {
-      "id": "pl_msg_00000610_00137",
+      "id": "pl_msg_00000610_00138",
       "en_US": "Stamina"
+    },
+    {
+      "id": "pl_msg_00000610_00139",
+      "en_US": "Multiscale"
     }
   ]
 }

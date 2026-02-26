@@ -970,6 +970,13 @@
         "Boosts the Defense stat\n",
         "when hit by an attack."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00139",
+      "en_US": [
+        "Reduces damage when\n",
+        "HP is full."
+      ]
     }
   ]
 }
