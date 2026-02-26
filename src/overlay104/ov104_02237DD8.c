@@ -1156,7 +1156,7 @@ static void ov104_02238D14(UnkStruct_ov104_0223BFFC *param0, Party *param1, u8 p
         v4 = Pokemon_GetValue(v6, MON_DATA_TYPE_2, NULL);
         v5 = Pokemon_GetValue(v6, MON_DATA_ABILITY, NULL);
 
-        if ((v3 == TYPE_FIRE) || (v4 == TYPE_FIRE) || (v5 == ABILITY_WATER_VEIL)) {
+        if ((v3 == TYPE_FIRE) || (v4 == TYPE_FIRE) || (v5 == ABILITY_WATER_VEIL) || (v5 == ABILITY_WATER_BUBBLE)) {
             v1++;
         } else {
             v2 = MON_CONDITION_BURN;

@@ -1033,6 +1033,13 @@
         "Reduces damage done\n",
         "to allies."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00148",
+      "en_US": [
+        "Halves fire damage and\n",
+        "boosts Water-type moves."
+      ]
     }
   ]
 }
