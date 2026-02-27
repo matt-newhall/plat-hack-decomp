@@ -8645,6 +8645,27 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
         "scattered poison spikes!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_QuickDrawTriggered_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "let it move first!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_QuickDrawTriggered_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 5, 1, 0} let it move first!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_QuickDrawTriggered_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 5, 1, 0} let it move first!"
+      ]
     }
   ]
 }

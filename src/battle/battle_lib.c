@@ -573,6 +573,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
     case BATTLEMON_IS_TIGHTENED_FOCUS:
         return battleMon->isTightenedFocus;
 
+    case BATTLEMON_QUICK_DRAW:
+        return battleMon->moveEffectsData.quickDraw;
+
     case BATTLEMON_TEMP:
         return BattleMon_Get(battleCtx, battler, battleCtx->scriptTemp, buf);
 
@@ -925,6 +928,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 
     case BATTLEMON_IS_TIGHTENED_FOCUS:
         mon->isTightenedFocus = *(u8 *)buf;
+        break;
+
+    case BATTLEMON_QUICK_DRAW:
+        mon->moveEffectsData.quickDraw = *(u8 *)buf;
         break;
 
     case BATTLEMON_FORM_NUM:
@@ -1286,6 +1293,16 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed *= 2;
     }
 
+    if (battler1Ability == ABILITY_QUICK_DRAW) {
+        if (BattleSystem_RandNext(battleSys) % 10 < 3) {
+            battler1QuickClaw = 1;
+
+            if (ignoreQuickClaw == FALSE) {
+                battleCtx->battleMons[battler1].moveEffectsData.quickDraw = 1;
+            }
+        }
+    }
+
     if (battler1ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
         if (battleCtx->speedRand[battler1] % (100 / battler1ItemParam) == 0) {
             battler1QuickClaw = 1;
@@ -1353,6 +1370,16 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler2)] & SIDE_CONDITION_TAILWIND
         || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && BattleSystem_GetBattlerSide(battleSys, battler2) == BATTLER_THEM)) {
         battler2Speed *= 2;
+    }
+
+    if (battler2Ability == ABILITY_QUICK_DRAW) {
+        if (BattleSystem_RandNext(battleSys) % 10 < 3) {
+            battler2QuickClaw = 1;
+
+            if (ignoreQuickClaw == FALSE) {
+                battleCtx->battleMons[battler2].moveEffectsData.quickDraw = 1;
+            }
+        }
     }
 
     if (battler2ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
@@ -1450,21 +1477,21 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
             result = COMPARE_SPEED_FASTER;
         } else if (isBattler1Stalled && isBattler2Stalled) {
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
-            if (battler1Speed > battler2Speed) {
-                result = COMPARE_SPEED_SLOWER;
+                if (battler1Speed > battler2Speed) {
+                    result = COMPARE_SPEED_SLOWER;
                 }
 
                 if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
-                result = COMPARE_SPEED_TIE;
-            }
+                    result = COMPARE_SPEED_TIE;
+                }
             } else {
                 if (battler1Speed < battler2Speed) {
-            result = COMPARE_SPEED_SLOWER;
+                    result = COMPARE_SPEED_SLOWER;
                 }
 
                 if (battler1Speed == battler2Speed && (BattleSystem_RandNext(battleSys) & 1)) {
-                result = COMPARE_SPEED_TIE;
-            }
+                    result = COMPARE_SPEED_TIE;
+                }
             }
         } else if (isBattler1Stalled && isBattler2Stalled == FALSE) {
             result = COMPARE_SPEED_SLOWER;

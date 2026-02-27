@@ -612,6 +612,10 @@
     {
       "id": "pl_msg_00000610_00152",
       "en_US": "Power Spot"
+    },
+    {
+      "id": "pl_msg_00000610_00153",
+      "en_US": "Quick Draw"
     }
   ]
 }

@@ -32,6 +32,7 @@ typedef struct MoveEffectsData {
     u32 micleBerry : 1;
     u32 custapBerry : 1;
     u32 quickClaw : 1;
+    u32 quickDraw : 1;
     u32 meFirst : 1;
     u32 padding0004_1F : 1;
 
