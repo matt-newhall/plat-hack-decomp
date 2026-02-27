@@ -613,4 +613,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Powers up moves used\nby allies.</language>
 	</row>
+	<row id="pl_msg_00000612_00153" index="153">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The Pokémon occasionally\nmoves first.</language>
+	</row>
 </body>
