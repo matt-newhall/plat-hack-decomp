@@ -4815,6 +4815,18 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             result = TRUE;
         }
         break;
+
+    case ABILITY_PERISH_BODY:
+        if (ATTACKING_MON.curHP
+            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+            && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && (!(ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_PERISH_SONG))
+            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            *subscript= subscript_perish_body;
+            result = TRUE;
+        }
+        break;
     }
 
     return result;

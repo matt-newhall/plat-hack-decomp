@@ -1075,6 +1075,13 @@
         "The Pokémon occasionally\n",
         "moves first."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00154",
+      "en_US": [
+        "Contact with the Pokémon\n",
+        "initiates Perish Song."
+      ]
     }
   ]
 }

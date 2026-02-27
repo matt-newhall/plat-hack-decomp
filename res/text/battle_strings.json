@@ -8666,6 +8666,55 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s\n",
         "{STRVAR_1 5, 1, 0} let it move first!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyTriggered",
+      "en_US": [
+        "Both Pokémon will faint\n",
+        "in three turns!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyCountdown_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} will faint\n",
+        "in three turns!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyCountdown_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} will\n",
+        "faint in three turns!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyCountdown_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} will\n",
+        "faint in three turns!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyUnleashed_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "was unleashed!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyUnleashed_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "was unleashed!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PerishBodyUnleashed_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "was unleashed!"
+      ]
     }
   ]
 }

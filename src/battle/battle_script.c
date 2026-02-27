@@ -317,6 +317,7 @@ static BOOL BtlCmd_FocusPunchFailed(BattleSystem *battleSys, BattleContext *batt
 static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -9376,6 +9377,47 @@ static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battle
     }
 
     return 0;
+}
+
+/**
+ * @brief Try to execute the Perish Song effect.
+ *
+ * This command will loop over all active battlers and attempt to apply Perish
+ * Song to each of them, setting their "perish count" to 3 turns. It will not
+ * reset the perish count for any of these active battlers, nor will it affect
+ * any battler with Soundproof.
+ *
+ * CompareVarToValue there are no active battlers which could be affected and do not have an
+ * active perish count, then this command will fail.
+ *
+ * Inputs:
+ * 1. The distance to jump if the effect fails to execute.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+    int jumpOnAttackerOnly = BattleScript_Read(battleCtx);
+
+    if (battleCtx->battleMons[battleCtx->attacker].moveEffectsData.perishSongTurns == 0 && battleCtx->attacker != battleCtx->defender) {
+        battleCtx->battleMons[battleCtx->attacker].moveEffectsMask |= MOVE_EFFECT_PERISH_SONG;
+        battleCtx->battleMons[battleCtx->attacker].moveEffectsData.perishSongTurns = 3;
+
+        if (battleCtx->battleMons[battleCtx->defender].moveEffectsData.perishSongTurns == 0) {
+            battleCtx->battleMons[battleCtx->defender].moveEffectsMask |= MOVE_EFFECT_PERISH_SONG;
+            battleCtx->battleMons[battleCtx->defender].moveEffectsData.perishSongTurns = 3;
+        } else {
+            BattleScript_Iter(battleCtx, jumpOnAttackerOnly);
+        }
+    } else {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
 }
 
 /**
