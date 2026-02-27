@@ -5689,6 +5689,8 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
         attackerData[i] = defenderData[i];
     }
 
+    ATTACKING_MON.gender = DEFENDING_MON.gender;
+
     ATTACKING_MON.weatherAbilityAnnounced = FALSE;
     ATTACKING_MON.intimidateAnnounced = FALSE;
     ATTACKING_MON.downloadAnnounced = FALSE;
