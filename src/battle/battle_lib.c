@@ -7627,11 +7627,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         if ((sideConditions & SIDE_CONDITION_REFLECT) != FALSE
             && criticalMul == 1
-            && (
-                MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS
-                || ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT) == 0
-                    && Battler_Ability(battleCtx, attacker) != ABILITY_SCRAPPY)
-            )) {
+            && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
             if (battleType & BATTLE_TYPE_DOUBLES) {
                 damage = damage * 2 / 3;
             } else {
@@ -7673,11 +7669,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         if ((sideConditions & SIDE_CONDITION_LIGHT_SCREEN) != FALSE
             && criticalMul == 1
-            && (
-                MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS
-                || ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT) == 0
-                    && Battler_Ability(battleCtx, attacker) != ABILITY_SCRAPPY)
-            )) {
+            && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
             if (battleType & BATTLE_TYPE_DOUBLES) {
                 damage = damage * 2 / 3;
             } else {
