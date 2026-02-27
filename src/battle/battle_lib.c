@@ -4471,6 +4471,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 }
             }
 
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             battleCtx->switchInCheckState++;
             break;
 
