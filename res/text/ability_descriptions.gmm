@@ -617,4 +617,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The Pokémon occasionally\nmoves first.</language>
 	</row>
+	<row id="pl_msg_00000612_00154" index="154">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Contact with the Pokémon\ninitiates Perish Song.</language>
+	</row>
 </body>

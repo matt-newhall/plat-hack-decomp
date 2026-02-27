@@ -1275,4 +1275,10 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro TryPerishBody jump_if_fail jump_if_attacker
+    .long 232
+    .long (\jump_if_fail-.) / 4 - 2
+    .long (\jump_if_attacker-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
