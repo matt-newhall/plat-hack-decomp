@@ -629,4 +629,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Unnerve</language>
 	</row>
+	<row id="pl_msg_00000610_00157" index="157">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Anger Shell</language>
+	</row>
 </body>
