@@ -3435,7 +3435,8 @@ static void BattleControllerPlayer_UpdateHP(BattleSystem *battleSys, BattleConte
 
         if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
             && battleCtx->damage < 0
-            && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))) {
+            && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+            && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR)) {
             if (DEFENDING_MON.moveEffectsData.substituteHP + battleCtx->damage <= 0) {
                 ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt += DEFENDING_MON.moveEffectsData.substituteHP * -1;
                 DEFENDING_MON.statusVolatile &= ~VOLATILE_CONDITION_SUBSTITUTE;

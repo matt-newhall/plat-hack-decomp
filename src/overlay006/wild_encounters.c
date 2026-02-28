@@ -1373,10 +1373,15 @@ static u8 ModifyEncounterRateWithFieldParams(const BOOL isFishingEncounter, cons
                     newEncRate /= 2;
                 }
             } else if (encounterFieldParams->firstMonAbility == ABILITY_SNOW_CLOAK) {
-                if (weatherEffect == OVERWORLD_WEATHER_SNOWING || weatherEffect == OVERWORLD_WEATHER_HEAVY_SNOW || weatherEffect == OVERWORLD_WEATHER_BLIZZARD) {
+                if (weatherEffect == OVERWORLD_WEATHER_SNOWING
+                    || weatherEffect == OVERWORLD_WEATHER_HEAVY_SNOW
+                    || weatherEffect == OVERWORLD_WEATHER_BLIZZARD) {
                     newEncRate /= 2;
                 }
-            } else if (encounterFieldParams->firstMonAbility == ABILITY_WHITE_SMOKE || encounterFieldParams->firstMonAbility == ABILITY_QUICK_FEET || encounterFieldParams->firstMonAbility == ABILITY_STENCH) {
+            } else if (encounterFieldParams->firstMonAbility == ABILITY_INFILTRATOR
+                || encounterFieldParams->firstMonAbility == ABILITY_WHITE_SMOKE
+                || encounterFieldParams->firstMonAbility == ABILITY_QUICK_FEET
+                || encounterFieldParams->firstMonAbility == ABILITY_STENCH) {
                 newEncRate /= 8;
             }
         }

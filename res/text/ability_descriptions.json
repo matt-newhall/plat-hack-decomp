@@ -1082,6 +1082,13 @@
         "Contact with the Pokémon\n",
         "initiates Perish Song."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00155",
+      "en_US": [
+        "Passes through the foe’s\n",
+        "barriers to strike."
+      ]
     }
   ]
 }
