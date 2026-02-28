@@ -8739,6 +8739,27 @@
         "makes the foe nervous\f",
         "to eat Berries!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_AngerShellActivated_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s Anger Shell\n",
+        "activated!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AngerShellActivated_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "Anger Shell activated!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AngerShellActivated_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "Anger Shell activated!"
+      ]
     }
   ]
 }

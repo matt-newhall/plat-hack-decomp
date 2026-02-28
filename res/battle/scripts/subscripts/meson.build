@@ -311,4 +311,5 @@ subscript_files = files(
     'subscript_toxic_debris.s',
     'subscript_perish_body.s',
     'subscript_unnerve.s',
+    'subscript_anger_shell.s',
 )

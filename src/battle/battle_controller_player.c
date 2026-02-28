@@ -3786,6 +3786,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
+    AFTER_MOVE_EFFECT_ANGER_SHELL,
     AFTER_MOVE_EFFECT_HELD_ITEM_STATUS,
 
     AFTER_MOVE_EFFECT_END
@@ -3928,6 +3929,22 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
 
             return;
         }
+
+    case AFTER_MOVE_EFFECT_ANGER_SHELL:
+        battleCtx->afterMoveEffectState++;
+
+        if (battleCtx->defender != BATTLER_NONE
+            && DEFENDING_MON.curHP
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+            && Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_ANGER_SHELL
+            && DEFENDING_MON.curHP <= DEFENDING_MON.maxHP / 2
+            && (DEFENDING_MON.curHP
+                - DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken
+                - DEFENDER_SELF_TURN_FLAGS.specialDamageTaken) > DEFENDING_MON.maxHP / 2) {
+            DEFENDER_SELF_TURN_FLAGS.angerShellActivated = TRUE;
+        }
+
+        break;
 
     case AFTER_MOVE_EFFECT_HELD_ITEM_STATUS:
         int battler;
@@ -4990,6 +5007,7 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
     AFTER_MOVE_HIT_STATE_UPROAR,
+    AFTER_MOVE_HIT_STATE_ANGER_SHELL,
 
     AFTER_MOVE_HIT_STATE_END
 };
@@ -5142,6 +5160,21 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
                     machineState = STATE_BREAK_OUT;
                 }
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_ANGER_SHELL:
+            if (DEFENDER_SELF_TURN_FLAGS.angerShellActivated == TRUE) {
+                battleCtx->sideEffectMon = battleCtx->defender;
+                battleCtx->msgBattlerTemp = battleCtx->defender;
+
+                LOAD_SUBSEQ(subscript_anger_shell);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
             }
 
             battleCtx->afterMoveHitCheckState++;

@@ -1096,6 +1096,13 @@
         "Makes the foe nervous and\n",
         "unable to eat Berries."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00157",
+      "en_US": [
+        "Boosts offense and lowers\n",
+        "defenses under half HP."
+      ]
     }
   ]
 }
