@@ -3176,7 +3176,15 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
     } else {
         if ((battleCtx->sideEffectFlags & MOVE_SIDE_EFFECT_CANNOT_PREVENT) == FALSE) {
             if (battleCtx->attacker != battleCtx->sideEffectMon) {
-                if (battleCtx->sideConditions[Battler_Side(battleSys, battleCtx->sideEffectMon)].mistTurns) {
+                if (battleCtx->sideConditions[Battler_Side(battleSys, battleCtx->sideEffectMon)].mistTurns
+                    && (!(
+                        Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR
+                        && (
+                            battleCtx->sideEffectType == SIDE_EFFECT_TYPE_DIRECT
+                            || battleCtx->sideEffectType == SIDE_EFFECT_TYPE_MOVE_EFFECT
+                            || battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT
+                        )
+                    ))) {
                     battleCtx->msgBuffer.id = 273; // "{0} is protected by Mist!"
                     battleCtx->msgBuffer.tags = TAG_NICKNAME;
                     battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->sideEffectMon);
@@ -3229,7 +3237,9 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_SHIELD_DUST) == TRUE
                     && battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT) {
                     result = 1;
-                } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))) {
+                } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE
+                    && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+                    && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR)) {
                     result = 2;
                 }
             } else if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == 0) {
@@ -9823,7 +9833,8 @@ static BOOL BtlCmd_CheckSubstitute(BattleSystem *battleSys, BattleContext *battl
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
         || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT))
-        && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))) {
+        && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+        && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR && battleCtx->moveCur != MOVE_TRANSFORM)) {
         BattleScript_Iter(battleCtx, jumpSubActive);
     }
 
