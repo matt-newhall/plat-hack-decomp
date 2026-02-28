@@ -312,4 +312,5 @@ subscript_files = files(
     'subscript_perish_body.s',
     'subscript_unnerve.s',
     'subscript_anger_shell.s',
+    'subscript_wind_rider.s',
 )

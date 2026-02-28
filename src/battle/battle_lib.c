@@ -115,6 +115,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
     battleCtx->battleMons[battler].newlySwitched = FALSE;
     battleCtx->battleMons[battler].isTightenedFocus = FALSE;
+    battleCtx->battleMons[battler].windRiderSwitchIn = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -3722,6 +3723,26 @@ BOOL BattleSystem_IsSoundMove(u16 move) {
     return FALSE;
 };
 
+static u16 sWindMoves[] = {
+    MOVE_AEROBLAST,
+    MOVE_AIR_CUTTER,
+    MOVE_BLIZZARD,
+    MOVE_GUST,
+    MOVE_HEAT_WAVE,
+    MOVE_HURRICANE,
+    MOVE_ICY_WIND,
+    MOVE_TWISTER,
+    MOVE_WHIRLWIND
+};
+
+BOOL BattleSystem_IsWindMove(u16 move) {
+    for (int i = 0; sWindMoves[i] != 0; i++) {
+        if (sWindMoves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+};
+
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
     int subscript = NULL, moveType;
@@ -3756,6 +3777,12 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
         && moveType == TYPE_GRASS
         && attacker != defender) {
             subscript = subscript_absorb_and_attack_up_1_stage;
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WIND_RIDER) == TRUE) {
+        if (BattleSystem_IsWindMove(battleCtx->moveCur)) {
+            subscript = subscript_absorb_and_attack_up_1_stage;
+        }
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE
@@ -3901,6 +3928,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_MOLD_BREAKER,
     SWITCH_IN_CHECK_STATE_PRESSURE,
     SWITCH_IN_CHECK_STATE_UNNERVE,
+    SWITCH_IN_CHECK_STATE_WIND_RIDER,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
@@ -4482,6 +4510,33 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     subscript = subscript_unnerve;
                     result = TRUE;
                     break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
+            break;
+
+        case SWITCH_IN_CHECK_STATE_WIND_RIDER:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
+                if (battleCtx->battleMons[battler].windRiderSwitchIn == FALSE
+                    && battleCtx->battleMons[battler].curHP
+                    && Battler_Ability(battleCtx, battler) == ABILITY_WIND_RIDER) {
+                    battleCtx->battleMons[battler].windRiderSwitchIn = TRUE;
+
+                    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] & SIDE_CONDITION_TAILWIND
+                        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && Battler_Side(battleSys, battler) == BATTLER_THEM)) {
+                        battleCtx->sideEffectMon = battler;
+                        subscript = subscript_wind_rider;
+                        result = TRUE;
+                        break;
+                    }
                 }
             }
 

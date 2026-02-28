@@ -8783,6 +8783,27 @@
         "{STRVAR_1 6, 1, 0} was bounced back by\f",
         "Magic Bounce!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_WindRiderTailwindTriggered_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} rides the\n",
+        "wind!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_WindRiderTailwindTriggered_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}\n",
+        "rides the wind!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_WindRiderTailwindTriggered_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}\n",
+        "rides the wind!"
+      ]
     }
   ]
 }

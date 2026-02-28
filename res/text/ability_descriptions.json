@@ -1110,6 +1110,13 @@
         "Reflects status-changing\n",
         "moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00159",
+      "en_US": [
+        "Boosts Attack when hit by\n",
+        "a wind move or Tailwind."
+      ]
     }
   ]
 }
