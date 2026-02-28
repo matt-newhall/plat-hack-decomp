@@ -317,6 +317,7 @@ static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCo
 static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -608,7 +609,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_TriggerAttackerAbilityOnHit,
     BtlCmd_TryToxicDebris,
     BtlCmd_TryPerishBody,
-    BtlCmd_CheckUnnerve
+    BtlCmd_CheckUnnerve,
+    BtlCmd_CheckPowderImmunity
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -9690,6 +9692,55 @@ static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCt
 
     if (unnerveCount > 0) {
         BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
+}
+
+static const u16 sPowderMoves[] = {
+    MOVE_COTTON_SPORE,
+    MOVE_POISON_POWDER,
+    MOVE_SLEEP_POWDER,
+    MOVE_SPORE,
+    MOVE_STUN_SPORE
+};
+
+/**
+ * @brief Checks if the given battler is immune to powder moves (Grass-type or Overcoat).
+ * Jumps if immune.
+ *
+ * Inputs:
+ * 1. Battler to check
+ * 2. GoTo distance if immune
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jump = BattleScript_Read(battleCtx);
+    int i;
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+
+    BOOL isPowderMove = FALSE;
+    for (i = 0; i < NELEMS(sPowderMoves); i++) {
+        if (battleCtx->moveCur == sPowderMoves[i]) {
+            isPowderMove = TRUE;
+        }
+    }
+
+    if (!isPowderMove) {
+        return FALSE;
+    }
+
+    if (BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL) == TYPE_GRASS
+        || BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL) == TYPE_GRASS
+        || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_OVERCOAT) == TRUE) {
+        BattleScript_Iter(battleCtx, jump);
     }
 
     return FALSE;

@@ -1286,4 +1286,10 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro CheckPowderImmunity battler, jump
+    .long 234
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC
