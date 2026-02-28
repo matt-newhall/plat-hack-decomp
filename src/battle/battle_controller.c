@@ -3105,7 +3105,10 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
     }
 
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
-        && DEFENDER_TURN_FLAGS.magicCoat
+        && (
+            DEFENDER_TURN_FLAGS.magicCoat
+            || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_MAGIC_BOUNCE)
+        )
         && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_MAGIC_COAT)) {
         battleCtx->moveProtect[battleCtx->attacker] = FALSE;
         battleCtx->movePrevByBattler[battleCtx->attacker] = battleCtx->moveTemp;
@@ -3121,11 +3124,6 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
 
         BattleSystem_DecPPForPressure(battleCtx, battleCtx->defender, battleCtx->attacker);
         return TRUE;
-    }
-
-    // Can't steal the same move twice
-    if (battleCtx->moveIsStolen) {
-        return FALSE;
     }
 
     for (i = 0; i < maxBattlers; i++) {

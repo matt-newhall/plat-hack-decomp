@@ -633,4 +633,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Anger Shell</language>
 	</row>
+	<row id="pl_msg_00000610_00158" index="158">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Magic Bounce</language>
+	</row>
 </body>

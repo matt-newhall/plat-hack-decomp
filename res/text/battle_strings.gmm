@@ -5242,4 +5242,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\nAnger Shell activated!</language>
 	</row>
+	<row id="pl_msg_00000368_01307" index="1307">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 6, 1, 0}\nwas bounced back by Magic Bounce!</language>
+	</row>
+	<row id="pl_msg_00000368_01308" index="1308">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 6, 1, 0} was bounced back by\fMagic Bounce!</language>
+	</row>
+	<row id="pl_msg_00000368_01309" index="1309">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 6, 1, 0} was bounced back by\fMagic Bounce!</language>
+	</row>
 </body>

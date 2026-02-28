@@ -633,4 +633,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Boosts offense and lowers\ndefenses under half HP.</language>
 	</row>
+	<row id="pl_msg_00000612_00158" index="158">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Reflects status-changing\nmoves.</language>
+	</row>
 </body>
