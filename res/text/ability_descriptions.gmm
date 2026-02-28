@@ -637,4 +637,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Reflects status-changing\nmoves.</language>
 	</row>
+	<row id="pl_msg_00000612_00159" index="159">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts Attack when hit by\nwind move or Tailwind.</language>
+	</row>
 </body>

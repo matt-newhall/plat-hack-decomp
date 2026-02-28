@@ -5254,4 +5254,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s\n{STRVAR_1 6, 1, 0} was bounced back by\fMagic Bounce!</language>
 	</row>
+	<row id="pl_msg_00000368_01310" index="1310">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} rides the\nwind!</language>
+	</row>
+	<row id="pl_msg_00000368_01311" index="1311">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}\nrides the wind!</language>
+	</row>
+	<row id="pl_msg_00000368_01312" index="1312">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}\nrides the wind!</language>
+	</row>
 </body>

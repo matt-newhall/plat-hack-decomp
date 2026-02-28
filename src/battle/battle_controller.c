@@ -3757,6 +3757,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_SYNCHRONIZE_STATUS,
     AFTER_MOVE_EFFECT_TRIGGER_SWITCH_IN_EFFECTS,
     AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN,
+    AFTER_MOVE_EFFECT_TAILWIND,
     AFTER_MOVE_EFFECT_KNOCK_OFF,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
@@ -3842,6 +3843,41 @@ static void BattleController_AfterMoveEffects(BattleSystem *battleSys, BattleCon
         }
 
         battleCtx->afterMoveEffectState++;
+
+    case AFTER_MOVE_EFFECT_TAILWIND:
+        if (battleCtx->moveCur == MOVE_TAILWIND && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
+            int battler;
+            BOOL result = FALSE;
+
+            while (battleCtx->afterMoveEffectTemp < BattleSystem_MaxBattlers(battleSys)) {
+                battler = battleCtx->monSpeedOrder[battleCtx->afterMoveEffectTemp];
+
+                if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
+                    battleCtx->afterMoveEffectTemp++;
+                    continue;
+                }
+
+                battleCtx->afterMoveEffectTemp++;
+
+                if (Battler_Ability(battleCtx, battler) == ABILITY_WIND_RIDER
+                    && Battler_Side(battleSys, battleCtx->attacker) == Battler_Side(battleSys, battler)) {
+                    battleCtx->sideEffectMon = battler;
+
+                    LOAD_SUBSEQ(subscript_wind_rider);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+            }
+
+            battleCtx->afterMoveEffectState++;
+            battleCtx->afterMoveEffectTemp = 0;
+            break;
+        } else {
+            battleCtx->afterMoveEffectState++;
+            break;
+        }
 
     case AFTER_MOVE_EFFECT_KNOCK_OFF:
         battleCtx->afterMoveEffectState++;
