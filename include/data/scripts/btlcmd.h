@@ -238,6 +238,7 @@ ScriptCommand(BTLCMD_TRYREGENERATORONSWITCH,      BtlCmd_TryRegeneratorOnSwitch)
 ScriptCommand(BTLCMD_TRIGGERATTACKERABILITYONHIT, BtlCmd_TriggerAttackerAbilityOnHit)
 ScriptCommand(BTLCMD_TRYTOXICDEBRIS,              BtlCmd_TryToxicDebris)
 ScriptCommand(BTLCMD_TRYPERISHBODY,               BtlCmd_TryPerishBody)
+ScriptCommand(BTLCMD_CHECKUNNERVE,                BtlCmd_CheckUnnerve)
 
 // clang-format on
 

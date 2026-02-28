@@ -310,4 +310,5 @@ subscript_files = files(
     'subscript_absorb_and_attack_up_1_stage.s',
     'subscript_toxic_debris.s',
     'subscript_perish_body.s',
+    'subscript_unnerve.s',
 )

@@ -104,6 +104,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 
     battleCtx->battleMons[battler].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battler].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battler].unnerveAnnounced = FALSE;
     battleCtx->battleMons[battler].downloadAnnounced = FALSE;
     battleCtx->battleMons[battler].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battler].forewarnAnnounced = FALSE;
@@ -1313,7 +1314,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    if (battler1ItemEffect == HOLD_EFFECT_PINCH_PRIORITY) {
+    if (battler1ItemEffect == HOLD_EFFECT_PINCH_PRIORITY && Battler_Ability(battleCtx, battler2) != ABILITY_UNNERVE) {
         if (Battler_Ability(battleCtx, battler1) == ABILITY_GLUTTONY) {
             battler1ItemParam /= 2;
         }
@@ -1392,7 +1393,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    if (battler2ItemEffect == HOLD_EFFECT_PINCH_PRIORITY) {
+    if (battler2ItemEffect == HOLD_EFFECT_PINCH_PRIORITY && Battler_Ability(battleCtx, battler1) != ABILITY_UNNERVE) {
         if (Battler_Ability(battleCtx, battler2) == ABILITY_GLUTTONY) {
             battler2ItemParam /= 2;
         }
@@ -3899,6 +3900,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_SLOW_START,
     SWITCH_IN_CHECK_STATE_MOLD_BREAKER,
     SWITCH_IN_CHECK_STATE_PRESSURE,
+    SWITCH_IN_CHECK_STATE_UNNERVE,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
@@ -4456,6 +4458,29 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     battleCtx->msgBattlerTemp = battler;
                     subscript = subscript_pressure;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
+            break;
+
+        case SWITCH_IN_CHECK_STATE_UNNERVE:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
+                if (battleCtx->battleMons[battler].unnerveAnnounced == FALSE
+                    && battleCtx->battleMons[battler].curHP
+                    && Battler_Ability(battleCtx, battler) == ABILITY_UNNERVE) {
+                    battleCtx->battleMons[battler].unnerveAnnounced = TRUE;
+                    battleCtx->msgBattlerTemp = battler;
+                    subscript = subscript_unnerve;
+                    result = TRUE;
                     break;
                 }
             }
@@ -5109,6 +5134,15 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
     int itemPower = Battler_HeldItemPower(battleCtx, battler, ITEM_POWER_CHECK_ALL);
     int divisor = (Battler_Ability(battleCtx, battler) == ABILITY_GLUTTONY) ? 2 : 4;
 
+    int unnerveCount = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_UNNERVE);
+
+    if (unnerveCount > 0
+        && !(itemEffect == HOLD_EFFECT_STATDOWN_RESTORE
+        || itemEffect == HOLD_EFFECT_HEAL_INFATUATION
+        || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
+        return FALSE;
+    }
+
     if (battleCtx->battleMons[battler].curHP) {
         switch (itemEffect) {
         case HOLD_EFFECT_HP_RESTORE:
@@ -5503,6 +5537,15 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
     int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
     int itemPower = Battler_HeldItemPower(battleCtx, battler, ITEM_POWER_CHECK_ALL);
     int divisor = (Battler_Ability(battleCtx, battler) == ABILITY_GLUTTONY) ? 2 : 4;
+
+    int unnerveCount = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_UNNERVE);
+
+    if (unnerveCount > 0
+        && !(itemEffect == HOLD_EFFECT_STATDOWN_RESTORE
+        || itemEffect == HOLD_EFFECT_HEAL_INFATUATION
+        || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
+        return FALSE;
+    }
 
     if (battleCtx->battleMons[battler].curHP) {
         switch (itemEffect) {
@@ -5920,6 +5963,15 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
     int itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->defender);
     int itemPower = Battler_HeldItemPower(battleCtx, battleCtx->defender, 0);
     int side = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
+
+    int unnerveCount = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->defender, ABILITY_UNNERVE);
+
+    if (unnerveCount > 0
+        && !(itemEffect == HOLD_EFFECT_RECOIL_PHYSICAL
+        || itemEffect == HOLD_EFFECT_RECOIL_SPECIAL
+        || itemEffect == HOLD_EFFECT_HP_RESTORE_SE)) {
+        return FALSE;
+    }
 
     switch (itemEffect) {
     case HOLD_EFFECT_DMG_USER_CONTACT_XFR:
@@ -8044,6 +8096,8 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
     int defenderItemPower = Battler_HeldItemPower(battleCtx, battleCtx->defender, ITEM_POWER_CHECK_ALL);
     int attackingSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
 
+    int unnerveCount = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->defender, ABILITY_UNNERVE);
+
     if (attackerItemEffect == HOLD_EFFECT_HP_RESTORE_ON_DMG
         && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
         && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
@@ -8070,6 +8124,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 
     if (defenderItemEffect == HOLD_EFFECT_RECOIL_PHYSICAL
         && battleCtx->battleMons[battleCtx->attacker].curHP
+        && unnerveCount > 0
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
         && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken
             || (DEFENDER_TURN_FLAGS.physicalDamageLastAttacker == battleCtx->attacker && battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM)))) {
@@ -8080,6 +8135,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 
     if (defenderItemEffect == HOLD_EFFECT_RECOIL_SPECIAL
         && battleCtx->battleMons[battleCtx->attacker].curHP
+        && unnerveCount > 0
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
         && (DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
             || (DEFENDER_TURN_FLAGS.specialDamageLastAttacker == battleCtx->attacker && battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM)))) {

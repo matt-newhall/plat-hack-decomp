@@ -1284,6 +1284,11 @@
     .long (\jump_if_attacker-.) / 4 - 1
     .endm
 
+    .macro CheckUnnerve jump_if_fail
+    .long BTLCMD_CHECKUNNERVE
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

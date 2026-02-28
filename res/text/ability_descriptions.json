@@ -1089,6 +1089,13 @@
         "Passes through the foe’s\n",
         "barriers to strike."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00156",
+      "en_US": [
+        "Makes the foe nervous and\n",
+        "unable to eat Berries."
+      ]
     }
   ]
 }

@@ -8715,6 +8715,30 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
         "was unleashed!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_UnnerveAnnounced_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "makes the foe nervous\f",
+        "to eat Berries!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_UnnerveAnnounced_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "makes the foe nervous\f",
+        "to eat Berries!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_UnnerveAnnounced_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
+        "makes the foe nervous\f",
+        "to eat Berries!"
+      ]
     }
   ]
 }
