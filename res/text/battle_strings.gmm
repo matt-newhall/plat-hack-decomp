@@ -5218,4 +5218,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nwas unleashed!</language>
 	</row>
+	<row id="pl_msg_00000368_01301" index="1301">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nmakes the foe nervous\fto eat Berries!</language>
+	</row>
+	<row id="pl_msg_00000368_01302" index="1302">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nmakes the foe nervous\fto eat Berries!</language>
+	</row>
+	<row id="pl_msg_00000368_01303" index="1303">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\nmakes the foe nervous\fto eat Berries!</language>
+	</row>
 </body>

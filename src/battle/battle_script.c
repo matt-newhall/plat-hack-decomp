@@ -316,6 +316,7 @@ static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext
 static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -606,7 +607,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_TryRegeneratorOnSwitch,
     BtlCmd_TriggerAttackerAbilityOnHit,
     BtlCmd_TryToxicDebris,
-    BtlCmd_TryPerishBody
+    BtlCmd_TryPerishBody,
+    BtlCmd_CheckUnnerve
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -5703,6 +5705,7 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
 
     ATTACKING_MON.weatherAbilityAnnounced = FALSE;
     ATTACKING_MON.intimidateAnnounced = FALSE;
+    ATTACKING_MON.unnerveAnnounced = FALSE;
     ATTACKING_MON.downloadAnnounced = FALSE;
     ATTACKING_MON.anticipationAnnounced = FALSE;
     ATTACKING_MON.forewarnAnnounced = FALSE;
@@ -7667,6 +7670,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
 
     battleCtx->battleMons[battleCtx->defender].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].unnerveAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].forewarnAnnounced = FALSE;
@@ -7676,6 +7680,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
 
     battleCtx->battleMons[battleCtx->attacker].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].unnerveAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].forewarnAnnounced = FALSE;
@@ -9657,6 +9662,30 @@ static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleC
             BattleScript_Iter(battleCtx, jumpOnAttackerOnly);
         }
     } else {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check if the defender is facing any foes with Unnerve.
+ *
+ * Inputs:
+ * 1. The distance to jump if the effect fails to execute.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    int unnerveCount = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->defender, ABILITY_UNNERVE);
+
+    if (unnerveCount > 0) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
 

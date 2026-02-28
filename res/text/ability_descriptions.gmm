@@ -625,4 +625,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Passes through the foe’s\nbarriers to strike.</language>
 	</row>
+	<row id="pl_msg_00000612_00156" index="156">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Makes the foe nervous and\nunable to eat Berries.</language>
+	</row>
 </body>
