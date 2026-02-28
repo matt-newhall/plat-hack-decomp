@@ -3099,12 +3099,19 @@ static BOOL BattleController_MoveStolen(BattleSystem *battleSys, BattleContext *
         return FALSE;
     }
 
+    // Can't steal the same move twice
+    if (battleCtx->moveIsStolen) {
+        return FALSE;
+    }
+
     if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
         && DEFENDER_TURN_FLAGS.magicCoat
         && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_CAN_MAGIC_COAT)) {
         battleCtx->moveProtect[battleCtx->attacker] = FALSE;
         battleCtx->movePrevByBattler[battleCtx->attacker] = battleCtx->moveTemp;
         battleCtx->movePrev = battleCtx->moveTemp;
+
+        battleCtx->moveIsStolen = TRUE;
 
         battleCtx->battleStatusMask |= SYSCTL_REUSE_LAST_MOVE;
 
