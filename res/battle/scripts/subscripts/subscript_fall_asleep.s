@@ -31,14 +31,7 @@ _077:
 
 _087:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _094
-    CompareVarToValue OPCODE_EQU, BTLVAR_CURRENT_MOVE, MOVE_SPORE, _090
-    CompareVarToValue OPCODE_EQU, BTLVAR_CURRENT_MOVE, MOVE_SLEEP_POWDER, _090
-    GoTo _091
-
-_090:
-    CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_TYPE_1, TYPE_GRASS, _202
-    CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_TYPE_2, TYPE_GRASS, _202
-    CheckIgnorableAbility CHECK_HAVE, BTLSCR_DEFENDER, ABILITY_OVERCOAT, _202
+    CheckPowderImmunity BTLSCR_DEFENDER, _202
 
 _091:
     PrintAttackMessage 
@@ -118,9 +111,6 @@ _202:
 _221:
     // {0} stayed awake because of its {1}!
     PrintMessage BattleStrings_Text_PokemonStayedAwakeBecauseOfItsAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
-    GoTo _330
-    // {0}’s {1} suppressed {2}’s {3}!
-    PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
     GoTo _330
 
 _237:

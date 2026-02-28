@@ -1289,6 +1289,12 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro CheckPowderImmunity battler, jump
+    .long BTLCMD_CHECKPOWDERIMMUNITY
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

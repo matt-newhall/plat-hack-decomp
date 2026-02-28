@@ -239,6 +239,7 @@ ScriptCommand(BTLCMD_TRIGGERATTACKERABILITYONHIT, BtlCmd_TriggerAttackerAbilityO
 ScriptCommand(BTLCMD_TRYTOXICDEBRIS,              BtlCmd_TryToxicDebris)
 ScriptCommand(BTLCMD_TRYPERISHBODY,               BtlCmd_TryPerishBody)
 ScriptCommand(BTLCMD_CHECKUNNERVE,                BtlCmd_CheckUnnerve)
+ScriptCommand(BTLCMD_CHECKPOWDERIMMUNITY,         BtlCmd_CheckPowderImmunity)
 
 // clang-format on
 
