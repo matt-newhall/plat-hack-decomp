@@ -1298,4 +1298,8 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CopyWithCostar
+    .long 236
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

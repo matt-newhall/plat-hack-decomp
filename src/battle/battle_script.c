@@ -319,6 +319,7 @@ static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleC
 static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -612,7 +613,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_TryPerishBody,
     BtlCmd_CheckUnnerve,
     BtlCmd_CheckPowderImmunity,
-    BtlCmd_CheckSleepAbilityImmunity
+    BtlCmd_CheckSleepAbilityImmunity,
+    BtlCmd_CopyWithCostar
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -5709,6 +5711,7 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
 
     ATTACKING_MON.weatherAbilityAnnounced = FALSE;
     ATTACKING_MON.intimidateAnnounced = FALSE;
+    ATTACKING_MON.costarAnnounced = FALSE;
     ATTACKING_MON.unnerveAnnounced = FALSE;
     ATTACKING_MON.downloadAnnounced = FALSE;
     ATTACKING_MON.anticipationAnnounced = FALSE;
@@ -7675,6 +7678,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
 
     battleCtx->battleMons[battleCtx->defender].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].costarAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].unnerveAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
@@ -7686,6 +7690,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
 
     battleCtx->battleMons[battleCtx->attacker].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].costarAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].unnerveAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
@@ -9789,6 +9794,29 @@ static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleCont
         && Battler_Ability(battleCtx, battler) == ABILITY_LEAF_GUARD) {
         BattleScript_Iter(battleCtx, jumpImmune);
     }
+
+    return FALSE;
+}
+
+/**
+ * @brief Copies the target's stat stages and any Focus Energy state from ally.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int partner = BattleSystem_Partner(battleSys, battleCtx->attacker);
+
+    for (int i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
+        ATTACKING_MON.statBoosts[i] = battleCtx->battleMons[partner].statBoosts[i];
+    }
+
+    ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_FOCUS_ENERGY;
+    ATTACKING_MON.statusVolatile |= (battleCtx->battleMons[partner].statusVolatile & VOLATILE_CONDITION_FOCUS_ENERGY);
 
     return FALSE;
 }

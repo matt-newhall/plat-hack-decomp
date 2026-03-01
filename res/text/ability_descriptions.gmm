@@ -645,4 +645,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Prevents itself and allies\nfrom falling asleep.</language>
 	</row>
+	<row id="pl_msg_00000612_00161" index="161">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Copies stat changes of\nally when switching in.</language>
+	</row>
 </body>
