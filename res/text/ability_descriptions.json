@@ -1131,6 +1131,13 @@
         "Copies stat changes of\n",
         "ally when switching in."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00162",
+      "en_US": [
+        "Boosts the power of\n",
+        "sound-based moves."
+      ]
     }
   ]
 }

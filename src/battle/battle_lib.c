@@ -7682,6 +7682,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
+    for (i = 0; i < NELEMS(sSoundMoves); i++) {
+        if (sSoundMoves[i] == move && attackerParams.ability == ABILITY_PUNK_ROCK) {
+            movePower = movePower * 13 / 10;
+            break;
+        }
+    }
+
     if (NO_CLOUD_NINE) {
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 15 / 10;
