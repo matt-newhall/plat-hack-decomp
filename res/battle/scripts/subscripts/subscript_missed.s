@@ -70,9 +70,15 @@ _134:
     GoTo _179
 
 _146:
-    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_ONE_HIT_KO_FAILED, _157
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_ONE_HIT_KO_FAILED, _150
     // {0} is unaffected!
     PrintMessage BattleStrings_Text_PokemonIsUnaffected_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
+    GoTo _179
+
+_150:
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_TELEPATHY, _157
+    // {0} avoids attacks by its ally Pokemon!
+    PrintMessage BattleStrings_Text_TelepathyTriggered_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
     GoTo _179
 
 _157:

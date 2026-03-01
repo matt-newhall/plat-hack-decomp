@@ -1145,6 +1145,13 @@
         "Copies the Ability of\n",
         "a defeated ally."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00164",
+      "en_US": [
+        "Anticipates an ally’s\n",
+        "attack and dodges it."
+      ]
     }
   ]
 }

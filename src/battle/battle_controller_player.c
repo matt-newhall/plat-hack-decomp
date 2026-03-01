@@ -3055,6 +3055,16 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
         return 0;
     }
 
+    int battleType = BattleSystem_GetBattleType(battleSys);
+
+    if ((battleType & BATTLE_TYPE_DOUBLES)
+        && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_TELEPATHY)
+        && BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) == BattleSystem_GetBattlerSide(battleSys, battleCtx->defender)
+        && (CURRENT_MOVE_DATA.class == CLASS_PHYSICAL || CURRENT_MOVE_DATA.class == CLASS_SPECIAL)) {
+        battleCtx->moveStatusFlags |= MOVE_STATUS_TELEPATHY;
+        return 0;
+    }
+
     if (battleCtx->turnFlags[defender].protecting
         && (MOVE_DATA(move).flags & MOVE_FLAG_CAN_PROTECT)
         && (move != MOVE_CURSE || Move_IsGhostCurse(battleCtx, move, attacker) == TRUE) // Ghost-Curse can be Protected

@@ -656,6 +656,10 @@
     {
       "id": "pl_msg_00000610_00163",
       "en_US": "Power of Alchemy"
+    },
+    {
+      "id": "pl_msg_00000610_00164",
+      "en_US": "Telepathy"
     }
   ]
 }
