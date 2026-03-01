@@ -292,6 +292,7 @@ Basic_CheckCannotSleep:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_INSOMNIA, ScoreMinus10
     IfLoadedEqualTo ABILITY_VITAL_SPIRIT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_SWEET_VEIL, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckCannotExplode:
@@ -1427,6 +1428,7 @@ Basic_CheckWorrySeed:
     IfLoadedEqualTo ABILITY_TRUANT, ScoreMinus10
     IfLoadedEqualTo ABILITY_INSOMNIA, ScoreMinus10
     IfLoadedEqualTo ABILITY_VITAL_SPIRIT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_SWEET_VEIL, ScoreMinus10
     IfLoadedEqualTo ABILITY_MULTITYPE, ScoreMinus10
 
     ; If the target is asleep and does not know either Sleep Talk or Snore, score -10.

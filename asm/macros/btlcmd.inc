@@ -1292,4 +1292,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CheckSleepAbilityImmunity battler, jump
+    .long 235
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

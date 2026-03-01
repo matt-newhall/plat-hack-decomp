@@ -2208,9 +2208,19 @@ static int BattleController_CheckObedience(BattleSystem *battleSys, BattleContex
 
     maxLevel = ATTACKING_MON.level - maxLevel;
     rand1 = BattleSystem_RandNext(battleSys) & 0xFF;
+    int partner = BATTLER_NONE;
+
+    if (battleType & BATTLE_TYPE_DOUBLES) {
+        partner = BattleSystem_Partner(battleSys, battleCtx->attacker);
+    }
+
     if ((rand1 < maxLevel && (ATTACKING_MON.status & MON_CONDITION_ANY) == FALSE)
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_VITAL_SPIRIT
+        && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_SWEET_VEIL
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_INSOMNIA
+        && !(partner != BATTLER_NONE
+            && (battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE
+            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, partner, ABILITY_SWEET_VEIL) == TRUE)
         && (battleCtx->fieldConditionsMask & FIELD_CONDITION_UPROAR) == FALSE) {
         *nextSeq = subscript_disobey_sleep;
         return OBEY_CHECK_DO_NOTHING;

@@ -5266,4 +5266,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0}\nrides the wind!</language>
 	</row>
+	<row id="pl_msg_00000368_01313" index="1313">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} stayed awake\nbecause of its ally’s Sweet Veil!</language>
+	</row>
+	<row id="pl_msg_00000368_01314" index="1314">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} stayed awake\nbecause of its ally’s Sweet Veil!</language>
+	</row>
+	<row id="pl_msg_00000368_01315" index="1315">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} stayed awake\nbecause of its ally’s Sweet Veil!</language>
+	</row>
 </body>

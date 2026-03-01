@@ -8208,8 +8208,19 @@ BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *b
         }
 
         u32 ability = Battler_Ability(battleCtx, battler);
-        if (ability == ABILITY_INSOMNIA || ability == ABILITY_VITAL_SPIRIT) {
+        if (ability == ABILITY_INSOMNIA || ability == ABILITY_SWEET_VEIL || ability == ABILITY_VITAL_SPIRIT) {
             return FALSE;
+        }
+
+        u32 battleType = BattleSystem_BattleType(battleSys);
+        if (battleType & BATTLE_TYPE_DOUBLES) {
+            int partner = BattleSystem_Partner(battleSys, battler);
+
+            if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
+                if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, partner, ABILITY_SWEET_VEIL) == TRUE) {
+                    return FALSE;
+                }
+            }
         }
 
         if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) {
