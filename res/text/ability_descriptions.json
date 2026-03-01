@@ -1124,6 +1124,13 @@
         "Prevents itself and allies\n",
         "from falling asleep."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00161",
+      "en_US": [
+        "Copies stat changes of\n",
+        "ally when switching in."
+      ]
     }
   ]
 }

@@ -241,6 +241,7 @@ ScriptCommand(BTLCMD_TRYPERISHBODY,               BtlCmd_TryPerishBody)
 ScriptCommand(BTLCMD_CHECKUNNERVE,                BtlCmd_CheckUnnerve)
 ScriptCommand(BTLCMD_CHECKPOWDERIMMUNITY,         BtlCmd_CheckPowderImmunity)
 ScriptCommand(BTLCMD_CHECKSLEEPABILITYIMMUNITY,   BtlCmd_CheckSleepAbilityImmunity)
+ScriptCommand(BTLCMD_COPYWITHCOSTAR,              BtlCmd_CopyWithCostar)
 
 // clang-format on
 

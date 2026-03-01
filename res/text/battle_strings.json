@@ -8825,6 +8825,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} stayed awake\n",
         "because of its ally’s Sweet Veil!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} copied\n",
+        "{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Wild",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} copied the wild\n",
+        "{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Foe",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} copied the foe’s\n",
+        "{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 1, 0}!"
+      ]
     }
   ]
 }

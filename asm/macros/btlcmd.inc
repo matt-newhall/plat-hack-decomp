@@ -1301,6 +1301,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CopyWithCostar
+    .long BTLCMD_COPYWITHCOSTAR
+    .endm
+
     .text
     .globl _start
 _start:
