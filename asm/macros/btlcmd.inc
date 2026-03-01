@@ -1302,4 +1302,9 @@
     .long 236
     .endm
 
+    .macro TryPowerOfAlchemy jump_if_fail
+    .long 237
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

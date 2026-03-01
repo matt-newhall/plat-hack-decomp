@@ -8640,12 +8640,14 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
     if (battleCtx->battleMons[defender1].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
         && battleCtx->battleMons[defender1].ability != ABILITY_FLOWER_GIFT
+        && battleCtx->battleMons[defender1].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
         && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
+        && battleCtx->battleMons[defender2].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
         // Both targets are eligible; choose randomly
         if (BattleSystem_RandNext(battleSys) & 1) {
@@ -8656,12 +8658,14 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
     } else if (battleCtx->battleMons[defender1].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender1].ability != ABILITY_TRACE
         && battleCtx->battleMons[defender1].ability != ABILITY_FLOWER_GIFT
+        && battleCtx->battleMons[defender1].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE) {
         trace = defender1;
     } else if (battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
         && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
+        && battleCtx->battleMons[defender2].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
         trace = defender2;
