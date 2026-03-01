@@ -657,4 +657,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Copies the Ability of\na defeated ally.</language>
 	</row>
+	<row id="pl_msg_00000612_00164" index="164">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Anticipates an ally’s\nattack and dodges it.</language>
+	</row>
 </body>

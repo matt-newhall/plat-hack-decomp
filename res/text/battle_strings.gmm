@@ -5290,4 +5290,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">{STRVAR_1 1, 0, 0} copied the foe’s\n{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 1, 0}!</language>
 	</row>
+	<row id="pl_msg_00000368_01319" index="1319">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} avoids attacks\nby its ally Pokémon!</language>
+	</row>
+	<row id="pl_msg_00000368_01320" index="1320">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} avoids\nattacks by its ally Pokémon!</language>
+	</row>
+	<row id="pl_msg_00000368_01321" index="1321">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} avoids\nattacks by its ally Pokémon!</language>
+	</row>
 </body>
