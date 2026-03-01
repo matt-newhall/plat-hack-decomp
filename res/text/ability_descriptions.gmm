@@ -649,4 +649,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Copies stat changes of\nally when switching in.</language>
 	</row>
+	<row id="pl_msg_00000612_00162" index="162">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts the power of\nsound-based moves.</language>
+	</row>
 </body>
