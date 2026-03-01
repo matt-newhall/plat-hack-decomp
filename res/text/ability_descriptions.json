@@ -1138,6 +1138,13 @@
         "Boosts the power of\n",
         "sound-based moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00163",
+      "en_US": [
+        "Copies the Ability of\n",
+        "a defeated ally."
+      ]
     }
   ]
 }

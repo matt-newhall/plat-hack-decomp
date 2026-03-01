@@ -25,6 +25,13 @@ _000:
     UpdateVarFromVar OPCODE_GET, BTLVAR_LAST_BATTLER_ID, BTLVAR_FAINTED_MON
 
 _066:
+    TryPowerOfAlchemy _072
+    // {0} acquired {1}!
+    PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
+    Wait
+    WaitButtonABTime 30
+
+_072:
     TryGrudge _076
     // {0}’s {1} lost all its PP due to the grudge!
     PrintMessage BattleStrings_Text_PokemonsMoveLostAllItsPPDueToTheGrudge_Ally, TAG_NICKNAME_MOVE, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP

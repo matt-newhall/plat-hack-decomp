@@ -322,6 +322,7 @@ static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCt
 static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -9586,6 +9587,63 @@ static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battle
     return FALSE;
 }
 
+/**
+ * @brief Try to copy the fainted ally's ability via Power of Alchemy.
+ *
+ * Triggers in doubles when the fainted mon's partner has Power of Alchemy, the
+ * partner is still alive, and the fainted mon's ability is one that can be
+ * copied. Sets msgBattlerTemp to the partner for message printing.
+ *
+ * Inputs:
+ * 1. The distance to jump if Power of Alchemy does not trigger.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    if (!(BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+        return FALSE;
+    }
+
+    int partner = BattleSystem_Partner(battleSys, battleCtx->faintedMon);
+
+    if (battleCtx->battleMons[partner].curHP == 0) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+        return FALSE;
+    }
+
+    u32 partnerAbility = Battler_Ability(battleCtx, partner);
+    if (partnerAbility != ABILITY_POWER_OF_ALCHEMY) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+        return FALSE;
+    }
+
+    u32 faintedAbility = FAINTED_MON.ability;
+
+    if (faintedAbility == ABILITY_NONE
+        || faintedAbility == ABILITY_WONDER_GUARD
+        || faintedAbility == ABILITY_MULTITYPE
+        || faintedAbility == ABILITY_FLOWER_GIFT
+        || faintedAbility == ABILITY_FORECAST
+        || faintedAbility == ABILITY_TRACE
+        || faintedAbility == ABILITY_POWER_OF_ALCHEMY) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+        return FALSE;
+    }
+
+    battleCtx->battleMons[partner].ability = faintedAbility;
+    BattleMon_CopyToParty(battleSys, battleCtx, partner);
+
+    battleCtx->msgBattlerTemp = partner;
+
+    return FALSE;
+}
 
 /**
  * @brief Triggers any held items when a move hits its target.

@@ -1305,6 +1305,11 @@
     .long BTLCMD_COPYWITHCOSTAR
     .endm
 
+    .macro TryPowerOfAlchemy jump_if_fail
+    .long BTLCMD_TRYPOWEROFALCHEMY
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:
