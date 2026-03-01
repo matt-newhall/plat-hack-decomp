@@ -6,6 +6,11 @@ _000:
     Wait 
     CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_INSOMNIA, _098
     CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_VITAL_SPIRIT, _098
+    CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_SWEET_VEIL, _098
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_TYPE, BATTLE_TYPE_DOUBLES, _015
+    CheckIgnorableAbility CHECK_HAVE, BTLSCR_ATTACKER_PARTNER, ABILITY_SWEET_VEIL, _099
+
+_015:
     CompareMonDataToValue OPCODE_FLAG_SET, BTLSCR_ATTACKER, BATTLEMON_STATUS, MON_CONDITION_SLEEP, _107
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_UPROAR, _115
     CheckIgnoreWeather _027
@@ -45,6 +50,12 @@ _098:
     WaitButtonABTime 30
     // {0} stayed awake because of its {1}!
     PrintMessage BattleStrings_Text_PokemonStayedAwakeBecauseOfItsAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_ATTACKER, BTLSCR_ATTACKER
+    GoTo _143
+
+_099:
+    WaitButtonABTime 30
+    // {0} stayed awake because of its ally’s Sweet Veil!
+    PrintMessage BattleStrings_Text_SweetVeilPartnerTriggered_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
     GoTo _143
 
 _107:

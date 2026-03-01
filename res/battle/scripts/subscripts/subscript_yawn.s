@@ -4,6 +4,11 @@
 _000:
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_INSOMNIA, _066
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_VITAL_SPIRIT, _066
+    CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_SWEET_VEIL, _066
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_TYPE, BATTLE_TYPE_DOUBLES, _015
+    CheckIgnorableAbility CHECK_HAVE, BTLSCR_DEFENDER_PARTNER, ABILITY_SWEET_VEIL, _067
+
+_015:
     CheckIgnoreWeather _021
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_SUNNY, _021
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_LEAF_GUARD, _066
@@ -35,6 +40,14 @@ _066:
     WaitButtonABTime 30
     // {0}’s {1} made it ineffective!
     PrintMessage BattleStrings_Text_PokemonsAbilityMadeItIneffective_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    GoTo _089
+
+_067:
+    PrintAttackMessage 
+    Wait 
+    WaitButtonABTime 30
+    // {0} stayed awake because of its ally’s Sweet Veil!
+    PrintMessage BattleStrings_Text_SweetVeilPartnerTriggered_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _089
 
 _077:

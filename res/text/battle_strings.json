@@ -8804,6 +8804,27 @@
         "The foe’s {STRVAR_1 1, 0, 0}\n",
         "rides the wind!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_SweetVeilPartnerTriggered_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} stayed awake\n",
+        "because of its ally’s Sweet Veil!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SweetVeilPartnerTriggered_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} stayed awake\n",
+        "because of its ally’s Sweet Veil!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SweetVeilPartnerTriggered_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} stayed awake\n",
+        "because of its ally’s Sweet Veil!"
+      ]
     }
   ]
 }

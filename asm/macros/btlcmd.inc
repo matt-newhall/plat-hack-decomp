@@ -1295,6 +1295,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CheckSleepAbilityImmunity battler, jump
+    .long BTLCMD_CHECKSLEEPABILITYIMMUNITY
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

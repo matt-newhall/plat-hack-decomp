@@ -240,6 +240,7 @@ ScriptCommand(BTLCMD_TRYTOXICDEBRIS,              BtlCmd_TryToxicDebris)
 ScriptCommand(BTLCMD_TRYPERISHBODY,               BtlCmd_TryPerishBody)
 ScriptCommand(BTLCMD_CHECKUNNERVE,                BtlCmd_CheckUnnerve)
 ScriptCommand(BTLCMD_CHECKPOWDERIMMUNITY,         BtlCmd_CheckPowderImmunity)
+ScriptCommand(BTLCMD_CHECKSLEEPABILITYIMMUNITY,   BtlCmd_CheckSleepAbilityImmunity)
 
 // clang-format on
 

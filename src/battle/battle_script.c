@@ -320,6 +320,7 @@ static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_TryPerishBody(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -9514,6 +9515,52 @@ static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *b
 }
 
 /**
+ * @brief Checks if the given battler is immune to sleep moves, via
+ * Leaf Guard in Sun, Vital Spirit, Insomnia or Sweet Veil.
+ * Jumps if immune.
+ *
+ * Inputs:
+ * 1. Battler to check
+ * 2. GoTo distance if immune
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpImmune = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+
+    if (Battler_Ability(battleCtx, battler) == ABILITY_INSOMNIA
+        || Battler_Ability(battleCtx, battler) == ABILITY_VITAL_SPIRIT
+        || Battler_Ability(battleCtx, battler) == ABILITY_SWEET_VEIL) {
+        BattleScript_Iter(battleCtx, jumpImmune);
+        return FALSE;
+    }
+
+    if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+        int partner = BattleSystem_GetPartner(battleSys, battler);
+        if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, partner, ABILITY_SWEET_VEIL) == TRUE) {
+            BattleScript_Iter(battleCtx, jumpImmune);
+            return FALSE;
+        }
+    }
+
+    if (NO_CLOUD_NINE
+        && WEATHER_IS_SUN
+        && Battler_Ability(battleCtx, battler) == ABILITY_LEAF_GUARD) {
+        BattleScript_Iter(battleCtx, jumpImmune);
+    }
+
+    return FALSE;
+}
+
+
+/**
  * @brief Triggers any held items when a move hits its target.
  *
  * Inputs:
@@ -11690,6 +11737,23 @@ static int BattleScript_Battler(BattleSystem *battleSys, BattleContext *battleCt
         for (battlerOut = 0; battlerOut < battlers; battlerOut++) {
             if (battlerOut != battleCtx->defender
                 && BattleSystem_GetBattlerSide(battleSys, battlerOut) == BattleSystem_GetBattlerSide(battleSys, battleCtx->defender)) {
+                break;
+            }
+        }
+
+        if (battlerOut == battlers) {
+            GF_ASSERT("FALSE");
+            battlerOut = 0;
+        }
+        break;
+    }
+
+    case BTLSCR_SIDE_EFFECT_MON_PARTNER: {
+        // must re-declare to match
+        int battlers = BattleSystem_MaxBattlers(battleSys);
+        for (battlerOut = 0; battlerOut < battlers; battlerOut++) {
+            if (battlerOut != battleCtx->sideEffectMon
+                && Battler_Side(battleSys, battlerOut) == Battler_Side(battleSys, battleCtx->sideEffectMon)) {
                 break;
             }
         }

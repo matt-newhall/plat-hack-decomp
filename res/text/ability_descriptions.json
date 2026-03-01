@@ -1117,6 +1117,13 @@
         "Boosts Attack when hit by\n",
         "a wind move or Tailwind."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00160",
+      "en_US": [
+        "Prevents itself and allies\n",
+        "from falling asleep."
+      ]
     }
   ]
 }
