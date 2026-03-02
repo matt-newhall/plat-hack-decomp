@@ -1291,10 +1291,11 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
             AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
         } else {
             // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
-                || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
-                || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP) {
-                AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].ability;
+            u8 knownAbility = Battler_Ability(battleCtx, battler);
+            if (knownAbility == ABILITY_SHADOW_TAG
+                || knownAbility == ABILITY_MAGNET_PULL
+                || knownAbility == ABILITY_ARENA_TRAP) {
+                AI_CONTEXT.calcTemp = knownAbility;
             } else {
                 // Try to guess the opponent's ability (flip a coin)
                 int ability1 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_1);
@@ -1314,7 +1315,7 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
             }
         }
     } else {
-        AI_CONTEXT.calcTemp = battleCtx->battleMons[battler].ability;
+        AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
     }
 }
 
@@ -1336,10 +1337,11 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
             AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
         } else {
             // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            if (battleCtx->battleMons[battler].ability == ABILITY_SHADOW_TAG
-                || battleCtx->battleMons[battler].ability == ABILITY_MAGNET_PULL
-                || battleCtx->battleMons[battler].ability == ABILITY_ARENA_TRAP) {
-                tmpAbility = battleCtx->battleMons[battler].ability;
+            u8 knownAbility = Battler_Ability(battleCtx, battler);
+            if (knownAbility == ABILITY_SHADOW_TAG
+                || knownAbility == ABILITY_MAGNET_PULL
+                || knownAbility == ABILITY_ARENA_TRAP) {
+                tmpAbility = knownAbility;
             } else {
                 // Try to guess the opponent's ability (flip a coin)
                 int ability1 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_1);
@@ -1362,7 +1364,7 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
             }
         }
     } else {
-        tmpAbility = battleCtx->battleMons[battler].ability;
+        tmpAbility = Battler_Ability(battleCtx, battler);
     }
 
     if (tmpAbility == ABILITY_NONE) {
@@ -3177,7 +3179,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         int monWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
 
-        if (battleCtx->battleMons[AI_CONTEXT.defender].ability == ABILITY_LIGHT_METAL) {
+        if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_LIGHT_METAL) {
             monWeight /= 2;
         }
 
@@ -3420,7 +3422,7 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
         return FALSE;
     }
 
-    if (battleCtx->battleMons[BATTLER_OPP(battler)].ability == ABILITY_WONDER_GUARD) {
+    if (Battler_Ability(battleCtx, BATTLER_OPP(battler)) == ABILITY_WONDER_GUARD) {
         // Check if we have a super-effective move against the opponent
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             move = battleCtx->battleMons[battler].moves[i];

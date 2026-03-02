@@ -3306,7 +3306,10 @@ BOOL BattleSystem_CanWhirlwind(BattleSystem *battleSys, BattleContext *battleCtx
 u8 Battler_Ability(BattleContext *battleCtx, int battler)
 {
     if (battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE) {
-        return ABILITY_NONE;
+        u8 rawAbility = battleCtx->battleMons[battler].ability;
+        if (rawAbility != ABILITY_NEUTRALIZING_GAS && rawAbility != ABILITY_MULTITYPE) {
+            return ABILITY_NONE;
+        }
     }
 
     if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED)
@@ -7988,7 +7991,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     attackerSpecies = battleCtx->battleMons[attacker].species;
     attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
     defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
-    attackerAbility = battleCtx->battleMons[attacker].ability;
+    attackerAbility = Battler_Ability(battleCtx, attacker);
     effectiveCritStage = (((attackerVolStatus & VOLATILE_CONDITION_FOCUS_ENERGY) != FALSE) * 2)
         + (itemEffect == HOLD_EFFECT_CRITRATE_UP)
         + criticalStage
@@ -8687,13 +8690,15 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         && battleCtx->battleMons[defender1].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender1].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
+        && battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
         && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender2].ability != ABILITY_POWER_OF_ALCHEMY
-        && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
+        && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE
+        && battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS) {
         // Both targets are eligible; choose randomly
         if (BattleSystem_RandNext(battleSys) & 1) {
             trace = defender2;
@@ -8705,14 +8710,16 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         && battleCtx->battleMons[defender1].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender1].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender1].curHP
-        && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE) {
+        && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
+        && battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS) {
         trace = defender1;
     } else if (battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
         && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender2].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender2].curHP
-        && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE) {
+        && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE
+        && battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS) {
         trace = defender2;
     }
 
