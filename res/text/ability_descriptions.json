@@ -1159,6 +1159,20 @@
         "Nullifies the effects\n",
         "of all abilities."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00166",
+      "en_US": [
+        "Boosts the Attack stat\n",
+        "when a stat is lowered."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00167",
+      "en_US": [
+        "Boosts the Sp. Atk stat\n",
+        "when a stat is lowered."
+      ]
     }
   ]
 }

@@ -3074,6 +3074,15 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] < MIN_STAT_STAGE) {
             mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] = MIN_STAT_STAGE;
         }
+
+        if (battleCtx->attacker != battleCtx->sideEffectMon
+            && BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) != BattleSystem_GetBattlerSide(battleSys, battleCtx->sideEffectMon)) {
+            if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_DEFIANT) == TRUE) {
+                battleCtx->battleStatusMask2 |= SYSCTL_DEFIANT_PENDING;
+            } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_COMPETITIVE) == TRUE) {
+                battleCtx->battleStatusMask2 |= SYSCTL_COMPETITIVE_PENDING;
+            }
+        }
     }
 
     return FALSE;

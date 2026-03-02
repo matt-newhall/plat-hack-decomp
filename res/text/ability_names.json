@@ -664,6 +664,14 @@
     {
       "id": "pl_msg_00000610_00165",
       "en_US": "NeutralizingGas"
+    },
+    {
+      "id": "pl_msg_00000610_00166",
+      "en_US": "Defiant"
+    },
+    {
+      "id": "pl_msg_00000610_00167",
+      "en_US": "Competitive"
     }
   ]
 }
