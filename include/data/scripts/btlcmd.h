@@ -243,6 +243,7 @@ ScriptCommand(BTLCMD_CHECKPOWDERIMMUNITY,         BtlCmd_CheckPowderImmunity)
 ScriptCommand(BTLCMD_CHECKSLEEPABILITYIMMUNITY,   BtlCmd_CheckSleepAbilityImmunity)
 ScriptCommand(BTLCMD_COPYWITHCOSTAR,              BtlCmd_CopyWithCostar)
 ScriptCommand(BTLCMD_TRYPOWEROFALCHEMY,           BtlCmd_TryPowerOfAlchemy)
+ScriptCommand(BTLCMD_TRIGGERNEUTRALIZINGGASWEAROFFSTEP, BtlCmd_TriggerNeutralizingGasWearOffStep)
 
 // clang-format on
 

@@ -1152,6 +1152,13 @@
         "Anticipates an ally’s\n",
         "attack and dodges it."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00165",
+      "en_US": [
+        "Nullifies the effects\n",
+        "of all abilities."
+      ]
     }
   ]
 }

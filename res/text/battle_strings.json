@@ -8867,6 +8867,33 @@
         "The foe’s {STRVAR_1 1, 0, 0} avoids\n",
         "attacks by its ally Pokémon!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_NeutralizingGasAnnounced_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} filled the air\n",
+        "with Neutralizing Gas!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_NeutralizingGasAnnounced_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} filled the air\n",
+        "with Neutralizing Gas!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_NeutralizingGasAnnounced_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} filled the air\n",
+        "with Neutralizing Gas!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AnnounceNeutralizingGasDisabled",
+      "en_US": [
+        "Neutralizing Gas wore off!"
+      ]
     }
   ]
 }

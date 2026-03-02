@@ -868,6 +868,18 @@ int BattleSystem_Divide(int dividend, int divisor);
 int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *battleCtx);
 
 /**
+ * @brief Initialize the switch-in check state to begin processing ability
+ * effects suppressed by Neutralizing Gas, skipping the Neutralizing Gas
+ * check itself to avoid a duplicate message.
+ *
+ * Should be called once before the first BattleSystem_TriggerEffectOnSwitch
+ * call in the BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH state.
+ *
+ * @param battleCtx
+ */
+void BattleSystem_StartNeutralizingGasWearOffEffects(BattleContext *battleCtx);
+
+/**
  * @brief Pick a random opponent for the given attacker.
  *
  * In a single-battle, this will always return the lone opponent.

@@ -70,6 +70,7 @@ static void BattleControllerPlayer_TurnEnd(BattleSystem *battleSys, BattleContex
 static void BattleControllerPlayer_FightCommand(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_ItemCommand(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_SwitchCommand(BattleSystem *battleSys, BattleContext *battleCtx);
+static void BattleControllerPlayer_NeutralizingGasPreSwitch(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_FleeCommand(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_SafariBallCommand(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_SafariBaitCommand(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -174,6 +175,7 @@ static const BattleControlFunc sBattleControlCommands[] = {
     [BATTLE_CONTROL_SCREEN_WIPE] = BattleControllerPlayer_ScreenWipe,
     [BATTLE_CONTROL_FIGHT_END] = BattleControllerPlayer_EndFight,
     [BATTLE_CONTROL_END_WAIT] = BattleControllerPlayer_EndWait
+    [BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH] = BattleControllerPlayer_NeutralizingGasPreSwitch
 };
 
 void *BattleContext_New(BattleSystem *battleSys)
@@ -1981,14 +1983,46 @@ static void BattleControllerPlayer_ItemCommand(BattleSystem *battleSys, BattleCo
 
 static void BattleControllerPlayer_SwitchCommand(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    LOAD_SUBSEQ(subscript_switch_pokemon);
-
     battleCtx->attacker = battleCtx->battlerActionOrder[battleCtx->turnOrderCounter];
     battleCtx->switchedMon = battleCtx->attacker;
-    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-    battleCtx->commandNext = BATTLE_CONTROL_CHECK_ANY_FAINTED;
+
+    if ((battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE)
+        && battleCtx->battleMons[battleCtx->switchedMon].curHP
+        && battleCtx->battleMons[battleCtx->switchedMon].ability == ABILITY_NEUTRALIZING_GAS) {
+        battleCtx->battleStatusMask2 &= ~SYSCTL_NEUTRALIZING_GAS_ACTIVE;
+        LOAD_SUBSEQ(subscript_neutralizing_gas_end);
+        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        battleCtx->commandNext = BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH;
+    } else {
+        LOAD_SUBSEQ(subscript_switch_pokemon);
+        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        battleCtx->commandNext = BATTLE_CONTROL_CHECK_ANY_FAINTED;
+    }
+
     battleCtx->scriptTemp = 0;
     battleCtx->moveStatusFlags |= MOVE_STATUS_NO_MORE_WORK;
+}
+
+static void BattleControllerPlayer_NeutralizingGasPreSwitch(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int nextSeq;
+
+    if (battleCtx->switchInCheckState == 0) {
+        BattleSystem_StartNeutralizingGasWearOffEffects(battleCtx);
+    }
+
+    nextSeq = BattleSystem_TriggerEffectOnSwitch(battleSys, battleCtx);
+
+    if (nextSeq) {
+        LOAD_SUBSEQ(nextSeq);
+        battleCtx->commandNext = battleCtx->command;
+        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+    } else {
+        LOAD_SUBSEQ(subscript_switch_pokemon);
+        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        battleCtx->commandNext = BATTLE_CONTROL_CHECK_ANY_FAINTED;
+        battleCtx->scriptTemp = 0;
+    }
 }
 
 static void BattleControllerPlayer_FleeCommand(BattleSystem *battleSys, BattleContext *battleCtx)

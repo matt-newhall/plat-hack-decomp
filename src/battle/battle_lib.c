@@ -117,6 +117,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].newlySwitched = FALSE;
     battleCtx->battleMons[battler].isTightenedFocus = FALSE;
     battleCtx->battleMons[battler].windRiderSwitchIn = FALSE;
+    battleCtx->battleMons[battler].neutralizingGasAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -3312,6 +3313,10 @@ BOOL BattleSystem_CanWhirlwind(BattleSystem *battleSys, BattleContext *battleCtx
 
 u8 Battler_Ability(BattleContext *battleCtx, int battler)
 {
+    if (battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE) {
+        return ABILITY_NONE;
+    }
+
     if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED)
         && battleCtx->battleMons[battler].ability != ABILITY_MULTITYPE) {
         return ABILITY_NONE;
@@ -3917,7 +3922,8 @@ int BattleSystem_Divide(int dividend, int divisor)
 enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_START = 0,
 
-    SWITCH_IN_CHECK_STATE_FIELD_WEATHER = SWITCH_IN_CHECK_STATE_START,
+    SWITCH_IN_CHECK_STATE_NEUTRALIZING_GAS = SWITCH_IN_CHECK_STATE_START,
+    SWITCH_IN_CHECK_STATE_FIELD_WEATHER,
     SWITCH_IN_CHECK_STATE_TRACE,
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
     SWITCH_IN_CHECK_STATE_INTIMIDATE,
@@ -3990,6 +3996,40 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
     do {
         switch (battleCtx->switchInCheckState) {
+        case SWITCH_IN_CHECK_STATE_NEUTRALIZING_GAS: {
+            BOOL anyNeutGas = FALSE;
+
+            for (i = 0; i < maxBattlers; i++) {
+                if (battleCtx->battleMons[i].curHP
+                    && battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS) {
+                    anyNeutGas = TRUE;
+
+                    if (!battleCtx->battleMons[i].neutralizingGasAnnounced) {
+                        battleCtx->battleMons[i].neutralizingGasAnnounced = TRUE;
+
+                        if (!(battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE)) {
+                            battleCtx->battleStatusMask2 |= SYSCTL_NEUTRALIZING_GAS_ACTIVE;
+                            battleCtx->msgBattlerTemp = i;
+                            subscript = subscript_neutralizing_gas;
+                            result = SWITCH_IN_CHECK_RESULT_BREAK;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            if (result != SWITCH_IN_CHECK_RESULT_BREAK) {
+                if ((battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE) && !anyNeutGas) {
+                    battleCtx->battleStatusMask2 &= ~SYSCTL_NEUTRALIZING_GAS_ACTIVE;
+                    subscript = subscript_neutralizing_gas_end;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                } else {
+                    battleCtx->switchInCheckState++;
+                }
+            }
+            break;
+        }
+
         case SWITCH_IN_CHECK_STATE_FIELD_WEATHER:
             if (battleCtx->fieldWeatherChecked == FALSE) {
                 switch (BattleSystem_GetFieldWeather(battleSys)) {
@@ -4634,6 +4674,11 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     } while (result == SWITCH_IN_CHECK_RESULT_CONTINUE);
 
     return subscript;
+}
+
+void BattleSystem_StartNeutralizingGasWearOffEffects(BattleContext *battleCtx)
+{
+    battleCtx->switchInCheckState = SWITCH_IN_CHECK_STATE_FIELD_WEATHER;
 }
 
 int BattleSystem_RandomOpponent(BattleSystem *battleSys, BattleContext *battleCtx, int attacker)

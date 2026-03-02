@@ -15,6 +15,21 @@ _007:
     UpdateHealthBarValue BTLSCR_ATTACKER
 
 _013:
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_NEUTRALIZING_GAS_ACTIVE, _025
+    CompareMonDataToValue OPCODE_NEQ, BTLSCR_ATTACKER, BATTLEMON_ABILITY, ABILITY_NEUTRALIZING_GAS, _025
+    UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_NEUTRALIZING_GAS_ACTIVE
+    // Neutralizing Gas wore off!
+    PrintMessage BattleStrings_Text_AnnounceNeutralizingGasDisabled, TAG_NONE
+    Wait
+    WaitButtonABTime 30
+
+_020:
+    // Activate all switch in abilities until all done
+    TriggerNeutralizingGasWearOffStep _025
+    CallFromVar BTLVAR_SCRIPT_TEMP
+    GoTo _020
+
+_025:
     DeletePokemon BTLSCR_ATTACKER
     Wait 
     HealthbarSlideOut BTLSCR_ATTACKER

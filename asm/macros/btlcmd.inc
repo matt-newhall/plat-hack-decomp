@@ -1310,6 +1310,11 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro TriggerNeutralizingGasWearOffStep jump_done
+    .long BTLCMD_TRIGGERNEUTRALIZINGGASWEAROFFSTEP
+    .long (\jump_done-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:
