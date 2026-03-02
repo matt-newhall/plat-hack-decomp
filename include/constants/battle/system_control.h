@@ -51,6 +51,7 @@
 #define SYSCTL_MOVE_SUCCEEDED          (1 << 6) // this only reflects that the move is executed, not whether it hit or missed
 #define SYSCTL_STAT_STAGE_CHANGE_SHOWN (1 << 7)
 #define SYSCTL_RECOVER_HP_VISUAL       (1 << 8)
+#define SYSCTL_NEUTRALIZING_GAS_ACTIVE (1 << 9)
 #define SYSCTL_FORM_CHANGE             (1 << 26)
 #define SYSCTL_RECALC_MON_STATS        (1 << 27)
 

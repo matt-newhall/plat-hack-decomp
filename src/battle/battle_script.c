@@ -321,6 +321,7 @@ static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *b
 static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -616,7 +617,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CheckPowderImmunity,
     BtlCmd_CheckSleepAbilityImmunity,
     BtlCmd_CopyWithCostar,
-    BtlCmd_TryPowerOfAlchemy
+    BtlCmd_TryPowerOfAlchemy,
+    BtlCmd_TriggerNeutralizingGasWearOffStep
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -9606,6 +9608,43 @@ static BOOL BtlCmd_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCo
 
     if (BattleSystem_TriggerAttackerAbilityOnHit(battleSys, battleCtx, &battleCtx->scriptTemp) == FALSE) {
         BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Run one step of the switch-in ability state machine for mons already
+ * on the field, starting from SWITCH_IN_CHECK_STATE_FIELD_WEATHER to skip the
+ * Neutralizing Gas check. Used after Neutralizing Gas wears off mid-script
+ * (e.g. U-Turn, Baton Pass) so suppressed abilities fire before the gas
+ * holder leaves the field.
+ *
+ * Inputs:
+ * 1. The distance to jump when all effects have been triggered.
+ *
+ * Side effects:
+ * - battleCtx->scriptTemp will be set to the subroutine sequence to execute
+ * for any triggered effect.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpDone = BattleScript_Read(battleCtx);
+
+    if (battleCtx->switchInCheckState == 0) {
+        BattleSystem_StartNeutralizingGasWearOffEffects(battleCtx);
+    }
+
+    int nextSeq = BattleSystem_TriggerEffectOnSwitch(battleSys, battleCtx);
+    if (nextSeq == 0) {
+        BattleScript_Iter(battleCtx, jumpDone);
+    } else {
+        battleCtx->scriptTemp = nextSeq;
     }
 
     return FALSE;

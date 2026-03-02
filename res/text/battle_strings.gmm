@@ -5302,4 +5302,20 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} avoids\nattacks by its ally Pokémon!</language>
 	</row>
+	<row id="pl_msg_00000368_01322" index="1322">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} filled the air\nwith Neutralizing Gas!</language>
+	</row>
+	<row id="pl_msg_00000368_01323" index="1323">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} filled the air\nwith Neutralizing Gas!</language>
+	</row>
+	<row id="pl_msg_00000368_01324" index="1324">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} filled the air\nwith Neutralizing Gas!</language>
+	</row>
+	<row id="pl_msg_00000368_01325" index="1325">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Neutralizing Gas wore off!</language>
+	</row>
 </body>
