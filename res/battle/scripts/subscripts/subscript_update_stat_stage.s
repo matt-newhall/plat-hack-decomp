@@ -24,10 +24,12 @@ _018:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_UPDATE_STAT_STAGES
 
 _036:
-    PrintBufferedMessage 
-    Wait 
+    PrintBufferedMessage
+    Wait
     WaitButtonABTime 30
-    End 
+    Call BATTLE_SUBSCRIPT_DEFIANT_CHECK
+    Call BATTLE_SUBSCRIPT_COMPETITIVE_CHECK
+    End
 
 _041:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _048

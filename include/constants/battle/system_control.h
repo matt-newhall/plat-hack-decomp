@@ -52,6 +52,8 @@
 #define SYSCTL_STAT_STAGE_CHANGE_SHOWN (1 << 7)
 #define SYSCTL_RECOVER_HP_VISUAL       (1 << 8)
 #define SYSCTL_NEUTRALIZING_GAS_ACTIVE (1 << 9)
+#define SYSCTL_DEFIANT_PENDING         (1 << 10)
+#define SYSCTL_COMPETITIVE_PENDING     (1 << 11)
 #define SYSCTL_FORM_CHANGE             (1 << 26)
 #define SYSCTL_RECALC_MON_STATS        (1 << 27)
 
@@ -63,7 +65,9 @@
     | SYSCTL_MAGIC_COAT_REFLECTED                 \
     | SYSCTL_UTURN_ACTIVE                         \
     | SYSCTL_MOVE_SUCCEEDED                       \
-    | SYSCTL_RECOVER_HP_VISUAL))
+    | SYSCTL_RECOVER_HP_VISUAL                    \
+    | SYSCTL_DEFIANT_PENDING                      \
+    | SYSCTL_COMPETITIVE_PENDING))
 
 #define SYSCTL_LINK_WAITING_SHIFT 24
 #define SYSCTL_PAYOUT_EXP_SHIFT   28

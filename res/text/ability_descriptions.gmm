@@ -665,4 +665,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Nullifies the effects\nof all abilities.</language>
 	</row>
+	<row id="pl_msg_00000612_00166" index="166">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Nullifies the effects\nof all abilities.</language>
+	</row>
+	<row id="pl_msg_00000612_00167" index="167">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts the Attack stat\nwhen a stat is lowered.</language>
+	</row>
+	<row id="pl_msg_00000612_00168" index="168">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">Boosts the Sp. Atk stat\nwhen a stat is lowered.</language>
+	</row>
 </body>
