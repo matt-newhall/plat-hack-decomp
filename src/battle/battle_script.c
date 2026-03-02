@@ -6977,7 +6977,7 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
     int i = 0;
     int monWeight = DEFENDING_MON.weight;
 
-    if (DEFENDING_MON.ability == ABILITY_LIGHT_METAL) {
+    if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_LIGHT_METAL) {
         monWeight /= 2;
     }
 
@@ -9815,11 +9815,7 @@ static BOOL BtlCmd_TryRestoreStatusOnSwitch(BattleSystem *battleSys, BattleConte
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     if (battleCtx->battleMons[battler].curHP && battleCtx->selectedPartySlot[battler] != 6) {
-        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
-        int ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
-        int status = Pokemon_GetValue(mon, MON_DATA_STATUS, NULL);
-
-        if (battleCtx->battleMons[battler].ability != ABILITY_NATURAL_CURE) {
+        if (Battler_Ability(battleCtx, battler) != ABILITY_NATURAL_CURE) {
             BattleScript_Iter(battleCtx, jumpNoStatusRestore);
         }
     } else {
