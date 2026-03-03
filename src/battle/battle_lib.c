@@ -1463,6 +1463,18 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
                 battler2Priority += 1;
             }
         }
+
+        if (Battler_Ability(battleCtx, battler1) == ABILITY_PRANKSTER) {
+            if (MOVE_DATA(battler1Move).class == CLASS_STATUS) {
+                battler1Priority += 1;
+            }
+        }
+
+        if (Battler_Ability(battleCtx, battler2) == ABILITY_PRANKSTER) {
+            if (MOVE_DATA(battler2Move).class == CLASS_STATUS) {
+                battler2Priority += 1;
+            }
+        }
     }
 
     if (battler1Priority == battler2Priority) {

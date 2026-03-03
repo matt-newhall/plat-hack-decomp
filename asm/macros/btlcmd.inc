@@ -1315,6 +1315,12 @@
     .long (\jump_done-.) / 4 - 1
     .endm
 
+    .macro CheckIsPranksterDarkImmune battler, jump
+    .long BTLCMD_CHECKISPRANKSTERDARKIMMUNE
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

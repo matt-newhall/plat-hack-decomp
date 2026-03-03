@@ -324,6 +324,7 @@ static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleCont
 static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -5612,7 +5613,10 @@ static BOOL BtlCmd_TryPerishSong(BattleSystem *battleSys, BattleContext *battleC
     for (int i = 0; i < maxBattlers; i++) {
         if ((battleCtx->battleMons[i].moveEffectsMask & MOVE_EFFECT_PERISH_SONG)
             || battleCtx->battleMons[i].curHP == 0
-            || (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE && (!(battleCtx->battleMons[battleCtx->attacker].personality == battleCtx->battleMons[i].personality)))) {
+            || (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE && (!(battleCtx->battleMons[battleCtx->attacker].personality == battleCtx->battleMons[i].personality)))
+            || (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PRANKSTER
+                && MON_HAS_TYPE(i, TYPE_DARK)
+                && Battler_Side(battleSys, battleCtx->attacker) != Battler_Side(battleSys, i))) {
             ineligibleBattlers++;
         } else {
             battleCtx->battleMons[i].moveEffectsMask |= MOVE_EFFECT_PERISH_SONG;
@@ -12811,6 +12815,36 @@ static void BattleScript_UpdateFriendship(BattleSystem *battleSys, BattleContext
     } else {
         Pokemon_UpdateFriendship(mon, FRIENDSHIP_EVENT_BATTLE_FAINT, BattleSystem_GetMapHeader(battleSys));
     }
+}
+
+/**
+ * @brief Jump forward if the given battler is immune to the current Prankster-
+ * boosted move due to being a Dark-type on the opposing side.
+ *
+ * Inputs:
+ * 1. The battler to check.
+ * 2. The distance to jump if the battler is immune.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jump = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PRANKSTER
+        && MON_HAS_TYPE(battler, TYPE_DARK)
+        && battleCtx->battleMons[battler].curHP > 0
+        && Battler_Side(battleSys, battleCtx->attacker) != Battler_Side(battleSys, battler)) {
+        BattleScript_Iter(battleCtx, jump);
+    }
+
+    return FALSE;
 }
 
 /**

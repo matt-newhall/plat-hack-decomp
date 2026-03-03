@@ -1173,6 +1173,13 @@
         "Boosts the Sp. Atk stat\n",
         "when a stat is lowered."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00168",
+      "en_US": [
+        "Gives priority to\n",
+        "status moves."
+      ]
     }
   ]
 }

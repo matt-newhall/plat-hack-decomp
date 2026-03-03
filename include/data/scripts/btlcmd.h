@@ -244,6 +244,7 @@ ScriptCommand(BTLCMD_CHECKSLEEPABILITYIMMUNITY,   BtlCmd_CheckSleepAbilityImmuni
 ScriptCommand(BTLCMD_COPYWITHCOSTAR,              BtlCmd_CopyWithCostar)
 ScriptCommand(BTLCMD_TRYPOWEROFALCHEMY,           BtlCmd_TryPowerOfAlchemy)
 ScriptCommand(BTLCMD_TRIGGERNEUTRALIZINGGASWEAROFFSTEP, BtlCmd_TriggerNeutralizingGasWearOffStep)
+ScriptCommand(BTLCMD_CHECKISPRANKSTERDARKIMMUNE,  BtlCmd_CheckIsPranksterDarkImmune)
 
 // clang-format on
 
