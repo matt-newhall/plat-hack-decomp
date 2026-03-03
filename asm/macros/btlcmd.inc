@@ -1312,4 +1312,10 @@
     .long (\jump_done-.) / 4 - 1
     .endm
 
+    .macro CheckIsPranksterDarkImmune battler, jump
+    .long 239
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

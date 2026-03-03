@@ -2870,6 +2870,49 @@ static BOOL BattleController_TriggerImmunityAbilities(BattleSystem *battleSys, B
 }
 
 /**
+ * @brief Trigger immunity for Dark-types to Prankster moves.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if there is an interjecting subroutine to execute instead of
+ * the rest of the user's move.
+ */
+static BOOL BattleController_TriggerPranksterImmunity(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int result = STATE_PROCESSING;
+
+    do {
+        switch (battleCtx->abilityCheckState) {
+        case IMMUNITY_ABILITY_STATE_CHECK:
+            if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PRANKSTER
+                && MOVE_DATA(battleCtx->moveTemp).class == CLASS_STATUS
+                && MOVE_DATA(battleCtx->moveTemp).range != RANGE_OPPONENT_SIDE
+                && MON_HAS_TYPE(battleCtx->defender, TYPE_DARK)
+                && Battler_Side(battleSys, battleCtx->attacker) != Battler_Side(battleSys, battleCtx->defender)) {
+                battleCtx->moveStatusFlags |= MOVE_STATUS_INEFFECTIVE;
+                battleCtx->moveFailFlags[battleCtx->attacker].noEffect = TRUE;
+                LOAD_SUBSEQ(subscript_missed);
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                battleCtx->commandNext = BATTLE_CONTROL_LOOP_FAINTED;
+                battleCtx->moveStatusFlags |= MOVE_STATUS_NO_MORE_WORK;
+
+                result = STATE_BREAK_OUT;
+            }
+
+            battleCtx->abilityCheckState++;
+            break;
+
+        case IMMUNITY_ABILITY_STATE_END:
+            battleCtx->abilityCheckState = IMMUNITY_ABILITY_STATE_START;
+            result = STATE_DONE;
+            break;
+        }
+    } while (result == STATE_PROCESSING);
+
+    return result != STATE_DONE;
+}
+
+/**
  * @brief Load the Quick Claw effect subroutine sequence.
  *
  * Activation checks are all handled within the loaded subroutine sequence.
@@ -3334,6 +3377,7 @@ enum TryMoveState {
     TRY_MOVE_STATE_CHECK_MOVE_HITS,
     TRY_MOVE_STATE_CHECK_MOVE_HIT_OVERRIDES,
     TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES,
+    TRY_MOVE_STATE_PRANKSTER_IMMUNITY,
     TRY_MOVE_STATE_CHECK_TYPE_CHART,
     TRY_MOVE_CHOICE_MULTI_TURN_CONFLICT,
 
@@ -3381,6 +3425,15 @@ static void BattleController_TryMove(BattleSystem *battleSys, BattleContext *bat
         if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
             && battleCtx->defender != BATTLER_NONE
             && BattleController_TriggerImmunityAbilities(battleSys, battleCtx) == 1) {
+            return;
+        }
+
+        battleCtx->tryMoveCheckState++;
+
+    case TRY_MOVE_STATE_PRANKSTER_IMMUNITY:
+        // if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
+        if (battleCtx->defender != BATTLER_NONE
+            && BattleController_TriggerPranksterImmunity(battleSys, battleCtx) == 1) {
             return;
         }
 

@@ -673,4 +673,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">COMPETITIVE</language>
 	</row>
+	<row id="pl_msg_00000611_00168" index="168">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">PRANKSTER</language>
+	</row>
 </body>

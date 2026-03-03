@@ -675,6 +675,6 @@
 	</row>
 	<row id="pl_msg_00000612_00168" index="168">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Boosts the Sp. Atk stat\nwhen a stat is lowered.</language>
+		<language name="English">Gives priority to\na status move.</language>
 	</row>
 </body>
