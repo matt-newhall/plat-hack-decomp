@@ -4587,15 +4587,15 @@
 	</row>
 	<row id="pl_msg_00000000_01146" index="1146">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMe First!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nQuiver Dance!</language>
 	</row>
 	<row id="pl_msg_00000000_01147" index="1147">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMe First!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nQuiver Dance!</language>
 	</row>
 	<row id="pl_msg_00000000_01148" index="1148">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMe First!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nQuiver Dance!</language>
 	</row>
 	<row id="pl_msg_00000000_01149" index="1149">
 		<attribute name="window_context_name">used</attribute>

@@ -7834,6 +7834,7 @@ static BOOL BtlCmd_CalcWringOutPower(BattleSystem *battleSys, BattleContext *bat
 }
 
 /**
+ * @deprecated
  * @brief Try to execute Me First.
  *
  * Inputs:

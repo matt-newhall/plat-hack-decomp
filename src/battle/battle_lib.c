@@ -1737,8 +1737,6 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
         } else {
             defender = attacker;
         }
-    } else if (range == RANGE_SINGLE_TARGET_ME_FIRST && randomize == TRUE) { // e.g., Me First
-        defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
     } else if (range == RANGE_OPPONENT_SIDE) { // e.g., Spikes, Stealth Rock
         defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
     } else if (range == RANGE_USER // e.g., Swords Dance

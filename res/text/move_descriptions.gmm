@@ -1531,7 +1531,7 @@
 	</row>
 	<row id="pl_msg_00000646_00382" index="382">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user tries to cut\nahead of the foe to\nsteal and use the\nfoe’s intended move\nwith greater power.</language>
+        <language name="English">The user performs\na beautiful, mystic\ndance. It boosts\nthe user’s Sp. Atk,\nSp. Def, and Speed.</language>
 	</row>
 	<row id="pl_msg_00000646_00383" index="383">
 		<attribute name="window_context_name">used</attribute>
