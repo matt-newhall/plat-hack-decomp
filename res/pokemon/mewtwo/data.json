@@ -47,7 +47,6 @@
             [ 64, "MOVE_POWER_SWAP" ],
             [ 64, "MOVE_GUARD_SWAP" ],
             [ 71, "MOVE_PSYCHIC" ],
-            [ 79, "MOVE_ME_FIRST" ],
             [ 86, "MOVE_RECOVER" ],
             [ 93, "MOVE_SAFEGUARD" ],
             [ 100, "MOVE_AURA_SPHERE" ]

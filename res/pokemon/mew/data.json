@@ -42,7 +42,6 @@
             [ 40, "MOVE_BARRIER" ],
             [ 50, "MOVE_ANCIENT_POWER" ],
             [ 60, "MOVE_AMNESIA" ],
-            [ 70, "MOVE_ME_FIRST" ],
             [ 80, "MOVE_BATON_PASS" ],
             [ 90, "MOVE_NASTY_PLOT" ],
             [ 100, "MOVE_AURA_SPHERE" ]
