@@ -860,6 +860,7 @@
     .long BTLCMD_CALCWRINGOUTPOWER
     .endm
 
+    // deprecated
     .macro TryMeFirst jump_if_fail
     .long BTLCMD_TRYMEFIRST
     .long (\jump_if_fail-.) / 4 - 1

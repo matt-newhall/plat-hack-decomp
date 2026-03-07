@@ -249,6 +249,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_FIRE_DAMAGE, Basic_CheckWaterSport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Basic_CheckCalmMind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Basic_CheckDragonDance
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Basic_CheckQuiverDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CAMOUFLAGE, Basic_CheckCamouflage
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
@@ -1011,6 +1012,28 @@ Basic_CheckDragonDance_NoSimple:
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus8
     PopOrEnd 
 
+Basic_CheckQuiverDance:
+    ; If Trick Room is in effect, score -10.
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
+
+    ; If the attacker's ability is Simple and either Sp. Atk, Sp. Def or Speed
+    ; are already at +3, score -10.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckQuiverDance_NoSimple
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 8, ScoreMinus10
+    PopOrEnd 
+
+Basic_CheckQuiverDance_NoSimple:
+    ; If the attacker's Sp. Atk is already at +6, score -10.
+    ; If the attacker's Sp. Def is already at +6, score -10.
+    ; If the attacker's Speed is already at +6, score -8.
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus10
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus8
+    PopOrEnd 
+
 Basic_CheckCamouflage:
     // If the attacker is already under the respective effect, score -10.
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_CAMOUFLAGE, ScoreMinus10
@@ -1750,6 +1773,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_FIRE_DAMAGE, Expert_WaterSport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Expert_DragonDance
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_QuiverDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_Gravity
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Expert_MiracleEye
@@ -1776,7 +1800,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_CRITS, Expert_LuckyChant
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_MOVE_FIRST, Expert_MeFirst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES, Expert_PowerSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Expert_GuardSwap
@@ -3256,6 +3279,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE
     TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_GRAVITY
     TableEntry BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE
@@ -4776,6 +4800,23 @@ Expert_DragonDance_TryScorePlus1:
 Expert_DragonDance_End:
     PopOrEnd 
 
+Expert_QuiverDance:
+    ; If the attacker is slower than its opponent, 50% chance of score +1.
+    ;
+    ; If the attacker's HP <= 50%, 72.7% chance of score -1.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_QuiverDance_TryScorePlus1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_QuiverDance_End
+    IfRandomLessThan 70, Expert_QuiverDance_End
+    AddToMoveScore -1
+    GoTo Expert_QuiverDance_End
+
+Expert_QuiverDance_TryScorePlus1:
+    IfRandomLessThan 128, Expert_QuiverDance_End
+    AddToMoveScore 1
+
+Expert_QuiverDance_End:
+    PopOrEnd 
+
 Expert_Gravity:
     // If the opponent has Levitate, is under the effect of Magnet Rise, or has a Flying typing, 75%
     // chance of score +1.
@@ -5511,39 +5552,6 @@ Expert_LuckyChant_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_LuckyChant_End:
-    PopOrEnd 
-
-Expert_MeFirst:
-    // If the attacker is slower than its opponent, score -2.
-    //
-    // If the attacker deals more damage than its opponent, 87.5% chance of additional score +1.
-    //
-    // If the opponent's last-used move was a Damaging move, 50% chance of additional score +1.
-    //
-    // 75% chance of score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_MeFirst_ScoreMinus2
-    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_MeFirst_TryScorePlus1
-    GoTo Expert_MeFirst_CheckLastUsedMove
-
-Expert_MeFirst_TryScorePlus1:
-    IfRandomLessThan 32, Expert_MeFirst_CheckLastUsedMove
-    AddToMoveScore 1
-
-Expert_MeFirst_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedEqualTo CLASS_STATUS, Expert_MeFirst_TryScorePlus1AndEnd
-    IfRandomLessThan 128, Expert_MeFirst_End
-    AddToMoveScore 1
-
-Expert_MeFirst_TryScorePlus1AndEnd:
-    IfRandomLessThan 64, Expert_MeFirst_End
-    AddToMoveScore 1
-    GoTo Expert_MeFirst_End
-
-Expert_MeFirst_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_MeFirst_End:
     PopOrEnd 
 
 Expert_Copycat:
@@ -6554,7 +6562,6 @@ Risky_RiskyEffects:
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_METAL_BURST
     TableEntry BATTLE_EFFECT_DOUBLE_POWER_IF_MOVING_SECOND
-    TableEntry BATTLE_EFFECT_USE_MOVE_FIRST
     TableEntry BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING
     TableEntry TABLE_END
 
@@ -7800,6 +7807,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_PREVENT_CRITS
     TableEntry BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
@@ -7853,6 +7861,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE
     TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
@@ -7903,6 +7912,7 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
@@ -7968,6 +7978,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER

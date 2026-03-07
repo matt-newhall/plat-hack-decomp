@@ -318,4 +318,5 @@ subscript_files = files(
     'subscript_neutralizing_gas_end.s',
     'subscript_defiant_check.s',
     'subscript_competitive_check.s',
+    'subscript_quiver_dance.s',
 )
