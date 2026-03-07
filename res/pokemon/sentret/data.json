@@ -45,7 +45,6 @@
             [ 31, "MOVE_SUCKER_PUNCH" ],
             [ 36, "MOVE_AMNESIA" ],
             [ 39, "MOVE_BATON_PASS" ],
-            [ 42, "MOVE_ME_FIRST" ],
             [ 47, "MOVE_HYPER_VOICE" ]
         ],
         "by_tm": [

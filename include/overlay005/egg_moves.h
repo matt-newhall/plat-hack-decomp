@@ -68,7 +68,7 @@ const u16 sEggMoves[] = {
         MOVE_UPROAR,
         MOVE_SWAGGER,
         MOVE_LAST_RESORT,
-        MOVE_ME_FIRST),
+        MOVE_QUIVER_DANCE),
 
     EGG_MOVES(SPECIES_SPEAROW,
         MOVE_FAINT_ATTACK,
@@ -318,7 +318,7 @@ const u16 sEggMoves[] = {
         MOVE_MUD_SPORT,
         MOVE_SLEEP_TALK,
         MOVE_SNORE,
-        MOVE_ME_FIRST,
+        MOVE_QUIVER_DANCE,
         MOVE_BLOCK,
         MOVE_ZEN_HEADBUTT),
 
@@ -1249,7 +1249,7 @@ const u16 sEggMoves[] = {
         MOVE_ICE_FANG,
         MOVE_FIRE_FANG,
         MOVE_THUNDER_FANG,
-        MOVE_ME_FIRST),
+        MOVE_QUIVER_DANCE),
 
     EGG_MOVES(SPECIES_ZIGZAGOON,
         MOVE_CHARM,
@@ -1714,7 +1714,7 @@ const u16 sEggMoves[] = {
         MOVE_PUNISHMENT,
         MOVE_SUCKER_PUNCH,
         MOVE_ASSURANCE,
-        MOVE_ME_FIRST),
+        MOVE_QUIVER_DANCE),
 
     EGG_MOVES(SPECIES_SNORUNT,
         MOVE_BLOCK,
@@ -2060,7 +2060,7 @@ const u16 sEggMoves[] = {
         MOVE_NIGHT_SLASH),
 
     EGG_MOVES(SPECIES_CROAGUNK,
-        MOVE_ME_FIRST,
+        MOVE_QUIVER_DANCE,
         MOVE_FEINT,
         MOVE_DYNAMIC_PUNCH,
         MOVE_HEADBUTT,

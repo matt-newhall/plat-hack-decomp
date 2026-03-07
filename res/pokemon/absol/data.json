@@ -48,7 +48,6 @@
             [ 44, "MOVE_SUCKER_PUNCH" ],
             [ 49, "MOVE_DETECT" ],
             [ 52, "MOVE_NIGHT_SLASH" ],
-            [ 57, "MOVE_ME_FIRST" ],
             [ 60, "MOVE_PSYCHO_CUT" ],
             [ 65, "MOVE_PERISH_SONG" ]
         ],

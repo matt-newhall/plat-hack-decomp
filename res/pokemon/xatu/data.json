@@ -39,7 +39,6 @@
             [ 9, "MOVE_TELEPORT" ],
             [ 12, "MOVE_LUCKY_CHANT" ],
             [ 17, "MOVE_MIRACLE_EYE" ],
-            [ 20, "MOVE_ME_FIRST" ],
             [ 23, "MOVE_CONFUSE_RAY" ],
             [ 27, "MOVE_TAILWIND" ],
             [ 30, "MOVE_WISH" ],
