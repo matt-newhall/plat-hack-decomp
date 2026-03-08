@@ -1099,7 +1099,7 @@
 	</row>
 	<row id="pl_msg_00000646_00274" index="274">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user hurriedly\nand randomly uses a\nmove among those\nknown by other\nPokémon in the party.</language>
+        <language name="English">The user materializes\nan odd psychic wave\nto attack the target.\nThis attack does\nphysical damage.</language>
 	</row>
 	<row id="pl_msg_00000646_00275" index="275">
 		<attribute name="window_context_name">used</attribute>

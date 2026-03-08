@@ -3291,15 +3291,15 @@
 	</row>
 	<row id="pl_msg_00000000_00822" index="822">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nAssist!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPsyshock!</language>
 	</row>
 	<row id="pl_msg_00000000_00823" index="823">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nAssist!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPsyshock!</language>
 	</row>
 	<row id="pl_msg_00000000_00824" index="824">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nAssist!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPsyshock!</language>
 	</row>
 	<row id="pl_msg_00000000_00825" index="825">
 		<attribute name="window_context_name">used</attribute>

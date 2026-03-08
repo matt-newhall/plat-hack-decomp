@@ -19,7 +19,7 @@ pl_waza_tbl_subdirs = [
     'aqua_tail',
     'arm_thrust',
     'aromatherapy',
-    'assist',
+    'psyshock',
     'assurance',
     'astonish',
     'attack_order',

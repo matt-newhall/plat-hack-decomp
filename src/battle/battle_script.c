@@ -6803,6 +6803,7 @@ static BOOL BtlCmd_TryWish(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @deprecated
  * @brief Try to execute Assist.
  *
  * Assist will pick a random move from among those known by the attacking mon's
