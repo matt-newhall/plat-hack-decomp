@@ -2,7 +2,7 @@
     "species": "SPECIES_DROWZEE",
     "moves": [
         "MOVE_PSYBEAM",
-        "MOVE_ASSIST",
+        "MOVE_PSYSHOCK",
         "MOVE_DISABLE",
         "MOVE_BARRIER"
     ],

@@ -755,6 +755,7 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    // deprecated
     .macro TryAssist jump_if_fail
     .long BTLCMD_TRYASSIST
     .long (\jump_if_fail-.) / 4 - 1

@@ -4,7 +4,7 @@
         "MOVE_FRUSTRATION",
         "MOVE_SHADOW_CLAW",
         "MOVE_TRICK",
-        "MOVE_ASSIST"
+        "MOVE_PSYSHOCK"
     ],
     "evFlags": {
         "hp": false,

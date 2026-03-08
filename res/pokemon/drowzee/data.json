@@ -102,7 +102,6 @@
         ],
         "egg_moves": [
             "MOVE_BARRIER",
-            "MOVE_ASSIST",
             "MOVE_ROLE_PLAY",
             "MOVE_FIRE_PUNCH",
             "MOVE_THUNDER_PUNCH",

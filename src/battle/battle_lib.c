@@ -3277,7 +3277,6 @@ BOOL Move_IsInvoker(u16 move)
     if (move == MOVE_NONE
         || move == MOVE_SLEEP_TALK
         || move == MOVE_COPYCAT
-        || move == MOVE_ASSIST
         || move == MOVE_MIRROR_MOVE
         || move == MOVE_METRONOME) {
         return TRUE;
@@ -7847,7 +7846,19 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage *= movePower;
         damage *= (attackerLevel * 2 / 5 + 2);
 
-        if (criticalMul > 1) {
+        if (move == MOVE_PSYSHOCK) {
+            if (criticalMul > 1) {
+                if (defenseStage < DEFAULT_STAT_STAGE) {
+                    stageDivisor = defenseStat * sStatStageBoosts[defenseStage].numerator;
+                    stageDivisor /= sStatStageBoosts[defenseStage].denominator;
+                } else {
+                    stageDivisor = defenseStat;
+                }
+            } else {
+                stageDivisor = defenseStat * sStatStageBoosts[defenseStage].numerator;
+                stageDivisor /= sStatStageBoosts[defenseStage].denominator;
+            }
+        } else if (criticalMul > 1) {
             if (spDefenseStage < DEFAULT_STAT_STAGE) {
                 stageDivisor = spDefenseStat * sStatStageBoosts[spDefenseStage].numerator;
                 stageDivisor /= sStatStageBoosts[spDefenseStage].denominator;
@@ -8050,7 +8061,6 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_CHATTER,
     FORBIDDEN_BY_MIMIC_DELIM,
     MOVE_SLEEP_TALK,
-    MOVE_ASSIST,
     MOVE_MIRROR_MOVE,
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
@@ -8106,7 +8116,6 @@ static const u16 sCannotEncoreMoves[] = {
     MOVE_MIRROR_MOVE,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
-    MOVE_ASSIST,
     MOVE_COPYCAT,
     MOVE_METRONOME,
     MOVE_NATURE_POWER,
