@@ -679,7 +679,7 @@
 	</row>
 	<row id="pl_msg_00000647_00169" index="169">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Spider Web</language>
+		<language name="English">Sticky Web</language>
 	</row>
 	<row id="pl_msg_00000647_00170" index="170">
 		<attribute name="window_context_name">used</attribute>

@@ -5318,4 +5318,12 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Neutralizing Gas wore off!</language>
 	</row>
+	<row id="pl_msg_00000368_01326" index="1326">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A sticky web has been laid out\nbeneath your team’s feet!</language>
+	</row>
+	<row id="pl_msg_00000368_01327" index="1327">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A sticky web has been laid out\nbeneath your foe’s feet!</language>
+	</row>
 </body>

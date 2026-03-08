@@ -1319,4 +1319,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CheckStickyWeb battler, jump
+    .long 240
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

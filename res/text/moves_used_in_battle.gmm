@@ -2031,15 +2031,15 @@
 	</row>
 	<row id="pl_msg_00000000_00507" index="507">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSpider Web!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSticky Web!</language>
 	</row>
 	<row id="pl_msg_00000000_00508" index="508">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSpider Web!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSticky Web!</language>
 	</row>
 	<row id="pl_msg_00000000_00509" index="509">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSpider Web!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSticky Web!</language>
 	</row>
 	<row id="pl_msg_00000000_00510" index="510">
 		<attribute name="window_context_name">used</attribute>

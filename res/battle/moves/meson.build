@@ -382,7 +382,7 @@ pl_waza_tbl_subdirs = [
     'sonic_boom',
     'spacial_rend',
     'spark',
-    'spider_web',
+    'sticky_web',
     'spike_cannon',
     'spikes',
     'spite',

@@ -679,7 +679,7 @@
 	</row>
 	<row id="pl_msg_00000646_00169" index="169">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user ensnares\nthe foe with a thin,\ngooey silk so it can’t\nflee from battle.\n</language>
+		<language name="English">The user weaves a\nsticky web around the\nopposing team,\nlowering their Speed\nupon switching in.</language>
 	</row>
 	<row id="pl_msg_00000646_00170" index="170">
 		<attribute name="window_context_name">used</attribute>

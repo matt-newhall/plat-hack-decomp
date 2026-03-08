@@ -323,6 +323,7 @@ static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -620,7 +621,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CopyWithCostar,
     BtlCmd_TryPowerOfAlchemy,
     BtlCmd_TriggerNeutralizingGasWearOffStep,
-    BtlCmd_CheckIsPranksterDarkImmune
+    BtlCmd_CheckIsPranksterDarkImmune,
+    BtlCmd_CheckStickyWeb
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -6338,6 +6340,14 @@ static BOOL BtlCmd_RapidSpin(BattleSystem *battleSys, BattleContext *battleCtx)
         return FALSE;
     }
 
+    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STICKY_WEB) {
+        battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_STICKY_WEB;
+        battleCtx->msgMoveTemp = MOVE_STICKY_WEB;
+        BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_blow_away_hazards);
+
+        return FALSE;
+    }
+
     BattleScript_Iter(battleCtx, 1);
 
     return FALSE;
@@ -8926,6 +8936,50 @@ static BOOL BtlCmd_CheckStealthRock(BattleSystem *battleSys, BattleContext *batt
         battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, battleCtx->hpCalcTemp);
     } else {
         BattleScript_Iter(battleCtx, jumpNoEffect);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check for Sticky Web on a battler's side of the field.
+ *
+ * Inputs:
+ * 1. The battler for whom Sticky Web should be checked.
+ * 2. The distance to jump if there is no effect to apply.
+ *
+ * Side effects:
+ * - battleCtx->sideEffectType will be set to SIDE_EFFECT_TYPE_INDIRECT.
+ * - battleCtx->lastBattlerId will be set to the previous attacker (for restore).
+ * - battleCtx->attacker will be set to the first opposing battler.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    int side = Battler_Side(battleSys, battler);
+
+    if (!((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STICKY_WEB) && battleCtx->battleMons[battler].curHP)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    } else {
+        // set attacker to the opposing side so Clear Body/Defiant checks work.
+        int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+        int opponent;
+        for (opponent = 0; opponent < maxBattlers; opponent++) {
+            if (Battler_Side(battleSys, opponent) != side) {
+                break;
+            }
+        }
+        battleCtx->lastBattlerId = battleCtx->attacker;
+        battleCtx->attacker = opponent;
+        battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
     }
 
     return FALSE;
