@@ -1639,10 +1639,11 @@
     {
       "id": "pl_msg_00000646_00169",
       "en_US": [
-        "The user ensnares\n",
-        "the foe with a thin,\n",
-        "gooey silk so it can’t\n",
-        "flee from battle.\n"
+        "The user weaves a\n",
+        "sticky web around the\n",
+        "opposing team,\n",
+        "lowering their Speed\n",
+        "upon switching in.\n"
       ]
     },
     {

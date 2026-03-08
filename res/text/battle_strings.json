@@ -8894,6 +8894,20 @@
       "en_US": [
         "Neutralizing Gas wore off!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_StickyWebLaidOutBeneathYourTeamsFeet",
+      "en_US": [
+        "A sticky web has been laid out\n",
+        "beneath your team’s feet!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_StickyWebLaidOutBeneathYourFoesFeet",
+      "en_US": [
+        "A sticky web has been laid out\n",
+        "beneath your foe’s feet!"
+      ]
     }
   ]
 }

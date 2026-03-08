@@ -1322,6 +1322,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CheckStickyWeb battler, jump
+    .long BTLCMD_CHECKSTICKYWEB
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

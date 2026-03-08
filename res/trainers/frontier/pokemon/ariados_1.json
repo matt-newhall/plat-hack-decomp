@@ -4,7 +4,7 @@
         "MOVE_BUG_BITE",
         "MOVE_TOXIC",
         "MOVE_SHADOW_SNEAK",
-        "MOVE_SPIDER_WEB"
+        "MOVE_STICKY_WEB"
     ],
     "evFlags": {
         "hp": true,
