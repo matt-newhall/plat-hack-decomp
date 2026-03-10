@@ -45,7 +45,6 @@
             [ 31, "MOVE_DEFENSE_CURL" ],
             [ 34, "MOVE_LIGHT_SCREEN" ],
             [ 38, "MOVE_EGG_BOMB" ],
-            [ 42, "MOVE_HEALING_WISH" ],
             [ 46, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [

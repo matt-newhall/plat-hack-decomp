@@ -1326,4 +1326,8 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CalcVenoshockPower
+    .long 241
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

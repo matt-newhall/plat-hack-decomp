@@ -43,7 +43,6 @@
             [ 64, "MOVE_AROMATHERAPY" ],
             [ 73, "MOVE_ENERGY_BALL" ],
             [ 82, "MOVE_SWEET_KISS" ],
-            [ 91, "MOVE_HEALING_WISH" ],
             [ 100, "MOVE_SEED_FLARE" ]
         ],
         "by_tm": [

@@ -255,7 +255,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Basic_CheckMiracleEye
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Basic_CheckHealingWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURAL_GIFT, Basic_CheckNaturalGift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Basic_CheckTailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_STAT_UP_2, Basic_CheckAcupressure
@@ -1049,23 +1048,6 @@ Basic_CheckMiracleEye:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MIRACLE_EYE, ScoreMinus10
     PopOrEnd 
 
-Basic_CheckHealingWish:
-    ; Start at -20
-    AddToMoveScore -20
-
-    ; If the attacker is on their last Pokemon, score additional -10.
-    CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, ScoreMinus10
-
-    ; If none of the attacker's party members are statused or at less than 100% HP,
-    ; score additional -10.
-    IfPartyMemberStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Basic_CheckHealingWish_Terminate
-    IfAnyPartyMemberIsWounded AI_BATTLER_ATTACKER, Basic_CheckHealingWish_Terminate
-    GoTo ScoreMinus10
-
-Basic_CheckHealingWish_Terminate:
-    PopOrEnd 
-
 Basic_CheckNaturalGift:
     ; If the attacker does not have an eligible berry or the target is immune to that berry's
     ; Natural Gift type, score -10.
@@ -1780,7 +1762,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_HEAL_SLEEP, Expert_WakeUpSlap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_HIT, Expert_HammerArm
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Expert_GyroBall
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_HealingWish
+    // IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_HealingWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF, Expert_Brine
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_PROTECT, Expert_Feint
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EAT_BERRY, Expert_Pluck
@@ -3283,7 +3265,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_GRAVITY
     TableEntry BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE
-    TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
+    // TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
     TableEntry BATTLE_EFFECT_NATURAL_GIFT
     TableEntry BATTLE_EFFECT_REMOVE_PROTECT
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
@@ -5425,7 +5407,7 @@ Expert_HealBlock:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_HealBlock_TryScorePlus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_HealBlock_TryScorePlus1
+    // IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_HealBlock_TryScorePlus1
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_HealBlock_TryScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_AQUA_RING, Expert_HealBlock_TryScorePlus1
@@ -7750,7 +7732,7 @@ CheckHP_DiscourageAtHighHP:
     TableEntry BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2
     TableEntry BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT
     TableEntry BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE
-    TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
+    // TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
     TableEntry BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON
     TableEntry TABLE_END
 

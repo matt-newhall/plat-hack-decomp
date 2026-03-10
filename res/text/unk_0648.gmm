@@ -1447,7 +1447,7 @@
 	</row>
 	<row id="pl_msg_00000648_00361" index="361">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">HEALING WISH</language>
+		<language name="English">VENOSHOCK</language>
 	</row>
 	<row id="pl_msg_00000648_00362" index="362">
 		<attribute name="window_context_name">used</attribute>

@@ -3198,6 +3198,13 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
     }
 
+    case MOVE_VENOSHOCK:
+        if (battleCtx->battleMons[AI_CONTEXT.defender].status & (MON_CONDITION_POISON | MON_CONDITION_TOXIC)) {
+            power = 130;
+        }
+
+        break;
+
     default:
         // Move has no special calculation logic; default to the basic calc
         power = 0;

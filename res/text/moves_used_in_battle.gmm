@@ -4335,15 +4335,15 @@
 	</row>
 	<row id="pl_msg_00000000_01083" index="1083">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nHealing Wish!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nVenoshock!</language>
 	</row>
 	<row id="pl_msg_00000000_01084" index="1084">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nHealing Wish!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nVenoshock!</language>
 	</row>
 	<row id="pl_msg_00000000_01085" index="1085">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nHealing Wish!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nVenoshock!</language>
 	</row>
 	<row id="pl_msg_00000000_01086" index="1086">
 		<attribute name="window_context_name">used</attribute>

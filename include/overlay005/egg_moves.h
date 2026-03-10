@@ -1969,7 +1969,6 @@ const u16 sEggMoves[] = {
         MOVE_CONFUSE_RAY,
         MOVE_WAKE_UP_SLAP,
         MOVE_TEETER_DANCE,
-        MOVE_HEALING_WISH,
         MOVE_CHARM),
 
     EGG_MOVES(SPECIES_HAPPINY,
