@@ -1329,6 +1329,10 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro CalcVenoshockPower
+    .long BTLCMD_CALCVENOSHOCKPOWER
+    .endm
+
     .text
     .globl _start
 _start:

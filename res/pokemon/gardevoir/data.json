@@ -34,7 +34,6 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HEALING_WISH" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_DOUBLE_TEAM" ],

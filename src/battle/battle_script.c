@@ -326,6 +326,7 @@ static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *bat
 static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -8742,6 +8743,28 @@ static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battle
         battleCtx->lastBattlerId = battleCtx->attacker;
         battleCtx->attacker = opponent;
         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Calculates the power for Venoshock.
+ *
+ * Venoshock has doubled power if the target is poisoned, or badly poisoned.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    if (battleCtx->battleMons[battleCtx->defender].status & (MON_CONDITION_POISON | MON_CONDITION_TOXIC)) {
+        battleCtx->movePower = CURRENT_MOVE_DATA.power * 2;
+    } else {
+        battleCtx->movePower = CURRENT_MOVE_DATA.power;
     }
 
     return FALSE;

@@ -45,7 +45,6 @@
             [ 35, "MOVE_ZEN_HEADBUTT" ],
             [ 40, "MOVE_DOUBLE_EDGE" ],
             [ 45, "MOVE_GRAVITY" ],
-            [ 50, "MOVE_HEALING_WISH" ],
             [ 55, "MOVE_FUTURE_SIGHT" ],
             [ 60, "MOVE_COSMIC_POWER" ],
             [ 65, "MOVE_LAST_RESORT" ],
