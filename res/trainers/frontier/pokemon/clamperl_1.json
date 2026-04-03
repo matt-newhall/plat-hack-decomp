@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_CLAMPERL",
     "moves": [
-        "MOVE_WHIRLPOOL",
+        "MOVE_DUAL_CHOP",
         "MOVE_TOXIC",
         "MOVE_IRON_DEFENSE",
         "MOVE_PROTECT"

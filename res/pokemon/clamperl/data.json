@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_CLAMP" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 1, "MOVE_WHIRLPOOL" ],
+            [ 1, "MOVE_DUAL_CHOP" ],
             [ 1, "MOVE_IRON_DEFENSE" ]
         ],
         "by_tm": [

@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_WAILORD",
     "moves": [
-        "MOVE_WHIRLPOOL",
+        "MOVE_DUAL_CHOP",
         "MOVE_TOXIC",
         "MOVE_AMNESIA",
         "MOVE_REST"

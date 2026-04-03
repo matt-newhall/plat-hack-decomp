@@ -6447,7 +6447,6 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_PREVENT_CRITS
     TableEntry BATTLE_EFFECT_GIVE_GROUND_IMMUNITY
     TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN
-    TableEntry BATTLE_EFFECT_WHIRLPOOL
     TableEntry TABLE_END
 
 PrioritizeExtremes_Main:

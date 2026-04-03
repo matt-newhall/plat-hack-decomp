@@ -42,7 +42,7 @@
             [ 19, "MOVE_FORESIGHT" ],
             [ 24, "MOVE_FREEZE_DRY" ],
             [ 28, "MOVE_TAKE_DOWN" ],
-            [ 33, "MOVE_WHIRLPOOL" ],
+            [ 33, "MOVE_DUAL_CHOP" ],
             [ 37, "MOVE_PROTECT" ],
             [ 42, "MOVE_HYDRO_PUMP" ],
             [ 46, "MOVE_ENDEAVOR" ]
@@ -99,7 +99,7 @@
             "MOVE_MIRROR_COAT",
             "MOVE_COUNTER",
             "MOVE_ANCIENT_POWER",
-            "MOVE_WHIRLPOOL",
+            "MOVE_DUAL_CHOP",
             "MOVE_BITE",
             "MOVE_DOUBLE_EDGE",
             "MOVE_MUD_BOMB"

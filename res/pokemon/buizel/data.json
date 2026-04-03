@@ -43,7 +43,7 @@
             [ 15, "MOVE_SWIFT" ],
             [ 21, "MOVE_AQUA_JET" ],
             [ 28, "MOVE_AGILITY" ],
-            [ 36, "MOVE_WHIRLPOOL" ],
+            [ 36, "MOVE_DUAL_CHOP" ],
             [ 45, "MOVE_RAZOR_WIND" ]
         ],
         "by_tm": [

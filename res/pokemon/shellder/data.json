@@ -43,7 +43,7 @@
             [ 25, "MOVE_CLAMP" ],
             [ 28, "MOVE_ICE_SHARD" ],
             [ 32, "MOVE_AURORA_BEAM" ],
-            [ 37, "MOVE_WHIRLPOOL" ],
+            [ 37, "MOVE_DUAL_CHOP" ],
             [ 40, "MOVE_IRON_DEFENSE" ],
             [ 44, "MOVE_BRINE" ],
             [ 49, "MOVE_ICE_BEAM" ]

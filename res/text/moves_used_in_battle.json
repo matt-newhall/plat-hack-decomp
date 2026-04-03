@@ -5246,21 +5246,21 @@
       "id": "pl_msg_00000000_00750",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Whirlpool!"
+        "Dual Chop!"
       ]
     },
     {
       "id": "pl_msg_00000000_00751",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Whirlpool!"
+        "Dual Chop!"
       ]
     },
     {
       "id": "pl_msg_00000000_00752",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Whirlpool!"
+        "Dual Chop!"
       ]
     },
     {

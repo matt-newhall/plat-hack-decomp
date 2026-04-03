@@ -37,7 +37,7 @@
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_BUBBLE" ],
-            [ 4, "MOVE_GROWL" ],
+            [ 4, "MOVE_DUAL_CHOP" ],
             [ 8, "MOVE_FIRST_IMPRESSION" ],
             [ 11, "MOVE_SWORDS_DANCE" ],
             [ 15, "MOVE_PECK" ],
@@ -47,7 +47,7 @@
             [ 28, "MOVE_FURY_ATTACK" ],
             [ 33, "MOVE_BRINE" ],
             [ 36, "MOVE_AQUA_JET" ],
-            [ 39, "MOVE_WHIRLPOOL" ],
+            [ 39, "MOVE_DUAL_CHOP" ],
             [ 46, "MOVE_MIST" ],
             [ 52, "MOVE_DRILL_PECK" ],
             [ 59, "MOVE_HYDRO_PUMP" ]

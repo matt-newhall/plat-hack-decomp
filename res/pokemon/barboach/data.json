@@ -88,7 +88,7 @@
         ],
         "egg_moves": [
             "MOVE_THRASH",
-            "MOVE_WHIRLPOOL",
+            "MOVE_DUAL_CHOP",
             "MOVE_SPARK",
             "MOVE_HYDRO_PUMP",
             "MOVE_FLAIL",
