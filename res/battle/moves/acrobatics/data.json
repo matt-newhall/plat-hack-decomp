@@ -1,12 +1,12 @@
 {
-    "name": "False Swipe",
+    "name": "Acrobatics",
     "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
-    "power": 40,
+    "type": "TYPE_FLYING",
+    "power": 55,
     "accuracy": 100,
-    "pp": 40,
+    "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_LEAVE_WITH_1_HP",
+        "type": "BATTLE_EFFECT_DOUBLE_POWER_WITH_NO_ITEM",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",

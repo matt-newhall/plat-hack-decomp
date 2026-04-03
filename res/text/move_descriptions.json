@@ -2002,11 +2002,11 @@
     {
       "id": "pl_msg_00000646_00206",
       "en_US": [
-        "A restrained attack\n",
-        "that prevents the\n",
-        "foe from fainting.\n",
-        "The target is left\n",
-        "with at least 1 HP."
+        "The user nimbly\n",
+        "strikes. This attack\n",
+        "does massive damage\n",
+        "if the user isn’t\n",
+        "holding an item."
       ]
     },
     {

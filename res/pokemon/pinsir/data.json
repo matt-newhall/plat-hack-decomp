@@ -100,7 +100,7 @@
         "egg_moves": [
             "MOVE_FURY_ATTACK",
             "MOVE_FLAIL",
-            "MOVE_FALSE_SWIPE",
+            "MOVE_ACROBATICS",
             "MOVE_FAINT_ATTACK",
             "MOVE_QUICK_ATTACK",
             "MOVE_CLOSE_COMBAT",

@@ -2958,9 +2958,9 @@
     {
       "id": "pl_msg_00000391_00381",
       "en_US": [
-        "A restrained attack that prevents the\n",
-        "foe from fainting. The target is left\n",
-        "with at least 1 HP."
+        "The user nimbly strikes. This attack\n",
+        "does massive damage if the user isn’t\n",
+        "holding an item."
       ]
     },
     {

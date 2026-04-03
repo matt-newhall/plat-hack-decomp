@@ -110,7 +110,7 @@
         ],
         "egg_moves": [
             "MOVE_SWORDS_DANCE",
-            "MOVE_FALSE_SWIPE",
+            "MOVE_ACROBATICS",
             "MOVE_POISON_FANG",
             "MOVE_PSYCH_UP",
             "MOVE_ANCIENT_POWER",

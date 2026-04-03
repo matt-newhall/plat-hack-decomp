@@ -3569,11 +3569,6 @@ static void BattleControllerPlayer_UpdateHP(BattleSystem *battleSys, BattleConte
             return;
         }
 
-        if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_LEAVE_WITH_1_HP
-            && DEFENDING_MON.curHP + battleCtx->damage <= 0) {
-            battleCtx->damage = (DEFENDING_MON.curHP - 1) * -1;
-        }
-
         if (DEFENDER_TURN_FLAGS.enduring == TRUE || DEFENDER_SELF_TURN_FLAGS.focusItemActivated == TRUE) {
             if (itemEffect == HOLD_EFFECT_MAYBE_ENDURE) {
                 if ((BattleSystem_RandNext(battleSys) % 100) >= itemPower) {
