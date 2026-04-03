@@ -255,15 +255,15 @@
 	</row>
 	<row id="pl_msg_00000000_00063" index="63">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSlam!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nScald!</language>
 	</row>
 	<row id="pl_msg_00000000_00064" index="64">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSlam!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nScald!</language>
 	</row>
 	<row id="pl_msg_00000000_00065" index="65">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSlam!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nScald!</language>
 	</row>
 	<row id="pl_msg_00000000_00066" index="66">
 		<attribute name="window_context_name">used</attribute>

@@ -37,7 +37,7 @@
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 5, "MOVE_FREEZE_DRY" ],
             [ 9, "MOVE_MUD_SHOT" ],
-            [ 15, "MOVE_SLAM" ],
+            [ 15, "MOVE_SCALD" ],
             [ 19, "MOVE_MUD_BOMB" ],
             [ 23, "MOVE_AMNESIA" ],
             [ 29, "MOVE_YAWN" ],

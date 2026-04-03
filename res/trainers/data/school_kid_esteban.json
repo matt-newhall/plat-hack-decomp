@@ -17,7 +17,7 @@
             "item": null,
             "moves": [
                 "MOVE_MUD_BOMB",
-                "MOVE_SLAM",
+                "MOVE_SCALD",
                 "MOVE_WATER_GUN",
                 "MOVE_AMNESIA"
             ],

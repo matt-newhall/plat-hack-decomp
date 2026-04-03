@@ -41,7 +41,7 @@
             [ 10, "MOVE_TAKE_DOWN" ],
             [ 15, "MOVE_ROLLOUT" ],
             [ 19, "MOVE_NATURAL_GIFT" ],
-            [ 24, "MOVE_SLAM" ],
+            [ 24, "MOVE_SCALD" ],
             [ 28, "MOVE_ENDURE" ],
             [ 33, "MOVE_CHARM" ],
             [ 37, "MOVE_LAST_RESORT" ],

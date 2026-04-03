@@ -87,7 +87,7 @@
 	</row>
 	<row id="pl_msg_00000646_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is slammed\nwith a long tail,\nvines, etc., to inflict\ndamage.\n</language>
+		<language name="English">The user shoots\nboiling hot water at\nits target. It\nmay also leave the\ntarget with a burn.</language>
 	</row>
 	<row id="pl_msg_00000646_00022" index="22">
 		<attribute name="window_context_name">used</attribute>

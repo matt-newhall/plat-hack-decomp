@@ -1,18 +1,17 @@
 {
-    "name": "Slam",
-    "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
+    "name": "Scald",
+    "class": "CLASS_SPECIAL",
+    "type": "TYPE_WATER",
     "power": 80,
-    "accuracy": 75,
-    "pp": 20,
+    "accuracy": 100,
+    "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_HIT",
-        "chance": 0
+        "type": "BATTLE_EFFECT_BURN_HIT",
+        "chance": 30
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],

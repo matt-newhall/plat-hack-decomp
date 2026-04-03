@@ -40,7 +40,7 @@
             [ 13, "MOVE_FURY_SWIPES" ],
             [ 16, "MOVE_HELPING_HAND" ],
             [ 19, "MOVE_FOLLOW_ME" ],
-            [ 25, "MOVE_SLAM" ],
+            [ 25, "MOVE_SCALD" ],
             [ 28, "MOVE_REST" ],
             [ 31, "MOVE_SUCKER_PUNCH" ],
             [ 36, "MOVE_AMNESIA" ],

@@ -29,7 +29,7 @@
             "level": 47,
             "item": null,
             "moves": [
-                "MOVE_SLAM",
+                "MOVE_SCALD",
                 "MOVE_POWER_WHIP",
                 "MOVE_EARTHQUAKE",
                 "MOVE_BRICK_BREAK"

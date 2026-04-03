@@ -45,7 +45,7 @@
             [ 25, "MOVE_STOMP" ],
             [ 32, "MOVE_PROTECT" ],
             [ 37, "MOVE_GUILLOTINE" ],
-            [ 44, "MOVE_SLAM" ],
+            [ 44, "MOVE_SCALD" ],
             [ 51, "MOVE_BRINE" ],
             [ 56, "MOVE_CRABHAMMER" ],
             [ 63, "MOVE_FLAIL" ]
