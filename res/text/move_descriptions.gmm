@@ -1527,8 +1527,8 @@
 	</row>
 	<row id="pl_msg_00000646_00381" index="381">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user chants an\nincantation toward\nthe sky, preventing\nthe foe from landing\ncritical hits.</language>
-	</row>
+        <language name="English">The user attacks by\nnuzzling targets\nwith its electrified\ncheeks. This leaves\ntargets paralyzed.</language>
+    </row>
 	<row id="pl_msg_00000646_00382" index="382">
 		<attribute name="window_context_name">used</attribute>
         <language name="English">The user performs\na beautiful, mystic\ndance. It boosts\nthe user’s Sp. Atk,\nSp. Def, and Speed.</language>

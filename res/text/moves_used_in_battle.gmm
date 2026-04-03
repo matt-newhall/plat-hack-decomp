@@ -4575,15 +4575,15 @@
 	</row>
 	<row id="pl_msg_00000000_01143" index="1143">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nLucky Chant!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nNuzzle!</language>
 	</row>
 	<row id="pl_msg_00000000_01144" index="1144">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLucky Chant!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nNuzzle!</language>
 	</row>
 	<row id="pl_msg_00000000_01145" index="1145">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLucky Chant!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nNuzzle!</language>
 	</row>
 	<row id="pl_msg_00000000_01146" index="1146">
 		<attribute name="window_context_name">used</attribute>

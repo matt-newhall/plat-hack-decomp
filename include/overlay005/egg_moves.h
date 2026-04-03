@@ -428,7 +428,7 @@ const u16 sEggMoves[] = {
         MOVE_INGRAIN,
         MOVE_CURSE,
         MOVE_NATURE_POWER,
-        MOVE_LUCKY_CHANT,
+        MOVE_NUZZLE,
         MOVE_LEAF_STORM),
 
     EGG_MOVES(SPECIES_CUBONE,
@@ -775,7 +775,7 @@ const u16 sEggMoves[] = {
         MOVE_PSYCH_UP,
         MOVE_NASTY_PLOT,
         MOVE_PSYCHO_SHIFT,
-        MOVE_LUCKY_CHANT),
+        MOVE_NUZZLE),
 
     EGG_MOVES(SPECIES_NATU,
         MOVE_HAZE,
@@ -1646,7 +1646,7 @@ const u16 sEggMoves[] = {
     EGG_MOVES(SPECIES_CASTFORM,
         MOVE_FUTURE_SIGHT,
         MOVE_PSYCH_UP,
-        MOVE_LUCKY_CHANT,
+        MOVE_NUZZLE,
         MOVE_DISABLE,
         MOVE_AMNESIA,
         MOVE_OMINOUS_WIND),

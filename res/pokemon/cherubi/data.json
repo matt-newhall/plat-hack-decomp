@@ -42,7 +42,7 @@
             [ 28, "MOVE_WORRY_SEED" ],
             [ 31, "MOVE_TAKE_DOWN" ],
             [ 37, "MOVE_SOLAR_BEAM" ],
-            [ 40, "MOVE_LUCKY_CHANT" ]
+            [ 40, "MOVE_NUZZLE" ]
         ],
         "by_tm": [
             "TM06",

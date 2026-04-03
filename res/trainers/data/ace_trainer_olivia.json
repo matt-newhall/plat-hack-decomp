@@ -18,7 +18,7 @@
                 "MOVE_FUTURE_SIGHT",
                 "MOVE_PSYCHIC",
                 "MOVE_MAGICAL_LEAF",
-                "MOVE_LUCKY_CHANT"
+                "MOVE_NUZZLE"
             ],
             "power": 50,
             "ball_seal": 0

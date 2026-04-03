@@ -37,7 +37,7 @@
             [ 1, "MOVE_LEER" ],
             [ 6, "MOVE_NIGHT_SHADE" ],
             [ 9, "MOVE_TELEPORT" ],
-            [ 12, "MOVE_LUCKY_CHANT" ],
+            [ 12, "MOVE_NUZZLE" ],
             [ 17, "MOVE_MIRACLE_EYE" ],
             [ 23, "MOVE_CONFUSE_RAY" ],
             [ 28, "MOVE_WISH" ],
