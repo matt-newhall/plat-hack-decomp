@@ -3003,15 +3003,15 @@
 	</row>
 	<row id="pl_msg_00000000_00750" index="750">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nWhirlpool!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDual Chop!</language>
 	</row>
 	<row id="pl_msg_00000000_00751" index="751">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nWhirlpool!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDual Chop!</language>
 	</row>
 	<row id="pl_msg_00000000_00752" index="752">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nWhirlpool!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDual Chop!</language>
 	</row>
 	<row id="pl_msg_00000000_00753" index="753">
 		<attribute name="window_context_name">used</attribute>

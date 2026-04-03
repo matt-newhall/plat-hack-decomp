@@ -1003,7 +1003,7 @@
 	</row>
 	<row id="pl_msg_00000646_00250" index="250">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user traps the\nfoe inside a fast,\nvicious whirlpool that\nlasts for two to five\nturns.</language>
+		<language name="English">The user attacks its\ntarget by hitting\nit with brutal strikes.\nThe target is hit\ntwice in a row.</language>
 	</row>
 	<row id="pl_msg_00000646_00251" index="251">
 		<attribute name="window_context_name">used</attribute>

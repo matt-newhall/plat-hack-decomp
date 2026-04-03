@@ -40,7 +40,7 @@
             [ 4, "MOVE_GROWL" ],
             [ 7, "MOVE_WATER_GUN" ],
             [ 11, "MOVE_ROLLOUT" ],
-            [ 14, "MOVE_WHIRLPOOL" ],
+            [ 14, "MOVE_DUAL_CHOP" ],
             [ 17, "MOVE_ASTONISH" ],
             [ 21, "MOVE_WATER_PULSE" ],
             [ 24, "MOVE_MIST" ],

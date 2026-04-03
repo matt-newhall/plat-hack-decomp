@@ -574,7 +574,7 @@ const u16 sEggMoves[] = {
         MOVE_SLEEP_TALK,
         MOVE_HORN_DRILL,
         MOVE_ANCIENT_POWER,
-        MOVE_WHIRLPOOL,
+        MOVE_DUAL_CHOP,
         MOVE_FISSURE),
 
     EGG_MOVES(SPECIES_EEVEE,
@@ -727,7 +727,7 @@ const u16 sEggMoves[] = {
         MOVE_SCREECH,
         MOVE_AMNESIA,
         MOVE_PSYBEAM,
-        MOVE_WHIRLPOOL,
+        MOVE_DUAL_CHOP,
         MOVE_AGILITY,
         MOVE_MIST),
 
@@ -1231,7 +1231,7 @@ const u16 sEggMoves[] = {
         MOVE_MIRROR_COAT,
         MOVE_COUNTER,
         MOVE_ANCIENT_POWER,
-        MOVE_WHIRLPOOL,
+        MOVE_DUAL_CHOP,
         MOVE_BITE,
         MOVE_DOUBLE_EDGE,
         MOVE_MUD_BOMB),
@@ -1600,7 +1600,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_BARBOACH,
         MOVE_THRASH,
-        MOVE_WHIRLPOOL,
+        MOVE_DUAL_CHOP,
         MOVE_SPARK,
         MOVE_HYDRO_PUMP,
         MOVE_FLAIL,

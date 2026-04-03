@@ -42,7 +42,7 @@
             [ 22, "MOVE_BIDE" ],
             [ 25, "MOVE_FURY_ATTACK" ],
             [ 29, "MOVE_BRINE" ],
-            [ 32, "MOVE_WHIRLPOOL" ],
+            [ 32, "MOVE_DUAL_CHOP" ],
             [ 36, "MOVE_MIST" ],
             [ 39, "MOVE_DRILL_PECK" ],
             [ 43, "MOVE_HYDRO_PUMP" ]
