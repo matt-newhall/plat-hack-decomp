@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_ODOR_SLEUTH" ],
-            [ 4, "MOVE_MUD_SPORT" ],
+            [ 4, "MOVE_FREEZE_DRY" ],
             [ 8, "MOVE_POWDER_SNOW" ],
             [ 13, "MOVE_MUD_SLAP" ],
             [ 16, "MOVE_ENDURE" ],

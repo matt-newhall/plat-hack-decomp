@@ -1,0 +1,23 @@
+{
+    "name": "Freeze-Dry",
+    "class": "CLASS_SPECIAL",
+    "type": "TYPE_ICE",
+    "power": 70,
+    "accuracy": 100,
+    "pp": 20,
+    "effect": {
+        "type": "BATTLE_EFFECT_SUPER_EFFECTIVE_VS_ICE_FREEZE_HIT",
+        "chance": 10
+    },
+    "range": "RANGE_SINGLE_TARGET",
+    "priority": 0,
+    "flags": [
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
+    ],
+    "contest": {
+        "effect": 13,
+        "type": "CONTEST_TYPE_BEAUTY"
+    }
+}

@@ -39,7 +39,7 @@
             [ 15, "MOVE_ROCK_TOMB" ],
             [ 22, "MOVE_YAWN" ],
             [ 29, "MOVE_TAKE_DOWN" ],
-            [ 36, "MOVE_MUD_SPORT" ],
+            [ 36, "MOVE_FREEZE_DRY" ],
             [ 43, "MOVE_ANCIENT_POWER" ],
             [ 50, "MOVE_DOUBLE_EDGE" ],
             [ 57, "MOVE_DIVE" ],

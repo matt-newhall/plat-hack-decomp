@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
             [ 1, "MOVE_HARDEN" ],
-            [ 7, "MOVE_MUD_SPORT" ],
+            [ 7, "MOVE_FREEZE_DRY" ],
             [ 13, "MOVE_WATER_GUN" ],
             [ 19, "MOVE_METAL_CLAW" ],
             [ 25, "MOVE_PROTECT" ],

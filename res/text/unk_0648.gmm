@@ -1203,7 +1203,7 @@
 	</row>
 	<row id="pl_msg_00000648_00300" index="300">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">MUD SPORT</language>
+		<language name="English">FREEZE-DRY</language>
 	</row>
 	<row id="pl_msg_00000648_00301" index="301">
 		<attribute name="window_context_name">used</attribute>

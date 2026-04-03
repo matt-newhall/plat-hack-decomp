@@ -1203,7 +1203,7 @@
 	</row>
 	<row id="pl_msg_00000646_00300" index="300">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user covers\nitself with mud. It\nweakens Electric-\ntype moves while the\nuser is in the battle.</language>
+        <language name="English">The user chills the\ntarget. This may\nleave them frozen,\nand is super effective\non Water types.</language>
 	</row>
 	<row id="pl_msg_00000646_00301" index="301">
 		<attribute name="window_context_name">used</attribute>

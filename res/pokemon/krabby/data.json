@@ -33,7 +33,7 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_MUD_SPORT" ],
+            [ 1, "MOVE_FREEZE_DRY" ],
             [ 1, "MOVE_BUBBLE" ],
             [ 5, "MOVE_VICE_GRIP" ],
             [ 9, "MOVE_LEER" ],
