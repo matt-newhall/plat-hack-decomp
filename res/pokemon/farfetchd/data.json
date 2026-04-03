@@ -48,7 +48,7 @@
             [ 33, "MOVE_NIGHT_SLASH" ],
             [ 37, "MOVE_AIR_SLASH" ],
             [ 43, "MOVE_FEINT" ],
-            [ 45, "MOVE_FALSE_SWIPE" ]
+            [ 45, "MOVE_ACROBATICS" ]
         ],
         "by_tm": [
             "TM06",

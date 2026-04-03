@@ -46,7 +46,7 @@
             [ 35, "MOVE_AGILITY" ],
             [ 41, "MOVE_SLAM" ],
             [ 47, "MOVE_DETECT" ],
-            [ 53, "MOVE_FALSE_SWIPE" ],
+            [ 53, "MOVE_ACROBATICS" ],
             [ 59, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [

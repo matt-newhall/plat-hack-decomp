@@ -38,7 +38,7 @@
             [ 1, "MOVE_LEER" ],
             [ 5, "MOVE_FOCUS_ENERGY" ],
             [ 9, "MOVE_PURSUIT" ],
-            [ 13, "MOVE_FALSE_SWIPE" ],
+            [ 13, "MOVE_ACROBATICS" ],
             [ 17, "MOVE_AGILITY" ],
             [ 21, "MOVE_METAL_CLAW" ],
             [ 25, "MOVE_FURY_CUTTER" ],

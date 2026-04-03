@@ -39,7 +39,7 @@
             [ 9, "MOVE_SAND_ATTACK" ],
             [ 14, "MOVE_FURY_SWIPES" ],
             [ 19, "MOVE_MIND_READER" ],
-            [ 25, "MOVE_FALSE_SWIPE" ],
+            [ 25, "MOVE_ACROBATICS" ],
             [ 31, "MOVE_MUD_SLAP" ],
             [ 38, "MOVE_METAL_CLAW" ],
             [ 45, "MOVE_DIG" ]

@@ -7633,6 +7633,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 150 / 100;
     }
 
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_DOUBLE_POWER_WITH_NO_ITEM
+        && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
+        movePower = movePower * 2;
+    }
+
     if (attackerParams.ability == ABILITY_SIMPLE) {
         attackStage *= 2;
         if (attackStage < -6) {

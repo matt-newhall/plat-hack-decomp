@@ -827,7 +827,7 @@
 	</row>
 	<row id="pl_msg_00000646_00206" index="206">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A restrained attack\nthat prevents the\nfoe from fainting.\nThe target is left\nwith at least 1 HP.</language>
+        <language name="English">The user nimbly\nstrikes. This attack\ndoes massive damage\nif the user isn’t\nholding an item.</language>
 	</row>
 	<row id="pl_msg_00000646_00207" index="207">
 		<attribute name="window_context_name">used</attribute>

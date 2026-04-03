@@ -2475,15 +2475,15 @@
 	</row>
 	<row id="pl_msg_00000000_00618" index="618">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nFalse Swipe!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nAcrobatics!</language>
 	</row>
 	<row id="pl_msg_00000000_00619" index="619">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFalse Swipe!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nAcrobatics!</language>
 	</row>
 	<row id="pl_msg_00000000_00620" index="620">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFalse Swipe!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nAcrobatics!</language>
 	</row>
 	<row id="pl_msg_00000000_00621" index="621">
 		<attribute name="window_context_name">used</attribute>
