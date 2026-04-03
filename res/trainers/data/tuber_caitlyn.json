@@ -14,7 +14,7 @@
             "item": null,
             "moves": [
                 "MOVE_WATER_GUN",
-                "MOVE_SLAM",
+                "MOVE_SCALD",
                 "MOVE_CHARM"
             ],
             "iv_scale": 10,

@@ -14,7 +14,7 @@
             "item": null,
             "moves": [
                 "MOVE_THUNDERBOLT",
-                "MOVE_SLAM",
+                "MOVE_SCALD",
                 "MOVE_THUNDER_WAVE",
                 "MOVE_QUICK_ATTACK"
             ],

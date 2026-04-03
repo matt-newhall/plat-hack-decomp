@@ -45,7 +45,7 @@
             [ 25, "MOVE_STOMP" ],
             [ 29, "MOVE_PROTECT" ],
             [ 31, "MOVE_GUILLOTINE" ],
-            [ 35, "MOVE_SLAM" ],
+            [ 35, "MOVE_SCALD" ],
             [ 39, "MOVE_BRINE" ],
             [ 41, "MOVE_CRABHAMMER" ],
             [ 45, "MOVE_FLAIL" ]
@@ -103,7 +103,7 @@
             "MOVE_HAZE",
             "MOVE_AMNESIA",
             "MOVE_FLAIL",
-            "MOVE_SLAM",
+            "MOVE_SCALD",
             "MOVE_KNOCK_OFF",
             "MOVE_SWORDS_DANCE",
             "MOVE_TICKLE",

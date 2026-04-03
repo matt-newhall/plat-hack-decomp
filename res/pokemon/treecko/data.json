@@ -42,7 +42,7 @@
             [ 21, "MOVE_SCREECH" ],
             [ 26, "MOVE_MEGA_DRAIN" ],
             [ 31, "MOVE_AGILITY" ],
-            [ 36, "MOVE_SLAM" ],
+            [ 36, "MOVE_SCALD" ],
             [ 41, "MOVE_DETECT" ],
             [ 46, "MOVE_GIGA_DRAIN" ],
             [ 51, "MOVE_ENERGY_BALL" ]

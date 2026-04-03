@@ -110,7 +110,7 @@
             "MOVE_THRASH",
             "MOVE_DOUBLE_EDGE",
             "MOVE_LEER",
-            "MOVE_SLAM",
+            "MOVE_SCALD",
             "MOVE_STOMP",
             "MOVE_WHIRLWIND",
             "MOVE_HAMMER_ARM"

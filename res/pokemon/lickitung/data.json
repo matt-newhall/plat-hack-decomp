@@ -41,7 +41,7 @@
             [ 17, "MOVE_WRAP" ],
             [ 21, "MOVE_STOMP" ],
             [ 25, "MOVE_DISABLE" ],
-            [ 29, "MOVE_SLAM" ],
+            [ 29, "MOVE_SCALD" ],
             [ 33, "MOVE_ROLLOUT" ],
             [ 41, "MOVE_REFRESH" ],
             [ 45, "MOVE_SCREECH" ],

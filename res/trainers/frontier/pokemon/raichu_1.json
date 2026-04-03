@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_THUNDER_PUNCH",
         "MOVE_IRON_TAIL",
-        "MOVE_SLAM",
+        "MOVE_SCALD",
         "MOVE_QUICK_ATTACK"
     ],
     "evFlags": {

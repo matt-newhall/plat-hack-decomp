@@ -46,7 +46,7 @@
             [ 14, "MOVE_RAGE" ],
             [ 17, "MOVE_ROCK_TOMB" ],
             [ 22, "MOVE_SANDSTORM" ],
-            [ 25, "MOVE_SLAM" ],
+            [ 25, "MOVE_SCALD" ],
             [ 30, "MOVE_ROCK_POLISH" ],
             [ 33, "MOVE_DRAGON_BREATH" ],
             [ 38, "MOVE_CURSE" ],
