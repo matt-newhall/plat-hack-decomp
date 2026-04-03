@@ -8,7 +8,7 @@
 const u16 sEggMoves[] = {
     EGG_MOVES(SPECIES_BULBASAUR,
         MOVE_LIGHT_SCREEN,
-        MOVE_SKULL_BASH,
+        MOVE_FIRST_IMPRESSION,
         MOVE_SAFEGUARD,
         MOVE_CHARM,
         MOVE_PETAL_DANCE,
@@ -436,7 +436,7 @@ const u16 sEggMoves[] = {
         MOVE_ANCIENT_POWER,
         MOVE_BELLY_DRUM,
         MOVE_SCREECH,
-        MOVE_SKULL_BASH,
+        MOVE_FIRST_IMPRESSION,
         MOVE_PERISH_SONG,
         MOVE_SWORDS_DANCE,
         MOVE_DOUBLE_KICK,
@@ -1741,7 +1741,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_RELICANTH,
         MOVE_MAGNITUDE,
-        MOVE_SKULL_BASH,
+        MOVE_FIRST_IMPRESSION,
         MOVE_WATER_SPORT,
         MOVE_AMNESIA,
         MOVE_SLEEP_TALK,

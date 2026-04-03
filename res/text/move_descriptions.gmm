@@ -523,7 +523,7 @@
 	</row>
 	<row id="pl_msg_00000646_00130" index="130">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user tucks in its\nhead to raise its\nDefense in the first\nturn, then rams the\nfoe on the next turn.</language>
+        <language name="English">Although this move\nhas great power, it\nonly works the first\nturn the user is\nin battle.</language>
 	</row>
 	<row id="pl_msg_00000646_00131" index="131">
 		<attribute name="window_context_name">used</attribute>
