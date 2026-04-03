@@ -242,7 +242,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Basic_CheckCanImprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Basic_CheckCanRefreshStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE, Basic_CheckCanMudSport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Basic_CheckBulkUp
@@ -916,11 +915,6 @@ Basic_CheckCanImprison:
 Basic_CheckCanRefreshStatus:
     // If the attacker is not Burned, Poisoned, or Paralyzed, score -10.
     IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_FACADE_BOOST, ScoreMinus10
-    PopOrEnd 
-
-Basic_CheckCanMudSport:
-    // If the attacker is already under the respective effect, score -10.
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_MUD_SPORT, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckTickle:
@@ -1746,7 +1740,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Snatch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOIL_THIRD, Expert_RecoilMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT, Expert_HighCritical
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE, Expert_MudSport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_Overheat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusDefenseDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_StatusSpDefenseUp
@@ -1762,7 +1755,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_HEAL_SLEEP, Expert_WakeUpSlap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_HIT, Expert_HammerArm
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Expert_GyroBall
-    // IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_HealingWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF, Expert_Brine
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_PROTECT, Expert_Feint
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EAT_BERRY, Expert_Pluck
@@ -3258,14 +3250,12 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_HEAL_STATUS
     TableEntry BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
-    TableEntry BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE
     TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_GRAVITY
     TableEntry BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE
-    // TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
     TableEntry BATTLE_EFFECT_NATURAL_GIFT
     TableEntry BATTLE_EFFECT_REMOVE_PROTECT
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
@@ -4701,27 +4691,6 @@ Expert_Snatch_TryScoreMinus2:
 Expert_Snatch_End:
     PopOrEnd 
 
-Expert_MudSport:
-    // If the attacker's HP < 50%, score -1.
-    //
-    // If the opponent has an Electric typing, score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_MudSport_ScoreMinus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_ELECTRIC, Expert_MudSport_ScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_ELECTRIC, Expert_MudSport_ScorePlus1
-    GoTo Expert_MudSport_ScoreMinus1
-
-Expert_MudSport_ScorePlus1:
-    AddToMoveScore 1
-    GoTo Expert_MudSport_End
-
-Expert_MudSport_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_MudSport_End:
-    PopOrEnd 
-
 Expert_Overheat:
     // If the opponent resists or is immune to the move, score -1.
     //
@@ -5407,7 +5376,6 @@ Expert_HealBlock:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_HealBlock_TryScorePlus1
-    // IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_HealBlock_TryScorePlus1
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_HealBlock_TryScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_AQUA_RING, Expert_HealBlock_TryScorePlus1
@@ -7742,7 +7710,6 @@ CheckHP_DiscourageAtHighHP:
     TableEntry BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2
     TableEntry BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT
     TableEntry BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE
-    // TableEntry BATTLE_EFFECT_FAINT_AND_FULL_HEAL_NEXT_MON
     TableEntry BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON
     TableEntry TABLE_END
 
@@ -7844,7 +7811,6 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE
     TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_METAL_BURST

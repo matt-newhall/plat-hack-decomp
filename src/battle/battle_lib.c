@@ -2804,6 +2804,10 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
+    if (move == MOVE_FREEZE_DRY && (MON_HAS_TYPE(defender, TYPE_WATER))) {
+        damage *= 4;
+    }
+
     if (moveType == TYPE_GROUND
         && defenderItemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
         && MON_HAS_TYPE(defender, TYPE_FLYING)
@@ -2856,6 +2860,13 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             }
 
             chartEntry++;
+        }
+    }
+
+    if (move == MOVE_FREEZE_DRY && (MON_HAS_TYPE(defender, TYPE_WATER))) {
+        *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
+        if (MON_HAS_TYPE(defender, TYPE_WATER) && !(MON_HAS_TYPE(defender, TYPE_STEEL) || MON_HAS_TYPE(defender, TYPE_ICE) || MON_HAS_TYPE(defender, TYPE_FIRE))) {
+            *moveStatusMask |= MOVE_STATUS_SUPER_EFFECTIVE;
         }
     }
 
@@ -2966,6 +2977,11 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         && ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE
             || (*moveStatusMask & MOVE_STATUS_BASIC_EFFECTIVENESS) == MOVE_STATUS_BASIC_EFFECTIVENESS)) {
         *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+    }
+
+    if (move == MOVE_FREEZE_DRY && (defenderType1 == TYPE_WATER || defenderType2 == TYPE_WATER)) {
+        ConsoleLog("are we here");
+        UpdateMoveStatusForTypeMul(4, moveStatusMask);
     }
 
     return;

@@ -40,7 +40,7 @@
             [ 10, "MOVE_WATER_GUN" ],
             [ 15, "MOVE_BIDE" ],
             [ 19, "MOVE_FORESIGHT" ],
-            [ 24, "MOVE_MUD_SPORT" ],
+            [ 24, "MOVE_FREEZE_DRY" ],
             [ 28, "MOVE_TAKE_DOWN" ],
             [ 33, "MOVE_WHIRLPOOL" ],
             [ 37, "MOVE_PROTECT" ],

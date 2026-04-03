@@ -73,7 +73,7 @@
         ],
         "egg_moves": [
             "MOVE_REFRESH",
-            "MOVE_MUD_SPORT",
+            "MOVE_FREEZE_DRY",
             "MOVE_BODY_SLAM",
             "MOVE_SUPERSONIC",
             "MOVE_BARRIER",

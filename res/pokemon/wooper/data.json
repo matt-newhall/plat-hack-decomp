@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_TAIL_WHIP" ],
-            [ 5, "MOVE_MUD_SPORT" ],
+            [ 5, "MOVE_FREEZE_DRY" ],
             [ 9, "MOVE_MUD_SHOT" ],
             [ 15, "MOVE_SLAM" ],
             [ 19, "MOVE_MUD_BOMB" ],
@@ -96,7 +96,7 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_SAFEGUARD",
             "MOVE_CURSE",
-            "MOVE_MUD_SPORT",
+            "MOVE_FREEZE_DRY",
             "MOVE_STOCKPILE",
             "MOVE_SWALLOW",
             "MOVE_SPIT_UP",

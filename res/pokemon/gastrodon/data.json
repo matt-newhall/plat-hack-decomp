@@ -38,10 +38,10 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_MUD_SLAP" ],
-            [ 1, "MOVE_MUD_SPORT" ],
+            [ 1, "MOVE_FREEZE_DRY" ],
             [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_WATER_PULSE" ],
-            [ 2, "MOVE_MUD_SPORT" ],
+            [ 2, "MOVE_FREEZE_DRY" ],
             [ 4, "MOVE_HARDEN" ],
             [ 7, "MOVE_WATER_PULSE" ],
             [ 11, "MOVE_MUD_BOMB" ],
