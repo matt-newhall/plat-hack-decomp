@@ -101,21 +101,21 @@
       "id": "pl_msg_00000000_00015",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Mega Punch!"
+        "Dual Wingbeat!"
       ]
     },
     {
       "id": "pl_msg_00000000_00016",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Mega Punch!"
+        "Dual Wingbeat!"
       ]
     },
     {
       "id": "pl_msg_00000000_00017",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Mega Punch!"
+        "Dual Wingbeat!"
       ]
     },
     {

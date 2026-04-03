@@ -2,7 +2,7 @@
     "species": "SPECIES_HITMONCHAN",
     "moves": [
         "MOVE_SKY_UPPERCUT",
-        "MOVE_MEGA_PUNCH",
+        "MOVE_DUAL_WINGBEAT",
         "MOVE_BULLET_PUNCH",
         "MOVE_COUNTER"
     ],
