@@ -91,7 +91,7 @@
         "egg_moves": [
             "MOVE_FUTURE_SIGHT",
             "MOVE_PSYCH_UP",
-            "MOVE_LUCKY_CHANT",
+            "MOVE_NUZZLE",
             "MOVE_DISABLE",
             "MOVE_AMNESIA",
             "MOVE_OMINOUS_WIND"

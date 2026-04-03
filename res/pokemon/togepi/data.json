@@ -108,7 +108,7 @@
             "MOVE_PSYCH_UP",
             "MOVE_NASTY_PLOT",
             "MOVE_PSYCHO_SHIFT",
-            "MOVE_LUCKY_CHANT"
+            "MOVE_NUZZLE"
         ]
     },
     "evolutions": [

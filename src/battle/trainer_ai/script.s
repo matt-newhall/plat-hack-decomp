@@ -266,7 +266,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Basic_CheckPowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_CRITS, Basic_CheckLuckyChant
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES, Basic_CheckPowerSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Basic_CheckGuardSwap
@@ -1371,11 +1370,6 @@ Basic_CheckGastroAcid:
     IfLoadedEqualTo ABILITY_HONEY_GATHER, ScoreMinus10
     PopOrEnd 
 
-Basic_CheckLuckyChant:
-    // If the attacker is already under the effect, score -10.
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LUCKY_CHANT, ScoreMinus10
-    PopOrEnd 
-
 Basic_CheckCopycat:
     // If it's the first turn of the battle and the attacker is faster than its target, score -10.
     LoadTurnCount 
@@ -1674,6 +1668,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Reflect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_StatusParalyze
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_Swagger
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SPEED_HIT, Expert_SpeedDownOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurnNoInvuln
@@ -1772,7 +1767,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP, Expert_WringOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_CRITS, Expert_LuckyChant
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES, Expert_PowerSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Expert_GuardSwap
@@ -2944,6 +2938,19 @@ Expert_StatusParalyze_TryScorePlus3:
 Expert_StatusParalyze_End:
     PopOrEnd 
 
+Expert_StatusParalyzeHit:
+    ; If the target is immune to or would resist the move, do not apply any further modifiers.
+    ;
+    ; Treat the exact moves Icy Wind, Rock Tomb, and Mud Shot as Speed-reducing status moves.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_StatusParalyzeHit_End
+    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_StatusParalyzeHit_End
+    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_StatusParalyzeHit_End
+    IfMoveEqualTo MOVE_NUZZLE, Expert_StatusParalyze
+    PopOrEnd 
+
+Expert_StatusParalyzeHit_End:
+    PopOrEnd 
+
 Expert_VitalThrow:
     // If the attacker is slower than its target, no change.
     //
@@ -3264,7 +3271,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_PREVENT_HEALING
     TableEntry BATTLE_EFFECT_SWAP_ATK_DEF
     TableEntry BATTLE_EFFECT_SUPRESS_ABILITY
-    TableEntry BATTLE_EFFECT_PREVENT_CRITS
     TableEntry BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA
@@ -5480,29 +5486,6 @@ Expert_GastroAcid_ContinueHPCheck:
 Expert_GastroAcid_End:
     PopOrEnd 
 
-Expert_LuckyChant:
-    // If the attacker's HP < 70%, score -1.
-    //
-    // If the opponent knows a move with a high critical-hit ratio, score +1.
-    //
-    // Otherwise, 25% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_LuckyChant_ScoreMinus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HIGH_CRITICAL, Expert_LuckyChant_ScorePlus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT, Expert_LuckyChant_ScorePlus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT, Expert_LuckyChant_ScorePlus1
-    IfRandomLessThan 64, Expert_LuckyChant_ScorePlus1
-    GoTo Expert_LuckyChant_End
-
-Expert_LuckyChant_ScorePlus1:
-    AddToMoveScore 1
-    GoTo Expert_LuckyChant_End
-
-Expert_LuckyChant_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_LuckyChant_End:
-    PopOrEnd 
-
 Expert_Copycat:
     // If the attacker is slower than its opponent, deals less damage than its opponent, and the
     // opponent's last-used move is not an encouraged move, 68.75% chance of score -1.
@@ -6444,7 +6427,6 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
-    TableEntry BATTLE_EFFECT_PREVENT_CRITS
     TableEntry BATTLE_EFFECT_GIVE_GROUND_IMMUNITY
     TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN
     TableEntry TABLE_END
@@ -7755,7 +7737,6 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_PREVENT_CRITS
     TableEntry BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
