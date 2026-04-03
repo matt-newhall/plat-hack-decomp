@@ -99,7 +99,7 @@
         ],
         "egg_moves": [
             "MOVE_MAGNITUDE",
-            "MOVE_SKULL_BASH",
+            "MOVE_FIRST_IMPRESSION",
             "MOVE_WATER_SPORT",
             "MOVE_AMNESIA",
             "MOVE_SLEEP_TALK",

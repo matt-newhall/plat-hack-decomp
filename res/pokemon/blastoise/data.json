@@ -48,7 +48,7 @@
             [ 24, "MOVE_PROTECT" ],
             [ 28, "MOVE_WATER_PULSE" ],
             [ 32, "MOVE_AQUA_TAIL" ],
-            [ 39, "MOVE_SKULL_BASH" ],
+            [ 39, "MOVE_FIRST_IMPRESSION" ],
             [ 46, "MOVE_IRON_DEFENSE" ],
             [ 53, "MOVE_RAIN_DANCE" ],
             [ 60, "MOVE_HYDRO_PUMP" ]
