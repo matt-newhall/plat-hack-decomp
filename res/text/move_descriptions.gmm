@@ -23,7 +23,7 @@
 	</row>
 	<row id="pl_msg_00000646_00005" index="5">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is slugged\nby a punch thrown\nwith muscle-packed\npower.\n</language>
+        <language name="English">The user slams the\ntarget with its\nwings. The target\nis hit twice in a\nrow.</language>
 	</row>
 	<row id="pl_msg_00000646_00006" index="6">
 		<attribute name="window_context_name">used</attribute>

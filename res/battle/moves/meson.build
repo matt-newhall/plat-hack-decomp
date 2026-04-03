@@ -241,7 +241,7 @@ pl_waza_tbl_subdirs = [
     'mega_drain',
     'megahorn',
     'mega_kick',
-    'mega_punch',
+    'dual_wingbeat',
     'memento',
     'metal_burst',
     'metal_claw',

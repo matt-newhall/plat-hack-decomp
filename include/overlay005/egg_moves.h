@@ -294,7 +294,7 @@ const u16 sEggMoves[] = {
         MOVE_ACUPRESSURE),
 
     EGG_MOVES(SPECIES_GEODUDE,
-        MOVE_MEGA_PUNCH,
+        MOVE_DUAL_WINGBEAT,
         MOVE_ROCK_SLIDE,
         MOVE_BLOCK,
         MOVE_HAMMER_ARM,
@@ -1159,7 +1159,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_MAGBY,
         MOVE_KARATE_CHOP,
-        MOVE_MEGA_PUNCH,
+        MOVE_DUAL_WINGBEAT,
         MOVE_BARRIER,
         MOVE_SCREECH,
         MOVE_CROSS_CHOP,
