@@ -4479,15 +4479,15 @@
 	</row>
 	<row id="pl_msg_00000000_01119" index="1119">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nEmbargo!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPower-Up Punch!</language>
 	</row>
 	<row id="pl_msg_00000000_01120" index="1120">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nEmbargo!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPower-Up Punch!</language>
 	</row>
 	<row id="pl_msg_00000000_01121" index="1121">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nEmbargo!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPower-Up Punch!</language>
 	</row>
 	<row id="pl_msg_00000000_01122" index="1122">
 		<attribute name="window_context_name">used</attribute>

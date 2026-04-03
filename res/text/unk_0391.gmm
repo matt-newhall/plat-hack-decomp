@@ -1585,7 +1585,7 @@
 	</row>
 	<row id="pl_msg_00000391_00390" index="390">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">It prevents the foe from using its\nheld item. Its Trainer is also\nprevented from using items on it.</language>
+		<language name="English">Striking opponents over and over makes\nthe user’s fists harder. Hitting\na target raises the Attack stat.</language>
 	</row>
 	<row id="pl_msg_00000391_00391" index="391">
 		<attribute name="window_context_name">used</attribute>

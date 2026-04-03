@@ -46,7 +46,7 @@
             [ 28, "MOVE_BEAT_UP" ],
             [ 32, "MOVE_FIRE_FANG" ],
             [ 38, "MOVE_FAINT_ATTACK" ],
-            [ 44, "MOVE_EMBARGO" ],
+            [ 44, "MOVE_POWER_UP_PUNCH" ],
             [ 48, "MOVE_FLAMETHROWER" ],
             [ 54, "MOVE_CRUNCH" ],
             [ 60, "MOVE_NASTY_PLOT" ]

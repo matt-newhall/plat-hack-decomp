@@ -207,8 +207,8 @@
 	</row>
 	<row id="pl_msg_00000143_00051" index="51">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">If someone uses Embargo on your\nPokémon, it becomes impossible to\fuse any items on it.\rAnyway, enjoy your visit to Veilstone,\nthe city of...well, stone.</language>
-	</row>
+        <language name="English">Power-Up Punch boosts the attack\nof your Pokémon if it lands.\rAnyway, enjoy your visit to Veilstone,\nthe city of...well, stone.</language>
+    </row>
 	<row id="pl_msg_00000143_00052" index="52">
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">Salut, Trainer!\nTu aimes les Pokémon?</language>
