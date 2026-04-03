@@ -41,7 +41,7 @@
             [ 12, "MOVE_HYPNOSIS" ],
             [ 20, "MOVE_ROCK_POLISH" ],
             [ 23, "MOVE_PSYWAVE" ],
-            [ 31, "MOVE_EMBARGO" ],
+            [ 31, "MOVE_POWER_UP_PUNCH" ],
             [ 34, "MOVE_COSMIC_POWER" ],
             [ 42, "MOVE_HEAL_BLOCK" ],
             [ 45, "MOVE_PSYCHIC" ],

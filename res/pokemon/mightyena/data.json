@@ -47,7 +47,7 @@
             [ 32, "MOVE_ASSURANCE" ],
             [ 37, "MOVE_SCARY_FACE" ],
             [ 42, "MOVE_TAUNT" ],
-            [ 47, "MOVE_EMBARGO" ],
+            [ 47, "MOVE_POWER_UP_PUNCH" ],
             [ 52, "MOVE_TAKE_DOWN" ],
             [ 57, "MOVE_THIEF" ],
             [ 62, "MOVE_SUCKER_PUNCH" ]
