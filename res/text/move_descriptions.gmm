@@ -1851,7 +1851,7 @@
 	</row>
 	<row id="pl_msg_00000646_00462" index="462">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is crushed\nwith great force.\nThe attack is more\npowerful the more HP\nthe foe has left.</language>
+		<language name="English">The user lunges at\nthe target, attacking\nwith full force. This\nalso lowers the\ntarget’s Attack stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00463" index="463">
 		<attribute name="window_context_name">used</attribute>

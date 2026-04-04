@@ -5547,15 +5547,15 @@
 	</row>
 	<row id="pl_msg_00000000_01386" index="1386">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nCrush Grip!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nLunge!</language>
 	</row>
 	<row id="pl_msg_00000000_01387" index="1387">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nCrush Grip!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLunge!</language>
 	</row>
 	<row id="pl_msg_00000000_01388" index="1388">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nCrush Grip!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLunge!</language>
 	</row>
 	<row id="pl_msg_00000000_01389" index="1389">
 		<attribute name="window_context_name">used</attribute>
