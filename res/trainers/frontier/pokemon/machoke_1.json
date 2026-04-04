@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_KARATE_CHOP",
         "MOVE_ROCK_TOMB",
-        "MOVE_FORESIGHT",
+        "MOVE_DRILL_RUN",
         "MOVE_SCARY_FACE"
     ],
     "evFlags": {

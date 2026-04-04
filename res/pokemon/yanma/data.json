@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 6, "MOVE_QUICK_ATTACK" ],
             [ 11, "MOVE_DOUBLE_TEAM" ],
             [ 14, "MOVE_SONIC_BOOM" ],

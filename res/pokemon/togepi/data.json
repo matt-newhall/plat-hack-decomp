@@ -102,7 +102,7 @@
             "MOVE_PRESENT",
             "MOVE_MIRROR_MOVE",
             "MOVE_PECK",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_FUTURE_SIGHT",
             "MOVE_SUBSTITUTE",
             "MOVE_PSYCH_UP",

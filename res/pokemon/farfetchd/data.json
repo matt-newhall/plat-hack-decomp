@@ -99,7 +99,7 @@
         ],
         "egg_moves": [
             "MOVE_STEEL_WING",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_MIRROR_MOVE",
             "MOVE_GUST",
             "MOVE_QUICK_ATTACK",

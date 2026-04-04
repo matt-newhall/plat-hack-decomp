@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_SCRATCH" ],
-            [ 4, "MOVE_FORESIGHT" ],
+            [ 4, "MOVE_DRILL_RUN" ],
             [ 8, "MOVE_NIGHT_SHADE" ],
             [ 11, "MOVE_ASTONISH" ],
             [ 15, "MOVE_FURY_SWIPES" ],

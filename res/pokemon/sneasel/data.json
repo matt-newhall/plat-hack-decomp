@@ -111,7 +111,7 @@
         "egg_moves": [
             "MOVE_COUNTER",
             "MOVE_SPITE",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_REFLECT",
             "MOVE_BITE",
             "MOVE_CRUSH_CLAW",

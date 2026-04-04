@@ -99,7 +99,7 @@
         "egg_moves": [
             "MOVE_FAINT_ATTACK",
             "MOVE_DETECT",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_HELPING_HAND",
             "MOVE_CROSS_CHOP",
             "MOVE_REVENGE",

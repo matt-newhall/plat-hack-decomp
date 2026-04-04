@@ -17,7 +17,7 @@
             "moves": [
                 "MOVE_SEISMIC_TOSS",
                 "MOVE_LOW_KICK",
-                "MOVE_FORESIGHT"
+                "MOVE_DRILL_RUN"
             ],
             "iv_scale": 100,
             "ball_seal": 0

@@ -4,7 +4,7 @@
         "MOVE_CROSS_CHOP",
         "MOVE_EARTHQUAKE",
         "MOVE_BULLET_PUNCH",
-        "MOVE_FORESIGHT"
+        "MOVE_DRILL_RUN"
     ],
     "evFlags": {
         "hp": true,

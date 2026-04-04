@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_BRICK_BREAK",
         "MOVE_BULLET_PUNCH",
-        "MOVE_FORESIGHT",
+        "MOVE_DRILL_RUN",
         "MOVE_COUNTER"
     ],
     "evFlags": {

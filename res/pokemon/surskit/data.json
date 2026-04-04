@@ -81,7 +81,7 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_MUD_SHOT",
             "MOVE_PSYBEAM",
             "MOVE_HYDRO_PUMP",

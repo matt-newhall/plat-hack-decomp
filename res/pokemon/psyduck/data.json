@@ -101,7 +101,7 @@
         "egg_moves": [
             "MOVE_HYPNOSIS",
             "MOVE_PSYBEAM",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_LIGHT_SCREEN",
             "MOVE_FUTURE_SIGHT",
             "MOVE_PSYCHIC",

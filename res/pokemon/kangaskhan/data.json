@@ -121,7 +121,7 @@
         ],
         "egg_moves": [
             "MOVE_STOMP",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_FOCUS_ENERGY",
             "MOVE_SAFEGUARD",
             "MOVE_DISABLE",

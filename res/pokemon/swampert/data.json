@@ -42,7 +42,7 @@
             [ 10, "MOVE_WATER_GUN" ],
             [ 15, "MOVE_BIDE" ],
             [ 16, "MOVE_MUD_SHOT" ],
-            [ 20, "MOVE_FORESIGHT" ],
+            [ 20, "MOVE_DRILL_RUN" ],
             [ 25, "MOVE_MUD_BOMB" ],
             [ 31, "MOVE_TAKE_DOWN" ],
             [ 39, "MOVE_MUDDY_WATER" ],

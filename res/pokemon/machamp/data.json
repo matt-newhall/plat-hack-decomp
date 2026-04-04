@@ -39,7 +39,7 @@
             [ 1, "MOVE_FOCUS_ENERGY" ],
             [ 7, "MOVE_FOCUS_ENERGY" ],
             [ 10, "MOVE_KARATE_CHOP" ],
-            [ 13, "MOVE_FORESIGHT" ],
+            [ 13, "MOVE_DRILL_RUN" ],
             [ 19, "MOVE_SEISMIC_TOSS" ],
             [ 22, "MOVE_REVENGE" ],
             [ 25, "MOVE_VITAL_THROW" ],

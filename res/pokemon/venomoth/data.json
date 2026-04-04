@@ -37,7 +37,7 @@
             [ 1, "MOVE_SILVER_WIND" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_DISABLE" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 1, "MOVE_SUPERSONIC" ],
             [ 5, "MOVE_SUPERSONIC" ],
             [ 11, "MOVE_CONFUSION" ],

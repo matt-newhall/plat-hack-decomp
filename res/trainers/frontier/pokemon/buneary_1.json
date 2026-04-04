@@ -4,7 +4,7 @@
         "MOVE_DIZZY_PUNCH",
         "MOVE_DRAIN_PUNCH",
         "MOVE_QUICK_ATTACK",
-        "MOVE_FORESIGHT"
+        "MOVE_DRILL_RUN"
     ],
     "evFlags": {
         "hp": false,

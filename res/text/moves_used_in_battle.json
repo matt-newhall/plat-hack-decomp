@@ -4049,21 +4049,21 @@
       "id": "pl_msg_00000000_00579",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Foresight!"
+        "Drill Run!"
       ]
     },
     {
       "id": "pl_msg_00000000_00580",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Foresight!"
+        "Drill Run!"
       ]
     },
     {
       "id": "pl_msg_00000000_00581",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Foresight!"
+        "Drill Run!"
       ]
     },
     {

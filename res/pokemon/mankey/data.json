@@ -109,7 +109,7 @@
         ],
         "egg_moves": [
             "MOVE_ROCK_SLIDE",
-            "MOVE_FORESIGHT",
+            "MOVE_DRILL_RUN",
             "MOVE_MEDITATE",
             "MOVE_COUNTER",
             "MOVE_REVERSAL",

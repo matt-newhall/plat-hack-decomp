@@ -39,7 +39,7 @@
             [ 1, "MOVE_SPLASH" ],
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_DEFENSE_CURL" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 6, "MOVE_ENDURE" ],
             [ 13, "MOVE_RETURN" ],
             [ 16, "MOVE_QUICK_ATTACK" ],
