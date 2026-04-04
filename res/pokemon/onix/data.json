@@ -105,7 +105,7 @@
             "MOVE_ROCK_SLIDE",
             "MOVE_FLAIL",
             "MOVE_EXPLOSION",
-            "MOVE_BLOCK",
+            "MOVE_SNARL",
             "MOVE_DEFENSE_CURL",
             "MOVE_ROLLOUT",
             "MOVE_ROCK_BLAST"

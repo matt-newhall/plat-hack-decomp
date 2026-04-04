@@ -115,7 +115,7 @@
             "MOVE_SLEEP_TALK",
             "MOVE_SNORE",
             "MOVE_QUIVER_DANCE",
-            "MOVE_BLOCK",
+            "MOVE_SNARL",
             "MOVE_ZEN_HEADBUTT"
         ]
     },

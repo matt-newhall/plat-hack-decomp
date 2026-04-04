@@ -82,7 +82,7 @@
             "MOVE_SPITE"
         ],
         "egg_moves": [
-            "MOVE_BLOCK",
+            "MOVE_SNARL",
             "MOVE_SPIKES",
             "MOVE_ROLLOUT",
             "MOVE_DISABLE",

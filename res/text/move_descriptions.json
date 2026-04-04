@@ -3271,10 +3271,11 @@
     {
       "id": "pl_msg_00000646_00335",
       "en_US": [
-        "The user blocks the\n",
-        "foe’s way with arms\n",
-        "spread wide to\n",
-        "prevent escape.\n"
+        "The user yells as\n",
+        "if it is ranting\n",
+        "about something,\n",
+        "making the target’s\n",
+        "Sp. Atk stat decrease."
       ]
     },
     {

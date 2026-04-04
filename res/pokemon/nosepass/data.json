@@ -37,7 +37,7 @@
             [ 1, "MOVE_TACKLE" ],
             [ 7, "MOVE_HARDEN" ],
             [ 13, "MOVE_ROCK_THROW" ],
-            [ 19, "MOVE_BLOCK" ],
+            [ 19, "MOVE_SNARL" ],
             [ 25, "MOVE_THUNDER_WAVE" ],
             [ 31, "MOVE_ROCK_SLIDE" ],
             [ 37, "MOVE_SANDSTORM" ],
@@ -101,7 +101,7 @@
             "MOVE_ROLLOUT",
             "MOVE_EXPLOSION",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_BLOCK"
+            "MOVE_SNARL"
         ]
     },
     "evolutions": [

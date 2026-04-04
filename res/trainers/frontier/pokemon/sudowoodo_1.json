@@ -4,7 +4,7 @@
         "MOVE_ROCK_SLIDE",
         "MOVE_FAINT_ATTACK",
         "MOVE_SANDSTORM",
-        "MOVE_BLOCK"
+        "MOVE_SNARL"
     ],
     "evFlags": {
         "hp": false,
