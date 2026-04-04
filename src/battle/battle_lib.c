@@ -3669,7 +3669,6 @@ static const u16 sMovesAffectedByHealBlock[] = {
     MOVE_HEAL_ORDER,
     MOVE_SLACK_OFF,
     MOVE_ROOST,
-    MOVE_LUNAR_DANCE,
     MOVE_WISH,
 };
 
