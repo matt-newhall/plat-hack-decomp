@@ -45,7 +45,7 @@
             [ 38, "MOVE_CRABHAMMER" ],
             [ 44, "MOVE_SWORDS_DANCE" ],
             [ 47, "MOVE_CRUNCH" ],
-            [ 53, "MOVE_GUILLOTINE" ]
+            [ 53, "MOVE_BOOMBURST" ]
         ],
         "by_tm": [
             "TM03",
