@@ -1145,7 +1145,7 @@ const u16 sEggMoves[] = {
         MOVE_FAKE_OUT,
         MOVE_WISH,
         MOVE_ICE_PUNCH,
-        MOVE_MIRACLE_EYE),
+        MOVE_WILD_CHARGE),
 
     EGG_MOVES(SPECIES_ELEKID,
         MOVE_KARATE_CHOP,

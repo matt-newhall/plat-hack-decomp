@@ -38,7 +38,7 @@
             [ 1, "MOVE_CONFUSION" ],
             [ 16, "MOVE_CONFUSION" ],
             [ 18, "MOVE_DISABLE" ],
-            [ 22, "MOVE_MIRACLE_EYE" ],
+            [ 22, "MOVE_WILD_CHARGE" ],
             [ 24, "MOVE_PSYBEAM" ],
             [ 28, "MOVE_REFLECT" ],
             [ 30, "MOVE_RECOVER" ],

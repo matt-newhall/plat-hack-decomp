@@ -1431,7 +1431,7 @@
 	</row>
 	<row id="pl_msg_00000646_00357" index="357">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Enables the user to\nhit a Dark type with\nany type of move. It\nalso enables the user\nto hit an evasive foe.</language>
+		<language name="English">The user shrouds itself\nin electricity and\nsmashes into its\ntarget. It also damages\nthe user a little.</language>
 	</row>
 	<row id="pl_msg_00000646_00358" index="358">
 		<attribute name="window_context_name">used</attribute>

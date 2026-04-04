@@ -38,7 +38,7 @@
             [ 6, "MOVE_NIGHT_SHADE" ],
             [ 9, "MOVE_TELEPORT" ],
             [ 12, "MOVE_NUZZLE" ],
-            [ 17, "MOVE_MIRACLE_EYE" ],
+            [ 17, "MOVE_WILD_CHARGE" ],
             [ 23, "MOVE_CONFUSE_RAY" ],
             [ 28, "MOVE_WISH" ],
             [ 33, "MOVE_PSYCHO_SHIFT" ],
