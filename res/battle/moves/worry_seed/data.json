@@ -1,20 +1,21 @@
 {
-    "name": "Worry Seed",
-    "class": "CLASS_STATUS",
-    "type": "TYPE_GRASS",
-    "power": 0,
+    "name": "Accelerock",
+    "class": "CLASS_PHYSICAL",
+    "type": "TYPE_ROCK",
+    "power": 40,
     "accuracy": 100,
-    "pp": 10,
+    "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA",
+        "type": "BATTLE_EFFECT_PRIORITY_1",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
-    "priority": 0,
+    "priority": 1,
     "flags": [
+        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
-        "MOVE_FLAG_CAN_MAGIC_COAT",
-        "MOVE_FLAG_CAN_MIRROR_MOVE"
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
     ],
     "contest": {
         "effect": 19,

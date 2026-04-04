@@ -280,7 +280,7 @@ const u16 sEggMoves[] = {
         MOVE_LEECH_LIFE,
         MOVE_INGRAIN,
         MOVE_MAGICAL_LEAF,
-        MOVE_WORRY_SEED,
+        MOVE_ACCELEROCK,
         MOVE_TICKLE),
 
     EGG_MOVES(SPECIES_TENTACOOL,
@@ -830,7 +830,7 @@ const u16 sEggMoves[] = {
         MOVE_HELPING_HAND,
         MOVE_PSYCH_UP,
         MOVE_AROMATHERAPY,
-        MOVE_WORRY_SEED),
+        MOVE_ACCELEROCK),
 
     EGG_MOVES(SPECIES_AIPOM,
         MOVE_COUNTER,
@@ -1201,7 +1201,7 @@ const u16 sEggMoves[] = {
         MOVE_LEECH_SEED,
         MOVE_DRAGON_BREATH,
         MOVE_CRUSH_CLAW,
-        MOVE_WORRY_SEED,
+        MOVE_ACCELEROCK,
         MOVE_DOUBLE_KICK,
         MOVE_GRASS_WHISTLE,
         MOVE_SYNTHESIS,
@@ -1273,7 +1273,7 @@ const u16 sEggMoves[] = {
         MOVE_RAZOR_WIND,
         MOVE_TAKE_DOWN,
         MOVE_ACROBATICS,
-        MOVE_WORRY_SEED,
+        MOVE_ACCELEROCK,
         MOVE_NASTY_PLOT),
 
     EGG_MOVES(SPECIES_TAILLOW,
@@ -1320,7 +1320,7 @@ const u16 sEggMoves[] = {
         MOVE_CHARM,
         MOVE_ACROBATICS,
         MOVE_HELPING_HAND,
-        MOVE_WORRY_SEED,
+        MOVE_ACCELEROCK,
         MOVE_WAKE_UP_SLAP,
         MOVE_SEED_BOMB),
 
@@ -1769,7 +1769,7 @@ const u16 sEggMoves[] = {
         MOVE_DRAGON_RUSH),
 
     EGG_MOVES(SPECIES_TURTWIG,
-        MOVE_WORRY_SEED,
+        MOVE_ACCELEROCK,
         MOVE_GROWTH,
         MOVE_TICKLE,
         MOVE_BODY_SLAM,
@@ -2075,7 +2075,7 @@ const u16 sEggMoves[] = {
         MOVE_SYNTHESIS,
         MOVE_MAGICAL_LEAF,
         MOVE_LEECH_SEED,
-        MOVE_WORRY_SEED),
+        MOVE_ACCELEROCK),
 
     EGG_MOVES(SPECIES_FINNEON,
         MOVE_SWEET_KISS,

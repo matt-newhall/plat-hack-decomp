@@ -1555,7 +1555,7 @@
 	</row>
 	<row id="pl_msg_00000646_00388" index="388">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A seed that causes\nworry is planted on\nthe foe. It prevents\nsleep by making its\nability Insomnia.</language>
+		<language name="English">The user smashes into\nthe target at high\nspeed. This move\nalways goes first.\n</language>
 	</row>
 	<row id="pl_msg_00000646_00389" index="389">
 		<attribute name="window_context_name">used</attribute>

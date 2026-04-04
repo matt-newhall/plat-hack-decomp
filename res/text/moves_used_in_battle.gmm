@@ -4659,15 +4659,15 @@
 	</row>
 	<row id="pl_msg_00000000_01164" index="1164">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nWorry Seed!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nAccelerock!</language>
 	</row>
 	<row id="pl_msg_00000000_01165" index="1165">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nWorry Seed!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nAccelerock!</language>
 	</row>
 	<row id="pl_msg_00000000_01166" index="1166">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nWorry Seed!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nAccelerock!</language>
 	</row>
 	<row id="pl_msg_00000000_01167" index="1167">
 		<attribute name="window_context_name">used</attribute>
