@@ -4,7 +4,7 @@
         "MOVE_SHADOW_SNEAK",
         "MOVE_KNOCK_OFF",
         "MOVE_WILL_O_WISP",
-        "MOVE_GRUDGE"
+        "MOVE_BULLDOZE"
     ],
     "evFlags": {
         "hp": true,

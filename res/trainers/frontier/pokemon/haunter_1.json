@@ -4,7 +4,7 @@
         "MOVE_NIGHT_SHADE",
         "MOVE_TOXIC",
         "MOVE_CONFUSE_RAY",
-        "MOVE_GRUDGE"
+        "MOVE_BULLDOZE"
     ],
     "evFlags": {
         "hp": false,

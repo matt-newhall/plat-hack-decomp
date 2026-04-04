@@ -4,7 +4,7 @@
         "MOVE_SLUDGE_BOMB",
         "MOVE_DARK_PULSE",
         "MOVE_SHOCK_WAVE",
-        "MOVE_GRUDGE"
+        "MOVE_BULLDOZE"
     ],
     "evFlags": {
         "hp": false,
