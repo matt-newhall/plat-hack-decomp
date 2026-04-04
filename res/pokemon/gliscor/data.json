@@ -52,7 +52,7 @@
             [ 34, "MOVE_SWORDS_DANCE" ],
             [ 38, "MOVE_U_TURN" ],
             [ 42, "MOVE_X_SCISSOR" ],
-            [ 45, "MOVE_GUILLOTINE" ]
+            [ 45, "MOVE_BOOMBURST" ]
         ],
         "by_tm": [
             "TM06",

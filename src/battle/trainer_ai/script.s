@@ -1921,7 +1921,6 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_SAND_ATTACK
     TableEntry MOVE_SMOKE_SCREEN
     TableEntry MOVE_TOXIC
-    TableEntry MOVE_GUILLOTINE
     TableEntry MOVE_HORN_DRILL
     TableEntry MOVE_FISSURE
     TableEntry MOVE_SHEER_COLD
@@ -5527,7 +5526,6 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_SAND_ATTACK
     TableEntry MOVE_SMOKE_SCREEN
     TableEntry MOVE_TOXIC
-    TableEntry MOVE_GUILLOTINE
     TableEntry MOVE_HORN_DRILL
     TableEntry MOVE_FISSURE
     TableEntry MOVE_SHEER_COLD

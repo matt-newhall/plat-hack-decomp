@@ -2,7 +2,7 @@
     "species": "SPECIES_KINGLER",
     "moves": [
         "MOVE_CRABHAMMER",
-        "MOVE_GUILLOTINE",
+        "MOVE_BOOMBURST",
         "MOVE_FLAIL",
         "MOVE_ENDURE"
     ],

@@ -1,18 +1,17 @@
 {
-    "name": "Guillotine",
-    "class": "CLASS_PHYSICAL",
+    "name": "Boomburst",
+    "class": "CLASS_SPECIAL",
     "type": "TYPE_NORMAL",
-    "power": 1,
-    "accuracy": 30,
-    "pp": 5,
+    "power": 140,
+    "accuracy": 100,
+    "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_ONE_HIT_KO",
+        "type": "BATTLE_EFFECT_HIT",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_ALL_ADJACENT",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],

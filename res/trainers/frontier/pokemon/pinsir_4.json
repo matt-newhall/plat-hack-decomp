@@ -4,7 +4,7 @@
         "MOVE_X_SCISSOR",
         "MOVE_EARTHQUAKE",
         "MOVE_CLOSE_COMBAT",
-        "MOVE_GUILLOTINE"
+        "MOVE_BOOMBURST"
     ],
     "evFlags": {
         "hp": false,
