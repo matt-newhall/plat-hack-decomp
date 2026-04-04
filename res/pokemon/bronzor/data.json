@@ -36,7 +36,7 @@
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 7, "MOVE_HYPNOSIS" ],
-            [ 12, "MOVE_IMPRISON" ],
+            [ 12, "MOVE_STRUGGLE_BUG" ],
             [ 14, "MOVE_CONFUSE_RAY" ],
             [ 19, "MOVE_EXTRASENSORY" ],
             [ 26, "MOVE_IRON_DEFENSE" ],

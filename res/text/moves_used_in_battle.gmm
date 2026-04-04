@@ -3435,15 +3435,15 @@
 	</row>
 	<row id="pl_msg_00000000_00858" index="858">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nImprison!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nStruggle Bug!</language>
 	</row>
 	<row id="pl_msg_00000000_00859" index="859">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nImprison!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nStruggle Bug!</language>
 	</row>
 	<row id="pl_msg_00000000_00860" index="860">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nImprison!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nStruggle Bug!</language>
 	</row>
 	<row id="pl_msg_00000000_00861" index="861">
 		<attribute name="window_context_name">used</attribute>
