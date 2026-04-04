@@ -1847,7 +1847,7 @@
 	</row>
 	<row id="pl_msg_00000646_00461" index="461">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user faints. In\nreturn, the Pokémon\ntaking its place will\nhave its status and\nHP fully restored.</language>
+		<language name="English">The user attacks by\nstriking the target\nwith its hard tail.\nIt hits the target two\nto five times in a row.</language>
 	</row>
 	<row id="pl_msg_00000646_00462" index="462">
 		<attribute name="window_context_name">used</attribute>

@@ -5535,15 +5535,15 @@
 	</row>
 	<row id="pl_msg_00000000_01383" index="1383">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nLunar Dance!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nTail Slap!</language>
 	</row>
 	<row id="pl_msg_00000000_01384" index="1384">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLunar Dance!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nTail Slap!</language>
 	</row>
 	<row id="pl_msg_00000000_01385" index="1385">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLunar Dance!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nTail Slap!</language>
 	</row>
 	<row id="pl_msg_00000000_01386" index="1386">
 		<attribute name="window_context_name">used</attribute>
