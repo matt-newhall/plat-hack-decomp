@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_HI_JUMP_KICK",
         "MOVE_BLAZE_KICK",
-        "MOVE_MEGA_KICK",
+        "MOVE_SOLAR_BLADE",
         "MOVE_ENDURE"
     ],
     "evFlags": {

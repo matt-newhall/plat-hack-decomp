@@ -240,10 +240,11 @@
     {
       "id": "pl_msg_00000646_00025",
       "en_US": [
-        "The foe is attacked\n",
-        "by a kick launched\n",
-        "with muscle-packed\n",
-        "power.\n"
+        "A two-turn attack.\nsecond turn.",
+        "The user gathers\n",
+        "light, then strikes\n",
+        "with a blade on the\n",
+        "second turn."
       ]
     },
     {
