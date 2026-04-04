@@ -4,7 +4,7 @@
         "MOVE_MEGA_DRAIN",
         "MOVE_TOXIC",
         "MOVE_GROWTH",
-        "MOVE_WORRY_SEED"
+        "MOVE_ACCELEROCK"
     ],
     "evFlags": {
         "hp": false,

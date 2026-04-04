@@ -42,7 +42,7 @@
             [ 13, "MOVE_GRASS_WHISTLE" ],
             [ 17, "MOVE_LEECH_SEED" ],
             [ 21, "MOVE_BULLET_SEED" ],
-            [ 25, "MOVE_WORRY_SEED" ],
+            [ 25, "MOVE_ACCELEROCK" ],
             [ 29, "MOVE_RAZOR_LEAF" ],
             [ 33, "MOVE_PETAL_DANCE" ],
             [ 37, "MOVE_SUNNY_DAY" ],
