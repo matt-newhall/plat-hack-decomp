@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_HEADBUTT" ],
             [ 3, "MOVE_GROWL" ],
-            [ 7, "MOVE_WATER_SPORT" ],
+            [ 7, "MOVE_ACID_SPRAY" ],
             [ 11, "MOVE_ICY_WIND" ],
             [ 13, "MOVE_ENCORE" ],
             [ 17, "MOVE_ICE_SHARD" ],

@@ -33,7 +33,7 @@
     "flip_sprite": true,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_ACID_SPRAY" ],
             [ 5, "MOVE_BUBBLE" ],
             [ 8, "MOVE_HYPNOSIS" ],
             [ 11, "MOVE_WATER_GUN" ],

@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_MUD_SLAP" ],
             [ 6, "MOVE_FREEZE_DRY" ],
-            [ 6, "MOVE_WATER_SPORT" ],
+            [ 6, "MOVE_ACID_SPRAY" ],
             [ 10, "MOVE_WATER_GUN" ],
             [ 14, "MOVE_MUD_BOMB" ],
             [ 18, "MOVE_AMNESIA" ],

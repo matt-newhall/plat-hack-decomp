@@ -1387,7 +1387,7 @@
 	</row>
 	<row id="pl_msg_00000646_00346" index="346">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user soaks itself\nwith water. The move\nweakens Fire-type\nmoves while the user\nis in the battle.</language>
+		<language name="English">The user spits fluid\nthat works to melt\nthe target. This\nharshly reduces the\ntarget's Sp. Def stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00347" index="347">
 		<attribute name="window_context_name">used</attribute>

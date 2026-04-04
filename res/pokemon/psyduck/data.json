@@ -33,7 +33,7 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_ACID_SPRAY" ],
             [ 1, "MOVE_SCRATCH" ],
             [ 5, "MOVE_TAIL_WHIP" ],
             [ 9, "MOVE_WATER_GUN" ],

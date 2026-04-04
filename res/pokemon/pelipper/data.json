@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_ACID_SPRAY" ],
             [ 1, "MOVE_WING_ATTACK" ],
             [ 6, "MOVE_SUPERSONIC" ],
             [ 11, "MOVE_WING_ATTACK" ],

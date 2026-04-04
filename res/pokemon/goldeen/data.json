@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_TAIL_WHIP" ],
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_ACID_SPRAY" ],
             [ 7, "MOVE_SUPERSONIC" ],
             [ 11, "MOVE_HORN_ATTACK" ],
             [ 17, "MOVE_WATER_PULSE" ],
