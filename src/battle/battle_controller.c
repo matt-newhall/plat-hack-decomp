@@ -4807,7 +4807,7 @@ static void BattleController_ClearFlags(BattleSystem *battleSys, BattleContext *
  * @param onlyFaint         If TRUE, then standard FAINT_MON subroutine will be
  *                          loaded if any battler has fainted. If FALSE, then the
  *                          subroutine which checks for on-faint triggers will be
- *                          loaded instead (e.g., Destiny Bond, Grudge).
+ *                          loaded instead (e.g., Destiny Bond).
  * @return TRUE if any battler has fainted; FALSE if none have fainted.
  */
 static BOOL BattleController_AnyFainted(BattleContext *battleCtx, int nextCmd, int nextCmdNoFainted, BOOL onlyFaint)

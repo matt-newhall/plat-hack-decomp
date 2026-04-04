@@ -3459,15 +3459,15 @@
 	</row>
 	<row id="pl_msg_00000000_00864" index="864">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nGrudge!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nBulldoze!</language>
 	</row>
 	<row id="pl_msg_00000000_00865" index="865">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nGrudge!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBulldoze!</language>
 	</row>
 	<row id="pl_msg_00000000_00866" index="866">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nGrudge!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBulldoze!</language>
 	</row>
 	<row id="pl_msg_00000000_00867" index="867">
 		<attribute name="window_context_name">used</attribute>

@@ -45,7 +45,7 @@
             [ 35, "MOVE_SUCKER_PUNCH" ],
             [ 38, "MOVE_POWER_UP_PUNCH" ],
             [ 43, "MOVE_SNATCH" ],
-            [ 46, "MOVE_GRUDGE" ],
+            [ 46, "MOVE_BULLDOZE" ],
             [ 50, "MOVE_TRICK" ]
         ],
         "by_tm": [

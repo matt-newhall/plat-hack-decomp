@@ -1155,7 +1155,7 @@
 	</row>
 	<row id="pl_msg_00000646_00288" index="288">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">If the user faints,\nthe user’s grudge\nfully depletes the PP\nof the foe’s move\nthat knocked it out.</language>
+		<language name="English">The user stomps down\non the ground and\nattacks everything in\nthe area. Hit Pokémon’s\nSpeed stat is reduced.</language>
 	</row>
 	<row id="pl_msg_00000646_00289" index="289">
 		<attribute name="window_context_name">used</attribute>

@@ -45,7 +45,7 @@
             [ 31, "MOVE_PAYBACK" ],
             [ 34, "MOVE_FIRE_SPIN" ],
             [ 37, "MOVE_CAPTIVATE" ],
-            [ 41, "MOVE_GRUDGE" ],
+            [ 41, "MOVE_BULLDOZE" ],
             [ 44, "MOVE_EXTRASENSORY" ],
             [ 47, "MOVE_FIRE_BLAST" ]
         ],
