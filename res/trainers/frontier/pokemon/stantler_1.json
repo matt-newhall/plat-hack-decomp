@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_STOMP",
         "MOVE_BITE",
-        "MOVE_IMPRISON",
+        "MOVE_STRUGGLE_BUG",
         "MOVE_CONFUSE_RAY"
     ],
     "evFlags": {
