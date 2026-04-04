@@ -39,7 +39,7 @@
             [ 1, "MOVE_DOUBLE_SLAP" ],
             [ 1, "MOVE_SUBMISSION" ],
             [ 43, "MOVE_DYNAMIC_PUNCH" ],
-            [ 53, "MOVE_MIND_READER" ]
+            [ 53, "MOVE_ZING_ZAP" ]
         ],
         "by_tm": [
             "TM01",

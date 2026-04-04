@@ -47,7 +47,7 @@
             [ 25, "MOVE_COUNTER" ],
             [ 29, "MOVE_FORCE_PALM" ],
             [ 33, "MOVE_SKY_UPPERCUT" ],
-            [ 37, "MOVE_MIND_READER" ],
+            [ 37, "MOVE_ZING_ZAP" ],
             [ 41, "MOVE_SEED_BOMB" ],
             [ 45, "MOVE_DYNAMIC_PUNCH" ]
         ],

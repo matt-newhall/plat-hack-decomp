@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_MACH_PUNCH",
         "MOVE_BULLET_PUNCH",
-        "MOVE_MIND_READER",
+        "MOVE_ZING_ZAP",
         "MOVE_COUNTER"
     ],
     "evFlags": {

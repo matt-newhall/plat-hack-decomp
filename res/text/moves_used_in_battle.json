@@ -3566,21 +3566,21 @@
       "id": "pl_msg_00000000_00510",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Mind Reader!"
+        "Zing Zap!"
       ]
     },
     {
       "id": "pl_msg_00000000_00511",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Mind Reader!"
+        "Zing Zap!"
       ]
     },
     {
       "id": "pl_msg_00000000_00512",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Mind Reader!"
+        "Zing Zap!"
       ]
     },
     {
