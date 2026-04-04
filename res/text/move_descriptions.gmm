@@ -471,7 +471,7 @@
 	</row>
 	<row id="pl_msg_00000646_00117" index="117">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user endures\nattacks for two\nturns, then strikes\nback to cause double\nthe damage taken.</language>
+		<language name="English">The user attacks and\ncaptures opposing Pokémon\nusing an electric net.\nThis lowers their Speed\nstat.</language>
 	</row>
 	<row id="pl_msg_00000646_00118" index="118">
 		<attribute name="window_context_name">used</attribute>

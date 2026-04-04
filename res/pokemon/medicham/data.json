@@ -36,7 +36,7 @@
             [ 1, "MOVE_FIRE_PUNCH" ],
             [ 1, "MOVE_THUNDER_PUNCH" ],
             [ 1, "MOVE_ICE_PUNCH" ],
-            [ 1, "MOVE_BIDE" ],
+            [ 1, "MODE_ELECTROWEB" ],
             [ 1, "MOVE_MEDITATE" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_DETECT" ],

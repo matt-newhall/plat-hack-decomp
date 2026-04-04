@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_BIDE" ],
+            [ 1, "MODE_ELECTROWEB" ],
             [ 5, "MOVE_QUICK_ATTACK" ],
             [ 9, "MOVE_CHARM" ],
             [ 13, "MOVE_SPARK" ],

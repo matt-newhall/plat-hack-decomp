@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_WITHDRAW" ],
             [ 1, "MOVE_CONSTRICT" ],
-            [ 1, "MOVE_BIDE" ],
+            [ 1, "MODE_ELECTROWEB" ],
             [ 9, "MOVE_ENCORE" ],
             [ 14, "MOVE_SAFEGUARD" ],
             [ 22, "MOVE_WRAP" ],

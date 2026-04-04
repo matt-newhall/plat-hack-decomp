@@ -41,7 +41,7 @@
             [ 15, "MOVE_PECK" ],
             [ 16, "MOVE_METAL_CLAW" ],
             [ 19, "MOVE_BUBBLE_BEAM" ],
-            [ 24, "MOVE_BIDE" ],
+            [ 24, "MODE_ELECTROWEB" ],
             [ 28, "MOVE_FURY_ATTACK" ],
             [ 33, "MOVE_BRINE" ],
             [ 37, "MOVE_DUAL_CHOP" ],

@@ -1407,15 +1407,15 @@
 	</row>
 	<row id="pl_msg_00000000_00351" index="351">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBide!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nElectroweb!</language>
 	</row>
 	<row id="pl_msg_00000000_00352" index="352">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBide!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nElectroweb!</language>
 	</row>
 	<row id="pl_msg_00000000_00353" index="353">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBide!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nElectroweb!</language>
 	</row>
 	<row id="pl_msg_00000000_00354" index="354">
 		<attribute name="window_context_name">used</attribute>
