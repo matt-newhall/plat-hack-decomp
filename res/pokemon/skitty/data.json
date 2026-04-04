@@ -37,7 +37,7 @@
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 4, "MOVE_FORESIGHT" ],
+            [ 4, "MOVE_DRILL_RUN" ],
             [ 8, "MOVE_ATTRACT" ],
             [ 11, "MOVE_SING" ],
             [ 15, "MOVE_DOUBLE_SLAP" ],

@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_DARK_PULSE" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 1, "MOVE_DETECT" ],
             [ 1, "MOVE_METAL_CLAW" ],
             [ 6, "MOVE_COUNTER" ],

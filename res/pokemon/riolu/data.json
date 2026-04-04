@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_QUICK_ATTACK" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 1, "MOVE_ENDURE" ],
             [ 6, "MOVE_COUNTER" ],
             [ 11, "MOVE_FORCE_PALM" ],

@@ -775,7 +775,7 @@
 	</row>
 	<row id="pl_msg_00000646_00193" index="193">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Enables the user to\nhit a Ghost type with\nany type of move. It\nalso enables the user\nto hit an evasive foe.</language>
+		<language name="English">The user crashes into\nits target while\nrotating its body\nlike a drill. Critical \nhits land more easily.</language>
 	</row>
 	<row id="pl_msg_00000646_00194" index="194">
 		<attribute name="window_context_name">used</attribute>

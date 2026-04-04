@@ -16,7 +16,7 @@
             "moves": [
                 "MOVE_KARATE_CHOP",
                 "MOVE_LEER",
-                "MOVE_FORESIGHT"
+                "MOVE_DRILL_RUN"
             ],
             "power": 40,
             "ball_seal": 0
@@ -28,7 +28,7 @@
             "item": null,
             "moves": [
                 "MOVE_LOW_KICK",
-                "MOVE_FORESIGHT"
+                "MOVE_DRILL_RUN"
             ],
             "power": 40,
             "ball_seal": 0
@@ -41,7 +41,7 @@
             "moves": [
                 "MOVE_SUBMISSION",
                 "MOVE_LEER",
-                "MOVE_FORESIGHT"
+                "MOVE_DRILL_RUN"
             ],
             "power": 40,
             "ball_seal": 0

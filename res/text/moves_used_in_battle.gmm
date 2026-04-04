@@ -2319,15 +2319,15 @@
 	</row>
 	<row id="pl_msg_00000000_00579" index="579">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nForesight!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDrill Run!</language>
 	</row>
 	<row id="pl_msg_00000000_00580" index="580">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nForesight!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDrill Run!</language>
 	</row>
 	<row id="pl_msg_00000000_00581" index="581">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nForesight!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDrill Run!</language>
 	</row>
 	<row id="pl_msg_00000000_00582" index="582">
 		<attribute name="window_context_name">used</attribute>

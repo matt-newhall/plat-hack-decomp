@@ -36,7 +36,7 @@
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_NIGHT_SHADE" ],
             [ 6, "MOVE_DISABLE" ],
-            [ 9, "MOVE_FORESIGHT" ],
+            [ 9, "MOVE_DRILL_RUN" ],
             [ 14, "MOVE_ASTONISH" ],
             [ 17, "MOVE_CONFUSE_RAY" ],
             [ 22, "MOVE_SHADOW_SNEAK" ],

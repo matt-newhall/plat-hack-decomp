@@ -28,7 +28,7 @@
             "item": null,
             "moves": [
                 "MOVE_KARATE_CHOP",
-                "MOVE_FORESIGHT"
+                "MOVE_DRILL_RUN"
             ],
             "power": 40,
             "ball_seal": 0

@@ -36,7 +36,7 @@
             [ 1, "MOVE_NIGHT_SLASH" ],
             [ 1, "MOVE_BUG_BITE" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
             [ 1, "MOVE_DOUBLE_TEAM" ],
             [ 6, "MOVE_QUICK_ATTACK" ],

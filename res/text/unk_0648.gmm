@@ -775,7 +775,7 @@
 	</row>
 	<row id="pl_msg_00000648_00193" index="193">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">FORESIGHT</language>
+		<language name="English">DRILL RUN</language>
 	</row>
 	<row id="pl_msg_00000648_00194" index="194">
 		<attribute name="window_context_name">used</attribute>

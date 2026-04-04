@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 4, "MOVE_DEFENSE_CURL" ],
             [ 7, "MOVE_QUICK_ATTACK" ],
             [ 13, "MOVE_FURY_SWIPES" ],

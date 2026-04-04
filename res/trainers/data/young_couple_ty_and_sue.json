@@ -13,7 +13,7 @@
             "level": 23,
             "item": null,
             "moves": [
-                "MOVE_FORESIGHT",
+                "MOVE_DRILL_RUN",
                 "MOVE_JUMP_KICK",
                 "MOVE_QUICK_ATTACK",
                 "MOVE_DEFENSE_CURL"

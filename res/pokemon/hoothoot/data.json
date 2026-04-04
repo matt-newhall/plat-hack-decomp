@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_FORESIGHT" ],
+            [ 1, "MOVE_DRILL_RUN" ],
             [ 5, "MOVE_HYPNOSIS" ],
             [ 9, "MOVE_PECK" ],
             [ 13, "MOVE_UPROAR" ],

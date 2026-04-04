@@ -43,7 +43,7 @@
             [ 25, "MOVE_FEINT" ],
             [ 29, "MOVE_HI_JUMP_KICK" ],
             [ 33, "MOVE_ZING_ZAP" ],
-            [ 37, "MOVE_FORESIGHT" ],
+            [ 37, "MOVE_DRILL_RUN" ],
             [ 41, "MOVE_BLAZE_KICK" ],
             [ 45, "MOVE_ENDURE" ],
             [ 49, "MOVE_SOLAR_BLADE" ],
