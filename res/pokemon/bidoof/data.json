@@ -97,7 +97,7 @@
         ],
         "egg_moves": [
             "MOVE_QUICK_ATTACK",
-            "MOVE_WATER_SPORT",
+            "MOVE_ACID_SPRAY",
             "MOVE_DOUBLE_EDGE",
             "MOVE_FURY_SWIPES",
             "MOVE_DEFENSE_CURL",

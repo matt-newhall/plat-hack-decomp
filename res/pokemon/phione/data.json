@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_BUBBLE" ],
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_ACID_SPRAY" ],
             [ 9, "MOVE_CHARM" ],
             [ 16, "MOVE_SUPERSONIC" ],
             [ 24, "MOVE_BUBBLE_BEAM" ],

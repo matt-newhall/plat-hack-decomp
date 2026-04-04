@@ -16,7 +16,7 @@
             "moves": [
                 "MOVE_ABSORB",
                 "MOVE_STUN_SPORE",
-                "MOVE_WATER_SPORT"
+                "MOVE_ACID_SPRAY"
             ],
             "iv_scale": 20,
             "ball_seal": 0
@@ -29,7 +29,7 @@
             "moves": [
                 "MOVE_ABSORB",
                 "MOVE_STUN_SPORE",
-                "MOVE_WATER_SPORT"
+                "MOVE_ACID_SPRAY"
             ],
             "iv_scale": 20,
             "ball_seal": 0
@@ -42,7 +42,7 @@
             "moves": [
                 "MOVE_ABSORB",
                 "MOVE_STUN_SPORE",
-                "MOVE_WATER_SPORT"
+                "MOVE_ACID_SPRAY"
             ],
             "iv_scale": 20,
             "ball_seal": 0

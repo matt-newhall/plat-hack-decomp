@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_ABSORB" ],
             [ 4, "MOVE_GROWTH" ],
-            [ 7, "MOVE_WATER_SPORT" ],
+            [ 7, "MOVE_ACID_SPRAY" ],
             [ 10, "MOVE_STUN_SPORE" ],
             [ 13, "MOVE_MEGA_DRAIN" ],
             [ 16, "MOVE_ACCELEROCK" ]

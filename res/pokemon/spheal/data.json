@@ -90,7 +90,7 @@
             "MOVE_SIGNAL_BEAM"
         ],
         "egg_moves": [
-            "MOVE_WATER_SPORT",
+            "MOVE_ACID_SPRAY",
             "MOVE_STOCKPILE",
             "MOVE_SWALLOW",
             "MOVE_SPIT_UP",

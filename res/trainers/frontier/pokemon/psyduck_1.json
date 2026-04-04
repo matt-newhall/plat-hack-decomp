@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_WATER_GUN",
         "MOVE_CONFUSION",
-        "MOVE_WATER_SPORT",
+        "MOVE_ACID_SPRAY",
         "MOVE_DISABLE"
     ],
     "evFlags": {

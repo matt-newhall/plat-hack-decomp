@@ -34,7 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_ACID_SPRAY" ],
             [ 1, "MOVE_BUBBLE" ],
             [ 1, "MOVE_HYPNOSIS" ],
             [ 5, "MOVE_BUBBLE" ],
