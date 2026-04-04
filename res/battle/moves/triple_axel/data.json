@@ -1,0 +1,24 @@
+{
+    "name": "Triple Axel",
+    "class": "CLASS_PHYSICAL",
+    "type": "TYPE_ICE",
+    "power": 20,
+    "accuracy": 90,
+    "pp": 10,
+    "effect": {
+        "type": "BATTLE_EFFECT_HIT_THREE_TIMES",
+        "chance": 0
+    },
+    "range": "RANGE_SINGLE_TARGET",
+    "priority": 0,
+    "flags": [
+        "MOVE_FLAG_MAKES_CONTACT",
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
+    ],
+    "contest": {
+        "effect": 9,
+        "type": "CONTEST_TYPE_CUTE"
+    }
+}

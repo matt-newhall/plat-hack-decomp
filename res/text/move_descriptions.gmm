@@ -1319,7 +1319,7 @@
 	</row>
 	<row id="pl_msg_00000646_00329" index="329">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is attacked\nwith a blast of\nabsolute-zero cold.\nThe foe instantly\nfaints if it hits.</language>
+		<language name="English">A consecutive\nthree-kick attack that\nbecomes more powerful\nwith each successful\nhit.</language>
 	</row>
 	<row id="pl_msg_00000646_00330" index="330">
 		<attribute name="window_context_name">used</attribute>

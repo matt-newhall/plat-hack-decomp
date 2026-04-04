@@ -45,7 +45,7 @@
             [ 57, "MOVE_ROOST" ],
             [ 64, "MOVE_TAILWIND" ],
             [ 71, "MOVE_BLIZZARD" ],
-            [ 78, "MOVE_SHEER_COLD" ],
+            [ 78, "MOVE_TRIPLE_AXEL" ],
             [ 85, "MOVE_HAIL" ]
         ],
         "by_tm": [

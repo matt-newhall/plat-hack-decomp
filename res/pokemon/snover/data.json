@@ -44,7 +44,7 @@
             [ 31, "MOVE_INGRAIN" ],
             [ 36, "MOVE_WOOD_HAMMER" ],
             [ 41, "MOVE_BLIZZARD" ],
-            [ 46, "MOVE_SHEER_COLD" ]
+            [ 46, "MOVE_TRIPLE_AXEL" ]
         ],
         "by_tm": [
             "TM03",

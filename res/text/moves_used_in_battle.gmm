@@ -3951,15 +3951,15 @@
 	</row>
 	<row id="pl_msg_00000000_00987" index="987">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSheer Cold!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nTriple Axel!</language>
 	</row>
 	<row id="pl_msg_00000000_00988" index="988">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSheer Cold!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nTriple Axel!</language>
 	</row>
 	<row id="pl_msg_00000000_00989" index="989">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSheer Cold!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nTriple Axel!</language>
 	</row>
 	<row id="pl_msg_00000000_00990" index="990">
 		<attribute name="window_context_name">used</attribute>
