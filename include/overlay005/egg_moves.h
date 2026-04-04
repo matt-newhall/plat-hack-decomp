@@ -296,7 +296,7 @@ const u16 sEggMoves[] = {
     EGG_MOVES(SPECIES_GEODUDE,
         MOVE_DUAL_WINGBEAT,
         MOVE_ROCK_SLIDE,
-        MOVE_BLOCK,
+        MOVE_SNARL,
         MOVE_HAMMER_ARM,
         MOVE_FLAIL),
 
@@ -318,7 +318,7 @@ const u16 sEggMoves[] = {
         MOVE_SLEEP_TALK,
         MOVE_SNORE,
         MOVE_QUIVER_DANCE,
-        MOVE_BLOCK,
+        MOVE_SNARL,
         MOVE_ZEN_HEADBUTT),
 
     EGG_MOVES(SPECIES_FARFETCHD,
@@ -393,7 +393,7 @@ const u16 sEggMoves[] = {
         MOVE_ROCK_SLIDE,
         MOVE_FLAIL,
         MOVE_EXPLOSION,
-        MOVE_BLOCK,
+        MOVE_SNARL,
         MOVE_DEFENSE_CURL,
         MOVE_ROLLOUT,
         MOVE_ROCK_BLAST),
@@ -1378,7 +1378,7 @@ const u16 sEggMoves[] = {
         MOVE_ROLLOUT,
         MOVE_EXPLOSION,
         MOVE_DOUBLE_EDGE,
-        MOVE_BLOCK),
+        MOVE_SNARL),
 
     EGG_MOVES(SPECIES_SKITTY,
         MOVE_HELPING_HAND,
@@ -1713,7 +1713,7 @@ const u16 sEggMoves[] = {
         MOVE_QUIVER_DANCE),
 
     EGG_MOVES(SPECIES_SNORUNT,
-        MOVE_BLOCK,
+        MOVE_SNARL,
         MOVE_SPIKES,
         MOVE_ROLLOUT,
         MOVE_DISABLE,

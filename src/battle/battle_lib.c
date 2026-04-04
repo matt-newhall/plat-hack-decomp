@@ -3734,7 +3734,8 @@ static u16 sSoundMoves[] = {
     MOVE_CHATTER,
     MOVE_PERISH_SONG,
     MOVE_HOWL,
-    MOVE_HEAL_BELL
+    MOVE_HEAL_BELL,
+    MOVE_SNARL
 };
 
 BOOL BattleSystem_IsSoundMove(u16 move) {

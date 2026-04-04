@@ -4023,15 +4023,15 @@
 	</row>
 	<row id="pl_msg_00000000_01005" index="1005">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBlock!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSnarl!</language>
 	</row>
 	<row id="pl_msg_00000000_01006" index="1006">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBlock!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSnarl!</language>
 	</row>
 	<row id="pl_msg_00000000_01007" index="1007">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBlock!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSnarl!</language>
 	</row>
 	<row id="pl_msg_00000000_01008" index="1008">
 		<attribute name="window_context_name">used</attribute>

@@ -50,7 +50,7 @@
             [ 47, "MOVE_TICKLE" ],
             [ 50, "MOVE_WRING_OUT" ],
             [ 54, "MOVE_POWER_WHIP" ],
-            [ 57, "MOVE_BLOCK" ]
+            [ 57, "MOVE_SNARL" ]
         ],
         "by_tm": [
             "TM06",
