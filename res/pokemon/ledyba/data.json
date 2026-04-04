@@ -97,7 +97,7 @@
         ],
         "egg_moves": [
             "MOVE_PSYBEAM",
-            "MOVE_BIDE",
+            "MOVE_ELECTROWEB",
             "MOVE_SILVER_WIND",
             "MOVE_BUG_BUZZ",
             "MOVE_SCREECH",

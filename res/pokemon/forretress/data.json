@@ -43,7 +43,7 @@
             [ 9, "MOVE_BUG_BITE" ],
             [ 12, "MOVE_TAKE_DOWN" ],
             [ 17, "MOVE_RAPID_SPIN" ],
-            [ 20, "MOVE_BIDE" ],
+            [ 20, "MODE_ELECTROWEB" ],
             [ 23, "MOVE_NATURAL_GIFT" ],
             [ 28, "MOVE_SPIKES" ],
             [ 31, "MOVE_MIRROR_SHOT" ],

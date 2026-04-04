@@ -82,7 +82,7 @@
         ],
         "egg_moves": [
             "MOVE_REVERSAL",
-            "MOVE_BIDE",
+            "MOVE_ELECTROWEB",
             "MOVE_PRESENT",
             "MOVE_ENCORE",
             "MOVE_DOUBLE_SLAP",

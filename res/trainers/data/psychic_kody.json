@@ -15,7 +15,7 @@
             "item": null,
             "moves": [
                 "MOVE_CONFUSION",
-                "MOVE_BIDE",
+                "MODE_ELECTROWEB",
                 "MOVE_MEDITATE"
             ],
             "iv_scale": 20,

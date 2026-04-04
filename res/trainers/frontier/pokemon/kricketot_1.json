@@ -2,7 +2,7 @@
     "species": "SPECIES_KRICKETOT",
     "moves": [
         "MOVE_BUG_BITE",
-        "MOVE_BIDE",
+        "MOVE_ELECTROWEB",
         "MOVE_MUD_SLAP",
         "MOVE_GROWL"
     ],

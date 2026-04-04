@@ -2170,9 +2170,6 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
     if (Battler_CanPickCommand(battleCtx, battleCtx->attacker) == FALSE) {
         return OBEY_CHECK_SUCCESS;
     }
-    if (battleCtx->moveCur == MOVE_BIDE && (battleCtx->battleStatusMask & SYSCTL_LAST_OF_MULTI_TURN)) {
-        return OBEY_CHECK_SUCCESS;
-    }
     if (TrainerInfo_BadgeCount(trInfo) >= 8) {
         return OBEY_CHECK_SUCCESS;
     }

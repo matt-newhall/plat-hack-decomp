@@ -108,7 +108,7 @@
             "MOVE_LAST_RESORT"
         ],
         "egg_moves": [
-            "MOVE_BIDE",
+            "MOVE_ELECTROWEB",
             "MOVE_ANCIENT_POWER",
             "MOVE_ROCK_SLIDE",
             "MOVE_BITE",

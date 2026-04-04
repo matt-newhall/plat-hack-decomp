@@ -1426,8 +1426,6 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         if (battler1Action == PLAYER_INPUT_FIGHT) {
             if (battleCtx->turnFlags[battler1].struggling) {
                 battler1Move = MOVE_STRUGGLE;
-            } else if (battleCtx->battleMons[battler1].statusVolatile & VOLATILE_CONDITION_BIDE) {
-                battler1Move = MOVE_BIDE;
             } else {
                 battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + battler1MoveSlot, NULL);
             }
@@ -1436,8 +1434,6 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         if (battler2Action == PLAYER_INPUT_FIGHT) {
             if (battleCtx->turnFlags[battler2].struggling) {
                 battler2Move = MOVE_STRUGGLE;
-            } else if (battleCtx->battleMons[battler2].statusVolatile & VOLATILE_CONDITION_BIDE) {
-                battler2Move = MOVE_BIDE;
             } else {
                 battler2Move = BattleMon_Get(battleCtx, battler2, BATTLEMON_MOVE_1 + battler2MoveSlot, NULL);
             }
@@ -1929,11 +1925,7 @@ void BattleMon_CopyToParty(BattleSystem *battleSys, BattleContext *battleCtx, in
 void Battler_LockMoveChoice(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     battleCtx->battleMons[battler].statusVolatile |= VOLATILE_CONDITION_MOVE_LOCKED;
-    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_BIDE) {
-        battleCtx->moveLockedInto[battler] = MOVE_BIDE;
-    } else {
-        battleCtx->moveLockedInto[battler] = battleCtx->moveCur;
-    }
+    battleCtx->moveLockedInto[battler] = battleCtx->moveCur;
 }
 
 void Battler_UnlockMoveChoice(BattleSystem *battleSys, BattleContext *battleCtx, int battler)

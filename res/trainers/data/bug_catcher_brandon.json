@@ -27,7 +27,7 @@
             "level": 11,
             "item": null,
             "moves": [
-                "MOVE_BIDE"
+                "MODE_ELECTROWEB"
             ],
             "iv_scale": 0,
             "ball_seal": 0

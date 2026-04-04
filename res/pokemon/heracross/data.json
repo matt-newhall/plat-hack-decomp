@@ -98,7 +98,7 @@
         ],
         "egg_moves": [
             "MOVE_HARDEN",
-            "MOVE_BIDE",
+            "MOVE_ELECTROWEB",
             "MOVE_FLAIL",
             "MOVE_ACROBATICS",
             "MOVE_REVENGE",
