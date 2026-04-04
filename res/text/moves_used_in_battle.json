@@ -9698,21 +9698,21 @@
       "id": "pl_msg_00000000_01386",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Crush Grip!"
+        "Lunge!"
       ]
     },
     {
       "id": "pl_msg_00000000_01387",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Crush Grip!"
+        "Lunge!"
       ]
     },
     {
       "id": "pl_msg_00000000_01388",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Crush Grip!"
+        "Lunge!"
       ]
     },
     {

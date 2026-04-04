@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_REGIGIGAS",
     "moves": [
-        "MOVE_CRUSH_GRIP",
+        "MOVE_LUNGE",
         "MOVE_EARTHQUAKE",
         "MOVE_STONE_EDGE",
         "MOVE_DRAIN_PUNCH"
