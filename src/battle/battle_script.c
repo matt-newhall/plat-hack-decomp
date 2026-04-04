@@ -4322,15 +4322,8 @@ static BOOL BtlCmd_TryConversion(BattleSystem *battleSys, BattleContext *battleC
     }
 
     // First, check if there are any non-Conversion moves which have a type different from the
-    // source Pokemon's types.
-    // It's not super clean, as we replaced Conversion with Hurricane, but
-    // I'd prefer to keep battle effects "intact" for memory. If you have
-    // better ideas lmk
+    // source Pokemon's types - Conversion was replaced
     for (i = 0; i < numMoves; i++) {
-        if (ATTACKING_MON.moves[i] == MOVE_HURRICANE) {
-            continue;
-        }
-
         moveType = MOVE_DATA(ATTACKING_MON.moves[i]).type;
         if (moveType == TYPE_MYSTERY) {
             if (MON_HAS_TYPE(battleCtx->attacker, TYPE_GHOST)) {
@@ -4349,11 +4342,8 @@ static BOOL BtlCmd_TryConversion(BattleSystem *battleSys, BattleContext *battleC
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
         do {
-            // Get a random non-Conversion move
-            // See above re. Hurricane
-            do {
-                i = BattleSystem_RandNext(battleSys) % numMoves;
-            } while (ATTACKING_MON.moves[i] == MOVE_HURRICANE);
+            // Get a random non-Conversion move - Conversion was replaced
+            i = BattleSystem_RandNext(battleSys) % numMoves;
 
             moveType = MOVE_DATA(ATTACKING_MON.moves[i]).type;
 
