@@ -75,15 +75,15 @@
 	</row>
 	<row id="pl_msg_00000000_00018" index="18">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nPay Day!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nLiquidation!</language>
 	</row>
 	<row id="pl_msg_00000000_00019" index="19">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPay Day!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLiquidation!</language>
 	</row>
 	<row id="pl_msg_00000000_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPay Day!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLiquidation!</language>
 	</row>
 	<row id="pl_msg_00000000_00021" index="21">
 		<attribute name="window_context_name">used</attribute>

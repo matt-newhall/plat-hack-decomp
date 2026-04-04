@@ -27,7 +27,7 @@
 	</row>
 	<row id="pl_msg_00000646_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Numerous coins are\nhurled at the foe to\ninflict damage.\nMoney is earned\nafter battle.</language>
+		<language name="English">The user slams the\nfoe with water at\nfull-force. It may\nalso lower the\ntarget’s Defense stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
