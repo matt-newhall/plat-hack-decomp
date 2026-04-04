@@ -41,7 +41,7 @@
             [ 5, "MOVE_LEECH_LIFE" ],
             [ 9, "MOVE_SAND_ATTACK" ],
             [ 14, "MOVE_FURY_SWIPES" ],
-            [ 19, "MOVE_MIND_READER" ],
+            [ 19, "MOVE_ZING_ZAP" ],
             [ 20, "MOVE_DOUBLE_TEAM" ],
             [ 20, "MOVE_FURY_CUTTER" ],
             [ 20, "MOVE_SCREECH" ],

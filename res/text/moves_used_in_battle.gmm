@@ -2043,15 +2043,15 @@
 	</row>
 	<row id="pl_msg_00000000_00510" index="510">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMind Reader!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nZing Zap!</language>
 	</row>
 	<row id="pl_msg_00000000_00511" index="511">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMind Reader!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nZing Zap!</language>
 	</row>
 	<row id="pl_msg_00000000_00512" index="512">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMind Reader!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nZing Zap!</language>
 	</row>
 	<row id="pl_msg_00000000_00513" index="513">
 		<attribute name="window_context_name">used</attribute>

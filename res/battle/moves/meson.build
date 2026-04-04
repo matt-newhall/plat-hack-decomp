@@ -249,7 +249,6 @@ pl_waza_tbl_subdirs = [
     'metronome',
     'milk_drink',
     'mimic',
-    'mind_reader',
     'minimize',
     'miracle_eye',
     'mirror_coat',
@@ -470,6 +469,7 @@ pl_waza_tbl_subdirs = [
     'yawn',
     'zap_cannon',
     'zen_headbutt',
+    'zing_zap',
 ]
 
 pl_waza_tbl_data_srcs = []

@@ -44,7 +44,7 @@
             [ 8, "MOVE_CONFUSION" ],
             [ 11, "MOVE_DETECT" ],
             [ 15, "MOVE_HIDDEN_POWER" ],
-            [ 18, "MOVE_MIND_READER" ],
+            [ 18, "MOVE_ZING_ZAP" ],
             [ 22, "MOVE_FEINT" ],
             [ 25, "MOVE_CALM_MIND" ],
             [ 29, "MOVE_FORCE_PALM" ],
