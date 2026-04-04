@@ -46,7 +46,7 @@
             [ 38, "MOVE_FLAIL" ],
             [ 41, "MOVE_ATTRACT" ],
             [ 44, "MOVE_PSYCHIC" ],
-            [ 47, "MOVE_FISSURE" ]
+            [ 47, "MOVE_SLUDGE_WAVE" ]
         ],
         "by_tm": [
             "TM06",

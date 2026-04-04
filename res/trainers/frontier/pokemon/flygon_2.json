@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_FLYGON",
     "moves": [
-        "MOVE_FISSURE",
+        "MOVE_SLUDGE_WAVE",
         "MOVE_FIRE_PUNCH",
         "MOVE_THUNDER_PUNCH",
         "MOVE_AERIAL_ACE"

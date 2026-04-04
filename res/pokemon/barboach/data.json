@@ -47,7 +47,7 @@
             [ 35, "MOVE_AQUA_TAIL" ],
             [ 39, "MOVE_EARTHQUAKE" ],
             [ 43, "MOVE_FUTURE_SIGHT" ],
-            [ 47, "MOVE_FISSURE" ]
+            [ 47, "MOVE_SLUDGE_WAVE" ]
         ],
         "by_tm": [
             "TM03",

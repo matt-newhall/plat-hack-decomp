@@ -101,7 +101,7 @@
             "MOVE_SLEEP_TALK",
             "MOVE_YAWN",
             "MOVE_EARTHQUAKE",
-            "MOVE_FISSURE"
+            "MOVE_SLUDGE_WAVE"
         ]
     },
     "evolutions": [  ],

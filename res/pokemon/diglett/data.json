@@ -46,7 +46,7 @@
             [ 29, "MOVE_MUD_BOMB" ],
             [ 34, "MOVE_SLASH" ],
             [ 37, "MOVE_EARTHQUAKE" ],
-            [ 40, "MOVE_FISSURE" ]
+            [ 40, "MOVE_SLUDGE_WAVE" ]
         ],
         "by_tm": [
             "TM06",

@@ -97,7 +97,7 @@
             "MOVE_YAWN",
             "MOVE_ROCK_SLIDE",
             "MOVE_CURSE",
-            "MOVE_FISSURE",
+            "MOVE_SLUDGE_WAVE",
             "MOVE_SIGNAL_BEAM"
         ]
     },

@@ -45,7 +45,7 @@
             [ 65, "MOVE_EARTH_POWER" ],
             [ 73, "MOVE_EARTHQUAKE" ],
             [ 81, "MOVE_FEINT" ],
-            [ 89, "MOVE_FISSURE" ]
+            [ 89, "MOVE_SLUDGE_WAVE" ]
         ],
         "by_tm": [
             "TM06",

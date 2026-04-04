@@ -4,7 +4,7 @@
         "MOVE_WATERFALL",
         "MOVE_EARTHQUAKE",
         "MOVE_STONE_EDGE",
-        "MOVE_FISSURE"
+        "MOVE_SLUDGE_WAVE"
     ],
     "evFlags": {
         "hp": true,

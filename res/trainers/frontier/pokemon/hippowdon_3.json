@@ -4,7 +4,7 @@
         "MOVE_SUPERPOWER",
         "MOVE_FIRE_FANG",
         "MOVE_ICE_FANG",
-        "MOVE_FISSURE"
+        "MOVE_SLUDGE_WAVE"
     ],
     "evFlags": {
         "hp": true,

@@ -2,7 +2,7 @@
     "species": "SPECIES_WALREIN",
     "moves": [
         "MOVE_SHEER_COLD",
-        "MOVE_FISSURE",
+        "MOVE_SLUDGE_WAVE",
         "MOVE_REST",
         "MOVE_SLEEP_TALK"
     ],

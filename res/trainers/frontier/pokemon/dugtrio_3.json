@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_DUGTRIO",
     "moves": [
-        "MOVE_FISSURE",
+        "MOVE_SLUDGE_WAVE",
         "MOVE_GIGA_IMPACT",
         "MOVE_AERIAL_ACE",
         "MOVE_NIGHT_SLASH"
