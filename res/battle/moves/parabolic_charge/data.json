@@ -1,18 +1,17 @@
 {
-    "name": "Constrict",
-    "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
-    "power": 10,
+    "name": "ParabolcChrge",
+    "class": "CLASS_SPECIAL",
+    "type": "TYPE_ELECTRIC",
+    "power": 65,
     "accuracy": 100,
-    "pp": 35,
+    "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_LOWER_SPEED_HIT",
-        "chance": 10
+        "type": "BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT",
+        "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_ALL_ADJACENT",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],

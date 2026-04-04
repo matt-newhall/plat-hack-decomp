@@ -34,7 +34,7 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_CONSTRICT" ],
+            [ 1, "MOVE_PARABOLIC_CHARGE" ],
             [ 1, "MOVE_MINIMIZE" ],
             [ 6, "MOVE_ASTONISH" ],
             [ 11, "MOVE_GUST" ],

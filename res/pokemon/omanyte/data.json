@@ -34,7 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_CONSTRICT" ],
+            [ 1, "MOVE_PARABOLIC_CHARGE" ],
             [ 1, "MOVE_WITHDRAW" ],
             [ 7, "MOVE_BITE" ],
             [ 10, "MOVE_WATER_GUN" ],

@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_INGRAIN" ],
-            [ 1, "MOVE_CONSTRICT" ],
+            [ 1, "MOVE_PARABOLIC_CHARGE" ],
             [ 5, "MOVE_SLEEP_POWDER" ],
             [ 8, "MOVE_ABSORB" ],
             [ 12, "MOVE_GROWTH" ],
