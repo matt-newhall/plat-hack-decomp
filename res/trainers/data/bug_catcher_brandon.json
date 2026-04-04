@@ -27,7 +27,7 @@
             "level": 11,
             "item": null,
             "moves": [
-                "MODE_ELECTROWEB"
+                "MOVE_ELECTROWEB"
             ],
             "power": 0,
             "ball_seal": 0

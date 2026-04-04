@@ -33,10 +33,10 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_GROWL" ],
-            [ 1, "MODE_ELECTROWEB" ],
-            [ 5, "MOVE_QUICK_ATTACK" ],
-            [ 9, "MOVE_CHARM" ],
+            [ 1, "MOVE_DRILL_RUN" ],
+            [ 1, "MOVE_WILD_CHARGE" ],
+            [ 5, "MOVE_LIQUIDATION" ],
+            [ 9, "MOVE_TAIL_SLAP" ],
             [ 13, "MOVE_SPARK" ],
             [ 17, "MOVE_ENDURE" ],
             [ 21, "MOVE_SWIFT" ],

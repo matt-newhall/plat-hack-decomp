@@ -33,7 +33,7 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MODE_ELECTROWEB" ],
+            [ 1, "MOVE_ELECTROWEB" ],
             [ 4, "MOVE_MEDITATE" ],
             [ 8, "MOVE_CONFUSION" ],
             [ 11, "MOVE_DETECT" ],

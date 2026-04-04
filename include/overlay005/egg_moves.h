@@ -704,7 +704,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_LEDYBA,
         MOVE_PSYBEAM,
-        MODE_ELECTROWEB,
+        MOVE_ELECTROWEB,
         MOVE_SILVER_WIND,
         MOVE_BUG_BUZZ,
         MOVE_SCREECH,
@@ -733,7 +733,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_PICHU,
         MOVE_REVERSAL,
-        MODE_ELECTROWEB,
+        MOVE_ELECTROWEB,
         MOVE_PRESENT,
         MOVE_ENCORE,
         MOVE_DOUBLE_SLAP,
@@ -927,7 +927,7 @@ const u16 sEggMoves[] = {
         MOVE_TOXIC_SPIKES),
 
     EGG_MOVES(SPECIES_DUNSPARCE,
-        MODE_ELECTROWEB,
+        MOVE_ELECTROWEB,
         MOVE_ANCIENT_POWER,
         MOVE_ROCK_SLIDE,
         MOVE_BITE,
@@ -984,7 +984,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_HERACROSS,
         MOVE_HARDEN,
-        MODE_ELECTROWEB,
+        MOVE_ELECTROWEB,
         MOVE_FLAIL,
         MOVE_ACROBATICS,
         MOVE_REVENGE,
@@ -1717,7 +1717,7 @@ const u16 sEggMoves[] = {
         MOVE_SPIKES,
         MOVE_ROLLOUT,
         MOVE_DISABLE,
-        MODE_ELECTROWEB),
+        MOVE_ELECTROWEB),
 
     EGG_MOVES(SPECIES_SPHEAL,
         MOVE_ACID_SPRAY,

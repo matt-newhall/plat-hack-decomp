@@ -27,7 +27,7 @@
 	</row>
 	<row id="pl_msg_00000646_00006" index="6">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user slams the\nfoe with water at\nfull-force. It may\nalso lower the\ntarget’s Defense stat.</language>
+		<language name="English">The user slams the\nfoe with water at\nfull-force. It may\nlower the target’s\nDefense stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00007" index="7">
 		<attribute name="window_context_name">used</attribute>
@@ -471,7 +471,7 @@
 	</row>
 	<row id="pl_msg_00000646_00117" index="117">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user attacks and\ncaptures opposing Pokémon\nusing an electric net.\nThis lowers their Speed\nstat.</language>
+		<language name="English">The user captures\nopposing Pokémon\nusing an electric\nnet. This lowers\ntheir Speed stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00118" index="118">
 		<attribute name="window_context_name">used</attribute>
@@ -683,7 +683,7 @@
 	</row>
 	<row id="pl_msg_00000646_00170" index="170">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user senses the\nfoe’s movements\nwith its mind to\nensure its next\nattack does not miss.</language>
+        <language name="English">A strong electric\nblast crashes down\non the target.\nThis may also make\nthe target flinch.</language>
 	</row>
 	<row id="pl_msg_00000646_00171" index="171">
 		<attribute name="window_context_name">used</attribute>
@@ -1319,7 +1319,7 @@
 	</row>
 	<row id="pl_msg_00000646_00329" index="329">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A consecutive\nthree-kick attack that\nbecomes more powerful\nwith each successful\nhit.</language>
+		<language name="English">A consecutive\nthree-kick attack\nthat becomes more\npowerful with each\nsuccessful hit.</language>
 	</row>
 	<row id="pl_msg_00000646_00330" index="330">
 		<attribute name="window_context_name">used</attribute>
@@ -1343,7 +1343,7 @@
 	</row>
 	<row id="pl_msg_00000646_00335" index="335">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user yells as\nif it is ranting\nabout something,\nmaking the target’s\nSp. Atk stat decrease.</language>
+		<language name="English">The user yells as if\nit is ranting about\nsomething, making\nthe target’s Sp. Atk\nstat decrease.</language>
 	</row>
 	<row id="pl_msg_00000646_00336" index="336">
 		<attribute name="window_context_name">used</attribute>
@@ -1387,7 +1387,7 @@
 	</row>
 	<row id="pl_msg_00000646_00346" index="346">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user spits fluid\nthat works to melt\nthe target. This\nharshly reduces the\ntarget's Sp. Def stat.</language>
+		<language name="English">The user spits fluid\nthat works to melt\nthe target. This\nharshly reduces the\ntarget’s Sp. Def stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00347" index="347">
 		<attribute name="window_context_name">used</attribute>
@@ -1431,7 +1431,7 @@
 	</row>
 	<row id="pl_msg_00000646_00357" index="357">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user shrouds itself\nin electricity and\nsmashes into its\ntarget. It also damages\nthe user a little.</language>
+		<language name="English">The user shrouds\nitself in electricity\nand smashes into its\ntarget. It also\ndamages the user.</language>
 	</row>
 	<row id="pl_msg_00000646_00358" index="358">
 		<attribute name="window_context_name">used</attribute>
@@ -1847,7 +1847,7 @@
 	</row>
 	<row id="pl_msg_00000646_00461" index="461">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user attacks by\nstriking the target\nwith its hard tail.\nIt hits the target two\nto five times in a row.</language>
+		<language name="English">The user attacks by\nstriking the target\nwith its hard tail.It\nhits the target two\nto five times in a row.</language>
 	</row>
 	<row id="pl_msg_00000646_00462" index="462">
 		<attribute name="window_context_name">used</attribute>

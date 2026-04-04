@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MODE_ELECTROWEB" ],
+            [ 1, "MOVE_ELECTROWEB" ],
             [ 16, "MOVE_BUG_BITE" ]
         ],
         "by_tm": [  ],

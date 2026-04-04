@@ -7361,7 +7361,7 @@ static const u16 sAuraAndPulseMoves[] = {
 static const u16 sSolarMoves[] = {
     MOVE_SOLAR_BEAM,
     MOVE_SOLAR_BLADE
-}
+};
 
 BOOL BattleSystem_IsSolarMove(u16 move) {
     for (int i = 0; sSolarMoves[i] != 0; i++) {
