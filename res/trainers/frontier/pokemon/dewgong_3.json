@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_DEWGONG",
     "moves": [
-        "MOVE_SHEER_COLD",
+        "MOVE_TRIPLE_AXEL",
         "MOVE_HORN_DRILL",
         "MOVE_REST",
         "MOVE_SLEEP_TALK"

@@ -46,7 +46,7 @@
             [ 37, "MOVE_REST" ],
             [ 37, "MOVE_SNORE" ],
             [ 43, "MOVE_BLIZZARD" ],
-            [ 49, "MOVE_SHEER_COLD" ]
+            [ 49, "MOVE_TRIPLE_AXEL" ]
         ],
         "by_tm": [
             "TM03",

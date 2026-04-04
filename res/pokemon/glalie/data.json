@@ -48,7 +48,7 @@
             [ 37, "MOVE_ICE_BEAM" ],
             [ 40, "MOVE_HAIL" ],
             [ 51, "MOVE_BLIZZARD" ],
-            [ 59, "MOVE_SHEER_COLD" ]
+            [ 59, "MOVE_TRIPLE_AXEL" ]
         ],
         "by_tm": [
             "TM03",
