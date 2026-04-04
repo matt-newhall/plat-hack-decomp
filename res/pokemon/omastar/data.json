@@ -33,7 +33,7 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_CONSTRICT" ],
+            [ 1, "MOVE_PARABOLIC_CHARGE" ],
             [ 1, "MOVE_WITHDRAW" ],
             [ 1, "MOVE_BITE" ],
             [ 7, "MOVE_BITE" ],

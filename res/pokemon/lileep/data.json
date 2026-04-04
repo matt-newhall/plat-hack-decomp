@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_ASTONISH" ],
-            [ 1, "MOVE_CONSTRICT" ],
+            [ 1, "MOVE_PARABOLIC_CHARGE" ],
             [ 8, "MOVE_ACID" ],
             [ 15, "MOVE_INGRAIN" ],
             [ 22, "MOVE_CONFUSE_RAY" ],
