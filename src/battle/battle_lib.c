@@ -7364,6 +7364,19 @@ static const u16 sAuraAndPulseMoves[] = {
     MOVE_DRAGON_PULSE
 };
 
+static const u16 sSolarMoves[] = {
+    MOVE_SOLAR_BEAM,
+    MOVE_SOLAR_BLADE
+}
+
+BOOL BattleSystem_IsSolarMove(u16 move) {
+    for (int i = 0; sSolarMoves[i] != 0; i++) {
+        if (sSolarMoves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+};
+
 typedef struct DamageCalcParams {
     u16 species;
     s16 curHP;
@@ -7915,7 +7928,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             }
         }
 
-        if ((fieldConditions & FIELD_CONDITION_SOLAR_DOWN) && move == MOVE_SOLAR_BEAM) {
+        if ((fieldConditions & FIELD_CONDITION_SOLAR_DOWN) && BattleSystem_IsSolarMove(move)) {
             damage /= 2;
         }
 

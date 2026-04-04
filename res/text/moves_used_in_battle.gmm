@@ -303,15 +303,15 @@
 	</row>
 	<row id="pl_msg_00000000_00075" index="75">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMega Kick!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nSolar Blade!</language>
 	</row>
 	<row id="pl_msg_00000000_00076" index="76">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMega Kick!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSolar Blade!</language>
 	</row>
 	<row id="pl_msg_00000000_00077" index="77">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMega Kick!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSolar Blade!</language>
 	</row>
 	<row id="pl_msg_00000000_00078" index="78">
 		<attribute name="window_context_name">used</attribute>

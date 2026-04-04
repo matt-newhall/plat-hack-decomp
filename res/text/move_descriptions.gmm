@@ -103,7 +103,7 @@
 	</row>
 	<row id="pl_msg_00000646_00025" index="25">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is attacked\nby a kick launched\nwith muscle-packed\npower.\n</language>
+		<language name="English">A two-turn attack.\nThe user gathers\nlight, then strikes\nwith a blade on the\nsecond turn.</language>
 	</row>
 	<row id="pl_msg_00000646_00026" index="26">
 		<attribute name="window_context_name">used</attribute>
