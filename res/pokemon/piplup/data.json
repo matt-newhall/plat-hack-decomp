@@ -40,7 +40,7 @@
             [ 11, "MOVE_ACID_SPRAY" ],
             [ 15, "MOVE_PECK" ],
             [ 18, "MOVE_BUBBLE_BEAM" ],
-            [ 22, "MODE_ELECTROWEB" ],
+            [ 22, "MOVE_ELECTROWEB" ],
             [ 25, "MOVE_FURY_ATTACK" ],
             [ 29, "MOVE_BRINE" ],
             [ 32, "MOVE_DUAL_CHOP" ],

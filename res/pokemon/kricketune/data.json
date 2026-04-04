@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MODE_ELECTROWEB" ],
+            [ 1, "MOVE_ELECTROWEB" ],
             [ 10, "MOVE_FURY_CUTTER" ],
             [ 14, "MOVE_LEECH_LIFE" ],
             [ 18, "MOVE_SING" ],

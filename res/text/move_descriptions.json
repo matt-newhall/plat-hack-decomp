@@ -62,8 +62,8 @@
         "The user slams the\n",
         "foe with water at\n",
         "full-force. It may\n",
-        "also lower the\n",
-        "target’s Defense stat."
+        "lower the target’s\n",
+        "Defense stat."
       ]
     },
     {
@@ -1134,11 +1134,11 @@
     {
       "id": "pl_msg_00000646_00117",
       "en_US": [
-        "The user attacks and\n",
-        "captures opposing Pokémon\n",
-        "using an electric net.\n",
-        "This lowers their Speed\n",
-        "stat."
+        "The user captures\n",
+        "opposing Pokémon\n",
+        "using an electric\n",
+        "net. This lowers\n",
+        "their Speed stat."
       ]
     },
     {
@@ -1652,11 +1652,11 @@
     {
       "id": "pl_msg_00000646_00170",
       "en_US": [
-        "The user senses the\n",
-        "foe’s movements\n",
-        "with its mind to\n",
-        "ensure its next\n",
-        "attack does not miss."
+        "A strong electric\n",
+        "blast crashes down\n",
+        "on the target.\n",
+        "This may also make\n",
+        "the target flinch."
       ]
     },
     {
@@ -3212,10 +3212,10 @@
       "id": "pl_msg_00000646_00329",
       "en_US": [
         "A consecutive\n",
-        "three-kick attack that\n",
-        "becomes more powerful\n",
-        "with each successful\n",
-        "hit."
+        "three-kick attack\n",
+        "that becomes more\n",
+        "powerful with each\n",
+        "successful hit."
       ]
     },
     {
@@ -3271,11 +3271,11 @@
     {
       "id": "pl_msg_00000646_00335",
       "en_US": [
-        "The user yells as\n",
-        "if it is ranting\n",
-        "about something,\n",
-        "making the target’s\n",
-        "Sp. Atk stat decrease."
+        "The user yells as if\n",
+        "it is ranting about\n",
+        "something, making\n",
+        "the target’s Sp. Atk\n",
+        "stat decrease."
       ]
     },
     {
@@ -3382,7 +3382,7 @@
         "that works to melt\n",
         "the target. This\n",
         "harshly reduces the\n",
-        "target's Sp. Def stat.."
+        "target’s's Sp. Def stat."
       ]
     },
     {
@@ -3487,11 +3487,11 @@
     {
       "id": "pl_msg_00000646_00357",
       "en_US": [
-        "The user shrouds itself\n",
-        "in electricity and\n",
-        "smashes into its\n",
-        "target. It also damages\n",
-        "the user a little."
+        "The user shrouds\n",
+        "itself in electricity\n",
+        "and smashes into its\n",
+        "target. It also\n",
+        "damages the user."
       ]
     },
     {
@@ -4512,8 +4512,8 @@
       "en_US": [
         "The user attacks by\n",
         "striking the target\n",
-        "with its hard tail.\n",
-        "It hits the target two\n",
+        "with its hard tail. It\n",
+        "hits the target two\n",
         "to five times in a row."
       ]
     },
