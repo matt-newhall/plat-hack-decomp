@@ -2980,7 +2980,6 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
     }
 
     if (move == MOVE_FREEZE_DRY && (defenderType1 == TYPE_WATER || defenderType2 == TYPE_WATER)) {
-        ConsoleLog("are we here");
         UpdateMoveStatusForTypeMul(4, moveStatusMask);
     }
 
@@ -7362,7 +7361,6 @@ static const u16 sPunchingMoves[] = {
     MOVE_DIZZY_PUNCH,
     MOVE_DYNAMIC_PUNCH,
     MOVE_HAMMER_ARM,
-    MOVE_DUAL_WINGBEAT,
     MOVE_COMET_PUNCH,
     MOVE_METEOR_MASH,
     MOVE_SHADOW_PUNCH,
