@@ -41,7 +41,7 @@
             [ 35, "MOVE_EARTHQUAKE" ],
             [ 45, "MOVE_FIRE_BLAST" ],
             [ 50, "MOVE_REST" ],
-            [ 60, "MOVE_FISSURE" ],
+            [ 60, "MOVE_SLUDGE_WAVE" ],
             [ 65, "MOVE_SOLAR_BEAM" ],
             [ 75, "MOVE_EARTH_POWER" ],
             [ 80, "MOVE_ERUPTION" ]

@@ -363,7 +363,7 @@
 	</row>
 	<row id="pl_msg_00000646_00090" index="90">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user opens up a\nfissure in the ground\nand drops the foe in.\nThe target instantly\nfaints if it hits.</language>
+		<language name="English">It swamps the area\naround the user\nwith a giant sludge\nwave. It may also\npoison those hit.</language>
 	</row>
 	<row id="pl_msg_00000646_00091" index="91">
 		<attribute name="window_context_name">used</attribute>

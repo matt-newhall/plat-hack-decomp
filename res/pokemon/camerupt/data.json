@@ -47,7 +47,7 @@
             [ 39, "MOVE_EARTH_POWER" ],
             [ 49, "MOVE_EARTHQUAKE" ],
             [ 57, "MOVE_ERUPTION" ],
-            [ 67, "MOVE_FISSURE" ]
+            [ 67, "MOVE_SLUDGE_WAVE" ]
         ],
         "by_tm": [
             "TM05",

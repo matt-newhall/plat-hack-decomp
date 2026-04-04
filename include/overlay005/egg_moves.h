@@ -575,7 +575,7 @@ const u16 sEggMoves[] = {
         MOVE_HORN_DRILL,
         MOVE_ANCIENT_POWER,
         MOVE_DUAL_CHOP,
-        MOVE_FISSURE),
+        MOVE_SLUDGE_WAVE),
 
     EGG_MOVES(SPECIES_EEVEE,
         MOVE_CHARM,
@@ -626,7 +626,7 @@ const u16 sEggMoves[] = {
         MOVE_CHARM,
         MOVE_DOUBLE_EDGE,
         MOVE_CURSE,
-        MOVE_FISSURE,
+        MOVE_SLUDGE_WAVE,
         MOVE_SUBSTITUTE,
         MOVE_WHIRLWIND,
         MOVE_PURSUIT),
@@ -1038,7 +1038,7 @@ const u16 sEggMoves[] = {
         MOVE_MUD_SHOT,
         MOVE_ICICLE_SPEAR,
         MOVE_DOUBLE_EDGE,
-        MOVE_FISSURE,
+        MOVE_SLUDGE_WAVE,
         MOVE_CURSE),
 
     EGG_MOVES(SPECIES_CORSOLA,
@@ -1114,7 +1114,7 @@ const u16 sEggMoves[] = {
         MOVE_ANCIENT_POWER,
         MOVE_SNORE,
         MOVE_COUNTER,
-        MOVE_FISSURE,
+        MOVE_SLUDGE_WAVE,
         MOVE_ENDEAVOR,
         MOVE_ICE_SHARD),
 
@@ -1505,7 +1505,7 @@ const u16 sEggMoves[] = {
         MOVE_SNORE,
         MOVE_SLEEP_TALK,
         MOVE_CURSE,
-        MOVE_FISSURE,
+        MOVE_SLUDGE_WAVE,
         MOVE_TICKLE,
         MOVE_DEFENSE_CURL,
         MOVE_BODY_SLAM),
@@ -1528,7 +1528,7 @@ const u16 sEggMoves[] = {
         MOVE_SLEEP_TALK,
         MOVE_YAWN,
         MOVE_EARTHQUAKE,
-        MOVE_FISSURE),
+        MOVE_SLUDGE_WAVE),
 
     EGG_MOVES(SPECIES_SPOINK,
         MOVE_FUTURE_SIGHT,
@@ -1727,7 +1727,7 @@ const u16 sEggMoves[] = {
         MOVE_YAWN,
         MOVE_ROCK_SLIDE,
         MOVE_CURSE,
-        MOVE_FISSURE,
+        MOVE_SLUDGE_WAVE,
         MOVE_SIGNAL_BEAM),
 
     EGG_MOVES(SPECIES_CLAMPERL,
@@ -1861,7 +1861,7 @@ const u16 sEggMoves[] = {
         MOVE_BODY_SLAM,
         MOVE_SCREECH,
         MOVE_CURSE,
-        MOVE_FISSURE),
+        MOVE_SLUDGE_WAVE),
 
     EGG_MOVES(SPECIES_PACHIRISU,
         MOVE_COVET,
@@ -1900,7 +1900,7 @@ const u16 sEggMoves[] = {
         MOVE_MEMENTO,
         MOVE_CURSE,
         MOVE_AMNESIA,
-        MOVE_FISSURE),
+        MOVE_SLUDGE_WAVE),
 
     EGG_MOVES(SPECIES_DRIFLOON,
         MOVE_MEMENTO,
