@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_RHYPERIOR",
     "moves": [
-        "MOVE_HORN_DRILL",
+        "MOVE_FLAME_CHARGE",
         "MOVE_AVALANCHE",
         "MOVE_PAYBACK",
         "MOVE_COUNTER"

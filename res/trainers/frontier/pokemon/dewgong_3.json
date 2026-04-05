@@ -2,7 +2,7 @@
     "species": "SPECIES_DEWGONG",
     "moves": [
         "MOVE_TRIPLE_AXEL",
-        "MOVE_HORN_DRILL",
+        "MOVE_FLAME_CHARGE",
         "MOVE_REST",
         "MOVE_SLEEP_TALK"
     ],

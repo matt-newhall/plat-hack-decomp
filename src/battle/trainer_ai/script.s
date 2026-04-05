@@ -53,9 +53,6 @@ Basic_Main:
     // Ignore this flag on partner battlers.
     IfTargetIsPartner Terminate
 
-    // Skip damage scoring for OHKO moves (only Horn Drill)
-    IfMoveEqualTo MOVE_HORN_DRILL, Basic_CheckForImmunity
-
     // Score the move according to its damage. If the AI does not know any
     // moves which are eligible for scoring, skip ahead.
     FlagMoveDamageScore USE_MAX_DAMAGE
@@ -1912,7 +1909,6 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_SAND_ATTACK
     TableEntry MOVE_SMOKE_SCREEN
     TableEntry MOVE_TOXIC
-    TableEntry MOVE_HORN_DRILL
     TableEntry MOVE_CROSS_CHOP
     TableEntry MOVE_AEROBLAST
     TableEntry MOVE_CONFUSE_RAY
@@ -5477,7 +5473,6 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_SAND_ATTACK
     TableEntry MOVE_SMOKE_SCREEN
     TableEntry MOVE_TOXIC
-    TableEntry MOVE_HORN_DRILL
     TableEntry MOVE_CROSS_CHOP
     TableEntry MOVE_AEROBLAST
     TableEntry MOVE_CONFUSE_RAY

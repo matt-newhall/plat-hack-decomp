@@ -4,7 +4,7 @@
         "MOVE_FLARE_BLITZ",
         "MOVE_POISON_JAB",
         "MOVE_IRON_TAIL",
-        "MOVE_HORN_DRILL"
+        "MOVE_FLAME_CHARGE"
     ],
     "evFlags": {
         "hp": false,

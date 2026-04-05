@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_FOCUS_PUNCH",
         "MOVE_DRAGON_PULSE",
-        "MOVE_HORN_DRILL",
+        "MOVE_FLAME_CHARGE",
         "MOVE_SUBSTITUTE"
     ],
     "evFlags": {
