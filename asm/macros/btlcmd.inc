@@ -1330,4 +1330,8 @@
     .long 241
     .endm
 
+    .macro TryRandomStatus
+    .long 242
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

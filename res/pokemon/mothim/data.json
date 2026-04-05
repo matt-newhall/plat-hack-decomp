@@ -41,7 +41,7 @@
             [ 26, "MOVE_GUST" ],
             [ 29, "MOVE_POISON_POWDER" ],
             [ 32, "MOVE_PSYBEAM" ],
-            [ 35, "MOVE_CAMOUFLAGE" ],
+            [ 35, "MOVE_DIRE_CLAW" ],
             [ 38, "MOVE_SILVER_WIND" ],
             [ 41, "MOVE_AIR_SLASH" ],
             [ 44, "MOVE_PSYCHIC" ],

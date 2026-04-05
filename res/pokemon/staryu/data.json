@@ -38,7 +38,7 @@
             [ 6, "MOVE_WATER_GUN" ],
             [ 10, "MOVE_RAPID_SPIN" ],
             [ 15, "MOVE_RECOVER" ],
-            [ 19, "MOVE_CAMOUFLAGE" ],
+            [ 19, "MOVE_DIRE_CLAW" ],
             [ 24, "MOVE_SWIFT" ],
             [ 28, "MOVE_BUBBLE_BEAM" ],
             [ 33, "MOVE_MINIMIZE" ],

@@ -1175,7 +1175,7 @@
 	</row>
 	<row id="pl_msg_00000646_00293" index="293">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user’s type is\nchanged depending on\nits environment, such\nas at water’s edge, in\ngrass, or in a cave.</language>
+		<language name="English">The user strikes\nwith ruinous claws,\naiming to land a\ncritical hit. This may\nalso inflict status.</language>
 	</row>
 	<row id="pl_msg_00000646_00294" index="294">
 		<attribute name="window_context_name">used</attribute>
