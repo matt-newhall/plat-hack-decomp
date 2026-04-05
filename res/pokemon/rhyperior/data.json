@@ -43,7 +43,7 @@
             [ 21, "MOVE_SCARY_FACE" ],
             [ 25, "MOVE_ROCK_BLAST" ],
             [ 33, "MOVE_TAKE_DOWN" ],
-            [ 37, "MOVE_HORN_DRILL" ],
+            [ 37, "MOVE_FLAME_CHARGE" ],
             [ 42, "MOVE_HAMMER_ARM" ],
             [ 45, "MOVE_STONE_EDGE" ],
             [ 49, "MOVE_EARTHQUAKE" ],

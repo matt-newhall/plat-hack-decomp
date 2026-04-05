@@ -4664,6 +4664,7 @@ static BOOL BtlCmd_TryMist(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @deprecated
  * @brief Try to execute a one-hit KO move (e.g. Horn Drill).
  *
  * These moves do not follow the standard accuracy formula. CompareVarToValue the defender is

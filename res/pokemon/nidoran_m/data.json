@@ -45,7 +45,7 @@
             [ 33, "MOVE_FLATTER" ],
             [ 37, "MOVE_POISON_JAB" ],
             [ 43, "MOVE_CAPTIVATE" ],
-            [ 45, "MOVE_HORN_DRILL" ]
+            [ 45, "MOVE_FLAME_CHARGE" ]
         ],
         "by_tm": [
             "TM03",

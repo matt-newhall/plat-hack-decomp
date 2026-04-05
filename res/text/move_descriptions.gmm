@@ -131,7 +131,7 @@
 	</row>
 	<row id="pl_msg_00000646_00032" index="32">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is stabbed\nwith a horn rotating\nlike a drill.\nThe foe instantly\nfaints if it hits.</language>
+		<language name="English">The user cloaks\nitself with flame\nand attacks.\nIt raises the\nuser’s Speed stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00033" index="33">
 		<attribute name="window_context_name">used</attribute>

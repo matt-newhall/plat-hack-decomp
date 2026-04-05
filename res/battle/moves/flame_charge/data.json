@@ -1,13 +1,13 @@
 {
-    "name": "Horn Drill",
+    "name": "Flame Charge",
     "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
-    "power": 1,
-    "accuracy": 30,
-    "pp": 5,
+    "type": "TYPE_FIRE",
+    "power": 50,
+    "accuracy": 100,
+    "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_ONE_HIT_KO",
-        "chance": 0
+        "type": "BATTLE_EFFECT_SPEED_UP",
+        "chance": 100
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
