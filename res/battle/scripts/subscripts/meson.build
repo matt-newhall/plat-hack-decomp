@@ -320,4 +320,5 @@ subscript_files = files(
     'subscript_competitive_check.s',
     'subscript_quiver_dance.s',
     'subscript_steel_beam.s',
+    'subscript_random_status.s',
 )

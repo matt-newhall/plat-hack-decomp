@@ -327,6 +327,7 @@ static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, Ba
 static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -8755,6 +8756,36 @@ static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *ba
         battleCtx->movePower = CURRENT_MOVE_DATA.power * 2;
     } else {
         battleCtx->movePower = CURRENT_MOVE_DATA.power;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Attempts to inflict status as a result of the move Dire Claw.
+ *
+ * Has a 50% chance to activate, and a 1/3 chance respectively to sleep, poison,
+ * or paralyze the target.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    if (DEFENDING_MON.curHP
+        && DEFENDING_MON.status == MON_CONDITION_NONE) {
+        int rand = BattleSystem_RandNext(battleSys) % 3;
+
+        if (rand == 0) {
+            BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_poison);
+        } else if (rand == 1) {
+            BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_paralyze);
+        } else {
+            BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_fall_asleep);
+        }
     }
 
     return FALSE;

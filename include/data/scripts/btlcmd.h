@@ -247,6 +247,7 @@ ScriptCommand(BTLCMD_TRIGGERNEUTRALIZINGGASWEAROFFSTEP, BtlCmd_TriggerNeutralizi
 ScriptCommand(BTLCMD_CHECKISPRANKSTERDARKIMMUNE,  BtlCmd_CheckIsPranksterDarkImmune)
 ScriptCommand(BTLCMD_CHECKSTICKYWEB,              BtlCmd_CheckStickyWeb)
 ScriptCommand(BTLCMD_CALCVENOSHOCKPOWER,          BtlCmd_CalcVenoshockPower)
+ScriptCommand(BTLCMD_TRYRANDOMSTATUS,             BtlCmd_TryRandomStatus)
 
 // clang-format on
 

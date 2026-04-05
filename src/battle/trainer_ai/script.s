@@ -248,7 +248,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Basic_CheckCalmMind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Basic_CheckDragonDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Basic_CheckQuiverDance
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CAMOUFLAGE, Basic_CheckCamouflage
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Basic_CheckMiracleEye
@@ -1022,11 +1021,6 @@ Basic_CheckQuiverDance_NoSimple:
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus8
-    PopOrEnd 
-
-Basic_CheckCamouflage:
-    // If the attacker is already under the respective effect, score -10.
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_CAMOUFLAGE, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckGravityActive:
@@ -3253,7 +3247,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_GRAVITY
     TableEntry BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE
     TableEntry BATTLE_EFFECT_NATURAL_GIFT
@@ -6363,7 +6356,6 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_EVA_UP_2_MINIMIZE
     TableEntry BATTLE_EFFECT_CURSE
     TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
-    TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN
     TableEntry BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER
     TableEntry BATTLE_EFFECT_TORMENT
@@ -6376,7 +6368,6 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
-    TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_GIVE_GROUND_IMMUNITY
@@ -7949,7 +7940,6 @@ Harrassment_Effects:
     TableEntry BATTLE_EFFECT_SECRET_POWER
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
-    TableEntry BATTLE_EFFECT_CAMOUFLAGE
     TableEntry BATTLE_EFFECT_PREVENT_ITEM_USE
     TableEntry BATTLE_EFFECT_TRANSFER_STATUS
     TableEntry BATTLE_EFFECT_TOXIC_SPIKES

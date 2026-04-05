@@ -1333,6 +1333,10 @@
     .long BTLCMD_CALCVENOSHOCKPOWER
     .endm
 
+    .macro TryRandomStatus
+    .long BTLCMD_TRYRANDOMSTATUS
+    .endm
+
     .text
     .globl _start
 _start:
