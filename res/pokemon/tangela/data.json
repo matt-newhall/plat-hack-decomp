@@ -49,7 +49,7 @@
             [ 40, "MOVE_NATURAL_GIFT" ],
             [ 43, "MOVE_SCALD" ],
             [ 47, "MOVE_TICKLE" ],
-            [ 50, "MOVE_WRING_OUT" ],
+            [ 50, "MOVE_STEEL_BEAM" ],
             [ 54, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [

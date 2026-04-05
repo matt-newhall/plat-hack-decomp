@@ -4,7 +4,7 @@
         "MOVE_BLIZZARD",
         "MOVE_ENERGY_BALL",
         "MOVE_SIGNAL_BEAM",
-        "MOVE_WRING_OUT"
+        "MOVE_STEEL_BEAM"
     ],
     "evFlags": {
         "hp": false,

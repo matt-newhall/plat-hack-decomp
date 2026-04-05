@@ -2,7 +2,7 @@
     "species": "SPECIES_MEGANIUM",
     "moves": [
         "MOVE_LEAF_STORM",
-        "MOVE_WRING_OUT",
+        "MOVE_STEEL_BEAM",
         "MOVE_LIGHT_SCREEN",
         "MOVE_REFLECT"
     ],

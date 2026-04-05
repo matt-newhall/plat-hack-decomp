@@ -47,7 +47,7 @@
             [ 23, "MOVE_FOCUS_ENERGY" ],
             [ 25, "MOVE_OCTAZOOKA" ],
             [ 29, "MOVE_BULLET_SEED" ],
-            [ 36, "MOVE_WRING_OUT" ],
+            [ 36, "MOVE_STEEL_BEAM" ],
             [ 42, "MOVE_SIGNAL_BEAM" ],
             [ 48, "MOVE_ICE_BEAM" ],
             [ 55, "MOVE_HYPER_BEAM" ]

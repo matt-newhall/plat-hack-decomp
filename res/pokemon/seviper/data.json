@@ -46,7 +46,7 @@
             [ 43, "MOVE_HAZE" ],
             [ 46, "MOVE_NIGHT_SLASH" ],
             [ 52, "MOVE_POISON_JAB" ],
-            [ 55, "MOVE_WRING_OUT" ]
+            [ 55, "MOVE_STEEL_BEAM" ]
         ],
         "by_tm": [
             "TM06",

@@ -46,7 +46,7 @@
             [ 34, "MOVE_SWALLOW" ],
             [ 39, "MOVE_SLUDGE_BOMB" ],
             [ 44, "MOVE_GASTRO_ACID" ],
-            [ 49, "MOVE_WRING_OUT" ],
+            [ 49, "MOVE_STEEL_BEAM" ],
             [ 54, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [

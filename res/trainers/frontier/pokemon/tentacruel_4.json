@@ -4,7 +4,7 @@
         "MOVE_HYDRO_PUMP",
         "MOVE_SLUDGE_BOMB",
         "MOVE_ICE_BEAM",
-        "MOVE_WRING_OUT"
+        "MOVE_STEEL_BEAM"
     ],
     "evFlags": {
         "hp": false,

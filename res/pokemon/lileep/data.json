@@ -46,7 +46,7 @@
             [ 57, "MOVE_STOCKPILE" ],
             [ 57, "MOVE_SPIT_UP" ],
             [ 57, "MOVE_SWALLOW" ],
-            [ 64, "MOVE_WRING_OUT" ]
+            [ 64, "MOVE_STEEL_BEAM" ]
         ],
         "by_tm": [
             "TM06",
@@ -94,7 +94,7 @@
             "MOVE_RECOVER",
             "MOVE_MIRROR_COAT",
             "MOVE_ROCK_SLIDE",
-            "MOVE_WRING_OUT",
+            "MOVE_STEEL_BEAM",
             "MOVE_TICKLE"
         ]
     },

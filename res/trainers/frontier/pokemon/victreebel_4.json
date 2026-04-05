@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_SOLAR_BEAM",
         "MOVE_SLUDGE_BOMB",
-        "MOVE_WRING_OUT",
+        "MOVE_STEEL_BEAM",
         "MOVE_SUNNY_DAY"
     ],
     "evFlags": {

@@ -49,7 +49,7 @@
             [ 40, "MOVE_SLASH" ],
             [ 45, "MOVE_METAL_SOUND" ],
             [ 54, "MOVE_ANCIENT_POWER" ],
-            [ 63, "MOVE_WRING_OUT" ],
+            [ 63, "MOVE_STEEL_BEAM" ],
             [ 72, "MOVE_NIGHT_SLASH" ]
         ],
         "by_tm": [

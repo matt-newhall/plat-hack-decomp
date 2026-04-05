@@ -45,7 +45,7 @@
             [ 31, "MOVE_SPIT_UP" ],
             [ 31, "MOVE_SWALLOW" ],
             [ 37, "MOVE_CRUNCH" ],
-            [ 41, "MOVE_WRING_OUT" ],
+            [ 41, "MOVE_STEEL_BEAM" ],
             [ 47, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [

@@ -2,7 +2,7 @@
     "species": "SPECIES_TANGROWTH",
     "moves": [
         "MOVE_SOLAR_BEAM",
-        "MOVE_WRING_OUT",
+        "MOVE_STEEL_BEAM",
         "MOVE_SYNTHESIS",
         "MOVE_SUNNY_DAY"
     ],
