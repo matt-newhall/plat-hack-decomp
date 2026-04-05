@@ -1151,7 +1151,7 @@
 	</row>
 	<row id="pl_msg_00000646_00287" index="287">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user rests\nto cure itself of a\npoisoning, burn, or\nparalysis.\n</language>
+		<language name="English">The user attacks\nby slamming its\nbody into the\ntarget, using the\nuser’s Defense stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00288" index="288">
 		<attribute name="window_context_name">used</attribute>

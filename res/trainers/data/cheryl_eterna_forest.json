@@ -17,7 +17,7 @@
             "moves": [
                 "MOVE_EGG_BOMB",
                 "MOVE_SOFTBOILED",
-                "MOVE_REFRESH"
+                "MOVE_BODY_PRESS"
             ],
             "power": 30,
             "ball_seal": 0

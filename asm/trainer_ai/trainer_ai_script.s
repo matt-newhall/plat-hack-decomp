@@ -236,7 +236,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HELD_ITEM, Basic_CheckCanRemoveItem
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Basic_CheckCanImprison
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Basic_CheckCanRefreshStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
@@ -903,11 +902,6 @@ Basic_CheckCanImprison:
     ; If either the attacker or a target are under the effect of Imprison, score -10.
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_IMPRISON, ScoreMinus10
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_IMPRISONED, ScoreMinus10
-    PopOrEnd 
-
-Basic_CheckCanRefreshStatus:
-    ; If the attacker is not Burned, Poisoned, or Paralyzed, score -10.
-    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_FACADE_BOOST, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckTickle:
@@ -1719,7 +1713,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP, Expert_WaterSpout
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_ChangeUserAbility
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Expert_Imprison
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_Refresh
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Snatch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOIL_THIRD, Expert_RecoilMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT, Expert_HighCritical
@@ -3237,7 +3230,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_REMOVE_HELD_ITEM
     TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
     TableEntry BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE
-    TableEntry BATTLE_EFFECT_HEAL_STATUS
     TableEntry BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
@@ -4620,17 +4612,6 @@ Expert_Imprison:
     AddToMoveScore 2
 
 Expert_Imprison_End:
-    PopOrEnd 
-
-Expert_Refresh:
-    ; If the opponent's HP < 50%, score -1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_Refresh_ScoreMinus1
-    GoTo Expert_Refresh_End
-
-Expert_Refresh_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Refresh_End:
     PopOrEnd 
 
 Expert_Snatch:

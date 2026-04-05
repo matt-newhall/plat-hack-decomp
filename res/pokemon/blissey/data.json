@@ -36,7 +36,7 @@
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_GROWL" ],
             [ 5, "MOVE_TAIL_WHIP" ],
-            [ 9, "MOVE_REFRESH" ],
+            [ 9, "MOVE_BODY_PRESS" ],
             [ 12, "MOVE_SOFTBOILED" ],
             [ 16, "MOVE_DOUBLE_SLAP" ],
             [ 20, "MOVE_MINIMIZE" ],
