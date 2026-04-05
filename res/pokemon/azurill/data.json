@@ -80,7 +80,7 @@
         "egg_moves": [
             "MOVE_ENCORE",
             "MOVE_SING",
-            "MOVE_REFRESH",
+            "MOVE_BODY_PRESS",
             "MOVE_SCALD",
             "MOVE_TICKLE",
             "MOVE_FAKE_TEARS"

@@ -91,7 +91,7 @@
             "MOVE_ACID_SPRAY",
             "MOVE_ICE_BALL",
             "MOVE_MUD_SHOT",
-            "MOVE_REFRESH",
+            "MOVE_BODY_PRESS",
             "MOVE_ENDEAVOR"
         ]
     },

@@ -7515,6 +7515,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     moveClass = MOVE_DATA(move).class;
 
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_USE_DEF_AS_ATK) {
+        attackStat = BattleMon_Get(battleCtx, attacker, BATTLEMON_DEFENSE, NULL);
+        attackStage = BattleMon_Get(battleCtx, attacker, BATTLEMON_DEFENSE_STAGE, NULL) - 6;
+    }
+
     if ((attackerParams.ability == ABILITY_HUGE_POWER || attackerParams.ability == ABILITY_PURE_POWER) && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         attackStat = attackStat * 2;
     }

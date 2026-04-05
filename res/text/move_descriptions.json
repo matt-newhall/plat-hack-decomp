@@ -2801,10 +2801,11 @@
     {
       "id": "pl_msg_00000646_00287",
       "en_US": [
-        "The user rests\n",
-        "to cure itself of a\n",
-        "poisoning, burn, or\n",
-        "paralysis.\n"
+        "The user attacks\n",
+        "by slamming its\n",
+        "body into the\n",
+        "target, using the\n",
+        "user’s Defense stat."
       ]
     },
     {

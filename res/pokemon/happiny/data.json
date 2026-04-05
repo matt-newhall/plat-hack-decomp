@@ -37,7 +37,7 @@
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_CHARM" ],
             [ 5, "MOVE_COPYCAT" ],
-            [ 9, "MOVE_REFRESH" ],
+            [ 9, "MOVE_BODY_PRESS" ],
             [ 12, "MOVE_SWEET_KISS" ]
         ],
         "by_tm": [

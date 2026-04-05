@@ -40,7 +40,7 @@
             [ 10, "MOVE_SWIFT" ],
             [ 15, "MOVE_HELPING_HAND" ],
             [ 20, "MOVE_PSYCHIC" ],
-            [ 25, "MOVE_REFRESH" ],
+            [ 25, "MOVE_BODY_PRESS" ],
             [ 30, "MOVE_REST" ],
             [ 35, "MOVE_ZEN_HEADBUTT" ],
             [ 40, "MOVE_DOUBLE_EDGE" ],

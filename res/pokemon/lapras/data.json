@@ -105,7 +105,7 @@
             "MOVE_DRILL_RUN",
             "MOVE_SUBSTITUTE",
             "MOVE_TICKLE",
-            "MOVE_REFRESH",
+            "MOVE_BODY_PRESS",
             "MOVE_DRAGON_DANCE",
             "MOVE_CURSE",
             "MOVE_SLEEP_TALK",

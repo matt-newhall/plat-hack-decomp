@@ -6023,21 +6023,21 @@
       "id": "pl_msg_00000000_00861",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Refresh!"
+        "Body Press!"
       ]
     },
     {
       "id": "pl_msg_00000000_00862",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Refresh!"
+        "Body Press!"
       ]
     },
     {
       "id": "pl_msg_00000000_00863",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Refresh!"
+        "Body Press!"
       ]
     },
     {

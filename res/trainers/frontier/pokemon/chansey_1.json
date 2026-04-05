@@ -2,7 +2,7 @@
     "species": "SPECIES_CHANSEY",
     "moves": [
         "MOVE_METRONOME",
-        "MOVE_REFRESH",
+        "MOVE_BODY_PRESS",
         "MOVE_DEFENSE_CURL",
         "MOVE_MINIMIZE"
     ],
