@@ -1,18 +1,17 @@
 {
-    "name": "Wring Out",
+    "name": "Steel Beam",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
-    "power": 1,
-    "accuracy": 100,
+    "type": "TYPE_STEEL",
+    "power": 140,
+    "accuracy": 95,
     "pp": 5,
     "effect": {
-        "type": "BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP",
+        "type": "BATTLE_EFFECT_STEEL_BEAM",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],

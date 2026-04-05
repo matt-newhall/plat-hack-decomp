@@ -1515,7 +1515,7 @@
 	</row>
 	<row id="pl_msg_00000646_00378" index="378">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user powerfully\nwrings the foe.\nThe more HP the foe\nhas, the greater this\nattack’s power.</language>
+		<language name="English">The user fires a\nbeam of steel that\nit collected from its\nentire body. This also\ndamages the user.</language>
 	</row>
 	<row id="pl_msg_00000646_00379" index="379">
 		<attribute name="window_context_name">used</attribute>

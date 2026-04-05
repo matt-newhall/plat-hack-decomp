@@ -47,7 +47,7 @@
             [ 36, "MOVE_POISON_JAB" ],
             [ 42, "MOVE_SCREECH" ],
             [ 49, "MOVE_HYDRO_PUMP" ],
-            [ 55, "MOVE_WRING_OUT" ]
+            [ 55, "MOVE_STEEL_BEAM" ]
         ],
         "by_tm": [
             "TM03",

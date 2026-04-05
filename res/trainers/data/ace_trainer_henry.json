@@ -29,7 +29,7 @@
             "level": 48,
             "item": null,
             "moves": [
-                "MOVE_WRING_OUT",
+                "MOVE_STEEL_BEAM",
                 "MOVE_CRUNCH",
                 "MOVE_FAINT_ATTACK",
                 "MOVE_INGRAIN"

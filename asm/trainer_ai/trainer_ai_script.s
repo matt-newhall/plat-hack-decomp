@@ -262,7 +262,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Basic_CheckCanPsychoShift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Basic_CheckHealBlock
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Basic_CheckPowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
@@ -1763,7 +1762,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_PsychoShift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Expert_TrumpCard
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP, Expert_WringOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
@@ -5391,43 +5389,6 @@ Expert_HealBlock_TryScorePlus1:
 Expert_HealBlock_End:
     PopOrEnd 
 
-Expert_WringOut:
-    ; If the opponent resists or is immune to the move, score -1.
-    ;
-    ; If the opponent's HP < 50%, score -1.
-    ;
-    ; If the opponent is at full HP:
-    ; - Start with 90.2% chance of score +1.
-    ; - If the attacker is faster than its opponent, additional score +2.
-    ; - If the attacker is slower than its opponent, additional score +1.
-    ;
-    ; If the opponent's HP > 85%, 90.2% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_WringOut_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_WringOut_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_WringOut_ScoreMinus1
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_WringOut_ScoreMinus1
-    IfHPPercentEqualTo AI_BATTLER_DEFENDER, 100, Expert_WringOut_CheckSpeed
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 85, Expert_WringOut_TryScorePlus1
-    GoTo Expert_WringOut_End
-
-Expert_WringOut_CheckSpeed:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_WringOut_ScorePlus1
-    AddToMoveScore 1
-
-Expert_WringOut_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_WringOut_TryScorePlus1:
-    IfRandomLessThan 25, Expert_WringOut_End
-    AddToMoveScore 1
-    GoTo Expert_WringOut_End
-
-Expert_WringOut_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_WringOut_End:
-    PopOrEnd 
-
 Expert_PowerTrick:
     ; If the attacker's HP > 90%, 62.5% chance of score +1.
     ;
@@ -7822,7 +7783,7 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
-    TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP
+    TableEntry BATTLE_EFFECT_STEEL_BEAM
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END
 
@@ -7888,7 +7849,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
-    TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP
+    TableEntry BATTLE_EFFECT_STEEL_BEAM
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END
 

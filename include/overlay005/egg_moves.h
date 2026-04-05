@@ -597,7 +597,7 @@ const u16 sEggMoves[] = {
         MOVE_ROCK_SLIDE,
         MOVE_SPIKES,
         MOVE_KNOCK_OFF,
-        MOVE_WRING_OUT,
+        MOVE_STEEL_BEAM,
         MOVE_TOXIC_SPIKES),
 
     EGG_MOVES(SPECIES_KABUTO,
@@ -651,7 +651,7 @@ const u16 sEggMoves[] = {
         MOVE_GRASS_WHISTLE,
         MOVE_LEAF_STORM,
         MOVE_AROMATHERAPY,
-        MOVE_WRING_OUT),
+        MOVE_STEEL_BEAM),
 
     EGG_MOVES(SPECIES_CYNDAQUIL,
         MOVE_FURY_SWIPES,
@@ -1620,7 +1620,7 @@ const u16 sEggMoves[] = {
         MOVE_RECOVER,
         MOVE_MIRROR_COAT,
         MOVE_ROCK_SLIDE,
-        MOVE_WRING_OUT,
+        MOVE_STEEL_BEAM,
         MOVE_TICKLE),
 
     EGG_MOVES(SPECIES_ANORITH,

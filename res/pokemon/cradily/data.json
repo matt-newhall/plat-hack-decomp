@@ -47,7 +47,7 @@
             [ 66, "MOVE_STOCKPILE" ],
             [ 66, "MOVE_SPIT_UP" ],
             [ 66, "MOVE_SWALLOW" ],
-            [ 76, "MOVE_WRING_OUT" ]
+            [ 76, "MOVE_STEEL_BEAM" ]
         ],
         "by_tm": [
             "TM06",
