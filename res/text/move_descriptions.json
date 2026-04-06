@@ -2025,11 +2025,11 @@
     {
       "id": "pl_msg_00000646_00208",
       "en_US": [
-        "The user restores its\n",
-        "own HP by up to half\n",
-        "of its maximum HP.\n",
-        "It may also be used\n",
-        "to heal an ally’s HP."
+        "The user infests\n",
+        "the target, attacking\n",
+        "it for four to\n",
+        "five turns. The\n",
+        "target cannot flee."
       ]
     },
     {

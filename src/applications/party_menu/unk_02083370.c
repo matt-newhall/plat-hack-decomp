@@ -53,7 +53,6 @@ static void PartyMenu_SelectTeleport(PartyMenuApplication *application, int *par
 static void PartyMenu_SelectDig(PartyMenuApplication *application, int *partyMenuState);
 static void PartyMenu_SelectSweetScent(PartyMenuApplication *application, int *partyMenuState);
 static void PartyMenu_SelectChatter(PartyMenuApplication *application, int *partyMenuState);
-static void PartyMenu_SelectMilkDrink(PartyMenuApplication *application, int *partyMenuState);
 static void PartyMenu_SelectSoftboiled(PartyMenuApplication *application, int *partyMenuState);
 static int PartyMenu_StartFieldMoveHPTransfer(PartyMenuApplication *application);
 static void sub_02084760(PartyMenuApplication *application, int *partyMenuState);
@@ -103,7 +102,6 @@ static const PartyMenuAction sPartyMenuActions[32] = {
     PartyMenu_SelectDig,
     PartyMenu_SelectSweetScent,
     PartyMenu_SelectChatter,
-    PartyMenu_SelectMilkDrink,
     PartyMenu_SelectSoftboiled,
     0xFFFFFFFE
 };
@@ -976,15 +974,6 @@ static void PartyMenu_SelectChatter(PartyMenuApplication *application, int *part
 {
     application->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_CHATTER;
     PartyMenu_SelectFieldMove(application, partyMenuState);
-}
-
-static void PartyMenu_SelectMilkDrink(PartyMenuApplication *application, int *partyMenuState)
-{
-    *partyMenuState = PartyMenu_StartFieldMoveHPTransfer(application);
-
-    if (*partyMenuState == PARTY_MENU_STATE_HP_TRANSFER_FIELD_MOVE) {
-        application->monHpTransfer[HP_TRANSFER_JOURNAL_MOVE_IDX] = FIELD_MOVE_MILK_DRINK;
-    }
 }
 
 static void PartyMenu_SelectSoftboiled(PartyMenuApplication *application, int *partyMenuState)

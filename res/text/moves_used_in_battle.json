@@ -4364,21 +4364,21 @@
       "id": "pl_msg_00000000_00624",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Milk Drink!"
+        "Infestation!"
       ]
     },
     {
       "id": "pl_msg_00000000_00625",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Milk Drink!"
+        "Infestation!"
       ]
     },
     {
       "id": "pl_msg_00000000_00626",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Milk Drink!"
+        "Infestation!"
       ]
     },
     {

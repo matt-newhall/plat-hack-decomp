@@ -8908,6 +8908,27 @@
         "A sticky web has been laid out\n",
         "beneath your foe’s feet!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_InfestationInflicted_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was inflicted\n",
+        "with an infestation!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_InfestationInflicted_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} was inflicted\n",
+        "with an infestation!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_InfestationInflicted_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} was inflicted\n",
+        "with an infestation!"
+      ]
     }
   ]
 }
