@@ -237,7 +237,6 @@ static const u16 Unk_020F1CB0[] = {
     0x5B,
     0xE6,
     0x1C0,
-    0xD0,
     0x87,
 };
 

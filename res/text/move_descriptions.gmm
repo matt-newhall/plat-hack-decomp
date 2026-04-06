@@ -835,7 +835,7 @@
 	</row>
 	<row id="pl_msg_00000646_00208" index="208">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user restores its\nown HP by up to half\nof its maximum HP.\nIt may also be used\nto heal an ally’s HP.</language>
+		<language name="English">The user infests\nthe target, attacking\nit for four to\nfive turns. The\ntarget cannot flee.</language>
 	</row>
 	<row id="pl_msg_00000646_00209" index="209">
 		<attribute name="window_context_name">used</attribute>

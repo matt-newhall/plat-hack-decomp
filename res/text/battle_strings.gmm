@@ -5326,4 +5326,16 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">A sticky web has been laid out\nbeneath your foe’s feet!</language>
 	</row>
+	<row id="pl_msg_00000368_01328" index="1328">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was inflicted\nwith an infestation!</language>
+	</row>
+	<row id="pl_msg_00000368_01329" index="1329">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was inflicted\nwith an infestation!</language>
+	</row>
+	<row id="pl_msg_00000368_01330" index="1330">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was inflicted\nwith an infestation!</language>
+	</row>
 </body>

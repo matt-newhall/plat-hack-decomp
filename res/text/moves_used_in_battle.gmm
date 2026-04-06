@@ -2499,15 +2499,15 @@
 	</row>
 	<row id="pl_msg_00000000_00624" index="624">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMilk Drink!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nInfestation!</language>
 	</row>
 	<row id="pl_msg_00000000_00625" index="625">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMilk Drink!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nInfestation!</language>
 	</row>
 	<row id="pl_msg_00000000_00626" index="626">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMilk Drink!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nInfestation!</language>
 	</row>
 	<row id="pl_msg_00000000_00627" index="627">
 		<attribute name="window_context_name">used</attribute>

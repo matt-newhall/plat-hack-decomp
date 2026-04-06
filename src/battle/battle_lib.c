@@ -3653,7 +3653,6 @@ static const u16 sMovesAffectedByHealBlock[] = {
     MOVE_RECOVER,
     MOVE_SOFTBOILED,
     MOVE_REST,
-    MOVE_MILK_DRINK,
     MOVE_MORNING_SUN,
     MOVE_SYNTHESIS,
     MOVE_MOONLIGHT,
