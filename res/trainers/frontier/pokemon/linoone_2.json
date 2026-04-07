@@ -4,7 +4,7 @@
         "MOVE_FRUSTRATION",
         "MOVE_SHADOW_CLAW",
         "MOVE_DIG",
-        "MOVE_SWITCHEROO"
+        "MOVE_DRAGON_TAIL"
     ],
     "evFlags": {
         "hp": false,

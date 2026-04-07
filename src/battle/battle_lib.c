@@ -8104,7 +8104,6 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_FOCUS_PUNCH,
     MOVE_FEINT,
     MOVE_COPYCAT,
-    MOVE_SWITCHEROO,
     MOVE_TRANSFORM,
     MOVE_SNORE,
     MOVE_NATURE_POWER,

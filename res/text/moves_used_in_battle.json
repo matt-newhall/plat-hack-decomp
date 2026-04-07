@@ -8711,21 +8711,21 @@
       "id": "pl_msg_00000000_01245",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Switcheroo!"
+        "Dragon Tail!"
       ]
     },
     {
       "id": "pl_msg_00000000_01246",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Switcheroo!"
+        "Dragon Tail!"
       ]
     },
     {
       "id": "pl_msg_00000000_01247",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Switcheroo!"
+        "Dragon Tail!"
       ]
     },
     {

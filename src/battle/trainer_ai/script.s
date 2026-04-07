@@ -1932,7 +1932,6 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_GUARD_SWAP
     TableEntry MOVE_SUCKER_PUNCH
     TableEntry MOVE_HEART_SWAP
-    TableEntry MOVE_SWITCHEROO
     TableEntry MOVE_CAPTIVATE
     TableEntry MOVE_DARK_VOID
     TableEntry TABLE_END
@@ -3567,6 +3566,7 @@ Expert_Spikes:
     AddToMoveScore 1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_Spikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_Spikes_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DRAGON_TAIL, Expert_Spikes_TryScorePlus1
     GoTo Expert_Spikes_End
 
 Expert_Spikes_TryScorePlus1:
@@ -5484,7 +5484,6 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_GUARD_SWAP
     TableEntry MOVE_SUCKER_PUNCH
     TableEntry MOVE_HEART_SWAP
-    TableEntry MOVE_SWITCHEROO
     TableEntry MOVE_CAPTIVATE
     TableEntry MOVE_DARK_VOID
     TableEntry TABLE_END
@@ -5879,6 +5878,7 @@ Expert_ToxicSpikes:
     AddToMoveScore 1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_ToxicSpikes_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_ToxicSpikes_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DRAGON_TAIL, Expert_ToxicSpikes_TryScorePlus1
     GoTo Expert_ToxicSpikes_End
 
 Expert_ToxicSpikes_TryScorePlus1:
@@ -6133,6 +6133,7 @@ Expert_StealthRock:
     AddToMoveScore 1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StealthRock_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StealthRock_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DRAGON_TAIL, Expert_StealthRock_TryScorePlus1
     GoTo Expert_StealthRock_End
 
 Expert_StealthRock_TryScorePlus1:
@@ -7303,7 +7304,6 @@ TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_HELPING_HAND, TagStrategy_PartnerUsingHelpingHand
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
     IfMoveEqualTo MOVE_TRICK, TagStrategy_PartnerTrick
-    IfMoveEqualTo MOVE_SWITCHEROO, TagStrategy_PartnerTrick
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
     IfMoveEqualTo MOVE_ACUPRESSURE, TagStrategy_PartnerAcupressure
     GoTo TagStrategy_PartnerScoreMinus30
