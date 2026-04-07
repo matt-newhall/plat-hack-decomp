@@ -293,7 +293,7 @@ subscript_files = files(
     'subscript_use_full_restore.s',
     'subscript_pluck_check.s',
     'subscript_wait_move_animation.s',
-    'subscript_power_herb_skull_bash.s',
+    'subscript_power_herb_meteor_beam.s',
     'subscript_check_shaymin_form.s',
     'subscript_overworld_sun.s',
     'subscript_overworld_trick_room.s',

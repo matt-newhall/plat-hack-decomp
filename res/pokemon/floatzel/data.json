@@ -47,7 +47,7 @@
             [ 26, "MOVE_CRUNCH" ],
             [ 29, "MOVE_AGILITY" ],
             [ 39, "MOVE_DUAL_CHOP" ],
-            [ 50, "MOVE_RAZOR_WIND" ]
+            [ 50, "MOVE_METEOR_BEAM" ]
         ],
         "by_tm": [
             "TM01",

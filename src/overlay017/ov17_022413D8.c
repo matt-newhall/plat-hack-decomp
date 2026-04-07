@@ -2090,7 +2090,7 @@ void ov17_022439C8(Contest *param0, int contestantID, enum Move moveID, UnkStruc
 
     switch (moveID) {
     case MOVE_SOLAR_BEAM:
-    case MOVE_RAZOR_WIND:
+    case MOVE_METEOR_BEAM:
     case MOVE_SKY_ATTACK:
         param3->unk_06 = TRUE;
         break;

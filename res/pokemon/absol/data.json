@@ -39,7 +39,7 @@
             [ 4, "MOVE_LEER" ],
             [ 9, "MOVE_TAUNT" ],
             [ 12, "MOVE_QUICK_ATTACK" ],
-            [ 17, "MOVE_RAZOR_WIND" ],
+            [ 17, "MOVE_METEOR_BEAM" ],
             [ 20, "MOVE_PURSUIT" ],
             [ 25, "MOVE_SWORDS_DANCE" ],
             [ 28, "MOVE_BITE" ],
