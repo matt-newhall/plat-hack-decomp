@@ -43,7 +43,7 @@
             [ 21, "MOVE_AQUA_JET" ],
             [ 28, "MOVE_AGILITY" ],
             [ 36, "MOVE_DUAL_CHOP" ],
-            [ 45, "MOVE_RAZOR_WIND" ]
+            [ 45, "MOVE_METEOR_BEAM" ]
         ],
         "by_tm": [
             "TM01",

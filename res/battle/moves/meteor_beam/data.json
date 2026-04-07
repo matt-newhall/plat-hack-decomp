@@ -1,15 +1,15 @@
 {
-    "name": "Razor Wind",
+    "name": "Meteor Beam",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
-    "power": 80,
-    "accuracy": 100,
+    "type": "TYPE_ROCK",
+    "power": 120,
+    "accuracy": 90,
     "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT",
-        "chance": 0
+        "type": "BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP",
+        "chance": 100
     },
-    "range": "RANGE_ADJACENT_OPPONENTS",
+    "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_CAN_PROTECT",

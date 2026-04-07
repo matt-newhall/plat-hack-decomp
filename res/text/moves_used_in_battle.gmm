@@ -159,15 +159,15 @@
 	</row>
 	<row id="pl_msg_00000000_00039" index="39">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nRazor Wind!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nMeteor Beam!</language>
 	</row>
 	<row id="pl_msg_00000000_00040" index="40">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nRazor Wind!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMeteor Beam!</language>
 	</row>
 	<row id="pl_msg_00000000_00041" index="41">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nRazor Wind!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMeteor Beam!</language>
 	</row>
 	<row id="pl_msg_00000000_00042" index="42">
 		<attribute name="window_context_name">used</attribute>

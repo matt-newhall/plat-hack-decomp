@@ -212,6 +212,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Basic_CheckBellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Basic_CheckStatStageImbalance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Basic_CheckNonStandardDamageOrChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, Basic_CheckFutureSight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, ScoreMinus10
@@ -240,7 +241,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Basic_CheckBulkUp
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_FIRE_DAMAGE, Basic_CheckWaterSport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Basic_CheckCalmMind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Basic_CheckDragonDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Basic_CheckQuiverDance
@@ -950,11 +950,6 @@ Basic_CheckBulkUp_NoSimple:
     ; If the attacker's Defense is already at +6, score -8.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, ScoreMinus8
-    PopOrEnd 
-
-Basic_CheckWaterSport:
-    ; If the attacker is already under the respective effect, score -10.
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_WATER_SPORT, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckCalmMind:
@@ -1687,6 +1682,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_BellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Expert_PsychUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_MirrorCoat
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Expert_ChargeTurnNoInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_ChargeTurnNoInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_UnusedSolarbeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLY, Expert_ChargeTurnWithInvuln
@@ -1721,7 +1717,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Expert_StatusDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT, Expert_HighCritical
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_FIRE_DAMAGE, Expert_WaterSport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Expert_DragonDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_QuiverDance
@@ -3231,7 +3226,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE
     TableEntry BATTLE_EFFECT_REMOVE_ALL_PP_ON_DEFEAT
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
-    TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
+    TableEntry BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_GRAVITY
@@ -4680,27 +4675,6 @@ Expert_Overheat_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_Overheat_End:
-    PopOrEnd 
-
-Expert_WaterSport:
-    ; If the attacker's HP < 50%, score -1.
-    ;
-    ; If the opponent has a Fire typing, score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_WaterSport_ScoreMinus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, Expert_WaterSport_ScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, Expert_WaterSport_ScorePlus1
-    GoTo Expert_WaterSport_ScoreMinus1
-
-Expert_WaterSport_ScorePlus1:
-    AddToMoveScore 1
-    GoTo Expert_WaterSport_End
-
-Expert_WaterSport_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_WaterSport_End:
     PopOrEnd 
 
 Expert_DragonDance:
@@ -7699,7 +7673,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_HALVE_FIRE_DAMAGE
+    TableEntry BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP
     TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_METAL_BURST
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER

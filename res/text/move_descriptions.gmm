@@ -55,7 +55,7 @@
 	</row>
 	<row id="pl_msg_00000646_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A two-turn attack.\nBlades of wind hit the\nfoe on the second\nturn. It has a high\ncritical-hit ratio.</language>
+		<language name="English">The user gathers\nspace power, raising\nSp. Atk on the first\nturn, then hits the\nfoe on the next turn.</language>
 	</row>
 	<row id="pl_msg_00000646_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
