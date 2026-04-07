@@ -4983,15 +4983,15 @@
 	</row>
 	<row id="pl_msg_00000000_01245" index="1245">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSwitcheroo!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDragon Tail!</language>
 	</row>
 	<row id="pl_msg_00000000_01246" index="1246">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSwitcheroo!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDragon Tail!</language>
 	</row>
 	<row id="pl_msg_00000000_01247" index="1247">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSwitcheroo!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDragon Tail!</language>
 	</row>
 	<row id="pl_msg_00000000_01248" index="1248">
 		<attribute name="window_context_name">used</attribute>

@@ -1919,7 +1919,7 @@ const u16 sEggMoves[] = {
         MOVE_ATTRACT,
         MOVE_LOW_KICK,
         MOVE_SKY_UPPERCUT,
-        MOVE_SWITCHEROO,
+        MOVE_DRAGON_TAIL,
         MOVE_THUNDER_PUNCH,
         MOVE_ICE_PUNCH,
         MOVE_FIRE_PUNCH),

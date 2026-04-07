@@ -33,7 +33,7 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SWITCHEROO" ],
+            [ 1, "MOVE_DRAGON_TAIL" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_TAIL_WHIP" ],
