@@ -38,7 +38,7 @@
             [ 1, "MOVE_ICE_PUNCH" ],
             [ 1, "MOVE_THUNDER_PUNCH" ],
             [ 1, "MOVE_GRAVITY" ],
-            [ 1, "MOVE_BIND" ],
+            [ 1, "MOVE_FLIP_TURN" ],
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_NIGHT_SHADE" ],
             [ 1, "MOVE_DISABLE" ],

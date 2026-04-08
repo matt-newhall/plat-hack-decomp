@@ -416,21 +416,21 @@
       "id": "pl_msg_00000000_00060",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Bind!"
+        "Flip Turn!"
       ]
     },
     {
       "id": "pl_msg_00000000_00061",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Bind!"
+        "Flip Turn!"
       ]
     },
     {
       "id": "pl_msg_00000000_00062",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Bind!"
+        "Flip Turn!"
       ]
     },
     {

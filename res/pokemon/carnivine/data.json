@@ -34,7 +34,7 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_BIND" ],
+            [ 1, "MOVE_FLIP_TURN" ],
             [ 1, "MOVE_GROWTH" ],
             [ 7, "MOVE_BITE" ],
             [ 11, "MOVE_VINE_WHIP" ],

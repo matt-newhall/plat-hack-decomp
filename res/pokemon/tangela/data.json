@@ -41,7 +41,7 @@
             [ 12, "MOVE_GROWTH" ],
             [ 15, "MOVE_POISON_POWDER" ],
             [ 19, "MOVE_VINE_WHIP" ],
-            [ 22, "MOVE_BIND" ],
+            [ 22, "MOVE_FLIP_TURN" ],
             [ 26, "MOVE_MEGA_DRAIN" ],
             [ 29, "MOVE_STUN_SPORE" ],
             [ 33, "MOVE_ANCIENT_POWER" ],

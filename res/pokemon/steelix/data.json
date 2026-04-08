@@ -40,7 +40,7 @@
             [ 1, "MOVE_FREEZE_DRY" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_HARDEN" ],
-            [ 1, "MOVE_BIND" ],
+            [ 1, "MOVE_FLIP_TURN" ],
             [ 6, "MOVE_SCREECH" ],
             [ 9, "MOVE_ROCK_THROW" ],
             [ 14, "MOVE_RAGE" ],
