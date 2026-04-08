@@ -4119,15 +4119,15 @@
 	</row>
 	<row id="pl_msg_00000000_01029" index="1029">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nCovet!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nFrost Breath!</language>
 	</row>
 	<row id="pl_msg_00000000_01030" index="1030">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nCovet!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFrost Breath!</language>
 	</row>
 	<row id="pl_msg_00000000_01031" index="1031">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nCovet!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFrost Breath!</language>
 	</row>
 	<row id="pl_msg_00000000_01032" index="1032">
 		<attribute name="window_context_name">used</attribute>

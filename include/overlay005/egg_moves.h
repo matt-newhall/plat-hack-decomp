@@ -330,7 +330,7 @@ const u16 sEggMoves[] = {
         MOVE_FLAIL,
         MOVE_FEATHER_DANCE,
         MOVE_CURSE,
-        MOVE_COVET,
+        MOVE_FROST_BREATH,
         MOVE_MUD_SLAP,
         MOVE_NIGHT_SLASH),
 
@@ -586,7 +586,7 @@ const u16 sEggMoves[] = {
         MOVE_WISH,
         MOVE_YAWN,
         MOVE_FAKE_TEARS,
-        MOVE_COVET),
+        MOVE_FROST_BREATH),
 
     EGG_MOVES(SPECIES_OMANYTE,
         MOVE_BUBBLE_BEAM,
@@ -659,7 +659,7 @@ const u16 sEggMoves[] = {
         MOVE_REVERSAL,
         MOVE_THRASH,
         MOVE_DRILL_RUN,
-        MOVE_COVET,
+        MOVE_FROST_BREATH,
         MOVE_HOWL,
         MOVE_CRUSH_CLAW,
         MOVE_DOUBLE_EDGE,
@@ -689,7 +689,7 @@ const u16 sEggMoves[] = {
         MOVE_TRICK,
         MOVE_LAST_RESORT,
         MOVE_CHARM,
-        MOVE_COVET),
+        MOVE_FROST_BREATH),
 
     EGG_MOVES(SPECIES_HOOTHOOT,
         MOVE_MIRROR_MOVE,
@@ -753,7 +753,7 @@ const u16 sEggMoves[] = {
         MOVE_WISH,
         MOVE_SUBSTITUTE,
         MOVE_FAKE_TEARS,
-        MOVE_COVET),
+        MOVE_FROST_BREATH),
 
     EGG_MOVES(SPECIES_IGGLYBUFF,
         MOVE_PERISH_SONG,
@@ -762,7 +762,7 @@ const u16 sEggMoves[] = {
         MOVE_WISH,
         MOVE_FAKE_TEARS,
         MOVE_LAST_RESORT,
-        MOVE_COVET,
+        MOVE_FROST_BREATH,
         MOVE_GRAVITY),
 
     EGG_MOVES(SPECIES_TOGEPI,
@@ -842,7 +842,7 @@ const u16 sEggMoves[] = {
         MOVE_DOUBLE_SLAP,
         MOVE_BEAT_UP,
         MOVE_FAKE_OUT,
-        MOVE_COVET,
+        MOVE_FROST_BREATH,
         MOVE_BOUNCE),
 
     EGG_MOVES(SPECIES_SUNKERN,
@@ -1239,7 +1239,7 @@ const u16 sEggMoves[] = {
     EGG_MOVES(SPECIES_POOCHYENA,
         MOVE_ASTONISH,
         MOVE_POISON_FANG,
-        MOVE_COVET,
+        MOVE_FROST_BREATH,
         MOVE_LEER,
         MOVE_YAWN,
         MOVE_SUCKER_PUNCH,
@@ -1864,7 +1864,7 @@ const u16 sEggMoves[] = {
         MOVE_SLUDGE_WAVE),
 
     EGG_MOVES(SPECIES_PACHIRISU,
-        MOVE_COVET,
+        MOVE_FROST_BREATH,
         MOVE_BITE,
         MOVE_FAKE_TEARS,
         MOVE_DEFENSE_CURL,

@@ -45,7 +45,7 @@
             [ 25, "MOVE_CHARM" ],
             [ 29, "MOVE_FAINT_ATTACK" ],
             [ 32, "MOVE_WAKE_UP_SLAP" ],
-            [ 36, "MOVE_COVET" ],
+            [ 36, "MOVE_FROST_BREATH" ],
             [ 39, "MOVE_HEAL_BELL" ],
             [ 42, "MOVE_DOUBLE_EDGE" ],
             [ 46, "MOVE_CAPTIVATE" ]

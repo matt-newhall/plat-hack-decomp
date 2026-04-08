@@ -1375,7 +1375,7 @@
 	</row>
 	<row id="pl_msg_00000646_00343" index="343">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user endearingly\napproaches the foe,\nthen steals the item\nthe foe is holding.\n</language>
+		<language name="English">The user blows a\ncold breath on the\ntarget. This attack\nalways results in a\ncritical hit.</language>
 	</row>
 	<row id="pl_msg_00000646_00344" index="344">
 		<attribute name="window_context_name">used</attribute>

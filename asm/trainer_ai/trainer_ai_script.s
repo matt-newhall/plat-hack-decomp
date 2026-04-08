@@ -1914,7 +1914,6 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_HYPER_BEAM
     TableEntry MOVE_EXTREME_SPEED
     TableEntry MOVE_THIEF
-    TableEntry MOVE_COVET
     TableEntry MOVE_ATTRACT
     TableEntry MOVE_SWAGGER
     TableEntry MOVE_TORMENT
@@ -5445,7 +5444,6 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_HYPER_BEAM
     TableEntry MOVE_EXTREME_SPEED
     TableEntry MOVE_THIEF
-    TableEntry MOVE_COVET
     TableEntry MOVE_ATTRACT
     TableEntry MOVE_SWAGGER
     TableEntry MOVE_TORMENT

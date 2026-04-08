@@ -24,7 +24,7 @@
 #define MOVE_EFFECT_MUD_SPORT              (1 << 16)
 #define MOVE_EFFECT_WATER_SPORT            (1 << 17)
 #define MOVE_EFFECT_UNDERWATER             (1 << 18) // Dive
-// unused flag: 1 << 19
+#define MOVE_EFFECT_ALWAYS_CRITICAL        (1 << 19) // Frost Breath
 // unused flag: 1 << 20
 #define MOVE_EFFECT_ABILITY_SUPPRESSED (1 << 21) // Gastro Acid
 #define MOVE_EFFECT_MIRACLE_EYE        (1 << 22)
