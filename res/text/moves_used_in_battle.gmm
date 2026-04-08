@@ -243,15 +243,15 @@
 	</row>
 	<row id="pl_msg_00000000_00060" index="60">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nBind!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nFlip Turn!</language>
 	</row>
 	<row id="pl_msg_00000000_00061" index="61">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nBind!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFlip Turn!</language>
 	</row>
 	<row id="pl_msg_00000000_00062" index="62">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nBind!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFlip Turn!</language>
 	</row>
 	<row id="pl_msg_00000000_00063" index="63">
 		<attribute name="window_context_name">used</attribute>

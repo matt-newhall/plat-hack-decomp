@@ -83,7 +83,7 @@
 	</row>
 	<row id="pl_msg_00000647_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Bind</language>
+		<language name="English">Flip Turn</language>
 	</row>
 	<row id="pl_msg_00000647_00021" index="21">
 		<attribute name="window_context_name">used</attribute>

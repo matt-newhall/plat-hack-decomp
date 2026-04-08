@@ -373,7 +373,7 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
  * @brief Cleanup lingering state according to the given battler.
  *
  * This routine will clean up any volatile status values dependent on the
- * fainted battler (Mean Look, Attract, Bind), all move effects and single-turn
+ * fainted battler (Mean Look, Attract), all move effects and single-turn
  * flags, and extra data associated with the battler that is elsewhere in the
  * battle context struct (e.g., buffers for Conversion 2, Sketch, and Mirror
  * Move).

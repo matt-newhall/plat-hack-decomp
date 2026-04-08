@@ -83,7 +83,7 @@
 	</row>
 	<row id="pl_msg_00000646_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A long body or\ntentacles are used\nto bind and squeeze\nthe foe for two to\nfive turns.</language>
+		<language name="English">After making its\nattack, the user rushes\nback to switch\nplaces with a party\nPokémon in waiting.</language>
 	</row>
 	<row id="pl_msg_00000646_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
@@ -919,7 +919,7 @@
 	</row>
 	<row id="pl_msg_00000646_00229" index="229">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A spin attack that\ncan also eliminate\nsuch moves as Bind,\nWrap, Leech Seed,\nand Spikes.</language>
+		<language name="English">A spin attack that\ncan also eliminate\nsuch moves as Wrap,\nLeech Seed, and\nSpikes.</language>
 	</row>
 	<row id="pl_msg_00000646_00230" index="230">
 		<attribute name="window_context_name">used</attribute>

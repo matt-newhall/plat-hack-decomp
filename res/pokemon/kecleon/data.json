@@ -38,7 +38,7 @@
             [ 1, "MOVE_ASTONISH" ],
             [ 1, "MOVE_LICK" ],
             [ 1, "MOVE_SCRATCH" ],
-            [ 4, "MOVE_BIND" ],
+            [ 4, "MOVE_FLIP_TURN" ],
             [ 7, "MOVE_FAINT_ATTACK" ],
             [ 10, "MOVE_FURY_SWIPES" ],
             [ 14, "MOVE_FEINT" ],
