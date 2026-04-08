@@ -83,7 +83,7 @@
 	</row>
 	<row id="pl_msg_00000646_00020" index="20">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">After making its\nattack, the user rushes\nback to switch\nplaces with a party\nPokémon in waiting.</language>
+		<language name="English">After attacking, the\nuser rushes back\nto switch places\nwith a party\nPokémon in waiting.</language>
 	</row>
 	<row id="pl_msg_00000646_00021" index="21">
 		<attribute name="window_context_name">used</attribute>
