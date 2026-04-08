@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_SLASH",
         "MOVE_SHADOW_CLAW",
-        "MOVE_COVET",
+        "MOVE_FROST_BREATH",
         "MOVE_TICKLE"
     ],
     "evFlags": {

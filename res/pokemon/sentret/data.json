@@ -113,7 +113,7 @@
             "MOVE_TRICK",
             "MOVE_LAST_RESORT",
             "MOVE_CHARM",
-            "MOVE_COVET"
+            "MOVE_FROST_BREATH"
         ]
     },
     "evolutions": [

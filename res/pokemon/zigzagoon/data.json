@@ -42,7 +42,7 @@
             [ 17, "MOVE_ODOR_SLEUTH" ],
             [ 21, "MOVE_FREEZE_DRY" ],
             [ 25, "MOVE_PIN_MISSILE" ],
-            [ 29, "MOVE_COVET" ],
+            [ 29, "MOVE_FROST_BREATH" ],
             [ 33, "MOVE_FLAIL" ],
             [ 37, "MOVE_REST" ],
             [ 41, "MOVE_BELLY_DRUM" ],

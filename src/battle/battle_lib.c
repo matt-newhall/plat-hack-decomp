@@ -8042,6 +8042,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     int itemEffect;
     u16 attackerSpecies;
     u32 attackerVolStatus;
+    u32 attackerMoveEffects;
     u32 defenderMoveEffects;
     int criticalMul = 1;
     int attackerAbility;
@@ -8050,6 +8051,7 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     itemEffect = BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT);
     attackerSpecies = battleCtx->battleMons[attacker].species;
     attackerVolStatus = battleCtx->battleMons[attacker].statusVolatile;
+    attackerMoveEffects = battleCtx->battleMons[attacker].moveEffectsMask;
     defenderMoveEffects = battleCtx->battleMons[defender].moveEffectsMask;
     attackerAbility = Battler_Ability(battleCtx, attacker);
     effectiveCritStage = (((attackerVolStatus & VOLATILE_CONDITION_FOCUS_ENERGY) != FALSE) * 2)
@@ -8063,7 +8065,8 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
         effectiveCritStage = 4;
     }
 
-    if (BattleSystem_RandNext(battleSys) % sCriticalStageRates[effectiveCritStage] == 0
+    if (
+        (BattleSystem_RandNext(battleSys) % sCriticalStageRates[effectiveCritStage] == 0 || attackerMoveEffects & MOVE_EFFECT_ALWAYS_CRITICAL)
         && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == FALSE
         && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SHELL_ARMOR) == FALSE
         && (sideConditions & SIDE_CONDITION_LUCKY_CHANT) == FALSE
@@ -8100,7 +8103,6 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_FOLLOW_ME,
     MOVE_SNATCH,
     MOVE_HELPING_HAND,
-    MOVE_COVET,
     MOVE_TRICK,
     MOVE_FOCUS_PUNCH,
     MOVE_FEINT,
@@ -8166,7 +8168,7 @@ static const u16 sCannotMeFirstMoves[] = {
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
     MOVE_THIEF,
-    MOVE_COVET,
+    MOVE_FROST_BREATH,
     MOVE_FOCUS_PUNCH,
     MOVE_CHATTER,
 };

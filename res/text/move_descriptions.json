@@ -3350,10 +3350,11 @@
     {
       "id": "pl_msg_00000646_00343",
       "en_US": [
-        "The user endearingly\n",
-        "approaches the foe,\n",
-        "then steals the item\n",
-        "the foe is holding.\n"
+        "The user blows a\n",
+        "cold breath on the\n",
+        "target. This attack\n",
+        "always results in a\n",
+        "critical hit."
       ]
     },
     {
