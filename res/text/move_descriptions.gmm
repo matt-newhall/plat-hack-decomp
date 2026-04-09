@@ -995,7 +995,7 @@
 	</row>
 	<row id="pl_msg_00000646_00248" index="248">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Two turns after this\nmove is used, the foe\nis attacked with a\nhunk of psychic\nenergy.</language>
+		<language name="English">After making its\nattack, the user\nrushes back to switch\nplaces with a party\nPokémon in waiting.</language>
 	</row>
 	<row id="pl_msg_00000646_00249" index="249">
 		<attribute name="window_context_name">used</attribute>

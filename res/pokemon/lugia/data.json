@@ -44,7 +44,7 @@
             [ 57, "MOVE_ANCIENT_POWER" ],
             [ 65, "MOVE_EXTRASENSORY" ],
             [ 71, "MOVE_PUNISHMENT" ],
-            [ 79, "MOVE_FUTURE_SIGHT" ],
+            [ 79, "MOVE_VOLT_SWITCH" ],
             [ 85, "MOVE_AEROBLAST" ],
             [ 93, "MOVE_CALM_MIND" ],
             [ 99, "MOVE_SKY_ATTACK" ]

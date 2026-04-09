@@ -21,7 +21,7 @@
                 "MOVE_WILL_O_WISP",
                 "MOVE_PURSUIT",
                 "MOVE_SHADOW_SNEAK",
-                "MOVE_FUTURE_SIGHT"
+                "MOVE_VOLT_SWITCH"
             ],
             "power": 100,
             "ball_seal": 0

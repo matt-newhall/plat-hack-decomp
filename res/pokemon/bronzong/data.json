@@ -47,7 +47,7 @@
             [ 30, "MOVE_SAFEGUARD" ],
             [ 33, "MOVE_SNARL" ],
             [ 38, "MOVE_GYRO_BALL" ],
-            [ 43, "MOVE_FUTURE_SIGHT" ],
+            [ 43, "MOVE_VOLT_SWITCH" ],
             [ 50, "MOVE_FAINT_ATTACK" ],
             [ 61, "MOVE_PAYBACK" ],
             [ 67, "MOVE_HEAL_BLOCK" ]

@@ -995,7 +995,7 @@
 	</row>
 	<row id="pl_msg_00000647_00248" index="248">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Future Sight</language>
+		<language name="English">Volt Switch</language>
 	</row>
 	<row id="pl_msg_00000647_00249" index="249">
 		<attribute name="window_context_name">used</attribute>

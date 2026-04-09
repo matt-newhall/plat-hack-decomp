@@ -44,7 +44,7 @@
             [ 35, "MOVE_ZEN_HEADBUTT" ],
             [ 40, "MOVE_DOUBLE_EDGE" ],
             [ 45, "MOVE_GRAVITY" ],
-            [ 55, "MOVE_FUTURE_SIGHT" ],
+            [ 55, "MOVE_VOLT_SWITCH" ],
             [ 60, "MOVE_COSMIC_POWER" ],
             [ 65, "MOVE_LAST_RESORT" ],
             [ 70, "MOVE_DOOM_DESIRE" ]

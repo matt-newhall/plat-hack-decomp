@@ -44,7 +44,7 @@
             [ 28, "MOVE_BITE" ],
             [ 33, "MOVE_DOUBLE_TEAM" ],
             [ 36, "MOVE_SLASH" ],
-            [ 41, "MOVE_FUTURE_SIGHT" ],
+            [ 41, "MOVE_VOLT_SWITCH" ],
             [ 44, "MOVE_SUCKER_PUNCH" ],
             [ 49, "MOVE_DETECT" ],
             [ 52, "MOVE_NIGHT_SLASH" ],

@@ -2979,15 +2979,15 @@
 	</row>
 	<row id="pl_msg_00000000_00744" index="744">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nFuture Sight!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nVolt Switch!</language>
 	</row>
 	<row id="pl_msg_00000000_00745" index="745">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFuture Sight!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nVolt Switch!</language>
 	</row>
 	<row id="pl_msg_00000000_00746" index="746">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFuture Sight!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nVolt Switch!</language>
 	</row>
 	<row id="pl_msg_00000000_00747" index="747">
 		<attribute name="window_context_name">used</attribute>

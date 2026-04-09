@@ -15,7 +15,7 @@
             "level": 38,
             "item": null,
             "moves": [
-                "MOVE_FUTURE_SIGHT",
+                "MOVE_VOLT_SWITCH",
                 "MOVE_PSYCHIC",
                 "MOVE_MAGICAL_LEAF",
                 "MOVE_NUZZLE"

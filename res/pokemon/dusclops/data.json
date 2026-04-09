@@ -52,7 +52,7 @@
             [ 37, "MOVE_SHADOW_PUNCH" ],
             [ 43, "MOVE_MEAN_LOOK" ],
             [ 51, "MOVE_PAYBACK" ],
-            [ 61, "MOVE_FUTURE_SIGHT" ]
+            [ 61, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM01",
