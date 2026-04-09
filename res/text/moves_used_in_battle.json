@@ -5204,21 +5204,21 @@
       "id": "pl_msg_00000000_00744",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Future Sight!"
+        "Volt Switch!"
       ]
     },
     {
       "id": "pl_msg_00000000_00745",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Future Sight!"
+        "Volt Switch!"
       ]
     },
     {
       "id": "pl_msg_00000000_00746",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Future Sight!"
+        "Volt Switch!"
       ]
     },
     {

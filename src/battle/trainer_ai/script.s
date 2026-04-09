@@ -6561,7 +6561,6 @@ TagStrategy_CheckSpecialScoring:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfMoveEqualTo MOVE_EARTHQUAKE, TagStrategy_Earthquake
     IfMoveEqualTo MOVE_MAGNITUDE, TagStrategy_Earthquake
-    IfMoveEqualTo MOVE_FUTURE_SIGHT, TagStrategy_FutureSight
     IfMoveEqualTo MOVE_DOOM_DESIRE, TagStrategy_FutureSight
     IfMoveEqualTo MOVE_RAIN_DANCE, TagStrategy_RainDance
     IfMoveEqualTo MOVE_SUNNY_DAY, TagStrategy_SunnyDay
@@ -6980,7 +6979,6 @@ TagStrategy_FutureSight:
     //    - They would move before us, score -3
     //    - They speed-tie us, 50% chance of score -3
     IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, TagStrategy_FutureSight_End
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_FUTURE_SIGHT, TagStrategy_FutureSight_CheckSelfSpeed
     IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_DOOM_DESIRE, TagStrategy_FutureSight_CheckSelfSpeed
     GoTo TagStrategy_FutureSight_End
 

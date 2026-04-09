@@ -1,17 +1,20 @@
 {
-    "name": "Future Sight",
+    "name": "Volt Switch",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_PSYCHIC",
-    "power": 80,
-    "accuracy": 90,
-    "pp": 15,
+    "type": "TYPE_ELECTRIC",
+    "power": 70,
+    "accuracy": 100,
+    "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_HIT_IN_3_TURNS",
+        "type": "BATTLE_EFFECT_SWITCH_HIT",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
-    "flags": [],
+    "flags": [
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE"
+    ],
     "contest": {
         "effect": "CONTEST_EFFECT_FIRST_PERFORMANCE_ADVANTAGE",
         "type": "CONTEST_TYPE_SMART"
