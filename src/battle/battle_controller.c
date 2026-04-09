@@ -3428,7 +3428,6 @@ static void BattleController_TryMove(BattleSystem *battleSys, BattleContext *bat
         battleCtx->tryMoveCheckState++;
 
     case TRY_MOVE_STATE_PRANKSTER_IMMUNITY:
-        // if ((battleCtx->multiHitCheckFlags & SYSCTL_SKIP_IMMUNITY_TRIGGERS) == FALSE
         if (battleCtx->defender != BATTLER_NONE
             && BattleController_TriggerPranksterImmunity(battleSys, battleCtx) == 1) {
             return;
