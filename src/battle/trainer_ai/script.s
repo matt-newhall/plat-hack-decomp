@@ -138,6 +138,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_UP, Basic_CheckHighStatStage_Accuracy
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Basic_CheckHighStatStage_Evasion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN, Basic_CheckLowStatStage_Attack
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Basic_CheckLowStatStage_Attack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN, Basic_CheckLowStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN, Basic_CheckLowStatStage_Speed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN, Basic_CheckLowStatStage_SpAttack
@@ -214,7 +215,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, Basic_CheckFutureSight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, ScoreMinus10
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Basic_CheckCanRecoverHP
@@ -801,12 +801,6 @@ Basic_CheckCurrentWeatherIsSun:
     // If the weather is currently Sun, score -8.
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus8
-    PopOrEnd 
-
-Basic_CheckFutureSight:
-    // If either the attacker or the target are currently under the effect of Future Sight, score -12.
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_FUTURE_SIGHT, ScoreMinus12
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_FUTURE_SIGHT, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckFirstTurnInBattle:
@@ -1608,6 +1602,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Expert_StatusEvasionUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BYPASS_ACCURACY, Expert_BypassAccuracyMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN, Expert_StatusAttackDown
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Expert_StatusAttackDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN, Expert_StatusDefenseDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN, Expert_StatusSpeedDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN, Expert_StatusSpAttackDown
@@ -3206,7 +3201,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_WEATHER_SUN
     TableEntry BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP
     TableEntry BATTLE_EFFECT_COPY_STAT_CHANGES
-    TableEntry BATTLE_EFFECT_HIT_IN_3_TURNS
     TableEntry BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY
     TableEntry BATTLE_EFFECT_STOCKPILE
     TableEntry BATTLE_EFFECT_SPIT_UP
@@ -6224,7 +6218,6 @@ EvalAttack_ApplyKillBonuses:
     // treats them as able to kill.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, EvalAttack_TryScorePlus4
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING, EvalAttack_TryScorePlus4
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, EvalAttack_TryScorePlus4
 
     // Moves with the "+1 priority" effect get an additional +2 on top of the usual +4 for a kill.
     // NOTE: this checks the move's _effect_, not the priority score in its data.
@@ -6272,6 +6265,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_ACC_UP
     TableEntry BATTLE_EFFECT_EVA_UP
     TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
@@ -6561,7 +6555,6 @@ TagStrategy_CheckSpecialScoring:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfMoveEqualTo MOVE_EARTHQUAKE, TagStrategy_Earthquake
     IfMoveEqualTo MOVE_MAGNITUDE, TagStrategy_Earthquake
-    IfMoveEqualTo MOVE_DOOM_DESIRE, TagStrategy_FutureSight
     IfMoveEqualTo MOVE_RAIN_DANCE, TagStrategy_RainDance
     IfMoveEqualTo MOVE_SUNNY_DAY, TagStrategy_SunnyDay
     IfMoveEqualTo MOVE_HAIL, TagStrategy_Hail
@@ -6971,50 +6964,6 @@ TagStrategy_Earthquake:
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
     GoTo ScoreMinus3
-
-TagStrategy_FutureSight:
-    // If the move is Future Sight or Doom Desire:
-    //  - If we have no partner, apply no additional modifiers
-    //  - If our partner knows Future Sight or Doom Desire and:
-    //    - They would move before us, score -3
-    //    - They speed-tie us, 50% chance of score -3
-    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, TagStrategy_FutureSight_End
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_DOOM_DESIRE, TagStrategy_FutureSight_CheckSelfSpeed
-    GoTo TagStrategy_FutureSight_End
-
-TagStrategy_FutureSight_CheckSelfSpeed:
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 3, ScoreMinus3
-    IfLoadedEqualTo 2, TagStrategy_FutureSight_SelfMovesThird
-    IfLoadedEqualTo 1, TagStrategy_FutureSight_SelfMovesSecond
-    IfLoadedEqualTo 0, TagStrategy_FutureSight_SelfMovesFirst
-    GoTo TagStrategy_FutureSight_End
-
-TagStrategy_FutureSight_SelfMovesThird:
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 0, ScoreMinus3
-    IfLoadedEqualTo 1, ScoreMinus3
-    IfRandomLessThan 128, TagStrategy_FutureSight_End
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 2, ScoreMinus3
-    GoTo TagStrategy_FutureSight_End
-
-TagStrategy_FutureSight_SelfMovesSecond:
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 0, ScoreMinus3
-    IfRandomLessThan 128, TagStrategy_FutureSight_End
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 1, ScoreMinus3
-    GoTo TagStrategy_FutureSight_End
-
-TagStrategy_FutureSight_SelfMovesFirst:
-    IfRandomLessThan 128, TagStrategy_FutureSight_End
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 0, ScoreMinus3
-    GoTo TagStrategy_FutureSight_End
-
-TagStrategy_FutureSight_End:
-    PopOrEnd 
 
 TagStrategy_SkillSwap:
     // If the move is Skill Swap and:
@@ -7592,6 +7541,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_ACC_UP
     TableEntry BATTLE_EFFECT_EVA_UP
     TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
@@ -7640,6 +7590,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_ACC_UP
     TableEntry BATTLE_EFFECT_EVA_UP
     TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
@@ -7697,6 +7648,7 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_ACC_UP
     TableEntry BATTLE_EFFECT_EVA_UP
     TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
@@ -7745,6 +7697,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_ACC_UP
     TableEntry BATTLE_EFFECT_EVA_UP
     TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
@@ -7860,6 +7813,7 @@ Harrassment_Terminate:
 Harrassment_Effects:
     TableEntry BATTLE_EFFECT_STATUS_SLEEP
     TableEntry BATTLE_EFFECT_ATK_DOWN
+    TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_ACC_DOWN
     TableEntry BATTLE_EFFECT_EVA_DOWN

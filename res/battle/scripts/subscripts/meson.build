@@ -321,4 +321,5 @@ subscript_files = files(
     'subscript_quiver_dance.s',
     'subscript_steel_beam.s',
     'subscript_random_status.s',
+    'subscript_lower_atks_then_switch_out.s',
 )
