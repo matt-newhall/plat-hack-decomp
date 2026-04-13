@@ -87,7 +87,7 @@
             "MOVE_PURSUIT",
             "MOVE_SUPERSONIC",
             "MOVE_BODY_PRESS",
-            "MOVE_MIRROR_MOVE",
+            "MOVE_STORED_POWER",
             "MOVE_RAGE",
             "MOVE_SKY_ATTACK",
             "MOVE_WHIRLWIND",

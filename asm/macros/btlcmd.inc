@@ -1337,6 +1337,10 @@
     .long BTLCMD_TRYRANDOMSTATUS
     .endm
 
+    .macro CalcStoredPowerPower
+    .long BTLCMD_CALCSTOREDPOWERPOWER
+    .endm
+
     .text
     .globl _start
 _start:

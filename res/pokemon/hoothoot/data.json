@@ -95,7 +95,7 @@
             "MOVE_UPROAR"
         ],
         "egg_moves": [
-            "MOVE_MIRROR_MOVE",
+            "MOVE_STORED_POWER",
             "MOVE_SUPERSONIC",
             "MOVE_FAINT_ATTACK",
             "MOVE_WING_ATTACK",

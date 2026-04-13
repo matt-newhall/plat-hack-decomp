@@ -1154,10 +1154,11 @@
     {
       "id": "pl_msg_00000646_00119",
       "en_US": [
-        "The user counters\n",
-        "the foe by mimicking\n",
-        "the move last used\n",
-        "by the foe."
+        "The user attacks the\n",
+        "target with stored\n",
+        "power. Damage\n",
+        "increases as the\n",
+        "user’s stats rise."
       ]
     },
     {

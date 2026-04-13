@@ -88,7 +88,7 @@
             "MOVE_FAINT_ATTACK",
             "MOVE_FLAIL",
             "MOVE_ENDEAVOR",
-            "MOVE_MIRROR_MOVE",
+            "MOVE_STORED_POWER",
             "MOVE_BRAVE_BIRD"
         ]
     },

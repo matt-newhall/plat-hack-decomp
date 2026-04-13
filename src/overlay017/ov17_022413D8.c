@@ -2112,9 +2112,6 @@ void ov17_022439C8(Contest *param0, int contestantID, enum Move moveID, UnkStruc
             param3->unk_07 = 0;
         }
     } break;
-    case MOVE_MIRROR_MOVE:
-        param3->actingAnimationMoveID = MOVE_POUND;
-        break;
     case MOVE_NATURE_POWER:
         param3->actingAnimationMoveID = MOVE_TRI_ATTACK;
         break;

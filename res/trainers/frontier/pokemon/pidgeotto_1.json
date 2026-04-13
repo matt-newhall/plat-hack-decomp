@@ -4,7 +4,7 @@
         "MOVE_WING_ATTACK",
         "MOVE_QUICK_ATTACK",
         "MOVE_FEATHER_DANCE",
-        "MOVE_MIRROR_MOVE"
+        "MOVE_STORED_POWER"
     ],
     "evFlags": {
         "hp": false,

@@ -248,6 +248,7 @@ ScriptCommand(BTLCMD_CHECKISPRANKSTERDARKIMMUNE,  BtlCmd_CheckIsPranksterDarkImm
 ScriptCommand(BTLCMD_CHECKSTICKYWEB,              BtlCmd_CheckStickyWeb)
 ScriptCommand(BTLCMD_CALCVENOSHOCKPOWER,          BtlCmd_CalcVenoshockPower)
 ScriptCommand(BTLCMD_TRYRANDOMSTATUS,             BtlCmd_TryRandomStatus)
+ScriptCommand(BTLCMD_CALCSTOREDPOWERPOWER,        BtlCmd_CalcStoredPowerPower)
 
 // clang-format on
 

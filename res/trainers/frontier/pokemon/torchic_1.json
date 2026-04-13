@@ -2,7 +2,7 @@
     "species": "SPECIES_TORCHIC",
     "moves": [
         "MOVE_EMBER",
-        "MOVE_MIRROR_MOVE",
+        "MOVE_STORED_POWER",
         "MOVE_MUD_SLAP",
         "MOVE_DOUBLE_TEAM"
     ],

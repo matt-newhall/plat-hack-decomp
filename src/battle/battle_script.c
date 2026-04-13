@@ -328,6 +328,7 @@ static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleCon
 static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -8787,6 +8788,35 @@ static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battl
         } else {
             BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_fall_asleep);
         }
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Calculate the base power for Stored Power.
+ *
+ * Stored Power's base power scales according to the sum of positive stat
+ * boosts the attacker has accrued. Stat reductions are not considered.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int i, sumBoosts = 0;
+    for (i = BATTLE_STAT_ATTACK; i < BATTLE_STAT_MAX; i++) {
+        if (ATTACKING_MON.statBoosts[i] > 6) {
+            sumBoosts += ATTACKING_MON.statBoosts[i] - 6;
+        }
+    }
+
+    battleCtx->movePower = 20 + 20 * sumBoosts;
+    if (battleCtx->movePower > 860) {
+        battleCtx->movePower = 860;
     }
 
     return FALSE;

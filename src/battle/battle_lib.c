@@ -3284,7 +3284,6 @@ BOOL Move_IsInvoker(u16 move)
     if (move == MOVE_NONE
         || move == MOVE_SLEEP_TALK
         || move == MOVE_COPYCAT
-        || move == MOVE_MIRROR_MOVE
         || move == MOVE_METRONOME) {
         return TRUE;
     }
@@ -8092,7 +8091,6 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_CHATTER,
     FORBIDDEN_BY_MIMIC_DELIM,
     MOVE_SLEEP_TALK,
-    MOVE_MIRROR_MOVE,
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
     MOVE_PROTECT,
@@ -8142,7 +8140,6 @@ static const u16 sCannotEncoreMoves[] = {
     MOVE_TRANSFORM,
     MOVE_MIMIC,
     MOVE_SKETCH,
-    MOVE_MIRROR_MOVE,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
     MOVE_COPYCAT,

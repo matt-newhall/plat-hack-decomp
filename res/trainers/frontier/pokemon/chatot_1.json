@@ -4,7 +4,7 @@
         "MOVE_CHATTER",
         "MOVE_SWIFT",
         "MOVE_SING",
-        "MOVE_MIRROR_MOVE"
+        "MOVE_STORED_POWER"
     ],
     "evFlags": {
         "hp": false,

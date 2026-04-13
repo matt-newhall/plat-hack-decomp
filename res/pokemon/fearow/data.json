@@ -43,7 +43,7 @@
             [ 9, "MOVE_FURY_ATTACK" ],
             [ 13, "MOVE_PURSUIT" ],
             [ 17, "MOVE_AERIAL_ACE" ],
-            [ 23, "MOVE_MIRROR_MOVE" ],
+            [ 23, "MOVE_STORED_POWER" ],
             [ 29, "MOVE_AGILITY" ],
             [ 35, "MOVE_ASSURANCE" ],
             [ 41, "MOVE_ROOST" ],
