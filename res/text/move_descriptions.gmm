@@ -1415,7 +1415,7 @@
 	</row>
 	<row id="pl_msg_00000646_00353" index="353">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Two turns after this\nmove is used, the\nuser blasts the foe\nwith a concentrated\nbundle of light.</language>
+		<language name="English">With a parting threat,\nthe user lowers the\ntarget’s offensive\nstats, and switches\nwith a party Pokémon.</language>
 	</row>
 	<row id="pl_msg_00000646_00354" index="354">
 		<attribute name="window_context_name">used</attribute>

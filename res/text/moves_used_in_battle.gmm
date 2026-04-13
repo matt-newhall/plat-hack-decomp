@@ -4239,15 +4239,15 @@
 	</row>
 	<row id="pl_msg_00000000_01059" index="1059">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nDoom Desire!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nParting Shot!</language>
 	</row>
 	<row id="pl_msg_00000000_01060" index="1060">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDoom Desire!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nParting Shot!</language>
 	</row>
 	<row id="pl_msg_00000000_01061" index="1061">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDoom Desire!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nParting Shot!</language>
 	</row>
 	<row id="pl_msg_00000000_01062" index="1062">
 		<attribute name="window_context_name">used</attribute>

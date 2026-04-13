@@ -47,7 +47,7 @@
             [ 55, "MOVE_VOLT_SWITCH" ],
             [ 60, "MOVE_COSMIC_POWER" ],
             [ 65, "MOVE_LAST_RESORT" ],
-            [ 70, "MOVE_DOOM_DESIRE" ]
+            [ 70, "MOVE_PARTING_SHOT" ]
         ],
         "by_tm": [
             "TM03",
