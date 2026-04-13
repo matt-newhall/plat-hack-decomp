@@ -479,7 +479,7 @@
 	</row>
 	<row id="pl_msg_00000648_00119" index="119">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">MIRROR MOVE</language>
+		<language name="English">STORED POWER</language>
 	</row>
 	<row id="pl_msg_00000648_00120" index="120">
 		<attribute name="window_context_name">used</attribute>

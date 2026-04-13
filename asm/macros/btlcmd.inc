@@ -1334,4 +1334,8 @@
     .long 242
     .endm
 
+    .macro CalcStoredPowerPower
+    .long 243
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

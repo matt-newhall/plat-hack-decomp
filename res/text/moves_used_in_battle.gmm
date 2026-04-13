@@ -1431,15 +1431,15 @@
 	</row>
 	<row id="pl_msg_00000000_00357" index="357">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nMirror Move!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nStored Power!</language>
 	</row>
 	<row id="pl_msg_00000000_00358" index="358">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMirror Move!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nStored Power!</language>
 	</row>
 	<row id="pl_msg_00000000_00359" index="359">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMirror Move!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nStored Power!</language>
 	</row>
 	<row id="pl_msg_00000000_00360" index="360">
 		<attribute name="window_context_name">used</attribute>

@@ -42,7 +42,7 @@
             [ 23, "MOVE_MIST" ],
             [ 28, "MOVE_TAKE_DOWN" ],
             [ 32, "MOVE_NATURAL_GIFT" ],
-            [ 36, "MOVE_MIRROR_MOVE" ],
+            [ 36, "MOVE_STORED_POWER" ],
             [ 40, "MOVE_BODY_PRESS" ],
             [ 45, "MOVE_DRAGON_PULSE" ],
             [ 50, "MOVE_PERISH_SONG" ]

@@ -479,7 +479,7 @@
 	</row>
 	<row id="pl_msg_00000646_00119" index="119">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user counters\nthe foe by mimicking\nthe move last used\nby the foe.</language>
+		<language name="English">The user attacks the\ntarget with stored\npower. Damage\nincreases as the\nuser’s stats rise.</language>
 	</row>
 	<row id="pl_msg_00000646_00120" index="120">
 		<attribute name="window_context_name">used</attribute>

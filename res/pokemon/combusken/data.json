@@ -45,7 +45,7 @@
             [ 28, "MOVE_BULK_UP" ],
             [ 32, "MOVE_QUICK_ATTACK" ],
             [ 39, "MOVE_SLASH" ],
-            [ 43, "MOVE_MIRROR_MOVE" ],
+            [ 43, "MOVE_STORED_POWER" ],
             [ 50, "MOVE_SKY_UPPERCUT" ],
             [ 54, "MOVE_FLARE_BLITZ" ]
         ],
