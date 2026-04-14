@@ -1539,7 +1539,7 @@
 	</row>
 	<row id="pl_msg_00000646_00384" index="384">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user employs its\npsychic power to\nswitch changes to\nits Attack and\nSp. Atk with the foe.</language>
+		<language name="English">Protects the user\nfrom attacks, and\nalso damages any\nattacker who makes\ndirect contact.</language>
 	</row>
 	<row id="pl_msg_00000646_00385" index="385">
 		<attribute name="window_context_name">used</attribute>

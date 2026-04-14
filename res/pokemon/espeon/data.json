@@ -46,7 +46,7 @@
             [ 57, "MOVE_PSYCH_UP" ],
             [ 64, "MOVE_PSYCHIC" ],
             [ 71, "MOVE_MORNING_SUN" ],
-            [ 78, "MOVE_POWER_SWAP" ]
+            [ 78, "MOVE_SPIKY_SHIELD" ]
         ],
         "by_tm": [
             "TM04",

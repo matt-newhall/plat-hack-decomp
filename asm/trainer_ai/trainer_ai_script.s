@@ -260,7 +260,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Basic_CheckPowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES, Basic_CheckPowerSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Basic_CheckGuardSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Basic_CheckLastResort
@@ -1351,20 +1350,6 @@ Basic_CheckCopycat:
 Basic_CheckCopycat_Terminate:
     PopOrEnd 
 
-Basic_CheckPowerSwap:
-    ; If Power Swap would result in a net-negative change to stat stages for both Attack
-    ; and SpAttack, score -10.
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK
-    IfLoadedLessThan 1, Basic_CheckGuardSwap_SpAttack
-    GoTo Basic_CheckPowerSwap_Terminate
-
-Basic_CheckGuardSwap_SpAttack:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
-    IfLoadedLessThan 1, ScoreMinus10
-
-Basic_CheckPowerSwap_Terminate:
-    PopOrEnd 
-
 Basic_CheckGuardSwap:
     ; If Guard Swap would result in a net-negative change to stat stages for both Defense
     ; and SpDefense, score -10.
@@ -1664,6 +1649,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2_MINIMIZE, Expert_StatusEvasionUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURSE, Expert_Curse
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, Expert_Protect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SPIKES, Expert_Spikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORESIGHT, Expert_Foresight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Expert_Endure
@@ -1739,7 +1725,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES, Expert_PowerSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Expert_GuardSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Expert_Punishment
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Expert_LastResort
@@ -1917,7 +1902,7 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_SUPERPOWER
     TableEntry MOVE_SKILL_SWAP
     TableEntry MOVE_PSYCHO_SHIFT
-    TableEntry MOVE_POWER_SWAP
+    TableEntry MOVE_SPIKY_SHIELD
     TableEntry MOVE_GUARD_SWAP
     TableEntry MOVE_SUCKER_PUNCH
     TableEntry MOVE_HEART_SWAP
@@ -2648,6 +2633,7 @@ Expert_ToxicLeechSeed_CheckTargetHP:
 Expert_ToxicLeechSeed_CheckMoveEffectsKnown:
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SP_DEF_UP, Expert_ToxicLeechSeed_TryScorePlus2
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_ToxicLeechSeed_TryScorePlus2
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ToxicLeechSeed_TryScorePlus2
     GoTo Expert_ToxicLeechSeed_End
 
 Expert_ToxicLeechSeed_TryScorePlus2:
@@ -3189,6 +3175,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_PREVENT_ESCAPE
     TableEntry BATTLE_EFFECT_STATUS_NIGHTMARE
     TableEntry BATTLE_EFFECT_PROTECT
+    TableEntry BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT
     TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
     TableEntry BATTLE_EFFECT_FORESIGHT
     TableEntry BATTLE_EFFECT_ALL_FAINT_3_TURNS
@@ -3232,7 +3219,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_PREVENT_HEALING
     TableEntry BATTLE_EFFECT_SWAP_ATK_DEF
     TableEntry BATTLE_EFFECT_SUPRESS_ABILITY
-    TableEntry BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA
     TableEntry BATTLE_EFFECT_SWAP_STAT_CHANGES
@@ -3920,6 +3906,7 @@ Expert_ChargeTurnNoInvuln_ScorePlus2:
 
 Expert_ChargeTurnNoInvuln_CheckForProtectAndHP:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ChargeTurnNoInvuln_ScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 38, Expert_ChargeTurnNoInvuln_End
     AddToMoveScore -1
     GoTo Expert_ChargeTurnNoInvuln_End
@@ -3966,6 +3953,7 @@ Expert_ChargeTurnWithInvuln:
     ; always-hit effect (e.g. Aerial Ace), 68.75% chance of score +1.
     IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnNoInvuln_ScorePlus2
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ShadowForce
+    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ShadowForce
     AddToMoveScore -1
     GoTo Expert_ChargeTurnWithInvuln_End
 
@@ -4833,6 +4821,7 @@ Expert_Feint:
     ;
     ; Otherwise, score -2.
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_Feint_CheckConditions
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_Feint_CheckConditions
     IfRandomLessThan 64, Expert_Feint_CheckConditions
     GoTo Expert_Feint_End
 
@@ -5445,147 +5434,13 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_SUPERPOWER
     TableEntry MOVE_SKILL_SWAP
     TableEntry MOVE_PSYCHO_SHIFT
-    TableEntry MOVE_POWER_SWAP
+    TableEntry MOVE_SPIKY_SHIELD
     TableEntry MOVE_GUARD_SWAP
     TableEntry MOVE_SUCKER_PUNCH
     TableEntry MOVE_HEART_SWAP
     TableEntry MOVE_CAPTIVATE
     TableEntry MOVE_DARK_VOID
     TableEntry TABLE_END
-
-Expert_PowerSwap:
-    ; Find the difference in stat stages between the attacker and its opponent for the Attack stat.
-    ;
-    ; If the difference is > 3:
-    ; - If the difference in SpAttack stages > 3:
-    ;   - 50% chance of score +5.
-    ;   - 25% chance of score +4.
-    ;   - 12.5% chance of score +3.
-    ;   - 6.25% chance of score +2.
-    ;   - 3.125% chance of score +1.
-    ;   - 3.125% chance of score +0.
-    ; - If the difference in SpAttack stages > 1:
-    ;   - 50% chance of score +4.
-    ;   - 25% chance of score +3.
-    ;   - 12.5% chance of score +2.
-    ;   - 6.25% chance of score +1.
-    ;   - 6.25% chance of score +0.
-    ; - If the difference in SpAttack stages = 0:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - Otherwise, no score change.
-    ;
-    ; If the difference is > 1:
-    ; - If the difference in SpAttack stages > 3:
-    ;   - 50% chance of score +4.
-    ;   - 25% chance of score +3.
-    ;   - 12.5% chance of score +2.
-    ;   - 6.25% chance of score +1.
-    ;   - 6.25% chance of score +0.
-    ; - If the difference in SpAttack stages > 1:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - If the difference in SpAttack stages = 0:
-    ;   - 50% chance of score +2.
-    ;   - 25% chance of score +1.
-    ;   - 25% chance of score +0.
-    ; - Otherwise, no score change.
-    ;
-    ; If the difference is > 0:
-    ; - If the difference in SpAttack stages > 3:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - If the difference in SpAttack stages > 1:
-    ;   - 50% chance of score +2.
-    ;   - 25% chance of score +1.
-    ;   - 25% chance of score +0.
-    ; - If the difference in SpAttack stages = 0:
-    ;   - 50% chance of score +1.
-    ;   - 50% chance of score +0.
-    ; - Otherwise, no score change.
-    ;
-    ; If the difference = 0:
-    ; - If the difference in SpAttack stages > 3:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - If the difference in SpAttack stages > 1:
-    ;   - 50% chance of score +2.
-    ;   - 25% chance of score +1.
-    ;   - 25% chance of score +0.
-    ; - If the difference in SpAttack stages > 0:
-    ;   - 50% chance of score +1.
-    ;   - 50% chance of score +0.
-    ; - Otherwise, no score change.
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK
-    IfLoadedGreaterThan 3, Expert_PowerSwap_CheckSpAttack_HighDiff
-    IfLoadedGreaterThan 1, Expert_PowerSwap_CheckSpAttack_MediumDiff
-    IfLoadedGreaterThan 0, Expert_PowerSwap_CheckSpAttack_LowDiff
-    IfLoadedEqualTo 0, Expert_PowerSwap_CheckSpAttack_NoDiff
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_CheckSpAttack_HighDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
-    IfLoadedGreaterThan 3, Expert_PowerSwap_TryScorePlus5
-    IfLoadedGreaterThan 1, Expert_PowerSwap_TryScorePlus4
-    IfLoadedEqualTo 0, Expert_PowerSwap_TryScorePlus3
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_CheckSpAttack_MediumDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
-    IfLoadedGreaterThan 3, Expert_PowerSwap_TryScorePlus4
-    IfLoadedGreaterThan 1, Expert_PowerSwap_TryScorePlus3
-    IfLoadedEqualTo 0, Expert_PowerSwap_TryScorePlus2
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_CheckSpAttack_LowDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
-    IfLoadedGreaterThan 3, Expert_PowerSwap_TryScorePlus3
-    IfLoadedGreaterThan 1, Expert_PowerSwap_TryScorePlus2
-    IfLoadedEqualTo 0, Expert_PowerSwap_TryScorePlus1
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_CheckSpAttack_NoDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK
-    IfLoadedGreaterThan 3, Expert_PowerSwap_TryScorePlus3
-    IfLoadedGreaterThan 1, Expert_PowerSwap_TryScorePlus2
-    IfLoadedGreaterThan 0, Expert_PowerSwap_TryScorePlus1
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_TryScorePlus5:
-    IfRandomLessThan 128, Expert_PowerSwap_TryScorePlus4
-    AddToMoveScore 5
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_TryScorePlus4:
-    IfRandomLessThan 128, Expert_PowerSwap_TryScorePlus3
-    AddToMoveScore 4
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_TryScorePlus3:
-    IfRandomLessThan 128, Expert_PowerSwap_TryScorePlus2
-    AddToMoveScore 3
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_TryScorePlus2:
-    IfRandomLessThan 128, Expert_PowerSwap_TryScorePlus1
-    AddToMoveScore 2
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_TryScorePlus1:
-    IfRandomLessThan 128, Expert_PowerSwap_CheckSpAttack_End
-    AddToMoveScore 1
-    GoTo Expert_PowerSwap_CheckSpAttack_End
-
-Expert_PowerSwap_CheckSpAttack_End:
-    PopOrEnd 
 
 Expert_GuardSwap:
     ; Find the difference in stat stages between the attacker and its opponent for the Defense stat.
@@ -6393,6 +6248,7 @@ BatonPass_EvalMove:
     IfMoveEqualTo MOVE_NASTY_PLOT, BatonPass_SetupAtHighHP
 
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, BatonPass_EvalProtect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, BatonPass_EvalProtect
 
     IfMoveEqualTo MOVE_BATON_PASS, BatonPass_EvalBatonPass
 
@@ -6424,6 +6280,7 @@ BatonPass_EvalProtect:
 BatonPass_ProtectDetect:
     TableEntry MOVE_PROTECT
     TableEntry MOVE_DETECT
+    TableEntry MOVE_SPIKY_SHIELD
     TableEntry TABLE_END
 
 BatonPass_EvalBatonPass:
@@ -7564,7 +7421,6 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_SWAP_ATK_SP_ATK_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END

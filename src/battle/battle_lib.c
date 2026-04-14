@@ -8084,6 +8084,7 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_MIRROR_COAT,
     MOVE_PROTECT,
     MOVE_DETECT,
+    MOVE_SPIKY_SHIELD,
     MOVE_ENDURE,
     MOVE_DESTINY_BOND,
     MOVE_THIEF,

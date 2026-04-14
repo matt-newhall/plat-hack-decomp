@@ -30,6 +30,11 @@ _058:
 _063:
     // {0} protected itself!
     PrintMessage pl_msg_00000368_00015, TAG_NICKNAME, BTLSCR_DEFENDER
+    IfTurnFlag BTLSCR_DEFENDER, TURN_FLAG_SPIKY_SHIELDING, 0, _179
+    CompareVarToValue OPCODE_EQU, BTLVAR_HP_CALC_TEMP, 0, _179
+    Wait
+    WaitButtonABTime 30
+    Call BATTLE_SUBSCRIPT_SPIKY_SHIELD_DAMAGE
     GoTo _179
 
 _069:

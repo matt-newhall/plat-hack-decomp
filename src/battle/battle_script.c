@@ -5531,7 +5531,8 @@ static BOOL BtlCmd_TryProtection(BattleSystem *battleSys, BattleContext *battleC
 
     if (battleCtx->moveProtect[battleCtx->attacker] != MOVE_PROTECT
         && battleCtx->moveProtect[battleCtx->attacker] != MOVE_DETECT
-        && battleCtx->moveProtect[battleCtx->attacker] != MOVE_ENDURE) {
+        && battleCtx->moveProtect[battleCtx->attacker] != MOVE_ENDURE
+        && battleCtx->moveProtect[battleCtx->attacker] != MOVE_SPIKY_SHIELD) {
         battleCtx->battleMons[battleCtx->attacker].moveEffectsData.protectSuccessTurns = 0;
     }
 
@@ -5544,9 +5545,13 @@ static BOOL BtlCmd_TryProtection(BattleSystem *battleSys, BattleContext *battleC
 
     if (sProtectSuccessRate[ATTACKING_MON.moveEffectsData.protectSuccessTurns] >= BattleSystem_RandNext(battleSys)
         && moreBattlersThisTurn) {
-        if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_PROTECT) {
+        if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_PROTECT || CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT) {
             ATTACKER_TURN_FLAGS.protecting = TRUE;
             battleCtx->msgBuffer.id = 282; // "{0} protected itself!"
+        }
+
+        if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT) {
+            ATTACKER_TURN_FLAGS.spikyShielding = TRUE;
         }
 
         if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_SURVIVE_WITH_1_HP) {
@@ -7470,6 +7475,12 @@ static BOOL BtlCmd_IfTurnFlag(BattleSystem *battleSys, BattleContext *battleCtx)
             result = TRUE;
         }
         break;
+
+    case TURN_FLAG_SPIKY_SHIELDING:
+        if (battleCtx->turnFlags[battler].spikyShielding == compareTo) {
+            result = TRUE;
+        }
+        break;
     }
 
     if (result) {
@@ -7527,6 +7538,10 @@ static BOOL BtlCmd_SetTurnFlag(BattleSystem *battleSys, BattleContext *battleCtx
 
     case TURN_FLAG_ROOSTING:
         battleCtx->turnFlags[battler].roosting = val;
+        break;
+
+    case TURN_FLAG_SPIKY_SHIELDING:
+        battleCtx->turnFlags[battler].spikyShielding = val;
         break;
     }
 
@@ -9060,6 +9075,8 @@ static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *
     if (battleCtx->movePower > 860) {
         battleCtx->movePower = 860;
     }
+
+    ConsoleLog("Move Power is %d\n", battleCtx->movePower);
 
     return FALSE;
 }

@@ -5338,4 +5338,32 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was inflicted\nwith an infestation!</language>
 	</row>
+	<row id="pl_msg_00000368_01331" index="1331">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was hurt\nby {STRVAR_1 1, 1, 0}’s Spiky Shield!</language>
+	</row>
+	<row id="pl_msg_00000368_01332" index="1332">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was hurt\nby the wild {STRVAR_1 1, 1, 0}’s\fSpiky Shield!</language>
+	</row>
+	<row id="pl_msg_00000368_01333" index="1333">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was hurt\nby the foe’s {STRVAR_1 1, 1, 0}’s\fSpiky Shield!</language>
+	</row>
+	<row id="pl_msg_00000368_01334" index="1334">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was hurt\nby {STRVAR_1 1, 1, 0}’s Spiky Shield!</language>
+	</row>
+	<row id="pl_msg_00000368_01335" index="1335">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was hurt\nby the wild {STRVAR_1 1, 1, 0}’s\fSpiky Shield!</language>
+	</row>
+	<row id="pl_msg_00000368_01336" index="1336">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was hurt\nby {STRVAR_1 1, 1, 0}’s Spiky Shield!</language>
+	</row>
+	<row id="pl_msg_00000368_01337" index="1337">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was hurt\nby the foe’s {STRVAR_1 1, 1, 0}’s\fSpiky Shield!</language>
+	</row>
 </body>

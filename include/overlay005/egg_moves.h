@@ -1432,7 +1432,7 @@ const u16 sEggMoves[] = {
         MOVE_FAKE_OUT,
         MOVE_BATON_PASS,
         MOVE_DYNAMIC_PUNCH,
-        MOVE_POWER_SWAP,
+        MOVE_SPIKY_SHIELD,
         MOVE_GUARD_SWAP,
         MOVE_PSYCHO_CUT,
         MOVE_BULLET_PUNCH),
