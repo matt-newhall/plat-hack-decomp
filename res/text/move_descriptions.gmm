@@ -451,7 +451,7 @@
 	</row>
 	<row id="pl_msg_00000646_00112" index="112">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user throws up a\nsturdy wall that\nsharply raises its\nDefense stat.\n</language>
+		<language name="English">Protects the user\nfrom attacks, and\nalso slows down any\nattacker who makes\ndirect contact.</language>
 	</row>
 	<row id="pl_msg_00000646_00113" index="113">
 		<attribute name="window_context_name">used</attribute>

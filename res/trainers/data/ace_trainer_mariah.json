@@ -46,7 +46,7 @@
                 "MOVE_DISCHARGE",
                 "MOVE_FLASH_CANNON",
                 "MOVE_THUNDER_WAVE",
-                "MOVE_BARRIER"
+                "MOVE_SILK_TRAP"
             ],
             "power": 50,
             "ball_seal": 0

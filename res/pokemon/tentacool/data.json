@@ -40,7 +40,7 @@
             [ 15, "MOVE_TOXIC_SPIKES" ],
             [ 19, "MOVE_BUBBLE_BEAM" ],
             [ 22, "MOVE_WRAP" ],
-            [ 26, "MOVE_BARRIER" ],
+            [ 26, "MOVE_SILK_TRAP" ],
             [ 29, "MOVE_WATER_PULSE" ],
             [ 33, "MOVE_POISON_JAB" ],
             [ 36, "MOVE_SCREECH" ],

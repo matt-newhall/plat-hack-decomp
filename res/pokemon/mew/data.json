@@ -38,7 +38,7 @@
             [ 10, "MOVE_ACROBATICS" ],
             [ 20, "MOVE_METRONOME" ],
             [ 30, "MOVE_PSYCHIC" ],
-            [ 40, "MOVE_BARRIER" ],
+            [ 40, "MOVE_SILK_TRAP" ],
             [ 50, "MOVE_ANCIENT_POWER" ],
             [ 60, "MOVE_AMNESIA" ],
             [ 80, "MOVE_BATON_PASS" ],
