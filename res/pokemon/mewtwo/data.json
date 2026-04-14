@@ -44,7 +44,7 @@
             [ 43, "MOVE_MIST" ],
             [ 50, "MOVE_PSYCHO_CUT" ],
             [ 57, "MOVE_AMNESIA" ],
-            [ 64, "MOVE_POWER_SWAP" ],
+            [ 64, "MOVE_SPIKY_SHIELD" ],
             [ 64, "MOVE_GUARD_SWAP" ],
             [ 71, "MOVE_PSYCHIC" ],
             [ 86, "MOVE_RECOVER" ],

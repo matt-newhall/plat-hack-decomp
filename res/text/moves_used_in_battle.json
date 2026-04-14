@@ -8060,21 +8060,21 @@
       "id": "pl_msg_00000000_01152",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Power Swap!"
+        "Spiky Shield!"
       ]
     },
     {
       "id": "pl_msg_00000000_01153",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Power Swap!"
+        "Spiky Shield!"
       ]
     },
     {
       "id": "pl_msg_00000000_01154",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Power Swap!"
+        "Spiky Shield!"
       ]
     },
     {

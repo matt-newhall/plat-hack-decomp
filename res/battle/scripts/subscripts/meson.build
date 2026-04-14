@@ -322,4 +322,5 @@ subscript_files = files(
     'subscript_steel_beam.s',
     'subscript_random_status.s',
     'subscript_lower_atks_then_switch_out.s',
+    'subscript_spiky_shield_damage.s',
 )

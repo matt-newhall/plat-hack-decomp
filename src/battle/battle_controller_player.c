@@ -3145,6 +3145,16 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
         && (Move_IsMultiTurn(battleCtx, move) == FALSE || (battleCtx->battleStatusMask & SYSCTL_LAST_OF_MULTI_TURN))) {
         Battler_UnlockMoveChoice(battleSys, battleCtx, attacker);
         battleCtx->moveStatusFlags |= MOVE_STATUS_PROTECTED;
+
+        if (battleCtx->turnFlags[defender].spikyShielding
+            && (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
+            && battleCtx->battleMons[attacker].curHP
+            && Battler_Ability(battleCtx, attacker) != ABILITY_MAGIC_GUARD) {
+            battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[attacker].maxHP * -1, 8);
+        } else {
+            battleCtx->hpCalcTemp = 0;
+        }
+
         return 0;
     }
 

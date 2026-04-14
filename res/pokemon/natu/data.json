@@ -45,7 +45,7 @@
             [ 33, "MOVE_PSYCHO_SHIFT" ],
             [ 36, "MOVE_VOLT_SWITCH" ],
             [ 39, "MOVE_OMINOUS_WIND" ],
-            [ 44, "MOVE_POWER_SWAP" ],
+            [ 44, "MOVE_SPIKY_SHIELD" ],
             [ 44, "MOVE_GUARD_SWAP" ],
             [ 47, "MOVE_PSYCHIC" ]
         ],

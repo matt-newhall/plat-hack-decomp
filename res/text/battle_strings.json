@@ -8929,6 +8929,59 @@
         "The foe’s {STRVAR_1 1, 0, 0} was inflicted\n",
         "with an infestation!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_AllyHurtByAlly",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was hurt\n",
+        "by {STRVAR_1 1, 1, 0}’s Spiky Shield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_AllyHurtByWild",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was hurt\n",
+        "by the wild {STRVAR_1 1, 1, 0}’s\f",
+        "Spiky Shield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_AllyHurtByFoe",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was hurt\n",
+        "by the foe’s {STRVAR_1 1, 1, 0}’s\f",
+        "Spiky Shield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_WildHurtByAlly",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} was hurt\n",
+        "by {STRVAR_1 1, 1, 0}’s Spiky Shield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_WildHurtByWild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} was hurt\n",
+        "by the wild {STRVAR_1 1, 1, 0}’s\f",
+        "Spiky Shield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_FoeHurtByAlly",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} was hurt\n",
+        "by {STRVAR_1 1, 1, 0}’s Spiky Shield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_SpikyShield_FoeHurtByFoe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} was hurt\n",
+        "by the foe’s {STRVAR_1 1, 1, 0}’s\f",
+        "Spiky Shield!"
+      ]
     }
   ]
 }
