@@ -1634,11 +1634,11 @@
     {
       "id": "pl_msg_00000646_00168",
       "en_US": [
-        "The user attacks and\n",
-        "steals the foe’s held\n",
-        "item simultaneously.\n",
-        "It can’t steal if the\n",
-        "user holds an item."
+        "This relentless\n",
+        "attack does massive\n",
+        "damage to a\n",
+        "target affected\n",
+        "by status problems."
       ]
     },
     {
