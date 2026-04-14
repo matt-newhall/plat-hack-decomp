@@ -90,7 +90,7 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_BARRIER",
+            "MOVE_SILK_TRAP",
             "MOVE_RECOVER",
             "MOVE_MIRROR_COAT",
             "MOVE_ROCK_SLIDE",

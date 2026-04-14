@@ -94,7 +94,7 @@
         ],
         "egg_moves": [
             "MOVE_ENCORE",
-            "MOVE_BARRIER",
+            "MOVE_SILK_TRAP",
             "MOVE_KNOCK_OFF",
             "MOVE_FIRE_PUNCH",
             "MOVE_THUNDER_PUNCH",

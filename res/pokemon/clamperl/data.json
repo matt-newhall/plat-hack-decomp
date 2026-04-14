@@ -76,7 +76,7 @@
             "MOVE_FREEZE_DRY",
             "MOVE_BODY_SLAM",
             "MOVE_SUPERSONIC",
-            "MOVE_BARRIER",
+            "MOVE_SILK_TRAP",
             "MOVE_CONFUSE_RAY",
             "MOVE_AQUA_RING"
         ]

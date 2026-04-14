@@ -4,7 +4,7 @@
         "MOVE_SURF",
         "MOVE_SLUDGE_BOMB",
         "MOVE_ICY_WIND",
-        "MOVE_BARRIER"
+        "MOVE_SILK_TRAP"
     ],
     "evFlags": {
         "hp": false,

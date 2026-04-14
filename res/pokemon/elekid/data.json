@@ -93,7 +93,7 @@
         ],
         "egg_moves": [
             "MOVE_KARATE_CHOP",
-            "MOVE_BARRIER",
+            "MOVE_SILK_TRAP",
             "MOVE_ROLLING_KICK",
             "MOVE_MEDITATE",
             "MOVE_CROSS_CHOP",

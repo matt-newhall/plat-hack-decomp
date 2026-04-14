@@ -246,7 +246,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Basic_CheckQuiverDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Basic_CheckMiracleEye
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURAL_GIFT, Basic_CheckNaturalGift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Basic_CheckTailwind
@@ -1007,11 +1006,6 @@ Basic_CheckGravityActive:
     IfFieldConditionsMask FIELD_CONDITION_GRAVITY, ScoreMinus10
     PopOrEnd 
 
-Basic_CheckMiracleEye:
-    // If the target is already under the respective effect, score -10.
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MIRACLE_EYE, ScoreMinus10
-    PopOrEnd 
-
 Basic_CheckNaturalGift:
     // If the attacker does not have an eligible berry or the target is immune to that berry's
     // Natural Gift type, score -10.
@@ -1650,6 +1644,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURSE, Expert_Curse
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_Protect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SPIKES, Expert_Spikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORESIGHT, Expert_Foresight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Expert_Endure
@@ -1703,7 +1698,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_QuiverDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_Gravity
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE, Expert_MiracleEye
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_HEAL_SLEEP, Expert_WakeUpSlap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_HIT, Expert_HammerArm
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Expert_GyroBall
@@ -2634,6 +2628,7 @@ Expert_ToxicLeechSeed_CheckMoveEffectsKnown:
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SP_DEF_UP, Expert_ToxicLeechSeed_TryScorePlus2
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_ToxicLeechSeed_TryScorePlus2
     IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ToxicLeechSeed_TryScorePlus2
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_ToxicLeechSeed_TryScorePlus2
     GoTo Expert_ToxicLeechSeed_End
 
 Expert_ToxicLeechSeed_TryScorePlus2:
@@ -3176,6 +3171,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_STATUS_NIGHTMARE
     TableEntry BATTLE_EFFECT_PROTECT
     TableEntry BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT
+    TableEntry BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT
     TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
     TableEntry BATTLE_EFFECT_FORESIGHT
     TableEntry BATTLE_EFFECT_ALL_FAINT_3_TURNS
@@ -3209,7 +3205,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_GRAVITY
-    TableEntry BATTLE_EFFECT_IGNORE_EVATION_REMOVE_DARK_IMMUNE
     TableEntry BATTLE_EFFECT_NATURAL_GIFT
     TableEntry BATTLE_EFFECT_REMOVE_PROTECT
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
@@ -3907,6 +3902,7 @@ Expert_ChargeTurnNoInvuln_ScorePlus2:
 Expert_ChargeTurnNoInvuln_CheckForProtectAndHP:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ChargeTurnNoInvuln_ScoreMinus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_ChargeTurnNoInvuln_ScoreMinus2
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 38, Expert_ChargeTurnNoInvuln_End
     AddToMoveScore -1
     GoTo Expert_ChargeTurnNoInvuln_End
@@ -3954,6 +3950,7 @@ Expert_ChargeTurnWithInvuln:
     IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnNoInvuln_ScorePlus2
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ShadowForce
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ShadowForce
+    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_ShadowForce
     AddToMoveScore -1
     GoTo Expert_ChargeTurnWithInvuln_End
 
@@ -4714,30 +4711,6 @@ Expert_Gravity_TryScorePlus1:
 Expert_Gravity_End:
     PopOrEnd 
 
-Expert_MiracleEye:
-    // If the opponent has a Dark typing, 47.3% chance of score +2.
-    //
-    // If the opponent's Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
-    //
-    // Otherwise, score -2.
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_DARK, Expert_MiracleEye_ExtraRandomGate
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_DARK, Expert_MiracleEye_ExtraRandomGate
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_MiracleEye_ScorePlus2
-    AddToMoveScore -2
-    PopOrEnd 
-
-Expert_MiracleEye_ExtraRandomGate:
-    IfRandomLessThan 80, Expert_MiracleEye_End
-
-Expert_MiracleEye_ScorePlus2:
-    IfRandomLessThan 80, Expert_MiracleEye_End
-    AddToMoveScore 2
-
-Expert_MiracleEye_End:
-    PopOrEnd 
-
 Expert_WakeUpSlap:
     // If the opponent resists or is immune to the move, score -1.
     //
@@ -4822,6 +4795,7 @@ Expert_Feint:
     // Otherwise, score -2.
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_Feint_CheckConditions
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_Feint_CheckConditions
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_Feint_CheckConditions
     IfRandomLessThan 64, Expert_Feint_CheckConditions
     GoTo Expert_Feint_End
 
@@ -6259,6 +6233,7 @@ BatonPass_EvalMove:
 
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, BatonPass_EvalProtect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, BatonPass_EvalProtect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, BatonPass_EvalProtect
 
     IfMoveEqualTo MOVE_BATON_PASS, BatonPass_EvalBatonPass
 

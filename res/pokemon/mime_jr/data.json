@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TICKLE" ],
-            [ 1, "MOVE_BARRIER" ],
+            [ 1, "MOVE_SILK_TRAP" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 4, "MOVE_COPYCAT" ],
             [ 8, "MOVE_MEDITATE" ],

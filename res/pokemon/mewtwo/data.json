@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_DISABLE" ],
-            [ 8, "MOVE_BARRIER" ],
+            [ 8, "MOVE_SILK_TRAP" ],
             [ 15, "MOVE_SWIFT" ],
             [ 22, "MOVE_VOLT_SWITCH" ],
             [ 29, "MOVE_PSYCH_UP" ],

@@ -8096,6 +8096,7 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_PROTECT,
     MOVE_DETECT,
     MOVE_SPIKY_SHIELD,
+    MOVE_SILK_TRAP,
     MOVE_ENDURE,
     MOVE_DESTINY_BOND,
     MOVE_THIEF,

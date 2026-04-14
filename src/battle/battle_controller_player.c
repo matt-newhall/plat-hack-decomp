@@ -3155,6 +3155,10 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
             battleCtx->hpCalcTemp = 0;
         }
 
+        if (battleCtx->turnFlags[defender].silkTrapping) {
+            battleCtx->hpCalcTemp = (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) ? 1 : 0;
+        }
+
         return 0;
     }
 

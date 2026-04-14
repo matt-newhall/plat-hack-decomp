@@ -4,7 +4,7 @@
         "MOVE_PSYBEAM",
         "MOVE_PSYSHOCK",
         "MOVE_DISABLE",
-        "MOVE_BARRIER"
+        "MOVE_SILK_TRAP"
     ],
     "evFlags": {
         "hp": false,

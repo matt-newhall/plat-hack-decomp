@@ -2549,6 +2549,7 @@ static void AICmd_LoadProtectChain(BattleSystem *battleSys, BattleContext *battl
     if (battleCtx->moveProtect[battler] != MOVE_PROTECT
         && battleCtx->moveProtect[battler] != MOVE_DETECT
         && battleCtx->moveProtect[battler] != MOVE_ENDURE
+        && battleCtx->moveProtect[battler] != MOVE_SILK_TRAP
         && battleCtx->moveProtect[battler] != MOVE_SPIKY_SHIELD) {
         AI_CONTEXT.calcTemp = 0;
     } else {
