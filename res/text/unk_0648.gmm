@@ -47,7 +47,7 @@
 	</row>
 	<row id="pl_msg_00000648_00011" index="11">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">VICEGRIP</language>
+		<language name="English">VISEGRIP</language>
 	</row>
 	<row id="pl_msg_00000648_00012" index="12">
 		<attribute name="window_context_name">used</attribute>

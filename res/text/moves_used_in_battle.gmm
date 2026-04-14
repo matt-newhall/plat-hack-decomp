@@ -135,15 +135,15 @@
 	</row>
 	<row id="pl_msg_00000000_00033" index="33">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nViceGrip!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nViseGrip!</language>
 	</row>
 	<row id="pl_msg_00000000_00034" index="34">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nViceGrip!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nViseGrip!</language>
 	</row>
 	<row id="pl_msg_00000000_00035" index="35">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nViceGrip!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nViseGrip!</language>
 	</row>
 	<row id="pl_msg_00000000_00036" index="36">
 		<attribute name="window_context_name">used</attribute>
