@@ -2,9 +2,9 @@
     "name": "Rock Tomb",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_ROCK",
-    "power": 50,
-    "accuracy": 80,
-    "pp": 10,
+    "power": 60,
+    "accuracy": 95,
+    "pp": 15,
     "effect": {
         "type": "BATTLE_EFFECT_LOWER_SPEED_HIT",
         "chance": 100

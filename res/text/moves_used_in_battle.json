@@ -227,21 +227,21 @@
       "id": "pl_msg_00000000_00033",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "ViceGrip!"
+        "ViseGrip!"
       ]
     },
     {
       "id": "pl_msg_00000000_00034",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "ViceGrip!"
+        "ViseGrip!"
       ]
     },
     {
       "id": "pl_msg_00000000_00035",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "ViceGrip!"
+        "ViseGrip!"
       ]
     },
     {
