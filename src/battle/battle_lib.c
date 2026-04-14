@@ -8155,7 +8155,6 @@ BOOL Move_CanBeEncored(BattleContext *battleCtx, u16 move)
 static const u16 sCannotMeFirstMoves[] = {
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
-    MOVE_FROST_BREATH,
     MOVE_FOCUS_PUNCH,
     MOVE_CHATTER,
 };
