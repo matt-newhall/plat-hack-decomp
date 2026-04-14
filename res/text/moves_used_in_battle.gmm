@@ -2019,15 +2019,15 @@
 	</row>
 	<row id="pl_msg_00000000_00504" index="504">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nThief!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nHex!</language>
 	</row>
 	<row id="pl_msg_00000000_00505" index="505">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nThief!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nHex!</language>
 	</row>
 	<row id="pl_msg_00000000_00506" index="506">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nThief!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nHex!</language>
 	</row>
 	<row id="pl_msg_00000000_00507" index="507">
 		<attribute name="window_context_name">used</attribute>

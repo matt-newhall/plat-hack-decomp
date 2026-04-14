@@ -675,7 +675,7 @@
 	</row>
 	<row id="pl_msg_00000646_00168" index="168">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user attacks and\nsteals the foe’s held\nitem simultaneously.\nIt can’t steal if the\nuser holds an item.</language>
+		<language name="English">This relentless\nattack does massive\ndamage to a\ntarget affected\nby status problems.</language>
 	</row>
 	<row id="pl_msg_00000646_00169" index="169">
 		<attribute name="window_context_name">used</attribute>

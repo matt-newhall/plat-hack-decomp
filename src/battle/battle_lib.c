@@ -8088,7 +8088,6 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_SILK_TRAP,
     MOVE_ENDURE,
     MOVE_DESTINY_BOND,
-    MOVE_THIEF,
     MOVE_FOLLOW_ME,
     MOVE_SNATCH,
     MOVE_HELPING_HAND,
@@ -8156,7 +8155,6 @@ BOOL Move_CanBeEncored(BattleContext *battleCtx, u16 move)
 static const u16 sCannotMeFirstMoves[] = {
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
-    MOVE_THIEF,
     MOVE_FROST_BREATH,
     MOVE_FOCUS_PUNCH,
     MOVE_CHATTER,

@@ -1638,7 +1638,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP, Expert_Reversal
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURE_PARTY_STATUS, Expert_HealBell
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_HELD_ITEM, Expert_Thief
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Expert_BindingMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2_MINIMIZE, Expert_StatusEvasionUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURSE, Expert_Curse
@@ -1887,7 +1886,6 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_DYNAMIC_PUNCH
     TableEntry MOVE_HYPER_BEAM
     TableEntry MOVE_EXTREME_SPEED
-    TableEntry MOVE_THIEF
     TableEntry MOVE_ATTRACT
     TableEntry MOVE_SWAGGER
     TableEntry MOVE_TORMENT
@@ -3342,50 +3340,6 @@ Expert_HealBell:
 
 Expert_HealBell_End:
     PopOrEnd 
-
-Expert_Thief:
-    ; If the opponent's held item does NOT have one of the encouraged effects, score -2.
-    ;
-    ; Otherwise, 80.5% chance of score +1.
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedNotInTable Expert_Thief_EncouragedItemEffects, Expert_Thief_ScoreMinus2
-    IfRandomLessThan 50, Expert_Thief_End
-    AddToMoveScore 1
-    GoTo Expert_Thief_End
-
-Expert_Thief_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_Thief_End:
-    PopOrEnd 
-
-Expert_Thief_EncouragedItemEffects:
-    TableEntry HOLD_EFFECT_SLP_RESTORE
-    TableEntry HOLD_EFFECT_STATUS_RESTORE
-    TableEntry HOLD_EFFECT_HP_RESTORE
-    TableEntry HOLD_EFFECT_ACC_REDUCE
-    TableEntry HOLD_EFFECT_HP_RESTORE_GRADUAL
-    TableEntry HOLD_EFFECT_PIKA_SPATK_UP
-    TableEntry HOLD_EFFECT_CUBONE_ATK_UP
-    TableEntry HOLD_EFFECT_WEAKEN_SE_FIRE
-    TableEntry HOLD_EFFECT_WEAKEN_SE_WATER
-    TableEntry HOLD_EFFECT_WEAKEN_SE_ELECTRIC
-    TableEntry HOLD_EFFECT_WEAKEN_SE_GRASS
-    TableEntry HOLD_EFFECT_WEAKEN_SE_ICE
-    TableEntry HOLD_EFFECT_WEAKEN_SE_FIGHT
-    TableEntry HOLD_EFFECT_WEAKEN_SE_POISON
-    TableEntry HOLD_EFFECT_WEAKEN_SE_GROUND
-    TableEntry HOLD_EFFECT_WEAKEN_SE_FLYING
-    TableEntry HOLD_EFFECT_WEAKEN_SE_PSYCHIC
-    TableEntry HOLD_EFFECT_WEAKEN_SE_BUG
-    TableEntry HOLD_EFFECT_WEAKEN_SE_ROCK
-    TableEntry HOLD_EFFECT_WEAKEN_SE_GHOST
-    TableEntry HOLD_EFFECT_WEAKEN_SE_DRAGON
-    TableEntry HOLD_EFFECT_WEAKEN_SE_DARK
-    TableEntry HOLD_EFFECT_WEAKEN_SE_STEEL
-    TableEntry HOLD_EFFECT_WEAKEN_NORMAL
-    TableEntry HOLD_EFFECT_HP_RESTORE_PSN_TYPE
-    TableEntry TABLE_END
 
 Expert_Curse:
     ; If the attacker has a Ghost typing:
@@ -5399,7 +5353,6 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_DYNAMIC_PUNCH
     TableEntry MOVE_HYPER_BEAM
     TableEntry MOVE_EXTREME_SPEED
-    TableEntry MOVE_THIEF
     TableEntry MOVE_ATTRACT
     TableEntry MOVE_SWAGGER
     TableEntry MOVE_TORMENT
