@@ -44,7 +44,7 @@
             [ 31, "MOVE_CONFUSE_RAY" ],
             [ 38, "MOVE_SHADOW_SNEAK" ],
             [ 45, "MOVE_BULLDOZE" ],
-            [ 52, "MOVE_HEAL_BLOCK" ],
+            [ 52, "MOVE_PLAY_ROUGH" ],
             [ 59, "MOVE_SHADOW_BALL" ]
         ],
         "by_tm": [

@@ -2,7 +2,7 @@
 
 
 _000:
-    UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_HEAL_BLOCK
+    // Missing an UpdateVar now we got rid of Heal Block
     // {0}’s {1} wore off!
     PrintMessage BattleStrings_Text_PokemonsMoveWoreOff_Ally, TAG_NICKNAME_MOVE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     Wait 

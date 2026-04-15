@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_PSYWAVE" ],
-            [ 5, "MOVE_HEAL_BLOCK" ],
+            [ 5, "MOVE_PLAY_ROUGH" ],
             [ 10, "MOVE_HELPING_HAND" ],
             [ 15, "MOVE_SAFEGUARD" ],
             [ 20, "MOVE_DRAGON_BREATH" ],
