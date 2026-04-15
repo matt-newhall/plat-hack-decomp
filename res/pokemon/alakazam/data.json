@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TELEPORT" ],
-            [ 1, "MOVE_KINESIS" ],
+            [ 1, "MOVE_BABY_DOLL_EYES" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 16, "MOVE_CONFUSION" ],
             [ 18, "MOVE_DISABLE" ],

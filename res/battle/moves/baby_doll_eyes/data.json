@@ -1,16 +1,16 @@
 {
-    "name": "Kinesis",
+    "name": "Baby-Doll Eyes",
     "class": "CLASS_STATUS",
-    "type": "TYPE_PSYCHIC",
+    "type": "TYPE_NORMAL",
     "power": 0,
-    "accuracy": 80,
-    "pp": 15,
+    "accuracy": 100,
+    "pp": 30,
     "effect": {
-        "type": "BATTLE_EFFECT_ACC_DOWN",
+        "type": "BATTLE_EFFECT_ATK_DOWN",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
-    "priority": 0,
+    "priority": 11,
     "flags": [
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MAGIC_COAT",
