@@ -255,7 +255,7 @@ const u16 sEggMoves[] = {
         MOVE_FIRE_PUNCH,
         MOVE_THUNDER_PUNCH,
         MOVE_ICE_PUNCH,
-        MOVE_POWER_TRICK,
+        MOVE_MOONBLAST,
         MOVE_GUARD_SWAP),
 
     EGG_MOVES(SPECIES_MACHOP,

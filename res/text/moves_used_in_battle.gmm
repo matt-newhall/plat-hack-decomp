@@ -4551,15 +4551,15 @@
 	</row>
 	<row id="pl_msg_00000000_01137" index="1137">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nPower Trick!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nMoonblast!</language>
 	</row>
 	<row id="pl_msg_00000000_01138" index="1138">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPower Trick!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nMoonblast!</language>
 	</row>
 	<row id="pl_msg_00000000_01139" index="1139">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPower Trick!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nMoonblast!</language>
 	</row>
 	<row id="pl_msg_00000000_01140" index="1140">
 		<attribute name="window_context_name">used</attribute>

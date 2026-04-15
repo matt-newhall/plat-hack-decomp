@@ -1519,7 +1519,7 @@
 	</row>
 	<row id="pl_msg_00000646_00379" index="379">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user employs its\npsychic power to\nswitch its Attack\nwith its Defense\nstat.</language>
+		<language name="English">The user borrows\nthe power of the\nmoon. This may also\nlower the target’s\nSp. Atk stat.</language>
 	</row>
 	<row id="pl_msg_00000646_00380" index="380">
 		<attribute name="window_context_name">used</attribute>

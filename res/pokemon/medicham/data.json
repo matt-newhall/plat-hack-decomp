@@ -50,7 +50,7 @@
             [ 29, "MOVE_FORCE_PALM" ],
             [ 32, "MOVE_HI_JUMP_KICK" ],
             [ 36, "MOVE_PSYCH_UP" ],
-            [ 42, "MOVE_POWER_TRICK" ],
+            [ 42, "MOVE_MOONBLAST" ],
             [ 49, "MOVE_REVERSAL" ],
             [ 55, "MOVE_RECOVER" ]
         ],
