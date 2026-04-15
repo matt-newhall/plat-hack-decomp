@@ -4,7 +4,7 @@
         "MOVE_STONE_EDGE",
         "MOVE_BUG_BITE",
         "MOVE_SWAGGER",
-        "MOVE_POWER_TRICK"
+        "MOVE_MOONBLAST"
     ],
     "evFlags": {
         "hp": true,

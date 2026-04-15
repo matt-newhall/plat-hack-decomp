@@ -43,7 +43,7 @@
             [ 27, "MOVE_REST" ],
             [ 35, "MOVE_GASTRO_ACID" ],
             [ 40, "MOVE_BUG_BITE" ],
-            [ 48, "MOVE_POWER_TRICK" ]
+            [ 48, "MOVE_MOONBLAST" ]
         ],
         "by_tm": [
             "TM06",

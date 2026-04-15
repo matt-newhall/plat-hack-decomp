@@ -4,7 +4,7 @@
         "MOVE_GYRO_BALL",
         "MOVE_SUBSTITUTE",
         "MOVE_DOUBLE_TEAM",
-        "MOVE_POWER_TRICK"
+        "MOVE_MOONBLAST"
     ],
     "evFlags": {
         "hp": true,
