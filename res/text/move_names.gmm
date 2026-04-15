@@ -1511,7 +1511,7 @@
 	</row>
 	<row id="pl_msg_00000647_00377" index="377">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">Heal Block</language>
+		<language name="English">Play Rough</language>
 	</row>
 	<row id="pl_msg_00000647_00378" index="378">
 		<attribute name="window_context_name">used</attribute>

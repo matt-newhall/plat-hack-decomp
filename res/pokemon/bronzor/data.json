@@ -45,7 +45,7 @@
             [ 37, "MOVE_VOLT_SWITCH" ],
             [ 41, "MOVE_FAINT_ATTACK" ],
             [ 49, "MOVE_PAYBACK" ],
-            [ 52, "MOVE_HEAL_BLOCK" ]
+            [ 52, "MOVE_PLAY_ROUGH" ]
         ],
         "by_tm": [
             "TM04",

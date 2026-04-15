@@ -2455,7 +2455,8 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
         msgOut->tags = TAG_NICKNAME_MOVE_MOVE;
         msgOut->id = 1057; // "{0} can't use {2} because of {1}!"
         msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, battler);
-        msgOut->params[1] = MOVE_HEAL_BLOCK;
+        // got rid of Heal Block
+        msgOut->params[1] = MOVE_NONE;
         msgOut->params[2] = battleCtx->battleMons[battler].moves[moveSlot];
         result = FALSE;
     } else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_CHOICE_ITEM) & FlagIndex(moveSlot)) {

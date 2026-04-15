@@ -22,19 +22,10 @@ _050:
     UpdateVarFromVar OPCODE_SET, BTLVAR_MSG_BATTLER_TEMP, BTLVAR_MSG_ATTACKER
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
     CheckAbility CHECK_HAVE, BTLSCR_MSG_DEFENDER, ABILITY_LIQUID_OOZE, _096
-    CompareMonDataToValue OPCODE_NEQ, BTLSCR_MSG_TEMP, BATTLEMON_HEAL_BLOCK_TURNS, 0, _083
     UpdateVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, -1
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // {0}’s health is sapped by Leech Seed!
     PrintMessage pl_msg_00000368_00296, TAG_NICKNAME, BTLSCR_MSG_DEFENDER
-    Wait 
-    WaitButtonABTime 30
-    End 
-
-_083:
-    UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_HEAL_BLOCK
-    // {0} was prevented from healing due to {1}!
-    PrintMessage pl_msg_00000368_01054, TAG_NICKNAME_MOVE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     Wait 
     WaitButtonABTime 30
     End 

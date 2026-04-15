@@ -42,7 +42,7 @@
             [ 23, "MOVE_PSYWAVE" ],
             [ 31, "MOVE_POWER_UP_PUNCH" ],
             [ 34, "MOVE_COSMIC_POWER" ],
-            [ 42, "MOVE_HEAL_BLOCK" ],
+            [ 42, "MOVE_PLAY_ROUGH" ],
             [ 45, "MOVE_ROCK_SLIDE" ],
             [ 53, "MOVE_SOLAR_BEAM" ],
             [ 56, "MOVE_EXPLOSION" ]

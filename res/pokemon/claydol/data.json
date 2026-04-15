@@ -49,7 +49,7 @@
             [ 40, "MOVE_SANDSTORM" ],
             [ 51, "MOVE_COSMIC_POWER" ],
             [ 62, "MOVE_EARTH_POWER" ],
-            [ 73, "MOVE_HEAL_BLOCK" ],
+            [ 73, "MOVE_PLAY_ROUGH" ],
             [ 86, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [
