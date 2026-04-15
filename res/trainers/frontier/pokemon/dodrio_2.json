@@ -4,7 +4,7 @@
         "MOVE_DRILL_PECK",
         "MOVE_FRUSTRATION",
         "MOVE_FAINT_ATTACK",
-        "MOVE_ACUPRESSURE"
+        "MOVE_LIFE_DEW"
     ],
     "evFlags": {
         "hp": false,

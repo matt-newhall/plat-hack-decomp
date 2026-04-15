@@ -154,6 +154,7 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_QUIVER_DANCE]                     = subscript_quiver_dance,
     [MOVE_SUBSCRIPT_PTR_STEEL_BEAM]                       = subscript_steel_beam,
     [MOVE_SUBSCRIPT_PTR_RANDOM_STATUS]                    = subscript_random_status,
-    [MOVE_SUBSCRIPT_PTR_LOWER_ATKS_THEN_SWITCH_OUT]       = subscript_lower_atks_then_switch_out
+    [MOVE_SUBSCRIPT_PTR_LOWER_ATKS_THEN_SWITCH_OUT]       = subscript_lower_atks_then_switch_out,
+    [MOVE_SUBSCRIPT_PTR_ALLIES_RECOVER_QUARTER_MAX_HP]    = subscript_allies_recover_quarter_max_hp
 };
 // clang-format on

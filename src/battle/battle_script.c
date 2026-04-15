@@ -10017,10 +10017,6 @@ static BOOL BtlCmd_CheckSubstitute(BattleSystem *battleSys, BattleContext *battl
     int inBattler = BattleScript_Read(battleCtx);
     int jumpSubActive = BattleScript_Read(battleCtx);
 
-    if (battleCtx->attacker == battleCtx->defender && battleCtx->moveTemp == MOVE_ACUPRESSURE) {
-        return FALSE;
-    }
-
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
         || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT))

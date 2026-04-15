@@ -4,7 +4,7 @@
         "MOVE_PLUCK",
         "MOVE_FURY_ATTACK",
         "MOVE_GROWL",
-        "MOVE_ACUPRESSURE"
+        "MOVE_LIFE_DEW"
     ],
     "evFlags": {
         "hp": false,

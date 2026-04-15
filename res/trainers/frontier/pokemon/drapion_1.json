@@ -4,7 +4,7 @@
         "MOVE_POISON_JAB",
         "MOVE_CRUNCH",
         "MOVE_AQUA_TAIL",
-        "MOVE_ACUPRESSURE"
+        "MOVE_LIFE_DEW"
     ],
     "evFlags": {
         "hp": false,

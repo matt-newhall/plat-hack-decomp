@@ -4258,9 +4258,10 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         } while (battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys));
 
         BattleIO_ClearMessageBox(battleSys);
-    } else if (CURRENT_MOVE_DATA.range == RANGE_USER_SIDE && battleCtx->moveCur == MOVE_HOWL
+    } else if (CURRENT_MOVE_DATA.range == RANGE_USER_SIDE
+        && (battleCtx->moveCur == MOVE_HOWL || battleCtx->moveCur == MOVE_LIFE_DEW)
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
-        // Loop over partners if using Howl
+        // Loop over partners if using Howl or Life Dew
         // No other moves target just _both_ of the user's mons, so this seemed like the best solution without adding a new range option
         // which, admittedly, would probably have been better, but I wasn't sure how to implement.
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
@@ -4270,11 +4271,13 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
             if ((battleCtx->battlersSwitchingMask & FlagIndex(battler)) == FALSE
                 && battleCtx->battleMons[battler].curHP
                 && battler == BattleSystem_GetPartner(battleSys, battleCtx->attacker)
-                // Howl does not affect allies behind Substitute
-                && !((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
-                || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT))
+                // Howl does not affect allies behind Substitute; Life Dew heals through Substitute
+                && (battleCtx->moveCur != MOVE_HOWL
+                    || !((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
+                    || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT)))
                 && battler != battleCtx->attacker) {
-                if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_SOUNDPROOF) == TRUE) {
+                if (battleCtx->moveCur == MOVE_HOWL
+                    && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_SOUNDPROOF) == TRUE) {
                     // Do the Soundproof check here, otherwise we will consider the Soundproof Pokemon the
                     // attacker, and in that case, Howl will execute properly.
                     battleCtx->attacker = battler;
