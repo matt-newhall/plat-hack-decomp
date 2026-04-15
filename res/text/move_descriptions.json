@@ -3689,10 +3689,11 @@
     {
       "id": "pl_msg_00000646_00377",
       "en_US": [
-        "The user prevents\n",
-        "the foe from using\n",
-        "any HP-recovery\n",
-        "moves for five turns.\n"
+        "The user plays rough\n",
+        "with the target and\n",
+        "attacks it. This may\n",
+        "also lower the\n",
+        "target’s Attack stat."
       ]
     },
     {
