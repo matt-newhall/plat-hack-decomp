@@ -4407,15 +4407,15 @@
 	</row>
 	<row id="pl_msg_00000000_01101" index="1101">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nAcupressure!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nLife Dew!</language>
 	</row>
 	<row id="pl_msg_00000000_01102" index="1102">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nAcupressure!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nLife Dew!</language>
 	</row>
 	<row id="pl_msg_00000000_01103" index="1103">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nAcupressure!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nLife Dew!</language>
 	</row>
 	<row id="pl_msg_00000000_01104" index="1104">
 		<attribute name="window_context_name">used</attribute>

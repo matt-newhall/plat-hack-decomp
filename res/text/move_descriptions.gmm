@@ -1471,7 +1471,7 @@
 	</row>
 	<row id="pl_msg_00000646_00367" index="367">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user applies\npressure to stress\npoints, sharply\nboosting one of its\nstats.</language>
+		<language name="English">The user scatters\nmysterious water\naround and restores\nthe HP of itself\nand its allies.</language>
 	</row>
 	<row id="pl_msg_00000646_00368" index="368">
 		<attribute name="window_context_name">used</attribute>

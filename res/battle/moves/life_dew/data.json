@@ -1,17 +1,18 @@
 {
-    "name": "Acupressure",
+    "name": "Life Dew",
     "class": "CLASS_STATUS",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_WATER",
     "power": 0,
     "accuracy": 0,
-    "pp": 30,
+    "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_RANDOM_STAT_UP_2",
+        "type": "BATTLE_EFFECT_HEAL_ALLIES_QUARTER",
         "chance": 0
     },
-    "range": "RANGE_USER_OR_ALLY",
+    "range": "RANGE_USER_SIDE",
     "priority": 0,
     "flags": [
+        "MOVE_FLAG_CAN_SNATCH",
         "MOVE_FLAG_HIDES_HP_GAUGES"
     ],
     "contest": {

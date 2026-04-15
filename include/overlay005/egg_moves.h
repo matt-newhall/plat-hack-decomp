@@ -291,7 +291,7 @@ const u16 sEggMoves[] = {
         MOVE_SAFEGUARD,
         MOVE_CONFUSE_RAY,
         MOVE_KNOCK_OFF,
-        MOVE_ACUPRESSURE),
+        MOVE_LIFE_DEW),
 
     EGG_MOVES(SPECIES_GEODUDE,
         MOVE_DUAL_WINGBEAT,
@@ -978,7 +978,7 @@ const u16 sEggMoves[] = {
         MOVE_SWEET_SCENT,
         MOVE_KNOCK_OFF,
         MOVE_HELPING_HAND,
-        MOVE_ACUPRESSURE,
+        MOVE_LIFE_DEW,
         MOVE_SAND_TOMB,
         MOVE_MUD_SLAP),
 

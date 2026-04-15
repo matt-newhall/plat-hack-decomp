@@ -149,6 +149,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Basic_CheckCanForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Basic_CheckOHKOWouldFail
@@ -249,7 +250,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURAL_GIFT, Basic_CheckNaturalGift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Basic_CheckTailwind
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_STAT_UP_2, Basic_CheckAcupressure
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Basic_CheckMetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Basic_CheckEmbargo
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLING, Basic_CheckFling
@@ -1089,31 +1089,6 @@ Basic_CheckTailwind:
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TAILWIND, ScoreMinus10
     PopOrEnd 
 
-Basic_CheckAcupressure:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_SIMPLE, Basic_CheckAcupressure_Simple
-
-    ; If any of the attacker's stat stages are already at +6, score -10.
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 12, ScoreMinus10
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 12, ScoreMinus10
-    PopOrEnd 
-
-Basic_CheckAcupressure_Simple:
-    ; If the attacker's ability is Simple and any stat stage is already at +3, score -10.
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 8, ScoreMinus10
-    PopOrEnd 
-
 Basic_CheckMetalBurst:
     ; If the target is immune to Metal Burst due to its typing (?), score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
@@ -1593,6 +1568,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Expert_ForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
@@ -1704,7 +1680,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_PROTECT, Expert_Feint
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EAT_BERRY, Expert_Pluck
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_STAT_UP_2, Expert_Acupressure
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_CloseCombat
@@ -3206,7 +3181,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_NATURAL_GIFT
     TableEntry BATTLE_EFFECT_REMOVE_PROTECT
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_FLING
     TableEntry BATTLE_EFFECT_TRANSFER_STATUS
     TableEntry BATTLE_EFFECT_PREVENT_HEALING
@@ -3443,6 +3417,7 @@ Expert_Protect_CheckStatusConditions:
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_CheckAttackerLockedOnto
     IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_YAWN, Expert_Protect_CheckAttackerLockedOnto
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Protect_CheckAttackerLockedOnto
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Protect_CheckAttackerLockedOnto
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_Protect_CheckAttackerLockedOnto
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Protect_ScorePlus2
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_Protect_ScorePlus2
@@ -4566,6 +4541,7 @@ Expert_Snatch:
 Expert_Snatch_UserIsSlower:
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 25, Expert_Snatch_TryScoreMinus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Snatch_TryScorePlus2
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Snatch_TryScorePlus2
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_Snatch_TryScorePlus2
     GoTo Expert_Snatch_TryScorePlus1
 
@@ -4844,27 +4820,6 @@ Expert_Tailwind_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_Tailwind_End:
-    PopOrEnd 
-
-Expert_Acupressure:
-    ; If the attacker's HP <= 50%, score -1.
-    ;
-    ; If the attacker's HP > 90%, 75% chance of score +1.
-    ;
-    ; Otherwise, 37.5% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, Expert_Acupressure_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Acupressure_TryScorePlus1
-    IfRandomLessThan 128, Expert_Acupressure_End
-
-Expert_Acupressure_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Acupressure_End
-    AddToMoveScore 1
-    GoTo Expert_Acupressure_End
-
-Expert_Acupressure_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Acupressure_End:
     PopOrEnd 
 
 Expert_MetalBurst:
@@ -5219,6 +5174,7 @@ Expert_HealBlock:
     ; Otherwise, 56.4% chance of score +1.
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_HealBlock_TryScorePlus1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_UNUSED_157, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_HealBlock_TryScorePlus1
@@ -6090,7 +6046,6 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_GIVE_GROUND_IMMUNITY
     TableEntry BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN
     TableEntry TABLE_END
@@ -6146,7 +6101,6 @@ Risky_RiskyEffects:
     TableEntry BATTLE_EFFECT_DOUBLE_POWER_IF_HIT
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_METAL_BURST
     TableEntry BATTLE_EFFECT_DOUBLE_POWER_IF_MOVING_SECOND
     TableEntry BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING
@@ -6998,7 +6952,6 @@ TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
     IfMoveEqualTo MOVE_TRICK, TagStrategy_PartnerTrick
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
-    IfMoveEqualTo MOVE_ACUPRESSURE, TagStrategy_PartnerAcupressure
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerSkillSwap:
@@ -7189,52 +7142,6 @@ TagStrategy_PartnerGastroAcid_ScorePlus5:
 TagStrategy_PartnerGastroAcid_End:
     PopOrEnd 
 
-TagStrategy_PartnerAcupressure:
-    ; If our partner has Simple and any stat at +3 stages, score -10
-    ;
-    ; Else if our partner has any stat at +6 stages, score -30
-    ;
-    ; Else if our partner's HP is 50% or lower, score -1
-    ;
-    ; Else if our partner's HP is 91% or higher, 68.75% chance of score +2, 31.25% chance of no score change
-    ;
-    ; Else 31.25% chance of score +2, 68.75% chance of no score change
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SIMPLE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerAcupressureSimple
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_ATTACK, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_DEFENSE, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SPEED, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SP_ATTACK, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SP_DEFENSE, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_EVASION, 12, TagStrategy_PartnerScoreMinus30
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_ACCURACY, 12, TagStrategy_PartnerScoreMinus30
-    GoTo TagStrategy_PartnerAcupressure_CheckHP
-
-TagStrategy_PartnerAcupressureSimple:
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_DEFENSE, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SPEED, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SP_DEFENSE, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_EVASION, 8, ScoreMinus10
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_ACCURACY, 8, ScoreMinus10
-
-TagStrategy_PartnerAcupressure_CheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER_PARTNER, 51, TagStrategy_PartnerAcupressure_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 90, TagStrategy_PartnerAcupressure_TryScorePlus2
-    IfRandomLessThan 128, TagStrategy_PartnerAcupressure_End
-
-TagStrategy_PartnerAcupressure_TryScorePlus2:
-    IfRandomLessThan 80, TagStrategy_PartnerAcupressure_End
-    AddToMoveScore 2
-    GoTo TagStrategy_PartnerAcupressure_End
-
-TagStrategy_PartnerAcupressure_ScoreMinus1:
-    AddToMoveScore -1
-
-TagStrategy_PartnerAcupressure_End:
-    PopOrEnd 
-
 TagStrategy_PartnerScoreMinus30:
     AddToMoveScore -30
     PopOrEnd 
@@ -7294,6 +7201,7 @@ CheckHP_Terminate:
 CheckHP_DiscourageAtHighHP:
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE
     TableEntry BATTLE_EFFECT_RESTORE_HALF_HP
+    TableEntry BATTLE_EFFECT_HEAL_ALLIES_QUARTER
     TableEntry BATTLE_EFFECT_REST
     TableEntry BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER
     TableEntry BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP
@@ -7403,7 +7311,6 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
     TableEntry BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_METAL_BURST
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END
@@ -7453,7 +7360,6 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_STEEL_BEAM
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END
@@ -7520,7 +7426,6 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_RANDOM_STAT_UP_2
     TableEntry BATTLE_EFFECT_STEEL_BEAM
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END
