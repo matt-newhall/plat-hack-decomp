@@ -1535,7 +1535,7 @@
 	</row>
 	<row id="pl_msg_00000646_00383" index="383">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user mimics the\nmove used immediately\nbefore it. The move\nfails if no other move\nhas been used yet.</language>
+		<language name="English">The user breaks its\nshell, lowering its\ndefensive stats but\nsharply raising its\nSpeed and offenses.</language>
 	</row>
 	<row id="pl_msg_00000646_00384" index="384">
 		<attribute name="window_context_name">used</attribute>

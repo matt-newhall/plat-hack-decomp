@@ -38,7 +38,7 @@
             [ 5, "MOVE_DEFENSE_CURL" ],
             [ 9, "MOVE_POUND" ],
             [ 13, "MOVE_SWEET_KISS" ],
-            [ 17, "MOVE_COPYCAT" ]
+            [ 17, "MOVE_SHELL_SMASH" ]
         ],
         "by_tm": [
             "TM03",

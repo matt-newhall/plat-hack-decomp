@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_WOOD_HAMMER" ],
-            [ 1, "MOVE_COPYCAT" ],
+            [ 1, "MOVE_SHELL_SMASH" ],
             [ 1, "MOVE_FLAIL" ],
             [ 1, "MOVE_LOW_KICK" ],
             [ 1, "MOVE_ROCK_THROW" ],

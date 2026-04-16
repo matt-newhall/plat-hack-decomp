@@ -4599,15 +4599,15 @@
 	</row>
 	<row id="pl_msg_00000000_01149" index="1149">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nCopycat!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nShell Smash!</language>
 	</row>
 	<row id="pl_msg_00000000_01150" index="1150">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nCopycat!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nShell Smash!</language>
 	</row>
 	<row id="pl_msg_00000000_01151" index="1151">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nCopycat!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nShell Smash!</language>
 	</row>
 	<row id="pl_msg_00000000_01152" index="1152">
 		<attribute name="window_context_name">used</attribute>
