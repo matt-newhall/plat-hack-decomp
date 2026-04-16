@@ -249,6 +249,7 @@ ScriptCommand(BTLCMD_CHECKSTICKYWEB,              BtlCmd_CheckStickyWeb)
 ScriptCommand(BTLCMD_CALCVENOSHOCKPOWER,          BtlCmd_CalcVenoshockPower)
 ScriptCommand(BTLCMD_TRYRANDOMSTATUS,             BtlCmd_TryRandomStatus)
 ScriptCommand(BTLCMD_CALCSTOREDPOWERPOWER,        BtlCmd_CalcStoredPowerPower)
+ScriptCommand(BTLCMD_TRYAURORAVEIL,               BtlCmd_TryAuroraVeil)
 
 // clang-format on
 

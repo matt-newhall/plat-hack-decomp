@@ -1341,6 +1341,11 @@
     .long BTLCMD_CALCSTOREDPOWERPOWER
     .endm
 
+    .macro TryAuroraVeil jump_if_fail
+    .long BTLCMD_TRYAURORAVEIL
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

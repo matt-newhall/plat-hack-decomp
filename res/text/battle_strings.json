@@ -8982,6 +8982,38 @@
         "by the foe’s {STRVAR_1 1, 1, 0}’s\f",
         "Spiky Shield!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_AuroraVeilSingles_Ally",
+      "en_US": [
+        "{STRVAR_1 6, 0, 0} made your team\n",
+        "stronger against physical\f",
+        "and special moves!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AuroraVeilSingles_Opposing",
+      "en_US": [
+        "The foe’s {STRVAR_1 6, 0, 0} made\n",
+        "its team stronger against\f",
+        "physical and special moves!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AuroraVeilDoubles_Ally",
+      "en_US": [
+        "{STRVAR_1 6, 0, 0} made your team\n",
+        "stronger against physical\f",
+        "and special moves slightly!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_AuroraVeilDoubles_Opposing",
+      "en_US": [
+        "The foe’s {STRVAR_1 6, 0, 0} made\n",
+        "its team stronger against\f",
+        "physical and special moves slightly!"
+      ]
     }
   ]
 }

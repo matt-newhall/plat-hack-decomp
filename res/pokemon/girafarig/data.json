@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_SPIKY_SHIELD" ],
-            [ 1, "MOVE_GUARD_SWAP" ],
+            [ 1, "MOVE_AURORA_VEIL" ],
             [ 1, "MOVE_ASTONISH" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],

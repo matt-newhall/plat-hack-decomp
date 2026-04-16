@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_MAGICAL_LEAF" ],
             [ 1, "MOVE_SPIKY_SHIELD" ],
-            [ 1, "MOVE_GUARD_SWAP" ],
+            [ 1, "MOVE_AURORA_VEIL" ],
             [ 1, "MOVE_SILK_TRAP" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 4, "MOVE_COPYCAT" ],

@@ -1,19 +1,18 @@
 {
-    "name": "Guard Swap",
+    "name": "Aurora Veil",
     "class": "CLASS_STATUS",
-    "type": "TYPE_PSYCHIC",
+    "type": "TYPE_ICE",
     "power": 0,
     "accuracy": 0,
-    "pp": 10,
+    "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES",
+        "type": "BATTLE_EFFECT_AURORA_VEIL",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_USER_SIDE",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_CAN_PROTECT",
-        "MOVE_FLAG_CAN_MIRROR_MOVE"
+        "MOVE_FLAG_CAN_SNATCH"
     ],
     "contest": {
         "effect": "CONTEST_EFFECT_LOW_VOLTAGE_ADVANTAGE",
