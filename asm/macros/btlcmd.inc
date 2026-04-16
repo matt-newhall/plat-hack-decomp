@@ -1346,6 +1346,10 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro CalcHeavySlamPower
+    .long BTLCMD_CALCHEAVYSLAMPOWER
+    .endm
+
     .text
     .globl _start
 _start:

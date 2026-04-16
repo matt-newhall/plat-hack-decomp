@@ -34,7 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_CONVERSION_2" ],
+            [ 1, "MOVE_HEAVY_SLAM" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_DEFENSE_CURL" ],
             [ 7, "MOVE_PSYBEAM" ],

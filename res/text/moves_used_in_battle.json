@@ -3692,21 +3692,21 @@
       "id": "pl_msg_00000000_00528",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Conversion 2!"
+        "Heavy Slam!"
       ]
     },
     {
       "id": "pl_msg_00000000_00529",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Conversion 2!"
+        "Heavy Slam!"
       ]
     },
     {
       "id": "pl_msg_00000000_00530",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Conversion 2!"
+        "Heavy Slam!"
       ]
     },
     {

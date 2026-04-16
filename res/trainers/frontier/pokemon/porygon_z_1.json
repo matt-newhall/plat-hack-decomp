@@ -4,7 +4,7 @@
         "MOVE_TRI_ATTACK",
         "MOVE_SHADOW_BALL",
         "MOVE_RECYCLE",
-        "MOVE_CONVERSION_2"
+        "MOVE_HEAVY_SLAM"
     ],
     "evFlags": {
         "hp": true,

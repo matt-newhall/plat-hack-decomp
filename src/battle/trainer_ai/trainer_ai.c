@@ -57,6 +57,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP,
     BATTLE_EFFECT_20_DAMAGE_FLAT,
     BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT,
+    BATTLE_EFFECT_HEAVY_SLAM,
     0xFFFF
 };
 
@@ -3105,6 +3106,33 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         }
 
         break;
+
+    case MOVE_HEAVY_SLAM: {
+        int atkWeight = battleCtx->battleMons[AI_CONTEXT.attacker].weight;
+        int defWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
+
+        if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_LIGHT_METAL) {
+            atkWeight /= 2;
+        }
+
+        if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_LIGHT_METAL) {
+            defWeight /= 2;
+        }
+
+        if (atkWeight >= defWeight * 5) {
+            power = 120;
+        } else if (atkWeight >= defWeight * 4) {
+            power = 100;
+        } else if (atkWeight >= defWeight * 3) {
+            power = 80;
+        } else if (atkWeight >= defWeight * 2) {
+            power = 60;
+        } else {
+            power = 40;
+        }
+
+        break;
+    }
 
     default:
         // Move has no special calculation logic; default to the basic calc
