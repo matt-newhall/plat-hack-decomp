@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_ROCK_SLIDE",
         "MOVE_LOW_KICK",
-        "MOVE_COPYCAT",
+        "MOVE_SHELL_SMASH",
         "MOVE_SANDSTORM"
     ],
     "evFlags": {

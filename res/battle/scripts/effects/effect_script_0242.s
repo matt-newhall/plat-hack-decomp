@@ -2,13 +2,5 @@
 
 
 _000:
-    TryCopycat _008
-    PrintAttackMessage 
-    Wait 
-    PlayMoveAnimation BTLSCR_ATTACKER
-    Wait 
-    GoToMoveScript FALSE
-
-_008:
-    UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
-    End 
+    UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_FLAGS_DIRECT, MOVE_SIDE_EFFECT_TO_ATTACKER|MOVE_SUBSCRIPT_PTR_SHELL_SMASH
+    End

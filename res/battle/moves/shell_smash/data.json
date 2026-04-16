@@ -1,17 +1,19 @@
 {
-    "name": "Copycat",
+    "name": "Shell Smash",
     "class": "CLASS_STATUS",
     "type": "TYPE_NORMAL",
     "power": 0,
     "accuracy": 0,
-    "pp": 20,
+    "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_USE_LAST_USED_MOVE",
+        "type": "BATTLE_EFFECT_SHELL_SMASH",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET_SPECIAL",
+    "range": "RANGE_USER",
     "priority": 0,
-    "flags": [],
+    "flags": [
+        "MOVE_FLAG_CAN_SNATCH"
+    ],
     "contest": {
         "effect": "CONTEST_EFFECT_STEAL_VOLTAGE",
         "type": "CONTEST_TYPE_COOL"

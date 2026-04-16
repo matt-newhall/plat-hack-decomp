@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_PRESENT",
         "MOVE_SWEET_KISS",
-        "MOVE_COPYCAT",
+        "MOVE_SHELL_SMASH",
         "MOVE_CHARM"
     ],
     "evFlags": {

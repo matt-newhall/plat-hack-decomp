@@ -8039,21 +8039,21 @@
       "id": "pl_msg_00000000_01149",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Copycat!"
+        "Shell Smash!"
       ]
     },
     {
       "id": "pl_msg_00000000_01150",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Copycat!"
+        "Shell Smash!"
       ]
     },
     {
       "id": "pl_msg_00000000_01151",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Copycat!"
+        "Shell Smash!"
       ]
     },
     {

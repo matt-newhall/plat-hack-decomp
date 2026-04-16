@@ -246,6 +246,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Basic_CheckCalmMind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Basic_CheckDragonDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Basic_CheckQuiverDance
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHELL_SMASH, Basic_CheckShellSmash
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Basic_CheckNonStandardDamageOrChargeTurn
@@ -259,7 +260,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Basic_CheckHealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Basic_CheckPowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Basic_CheckLastResort
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Basic_CheckWorrySeed
@@ -1011,7 +1011,30 @@ Basic_CheckQuiverDance_NoSimple:
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus8
-    PopOrEnd 
+    PopOrEnd
+
+Basic_CheckShellSmash:
+    ; If Trick Room is in effect, score -10.
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
+
+    ; If the attacker's ability is Simple and Attack, Sp. Atk, or Speed are already at
+    ; +3, score -10.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckShellSmash_NoSimple
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 8, ScoreMinus10
+    PopOrEnd
+
+Basic_CheckShellSmash_NoSimple:
+    ; Only score -10 if Attack, Sp. Atk, and Speed are all already at +6.
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Basic_CheckShellSmash_End
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, Basic_CheckShellSmash_End
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Basic_CheckShellSmash_End
+    GoTo ScoreMinus10
+
+Basic_CheckShellSmash_End:
+    PopOrEnd
 
 Basic_CheckGravityActive:
     // If Gravity is already active, score -10.
@@ -1320,15 +1343,6 @@ Basic_CheckGastroAcid:
     IfLoadedEqualTo ABILITY_RUN_AWAY, ScoreMinus10
     IfLoadedEqualTo ABILITY_PICKUP, ScoreMinus10
     IfLoadedEqualTo ABILITY_HONEY_GATHER, ScoreMinus10
-    PopOrEnd 
-
-Basic_CheckCopycat:
-    // If it's the first turn of the battle and the attacker is faster than its target, score -10.
-    LoadTurnCount 
-    IfLoadedNotEqualTo 0, Basic_CheckCopycat_Terminate
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus10
-
-Basic_CheckCopycat_Terminate:
     PopOrEnd 
 
 Basic_CheckLastResort:
@@ -1670,6 +1684,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SPD_UP, Expert_DragonDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_QuiverDance
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHELL_SMASH, Expert_ShellSmash
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_Gravity
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_HEAL_SLEEP, Expert_WakeUpSlap
@@ -1691,7 +1706,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Expert_Punishment
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Expert_LastResort
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Expert_WorrySeed
@@ -4639,6 +4653,23 @@ Expert_QuiverDance_TryScorePlus1:
 Expert_QuiverDance_End:
     PopOrEnd 
 
+Expert_ShellSmash:
+    ; If the attacker is slower than its opponent, 50% chance of score +1.
+    ;
+    ; If the attacker's HP <= 50%, 72.7% chance of score -1.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_ShellSmash_TryScorePlus1
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_ShellSmash_End
+    IfRandomLessThan 70, Expert_ShellSmash_End
+    AddToMoveScore -1
+    GoTo Expert_ShellSmash_End
+
+Expert_ShellSmash_TryScorePlus1:
+    IfRandomLessThan 128, Expert_ShellSmash_End
+    AddToMoveScore 1
+
+Expert_ShellSmash_End:
+    PopOrEnd
+
 Expert_Gravity:
     // If the opponent has Levitate, is under the effect of Magnet Rise, or has a Flying typing, 75%
     // chance of score +1.
@@ -5272,78 +5303,6 @@ Expert_GastroAcid_ContinueHPCheck:
 
 Expert_GastroAcid_End:
     PopOrEnd 
-
-Expert_Copycat:
-    // If the attacker is slower than its opponent, deals less damage than its opponent, and the
-    // opponent's last-used move is not an encouraged move, 68.75% chance of score -1.
-    //
-    // If the attacker is faster than its opponent:
-    // - If the attacker deals more damage than its opponent, 87.5% chance of score +2.
-    // - If the opponent's last-used move is an encouraged move, 50% chance of score +2.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Copycat_CheckMoveEncouraged
-    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_TryScorePlus2
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    IfLoadedNotInTable Expert_Copycat_EncouragedMoves, Expert_Copycat_CheckMoveEncouraged
-    IfRandomLessThan 128, Expert_Copycat_End
-    AddToMoveScore 2
-    GoTo Expert_Copycat_End
-
-Expert_Copycat_TryScorePlus2:
-    IfRandomLessThan 32, Expert_Copycat_End
-    AddToMoveScore 2
-    GoTo Expert_Copycat_End
-
-Expert_Copycat_CheckMoveEncouraged:
-    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_End
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Copycat_EncouragedMoves, Expert_Copycat_End
-    IfRandomLessThan 80, Expert_Copycat_End
-    AddToMoveScore -1
-
-Expert_Copycat_End:
-    PopOrEnd 
-
-Expert_Copycat_EncouragedMoves:
-    TableEntry MOVE_SLEEP_POWDER
-    TableEntry MOVE_LOVELY_KISS
-    TableEntry MOVE_SPORE
-    TableEntry MOVE_HYPNOSIS
-    TableEntry MOVE_SING
-    TableEntry MOVE_GRASS_WHISTLE
-    TableEntry MOVE_SHADOW_PUNCH
-    TableEntry MOVE_SAND_ATTACK
-    TableEntry MOVE_SMOKE_SCREEN
-    TableEntry MOVE_TOXIC
-    TableEntry MOVE_CROSS_CHOP
-    TableEntry MOVE_AEROBLAST
-    TableEntry MOVE_CONFUSE_RAY
-    TableEntry MOVE_SWEET_KISS
-    TableEntry MOVE_SCREECH
-    TableEntry MOVE_COTTON_SPORE
-    TableEntry MOVE_SCARY_FACE
-    TableEntry MOVE_FAKE_TEARS
-    TableEntry MOVE_METAL_SOUND
-    TableEntry MOVE_THUNDER_WAVE
-    TableEntry MOVE_GLARE
-    TableEntry MOVE_POISON_POWDER
-    TableEntry MOVE_SHADOW_BALL
-    TableEntry MOVE_DYNAMIC_PUNCH
-    TableEntry MOVE_HYPER_BEAM
-    TableEntry MOVE_EXTREME_SPEED
-    TableEntry MOVE_ATTRACT
-    TableEntry MOVE_SWAGGER
-    TableEntry MOVE_TORMENT
-    TableEntry MOVE_FLATTER
-    TableEntry MOVE_TRICK
-    TableEntry MOVE_SUPERPOWER
-    TableEntry MOVE_SKILL_SWAP
-    TableEntry MOVE_PSYCHO_SHIFT
-    TableEntry MOVE_SPIKY_SHIELD
-    TableEntry MOVE_SUCKER_PUNCH
-    TableEntry MOVE_HEART_SWAP
-    TableEntry MOVE_CAPTIVATE
-    TableEntry MOVE_DARK_VOID
-    TableEntry TABLE_END
 
 Expert_Punishment:
     // If the opponent resists or is immune to the move, score +0.

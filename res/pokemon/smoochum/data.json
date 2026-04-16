@@ -45,7 +45,7 @@
             [ 28, "MOVE_NUZZLE" ],
             [ 31, "MOVE_AVALANCHE" ],
             [ 35, "MOVE_PSYCHIC" ],
-            [ 38, "MOVE_COPYCAT" ],
+            [ 38, "MOVE_SHELL_SMASH" ],
             [ 41, "MOVE_PERISH_SONG" ],
             [ 45, "MOVE_BLIZZARD" ]
         ],

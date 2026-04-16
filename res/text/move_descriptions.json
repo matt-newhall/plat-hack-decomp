@@ -3749,11 +3749,11 @@
     {
       "id": "pl_msg_00000646_00383",
       "en_US": [
-        "The user mimics the\n",
-        "move used immediately\n",
-        "before it. The move\n",
-        "fails if no other move\n",
-        "has been used yet."
+        "The user breaks its\n",
+        "shell, lowering its\n",
+        "defensive stats but\n",
+        "sharply raising its\n",
+        "Speed and offenses."
       ]
     },
     {
