@@ -45,7 +45,7 @@
             [ 36, "MOVE_VOLT_SWITCH" ],
             [ 39, "MOVE_OMINOUS_WIND" ],
             [ 44, "MOVE_SPIKY_SHIELD" ],
-            [ 44, "MOVE_GUARD_SWAP" ],
+            [ 44, "MOVE_AURORA_VEIL" ],
             [ 47, "MOVE_PSYCHIC" ]
         ],
         "by_tm": [

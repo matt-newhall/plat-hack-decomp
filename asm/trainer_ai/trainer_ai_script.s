@@ -152,6 +152,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Basic_CheckAuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Basic_CheckOHKOWouldFail
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_HP, Basic_CheckNonStandardDamageOrChargeTurn
@@ -259,7 +260,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Basic_CheckPowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Basic_CheckGuardSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Basic_CheckLastResort
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Basic_CheckWorrySeed
@@ -541,6 +541,18 @@ Basic_CheckAlreadyUnderLightScreen:
     ; If already under the effect of Light Screen, score -8.
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LIGHT_SCREEN, ScoreMinus8
     PopOrEnd 
+
+Basic_CheckAuroraVeil:
+    ; If not currently hailing, score -10 (move will fail).
+    ; If already under the effect of both Light Screen and Reflect, score -8.
+    LoadCurrentWeather
+    IfLoadedNotEqualTo AI_WEATHER_HAILING, ScoreMinus10
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LIGHT_SCREEN, Basic_CheckAuroraVeil_CheckReflect
+    PopOrEnd
+
+Basic_CheckAuroraVeil_CheckReflect:
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_REFLECT, ScoreMinus8
+    PopOrEnd
 
 Basic_CheckOHKOWouldFail:
     ; If the OHKO move would always fail for any reason, score -10.
@@ -1319,20 +1331,6 @@ Basic_CheckCopycat:
 Basic_CheckCopycat_Terminate:
     PopOrEnd 
 
-Basic_CheckGuardSwap:
-    ; If Guard Swap would result in a net-negative change to stat stages for both Defense
-    ; and SpDefense, score -10.
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE
-    IfLoadedLessThan 1, Basic_CheckGuardSwap_SpDefense
-    GoTo Basic_CheckGuardSwap_Terminate
-
-Basic_CheckGuardSwap_SpDefense:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE
-    IfLoadedLessThan 1, ScoreMinus10
-
-Basic_CheckGuardSwap_Terminate:
-    PopOrEnd 
-
 Basic_CheckLastResort:
     ; If the attacker has yet to use all of its other moves, score -10.
     IfCanUseLastResort AI_BATTLER_ATTACKER, Basic_CheckLastResort_Terminate
@@ -1571,6 +1569,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Expert_AuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurnNoInvuln
@@ -1693,7 +1692,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES, Expert_GuardSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Expert_Punishment
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Expert_LastResort
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Expert_WorrySeed
@@ -1870,7 +1868,6 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_SKILL_SWAP
     TableEntry MOVE_PSYCHO_SHIFT
     TableEntry MOVE_SPIKY_SHIELD
-    TableEntry MOVE_GUARD_SWAP
     TableEntry MOVE_SUCKER_PUNCH
     TableEntry MOVE_HEART_SWAP
     TableEntry MOVE_CAPTIVATE
@@ -2646,6 +2643,30 @@ Expert_LightScreen_PreSplitSpecialTypes:
     TableEntry TYPE_DARK
     TableEntry TABLE_END
 
+Expert_AuroraVeil:
+    ; If not currently hailing, score -10 (move will fail).
+    ;
+    ; If the attacker's HP is < 50%, score -2.
+    ;
+    ; If the attacker's HP is >= 90%, 50% of additional score +1.
+    LoadCurrentWeather
+    IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_AuroraVeil_ScoreMinus10
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_AuroraVeil_ScoreMinus2
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_AuroraVeil_End
+    IfRandomLessThan 128, Expert_AuroraVeil_End
+    AddToMoveScore 1
+    GoTo Expert_AuroraVeil_End
+
+Expert_AuroraVeil_ScoreMinus10:
+    AddToMoveScore -10
+    GoTo Expert_AuroraVeil_End
+
+Expert_AuroraVeil_ScoreMinus2:
+    AddToMoveScore -2
+
+Expert_AuroraVeil_End:
+    PopOrEnd
+
 Expert_Rest:
     ; If the attacker is faster than its target:
     ; - If the attacker is at full HP, 60.9% chance of score -8 and terminate.
@@ -3127,6 +3148,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_STATUS_BADLY_POISON
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
+    TableEntry BATTLE_EFFECT_AURORA_VEIL
     TableEntry BATTLE_EFFECT_REST
     TableEntry BATTLE_EFFECT_HALVE_HP
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -3186,7 +3208,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_PREVENT_HEALING
     TableEntry BATTLE_EFFECT_SWAP_ATK_DEF
     TableEntry BATTLE_EFFECT_SUPRESS_ABILITY
-    TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA
     TableEntry BATTLE_EFFECT_SWAP_STAT_CHANGES
     TableEntry BATTLE_EFFECT_RESTORE_HP_EVERY_TURN
@@ -5318,146 +5339,11 @@ Expert_Copycat_EncouragedMoves:
     TableEntry MOVE_SKILL_SWAP
     TableEntry MOVE_PSYCHO_SHIFT
     TableEntry MOVE_SPIKY_SHIELD
-    TableEntry MOVE_GUARD_SWAP
     TableEntry MOVE_SUCKER_PUNCH
     TableEntry MOVE_HEART_SWAP
     TableEntry MOVE_CAPTIVATE
     TableEntry MOVE_DARK_VOID
     TableEntry TABLE_END
-
-Expert_GuardSwap:
-    ; Find the difference in stat stages between the attacker and its opponent for the Defense stat.
-    ;
-    ; If the difference is > 3:
-    ; - If the difference in SpDefense stages > 3:
-    ;   - 50% chance of score +5.
-    ;   - 25% chance of score +4.
-    ;   - 12.5% chance of score +3.
-    ;   - 6.25% chance of score +2.
-    ;   - 3.125% chance of score +1.
-    ;   - 3.125% chance of score +0.
-    ; - If the difference in SpDefense stages > 1:
-    ;   - 50% chance of score +4.
-    ;   - 25% chance of score +3.
-    ;   - 12.5% chance of score +2.
-    ;   - 6.25% chance of score +1.
-    ;   - 6.25% chance of score +0.
-    ; - If the difference in SpDefense stages = 0:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - Otherwise, no score change.
-    ;
-    ; If the difference is > 1:
-    ; - If the difference in SpDefense stages > 3:
-    ;   - 50% chance of score +4.
-    ;   - 25% chance of score +3.
-    ;   - 12.5% chance of score +2.
-    ;   - 6.25% chance of score +1.
-    ;   - 6.25% chance of score +0.
-    ; - If the difference in SpDefense stages > 1:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - If the difference in SpDefense stages = 0:
-    ;   - 50% chance of score +2.
-    ;   - 25% chance of score +1.
-    ;   - 25% chance of score +0.
-    ; - Otherwise, no score change.
-    ;
-    ; If the difference is > 0:
-    ; - If the difference in SpDefense stages > 3:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - If the difference in SpDefense stages > 1:
-    ;   - 50% chance of score +2.
-    ;   - 25% chance of score +1.
-    ;   - 25% chance of score +0.
-    ; - If the difference in SpDefense stages = 0:
-    ;   - 50% chance of score +1.
-    ;   - 50% chance of score +0.
-    ; - Otherwise, no score change.
-    ;
-    ; If the difference = 0:
-    ; - If the difference in SpDefense stages > 3:
-    ;   - 50% chance of score +3.
-    ;   - 25% chance of score +2.
-    ;   - 12.5% chance of score +1.
-    ;   - 12.5% chance of score +0.
-    ; - If the difference in SpDefense stages > 1:
-    ;   - 50% chance of score +2.
-    ;   - 25% chance of score +1.
-    ;   - 25% chance of score +0.
-    ; - If the difference in SpDefense stages > 0:
-    ;   - 50% chance of score +1.
-    ;   - 50% chance of score +0.
-    ; - Otherwise, no score change.
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE
-    IfLoadedGreaterThan 3, Expert_GuardSwap_CheckSpDefense_HighDiff
-    IfLoadedGreaterThan 1, Expert_GuardSwap_CheckSpDefense_MediumDiff
-    IfLoadedGreaterThan 0, Expert_GuardSwap_CheckSpDefense_LowDiff
-    IfLoadedEqualTo 0, Expert_GuardSwap_CheckSpDefense_NoDiff
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_CheckSpDefense_HighDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE
-    IfLoadedGreaterThan 3, Expert_GuardSwap_TryScorePlus5
-    IfLoadedGreaterThan 1, Expert_GuardSwap_TryScorePlus4
-    IfLoadedEqualTo 0, Expert_GuardSwap_TryScorePlus3
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_CheckSpDefense_MediumDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE
-    IfLoadedGreaterThan 3, Expert_GuardSwap_TryScorePlus4
-    IfLoadedGreaterThan 1, Expert_GuardSwap_TryScorePlus3
-    IfLoadedEqualTo 0, Expert_GuardSwap_TryScorePlus2
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_CheckSpDefense_LowDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE
-    IfLoadedGreaterThan 3, Expert_GuardSwap_TryScorePlus3
-    IfLoadedGreaterThan 1, Expert_GuardSwap_TryScorePlus2
-    IfLoadedEqualTo 0, Expert_GuardSwap_TryScorePlus1
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_CheckSpDefense_NoDiff:
-    DiffStatStages AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE
-    IfLoadedGreaterThan 3, Expert_GuardSwap_TryScorePlus3
-    IfLoadedGreaterThan 1, Expert_GuardSwap_TryScorePlus2
-    IfLoadedGreaterThan 0, Expert_GuardSwap_TryScorePlus1
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_TryScorePlus5:
-    IfRandomLessThan 128, Expert_GuardSwap_TryScorePlus4
-    AddToMoveScore 5
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_TryScorePlus4:
-    IfRandomLessThan 128, Expert_GuardSwap_TryScorePlus3
-    AddToMoveScore 4
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_TryScorePlus3:
-    IfRandomLessThan 128, Expert_GuardSwap_TryScorePlus2
-    AddToMoveScore 3
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_TryScorePlus2:
-    IfRandomLessThan 128, Expert_GuardSwap_TryScorePlus1
-    AddToMoveScore 2
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_TryScorePlus1:
-    IfRandomLessThan 128, Expert_GuardSwap_End
-    AddToMoveScore 1
-    GoTo Expert_GuardSwap_End
-
-Expert_GuardSwap_End:
-    PopOrEnd 
 
 Expert_Punishment:
     ; If the opponent resists or is immune to the move, score +0.
@@ -6008,6 +5894,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_EVA_DOWN
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
+    TableEntry BATTLE_EFFECT_AURORA_VEIL
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
@@ -7232,6 +7119,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_BIDE
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
+    TableEntry BATTLE_EFFECT_AURORA_VEIL
     TableEntry BATTLE_EFFECT_PREVENT_STAT_REDUCTION
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
@@ -7257,7 +7145,6 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
     TableEntry BATTLE_EFFECT_QUIVER_DANCE
-    TableEntry BATTLE_EFFECT_SWAP_DEF_SP_DEF_STAT_CHANGES
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER
     TableEntry TABLE_END
 
@@ -7280,6 +7167,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_BIDE
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
+    TableEntry BATTLE_EFFECT_AURORA_VEIL
     TableEntry BATTLE_EFFECT_PREVENT_STAT_REDUCTION
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
@@ -7386,6 +7274,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_CONVERSION
     TableEntry BATTLE_EFFECT_STATUS_BADLY_POISON
     TableEntry BATTLE_EFFECT_SET_LIGHT_SCREEN
+    TableEntry BATTLE_EFFECT_AURORA_VEIL
     TableEntry BATTLE_EFFECT_ONE_HIT_KO
     TableEntry BATTLE_EFFECT_HALVE_HP
     TableEntry BATTLE_EFFECT_HALVE_HP

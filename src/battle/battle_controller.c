@@ -900,6 +900,7 @@ enum FieldCondCheckState {
     FIELD_COND_CHECK_STATE_DEEP_FOG,
     FIELD_COND_CHECK_STATE_GRAVITY,
     FIELD_COND_CHECK_STATE_MAGMA_STORM,
+    FIELD_COND_CHECK_STATE_AURORA_VEIL,
 
     FIELD_COND_CHECK_END
 };
@@ -1256,6 +1257,29 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
             }
 
             battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_AURORA_VEIL:
+            while (battleCtx->fieldConditionCheckTemp < NUM_BATTLE_SIDES) {
+                side = battleCtx->fieldConditionCheckTemp;
+
+                if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_AURORA_VEIL
+                    && --battleCtx->sideConditions[side].auroraVeilTurns == 0) {
+                    battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_AURORA_VEIL;
+                    battleCtx->msgMoveTemp = MOVE_AURORA_VEIL;
+
+                    PrepareSubroutineSequence(battleCtx, subscript_move_effect_end);
+                    battleCtx->msgBattlerTemp = BattleSystem_SideToBattler(battleSys, battleCtx, side);
+                    state = STATE_BREAK_OUT;
+                }
+
+                battleCtx->fieldConditionCheckTemp++;
+                if (state) {
+                    break;
+                }
+            }
+
+            StepFieldConditionCheck(battleCtx, state);
             break;
 
         case FIELD_COND_CHECK_END:

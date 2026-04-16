@@ -7837,7 +7837,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             damage /= 2;
         }
 
-        if ((sideConditions & SIDE_CONDITION_REFLECT) != FALSE
+        if ((sideConditions & SIDE_CONDITION_PHYSICAL_WALL) != FALSE
             && criticalMul == 1
             && Battler_Ability(battleCtx, attacker) != ABILITY_INFILTRATOR
             && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
@@ -7892,7 +7892,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         damage += 2;
 
-        if ((sideConditions & SIDE_CONDITION_LIGHT_SCREEN) != FALSE
+        if ((sideConditions & SIDE_CONDITION_SPECIAL_WALL) != FALSE
             && criticalMul == 1
             && Battler_Ability(battleCtx, attacker) != ABILITY_INFILTRATOR
             && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {

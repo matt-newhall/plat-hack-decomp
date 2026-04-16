@@ -1543,7 +1543,7 @@
 	</row>
 	<row id="pl_msg_00000646_00385" index="385">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user employs its\npsychic power to\nswitch changes to\nits Defense and\nSp. Def with the foe.</language>
+		<language name="English">In a hailstorm, this\nmove reduces damage\nfrom physical and\nspecial moves for\nfive turns.</language>
 	</row>
 	<row id="pl_msg_00000646_00386" index="386">
 		<attribute name="window_context_name">used</attribute>

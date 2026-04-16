@@ -4623,15 +4623,15 @@
 	</row>
 	<row id="pl_msg_00000000_01155" index="1155">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nGuard Swap!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nAurora Veil!</language>
 	</row>
 	<row id="pl_msg_00000000_01156" index="1156">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nGuard Swap!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nAurora Veil!</language>
 	</row>
 	<row id="pl_msg_00000000_01157" index="1157">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nGuard Swap!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nAurora Veil!</language>
 	</row>
 	<row id="pl_msg_00000000_01158" index="1158">
 		<attribute name="window_context_name">used</attribute>

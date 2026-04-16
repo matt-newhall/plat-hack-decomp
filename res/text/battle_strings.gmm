@@ -5366,4 +5366,20 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was hurt\nby the foe’s {STRVAR_1 1, 1, 0}’s\fSpiky Shield!</language>
 	</row>
+	<row id="pl_msg_00000368_01338" index="1338">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 6, 0, 0} made your team\nstronger against physical\fand special moves!</language>
+	</row>
+	<row id="pl_msg_00000368_01339" index="1339">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 6, 0, 0} made\nits team stronger against\nphysical and special moves!</language>
+	</row>
+	<row id="pl_msg_00000368_01340" index="1340">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 6, 0, 0} made your team\nstronger against physical\fand special moves slightly!</language>
+	</row>
+	<row id="pl_msg_00000368_01341" index="1341">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 6, 0, 0} made\nits team stronger against\nphysical and special moves slightly!</language>
+	</row>
 </body>

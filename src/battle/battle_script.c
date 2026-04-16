@@ -327,6 +327,7 @@ static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -628,7 +629,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CheckStickyWeb,
     BtlCmd_CalcVenoshockPower,
     BtlCmd_TryRandomStatus,
-    BtlCmd_CalcStoredPowerPower
+    BtlCmd_CalcStoredPowerPower,
+    BtlCmd_TryAuroraVeil
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -6988,11 +6990,14 @@ static BOOL BtlCmd_TryBreakScreens(BattleSystem *battleSys, BattleContext *battl
     }
 
     if ((battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_REFLECT)
-        || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_LIGHT_SCREEN)) {
+        || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_LIGHT_SCREEN)
+        || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_AURORA_VEIL)) {
         battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_REFLECT;
         battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_LIGHT_SCREEN;
+        battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_AURORA_VEIL;
         battleCtx->sideConditions[defending].reflectTurns = 0;
         battleCtx->sideConditions[defending].lightScreenTurns = 0;
+        battleCtx->sideConditions[defending].auroraVeilTurns = 0;
     } else {
         BattleScript_Iter(battleCtx, jumpIfNoScreens);
     }
@@ -8061,6 +8066,10 @@ static BOOL BtlCmd_CheckSideCondition(BattleSystem *battleSys, BattleContext *ba
         case SIDE_COND_TOXIC_SPIKES_LAYERS:
             val = battleCtx->sideConditions[side].toxicSpikesLayers;
             break;
+
+        case SIDE_COND_AURORA_VEIL_TURNS:
+            val = battleCtx->sideConditions[side].auroraVeilTurns;
+            break;
         }
         break;
 
@@ -8094,6 +8103,11 @@ static BOOL BtlCmd_CheckSideCondition(BattleSystem *battleSys, BattleContext *ba
         case SIDE_COND_TOXIC_SPIKES_LAYERS:
             battleCtx->sideConditions[side].toxicSpikesLayers = 0;
             battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_TOXIC_SPIKES;
+            break;
+
+        case SIDE_COND_AURORA_VEIL_TURNS:
+            battleCtx->sideConditions[side].auroraVeilTurns = 0;
+            battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_AURORA_VEIL;
             break;
         }
         break;
@@ -9092,6 +9106,49 @@ static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *
     }
 
     ConsoleLog("Move Power is %d\n", battleCtx->movePower);
+
+    return FALSE;
+}
+
+/**
+ * @brief Try to set Aurora Veil for the user's side.
+ *
+ * Inputs:
+ * 1. The jump-distance if Aurora Veil is already set for the user's side.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jump = BattleScript_Read(battleCtx);
+
+    int side = Battler_Side(battleSys, battleCtx->attacker);
+
+    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_AURORA_VEIL) {
+        BattleScript_Iter(battleCtx, jump);
+        battleCtx->moveStatusFlags |= MOVE_STATUS_FAILED;
+    } else {
+        battleCtx->sideConditionsMask[side] |= SIDE_CONDITION_AURORA_VEIL;
+        battleCtx->sideConditions[side].auroraVeilTurns = NUM_SCREEN_TURNS;
+        battleCtx->sideConditions[side].auroraVeilUser = battleCtx->attacker;
+
+        if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_EXTEND_SCREENS) {
+            battleCtx->sideConditions[side].auroraVeilTurns += Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0);
+        }
+
+        battleCtx->msgBuffer.tags = TAG_MOVE_SIDE;
+        battleCtx->msgBuffer.params[0] = battleCtx->moveCur;
+        battleCtx->msgBuffer.params[1] = battleCtx->attacker;
+
+        if (BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, battleCtx->attacker) == 2) {
+            battleCtx->msgBuffer.id = 1340;
+        } else {
+            battleCtx->msgBuffer.id = 1338;
+        }
+    }
 
     return FALSE;
 }

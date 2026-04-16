@@ -44,7 +44,7 @@
             [ 50, "MOVE_PSYCHO_CUT" ],
             [ 57, "MOVE_AMNESIA" ],
             [ 64, "MOVE_SPIKY_SHIELD" ],
-            [ 64, "MOVE_GUARD_SWAP" ],
+            [ 64, "MOVE_AURORA_VEIL" ],
             [ 71, "MOVE_PSYCHIC" ],
             [ 86, "MOVE_RECOVER" ],
             [ 93, "MOVE_SAFEGUARD" ],

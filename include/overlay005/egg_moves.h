@@ -256,7 +256,7 @@ const u16 sEggMoves[] = {
         MOVE_THUNDER_PUNCH,
         MOVE_ICE_PUNCH,
         MOVE_MOONBLAST,
-        MOVE_GUARD_SWAP),
+        MOVE_AURORA_VEIL),
 
     EGG_MOVES(SPECIES_MACHOP,
         MOVE_LIGHT_SCREEN,
@@ -1433,7 +1433,7 @@ const u16 sEggMoves[] = {
         MOVE_BATON_PASS,
         MOVE_DYNAMIC_PUNCH,
         MOVE_SPIKY_SHIELD,
-        MOVE_GUARD_SWAP,
+        MOVE_AURORA_VEIL,
         MOVE_PSYCHO_CUT,
         MOVE_BULLET_PUNCH),
 

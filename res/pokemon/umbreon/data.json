@@ -46,7 +46,7 @@
             [ 57, "MOVE_MEAN_LOOK" ],
             [ 64, "MOVE_SCREECH" ],
             [ 71, "MOVE_MOONLIGHT" ],
-            [ 78, "MOVE_GUARD_SWAP" ]
+            [ 78, "MOVE_AURORA_VEIL" ]
         ],
         "by_tm": [
             "TM06",
