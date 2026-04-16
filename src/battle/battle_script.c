@@ -224,6 +224,7 @@ static BOOL BtlCmd_TryImprison(BattleSystem *battleSys, BattleContext *battleCtx
 static BOOL BtlCmd_TryGrudge(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySnatch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcHeavySlamPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcWeatherBallParams(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPursuit(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_ApplyTypeEffectiveness(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -630,7 +631,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CalcVenoshockPower,
     BtlCmd_TryRandomStatus,
     BtlCmd_CalcStoredPowerPower,
-    BtlCmd_TryAuroraVeil
+    BtlCmd_TryAuroraVeil,
+    BtlCmd_CalcHeavySlamPower
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7264,6 +7266,44 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
         battleCtx->movePower = sWeightToPower[i][1];
     } else {
         battleCtx->movePower = 120;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Calculate the base power of Heavy Slam based on the ratio of the
+ * attacker's weight to the defender's weight.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcHeavySlamPower(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int atkWeight = ATTACKING_MON.weight;
+    int defWeight = DEFENDING_MON.weight;
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_LIGHT_METAL) {
+        atkWeight /= 2;
+    }
+
+    if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_LIGHT_METAL) {
+        defWeight /= 2;
+    }
+
+    if (atkWeight >= defWeight * 5) {
+        battleCtx->movePower = 120;
+    } else if (atkWeight >= defWeight * 4) {
+        battleCtx->movePower = 100;
+    } else if (atkWeight >= defWeight * 3) {
+        battleCtx->movePower = 80;
+    } else if (atkWeight >= defWeight * 2) {
+        battleCtx->movePower = 60;
+    } else {
+        battleCtx->movePower = 40;
     }
 
     return FALSE;

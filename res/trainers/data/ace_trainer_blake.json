@@ -31,7 +31,7 @@
             "moves": [
                 "MOVE_PSYBEAM",
                 "MOVE_SIGNAL_BEAM",
-                "MOVE_CONVERSION_2",
+                "MOVE_HEAVY_SLAM",
                 "MOVE_RECOVER"
             ],
             "power": 50,

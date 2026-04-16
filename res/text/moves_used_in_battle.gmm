@@ -2115,15 +2115,15 @@
 	</row>
 	<row id="pl_msg_00000000_00528" index="528">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nConversion 2!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nHeavy Slam!</language>
 	</row>
 	<row id="pl_msg_00000000_00529" index="529">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nConversion 2!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nHeavy Slam!</language>
 	</row>
 	<row id="pl_msg_00000000_00530" index="530">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nConversion 2!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nHeavy Slam!</language>
 	</row>
 	<row id="pl_msg_00000000_00531" index="531">
 		<attribute name="window_context_name">used</attribute>

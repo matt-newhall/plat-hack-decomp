@@ -707,7 +707,7 @@
 	</row>
 	<row id="pl_msg_00000646_00176" index="176">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The user changes its\ntype to make itself\nresistant to the type\nof the attack it\nlast took.</language>
+		<language name="English">The user slams the\ntarget with its body.\nDamage increases the\nthe heavier the user\nis than the target.</language>
 	</row>
 	<row id="pl_msg_00000646_00177" index="177">
 		<attribute name="window_context_name">used</attribute>
