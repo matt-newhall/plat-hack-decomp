@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_YAWN" ],
-            [ 1, "MOVE_SMOG" ],
+            [ 1, "MOVE_DRAINING_KISS" ],
             [ 1, "MOVE_EMBER" ],
             [ 1, "MOVE_ROCK_THROW" ],
             [ 8, "MOVE_EMBER" ],

@@ -238,7 +238,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HELD_ITEM, Basic_CheckCanRemoveItem
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Basic_CheckCanImprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
@@ -902,12 +901,6 @@ Basic_CheckCanRecycle:
     IfLoadedEqualTo ITEM_NONE, ScoreMinus10
     PopOrEnd 
 
-Basic_CheckCanImprison:
-    // If either the attacker or a target are under the effect of Imprison, score -10.
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_IMPRISON, ScoreMinus10
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_IMPRISONED, ScoreMinus10
-    PopOrEnd 
-
 Basic_CheckTickle:
     // If the target's ability is Clear Body or White Smoke and the attacker's ability is not
     // Mold Breaker, score -10.
@@ -1556,6 +1549,7 @@ Expert_Main:
     // Evaluate moves which match a known effect according to this jump table.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Expert_StatusSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT, Expert_DrainMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_THREE_QUARTER_DAMAGE_DEALT, Expert_DrainMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_DreamEater
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_MOVE, Expert_MirrorMove
@@ -1672,7 +1666,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Expert_Endeavor
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP, Expert_WaterSpout
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_ChangeUserAbility
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Expert_Imprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Snatch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOIL_THIRD, Expert_RecoilMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT, Expert_HighCritical
@@ -3207,7 +3200,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_RECYCLE
     TableEntry BATTLE_EFFECT_REMOVE_HELD_ITEM
     TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
-    TableEntry BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
@@ -4539,16 +4531,6 @@ Expert_WaterSpout_ScoreMinus1:
 Expert_WaterSpout_End:
     PopOrEnd 
 
-Expert_Imprison:
-    // If it is not the attacker's first turn in battle, 60.9% chance of score +2.
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedGreaterThan FALSE, Expert_Imprison_End
-    IfRandomLessThan 100, Expert_Imprison_End
-    AddToMoveScore 2
-
-Expert_Imprison_End:
-    PopOrEnd 
-
 Expert_Snatch:
     // If it is the attacker's first turn in battle, 41.4% chance of score +2.
     //
@@ -5232,6 +5214,7 @@ Expert_HealBlock:
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REST, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SWALLOW, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT, Expert_HealBlock_TryScorePlus1
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RECOVER_THREE_QUARTER_DAMAGE_DEALT, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Expert_HealBlock_TryScorePlus1
     IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_HealBlock_TryScorePlus1
@@ -5887,7 +5870,6 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION
     TableEntry BATTLE_EFFECT_STATUS_BURN
     TableEntry BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL
-    TableEntry BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
@@ -7367,7 +7349,6 @@ Harrassment_Effects:
     TableEntry BATTLE_EFFECT_NATURE_POWER
     TableEntry BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN
     TableEntry BATTLE_EFFECT_REMOVE_HELD_ITEM
-    TableEntry BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE
     TableEntry BATTLE_EFFECT_SECRET_POWER
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN

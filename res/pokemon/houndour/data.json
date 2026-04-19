@@ -37,7 +37,7 @@
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_EMBER" ],
             [ 4, "MOVE_HOWL" ],
-            [ 9, "MOVE_SMOG" ],
+            [ 9, "MOVE_DRAINING_KISS" ],
             [ 14, "MOVE_ROAR" ],
             [ 17, "MOVE_BITE" ],
             [ 22, "MOVE_ODOR_SLEUTH" ],

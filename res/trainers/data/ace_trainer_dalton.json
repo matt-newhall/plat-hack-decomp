@@ -31,7 +31,7 @@
             "moves": [
                 "MOVE_FLAMETHROWER",
                 "MOVE_FAINT_ATTACK",
-                "MOVE_SMOG",
+                "MOVE_DRAINING_KISS",
                 "MOVE_WILL_O_WISP"
             ],
             "iv_scale": 50,

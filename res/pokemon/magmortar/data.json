@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_THUNDER_PUNCH" ],
-            [ 1, "MOVE_SMOG" ],
+            [ 1, "MOVE_DRAINING_KISS" ],
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_EMBER" ],
             [ 1, "MOVE_SMOKE_SCREEN" ],

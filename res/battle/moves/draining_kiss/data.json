@@ -1,19 +1,21 @@
 {
-    "name": "Smog",
+    "name": "Draining Kiss",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_POISON",
-    "power": 30,
-    "accuracy": 70,
-    "pp": 20,
+    "type": "TYPE_NORMAL",
+    "power": 50,
+    "accuracy": 100,
+    "pp": 10,
     "effect": {
-        "type": "BATTLE_EFFECT_POISON_HIT",
+        "type": "BATTLE_EFFECT_RECOVER_THREE_QUARTER_DAMAGE_DEALT",
         "chance": 40
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [
+        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
-        "MOVE_FLAG_CAN_MIRROR_MOVE"
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
     ],
     "contest": {
         "effect": "CONTEST_EFFECT_BASIC",

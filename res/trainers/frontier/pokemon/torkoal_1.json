@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_EMBER",
         "MOVE_MUD_SLAP",
-        "MOVE_SMOG",
+        "MOVE_DRAINING_KISS",
         "MOVE_AMNESIA"
     ],
     "evFlags": {

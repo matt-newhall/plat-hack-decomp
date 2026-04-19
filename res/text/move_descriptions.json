@@ -1194,11 +1194,11 @@
     {
       "id": "pl_msg_00000646_00123",
       "en_US": [
-        "The foe is attacked\n",
-        "with a discharge of\n",
-        "filthy gases.\n",
-        "It may also poison\n",
-        "the target."
+        "The user attacks with\n",
+        "a draining kiss\n",
+        "that steals HP from\n",
+        "targets to restore\n",
+        "the user’s own HP."
       ]
     },
     {

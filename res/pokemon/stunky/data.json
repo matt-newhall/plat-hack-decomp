@@ -95,7 +95,7 @@
         "egg_moves": [
             "MOVE_PURSUIT",
             "MOVE_LEER",
-            "MOVE_SMOG",
+            "MOVE_DRAINING_KISS",
             "MOVE_DOUBLE_EDGE",
             "MOVE_CRUNCH",
             "MOVE_SCARY_FACE",
