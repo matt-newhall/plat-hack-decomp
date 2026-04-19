@@ -1,7 +1,7 @@
 {
     "species": "SPECIES_FURRET",
     "moves": [
-        "MOVE_FRUSTRATION",
+        "MOVE_DISARMING_VOICE",
         "MOVE_SHADOW_CLAW",
         "MOVE_TRICK",
         "MOVE_PSYSHOCK"

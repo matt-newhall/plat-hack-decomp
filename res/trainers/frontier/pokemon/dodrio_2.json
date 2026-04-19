@@ -2,7 +2,7 @@
     "species": "SPECIES_DODRIO",
     "moves": [
         "MOVE_DRILL_PECK",
-        "MOVE_FRUSTRATION",
+        "MOVE_DISARMING_VOICE",
         "MOVE_FAINT_ATTACK",
         "MOVE_LIFE_DEW"
     ],

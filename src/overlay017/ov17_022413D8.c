@@ -2097,9 +2097,6 @@ void ov17_022439C8(Contest *param0, int contestantID, enum Move moveID, UnkStruc
     case MOVE_RETURN:
         param3->friendship = 255;
         break;
-    case MOVE_FRUSTRATION:
-        param3->friendship = 0;
-        break;
     case MOVE_CURSE: {
         int type1, type2;
 

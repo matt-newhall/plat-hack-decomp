@@ -167,14 +167,6 @@ u32 ov104_0222DD6C(FrontierPokemonDataDTO *param0, u16 param1, u32 param2, u32 p
 
     u8 friendship = MAX_FRIENDSHIP_VALUE;
 
-    for (v0 = 0; v0 < LEARNED_MOVES_MAX; v0++) {
-        param0->moves[v0] = v4.moves[v0];
-
-        if (v4.moves[v0] == MOVE_FRUSTRATION) {
-            friendship = 0;
-        }
-    }
-
     param0->otID = param2;
 
     if (param3 == 0) {

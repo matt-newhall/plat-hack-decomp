@@ -44,7 +44,7 @@
             "moves": [
                 "MOVE_SHADOW_BALL",
                 "MOVE_DARK_PULSE",
-                "MOVE_FRUSTRATION",
+                "MOVE_DISARMING_VOICE",
                 "MOVE_SLUDGE_BOMB"
             ],
             "iv_scale": 0,

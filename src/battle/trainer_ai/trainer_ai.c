@@ -3036,11 +3036,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         type = TYPE_NORMAL;
         break;
 
-    case MOVE_FRUSTRATION:
-        power = (255 - battleCtx->battleMons[attacker].friendship) * 10 / 25;
-        type = TYPE_NORMAL;
-        break;
-
     case MOVE_MAGNITUDE:
         // Simulate a Magnitude roll
         power = BattleSystem_RandNext(battleSys) % 100;

@@ -816,14 +816,6 @@ static u32 BattleTower_CopySetToPokemonDataDTO(BattleTower *battleTower, Frontie
 
     u8 friendship = MAX_FRIENDSHIP_VALUE;
 
-    for (v0 = 0; v0 < LEARNED_MOVES_MAX; v0++) {
-        monDataDTO->moves[v0] = monData.moves[v0];
-
-        if (monData.moves[v0] == MOVE_FRUSTRATION) {
-            friendship = 0;
-        }
-    }
-
     monDataDTO->otID = otID;
 
     if (givenPersonality == 0) {
