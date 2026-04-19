@@ -33,7 +33,7 @@
     "flip_sprite": true,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SMOG" ],
+            [ 1, "MOVE_DRAINING_KISS" ],
             [ 1, "MOVE_LEER" ],
             [ 7, "MOVE_EMBER" ],
             [ 10, "MOVE_SMOKE_SCREEN" ],

@@ -34,7 +34,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_EMBER" ],
-            [ 4, "MOVE_SMOG" ],
+            [ 4, "MOVE_DRAINING_KISS" ],
             [ 7, "MOVE_WITHDRAW" ],
             [ 12, "MOVE_CURSE" ],
             [ 17, "MOVE_FIRE_SPIN" ],

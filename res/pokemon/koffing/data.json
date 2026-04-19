@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_POISON_GAS" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 6, "MOVE_SMOG" ],
+            [ 6, "MOVE_DRAINING_KISS" ],
             [ 10, "MOVE_SMOKE_SCREEN" ],
             [ 15, "MOVE_ASSURANCE" ],
             [ 19, "MOVE_SELFDESTRUCT" ],

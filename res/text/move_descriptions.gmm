@@ -495,7 +495,7 @@
 	</row>
 	<row id="pl_msg_00000646_00123" index="123">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe is attacked\nwith a discharge of\nfilthy gases.\nIt may also poison\nthe target.</language>
+		<language name="English">The user attacks with\na draining kiss\nthat steals HP from\ntargets to restore\nthe user’s own HP.</language>
 	</row>
 	<row id="pl_msg_00000646_00124" index="124">
 		<attribute name="window_context_name">used</attribute>

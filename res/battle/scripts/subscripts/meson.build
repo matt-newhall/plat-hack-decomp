@@ -326,4 +326,5 @@ subscript_files = files(
     'subscript_allies_recover_quarter_max_hp.s',
     'subscript_aurora_veil.s',
     'subscript_shell_smash.s',
+    'subscript_drain_three_quarter_damage_dealt.s',
 )

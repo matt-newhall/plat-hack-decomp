@@ -1479,15 +1479,15 @@
 	</row>
 	<row id="pl_msg_00000000_00369" index="369">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSmog!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDraining Kiss!</language>
 	</row>
 	<row id="pl_msg_00000000_00370" index="370">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSmog!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDraining Kiss!</language>
 	</row>
 	<row id="pl_msg_00000000_00371" index="371">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSmog!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDraining Kiss!</language>
 	</row>
 	<row id="pl_msg_00000000_00372" index="372">
 		<attribute name="window_context_name">used</attribute>
