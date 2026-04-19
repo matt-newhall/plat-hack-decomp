@@ -1417,7 +1417,7 @@
 	</row>
 	<row id="pl_msg_00000391_00348" index="348">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">A full-power attack that grows more\npowerful the less the user likes its\nTrainer.</language>
+		<language name="English">The user attacks by letting out a\ncharming cry that causes emotional\ndamage. This attack never misses.</language>
 	</row>
 	<row id="pl_msg_00000391_00349" index="349">
 		<attribute name="window_context_name">used</attribute>

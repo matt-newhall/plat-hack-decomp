@@ -38,7 +38,7 @@
             [ 1, "MOVE_DEFENSE_CURL" ],
             [ 1, "MOVE_DRILL_RUN" ],
             [ 6, "MOVE_ENDURE" ],
-            [ 13, "MOVE_FRUSTRATION" ],
+            [ 13, "MOVE_DISARMING_VOICE" ],
             [ 16, "MOVE_QUICK_ATTACK" ],
             [ 23, "MOVE_JUMP_KICK" ],
             [ 26, "MOVE_BATON_PASS" ],

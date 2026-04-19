@@ -1,18 +1,17 @@
 {
-    "name": "Frustration",
-    "class": "CLASS_PHYSICAL",
+    "name": "Disarming Voice",
+    "class": "CLASS_SPECIAL",
     "type": "TYPE_NORMAL",
-    "power": 1,
-    "accuracy": 100,
-    "pp": 20,
+    "power": 40,
+    "accuracy": 0,
+    "pp": 15,
     "effect": {
-        "type": "BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP",
+        "type": "BATTLE_EFFECT_HIT",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_ADJACENT_OPPONENTS",
     "priority": 0,
     "flags": [
-        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
         "MOVE_FLAG_CAN_MIRROR_MOVE",
         "MOVE_FLAG_HIDES_HP_GAUGES"

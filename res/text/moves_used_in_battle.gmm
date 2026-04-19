@@ -2619,15 +2619,15 @@
 	</row>
 	<row id="pl_msg_00000000_00654" index="654">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nFrustration!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nDisarming Voice!</language>
 	</row>
 	<row id="pl_msg_00000000_00655" index="655">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFrustration!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nDisarming Voice!</language>
 	</row>
 	<row id="pl_msg_00000000_00656" index="656">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFrustration!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nDisarming Voice!</language>
 	</row>
 	<row id="pl_msg_00000000_00657" index="657">
 		<attribute name="window_context_name">used</attribute>
