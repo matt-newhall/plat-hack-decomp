@@ -251,6 +251,7 @@ ScriptCommand(BTLCMD_TRYRANDOMSTATUS,             BtlCmd_TryRandomStatus)
 ScriptCommand(BTLCMD_CALCSTOREDPOWERPOWER,        BtlCmd_CalcStoredPowerPower)
 ScriptCommand(BTLCMD_TRYAURORAVEIL,               BtlCmd_TryAuroraVeil)
 ScriptCommand(BTLCMD_CALCHEAVYSLAMPOWER,          BtlCmd_CalcHeavySlamPower)
+ScriptCommand(BTLCMD_RAGEPOWDER,                  BtlCmd_RagePowder)
 
 // clang-format on
 

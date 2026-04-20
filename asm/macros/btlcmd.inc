@@ -1350,6 +1350,10 @@
     .long BTLCMD_CALCHEAVYSLAMPOWER
     .endm
 
+    .macro RagePowder
+    .long BTLCMD_RAGEPOWDER
+    .endm
+
     .text
     .globl _start
 _start:

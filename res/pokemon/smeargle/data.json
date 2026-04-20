@@ -34,16 +34,16 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SKETCH" ],
-            [ 11, "MOVE_SKETCH" ],
-            [ 21, "MOVE_SKETCH" ],
-            [ 31, "MOVE_SKETCH" ],
-            [ 41, "MOVE_SKETCH" ],
-            [ 51, "MOVE_SKETCH" ],
-            [ 61, "MOVE_SKETCH" ],
-            [ 71, "MOVE_SKETCH" ],
-            [ 81, "MOVE_SKETCH" ],
-            [ 91, "MOVE_SKETCH" ]
+            [ 1, "MOVE_RAGE_POWDER" ],
+            [ 11, "MOVE_RAGE_POWDER" ],
+            [ 21, "MOVE_RAGE_POWDER" ],
+            [ 31, "MOVE_RAGE_POWDER" ],
+            [ 41, "MOVE_RAGE_POWDER" ],
+            [ 51, "MOVE_RAGE_POWDER" ],
+            [ 61, "MOVE_RAGE_POWDER" ],
+            [ 71, "MOVE_RAGE_POWDER" ],
+            [ 81, "MOVE_RAGE_POWDER" ],
+            [ 91, "MOVE_RAGE_POWDER" ]
         ],
         "by_tm": [  ],
         "by_tutor": [  ]
