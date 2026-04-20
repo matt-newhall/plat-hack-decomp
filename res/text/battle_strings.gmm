@@ -5382,4 +5382,24 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The foe’s {STRVAR_1 6, 0, 0} made\nits team stronger against\nphysical and special moves slightly!</language>
 	</row>
+	<row id="pl_msg_00000368_01342" index="1342">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">{STRVAR_1 1, 0, 0} was covered\nin powder!</language>
+	</row>
+	<row id="pl_msg_00000368_01343" index="1343">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} was covered\nin powder!</language>
+	</row>
+	<row id="pl_msg_00000368_01344" index="1344">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} was covered\nin powder!</language>
+	</row>
+	<row id="pl_msg_00000368_01345" index="1345">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">When the flame touched the powder\non the Pokémon, it exploded!</language>
+	</row>
+	<row id="pl_msg_00000368_01346" index="1346">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The rain quenched\nthe powder!</language>
+	</row>
 </body>

@@ -40,7 +40,7 @@
             [ 13, "MOVE_LEER" ],
             [ 17, "MOVE_FOCUS_ENERGY" ],
             [ 21, "MOVE_BONEMERANG" ],
-            [ 23, "MOVE_RAGE" ],
+            [ 23, "MOVE_POWDER" ],
             [ 27, "MOVE_ACROBATICS" ],
             [ 31, "MOVE_THRASH" ],
             [ 33, "MOVE_FLING" ],

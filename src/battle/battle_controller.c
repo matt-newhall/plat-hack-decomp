@@ -119,7 +119,6 @@ static void BattleController_UpdateFlagsWhenHit(BattleSystem *battleSys, BattleC
 static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BattleController_CriticalMessage(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BattleController_FollowupMessage(BattleSystem *battleSys, BattleContext *battleCtx);
-static BOOL BattleController_RageBuilding(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BattleController_CheckExtraFlinch(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BattleController_ToggleSemiInvulnMons(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleController_InitAI(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -784,7 +783,6 @@ enum PreMoveActionState {
     PRE_MOVE_ACTION_START = 0,
 
     PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS = PRE_MOVE_ACTION_START,
-    PRE_MOVE_ACTION_STATE_CHECK_RAGE_FLAG,
     PRE_MOVE_ACTION_STATE_SPEED_RNG,
 
     PRE_MOVE_ACTION_END
@@ -825,17 +823,6 @@ static void BattleController_CheckPreMoveActions(BattleSystem *battleSys, Battle
             }
 
             battleCtx->turnStartCheckTemp = 0;
-            battleCtx->turnStartCheckState++;
-            break;
-
-        case PRE_MOVE_ACTION_STATE_CHECK_RAGE_FLAG:
-            for (battler = 0; battler < maxBattlers; battler++) {
-                if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_RAGE)
-                    && Battler_SelectedMove(battleCtx, battler) != MOVE_RAGE) {
-                    battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_RAGE;
-                }
-            }
-
             battleCtx->turnStartCheckState++;
             break;
 
@@ -2222,10 +2209,6 @@ static int BattleController_CheckObedience(BattleSystem *battleSys, BattleContex
         return OBEY_CHECK_SUCCESS;
     }
 
-    if (battleCtx->moveCur == MOVE_RAGE) {
-        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RAGE;
-    }
-
     if ((ATTACKING_MON.status & MON_CONDITION_SLEEP)
         && (battleCtx->moveCur == MOVE_SNORE || battleCtx->moveCur == MOVE_SLEEP_TALK)) {
         *nextSeq = subscript_disobey_while_asleep;
@@ -3310,6 +3293,7 @@ enum BeforeMoveState {
     BEFORE_MOVE_STATE_STATUS_DISRUPTION,
     BEFORE_MOVE_STATE_CHECK_OBEDIENCE,
     BEFORE_MOVE_STATE_DECREMENT_PP,
+    BEFORE_MOVE_STATE_POWDER_CHECK,
     BEFORE_MOVE_STATE_CHECK_TARGET_EXISTS,
     BEFORE_MOVE_STATE_CHECK_STOLEN,
     BEFORE_MOVE_STATE_REDIRECT_TARGET,
@@ -3368,6 +3352,23 @@ static void BattleController_BeforeMove(BattleSystem *battleSys, BattleContext *
         }
 
         battleCtx->beforeMoveCheckState++;
+
+    case BEFORE_MOVE_STATE_POWDER_CHECK:
+        battleCtx->beforeMoveCheckState++;
+
+        if (ATTACKER_TURN_FLAGS.powdered && (
+                CalcCurrentMoveType(battleCtx) == TYPE_FIRE
+                || (battleCtx->moveCur == MOVE_NATURAL_GIFT && Battler_NaturalGiftType(battleCtx, battleCtx->attacker) == TYPE_FIRE)
+        )) {
+            ATTACKER_TURN_FLAGS.powdered = 0;
+            battleCtx->msgBattlerTemp = battleCtx->attacker;
+
+            LOAD_SUBSEQ(subscript_powder_fire_move);
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+            battleCtx->commandNext = BATTLE_CONTROL_LOOP_FAINTED;
+
+            return;
+        }
 
     case BEFORE_MOVE_STATE_CHECK_TARGET_EXISTS:
         if (BattleController_HasNoTarget(battleSys, battleCtx) == TRUE) {
@@ -3685,7 +3686,6 @@ enum AfterMoveMessageState {
     ONE_HIT_STATUS,
     ONE_HIT_TRIGGER_SECONDARY,
     ONE_HIT_FORM_CHANGE,
-    ONE_HIT_RAGE,
     ONE_HIT_TRIGGER_ABILITY,
     ONE_HIT_TRIGGER_ATTACKER_ABILITY,
     ONE_HIT_EXTRA_FLINCH,
@@ -3693,7 +3693,6 @@ enum AfterMoveMessageState {
     MULTI_HIT_CRITICAL = 0,
     MULTI_HIT_TRIGGER_SECONDARY,
     MULTI_HIT_FORM_CHANGE,
-    MULTI_HIT_RAGE,
     MULTI_HIT_TRIGGER_ABILITY,
     MULTI_HIT_TRIGGER_ATTACKER_ABILITY,
     MULTI_HIT_STATUS,
@@ -3739,12 +3738,6 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
             return;
-
-        case ONE_HIT_RAGE:
-            battleCtx->afterMoveMessageState++;
-            if (BattleController_RageBuilding(battleSys, battleCtx) == TRUE) {
-                return;
-            }
 
         case ONE_HIT_TRIGGER_ABILITY:
             int defenderAbilitySeq;
@@ -3811,12 +3804,6 @@ static void BattleController_AfterMoveMessage(BattleSystem *battleSys, BattleCon
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
             return;
-
-        case MULTI_HIT_RAGE:
-            battleCtx->afterMoveMessageState++;
-            if (BattleController_RageBuilding(battleSys, battleCtx) == TRUE) {
-                return;
-            }
 
         case MULTI_HIT_TRIGGER_ABILITY:
             int defenderAbilitySeq;
@@ -5033,38 +5020,6 @@ static BOOL BattleController_FollowupMessage(BattleSystem *battleSys, BattleCont
 }
 
 /**
- * @brief Load the Rage Is Building subroutine sequence, if applicable.
- *
- * @param battleSys
- * @param battleCtx
- * @return TRUE if the subroutine was loaded for execution; FALSE otherwise.
- */
-static BOOL BattleController_RageBuilding(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    BOOL result = FALSE;
-    if (battleCtx->defender == BATTLER_NONE) {
-        return result;
-    }
-
-    if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_RAGE)
-        && (battleCtx->moveStatusFlags & MOVE_STATUS_MULTI_HIT_DISRUPTED) == FALSE
-        && battleCtx->defender != battleCtx->attacker
-        && DEFENDING_MON.curHP
-        && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
-            || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
-        && DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
-        DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK]++;
-
-        LOAD_SUBSEQ(subscript_rage_is_building);
-        battleCtx->commandNext = battleCtx->command;
-        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-        result = TRUE;
-    }
-
-    return result;
-}
-
-/**
  * @brief Check if an additional flinch effect should be applied due to King's
  * Rock.
  *
@@ -5151,8 +5106,7 @@ static BOOL BattleController_ToggleSemiInvulnMons(BattleSystem *battleSys, Battl
 enum AfterMoveHitState {
     AFTER_MOVE_HIT_START = 0,
 
-    AFTER_MOVE_HIT_STATE_RAGE = AFTER_MOVE_HIT_START,
-    AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE,
+    AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE = AFTER_MOVE_HIT_START,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
     AFTER_MOVE_HIT_STATE_UPROAR,
@@ -5165,7 +5119,6 @@ enum AfterMoveHitState {
  * @brief Trigger effects which apply after a move hits its target.
  *
  * This handles:
- * - turning off the Rage flag if the attacker did not use Rage again
  * - granting Shell Bell HP restoration
  * - deducting HP due to Life Orb
  *
@@ -5186,13 +5139,6 @@ static BOOL BattleController_TriggerAfterMoveHitEffects(BattleSystem *battleSys,
 
     do {
         switch (battleCtx->afterMoveHitCheckState) {
-        case AFTER_MOVE_HIT_STATE_RAGE:
-            if ((ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_RAGE) && battleCtx->moveCur != MOVE_RAGE) {
-                ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RAGE;
-            }
-
-            battleCtx->afterMoveHitCheckState++;
-            break;
 
         case AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE:
             if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE) {

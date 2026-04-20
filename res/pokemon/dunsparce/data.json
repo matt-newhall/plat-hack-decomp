@@ -33,7 +33,7 @@
     "flip_sprite": false,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_RAGE" ],
+            [ 1, "MOVE_POWDER" ],
             [ 5, "MOVE_DEFENSE_CURL" ],
             [ 9, "MOVE_YAWN" ],
             [ 13, "MOVE_GLARE" ],

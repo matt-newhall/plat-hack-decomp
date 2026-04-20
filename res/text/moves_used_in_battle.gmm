@@ -1191,15 +1191,15 @@
 	</row>
 	<row id="pl_msg_00000000_00297" index="297">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nRage!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nPowder!</language>
 	</row>
 	<row id="pl_msg_00000000_00298" index="298">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nRage!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nPowder!</language>
 	</row>
 	<row id="pl_msg_00000000_00299" index="299">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nRage!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nPowder!</language>
 	</row>
 	<row id="pl_msg_00000000_00300" index="300">
 		<attribute name="window_context_name">used</attribute>

@@ -1096,7 +1096,7 @@ const u16 sEggMoves[] = {
 
     EGG_MOVES(SPECIES_HOUNDOUR,
         MOVE_FIRE_SPIN,
-        MOVE_RAGE,
+        MOVE_POWDER,
         MOVE_PURSUIT,
         MOVE_COUNTER,
         MOVE_SPITE,
@@ -1281,7 +1281,7 @@ const u16 sEggMoves[] = {
         MOVE_SUPERSONIC,
         MOVE_BODY_PRESS,
         MOVE_STORED_POWER,
-        MOVE_RAGE,
+        MOVE_POWDER,
         MOVE_SKY_ATTACK,
         MOVE_WHIRLWIND,
         MOVE_BRAVE_BIRD),
@@ -1573,7 +1573,7 @@ const u16 sEggMoves[] = {
         MOVE_AGILITY,
         MOVE_HAZE,
         MOVE_PURSUIT,
-        MOVE_RAGE,
+        MOVE_POWDER,
         MOVE_FEATHER_DANCE,
         MOVE_DRAGON_RUSH),
 

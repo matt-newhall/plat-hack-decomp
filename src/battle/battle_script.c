@@ -7537,6 +7537,12 @@ static BOOL BtlCmd_IfTurnFlag(BattleSystem *battleSys, BattleContext *battleCtx)
             result = TRUE;
         }
         break;
+
+    case TURN_FLAG_POWDERED:
+        if (battleCtx->turnFlags[battler].powdered == compareTo) {
+            result = TRUE;
+        }
+        break;
     }
 
     if (result) {
@@ -7602,6 +7608,10 @@ static BOOL BtlCmd_SetTurnFlag(BattleSystem *battleSys, BattleContext *battleCtx
 
     case TURN_FLAG_SILK_TRAPPING:
         battleCtx->turnFlags[battler].silkTrapping = val;
+        break;
+
+    case TURN_FLAG_POWDERED:
+        battleCtx->turnFlags[battler].powdered = val;
         break;
     }
 
@@ -10025,6 +10035,7 @@ static BOOL BtlCmd_CheckUnnerve(BattleSystem *battleSys, BattleContext *battleCt
 static const u16 sPowderMoves[] = {
     MOVE_COTTON_SPORE,
     MOVE_POISON_POWDER,
+    MOVE_POWDER,
     MOVE_SLEEP_POWDER,
     MOVE_SPORE,
     MOVE_STUN_SPORE

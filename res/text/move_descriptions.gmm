@@ -399,7 +399,7 @@
 	</row>
 	<row id="pl_msg_00000646_00099" index="99">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">While this move is in\nuse, it gains attack\npower each time the\nuser is hit in battle.\n</language>
+		<language name="English">The user covers the\ntarget in a powder\nthat explodes and\ndeals damage if Fire-\ntype moves are used.</language>
 	</row>
 	<row id="pl_msg_00000646_00100" index="100">
 		<attribute name="window_context_name">used</attribute>

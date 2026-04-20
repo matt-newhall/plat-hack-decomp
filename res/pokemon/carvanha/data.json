@@ -35,7 +35,7 @@
         "by_level": [
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_BITE" ],
-            [ 6, "MOVE_RAGE" ],
+            [ 6, "MOVE_POWDER" ],
             [ 8, "MOVE_FOCUS_ENERGY" ],
             [ 11, "MOVE_SCARY_FACE" ],
             [ 16, "MOVE_ICE_FANG" ],

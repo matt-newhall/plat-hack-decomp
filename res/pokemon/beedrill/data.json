@@ -37,7 +37,7 @@
             [ 10, "MOVE_FURY_ATTACK" ],
             [ 13, "MOVE_FOCUS_ENERGY" ],
             [ 16, "MOVE_TWINEEDLE" ],
-            [ 19, "MOVE_RAGE" ],
+            [ 19, "MOVE_POWDER" ],
             [ 22, "MOVE_PURSUIT" ],
             [ 25, "MOVE_TOXIC_SPIKES" ],
             [ 28, "MOVE_PIN_MISSILE" ],

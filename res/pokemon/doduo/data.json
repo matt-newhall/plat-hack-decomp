@@ -36,7 +36,7 @@
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_GROWL" ],
             [ 5, "MOVE_QUICK_ATTACK" ],
-            [ 10, "MOVE_RAGE" ],
+            [ 10, "MOVE_POWDER" ],
             [ 14, "MOVE_FURY_ATTACK" ],
             [ 19, "MOVE_PURSUIT" ],
             [ 23, "MOVE_UPROAR" ],
