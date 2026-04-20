@@ -1995,15 +1995,15 @@
 	</row>
 	<row id="pl_msg_00000000_00498" index="498">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nSketch!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nRage Powder!</language>
 	</row>
 	<row id="pl_msg_00000000_00499" index="499">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nSketch!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nRage Powder!</language>
 	</row>
 	<row id="pl_msg_00000000_00500" index="500">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nSketch!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nRage Powder!</language>
 	</row>
 	<row id="pl_msg_00000000_00501" index="501">
 		<attribute name="window_context_name">used</attribute>

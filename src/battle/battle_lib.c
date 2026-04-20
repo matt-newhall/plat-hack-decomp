@@ -1768,6 +1768,10 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
                 && battleCtx->battleMons[battleCtx->sideConditions[enemySide].followMeUser].curHP) {
                 // If Follow Me is active and the user is still alive, re-point all targets toward them
                 defender = battleCtx->sideConditions[enemySide].followMeUser;
+            } else if (battleCtx->sideConditions[enemySide].ragePowder
+                && RAGE_POWDER_MON(enemySide).curHP
+                && !IS_RAGE_POWDER_IMMUNE(attacker)) {
+                defender = RAGE_POWDER_USER(enemySide);
             } else if (battleCtx->battleMons[opponents[0]].curHP
                 && battleCtx->battleMons[opponents[1]].curHP) {
                 defender = opponents[BattleSystem_RandNext(battleSys) & 1];
@@ -1788,6 +1792,10 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
             && battleCtx->battleMons[battleCtx->sideConditions[enemySide].followMeUser].curHP) {
             // If Follow Me is active and the user is still alive, re-point all targets toward them
             defender = battleCtx->sideConditions[enemySide].followMeUser;
+        } else if (battleCtx->sideConditions[enemySide].ragePowder
+            && RAGE_POWDER_MON(enemySide).curHP
+            && !IS_RAGE_POWDER_IMMUNE(attacker)) {
+            defender = RAGE_POWDER_USER(enemySide);
         } else if (battleCtx->battleMons[target].curHP) {
             defender = target;
         } else {
@@ -1824,6 +1832,10 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
 
     int defSide = Battler_Side(battleSys, attacker) ^ 1;
     if (battleCtx->sideConditions[defSide].followMe && FOLLOW_ME_MON(defSide).curHP) {
+        return;
+    }
+    if (battleCtx->sideConditions[defSide].ragePowder && RAGE_POWDER_MON(defSide).curHP
+        && !IS_RAGE_POWDER_IMMUNE(attacker)) {
         return;
     }
 
@@ -2338,6 +2350,8 @@ void BattleSystem_SetupNextTurn(BattleSystem *battleSys, BattleContext *battleCt
 
     battleCtx->sideConditions[BATTLER_US].followMe = FALSE;
     battleCtx->sideConditions[BATTLER_THEM].followMe = FALSE;
+    battleCtx->sideConditions[BATTLER_US].ragePowder = FALSE;
+    battleCtx->sideConditions[BATTLER_THEM].ragePowder = FALSE;
 }
 
 int BattleSystem_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int invalidMoves, int opMask)
@@ -8078,7 +8092,6 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
 static const u16 sCannotMetronomeMoves[] = {
     MOVE_METRONOME,
     MOVE_STRUGGLE,
-    MOVE_SKETCH,
     MOVE_MIMIC,
     MOVE_CHATTER,
     FORBIDDEN_BY_MIMIC_DELIM,
@@ -8092,6 +8105,7 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_ENDURE,
     MOVE_DESTINY_BOND,
     MOVE_FOLLOW_ME,
+    MOVE_RAGE_POWDER,
     MOVE_SNATCH,
     MOVE_HELPING_HAND,
     MOVE_FROST_BREATH,
@@ -8132,7 +8146,6 @@ BOOL Move_CanBeMetronomed(BattleSystem *battleSys, BattleContext *battleCtx, int
 static const u16 sCannotEncoreMoves[] = {
     MOVE_TRANSFORM,
     MOVE_MIMIC,
-    MOVE_SKETCH,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
     MOVE_METRONOME,

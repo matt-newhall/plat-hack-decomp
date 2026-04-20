@@ -1347,4 +1347,8 @@
     .long 245
     .endm
 
+    .macro RagePowder
+    .long 246
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

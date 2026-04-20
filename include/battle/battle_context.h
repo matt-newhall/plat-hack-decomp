@@ -39,9 +39,11 @@ typedef struct SideConditions {
     u32 safeguardTurns : 3;
     u32 followMe : 1;
     u32 followMeUser : 2;
+    u32 ragePowder : 1;
+    u32 ragePowderUser : 2;
     u32 auroraVeilUser : 2;
     u32 auroraVeilTurns : 3;
-    u32 padding00_1D : 4;
+    u32 padding00_1D : 1;
 
     u32 spikesLayers : 2;
     u32 toxicSpikesLayers : 2;

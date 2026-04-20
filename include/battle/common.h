@@ -21,6 +21,12 @@
 #define FOLLOW_ME_USER(side) (battleCtx->sideConditions[side].followMeUser)
 #define FOLLOW_ME_MON(side)  (battleCtx->battleMons[FOLLOW_ME_USER(side)])
 
+#define RAGE_POWDER_USER(side) (battleCtx->sideConditions[side].ragePowderUser)
+#define RAGE_POWDER_MON(side)  (battleCtx->battleMons[RAGE_POWDER_USER(side)])
+
+#define IS_RAGE_POWDER_IMMUNE(attacker) \
+    (MON_HAS_TYPE(attacker, TYPE_GRASS) || Battler_Ability(battleCtx, attacker) == ABILITY_OVERCOAT)
+
 #define CURRENT_MOVE_DATA (battleCtx->aiContext.moveTable[battleCtx->moveCur])
 #define MOVE_DATA(move)   (battleCtx->aiContext.moveTable[move])
 

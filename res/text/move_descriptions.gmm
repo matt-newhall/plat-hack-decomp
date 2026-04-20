@@ -667,7 +667,7 @@
 	</row>
 	<row id="pl_msg_00000646_00166" index="166">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">It enables the user\nto learn a move used\nby the foe.\nOnce used, the move\nSketch disappears.</language>
+		<language name="English">The user scatters a\ncloud of power to\ndraw attention to\nitself. Opponents\naim only at the user.</language>
 	</row>
 	<row id="pl_msg_00000646_00167" index="167">
 		<attribute name="window_context_name">used</attribute>

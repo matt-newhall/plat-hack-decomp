@@ -209,6 +209,7 @@ static BOOL BtlCmd_CheckMoveHit(BattleSystem *battleSys, BattleContext *battleCt
 static BOOL BtlCmd_TryTeleport(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_FollowMe(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_RagePowder(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryHelpingHand(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySwapItems(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryWish(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -632,7 +633,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_TryRandomStatus,
     BtlCmd_CalcStoredPowerPower,
     BtlCmd_TryAuroraVeil,
-    BtlCmd_CalcHeavySlamPower
+    BtlCmd_CalcHeavySlamPower,
+    BtlCmd_RagePowder
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -4979,6 +4981,9 @@ static BOOL BtlCmd_Counter(BattleSystem *battleSys, BattleContext *battleCtx)
 
         if (battleCtx->sideConditions[defendingSide].followMe && FOLLOW_ME_MON(defendingSide).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defendingSide);
+        } else if (battleCtx->sideConditions[defendingSide].ragePowder && RAGE_POWDER_MON(defendingSide).curHP
+            && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
+            battleCtx->defender = RAGE_POWDER_USER(defendingSide);
         } else {
             battleCtx->defender = lastAttacker;
         }
@@ -5051,6 +5056,9 @@ static BOOL BtlCmd_MirrorCoat(BattleSystem *battleSys, BattleContext *battleCtx)
 
         if (battleCtx->sideConditions[defendingSide].followMe && FOLLOW_ME_MON(defendingSide).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defendingSide);
+        } else if (battleCtx->sideConditions[defendingSide].ragePowder && RAGE_POWDER_MON(defendingSide).curHP
+            && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
+            battleCtx->defender = RAGE_POWDER_USER(defendingSide);
         } else {
             battleCtx->defender = lastAttacker;
         }
@@ -5219,7 +5227,6 @@ static BOOL BtlCmd_TrySketch(BattleSystem *battleSys, BattleContext *battleCtx)
     // Don't allow Sketch while Transformed or against any of Struggle, Chatter, or Sketch itself
     if ((ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_TRANSFORM)
         || battleCtx->moveSketched[battleCtx->defender] == MOVE_STRUGGLE
-        || battleCtx->moveSketched[battleCtx->defender] == MOVE_SKETCH
         || battleCtx->moveSketched[battleCtx->defender] == MOVE_CHATTER
         || battleCtx->moveSketched[battleCtx->defender] == MOVE_NONE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
@@ -5227,14 +5234,8 @@ static BOOL BtlCmd_TrySketch(BattleSystem *battleSys, BattleContext *battleCtx)
         int i;
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             // Don't allow Sketching a move that we already know
-            if (ATTACKING_MON.moves[i] != MOVE_SKETCH
-                && ATTACKING_MON.moves[i] == battleCtx->moveSketched[battleCtx->defender]) {
+            if (ATTACKING_MON.moves[i] == battleCtx->moveSketched[battleCtx->defender]) {
                 break;
-            }
-
-            // Replace the first instance of Sketch only (there should only be one)
-            if (ATTACKING_MON.moves[i] == MOVE_SKETCH && moveSlot == -1) {
-                moveSlot = i;
             }
         }
 
@@ -6702,6 +6703,30 @@ static BOOL BtlCmd_FollowMe(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @brief Set up Rage Powder for the attacking side.
+ *
+ * Side effects:
+ * 1. The ragePowder flag for the user's side will be set to TRUE.
+ * 2. The ragePowderUser value for the user's side will be set to the user's ID.
+ *
+ * Grass-type Pokémon and Pokémon with Overcoat are immune to the redirection.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_RagePowder(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int side = Battler_Side(battleSys, battleCtx->attacker);
+    battleCtx->sideConditions[side].ragePowder = TRUE;
+    RAGE_POWDER_USER(side) = battleCtx->attacker;
+
+    return FALSE;
+}
+
+/**
  * @brief Try to set up Helping Hand on the user's side.
  *
  * This command will fail if any of the following are true:
@@ -6925,6 +6950,9 @@ static BOOL BtlCmd_MagicCoat(BattleSystem *battleSys, BattleContext *battleCtx)
 
     if (battleCtx->sideConditions[target].followMe && FOLLOW_ME_MON(target).curHP) {
         battleCtx->defender = FOLLOW_ME_USER(target);
+    } else if (battleCtx->sideConditions[target].ragePowder && RAGE_POWDER_MON(target).curHP
+        && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
+        battleCtx->defender = RAGE_POWDER_USER(target);
     } else if (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) {
         battleCtx->savedBattlerCounter = battleCtx->battlerCounter;
         battleCtx->battlerCounter = 0;
@@ -7681,6 +7709,9 @@ static BOOL BtlCmd_TryMetalBurst(BattleSystem *battleSys, BattleContext *battleC
 
         if (battleCtx->sideConditions[defending].followMe && FOLLOW_ME_MON(defending).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defending);
+        } else if (battleCtx->sideConditions[defending].ragePowder && RAGE_POWDER_MON(defending).curHP
+            && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
+            battleCtx->defender = RAGE_POWDER_USER(defending);
         } else {
             battleCtx->defender = ATTACKER_TURN_FLAGS.lastAttacker;
         }
