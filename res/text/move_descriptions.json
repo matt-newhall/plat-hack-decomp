@@ -40,10 +40,11 @@
     {
       "id": "pl_msg_00000646_00004",
       "en_US": [
-        "The foe is hit with\n",
-        "a flurry of punches\n",
-        "that strike two to\n",
-        "five times in a row.\n"
+        "The user uses the\n",
+        "target’s power.\n",
+        "Damage increases the\n",
+        "greater the target’s\n",
+        "Attack stat."
       ]
     },
     {

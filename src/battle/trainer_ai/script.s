@@ -257,7 +257,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Basic_CheckCanPsychoShift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Basic_CheckHealBlock
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Basic_CheckPowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Basic_CheckLastResort
@@ -1318,11 +1317,6 @@ Basic_CheckHealBlock:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_HEAL_BLOCK, ScoreMinus10
     PopOrEnd 
 
-Basic_CheckPowerTrick:
-    // If the attacker is already under the effect, score -10.
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_POWER_TRICK, ScoreMinus10
-    PopOrEnd 
-
 Basic_CheckGastroAcid:
     // If the target is already under the effect, score -10.
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_ABILITY_SUPPRESSED, ScoreMinus10
@@ -1697,7 +1691,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_PsychoShift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Expert_TrumpCard
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_ATK_DEF, Expert_PowerTrick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Expert_Punishment
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Expert_LastResort
@@ -3211,7 +3204,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_FLING
     TableEntry BATTLE_EFFECT_TRANSFER_STATUS
     TableEntry BATTLE_EFFECT_PREVENT_HEALING
-    TableEntry BATTLE_EFFECT_SWAP_ATK_DEF
     TableEntry BATTLE_EFFECT_SUPRESS_ABILITY
     TableEntry BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA
     TableEntry BATTLE_EFFECT_SWAP_STAT_CHANGES
@@ -5230,35 +5222,6 @@ Expert_HealBlock_TryScorePlus1:
     AddToMoveScore 1
 
 Expert_HealBlock_End:
-    PopOrEnd 
-
-Expert_PowerTrick:
-    // If the attacker's HP > 90%, 62.5% chance of score +1.
-    //
-    // If the attacker's HP > 60%, 50% chance of score +1.
-    //
-    // If the attacker's HP > 30%, 35.9% chance of score +1.
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_PowerTrick_LikelyScorePlus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_PowerTrick_CoinFlipScorePlus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_PowerTrick_UnlikelyScorePlus1
-    GoTo ScoreMinus2
-
-Expert_PowerTrick_LikelyScorePlus1:
-    IfRandomLessThan 96, Expert_PowerTrick_End
-    AddToMoveScore 1
-    GoTo Expert_PowerTrick_End
-
-Expert_PowerTrick_CoinFlipScorePlus1:
-    IfRandomLessThan 128, Expert_PowerTrick_End
-    AddToMoveScore 1
-    GoTo Expert_PowerTrick_End
-
-Expert_PowerTrick_UnlikelyScorePlus1:
-    IfRandomLessThan 164, Expert_PowerTrick_End
-    AddToMoveScore 1
-    GoTo Expert_PowerTrick_End
-
-Expert_PowerTrick_End:
     PopOrEnd 
 
 Expert_GastroAcid:
