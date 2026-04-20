@@ -7343,7 +7343,6 @@ static const u16 sPunchingMoves[] = {
     MOVE_DIZZY_PUNCH,
     MOVE_DYNAMIC_PUNCH,
     MOVE_HAMMER_ARM,
-    MOVE_COMET_PUNCH,
     MOVE_METEOR_MASH,
     MOVE_SHADOW_PUNCH,
     MOVE_DRAIN_PUNCH,
@@ -7507,6 +7506,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (MOVE_DATA(move).effect == BATTLE_EFFECT_USE_DEF_AS_ATK) {
         attackStat = BattleMon_Get(battleCtx, attacker, BATTLEMON_DEFENSE, NULL);
         attackStage = BattleMon_Get(battleCtx, attacker, BATTLEMON_DEFENSE_STAGE, NULL) - 6;
+    } else if (MOVE_DATA(move).effect == BATTLE_EFFECT_USE_TARGET_ATTACK_STAT) {
+        attackStat = BattleMon_Get(battleCtx, defender, BATTLEMON_ATTACK, NULL);
+        attackStage = BattleMon_Get(battleCtx, defender, BATTLEMON_ATTACK_STAGE, NULL) - 6;
     }
 
     if ((attackerParams.ability == ABILITY_HUGE_POWER || attackerParams.ability == ABILITY_PURE_POWER) && (!(move == MOVE_STRUGGLE && inPower == 40))) {

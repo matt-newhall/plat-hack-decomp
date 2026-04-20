@@ -35,9 +35,9 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_SUPERSONIC" ],
-            [ 1, "MOVE_COMET_PUNCH" ],
+            [ 1, "MOVE_FOUL_PLAY" ],
             [ 6, "MOVE_SUPERSONIC" ],
-            [ 9, "MOVE_COMET_PUNCH" ],
+            [ 9, "MOVE_FOUL_PLAY" ],
             [ 14, "MOVE_LIGHT_SCREEN" ],
             [ 14, "MOVE_REFLECT" ],
             [ 14, "MOVE_SAFEGUARD" ],

@@ -51,15 +51,15 @@
 	</row>
 	<row id="pl_msg_00000000_00012" index="12">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">{STRVAR_1 1, 0, 0} used\nComet Punch!</language>
+		<language name="English">{STRVAR_1 1, 0, 0} used\nFoul Play!</language>
 	</row>
 	<row id="pl_msg_00000000_00013" index="13">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nComet Punch!</language>
+		<language name="English">The wild {STRVAR_1 1, 0, 0} used\nFoul Play!</language>
 	</row>
 	<row id="pl_msg_00000000_00014" index="14">
 		<attribute name="window_context_name">used</attribute>
-		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nComet Punch!</language>
+		<language name="English">The foe’s {STRVAR_1 1, 0, 0} used\nFoul Play!</language>
 	</row>
 	<row id="pl_msg_00000000_00015" index="15">
 		<attribute name="window_context_name">used</attribute>
