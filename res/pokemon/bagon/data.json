@@ -34,7 +34,7 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_RAGE" ],
+            [ 1, "MOVE_POWDER" ],
             [ 5, "MOVE_BITE" ],
             [ 10, "MOVE_LEER" ],
             [ 16, "MOVE_HEADBUTT" ],

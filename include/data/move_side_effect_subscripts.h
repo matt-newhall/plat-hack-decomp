@@ -158,6 +158,7 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_ALLIES_RECOVER_QUARTER_MAX_HP]    = subscript_allies_recover_quarter_max_hp,
     [MOVE_SUBSCRIPT_PTR_AURORA_VEIL]                      = subscript_aurora_veil,
     [MOVE_SUBSCRIPT_PTR_SHELL_SMASH]                      = subscript_shell_smash,
-    [MOVE_SUBSCRIPT_PTR_DRAIN_THREE_QUARTER_DAMAGE_DEALT] = subscript_drain_three_quarter_damage_dealt
+    [MOVE_SUBSCRIPT_PTR_DRAIN_THREE_QUARTER_DAMAGE_DEALT] = subscript_drain_three_quarter_damage_dealt,
+    [MOVE_SUBSCRIPT_PTR_SET_POWDER_FLAG]                  = subscript_set_powder_flag
 };
 // clang-format on

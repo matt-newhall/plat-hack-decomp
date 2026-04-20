@@ -327,4 +327,6 @@ subscript_files = files(
     'subscript_aurora_veil.s',
     'subscript_shell_smash.s',
     'subscript_drain_three_quarter_damage_dealt.s',
+    'subscript_set_powder_flag.s',
+    'subscript_powder_fire_move.s',
 )

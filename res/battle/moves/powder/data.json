@@ -1,20 +1,21 @@
 {
-    "name": "Rage",
-    "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
-    "power": 20,
+    "name": "Powder",
+    "class": "CLASS_STATUS",
+    "type": "TYPE_BUG",
+    "power": 0,
     "accuracy": 100,
     "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_RAISE_ATK_WHEN_HIT",
+        "type": "BATTLE_EFFECT_POWDER",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
-    "priority": 0,
+    "priority": 1,
     "flags": [
-        "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
-        "MOVE_FLAG_CAN_MIRROR_MOVE"
+        "MOVE_FLAG_CAN_MAGIC_COAT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
     ],
     "contest": {
         "effect": "CONTEST_EFFECT_DOUBLE_NEXT_TURN",

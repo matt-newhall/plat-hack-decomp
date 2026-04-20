@@ -40,7 +40,7 @@
             [ 10, "MOVE_TAIL_WHIP" ],
             [ 13, "MOVE_BITE" ],
             [ 19, "MOVE_DUAL_WINGBEAT" ],
-            [ 22, "MOVE_RAGE" ],
+            [ 22, "MOVE_POWDER" ],
             [ 25, "MOVE_DIZZY_PUNCH" ],
             [ 31, "MOVE_CRUNCH" ],
             [ 34, "MOVE_ENDURE" ],

@@ -9014,6 +9014,41 @@
         "its team stronger against\f",
         "physical and special moves slightly!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PowderUsed_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was covered\n",
+        "in powder!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PowderUsed_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} was covered\n",
+        "in powder!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PowderUsed_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} was covered\n",
+        "in powder!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PowderExploded",
+      "en_US": [
+        "When the flame touched the powder\n",
+        "on the Pokémon, it exploded!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PowderQuenchedByRain",
+      "en_US": [
+        "The rain quenched\n",
+        "the powder!"
+      ]
     }
   ]
 }

@@ -45,7 +45,7 @@
             [ 13, "MOVE_LICK" ],
             [ 19, "MOVE_HEADBUTT" ],
             [ 25, "MOVE_ROAR" ],
-            [ 31, "MOVE_RAGE" ],
+            [ 31, "MOVE_POWDER" ],
             [ 37, "MOVE_TAKE_DOWN" ],
             [ 43, "MOVE_PAYBACK" ],
             [ 49, "MOVE_CRUNCH" ]
