@@ -51,8 +51,9 @@ _035:
 
 _067:
     FadeOutBattle 
-    SwitchToxic 
-    Wait 
+    SwitchToxic
+    ResetSleepTurns
+    Wait
     UpdateVar OPCODE_FLAG_ON, BTLVAR_RESULT_MASK, BATTLE_RESULT_PLAYER_FLED
     End 
 

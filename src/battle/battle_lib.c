@@ -575,6 +575,9 @@ int BattleMon_Get(BattleContext *battleCtx, int battler, enum BattleMonParam par
     case BATTLEMON_QUICK_DRAW:
         return battleMon->moveEffectsData.quickDraw;
 
+    case BATTLEMON_INITIAL_SLEEP_TURNS:
+        return battleMon->initialSleepTurns;
+
     case BATTLEMON_TEMP:
         return BattleMon_Get(battleCtx, battler, battleCtx->scriptTemp, buf);
 
@@ -931,6 +934,10 @@ void BattleMon_Set(BattleContext *battleCtx, int battler, enum BattleMonParam pa
 
     case BATTLEMON_QUICK_DRAW:
         mon->moveEffectsData.quickDraw = *(u8 *)buf;
+        break;
+
+    case BATTLEMON_INITIAL_SLEEP_TURNS:
+        mon->initialSleepTurns = *(u8 *)buf;
         break;
 
     case BATTLEMON_FORM_NUM:

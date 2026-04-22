@@ -1351,4 +1351,8 @@
     .long 246
     .endm
 
+    .macro ResetSleepTurns
+    .long 247
+    .endm
+
     .endif // ASM_BATTLE_SCRIPT_INC

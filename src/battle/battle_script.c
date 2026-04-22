@@ -324,6 +324,7 @@ static BOOL BtlCmd_CheckSleepAbilityImmunity(BattleSystem *battleSys, BattleCont
 static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TriggerNeutralizingGasWearOffStep(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_ResetSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckStickyWeb(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -634,7 +635,8 @@ static const BtlCmd sBattleCommands[] = {
     BtlCmd_CalcStoredPowerPower,
     BtlCmd_TryAuroraVeil,
     BtlCmd_CalcHeavySlamPower,
-    BtlCmd_RagePowder
+    BtlCmd_RagePowder,
+    BtlCmd_ResetSleepTurns
 };
 
 BOOL BattleScript_Exec(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -7807,6 +7809,41 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
                 u32 condition = MON_CONDITION_POISON;
 
                 Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &condition);
+            }
+        }
+    }
+
+    return FALSE;
+}
+
+static BOOL BtlCmd_ResetSleepTurns(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int maxBattlers = BattleSystem_MaxBattlers(battleSys);
+    Party *party = BattleSystem_Party(battleSys, BATTLER_US);
+
+    u8 initialSleepBySlot[MAX_PARTY_SIZE] = {0};
+    for (int i = 0; i < maxBattlers; i++) {
+        if (Battler_Side(battleSys, i) == BATTLER_US) {
+            int slot = battleCtx->selectedPartySlot[i];
+            if (slot < MAX_PARTY_SIZE && battleCtx->battleMons[i].initialSleepTurns > 0) {
+                initialSleepBySlot[slot] = battleCtx->battleMons[i].initialSleepTurns;
+            }
+        }
+    }
+
+    for (int j = 0; j < Party_GetCurrentCount(party); j++) {
+        Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, j);
+        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
+            u32 status = Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL);
+            if (status & MON_CONDITION_SLEEP) {
+                u32 newSleepTurns = initialSleepBySlot[j] > 0
+                    ? initialSleepBySlot[j]
+                    : 2 + BattleSystem_RandNext(battleSys) % 3;
+                status = (status & ~MON_CONDITION_SLEEP) | newSleepTurns;
+                Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &status);
             }
         }
     }
