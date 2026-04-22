@@ -252,6 +252,7 @@ ScriptCommand(BTLCMD_CALCSTOREDPOWERPOWER,        BtlCmd_CalcStoredPowerPower)
 ScriptCommand(BTLCMD_TRYAURORAVEIL,               BtlCmd_TryAuroraVeil)
 ScriptCommand(BTLCMD_CALCHEAVYSLAMPOWER,          BtlCmd_CalcHeavySlamPower)
 ScriptCommand(BTLCMD_RAGEPOWDER,                  BtlCmd_RagePowder)
+ScriptCommand(BTLCMD_RESETSLEEPTURNS,             BtlCmd_ResetSleepTurns)
 
 // clang-format on
 

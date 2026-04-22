@@ -70,10 +70,11 @@ _135:
     WaitButtonABTime 60
 
 _150:
-    FadeOutBattle 
-    SwitchToxic 
-    Wait 
-    End 
+    FadeOutBattle
+    SwitchToxic
+    ResetSleepTurns
+    Wait
+    End
 
 _153:
     Call BATTLE_SUBSCRIPT_LINK_WIN_LOSE

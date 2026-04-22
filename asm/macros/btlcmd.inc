@@ -1354,6 +1354,10 @@
     .long BTLCMD_RAGEPOWDER
     .endm
 
+    .macro ResetSleepTurns
+    .long BTLCMD_RESETSLEEPTURNS
+    .endm
+
     .text
     .globl _start
 _start:

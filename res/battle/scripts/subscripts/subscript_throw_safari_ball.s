@@ -26,8 +26,9 @@ _023:
     Wait 
     WaitButtonABTime 30
     FadeOutBattle 
-    SwitchToxic 
-    Wait 
+    SwitchToxic
+    ResetSleepTurns
+    Wait
     UpdateVar OPCODE_FLAG_ON, BTLVAR_RESULT_MASK, BATTLE_RESULT_PLAYER_FLED
 
 _051:

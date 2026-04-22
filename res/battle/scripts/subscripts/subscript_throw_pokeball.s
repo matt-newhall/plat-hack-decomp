@@ -10,7 +10,8 @@ _000:
     UpdateVarFromVar OPCODE_GET, BTLVAR_RESULT_MASK, BTLVAR_SCRIPT_TEMP
     UpdateVar OPCODE_BITWISE_AND, BTLVAR_SCRIPT_TEMP, 255
     CompareVarToValue OPCODE_NEQ, BTLVAR_SCRIPT_TEMP, 4, _029
-    SwitchToxic 
+    SwitchToxic
+    ResetSleepTurns
 
 _029:
     End 

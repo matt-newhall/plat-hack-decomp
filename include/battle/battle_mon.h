@@ -119,7 +119,8 @@ typedef struct BattleMon {
     u32 OTId;
 
     u16 heldItem;
-    u16 padding007A; // unused
+    u8 initialSleepTurns;
+    u8 padding007B;
 
     u8 timesDamaged;
     u8 trainerMessageFlags;
