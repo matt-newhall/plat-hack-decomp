@@ -1,7 +1,7 @@
 {
     "name": "Disarming Voice",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_FAIRY",
     "power": 40,
     "accuracy": 0,
     "pp": 15,

@@ -2086,7 +2086,7 @@ static int TVSegment_LoadMessage_DiscoveringGroups(FieldSystem *fieldSystem, Str
 
     type = LCRNG_RandMod(NUM_POKEMON_TYPES - 1);
 
-    if (type >= TYPE_MYSTERY) {
+    if (type >= TYPE_FAIRY) {
         type++;
     }
 

@@ -525,7 +525,7 @@ static void CreateCategoryBox(PokedexEntryDisplayGraphics *graphicsStruct, Poked
 
     graphicsStruct->displayedIconSprite = SpriteList_Add(&spriteListTemplate);
 
-    Sprite_SetAnim(graphicsStruct->displayedIconSprite, POKEDEX_TYPE_ICON_BACKGROUND_BOX_CELL);
+    Sprite_SetAnim(graphicsStruct->displayedIconSprite, 0x00);
 
     if (PokedexSort_CurrentCaughtStatus(displayState->sortData) != CS_CAUGHT) {
         species = SPECIES_NONE;

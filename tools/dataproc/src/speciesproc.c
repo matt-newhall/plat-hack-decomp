@@ -1433,7 +1433,6 @@ static int pack_dexdata(nitroarc_packer_t *p) {
 
     // Indices of species by their types
     for (size_t i = 0; i < NUM_POKEMON_TYPES; i++) {
-        if (i == TYPE_MYSTERY) continue; // NOTE: The Mystery type is not packed
         nitroarc_ppack(p, indexed_by_type[i], count_by_type[i] * sizeof(**indexed_by_type), NULL);
     }
 

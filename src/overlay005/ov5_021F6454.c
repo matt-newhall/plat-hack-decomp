@@ -689,7 +689,7 @@ static void CalcHiddenPowerTypeAndPower(Pokemon *mon, int *outPower, int *outTyp
         *outType = hpIV & 1 | (atkIV & 1) << 1 | (defIV & 1) << 2 | (speedIV & 1) << 3 | (spatkIV & 1) << 4 | (spdefIV & 1) << 5;
         *outType = *outType * 15 / 63 + 1;
 
-        if (*outType >= TYPE_MYSTERY) {
+        if (*outType >= TYPE_FAIRY) {
             *outType = *outType + 1;
         }
     }

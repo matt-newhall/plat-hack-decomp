@@ -2576,12 +2576,14 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_FIGHTING, TYPE_ROCK, TYPE_MULTI_SUPER_EFF },
     { TYPE_FIGHTING, TYPE_DARK, TYPE_MULTI_SUPER_EFF },
     { TYPE_FIGHTING, TYPE_STEEL, TYPE_MULTI_SUPER_EFF },
+    { TYPE_FIGHTING, TYPE_FAIRY, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_POISON, TYPE_GRASS, TYPE_MULTI_SUPER_EFF },
     { TYPE_POISON, TYPE_POISON, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_POISON, TYPE_GROUND, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_POISON, TYPE_ROCK, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_POISON, TYPE_GHOST, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_POISON, TYPE_STEEL, TYPE_MULTI_IMMUNE },
+    { TYPE_POISON, TYPE_FAIRY, TYPE_MULTI_SUPER_EFF },
     { TYPE_GROUND, TYPE_FIRE, TYPE_MULTI_SUPER_EFF },
     { TYPE_GROUND, TYPE_ELECTRIC, TYPE_MULTI_SUPER_EFF },
     { TYPE_GROUND, TYPE_GRASS, TYPE_MULTI_NOT_VERY_EFF },
@@ -2610,6 +2612,7 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_BUG, TYPE_GHOST, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_BUG, TYPE_DARK, TYPE_MULTI_SUPER_EFF },
     { TYPE_BUG, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_BUG, TYPE_FAIRY, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_ROCK, TYPE_FIRE, TYPE_MULTI_SUPER_EFF },
     { TYPE_ROCK, TYPE_ICE, TYPE_MULTI_SUPER_EFF },
     { TYPE_ROCK, TYPE_FIGHTING, TYPE_MULTI_NOT_VERY_EFF },
@@ -2623,16 +2626,25 @@ static const u8 sTypeMatchupMultipliers[][3] = {
     { TYPE_GHOST, TYPE_GHOST, TYPE_MULTI_SUPER_EFF },
     { TYPE_DRAGON, TYPE_DRAGON, TYPE_MULTI_SUPER_EFF },
     { TYPE_DRAGON, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_DRAGON, TYPE_FAIRY, TYPE_MULTI_IMMUNE },
     { TYPE_DARK, TYPE_FIGHTING, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_DARK, TYPE_PSYCHIC, TYPE_MULTI_SUPER_EFF },
     { TYPE_DARK, TYPE_GHOST, TYPE_MULTI_SUPER_EFF },
     { TYPE_DARK, TYPE_DARK, TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_DARK, TYPE_FAIRY, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_FIRE, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_WATER, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_ELECTRIC, TYPE_MULTI_NOT_VERY_EFF },
     { TYPE_STEEL, TYPE_ICE, TYPE_MULTI_SUPER_EFF },
     { TYPE_STEEL, TYPE_ROCK, TYPE_MULTI_SUPER_EFF },
     { TYPE_STEEL, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_STEEL, TYPE_FAIRY, TYPE_MULTI_SUPER_EFF },
+    { TYPE_FAIRY, TYPE_FIRE, TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FAIRY, TYPE_FIGHTING, TYPE_MULTI_SUPER_EFF },
+    { TYPE_FAIRY, TYPE_POISON, TYPE_MULTI_NOT_VERY_EFF },
+    { TYPE_FAIRY, TYPE_DRAGON, TYPE_MULTI_SUPER_EFF },
+    { TYPE_FAIRY, TYPE_DARK, TYPE_MULTI_SUPER_EFF },
+    { TYPE_FAIRY, TYPE_STEEL, TYPE_MULTI_NOT_VERY_EFF },
 
     { 0xFE, 0xFE, TYPE_MULTI_IMMUNE },
 
@@ -2712,7 +2724,7 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
             | ((battleCtx->battleMons[attacker].spDefenseIV & 1) << 5);
         hpType = (hpType * 15 / 63) + 1;
 
-        if (hpType >= TYPE_MYSTERY) {
+        if (hpType >= TYPE_FAIRY) {
             hpType++;
         }
         moveType = hpType;
@@ -8904,7 +8916,7 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
             | ((battleCtx->battleMons[item].spDefenseIV & 1) << 5);
         type = (type * 15 / 63) + 1;
 
-        if (type >= TYPE_MYSTERY) {
+        if (type >= TYPE_FAIRY) {
             type++;
         }
         break;
@@ -9249,7 +9261,7 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
             | ((Pokemon_GetValue(mon, MON_DATA_SPDEF_IV, NULL) & 1) << 5);
         type = (type * 15 / 63) + 1;
 
-        if (type >= TYPE_MYSTERY) {
+        if (type >= TYPE_FAIRY) {
             type++;
         }
         break;

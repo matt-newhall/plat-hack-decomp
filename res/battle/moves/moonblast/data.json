@@ -1,7 +1,7 @@
 {
     "name": "Moonblast",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_FAIRY",
     "power": 95,
     "accuracy": 100,
     "pp": 15,

@@ -3003,7 +3003,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         type = (type * 15 / 63) + 1;
 
-        if (type >= TYPE_MYSTERY) {
+        if (type >= TYPE_FAIRY) {
             type++;
         }
         break;
@@ -3272,7 +3272,7 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
             | ((battleCtx->battleMons[battler].spDefenseIV & 1) << 5);
         result = (result * 15 / 63) + 1;
 
-        if (result >= TYPE_MYSTERY) {
+        if (result >= TYPE_FAIRY) {
             result++;
         }
         break;

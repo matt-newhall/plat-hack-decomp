@@ -653,64 +653,7 @@ static void CreateTypeIconSprites(InfoMainGraphics *graphicsStruct, PokedexGraph
 // This maps the type to an animation ID used in the Pokedex graphics. See zukan.narc -> files type_icons_cell_NCER_lz, type_icons_anim_NANR_lz, type_icons_NCGR_lz
 int PokedexGraphics_GetAnimIDfromType(int monType)
 {
-    int animID;
-
-    switch (monType) {
-    case TYPE_NORMAL:
-        animID = 0;
-        break;
-    case TYPE_FIGHTING:
-        animID = 6;
-        break;
-    case TYPE_FLYING:
-        animID = 14;
-        break;
-    case TYPE_POISON:
-        animID = 10;
-        break;
-    case TYPE_GROUND:
-        animID = 8;
-        break;
-    case TYPE_ROCK:
-        animID = 5;
-        break;
-    case TYPE_BUG:
-        animID = 11;
-        break;
-    case TYPE_GHOST:
-    case TYPE_MYSTERY:
-        animID = 7;
-        break;
-    case TYPE_STEEL:
-        animID = 9;
-        break;
-    case TYPE_FIRE:
-        animID = 1;
-        break;
-    case TYPE_WATER:
-        animID = 3;
-        break;
-    case TYPE_GRASS:
-        animID = 2;
-        break;
-    case TYPE_ELECTRIC:
-        animID = 4;
-        break;
-    case TYPE_PSYCHIC:
-        animID = 15;
-        break;
-    case TYPE_ICE:
-        animID = 13;
-        break;
-    case TYPE_DRAGON:
-        animID = 16;
-        break;
-    case TYPE_DARK:
-        animID = 12;
-        break;
-    }
-
-    return animID;
+    return monType + 1;
 }
 
 static void DeleteTypeIconSprites(InfoMainGraphics *graphicsStruct)
@@ -744,7 +687,7 @@ static void CreateCategoryBox(InfoMainGraphics *graphicsStruct, PokedexGraphicDa
 
     graphicsStruct->categoryBoxSprite = SpriteList_Add(&spriteTemplate);
 
-    Sprite_SetAnim(graphicsStruct->categoryBoxSprite, POKEDEX_TYPE_ICON_BACKGROUND_BOX_CELL);
+    Sprite_SetAnim(graphicsStruct->categoryBoxSprite, 0x00);
 
     if (PokedexSort_CurrentCaughtStatus(displayState->sortData) != CS_CAUGHT) {
         species = SPECIES_NONE;
