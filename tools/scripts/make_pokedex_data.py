@@ -117,7 +117,7 @@ for i, species_dir in enumerate(SPECIES_DIRS):
         # pokemon types
         typeIdx = 27
         for type in PokemonType:
-            if type.name in ['TYPE_MYSTERY', 'NUM_POKEMON_TYPES']:
+            if type.name in ['NUM_POKEMON_TYPES']:
                 continue
             if type.name in pkdata['types']:
                 binData[typeIdx] = binData[typeIdx] + i.to_bytes(2, 'little')

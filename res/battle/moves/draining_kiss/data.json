@@ -1,7 +1,7 @@
 {
     "name": "Draining Kiss",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_FAIRY",
     "power": 50,
     "accuracy": 100,
     "pp": 10,

@@ -654,64 +654,7 @@ static void ov21_021DF098(UnkStruct_ov21_021DF374 *param0, PokedexGraphicData **
 
 int ov21_021DF180(int param0)
 {
-    int v0;
-
-    switch (param0) {
-    case 0:
-        v0 = 0x0;
-        break;
-    case 1:
-        v0 = 0x6;
-        break;
-    case 2:
-        v0 = 0xe;
-        break;
-    case 3:
-        v0 = 0xa;
-        break;
-    case 4:
-        v0 = 0x8;
-        break;
-    case 5:
-        v0 = 0x5;
-        break;
-    case 6:
-        v0 = 0xb;
-        break;
-    case 7:
-    case 9:
-        v0 = 0x7;
-        break;
-    case 8:
-        v0 = 0x9;
-        break;
-    case 10:
-        v0 = 0x1;
-        break;
-    case 11:
-        v0 = 0x3;
-        break;
-    case 12:
-        v0 = 0x2;
-        break;
-    case 13:
-        v0 = 0x4;
-        break;
-    case 14:
-        v0 = 0xf;
-        break;
-    case 15:
-        v0 = 0xd;
-        break;
-    case 16:
-        v0 = 0x10;
-        break;
-    case 17:
-        v0 = 0xc;
-        break;
-    }
-
-    return v0;
+    return param0 + 1;
 }
 
 static void ov21_021DF1F8(UnkStruct_ov21_021DF374 *param0)
@@ -747,7 +690,7 @@ static void ov21_021DF214(UnkStruct_ov21_021DF374 *param0, PokedexGraphicData **
 
     param0->unk_0C = SpriteList_Add(&v1);
 
-    Sprite_SetAnim(param0->unk_0C, 0x11);
+    Sprite_SetAnim(param0->unk_0C, 0x00);
 
     if (PokedexSort_CurrentCaughtStatus(param2->unk_04) != 2) {
         species = 0;

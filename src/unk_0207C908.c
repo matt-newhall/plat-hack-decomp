@@ -44,7 +44,7 @@ __attribute__((aligned(4))) static const u8 Unk_020F0B4C[] = {
     0x2,
     0x1,
     0x0,
-    0x2,
+    0x1,
     0x0,
     0x1,
     0x2,

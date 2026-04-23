@@ -1,7 +1,7 @@
 {
     "name": "Play Rough",
     "class": "CLASS_PHYSICAL",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_FAIRY",
     "power": 90,
     "accuracy": 90,
     "pp": 10,

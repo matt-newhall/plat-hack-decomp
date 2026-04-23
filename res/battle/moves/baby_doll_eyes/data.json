@@ -1,7 +1,7 @@
 {
     "name": "Baby-Doll Eyes",
     "class": "CLASS_STATUS",
-    "type": "TYPE_NORMAL",
+    "type": "TYPE_FAIRY",
     "power": 0,
     "accuracy": 100,
     "pp": 30,
