@@ -3069,7 +3069,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         int monWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
 
-        if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_LIGHT_METAL) {
+        if (Battler_IgnorableAbility(battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
             monWeight /= 2;
         }
 
@@ -3110,7 +3110,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             atkWeight /= 2;
         }
 
-        if (Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_LIGHT_METAL) {
+        if (Battler_IgnorableAbility(battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
             defWeight /= 2;
         }
 

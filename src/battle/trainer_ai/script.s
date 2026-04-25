@@ -69,6 +69,8 @@ Basic_CheckForImmunity:
     IfLoadedEqualTo ABILITY_MOTOR_DRIVE, Basic_CheckElectricAbsorption
     IfLoadedEqualTo ABILITY_WATER_ABSORB, Basic_CheckWaterAbsorption
     IfLoadedEqualTo ABILITY_FLASH_FIRE, Basic_CheckFireAbsorption
+    IfLoadedEqualTo ABILITY_EARTH_EATER, Basic_CheckGroundAbsorption
+    IfLoadedEqualTo ABILITY_SAP_SIPPER, Basic_CheckGrassAbsorption
     IfLoadedEqualTo ABILITY_WONDER_GUARD, Basic_CheckWonderGuard
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckGroundAbsorption
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckWaterAbsorption2 // BUG: This line should branch on Dry Skin rather than Levitate
@@ -87,6 +89,16 @@ Basic_CheckWaterAbsorption:
 Basic_CheckFireAbsorption:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_FIRE, ScoreMinus12
+    GoTo Basic_NoImmunityAbility
+
+Basic_CheckGroundAbsorption:
+    LoadTypeFrom LOAD_MOVE_TYPE
+    IfTempEqualTo TYPE_GROUND, ScoreMinus12
+    GoTo Basic_NoImmunityAbility
+
+Basic_CheckGrassAbsorption:
+    LoadTypeFrom LOAD_MOVE_TYPE
+    IfTempEqualTo TYPE_GRASS, ScoreMinus12
     GoTo Basic_NoImmunityAbility
 
 Basic_CheckWonderGuard:
@@ -6082,8 +6094,6 @@ TagStrategy_CheckSpecialScoring:
     // Handle each of these moves with their own routine
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_SkillSwap
     LoadTypeFrom LOAD_MOVE_TYPE
-    IfMoveEqualTo MOVE_EARTHQUAKE, TagStrategy_Earthquake
-    IfMoveEqualTo MOVE_MAGNITUDE, TagStrategy_Earthquake
     IfMoveEqualTo MOVE_RAIN_DANCE, TagStrategy_RainDance
     IfMoveEqualTo MOVE_SUNNY_DAY, TagStrategy_SunnyDay
     IfMoveEqualTo MOVE_HAIL, TagStrategy_Hail
@@ -6095,6 +6105,7 @@ TagStrategy_CheckSpecialScoring:
     IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckElectricMove
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckFireMove
     IfLoadedEqualTo TYPE_WATER, TagStrategy_CheckWaterMove
+    IfLoadedEqualTo TYPE_GROUND, TagStrategy_CheckGroundMove
     IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_HELPING_HAND, TagStrategy_PartnerKnowsHelpingHand
     PopOrEnd 
 
@@ -6471,29 +6482,6 @@ TagStrategy_Unused_2:
     IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, ScorePlus2
     PopOrEnd 
 
-TagStrategy_Earthquake:
-    // If the move is Earthquake and our partner:
-    //  - Is immune to Earthquake (has Levitate, a Flying typing, or Magnet Rise), score +2
-    //  - Is weak to Earthquake (has Fire, Electric, Poison, or Rock typing), score -10
-    //  - Otherwise, score -3
-    //
-    // Note that this does not check for if the partner is alive; this means that a solo
-    // battler will score Earthquake and Magnitude an additional -3
-    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, ScorePlus2
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE
-    IfLoadedEqualTo AI_HAVE, ScorePlus2
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, ScorePlus2
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ELECTRIC
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_POISON
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    GoTo ScoreMinus3
-
 TagStrategy_SkillSwap:
     // If the move is Skill Swap and:
     //  - The attacker has Truant, Slow Start, Stall, or Klutz, score +5
@@ -6601,6 +6589,42 @@ TagStrategy_SpreadWaterMove:
     AddToMoveScore -3
 
 TagStrategy_CheckWater_End:
+    PopOrEnd 
+
+TagStrategy_CheckGroundMove:
+    ; If the move is Earthquake or Magnitude, check spread. Otherwise, apply all of the
+    ; following which are met:
+    IfMoveEqualTo MOVE_EARTHQUAKE, TagStrategy_SpreadGroundMove
+    IfMoveEqualTo MOVE_MAGNITUDE, TagStrategy_SpreadGroundMove
+    GoTo TagStrategy_CheckGround_End
+
+TagStrategy_SpreadGroundMove:
+    ; If our partner has Earth Eater or Levitate, score +3
+    ;
+    ; If our partner is weak to Ground, score -10
+    ;
+    ; Else, score -3
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_EARTH_EATER
+    IfLoadedEqualTo AI_HAVE, ScorePlus3
+    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, Expert_Haze_TryScorePlus3
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE
+    IfLoadedEqualTo AI_HAVE, ScorePlus3
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
+    IfLoadedEqualTo AI_HAVE, ScorePlus3
+
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
+    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
+    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ELECTRIC
+    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_STEEL
+    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_POISON
+    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    AddToMoveScore -3
+
+TagStrategy_CheckGround_End:
     PopOrEnd 
 
 TagStrategy_CheckFireMove:
