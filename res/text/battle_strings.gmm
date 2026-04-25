@@ -5402,4 +5402,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">The rain quenched\nthe powder!</language>
 	</row>
+	<row id="pl_msg_00000368_01347" index="1347">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">A vortex of swirling magma\nprevents retreat!</language>
+	</row>
 </body>
