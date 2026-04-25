@@ -1,0 +1,49 @@
+# Added Abilities
+
+A quick list of all the abilities added to the game for Pokemon Tempered Platinum.
+
+- Aerilate
+- Regenerator
+- Neuroforce
+- Slush Rush
+- Sand Rush
+- Sand Force
+- Earth Eater
+- Refrigerate
+- Galvanize
+- Electromorphosis
+- Gooey
+- Fur Coat
+- Fluffy
+- Weak Armor
+- Stamina
+- Multiscale
+- Gale Wings
+- Sap Sipper
+- Poison Touch
+- Toxic Debris
+- Big Pecks
+- Light Metal
+- Mega Launcher
+- Friend Guard
+- Water Bubble
+- Stakeout
+- Justified
+- Overcoat
+- Power Spot
+- Quick Draw
+- Perish Body
+- Infiltrator
+- Unnerve
+- Anger Shell
+- Magic Bounce
+- Wind Rider
+- Sweet Veil
+- Costar
+- Punk Rock
+- Power of Alchemy
+- Telepathy
+- Neutralising Gas
+- Defiant
+- Competitive
+- Prankster
