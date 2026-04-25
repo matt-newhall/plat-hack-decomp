@@ -106,11 +106,6 @@ Basic_CheckWonderGuard:
     IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Basic_NoImmunityAbility
     GoTo ScoreMinus12
 
-Basic_CheckGroundAbsorption:
-    LoadTypeFrom LOAD_MOVE_TYPE
-    IfTempEqualTo TYPE_GROUND, ScoreMinus12
-    GoTo Basic_NoImmunityAbility
-
 Basic_CheckWaterAbsorption2:
     LoadTypeFrom LOAD_MOVE_TYPE
     IfTempEqualTo TYPE_WATER, ScoreMinus12
