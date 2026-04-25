@@ -9049,6 +9049,13 @@
         "The rain quenched\n",
         "the powder!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_MagmaStormWeatherAnnounced",
+      "en_US": [
+        "A vortex of swirling magma\n",
+        "prevents retreat!"
+      ]
     }
   ]
 }
