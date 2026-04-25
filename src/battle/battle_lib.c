@@ -7637,7 +7637,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         defenseStat = defenseStat * 150 / 100;
     }
 
-    if (Battler_Ability(battleCtx, defender) == ABILITY_FUR_COAT && (!(move == MOVE_STRUGGLE && inPower == 40))) {
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FUR_COAT) && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         defenseStat = defenseStat * 2;
     }
 
@@ -7999,7 +7999,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage *= 2;
     }
 
-    if (Battler_Ability(battleCtx, defender) == ABILITY_FLUFFY) {
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FLUFFY)) {
         if (moveType == TYPE_FIRE) {
             damage *= 2;
         }
@@ -8014,9 +8014,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (battleType & BATTLE_TYPE_DOUBLES) {
-        int friendGuardCount  = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, defender, ABILITY_FRIEND_GUARD);
-
-        if (friendGuardCount == 2 || (friendGuardCount == 1 && defenderParams.ability != ABILITY_FRIEND_GUARD)) {
+        int partner = BattleSystem_Partner(battleSys, defender);
+        if (battleCtx->battleMons[partner].curHP > 0
+                && Battler_IgnorableAbility(battleCtx, attacker, partner, ABILITY_FRIEND_GUARD)) {
             damage = damage * 3 / 4;
         }
     }

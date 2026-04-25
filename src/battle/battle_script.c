@@ -7266,7 +7266,7 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
     int i = 0;
     int monWeight = DEFENDING_MON.weight;
 
-    if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_LIGHT_METAL) {
+    if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_LIGHT_METAL)) {
         monWeight /= 2;
     }
 
@@ -7304,7 +7304,7 @@ static BOOL BtlCmd_CalcHeavySlamPower(BattleSystem *battleSys, BattleContext *ba
         atkWeight /= 2;
     }
 
-    if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_LIGHT_METAL) {
+    if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_LIGHT_METAL)) {
         defWeight /= 2;
     }
 
