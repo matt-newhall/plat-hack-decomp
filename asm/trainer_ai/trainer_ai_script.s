@@ -549,9 +549,12 @@ Basic_CheckAlreadyUnderLightScreen:
 
 Basic_CheckAuroraVeil:
     ; If not currently hailing, score -10 (move will fail).
+    ; If already under the effect of Aurora Veil, score -10.
     ; If already under the effect of both Light Screen and Reflect, score -8.
     LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_HAILING, ScoreMinus10
+    IfFieldConditionsMask FIELD_CONDITION_AURORA_VEIL_PERM, ScoreMinus10
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_AURORA_VEIL, ScoreMinus10
     IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_LIGHT_SCREEN, Basic_CheckAuroraVeil_CheckReflect
     PopOrEnd
 

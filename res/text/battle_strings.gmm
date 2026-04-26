@@ -5406,4 +5406,8 @@
 		<attribute name="window_context_name">used</attribute>
 		<language name="English">A vortex of swirling magma\nprevents retreat!</language>
 	</row>
+	<row id="pl_msg_00000368_01348" index="1348">
+		<attribute name="window_context_name">used</attribute>
+		<language name="English">The opposing side is covered\nby a protective veil!</language>
+	</row>
 </body>

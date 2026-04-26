@@ -1251,6 +1251,7 @@ static void BattleController_CheckFieldConditions(BattleSystem *battleSys, Battl
                 side = battleCtx->fieldConditionCheckTemp;
 
                 if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_AURORA_VEIL
+                    && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_AURORA_VEIL_PERM && side == BATTLER_THEM)
                     && --battleCtx->sideConditions[side].auroraVeilTurns == 0) {
                     battleCtx->sideConditionsMask[side] &= ~SIDE_CONDITION_AURORA_VEIL;
                     battleCtx->msgMoveTemp = MOVE_AURORA_VEIL;
