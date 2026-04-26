@@ -4124,6 +4124,13 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
+                case OVERWORLD_WEATHER_SOMEWHAT_BLUE:
+                    battleCtx->attacker = BATTLER_THEM;
+                    battleCtx->defender = BATTLER_US;
+                    subscript = subscript_overworld_somewhat_blue;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
                 case OVERWORLD_WEATHER_TWISTED_DIMENSIONS:
                     subscript = subscript_overworld_twisted_dimensions;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
@@ -7883,7 +7890,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             damage /= 2;
         }
 
-        if ((sideConditions & SIDE_CONDITION_PHYSICAL_WALL) != FALSE
+        if (((sideConditions & SIDE_CONDITION_PHYSICAL_WALL) != FALSE
+                || ((fieldConditions & FIELD_CONDITION_AURORA_VEIL_PERM) && Battler_Side(battleSys, defender) == BATTLER_THEM))
             && criticalMul == 1
             && Battler_Ability(battleCtx, attacker) != ABILITY_INFILTRATOR
             && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
@@ -7938,7 +7946,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         damage += 2;
 
-        if ((sideConditions & SIDE_CONDITION_SPECIAL_WALL) != FALSE
+        if (((sideConditions & SIDE_CONDITION_SPECIAL_WALL) != FALSE
+                || ((fieldConditions & FIELD_CONDITION_AURORA_VEIL_PERM) && Battler_Side(battleSys, defender) == BATTLER_THEM))
             && criticalMul == 1
             && Battler_Ability(battleCtx, attacker) != ABILITY_INFILTRATOR
             && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {

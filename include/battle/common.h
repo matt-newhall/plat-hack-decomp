@@ -78,6 +78,7 @@
 #define WEATHER_IS_FOG  (battleCtx->fieldConditionsMask & FIELD_CONDITION_DEEP_FOG)
 #define WEATHER_IS_MAGMA_STORM (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM)
 #define WEATHER_IS_TAILWIND (battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM)
+#define WEATHER_IS_AURORA_VEIL (battleCtx->fieldConditionsMask & FIELD_CONDITION_AURORA_VEIL_PERM)
 
 #define FLAG_NEGATE(flag) ((flag) ^ 0xFFFFFFFF)
 

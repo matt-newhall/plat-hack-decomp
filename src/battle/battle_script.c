@@ -6762,13 +6762,15 @@ static BOOL BtlCmd_TryBreakScreens(BattleSystem *battleSys, BattleContext *battl
 
     if ((battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_REFLECT)
         || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_LIGHT_SCREEN)
-        || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_AURORA_VEIL)) {
+        || (battleCtx->sideConditionsMask[defending] & SIDE_CONDITION_AURORA_VEIL)
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_AURORA_VEIL_PERM) && defending == BATTLER_THEM)) {
         battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_REFLECT;
         battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_LIGHT_SCREEN;
         battleCtx->sideConditionsMask[defending] &= ~SIDE_CONDITION_AURORA_VEIL;
         battleCtx->sideConditions[defending].reflectTurns = 0;
         battleCtx->sideConditions[defending].lightScreenTurns = 0;
         battleCtx->sideConditions[defending].auroraVeilTurns = 0;
+        battleCtx->fieldConditionsMask &= ~FIELD_CONDITION_AURORA_VEIL_PERM;
     } else {
         BattleScript_Iter(battleCtx, jumpIfNoScreens);
     }
@@ -8983,7 +8985,8 @@ static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleC
 
     int side = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
 
-    if (battleCtx->sideConditionsMask[side] & SIDE_CONDITION_AURORA_VEIL) {
+    if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_AURORA_VEIL)
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_AURORA_VEIL_PERM) && side == BATTLER_THEM)) {
         BattleScript_Iter(battleCtx, jump);
         battleCtx->moveStatusFlags |= MOVE_STATUS_FAILED;
     } else {

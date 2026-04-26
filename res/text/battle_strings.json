@@ -9056,6 +9056,13 @@
         "A vortex of swirling magma\n",
         "prevents retreat!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_AuroraVeilWeatherAnnounced",
+      "en_US": [
+        "The opposing side is covered\n",
+        "by a protective veil!"
+      ]
     }
   ]
 }
