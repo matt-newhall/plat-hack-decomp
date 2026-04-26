@@ -8,7 +8,7 @@ _000:
     Wait 
     UpdateVar OPCODE_SET, BTLVAR_MOVE_EFFECT_CHANCE, 0
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
-    // {0} became trapped by swirling magma!
+    // A vortex of swirling magma prevents retreat!
     PrintMessage pl_msg_00000368_01347, TAG_NONE
     Wait 
     WaitButtonABTime 30
