@@ -238,8 +238,8 @@ int main(int argc, char **argv) {
     archives[1].num_files = (u16)len_registry;
     archives[2].num_files = (u16)len_registry;
     archives[3].num_files = (u16)(4 * NATIONAL_DEX_MAX);
-    archives[4].num_files = (u16)(27 + (NUM_POKEMON_TYPES - 1) + NUM_BODY_SHAPES); // NOTE: The Mystery type is not packed
-    archives[5].num_files = (u16)(27 + (NUM_POKEMON_TYPES - 1) + NUM_BODY_SHAPES);
+    archives[4].num_files = (u16)(27 + NUM_POKEMON_TYPES + NUM_BODY_SHAPES);
+    archives[5].num_files = (u16)(27 + NUM_POKEMON_TYPES + NUM_BODY_SHAPES);
 
     common_init(DATAPROC_F_JSON, enums, archives, headers, textbanks, __FILE__, depfile_fpath, output_dir, pre_init, post_init);
 

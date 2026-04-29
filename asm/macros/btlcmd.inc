@@ -1249,7 +1249,7 @@
 
     .macro CheckImmuneGhost jump_if_fail
     .long BTLCMD_CHECKIMMUNEGHOST
-    .long (\jump_if_fail)-.) / 4 - 1
+    .long (\jump_if_fail-.) / 4 - 1
     .endm
 
     .macro SwitchToxic
