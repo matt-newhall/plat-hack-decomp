@@ -3534,11 +3534,11 @@
     {
       "id": "pl_msg_00000646_00361",
       "en_US": [
-        "The user faints. In\n",
-        "return, the Pokémon\n",
-        "taking its place will\n",
-        "have its HP restored\n",
-        "and status cured."
+        "The user drenches the\n",
+        "target in poisonous\n",
+        "liquid. This move’s\n",
+        "power doubles if the\n",
+        "target is poisoned."
       ]
     },
     {
