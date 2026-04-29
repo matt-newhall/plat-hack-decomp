@@ -2381,8 +2381,9 @@ void BattlePartyText_PrintEmbargoPreventingItemUse(BattleParty *battleParty)
     Pokemon *mon = BattleSystem_GetPartyPokemon(context->battleSys, context->battler, context->pokemonPartySlots[context->selectedPartyIndex]);
     String *string = MessageLoader_GetNewString(battleParty->messageLoader, BattleParty_Text_EmbargoPreventsItemUse);
 
+    // Removed Embargo so idm setting this to blank
     StringTemplate_SetNickname(battleParty->stringTemplate, 0, Pokemon_GetBoxPokemon(mon));
-    StringTemplate_SetMoveName(battleParty->stringTemplate, 1, MOVE_EMBARGO);
+    StringTemplate_SetMoveName(battleParty->stringTemplate, 1, MOVE_NONE);
     StringTemplate_Format(battleParty->stringTemplate, battleParty->string, string);
     String_Free(string);
 }

@@ -30,8 +30,8 @@ _045:
     GoTo _062
 
 _050:
-    // {0} was trapped\nin the vortex!!
-    PrintMessage pl_msg_00000368_00262, TAG_NICKNAME_MOVE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
+    // {0} was trapped in the vortex!!
+    PrintMessage BattleStrings_Text_PokemonWasTrappedInAVortex_Ally, TAG_NICKNAME_MOVE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     GoTo _062
 
 _057:

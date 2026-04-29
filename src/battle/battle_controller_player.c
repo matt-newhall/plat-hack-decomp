@@ -2221,7 +2221,7 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
     int partner = BATTLER_NONE;
 
     if (battleType & BATTLE_TYPE_DOUBLES) {
-        partner = BattleSystem_Partner(battleSys, battleCtx->attacker);
+        partner = BattleSystem_GetPartner(battleSys, battleCtx->attacker);
     }
 
     if ((rand1 < maxLevel && (ATTACKING_MON.status & MON_CONDITION_ANY) == FALSE)
@@ -4003,7 +4003,7 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
                 battleCtx->afterMoveEffectTemp++;
 
                 if (Battler_Ability(battleCtx, battler) == ABILITY_WIND_RIDER
-                    && Battler_Side(battleSys, battleCtx->attacker) == Battler_Side(battleSys, battler)) {
+                    && BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) == BattleSystem_GetBattlerSide(battleSys, battler)) {
                     battleCtx->sideEffectMon = battler;
 
                     LOAD_SUBSEQ(subscript_wind_rider);
@@ -4203,7 +4203,7 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
 {
     if (battleCtx->battleStatusMask2 & SYSCTL_MAGIC_COAT_REFLECTED) {
         // Only swap back if we're NOT still processing multi-target hits
-        if (!(CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) || battleCtx->battlerCounter >= BattleSystem_MaxBattlers(battleSys)) {
+        if (!(CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) || battleCtx->battlerCounter >= BattleSystem_GetMaxBattlers(battleSys)) {
             battleCtx->battleStatusMask2 &= ~SYSCTL_MAGIC_COAT_REFLECTED;
             battleCtx->defender = battleCtx->attacker;
             battleCtx->attacker = battleCtx->magicCoatMon;
@@ -4287,7 +4287,7 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
                     battleCtx->moveStatusFlags |= MOVE_STATUS_NO_MORE_WORK;
-                    battleCtx->battlerCounter = BattleSystem_MaxBattlers(battleSys);
+                    battleCtx->battlerCounter = BattleSystem_GetMaxBattlers(battleSys);
                 } else {
                     // When we find the (only) possible partner, redo the move, and then end.
                     BattleSystem_SetupLoop(battleSys, battleCtx);

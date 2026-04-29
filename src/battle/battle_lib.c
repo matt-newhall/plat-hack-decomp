@@ -4652,8 +4652,8 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     && Battler_Ability(battleCtx, battler) == ABILITY_WIND_RIDER) {
                     battleCtx->battleMons[battler].windRiderSwitchIn = TRUE;
 
-                    if (battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)] & SIDE_CONDITION_TAILWIND
-                        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && Battler_Side(battleSys, battler) == BATTLER_THEM)) {
+                    if (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] & SIDE_CONDITION_TAILWIND
+                        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM)) {
                         battleCtx->sideEffectMon = battler;
                         subscript = subscript_wind_rider;
                         result = TRUE;
@@ -7891,7 +7891,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
 
         if (((sideConditions & SIDE_CONDITION_PHYSICAL_WALL) != FALSE
-                || ((fieldConditions & FIELD_CONDITION_AURORA_VEIL_PERM) && Battler_Side(battleSys, defender) == BATTLER_THEM))
+                || ((fieldConditions & FIELD_CONDITION_AURORA_VEIL_PERM) && BattleSystem_GetBattlerSide(battleSys, defender) == BATTLER_THEM))
             && criticalMul == 1
             && Battler_Ability(battleCtx, attacker) != ABILITY_INFILTRATOR
             && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
@@ -7947,7 +7947,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage += 2;
 
         if (((sideConditions & SIDE_CONDITION_SPECIAL_WALL) != FALSE
-                || ((fieldConditions & FIELD_CONDITION_AURORA_VEIL_PERM) && Battler_Side(battleSys, defender) == BATTLER_THEM))
+                || ((fieldConditions & FIELD_CONDITION_AURORA_VEIL_PERM) && BattleSystem_GetBattlerSide(battleSys, defender) == BATTLER_THEM))
             && criticalMul == 1
             && Battler_Ability(battleCtx, attacker) != ABILITY_INFILTRATOR
             && MOVE_DATA(move).effect != BATTLE_EFFECT_REMOVE_SCREENS) {
@@ -8034,7 +8034,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (battleType & BATTLE_TYPE_DOUBLES) {
-        int partner = BattleSystem_Partner(battleSys, defender);
+        int partner = BattleSystem_GetPartner(battleSys, defender);
         if (battleCtx->battleMons[partner].curHP > 0
                 && Battler_IgnorableAbility(battleCtx, attacker, partner, ABILITY_FRIEND_GUARD)) {
             damage = damage * 3 / 4;
@@ -8387,9 +8387,9 @@ BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *b
             return FALSE;
         }
 
-        u32 battleType = BattleSystem_BattleType(battleSys);
+        u32 battleType = BattleSystem_GetBattleType(battleSys);
         if (battleType & BATTLE_TYPE_DOUBLES) {
-            int partner = BattleSystem_Partner(battleSys, battler);
+            int partner = BattleSystem_GetPartner(battleSys, battler);
 
             if ((battleCtx->battlersSwitchingMask & FlagIndex(partner)) == FALSE) {
                 if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, partner, ABILITY_SWEET_VEIL) == TRUE) {
@@ -8994,15 +8994,15 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     }
 
     defender = BattleSystem_RandomOpponent(battleSys, battleCtx, battler);
-    defenderPokemon = BattleSystem_PartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[defender]);
-    partySize = BattleSystem_PartyCount(battleSys, battler);
+    defenderPokemon = BattleSystem_GetPartyPokemon(battleSys, BATTLER_US, battleCtx->selectedPartySlot[defender]);
+    partySize = BattleSystem_GetPartyCount(battleSys, battler);
 
     maxScore = 0;
     picked = 6;
     firstNotDead = 6;
 
     for (i = 0; i < partySize; i++) {
-        battlerPokemon = BattleSystem_PartyPokemon(battleSys, battler, i);
+        battlerPokemon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
         battlerPokemonSpecies = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES_EGG, NULL);
 
         if (battlerPokemonSpecies != SPECIES_NONE
@@ -9033,7 +9033,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         moveDefender,
-                        battleCtx->sideConditionsMask[Battler_Side(battleSys, battler)],
+                        battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)],
                         battleCtx->fieldConditionsMask,
                         0,
                         0,
@@ -9080,7 +9080,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         moveBattler,
-                        battleCtx->sideConditionsMask[Battler_Side(battleSys, defender)],
+                        battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, defender)],
                         battleCtx->fieldConditionsMask,
                         0,
                         0,

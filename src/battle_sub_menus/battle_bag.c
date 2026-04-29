@@ -416,7 +416,8 @@ static u8 TryUseItem(BattleBag *battleBag)
             String *string = MessageLoader_GetNewString(battleBag->messageLoader, BattleBag_Text_EmbargoBlockingItemUse);
 
             StringTemplate_SetNickname(battleBag->stringTemplate, 0, Pokemon_GetBoxPokemon(mon));
-            StringTemplate_SetMoveName(battleBag->stringTemplate, 1, MOVE_EMBARGO);
+            // Removed Embargo so idm setting this to blank
+            StringTemplate_SetMoveName(battleBag->stringTemplate, 1, MOVE_NONE);
             StringTemplate_Format(battleBag->stringTemplate, battleBag->string, string);
             String_Free(string);
 

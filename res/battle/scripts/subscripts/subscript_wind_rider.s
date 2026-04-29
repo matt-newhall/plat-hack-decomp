@@ -4,7 +4,7 @@
 
 _000:
     // {0} rides the wind!
-    PrintMessage pl_msg_00000368_01310, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    PrintMessage BattleStrings_Text_WindRiderTailwindTriggered_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_PARAM, MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE

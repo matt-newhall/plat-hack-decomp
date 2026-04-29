@@ -29,7 +29,7 @@ _077:
     CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_MAGIC_GUARD, _090
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // It sucked up the liquid ooze!
-    PrintMessage pl_msg_00000368_00720, TAG_NONE
+    PrintMessage BattleStrings_Text_ItSuckedUpTheLiquidOoze, TAG_NONE
     Wait 
     WaitButtonABTime 30
 

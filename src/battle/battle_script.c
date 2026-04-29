@@ -4705,7 +4705,7 @@ static BOOL BtlCmd_Counter(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->damage = BattleSystem_CalcMoveDamage(battleSys,
                 battleCtx,
                 MOVE_COUNTER,
-                battleCtx->sideConditionsMask[Battler_Side(battleSys, lastAttacker)],
+                battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, lastAttacker)],
                 battleCtx->fieldConditionsMask,
                 1,
                 0,
@@ -4780,7 +4780,7 @@ static BOOL BtlCmd_MirrorCoat(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->damage = BattleSystem_CalcMoveDamage(battleSys,
                 battleCtx,
                 MOVE_MIRROR_COAT,
-                battleCtx->sideConditionsMask[Battler_Side(battleSys, lastAttacker)],
+                battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, lastAttacker)],
                 battleCtx->fieldConditionsMask,
                 1,
                 0,
@@ -5608,7 +5608,7 @@ static BOOL BtlCmd_TryPerishSong(BattleSystem *battleSys, BattleContext *battleC
             || (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, i, ABILITY_SOUNDPROOF) == TRUE && (!(battleCtx->battleMons[battleCtx->attacker].personality == battleCtx->battleMons[i].personality)))
             || (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PRANKSTER
                 && MON_HAS_TYPE(i, TYPE_DARK)
-                && Battler_Side(battleSys, battleCtx->attacker) != Battler_Side(battleSys, i))) {
+                && BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) != BattleSystem_GetBattlerSide(battleSys, i))) {
             ineligibleBattlers++;
         } else {
             battleCtx->battleMons[i].moveEffectsMask |= MOVE_EFFECT_PERISH_SONG;
@@ -5710,7 +5710,7 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
     if (NO_CLOUD_NINE) {
         if (WEATHER_IS_MAGMA_STORM
             && battleCtx->battleMons[battler].curHP
-            && Battler_Side(battleSys, battler) == BATTLER_US
+            && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US
             && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
             battleCtx->msgMoveTemp = MOVE_MAGMA_STORM;
             battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
@@ -6372,7 +6372,7 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->damage = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         MOVE_BEAT_UP,
-                        battleCtx->sideConditionsMask[Battler_Side(battleSys, battleCtx->defender)],
+                        battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battleCtx->defender)],
                         battleCtx->fieldConditionsMask,
                         movePower,
                         0,
@@ -7540,7 +7540,7 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
 {
     BattleScript_Iter(battleCtx, 1);
 
-    Party *party = BattleSystem_Party(battleSys, BATTLER_US);
+    Party *party = BattleSystem_GetParty(battleSys, BATTLER_US);
 
     for (int j = 0; j < Party_GetCurrentCount(party); j++) {
         Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, j);
@@ -9003,9 +9003,9 @@ static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleC
         battleCtx->msgBuffer.params[1] = battleCtx->attacker;
 
         if (BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, battleCtx->attacker) == 2) {
-            battleCtx->msgBuffer.id = 1340;
+            battleCtx->msgBuffer.id = BattleStrings_Text_AuroraVeilDoubles_Ally;
         } else {
-            battleCtx->msgBuffer.id = 1338;
+            battleCtx->msgBuffer.id = BattleStrings_Text_AuroraVeilSingles_Ally;
         }
     }
 
@@ -9764,7 +9764,7 @@ static BOOL BtlCmd_TryToxicDebris(BattleSystem *battleSys, BattleContext *battle
 {
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
-    int attacking = Battler_Side(battleSys, battleCtx->defender) ^ 1;
+    int attacking = BattleSystem_GetBattlerSide(battleSys, battleCtx->defender) ^ 1;
 
     if (battleCtx->sideConditions[attacking].toxicSpikesLayers == 2) {
         BattleScript_Iter(battleCtx, jumpOnFail);
@@ -9947,7 +9947,7 @@ static BOOL BtlCmd_CopyWithCostar(BattleSystem *battleSys, BattleContext *battle
 {
     BattleScript_Iter(battleCtx, 1);
 
-    int partner = BattleSystem_Partner(battleSys, battleCtx->attacker);
+    int partner = BattleSystem_GetPartner(battleSys, battleCtx->attacker);
 
     for (int i = BATTLE_STAT_HP; i < BATTLE_STAT_MAX; i++) {
         ATTACKING_MON.statBoosts[i] = battleCtx->battleMons[partner].statBoosts[i];
@@ -9978,12 +9978,12 @@ static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *bat
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    if (!(BattleSystem_BattleType(battleSys) & BATTLE_TYPE_DOUBLES)) {
+    if (!(BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES)) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
 
-    int partner = BattleSystem_Partner(battleSys, battleCtx->faintedMon);
+    int partner = BattleSystem_GetPartner(battleSys, battleCtx->faintedMon);
 
     if (battleCtx->battleMons[partner].curHP == 0) {
         BattleScript_Iter(battleCtx, jumpOnFail);
@@ -10477,7 +10477,7 @@ static BOOL BtlCmd_IsTailwindWeather(BattleSystem *battleSys, BattleContext *bat
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
 
     if ((WEATHER_IS_TAILWIND)
-        && (Battler_Side(battleSys, battler) == BATTLER_THEM)) {
+        && (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM)) {
         battleCtx->moveTemp = MOVE_TAILWIND;
     } else {
         battleCtx->moveTemp = 0;
@@ -12199,10 +12199,10 @@ static int BattleScript_Battler(BattleSystem *battleSys, BattleContext *battleCt
 
     case BTLSCR_SIDE_EFFECT_MON_PARTNER: {
         // must re-declare to match
-        int battlers = BattleSystem_MaxBattlers(battleSys);
+        int battlers = BattleSystem_GetMaxBattlers(battleSys);
         for (battlerOut = 0; battlerOut < battlers; battlerOut++) {
             if (battlerOut != battleCtx->sideEffectMon
-                && Battler_Side(battleSys, battlerOut) == Battler_Side(battleSys, battleCtx->sideEffectMon)) {
+                && BattleSystem_GetBattlerSide(battleSys, battlerOut) == BattleSystem_GetBattlerSide(battleSys, battleCtx->sideEffectMon)) {
                 break;
             }
         }
@@ -13157,7 +13157,7 @@ static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleCon
     if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PRANKSTER
         && MON_HAS_TYPE(battler, TYPE_DARK)
         && battleCtx->battleMons[battler].curHP > 0
-        && Battler_Side(battleSys, battleCtx->attacker) != Battler_Side(battleSys, battler)) {
+        && BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) != BattleSystem_GetBattlerSide(battleSys, battler)) {
         BattleScript_Iter(battleCtx, jump);
     }
 

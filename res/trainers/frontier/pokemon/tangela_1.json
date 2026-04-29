@@ -4,7 +4,7 @@
         "MOVE_MEGA_DRAIN",
         "MOVE_ANCIENT_POWER",
         "MOVE_TOXIC",
-        "MOVE_BIND"
+        "MOVE_FLIP_TURN"
     ],
     "evFlags": {
         "hp": false,

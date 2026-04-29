@@ -94,7 +94,7 @@ _147:
 _170:
     WaitButtonABTime 30
     // But it failed!
-    PrintMessage pl_msg_00000368_00796, TAG_NONE
+    PrintMessage BattleStrings_Text_ButItFailed, TAG_NONE
     Wait 
     WaitButtonABTime 30
     End 
