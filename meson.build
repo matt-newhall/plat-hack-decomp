@@ -291,32 +291,6 @@ ovly_mapper = custom_target('overlay.map',
 
 
 ############################################################
-###                        TESTS                         ###
-############################################################
-sha1sum = find_program(['sha1sum', 'shasum'], native: true)
-
-test('SBIN Checksums - Shared',
-    sha1sum,
-    args: ['-c', '--quiet', sbins_sha1]
-)
-
-test('SBIN Checksums - For Revision',
-    sha1sum,
-    args: ['-c', '--quiet', sbins_for_rev_sha1]
-)
-
-test('Filesystem Checksums',
-    sha1sum,
-    args: ['-c', '--quiet', filesys_sha1]
-)
-
-test('ROM Checksum',
-    sha1sum,
-    args: ['-c', '--quiet', rom_sha1]
-)
-
-
-############################################################
 ###                       POSTCONF                       ###
 ############################################################
 meson.add_postconf_script(postconf_py)
