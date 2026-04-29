@@ -548,9 +548,9 @@ Basic_CheckAlreadyUnderLightScreen:
     PopOrEnd 
 
 Basic_CheckAuroraVeil:
-    ; If not currently hailing, score -10 (move will fail).
-    ; If already under the effect of Aurora Veil, score -10.
-    ; If already under the effect of both Light Screen and Reflect, score -8.
+    // If not currently hailing, score -10 (move will fail).
+    // If already under the effect of Aurora Veil, score -10.
+    // If already under the effect of both Light Screen and Reflect, score -8.
     LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_HAILING, ScoreMinus10
     IfFieldConditionsMask FIELD_CONDITION_AURORA_VEIL_PERM, ScoreMinus10
@@ -994,11 +994,11 @@ Basic_CheckDragonDance_NoSimple:
     PopOrEnd 
 
 Basic_CheckQuiverDance:
-    ; If Trick Room is in effect, score -10.
+    // If Trick Room is in effect, score -10.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
 
-    ; If the attacker's ability is Simple and either Sp. Atk, Sp. Def or Speed
-    ; are already at +3, score -10.
+    // If the attacker's ability is Simple and either Sp. Atk, Sp. Def or Speed
+    // are already at +3, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckQuiverDance_NoSimple
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus10
@@ -1007,20 +1007,20 @@ Basic_CheckQuiverDance:
     PopOrEnd 
 
 Basic_CheckQuiverDance_NoSimple:
-    ; If the attacker's Sp. Atk is already at +6, score -10.
-    ; If the attacker's Sp. Def is already at +6, score -10.
-    ; If the attacker's Speed is already at +6, score -8.
+    // If the attacker's Sp. Atk is already at +6, score -10.
+    // If the attacker's Sp. Def is already at +6, score -10.
+    // If the attacker's Speed is already at +6, score -8.
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus8
     PopOrEnd
 
 Basic_CheckShellSmash:
-    ; If Trick Room is in effect, score -10.
+    // If Trick Room is in effect, score -10.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
 
-    ; If the attacker's ability is Simple and Attack, Sp. Atk, or Speed are already at
-    ; +3, score -10.
+    // If the attacker's ability is Simple and Attack, Sp. Atk, or Speed are already at
+    // +3, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckShellSmash_NoSimple
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
@@ -1029,7 +1029,7 @@ Basic_CheckShellSmash:
     PopOrEnd
 
 Basic_CheckShellSmash_NoSimple:
-    ; Only score -10 if Attack, Sp. Atk, and Speed are all already at +6.
+    // Only score -10 if Attack, Sp. Atk, and Speed are all already at +6.
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Basic_CheckShellSmash_End
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, Basic_CheckShellSmash_End
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Basic_CheckShellSmash_End
@@ -2654,11 +2654,11 @@ Expert_LightScreen_PreSplitSpecialTypes:
     TableEntry TABLE_END
 
 Expert_AuroraVeil:
-    ; If not currently hailing, score -10 (move will fail).
-    ;
-    ; If the attacker's HP is < 50%, score -2.
-    ;
-    ; If the attacker's HP is >= 90%, 50% of additional score +1.
+    // If not currently hailing, score -10 (move will fail).
+    //
+    // If the attacker's HP is < 50%, score -2.
+    //
+    // If the attacker's HP is >= 90%, 50% of additional score +1.
     LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_AuroraVeil_ScoreMinus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_AuroraVeil_ScoreMinus2
@@ -2889,9 +2889,9 @@ Expert_StatusParalyze_End:
     PopOrEnd 
 
 Expert_StatusParalyzeHit:
-    ; If the target is immune to or would resist the move, do not apply any further modifiers.
-    ;
-    ; Treat the exact moves Icy Wind, Rock Tomb, and Mud Shot as Speed-reducing status moves.
+    // If the target is immune to or would resist the move, do not apply any further modifiers.
+    //
+    // Treat the exact moves Icy Wind, Rock Tomb, and Mud Shot as Speed-reducing status moves.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_StatusParalyzeHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_StatusParalyzeHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_StatusParalyzeHit_End
@@ -4621,9 +4621,9 @@ Expert_DragonDance_End:
     PopOrEnd 
 
 Expert_QuiverDance:
-    ; If the attacker is slower than its opponent, 50% chance of score +1.
-    ;
-    ; If the attacker's HP <= 50%, 72.7% chance of score -1.
+    // If the attacker is slower than its opponent, 50% chance of score +1.
+    //
+    // If the attacker's HP <= 50%, 72.7% chance of score -1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_QuiverDance_TryScorePlus1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_QuiverDance_End
     IfRandomLessThan 70, Expert_QuiverDance_End
@@ -4638,9 +4638,9 @@ Expert_QuiverDance_End:
     PopOrEnd 
 
 Expert_ShellSmash:
-    ; If the attacker is slower than its opponent, 50% chance of score +1.
-    ;
-    ; If the attacker's HP <= 50%, 72.7% chance of score -1.
+    // If the attacker is slower than its opponent, 50% chance of score +1.
+    //
+    // If the attacker's HP <= 50%, 72.7% chance of score -1.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_ShellSmash_TryScorePlus1
     IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_ShellSmash_End
     IfRandomLessThan 70, Expert_ShellSmash_End
@@ -6590,18 +6590,18 @@ TagStrategy_CheckWater_End:
     PopOrEnd 
 
 TagStrategy_CheckGroundMove:
-    ; If the move is Earthquake or Magnitude, check spread. Otherwise, apply all of the
-    ; following which are met:
+    // If the move is Earthquake or Magnitude, check spread. Otherwise, apply all of the
+    // following which are met:
     IfMoveEqualTo MOVE_EARTHQUAKE, TagStrategy_SpreadGroundMove
     IfMoveEqualTo MOVE_MAGNITUDE, TagStrategy_SpreadGroundMove
     GoTo TagStrategy_CheckGround_End
 
 TagStrategy_SpreadGroundMove:
-    ; If our partner has Earth Eater or Levitate, score +3
-    ;
-    ; If our partner is weak to Ground, score -10
-    ;
-    ; Else, score -3
+    // If our partner has Earth Eater or Levitate, score +3
+    //
+    // If our partner is weak to Ground, score -10
+    //
+    // Else, score -3
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_EARTH_EATER
     IfLoadedEqualTo AI_HAVE, ScorePlus3
     IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, Expert_Haze_TryScorePlus3
