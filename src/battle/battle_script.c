@@ -7544,12 +7544,12 @@ static BOOL BtlCmd_SwitchToxic(BattleSystem *battleSys, BattleContext *battleCtx
 
     for (int j = 0; j < Party_GetCurrentCount(party); j++) {
         Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, j);
-        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
-            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
-            if (Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL) & MON_CONDITION_TOXIC) {
+        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG) {
+            if (Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL) & MON_CONDITION_TOXIC) {
                 u32 condition = MON_CONDITION_POISON;
 
-                Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &condition);
+                Pokemon_SetValue(pokemon, MON_DATA_STATUS, &condition);
             }
         }
     }
@@ -7576,15 +7576,15 @@ static BOOL BtlCmd_ResetSleepTurns(BattleSystem *battleSys, BattleContext *battl
 
     for (int j = 0; j < Party_GetCurrentCount(party); j++) {
         Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, j);
-        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_NONE
-            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_EGG, NULL) != SPECIES_EGG) {
-            u32 status = Pokemon_GetValue(pokemon, MON_DATA_STATUS_CONDITION, NULL);
+        if (Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
+            && Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG) {
+            u32 status = Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL);
             if (status & MON_CONDITION_SLEEP) {
                 u32 newSleepTurns = initialSleepBySlot[j] > 0
                     ? initialSleepBySlot[j]
                     : 2 + BattleSystem_RandNext(battleSys) % 3;
                 status = (status & ~MON_CONDITION_SLEEP) | newSleepTurns;
-                Pokemon_SetValue(pokemon, MON_DATA_STATUS_CONDITION, &status);
+                Pokemon_SetValue(pokemon, MON_DATA_STATUS, &status);
             }
         }
     }

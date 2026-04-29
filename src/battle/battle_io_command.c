@@ -649,7 +649,7 @@ static void BtlIOCmd_RefreshPartyStatus(BattleSystem *battleSys, BattlerData *ba
             ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
         }
 
-        Pokemon_SetValue(v1, MON_DATA_STATUS_CONDITION, (u8 *)&v5);
+        Pokemon_SetValue(mon, MON_DATA_STATUS, (u8 *)&v5);
     }
 
     BattleController_EmitClearCommand(battleSys, battlerData->battler, message->command);

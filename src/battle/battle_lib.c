@@ -8980,7 +8980,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     Pokemon *defenderPokemon;
     u16 defenderPokemonCurHP;
     u16 defenderPokemonSpeed;
-    BattleContext *battleCtx = BattleSystem_Context(battleSys);
+    BattleContext *battleCtx = BattleSystem_GetBattleContext(battleSys);
     u64 lhs, rhs;
     // s8 highestPriorityMove;
     // s8 defenderHighestMovePriority;
@@ -9003,11 +9003,11 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
     for (i = 0; i < partySize; i++) {
         battlerPokemon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
-        battlerPokemonSpecies = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES_EGG, NULL);
+        battlerPokemonSpecies = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES_OR_EGG, NULL);
 
         if (battlerPokemonSpecies != SPECIES_NONE
             && battlerPokemonSpecies != SPECIES_EGG
-            && Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL)
+            && Pokemon_GetValue(battlerPokemon, MON_DATA_HP, NULL)
             && battleCtx->selectedPartySlot[slot1] != i
             && battleCtx->selectedPartySlot[slot2] != i
             && i != battleCtx->aiSwitchedPartySlot[slot1]
@@ -9017,7 +9017,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 firstNotDead = i;
             }
 
-            battlerPokemonCurHP = Pokemon_GetValue(battlerPokemon, MON_DATA_CURRENT_HP, NULL);
+            battlerPokemonCurHP = Pokemon_GetValue(battlerPokemon, MON_DATA_HP, NULL);
             defenderPokemonCurHP = BattleMon_Get(battleCtx, defender, BATTLEMON_CUR_HP, NULL);
 
             trainerMaxDamageToAI = 0;
