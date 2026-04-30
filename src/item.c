@@ -2761,11 +2761,11 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = azure_flute_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_S_S_TICKET] = {
-        .dataID = 0x1B2,
-        .iconID = s_s_ticket_NCGR,
-        .paletteID = s_s_ticket_NCLR,
-        .gen3ID = GBA_ITEM_SS_TICKET,
+    [ITEM_TRAINING_KIT] = {
+        .dataID = 0x1D4,
+        .iconID = training_kit_NCGR,
+        .paletteID = training_kit_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_CONTEST_PASS] = {
         .dataID = 0x1B3,
