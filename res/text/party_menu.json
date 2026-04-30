@@ -1041,6 +1041,13 @@
         "{STRVAR_1 1, 0, 0} is\n",
         "no longer shiny!"
       ]
+    },
+    {
+      "id": "PartyMenu_Text_TrainingKitTrainedToItsLimits",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was trained to\n",
+        "its limits!"
+      ]
     }
   ]
 }
