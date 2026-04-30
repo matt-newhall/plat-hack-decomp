@@ -8829,22 +8829,54 @@
     {
       "id": "BattleStrings_Text_CostarAnnounced_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} copied\n",
-        "{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 2, 0}!"
+        "{STRVAR_1 1, 0, 0} copied {STRVAR_1 1, 1, 0}’s\n",
+        "stat changes with {STRVAR_1 5, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Ally_2",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} copied {STRVAR_1 1, 1, 0}’s\n",
+        "stat changes with {STRVAR_1 5, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Ally_3",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} copied {STRVAR_1 1, 1, 0}’s\n",
+        "stat changes with {STRVAR_1 5, 2, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Wild",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} copied the wild\n",
-        "{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 1, 0}!"
+        "The wild {STRVAR_1 1, 0, 0} copied\n",
+        "the wild {STRVAR_1 1, 1, 0}’s stat changes\f",
+        "with {STRVAR_1 5, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Wild_2",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} copied\n",
+        "the wild {STRVAR_1 1, 1, 0}’s stat changes\f",
+        "with {STRVAR_1 5, 2, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Foe",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} copied the foe’s\n",
-        "{STRVAR_1 1, 1, 0}’s stat changes with {STRVAR_1 5, 1, 0}!"
+        "The foe’s {STRVAR_1 1, 0, 0} copied\n",
+        "the foe’s {STRVAR_1 1, 1, 0}’s stat changes\f",
+        "with {STRVAR_1 5, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_CostarAnnounced_Foe_2",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} copied\n",
+        "the foe’s {STRVAR_1 1, 1, 0}’s stat changes\f",
+        "with {STRVAR_1 5, 2, 0}!"
       ]
     },
     {
