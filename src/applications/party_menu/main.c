@@ -2699,6 +2699,19 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
         return 6;
     }
 
+    if (Item_Get(itemData, ITEM_PARAM_EDGE_POKEMON) != 0) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+        if (Pokemon_GetExpToNextLevel(mon) < 2) {
+            PartyMenu_PrintLongMessage(app, PartyMenu_Text_ItWontHaveAnyEffect, TRUE);
+            app->currPartySlot = 7;
+            app->unk_B00 = sub_02085348;
+        } else {
+            sub_020852B8(app);
+        }
+        Heap_Free(itemData);
+        return 5;
+    }
+
     if (Party_CheckItemEffectsOnMember(app->partyMenu->party, app->partyMenu->usedItemID, app->currPartySlot, 0, HEAP_ID_PARTY_MENU) == 1) {
         Bag_TryRemoveItem(app->partyMenu->bag, app->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
 
