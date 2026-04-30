@@ -81,6 +81,11 @@ static u8 sub_02084B70(u16 itemID)
         return 2;
     }
 
+    if (Item_Get(itemData, ITEM_PARAM_EDGE_POKEMON) != 0) {
+        Heap_Free(itemData);
+        return 29;
+    }
+
     itemParam = Item_Get(itemData, ITEM_PARAM_HEAL_SLEEP);
     itemParam += (Item_Get(itemData, ITEM_PARAM_HEAL_POISON) << 1);
     itemParam += (Item_Get(itemData, ITEM_PARAM_HEAL_BURN) << 2);
@@ -354,6 +359,13 @@ static void BufferUsedItemMessage(PartyMenuApplication *application, u16 param1,
     case 27:
         MessageLoader_GetString(application->messageLoader, PartyMenu_Text_PPWasRestored, application->tmpString);
         break;
+    case 29:
+        string = MessageLoader_GetNewString(application->messageLoader, PartyMenu_Text_TrainingKitTrainedToItsLimits);
+
+        StringTemplate_SetNickname(application->template, 0, Pokemon_GetBoxPokemon(mon));
+        StringTemplate_Format(application->template, application->tmpString, string);
+        String_Free(string);
+        break;
     default:
         MessageLoader_GetString(application->messageLoader, PartyMenu_Text_ItWontHaveAnyEffect, application->tmpString);
     }
@@ -387,6 +399,7 @@ void sub_020852B8(PartyMenuApplication *application)
     case 25:
     case 26:
     case 27:
+    case 29:
         application->unk_B00 = sub_02085384;
         break;
     case 18:
