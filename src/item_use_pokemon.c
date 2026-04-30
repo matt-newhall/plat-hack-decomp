@@ -175,6 +175,14 @@ u8 Pokemon_CheckItemEffects(Pokemon *mon, u16 itemId, u16 moveSlot, enum HeapID 
         }
     }
 
+    if (Item_Get(item, ITEM_PARAM_EDGE_POKEMON)) {
+        if (Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) < MAX_POKEMON_LEVEL
+            && Pokemon_GetExpToNextLevel(mon) > 1) {
+            Heap_Free(item);
+            return TRUE;
+        }
+    }
+
     if (Item_Get(item, ITEM_PARAM_EVOLVE)) {
         if (Pokemon_GetEvolutionTargetSpecies(NULL, mon, EVO_CLASS_BY_ITEM, itemId, NULL) != SPECIES_NONE) {
             Heap_Free(item);
@@ -287,6 +295,15 @@ u8 Pokemon_ApplyItemEffects(Pokemon *mon, u16 itemId, u16 moveSlot, u16 location
     }
 
     vApplyLevel = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+
+    if (Item_Get(item, ITEM_PARAM_EDGE_POKEMON) != 0) {
+        if (vApplyLevel < 100) {
+            Pokemon_IncreaseValue(mon, MON_DATA_EXPERIENCE, Pokemon_GetExpToNextLevel(mon)-1);
+            effectApplied = TRUE;
+        }
+
+        effectFound = TRUE;
+    }
 
     if (Item_Get(item, ITEM_PARAM_LEVEL_UP)) {
         if (vApplyLevel < MAX_POKEMON_LEVEL) {
