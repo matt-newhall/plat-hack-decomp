@@ -481,7 +481,7 @@ static void LoadTypeIconSprites(PokedexEntryDisplayGraphics *graphicsStruct, Pok
     SpriteTransfer_RequestCharAtEnd(graphicsStruct->spriteResources[SPRITE_RESOURCE_CHAR]);
     SpriteResource_ReleaseData(graphicsStruct->spriteResources[SPRITE_RESOURCE_CHAR]);
 
-    graphicsStruct->spriteResources[SPRITE_RESOURCE_PLTT] = SpriteResourceCollection_AddPaletteFrom(pokedexGraphicData->spriteResourceCollection[SPRITE_RESOURCE_PLTT], narc, type_icons_NCLR, FALSE, type_icons_NCLR + POKEDEX_TYPE_ICON_RESOURCE_OFFSET, NNS_G2D_VRAM_TYPE_2DMAIN, 5, heapID);
+    graphicsStruct->spriteResources[SPRITE_RESOURCE_PLTT] = SpriteResourceCollection_AddPaletteFrom(pokedexGraphicData->spriteResourceCollection[SPRITE_RESOURCE_PLTT], narc, type_icons_NCLR, FALSE, type_icons_NCLR + POKEDEX_TYPE_ICON_RESOURCE_OFFSET, NNS_G2D_VRAM_TYPE_2DMAIN, 6, heapID);
 
     SpriteTransfer_RequestPlttFreeSpace(graphicsStruct->spriteResources[SPRITE_RESOURCE_PLTT]);
     SpriteResource_ReleaseData(graphicsStruct->spriteResources[SPRITE_RESOURCE_PLTT]);
