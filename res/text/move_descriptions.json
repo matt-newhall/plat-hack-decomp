@@ -4584,6 +4584,16 @@
         "It hits even if the\n",
         "foe used Protect."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00468",
+      "en_US": [
+        "The user shrouds\n",
+        "itself in water and\n",
+        "slams into the target.\n",
+        "This also damages the\n",
+        "user quite a lot."
+      ]
     }
   ]
 }
