@@ -1,7 +1,7 @@
 {
-    "name": "HP Ice",
+    "name": "HP Psychic",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_ICE",
+    "type": "TYPE_PSYCHIC",
     "power": 60,
     "accuracy": 100,
     "pp": 15,

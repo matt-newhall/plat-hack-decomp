@@ -1888,6 +1888,70 @@
     {
       "id": "pl_msg_00000647_00471",
       "en_US": "HP Ice"
+    },
+    {
+      "id": "pl_msg_00000647_00472",
+      "en_US": "HP Flying"
+    },
+    {
+      "id": "pl_msg_00000647_00473",
+      "en_US": "HP Poison"
+    },
+    {
+      "id": "pl_msg_00000647_00474",
+      "en_US": "HP Ground"
+    },
+    {
+      "id": "pl_msg_00000647_00475",
+      "en_US": "HP Rock"
+    },
+    {
+      "id": "pl_msg_00000647_00476",
+      "en_US": "HP Bug"
+    },
+    {
+      "id": "pl_msg_00000647_00477",
+      "en_US": "HP Ghost"
+    },
+    {
+      "id": "pl_msg_00000647_00478",
+      "en_US": "HP Steel"
+    },
+    {
+      "id": "pl_msg_00000647_00479",
+      "en_US": "HP Fairy"
+    },
+    {
+      "id": "pl_msg_00000647_00480",
+      "en_US": "HP Fire"
+    },
+    {
+      "id": "pl_msg_00000647_00481",
+      "en_US": "HP Water"
+    },
+    {
+      "id": "pl_msg_00000647_00482",
+      "en_US": "HP Grass"
+    },
+    {
+      "id": "pl_msg_00000647_00483",
+      "en_US": "HP Electric"
+    },
+    {
+      "id": "pl_msg_00000647_00484",
+      "en_US": "HP Psychic"
+    },
+    {
+      "id": "pl_msg_00000647_00485",
+      "en_US": "HP Ice"
+    },
+    {
+      "id": "pl_msg_00000647_00486",
+      "en_US": "HP Dragon"
+    },
+    {
+      "id": "pl_msg_00000647_00487",
+      "en_US": "HP Dark"
     }
   ]
 }

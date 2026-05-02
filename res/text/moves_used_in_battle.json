@@ -9887,21 +9887,357 @@
       "id": "pl_msg_00000000_01410",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "HP Ice!"
+        "HP Fighting!"
       ]
     },
     {
       "id": "pl_msg_00000000_01411",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "HP Ice!"
+        "HP Fighting!"
       ]
     },
     {
       "id": "pl_msg_00000000_01412",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Fighting!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01413",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Flying!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01414",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Flying!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01415",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Flying!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01416",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Poison!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01417",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Poison!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01418",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Poison!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01419",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Ground!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01420",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Ground!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01421",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Ground!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01422",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Rock!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01423",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Rock!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01424",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Rock!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01425",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Bug!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01426",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Bug!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01427",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Bug!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01428",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Ghost!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01429",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Ghost!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01430",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Ghost!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01431",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Steel!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01432",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Steel!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01433",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Steel!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01434",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Fairy!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01435",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Fairy!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01436",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Fairy!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01437",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Fire!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01438",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Fire!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01439",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Fire!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01440",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Water!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01441",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Water!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01442",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Water!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01443",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Grass!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01444",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Grass!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01445",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Grass!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01446",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Electric!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01447",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Electric!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01448",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Electric!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01449",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Psychic!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01450",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Psychic!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01451",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Psychic!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01452",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
         "HP Ice!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01453",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Ice!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01454",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Ice!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01455",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Dragon!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01456",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Dragon!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01457",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Dragon!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01458",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "HP Dark!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01459",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "HP Dark!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01460",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "HP Dark!"
       ]
     }
   ]

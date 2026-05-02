@@ -1,7 +1,7 @@
 {
-    "name": "HP Ice",
+    "name": "HP Dark",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_ICE",
+    "type": "TYPE_DARK",
     "power": 60,
     "accuracy": 100,
     "pp": 15,

@@ -1,7 +1,7 @@
 {
-    "name": "HP Ice",
+    "name": "HP Fire",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_ICE",
+    "type": "TYPE_FIRE",
     "power": 60,
     "accuracy": 100,
     "pp": 15,

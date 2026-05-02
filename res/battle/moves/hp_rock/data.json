@@ -1,7 +1,7 @@
 {
-    "name": "HP Ice",
+    "name": "HP Rock",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_ICE",
+    "type": "TYPE_ROCK",
     "power": 60,
     "accuracy": 100,
     "pp": 15,
