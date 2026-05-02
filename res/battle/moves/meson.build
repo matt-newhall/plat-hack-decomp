@@ -6,7 +6,6 @@ pl_waza_tbl_subdirs = [
 
 anim_script_subdirs = [
     '0000',
-    '0489',
     '0490',
     '0491',
     '0492',

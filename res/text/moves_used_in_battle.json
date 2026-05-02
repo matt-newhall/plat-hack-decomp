@@ -10260,6 +10260,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Slam!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01458",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Comet Punch!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01459",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Comet Punch!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01460",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Comet Punch!"
+      ]
     }
   ]
 }

@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_REVENGE" ],
-            [ 1, "MOVE_FOUL_PLAY" ],
+            [ 1, "MOVE_COMET_PUNCH" ],
             [ 6, "MOVE_AGILITY" ],
             [ 11, "MOVE_PURSUIT" ],
             [ 16, "MOVE_MACH_PUNCH" ],

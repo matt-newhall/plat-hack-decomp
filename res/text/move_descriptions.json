@@ -4792,6 +4792,15 @@
         "vines, etc., to inflict\n",
         "damage.\n"
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00489",
+      "en_US": [
+        "The foe is hit with\n",
+        "a flurry of punches\n",
+        "that strike two to\n",
+        "five times in a row.\n"
+      ]
     }
   ]
 }
