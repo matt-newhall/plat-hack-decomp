@@ -101,7 +101,7 @@
         ],
         "egg_moves": [
             "MOVE_HEADBUTT",
-            "MOVE_SCALD",
+            "MOVE_SLAM",
             "MOVE_METEOR_BEAM",
             "MOVE_LEECH_SEED",
             "MOVE_NATURE_POWER",

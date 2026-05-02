@@ -35,8 +35,8 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 5, "MOVE_GROWL" ],
-            [ 9, "MOVE_DEFENSE_CURL" ],
+            [ 5, "MOVE_POWER_UP_PUNCH" ],
+            [ 9, "MOVE_SNARL" ],
             [ 13, "MOVE_ROLLOUT" ],
             [ 17, "MOVE_HEADBUTT" ],
             [ 21, "MOVE_HYPER_FANG" ],

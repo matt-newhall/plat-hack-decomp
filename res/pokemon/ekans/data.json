@@ -93,7 +93,7 @@
         ],
         "egg_moves": [
             "MOVE_PURSUIT",
-            "MOVE_SCALD",
+            "MOVE_SLAM",
             "MOVE_SPITE",
             "MOVE_BEAT_UP",
             "MOVE_POISON_FANG",

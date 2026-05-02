@@ -41,7 +41,7 @@
             [ 5, "MOVE_THUNDER_WAVE" ],
             [ 11, "MOVE_TWISTER" ],
             [ 15, "MOVE_DRAGON_RAGE" ],
-            [ 21, "MOVE_SCALD" ],
+            [ 21, "MOVE_SLAM" ],
             [ 25, "MOVE_AGILITY" ],
             [ 33, "MOVE_AQUA_TAIL" ],
             [ 39, "MOVE_DRAGON_RUSH" ],

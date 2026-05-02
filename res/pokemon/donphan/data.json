@@ -44,7 +44,7 @@
             [ 10, "MOVE_KNOCK_OFF" ],
             [ 15, "MOVE_ROLLOUT" ],
             [ 19, "MOVE_MAGNITUDE" ],
-            [ 24, "MOVE_SCALD" ],
+            [ 24, "MOVE_SLAM" ],
             [ 25, "MOVE_FURY_ATTACK" ],
             [ 31, "MOVE_ASSURANCE" ],
             [ 39, "MOVE_SCARY_FACE" ],

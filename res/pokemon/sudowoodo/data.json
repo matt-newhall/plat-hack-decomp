@@ -47,7 +47,7 @@
             [ 25, "MOVE_FAINT_ATTACK" ],
             [ 30, "MOVE_ROCK_TOMB" ],
             [ 33, "MOVE_ROCK_SLIDE" ],
-            [ 38, "MOVE_SCALD" ],
+            [ 38, "MOVE_SLAM" ],
             [ 41, "MOVE_SUCKER_PUNCH" ],
             [ 46, "MOVE_DOUBLE_EDGE" ],
             [ 49, "MOVE_HAMMER_ARM" ]

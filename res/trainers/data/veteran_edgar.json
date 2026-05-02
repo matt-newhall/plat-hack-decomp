@@ -32,7 +32,7 @@
                 "MOVE_POWER_WHIP",
                 "MOVE_MEGA_DRAIN",
                 "MOVE_TOXIC",
-                "MOVE_SCALD"
+                "MOVE_SLAM"
             ],
             "iv_scale": 100,
             "ball_seal": 0

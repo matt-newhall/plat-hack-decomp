@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_DRAGON_PULSE",
         "MOVE_AQUA_TAIL",
-        "MOVE_SCALD",
+        "MOVE_SLAM",
         "MOVE_DRAGON_DANCE"
     ],
     "evFlags": {

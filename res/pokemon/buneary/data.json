@@ -35,10 +35,10 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_SPLASH" ],
-            [ 1, "MOVE_POUND" ],
-            [ 1, "MOVE_DEFENSE_CURL" ],
-            [ 1, "MOVE_DRILL_RUN" ],
-            [ 6, "MOVE_ENDURE" ],
+            [ 1, "MOVE_MOONBLAST" ],
+            [ 1, "MOVE_TAIL_SLAP" ],
+            [ 1, "MOVE_SOLAR_BLADE" ],
+            [ 6, "MOVE_RAGE_POWDER" ],
             [ 13, "MOVE_DISARMING_VOICE" ],
             [ 16, "MOVE_QUICK_ATTACK" ],
             [ 23, "MOVE_JUMP_KICK" ],
