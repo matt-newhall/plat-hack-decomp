@@ -8257,20 +8257,33 @@ void BattleSystem_SortMonActionOrder(BattleSystem *battleSys, BattleContext *bat
             battler1 = battleCtx->battlerActionOrder[i];
             battler2 = battleCtx->battlerActionOrder[j];
 
-            if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND]) {
-                if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == PLAYER_INPUT_FIGHT) {
-                    ignoreQuickClaw = FALSE;
-                } else {
-                    ignoreQuickClaw = TRUE;
-                }
+            BOOL battler1Done = battleCtx->battlerActions[battler1][BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END;
+            BOOL battler2Done = battleCtx->battlerActions[battler2][BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END;
 
-                if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler1, battler2, ignoreQuickClaw)) {
-                    battleCtx->battlerActionOrder[i] = battler2;
-                    battleCtx->battlerActionOrder[j] = battler1;
+            if (battler1Done && !battler2Done) {
+                battleCtx->battlerActionOrder[i] = battler2;
+                battleCtx->battlerActionOrder[j] = battler1;
+            } else if (!battler1Done && !battler2Done) {
+                if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND]) {
+                    if (battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND] == PLAYER_INPUT_FIGHT) {
+                        ignoreQuickClaw = FALSE;
+                    } else {
+                        ignoreQuickClaw = TRUE;
+                    }
+
+                    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battler1, battler2, ignoreQuickClaw)) {
+                        battleCtx->battlerActionOrder[i] = battler2;
+                        battleCtx->battlerActionOrder[j] = battler1;
+                    }
                 }
             }
         }
     }
+}
+
+void BattleSystem_SortRemainingActionOrder(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    
 }
 
 static const enum BattleSubAnimation sEffectsAlwaysShown[] = {

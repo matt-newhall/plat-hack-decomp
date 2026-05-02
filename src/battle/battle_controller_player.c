@@ -864,7 +864,7 @@ static void BattleControllerPlayer_BranchActions(BattleSystem *battleSys, Battle
     }
 
     BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
-    if (battleCtx->turnOrderCounter == maxBattlers) {
+    if (battleCtx->waitingBattlers == 0) {
         battleCtx->turnOrderCounter = 0;
         battleCtx->command = BATTLE_CONTROL_CHECK_FIELD_CONDITIONS;
     } else {
@@ -4425,13 +4425,9 @@ static void BattleControllerPlayer_MoveEnd(BattleSystem *battleSys, BattleContex
     }
 
     battleCtx->battlerActions[battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
-    if (ATTACKER_SELF_TURN_FLAGS.trickRoomActivated) {
-        BattleSystem_SortMonActionOrder(battleSys, battleCtx);
-        BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
-        battleCtx->turnOrderCounter = 0;
-    } else {
-        battleCtx->turnOrderCounter++;
-    }
+    BattleSystem_SortMonActionOrder(battleSys, battleCtx);
+    BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
+    battleCtx->turnOrderCounter = 0;
 
     BattleContext_Init(battleCtx);
     battleCtx->command = BATTLE_CONTROL_BRANCH_ACTIONS;
