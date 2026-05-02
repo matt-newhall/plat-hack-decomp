@@ -1,15 +1,15 @@
 {
-    "name": "",
+    "name": "Dazzling Gleam",
     "class": "CLASS_SPECIAL",
-    "type": "TYPE_NORMAL",
-    "power": 100,
+    "type": "TYPE_FAIRY",
+    "power": 80,
     "accuracy": 100,
     "pp": 10,
     "effect": {
         "type": "BATTLE_EFFECT_HIT",
         "chance": 0
     },
-    "range": "RANGE_SINGLE_TARGET",
+    "range": "RANGE_ADJACENT_OPPONENTS",
     "priority": 0,
     "flags": [
         "MOVE_FLAG_CAN_PROTECT",

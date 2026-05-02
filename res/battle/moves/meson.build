@@ -2,12 +2,10 @@ fs = import('fs')
 
 pl_waza_tbl_subdirs = [
     '0000',
-    '0470',
 ]
 
 anim_script_subdirs = [
     '0000',
-    '0470',
     '0471',
     '0472',
     '0473',

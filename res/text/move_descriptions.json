@@ -4604,6 +4604,15 @@
         "The user’s footwork\n",
         "boosts its Speed stat."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00470",
+      "en_US": [
+        "The user damages\n",
+        "opposing Pokémon by\n",
+        "emitting a powerful\n",
+        "flash.\n"
+      ]
     }
   ]
 }
