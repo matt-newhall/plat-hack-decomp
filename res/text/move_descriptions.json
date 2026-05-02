@@ -4594,6 +4594,16 @@
         "This also damages the\n",
         "user quite a lot."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00469",
+      "en_US": [
+        "The user attacks\n",
+        "suddenly as if leaping\n",
+        "out from tall grass.\n",
+        "The user’s footwork\n",
+        "boosts its Speed stat."
+      ]
     }
   ]
 }
