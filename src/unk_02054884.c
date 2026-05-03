@@ -11,6 +11,7 @@
 #include "overlay005/daycare.h"
 
 #include "heap.h"
+#include "math_util.h"
 #include "party.h"
 #include "pokemon.h"
 #include "save_player.h"
@@ -46,6 +47,17 @@ BOOL Pokemon_GiveMonFromScript(enum HeapID heapID, SaveData *saveData, u16 speci
 
     item = heldItem;
     Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &item);
+
+    u8 slots[6] = {0, 1, 2, 3, 4, 5};
+    u32 iv31 = 31;
+    for (int i = 0; i < 3; i++) {
+        int j = i + (LCRNG_Next() % (6 - i));
+        u8 tmp = slots[i];
+        slots[i] = slots[j];
+        slots[j] = tmp;
+        Pokemon_SetValue(mon, MON_DATA_HP_IV + slots[i], &iv31);
+    }
+
     result = Party_AddPokemon(party, mon);
 
     if (result) {
