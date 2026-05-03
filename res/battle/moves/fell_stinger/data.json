@@ -1,0 +1,24 @@
+{
+    "name": "Fell Stinger",
+    "class": "CLASS_PHYSICAL",
+    "type": "TYPE_BUG",
+    "power": 50,
+    "accuracy": 100,
+    "pp": 25,
+    "effect": {
+        "type": "BATTLE_EFFECT_BOOST_ATTACK_ON_KO",
+        "chance": 0
+    },
+    "range": "RANGE_SINGLE_TARGET",
+    "priority": 0,
+    "flags": [
+        "MOVE_FLAG_MAKES_CONTACT",
+        "MOVE_FLAG_CAN_PROTECT",
+        "MOVE_FLAG_CAN_MIRROR_MOVE",
+        "MOVE_FLAG_HIDES_HP_GAUGES"
+    ],
+    "contest": {
+        "effect": "CONTEST_EFFECT_LOW_VOLTAGE_ADVANTAGE",
+        "type": "CONTEST_TYPE_BEAUTY"
+    }
+}

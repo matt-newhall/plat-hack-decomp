@@ -330,4 +330,5 @@ subscript_files = files(
     'subscript_drain_three_quarter_damage_dealt.s',
     'subscript_set_powder_flag.s',
     'subscript_powder_fire_move.s',
+    'subscript_attack_then_check_ko.s',
 )

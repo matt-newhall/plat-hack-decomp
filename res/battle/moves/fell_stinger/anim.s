@@ -5,6 +5,6 @@ L_0:
     Func_AnimExample
     Func_SoundExample
     Func_GenericExample
-    PlaySoundEffect SEQ_SE_DP_BASI
+    PlaySoundEffectR SEQ_SE_DP_030
     Delay 60
     End

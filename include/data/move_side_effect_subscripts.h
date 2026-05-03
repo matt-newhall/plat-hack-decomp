@@ -159,6 +159,8 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_AURORA_VEIL]                      = subscript_aurora_veil,
     [MOVE_SUBSCRIPT_PTR_SHELL_SMASH]                      = subscript_shell_smash,
     [MOVE_SUBSCRIPT_PTR_DRAIN_THREE_QUARTER_DAMAGE_DEALT] = subscript_drain_three_quarter_damage_dealt,
-    [MOVE_SUBSCRIPT_PTR_SET_POWDER_FLAG]                  = subscript_set_powder_flag
+    [MOVE_SUBSCRIPT_PTR_SET_POWDER_FLAG]                  = subscript_set_powder_flag,
+    [MOVE_SUBSCRIPT_PTR_ATTACK_THEN_CHECK_KO]             = subscript_attack_then_check_ko,
+    [MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES]               = subscript_update_stat_stage
 };
 // clang-format on
