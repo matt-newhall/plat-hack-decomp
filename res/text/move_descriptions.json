@@ -4830,6 +4830,16 @@
         "poisoning, burn, or\n",
         "paralysis.\n"
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00493",
+      "en_US": [
+        "A restrained attack\n",
+        "that prevents the\n",
+        "foe from fainting.\n",
+        "The target is left\n",
+        "with at least 1 HP."
+      ]
     }
   ]
 }

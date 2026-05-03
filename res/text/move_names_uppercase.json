@@ -1972,6 +1972,10 @@
     {
       "id": "pl_msg_00000648_00492",
       "en_US": "REFRESH"
+    },
+    {
+      "id": "pl_msg_00000648_00493",
+      "en_US": "FALSE SWIPE"
     }
   ]
 }

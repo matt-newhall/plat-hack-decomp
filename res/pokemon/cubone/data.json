@@ -42,7 +42,7 @@
             [ 17, "MOVE_FOCUS_ENERGY" ],
             [ 21, "MOVE_BONEMERANG" ],
             [ 23, "MOVE_POWDER" ],
-            [ 27, "MOVE_ACROBATICS" ],
+            [ 27, "MOVE_FALSE_SWIPE" ],
             [ 31, "MOVE_THRASH" ],
             [ 33, "MOVE_FLING" ],
             [ 37, "MOVE_BONE_RUSH" ],

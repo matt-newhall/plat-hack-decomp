@@ -88,7 +88,7 @@
             "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
-            "MOVE_ACROBATICS",
+            "MOVE_FALSE_SWIPE",
             "MOVE_SCREECH",
             "MOVE_COUNTER",
             "MOVE_PSYBEAM",

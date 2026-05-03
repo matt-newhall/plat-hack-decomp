@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_TRANSFORM" ],
-            [ 10, "MOVE_ACROBATICS" ],
+            [ 10, "MOVE_FALSE_SWIPE" ],
             [ 20, "MOVE_METRONOME" ],
             [ 30, "MOVE_PSYCHIC" ],
             [ 40, "MOVE_SILK_TRAP" ],
