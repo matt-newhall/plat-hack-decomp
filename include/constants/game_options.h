@@ -13,8 +13,8 @@ enum OptionsSoundMode {
 };
 
 enum OptionsBattleStyle {
-    OPTIONS_BATTLE_STYLE_SHIFT = 0,
-    OPTIONS_BATTLE_STYLE_SET
+    OPTIONS_BATTLE_STYLE_SET = 0,
+    OPTIONS_BATTLE_STYLE_SHIFT
 };
 
 enum OptionsBattleScene {

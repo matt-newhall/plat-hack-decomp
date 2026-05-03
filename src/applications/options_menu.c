@@ -740,7 +740,7 @@ static const u8 sFirstChoicePerEntry[MAX_ENTRIES] = {
     OptionsMenu_Text_TextSpeedSlow,
     OptionsMenu_Text_SoundModeStereo,
     OptionsMenu_Text_BattleSceneOn,
-    OptionsMenu_Text_BattleStyleShift,
+    OptionsMenu_Text_BattleStyleSet,
     OptionsMenu_Text_ButtonModeNormal,
     OptionsMenu_Text_MessageBoxStyle_01,
     NULL,
