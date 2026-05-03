@@ -161,7 +161,7 @@ ScriptCommand(SCRCMD_RESETPARTYMONMOVESLOT_UNUSED,                         ScrCm
 ScriptCommand(SCRCMD_CHECKPARTYMONHASMOVE,                                 ScrCmd_CheckPartyMonHasMove)
 ScriptCommand(SCRCMD_FINDPARTYSLOTWITHMOVE,                                ScrCmd_FindPartySlotWithMove)
 ScriptCommand(SCRCMD_GETREMATCHTRAINERID,                                  ScrCmd_GetRematchTrainerID)
-ScriptCommand(SCRCMD_UNUSED_09C,                                           ScrCmd_Unused_09C)
+ScriptCommand(SCRCMD_GIVEPOKEMON_AT_LOCATION,                              ScrCmd_GivePokemonAtLocation)
 ScriptCommand(SCRCMD_UNUSED_09D,                                           ScrCmd_Unused_09D)
 ScriptCommand(SCRCMD_UNUSED_09E,                                           ScrCmd_Unused_09E)
 ScriptCommand(SCRCMD_UNUSED_09F,                                           ScrCmd_Unused_09F)

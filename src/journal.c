@@ -105,7 +105,6 @@ static const MapInfo sMapsInfo[] = {
     { LocationNames_Text_SunyshoreMarket, TRUE },
     { LocationNames_Text_BattleTower,     TRUE },
     { LocationNames_Text_PokemonMansion,  FALSE },
-    { LocationNames_Text_FootstepHouse,   TRUE },
     { LocationNames_Text_Cafe,            FALSE },
     { LocationNames_Text_GrandLake,       FALSE },
     { LocationNames_Text_Restaurant,      FALSE },
