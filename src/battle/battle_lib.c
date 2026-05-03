@@ -7853,6 +7853,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         defenseStat = defenseStat / 2;
     }
 
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_SP_DEFENSE) {
+        spDefenseStat = spDefenseStat / 2;
+    }
+
     if (moveClass == CLASS_PHYSICAL) {
         if (criticalMul > 1) {
             if (attackStage > DEFAULT_STAT_STAGE) {
@@ -8839,6 +8843,7 @@ static const u16 sMovesCannotTriggerAnticipation[] = {
     BATTLE_EFFECT_LEVEL_DAMAGE_FLAT,
     BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL,
     BATTLE_EFFECT_HALVE_DEFENSE,
+    BATTLE_EFFECT_HALVE_SP_DEFENSE,
 };
 
 static BOOL MoveCannotTriggerAnticipation(BattleContext *battleCtx, int move)

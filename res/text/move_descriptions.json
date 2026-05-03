@@ -4811,6 +4811,16 @@
         "user’s Attack stat\n",
         "rises sharply."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00491",
+      "en_US": [
+        "The user explodes to\n",
+        "inflict damage on all\n",
+        "Pokémon in battle.\n",
+        "The user faints upon\n",
+        "using this move."
+      ]
     }
   ]
 }

@@ -136,6 +136,7 @@ Basic_CheckSoundproof:
 Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Basic_CheckCannotExplode
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, Basic_CheckCannotExplode
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Basic_CheckDreamEater
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP, Basic_CheckHighStatStage_Attack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP, Basic_CheckHighStatStage_Defense
@@ -1555,6 +1556,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT, Expert_DrainMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_THREE_QUARTER_DAMAGE_DEALT, Expert_DrainMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Expert_Explosion
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_DreamEater
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_MOVE, Expert_MirrorMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP, Expert_StatusAttackUp
@@ -5726,6 +5728,7 @@ EvalAttack_Main:
 
     // Explosion, Focus Punch, and Sucker Punch are often deprioritized by this routine.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, EvalAttack_MaybeDeprioritize
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, EvalAttack_MaybeDeprioritize
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, EvalAttack_MaybeDeprioritize
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING, EvalAttack_MaybeDeprioritize
 
@@ -5750,6 +5753,7 @@ EvalAttack_TryScorePlus2:
 EvalAttack_ApplyKillBonuses:
     // Do not evaluate kills with Explosion or Self-Destruct for this routine.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, EvalAttack_Terminate
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, EvalAttack_Terminate
 
     // Moves like Focus Punch, Sucker Punch, and Future Sight *may* get +4 score for a kill.
     // NOTE: Focus Punch and Sucker Punch can never actually reach this state, because the AI never
@@ -5894,6 +5898,7 @@ Risky_Terminate:
 Risky_RiskyEffects:
     TableEntry BATTLE_EFFECT_STATUS_SLEEP
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE
+    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
     TableEntry BATTLE_EFFECT_COPY_MOVE
     TableEntry BATTLE_EFFECT_ONE_HIT_KO
     TableEntry BATTLE_EFFECT_HIGH_CRITICAL
@@ -6045,6 +6050,7 @@ TagStrategy_ScoreMove:
 
     // Handle Explosion and Self-Destruct like "normal" moves
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, TagStrategy_CheckSpecialScoring
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, TagStrategy_CheckSpecialScoring
 
     // Sometimes prioritize using priority +1 moves
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_1, TagStrategy_TryScorePlus1
@@ -7023,6 +7029,7 @@ CheckHP_Terminate:
 
 CheckHP_DiscourageAtHighHP:
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE
+    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
     TableEntry BATTLE_EFFECT_RESTORE_HALF_HP
     TableEntry BATTLE_EFFECT_HEAL_ALLIES_QUARTER
     TableEntry BATTLE_EFFECT_REST
@@ -7037,6 +7044,7 @@ CheckHP_DiscourageAtHighHP:
 
 CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE
+    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
     TableEntry BATTLE_EFFECT_ATK_UP
     TableEntry BATTLE_EFFECT_DEF_UP
     TableEntry BATTLE_EFFECT_SPEED_UP
@@ -7189,6 +7197,7 @@ CheckHP_Target_DiscourageAtMediumHP:
 CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_STATUS_SLEEP
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE // done
+    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
     TableEntry BATTLE_EFFECT_ATK_UP
     TableEntry BATTLE_EFFECT_DEF_UP
     TableEntry BATTLE_EFFECT_SPEED_UP

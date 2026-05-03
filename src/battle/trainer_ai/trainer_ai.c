@@ -30,6 +30,7 @@
 // Moves with an effect ID in either of these tables do not use the standard damage-calculation during scoring.
 static const u16 sNoDamageCalcMoveEffects[] = {
     BATTLE_EFFECT_HALVE_DEFENSE,
+    BATTLE_EFFECT_HALVE_SP_DEFENSE,
     BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP,
     BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT,
     BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH,

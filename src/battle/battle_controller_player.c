@@ -2334,8 +2334,10 @@ static BOOL BattleControllerPlayer_HasNoTarget(BattleSystem *battleSys, BattleCo
     BOOL result = FALSE;
     BOOL solarMove = FALSE;
 
+    int effect = MOVE_DATA(battleCtx->moveCur).effect;
+
     if (NO_TARGET) {
-        if (MOVE_DATA(battleCtx->moveCur).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
+        if (effect == BATTLE_EFFECT_HALVE_DEFENSE || effect == BATTLE_EFFECT_HALVE_SP_DEFENSE) {
             battleCtx->faintedMon = battleCtx->attacker;
             LOAD_SUBSEQ(subscript_fail_selfdestruct_kill_user);
             battleCtx->commandNext = BATTLE_CONTROL_TRIGGER_AFTER_HIT_EFFECTS;
