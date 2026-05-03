@@ -48,7 +48,7 @@
             [ 32, "MOVE_NATURAL_GIFT" ],
             [ 35, "MOVE_DRAGON_BREATH" ],
             [ 39, "MOVE_DRAGON_DANCE" ],
-            [ 46, "MOVE_BODY_PRESS" ],
+            [ 46, "MOVE_REFRESH" ],
             [ 54, "MOVE_DRAGON_PULSE" ],
             [ 62, "MOVE_PERISH_SONG" ],
             [ 70, "MOVE_SKY_ATTACK" ]

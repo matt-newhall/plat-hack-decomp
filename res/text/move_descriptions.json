@@ -4821,6 +4821,15 @@
         "The user faints upon\n",
         "using this move."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00492",
+      "en_US": [
+        "The user rests\n",
+        "to cure itself of a\n",
+        "poisoning, burn, or\n",
+        "paralysis.\n"
+      ]
     }
   ]
 }

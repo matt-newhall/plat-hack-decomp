@@ -91,7 +91,7 @@
             "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
-            "MOVE_BODY_PRESS",
+            "MOVE_REFRESH",
             "MOVE_UPROAR",
             "MOVE_CURSE",
             "MOVE_STOMP",

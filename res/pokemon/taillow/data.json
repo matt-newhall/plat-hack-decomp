@@ -86,7 +86,7 @@
         "egg_moves": [
             "MOVE_PURSUIT",
             "MOVE_SUPERSONIC",
-            "MOVE_BODY_PRESS",
+            "MOVE_REFRESH",
             "MOVE_STORED_POWER",
             "MOVE_POWDER",
             "MOVE_SKY_ATTACK",

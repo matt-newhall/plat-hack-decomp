@@ -246,6 +246,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HELD_ITEM, Basic_CheckCanRemoveItem
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Basic_CheckNonStandardDamageOrChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Basic_CheckCanRefreshStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
@@ -909,6 +910,11 @@ Basic_CheckCanRecycle:
     // If there is no item to be recycled, score -10.
     LoadRecycleItem AI_BATTLER_ATTACKER
     IfLoadedEqualTo ITEM_NONE, ScoreMinus10
+    PopOrEnd 
+
+Basic_CheckCanRefreshStatus:
+    // If the attacker is not Burned, Poisoned, or Paralyzed, score -10.
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_FACADE_BOOST, ScoreMinus10
     PopOrEnd 
 
 Basic_CheckTickle:
@@ -1672,6 +1678,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Expert_Endeavor
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP, Expert_WaterSpout
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_ChangeUserAbility
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_Refresh
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Snatch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOIL_THIRD, Expert_RecoilMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT, Expert_HighCritical
@@ -3206,6 +3213,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_RECYCLE
     TableEntry BATTLE_EFFECT_REMOVE_HELD_ITEM
     TableEntry BATTLE_EFFECT_SWITCH_ABILITIES
+    TableEntry BATTLE_EFFECT_HEAL_STATUS
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP
     TableEntry BATTLE_EFFECT_ATK_SPD_UP
@@ -4534,6 +4542,17 @@ Expert_WaterSpout_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_WaterSpout_End:
+    PopOrEnd 
+
+Expert_Refresh:
+    // If the opponent's HP < 50%, score -1.
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_Refresh_ScoreMinus1
+    GoTo Expert_Refresh_End
+
+Expert_Refresh_ScoreMinus1:
+    AddToMoveScore -1
+
+Expert_Refresh_End:
     PopOrEnd 
 
 Expert_Snatch:

@@ -37,7 +37,7 @@
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_WRAP" ],
             [ 5, "MOVE_ACID_SPRAY" ],
-            [ 9, "MOVE_BODY_PRESS" ],
+            [ 9, "MOVE_REFRESH" ],
             [ 13, "MOVE_WATER_PULSE" ],
             [ 17, "MOVE_TWISTER" ],
             [ 21, "MOVE_RECOVER" ],

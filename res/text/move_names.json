@@ -1968,6 +1968,10 @@
     {
       "id": "pl_msg_00000647_00491",
       "en_US": "Misty Explosion"
+    },
+    {
+      "id": "pl_msg_00000647_00492",
+      "en_US": "Refresh"
     }
   ]
 }
