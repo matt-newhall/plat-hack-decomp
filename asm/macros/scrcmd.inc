@@ -1003,6 +1003,15 @@
     .short \successVar
     .endm
 
+    .macro GivePokemonAtLocation species, level, heldItem, metLocation, successVar
+    .short SCRCMD_GIVEPOKEMON_AT_LOCATION
+    .short \species
+    .short \level
+    .short \heldItem
+    .short \metLocation
+    .short \successVar
+    .endm
+
     @ eggGiverTextId corresponds to an entry in special_met_location_names.gmm.
     .macro GiveEgg species, eggGiverTextId
     .short SCRCMD_GIVEEGG
