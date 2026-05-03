@@ -48,7 +48,7 @@
             [ 37, "MOVE_BRINE" ],
             [ 43, "MOVE_SAFEGUARD" ],
             [ 49, "MOVE_HYDRO_PUMP" ],
-            [ 55, "MOVE_TRIPLE_AXEL" ]
+            [ 55, "MOVE_SHEER_COLD" ]
         ],
         "by_tm": [
             "TM03",

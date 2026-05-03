@@ -2,7 +2,7 @@
     "species": "SPECIES_ABOMASNOW",
     "moves": [
         "MOVE_GIGA_DRAIN",
-        "MOVE_TRIPLE_AXEL",
+        "MOVE_SHEER_COLD",
         "MOVE_INGRAIN",
         "MOVE_LEECH_SEED"
     ],

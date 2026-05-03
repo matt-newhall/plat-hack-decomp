@@ -10346,24 +10346,45 @@
       ]
     },
     {
-      "id": "pl_msg_00000000_01464",
+      "id": "pl_msg_00000000_01467",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
         "False Swipe!"
       ]
     },
     {
-      "id": "pl_msg_00000000_01465",
+      "id": "pl_msg_00000000_01468",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
         "False Swipe!"
       ]
     },
     {
-      "id": "pl_msg_00000000_01466",
+      "id": "pl_msg_00000000_01469",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "False Swipe!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01470",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Sheer Cold!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01471",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Sheer Cold!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01472",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Sheer Cold!"
       ]
     }
   ]

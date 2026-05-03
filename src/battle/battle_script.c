@@ -4418,8 +4418,7 @@ static BOOL BtlCmd_TryMist(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
- * @deprecated
- * @brief Try to execute a one-hit KO move (e.g. Horn Drill).
+ * @brief Try to execute a one-hit KO move (e.g. Sheer Cold).
  *
  * These moves do not follow the standard accuracy formula. CompareVarToValue the defender is
  * a higher level than the attacker, then the move will always fail to hit, even

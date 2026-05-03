@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_BLIZZARD",
         "MOVE_DARK_PULSE",
-        "MOVE_TRIPLE_AXEL",
+        "MOVE_SHEER_COLD",
         "MOVE_HAIL"
     ],
     "evFlags": {

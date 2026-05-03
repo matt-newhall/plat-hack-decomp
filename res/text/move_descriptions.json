@@ -4840,6 +4840,16 @@
         "The target is left\n",
         "with at least 1 HP."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00494",
+      "en_US": [
+        "The foe is attacked\n",
+        "with a blast of\n",
+        "absolute-zero cold.\n",
+        "The foe instantly\n",
+        "faints if it hits."
+      ]
     }
   ]
 }

@@ -1862,6 +1862,7 @@ Expert_MirrorMove_MoveTable:
     TableEntry MOVE_SAND_ATTACK
     TableEntry MOVE_SMOKE_SCREEN
     TableEntry MOVE_TOXIC
+    TableEntry MOVE_SHEER_COLD
     TableEntry MOVE_CROSS_CHOP
     TableEntry MOVE_AEROBLAST
     TableEntry MOVE_CONFUSE_RAY
