@@ -34,7 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_POWER_UP_PUNCH" ],
+            [ 1, "MOVE_EMBARGO" ],
             [ 1, "MOVE_REVENGE" ],
             [ 1, "MOVE_ASSURANCE" ],
             [ 1, "MOVE_SCRATCH" ],

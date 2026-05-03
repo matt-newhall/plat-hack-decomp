@@ -4850,6 +4850,16 @@
         "The foe instantly\n",
         "faints if it hits."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00495",
+      "en_US": [
+        "It prevents the foe\n",
+        "from using its held\n",
+        "item. Its Trainer is\n",
+        "also prevented from\n",
+        "using items on it."
+      ]
     }
   ]
 }

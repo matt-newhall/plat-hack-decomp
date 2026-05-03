@@ -517,8 +517,9 @@
     {
       "id": "VeilstoneCity_Text_EmbargoMakesItemsUnusable",
       "en_US": [
-        "Power-Up Punch boosts the attack\n",
-        "of your Pokémon if it lands.\r",
+        "If someone uses Embargo on your\n",
+        "Pokémon, it becomes impossible to\f",
+        "use any items on it.\r",
         "Anyway, enjoy your visit to Veilstone,\n",
         "the city of...well, stone."
       ]
