@@ -10386,6 +10386,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Sheer Cold!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01473",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Embargo!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01474",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Embargo!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01475",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Embargo!"
+      ]
     }
   ]
 }

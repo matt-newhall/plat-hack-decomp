@@ -41,7 +41,7 @@
             [ 14, "MOVE_FURY_CUTTER" ],
             [ 18, "MOVE_SLASH" ],
             [ 22, "MOVE_PURSUIT" ],
-            [ 27, "MOVE_POWER_UP_PUNCH" ],
+            [ 27, "MOVE_EMBARGO" ],
             [ 31, "MOVE_CRUSH_CLAW" ],
             [ 35, "MOVE_TAUNT" ],
             [ 40, "MOVE_DETECT" ],

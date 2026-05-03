@@ -44,7 +44,7 @@
             [ 28, "MOVE_FAINT_ATTACK" ],
             [ 31, "MOVE_SHADOW_BALL" ],
             [ 35, "MOVE_SUCKER_PUNCH" ],
-            [ 38, "MOVE_POWER_UP_PUNCH" ],
+            [ 38, "MOVE_EMBARGO" ],
             [ 43, "MOVE_SNATCH" ],
             [ 46, "MOVE_BULLDOZE" ],
             [ 50, "MOVE_TRICK" ]

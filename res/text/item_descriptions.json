@@ -3030,9 +3030,9 @@
     {
       "id": "pl_msg_00000391_00390",
       "en_US": [
-        "Striking opponents over and over makes\n",
-        "the user’s fists harder. Hitting\n",
-        "a target raises the Attack stat."
+        "It prevents the foe from using its\n",
+        "held item. Its Trainer is also\n",
+        "prevented from using items on it."
       ]
     },
     {
