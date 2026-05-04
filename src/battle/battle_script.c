@@ -4440,13 +4440,17 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
 
     if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE) {
         battleCtx->moveStatusFlags |= MOVE_STATUS_STURDY;
+    } else if (MON_HAS_TYPE(battleCtx->defender, TYPE_ICE)) {
+        battleCtx->moveStatusFlags |= MOVE_STATUS_INEFFECTIVE;
     } else {
+        u16 baseAccuracy = MON_HAS_TYPE(battleCtx->attacker, TYPE_ICE) ? CURRENT_MOVE_DATA.accuracy : 20;
+
         if ((ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON) == FALSE
             && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NO_GUARD
             && Battler_Ability(battleCtx, battleCtx->defender) != ABILITY_NO_GUARD) {
             // Use the usual OHKO accuracy check: scale upwards with the difference between the attacker and
             // defender's levels.
-            hit = CURRENT_MOVE_DATA.accuracy + (ATTACKING_MON.level - DEFENDING_MON.level);
+            hit = baseAccuracy + (ATTACKING_MON.level - DEFENDING_MON.level);
 
             if ((BattleSystem_RandNext(battleSys) % 100) < hit && ATTACKING_MON.level >= DEFENDING_MON.level) {
                 hit = TRUE;
@@ -4455,15 +4459,15 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
             }
         } else {
             if (((ATTACKING_MON.moveEffectsData.lockOnTarget == battleCtx->defender
-                     && (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON))
-                    || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NO_GUARD
-                    || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_NO_GUARD)
+                && (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON))
+                || Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NO_GUARD
+                || Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_NO_GUARD)
                 && ATTACKING_MON.level >= DEFENDING_MON.level) {
                 // Bypass the accuracy check: always hit.
                 hit = TRUE;
             } else {
                 // Fallback to the usual OHKO accuracy check, for some reason.
-                hit = CURRENT_MOVE_DATA.accuracy + (ATTACKING_MON.level - DEFENDING_MON.level);
+                hit = baseAccuracy + (ATTACKING_MON.level - DEFENDING_MON.level);
 
                 if ((BattleSystem_RandNext(battleSys) % 100) < hit && ATTACKING_MON.level >= DEFENDING_MON.level) {
                     hit = TRUE;
