@@ -6888,12 +6888,13 @@ static BOOL BtlCmd_CalcHPFalloffPower(BattleSystem *battleSys, BattleContext *ba
 /**
  * @brief Try to apply the Imprison effect.
  *
- * This command will fail if the battler using Imprison does not know at least
- * one move that is also known by either of the defending battlers.
+ * Fails only if the attacker already has Imprison active. Unlike the original
+ * implementation, this no longer requires a shared move with the defenders at
+ * the time of use -- the effect is applied preemptively and will prevent moves
+ * whenever a shared move exists (e.g. after Transform, Mimic, or a switch-in).
  *
  * Inputs:
- * 1. The distance to jump if Imprison is already set or the Imprisoning battler
- * does not know a move that the defenders know.
+ * 1. The distance to jump if Imprison is already set on the attacker.
  *
  * @param battleSys
  * @param battleCtx
@@ -6901,11 +6902,7 @@ static BOOL BtlCmd_CalcHPFalloffPower(BattleSystem *battleSys, BattleContext *ba
  */
 static BOOL BtlCmd_TryImprison(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    // must declare C89-style to match
     int jumpOnFail;
-    int attackingSide;
-    int i, j;
-    int battler, maxBattlers;
     int defender1, defender2;
 
     BattleScript_Iter(battleCtx, 1);
@@ -6920,37 +6917,7 @@ static BOOL BtlCmd_TryImprison(BattleSystem *battleSys, BattleContext *battleCtx
     if (ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_IMPRISON) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
-        attackingSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
-        maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
-
-        // Check that the Imprisoning mon knows at least 1 move that the active defenders know
-        for (battler = 0; battler < maxBattlers; battler++) {
-            if (attackingSide != BattleSystem_GetBattlerSide(battleSys, battler)) {
-                for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-                    for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                        if (ATTACKING_MON.moves[i] == battleCtx->battleMons[battler].moves[j]
-                            && ATTACKING_MON.moves[i]
-                            && battleCtx->battleMons[battler].moves[j]) {
-                            break;
-                        }
-                    }
-
-                    if (j != LEARNED_MOVES_MAX) {
-                        break;
-                    }
-                }
-
-                if (j != LEARNED_MOVES_MAX) {
-                    break;
-                }
-            }
-        }
-
-        if (battler == maxBattlers) {
-            BattleScript_Iter(battleCtx, jumpOnFail);
-        } else {
-            ATTACKING_MON.moveEffectsMask |= MOVE_EFFECT_IMPRISON;
-        }
+        ATTACKING_MON.moveEffectsMask |= MOVE_EFFECT_IMPRISON;
     }
 
     return FALSE;
