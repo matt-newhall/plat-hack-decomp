@@ -46,7 +46,7 @@
             [ 25, "MOVE_CALM_MIND" ],
             [ 31, "MOVE_PSYCHIC" ],
             [ 36, "MOVE_IMPRISON" ],
-            [ 39, "MOVE_VOLT_SWITCH" ],
+            [ 39, "MOVE_FUTURE_SIGHT" ],
             [ 45, "MOVE_CHARM" ],
             [ 50, "MOVE_HYPNOSIS" ],
             [ 53, "MOVE_DREAM_EATER" ]
