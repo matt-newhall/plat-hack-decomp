@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_PSYBEAM",
         "MOVE_GRASS_KNOT",
-        "MOVE_FUTURE_SIGHT",
+        "MOVE_VOLT_SWITCH",
         "MOVE_CONFUSE_RAY"
     ],
     "evFlags": {

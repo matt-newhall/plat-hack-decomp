@@ -50,7 +50,7 @@
             [ 33, "MOVE_SNORE" ],
             [ 39, "MOVE_AQUA_TAIL" ],
             [ 45, "MOVE_EARTHQUAKE" ],
-            [ 51, "MOVE_FUTURE_SIGHT" ],
+            [ 51, "MOVE_VOLT_SWITCH" ],
             [ 57, "MOVE_SLUDGE_WAVE" ]
         ],
         "by_tm": [

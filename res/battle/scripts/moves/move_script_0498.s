@@ -2,6 +2,6 @@
 
 
 _000:
-    // {0} foresaw an attack!
-    BufferMessage BattleStrings_Text_PokemonForesawAnAttack_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
+    // {0} tucked in its head!
+    BufferMessage BattleStrings_Text_PokemonTuckedInItsHead_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
     GoToEffectScript 

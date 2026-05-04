@@ -40,7 +40,7 @@
             [ 16, "MOVE_ENDURE" ],
             [ 21, "MOVE_SWIFT" ],
             [ 31, "MOVE_YAWN" ],
-            [ 36, "MOVE_FUTURE_SIGHT" ],
+            [ 36, "MOVE_VOLT_SWITCH" ],
             [ 46, "MOVE_AMNESIA" ],
             [ 51, "MOVE_EXTRASENSORY" ],
             [ 61, "MOVE_FLAIL" ],

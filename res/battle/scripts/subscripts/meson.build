@@ -331,4 +331,5 @@ subscript_files = files(
     'subscript_set_powder_flag.s',
     'subscript_powder_fire_move.s',
     'subscript_attack_then_check_ko.s',
+    'subscript_power_herb_skull_bash.s',
 )

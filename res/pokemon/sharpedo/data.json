@@ -51,7 +51,7 @@
             [ 34, "MOVE_AQUA_JET" ],
             [ 40, "MOVE_TAUNT" ],
             [ 45, "MOVE_AGILITY" ],
-            [ 50, "MOVE_FIRST_IMPRESSION" ],
+            [ 50, "MOVE_SKULL_BASH" ],
             [ 56, "MOVE_NIGHT_SLASH" ]
         ],
         "by_tm": [

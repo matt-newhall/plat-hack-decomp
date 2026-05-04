@@ -19,7 +19,7 @@
                 "MOVE_PSYCHIC",
                 "MOVE_MAGICAL_LEAF",
                 "MOVE_HYPNOSIS",
-                "MOVE_FUTURE_SIGHT"
+                "MOVE_VOLT_SWITCH"
             ],
             "iv_scale": 0,
             "ball_seal": 0
