@@ -205,6 +205,10 @@ Roar, Whirlwind ✅
 - Bypass accuracy checks to always hit, unless the target is in the semi-invulnerable turn of a move (such as Dig or Fly).
 - Can now hit a target even if it has used Protect or Detect.
 
+Sheer Cold ✅
+- Ice-type Pokémon are now immune to Sheer Cold.
+- Additionally, the move's base chance of hitting is only 20% if the user is not an Ice-type Pokémon: (new formula)
+
 Skill Swap ✅
 - If the two Abilities being swapped both have an effect or message that activates when gained (such as Intimidate and Unnerve), the Pokémon using Skill Swap will always have its new Ability activate first.
 - If it is an Ability such as Intimidate that activates when it is gained, it will activate for both Pokémon after being gained this way.
@@ -235,6 +239,11 @@ Arm Thrust, Barrage, Bone Rush, Bullet Seed, Comet Punch, Double Slap, Fury Atta
 Aromatherapy ✅
 - Aromatherapy cannot affect allies behind a substitute, but still affects the user even if it is behind a substitute.
 
+Assist ✅
+- Assist can now call moves even if they would fail due to Gravity or Heal Block.
+- If a Pokémon is in battle and its moves have temporarily changed, Assist can now only access its current moves.
+- Assist can also no longer call any moves that switch the target out or moves with a semi-invulnerable turn.
+
 Bide ✅
 - Bide can no longer hit Ghost-type Pokémon.
 - If Bide is called through another move, it will have +1 priority on its subsequent turns.
@@ -246,6 +255,11 @@ Bug Bite, Pluck ✅
 Charge ✅
 - If the user's next move is not Electric-type, Charge no longer wears off, and instead remains active for the next move that is. However, if the user attempted to use an Electric-type move, Charge will still wear off even if a condition prevented the move from being used, such as being asleep or flinching. Missing an Electric-type move will remove the buff.
 - Multiple instances of the Charge effect (using Charge multiple times while the user's Ability is Normalize) are not cumulative; the next Electric-type move will still only deal twice as much damage, and no instances of the effect will linger to be used on subsequent moves.
+
+Copycat
+- If any move successfully calls another, the called move now counts as the last move used instead of the calling move.
+- The last move used is now unaffected if a Pokémon tries to use a move but is prevented by a status condition or effect. In other words, the last-used move remains what it was before the Pokémon's turn.
+- Bide, charging moves & recharging moves no longer have invalid turns that will cause Copycat to fail. Instead, charging moves can be copied on any turn, while recharging moves are ignored on their recharge turn (the last move used remains whatever it was before the recharge message appeared). Bide can be copied on any turn.
 
 Counter, Mirror Coat ✅
 - If the Pokémon using Counter is hit by a physical attack that deals 0 damage (for example, False Swipe when the user of Counter already has 1 HP), Counter becomes a physical move with 1 base power.
@@ -286,12 +300,18 @@ Heal Order, Milk Drink, Recover, Roost, Slack Off, Soft-boiled ✅
 Helping Hand ✅
 - It no longer boosts confusion damage.
 
+Imprison ✅
+- Imprison still works even if no opponent has a move the user knows. Although Imprison has no immediate effect in such a case, if the user or opponents change the moves they know (e.g. Mimic, Transform, Sketch, or learning a new move by leveling up) or a different opposing Pokémon enters the battle, it will be prevented from using the user's moves.
+
 Judgment, Natural Gift, Weather Ball ✅
 - Unaffected by Normalize.
 
 Lock-On, Mind Reader ✅
 - Multiple Pokémon can have the effect of Mind Reader or Lock-On on the same target.
 - Mind Reader will not fail if another Pokémon has used Mind Reader or Lock-On on the same target; it will only fail if the user already has the effect active on its current target.
+
+Me First ✅
+- Now, when Pokémon holding a Choice item copy a consecutively executed move or Bide with Me First, that move will fail after the first turn, because it is locked into Me First and attempting to use a different move.
 
 Memento ✅
 - The user will not faint if Memento fails (such as if it has no target, the move misses, or is blocked by a substitute), or if it is blocked by a protection move.
