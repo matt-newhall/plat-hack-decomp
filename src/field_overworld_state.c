@@ -125,11 +125,6 @@ u16 *FieldOverworldState_GetSafariStepCount(FieldOverworldState *fieldState)
     return &fieldState->safariSteps;
 }
 
-u16 *FieldOverworldState_GetPoisonStepCount(FieldOverworldState *fieldState)
-{
-    return &fieldState->poisonSteps;
-}
-
 FieldOverworldState *SaveData_GetFieldOverworldState(SaveData *saveData)
 {
     return SaveData_SaveTable(saveData, SAVE_TABLE_ENTRY_FIELD_PLAYER_STATE);

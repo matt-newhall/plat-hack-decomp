@@ -58,24 +58,6 @@ void ov5_021EF4F8(UnkStruct_ov5_021EF4F8 *param0)
     Heap_Free(param0);
 }
 
-void Field_DoPoisonEffect(UnkStruct_ov5_021EF4F8 *param0)
-{
-    GF_ASSERT(param0->unk_00 == 0);
-
-    param0->unk_314 = HBlankSystem_StartTask(param0->unk_310, ov5_021EF6C0, param0);
-    param0->unk_31C = SysTask_Start(ov5_021EF5A8, param0, 1024);
-    param0->unk_320 = SysTask_ExecuteOnVBlank(ov5_021EF6B0, param0, 1024);
-    param0->unk_324 = SysTask_ExecuteOnVBlank(ov5_021EF6E4, param0, 1024);
-
-    memset(param0->unk_0C, 0, sizeof(u16) * 192);
-    memset(param0->unk_18C, 0, sizeof(u16) * 192);
-
-    param0->unk_00 = 1;
-    param0->unk_08 = 0;
-
-    Sound_PlayEffect(SEQ_SE_DP_DOKU2);
-}
-
 static void ov5_021EF5A8(SysTask *param0, void *param1)
 {
     UnkStruct_ov5_021EF4F8 *v0 = param1;

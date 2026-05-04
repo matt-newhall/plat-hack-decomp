@@ -53,7 +53,6 @@ void FieldOverworldState_SetCameraType(FieldOverworldState *fieldState, int type
 PlayerData *FieldOverworldState_GetPlayerData(FieldOverworldState *fieldState);
 u16 *FieldOverworldState_GetSafariBallCount(FieldOverworldState *fieldState);
 u16 *FieldOverworldState_GetSafariStepCount(FieldOverworldState *fieldState);
-u16 *FieldOverworldState_GetPoisonStepCount(FieldOverworldState *fieldState);
 FieldOverworldState *SaveData_GetFieldOverworldState(SaveData *saveData);
 FieldOverworldSave *SaveData_GetFieldOverworldSave(SaveData *saveData);
 void FieldSystem_SaveObjects(FieldSystem *fieldSystem);
