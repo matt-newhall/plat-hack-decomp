@@ -4,7 +4,7 @@
         "MOVE_ZEN_HEADBUTT",
         "MOVE_PLUCK",
         "MOVE_TAILWIND",
-        "MOVE_VOLT_SWITCH"
+        "MOVE_FUTURE_SIGHT"
     ],
     "evFlags": {
         "hp": false,

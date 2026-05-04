@@ -4,7 +4,7 @@
         "MOVE_CONFUSION",
         "MOVE_ROLE_PLAY",
         "MOVE_DISABLE",
-        "MOVE_VOLT_SWITCH"
+        "MOVE_FUTURE_SIGHT"
     ],
     "evFlags": {
         "hp": false,

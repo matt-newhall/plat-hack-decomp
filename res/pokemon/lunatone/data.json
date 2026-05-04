@@ -45,7 +45,7 @@
             [ 34, "MOVE_COSMIC_POWER" ],
             [ 42, "MOVE_PLAY_ROUGH" ],
             [ 45, "MOVE_PSYCHIC" ],
-            [ 53, "MOVE_VOLT_SWITCH" ],
+            [ 53, "MOVE_FUTURE_SIGHT" ],
             [ 56, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [

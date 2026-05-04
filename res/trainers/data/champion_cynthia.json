@@ -96,6 +96,7 @@
                 "MOVE_GIGA_IMPACT"
             ],
             "iv_scale": 250,
+            "nature": "NATURE_JOLLY",
             "ball_seal": 0
         }
     ],

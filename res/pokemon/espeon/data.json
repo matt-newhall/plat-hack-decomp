@@ -42,7 +42,7 @@
             [ 22, "MOVE_QUICK_ATTACK" ],
             [ 29, "MOVE_SWIFT" ],
             [ 36, "MOVE_PSYBEAM" ],
-            [ 43, "MOVE_VOLT_SWITCH" ],
+            [ 43, "MOVE_FUTURE_SIGHT" ],
             [ 50, "MOVE_LAST_RESORT" ],
             [ 57, "MOVE_PSYCH_UP" ],
             [ 64, "MOVE_PSYCHIC" ],

@@ -4,7 +4,7 @@
         "MOVE_NIGHT_SHADE",
         "MOVE_AIR_CUTTER",
         "MOVE_OMINOUS_WIND",
-        "MOVE_VOLT_SWITCH"
+        "MOVE_FUTURE_SIGHT"
     ],
     "evFlags": {
         "hp": false,

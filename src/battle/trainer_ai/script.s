@@ -225,6 +225,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_IN_3_TURNS, Basic_CheckFutureSight
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, ScoreMinus10
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Basic_CheckCanRecoverHP
@@ -821,6 +822,12 @@ Basic_CheckCurrentWeatherIsSun:
     // If the weather is currently Sun, score -8.
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus8
+    PopOrEnd 
+
+Basic_CheckFutureSight:
+    // If either the attacker or the target are currently under the effect of Future Sight, score -12.
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_FUTURE_SIGHT, ScoreMinus12
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_FUTURE_SIGHT, ScoreMinus12
     PopOrEnd 
 
 Basic_CheckFirstTurnInBattle:
@@ -3199,6 +3206,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_WEATHER_SUN
     TableEntry BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP
     TableEntry BATTLE_EFFECT_COPY_STAT_CHANGES
+    TableEntry BATTLE_EFFECT_HIT_IN_3_TURNS
     TableEntry BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY
     TableEntry BATTLE_EFFECT_STOCKPILE
     TableEntry BATTLE_EFFECT_SPIT_UP
@@ -6153,6 +6161,7 @@ TagStrategy_CheckSpecialScoring:
     // Handle each of these moves with their own routine
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_SkillSwap
     LoadTypeFrom LOAD_MOVE_TYPE
+    IfMoveEqualTo MOVE_FUTURE_SIGHT, TagStrategy_FutureSight
     IfMoveEqualTo MOVE_RAIN_DANCE, TagStrategy_RainDance
     IfMoveEqualTo MOVE_SUNNY_DAY, TagStrategy_SunnyDay
     IfMoveEqualTo MOVE_HAIL, TagStrategy_Hail
@@ -6539,6 +6548,50 @@ TagStrategy_Unused_2:
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, ScoreMinus5
     AddToMoveScore 1
     IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, ScorePlus2
+    PopOrEnd 
+
+TagStrategy_FutureSight:
+    // If the move is Future Sight:
+    //  - If we have no partner, apply no additional modifiers
+    //  - If our partner knows Future Sight and:
+    //    - They would move before us, score -3
+    //    - They speed-tie us, 50% chance of score -3
+    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, TagStrategy_FutureSight_End
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_FUTURE_SIGHT, TagStrategy_FutureSight_CheckSelfSpeed
+    GoTo TagStrategy_FutureSight_End
+
+TagStrategy_FutureSight_CheckSelfSpeed:
+    LoadBattlerSpeedRank AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 3, ScoreMinus3
+    IfLoadedEqualTo 2, TagStrategy_FutureSight_SelfMovesThird
+    IfLoadedEqualTo 1, TagStrategy_FutureSight_SelfMovesSecond
+    IfLoadedEqualTo 0, TagStrategy_FutureSight_SelfMovesFirst
+    GoTo TagStrategy_FutureSight_End
+
+TagStrategy_FutureSight_SelfMovesThird:
+    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo 0, ScoreMinus3
+    IfLoadedEqualTo 1, ScoreMinus3
+    IfRandomLessThan 128, TagStrategy_FutureSight_End
+    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo 2, ScoreMinus3
+    GoTo TagStrategy_FutureSight_End
+
+TagStrategy_FutureSight_SelfMovesSecond:
+    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo 0, ScoreMinus3
+    IfRandomLessThan 128, TagStrategy_FutureSight_End
+    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo 1, ScoreMinus3
+    GoTo TagStrategy_FutureSight_End
+
+TagStrategy_FutureSight_SelfMovesFirst:
+    IfRandomLessThan 128, TagStrategy_FutureSight_End
+    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo 0, ScoreMinus3
+    GoTo TagStrategy_FutureSight_End
+
+TagStrategy_FutureSight_End:
     PopOrEnd 
 
 TagStrategy_SkillSwap:
