@@ -102,6 +102,7 @@
         ],
         "egg_moves": [
             "MOVE_SILK_TRAP",
+            "MOVE_ASSIST",
             "MOVE_ROLE_PLAY",
             "MOVE_FIRE_PUNCH",
             "MOVE_THUNDER_PUNCH",

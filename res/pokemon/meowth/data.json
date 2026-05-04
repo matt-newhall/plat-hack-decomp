@@ -108,6 +108,7 @@
             "MOVE_HYPNOSIS",
             "MOVE_AMNESIA",
             "MOVE_PSYCH_UP",
+            "MOVE_ASSIST",
             "MOVE_ODOR_SLEUTH",
             "MOVE_FLAIL",
             "MOVE_LAST_RESORT",

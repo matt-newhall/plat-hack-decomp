@@ -3319,6 +3319,7 @@ BOOL Move_IsInvoker(u16 move)
     // declaring this as a single return didn't match
     if (move == MOVE_NONE
         || move == MOVE_SLEEP_TALK
+        || move == MOVE_ASSIST
         || move == MOVE_ME_FIRST
         || move == MOVE_METRONOME) {
         return TRUE;
@@ -8142,6 +8143,7 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_CHATTER,
     FORBIDDEN_BY_MIMIC_DELIM,
     MOVE_SLEEP_TALK,
+    MOVE_ASSIST,
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
     MOVE_PROTECT,
@@ -8194,6 +8196,7 @@ static const u16 sCannotEncoreMoves[] = {
     MOVE_MIMIC,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
+    MOVE_ASSIST,
     MOVE_ME_FIRST,
     MOVE_METRONOME,
     MOVE_NATURE_POWER,
