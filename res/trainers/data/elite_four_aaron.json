@@ -24,7 +24,8 @@
                 "MOVE_DOUBLE_TEAM"
             ],
             "iv_scale": 250,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST"
         },
         {
             "species": "SPECIES_SCIZOR",
