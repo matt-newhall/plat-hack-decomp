@@ -108,7 +108,8 @@ typedef struct MoveFailFlags {
     u32 confused : 1;
     u32 gravity : 1;
     u32 healBlocked : 1;
-    u32 padding00_0A : 22;
+    u32 choiceConflict : 1;
+    u32 padding00_0A : 21;
 } MoveFailFlags;
 
 typedef struct BattleScriptTaskData {
