@@ -4,7 +4,7 @@
         "MOVE_CONFUSION",
         "MOVE_GYRO_BALL",
         "MOVE_ANCIENT_POWER",
-        "MOVE_STRUGGLE_BUG"
+        "MOVE_IMPRISON"
     ],
     "evFlags": {
         "hp": false,
