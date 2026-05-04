@@ -8169,6 +8169,32 @@ static const u16 sCannotMetronomeMoves[] = {
     FORBIDDEN_BY_METRONOME_DELIM,
 };
 
+static const u16 sCannotAssistMoves[] = {
+    MOVE_FLY,
+    MOVE_DIG,
+    MOVE_DIVE,
+    MOVE_BOUNCE,
+    MOVE_SHADOW_FORCE,
+    MOVE_WHIRLWIND,
+    MOVE_ROAR,
+    MOVE_DRAGON_TAIL,
+};
+
+BOOL Move_CanBeAssisted(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u16 move)
+{
+    if (Move_CanBeMetronomed(battleSys, battleCtx, battler, move) == FALSE) {
+        return FALSE;
+    }
+
+    for (int i = 0; i < NELEMS(sCannotAssistMoves); i++) {
+        if (sCannotAssistMoves[i] == move) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
 BOOL Move_CanBeMimicked(u16 move)
 {
     int i;

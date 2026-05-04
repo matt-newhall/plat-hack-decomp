@@ -1360,6 +1360,21 @@ BOOL Move_CanBeMimicked(u16 move);
 BOOL Move_CanBeMetronomed(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u16 move);
 
 /**
+ * @brief Check if a move can be called by Assist.
+ *
+ * Excludes everything Metronome cannot call, plus semi-invulnerable moves
+ * (Fly, Dig, Dive, Bounce, Shadow Force) and force-switch moves (Whirlwind,
+ * Roar, Dragon Tail).
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @param move
+ * @return TRUE if the move can be invoked by Assist, FALSE if not.
+ */
+BOOL Move_CanBeAssisted(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u16 move);
+
+/**
  * @brief Check if a move can be Encored.
  *
  * @param battleCtx
