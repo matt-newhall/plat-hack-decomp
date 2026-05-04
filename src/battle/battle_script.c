@@ -6608,8 +6608,8 @@ static BOOL BtlCmd_TryAssist(BattleSystem *battleSys, BattleContext *battleCtx)
     // must declare C89-style to match
     int jumpOnFail;
     u16 moves[MAX_PARTY_SIZE * LEARNED_MOVES_MAX], move;
-    int i, j;
-    int partyCount;
+    int i, j, b;
+    int partyCount, maxBattlers, activeBattler;
     int numMoves;
     Pokemon *mon;
 
@@ -6617,6 +6617,7 @@ static BOOL BtlCmd_TryAssist(BattleSystem *battleSys, BattleContext *battleCtx)
     jumpOnFail = BattleScript_Read(battleCtx);
     numMoves = 0;
     partyCount = BattleSystem_GetPartyCount(battleSys, battleCtx->attacker);
+    maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
 
     for (i = 0; i < partyCount; i++) {
         if (i == battleCtx->selectedPartySlot[battleCtx->attacker]) {
@@ -6626,9 +6627,19 @@ static BOOL BtlCmd_TryAssist(BattleSystem *battleSys, BattleContext *battleCtx)
         mon = BattleSystem_GetPartyPokemon(battleSys, battleCtx->attacker, i);
         if (Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
             && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG) {
+            activeBattler = -1;
+            for (b = 0; b < maxBattlers; b++) {
+                if (battleCtx->selectedPartySlot[b] == i && battleCtx->battleMons[b].curHP > 0) {
+                    activeBattler = b;
+                    break;
+                }
+            }
+
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                if (Move_IsInvoker(move) == FALSE && Move_CanBeMetronomed(battleSys, battleCtx, battleCtx->attacker, move) == TRUE) {
+                move = (activeBattler >= 0)
+                    ? battleCtx->battleMons[activeBattler].moves[j]
+                    : Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+                if (Move_IsInvoker(move) == FALSE && Move_CanBeAssisted(battleSys, battleCtx, battleCtx->attacker, move) == TRUE) {
                     moves[numMoves] = move;
                     numMoves++;
                 }
