@@ -186,44 +186,6 @@ void Party_GiveChampionRibbons(Party *party)
     }
 }
 
-int Pokemon_DoPoisonDamage(Party *party, u16 mapLabelTextID)
-{
-    int numPoisoned = 0;
-    int numFainted = 0;
-    int i, partyCount = Party_GetCurrentCount(party);
-    Pokemon *mon;
-
-    for (i = 0; i < partyCount; i++) {
-        mon = Party_GetPokemonBySlotIndex(party, i);
-
-        if (Pokemon_CanBattle(mon)
-            && (Pokemon_GetValue(mon, MON_DATA_STATUS, NULL) & (MON_CONDITION_TOXIC | MON_CONDITION_POISON))) {
-            u32 hp = Pokemon_GetValue(mon, MON_DATA_HP, NULL);
-
-            if (hp > 1) {
-                hp--;
-            }
-
-            Pokemon_SetValue(mon, MON_DATA_HP, &hp);
-
-            if (hp == 1) {
-                numFainted++;
-                Pokemon_UpdateFriendship(mon, FRIENDSHIP_EVENT_POISON_SURVIVE, mapLabelTextID);
-            }
-
-            numPoisoned++;
-        }
-    }
-
-    if (numFainted) {
-        return FLDPSN_FAINTED;
-    } else if (numPoisoned) {
-        return FLDPSN_POISONED;
-    } else {
-        return FLDPSN_NONE;
-    }
-}
-
 BOOL Pokemon_TrySurvivePoison(Pokemon *mon)
 {
     if (Pokemon_GetValue(mon, MON_DATA_STATUS, NULL) & (MON_CONDITION_TOXIC | MON_CONDITION_POISON)

@@ -7,6 +7,5 @@
 
 UnkStruct_ov5_021EF4F8 *ov5_021EF4BC(enum HeapID heapID, HBlankSystem *param1);
 void ov5_021EF4F8(UnkStruct_ov5_021EF4F8 *param0);
-void Field_DoPoisonEffect(UnkStruct_ov5_021EF4F8 *param0);
 
 #endif // POKEPLATINUM_OV5_021EF4BC_H

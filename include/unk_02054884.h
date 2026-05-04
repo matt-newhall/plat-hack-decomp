@@ -15,7 +15,6 @@ Pokemon *Party_FindFirstEligibleBattler(const Party *party);
 Pokemon *Party_FindFirstHatchedMon(const Party *party);
 BOOL Party_HasTwoAliveMons(const Party *party);
 void Party_GiveChampionRibbons(Party *party);
-int Pokemon_DoPoisonDamage(Party *party, u16 mapLabelTextID);
 BOOL Pokemon_TrySurvivePoison(Pokemon *mon);
 
 #endif // POKEPLATINUM_UNK_02054884_H

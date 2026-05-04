@@ -77,7 +77,6 @@ static BOOL Field_ProcessStep(FieldSystem *fieldSystem);
 static BOOL Field_CheckCoordEvent(FieldSystem *fieldSystem);
 static BOOL Field_CheckTransition(FieldSystem *fieldSystem, const int playerX, const int playerZ, const u8 curTileBehavior);
 static BOOL Field_UpdateDaycare(FieldSystem *fieldSystem);
-static BOOL Field_UpdatePoison(FieldSystem *fieldSystem);
 static BOOL Field_UpdateSafari(FieldSystem *fieldSystem);
 static BOOL Field_UpdateVsSeeker(FieldSystem *fieldSystem);
 static BOOL Field_UpdatePokeRadar(FieldSystem *fieldSystem);
@@ -732,10 +731,6 @@ static BOOL Field_ProcessStep(FieldSystem *fieldSystem)
 
     FieldSystem_SendPoketchEvent(fieldSystem, POKETCH_EVENT_PEDOMETER, 1);
 
-    if (Field_UpdatePoison(fieldSystem) == TRUE) {
-        return TRUE;
-    }
-
     if (Field_UpdateSafari(fieldSystem) == TRUE) {
         return TRUE;
     }
@@ -891,33 +886,6 @@ static void Field_CalculateFriendship(FieldSystem *fieldSystem)
         Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
         Pokemon_UpdateFriendship(mon, FRIENDSHIP_EVENT_WALK_CYCLE, mapID);
     }
-}
-
-static BOOL Field_UpdatePoison(FieldSystem *fieldSystem)
-{
-    Party *party = SaveData_GetParty(fieldSystem->saveData);
-    u16 *poisonSteps = FieldOverworldState_GetPoisonStepCount(SaveData_GetFieldOverworldState(fieldSystem->saveData));
-
-    (*poisonSteps)++;
-    (*poisonSteps) %= 4;
-
-    if (*poisonSteps != 0) {
-        return FALSE;
-    }
-
-    switch (Pokemon_DoPoisonDamage(party, MapHeader_GetMapLabelTextID(fieldSystem->location->mapId))) {
-    case FLDPSN_NONE:
-        return FALSE;
-    case FLDPSN_POISONED:
-        Field_DoPoisonEffect(fieldSystem->unk_04->unk_20);
-        return FALSE;
-    case FLDPSN_FAINTED:
-        Field_DoPoisonEffect(fieldSystem->unk_04->unk_20);
-        ScriptManager_Set(fieldSystem, SCRIPT_ID(COMMON_SCRIPTS, 3), NULL);
-        return TRUE;
-    }
-
-    return FALSE;
 }
 
 static BOOL Field_UpdateSafari(FieldSystem *fieldSystem)
