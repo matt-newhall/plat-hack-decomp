@@ -3,7 +3,7 @@
     "moves": [
         "MOVE_PSYCHIC",
         "MOVE_SIGNAL_BEAM",
-        "MOVE_SHELL_SMASH",
+        "MOVE_COPYCAT",
         "MOVE_MIMIC"
     ],
     "evFlags": {
