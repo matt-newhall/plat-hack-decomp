@@ -7739,7 +7739,6 @@ static BOOL BtlCmd_CalcWringOutPower(BattleSystem *battleSys, BattleContext *bat
 }
 
 /**
- * @deprecated
  * @brief Try to execute Me First.
  *
  * Inputs:
@@ -7868,7 +7867,7 @@ static BOOL BtlCmd_TrySuckerPunch(BattleSystem *battleSys, BattleContext *battle
     }
 
     if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
-        || (MOVE_DATA(move).power == 0 && DEFENDER_TURN_FLAGS.struggling == FALSE)) {
+        || (MOVE_DATA(move).power == 0 && DEFENDER_TURN_FLAGS.struggling == FALSE && move != MOVE_ME_FIRST)) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
 

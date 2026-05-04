@@ -4860,6 +4860,16 @@
         "also prevented from\n",
         "using items on it."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00496",
+      "en_US": [
+        "The user tries to cut\n",
+        "ahead of the foe to\n",
+        "steal and use the\n",
+        "foe’s intended move\n",
+        "with greater power."
+      ]
     }
   ]
 }
