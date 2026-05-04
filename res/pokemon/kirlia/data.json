@@ -45,7 +45,7 @@
             [ 22, "MOVE_MAGICAL_LEAF" ],
             [ 25, "MOVE_CALM_MIND" ],
             [ 31, "MOVE_PSYCHIC" ],
-            [ 36, "MOVE_STRUGGLE_BUG" ],
+            [ 36, "MOVE_IMPRISON" ],
             [ 39, "MOVE_VOLT_SWITCH" ],
             [ 45, "MOVE_CHARM" ],
             [ 50, "MOVE_HYPNOSIS" ],

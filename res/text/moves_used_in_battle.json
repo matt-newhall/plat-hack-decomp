@@ -10428,6 +10428,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Me First!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01479",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Imprison!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01480",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Imprison!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01481",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Imprison!"
+      ]
     }
   ]
 }

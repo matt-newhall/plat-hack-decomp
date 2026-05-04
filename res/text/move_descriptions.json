@@ -4870,6 +4870,16 @@
         "foe’s intended move\n",
         "with greater power."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00497",
+      "en_US": [
+        "If the foe knows any\n",
+        "move also known by\n",
+        "the user, the foe\n",
+        "is prevented\n",
+        "from using it."
+      ]
     }
   ]
 }

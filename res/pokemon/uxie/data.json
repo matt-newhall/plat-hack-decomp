@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_REST" ],
             [ 1, "MOVE_CONFUSION" ],
-            [ 6, "MOVE_STRUGGLE_BUG" ],
+            [ 6, "MOVE_IMPRISON" ],
             [ 16, "MOVE_ENDURE" ],
             [ 21, "MOVE_SWIFT" ],
             [ 31, "MOVE_YAWN" ],
