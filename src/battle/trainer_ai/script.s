@@ -1711,6 +1711,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Expert_TrumpCard
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_MOVE_FIRST, Expert_MeFirst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Expert_Punishment
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Expert_LastResort
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Expert_WorrySeed
@@ -5282,6 +5283,39 @@ Expert_GastroAcid_ContinueHPCheck:
 Expert_GastroAcid_End:
     PopOrEnd 
 
+Expert_MeFirst:
+    // If the attacker is slower than its opponent, score -2.
+    //
+    // If the attacker deals more damage than its opponent, 87.5% chance of additional score +1.
+    //
+    // If the opponent's last-used move was a Damaging move, 50% chance of additional score +1.
+    //
+    // 75% chance of score +1.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_MeFirst_ScoreMinus2
+    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_MeFirst_TryScorePlus1
+    GoTo Expert_MeFirst_CheckLastUsedMove
+
+Expert_MeFirst_TryScorePlus1:
+    IfRandomLessThan 32, Expert_MeFirst_CheckLastUsedMove
+    AddToMoveScore 1
+
+Expert_MeFirst_CheckLastUsedMove:
+    LoadDefenderLastUsedMoveClass 
+    IfLoadedEqualTo CLASS_STATUS, Expert_MeFirst_TryScorePlus1AndEnd
+    IfRandomLessThan 128, Expert_MeFirst_End
+    AddToMoveScore 1
+
+Expert_MeFirst_TryScorePlus1AndEnd:
+    IfRandomLessThan 64, Expert_MeFirst_End
+    AddToMoveScore 1
+    GoTo Expert_MeFirst_End
+
+Expert_MeFirst_ScoreMinus2:
+    AddToMoveScore -2
+
+Expert_MeFirst_End:
+    PopOrEnd 
+
 Expert_Punishment:
     // If the opponent resists or is immune to the move, score +0.
     //
@@ -5939,6 +5973,7 @@ Risky_RiskyEffects:
     TableEntry BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED
     TableEntry BATTLE_EFFECT_METAL_BURST
     TableEntry BATTLE_EFFECT_DOUBLE_POWER_IF_MOVING_SECOND
+    TableEntry BATTLE_EFFECT_USE_MOVE_FIRST
     TableEntry BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING
     TableEntry TABLE_END
 

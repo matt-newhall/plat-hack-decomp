@@ -1745,6 +1745,8 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
         } else {
             defender = attacker;
         }
+    } else if (range == RANGE_SINGLE_TARGET_ME_FIRST && randomize == TRUE) { // e.g., Me First
+        defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
     } else if (range == RANGE_OPPONENT_SIDE) { // e.g., Spikes, Stealth Rock
         defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
     } else if (range == RANGE_USER // e.g., Swords Dance
@@ -3317,6 +3319,7 @@ BOOL Move_IsInvoker(u16 move)
     // declaring this as a single return didn't match
     if (move == MOVE_NONE
         || move == MOVE_SLEEP_TALK
+        || move == MOVE_ME_FIRST
         || move == MOVE_METRONOME) {
         return TRUE;
     }
@@ -8154,6 +8157,7 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_TRICK,
     MOVE_FOCUS_PUNCH,
     MOVE_FEINT,
+    MOVE_ME_FIRST,
     MOVE_TRANSFORM,
     MOVE_SNORE,
     MOVE_NATURE_POWER,
@@ -8190,6 +8194,7 @@ static const u16 sCannotEncoreMoves[] = {
     MOVE_MIMIC,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
+    MOVE_ME_FIRST,
     MOVE_METRONOME,
     MOVE_NATURE_POWER,
     MOVE_SLEEP_TALK,

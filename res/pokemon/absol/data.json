@@ -135,7 +135,7 @@
             "MOVE_PUNISHMENT",
             "MOVE_SUCKER_PUNCH",
             "MOVE_ASSURANCE",
-            "MOVE_QUIVER_DANCE"
+            "MOVE_ME_FIRST"
         ]
     },
     "evolutions": [  ],
