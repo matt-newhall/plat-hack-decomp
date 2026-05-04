@@ -89,7 +89,7 @@
         ],
         "egg_moves": [
             "MOVE_LIGHT_SCREEN",
-            "MOVE_FIRST_IMPRESSION",
+            "MOVE_SKULL_BASH",
             "MOVE_SAFEGUARD",
             "MOVE_CHARM",
             "MOVE_PETAL_DANCE",

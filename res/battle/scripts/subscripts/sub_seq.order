@@ -328,3 +328,4 @@ subscript_drain_three_quarter_damage_dealt
 subscript_set_powder_flag
 subscript_powder_fire_move
 subscript_attack_then_check_ko
+subscript_power_herb_skull_bash

@@ -48,7 +48,7 @@
             [ 40, "MOVE_PSYCHIC" ],
             [ 43, "MOVE_NASTY_PLOT" ],
             [ 50, "MOVE_ZEN_HEADBUTT" ],
-            [ 53, "MOVE_FUTURE_SIGHT" ]
+            [ 53, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM01",

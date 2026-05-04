@@ -10454,21 +10454,21 @@
       "id": "pl_msg_00000000_01482",
       "en_US": [
         "{STRVAR_1 1, 0, 0} used\n",
-        "Future Sight!"
+        "Skull Bash!"
       ]
     },
     {
       "id": "pl_msg_00000000_01483",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} used\n",
-        "Future Sight!"
+        "Skull Bash!"
       ]
     },
     {
       "id": "pl_msg_00000000_01484",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
-        "Future Sight!"
+        "Skull Bash!"
       ]
     },
     {

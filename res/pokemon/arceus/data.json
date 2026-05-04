@@ -43,7 +43,7 @@
             [ 30, "MOVE_HYPER_VOICE" ],
             [ 40, "MOVE_EXTREME_SPEED" ],
             [ 50, "MOVE_REFRESH" ],
-            [ 60, "MOVE_FUTURE_SIGHT" ],
+            [ 60, "MOVE_VOLT_SWITCH" ],
             [ 70, "MOVE_RECOVER" ],
             [ 80, "MOVE_HYPER_BEAM" ],
             [ 90, "MOVE_PERISH_SONG" ],
