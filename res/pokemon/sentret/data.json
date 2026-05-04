@@ -111,6 +111,7 @@
             "MOVE_REVERSAL",
             "MOVE_SUBSTITUTE",
             "MOVE_TRICK",
+            "MOVE_ASSIST",
             "MOVE_LAST_RESORT",
             "MOVE_CHARM",
             "MOVE_FROST_BREATH"

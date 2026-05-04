@@ -1996,6 +1996,10 @@
     {
       "id": "pl_msg_00000648_00498",
       "en_US": "FUTURE SIGHT"
+    },
+    {
+      "id": "pl_msg_00000648_00499",
+      "en_US": "ASSIST"
     }
   ]
 }

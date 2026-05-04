@@ -43,6 +43,7 @@
             [ 11, "MOVE_SING" ],
             [ 15, "MOVE_DOUBLE_SLAP" ],
             [ 18, "MOVE_SHELL_SMASH" ],
+            [ 22, "MOVE_ASSIST" ],
             [ 25, "MOVE_CHARM" ],
             [ 29, "MOVE_FAINT_ATTACK" ],
             [ 32, "MOVE_WAKE_UP_SLAP" ],

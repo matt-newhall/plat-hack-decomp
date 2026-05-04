@@ -4,7 +4,7 @@
         "MOVE_DISARMING_VOICE",
         "MOVE_SHADOW_CLAW",
         "MOVE_TRICK",
-        "MOVE_PSYSHOCK"
+        "MOVE_ASSIST"
     ],
     "evFlags": {
         "hp": false,
