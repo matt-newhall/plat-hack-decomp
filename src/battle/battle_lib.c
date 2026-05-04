@@ -3099,6 +3099,7 @@ BOOL BattleContext_ThrashDisrupted(BattleContext *battleCtx, int battler)
         || battleCtx->moveFailFlags[battler].flinched
         || battleCtx->moveFailFlags[battler].gravity
         || battleCtx->moveFailFlags[battler].confused
+        || battleCtx->moveFailFlags[battler].choiceConflict
         || (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP)
         || (battleCtx->battleMons[battler].status & MON_CONDITION_FREEZE)) {
         return TRUE;

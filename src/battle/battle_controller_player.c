@@ -1513,14 +1513,20 @@ static void BattleControllerPlayer_CheckMonConditions(BattleSystem *battleSys, B
 
         case MON_COND_CHECK_STATE_UPROAR:
             if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_UPROAR) {
-                battleCtx->battleMons[battler].statusVolatile -= (1 << VOLATILE_CONDITION_UPROAR_SHIFT);
-
-                if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_UPROAR) {
-                    i = subscript_uproar_continues;
-                } else {
-                    i = subscript_uproar_end;
+                if (battleCtx->moveFailFlags[battler].choiceConflict) {
                     battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_UPROAR;
                     battleCtx->fieldConditionsMask &= ((FlagIndex(battler) << FIELD_CONDITION_UPROAR_SHIFT) ^ 0xFFFFFFFF);
+                    i = subscript_uproar_end;
+                } else {
+                    battleCtx->battleMons[battler].statusVolatile -= (1 << VOLATILE_CONDITION_UPROAR_SHIFT);
+
+                    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_UPROAR) {
+                        i = subscript_uproar_continues;
+                    } else {
+                        i = subscript_uproar_end;
+                        battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_UPROAR;
+                        battleCtx->fieldConditionsMask &= ((FlagIndex(battler) << FIELD_CONDITION_UPROAR_SHIFT) ^ 0xFFFFFFFF);
+                    }
                 }
 
                 battleCtx->msgBattlerTemp = battler;
@@ -3476,12 +3482,13 @@ static void BattleControllerPlayer_TryMove(BattleSystem *battleSys, BattleContex
 
     case TRY_MOVE_CHOICE_MULTI_TURN_CONFLICT:
         u8 itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
-        if ((itemEffect == HOLD_EFFECT_CHOICE_ATK 
-            || itemEffect == HOLD_EFFECT_CHOICE_SPEED 
+        if ((itemEffect == HOLD_EFFECT_CHOICE_ATK
+            || itemEffect == HOLD_EFFECT_CHOICE_SPEED
             || itemEffect == HOLD_EFFECT_CHOICE_SPATK)
             && ATTACKING_MON.moveEffectsData.choiceLockedMove != MOVE_NONE
             && ATTACKING_MON.moveEffectsData.choiceLockedMove != battleCtx->moveTemp) {
             battleCtx->moveStatusFlags |= MOVE_STATUS_FAILED;
+            battleCtx->moveFailFlags[battleCtx->attacker].choiceConflict = TRUE;
             Battler_UnlockMoveChoice(battleSys, battleCtx, battleCtx->attacker);
             // Set moveTemp so the Pokemon still stays locked into whatever move it used
             battleCtx->moveTemp = ATTACKING_MON.moveEffectsData.choiceLockedMove;
