@@ -268,6 +268,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Basic_CheckHealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Basic_CheckLastResort
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Basic_CheckWorrySeed
@@ -1356,6 +1357,15 @@ Basic_CheckGastroAcid:
     IfLoadedEqualTo ABILITY_HONEY_GATHER, ScoreMinus10
     PopOrEnd 
 
+Basic_CheckCopycat:
+    // If it's the first turn of the battle and the attacker is faster than its target, score -10.
+    LoadTurnCount 
+    IfLoadedNotEqualTo 0, Basic_CheckCopycat_Terminate
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus10
+
+Basic_CheckCopycat_Terminate:
+    PopOrEnd 
+
 Basic_CheckLastResort:
     // If the attacker has yet to use all of its other moves, score -10.
     IfCanUseLastResort AI_BATTLER_ATTACKER, Basic_CheckLastResort_Terminate
@@ -1718,6 +1728,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Expert_TrumpCard
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_MOVE_FIRST, Expert_MeFirst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP, Expert_Punishment
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAIL_IF_NOT_USED_ALL_OTHER_MOVES, Expert_LastResort
@@ -5290,6 +5301,79 @@ Expert_GastroAcid_ContinueHPCheck:
 
 Expert_GastroAcid_End:
     PopOrEnd 
+
+Expert_Copycat:
+    // If the attacker is slower than its opponent, deals less damage than its opponent, and the
+    // opponent's last-used move is not an encouraged move, 68.75% chance of score -1.
+    //
+    // If the attacker is faster than its opponent:
+    // - If the attacker deals more damage than its opponent, 87.5% chance of score +2.
+    // - If the opponent's last-used move is an encouraged move, 50% chance of score +2.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Copycat_CheckMoveEncouraged
+    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_TryScorePlus2
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    IfLoadedNotInTable Expert_Copycat_EncouragedMoves, Expert_Copycat_CheckMoveEncouraged
+    IfRandomLessThan 128, Expert_Copycat_End
+    AddToMoveScore 2
+    GoTo Expert_Copycat_End
+
+Expert_Copycat_TryScorePlus2:
+    IfRandomLessThan 32, Expert_Copycat_End
+    AddToMoveScore 2
+    GoTo Expert_Copycat_End
+
+Expert_Copycat_CheckMoveEncouraged:
+    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_End
+    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
+    IfLoadedInTable Expert_Copycat_EncouragedMoves, Expert_Copycat_End
+    IfRandomLessThan 80, Expert_Copycat_End
+    AddToMoveScore -1
+
+Expert_Copycat_End:
+    PopOrEnd 
+
+Expert_Copycat_EncouragedMoves:
+    TableEntry MOVE_SLEEP_POWDER
+    TableEntry MOVE_LOVELY_KISS
+    TableEntry MOVE_SPORE
+    TableEntry MOVE_HYPNOSIS
+    TableEntry MOVE_SING
+    TableEntry MOVE_GRASS_WHISTLE
+    TableEntry MOVE_SHADOW_PUNCH
+    TableEntry MOVE_SAND_ATTACK
+    TableEntry MOVE_SMOKE_SCREEN
+    TableEntry MOVE_TOXIC
+    TableEntry MOVE_SHEER_COLD
+    TableEntry MOVE_CROSS_CHOP
+    TableEntry MOVE_AEROBLAST
+    TableEntry MOVE_CONFUSE_RAY
+    TableEntry MOVE_SWEET_KISS
+    TableEntry MOVE_SCREECH
+    TableEntry MOVE_COTTON_SPORE
+    TableEntry MOVE_SCARY_FACE
+    TableEntry MOVE_FAKE_TEARS
+    TableEntry MOVE_METAL_SOUND
+    TableEntry MOVE_THUNDER_WAVE
+    TableEntry MOVE_GLARE
+    TableEntry MOVE_POISON_POWDER
+    TableEntry MOVE_SHADOW_BALL
+    TableEntry MOVE_DYNAMIC_PUNCH
+    TableEntry MOVE_HYPER_BEAM
+    TableEntry MOVE_EXTREME_SPEED
+    TableEntry MOVE_ATTRACT
+    TableEntry MOVE_SWAGGER
+    TableEntry MOVE_TORMENT
+    TableEntry MOVE_FLATTER
+    TableEntry MOVE_TRICK
+    TableEntry MOVE_SUPERPOWER
+    TableEntry MOVE_SKILL_SWAP
+    TableEntry MOVE_PSYCHO_SHIFT
+    TableEntry MOVE_SPIKY_SHIELD
+    TableEntry MOVE_SUCKER_PUNCH
+    TableEntry MOVE_HEART_SWAP
+    TableEntry MOVE_CAPTIVATE
+    TableEntry MOVE_DARK_VOID
+    TableEntry TABLE_END
 
 Expert_MeFirst:
     // If the attacker is slower than its opponent, score -2.

@@ -4900,6 +4900,16 @@
         "known by other\n",
         "Pokémon in the party."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00500",
+      "en_US": [
+        "The user mimics the\n",
+        "move used immediately\n",
+        "before it. The move\n",
+        "fails if no other move\n",
+        "has been used yet."
+      ]
     }
   ]
 }

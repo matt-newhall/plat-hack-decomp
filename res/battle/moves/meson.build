@@ -6,7 +6,6 @@ pl_waza_tbl_subdirs = [
 
 anim_script_subdirs = [
     '0000',
-    '0500',
 ]
 
 move_consts = fs.read(moves_txt).splitlines()
