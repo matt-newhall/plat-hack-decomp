@@ -4355,27 +4355,27 @@ static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, Ba
 
     if ((battleCtx->battleStatusMask & SYSCTL_REUSE_LAST_MOVE) == FALSE) {
         if (battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN) {
+            u16 effectiveMove = Move_IsInvoker(battleCtx->moveTemp) ? battleCtx->moveCur : battleCtx->moveTemp;
             battleCtx->moveProtect[battleCtx->attacker] = battleCtx->moveCur;
-            battleCtx->movePrev = battleCtx->moveTemp;
+            battleCtx->movePrev = effectiveMove;
+
+            BOOL focusPunchInterrupted =
+                battleCtx->moveTemp == MOVE_FOCUS_PUNCH &&
+                (battleCtx->turnFlags[battleCtx->attacker].physicalDamageAttackerMask != 0 ||
+                battleCtx->turnFlags[battleCtx->attacker].specialDamageAttackerMask != 0);
+
+            if (!(battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED)) {
+                battleCtx->movePrevByBattler[battleCtx->attacker] = MOVE_NONE;
+            } else if (!focusPunchInterrupted) {
+                battleCtx->movePrevByBattler[battleCtx->attacker] = effectiveMove;
+            }
         } else {
             battleCtx->moveProtect[battleCtx->attacker] = MOVE_NONE;
-            battleCtx->movePrev = MOVE_NONE;
-        }
-
-        BOOL focusPunchInterrupted =
-            battleCtx->moveTemp == MOVE_FOCUS_PUNCH &&
-            (battleCtx->turnFlags[battleCtx->attacker].physicalDamageAttackerMask != 0 ||
-            battleCtx->turnFlags[battleCtx->attacker].specialDamageAttackerMask != 0);
-
-        if (!(battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED)) {
-            battleCtx->movePrevByBattler[battleCtx->attacker] = MOVE_NONE;
-        } else if (!focusPunchInterrupted) {
-            battleCtx->movePrevByBattler[battleCtx->attacker] = battleCtx->moveTemp;
         }
     }
 
     if (battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN) {
-        battleCtx->moveSketched[battleCtx->attacker] = battleCtx->moveTemp;
+        battleCtx->moveSketched[battleCtx->attacker] = Move_IsInvoker(battleCtx->moveTemp) ? battleCtx->moveCur : battleCtx->moveTemp;
     }
 
     BattleControllerPlayer_UpdateFlagsWhenHit(battleSys, battleCtx);
@@ -4948,12 +4948,11 @@ static void BattleControllerPlayer_UpdateFlagsWhenHit(BattleSystem *battleSys, B
                 battleCtx->moveHit[battleCtx->defender] = battleCtx->moveCur;
                 battleCtx->moveHitBattler[battleCtx->defender] = battleCtx->attacker;
                 battleCtx->moveHitType[battleCtx->defender] = moveType;
-                battleCtx->movePrev = battleCtx->moveTemp;
+                battleCtx->movePrev = Move_IsInvoker(battleCtx->moveTemp) ? battleCtx->moveCur : battleCtx->moveTemp;
             } else {
                 battleCtx->moveHit[battleCtx->defender] = MOVE_NONE;
                 battleCtx->moveHitBattler[battleCtx->defender] = BATTLER_NONE;
                 battleCtx->moveHitType[battleCtx->defender] = TYPE_NORMAL;
-                battleCtx->movePrev = MOVE_NONE;
             }
 
             if ((battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED)
