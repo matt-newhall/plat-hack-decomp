@@ -1020,6 +1020,27 @@
         "Change {STRVAR_1 1, 0, 0}’s\n",
         "Ability to {STRVAR_1 5, 1, 0}?"
       ]
+    },
+    {
+      "id": "PartyMenu_Text_ShinyCharmConfirm",
+      "en_US": [
+        "Use the Shiny Charm\n",
+        "on {STRVAR_1 1, 0, 0}?"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_BecameShiny",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}\n",
+        "became shiny!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_NoLongerShiny",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} is\n",
+        "no longer shiny!"
+      ]
     }
   ]
 }

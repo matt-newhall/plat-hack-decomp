@@ -715,10 +715,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = ability_capsule_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_115] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_SHINY_CHARM] = {
+        .dataID = 0x1C0,
+        .iconID = shiny_charm_NCGR,
+        .paletteID = shiny_charm_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_116] = {

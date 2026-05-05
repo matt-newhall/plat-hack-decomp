@@ -919,7 +919,10 @@
     },
     {
       "id": "pl_msg_00000391_00115",
-      "garbage": 0
+      "en_US": [
+        "A mysterious charm that changes a\n",
+        "Pokémon’s color palette when used.\n"
+      ]
     },
     {
       "id": "pl_msg_00000391_00116",

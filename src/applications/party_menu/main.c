@@ -11,6 +11,7 @@
 #include "generated/items.h"
 #include "generated/moves.h"
 #include "generated/pokemon_contest_types.h"
+#include "generated/species.h"
 
 #include "applications/party_menu/defs.h"
 #include "applications/party_menu/form_change.h"
@@ -63,6 +64,7 @@
 #include "unk_0206B9D8.h"
 #include "vram_transfer.h"
 
+#include "res/graphics/party_menu/form_changes/form_change_effects.naix"
 #include "res/graphics/party_menu/party_menu_graphics.naix"
 #include "res/text/bank/party_menu.h"
 
@@ -300,7 +302,9 @@ static BOOL PartyMenu_Init(ApplicationManager *appMan, int *state)
     SetupRequestedModePanels(application);
     InitAnimAndPaletteForSlot(application, application->currPartySlot, TRUE);
 
-    if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
+    if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE
+        || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM
+        || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
         if (CheckItemSacredAsh(application->partyMenu->usedItemID) == FALSE) {
             PartyMenu_PrintShortMessage(application, PartyMenu_Text_UseOnWhichMon, TRUE);
         }
@@ -488,7 +492,9 @@ static BOOL PartyMenu_Main(ApplicationManager *appMan, int *state)
 static int sub_0207E490(PartyMenuApplication *application)
 {
     if (IsScreenFadeDone() == TRUE) {
-        if ((application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM) || (application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM)) {
+        if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE
+            || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM
+            || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
             if (CheckItemSacredAsh(application->partyMenu->usedItemID) == TRUE) {
                 application->stateAfterMessage = PARTY_MENU_STATE_START;
                 return PARTY_MENU_STATE_USE_SACRED_ASH;
@@ -1348,6 +1354,7 @@ static void DrawMemberPanels_UsingAbilityCapsule(PartyMenuApplication *applicati
 
     NARC_dtor(iconNarc);
 }
+
 
 static void DrawMemberPanels_TeachingMove(PartyMenuApplication *application, const MemberPanelTemplate *templates)
 {
@@ -2748,6 +2755,17 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
         return PARTY_MENU_STATE_SHOW_ABILITY_CAPSULE_CONFIRM;
     }
 
+    if (app->partyMenu->usedItemID == ITEM_SHINY_CHARM) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+        Heap_Free(itemData);
+        String *confirmStr = MessageLoader_GetNewString(app->messageLoader, PartyMenu_Text_ShinyCharmConfirm);
+        StringTemplate_SetNickname(app->template, 0, Pokemon_GetBoxPokemon(mon));
+        StringTemplate_Format(app->template, app->tmpString, confirmStr);
+        String_Free(confirmStr);
+        PartyMenu_PrintLongMessage(app, PRINT_MESSAGE_PRELOADED, TRUE);
+        return PARTY_MENU_STATE_SHOW_ABILITY_CAPSULE_CONFIRM;
+    }
+
     if (Item_Get(itemData, ITEM_PARAM_PP_UP) != 0 || Item_Get(itemData, ITEM_PARAM_PP_MAX) != 0) {
         Heap_Free(itemData);
         sub_020866A0(app, 0);
@@ -2945,6 +2963,24 @@ static int PartyMenu_ShowItemSwapConfirmation(PartyMenuApplication *application)
     return PARTY_MENU_STATE_SHOW_ITEM_SWAP_CONFIRMATION;
 }
 
+static int ShinyCharmFormChangeCallback(void *param0)
+{
+    PartyMenuApplication *app = (PartyMenuApplication *)param0;
+
+    if (app->formChanger->state == 9) {
+        PartyMenu_PrintLongMessage(app, PRINT_MESSAGE_PRELOADED, TRUE);
+        app->formChanger->state = 10;
+        return PARTY_MENU_STATE_5;
+    }
+
+    if (PartyMenuFormChange_ChangeForm(app) == TRUE) {
+        PartyMenu_TeardownFormChangeAnim(app);
+        return PARTY_MENU_STATE_CONFIRM_ITEM_UPDATE;
+    }
+
+    return PARTY_MENU_STATE_5;
+}
+
 static int PartyMenu_ShowAbilityCapsuleConfirmation(PartyMenuApplication *application)
 {
     if (Text_IsPrinterActive(application->textPrinterID) == FALSE) {
@@ -2960,6 +2996,58 @@ static int PartyMenu_ProcessAbilityCapsuleConfirmation(PartyMenuApplication *app
     switch (Menu_ProcessInputAndHandleExit(application->contextMenu, HEAP_ID_PARTY_MENU)) {
     case MENU_YES: {
         Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, application->currPartySlot);
+
+        if (application->partyMenu->usedItemID == ITEM_SHINY_CHARM) {
+            u32 monOTID = Pokemon_GetValue(mon, MON_DATA_OT_ID, NULL);
+            u32 monPersonality = Pokemon_GetValue(mon, MON_DATA_PERSONALITY, NULL);
+            u32 pidLow = monPersonality & 0xFFFF;
+            u32 oldPidHigh = (monPersonality >> 16) & 0xFFFF;
+            // Block order is (PID & 0x3E000) >> 13, spanning pidLow bits 13-15 (unchanged)
+            // and pidHigh bits 0-1 — preserve by requiring (candidate & 3) == (oldPidHigh & 3).
+            u32 oldBlockKey = (monPersonality & 0x3E000) >> 13;
+            u32 xorBase = ((monOTID >> 16) & 0xFFFF) ^ (monOTID & 0xFFFF) ^ pidLow;
+            u32 pidHigh = oldPidHigh;
+            u32 resultTextID;
+
+            if (Pokemon_IsShiny(mon)) {
+                // Revert to not-shiny: find pidHigh with xorBase ^ pidHigh >= 16
+                for (u32 candidate = (oldPidHigh & 3); candidate <= 0xFFFF; candidate += 4) {
+                    if ((xorBase ^ candidate) >= 16) {
+                        pidHigh = candidate;
+                        break;
+                    }
+                }
+                resultTextID = PartyMenu_Text_NoLongerShiny;
+            } else {
+                // Make shiny: pidHigh = (xorBase & 0xFFF0) | k, pick k preserving block order
+                u32 shinyBase = xorBase & 0xFFF0;
+                for (u32 k = 0; k < 16; k++) {
+                    u32 candidate = shinyBase | k;
+                    if (((((candidate << 16) | pidLow) & 0x3E000) >> 13) == oldBlockKey) {
+                        pidHigh = candidate;
+                        break;
+                    }
+                }
+                resultTextID = PartyMenu_Text_BecameShiny;
+            }
+
+            u32 newPersonality = (pidHigh << 16) | pidLow;
+            Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &newPersonality);
+
+            String *successStr = MessageLoader_GetNewString(application->messageLoader, resultTextID);
+            StringTemplate_SetNickname(application->template, 0, Pokemon_GetBoxPokemon(mon));
+            StringTemplate_Format(application->template, application->tmpString, successStr);
+            String_Free(successStr);
+
+            PartyMenu_SetupFormChangeAnim(application);
+            application->formChanger->species = SPECIES_SHAYMIN;
+            application->formChanger->narcIdx = shaymin_spa;
+            application->formChanger->framesBeforeFormChange = 35;
+            application->formChanger->state = 1;
+            application->unk_B00 = ShinyCharmFormChangeCallback;
+            return PARTY_MENU_STATE_5;
+        }
+
         u16 species = (u16)Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
         u32 ability1 = SpeciesData_GetSpeciesValue(species, SPECIES_DATA_ABILITY_1);
         u32 currentAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
