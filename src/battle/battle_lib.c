@@ -7614,19 +7614,17 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         attackStat = attackStat *= 2;
         spAttackStat = spAttackStat *= 2;
     }
-    ConsoleLog("Held item effect is: %d\n", defenderParams.heldItemEffect);
-    ConsoleLog("Eviolite is: %d\n", HOLD_EFFECT_BOOST_DEFENSES);
     if (defenderParams.heldItemEffect == HOLD_EFFECT_BOOST_DEFENSES) {
-        ConsoleLog("This is proof that we are holding the Eviolite\n");
         SpeciesEvolution evolutions[MAX_EVOLUTIONS];
         NARC_ReadWholeMemberByIndexPair(evolutions, NARC_INDEX_POKETOOL__PERSONAL__EVO, defenderParams.species);
         BOOL canEvolve = FALSE;
         for (int i = 0; i < MAX_EVOLUTIONS; i++) {
-            ConsoleLog("We have found an evolution\n");
-            if (evolutions[i].method != EVO_NONE) { canEvolve = TRUE; break; }
+            if (evolutions[i].method != EVO_NONE) {
+                canEvolve = TRUE;
+                break;
+            }
         }
         if (canEvolve) {
-            ConsoleLog("Update stats\n");
             defenseStat = defenseStat * (100 + defenderParams.heldItemPower) / 100;
             spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
         }
