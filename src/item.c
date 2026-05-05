@@ -705,8 +705,8 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     },
     [ITEM_EVIOLITE] = {
         .dataID = 0x1BE,
-        .iconID = ability_capsule_NCGR,
-        .paletteID = ability_capsule_NCLR,
+        .iconID = eviolite_NCGR,
+        .paletteID = eviolite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_ABILITY_CAPSULE] = {
