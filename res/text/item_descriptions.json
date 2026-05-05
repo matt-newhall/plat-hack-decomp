@@ -903,7 +903,11 @@
     },
     {
       "id": "pl_msg_00000391_00113",
-      "garbage": 0
+      "en_US": [
+        "A mysterious evolutionary lump. When\n",
+        "held, it raises the Defense and Sp. Def\n",
+        "of a Pokémon that can still evolve."
+      ]
     },
     {
       "id": "pl_msg_00000391_00114",
