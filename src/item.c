@@ -705,14 +705,14 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     },
     [ITEM_EVIOLITE] = {
         .dataID = 0x1BE,
-        .iconID = eviolite_NCGR,
-        .paletteID = eviolite_NCLR,
+        .iconID = ability_capsule_NCGR,
+        .paletteID = ability_capsule_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_114] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_ABILITY_CAPSULE] = {
+        .dataID = 0x1BF,
+        .iconID = ability_capsule_NCGR,
+        .paletteID = ability_capsule_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_115] = {

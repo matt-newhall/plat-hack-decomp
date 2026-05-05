@@ -54,7 +54,9 @@ enum PartyMenuState {
     PARTY_MENU_STATE_HP_TRANSFER_FIELD_MOVE,
     PARTY_MENU_STATE_31,
     PARTY_MENU_STATE_32,
-    PARTY_MENU_STATE_33
+    PARTY_MENU_STATE_33,
+    PARTY_MENU_STATE_SHOW_ABILITY_CAPSULE_CONFIRM,
+    PARTY_MENU_STATE_PROCESS_ABILITY_CAPSULE_CONFIRM
 };
 
 typedef void (*PartyMenuAction)(PartyMenuApplication *application, int *partyMenuState);

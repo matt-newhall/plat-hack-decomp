@@ -128,6 +128,8 @@ static int UpdatePokemonWithItem(PartyMenuApplication *application, Pokemon *par
 static int PartyMenu_ConfirmItemUpdate(PartyMenuApplication *application);
 static int PartyMenu_ShowItemSwapConfirmation(PartyMenuApplication *application);
 static int ProcessPokemonItemSwap(PartyMenuApplication *application);
+static int PartyMenu_ShowAbilityCapsuleConfirmation(PartyMenuApplication *application);
+static int PartyMenu_ProcessAbilityCapsuleConfirmation(PartyMenuApplication *application);
 static int sub_0207E634(PartyMenuApplication *application);
 static int ResetWindowOnInput(PartyMenuApplication *application);
 static int UpdatePokemonFormWithItem(PartyMenuApplication *application);
@@ -147,6 +149,7 @@ static int ProcessMessageResult(PartyMenuApplication *application);
 static int HandleOverlayCompletion(PartyMenuApplication *application);
 static void DrawMemberPanels_Standard(PartyMenuApplication *application, const MemberPanelTemplate *templates);
 static void DrawMemberPanels_UsingEvoItem(PartyMenuApplication *application, const MemberPanelTemplate *templates);
+static void DrawMemberPanels_UsingAbilityCapsule(PartyMenuApplication *application, const MemberPanelTemplate *templates);
 static void DrawMemberPanels_TeachingMove(PartyMenuApplication *application, const MemberPanelTemplate *templates);
 static void DrawMemberPanels_EnteringContest(PartyMenuApplication *application, const MemberPanelTemplate *templates);
 static void DrawMemberPanels_SelectingOrder(PartyMenuApplication *application, const MemberPanelTemplate *templates);
@@ -297,7 +300,7 @@ static BOOL PartyMenu_Init(ApplicationManager *appMan, int *state)
     SetupRequestedModePanels(application);
     InitAnimAndPaletteForSlot(application, application->currPartySlot, TRUE);
 
-    if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
+    if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
         if (CheckItemSacredAsh(application->partyMenu->usedItemID) == FALSE) {
             PartyMenu_PrintShortMessage(application, PartyMenu_Text_UseOnWhichMon, TRUE);
         }
@@ -466,6 +469,12 @@ static BOOL PartyMenu_Main(ApplicationManager *appMan, int *state)
             return TRUE;
         }
         break;
+    case PARTY_MENU_STATE_SHOW_ABILITY_CAPSULE_CONFIRM:
+        *state = PartyMenu_ShowAbilityCapsuleConfirmation(partyMenu);
+        break;
+    case PARTY_MENU_STATE_PROCESS_ABILITY_CAPSULE_CONFIRM:
+        *state = PartyMenu_ProcessAbilityCapsuleConfirmation(partyMenu);
+        break;
     }
 
     PartyMenu_UpdateMemberIcons(partyMenu);
@@ -479,7 +488,7 @@ static BOOL PartyMenu_Main(ApplicationManager *appMan, int *state)
 static int sub_0207E490(PartyMenuApplication *application)
 {
     if (IsScreenFadeDone() == TRUE) {
-        if ((application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM) || (application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM)) {
+        if ((application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM) || (application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM)) {
             if (CheckItemSacredAsh(application->partyMenu->usedItemID) == TRUE) {
                 application->stateAfterMessage = PARTY_MENU_STATE_START;
                 return PARTY_MENU_STATE_USE_SACRED_ASH;
@@ -1244,6 +1253,8 @@ static void SetupRequestedModePanels(PartyMenuApplication *application)
 
     if (application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
         DrawMemberPanels_UsingEvoItem(application, templates);
+    } else if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE) {
+        DrawMemberPanels_UsingAbilityCapsule(application, templates);
     } else if (application->partyMenu->mode == PARTY_MENU_MODE_TEACH_MOVE) {
         DrawMemberPanels_TeachingMove(application, templates);
     } else if (application->partyMenu->mode == PARTY_MENU_MODE_CONTEST) {
@@ -1298,6 +1309,30 @@ static void DrawMemberPanels_UsingEvoItem(PartyMenuApplication *application, con
         if (PartyMenu_LoadMember(application, slot) == TRUE) {
             DrawMemberPanel(application, slot, templates[slot].panelX, templates[slot].panelY, FALSE);
             PartyMenu_PrintMemberComment_CanUseEvoItem(application, slot);
+            PartyMenu_DrawMemberSpeciesIcon(application, slot, templates[slot].speciesIconX, templates[slot].speciesIconY, iconNarc);
+            PartyMenu_DrawMemberPokeBall(application, slot, templates[slot].ballSpriteX, templates[slot].ballSpriteY);
+            PartyMenu_DrawMemberHeldItem(application, slot, application->partyMembers[slot].heldItem);
+            PartyMenu_AlignMemberHeldItem(application, slot, templates[slot].speciesIconX, templates[slot].speciesIconY);
+            PartyMenu_DrawMemberBallSeal(application, slot);
+            PartyMenu_AlignMemberBallSeal(application, slot);
+            PartyMenu_DrawMemberStatusCondition(application, slot, application->partyMembers[slot].statusIcon);
+            DrawMemberTouchScreenButton(application, slot, 0);
+        } else {
+            DrawEmptyMemberPanel(application, slot, templates[slot].panelX, templates[slot].panelY);
+        }
+    }
+
+    NARC_dtor(iconNarc);
+}
+
+static void DrawMemberPanels_UsingAbilityCapsule(PartyMenuApplication *application, const MemberPanelTemplate *templates)
+{
+    NARC *iconNarc = NARC_ctor(NARC_INDEX_POKETOOL__ICONGRA__PL_POKE_ICON, HEAP_ID_PARTY_MENU);
+
+    for (u8 slot = 0; slot < MAX_PARTY_SIZE; slot++) {
+        if (PartyMenu_LoadMember(application, slot) == TRUE) {
+            DrawMemberPanel(application, slot, templates[slot].panelX, templates[slot].panelY, FALSE);
+            PartyMenu_PrintMemberComment_CanUseAbilityCapsule(application, slot);
             PartyMenu_DrawMemberSpeciesIcon(application, slot, templates[slot].speciesIconX, templates[slot].speciesIconY, iconNarc);
             PartyMenu_DrawMemberPokeBall(application, slot, templates[slot].ballSpriteX, templates[slot].ballSpriteY);
             PartyMenu_DrawMemberHeldItem(application, slot, application->partyMembers[slot].heldItem);
@@ -2687,6 +2722,32 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
         return 31;
     }
 
+    if (app->partyMenu->usedItemID == ITEM_ABILITY_CAPSULE) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+        u16 species = (u16)Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+        u32 ability1 = SpeciesData_GetSpeciesValue(species, SPECIES_DATA_ABILITY_1);
+        u32 ability2 = SpeciesData_GetSpeciesValue(species, SPECIES_DATA_ABILITY_2);
+
+        if (app->partyMembers[app->currPartySlot].isEgg || ability1 == ability2 || ability2 == ABILITY_NONE) {
+            Heap_Free(itemData);
+            PartyMenu_PrintLongMessage(app, PartyMenu_Text_ItWontHaveAnyEffect, TRUE);
+            app->currPartySlot = 7;
+            app->unk_B00 = sub_02085348;
+            return 5;
+        }
+
+        u32 currentAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+        u32 newAbility = (currentAbility == ability1) ? ability2 : ability1;
+        Heap_Free(itemData);
+        String *confirmStr = MessageLoader_GetNewString(app->messageLoader, PartyMenu_Text_AbilityCapsuleConfirm);
+        StringTemplate_SetNickname(app->template, 0, Pokemon_GetBoxPokemon(mon));
+        StringTemplate_SetAbilityName(app->template, 1, newAbility);
+        StringTemplate_Format(app->template, app->tmpString, confirmStr);
+        String_Free(confirmStr);
+        PartyMenu_PrintLongMessage(app, PRINT_MESSAGE_PRELOADED, TRUE);
+        return PARTY_MENU_STATE_SHOW_ABILITY_CAPSULE_CONFIRM;
+    }
+
     if (Item_Get(itemData, ITEM_PARAM_PP_UP) != 0 || Item_Get(itemData, ITEM_PARAM_PP_MAX) != 0) {
         Heap_Free(itemData);
         sub_020866A0(app, 0);
@@ -2884,6 +2945,53 @@ static int PartyMenu_ShowItemSwapConfirmation(PartyMenuApplication *application)
     return PARTY_MENU_STATE_SHOW_ITEM_SWAP_CONFIRMATION;
 }
 
+static int PartyMenu_ShowAbilityCapsuleConfirmation(PartyMenuApplication *application)
+{
+    if (Text_IsPrinterActive(application->textPrinterID) == FALSE) {
+        PartyMenu_DrawYesNoChoice(application);
+        return PARTY_MENU_STATE_PROCESS_ABILITY_CAPSULE_CONFIRM;
+    }
+
+    return PARTY_MENU_STATE_SHOW_ABILITY_CAPSULE_CONFIRM;
+}
+
+static int PartyMenu_ProcessAbilityCapsuleConfirmation(PartyMenuApplication *application)
+{
+    switch (Menu_ProcessInputAndHandleExit(application->contextMenu, HEAP_ID_PARTY_MENU)) {
+    case MENU_YES: {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, application->currPartySlot);
+        u16 species = (u16)Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+        u32 ability1 = SpeciesData_GetSpeciesValue(species, SPECIES_DATA_ABILITY_1);
+        u32 currentAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+        u32 newSlot = (currentAbility == ability1) ? 2 : 1;
+
+        Pokemon_SetValue(mon, MON_DATA_ABILITY_SLOT, &newSlot);
+        Pokemon_CalcAbility(mon);
+        u32 newAbility = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+        Bag_TryRemoveItem(application->partyMenu->bag, application->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
+
+        String *successStr = MessageLoader_GetNewString(application->messageLoader, PartyMenu_Text_AbilityChanged);
+        StringTemplate_SetNickname(application->template, 0, Pokemon_GetBoxPokemon(mon));
+        StringTemplate_SetAbilityName(application->template, 1, newAbility);
+        StringTemplate_Format(application->template, application->tmpString, successStr);
+        String_Free(successStr);
+
+        Window_FillTilemap(&application->windows[34], 15);
+        PartyMenu_AddLongMessagePrinter(application);
+        application->unk_B00 = sub_02085348;
+        return PARTY_MENU_STATE_5;
+    }
+    case 0xfffffffe:
+        Window_EraseMessageBox(&application->windows[34], 1);
+        PartyMenu_PrintShortMessage(application, PartyMenu_Text_UseOnWhichMon, TRUE);
+        Sprite_SetExplicitPalette2(application->sprites[PARTY_MENU_SPRITE_CURSOR_NORMAL], 0);
+        return PARTY_MENU_STATE_USE_ITEM;
+    }
+
+    return PARTY_MENU_STATE_PROCESS_ABILITY_CAPSULE_CONFIRM;
+}
+
 static int ProcessPokemonItemSwap(PartyMenuApplication *application)
 {
     int v0, v1;
@@ -3012,6 +3120,7 @@ static BOOL ShouldShowSubscreen(PartyMenuApplication *application)
         || application->partyMenu->mode == PARTY_MENU_MODE_GIVE_ITEM
         || application->partyMenu->mode == PARTY_MENU_MODE_GIVE_MAIL
         || application->partyMenu->mode == PARTY_MENU_MODE_MAILBOX
+        || application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE
         || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM
         || application->partyMenu->mode == PARTY_MENU_MODE_FEED_POFFIN) {
         return FALSE;

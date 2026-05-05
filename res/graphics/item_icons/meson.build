@@ -1,4 +1,5 @@
 item_icon_pngs = files(
+    'ability_capsule.png',
     'adamant_orb.png',
     'aguav_berry.png',
     'air_mail.png',
@@ -298,6 +299,7 @@ item_icon_pngs = files(
 )
 
 item_icon_pals = files(
+    'ability_capsule.pal',
     'adamant_orb.pal',
     'aguav_berry.pal',
     'air_mail.pal',

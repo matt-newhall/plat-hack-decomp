@@ -911,7 +911,11 @@
     },
     {
       "id": "pl_msg_00000391_00114",
-      "garbage": 0
+      "en_US": [
+        "A capsule that allows a Pokémon with\n",
+        "two Abilities to switch between these\n",
+        "Abilities when it is used."
+      ]
     },
     {
       "id": "pl_msg_00000391_00115",

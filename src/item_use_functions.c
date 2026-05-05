@@ -91,6 +91,7 @@ static void UseOldRodFromMenu(ItemMenuUseContext *usageContext, const ItemUseCon
 static void UseGoodRodFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseSuperRodFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseEvoStoneFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
+static void UseAbilityCapsuleFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseEscapeRopeFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseAzureFluteFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseVsRecorderFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
@@ -162,6 +163,7 @@ static const ItemUseFuncDat sItemUseFuncs[] = {
     [ITEM_USE_FUNC_AZURE_FLUTE]  = { UseAzureFluteFromMenu,  UseAzureFluteInField,  CanUseAzureFlute  },
     [ITEM_USE_FUNC_VS_RECORDER]  = { UseVsRecorderFromMenu,  UseVsRecorderInField,  NULL              },
     [ITEM_USE_FUNC_GRACIDEA]     = { UseGracideaFromMenu,    UseGracideaInField,    NULL              },
+    [ITEM_USE_FUNC_ABILITY_CAPSULE] = { UseAbilityCapsuleFromMenu, NULL, NULL },
 };
 // clang-format on
 
@@ -915,6 +917,30 @@ static void UseEvoStoneFromMenu(ItemMenuUseContext *usageContext, const ItemUseC
     partyMenu->fieldMoveContext = &menu->fieldMoveContext;
     partyMenu->type = PARTY_MENU_TYPE_BASIC;
     partyMenu->mode = PARTY_MENU_MODE_USE_EVO_ITEM;
+    partyMenu->usedItemID = usageContext->item;
+    partyMenu->selectedMonSlot = usageContext->selectedMonSlot;
+
+    FieldSystem_StartChildProcess(fieldSystem, &gPokemonPartyAppTemplate, partyMenu);
+    menu->taskData = partyMenu;
+    StartMenu_SetCallback(menu, StartMenu_ExitPartyMenu);
+}
+
+static void UseAbilityCapsuleFromMenu (ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
+{
+    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
+    StartMenu *menu = FieldTask_GetEnv(usageContext->fieldTask);
+    PartyMenu *partyMenu = Heap_Alloc(HEAP_ID_FIELD2, sizeof(PartyMenu));
+
+    memset(partyMenu, 0, sizeof(PartyMenu));
+
+    partyMenu->party = SaveData_GetParty(fieldSystem->saveData);
+    partyMenu->bag = SaveData_GetBag(fieldSystem->saveData);
+    partyMenu->mailbox = SaveData_GetMailbox(fieldSystem->saveData);
+    partyMenu->options = SaveData_GetOptions(fieldSystem->saveData);
+    partyMenu->broadcast = SaveData_GetTVBroadcast(fieldSystem->saveData);
+    partyMenu->fieldMoveContext = &menu->fieldMoveContext;
+    partyMenu->type = PARTY_MENU_TYPE_BASIC;
+    partyMenu->mode = PARTY_MENU_MODE_USE_ABILITY_CAPSULE;
     partyMenu->usedItemID = usageContext->item;
     partyMenu->selectedMonSlot = usageContext->selectedMonSlot;
 

@@ -1050,6 +1050,31 @@ void PartyMenu_PrintMemberComment_CanUseEvoItem(PartyMenuApplication *applicatio
     }
 }
 
+void PartyMenu_PrintMemberComment_CanUseAbilityCapsule(PartyMenuApplication *application, u8 slot)
+{
+    Window_FillTilemap(&application->windows[PARTY_MENU_WIN_NAME_MEMB0 + slot * PARTY_MENU_WIN_NUM_PER_MEMBER], 0);
+    Window_FillTilemap(&application->windows[PARTY_MENU_WIN_LEVEL_MEMB0 + slot * PARTY_MENU_WIN_NUM_PER_MEMBER], 0);
+    PartyMenu_PrintMemberName(application, slot);
+
+    if (application->partyMembers[slot].isEgg == TRUE) {
+        PrintMemberEvoComment(application, slot, EVO_COMMENT_UNABLE);
+        return;
+    }
+
+    PartyMenu_PrintMemberLevel(application, slot);
+
+    Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, slot);
+    u16 species = (u16)Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+    u32 ability1 = SpeciesData_GetSpeciesValue(species, SPECIES_DATA_ABILITY_1);
+    u32 ability2 = SpeciesData_GetSpeciesValue(species, SPECIES_DATA_ABILITY_2);
+
+    if (ability1 == ability2 || ability2 == ABILITY_NONE) {
+        PrintMemberEvoComment(application, slot, EVO_COMMENT_UNABLE);
+    } else {
+        PrintMemberEvoComment(application, slot, EVO_COMMENT_ABLE);
+    }
+}
+
 void PartyMenu_PrintMemberComment_CanLearnMove(PartyMenuApplication *application, u8 slot)
 {
     Window_FillTilemap(&application->windows[PARTY_MENU_WIN_NAME_MEMB0 + slot * PARTY_MENU_WIN_NUM_PER_MEMBER], 0);

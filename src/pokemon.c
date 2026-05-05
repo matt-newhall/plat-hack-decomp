@@ -1055,8 +1055,8 @@ static u32 BoxPokemon_GetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam 
         result = monDataBlockB->unused1;
         break;
 
-    case MON_DATA_UNUSED_114:
-        result = monDataBlockB->unused2;
+    case MON_DATA_ABILITY_SLOT:
+        result = monDataBlockB->unused2 & 0x3;
         break;
 
     case MON_DATA_NICKNAME:
@@ -1614,8 +1614,8 @@ static void BoxPokemon_SetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam
         monDataBlockB->unused1 = *u8Value;
         break;
 
-    case MON_DATA_UNUSED_114:
-        monDataBlockB->unused2 = *u16Value;
+    case MON_DATA_ABILITY_SLOT:
+        monDataBlockB->unused2 = (monDataBlockB->unused2 & ~0x3) | (*u8Value & 0x3);
         break;
 
     case MON_DATA_NICKNAME_AND_FLAG: {
@@ -2082,7 +2082,7 @@ static void BoxPokemon_IncreaseDataInternal(BoxPokemon *boxMon, enum PokemonData
     case MON_DATA_GENDER:
     case MON_DATA_FORM:
     case MON_DATA_UNUSED_113:
-    case MON_DATA_UNUSED_114:
+    case MON_DATA_ABILITY_SLOT:
     case MON_DATA_NICKNAME:
     case MON_DATA_NICKNAME_STRING:
     case MON_DATA_NICKNAME_STRING_AND_FLAG:
@@ -4755,17 +4755,18 @@ static void BoxPokemon_CalcAbility(BoxPokemon *boxMon)
     int monForm = BoxPokemon_GetValue(boxMon, MON_DATA_FORM, NULL);
     int monAbility1 = SpeciesData_GetFormValue(monSpecies, monForm, SPECIES_DATA_ABILITY_1);
     int monAbility2 = SpeciesData_GetFormValue(monSpecies, monForm, SPECIES_DATA_ABILITY_2);
+    int abilitySlot = BoxPokemon_GetValue(boxMon, MON_DATA_ABILITY_SLOT, NULL);
 
-    if (monAbility2 != ABILITY_NONE) {
-        if (monPersonality & 1) {
-            BoxPokemon_SetValue(boxMon, MON_DATA_ABILITY, &monAbility2);
-        } else {
-            BoxPokemon_SetValue(boxMon, MON_DATA_ABILITY, &monAbility1);
-        }
+    int newAbility;
+    if (abilitySlot == 2 && monAbility2 != ABILITY_NONE) {
+        newAbility = monAbility2;
+    } else if (abilitySlot == 1) {
+        newAbility = monAbility1;
     } else {
-        BoxPokemon_SetValue(boxMon, MON_DATA_ABILITY, &monAbility1);
+        newAbility = (monAbility2 != ABILITY_NONE && (monPersonality & 1)) ? monAbility2 : monAbility1;
     }
 
+    BoxPokemon_SetValue(boxMon, MON_DATA_ABILITY, &newAbility);
     BoxPokemon_ExitDecryptionContext(boxMon, reencrypt);
 }
 

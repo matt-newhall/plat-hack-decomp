@@ -23,6 +23,7 @@ void PartyMenu_DrawMemberPanelData(PartyMenuApplication *application, u8 slot);
 void PartyMenu_LoadMemberWindowTiles(PartyMenuApplication *application, u8 slot);
 void PartyMenu_CopyMemberWindowToVRAM(PartyMenuApplication *application, u8 slot);
 void PartyMenu_PrintMemberComment_CanUseEvoItem(PartyMenuApplication *application, u8 slot);
+void PartyMenu_PrintMemberComment_CanUseAbilityCapsule(PartyMenuApplication *application, u8 slot);
 void PartyMenu_PrintMemberComment_CanLearnMove(PartyMenuApplication *application, u8 slot);
 void PartyMenu_PrintMemberComment_IsContestEligible(PartyMenuApplication *application, u8 slot);
 void PartyMenu_PrintMemberNameAndLevel(PartyMenuApplication *application, u8 slot);
