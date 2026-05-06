@@ -268,6 +268,7 @@ subscript_files = files(
     'subscript_type_resist_berry.s',
     'subscript_held_item_temp_acc_up.s',
     'subscript_held_item_recoil_when_hit.s',
+    'subscript_rocky_helmet_recoil.s',
     'subscript_use_potion.s',
     'subscript_use_status_recovery.s',
     'subscript_use_stat_booster.s',

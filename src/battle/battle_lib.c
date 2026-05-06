@@ -6178,6 +6178,21 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
         }
         break;
 
+    case HOLD_EFFECT_CONTACT_RECOIL:
+        if (ATTACKING_MON.curHP
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
+            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+            && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, itemPower);
+            *subscript = subscript_rocky_helmet_recoil;
+            result = TRUE;
+        }
+        break;
+
     case HOLD_EFFECT_RECOIL_PHYSICAL:
         if (ATTACKING_MON.curHP
             && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD

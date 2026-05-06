@@ -4020,21 +4020,6 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             battleCtx->afterMoveEffectState++;
         }
 
-    case AFTER_MOVE_EFFECT_KNOCK_OFF:
-        battleCtx->afterMoveEffectState++;
-
-        if (ATTACKING_MON.curHP 
-            && battleCtx->moveCur == MOVE_KNOCK_OFF) {
-            LOAD_SUBSEQ(subscript_knock_off);
-            battleCtx->commandNext = battleCtx->command;
-            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-
-            // Clear the flag so it doesn't trigger again
-            battleCtx->sideEffectIndirectFlags = 0;
-
-            return;
-        }
-
     case AFTER_MOVE_EFFECT_ATTACKER_ITEM:
         battleCtx->afterMoveEffectState++;
 
@@ -4096,8 +4081,6 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             DEFENDER_SELF_TURN_FLAGS.angerShellActivated = TRUE;
         }
 
-        break;
-
     case AFTER_MOVE_EFFECT_HELD_ITEM_STATUS:
         int battler;
         BOOL result = FALSE;
@@ -4121,7 +4104,7 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
                 result = TRUE;
-                break;
+                return;
             }
         }
 
@@ -4129,7 +4112,21 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             battleCtx->afterMoveEffectState++;
             battleCtx->afterMoveEffectTemp = 0;
         }
-        break;
+
+    case AFTER_MOVE_EFFECT_KNOCK_OFF:
+        battleCtx->afterMoveEffectState++;
+
+        if (ATTACKING_MON.curHP 
+            && battleCtx->moveCur == MOVE_KNOCK_OFF) {
+            LOAD_SUBSEQ(subscript_knock_off);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            // Clear the flag so it doesn't trigger again
+            battleCtx->sideEffectIndirectFlags = 0;
+
+            return;
+        }
 
     default:
         break;

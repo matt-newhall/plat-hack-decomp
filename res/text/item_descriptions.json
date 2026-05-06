@@ -926,7 +926,11 @@
     },
     {
       "id": "pl_msg_00000391_00116",
-      "garbage": 0
+      "en_US": [
+        "If the holder of this item takes\n",
+        "damage, the attacker will also be\n",
+        "damaged upon contact."
+      ]
     },
     {
       "id": "pl_msg_00000391_00117",

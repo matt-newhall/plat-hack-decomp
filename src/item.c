@@ -721,10 +721,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = shiny_charm_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_116] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_ROCKY_HELMET] = {
+        .dataID = 0x1C1,
+        .iconID = rocky_helmet_NCGR,
+        .paletteID = rocky_helmet_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_117] = {
@@ -3396,8 +3396,14 @@ u8 Item_IsHerbalMedicine(u16 item)
 
 void *ItemTable_Load(enum HeapID heapID)
 {
-    int maxItem = Item_FileID(NUM_ITEMS, ITEM_FILE_TYPE_DATA);
-    return NARC_AllocAndReadFromMemberByIndexPair(NARC_INDEX_ITEMTOOL__ITEMDATA__PL_ITEM_DATA, 0, heapID, 0, sizeof(ItemData) * (maxItem + 2));
+    int maxItem = 0;
+    for (int i = ITEM_NONE + 1; i <= NUM_ITEMS; i++) {
+        int dataID = Item_FileID(i, ITEM_FILE_TYPE_DATA);
+        if (dataID > maxItem) {
+            maxItem = dataID;
+        }
+    }
+    return NARC_AllocAndReadFromMemberByIndexPair(NARC_INDEX_ITEMTOOL__ITEMDATA__PL_ITEM_DATA, 0, heapID, 0, sizeof(ItemData) * (maxItem + 5));
 }
 
 ItemData *ItemTable_Index(ItemData *itemTable, u16 index)
