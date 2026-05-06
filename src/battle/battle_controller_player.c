@@ -4016,10 +4016,8 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
 
             battleCtx->afterMoveEffectState++;
             battleCtx->afterMoveEffectTemp = 0;
-            break;
         } else {
             battleCtx->afterMoveEffectState++;
-            break;
         }
 
     case AFTER_MOVE_EFFECT_KNOCK_OFF:
