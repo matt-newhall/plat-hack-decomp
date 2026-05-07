@@ -2705,10 +2705,14 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
     int hits = BattleScript_Read(battleCtx);
     int flags = BattleScript_Read(battleCtx);
 
+    int attackerItem = Battler_HeldItem(battleCtx, battleCtx->attacker);
+
     if (battleCtx->multiHitNumHits == 0) {
         if (hits == 0) {
             if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
                 hits = 5;
+            } else if (BattleSystem_GetItemData(battleCtx, attackerItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_LOADED_DICE) {
+                hits = (BattleSystem_RandNext(battleSys) % 2 == 0) ? 4 : 5;
             } else {
                 int roll = BattleSystem_RandNext(battleSys) % 100;
                 if (roll < 35) {
@@ -2728,7 +2732,8 @@ static BOOL BtlCmd_SetMultiHit(BattleSystem *battleSys, BattleContext *battleCtx
         battleCtx->multiHitAccuracyCheck = flags;
     }
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK) {
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_SKILL_LINK
+            || BattleSystem_GetItemData(battleCtx, attackerItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_LOADED_DICE) {
         flags |= SYSCTL_SKIP_ACCURACY_CHECK;
         battleCtx->multiHitAccuracyCheck = flags;
     }
