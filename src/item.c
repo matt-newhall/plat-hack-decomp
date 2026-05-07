@@ -739,10 +739,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = fairy_feather_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_119] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_PIXIE_PLATE] = {
+        .dataID = 0x1C4,
+        .iconID = pixie_plate_NCGR,
+        .paletteID = pixie_plate_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_120] = {
