@@ -934,7 +934,11 @@
     },
     {
       "id": "pl_msg_00000391_00117",
-      "garbage": 0
+      "en_US": [
+        "A Poffin ingredient. If held by a\n",
+        "Pokémon, it weakens a foe’s\n",
+        "supereffective Fairy-type attack."
+      ]
     },
     {
       "id": "pl_msg_00000391_00118",

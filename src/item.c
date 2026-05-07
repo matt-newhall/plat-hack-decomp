@@ -727,10 +727,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = rocky_helmet_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_117] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_ROSELI_BERRY] = {
+        .dataID = 0x1C2,
+        .iconID = roseli_berry_NCGR,
+        .paletteID = roseli_berry_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_118] = {
@@ -3403,7 +3403,7 @@ void *ItemTable_Load(enum HeapID heapID)
             maxItem = dataID;
         }
     }
-    return NARC_AllocAndReadFromMemberByIndexPair(NARC_INDEX_ITEMTOOL__ITEMDATA__PL_ITEM_DATA, 0, heapID, 0, sizeof(ItemData) * (maxItem + 5));
+    return NARC_AllocAndReadFromMemberByIndexPair(NARC_INDEX_ITEMTOOL__ITEMDATA__PL_ITEM_DATA, 0, heapID, 0, sizeof(ItemData) * (maxItem + 6));
 }
 
 ItemData *ItemTable_Index(ItemData *itemTable, u16 index)

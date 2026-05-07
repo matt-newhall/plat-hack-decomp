@@ -1125,6 +1125,7 @@ Basic_NaturalGiftBerries:
     TableEntry ITEM_CUSTAP_BERRY
     TableEntry ITEM_JABOCA_BERRY
     TableEntry ITEM_ROWAP_BERRY
+    TableEntry ITEM_ROSELI_BERRY
     TableEntry TABLE_END
 
 Basic_CheckTailwind:

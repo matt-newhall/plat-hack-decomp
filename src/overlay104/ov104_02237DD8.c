@@ -970,6 +970,7 @@ static const u16 Unk_ov104_0223FB08[] = {
 
 static const u16 Unk_ov104_0223FB92[] = {
     ITEM_OCCA_BERRY,
+    ITEM_ROSELI_BERRY,
     ITEM_PASSHO_BERRY,
     ITEM_WACAN_BERRY,
     ITEM_RINDO_BERRY,

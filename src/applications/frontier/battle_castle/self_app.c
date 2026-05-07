@@ -208,7 +208,8 @@ const u16 sBerriesForRent[] = {
     ITEM_HABAN_BERRY,
     ITEM_COLBUR_BERRY,
     ITEM_BABIRI_BERRY,
-    ITEM_CHILAN_BERRY
+    ITEM_CHILAN_BERRY,
+    ITEM_ROSELI_BERRY
 };
 
 const u16 sBerryPrices[NELEMS(sBerriesForRent)] = {
@@ -218,6 +219,7 @@ const u16 sBerryPrices[NELEMS(sBerriesForRent)] = {
     2,
     2,
     2,
+    5,
     5,
     5,
     5,
