@@ -114,6 +114,7 @@
 #define FLING_EFFECT_POISON            28
 #define FLING_EFFECT_BADLY_POISON      29
 #define FLING_EFFECT_BURN              30
+#define FLING_EFFECT_CONFUSE           31
 
 #define PLUCK_EFFECT_NONE              0
 #define PLUCK_EFFECT_PRZ_RESTORE       1

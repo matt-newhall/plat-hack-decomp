@@ -5330,6 +5330,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
     if (unnerveCount > 0
         && !(itemEffect == HOLD_EFFECT_STATDOWN_RESTORE
         || itemEffect == HOLD_EFFECT_HEAL_INFATUATION
+        || itemEffect == HOLD_EFFECT_SWAGGER_SELF
         || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
         return FALSE;
     }
@@ -5662,6 +5663,15 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 result = TRUE;
             }
             break;
+
+        case HOLD_EFFECT_SWAGGER_SELF:
+            if (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < MAX_STAT_STAGE
+                || !(battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CONFUSION)) {
+                battleCtx->msgTemp = BATTLE_STAT_ATTACK;
+                subscript = subscript_held_item_swagger_self;
+                result = TRUE;
+            }
+            break;
         }
 
         if (result == TRUE) {
@@ -5734,6 +5744,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
     if (unnerveCount > 0
         && !(itemEffect == HOLD_EFFECT_STATDOWN_RESTORE
         || itemEffect == HOLD_EFFECT_HEAL_INFATUATION
+        || itemEffect == HOLD_EFFECT_SWAGGER_SELF
         || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
         return FALSE;
     }
@@ -6064,6 +6075,15 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                     *subscript = subscript_held_item_sharply_raise_stat;
                     result = TRUE;
                 }
+            }
+            break;
+
+        case HOLD_EFFECT_SWAGGER_SELF:
+            if (battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_ATTACK] < MAX_STAT_STAGE
+                || !(battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_CONFUSION)) {
+                battleCtx->msgTemp = BATTLE_STAT_ATTACK;
+                *subscript = subscript_held_item_swagger_self;
+                result = TRUE;
             }
             break;
         }
