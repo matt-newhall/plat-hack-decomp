@@ -3996,6 +3996,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_PRESSURE,
     SWITCH_IN_CHECK_STATE_UNNERVE,
     SWITCH_IN_CHECK_STATE_WIND_RIDER,
+    SWITCH_IN_CHECK_STATE_ROOM_SERVICE,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
@@ -4677,6 +4678,27 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
+        case SWITCH_IN_CHECK_STATE_ROOM_SERVICE:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->battleMons[battler].curHP
+                    && battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM
+                    && Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_LOWER_SPEED_IN_TRICK_ROOM
+                    && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED] > MIN_STAT_STAGE) {
+                    battleCtx->sideEffectMon = battler;
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+                    battleCtx->msgTemp = BATTLE_STAT_SPEED;
+                    subscript = subscript_held_item_lower_speed_in_trick_room;
+                    result = TRUE;
+                    break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            break;
+
         case SWITCH_IN_CHECK_STATE_FORM_CHANGE:
             if (BattleSystem_TriggerFormChange(battleSys, battleCtx, &subscript) == TRUE) {
                 result = SWITCH_IN_CHECK_RESULT_BREAK;
@@ -5331,6 +5353,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
         && !(itemEffect == HOLD_EFFECT_STATDOWN_RESTORE
         || itemEffect == HOLD_EFFECT_HEAL_INFATUATION
         || itemEffect == HOLD_EFFECT_SWAGGER_SELF
+        || itemEffect == HOLD_EFFECT_LOWER_SPEED_IN_TRICK_ROOM
         || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
         return FALSE;
     }

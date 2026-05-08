@@ -974,7 +974,11 @@
     },
     {
       "id": "pl_msg_00000391_00122",
-      "garbage": 0
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "If Trick Room takes effect, this item\n",
+        "will lower the holder’s Speed stat."
+      ]
     },
     {
       "id": "pl_msg_00000391_00123",

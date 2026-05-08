@@ -757,10 +757,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = berserk_gene_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_122] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_ROOM_SERVICE] = {
+        .dataID = 0x1C7,
+        .iconID = room_service_NCGR,
+        .paletteID = room_service_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_123] = {

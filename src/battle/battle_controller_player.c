@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "constants/battle.h"
+#include "constants/battle/battle_script.h"
 #include "constants/game_options.h"
 #include "constants/heap.h"
 #include "constants/items.h"
@@ -3903,6 +3904,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_KNOCK_OFF,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
+    AFTER_MOVE_EFFECT_ROOM_SERVICE,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
     AFTER_MOVE_EFFECT_ANGER_SHELL,
@@ -4032,6 +4034,41 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
 
         if (battleCtx->defender != BATTLER_NONE && BattleSystem_TriggerHeldItem(battleSys, battleCtx, battleCtx->defender) == TRUE) {
             return;
+        }
+
+    case AFTER_MOVE_EFFECT_ROOM_SERVICE:
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+            int battler;
+            BOOL result = FALSE;
+
+            while (battleCtx->afterMoveEffectTemp < BattleSystem_GetMaxBattlers(battleSys)) {
+                battler = battleCtx->monSpeedOrder[battleCtx->afterMoveEffectTemp];
+
+                if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
+                    battleCtx->afterMoveEffectTemp++;
+                    continue;
+                }
+
+                battleCtx->afterMoveEffectTemp++;
+
+                if (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_LOWER_SPEED_IN_TRICK_ROOM
+                    && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED] > MIN_STAT_STAGE) {
+                    battleCtx->sideEffectMon = battler;
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+                    battleCtx->msgTemp = BATTLE_STAT_SPEED;
+                    LOAD_SUBSEQ(subscript_held_item_lower_speed_in_trick_room);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+            }
+
+            battleCtx->afterMoveEffectState++;
+            battleCtx->afterMoveEffectTemp = 0;
+        } else {
+            battleCtx->afterMoveEffectState++;
         }
 
     case AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT:

@@ -9095,6 +9095,27 @@
         "The opposing side is covered\n",
         "by a protective veil!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemLoweredPokemonsStat_Ally",
+      "en_US": [
+        "The {STRVAR_1 8, 1, 0} lowered\n",
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemLoweredPokemonsStat_Wild",
+      "en_US": [
+        "The {STRVAR_1 8, 1, 0} lowered\n",
+        "the wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemLoweredPokemonsStat_Foe",
+      "en_US": [
+        "The {STRVAR_1 8, 1, 0} lowered\n",
+        "the foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
+      ]
     }
   ]
 }

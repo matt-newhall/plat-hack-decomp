@@ -214,7 +214,6 @@ subscript_files = files(
     'subscript_held_item_sharply_raise_stat.s',
     'subscript_held_item_statdown_restore.s',
     'subscript_held_item_heal_infatuation.s',
-    'subscript_held_item_swagger_self.s',
     'subscript_restore_a_little_hp.s',
     'subscript_lose_hp_from_item.s',
     'subscript_lose_hp_from_item_with_message.s',
@@ -334,4 +333,6 @@ subscript_files = files(
     'subscript_powder_fire_move.s',
     'subscript_attack_then_check_ko.s',
     'subscript_power_herb_skull_bash.s',
+    'subscript_held_item_swagger_self.s',
+    'subscript_held_item_lower_speed_in_trick_room.s'
 )
