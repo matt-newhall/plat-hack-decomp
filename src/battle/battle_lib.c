@@ -2440,6 +2440,13 @@ int BattleSystem_CheckInvalidMoves(BattleSystem *battleSys, BattleContext *battl
                 invalidMoves |= FlagIndex(i);
             }
         }
+
+        if (itemEffect == HOLD_EFFECT_RAISE_SP_DEF_ONLY_STATUS_MOVES
+            && (opMask & CHECK_INVALID_ASSAULT_VEST)
+            && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).power == 0
+            && battleCtx->battleMons[battler].moves[i] != MOVE_ME_FIRST) {
+            invalidMoves |= FlagIndex(i);
+        }
     }
 
     return invalidMoves;
@@ -2497,6 +2504,11 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
         msgOut->id = BattleStrings_Text_TheItemAllowsTheUseOfOnlyMove; // "The {0} allows the use of only {1}!"
         msgOut->params[0] = battleCtx->battleMons[battler].heldItem;
         msgOut->params[1] = battleCtx->battleMons[battler].moveEffectsData.choiceLockedMove;
+        result = FALSE;
+    } else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ASSAULT_VEST) & FlagIndex(moveSlot)) {
+        msgOut->tags = TAG_ITEM_MOVE;
+        msgOut->id = BattleStrings_Text_TheItemAllowsTheUseOfOnlyAttackingMoves; // "The {0} allows the use of only attacking moves!"
+        msgOut->params[0] = battleCtx->battleMons[battler].heldItem;
         result = FALSE;
     } else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_NO_PP) & FlagIndex(moveSlot)) {
         msgOut->tags = TAG_NONE;
@@ -7688,6 +7700,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             defenseStat = defenseStat * (100 + defenderParams.heldItemPower) / 100;
             spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
         }
+    }
+    if (defenderParams.heldItemEffect == HOLD_EFFECT_RAISE_SP_DEF_ONLY_STATUS_MOVES) {
+        spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
     }
     if (defenderParams.heldItemEffect == HOLD_EFFECT_DITTO_DEF_UP
         && defenderParams.species == SPECIES_DITTO) {

@@ -9116,6 +9116,13 @@
         "The {STRVAR_1 8, 1, 0} lowered\n",
         "the foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemAllowsTheUseOfOnlyAttackingMoves",
+      "en_US": [
+        "The {STRVAR_1 8, 0, 0} allows the\n",
+        "use of only attacking moves!\r"
+      ]
     }
   ]
 }
