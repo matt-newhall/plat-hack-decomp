@@ -3018,6 +3018,7 @@ const u16 sBerryItemIDs[] = {
     [BERRY_ID(CUSTAP)] = ITEM_CUSTAP_BERRY,
     [BERRY_ID(JABOCA)] = ITEM_JABOCA_BERRY,
     [BERRY_ID(ROWAP)] = ITEM_ROWAP_BERRY,
+    [NUM_BERRIES] = ITEM_ROSELI_BERRY,
 };
 // clang-format on
 
@@ -3359,6 +3360,10 @@ u16 Item_ForMailNumber(u8 mail)
 
 u8 Item_IsBerry(u16 item)
 {
+    if (item == ITEM_ROSELI_BERRY) {
+        return TRUE;
+    }
+
     for (u32 i = 0; i < NUM_BERRIES; i++) {
         if (sBerryItemIDs[i] == item) {
             return TRUE;
@@ -3370,6 +3375,10 @@ u8 Item_IsBerry(u16 item)
 
 u8 Item_BerryNumber(u16 item)
 {
+    if (item == ITEM_ROSELI_BERRY) {
+        return NUM_BERRIES;
+    }
+
     if (item < ITEM_CHERI_BERRY) {
         return BERRY_ID_NONE;
     }
@@ -3379,7 +3388,7 @@ u8 Item_BerryNumber(u16 item)
 
 u16 Item_ForBerryNumber(u8 berry)
 {
-    if (berry >= NUM_BERRIES) {
+    if (berry > NUM_BERRIES) {
         return ITEM_RETURN_ID;
     }
 

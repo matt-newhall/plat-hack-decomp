@@ -308,11 +308,16 @@ void Pocket_SortEmpty(BagItem *pocket, const u32 size)
     }
 }
 
+static u16 BagItem_SortKey(u16 item)
+{
+    return item == ITEM_ROSELI_BERRY ? LAST_BERRY_IDX + 1 : item;
+}
+
 void Pocket_Sort(BagItem *pocket, const u32 size)
 {
     for (u32 i = 0; i < size - 1; i++) {
         for (u32 j = i + 1; j < size; j++) {
-            if (pocket[i].quantity == 0 || (pocket[j].quantity != 0 && pocket[i].item > pocket[j].item)) {
+            if (pocket[i].quantity == 0 || (pocket[j].quantity != 0 && BagItem_SortKey(pocket[i].item) > BagItem_SortKey(pocket[j].item))) {
                 BagItem_Swap(&pocket[i], &pocket[j]);
             }
         }

@@ -29,6 +29,10 @@ BerryData *BerryData_Load(u32 memberIdx, u32 heapID)
 
 BerryData *BerryData_LoadDataByItemID(u32 itemID, u32 heapID)
 {
+    if (itemID == ITEM_ROSELI_BERRY) {
+        return BerryData_Load(NUM_BERRIES, heapID);
+    }
+
     return BerryData_Load(itemID - FIRST_BERRY_IDX, heapID);
 }
 
