@@ -98,6 +98,7 @@ typedef struct BattleMon {
     u32 windRiderSwitchIn : 1;
     u32 costarAnnounced : 1;
     u32 neutralizingGasAnnounced : 1;
+    u32 airBalloonAnnounced : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];

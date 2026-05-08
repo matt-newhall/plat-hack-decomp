@@ -54,6 +54,12 @@ _069:
     GoTo _179
 
 _081:
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_AIR_BALLOON, _090
+    // {0} evades Ground moves with its {1}!
+    PrintMessage BattleStrings_Text_PokemonEvadesGroundMovesWithItem_Ally, TAG_NICKNAME_ITEM, BTLSCR_DEFENDER, BTLSCR_DEFENDER
+    GoTo _179
+
+_090:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MAGNET_RISE, _097
     UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_MAGNET_RISE
     // {0} evades Ground moves with {1}!

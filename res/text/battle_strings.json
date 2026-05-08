@@ -9123,6 +9123,69 @@
         "The {STRVAR_1 8, 0, 0} allows the\n",
         "use of only attacking moves!\r"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonEvadesGroundMovesWithItem_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} evades Ground moves\n",
+        "with its {STRVAR_1 8, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonEvadesGroundMovesWithItem_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} evades Ground\n",
+        "moves with its {STRVAR_1 8, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonEvadesGroundMovesWithItem_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} evades\n",
+        "moves with its {STRVAR_1 8, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFloatedOnAirBalloon_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} floated on\n",
+        "its {STRVAR_1 8, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFloatedOnAirBalloon_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} floated\n",
+        "on its {STRVAR_1 8, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFloatedOnAirBalloon_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} floated\n",
+        "on its {STRVAR_1 8, 1, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsItemPopped_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 8, 1, 0}\n",
+        "popped!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsItemPopped_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 8, 1, 0} popped!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsItemPopped_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 8, 1, 0} popped!"
+      ]
     }
   ]
 }

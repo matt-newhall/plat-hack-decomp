@@ -775,10 +775,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = weakness_policy_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_125] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_AIR_BALLOON] = {
+        .dataID = 0x1CA,
+        .iconID = air_balloon_NCGR,
+        .paletteID = air_balloon_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_126] = {

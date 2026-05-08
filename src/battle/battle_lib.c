@@ -120,6 +120,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].isTightenedFocus = FALSE;
     battleCtx->battleMons[battler].windRiderSwitchIn = FALSE;
     battleCtx->battleMons[battler].neutralizingGasAnnounced = FALSE;
+    battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -2760,6 +2761,10 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
         && moveType == TYPE_GROUND
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
+    } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
+        && moveType == TYPE_GROUND) {
+        *moveStatusMask |= MOVE_STATUS_AIR_BALLOON;
     } else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
         && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
         && moveType == TYPE_GROUND
@@ -2860,6 +2865,9 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         && moveType == TYPE_GROUND
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
+    } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && moveType == TYPE_GROUND) {
+        *moveStatusMask |= MOVE_STATUS_AIR_BALLOON;
     } else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
         && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
         && moveType == TYPE_GROUND
@@ -2982,6 +2990,11 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         && moveType == TYPE_GROUND
         && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
+        *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
+    } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE
+        && !(battleCtx->battleMons[battleCtx->defender].moveEffectsMask & MOVE_EFFECT_INGRAIN)
+        && moveType == TYPE_GROUND) {
         *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
     } else {
         chartEntry = 0;
@@ -3519,6 +3532,7 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
         if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE && itemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
             if (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
                 && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
+                && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
                 && MON_IS_NOT_TYPE(battler, TYPE_FLYING)) {
                 if (msgOut == NULL) {
                     return TRUE;
@@ -4009,6 +4023,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_UNNERVE,
     SWITCH_IN_CHECK_STATE_WIND_RIDER,
     SWITCH_IN_CHECK_STATE_ROOM_SERVICE,
+    SWITCH_IN_CHECK_STATE_AIR_BALLOON,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
@@ -4709,6 +4724,28 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             if (battler == BATTLER_NONE) {
                 battleCtx->switchInCheckState++;
             }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
+            break;
+
+        case SWITCH_IN_CHECK_STATE_AIR_BALLOON:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->battleMons[battler].airBalloonAnnounced == FALSE
+                    && battleCtx->battleMons[battler].curHP
+                    && Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+                    && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE) {
+                    battleCtx->battleMons[battler].airBalloonAnnounced = TRUE;
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+                    subscript = subscript_air_balloon_entry;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
 
         case SWITCH_IN_CHECK_STATE_FORM_CHANGE:
@@ -6294,6 +6331,15 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
         }
         break;
 
+    case HOLD_EFFECT_LEVITATE_POP_ON_HIT:
+        if (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM)) {
+            battleCtx->msgBattlerTemp = battleCtx->defender;
+            battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+            *subscript = subscript_held_item_pop;
+            result = TRUE;
+        }
+
     default:
         break;
     }
@@ -6365,10 +6411,13 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
 
 static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
 {
+    int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
+
     return (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
-               && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
-               && MON_IS_NOT_TYPE(battler, TYPE_FLYING))
-        || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+                && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
+                && itemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+                && MON_IS_NOT_TYPE(battler, TYPE_FLYING))
+        || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
         || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY);
 }
 
