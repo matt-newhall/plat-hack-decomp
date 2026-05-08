@@ -6281,6 +6281,19 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
         }
         break;
 
+    case HOLD_EFFECT_SHARPLY_BOOST_OFFENSES:
+        if (DEFENDING_MON.curHP && (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+            && (battleCtx->battleMons[battleCtx->defender].statBoosts[BATTLE_STAT_ATTACK] < MAX_STAT_STAGE
+                || battleCtx->battleMons[battleCtx->defender].statBoosts[BATTLE_STAT_SP_ATTACK] < MAX_STAT_STAGE)) {
+            battleCtx->msgBattlerTemp = battleCtx->defender;
+            battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+            *subscript = subscript_held_item_sharply_boost_offenses;
+            result = TRUE;
+        }
+        break;
+
     default:
         break;
     }

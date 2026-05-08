@@ -769,10 +769,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = assault_vest_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_124] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_WEAKNESS_POLICY] = {
+        .dataID = 0x1C9,
+        .iconID = weakness_policy_NCGR,
+        .paletteID = weakness_policy_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_125] = {
