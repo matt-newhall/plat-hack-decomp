@@ -5737,6 +5737,7 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
             && Battler_Ability(battleCtx, battler) != ABILITY_SAND_FORCE
             && Battler_Ability(battleCtx, battler) != ABILITY_SAND_RUSH
             && Battler_Ability(battleCtx, battler) != ABILITY_OVERCOAT
+            && Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_OVERCOAT
             && (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_NO_WEATHER_DAMAGE) == FALSE) {
             battleCtx->msgMoveTemp = MOVE_SANDSTORM;
             battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
@@ -5765,6 +5766,7 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
             } else if (type1 != TYPE_ICE
                 && type2 != TYPE_ICE
                 && Battler_Ability(battleCtx, battler) != ABILITY_OVERCOAT
+                && Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_OVERCOAT
                 && Battler_Ability(battleCtx, battler) != ABILITY_SNOW_CLOAK) {
                 battleCtx->msgMoveTemp = MOVE_HAIL;
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP * -1, 16);
@@ -9872,6 +9874,7 @@ static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *b
 
     if (BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL) == TYPE_GRASS
         || BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL) == TYPE_GRASS
+        || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_OVERCOAT
         || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_OVERCOAT) == TRUE) {
         BattleScript_Iter(battleCtx, jump);
     }
