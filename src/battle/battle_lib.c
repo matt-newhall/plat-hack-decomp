@@ -5760,6 +5760,26 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
     return result;
 }
 
+BOOL BattleSystem_TriggerThroatSpray(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int battler = battleCtx->attacker;
+
+    if (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_RAISE_SP_ATK_SOUND_MOVE
+        && BattleSystem_IsSoundMove(battleCtx->moveTemp)
+        && !(battleCtx->moveStatusFlags & MOVE_STATUS_DID_NOT_HIT)
+        && battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SP_ATTACK] < MAX_STAT_STAGE) {
+        battleCtx->msgBattlerTemp = battler;
+        battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+        battleCtx->msgTemp = BATTLE_STAT_SP_ATTACK;
+        LOAD_SUBSEQ(subscript_held_item_raise_stat);
+        battleCtx->commandNext = battleCtx->command;
+        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 BOOL BattleSystem_TriggerLeftovers(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     BOOL result = 0;

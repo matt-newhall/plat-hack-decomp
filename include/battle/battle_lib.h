@@ -957,6 +957,7 @@ BOOL BattleSystem_SynchronizeStatus(BattleSystem *battleSys, BattleContext *batt
  * otherwise.
  */
 BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+BOOL BattleSystem_TriggerThroatSpray(BattleSystem *battleSys, BattleContext *battleCtx);
 
 /**
  * @brief Check if a Leftovers-type item should trigger at the end of the turn.

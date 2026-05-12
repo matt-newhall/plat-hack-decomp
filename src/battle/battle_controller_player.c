@@ -3905,6 +3905,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_ROOM_SERVICE,
+    AFTER_MOVE_EFFECT_THROAT_SPRAY,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
     AFTER_MOVE_EFFECT_ANGER_SHELL,
@@ -4069,6 +4070,13 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             battleCtx->afterMoveEffectTemp = 0;
         } else {
             battleCtx->afterMoveEffectState++;
+        }
+
+    case AFTER_MOVE_EFFECT_THROAT_SPRAY:
+        battleCtx->afterMoveEffectState++;
+
+        if (BattleSystem_TriggerThroatSpray(battleSys, battleCtx) == TRUE) {
+            return;
         }
 
     case AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT:

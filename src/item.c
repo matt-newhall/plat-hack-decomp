@@ -787,10 +787,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = safety_goggles_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_127] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_THROAT_SPRAY] = {
+        .dataID = 0x1CC,
+        .iconID = throat_spray_NCGR,
+        .paletteID = throat_spray_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_128] = {
