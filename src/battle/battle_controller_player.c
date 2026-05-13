@@ -3140,6 +3140,7 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
 
         if (battleCtx->turnFlags[defender].spikyShielding
             && (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
+            && !(Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_IGNORE_CONTACT)
             && battleCtx->battleMons[attacker].curHP
             && Battler_Ability(battleCtx, attacker) != ABILITY_MAGIC_GUARD) {
             battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[attacker].maxHP * -1, 8);
@@ -3147,7 +3148,9 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
             battleCtx->hpCalcTemp = 0;
         }
 
-        if (battleCtx->turnFlags[defender].silkTrapping) {
+        if (battleCtx->turnFlags[defender].silkTrapping
+            && battleCtx->battleMons[attacker].curHP
+            && !(Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_IGNORE_CONTACT)) {
             battleCtx->hpCalcTemp = (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) ? 1 : 0;
         }
 

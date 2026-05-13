@@ -805,10 +805,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = heavy_duty_boots_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_130] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_PROTECTIVE_PADS] = {
+        .dataID = 0x1CF,
+        .iconID = protective_pads_NCGR,
+        .paletteID = protective_pads_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_131] = {
