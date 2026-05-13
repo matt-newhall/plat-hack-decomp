@@ -799,10 +799,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = covert_cloak_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_129] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_HEAVY_DUTY_BOOTS] = {
+        .dataID = 0x1CE,
+        .iconID = heavy_duty_boots_NCGR,
+        .paletteID = heavy_duty_boots_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_130] = {
