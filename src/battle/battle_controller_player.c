@@ -4082,17 +4082,19 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             return;
         }
 
-    case AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT:
+    case AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT: {
+        BOOL isReentry = battleCtx->afterMoveEffectState == AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT;
         battleCtx->afterMoveEffectState++;
 
         int itemSeq;
-        if (BattleSystem_TriggerHeldItemOnHit(battleSys, battleCtx, &itemSeq) == TRUE) {
+        if (!isReentry && BattleSystem_TriggerHeldItemOnHit(battleSys, battleCtx, &itemSeq) == TRUE) {
             LOAD_SUBSEQ(itemSeq);
             battleCtx->commandNext = battleCtx->command;
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
             return;
         }
+    }
 
     case AFTER_MOVE_EFFECT_THAW_DEFENDER:
         int moveType = CalcCurrentMoveType(battleCtx);
