@@ -811,10 +811,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = protective_pads_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_131] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_CLEAR_AMULET] = {
+        .dataID = 0x1D0,
+        .iconID = clear_amulet_NCGR,
+        .paletteID = clear_amulet_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_UNUSED_132] = {

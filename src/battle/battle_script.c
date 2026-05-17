@@ -2984,6 +2984,13 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                     battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->sideEffectMon);
 
                     result = 1;
+                } else if (Battler_HeldItemEffect(battleCtx, battleCtx->sideEffectMon) == HOLD_EFFECT_WHITE_SMOKE) {
+                    battleCtx->msgBuffer.id = BattleStrings_Text_PokemonsItemPreventsStatLoss_Ally; // "{0}'s {1} prevents stat loss!"
+                    battleCtx->msgBuffer.tags = TAG_NICKNAME_ITEM;
+                    battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->sideEffectMon);
+                    battleCtx->msgBuffer.params[1] = battleCtx->battleMons[battleCtx->sideEffectMon].heldItem;
+
+                    result = 1;
                 } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_CLEAR_BODY) == TRUE
                     || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_WHITE_SMOKE) == TRUE) {
                     if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
