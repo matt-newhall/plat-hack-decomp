@@ -2,6 +2,8 @@
 
 
 _000:
+    ShowAbilityPopup BTLSCR_MSG_BATTLER_TEMP
+    WaitAbilityPopupAnim
     WaitButtonABTime 15
     UpdateVar OPCODE_SET, BTLVAR_BATTLER_SPEED_TEMP, 0
     UpdateVarFromVar OPCODE_SET, BTLVAR_LAST_BATTLER_ID, BTLVAR_ATTACKER
@@ -31,4 +33,5 @@ _038:
     UpdateVar OPCODE_ADD, BTLVAR_BATTLER_SPEED_TEMP, 1
     GoToIfValidMon BTLVAR_BATTLER_SPEED_TEMP, _013
     UpdateVarFromVar OPCODE_SET, BTLVAR_ATTACKER, BTLVAR_LAST_BATTLER_ID
-    End 
+    HideAbilityPopup
+    End

@@ -2,10 +2,12 @@
 
 
 _000:
+    ShowAbilityPopupForEffect
+    WaitAbilityPopupAnim
     ChangeStatStage _041, _059, _060
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _010
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
 
 _010:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _018
@@ -13,12 +15,12 @@ _010:
 
 _016:
     PlayMoveAnimation BTLSCR_ATTACKER
-    Wait 
+    Wait
 
 _018:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_UPDATE_STAT_STAGES, _036
     PlayBattleAnimationFromVar BTLSCR_SIDE_EFFECT_MON, BTLVAR_SCRIPT_TEMP
-    Wait 
+    Wait
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_STAT_STAGE_CHANGE_SHOWN, _036
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_UPDATE_STAT_STAGES
 
@@ -26,33 +28,37 @@ _036:
     PrintBufferedMessage
     Wait
     WaitButtonABTime 30
+    HideAbilityPopupIfOurs
     Call BATTLE_SUBSCRIPT_DEFIANT_CHECK
     Call BATTLE_SUBSCRIPT_COMPETITIVE_CHECK
     End
 
 _041:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _048
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
 
 _048:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_TURN_OFF_MESSAGES, _059
     WaitButtonABTime 30
-    PrintBufferedMessage 
-    Wait 
+    PrintBufferedMessage
+    Wait
     WaitButtonABTime 30
 
 _059:
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _060:
+    HideAbilityPopupIfOurs
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
-    End 
+    End
 
 _061:
     WaitButtonABTime 30
     PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
-    Wait 
+    Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
+    HideAbilityPopupIfOurs
     End

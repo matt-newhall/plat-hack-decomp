@@ -2,6 +2,8 @@
 
 
 _000:
+    ShowAbilityPopupForEffectHolder
+    WaitAbilityPopupAnim
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DISOBEDIENCE, _147
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_MOVE_EFFECT, _055
     CheckSleepAbilityImmunity BTLSCR_SIDE_EFFECT_MON, _202
@@ -91,7 +93,8 @@ _193:
     Call BATTLE_SUBSCRIPT_VANISH_OFF
 
 _201:
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _202:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _337
@@ -169,4 +172,5 @@ _330:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
 
 _337:
-    End 
+    HideAbilityPopupIfOurs
+    End

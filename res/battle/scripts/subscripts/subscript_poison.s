@@ -2,6 +2,8 @@
 
 
 _000:
+    ShowAbilityPopupForEffectHolder
+    WaitAbilityPopupAnim
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_TOXIC_SPIKES, _023
     CheckAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_IMMUNITY, _177
     CheckIgnoreWeather _050
@@ -80,7 +82,8 @@ _156:
     WaitButtonABTime 30
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_TOXIC_SPIKES, _322
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_TRY_SYNCHRONIZE_STATUS
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _177:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _322
@@ -141,4 +144,5 @@ _315:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
 
 _322:
-    End 
+    HideAbilityPopupIfOurs
+    End

@@ -3,10 +3,13 @@
 
 _000:
     TryPowerOfAlchemy _010
+    ShowAbilityPopupSaved BTLSCR_MSG_BATTLER_TEMP
+    WaitAbilityPopupAnim
     // {0} acquired {1}!
     PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait
     WaitButtonABTime 30
+    HideAbilityPopup
 
 _010:
     IncrementGameRecord BTLSCR_FAINTED_MON, BATTLER_TYPE_SOLO_ENEMY, RECORD_FAINTED_IN_BATTLE
