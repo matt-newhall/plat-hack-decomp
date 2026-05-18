@@ -1356,6 +1356,49 @@
     .long BTLCMD_RESETSLEEPTURNS
     .endm
 
+    .macro ShowAbilityPopup battler
+    .long BTLCMD_SHOWABILITYPOPUP
+    .long \battler
+    .endm
+
+    .macro ShowAbilityPopupSaved battler
+    .long BTLCMD_SHOWABILITYPOPUPSAVED
+    .long \battler
+    .endm
+
+    .macro ShowAbilityPopupForEffect
+    .long BTLCMD_SHOWABILITYPOPUPFOREFFECT
+    .endm
+
+    .macro ShowAbilityPopupForEffectHolder
+    .long BTLCMD_SHOWABILITYPOPUPFOREFFECTHOLDER
+    .endm
+
+    .macro HideAbilityPopup
+    .long BTLCMD_HIDEABILITYPOPUP
+    .endm
+
+    .macro HideAbilityPopupIfOurs
+    .long BTLCMD_HIDEABILITYPOPUPIFOURS
+    .endm
+
+    .macro WaitAbilityPopupAnim
+    .long BTLCMD_WAITABILITYPOPUPANIM
+    .endm
+
+    .macro ShowAbilityPopupReaction battler
+    .long BTLCMD_SHOWABILITYPOPUPREACTION
+    .long \battler
+    .endm
+
+    .macro WaitAbilityPopupReactionAnim
+    .long BTLCMD_WAITABILITYPOPUPREACTIONANIM
+    .endm
+
+    .macro HideAbilityPopupReaction
+    .long BTLCMD_HIDEABILITYPOPUPREACTION
+    .endm
+
     .text
     .globl _start
 _start:

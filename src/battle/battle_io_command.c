@@ -224,7 +224,7 @@ static const BattleCommandPtr sBattleCommands[] = {
     [BATTLE_COMMAND_FLY_MOVE_HIT_SOUND_EFFECT] = BtlIOCmd_FlyMoveHitSoundEffect,
     [BATTLE_COMMAND_PLAY_MUSIC] = BtlIOCmd_PlayMusic,
     [BATTLE_COMMAND_SUBMIT_RESULT] = BtlIOCmd_SubmitResult,
-    [BATTLE_COMMAND_CLEAR_MESSAGE_BOX] = BtlIOCmd_ClearMessageBox
+    [BATTLE_COMMAND_CLEAR_MESSAGE_BOX] = BtlIOCmd_ClearMessageBox,
 };
 
 void BattleSystem_ExecuteBattlerCommand(BattleSystem *battleSys, BattlerData *battlerData)

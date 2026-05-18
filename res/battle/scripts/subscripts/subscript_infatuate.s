@@ -2,6 +2,8 @@
 
 
 _000:
+    ShowAbilityPopupForEffectHolder
+    WaitAbilityPopupAnim
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_OBLIVIOUS, _055
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _108
     TryAttract _108
@@ -27,7 +29,8 @@ _047:
     Wait 
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_SIDE_EFFECT_MON_SELF_TURN_STATUS_FLAGS, SELF_TURN_FLAG_INFATUATED
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _055:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _082
@@ -40,26 +43,30 @@ _055:
     Wait 
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _082:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _117
     // {0}’s {1} suppressed {2}’s {3}!
     PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
-    Wait 
+    Wait
     WaitButtonABTime 30
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _098:
     // {0}’s {1} made the {2} ineffective!
     PrintMessage BattleStrings_Text_PokemonsAbilityMadeTheItemIneffective_Ally, TAG_NICKNAME_ABILITY_ITEM, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_BATTLER_TEMP
-    Wait 
+    Wait
     WaitButtonABTime 30
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _108:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _117
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
 
 _117:
-    End 
+    HideAbilityPopupIfOurs
+    End

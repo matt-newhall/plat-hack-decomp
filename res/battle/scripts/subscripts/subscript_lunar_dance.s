@@ -8,10 +8,13 @@ _000:
     Call BATTLE_SUBSCRIPT_ATTACK_MESSAGE_AND_ANIMATION
     TryFaintMon BTLSCR_ATTACKER
     TryPowerOfAlchemy _010
+    ShowAbilityPopupSaved BTLSCR_MSG_BATTLER_TEMP
+    WaitAbilityPopupAnim
     // {0} acquired {1}!
     PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait
     WaitButtonABTime 30
+    HideAbilityPopup
 
 _010:
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_MON_FAINTED

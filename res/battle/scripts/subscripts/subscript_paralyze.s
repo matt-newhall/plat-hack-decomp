@@ -2,6 +2,8 @@
 
 
 _000:
+    ShowAbilityPopupForEffectHolder
+    WaitAbilityPopupAnim
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_LIMBER, _170
     CheckIgnoreWeather _016
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_SUNNY, _016
@@ -68,7 +70,8 @@ _102:
     SetHealthbarStatus BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_PARALYZED
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_TRY_SYNCHRONIZE_STATUS
-    End 
+    HideAbilityPopupIfOurs
+    End
 
 _123:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _218
@@ -117,4 +120,5 @@ _211:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
 
 _218:
-    End 
+    HideAbilityPopupIfOurs
+    End
