@@ -13188,8 +13188,8 @@ typedef struct AbilityPopupAnim {
 
 #define POPUP_COLS_PER_FRAME 3
 
-// BGR555 color for the 1px outer border (B=12, G=0, R=0). Tweak to taste.
 #define POPUP_BORDER_COLOR 0x3D89u  // #4a637b in BGR555
+#define POPUP_RING_COLOR   0x56F8u  // #adbdc6 in BGR555
 
 // Ability popup y-positions — edit these to adjust placement per battle type
 #define POPUP_Y_PLAYER_SINGLE   7
@@ -13247,10 +13247,15 @@ static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int 
     Window_FillRectWithColor(popup, 2,  2, 2, 92, 36);
     // White interior — 4px inset (2px outer + 2px grey), 88x32px
     Window_FillRectWithColor(popup, 15, 4, 4, 88, 32);
-    // Round the grey ring's outer corners — paint border color over them for curved look
-    Window_FillRectWithColor(popup, 3,  2, 2, 2, 1); Window_FillRectWithColor(popup, 3,  2, 3, 1, 1);
-    Window_FillRectWithColor(popup, 3, 92, 2, 2, 1); Window_FillRectWithColor(popup, 3, 93, 3, 1, 1);
-    Window_FillRectWithColor(popup, 3,  2, 37, 2, 1); Window_FillRectWithColor(popup, 3, 2, 36, 1, 1);
+    // Round the outer border corners — paint transparent (index 0) over the outermost corner pixels
+    Window_FillRectWithColor(popup, 0,  0,  0, 2, 1); Window_FillRectWithColor(popup, 0,  0,  1, 1, 1);
+    Window_FillRectWithColor(popup, 0, 94,  0, 2, 1); Window_FillRectWithColor(popup, 0, 95,  1, 1, 1);
+    Window_FillRectWithColor(popup, 0,  0, 39, 2, 1); Window_FillRectWithColor(popup, 0,  0, 38, 1, 1);
+    Window_FillRectWithColor(popup, 0, 94, 39, 2, 1); Window_FillRectWithColor(popup, 0, 95, 38, 1, 1);
+    // Round the grey ring's inner corners — paint border color over the grey ring corner pixels
+    Window_FillRectWithColor(popup, 3,  2,  2, 2, 1); Window_FillRectWithColor(popup, 3,  2,  3, 1, 1);
+    Window_FillRectWithColor(popup, 3, 92,  2, 2, 1); Window_FillRectWithColor(popup, 3, 93,  3, 1, 1);
+    Window_FillRectWithColor(popup, 3,  2, 37, 2, 1); Window_FillRectWithColor(popup, 3,  2, 36, 1, 1);
     Window_FillRectWithColor(popup, 3, 92, 37, 2, 1); Window_FillRectWithColor(popup, 3, 93, 36, 1, 1);
 
     String *nameLine = String_Init(MON_NAME_LEN + 3, HEAP_ID_BATTLE);
@@ -13292,7 +13297,9 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
 
     Window_Add(bgConfig, popup, 1, xPos, yPos, 12, 5, 12, 139);
     ShowAbilityPopupWindow(popup, battleCtx, battler);
-    // Patch after text rendering — text renderer may reload the font palette, restoring index 3
+    // Patch after text rendering — text renderer may reload the font palette, restoring indices 2 and 3
+    PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
+    PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
     PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 3] = POPUP_BORDER_COLOR;
     PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 3] = POPUP_BORDER_COLOR;
 
