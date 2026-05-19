@@ -3,6 +3,7 @@
     .data
 
 _000:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     // {0}'s armor weakened!
     PrintMessage BattleStrings_Text_WeakArmorTriggered_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
     Wait 

@@ -108,6 +108,7 @@ _221:
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_DEFENDER_PARTNER, ABILITY_SWEET_VEIL, _223
 
 _222:
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0} stayed awake because of its {1}!
     PrintMessage BattleStrings_Text_PokemonStayedAwakeBecauseOfItsAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     GoTo _330

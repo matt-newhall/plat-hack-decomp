@@ -14,6 +14,7 @@ _076:
     PrintAttackMessage
     Wait
     WaitButtonABTime 15
+    ShowAbilityPopupAuto BTLSCR_ATTACKER
     CompareMonDataToValue OPCODE_EQU, BTLSCR_ATTACKER, BATTLEMON_SP_ATTACK_STAGE, 12, _204
     PlayBattleAnimation BTLSCR_ATTACKER, BATTLE_ANIMATION_STAT_BOOST
     Wait
@@ -37,6 +38,7 @@ _224:
     End
 
 _300:
+    ShowAbilityPopupAuto BTLSCR_ATTACKER
     UpdateMonDataFromVar OPCODE_GET, BTLSCR_ATTACKER, BATTLEMON_MAX_HP, BTLVAR_HP_CALC_TEMP
     UpdateVar OPCODE_ADD, BTLVAR_HP_CALC_TEMP, 1
     DivideVarByValue BTLVAR_HP_CALC_TEMP, 4

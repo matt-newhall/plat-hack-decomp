@@ -30,6 +30,7 @@ _050:
     End 
 
 _096:
+    ShowAbilityPopupAuto BTLSCR_MSG_DEFENDER
     CheckAbility CHECK_HAVE, BTLSCR_MSG_ATTACKER, ABILITY_MAGIC_GUARD, _110
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // It sucked up the liquid ooze!
@@ -39,6 +40,7 @@ _096:
     End 
 
 _110:
+    ShowAbilityPopupAuto BTLSCR_MSG_DEFENDER
     // It sucked up the liquid ooze!
     PrintMessage BattleStrings_Text_ItSuckedUpTheLiquidOoze, TAG_NONE
     Wait 

@@ -5,6 +5,7 @@ _000:
     PrintAttackMessage 
     Wait 
     WaitButtonABTime 15
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_SPEED_STAGE, 12, _032
     PlayBattleAnimation BTLSCR_DEFENDER, BATTLE_ANIMATION_STAT_BOOST
     Wait 

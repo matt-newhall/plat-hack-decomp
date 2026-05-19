@@ -3,6 +3,7 @@
     .data
 
 _000:
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0}'s Anger Shell activated!
     PrintMessage BattleStrings_Text_AngerShellActivated_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait

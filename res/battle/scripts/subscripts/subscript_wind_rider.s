@@ -3,6 +3,7 @@
     .data
 
 _000:
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0} rides the wind!
     PrintMessage BattleStrings_Text_WindRiderTailwindTriggered_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait
