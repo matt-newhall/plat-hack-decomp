@@ -13177,16 +13177,15 @@ typedef struct AbilityPopupAnim {
     BgConfig *bgConfig;
     Window *popup;
     BOOL *animDoneFlag;
-    u8 xPos;
+    s16 currentX;
+    s16 targetX;
     u8 yPos;
-    u8 step;
     u8 height;
     u16 baseTile;
-    BOOL slideLeft;
     BOOL dismiss;
 } AbilityPopupAnim;
 
-#define POPUP_COLS_PER_FRAME 3
+#define POPUP_SLIDE_SPEED 3
 
 #define POPUP_BORDER_COLOR 0x3D89u  // #4a637b in BGR555
 #define POPUP_RING_COLOR   0x56F8u  // #adbdc6 in BGR555
@@ -13211,23 +13210,38 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
     }
 
     u16 *tilemap = anim->bgConfig->bgs[1].tilemapBuffer;
-    BOOL effectiveLeft = anim->dismiss ? !anim->slideLeft : anim->slideLeft;
 
-    for (int i = 0; i < POPUP_COLS_PER_FRAME && anim->step < 12; i++, anim->step++) {
-        u8 col = effectiveLeft ? anim->step : (11 - anim->step);
-        u8 absCol = anim->xPos + col;
+    // Erase tiles at current position before moving
+    for (int col = 0; col < 12; col++) {
+        int absCol = anim->currentX + col;
+        if (absCol < 0 || absCol > 31) continue;
+        for (int row = 0; row < anim->height; row++) {
+            tilemap[(anim->yPos + row) * 32 + absCol] = 0;
+        }
+    }
 
+    // Advance position toward target
+    if (anim->currentX < anim->targetX) {
+        anim->currentX += POPUP_SLIDE_SPEED;
+        if (anim->currentX > anim->targetX) anim->currentX = anim->targetX;
+    } else if (anim->currentX > anim->targetX) {
+        anim->currentX -= POPUP_SLIDE_SPEED;
+        if (anim->currentX < anim->targetX) anim->currentX = anim->targetX;
+    }
+
+    // Draw tiles at new position (bounds check keeps us within [0,31])
+    for (int col = 0; col < 12; col++) {
+        int absCol = anim->currentX + col;
+        if (absCol < 0 || absCol > 31) continue;
         for (int row = 0; row < anim->height; row++) {
             int idx = (anim->yPos + row) * 32 + absCol;
-            tilemap[idx] = anim->dismiss
-                ? 0
-                : (u16)((anim->baseTile + row * 12 + col) | (12 << 12));
+            tilemap[idx] = (u16)((anim->baseTile + row * 12 + col) | (12 << 12));
         }
     }
 
     Bg_CopyTilemapBufferToVRAM(anim->bgConfig, 1);
 
-    if (anim->step >= 12) {
+    if (anim->currentX == anim->targetX) {
         if (anim->dismiss) {
             Window_Remove(anim->popup);
         }
@@ -13323,12 +13337,11 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
     anim->bgConfig     = bgConfig;
     anim->popup        = popup;
     anim->animDoneFlag = &s_abilityPopupAnimDone;
-    anim->xPos         = xPos;
+    anim->currentX     = isEnemy ? 32 : -12;
+    anim->targetX      = (s16)xPos;
     anim->yPos         = yPos;
-    anim->step         = 0;
     anim->height       = 5;
     anim->baseTile     = 139;
-    anim->slideLeft    = !isEnemy;
     anim->dismiss      = FALSE;
 
     s_abilityPopupAnimDone = FALSE;
@@ -13349,12 +13362,11 @@ static void DoHideAbilityPopup(BattleSystem *battleSys)
     anim->bgConfig     = bgConfig;
     anim->popup        = popup;
     anim->animDoneFlag = &s_abilityPopupDismissAnimDone;
-    anim->xPos         = popup->tilemapLeft;
+    anim->currentX     = (s16)popup->tilemapLeft;
+    anim->targetX      = isEnemy ? 32 : -12;
     anim->yPos         = popup->tilemapTop;
-    anim->step         = 0;
     anim->height       = popup->height;
-    anim->baseTile     = 0;
-    anim->slideLeft    = !isEnemy;
+    anim->baseTile     = 139;
     anim->dismiss      = TRUE;
 
     s_abilityPopupDismissAnimDone = FALSE;
