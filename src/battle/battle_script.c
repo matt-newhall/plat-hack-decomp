@@ -13187,10 +13187,9 @@ typedef struct AbilityPopupAnim {
 
 #define POPUP_SLIDE_SPEED 3
 
-#define POPUP_BORDER_COLOR 0x3D89u  // #4a637b in BGR555
-#define POPUP_RING_COLOR   0x56F8u  // #adbdc6 in BGR555
+#define POPUP_BORDER_COLOR 0x3D89u
+#define POPUP_RING_COLOR   0x56F8u
 
-// Ability popup y-positions — edit these to adjust placement per battle type
 #define POPUP_Y_PLAYER_SINGLE   7
 #define POPUP_Y_ENEMY_SINGLE    1
 #define POPUP_Y_PLAYER_DOUBLE   8
@@ -13211,7 +13210,6 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
 
     u16 *tilemap = anim->bgConfig->bgs[1].tilemapBuffer;
 
-    // Erase tiles at current position before moving
     for (int col = 0; col < 12; col++) {
         int absCol = anim->currentX + col;
         if (absCol < 0 || absCol > 31) continue;
@@ -13220,7 +13218,6 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
         }
     }
 
-    // Advance position toward target
     if (anim->currentX < anim->targetX) {
         anim->currentX += POPUP_SLIDE_SPEED;
         if (anim->currentX > anim->targetX) anim->currentX = anim->targetX;
@@ -13229,7 +13226,6 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
         if (anim->currentX < anim->targetX) anim->currentX = anim->targetX;
     }
 
-    // Draw tiles at new position (bounds check keeps us within [0,31])
     for (int col = 0; col < 12; col++) {
         int absCol = anim->currentX + col;
         if (absCol < 0 || absCol > 31) continue;
@@ -13255,32 +13251,28 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
 
 static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int battler, BOOL isEnemy)
 {
-    Window_FillRectWithColor(popup, 0,   0,  0, 96, 40);   // transparent base
+    Window_FillRectWithColor(popup, 0,   0,  0, 96, 40);
 
     if (isEnemy) {
-        // No right border — open on the right (screen edge side)
-        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);   // top border (full width)
-        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);   // bottom border (full width)
-        Window_FillRectWithColor(popup, 3,   0,  0,  2, 40);   // left outer border
-        Window_FillRectWithColor(popup, 2,   2,  2, 94,  2);   // top ring (extends to right edge)
-        Window_FillRectWithColor(popup, 2,   2, 36, 94,  2);   // bottom ring (extends to right edge)
-        Window_FillRectWithColor(popup, 2,   2,  2,  2, 36);   // left ring
-        Window_FillRectWithColor(popup, 15,  4,  4, 92, 32);   // interior (extends to right edge)
-        // Round top-left and bottom-left corners only
+        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);
+        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);
+        Window_FillRectWithColor(popup, 3,   0,  0,  2, 40);
+        Window_FillRectWithColor(popup, 2,   2,  2, 94,  2);
+        Window_FillRectWithColor(popup, 2,   2, 36, 94,  2);
+        Window_FillRectWithColor(popup, 2,   2,  2,  2, 36);
+        Window_FillRectWithColor(popup, 15,  4,  4, 92, 32);
         Window_FillRectWithColor(popup, 0,  0,  0, 2, 1); Window_FillRectWithColor(popup, 0,  0,  1, 1, 1);
         Window_FillRectWithColor(popup, 0,  0, 39, 2, 1); Window_FillRectWithColor(popup, 0,  0, 38, 1, 1);
         Window_FillRectWithColor(popup, 3,  2,  2, 2, 1); Window_FillRectWithColor(popup, 3,  2,  3, 1, 1);
         Window_FillRectWithColor(popup, 3,  2, 37, 2, 1); Window_FillRectWithColor(popup, 3,  2, 36, 1, 1);
     } else {
-        // No left border — open on the left (screen edge side)
-        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);   // top border (full width)
-        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);   // bottom border (full width)
-        Window_FillRectWithColor(popup, 3,  94,  0,  2, 40);   // right outer border
-        Window_FillRectWithColor(popup, 2,   0,  2, 94,  2);   // top ring (extends to left edge)
-        Window_FillRectWithColor(popup, 2,   0, 36, 94,  2);   // bottom ring (extends to left edge)
-        Window_FillRectWithColor(popup, 2,  92,  2,  2, 36);   // right ring
-        Window_FillRectWithColor(popup, 15,  0,  4, 92, 32);   // interior (extends to left edge)
-        // Round top-right and bottom-right corners only
+        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);
+        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);
+        Window_FillRectWithColor(popup, 3,  94,  0,  2, 40);
+        Window_FillRectWithColor(popup, 2,   0,  2, 94,  2);
+        Window_FillRectWithColor(popup, 2,   0, 36, 94,  2);
+        Window_FillRectWithColor(popup, 2,  92,  2,  2, 36);
+        Window_FillRectWithColor(popup, 15,  0,  4, 92, 32);
         Window_FillRectWithColor(popup, 0, 94,  0, 2, 1); Window_FillRectWithColor(popup, 0, 95,  1, 1, 1);
         Window_FillRectWithColor(popup, 0, 94, 39, 2, 1); Window_FillRectWithColor(popup, 0, 95, 38, 1, 1);
         Window_FillRectWithColor(popup, 3, 92,  2, 2, 1); Window_FillRectWithColor(popup, 3, 93,  3, 1, 1);
@@ -13327,7 +13319,6 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
 
     Window_Add(bgConfig, popup, 1, xPos, yPos, 12, 5, 12, 139);
     ShowAbilityPopupWindow(popup, battleCtx, battler, isEnemy);
-    // Patch after text rendering — text renderer may reload the font palette, restoring indices 2 and 3
     PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
     PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
     PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 3] = POPUP_BORDER_COLOR;
@@ -13356,7 +13347,7 @@ static void DoHideAbilityPopup(BattleSystem *battleSys)
         return;
     }
     BgConfig *bgConfig = BattleSystem_GetBgConfig(battleSys);
-    BOOL isEnemy = popup->tilemapLeft > 10;  // player=xPos1, enemy=xPos19
+    BOOL isEnemy = popup->tilemapLeft > 10;
 
     AbilityPopupAnim *anim = Heap_Alloc(HEAP_ID_BATTLE, sizeof(AbilityPopupAnim));
     anim->bgConfig     = bgConfig;
@@ -13373,9 +13364,6 @@ static void DoHideAbilityPopup(BattleSystem *battleSys)
     SysTask_Start(SysTask_AnimateAbilityPopup, anim, 0);
 }
 
-// Handles phases 1-3 of the auto popup cycle (slide-in wait, hold, dismiss).
-// Returns TRUE when phase == 0, meaning caller should execute phase 0 (show).
-// rewindWords: how many words to back the cursor up to replay this command next frame.
 static BOOL PopupAutoTick(BattleSystem *battleSys, BattleContext *battleCtx, int rewindWords)
 {
     switch (s_popupAutoPhase) {
