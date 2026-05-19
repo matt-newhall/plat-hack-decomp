@@ -1399,6 +1399,11 @@
     .long BTLCMD_HIDEABILITYPOPUPREACTION
     .endm
 
+    .macro ShowAbilityPopupAuto battler
+    .long BTLCMD_SHOWABILITYPOPUPAUTO
+    .long \battler
+    .endm
+
     .text
     .globl _start
 _start:
