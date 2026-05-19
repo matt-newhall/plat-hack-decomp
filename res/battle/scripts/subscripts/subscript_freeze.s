@@ -74,9 +74,10 @@ _115:
 
 _128:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _157
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
     WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     GoTo _150
 
 _139:

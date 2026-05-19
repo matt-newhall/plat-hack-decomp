@@ -99,6 +99,7 @@ _170:
     PrintAttackMessage
     Wait
     WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0}'s {1} prevents paralysis!
     PrintMessage BattleStrings_Text_PokemonsAbilityPreventsParalysis_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     GoTo _211

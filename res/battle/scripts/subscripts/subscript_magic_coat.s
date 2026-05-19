@@ -13,6 +13,7 @@ _000:
     GoTo _005
 
 _003:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     // {0}’s {1} was bounced back by Magic Bounce!
     PrintMessage BattleStrings_Text_MagicBounceTriggered_Ally, TAG_NICKNAME_MOVE, BTLSCR_ATTACKER, BTLSCR_ATTACKER
     Wait 

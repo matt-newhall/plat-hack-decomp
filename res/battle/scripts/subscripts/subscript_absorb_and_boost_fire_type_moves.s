@@ -5,6 +5,7 @@ _000:
     PrintAttackMessage 
     Wait 
     WaitButtonABTime 15
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_FLASH_FIRE, 0, _023
     // {0}’s {1} raised the power of its Fire-type moves!
     PrintMessage BattleStrings_Text_PokemonsAbilityRaisedThePowerOfItsFireTypeMoves_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER

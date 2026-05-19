@@ -26,6 +26,7 @@ _020:
     End 
 
 _077:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_MAGIC_GUARD, _090
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // It sucked up the liquid ooze!
