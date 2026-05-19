@@ -4,9 +4,8 @@
 
 _000:
     TryPerishBody _002 _001
-    ShowAbilityPopup BTLSCR_DEFENDER
-    WaitAbilityPopupAnim
-    // {0}’s {1} was unleashed!
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    // {0}'s {1} was unleashed!
     PrintMessage BattleStrings_Text_PerishBodyUnleashed_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     Wait
     WaitButtonABTime 30
@@ -17,9 +16,8 @@ _000:
     GoTo _002
 
 _001:
-    ShowAbilityPopup BTLSCR_DEFENDER
-    WaitAbilityPopupAnim
-    // {0}’s {1} was unleashed!
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    // {0}'s {1} was unleashed!
     PrintMessage BattleStrings_Text_PerishBodyUnleashed_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     Wait
     WaitButtonABTime 30
@@ -29,5 +27,4 @@ _001:
     WaitButtonABTime 30
 
 _002:
-    HideAbilityPopup
     End

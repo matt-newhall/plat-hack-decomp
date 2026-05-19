@@ -26,7 +26,6 @@ _036:
     PrintBufferedMessage
     Wait
     WaitButtonABTime 30
-    HideAbilityPopupIfOurs
     Call BATTLE_SUBSCRIPT_DEFIANT_CHECK
     Call BATTLE_SUBSCRIPT_COMPETITIVE_CHECK
     End
@@ -44,11 +43,9 @@ _048:
     WaitButtonABTime 30
 
 _059:
-    HideAbilityPopupIfOurs
     End
 
 _060:
-    HideAbilityPopupIfOurs
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
     End
 
@@ -58,5 +55,4 @@ _061:
     Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
-    HideAbilityPopupIfOurs
     End

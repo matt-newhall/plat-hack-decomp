@@ -8,13 +8,11 @@ _000:
     Call BATTLE_SUBSCRIPT_ATTACK_MESSAGE_AND_ANIMATION
     TryFaintMon BTLSCR_ATTACKER
     TryPowerOfAlchemy _010
-    ShowAbilityPopupSaved BTLSCR_MSG_BATTLER_TEMP
-    WaitAbilityPopupAnim
+    ShowAbilityPopupAutoSaved BTLSCR_MSG_BATTLER_TEMP
     // {0} acquired {1}!
     PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait
     WaitButtonABTime 30
-    HideAbilityPopup
 
 _010:
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_MON_FAINTED
@@ -24,15 +22,15 @@ _010:
 
 _026:
     TryReplaceFaintedMon BTLSCR_ATTACKER, TRUE, _087
-    ShowParty 
-    WaitMonSelection 
+    ShowParty
+    WaitMonSelection
     SwitchAndUpdateMon BTLSCR_SWITCHED_MON
     PrintSendOutMessage BTLSCR_SWITCHED_MON
-    Wait 
+    Wait
     PokemonSendOut BTLSCR_SWITCHED_MON
     WaitTime 72
     HealthbarSlideIn BTLSCR_SWITCHED_MON
-    Wait 
+    Wait
     Call BATTLE_SUBSCRIPT_HAZARDS_CHECK
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_MON_FAINTED, _065
     Call BATTLE_SUBSCRIPT_FAINT_MON
@@ -51,4 +49,4 @@ _065:
     Call BATTLE_SUBSCRIPT_WISH_HEAL
 
 _087:
-    End 
+    End

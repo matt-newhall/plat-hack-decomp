@@ -2,8 +2,7 @@
 
 
 _000:
-    ShowAbilityPopupForEffectHolder
-    WaitAbilityPopupAnim
+    ShowAbilityPopupAutoForEffectHolder
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DISOBEDIENCE, _147
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_MOVE_EFFECT, _055
     CheckSleepAbilityImmunity BTLSCR_SIDE_EFFECT_MON, _202
@@ -29,8 +28,8 @@ _087:
     CheckPowderImmunity BTLSCR_DEFENDER, _202
 
 _091:
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
 
 _094:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _102
@@ -56,7 +55,7 @@ _122:
 
 _125:
     PlayMoveAnimation BTLSCR_ATTACKER
-    Wait 
+    Wait
 
 _130:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _147
@@ -65,7 +64,7 @@ _130:
 
 _147:
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_ASLEEP
-    Wait 
+    Wait
     Random 2, 2
     UpdateMonDataFromVar OPCODE_FLAG_ON, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, BTLVAR_CALC_TEMP
     UpdateMonDataFromVar OPCODE_SET, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_INITIAL_SLEEP_TURNS, BTLVAR_CALC_TEMP
@@ -75,14 +74,14 @@ _147:
     GoTo _176
 
 _170:
-    // {0}’s {1} made {2} fall asleep!
+    // {0}'s {1} made {2} fall asleep!
     PrintMessage BattleStrings_Text_PokemonsAbilityMadePokemonFallAsleep_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_SIDE_EFFECT_MON
 
 _176:
-    Wait 
+    Wait
     WaitButtonABTime 30
     SetHealthbarStatus BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_ASLEEP
-    Wait 
+    Wait
     CompareMonDataToValue OPCODE_FLAG_SET, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_MOVE_EFFECTS_MASK, MOVE_EFFECT_SEMI_INVULNERABLE, _193
     UnlockMoveChoice BTLSCR_SIDE_EFFECT_MON
     GoTo _201
@@ -93,15 +92,14 @@ _193:
     Call BATTLE_SUBSCRIPT_VANISH_OFF
 
 _201:
-    HideAbilityPopupIfOurs
     End
 
 _202:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _337
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _337
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_MOVE_EFFECT, _221
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
     WaitButtonABTime 30
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _329
 
@@ -115,7 +113,7 @@ _222:
     GoTo _330
 
 _223:
-    // {0} stayed awake because of its ally’s Sweet Veil!
+    // {0} stayed awake because of its ally's Sweet Veil!
     PrintMessage BattleStrings_Text_SweetVeilPartnerTriggered_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _330
 
@@ -152,7 +150,7 @@ _292:
 
 _311:
     WaitButtonABTime 30
-    // But {0} can’t sleep in an uproar!
+    // But {0} can't sleep in an uproar!
     PrintMessage BattleStrings_Text_ButPokemonCantSleepInAnUproar_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _330
 
@@ -167,10 +165,9 @@ _329:
     PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
 
 _330:
-    Wait 
+    Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
 
 _337:
-    HideAbilityPopupIfOurs
     End

@@ -4,17 +4,15 @@
 
 _000:
     TryToxicDebris _010
-    ShowAbilityPopup BTLSCR_DEFENDER
-    WaitAbilityPopupAnim
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
     UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_TOXIC_SPIKES
     PlayMoveAnimationOnMons BTLSCR_MSG_TEMP, BTLSCR_DEFENDER, BTLSCR_ATTACKER
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_PLAYED_MOVE_ANIMATION
-    // Poison spikes were scattered all around your team’s feet!
+    // Poison spikes were scattered all around your team's feet!
     PrintMessage BattleStrings_Text_ToxicDebrisTriggered_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     Wait
     WaitButtonABTime 30
-    HideAbilityPopup
     End
 
 _010:

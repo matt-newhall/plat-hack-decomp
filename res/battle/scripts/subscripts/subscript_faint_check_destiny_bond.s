@@ -13,12 +13,12 @@ _000:
     UpdateVarFromVar OPCODE_SET, BTLVAR_MSG_BATTLER_TEMP, BTLVAR_ATTACKER
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
     Call BATTLE_SUBSCRIPT_UPDATE_HP
-    PlayFaintAnimation 
-    Wait 
+    PlayFaintAnimation
+    Wait
     HealthbarSlideOut BTLSCR_FAINTED_MON
     // {0} fainted!
     PrintMessage BattleStrings_Text_PokemonFainted_Ally, TAG_NICKNAME, BTLSCR_FAINTED_MON
-    Wait 
+    Wait
     WaitButtonABTime 30
     IncrementGameRecord BTLSCR_FAINTED_MON, BATTLER_TYPE_SOLO_ENEMY, RECORD_FAINTED_IN_BATTLE
     IncrementGameRecord BTLSCR_FAINTED_MON, BATTLER_TYPE_SOLO_PLAYER, RECORD_FAINTED_ENEMY_MON
@@ -26,23 +26,21 @@ _000:
 
 _066:
     TryPowerOfAlchemy _072
-    ShowAbilityPopupSaved BTLSCR_MSG_BATTLER_TEMP
-    WaitAbilityPopupAnim
+    ShowAbilityPopupAutoSaved BTLSCR_MSG_BATTLER_TEMP
     // {0} acquired {1}!
     PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait
     WaitButtonABTime 30
-    HideAbilityPopup
 
 _072:
     TryGrudge _076
-    // {0}’s {1} lost all its PP due to the grudge!
+    // {0}'s {1} lost all its PP due to the grudge!
     PrintMessage BattleStrings_Text_PokemonsMoveLostAllItsPPDueToTheGrudge_Ally, TAG_NICKNAME_MOVE, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
-    Wait 
+    Wait
     WaitButtonABTime 30
 
 _076:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_NO_EXPERIENCE_GIVEN
     Call BATTLE_SUBSCRIPT_FAINT_MON
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_NO_EXPERIENCE_GIVEN
-    End 
+    End
