@@ -1,4 +1,5 @@
 #include "constants/battle/battle_script.h"
+#include "ability_popup_tiles.h"
 
 #include <nitro.h>
 #include <string.h>
@@ -13187,8 +13188,18 @@ typedef struct AbilityPopupAnim {
 
 #define POPUP_SLIDE_SPEED 3
 
-#define POPUP_BORDER_COLOR 0x3D89u
-#define POPUP_RING_COLOR   0x56F8u
+static const u16 sAbilityPopupPalette[16] = {
+    0x0000u,
+    0x3129u,
+    0x398Bu,
+    0x7FFFu,
+    0x7B13u,
+    0x7AD0u,
+    0x6A0Bu,
+    0x4DA8u,
+    0x0000u, 0x0000u, 0x0000u, 0x0000u, 0x0000u, 0x0000u, 0x0000u,
+    0x7AD0u,
+};
 
 #define POPUP_Y_PLAYER_SINGLE   7
 #define POPUP_Y_ENEMY_SINGLE    1
@@ -13210,7 +13221,7 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
 
     u16 *tilemap = anim->bgConfig->bgs[1].tilemapBuffer;
 
-    for (int col = 0; col < 12; col++) {
+    for (int col = 0; col < 13; col++) {
         int absCol = anim->currentX + col;
         if (absCol < 0 || absCol > 31) continue;
         for (int row = 0; row < anim->height; row++) {
@@ -13226,12 +13237,12 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
         if (anim->currentX < anim->targetX) anim->currentX = anim->targetX;
     }
 
-    for (int col = 0; col < 12; col++) {
+    for (int col = 0; col < 13; col++) {
         int absCol = anim->currentX + col;
         if (absCol < 0 || absCol > 31) continue;
         for (int row = 0; row < anim->height; row++) {
             int idx = (anim->yPos + row) * 32 + absCol;
-            tilemap[idx] = (u16)((anim->baseTile + row * 12 + col) | (12 << 12));
+            tilemap[idx] = (u16)((anim->baseTile + row * 13 + col) | (12 << 12));
         }
     }
 
@@ -13251,47 +13262,22 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
 
 static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int battler, BOOL isEnemy)
 {
-    Window_FillRectWithColor(popup, 0,   0,  0, 96, 40);
+    MI_CpuCopy8(isEnemy ? sAbilityPopupTilesLeft : sAbilityPopupTilesRight,
+                popup->pixels, 13 * 5 * 32);
 
-    if (isEnemy) {
-        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);
-        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);
-        Window_FillRectWithColor(popup, 3,   0,  0,  2, 40);
-        Window_FillRectWithColor(popup, 2,   2,  2, 94,  2);
-        Window_FillRectWithColor(popup, 2,   2, 36, 94,  2);
-        Window_FillRectWithColor(popup, 2,   2,  2,  2, 36);
-        Window_FillRectWithColor(popup, 15,  4,  4, 92, 32);
-        Window_FillRectWithColor(popup, 0,  0,  0, 2, 1); Window_FillRectWithColor(popup, 0,  0,  1, 1, 1);
-        Window_FillRectWithColor(popup, 0,  0, 39, 2, 1); Window_FillRectWithColor(popup, 0,  0, 38, 1, 1);
-        Window_FillRectWithColor(popup, 3,  2,  2, 2, 1); Window_FillRectWithColor(popup, 3,  2,  3, 1, 1);
-        Window_FillRectWithColor(popup, 3,  2, 37, 2, 1); Window_FillRectWithColor(popup, 3,  2, 36, 1, 1);
-    } else {
-        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);
-        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);
-        Window_FillRectWithColor(popup, 3,  94,  0,  2, 40);
-        Window_FillRectWithColor(popup, 2,   0,  2, 94,  2);
-        Window_FillRectWithColor(popup, 2,   0, 36, 94,  2);
-        Window_FillRectWithColor(popup, 2,  92,  2,  2, 36);
-        Window_FillRectWithColor(popup, 15,  0,  4, 92, 32);
-        Window_FillRectWithColor(popup, 0, 94,  0, 2, 1); Window_FillRectWithColor(popup, 0, 95,  1, 1, 1);
-        Window_FillRectWithColor(popup, 0, 94, 39, 2, 1); Window_FillRectWithColor(popup, 0, 95, 38, 1, 1);
-        Window_FillRectWithColor(popup, 3, 92,  2, 2, 1); Window_FillRectWithColor(popup, 3, 93,  3, 1, 1);
-        Window_FillRectWithColor(popup, 3, 92, 37, 2, 1); Window_FillRectWithColor(popup, 3, 93, 36, 1, 1);
-    }
-
-    int textX = isEnemy ? 7 : 3;
+    int textX = isEnemy ? 14 : 6;
     String *nameLine = String_Init(MON_NAME_LEN + 3, HEAP_ID_BATTLE);
     String_CopyChars(nameLine, battleCtx->battleMons[battler].nickname);
     String_AppendChar(nameLine, CHAR_SINGLE_QUOTE_CLOSE);
     String_AppendChar(nameLine, CHAR_s);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, nameLine, textX, 5, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, nameLine, textX, 6, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 15), NULL);
     String_Free(nameLine);
 
     MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_ABILITY_NAMES, HEAP_ID_BATTLE);
     String *abilityName = MessageLoader_GetNewString(loader, battleCtx->battleMons[battler].ability);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, textX, 19, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
-    String_Free(abilityName);
     MessageLoader_Free(loader);
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, textX, 21, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 6), NULL);
+    String_Free(abilityName);
 
     Window_LoadTiles(popup);
 }
@@ -13302,11 +13288,9 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
     Window *popup = BattleSystem_GetWindow(battleSys, 1);
 
     PaletteData *pd = BattleSystem_GetPaletteData(battleSys);
-    PaletteData_LoadBufferFromFileStart(pd, NARC_INDEX_GRAPHIC__PL_FONT, 7, HEAP_ID_BATTLE, PLTTBUF_MAIN_BG, 32, 12 * 16);
-
     BOOL isEnemy = BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_ENEMY;
     BOOL isDouble = (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) != 0;
-    u8 xPos = isEnemy ? 20 : 0;
+    u8 xPos = isEnemy ? 19 : 0;
     u8 yPos = isDouble
         ? (isEnemy ? POPUP_Y_ENEMY_DOUBLE  : POPUP_Y_PLAYER_DOUBLE)
         : (isEnemy ? POPUP_Y_ENEMY_SINGLE  : POPUP_Y_PLAYER_SINGLE);
@@ -13317,18 +13301,20 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
         Window_Remove(popup);
     }
 
-    Window_Add(bgConfig, popup, 1, xPos, yPos, 12, 5, 12, 139);
+    Window_Add(bgConfig, popup, 1, xPos, yPos, 13, 5, 12, 139);
     ShowAbilityPopupWindow(popup, battleCtx, battler, isEnemy);
-    PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
-    PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
-    PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 3] = POPUP_BORDER_COLOR;
-    PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 3] = POPUP_BORDER_COLOR;
+    MI_CpuCopy16(sAbilityPopupPalette,
+                 PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG) + 12 * 16,
+                 sizeof(sAbilityPopupPalette));
+    MI_CpuCopy16(sAbilityPopupPalette,
+                 PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG) + 12 * 16,
+                 sizeof(sAbilityPopupPalette));
 
     AbilityPopupAnim *anim = Heap_Alloc(HEAP_ID_BATTLE, sizeof(AbilityPopupAnim));
     anim->bgConfig     = bgConfig;
     anim->popup        = popup;
     anim->animDoneFlag = &s_abilityPopupAnimDone;
-    anim->currentX     = isEnemy ? 32 : -12;
+    anim->currentX     = isEnemy ? 32 : -13;
     anim->targetX      = (s16)xPos;
     anim->yPos         = yPos;
     anim->height       = 5;
@@ -13354,7 +13340,7 @@ static void DoHideAbilityPopup(BattleSystem *battleSys)
     anim->popup        = popup;
     anim->animDoneFlag = &s_abilityPopupDismissAnimDone;
     anim->currentX     = (s16)popup->tilemapLeft;
-    anim->targetX      = isEnemy ? 32 : -12;
+    anim->targetX      = isEnemy ? 32 : -13;
     anim->yPos         = popup->tilemapTop;
     anim->height       = popup->height;
     anim->baseTile     = 139;
