@@ -2,8 +2,7 @@
 
 
 _000:
-    ShowAbilityPopupForEffectHolder
-    WaitAbilityPopupAnim
+    ShowAbilityPopupAutoForEffectHolder
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_LIMBER, _170
     CheckIgnoreWeather _016
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_SUNNY, _016
@@ -16,8 +15,8 @@ _016:
 
 _026:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _033
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
 
 _033:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _041
@@ -45,7 +44,7 @@ _058:
 
 _066:
     PlayMoveAnimation BTLSCR_ATTACKER
-    Wait 
+    Wait
 
 _070:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _076
@@ -54,7 +53,7 @@ _070:
 
 _076:
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_PARALYZED
-    Wait 
+    Wait
     UpdateMonData OPCODE_FLAG_ON, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, MON_CONDITION_PARALYSIS
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _096
     // {0} is paralyzed! It may be unable to move!
@@ -62,15 +61,14 @@ _076:
     GoTo _102
 
 _096:
-    // {0}’s {1} paralyzed {2}! It may be unable to move!
+    // {0}'s {1} paralyzed {2}! It may be unable to move!
     PrintMessage BattleStrings_Text_PokemonsAbilityParalyzedPokemon_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_SIDE_EFFECT_MON
 
 _102:
-    Wait 
+    Wait
     SetHealthbarStatus BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_PARALYZED
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_TRY_SYNCHRONIZE_STATUS
-    HideAbilityPopupIfOurs
     End
 
 _123:
@@ -91,20 +89,20 @@ _139:
 _140:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _218
     WaitButtonABTime 30
-    // It doesn’t affect {0}...
+    // It doesn't affect {0}...
     PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _211
 
 _170:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _218
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _218
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
     WaitButtonABTime 30
-    // {0}’s {1} prevents paralysis!
+    // {0}'s {1} prevents paralysis!
     PrintMessage BattleStrings_Text_PokemonsAbilityPreventsParalysis_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     GoTo _211
-    // {0}’s {1} suppressed {2}’s {3}!
+    // {0}'s {1} suppressed {2}'s {3}!
     PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
     GoTo _211
 
@@ -115,10 +113,9 @@ _200:
     PrintMessage BattleStrings_Text_PokemonIsProtectedBySafeguard_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
 
 _211:
-    Wait 
+    Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
 
 _218:
-    HideAbilityPopupIfOurs
     End

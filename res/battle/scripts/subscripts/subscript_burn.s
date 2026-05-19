@@ -2,8 +2,7 @@
 
 
 _000:
-    ShowAbilityPopupForEffectHolder
-    WaitAbilityPopupAnim
+    ShowAbilityPopupAutoForEffectHolder
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_HELD_ITEM, _052
     CheckAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_WATER_VEIL, _211
     CheckAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_WATER_BUBBLE, _211
@@ -32,8 +31,8 @@ _069:
 
 _079:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _086
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
 
 _086:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _094
@@ -58,7 +57,7 @@ _125:
 
 _130:
     PlayMoveAnimation BTLSCR_ATTACKER
-    Wait 
+    Wait
 
 _141:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _142
@@ -68,7 +67,7 @@ _141:
 _142:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_HELD_ITEM, _152
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_HELD_ITEM
-    Wait 
+    Wait
     WaitButtonABTime 15
     GoTo _152
 
@@ -77,7 +76,7 @@ _143:
 
 _152:
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_BURNED
-    Wait 
+    Wait
     UpdateMonData OPCODE_FLAG_ON, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, MON_CONDITION_BURN
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _177
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_HELD_ITEM, _185
@@ -86,7 +85,7 @@ _152:
     GoTo _190
 
 _177:
-    // {0}’s {1} burned {2}!
+    // {0}'s {1} burned {2}!
     PrintMessage BattleStrings_Text_PokemonsAbilityBurnedPokemon_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_SIDE_EFFECT_MON
     GoTo _190
 
@@ -95,13 +94,12 @@ _185:
     PrintMessage BattleStrings_Text_PokemonGotABurnFromTheItem_Ally, TAG_NICKNAME_ITEM, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP
 
 _190:
-    Wait 
+    Wait
     SetHealthbarStatus BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_BURNED
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_TRY_SYNCHRONIZE_STATUS
 
 _211:
-    HideAbilityPopupIfOurs
     End
 
 _212:
@@ -123,20 +121,20 @@ _246:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _312
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _312
     WaitButtonABTime 30
-    // It doesn’t affect {0}...
+    // It doesn't affect {0}...
     PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _305
 
 _264:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _312
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _312
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
     WaitButtonABTime 30
-    // {0}’s {1} prevents burns!
+    // {0}'s {1} prevents burns!
     PrintMessage BattleStrings_Text_PokemonsAbilityPreventsBurns_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     GoTo _305
-    // {0}’s {1} suppressed {2}’s {3}!
+    // {0}'s {1} suppressed {2}'s {3}!
     PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
     GoTo _305
 
@@ -147,10 +145,9 @@ _294:
     PrintMessage BattleStrings_Text_PokemonIsProtectedBySafeguard_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
 
 _305:
-    Wait 
+    Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
 
 _312:
-    HideAbilityPopupIfOurs
     End
