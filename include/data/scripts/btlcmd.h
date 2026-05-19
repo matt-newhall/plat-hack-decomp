@@ -263,6 +263,7 @@ ScriptCommand(BTLCMD_WAITABILITYPOPUPANIM,            BtlCmd_WaitAbilityPopupAni
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPREACTION,        BtlCmd_ShowAbilityPopupReaction)
 ScriptCommand(BTLCMD_WAITABILITYPOPUPREACTIONANIM,    BtlCmd_WaitAbilityPopupReactionAnim)
 ScriptCommand(BTLCMD_HIDEABILITYPOPUPREACTION,        BtlCmd_HideAbilityPopupReaction)
+ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTO,            BtlCmd_ShowAbilityPopupAuto)
 
 // clang-format on
 
