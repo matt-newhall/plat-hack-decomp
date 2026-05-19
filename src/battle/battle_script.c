@@ -13276,7 +13276,7 @@ static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int 
     MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_ABILITY_NAMES, HEAP_ID_BATTLE);
     String *abilityName = MessageLoader_GetNewString(loader, battleCtx->battleMons[battler].ability);
     MessageLoader_Free(loader);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, textX, 21, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 6), NULL);
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, textX, 20, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 6), NULL);
     String_Free(abilityName);
 
     Window_LoadTiles(popup);
