@@ -13239,35 +13239,51 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
     }
 }
 
-static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int battler)
+static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int battler, BOOL isEnemy)
 {
-    // 2px dark blue outer border (index 3, patched after text render in DoShowAbilityPopup)
-    Window_FillRectWithColor(popup, 3,  0, 0, 96, 40);
-    // 2px grey inner ring (index 2 = text shadow color)
-    Window_FillRectWithColor(popup, 2,  2, 2, 92, 36);
-    // White interior — 4px inset (2px outer + 2px grey), 88x32px
-    Window_FillRectWithColor(popup, 15, 4, 4, 88, 32);
-    // Round the outer border corners — paint transparent (index 0) over the outermost corner pixels
-    Window_FillRectWithColor(popup, 0,  0,  0, 2, 1); Window_FillRectWithColor(popup, 0,  0,  1, 1, 1);
-    Window_FillRectWithColor(popup, 0, 94,  0, 2, 1); Window_FillRectWithColor(popup, 0, 95,  1, 1, 1);
-    Window_FillRectWithColor(popup, 0,  0, 39, 2, 1); Window_FillRectWithColor(popup, 0,  0, 38, 1, 1);
-    Window_FillRectWithColor(popup, 0, 94, 39, 2, 1); Window_FillRectWithColor(popup, 0, 95, 38, 1, 1);
-    // Round the grey ring's inner corners — paint border color over the grey ring corner pixels
-    Window_FillRectWithColor(popup, 3,  2,  2, 2, 1); Window_FillRectWithColor(popup, 3,  2,  3, 1, 1);
-    Window_FillRectWithColor(popup, 3, 92,  2, 2, 1); Window_FillRectWithColor(popup, 3, 93,  3, 1, 1);
-    Window_FillRectWithColor(popup, 3,  2, 37, 2, 1); Window_FillRectWithColor(popup, 3,  2, 36, 1, 1);
-    Window_FillRectWithColor(popup, 3, 92, 37, 2, 1); Window_FillRectWithColor(popup, 3, 93, 36, 1, 1);
+    Window_FillRectWithColor(popup, 0,   0,  0, 96, 40);   // transparent base
 
+    if (isEnemy) {
+        // No right border — open on the right (screen edge side)
+        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);   // top border (full width)
+        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);   // bottom border (full width)
+        Window_FillRectWithColor(popup, 3,   0,  0,  2, 40);   // left outer border
+        Window_FillRectWithColor(popup, 2,   2,  2, 94,  2);   // top ring (extends to right edge)
+        Window_FillRectWithColor(popup, 2,   2, 36, 94,  2);   // bottom ring (extends to right edge)
+        Window_FillRectWithColor(popup, 2,   2,  2,  2, 36);   // left ring
+        Window_FillRectWithColor(popup, 15,  4,  4, 92, 32);   // interior (extends to right edge)
+        // Round top-left and bottom-left corners only
+        Window_FillRectWithColor(popup, 0,  0,  0, 2, 1); Window_FillRectWithColor(popup, 0,  0,  1, 1, 1);
+        Window_FillRectWithColor(popup, 0,  0, 39, 2, 1); Window_FillRectWithColor(popup, 0,  0, 38, 1, 1);
+        Window_FillRectWithColor(popup, 3,  2,  2, 2, 1); Window_FillRectWithColor(popup, 3,  2,  3, 1, 1);
+        Window_FillRectWithColor(popup, 3,  2, 37, 2, 1); Window_FillRectWithColor(popup, 3,  2, 36, 1, 1);
+    } else {
+        // No left border — open on the left (screen edge side)
+        Window_FillRectWithColor(popup, 3,   0,  0, 96,  2);   // top border (full width)
+        Window_FillRectWithColor(popup, 3,   0, 38, 96,  2);   // bottom border (full width)
+        Window_FillRectWithColor(popup, 3,  94,  0,  2, 40);   // right outer border
+        Window_FillRectWithColor(popup, 2,   0,  2, 94,  2);   // top ring (extends to left edge)
+        Window_FillRectWithColor(popup, 2,   0, 36, 94,  2);   // bottom ring (extends to left edge)
+        Window_FillRectWithColor(popup, 2,  92,  2,  2, 36);   // right ring
+        Window_FillRectWithColor(popup, 15,  0,  4, 92, 32);   // interior (extends to left edge)
+        // Round top-right and bottom-right corners only
+        Window_FillRectWithColor(popup, 0, 94,  0, 2, 1); Window_FillRectWithColor(popup, 0, 95,  1, 1, 1);
+        Window_FillRectWithColor(popup, 0, 94, 39, 2, 1); Window_FillRectWithColor(popup, 0, 95, 38, 1, 1);
+        Window_FillRectWithColor(popup, 3, 92,  2, 2, 1); Window_FillRectWithColor(popup, 3, 93,  3, 1, 1);
+        Window_FillRectWithColor(popup, 3, 92, 37, 2, 1); Window_FillRectWithColor(popup, 3, 93, 36, 1, 1);
+    }
+
+    int textX = isEnemy ? 7 : 3;
     String *nameLine = String_Init(MON_NAME_LEN + 3, HEAP_ID_BATTLE);
     String_CopyChars(nameLine, battleCtx->battleMons[battler].nickname);
     String_AppendChar(nameLine, CHAR_SINGLE_QUOTE_CLOSE);
     String_AppendChar(nameLine, CHAR_s);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, nameLine, 7, 5, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, nameLine, textX, 5, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
     String_Free(nameLine);
 
     MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_ABILITY_NAMES, HEAP_ID_BATTLE);
     String *abilityName = MessageLoader_GetNewString(loader, battleCtx->battleMons[battler].ability);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, 7, 19, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, textX, 19, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
     String_Free(abilityName);
     MessageLoader_Free(loader);
 
@@ -13284,7 +13300,7 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
 
     BOOL isEnemy = BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_ENEMY;
     BOOL isDouble = (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) != 0;
-    u8 xPos = isEnemy ? 19 : 1;
+    u8 xPos = isEnemy ? 20 : 0;
     u8 yPos = isDouble
         ? (isEnemy ? POPUP_Y_ENEMY_DOUBLE  : POPUP_Y_PLAYER_DOUBLE)
         : (isEnemy ? POPUP_Y_ENEMY_SINGLE  : POPUP_Y_PLAYER_SINGLE);
@@ -13296,7 +13312,7 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
     }
 
     Window_Add(bgConfig, popup, 1, xPos, yPos, 12, 5, 12, 139);
-    ShowAbilityPopupWindow(popup, battleCtx, battler);
+    ShowAbilityPopupWindow(popup, battleCtx, battler, isEnemy);
     // Patch after text rendering — text renderer may reload the font palette, restoring indices 2 and 3
     PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
     PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG)[12 * 16 + 2] = POPUP_RING_COLOR;
