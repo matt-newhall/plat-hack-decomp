@@ -2,8 +2,6 @@
 
 
 _000:
-    ShowAbilityPopupForEffect
-    WaitAbilityPopupAnim
     ChangeStatStage _041, _059, _060
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _010
     PrintAttackMessage
