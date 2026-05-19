@@ -9,15 +9,13 @@ _000:
     UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_PARAM, MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_2_STAGES
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_UPDATE_STAT_STAGES
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_STAT_STAGE_CHANGE_SHOWN
-    ShowAbilityPopupReaction BTLSCR_SIDE_EFFECT_MON
-    WaitAbilityPopupReactionAnim
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     ChangeStatStage _003, _003, _003
     PlayBattleAnimationFromVar BTLSCR_SIDE_EFFECT_MON, BTLVAR_SCRIPT_TEMP
     Wait
     PrintBufferedMessage
     Wait
     WaitButtonABTime 30
-    HideAbilityPopupReaction
 
 _003:
     End

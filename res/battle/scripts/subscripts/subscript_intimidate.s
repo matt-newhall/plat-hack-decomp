@@ -2,9 +2,7 @@
 
 
 _000:
-    ShowAbilityPopup BTLSCR_MSG_BATTLER_TEMP
-    WaitAbilityPopupAnim
-    WaitButtonABTime 15
+    ShowAbilityPopupAuto BTLSCR_MSG_BATTLER_TEMP
     UpdateVar OPCODE_SET, BTLVAR_BATTLER_SPEED_TEMP, 0
     UpdateVarFromVar OPCODE_SET, BTLVAR_LAST_BATTLER_ID, BTLVAR_ATTACKER
     UpdateVarFromVar OPCODE_SET, BTLVAR_ATTACKER, BTLVAR_MSG_BATTLER_TEMP
@@ -24,6 +22,7 @@ _013:
     GoTo _038
 
 _032:
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0}'s Attack was not lowered!
     PrintMessage BattleStrings_Text_AbilityPreventsIntimidate_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     Wait
@@ -33,5 +32,4 @@ _038:
     UpdateVar OPCODE_ADD, BTLVAR_BATTLER_SPEED_TEMP, 1
     GoToIfValidMon BTLVAR_BATTLER_SPEED_TEMP, _013
     UpdateVarFromVar OPCODE_SET, BTLVAR_ATTACKER, BTLVAR_LAST_BATTLER_ID
-    HideAbilityPopup
     End
