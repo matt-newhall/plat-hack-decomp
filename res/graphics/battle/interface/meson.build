@@ -53,4 +53,19 @@ battle_sprites += [
     ),
     preserve_path_from: base_directory,
   ),
+
+  ncgr_lz_gen.process(
+    files(
+      'ability_popup_diagonal_left.png',
+      'ability_popup_diagonal_right.png',
+    ),
+    preserve_path_from: base_directory,
+    extra_args: [ '-bitdepth', '4' ],
+  ),
+
+  nclr_gen.process(
+    files('ability_popup_diagonal_left.png'),
+    preserve_path_from: base_directory,
+    extra_args: [ '-bitdepth', '4' ],
+  ),
 ]

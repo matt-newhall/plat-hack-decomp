@@ -341,3 +341,6 @@ ball_throws/mud.NCGR.lz
 interface/top_stock.NCGR.lz
 interface/top_stock_cell.NCER.lz
 interface/top_stock_anim.NANR.lz
+interface/ability_popup_diagonal_left.NCGR.lz
+interface/ability_popup_diagonal_right.NCGR.lz
+interface/ability_popup_diagonal_left.NCLR

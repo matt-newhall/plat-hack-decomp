@@ -1,5 +1,4 @@
 #include "constants/battle/battle_script.h"
-#include "ability_popup_tiles.h"
 
 #include <nitro.h>
 #include <string.h>
@@ -44,6 +43,7 @@
 #include "battle_anim/struct_ov12_02237728.h"
 
 #include "bg_window.h"
+#include "graphics.h"
 #include "char_transfer.h"
 #include "dexmode_checker.h"
 #include "flags.h"
@@ -13188,18 +13188,9 @@ typedef struct AbilityPopupAnim {
 
 #define POPUP_SLIDE_SPEED 3
 
-static const u16 sAbilityPopupPalette[16] = {
-    0x0000u,
-    0x3129u,
-    0x398Bu,
-    0x7FFFu,
-    0x7B13u,
-    0x7AD0u,
-    0x6A0Bu,
-    0x4DA8u,
-    0x0000u, 0x0000u, 0x0000u, 0x0000u, 0x0000u, 0x0000u, 0x0000u,
-    0x7AD0u,
-};
+#define ABILITY_POPUP_NCGR_LEFT_IDX  343
+#define ABILITY_POPUP_NCGR_RIGHT_IDX 344
+#define ABILITY_POPUP_NCLR_IDX       345
 
 #define POPUP_Y_PLAYER_SINGLE   7
 #define POPUP_Y_ENEMY_SINGLE    1
@@ -13262,8 +13253,13 @@ static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
 
 static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int battler, BOOL isEnemy)
 {
-    MI_CpuCopy8(isEnemy ? sAbilityPopupTilesLeft : sAbilityPopupTilesRight,
-                popup->pixels, 13 * 5 * 32);
+    NNSG2dCharacterData *charData;
+    void *ncgrBuffer = Graphics_GetCharData(
+        NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_OBJ,
+        isEnemy ? ABILITY_POPUP_NCGR_LEFT_IDX : ABILITY_POPUP_NCGR_RIGHT_IDX,
+        TRUE, &charData, HEAP_ID_BATTLE);
+    MI_CpuCopy8(charData->pRawData, popup->pixels, 13 * 5 * 32);
+    Heap_Free(ncgrBuffer);
 
     int textX = isEnemy ? 14 : 6;
     String *nameLine = String_Init(MON_NAME_LEN + 3, HEAP_ID_BATTLE);
@@ -13303,12 +13299,18 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
 
     Window_Add(bgConfig, popup, 1, xPos, yPos, 13, 5, 12, 139);
     ShowAbilityPopupWindow(popup, battleCtx, battler, isEnemy);
-    MI_CpuCopy16(sAbilityPopupPalette,
+    NNSG2dPaletteData *paletteData;
+    void *nclrBuffer = Graphics_GetPlttData(
+        NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_OBJ,
+        ABILITY_POPUP_NCLR_IDX,
+        &paletteData, HEAP_ID_BATTLE);
+    MI_CpuCopy16(paletteData->pRawData,
                  PaletteData_GetUnfadedBuffer(pd, PLTTBUF_MAIN_BG) + 12 * 16,
-                 sizeof(sAbilityPopupPalette));
-    MI_CpuCopy16(sAbilityPopupPalette,
+                 32);
+    MI_CpuCopy16(paletteData->pRawData,
                  PaletteData_GetFadedBuffer(pd, PLTTBUF_MAIN_BG) + 12 * 16,
-                 sizeof(sAbilityPopupPalette));
+                 32);
+    Heap_Free(nclrBuffer);
 
     AbilityPopupAnim *anim = Heap_Alloc(HEAP_ID_BATTLE, sizeof(AbilityPopupAnim));
     anim->bgConfig     = bgConfig;
