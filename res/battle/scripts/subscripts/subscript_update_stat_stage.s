@@ -2,6 +2,10 @@
 
 
 _000:
+    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _no_ability_popup
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
+
+_no_ability_popup:
     ChangeStatStage _041, _059, _060
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _010
     PrintAttackMessage

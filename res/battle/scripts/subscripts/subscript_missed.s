@@ -87,6 +87,7 @@ _119:
 
 _134:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_STURDY, _146
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     // {0} was protected by {1}!
     PrintMessage BattleStrings_Text_PokemonWasProtectedByAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     GoTo _179

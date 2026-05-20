@@ -2,6 +2,7 @@
 
 
 _000:
+    ShowAbilityPopupAuto BTLSCR_MSG_TEMP
     // {0} cured its {2} status with its {1}!
     PrintMessage BattleStrings_Text_PokemonCuredItsStatusWithItsAbility_Ally, TAG_NICKNAME_ABILITY_STATUS, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     Wait 
