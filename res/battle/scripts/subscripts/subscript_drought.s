@@ -2,7 +2,7 @@
 
 
 _000:
-    ShowAbilityPopupAuto BTLSCR_ATTACKER
+    ShowAbilityPopupAuto BTLSCR_MSG_BATTLER_TEMP
     PlayBattleAnimation BTLSCR_PLAYER, BATTLE_ANIMATION_WEATHER_SUN
     Wait
     // {0}'s {1} intensified the sun's rays!

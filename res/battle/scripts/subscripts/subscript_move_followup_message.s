@@ -25,6 +25,10 @@ _032:
 _037:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_ENDURED, _057
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_CUR_HP, 1, _057
+    CheckAbility CHECK_NOT_HAVE, BTLSCR_DEFENDER, ABILITY_STURDY, _endure_msg
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+
+_endure_msg:
     // {0} endured the hit!
     PrintMessage BattleStrings_Text_PokemonEnduredTheHit_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
     Wait 
