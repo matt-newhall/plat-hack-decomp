@@ -13261,18 +13261,19 @@ static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int 
     MI_CpuCopy8(charData->pRawData, popup->pixels, 13 * 5 * 32);
     Heap_Free(ncgrBuffer);
 
-    int textX = isEnemy ? 14 : 6;
     String *nameLine = String_Init(MON_NAME_LEN + 3, HEAP_ID_BATTLE);
     String_CopyChars(nameLine, battleCtx->battleMons[battler].nickname);
     String_AppendChar(nameLine, CHAR_SINGLE_QUOTE_CLOSE);
     String_AppendChar(nameLine, CHAR_s);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, nameLine, textX, 6, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 15), NULL);
+    int nameTextX = isEnemy ? (104 - 6 - (int)Font_CalcStringWidth(FONT_SYSTEM, nameLine, 0)) : 6;
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, nameLine, nameTextX, 6, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 15), NULL);
     String_Free(nameLine);
 
     MessageLoader *loader = MessageLoader_Init(MSG_LOADER_LOAD_ON_DEMAND, NARC_INDEX_MSGDATA__PL_MSG, TEXT_BANK_ABILITY_NAMES, HEAP_ID_BATTLE);
     String *abilityName = MessageLoader_GetNewString(loader, battleCtx->battleMons[battler].ability);
     MessageLoader_Free(loader);
-    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, textX, 20, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 6), NULL);
+    int abilityTextX = isEnemy ? (104 - 6 - (int)Font_CalcStringWidth(FONT_SYSTEM, abilityName, 0)) : 6;
+    Text_AddPrinterWithParamsAndColor(popup, FONT_SYSTEM, abilityName, abilityTextX, 20, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(3, 1, 6), NULL);
     String_Free(abilityName);
 
     Window_LoadTiles(popup);
