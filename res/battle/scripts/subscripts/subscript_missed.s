@@ -75,6 +75,7 @@ _097:
 
 _107:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_WONDER_GUARD, _119
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     // {0} avoided damage by using {1}!
     PrintMessage BattleStrings_Text_PokemonAvoidedDamageByUsingAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     GoTo _179
