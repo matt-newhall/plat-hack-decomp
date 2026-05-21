@@ -49,8 +49,9 @@ _065:
 
 _069:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_LEVITATED, _081
-    // {0} makes Ground moves miss by using {1}!
-    PrintMessage BattleStrings_Text_PokemonMakesGroundMovesMissByUsingAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    // It doesn't affect {0}...
+    PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
     GoTo _179
 
 _081:
