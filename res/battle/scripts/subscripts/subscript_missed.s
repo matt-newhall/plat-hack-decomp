@@ -102,6 +102,7 @@ _146:
 
 _150:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_TELEPATHY, _157
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     // {0} avoids attacks by its ally Pokemon!
     PrintMessage BattleStrings_Text_TelepathyTriggered_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
     GoTo _179
