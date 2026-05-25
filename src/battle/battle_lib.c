@@ -4085,16 +4085,43 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
         switch (battleCtx->switchInCheckState) {
         case SWITCH_IN_CHECK_STATE_NEUTRALIZING_GAS: {
             BOOL anyNeutGas = FALSE;
+            BOOL hasAnnouncer = FALSE;
 
             for (i = 0; i < maxBattlers; i++) {
                 if (battleCtx->battleMons[i].curHP
-                    && battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS) {
+                    && battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS
+                    && !(battleCtx->battleMons[i].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED)) {
                     anyNeutGas = TRUE;
+                    if (battleCtx->battleMons[i].neutralizingGasAnnounced) {
+                        hasAnnouncer = TRUE;
+                    }
+                }
+            }
 
-                    if (!battleCtx->battleMons[i].neutralizingGasAnnounced) {
+            if (result != SWITCH_IN_CHECK_RESULT_BREAK) {
+                if (!anyNeutGas) {
+                    if (battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE) {
+                        battleCtx->battleStatusMask2 &= ~SYSCTL_NEUTRALIZING_GAS_ACTIVE;
+                        subscript = subscript_neutralizing_gas_end;
+                        result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    } else {
+                        battleCtx->switchInCheckState++;
+                    }
+                } else if (!hasAnnouncer) {
+                    // Either initial activation, or the announcing mon left/was suppressed
+                    // and a silent secondary is still on the field.
+                    for (i = 0; i < maxBattlers; i++) {
+                        if (battleCtx->battleMons[i].curHP
+                            && battleCtx->battleMons[i].ability == ABILITY_NEUTRALIZING_GAS
+                            && !(battleCtx->battleMons[i].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED)) {
+                            if (battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE) {
+                                // Handoff: show wore-off for the old source; don't advance state
+                                // so the next call re-announces the new source with its popup.
+                                battleCtx->battleStatusMask2 &= ~SYSCTL_NEUTRALIZING_GAS_ACTIVE;
+                                subscript = subscript_neutralizing_gas_end;
+                                result = SWITCH_IN_CHECK_RESULT_BREAK;
+                            } else {
                         battleCtx->battleMons[i].neutralizingGasAnnounced = TRUE;
-
-                        if (!(battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE)) {
                             battleCtx->battleStatusMask2 |= SYSCTL_NEUTRALIZING_GAS_ACTIVE;
                             battleCtx->msgBattlerTemp = i;
                             subscript = subscript_neutralizing_gas;
@@ -4103,13 +4130,9 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                         break;
                     }
                 }
-            }
-
             if (result != SWITCH_IN_CHECK_RESULT_BREAK) {
-                if ((battleCtx->battleStatusMask2 & SYSCTL_NEUTRALIZING_GAS_ACTIVE) && !anyNeutGas) {
-                    battleCtx->battleStatusMask2 &= ~SYSCTL_NEUTRALIZING_GAS_ACTIVE;
-                    subscript = subscript_neutralizing_gas_end;
-                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                        battleCtx->switchInCheckState++;
+                    }
                 } else {
                     battleCtx->switchInCheckState++;
                 }
