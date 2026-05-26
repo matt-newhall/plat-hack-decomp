@@ -9,7 +9,7 @@ _000:
 
 _010:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _018
-    CheckPowderImmunity BTLSCR_DEFENDER, _061
+    CheckPowderImmunity BTLSCR_DEFENDER, _061, _overcoat_popup
 
 _016:
     PlayMoveAnimation BTLSCR_ATTACKER
@@ -53,6 +53,10 @@ _059:
 _060:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
     End
+
+_overcoat_popup:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    GoTo _061
 
 _061:
     WaitButtonABTime 30

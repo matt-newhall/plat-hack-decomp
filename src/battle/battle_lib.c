@@ -121,6 +121,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].windRiderSwitchIn = FALSE;
     battleCtx->battleMons[battler].neutralizingGasAnnounced = FALSE;
     battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
+    battleCtx->battleMons[battler].cloudNineAnnounced = FALSE;
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].gender = Pokemon_GetGender(mon);
@@ -4011,6 +4012,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_FIELD_WEATHER,
     SWITCH_IN_CHECK_STATE_TRACE,
     SWITCH_IN_CHECK_STATE_WEATHER_ABILITIES,
+    SWITCH_IN_CHECK_STATE_CLOUD_NINE,
     SWITCH_IN_CHECK_STATE_INTIMIDATE,
     SWITCH_IN_CHECK_STATE_COSTAR,
     SWITCH_IN_CHECK_STATE_DOWNLOAD,
@@ -4295,6 +4297,30 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 if (result == SWITCH_IN_CHECK_RESULT_BREAK) {
                     battleCtx->msgBattlerTemp = battler;
+                    break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
+            break;
+
+        case SWITCH_IN_CHECK_STATE_CLOUD_NINE:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
+                if (battleCtx->battleMons[battler].cloudNineAnnounced == FALSE
+                    && battleCtx->battleMons[battler].curHP
+                    && (Battler_Ability(battleCtx, battler) == ABILITY_CLOUD_NINE
+                        || Battler_Ability(battleCtx, battler) == ABILITY_AIR_LOCK)) {
+                    battleCtx->battleMons[battler].cloudNineAnnounced = TRUE;
+                    battleCtx->msgBattlerTemp = battler;
+                    subscript = subscript_cloud_nine;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
                 }
             }

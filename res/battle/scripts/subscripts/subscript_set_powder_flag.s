@@ -4,7 +4,7 @@
 
 _000:
     CheckSubstitute BTLSCR_DEFENDER, _015
-    CheckPowderImmunity BTLSCR_DEFENDER, _010
+    CheckPowderImmunity BTLSCR_DEFENDER, _010, _overcoat_popup
     PrintAttackMessage
     Wait
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _005
@@ -26,10 +26,19 @@ _005:
     WaitButtonABTime 30
     End
 
+_overcoat_popup:
+    PrintAttackMessage
+    Wait
+    WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    GoTo _010_immune
+
 _010:
     PrintAttackMessage
     Wait
     WaitButtonABTime 30
+
+_010_immune:
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK
     // It doesn't affect {0}...
     PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_DEFENDER

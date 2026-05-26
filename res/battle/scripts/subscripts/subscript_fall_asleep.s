@@ -25,7 +25,7 @@ _077:
 
 _087:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _094
-    CheckPowderImmunity BTLSCR_DEFENDER, _202
+    CheckPowderImmunity BTLSCR_DEFENDER, _202, _overcoat_popup
 
 _091:
     PrintAttackMessage
@@ -94,6 +94,13 @@ _193:
 _201:
     End
 
+_overcoat_popup:
+    PrintAttackMessage
+    Wait
+    WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    GoTo _329
+
 _202:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _337
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _337
@@ -114,6 +121,7 @@ _222:
     GoTo _330
 
 _223:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER_PARTNER
     // {0} stayed awake because of its ally's Sweet Veil!
     PrintMessage BattleStrings_Text_SweetVeilPartnerTriggered_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _330

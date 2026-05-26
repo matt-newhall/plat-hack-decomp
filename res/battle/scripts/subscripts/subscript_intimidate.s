@@ -23,8 +23,9 @@ _013:
 
 _032:
     ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
+    UpdateVar OPCODE_SET, BTLVAR_MSG_TEMP, 1
     // {0}'s Attack was not lowered!
-    PrintMessage BattleStrings_Text_AbilityPreventsIntimidate_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    PrintMessage BattleStrings_Text_PokemonsStatWasNotLowered_Ally, TAG_NICKNAME_STAT, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP
     Wait
     WaitButtonABTime 30
 

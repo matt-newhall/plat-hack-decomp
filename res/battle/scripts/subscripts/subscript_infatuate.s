@@ -36,8 +36,9 @@ _055:
     PrintAttackMessage
     Wait
     WaitButtonABTime 30
-    // {0}'s {1} prevents romance!
-    PrintMessage BattleStrings_Text_PokemonsAbilityPreventsRomance_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
+    // It doesn't affect {0}...
+    PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_NO_MORE_WORK

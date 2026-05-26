@@ -4436,24 +4436,22 @@
     {
       "id": "BattleStrings_Text_PokemonsAbilityMadeItType_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
-        "made it the {STRVAR_1 15, 2, 0} type!"
+        "{STRVAR_1 1, 0, 0}’s type\n",
+        "changed to {STRVAR_1 15, 2, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonsAbilityMadeItType_Wild",
       "en_US": [
-        "The wild {STRVAR_1 1, 0, 0}’s\n",
-        "{STRVAR_1 5, 1, 0} made it the\f",
-        "{STRVAR_1 15, 2, 0} type!"
+        "The wild {STRVAR_1 1, 0, 0}’s type\n",
+        "changed to {STRVAR_1 15, 2, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonsAbilityMadeItType_Foe",
       "en_US": [
-        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
-        "{STRVAR_1 5, 1, 0} made it the\f",
-        "{STRVAR_1 15, 2, 0} type!"
+        "The foe’s {STRVAR_1 1, 0, 0}’s type\n",
+        "changed to {STRVAR_1 15, 2, 0}!"
       ]
     },
     {
@@ -7355,21 +7353,21 @@
       "id": "BattleStrings_Text_PokemonMaxedItsStatWithAbility_Ally",
       "en_US": [
         "{STRVAR_1 1, 0, 0} maxed its\n",
-        "{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!"
+        "{STRVAR_1 13, 2, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonMaxedItsStatWithAbility_Wild",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} maxed its\n",
-        "{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!"
+        "{STRVAR_1 13, 2, 0}!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonMaxedItsStatWithAbility_Foe",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} maxed its\n",
-        "{STRVAR_1 13, 2, 0} with {STRVAR_1 5, 1, 0}!"
+        "{STRVAR_1 13, 2, 0}!"
       ]
     },
     {
@@ -8557,7 +8555,7 @@
     {
       "id": "BattleStrings_Text_AnnounceWeatherDisabled",
       "en_US": [
-        "The effects of weather disappeared."
+        "The effects of the weather disappeared."
       ]
     },
     {
@@ -9200,6 +9198,48 @@
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0}’s\n",
         "{STRVAR_1 8, 1, 0} prevents stat loss!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatWasNotLowered_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "was not lowered!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatWasNotLowered_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "was not lowered!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatWasNotLowered_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "was not lowered!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsItemCannotBeRemoved_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s item cannot\n",
+        "be removed!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsItemCannotBeRemoved_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s item\n",
+        "cannot be removed!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsItemCannotBeRemoved_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s item\n",
+        "cannot be removed!"
       ]
     }
   ]

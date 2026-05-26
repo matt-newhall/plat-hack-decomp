@@ -56,6 +56,7 @@ _098:
 
 _099:
     WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_ATTACKER_PARTNER
     // {0} stayed awake because of its ally’s Sweet Veil!
     PrintMessage BattleStrings_Text_SweetVeilPartnerTriggered_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
     GoTo _143
@@ -94,8 +95,9 @@ _147:
 
 _170:
     WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // But it failed!
     PrintMessage BattleStrings_Text_ButItFailed, TAG_NONE
-    Wait 
+    Wait
     WaitButtonABTime 30
-    End 
+    End

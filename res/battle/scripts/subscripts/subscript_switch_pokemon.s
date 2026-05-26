@@ -46,15 +46,7 @@ _045:
     PokemonSendOut BTLSCR_SWITCHED_MON
     WaitTime 72
     HealthbarSlideIn BTLSCR_SWITCHED_MON
-    Wait 
-    CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_CLOUD_NINE, _047
-    CheckAbility CHECK_NOT_HAVE, BTLSCR_ATTACKER, ABILITY_AIR_LOCK, _050
-
-_047:
-    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_WEATHER, _050
-    PrintMessage BattleStrings_Text_AnnounceWeatherDisabled, TAG_NONE
-    Wait 
-    WaitButtonABTime 30
+    Wait
 
 _050:
     Call BATTLE_SUBSCRIPT_HAZARDS_CHECK
