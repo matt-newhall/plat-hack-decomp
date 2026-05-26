@@ -4996,24 +4996,22 @@
     {
       "id": "BattleStrings_Text_PokemonsAbilityCuredItsStatus_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 5, 1, 0}\n",
-        "cured its {STRVAR_1 17, 2, 0} status!"
+        "{STRVAR_1 1, 0, 0} cured its\n",
+        "{STRVAR_1 17, 2, 0} status!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonsAbilityCuredItsStatus_Wild",
       "en_US": [
-        "The wild {STRVAR_1 1, 0, 0}’s\n",
-        "{STRVAR_1 5, 1, 0} cured its\f",
-        "{STRVAR_1 17, 2, 0} status!"
+        "The wild {STRVAR_1 1, 0, 0} cured\n",
+        "its {STRVAR_1 17, 2, 0} status!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonsAbilityCuredItsStatus_Foe",
       "en_US": [
-        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
-        "{STRVAR_1 5, 1, 0} cured its\f",
-        "{STRVAR_1 17, 2, 0} status!"
+        "The foe’s {STRVAR_1 1, 0, 0} cured\n",
+        "its {STRVAR_1 17, 2, 0} status!"
       ]
     },
     {
