@@ -27,6 +27,7 @@ _000:
 _066:
     TryPowerOfAlchemy _072
     ShowAbilityPopupAutoSaved BTLSCR_MSG_BATTLER_TEMP
+    ShowAbilityPopupAuto BTLSCR_MSG_BATTLER_TEMP
     // {0} acquired {1}!
     PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait

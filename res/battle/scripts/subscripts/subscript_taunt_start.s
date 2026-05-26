@@ -15,10 +15,12 @@ _000:
     End 
 
 _027:
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
     WaitButtonABTime 30
-    PrintMessage BattleStrings_Text_AbilityPreventsTaunt_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
+    // It doesn't affect {0}...
+    PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     Wait 
     WaitButtonABTime 30
     End 

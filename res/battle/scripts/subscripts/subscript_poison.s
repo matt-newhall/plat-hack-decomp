@@ -38,7 +38,7 @@ _065:
     CompareMonDataToValue OPCODE_EQU, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_TYPE_1, TYPE_STEEL, _266
     CompareMonDataToValue OPCODE_EQU, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_TYPE_2, TYPE_STEEL, _266
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, MON_CONDITION_NONE, _217
-    CheckPowderImmunity BTLSCR_DEFENDER, _266
+    CheckPowderImmunity BTLSCR_DEFENDER, _266, _overcoat_popup
 
 _071:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _085
@@ -93,8 +93,9 @@ _177:
     WaitButtonABTime 30
 
 _201:
-    // {0}'s {1} prevents poisoning!
-    PrintMessage BattleStrings_Text_PokemonsAbilityPreventsPoisoning_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
+    // It doesn't affect {0}...
+    PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _315
     // {0}'s {1} suppressed {2}'s {3}!
     PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
@@ -117,6 +118,10 @@ _243:
     // {0} is already poisoned.
     PrintMessage BattleStrings_Text_PokemonIsAlreadyPoisoned_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _315
+
+_overcoat_popup:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    GoTo _266
 
 _266:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _322

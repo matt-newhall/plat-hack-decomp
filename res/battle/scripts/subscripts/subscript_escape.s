@@ -15,6 +15,7 @@ _005:
     GoTo _055
 
 _043:
+    ShowAbilityPopupAuto BTLSCR_ATTACKER
     // {0} fled using {1}!
     PrintMessage BattleStrings_Text_PokemonFledUsingItsAbility, TAG_NICKNAME_ABILITY, BTLSCR_ATTACKER, BTLSCR_ATTACKER
     GoTo _055

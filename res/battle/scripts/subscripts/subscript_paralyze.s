@@ -27,7 +27,7 @@ _041:
     CompareMonDataToValue OPCODE_EQU, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_TYPE_1, TYPE_ELECTRIC, _140
     CompareMonDataToValue OPCODE_EQU, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_TYPE_2, TYPE_ELECTRIC, _140
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, MON_CONDITION_NONE, _123
-    CheckPowderImmunity BTLSCR_DEFENDER, _140
+    CheckPowderImmunity BTLSCR_DEFENDER, _140, _overcoat_popup
 
 _046:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _070
@@ -85,6 +85,10 @@ _139:
     // {0} is already paralyzed!
     PrintMessage BattleStrings_Text_PokemonIsAlreadyParalyzed_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _211
+
+_overcoat_popup:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    GoTo _140
 
 _140:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _218

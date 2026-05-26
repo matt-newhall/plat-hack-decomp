@@ -11,13 +11,14 @@ _000:
     Wait 
 
 _016:
+    ShowAbilityPopupAuto BTLSCR_MSG_TEMP
     PlaySound BTLSCR_MSG_TEMP, 1980
     SetMosaic BTLSCR_MSG_TEMP, 8, 1
-    Wait 
+    Wait
     ChangeForm BTLSCR_MSG_TEMP
     PlaySound BTLSCR_MSG_TEMP, 1984
     SetMosaic BTLSCR_MSG_TEMP, 0, 1
-    Wait 
+    Wait
     // {0} transformed!
     PrintMessage BattleStrings_Text_PokemonTransformed_Ally, TAG_NICKNAME, BTLSCR_MSG_TEMP
     Wait 

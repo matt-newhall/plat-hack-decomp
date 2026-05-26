@@ -30,10 +30,18 @@ _002:
 _004:
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_QUICK_CLAW, 0, _032
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_CUSTAP_BERRY, 0, _032
-    TryKnockOff _032
-    PrintBufferedMessage 
-    Wait 
+    TryKnockOff _032, _sticky_hold
+    PrintBufferedMessage
+    Wait
+    WaitButtonABTime 30
+    GoTo _032
+
+_sticky_hold:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    // {0}'s item cannot be removed!
+    PrintMessage BattleStrings_Text_PokemonsItemCannotBeRemoved_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
+    Wait
     WaitButtonABTime 30
 
 _032:
-    End 
+    End

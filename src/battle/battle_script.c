@@ -3009,19 +3009,11 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 } else if (AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_KEEN_EYE, BATTLE_STAT_ACCURACY)
                     || AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_ILLUMINATE, BATTLE_STAT_ACCURACY)
                     || AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_HYPER_CUTTER, BATTLE_STAT_ATTACK)) {
-                    if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
-                        SetupNicknameAbilityNicknameAbilityMsg(battleCtx, BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly); // "{0}'s {1} suppressed {2}'s {3}!"
-                    } else {
-                        SetupNicknameAbilityStatMsg(battleCtx, BattleStrings_Text_PokemonsAbilityPreventsBufferStatLoss, statOffset); // "{0}'s {1} prevents {2} loss!"
-                    }
+                    SetupNicknameStatMsg(battleCtx, BattleStrings_Text_PokemonsStatWasNotLowered_Ally, statOffset); // "{0}'s {1} was not lowered!"
 
                     result = 1;
                 } else if (AbilityBlocksSpecificStatReduction(battleCtx, statOffset, ABILITY_BIG_PECKS, BATTLE_STAT_DEFENSE)) {
-                    if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
-                        SetupNicknameAbilityNicknameAbilityMsg(battleCtx, BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly); // "{0}'s {1} suppressed {2}'s {3}!"
-                    } else {
-                        SetupNicknameAbilityStatMsg(battleCtx, BattleStrings_Text_PokemonsAbilityPreventsBufferStatLoss, statOffset); // "{0}'s {1} prevents {2} loss!"
-                    }
+                    SetupNicknameStatMsg(battleCtx, BattleStrings_Text_PokemonsStatWasNotLowered_Ally, statOffset); // "{0}'s {1} was not lowered!"
 
                     result = 1;
                 } else if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == MIN_STAT_STAGE) {
@@ -5491,6 +5483,7 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
     ATTACKING_MON.intimidateAnnounced = FALSE;
     ATTACKING_MON.costarAnnounced = FALSE;
     ATTACKING_MON.unnerveAnnounced = FALSE;
+    ATTACKING_MON.cloudNineAnnounced = FALSE;
     ATTACKING_MON.downloadAnnounced = FALSE;
     ATTACKING_MON.anticipationAnnounced = FALSE;
     ATTACKING_MON.forewarnAnnounced = FALSE;
@@ -6841,14 +6834,11 @@ static BOOL BtlCmd_TryKnockOff(BattleSystem *battleSys, BattleContext *battleCtx
 {
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
+    int jumpStickyHold = BattleScript_Read(battleCtx);
     int defending = BattleSystem_GetBattlerSide(battleSys, battleCtx->defender);
 
     if (DEFENDING_MON.heldItem && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE) {
-        battleCtx->msgBuffer.id = BattleStrings_Text_PokemonsAbilityMadeMoveIneffective_Ally; // "{0}'s {1} made {2} ineffective!"
-        battleCtx->msgBuffer.tags = TAG_NICKNAME_ABILITY_MOVE;
-        battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->defender);
-        battleCtx->msgBuffer.params[1] = DEFENDING_MON.ability;
-        battleCtx->msgBuffer.params[2] = battleCtx->moveCur;
+        BattleScript_Iter(battleCtx, jumpStickyHold);
     } else if (DEFENDING_MON.heldItem) {
         battleCtx->msgBuffer.id = BattleStrings_Text_PokemonKnockedOffPokemonsItem_AllyAlly; // "{0} knocked off {1}'s {2}!"
         battleCtx->msgBuffer.tags = TAG_NICKNAME_NICKNAME_ITEM;
@@ -7587,6 +7577,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->defender].intimidateAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].costarAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].unnerveAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].cloudNineAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].forewarnAnnounced = FALSE;
@@ -7599,6 +7590,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].costarAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].unnerveAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].cloudNineAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].forewarnAnnounced = FALSE;
@@ -9853,6 +9845,7 @@ static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *b
     BattleScript_Iter(battleCtx, 1);
     int inBattler = BattleScript_Read(battleCtx);
     int jump = BattleScript_Read(battleCtx);
+    int jumpOvercoat = BattleScript_Read(battleCtx);
     int i;
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
@@ -9870,9 +9863,10 @@ static BOOL BtlCmd_CheckPowderImmunity(BattleSystem *battleSys, BattleContext *b
 
     if (BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL) == TYPE_GRASS
         || BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL) == TYPE_GRASS
-        || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_OVERCOAT
-        || Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_OVERCOAT) == TRUE) {
+        || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_OVERCOAT) {
         BattleScript_Iter(battleCtx, jump);
+    } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_OVERCOAT) == TRUE) {
+        BattleScript_Iter(battleCtx, jumpOvercoat);
     }
 
     return FALSE;

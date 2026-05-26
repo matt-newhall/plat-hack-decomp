@@ -783,9 +783,10 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
-    .macro TryKnockOff jump_if_fail
+    .macro TryKnockOff jump_if_fail, jump_sticky_hold
     .long BTLCMD_TRYKNOCKOFF
-    .long (\jump_if_fail-.) / 4 - 1
+    .long (\jump_if_fail-.) / 4 - 2
+    .long (\jump_sticky_hold-.) / 4 - 1
     .endm
 
     .macro CalcHPFalloffPower
@@ -1289,10 +1290,11 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
-    .macro CheckPowderImmunity battler, jump
+    .macro CheckPowderImmunity battler, jump, jump_overcoat
     .long BTLCMD_CHECKPOWDERIMMUNITY
     .long \battler
-    .long (\jump-.) / 4 - 1
+    .long (\jump-.) / 4 - 2
+    .long (\jump_overcoat-.) / 4 - 1
     .endm
 
     .macro CheckSleepAbilityImmunity battler, jump
