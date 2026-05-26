@@ -2,10 +2,6 @@
 
 
 _000:
-    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _no_ability_popup
-    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
-
-_no_ability_popup:
     ChangeStatStage _041, _059, _060
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _010
     PrintAttackMessage
@@ -35,10 +31,12 @@ _036:
     End
 
 _041:
-    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _048
+    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _blocking_popup_check
     PrintAttackMessage
     Wait
     WaitButtonABTime 30
+
+_blocking_popup_check:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_FAIL_STAT_STAGE_CHANGE, _048
     ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
 

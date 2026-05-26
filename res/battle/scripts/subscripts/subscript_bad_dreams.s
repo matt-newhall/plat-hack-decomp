@@ -6,6 +6,7 @@ _000:
 
 _003:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_SCRIPT_TEMP, 1, _029
+    ShowAbilityPopupAuto BTLSCR_MSG_ATTACKER
     // {2} is tormented by {0}’s {1}!
     PrintMessage BattleStrings_Text_PokemonIsTormentedByPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME, BTLSCR_MSG_ATTACKER, BTLSCR_MSG_ATTACKER, BTLSCR_MSG_TEMP
     Wait 

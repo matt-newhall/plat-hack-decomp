@@ -4566,22 +4566,22 @@
     {
       "id": "BattleStrings_Text_PokemonAnchorsItselfWithAbility_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} anchors\n",
-        "itself with {STRVAR_1 5, 1, 0}!"
+        "{STRVAR_1 1, 0, 0} is anchored in place\n",
+        "with its suction cups!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonAnchorsItselfWithAbility_Wild",
       "en_US": [
-        "The wild {STRVAR_1 1, 0, 0} anchors\n",
-        "itself with {STRVAR_1 5, 1, 0}!"
+        "The wild {STRVAR_1 1, 0, 0} is anchored\n",
+        "in place with its suction cups!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonAnchorsItselfWithAbility_Foe",
       "en_US": [
-        "The foe’s {STRVAR_1 1, 0, 0} anchors\n",
-        "itself with {STRVAR_1 5, 1, 0}!"
+        "The foe’s {STRVAR_1 1, 0, 0} is anchored\n",
+        "in place with its suction cups!"
       ]
     },
     {
@@ -7314,22 +7314,22 @@
     {
       "id": "BattleStrings_Text_PokemonWasAbility_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} has\n",
-        "{STRVAR_1 5, 1, 0}!"
+        "{STRVAR_1 1, 0, 0} breaks\n",
+        "the mold!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonWasAbility_Wild",
       "en_US": [
-        "The wild {STRVAR_1 1, 0, 0} has\n",
-        "{STRVAR_1 5, 1, 0}!"
+        "The wild {STRVAR_1 1, 0, 0}\n",
+        "breaks the mold!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonWasAbility_Foe",
       "en_US": [
-        "The foe’s {STRVAR_1 1, 0, 0} has\n",
-        "{STRVAR_1 5, 1, 0}!"
+        "The foe’s {STRVAR_1 1, 0, 0}\n",
+        "breaks the mold!"
       ]
     },
     {
@@ -7490,22 +7490,22 @@
     {
       "id": "BattleStrings_Text_PokemonCantGetItGoingBecauseOfItsAbility_Ally",
       "en_US": [
-        "{STRVAR_1 1, 0, 0} can’t get it\n",
-        "going because of its {STRVAR_1 5, 1, 0}!"
+        "{STRVAR_1 1, 0, 0} is slow to\n",
+        "get going!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonCantGetItGoingBecauseOfItsAbility_Wild",
       "en_US": [
-        "The wild {STRVAR_1 1, 0, 0} can’t get it\n",
-        "going because of its {STRVAR_1 5, 1, 0}!"
+        "The wild {STRVAR_1 1, 0, 0} is slow\n",
+        "to get going!"
       ]
     },
     {
       "id": "BattleStrings_Text_PokemonCantGetItGoingBecauseOfItsAbility_Foe",
       "en_US": [
-        "The foe’s {STRVAR_1 1, 0, 0} can’t get it\n",
-        "going because of its {STRVAR_1 5, 1, 0}!"
+        "The foe’s {STRVAR_1 1, 0, 0} is slow\n",
+        "to get going!"
       ]
     },
     {
@@ -8830,53 +8830,49 @@
       "id": "BattleStrings_Text_CostarAnnounced_Ally",
       "en_US": [
         "{STRVAR_1 1, 0, 0} copied {STRVAR_1 1, 1, 0}’s\n",
-        "stat changes with {STRVAR_1 5, 2, 0}!"
+        "stat changes!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Ally_2",
       "en_US": [
         "{STRVAR_1 1, 0, 0} copied {STRVAR_1 1, 1, 0}’s\n",
-        "stat changes with {STRVAR_1 5, 2, 0}!"
+        "stat changes!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Ally_3",
       "en_US": [
         "{STRVAR_1 1, 0, 0} copied {STRVAR_1 1, 1, 0}’s\n",
-        "stat changes with {STRVAR_1 5, 2, 0}!"
+        "stat changes!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Wild",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} copied\n",
-        "the wild {STRVAR_1 1, 1, 0}’s stat changes\f",
-        "with {STRVAR_1 5, 2, 0}!"
+        "{STRVAR_1 1, 1, 0}’s stat changes!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Wild_2",
       "en_US": [
         "The wild {STRVAR_1 1, 0, 0} copied\n",
-        "the wild {STRVAR_1 1, 1, 0}’s stat changes\f",
-        "with {STRVAR_1 5, 2, 0}!"
+        "{STRVAR_1 1, 1, 0}’s stat changes!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Foe",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} copied\n",
-        "the foe’s {STRVAR_1 1, 1, 0}’s stat changes\f",
-        "with {STRVAR_1 5, 2, 0}!"
+        "{STRVAR_1 1, 1, 0}’s stat changes!"
       ]
     },
     {
       "id": "BattleStrings_Text_CostarAnnounced_Foe_2",
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0} copied\n",
-        "the foe’s {STRVAR_1 1, 1, 0}’s stat changes\f",
-        "with {STRVAR_1 5, 2, 0}!"
+        "{STRVAR_1 1, 1, 0}’s stat changes!"
       ]
     },
     {

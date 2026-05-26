@@ -4,10 +4,6 @@
 
 _000:
     ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
-    // {0} rides the wind!
-    PrintMessage BattleStrings_Text_WindRiderTailwindTriggered_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
-    Wait
-    WaitButtonABTime 30
     UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_PARAM, MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE
     Call BATTLE_SUBSCRIPT_UPDATE_STAT_STAGE
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_BATTLE_CTX_STATUS_2, SYSCTL_UPDATE_STAT_STAGES

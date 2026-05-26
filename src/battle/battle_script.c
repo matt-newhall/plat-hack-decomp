@@ -2945,9 +2945,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 BattleScript_Iter(battleCtx, jumpNoChange);
             }
         } else {
-            if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
-                SetupNicknameAbilityStatMsg(battleCtx, BattleStrings_Text_PokemonsAbilityRaisedItsStat_Ally, statOffset); // "{0}'s {1} raised its {2}!"
-            } else if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_HELD_ITEM) {
+            if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_HELD_ITEM) {
                 battleCtx->msgBuffer.id = BattleStrings_Text_TheItemRaisedPokemonsStat_Ally; // "The {0} raised {1}'s {2}!"
                 battleCtx->msgBuffer.tags = TAG_NICKNAME_ITEM_STAT;
                 battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->sideEffectMon);
@@ -3080,25 +3078,10 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
             }
         }
 
-        if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY) {
-            battleCtx->msgBuffer.id = BattleStrings_Text_PokemonsAbilityCutsPokemonsStat_AllyAlly; // "{0}'s {1} cuts {2}'s {3}!"
-            battleCtx->msgBuffer.tags = TAG_NICKNAME_ABILITY_NICKNAME_STAT;
-
-            if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SPEED_DOWN_1_STAGE) {
-                battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->defender);
-                battleCtx->msgBuffer.params[1] = battleCtx->battleMons[battleCtx->defender].ability;
-            } else {
-                battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battleCtx->attacker);
-                battleCtx->msgBuffer.params[1] = battleCtx->battleMons[battleCtx->attacker].ability;
-            }
-            battleCtx->msgBuffer.params[2] = BattleSystem_NicknameTag(battleCtx, battleCtx->sideEffectMon);
-            battleCtx->msgBuffer.params[3] = BATTLE_STAT_ATTACK + statOffset;
-        } else {
-            SetupNicknameStatMsg(battleCtx,
-                stageChange == -1 ? BattleStrings_Text_PokemonsStatFell_Ally : // "{0}'s {1} fell!"
-                    BattleStrings_Text_PokemonsStatHarshlyFell_Ally, // "{0}'s {1} harshly fell!"
-                statOffset);
-        }
+        SetupNicknameStatMsg(battleCtx,
+            stageChange == -1 ? BattleStrings_Text_PokemonsStatFell_Ally : // "{0}'s {1} fell!"
+                BattleStrings_Text_PokemonsStatHarshlyFell_Ally, // "{0}'s {1} harshly fell!"
+            statOffset);
 
         mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
 
