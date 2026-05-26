@@ -10,7 +10,7 @@ _000:
     ShowAbilityPopupAuto BTLSCR_ATTACKER
     CopyWithCostar
     // {0} copied {1}'s stat changes with {2}!
-    PrintMessage BattleStrings_Text_CostarAnnounced_Ally, TAG_NICKNAME_NICKNAME_ABILITY, BTLSCR_ATTACKER, BTLSCR_ATTACKER_PARTNER, BTLSCR_ATTACKER
+    PrintMessage BattleStrings_Text_CostarAnnounced_Ally, TAG_NICKNAME_NICKNAME, BTLSCR_ATTACKER, BTLSCR_ATTACKER_PARTNER
     Wait
     WaitButtonABTime 30
     UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_FLAGS_INDIRECT, MOVE_SIDE_EFFECT_ON_HIT|MOVE_SUBSCRIPT_PTR_PRINT_MESSAGE_AND_PLAY_ANIMATION

@@ -11,8 +11,8 @@ _000:
     Wait 
     UpdateMonData OPCODE_ADD, BTLSCR_DEFENDER, BATTLEMON_SPEED_STAGE, 1
     UpdateVar OPCODE_SET, BTLVAR_MSG_TEMP, 3
-    // {0}’s {1} raised its {2}!
-    PrintMessage BattleStrings_Text_PokemonsAbilityRaisedItsStat_Ally, TAG_NICKNAME_ABILITY_STAT, BTLSCR_DEFENDER, BTLSCR_DEFENDER, BTLSCR_MSG_TEMP
+    // {0}’s {1} rose!
+    PrintMessage BattleStrings_Text_PokemonsStatRose_Ally, TAG_NICKNAME_STAT, BTLSCR_DEFENDER, BTLSCR_MSG_TEMP
     Wait 
     WaitButtonABTime 30
     End 

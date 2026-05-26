@@ -62,7 +62,7 @@ _074:
 
 _079:
     // {0} anchors itself with {1}!
-    BufferMessage BattleStrings_Text_PokemonAnchorsItselfWithAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
+    BufferMessage BattleStrings_Text_PokemonAnchorsItselfWithAbility_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
     GoTo _090
 
 _086:
@@ -73,6 +73,7 @@ _090:
     PrintAttackMessage 
     Wait 
     WaitButtonABTime 30
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     PrintBufferedMessage 
     Wait 
     WaitButtonABTime 30

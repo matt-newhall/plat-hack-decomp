@@ -3945,7 +3945,7 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
             battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_SPEED_UP_1_STAGE;
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
             battleCtx->sideEffectMon = battler;
-            subscript = subscript_update_stat_stage;
+            subscript = subscript_ability_stat_boost;
             result = TRUE;
         }
         break;
@@ -4121,16 +4121,16 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                                 subscript = subscript_neutralizing_gas_end;
                                 result = SWITCH_IN_CHECK_RESULT_BREAK;
                             } else {
-                        battleCtx->battleMons[i].neutralizingGasAnnounced = TRUE;
-                            battleCtx->battleStatusMask2 |= SYSCTL_NEUTRALIZING_GAS_ACTIVE;
-                            battleCtx->msgBattlerTemp = i;
-                            subscript = subscript_neutralizing_gas;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
+                                battleCtx->battleMons[i].neutralizingGasAnnounced = TRUE;
+                                battleCtx->battleStatusMask2 |= SYSCTL_NEUTRALIZING_GAS_ACTIVE;
+                                battleCtx->msgBattlerTemp = i;
+                                subscript = subscript_neutralizing_gas;
+                                result = SWITCH_IN_CHECK_RESULT_BREAK;
+                            }
+                            break;
                         }
-                        break;
                     }
-                }
-            if (result != SWITCH_IN_CHECK_RESULT_BREAK) {
+                    if (result != SWITCH_IN_CHECK_RESULT_BREAK) {
                         battleCtx->switchInCheckState++;
                     }
                 } else {
@@ -4387,7 +4387,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                         battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
                         battleCtx->sideEffectMon = battler;
-                        subscript = subscript_update_stat_stage;
+                        subscript = subscript_ability_stat_boost;
                         result = SWITCH_IN_CHECK_RESULT_BREAK;
                         break;
                     }
@@ -5084,7 +5084,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             battleCtx->msgBattlerTemp = battleCtx->defender;
             battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_SPEED_DOWN_1_STAGE;
 
-            *subscript = subscript_update_stat_stage;
+            *subscript = subscript_gooey;
             result = TRUE;
         }
         break;
@@ -5108,7 +5108,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_DEFENSE_UP_1_STAGE;
 
-            *subscript = subscript_update_stat_stage;
+            *subscript = subscript_ability_stat_boost;
             result = TRUE;
         }
         break;
@@ -5130,7 +5130,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             battleCtx->sideEffectMon = battleCtx->defender;
             battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE;
 
-            *subscript = subscript_update_stat_stage;
+            *subscript = subscript_ability_stat_boost;
             result = TRUE;
         }
         break;

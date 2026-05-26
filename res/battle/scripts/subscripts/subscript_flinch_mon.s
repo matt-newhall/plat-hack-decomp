@@ -20,6 +20,7 @@ _026:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _044
 
 _036:
+    ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0} won’t flinch because of its {1}!
     PrintMessage BattleStrings_Text_PokemonWontFlinchBecauseOfItsAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
     Wait 

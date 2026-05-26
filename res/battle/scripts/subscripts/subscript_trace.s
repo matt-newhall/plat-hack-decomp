@@ -3,9 +3,9 @@
 
 _000:
     WaitButtonABTime 15
+    ShowAbilityPopupAuto BTLSCR_MSG_TEMP
     UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_DEFENDER, BATTLEMON_ABILITY, BTLVAR_CALC_TEMP
     UpdateMonDataFromVar OPCODE_SET, BTLSCR_MSG_TEMP, BATTLEMON_ABILITY, BTLVAR_CALC_TEMP
-    ShowAbilityPopupAuto BTLSCR_MSG_TEMP
     // {0} traced {1}’s {2}!
     PrintMessage BattleStrings_Text_PokemonTracedPokemonsAbility_AllyAlly, TAG_NICKNAME_NICKNAME_ABILITY, BTLSCR_MSG_TEMP, BTLSCR_MSG_DEFENDER, BTLSCR_MSG_DEFENDER
     Wait 

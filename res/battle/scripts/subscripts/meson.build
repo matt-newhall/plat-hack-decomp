@@ -337,5 +337,7 @@ subscript_files = files(
     'subscript_held_item_lower_speed_in_trick_room.s',
     'subscript_held_item_sharply_boost_offenses.s',
     'subscript_held_item_pop.s',
-    'subscript_air_balloon_entry.s'
+    'subscript_air_balloon_entry.s',
+    'subscript_ability_stat_boost.s',
+    'subscript_gooey.s'
 )
