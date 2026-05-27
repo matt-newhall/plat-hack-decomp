@@ -116,6 +116,7 @@ static BOOL BattleControllerPlayer_ReplaceFainted(BattleSystem *battleSys, Battl
 static BOOL BattleControllerPlayer_CheckBattleOver(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BattleControllerPlayer_MustSelectTarget(BattleSystem *battleSys, BattleContext *battleCtx, u8 battler, u32 battleType, int *range, int moveSlot, u32 *target);
 static void BattleControllerPlayer_ClearFlags(BattleSystem *battleSys, BattleContext *battleCtx);
+static void BattleControllerPlayer_DancerTurn(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BattleControllerPlayer_AnyFainted(BattleContext *battleCtx, int nextCmd, int nextCmdNoFainted, BOOL onlyFaint);
 static BOOL BattleControllerPlayer_AnyExpPayout(BattleContext *battleCtx, int nextCmd, int nextCmdNoExp);
 static void BattleControllerPlayer_UpdateFlagsWhenHit(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -175,7 +176,8 @@ static const BattleControlFunc sBattleControlCommands[] = {
     [BATTLE_CONTROL_SCREEN_WIPE] = BattleControllerPlayer_ScreenWipe,
     [BATTLE_CONTROL_FIGHT_END] = BattleControllerPlayer_EndFight,
     [BATTLE_CONTROL_END_WAIT] = BattleControllerPlayer_EndWait,
-    [BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH] = BattleControllerPlayer_NeutralizingGasPreSwitch
+    [BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH] = BattleControllerPlayer_NeutralizingGasPreSwitch,
+    [BATTLE_CONTROL_DANCER_TURN] = BattleControllerPlayer_DancerTurn
 };
 
 void *BattleContext_New(BattleSystem *battleSys)
@@ -3913,6 +3915,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
     AFTER_MOVE_EFFECT_ANGER_SHELL,
     AFTER_MOVE_EFFECT_HELD_ITEM_STATUS,
+    AFTER_MOVE_EFFECT_DANCER,
 
     AFTER_MOVE_EFFECT_END
 };
@@ -4166,7 +4169,7 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
     case AFTER_MOVE_EFFECT_KNOCK_OFF:
         battleCtx->afterMoveEffectState++;
 
-        if (ATTACKING_MON.curHP 
+        if (ATTACKING_MON.curHP
             && battleCtx->moveCur == MOVE_KNOCK_OFF) {
             LOAD_SUBSEQ(subscript_knock_off);
             battleCtx->commandNext = battleCtx->command;
@@ -4176,6 +4179,36 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             battleCtx->sideEffectIndirectFlags = 0;
 
             return;
+        }
+
+    case AFTER_MOVE_EFFECT_DANCER:
+        battleCtx->afterMoveEffectState++;
+
+        if (!battleCtx->isDancerCopy
+                && BattleSystem_IsDanceMove((u16)battleCtx->moveCur)
+                && battleCtx->dancerMove != (u16)battleCtx->moveCur
+                && !battleCtx->moveIsStolen
+                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == 0) {
+            battleCtx->dancerMove = (u16)battleCtx->moveCur;
+            battleCtx->dancerOriginalAttacker = battleCtx->attacker;
+            battleCtx->dancerOriginalDefender = battleCtx->defender;
+            battleCtx->dancerPendingMask = 0;
+
+            int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+            for (int di = 0; di < maxBattlers; di++) {
+                int candidate = battleCtx->monSpeedOrder[di];
+                if (candidate == battleCtx->attacker)
+                    continue;
+                if (battleCtx->battleMons[candidate].curHP == 0)
+                    continue;
+                if (battleCtx->battlersSwitchingMask & FlagIndex(candidate))
+                    continue;
+                if (Battler_Ability(battleCtx, candidate) != ABILITY_DANCER)
+                    continue;
+                if (battleCtx->battleMons[candidate].moveEffectsMask & MOVE_EFFECT_SEMI_INVULNERABLE)
+                    continue;
+                battleCtx->dancerPendingMask |= (u8)FlagIndex(candidate);
+            }
         }
 
     default:
@@ -4483,13 +4516,78 @@ static void BattleControllerPlayer_MoveEnd(BattleSystem *battleSys, BattleContex
         BattleControllerPlayer_ClearFlags(battleSys, battleCtx);
     }
 
-    battleCtx->battlerActions[battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
+    if (!battleCtx->isDancerCopy) {
+        battleCtx->battlerActions[battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
+        battleCtx->turnOrderCounter = 0;
+    }
     BattleSystem_SortMonActionOrder(battleSys, battleCtx);
     BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
-    battleCtx->turnOrderCounter = 0;
 
     BattleContext_Init(battleCtx);
-    battleCtx->command = BATTLE_CONTROL_BRANCH_ACTIONS;
+    if (battleCtx->dancerPendingMask != 0) {
+        battleCtx->command = BATTLE_CONTROL_DANCER_TURN;
+    } else {
+        battleCtx->isDancerCopy = FALSE;
+        battleCtx->dancerMove = 0;
+        battleCtx->command = BATTLE_CONTROL_BRANCH_ACTIONS;
+    }
+}
+
+static void BattleControllerPlayer_DancerTurn(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+    int dancerBattler = BATTLER_NONE;
+
+    for (int i = maxBattlers - 1; i >= 0; i--) {
+        int candidate = battleCtx->monSpeedOrder[i];
+        if (battleCtx->dancerPendingMask & FlagIndex(candidate)) {
+            dancerBattler = candidate;
+            break;
+        }
+    }
+
+    if (dancerBattler == BATTLER_NONE) {
+        battleCtx->isDancerCopy = FALSE;
+        battleCtx->dancerMove = 0;
+        battleCtx->command = BATTLE_CONTROL_BRANCH_ACTIONS;
+        return;
+    }
+
+    battleCtx->dancerPendingMask &= (u8)~FlagIndex(dancerBattler);
+    battleCtx->attacker = dancerBattler;
+    battleCtx->moveTemp = battleCtx->dancerMove;
+    battleCtx->moveCur = battleCtx->dancerMove;
+    battleCtx->isDancerCopy = TRUE;
+    battleCtx->multiHitCheckFlags = SYSCTL_SKIP_PP_DECREMENT | SYSCTL_SKIP_OBEDIENCE_CHECK;
+
+    int moveRange = MOVE_DATA(battleCtx->dancerMove).range;
+    if (moveRange & RANGE_USER) {
+        battleCtx->defender = dancerBattler;
+    } else if (moveRange & RANGE_RANDOM_OPPONENT) {
+        battleCtx->defender = BattleSystem_RandomOpponent(battleSys, battleCtx, dancerBattler);
+    } else if (moveRange == RANGE_SINGLE_TARGET) {
+        int dancerSide = BattleSystem_GetBattlerSide(battleSys, dancerBattler);
+        int origAttackerSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->dancerOriginalAttacker);
+        int origDefenderSide = (battleCtx->dancerOriginalDefender != BATTLER_NONE)
+            ? BattleSystem_GetBattlerSide(battleSys, battleCtx->dancerOriginalDefender)
+            : origAttackerSide;
+
+        if (dancerSide == origAttackerSide
+                && origAttackerSide != origDefenderSide
+                && battleCtx->dancerOriginalDefender != (int)BATTLER_NONE
+                && battleCtx->battleMons[battleCtx->dancerOriginalDefender].curHP > 0
+                && !(battleCtx->battlersSwitchingMask & FlagIndex(battleCtx->dancerOriginalDefender))) {
+            battleCtx->defender = battleCtx->dancerOriginalDefender;
+        } else {
+            battleCtx->defender = battleCtx->dancerOriginalAttacker;
+        }
+    } else {
+        battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, dancerBattler, battleCtx->dancerMove, TRUE, 0);
+    }
+
+    LOAD_SUBSEQ(subscript_dancer);
+    battleCtx->commandNext = BATTLE_CONTROL_BEFORE_MOVE;
+    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 }
 
 static void BattleControllerPlayer_CheckAnyFainted(BattleSystem *battleSys, BattleContext *battleCtx)
