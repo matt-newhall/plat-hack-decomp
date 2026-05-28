@@ -5169,6 +5169,7 @@ enum AfterMoveHitState {
 
     AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE = AFTER_MOVE_HIT_START,
     AFTER_MOVE_HIT_STATE_RED_CARD,
+    AFTER_MOVE_HIT_STATE_EJECT_BUTTON,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
     AFTER_MOVE_HIT_STATE_UPROAR,
@@ -5339,6 +5340,77 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
                     machineState = STATE_BREAK_OUT;
+                }
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+        }
+
+        case AFTER_MOVE_HIT_STATE_EJECT_BUTTON: {
+            u32 battleType = BattleSystem_GetBattleType(battleSys);
+
+            if (battleType & BATTLE_TYPE_DOUBLES) {
+                int defenderPartner = BattleSystem_GetPartner(battleSys, battleCtx->defender);
+                if (battleCtx->battleMons[defenderPartner].curHP
+                    && Battler_HeldItemEffect(battleCtx, defenderPartner) == HOLD_EFFECT_EJECT_BUTTON
+                    && (battleCtx->selfTurnFlags[defenderPartner].physicalDamageTaken || battleCtx->selfTurnFlags[defenderPartner].specialDamageTaken)
+                    && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battleCtx->defender, defenderPartner, TRUE) == COMPARE_SPEED_SLOWER) {
+                    battleCtx->defender = defenderPartner;
+                }
+            }
+
+            int defenderItemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->defender);
+
+            if (defenderItemEffect == HOLD_EFFECT_EJECT_BUTTON
+                && battleCtx->defender != BATTLER_NONE
+                && Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == FALSE
+                && DEFENDING_MON.curHP
+                && CURRENT_MOVE_DATA.effect != BATTLE_EFFECT_DRAGON_TAIL
+                && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                    || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+                && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+                && !(battleCtx->multiHitNumHits > 0 && battleCtx->multiHitCounter > 1)
+                && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE) {
+
+                if ((battleType & BATTLE_TYPE_TRAINER) || ((battleCtx->defender & 1) == BATTLE_SIDE_PLAYER)) {
+                    Party *defenderParty = BattleSystem_GetParty(battleSys, battleCtx->defender);
+                    int defenderPartyCount = BattleSystem_GetPartyCount(battleSys, battleCtx->defender);
+                    int eligibleMons = 0;
+                    int maxActiveMons = 1;
+                    int selectedSlot1 = battleCtx->selectedPartySlot[battleCtx->defender];
+                    int selectedSlot2 = selectedSlot1;
+
+                    if ((battleType & (BATTLE_TYPE_DOUBLES | BATTLE_TYPE_2vs2)) == BATTLE_TYPE_DOUBLES) {
+                        int partner = BattleSystem_GetPartner(battleSys, battleCtx->defender);
+                        if (BattleSystem_GetParty(battleSys, partner) == defenderParty) {
+                            maxActiveMons = 2;
+                            selectedSlot2 = battleCtx->selectedPartySlot[partner];
+                        }
+                    }
+
+                    for (int i = 0; i < defenderPartyCount; i++) {
+                        Pokemon *mon = Party_GetPokemonBySlotIndex(defenderParty, i);
+                        if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL)
+                            && !Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL)
+                            && Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
+                            eligibleMons++;
+                        }
+                    }
+
+                    if (eligibleMons > maxActiveMons) {
+                        if ((battleType & BATTLE_TYPE_TRAINER) && (battleCtx->defender & 1) == BATTLE_SIDE_ENEMY) {
+                            battleCtx->switchedPartySlot[battleCtx->defender] = BattleAI_PostKOSwitchIn(battleSys, battleCtx->defender);
+                        } else {
+                            battleCtx->battlerStatusFlags[battleCtx->defender] |= BATTLER_STATUS_SWITCHING;
+                        }
+
+                        battleCtx->afterMoveHitCheckTemp = 1;
+                        LOAD_SUBSEQ(subscript_eject_button_switch);
+                        battleCtx->commandNext = battleCtx->command;
+                        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                        machineState = STATE_BREAK_OUT;
+                    }
                 }
             }
 

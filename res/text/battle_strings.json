@@ -9262,6 +9262,27 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s\n",
         "{STRVAR_1 8, 1, 0} was held up!\r"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsEjectButtonActivated_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 8, 1, 0}\n",
+        "activated!\r"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsEjectButtonActivated_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 8, 1, 0} activated!\r"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsEjectButtonActivated_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 8, 1, 0} activated!\r"
+      ]
     }
   ]
 }
