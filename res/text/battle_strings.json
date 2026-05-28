@@ -9241,6 +9241,27 @@
         "The foe’s {STRVAR_1 1, 0, 0}’s item\n",
         "cannot be removed!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsRedCardWasHeldUp_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 8, 1, 0}\n",
+        "was held up!\r"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsRedCardWasHeldUp_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 8, 1, 0} was held up!\r"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsRedCardWasHeldUp_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s\n",
+        "{STRVAR_1 8, 1, 0} was held up!\r"
+      ]
     }
   ]
 }

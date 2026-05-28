@@ -6420,6 +6420,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
             *subscript = subscript_held_item_pop;
             result = TRUE;
         }
+        break;
 
     default:
         break;

@@ -5168,10 +5168,12 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_START = 0,
 
     AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE = AFTER_MOVE_HIT_START,
+    AFTER_MOVE_HIT_STATE_RED_CARD,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
     AFTER_MOVE_HIT_STATE_UPROAR,
     AFTER_MOVE_HIT_STATE_ANGER_SHELL,
+    AFTER_MOVE_HIT_STATE_SWITCH_HIT,
 
     AFTER_MOVE_HIT_STATE_END
 };
@@ -5260,9 +5262,94 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
             battleCtx->afterMoveHitCheckState++;
             break;
 
+        case AFTER_MOVE_HIT_STATE_RED_CARD: {
+            u32 battleType = BattleSystem_GetBattleType(battleSys);
+
+            if (battleType & BATTLE_TYPE_DOUBLES) {
+                int defenderPartner = BattleSystem_GetPartner(battleSys, battleCtx->defender);
+                if (battleCtx->battleMons[defenderPartner].curHP
+                    && Battler_HeldItemEffect(battleCtx, defenderPartner) == HOLD_EFFECT_RED_CARD
+                    && (battleCtx->selfTurnFlags[defenderPartner].physicalDamageTaken || battleCtx->selfTurnFlags[defenderPartner].specialDamageTaken)
+                    && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battleCtx->defender, defenderPartner, TRUE) == COMPARE_SPEED_SLOWER) {
+                    battleCtx->defender = defenderPartner;
+                }
+            }
+
+            int defenderItemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->defender);
+
+            if (defenderItemEffect == HOLD_EFFECT_RED_CARD
+                && battleCtx->defender != BATTLER_NONE
+                && Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == FALSE
+                && DEFENDING_MON.curHP
+                && ATTACKING_MON.curHP
+                && CURRENT_MOVE_DATA.effect != BATTLE_EFFECT_DRAGON_TAIL
+                && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                    || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+                && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+                && !(battleCtx->multiHitNumHits > 0 && battleCtx->multiHitCounter > 1)
+                && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE) {
+
+                if ((battleType & BATTLE_TYPE_TRAINER) || ((battleCtx->attacker & 1) == BATTLE_SIDE_PLAYER && (battleType & BATTLE_TYPE_DOUBLES))) {
+                    Party *attackerParty = BattleSystem_GetParty(battleSys, battleCtx->attacker);
+                    int attackerPartyCount = BattleSystem_GetPartyCount(battleSys, battleCtx->attacker);
+                    int eligibleMons = 0;
+                    int maxActiveMons = 1;
+                    int selectedSlot1 = battleCtx->selectedPartySlot[battleCtx->attacker];
+                    int selectedSlot2 = selectedSlot1;
+
+                    if ((battleType & (BATTLE_TYPE_DOUBLES | BATTLE_TYPE_2vs2)) == BATTLE_TYPE_DOUBLES) {
+                        int partner = BattleSystem_GetPartner(battleSys, battleCtx->attacker);
+                        if (BattleSystem_GetParty(battleSys, partner) == attackerParty) {
+                            maxActiveMons = 2;
+                            selectedSlot2 = battleCtx->selectedPartySlot[partner];
+                        }
+                    }
+
+                    for (int i = 0; i < attackerPartyCount; i++) {
+                        Pokemon *mon = Party_GetPokemonBySlotIndex(attackerParty, i);
+                        if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL)
+                            && !Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL)
+                            && Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
+                            eligibleMons++;
+                        }
+                    }
+
+                    if (eligibleMons > maxActiveMons) {
+                        int i;
+                        Pokemon *mon;
+                        do {
+                            do {
+                                i = BattleSystem_RandNext(battleSys) % attackerPartyCount;
+                            } while (i == selectedSlot1 || i == selectedSlot2);
+                            mon = Party_GetPokemonBySlotIndex(attackerParty, i);
+                        } while (!Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL)
+                              || Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL)
+                              || !Pokemon_GetValue(mon, MON_DATA_HP, NULL));
+
+                        battleCtx->switchedPartySlot[battleCtx->attacker] = i;
+                        battleCtx->afterMoveHitCheckTemp = 1;
+                        LOAD_SUBSEQ(subscript_red_card_force_switch);
+                        battleCtx->commandNext = battleCtx->command;
+                        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                        machineState = STATE_BREAK_OUT;
+                    }
+                } else if ((battleCtx->attacker & 1) == BATTLE_SIDE_PLAYER) {
+                    battleCtx->afterMoveHitCheckTemp = 1;
+                    LOAD_SUBSEQ(subscript_red_card_force_switch);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                    machineState = STATE_BREAK_OUT;
+                }
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+        }
+
         case AFTER_MOVE_HIT_STATE_SHELL_BELL:
             if (battleCtx->defender != BATTLER_NONE
                 && itemEffect == HOLD_EFFECT_HP_RESTORE_ON_DMG
+                && battleCtx->afterMoveHitCheckTemp == 0
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                 && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
                 && ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt
@@ -5285,6 +5372,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
         case AFTER_MOVE_HIT_STATE_LIFE_ORB:
             if (itemEffect == HOLD_EFFECT_HP_DRAIN_ON_ATK
+                && battleCtx->afterMoveHitCheckTemp == 0
                 && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                 && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
@@ -5304,7 +5392,8 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
             break;
 
         case AFTER_MOVE_HIT_STATE_UPROAR:
-            if (battleCtx->battleMons[battleCtx->attacker].statusVolatile & VOLATILE_CONDITION_UPROAR) {
+            if (battleCtx->afterMoveHitCheckTemp == 0
+                && battleCtx->battleMons[battleCtx->attacker].statusVolatile & VOLATILE_CONDITION_UPROAR) {
                 if (BattleContext_MoveFailed(battleCtx, battleCtx->attacker) || battleCtx->moveStatusFlags & (MOVE_STATUS_NO_MORE_WORK | MOVE_STATUS_PROTECTED | MOVE_STATUS_WONDER_GUARD)) {
                     battleCtx->msgBattlerTemp = battleCtx->attacker;
                     LOAD_SUBSEQ(subscript_uproar_end);
@@ -5327,6 +5416,22 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                 battleCtx->msgBattlerTemp = battleCtx->defender;
 
                 LOAD_SUBSEQ(subscript_anger_shell);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_SWITCH_HIT:
+            if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_SWITCH_HIT
+                && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+                && (battleCtx->moveStatusFlags & (MOVE_STATUS_DID_NOT_HIT | MOVE_STATUS_NO_EFFECTS)) == FALSE
+                && battleCtx->attacker != BATTLER_NONE
+                && ATTACKING_MON.curHP) {
+                LOAD_SUBSEQ(subscript_attack_then_switch_out);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
