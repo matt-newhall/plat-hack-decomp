@@ -829,10 +829,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = eject_button_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_UNUSED_134] = {
-        .dataID = 0x0,
-        .iconID = none_NCGR,
-        .paletteID = none_NCLR,
+    [ITEM_EJECT_PACK] = {
+        .dataID = 0x1D3,
+        .iconID = eject_pack_NCGR,
+        .paletteID = eject_pack_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_ADAMANT_ORB] = {

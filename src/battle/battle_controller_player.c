@@ -5169,7 +5169,7 @@ enum AfterMoveHitState {
 
     AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE = AFTER_MOVE_HIT_START,
     AFTER_MOVE_HIT_STATE_RED_CARD,
-    AFTER_MOVE_HIT_STATE_EJECT_BUTTON,
+    AFTER_MOVE_HIT_STATE_EJECT_ITEMS,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
     AFTER_MOVE_HIT_STATE_UPROAR,
@@ -5347,45 +5347,64 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
             break;
         }
 
-        case AFTER_MOVE_HIT_STATE_EJECT_BUTTON: {
+        case AFTER_MOVE_HIT_STATE_EJECT_ITEMS: {
             u32 battleType = BattleSystem_GetBattleType(battleSys);
+            int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
 
-            if (battleType & BATTLE_TYPE_DOUBLES) {
-                int defenderPartner = BattleSystem_GetPartner(battleSys, battleCtx->defender);
-                if (battleCtx->battleMons[defenderPartner].curHP
-                    && Battler_HeldItemEffect(battleCtx, defenderPartner) == HOLD_EFFECT_EJECT_BUTTON
-                    && (battleCtx->selfTurnFlags[defenderPartner].physicalDamageTaken || battleCtx->selfTurnFlags[defenderPartner].specialDamageTaken)
-                    && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, battleCtx->defender, defenderPartner, TRUE) == COMPARE_SPEED_SLOWER) {
-                    battleCtx->defender = defenderPartner;
-                }
-            }
+            // buttonWon: button type won this turn — suppress all further eject items on every target.
+            // packWon:   pack type won this turn — suppress button but allow more packs to fire.
+            // Both flags persist across per-target AFTER_MOVE_HIT calls; only SYSCTL_INIT2 clears them.
+            BOOL buttonWon = (battleCtx->battleStatusMask2 & SYSCTL_EJECT_BUTTON_WON) != FALSE;
+            BOOL packWon = (battleCtx->battleStatusMask2 & SYSCTL_EJECT_PACK_WON) != FALSE;
 
-            int defenderItemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->defender);
-
-            if (defenderItemEffect == HOLD_EFFECT_EJECT_BUTTON
-                && battleCtx->defender != BATTLER_NONE
-                && Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == FALSE
-                && DEFENDING_MON.curHP
+            int fastestButtonMon = BATTLER_NONE;
+            if (!packWon
                 && CURRENT_MOVE_DATA.effect != BATTLE_EFFECT_DRAGON_TAIL
-                && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
-                    || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
                 && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
                 && !(battleCtx->multiHitNumHits > 0 && battleCtx->multiHitCounter > 1)
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE) {
+                for (int i = 0; i < maxBattlers; i++) {
+                    if (battleCtx->battleMons[i].curHP
+                        && Battler_HeldItemEffect(battleCtx, i) == HOLD_EFFECT_EJECT_BUTTON
+                        && Battler_SubstituteWasHit(battleCtx, i) == FALSE
+                        && (battleCtx->selfTurnFlags[i].physicalDamageTaken || battleCtx->selfTurnFlags[i].specialDamageTaken)) {
+                        if (fastestButtonMon == BATTLER_NONE
+                            || BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, fastestButtonMon, i, TRUE) == COMPARE_SPEED_SLOWER) {
+                            fastestButtonMon = i;
+                        }
+                    }
+                }
+            }
 
-                if ((battleType & BATTLE_TYPE_TRAINER) || ((battleCtx->defender & 1) == BATTLE_SIDE_PLAYER)) {
-                    Party *defenderParty = BattleSystem_GetParty(battleSys, battleCtx->defender);
-                    int defenderPartyCount = BattleSystem_GetPartyCount(battleSys, battleCtx->defender);
+            int fastestPackMon = BATTLER_NONE;
+            u32 ejectPackPending = battleCtx->battleStatusMask2 & SYSCTL_EJECT_PACK_PENDING_MASK;
+            for (int i = 0; i < maxBattlers; i++) {
+                if ((ejectPackPending & (SYSCTL_EJECT_PACK_PENDING_0 << i))
+                    && battleCtx->battleMons[i].curHP
+                    && Battler_HeldItemEffect(battleCtx, i) == HOLD_EFFECT_EJECT_PACK) {
+                    if (fastestPackMon == BATTLER_NONE
+                        || BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, fastestPackMon, i, TRUE) == COMPARE_SPEED_SLOWER) {
+                        fastestPackMon = i;
+                    }
+                }
+            }
+
+            // Button wins unless a pack holder is strictly faster (ties go to button).
+            BOOL buttonWins = fastestButtonMon != BATTLER_NONE
+                && (fastestPackMon == BATTLER_NONE
+                    || BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, fastestButtonMon, fastestPackMon, TRUE) != COMPARE_SPEED_SLOWER);
+
+            if (buttonWins) {
+                if ((battleType & BATTLE_TYPE_TRAINER) || (fastestButtonMon & 1) == BATTLE_SIDE_PLAYER) {
+                    Party *defenderParty = BattleSystem_GetParty(battleSys, fastestButtonMon);
+                    int defenderPartyCount = BattleSystem_GetPartyCount(battleSys, fastestButtonMon);
                     int eligibleMons = 0;
                     int maxActiveMons = 1;
-                    int selectedSlot1 = battleCtx->selectedPartySlot[battleCtx->defender];
-                    int selectedSlot2 = selectedSlot1;
 
                     if ((battleType & (BATTLE_TYPE_DOUBLES | BATTLE_TYPE_2vs2)) == BATTLE_TYPE_DOUBLES) {
-                        int partner = BattleSystem_GetPartner(battleSys, battleCtx->defender);
+                        int partner = BattleSystem_GetPartner(battleSys, fastestButtonMon);
                         if (BattleSystem_GetParty(battleSys, partner) == defenderParty) {
                             maxActiveMons = 2;
-                            selectedSlot2 = battleCtx->selectedPartySlot[partner];
                         }
                     }
 
@@ -5399,22 +5418,76 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                     }
 
                     if (eligibleMons > maxActiveMons) {
-                        if ((battleType & BATTLE_TYPE_TRAINER) && (battleCtx->defender & 1) == BATTLE_SIDE_ENEMY) {
-                            battleCtx->switchedPartySlot[battleCtx->defender] = BattleAI_PostKOSwitchIn(battleSys, battleCtx->defender);
+                        if ((battleType & BATTLE_TYPE_TRAINER) && (fastestButtonMon & 1) == BATTLE_SIDE_ENEMY) {
+                            battleCtx->switchedPartySlot[fastestButtonMon] = BattleAI_PostKOSwitchIn(battleSys, fastestButtonMon);
+                            BattleSystem_InitBattleMon(battleSys, battleCtx, fastestButtonMon, battleCtx->selectedPartySlot[fastestButtonMon]);
                         } else {
-                            battleCtx->battlerStatusFlags[battleCtx->defender] |= BATTLER_STATUS_SWITCHING;
+                            battleCtx->battlerStatusFlags[fastestButtonMon] |= BATTLER_STATUS_SWITCHING;
                         }
 
+                        battleCtx->defender = fastestButtonMon;
                         battleCtx->afterMoveHitCheckTemp = 1;
                         LOAD_SUBSEQ(subscript_eject_button_switch);
                         battleCtx->commandNext = battleCtx->command;
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                        battleCtx->battleStatusMask2 |= SYSCTL_EJECT_BUTTON_WON;
+                        battleCtx->battleStatusMask2 &= ~SYSCTL_EJECT_PACK_PENDING_MASK;
                         machineState = STATE_BREAK_OUT;
                     }
                 }
+            } else if (fastestPackMon != BATTLER_NONE) {
+                if ((battleType & BATTLE_TYPE_TRAINER) || (fastestPackMon & 1) == BATTLE_SIDE_PLAYER) {
+                    Party *ejectParty = BattleSystem_GetParty(battleSys, fastestPackMon);
+                    int ejectPartyCount = BattleSystem_GetPartyCount(battleSys, fastestPackMon);
+                    int eligibleMons = 0;
+                    int maxActiveMons = 1;
+
+                    if ((battleType & (BATTLE_TYPE_DOUBLES | BATTLE_TYPE_2vs2)) == BATTLE_TYPE_DOUBLES) {
+                        int partner = BattleSystem_GetPartner(battleSys, fastestPackMon);
+                        if (BattleSystem_GetParty(battleSys, partner) == ejectParty) {
+                            maxActiveMons = 2;
+                        }
+                    }
+
+                    for (int i = 0; i < ejectPartyCount; i++) {
+                        Pokemon *mon = Party_GetPokemonBySlotIndex(ejectParty, i);
+                        if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL)
+                            && !Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL)
+                            && Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
+                            eligibleMons++;
+                        }
+                    }
+
+                    if (eligibleMons > maxActiveMons) {
+                        battleCtx->battleStatusMask2 |= SYSCTL_EJECT_PACK_WON;
+                        battleCtx->battleStatusMask2 &= ~(SYSCTL_EJECT_PACK_PENDING_0 << fastestPackMon);
+                        battleCtx->msgItemTemp = battleCtx->battleMons[fastestPackMon].heldItem;
+
+                        if ((battleType & BATTLE_TYPE_TRAINER) && (fastestPackMon & 1) == BATTLE_SIDE_ENEMY) {
+                            battleCtx->switchedPartySlot[fastestPackMon] = BattleAI_PostKOSwitchIn(battleSys, fastestPackMon);
+                            BattleSystem_InitBattleMon(battleSys, battleCtx, fastestPackMon, battleCtx->selectedPartySlot[fastestPackMon]);
+                        } else {
+                            battleCtx->battlerStatusFlags[fastestPackMon] |= BATTLER_STATUS_SWITCHING;
+                        }
+
+                        battleCtx->sideEffectMon = fastestPackMon;
+                        battleCtx->afterMoveHitCheckTemp = 1;
+                        LOAD_SUBSEQ(subscript_eject_pack_switch);
+                        battleCtx->commandNext = battleCtx->command;
+                        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+                        machineState = STATE_BREAK_OUT;
+                    } else {
+                        battleCtx->battleStatusMask2 &= ~(SYSCTL_EJECT_PACK_PENDING_0 << fastestPackMon);
+                    }
+                } else {
+                    battleCtx->battleStatusMask2 &= ~(SYSCTL_EJECT_PACK_PENDING_0 << fastestPackMon);
+                }
             }
 
-            battleCtx->afterMoveHitCheckState++;
+            if (machineState != STATE_BREAK_OUT) {
+                battleCtx->battleStatusMask2 &= ~SYSCTL_EJECT_PACK_PENDING_MASK;
+                battleCtx->afterMoveHitCheckState++;
+            }
             break;
         }
 

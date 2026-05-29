@@ -47,6 +47,7 @@
 #include "unk_0208C098.h"
 
 #include "res/battle/scripts/sub_seq.naix"
+
 #include "res/text/bank/battle_strings.h"
 
 #define TRMSG_ACTIVE_BATTLER_HALF_HP_FLAG 2
@@ -4030,6 +4031,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
     SWITCH_IN_CHECK_STATE_HELD_ITEM_STATUS,
     SWITCH_IN_CHECK_STATE_FORBIDDEN_STATUS,
+    SWITCH_IN_CHECK_STATE_EJECT_PACK,
 
     SWITCH_IN_CHECK_STATE_DONE,
 };
@@ -4848,6 +4850,81 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
             }
             iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
             break;
+
+        case SWITCH_IN_CHECK_STATE_EJECT_PACK: {
+            u32 ejectPackPending = battleCtx->battleStatusMask2 & SYSCTL_EJECT_PACK_PENDING_MASK;
+
+            if (ejectPackPending) {
+                // Find fastest pending pack holder.
+                int fastestPackMon = BATTLER_NONE;
+                for (int checkI = 0; checkI < maxBattlers; checkI++) {
+                    if ((ejectPackPending & (SYSCTL_EJECT_PACK_PENDING_0 << checkI))
+                        && battleCtx->battleMons[checkI].curHP
+                        && Battler_HeldItemEffect(battleCtx, checkI) == HOLD_EFFECT_EJECT_PACK) {
+                        if (fastestPackMon == BATTLER_NONE
+                            || BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, fastestPackMon, checkI, TRUE) == COMPARE_SPEED_SLOWER) {
+                            fastestPackMon = checkI;
+                        }
+                    }
+                }
+
+                // Find fastest button candidate. For spread moves, also consider targets that
+                // haven't been hit yet (opposite side, alive) since they WILL be damaged.
+                int fastestButtonMon = BATTLER_NONE;
+                if (fastestPackMon != BATTLER_NONE
+                    && CURRENT_MOVE_DATA.effect != BATTLE_EFFECT_DRAGON_TAIL
+                    && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+                    && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE) {
+
+                    BOOL isSpreadMove = (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS
+                        || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT);
+                    int attackerSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
+
+                    for (int checkI = 0; checkI < maxBattlers; checkI++) {
+                        if (!battleCtx->battleMons[checkI].curHP) {
+                            continue;
+                        }
+                        if (Battler_HeldItemEffect(battleCtx, checkI) != HOLD_EFFECT_EJECT_BUTTON) {
+                            continue;
+                        }
+                        if (Battler_SubstituteWasHit(battleCtx, checkI)) {
+                            continue;
+                        }
+
+                        // Button triggers either from already-taken damage, or (for spread
+                        // moves) from being a pending target on the opposing side.
+                        BOOL alreadyHit = battleCtx->selfTurnFlags[checkI].physicalDamageTaken
+                            || battleCtx->selfTurnFlags[checkI].specialDamageTaken;
+                        BOOL pendingTarget = isSpreadMove
+                            && BattleSystem_GetBattlerSide(battleSys, checkI) != attackerSide;
+
+                        if (alreadyHit || pendingTarget) {
+                            if (fastestButtonMon == BATTLER_NONE
+                                || BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, fastestButtonMon, checkI, TRUE) == COMPARE_SPEED_SLOWER) {
+                                fastestButtonMon = checkI;
+                            }
+                        }
+                    }
+                }
+
+                // Button wins unless a pack holder is strictly faster (ties go to button).
+                BOOL buttonWins = fastestButtonMon != BATTLER_NONE
+                    && (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, fastestButtonMon, fastestPackMon, TRUE) != COMPARE_SPEED_SLOWER);
+
+                if (buttonWins) {
+                    battleCtx->battleStatusMask2 &= ~SYSCTL_EJECT_PACK_PENDING_MASK;
+                    battleCtx->battleStatusMask2 |= SYSCTL_EJECT_BUTTON_WON;
+                    battleCtx->switchInCheckState++;
+                } else {
+                    battleCtx->battleStatusMask2 |= SYSCTL_EJECT_PACK_WON;
+                    subscript = subscript_eject_pack_check;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                }
+            } else {
+                battleCtx->switchInCheckState++;
+            }
+            break;
+        }
 
         case SWITCH_IN_CHECK_STATE_DONE:
             battleCtx->switchInCheckState = 0;

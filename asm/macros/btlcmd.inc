@@ -1372,6 +1372,10 @@
     .long BTLCMD_SHOWABILITYPOPUPAUTOFOREFFECTHOLDER
     .endm
 
+    .macro SetupEjectPack
+    .long BTLCMD_SETUPEJECTPACK
+    .endm
+
     .text
     .globl _start
 _start:

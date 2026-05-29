@@ -316,6 +316,7 @@ subscript_neutralizing_gas
 subscript_neutralizing_gas_end
 subscript_defiant_check
 subscript_competitive_check
+subscript_eject_pack_check
 subscript_quiver_dance
 subscript_steel_beam
 subscript_random_status
@@ -332,6 +333,7 @@ subscript_power_herb_skull_bash
 subscript_rocky_helmet_recoil
 subscript_red_card_force_switch
 subscript_eject_button_switch
+subscript_eject_pack_switch
 subscript_held_item_swagger_self
 subscript_held_item_lower_speed_in_trick_room
 subscript_held_item_sharply_boost_offenses

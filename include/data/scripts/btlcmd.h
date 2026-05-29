@@ -256,6 +256,7 @@ ScriptCommand(BTLCMD_RESETSLEEPTURNS,             BtlCmd_ResetSleepTurns)
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTO,                BtlCmd_ShowAbilityPopupAuto)
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTOSAVED,           BtlCmd_ShowAbilityPopupAutoSaved)
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTOFOREFFECTHOLDER, BtlCmd_ShowAbilityPopupAutoForEffectHolder)
+ScriptCommand(BTLCMD_SETUPEJECTPACK,                      BtlCmd_SetupEjectPack)
 
 // clang-format on
 

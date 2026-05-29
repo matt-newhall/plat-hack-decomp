@@ -338,6 +338,7 @@ static BOOL BtlCmd_CalcVenoshockPower(BattleSystem *battleSys, BattleContext *ba
 static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -3079,6 +3080,10 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
         if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] < MIN_STAT_STAGE) {
             mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] = MIN_STAT_STAGE;
+        }
+
+        if (Battler_HeldItemEffect(battleCtx, battleCtx->sideEffectMon) == HOLD_EFFECT_EJECT_PACK) {
+            battleCtx->battleStatusMask2 |= (SYSCTL_EJECT_PACK_PENDING_0 << battleCtx->sideEffectMon);
         }
 
         if (battleCtx->attacker != battleCtx->sideEffectMon
@@ -12763,6 +12768,11 @@ static int BattleMessage_ItemTag(BattleContext *battleCtx, int battlerIn)
         BattleAI_SetHeldItem(battleCtx, battleCtx->msgBattlerTemp, item);
         break;
 
+    case BTLSCR_SIDE_EFFECT_MON:
+        item = battleCtx->battleMons[battleCtx->sideEffectMon].heldItem;
+        BattleAI_SetHeldItem(battleCtx, battleCtx->sideEffectMon, item);
+        break;
+
     case BTLSCR_MSG_TEMP:
         item = battleCtx->msgItemTemp;
         break;
@@ -13412,6 +13422,97 @@ static BOOL BtlCmd_ShowAbilityPopupAutoForEffectHolder(BattleSystem *battleSys, 
         BattleScript_Iter(battleCtx, -1);
         battleCtx->battleProgressFlag = TRUE;
     }
+    return FALSE;
+}
+
+/**
+ * @brief Find the next eligible Eject Pack holder, set up switch state, and
+ * signal to the calling script whether a switch should occur.
+ *
+ * Iterates through battlers with pending Eject Pack bits (set by
+ * BtlCmd_ChangeStatStage on any stat drop) in speed order, finding the first
+ * battler that has a valid Eject Pack and an eligible party member to switch
+ * to. Clears the pending bit for any battler it considers. Sets
+ * battleCtx->scriptTemp to 1 if a switch was set up, 0 if no more activations
+ * are possible.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    battleCtx->scriptTemp = 0;
+
+    u32 battleType = BattleSystem_GetBattleType(battleSys);
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    while (battleCtx->battleStatusMask2 & SYSCTL_EJECT_PACK_PENDING_MASK) {
+        u32 ejectPackPending = battleCtx->battleStatusMask2 & SYSCTL_EJECT_PACK_PENDING_MASK;
+        int ejectPackMon = BATTLER_NONE;
+
+        for (int i = 0; i < maxBattlers; i++) {
+            if ((ejectPackPending & (SYSCTL_EJECT_PACK_PENDING_0 << i))
+                && battleCtx->battleMons[i].curHP
+                && Battler_HeldItemEffect(battleCtx, i) == HOLD_EFFECT_EJECT_PACK) {
+                if (ejectPackMon == BATTLER_NONE
+                    || BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, ejectPackMon, i, TRUE) == COMPARE_SPEED_SLOWER) {
+                    ejectPackMon = i;
+                }
+            }
+        }
+
+        if (ejectPackMon == BATTLER_NONE) {
+            battleCtx->battleStatusMask2 &= ~SYSCTL_EJECT_PACK_PENDING_MASK;
+            break;
+        }
+
+        battleCtx->battleStatusMask2 &= ~(SYSCTL_EJECT_PACK_PENDING_0 << ejectPackMon);
+
+        if (!((battleType & BATTLE_TYPE_TRAINER) || (ejectPackMon & 1) == BATTLE_SIDE_PLAYER)) {
+            continue;
+        }
+
+        Party *ejectParty = BattleSystem_GetParty(battleSys, ejectPackMon);
+        int ejectPartyCount = BattleSystem_GetPartyCount(battleSys, ejectPackMon);
+        int eligibleMons = 0;
+        int maxActiveMons = 1;
+
+        if ((battleType & (BATTLE_TYPE_DOUBLES | BATTLE_TYPE_2vs2)) == BATTLE_TYPE_DOUBLES) {
+            int partner = BattleSystem_GetPartner(battleSys, ejectPackMon);
+            if (BattleSystem_GetParty(battleSys, partner) == ejectParty) {
+                maxActiveMons = 2;
+            }
+        }
+
+        for (int i = 0; i < ejectPartyCount; i++) {
+            Pokemon *mon = Party_GetPokemonBySlotIndex(ejectParty, i);
+            if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL)
+                && !Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL)
+                && Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
+                eligibleMons++;
+            }
+        }
+
+        if (eligibleMons <= maxActiveMons) {
+            continue;
+        }
+
+        battleCtx->msgItemTemp = battleCtx->battleMons[ejectPackMon].heldItem;
+
+        if ((battleType & BATTLE_TYPE_TRAINER) && (ejectPackMon & 1) == BATTLE_SIDE_ENEMY) {
+            battleCtx->switchedPartySlot[ejectPackMon] = BattleAI_PostKOSwitchIn(battleSys, ejectPackMon);
+            BattleSystem_InitBattleMon(battleSys, battleCtx, ejectPackMon, battleCtx->selectedPartySlot[ejectPackMon]);
+        } else {
+            battleCtx->battlerStatusFlags[ejectPackMon] |= BATTLER_STATUS_SWITCHING;
+        }
+
+        battleCtx->sideEffectMon = ejectPackMon;
+        battleCtx->scriptTemp = 1;
+        return FALSE;
+    }
+
     return FALSE;
 }
 
