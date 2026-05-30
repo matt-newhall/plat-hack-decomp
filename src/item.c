@@ -2671,10 +2671,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = galactic_key_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_RED_CHAIN] = {
-        .dataID = 0x1A3,
-        .iconID = red_chain_NCGR,
-        .paletteID = red_chain_NCLR,
+    [ITEM_CANDY_BAG] = {
+        .dataID = 0x1D5,
+        .iconID = candy_bag_NCGR,
+        .paletteID = candy_bag_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TOWN_MAP] = {

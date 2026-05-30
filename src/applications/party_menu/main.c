@@ -5,6 +5,7 @@
 
 #include "constants/graphics.h"
 #include "constants/heap.h"
+#include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
 #include "constants/string.h"
@@ -2792,7 +2793,9 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
     }
 
     if (Party_CheckItemEffectsOnMember(app->partyMenu->party, app->partyMenu->usedItemID, app->currPartySlot, 0, HEAP_ID_PARTY_MENU) == 1) {
-        Bag_TryRemoveItem(app->partyMenu->bag, app->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
+        if (Item_Get(itemData, ITEM_PARAM_FIELD_POCKET) != POCKET_KEY_ITEMS) {
+            Bag_TryRemoveItem(app->partyMenu->bag, app->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
+        }
 
         if (Item_Get(itemData, ITEM_PARAM_EVOLVE) != 0) {
             Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
