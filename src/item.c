@@ -2763,8 +2763,8 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     },
     [ITEM_TRAINING_KIT] = {
         .dataID = 0x1D4,
-        .iconID = training_kit_NCGR,
-        .paletteID = training_kit_NCLR,
+        .iconID = growth_mulch_NCGR,
+        .paletteID = growth_mulch_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_CONTEST_PASS] = {
