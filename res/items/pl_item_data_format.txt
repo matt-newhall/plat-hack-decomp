@@ -48,6 +48,7 @@ giveSpDefEVs:u8.1:bool
 giveFriendshipLow:u8.1:bool
 giveFriendshipMed:u8.1:bool
 giveFriendshipHigh:u8.1:bool
+edgeLevel:u8.1:bool
 hpEVs:s8
 atkEVs:s8
 defEVs:s8
