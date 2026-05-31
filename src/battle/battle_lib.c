@@ -9567,9 +9567,17 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + j, NULL);
 
                 if (moveDefender) {
+                    int moveEffect = MOVE_DATA(moveDefender).effect;
+
+                    if (moveEffect == BATTLE_EFFECT_HALVE_DEFENSE
+                        || moveEffect == BATTLE_EFFECT_HALVE_SP_DEFENSE
+                        || moveEffect == BATTLE_EFFECT_ONE_HIT_KO) {
+                        continue;
+                    }
+
                     int hitMultiplier = 1;
                     u16 inPower = 0;
-                    int moveEffect = MOVE_DATA(moveDefender).effect;
+
                     if (moveEffect == BATTLE_EFFECT_HIT_TWICE
                         || moveEffect == BATTLE_EFFECT_POISON_MULTI_HIT) {
                         hitMultiplier = 2;
@@ -9580,16 +9588,24 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         hitMultiplier = 3;
                     }
 
-                    damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
-                        battleCtx,
-                        moveDefender,
-                        battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)],
-                        battleCtx->fieldConditionsMask,
-                        inPower,
-                        0,
-                        defender,
-                        battler,
-                        1);
+                    if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
+                        damageToTarget = 20;
+                    } else if (moveEffect == BATTLE_EFFECT_40_DAMAGE_FLAT) {
+                        damageToTarget = 40;
+                    } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
+                        damageToTarget = BattleMon_Get(battleCtx, defender, BATTLEMON_LEVEL, NULL);
+                    } else {
+                        damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
+                            battleCtx,
+                            moveDefender,
+                            battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)],
+                            battleCtx->fieldConditionsMask,
+                            inPower,
+                            0,
+                            defender,
+                            battler,
+                            1);
+                    }
 
                     damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
@@ -9653,9 +9669,17 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 moveBattler = Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1 + j, NULL);
 
                 if (moveBattler) {
+                    int moveEffect = MOVE_DATA(moveBattler).effect;
+
+                    if (moveEffect == BATTLE_EFFECT_HALVE_DEFENSE
+                        || moveEffect == BATTLE_EFFECT_HALVE_SP_DEFENSE
+                        || moveEffect == BATTLE_EFFECT_ONE_HIT_KO) {
+                        continue;
+                    }
+
                     int hitMultiplier = 1;
                     u16 inPower = 0;
-                    int moveEffect = MOVE_DATA(moveBattler).effect;
+
                     if (moveEffect == BATTLE_EFFECT_HIT_TWICE
                         || moveEffect == BATTLE_EFFECT_POISON_MULTI_HIT) {
                         hitMultiplier = 2;
@@ -9666,16 +9690,24 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         hitMultiplier = 3;
                     }
 
-                    damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
-                        battleCtx,
-                        moveBattler,
-                        battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, defender)],
-                        battleCtx->fieldConditionsMask,
-                        inPower,
-                        0,
-                        battler,
-                        defender,
-                        1);
+                    if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
+                        damageToTarget = 20;
+                    } else if (moveEffect == BATTLE_EFFECT_40_DAMAGE_FLAT) {
+                        damageToTarget = 40;
+                    } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
+                        damageToTarget = BattleMon_Get(battleCtx, battler, BATTLEMON_LEVEL, NULL);
+                    } else {
+                        damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
+                            battleCtx,
+                            moveBattler,
+                            battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, defender)],
+                            battleCtx->fieldConditionsMask,
+                            inPower,
+                            0,
+                            battler,
+                            defender,
+                            1);
+                    }
 
                     damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
