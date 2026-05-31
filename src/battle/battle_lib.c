@@ -9405,6 +9405,17 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
             BattleSystem_InitBattleMon(battleSys, battleCtx, battler, i);
 
+            if (battlerPokemonSpecies == SPECIES_WOBBUFFET
+                || battlerPokemonSpecies == SPECIES_WYNAUT
+                || battlerPokemonSpecies == SPECIES_DITTO) {
+                score = 2;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
+            }
+
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + j, NULL);
 
