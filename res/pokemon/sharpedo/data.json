@@ -24,7 +24,7 @@
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_50",
     "hatch_cycles": 20,
-    "base_friendship": 35,
+    "base_friendship": 255,
     "exp_rate": "EXP_RATE_SLOW",
     "egg_groups": [ "EGG_GROUP_WATER_2", "EGG_GROUP_WATER_2" ],
     "abilities": [ "ABILITY_ROUGH_SKIN", "ABILITY_NONE" ],

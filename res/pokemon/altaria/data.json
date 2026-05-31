@@ -24,7 +24,7 @@
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_50",
     "hatch_cycles": 20,
-    "base_friendship": 70,
+    "base_friendship": 255,
     "exp_rate": "EXP_RATE_ERRATIC",
     "egg_groups": [ "EGG_GROUP_FLYING", "EGG_GROUP_DRAGON" ],
     "abilities": [ "ABILITY_NATURAL_CURE", "ABILITY_NONE" ],

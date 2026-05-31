@@ -24,7 +24,7 @@
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_50",
     "hatch_cycles": 10,
-    "base_friendship": 100,
+    "base_friendship": 255,
     "exp_rate": "EXP_RATE_SLOW",
     "egg_groups": [ "EGG_GROUP_UNDISCOVERED", "EGG_GROUP_UNDISCOVERED" ],
     "abilities": [ "ABILITY_FLASH_FIRE", "ABILITY_NONE" ],
