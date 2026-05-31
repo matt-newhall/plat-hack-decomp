@@ -9412,7 +9412,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     u16 moveBattler;
     u16 moveDefender;
     int damageToTarget;
-    u8 score, maxScore;
+    u32 score, maxScore;
     u8 picked;
     u8 slot1, slot2;
     u8 firstNotDead;
@@ -9596,9 +9596,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     return i;
                 }
                 if (isPursuitKO) {
+                    // Pursuit + fast kill: highest priority, short-circuit
                     return i;
                 }
-                score = 7;
+                score = 5;
                 if (score > maxScore) {
                     maxScore = score;
                     picked = i;
@@ -9616,7 +9617,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             }
 
             if (isAIKOTrainer) {
-                score = 5;
+                score = 4;
                 if (score > maxScore) {
                     maxScore = score;
                     picked = i;
@@ -9630,22 +9631,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             if (lhs >= rhs) {
                 // AI deals more damage to player than it takes
                 if (battlerFirst) {
-                    score = 4;
+                    score = 3;
                     if (score > maxScore) {
                         maxScore = score;
                         picked = i;
                     }
                     continue;
                 }
-                score = 3;
-                if (score > maxScore) {
-                    maxScore = score;
-                    picked = i;
-                }
-                continue;
-            }
-
-            if (battlerFirst) {
                 score = 2;
                 if (score > maxScore) {
                     maxScore = score;
@@ -9654,9 +9646,13 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 continue;
             }
 
-            if (1 > maxScore) {
-                maxScore = 1;
-                picked = i;
+            if (battlerFirst) {
+                score = 1;
+                if (score > maxScore) {
+                    maxScore = score;
+                    picked = i;
+                }
+                continue;
             }
         }
     }
