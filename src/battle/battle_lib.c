@@ -9358,6 +9358,27 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
     return type;
 }
 
+static u16 BattleAI_CalcWeightBasedPower(int weight)
+{
+    if (weight <= 100)  return 20;
+    if (weight <= 250)  return 40;
+    if (weight <= 500)  return 60;
+    if (weight <= 1000) return 80;
+    if (weight <= 2000) return 100;
+    return 120;
+}
+
+static u16 BattleAI_CalcFlailPower(int curHP, int maxHP)
+{
+    int pixels = ((u64)curHP * 64 + maxHP - 1) / maxHP;
+    if (pixels <= 1)  return 200;
+    if (pixels <= 5)  return 150;
+    if (pixels <= 12) return 100;
+    if (pixels <= 21) return 80;
+    if (pixels <= 42) return 40;
+    return 20;
+}
+
 static const ItemEffectTypePair sTypeResistBerries[] = {
     { HOLD_EFFECT_WEAKEN_SE_FIRE,     TYPE_FIRE },
     { HOLD_EFFECT_WEAKEN_SE_WATER,    TYPE_WATER },
@@ -9586,6 +9607,58 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     } else if (moveEffect == BATTLE_EFFECT_HIT_THREE_TIMES) {
                         inPower = MOVE_DATA(moveDefender).power * 2;
                         hitMultiplier = 3;
+                    } else if (moveEffect == BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED) {
+                        u32 userSpeed = BattleAI_CalcEffectiveSpeed(battleSys, battleCtx, defender);
+                        u32 targetSpeed = BattleAI_CalcEffectiveSpeed(battleSys, battleCtx, battler);
+                        inPower = userSpeed > 0 ? (1 + 25 * targetSpeed / userSpeed) : 1;
+                        if (inPower > 150) inPower = 150;
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_STATUSED) {
+                        if (battleCtx->battleMons[defender].status & MON_CONDITION_FACADE_BOOST) {
+                            inPower = MOVE_DATA(moveDefender).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_DAMAGE_STATUSED) {
+                        if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY) {
+                            inPower = MOVE_DATA(moveDefender).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_IF_TARGET_POISONED) {
+                        if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY_POISON) {
+                            inPower = MOVE_DATA(moveDefender).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP) {
+                        inPower = MOVE_DATA(moveDefender).power * defenderPokemonCurHP / BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL);
+                        if (inPower < 1) inPower = 1;
+                    } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP) {
+                        inPower = BattleAI_CalcFlailPower(defenderPokemonCurHP, BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL));
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF) {
+                        if ((u32)battlerPokemonCurHP * 2 <= BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL)) {
+                            inPower = MOVE_DATA(moveDefender).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP) {
+                        int friendship = Pokemon_GetValue(defenderPokemon, MON_DATA_FRIENDSHIP, NULL);
+                        inPower = friendship * 2 / 5;
+                        if (inPower < 1) inPower = 1;
+                    } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT) {
+                        int defWeight = battleCtx->battleMons[battler].weight;
+                        if (Battler_IgnorableAbility(battleCtx, defender, battler, ABILITY_LIGHT_METAL)) {
+                            defWeight /= 2;
+                        }
+                        inPower = BattleAI_CalcWeightBasedPower(defWeight);
+                    } else if (moveEffect == BATTLE_EFFECT_HEAVY_SLAM) {
+                        int atkWeight = battleCtx->battleMons[defender].weight;
+                        int defWeight = battleCtx->battleMons[battler].weight;
+                        if (Battler_Ability(battleCtx, defender) == ABILITY_LIGHT_METAL) {
+                            atkWeight /= 2;
+                        }
+                        if (Battler_IgnorableAbility(battleCtx, defender, battler, ABILITY_LIGHT_METAL)) {
+                            defWeight /= 2;
+                        }
+                        if (atkWeight >= defWeight * 5)      inPower = 120;
+                        else if (atkWeight >= defWeight * 4) inPower = 100;
+                        else if (atkWeight >= defWeight * 3) inPower = 80;
+                        else if (atkWeight >= defWeight * 2) inPower = 60;
+                        else                                 inPower = 40;
+                    } else if (moveEffect == BATTLE_EFFECT_FLING) {
+                        inPower = Battler_ItemFlingPower(battleCtx, defender);
                     }
 
                     if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
@@ -9688,6 +9761,56 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     } else if (moveEffect == BATTLE_EFFECT_HIT_THREE_TIMES) {
                         inPower = MOVE_DATA(moveBattler).power * 2;
                         hitMultiplier = 3;
+                    } else if (moveEffect == BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED) {
+                        u32 userSpeed = BattleAI_CalcEffectiveSpeed(battleSys, battleCtx, battler);
+                        u32 targetSpeed = BattleAI_CalcEffectiveSpeed(battleSys, battleCtx, defender);
+                        inPower = userSpeed > 0 ? (1 + 25 * targetSpeed / userSpeed) : 1;
+                        if (inPower > 150) inPower = 150;
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_STATUSED) {
+                        if (battleCtx->battleMons[battler].status & MON_CONDITION_FACADE_BOOST) {
+                            inPower = MOVE_DATA(moveBattler).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_DAMAGE_STATUSED) {
+                        if (battleCtx->battleMons[defender].status & MON_CONDITION_ANY) {
+                            inPower = MOVE_DATA(moveBattler).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_IF_TARGET_POISONED) {
+                        if (battleCtx->battleMons[defender].status & MON_CONDITION_ANY_POISON) {
+                            inPower = MOVE_DATA(moveBattler).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP) {
+                        inPower = MOVE_DATA(moveBattler).power * battlerPokemonCurHP / BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL);
+                        if (inPower < 1) inPower = 1;
+                    } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP) {
+                        inPower = BattleAI_CalcFlailPower(battlerPokemonCurHP, BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL));
+                    } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF) {
+                        if ((u32)defenderPokemonCurHP * 2 <= BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL)) {
+                            inPower = MOVE_DATA(moveBattler).power * 2;
+                        }
+                    } else if (moveEffect == BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP) {
+                        inPower = 102;
+                    } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT) {
+                        int defWeight = battleCtx->battleMons[defender].weight;
+                        if (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIGHT_METAL)) {
+                            defWeight /= 2;
+                        }
+                        inPower = BattleAI_CalcWeightBasedPower(defWeight);
+                    } else if (moveEffect == BATTLE_EFFECT_HEAVY_SLAM) {
+                        int atkWeight = battleCtx->battleMons[battler].weight;
+                        int defWeight = battleCtx->battleMons[defender].weight;
+                        if (Battler_Ability(battleCtx, battler) == ABILITY_LIGHT_METAL) {
+                            atkWeight /= 2;
+                        }
+                        if (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIGHT_METAL)) {
+                            defWeight /= 2;
+                        }
+                        if (atkWeight >= defWeight * 5)      inPower = 120;
+                        else if (atkWeight >= defWeight * 4) inPower = 100;
+                        else if (atkWeight >= defWeight * 3) inPower = 80;
+                        else if (atkWeight >= defWeight * 2) inPower = 60;
+                        else                                 inPower = 40;
+                    } else if (moveEffect == BATTLE_EFFECT_FLING) {
+                        inPower = Battler_ItemFlingPower(battleCtx, battler);
                     }
 
                     if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
