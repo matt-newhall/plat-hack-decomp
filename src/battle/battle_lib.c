@@ -9507,12 +9507,25 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 moveDefender = Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1 + j, NULL);
 
                 if (moveDefender) {
+                    int hitMultiplier = 1;
+                    u16 inPower = 0;
+                    int moveEffect = MOVE_DATA(moveDefender).effect;
+                    if (moveEffect == BATTLE_EFFECT_HIT_TWICE
+                        || moveEffect == BATTLE_EFFECT_POISON_MULTI_HIT) {
+                        hitMultiplier = 2;
+                    } else if (moveEffect == BATTLE_EFFECT_MULTI_HIT) {
+                        hitMultiplier = (Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_LOADED_DICE) ? 4 : 3;
+                    } else if (moveEffect == BATTLE_EFFECT_HIT_THREE_TIMES) {
+                        inPower = MOVE_DATA(moveDefender).power * 2;
+                        hitMultiplier = 3;
+                    }
+
                     damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         moveDefender,
                         battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)],
                         battleCtx->fieldConditionsMask,
-                        0,
+                        inPower,
                         0,
                         defender,
                         battler,
@@ -9526,6 +9539,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         battler,
                         damageToTarget,
                         &battleCtx->moveStatusFlags);
+
+                    damageToTarget *= hitMultiplier;
 
                     if (damageToTarget >= battlerPokemonCurHP) {
                         // AI can be OHKO'd by the player
@@ -9577,12 +9592,25 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 moveBattler = Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1 + j, NULL);
 
                 if (moveBattler) {
+                    int hitMultiplier = 1;
+                    u16 inPower = 0;
+                    int moveEffect = MOVE_DATA(moveBattler).effect;
+                    if (moveEffect == BATTLE_EFFECT_HIT_TWICE
+                        || moveEffect == BATTLE_EFFECT_POISON_MULTI_HIT) {
+                        hitMultiplier = 2;
+                    } else if (moveEffect == BATTLE_EFFECT_MULTI_HIT) {
+                        hitMultiplier = (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_LOADED_DICE) ? 4 : 3;
+                    } else if (moveEffect == BATTLE_EFFECT_HIT_THREE_TIMES) {
+                        inPower = MOVE_DATA(moveBattler).power * 2;
+                        hitMultiplier = 3;
+                    }
+
                     damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                         battleCtx,
                         moveBattler,
                         battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, defender)],
                         battleCtx->fieldConditionsMask,
-                        0,
+                        inPower,
                         0,
                         battler,
                         defender,
@@ -9596,6 +9624,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         defender,
                         damageToTarget,
                         &battleCtx->moveStatusFlags);
+
+                    damageToTarget *= hitMultiplier;
 
                     if (damageToTarget >= defenderPokemonCurHP) {
                         if (moveBattler == MOVE_PURSUIT) {
