@@ -9338,6 +9338,73 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
     return type;
 }
 
+static u32 BattleAI_CalcEffectiveSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int speedStage = battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED];
+    int ability = Battler_Ability(battleCtx, battler);
+    u8 itemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    u32 speed;
+    int i;
+
+    speedStage = CompareSpeed_ApplySimple(battleCtx, battler, speedStage);
+    speed = battleCtx->battleMons[battler].speed
+        * sStatStageBoosts[speedStage].numerator
+        / sStatStageBoosts[speedStage].denominator;
+
+    if (NO_CLOUD_NINE) {
+        if ((ability == ABILITY_SWIFT_SWIM && WEATHER_IS_RAIN)
+            || (ability == ABILITY_CHLOROPHYLL && WEATHER_IS_SUN)
+            || (ability == ABILITY_SLUSH_RUSH && WEATHER_IS_HAIL)
+            || (ability == ABILITY_SAND_RUSH && WEATHER_IS_SAND)) {
+            speed *= 2;
+        }
+    }
+
+    for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
+        if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
+            if (!(battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_EMBARGO)
+                && (ability != ABILITY_KLUTZ
+                    || BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT) != HOLD_EFFECT_SPEED_DOWN_GROUNDED)) {
+                speed /= 2;
+                break;
+            }
+        }
+    }
+
+    if (itemEffect == HOLD_EFFECT_CHOICE_SPEED) {
+        speed = speed * 15 / 10;
+    }
+
+    if (itemEffect == HOLD_EFFECT_DITTO_SPEED_UP
+        && battleCtx->battleMons[battler].species == SPECIES_DITTO) {
+        speed *= 2;
+    }
+
+    if (ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler].status & MON_CONDITION_ANY)) {
+        speed = speed * 15 / 10;
+    } else if (battleCtx->battleMons[battler].status & MON_CONDITION_PARALYSIS) {
+        speed /= 2;
+    }
+
+    if (ability == ABILITY_SLOW_START
+        && battleCtx->totalTurns - battleCtx->battleMons[battler].moveEffectsData.slowStartTurnNumber < 5) {
+        speed /= 2;
+    }
+
+    if (ability == ABILITY_UNBURDEN
+        && battleCtx->battleMons[battler].moveEffectsData.canUnburden
+        && battleCtx->battleMons[battler].heldItem == ITEM_NONE) {
+        speed *= 2;
+    }
+
+    if (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] & SIDE_CONDITION_TAILWIND
+        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM)) {
+        speed *= 2;
+    }
+
+    return speed;
+}
+
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
     int i, j;
@@ -9355,10 +9422,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     Pokemon *battlerPokemon;
     u16 battlerPokemonSpecies;
     u16 battlerPokemonCurHP;
-    u16 battlerPokemonSpeed;
+    BOOL battlerFirst;
+    BOOL defenderFirst;
     Pokemon *defenderPokemon;
     u16 defenderPokemonCurHP;
-    u16 defenderPokemonSpeed;
     BattleContext *battleCtx = BattleSystem_GetBattleContext(battleSys);
     u64 lhs, rhs;
     // s8 highestPriorityMove;
@@ -9451,10 +9518,33 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 }
             }
 
-            battlerPokemonSpeed = Pokemon_GetValue(battlerPokemon, MON_DATA_SPEED, NULL);
-            defenderPokemonSpeed = Pokemon_GetValue(defenderPokemon, MON_DATA_SPEED, NULL);
+            {
+                BOOL battlerStalled = Battler_Ability(battleCtx, battler) == ABILITY_STALL
+                    || Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_PRIORITY_DOWN;
+                BOOL defenderStalled = Battler_Ability(battleCtx, defender) == ABILITY_STALL
+                    || Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_PRIORITY_DOWN;
 
-            if (isTrainerKOAI && (defenderPokemonSpeed > battlerPokemonSpeed)) {
+                if (battlerStalled && !defenderStalled) {
+                    battlerFirst = FALSE;
+                    defenderFirst = TRUE;
+                } else if (!battlerStalled && defenderStalled) {
+                    battlerFirst = TRUE;
+                    defenderFirst = FALSE;
+                } else {
+                    // Both stalled or neither: resolve by effective speed (Trick Room applies)
+                    u32 battlerEffSpeed = BattleAI_CalcEffectiveSpeed(battleSys, battleCtx, battler);
+                    u32 defenderEffSpeed = BattleAI_CalcEffectiveSpeed(battleSys, battleCtx, defender);
+                    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+                        battlerFirst = battlerEffSpeed <= defenderEffSpeed;
+                        defenderFirst = defenderEffSpeed < battlerEffSpeed;
+                    } else {
+                        battlerFirst = battlerEffSpeed >= defenderEffSpeed;
+                        defenderFirst = defenderEffSpeed > battlerEffSpeed;
+                    }
+                }
+            }
+
+            if (isTrainerKOAI && defenderFirst) {
                 // AI is fast KO'd by player
                 continue;
             }
@@ -9501,7 +9591,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 }
             }
 
-            if (isAIKOTrainer && (battlerPokemonSpeed >= defenderPokemonSpeed)) {
+            if (isAIKOTrainer && battlerFirst) {
                 if (Battler_IsTrapped(battleSys, battleCtx, defender)) {
                     return i;
                 }
@@ -9539,7 +9629,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
             if (lhs >= rhs) {
                 // AI deals more damage to player than it takes
-                if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+                if (battlerFirst) {
                     score = 4;
                     if (score > maxScore) {
                         maxScore = score;
@@ -9555,7 +9645,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 continue;
             }
 
-            if (battlerPokemonSpeed >= defenderPokemonSpeed) {
+            if (battlerFirst) {
                 score = 2;
                 if (score > maxScore) {
                     maxScore = score;
