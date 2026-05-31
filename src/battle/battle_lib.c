@@ -9788,7 +9788,9 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                             inPower = MOVE_DATA(moveBattler).power * 2;
                         }
                     } else if (moveEffect == BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP) {
-                        inPower = 102;
+                        int friendship = Pokemon_GetValue(battlerPokemon, MON_DATA_FRIENDSHIP, NULL);
+                        inPower = friendship * 2 / 5;
+                        if (inPower < 1) inPower = 1;
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT) {
                         int defWeight = battleCtx->battleMons[defender].weight;
                         if (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIGHT_METAL)) {
