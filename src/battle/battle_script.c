@@ -1406,26 +1406,6 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
 
-    if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_HP_DRAIN_ON_ATK) {
-        battleCtx->damage = battleCtx->damage * (100 + Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0)) / 100;
-    }
-
-    if (Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_BOOST_REPEATED) {
-        battleCtx->damage = battleCtx->damage * (10 + ATTACKING_MON.moveEffectsData.metronomeTurns) / 10;
-    }
-
-    if (ATTACKING_MON.moveEffectsData.meFirst) {
-        // TODO: Document how this works after documenting the Me First behavior.
-        if (battleCtx->meFirstTurnOrder == ATTACKING_MON.moveEffectsData.meFirstTurnNumber) {
-            ATTACKING_MON.moveEffectsData.meFirstTurnNumber--;
-        }
-
-        if (battleCtx->meFirstTurnOrder - ATTACKING_MON.moveEffectsData.meFirstTurnNumber < 2) {
-            battleCtx->damage = battleCtx->damage * 15 / 10;
-        } else {
-            ATTACKING_MON.moveEffectsData.meFirst = 0;
-        }
-    }
 }
 
 /**

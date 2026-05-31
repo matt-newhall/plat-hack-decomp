@@ -8376,6 +8376,26 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         damage *= 2;
     }
 
+    if (attackerParams.heldItemEffect == HOLD_EFFECT_HP_DRAIN_ON_ATK) {
+        damage = damage * (100 + attackerParams.heldItemPower) / 100;
+    }
+
+    if (attackerParams.heldItemEffect == HOLD_EFFECT_BOOST_REPEATED) {
+        damage = damage * (10 + battleCtx->battleMons[attacker].moveEffectsData.metronomeTurns) / 10;
+    }
+
+    if (battleCtx->battleMons[attacker].moveEffectsData.meFirst) {
+        if (battleCtx->meFirstTurnOrder == battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber) {
+            battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber--;
+        }
+
+        if (battleCtx->meFirstTurnOrder - battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber < 2) {
+            damage = damage * 15 / 10;
+        } else {
+            battleCtx->battleMons[attacker].moveEffectsData.meFirst = 0;
+        }
+    }
+
     return damage;
 }
 
