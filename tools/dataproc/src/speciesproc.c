@@ -46,10 +46,10 @@ typedef struct SpeciesEvolutionList {
 } SpeciesEvolutionList;
 
 typedef struct SpeciesHeights {
-    u8   back_female;
-    u8   back_male;
-    u8   front_female;
-    u8   front_male;
+    s8   back_female;
+    s8   back_male;
+    s8   front_female;
+    s8   front_male;
     bool has_female;
     bool has_male;
 } SpeciesHeights;
@@ -834,14 +834,14 @@ static SpeciesHeights proc_heights(datafile_t *df, enum GenderRatio ratio) {
 
     if (ratio != GENDER_RATIO_FEMALE_ONLY) {
         result.has_male   = true;
-        result.back_male  = dp_u8(dp_objmemb(back, "male"));
-        result.front_male = dp_u8(dp_objmemb(front, "male"));
+        result.back_male  = dp_s8(dp_objmemb(back, "male"));
+        result.front_male = dp_s8(dp_objmemb(front, "male"));
     }
 
     if (ratio != GENDER_RATIO_MALE_ONLY && ratio != GENDER_RATIO_NO_GENDER) {
         result.has_female   = true;
-        result.back_female  = dp_u8(dp_objmemb(back, "female"));
-        result.front_female = dp_u8(dp_objmemb(front, "female"));
+        result.back_female  = dp_s8(dp_objmemb(back, "female"));
+        result.front_female = dp_s8(dp_objmemb(front, "female"));
     }
 
     return result;
