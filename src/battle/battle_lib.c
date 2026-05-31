@@ -9358,6 +9358,66 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
     return type;
 }
 
+static const ItemEffectTypePair sTypeResistBerries[] = {
+    { HOLD_EFFECT_WEAKEN_SE_FIRE,     TYPE_FIRE },
+    { HOLD_EFFECT_WEAKEN_SE_WATER,    TYPE_WATER },
+    { HOLD_EFFECT_WEAKEN_SE_ELECTRIC, TYPE_ELECTRIC },
+    { HOLD_EFFECT_WEAKEN_SE_GRASS,    TYPE_GRASS },
+    { HOLD_EFFECT_WEAKEN_SE_ICE,      TYPE_ICE },
+    { HOLD_EFFECT_WEAKEN_SE_FIGHT,    TYPE_FIGHTING },
+    { HOLD_EFFECT_WEAKEN_SE_POISON,   TYPE_POISON },
+    { HOLD_EFFECT_WEAKEN_SE_GROUND,   TYPE_GROUND },
+    { HOLD_EFFECT_WEAKEN_SE_FLYING,   TYPE_FLYING },
+    { HOLD_EFFECT_WEAKEN_SE_PSYCHIC,  TYPE_PSYCHIC },
+    { HOLD_EFFECT_WEAKEN_SE_BUG,      TYPE_BUG },
+    { HOLD_EFFECT_WEAKEN_SE_ROCK,     TYPE_ROCK },
+    { HOLD_EFFECT_WEAKEN_SE_GHOST,    TYPE_GHOST },
+    { HOLD_EFFECT_WEAKEN_SE_DRAGON,   TYPE_DRAGON },
+    { HOLD_EFFECT_WEAKEN_SE_DARK,     TYPE_DARK },
+    { HOLD_EFFECT_WEAKEN_SE_STEEL,    TYPE_STEEL },
+    { HOLD_EFFECT_WEAKEN_SE_FAIRY,    TYPE_FAIRY },
+    { HOLD_EFFECT_WEAKEN_NORMAL,      TYPE_NORMAL },
+};
+
+static int BattleAI_ApplyTypeResistBerry(BattleContext *battleCtx, u16 move, u8 attacker, u8 defender, int damage)
+{
+    int attackerAbility = Battler_Ability(battleCtx, attacker);
+    int defenderItemEffect = Battler_HeldItemEffect(battleCtx, defender);
+    int moveType = MOVE_DATA(move).type;
+    int k;
+
+    if (attackerAbility == ABILITY_NORMALIZE
+        && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_NORMAL;
+    } else if (attackerAbility == ABILITY_AERILATE && moveType == TYPE_NORMAL
+        && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_FLYING;
+    } else if (attackerAbility == ABILITY_REFRIGERATE && moveType == TYPE_NORMAL
+        && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_ICE;
+    } else if (attackerAbility == ABILITY_GALVANIZE && moveType == TYPE_NORMAL
+        && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+        moveType = TYPE_ELECTRIC;
+    }
+
+    for (k = 0; k < NELEMS(sTypeResistBerries); k++) {
+        if (defenderItemEffect == sTypeResistBerries[k].itemEffect
+            && moveType == sTypeResistBerries[k].type) {
+            if (sTypeResistBerries[k].itemEffect == HOLD_EFFECT_WEAKEN_NORMAL
+                || (battleCtx->moveStatusFlags & MOVE_STATUS_SUPER_EFFECTIVE)) {
+                damage /= 2;
+            }
+            break;
+        }
+    }
+
+    return damage;
+}
+
 static u32 BattleAI_CalcEffectiveSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     int speedStage = battleCtx->battleMons[battler].statBoosts[BATTLE_STAT_SPEED];
@@ -9540,6 +9600,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         damageToTarget,
                         &battleCtx->moveStatusFlags);
 
+                    damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveDefender, defender, battler, damageToTarget);
                     damageToTarget *= hitMultiplier;
 
                     if (damageToTarget >= battlerPokemonCurHP) {
@@ -9625,6 +9686,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         damageToTarget,
                         &battleCtx->moveStatusFlags);
 
+                    damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveBattler, battler, defender, damageToTarget);
                     damageToTarget *= hitMultiplier;
 
                     if (damageToTarget >= defenderPokemonCurHP) {
