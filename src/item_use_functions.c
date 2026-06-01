@@ -11,6 +11,7 @@
 
 #include "applications/party_menu/defs.h"
 #include "applications/party_menu/main.h"
+#include "applications/pc_boxes/pokemon_storage_session.h"
 #include "applications/poffin_case/main.h"
 #include "field/field_system.h"
 #include "overlay005/fieldmap.h"
@@ -93,6 +94,7 @@ static void UseSuperRodFromMenu(ItemMenuUseContext *usageContext, const ItemUseC
 static void UseEvoStoneFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseAbilityCapsuleFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseShinyCharmFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
+static void UsePcFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseEscapeRopeFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseAzureFluteFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
 static void UseVsRecorderFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext);
@@ -130,12 +132,16 @@ static enum ItemUseCheckResult CanUseFishingRod(const ItemUseContext *usageConte
 static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageContext);
 static enum ItemUseCheckResult CanUseAzureFlute(const ItemUseContext *usageContext);
 static BOOL MountOrUnmountBicycle(FieldTask *task);
+static BOOL ExitPcToField(FieldTask *task);
 static BOOL PrintRegisteredKeyItemUseMessage(FieldTask *task);
 static void RegisteredItem_CreateGoToAppTask(ItemFieldUseContext *usageContext, void *param1);
 static BOOL RegisteredItem_GoToApp(FieldTask *task);
 static BOOL WarpWithEscapeRope(FieldTask *task);
 static BOOL sub_020685AC(FieldTask *task);
 static void PrintRegisteredKeyItemError(ItemFieldUseContext *usageContext, u32 param1);
+static BOOL UseHealingKeyItemInField(ItemFieldUseContext *usageContext);
+static void *OpenPartyMenuForRegisteredHealingItem(void *fieldSystem);
+static BOOL UsePortaPCInField(ItemFieldUseContext *usageContext);
 
 // clang-format off
 static const ItemUseFuncDat sItemUseFuncs[] = {
@@ -166,6 +172,8 @@ static const ItemUseFuncDat sItemUseFuncs[] = {
     [ITEM_USE_FUNC_GRACIDEA]     = { UseGracideaFromMenu,    UseGracideaInField,    NULL              },
     [ITEM_USE_FUNC_ABILITY_CAPSULE] = { UseAbilityCapsuleFromMenu, NULL,            NULL              },
     [ITEM_USE_FUNC_SHINY_CHARM]  = { UseShinyCharmFromMenu,  NULL,                  NULL              },
+    [ITEM_USE_FUNC_OPEN_PC]            = { UsePcFromMenu,          UsePortaPCInField,          NULL              },
+    [ITEM_USE_FUNC_HEALING_KEY_ITEM]   = { UseHealingItemFromMenu, UseHealingKeyItemInField,   NULL              }
 };
 // clang-format on
 
@@ -975,6 +983,33 @@ static void UseShinyCharmFromMenu (ItemMenuUseContext *usageContext, const ItemU
     StartMenu_SetCallback(menu, StartMenu_ExitPartyMenu);
 }
 
+static void UsePcFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
+{
+    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
+    StartMenu *menu = FieldTask_GetEnv(usageContext->fieldTask);
+    PokemonStorageSession *storageSession = Heap_Alloc(HEAP_ID_FIELD2, sizeof(PokemonStorageSession));
+
+    storageSession->saveData = fieldSystem->saveData;
+    storageSession->boxMode = PC_MODE_MOVE_MONS;
+    storageSession->recordBoxUseInJournal = FALSE;
+
+    FieldSystem_OpenPokemonStorage(fieldSystem, storageSession);
+    menu->taskData = storageSession;
+    StartMenu_SetCallback(menu, ExitPcToField);
+}
+
+static BOOL ExitPcToField(FieldTask *task)
+{
+    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);
+    StartMenu *menu = FieldTask_GetEnv(task);
+
+    Heap_Free(menu->taskData);
+    FieldSystem_StartFieldMap(fieldSystem);
+    menu->state = START_MENU_STATE_8;
+
+    return FALSE;
+}
+
 static void UseEscapeRopeFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
 {
     FieldSystem *fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
@@ -1087,6 +1122,24 @@ static BOOL UseGracideaInField(ItemFieldUseContext *usageContext)
 static void *OpenPartyMenuForGracidea(void *fieldSystem)
 {
     return FieldSystem_OpenPartyMenu_SelectForItemUsage(fieldSystem, HEAP_ID_FIELD2, ITEM_GRACIDEA);
+}
+
+static BOOL UseHealingKeyItemInField(ItemFieldUseContext *usageContext)
+{
+    RegisteredItem_CreateGoToAppTask(usageContext, OpenPartyMenuForRegisteredHealingItem);
+    return TRUE;
+}
+
+static void *OpenPartyMenuForRegisteredHealingItem(void *fieldSystem)
+{
+    u16 item = (u16)Bag_GetRegisteredItem(SaveData_GetBag(((FieldSystem *)fieldSystem)->saveData));
+    return FieldSystem_OpenPartyMenu_SelectForItemUsage(fieldSystem, HEAP_ID_FIELD2, item);
+}
+
+static BOOL UsePortaPCInField(ItemFieldUseContext *usageContext)
+{
+    sub_02068584(usageContext, SCRIPT_ID(COMMON_SCRIPTS, 58));
+    return FALSE;
 }
 
 BOOL sub_02069238(FieldSystem *fieldSystem)
