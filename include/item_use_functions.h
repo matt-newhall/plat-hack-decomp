@@ -73,5 +73,6 @@ u32 ItemUseFunction_Get(u16 funcType, u16 functionIdx);
 void ItemUseContext_Init(FieldSystem *fieldSystem, ItemUseContext *param1);
 BOOL BerryPatch_IsEmpty(const ItemUseContext *usageContext);
 BOOL sub_02069238(FieldSystem *fieldSystem);
+BOOL FieldSystem_TriggerPortablePC(FieldSystem *fieldSystem);
 
 #endif // POKEPLATINUM_ITEM_USE_FUNCTIONS_H

@@ -30,8 +30,7 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
     { ITEM_ESCAPE_ROPE, 0x2 },
     { ITEM_REPEL, 0x2 },
     { ITEM_SUPER_REPEL, 0x3 },
-    { ITEM_MAX_REPEL, 0x4 },
-    { ITEM_PORTA_PC, 0x0 }
+    { ITEM_MAX_REPEL, 0x4 }
 };
 
 const u16 JubilifeMartSpecialties[] = {

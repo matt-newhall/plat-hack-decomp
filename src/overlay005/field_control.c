@@ -132,6 +132,10 @@ void FieldInput_Update(FieldInput *input, FieldSystem *fieldSystem, u16 pressedK
             input->registeredItem = TRUE;
         }
 
+        if (pressedKeys & PAD_BUTTON_R) {
+            input->dummy2 = TRUE;
+        }
+
         if (pressedKeys & PAD_BUTTON_A) {
             input->interact = TRUE;
         }
@@ -324,6 +328,11 @@ BOOL FieldInput_Process(const FieldInput *input, FieldSystem *fieldSystem)
     }
 
     if (input->registeredItem && sub_02069238(fieldSystem) == TRUE) {
+        return TRUE;
+    }
+
+    if (input->dummy2 && FieldSystem_IsInValidLocation(fieldSystem) == TRUE) {
+        FieldSystem_TriggerPortablePC(fieldSystem);
         return TRUE;
     }
 

@@ -894,7 +894,7 @@ _0BEE:
     GoTo _0C1C
 
 _0C06:
-    GoToIfEq VAR_0x8004, 0xFF, _PC_Boot_Skip
+    GoToIfSet FLAG_UNK_0x0BFF, _PC_Boot_Skip
     LoadPCAnimation ANIMATION_TAG_PC
     PlayPCBootUpAnimation ANIMATION_TAG_PC
     WaitForAnimation ANIMATION_TAG_PC
@@ -902,7 +902,7 @@ _PC_Boot_Skip:
     Return
 
 _0C11:
-    GoToIfEq VAR_0x8004, 0xFF, _PC_Shutdown_Skip
+    GoToIfSet FLAG_UNK_0x0BFF, _PC_Shutdown_Skip
     PlayPCShutDownAnimation ANIMATION_TAG_PC
     WaitForAnimation ANIMATION_TAG_PC
     UnloadAnimation ANIMATION_TAG_PC
@@ -1119,6 +1119,7 @@ _0F70:
     CloseMessage
     PlaySE SEQ_SE_DP_PC_LOGOFF
     Call _0C11
+    ClearFlag FLAG_UNK_0x0BFF
     ReleaseAll
     End
 
@@ -1131,7 +1132,7 @@ _0F80:
 _0F94:
     FadeScreenOut
     WaitFadeScreen
-    GoToIfEq VAR_0x8004, 0xFF, _PC_Unload_Skip
+    GoToIfSet FLAG_UNK_0x0BFF, _PC_Unload_Skip
     UnloadAnimation ANIMATION_TAG_PC
 _PC_Unload_Skip:
     Return
@@ -1684,7 +1685,7 @@ CommonScript_GriseousOrbCouldNotBeRemoved:
 
 CommonScript_PortablePC:
     LockAll
-    SetVar VAR_0x8004, 0xFF
+    SetFlag FLAG_UNK_0x0BFF
     PlaySE SEQ_SE_DP_PC_ON
     BufferPlayerName 0
     Message pl_msg_00000213_00032
