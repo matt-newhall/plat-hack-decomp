@@ -3,63 +3,63 @@
   "messages": [
     {
       "id": "pl_msg_00000361_00000",
-      "en_US": "POISONED"
+      "en_US": "Poisoned"
     },
     {
       "id": "pl_msg_00000361_00001",
-      "en_US": "PARALYZED"
+      "en_US": "Paralyzed"
     },
     {
       "id": "pl_msg_00000361_00002",
-      "en_US": "ASLEEP"
+      "en_US": "Asleep"
     },
     {
       "id": "pl_msg_00000361_00003",
-      "en_US": "BURNED"
+      "en_US": "Burned"
     },
     {
       "id": "pl_msg_00000361_00004",
-      "en_US": "FROZEN"
+      "en_US": "Frozen"
     },
     {
       "id": "MenuEntries_Text_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_SingleBattle",
-      "en_US": "SINGLE BATTLE"
+      "en_US": "Single Battle"
     },
     {
       "id": "MenuEntries_Text_DoubleBattle",
-      "en_US": "DOUBLE BATTLE"
+      "en_US": "Double Battle"
     },
     {
       "id": "MenuEntries_Text_MixBattle",
-      "en_US": "MIX BATTLE"
+      "en_US": "Mix Battle"
     },
     {
       "id": "MenuEntries_Text_MultiBattle",
-      "en_US": "MULTI BATTLE"
+      "en_US": "Multi Battle"
     },
     {
       "id": "MenuEntries_Text_Battle_Info",
-      "en_US": "INFO"
+      "en_US": "Info"
     },
     {
       "id": "MenuEntries_Text_Exit2",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_ListMenu_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_BattleTower_JoinGroup",
-      "en_US": "JOIN GROUP"
+      "en_US": "Join Group"
     },
     {
       "id": "MenuEntries_Text_BattleTower_BecomeLeader",
-      "en_US": "BECOME LEADER"
+      "en_US": "Become Leader"
     },
     {
       "id": "pl_msg_00000361_00015",
@@ -71,63 +71,63 @@
     },
     {
       "id": "pl_msg_00000361_00017",
-      "en_US": "COOL"
+      "en_US": "Cool"
     },
     {
       "id": "pl_msg_00000361_00018",
-      "en_US": "BEAUTY"
+      "en_US": "Beauty"
     },
     {
       "id": "pl_msg_00000361_00019",
-      "en_US": "CUTE"
+      "en_US": "Cute"
     },
     {
       "id": "pl_msg_00000361_00020",
-      "en_US": "TOUGH"
+      "en_US": "Tough"
     },
     {
       "id": "pl_msg_00000361_00021",
-      "en_US": "SMART"
+      "en_US": "Smart"
     },
     {
       "id": "pl_msg_00000361_00022",
-      "en_US": "TRADE"
+      "en_US": "Trade"
     },
     {
       "id": "pl_msg_00000361_00023",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "pl_msg_00000361_00024",
-      "en_US": "PRE-DAMAGE"
+      "en_US": "Pre-Damage"
     },
     {
       "id": "pl_msg_00000361_00025",
-      "en_US": "STATUS"
+      "en_US": "Status"
     },
     {
       "id": "MenuEntries_Text_Status_Poison",
-      "en_US": "POISON"
+      "en_US": "Poison"
     },
     {
       "id": "MenuEntries_Text_Status_Paralysis",
-      "en_US": "PARALYSIS"
+      "en_US": "Paralysis"
     },
     {
       "id": "MenuEntries_Text_Status_Sleep",
-      "en_US": "SLEEP"
+      "en_US": "Sleep"
     },
     {
       "id": "MenuEntries_Text_Status_Burn",
-      "en_US": "BURN"
+      "en_US": "Burn"
     },
     {
       "id": "MenuEntries_Text_Status_Freeze",
-      "en_US": "FREEZE"
+      "en_US": "Freeze"
     },
     {
       "id": "MenuEntries_Text_Status_Toxic",
-      "en_US": "TOXIC"
+      "en_US": "Toxic"
     },
     {
       "id": "pl_msg_00000361_00032",
@@ -143,11 +143,11 @@
     },
     {
       "id": "pl_msg_00000361_00035",
-      "en_US": "HALL OF FAME"
+      "en_US": "Hall of Fame"
     },
     {
       "id": "pl_msg_00000361_00036",
-      "en_US": "SWITCH OFF"
+      "en_US": "Switch Off"
     },
     {
       "id": "pl_msg_00000361_00037",
@@ -159,39 +159,39 @@
     },
     {
       "id": "pl_msg_00000361_00039",
-      "en_US": "CONFIRM"
+      "en_US": "Confirm"
     },
     {
       "id": "pl_msg_00000361_00040",
-      "en_US": "RULES"
+      "en_US": "Rules"
     },
     {
       "id": "MenuEntries_Text_Yes",
-      "en_US": "YES"
+      "en_US": "Yes"
     },
     {
       "id": "MenuEntries_Text_No",
-      "en_US": "NO"
+      "en_US": "No"
     },
     {
       "id": "MenuEntries_Text_TrainerAppearancesExit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "pl_msg_00000361_00044",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "MenuEntries_Text_TypePreferenceFire",
-      "en_US": "FIRE"
+      "en_US": "Fire"
     },
     {
       "id": "MenuEntries_Text_TypePreferenceWater",
-      "en_US": "WATER"
+      "en_US": "Water"
     },
     {
       "id": "MenuEntries_Text_TypePreferenceGrass",
-      "en_US": "GRASS"
+      "en_US": "Grass"
     },
     {
       "id": "pl_msg_00000361_00048",
@@ -199,7 +199,7 @@
     },
     {
       "id": "pl_msg_00000361_00049",
-      "en_US": "BATTLE"
+      "en_US": "Battle"
     },
     {
       "id": "MenuEntries_Text_TrainerAppearanceVariant1",
@@ -219,15 +219,15 @@
     },
     {
       "id": "pl_msg_00000361_00054",
-      "en_US": "FERTILIZE"
+      "en_US": "Fertilize"
     },
     {
       "id": "pl_msg_00000361_00055",
-      "en_US": "PLANT BERRY"
+      "en_US": "Plant Berry"
     },
     {
       "id": "pl_msg_00000361_00056",
-      "en_US": "DRAW"
+      "en_US": "Draw"
     },
     {
       "id": "pl_msg_00000361_00057",
@@ -235,11 +235,11 @@
     },
     {
       "id": "pl_msg_00000361_00058",
-      "en_US": "SOMEONE’S PC"
+      "en_US": "Someone’s PC"
     },
     {
       "id": "pl_msg_00000361_00059",
-      "en_US": "BEBE’S PC"
+      "en_US": "Bebe’s PC"
     },
     {
       "id": "pl_msg_00000361_00060",
@@ -247,18 +247,19 @@
     },
     {
       "id": "pl_msg_00000361_00061",
-      "en_US": "HALL OF FAME"
+      "en_US": "Hall of Fame"
     },
     {
       "id": "pl_msg_00000361_00062",
-      "en_US": "OAK’S PC"
+      "en_US": "Oak’s PC"
     },
     {
       "id": "pl_msg_00000361_00063",
-      "en_US": "ROWAN’S PC"
+      "en_US": "Rowan’s PC"
     },
     {
       "id": "pl_msg_00000361_00064",
+      "en_US": "Switch Off"
     },
     {
       "id": "pl_msg_00000361_00065",
@@ -266,39 +267,39 @@
     },
     {
       "id": "MenuEntries_Text_PokemonStorageDepositPokemon",
-      "en_US": "DEPOSIT POKéMON"
+      "en_US": "Deposit Pokémon"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageWithdrawPokemon",
-      "en_US": "WITHDRAW POKéMON"
+      "en_US": "Withdraw Pokémon"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageMovePokemon",
-      "en_US": "MOVE POKéMON"
+      "en_US": "Move Pokémon"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageMoveItems",
-      "en_US": "MOVE ITEMS"
+      "en_US": "Move Items"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageComparePokemon",
-      "en_US": "COMPARE POKéMON"
+      "en_US": "Compare Pokémon"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageSeeYa",
-      "en_US": "SEE YA!"
+      "en_US": "See Ya!"
     },
     {
       "id": "pl_msg_00000361_00071",
-      "en_US": "MAILBOX"
+      "en_US": "Mailbox"
     },
     {
       "id": "pl_msg_00000361_00072",
-      "en_US": "BALL CAPSULES"
+      "en_US": "Ball Capsules"
     },
     {
       "id": "pl_msg_00000361_00073",
-      "en_US": "LOG OUT"
+      "en_US": "Log Out"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageDepositPokemonDescription",
@@ -362,7 +363,7 @@
     },
     {
       "id": "pl_msg_00000361_00083",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "pl_msg_00000361_00084",
@@ -406,7 +407,7 @@
     },
     {
       "id": "MenuEntries_Text_BattleTower_Cancel",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "pl_msg_00000361_00095",
@@ -414,19 +415,19 @@
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_ContestBasics",
-      "en_US": "CONTEST BASICS"
+      "en_US": "Contest Basics"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_TypesOfContests",
-      "en_US": "TYPES OF CONTESTS"
+      "en_US": "Types of Contests"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_ContestRanks",
-      "en_US": "CONTEST RANKS"
+      "en_US": "Contest Ranks"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_Cancel",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "pl_msg_00000361_00100",
@@ -450,47 +451,47 @@
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_NormalRank",
-      "en_US": "NORMAL RANK"
+      "en_US": "Normal Rank"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_GreatRank",
-      "en_US": "GREAT RANK"
+      "en_US": "Great Rank"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_UltraRank",
-      "en_US": "ULTRA RANK"
+      "en_US": "Ultra Rank"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_MasterRank",
-      "en_US": "MASTER RANK"
+      "en_US": "Master Rank"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_ContestRankExit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_CoolContest",
-      "en_US": "COOL CONTEST"
+      "en_US": "Cool Contest"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_BeautyContest",
-      "en_US": "BEAUTY CONTEST"
+      "en_US": "Beauty Contest"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_CuteContest",
-      "en_US": "CUTE CONTEST"
+      "en_US": "Cute Contest"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_SmartContest",
-      "en_US": "SMART CONTEST"
+      "en_US": "Smart Contest"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_ToughContest",
-      "en_US": "TOUGH CONTEST"
+      "en_US": "Tough Contest"
     },
     {
       "id": "MenuEntries_Text_ContestRegistration_ContestTypeExit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_1F",
@@ -522,11 +523,11 @@
     },
     {
       "id": "pl_msg_00000361_00123",
-      "en_US": "LOOKOUT"
+      "en_US": "Lookout"
     },
     {
       "id": "MenuEntries_Text_ElevatorExit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_GameCorner_50Coins",
@@ -538,31 +539,31 @@
     },
     {
       "id": "MenuEntries_Text_GameCorner_NoThanks",
-      "en_US": "NO THANKS"
+      "en_US": "No Thanks"
     },
     {
       "id": "pl_msg_00000361_00128",
-      "en_US": "INFO"
+      "en_US": "Info"
     },
     {
       "id": "pl_msg_00000361_00129",
-      "en_US": "TRADE"
+      "en_US": "Trade"
     },
     {
       "id": "pl_msg_00000361_00130",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "pl_msg_00000361_00131",
-      "en_US": "OFFER POKéMON?"
+      "en_US": "Offer Pokémon?"
     },
     {
       "id": "pl_msg_00000361_00132",
-      "en_US": "SEEK POKéMON?"
+      "en_US": "Seek Pokémon?"
     },
     {
       "id": "pl_msg_00000361_00133",
-      "en_US": "UNDERSTOOD!"
+      "en_US": "Understood!"
     },
     {
       "id": "pl_msg_00000361_00134",
@@ -574,131 +575,131 @@
     },
     {
       "id": "pl_msg_00000361_00136",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "MenuEntries_Text_CounterpartHand_Right",
-      "en_US": "RIGHT"
+      "en_US": "Right"
     },
     {
       "id": "MenuEntries_Text_CounterpartHand_Left",
-      "en_US": "LEFT"
+      "en_US": "Left"
     },
     {
       "id": "pl_msg_00000361_00139",
-      "en_US": "SPIN"
+      "en_US": "Spin"
     },
     {
       "id": "pl_msg_00000361_00140",
-      "en_US": "RECORDS"
+      "en_US": "Records"
     },
     {
       "id": "MenuEntries_Text_BattleTower_Challenge",
-      "en_US": "CHALLENGE"
+      "en_US": "Challenge"
     },
     {
       "id": "MenuEntries_Text_BattleTower_Info",
-      "en_US": "INFO"
+      "en_US": "Info"
     },
     {
       "id": "MenuEntries_Text_BattleTower_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "pl_msg_00000361_00144",
-      "en_US": "SINGLE"
+      "en_US": "Single"
     },
     {
       "id": "pl_msg_00000361_00145",
-      "en_US": "DOUBLE"
+      "en_US": "Double"
     },
     {
       "id": "MenuEntries_Text_BattleTowerBattleRoom_KeepGoing",
-      "en_US": "KEEP GOING"
+      "en_US": "Keep Going"
     },
     {
       "id": "MenuEntries_Text_BattleTowerBattleRoom_Rest",
-      "en_US": "REST"
+      "en_US": "Rest"
     },
     {
       "id": "MenuEntries_Text_BattleTowerBattleRoom_Retire",
-      "en_US": "RETIRE"
+      "en_US": "Retire"
     },
     {
       "id": "pl_msg_00000361_00149",
-      "en_US": "BECOME LEADER"
+      "en_US": "Become Leader"
     },
     {
       "id": "pl_msg_00000361_00150",
-      "en_US": "JOIN GROUP"
+      "en_US": "Join Group"
     },
     {
       "id": "MenuEntries_Text_BattleTower_CheckLeaders",
-      "en_US": "CHECK LEADERS"
+      "en_US": "Check Leaders"
     },
     {
       "id": "MenuEntries_Text_BattleTower_ChallengeEarlierRoom",
-      "en_US": "CHALLENGE EARLIER ROOM"
+      "en_US": "Challenge Earlier Room"
     },
     {
       "id": "pl_msg_00000361_00153",
-      "en_US": "REGISTER A FRIEND?"
+      "en_US": "Register a Friend?"
     },
     {
       "id": "pl_msg_00000361_00154",
-      "en_US": "UNDERSTOOD!"
+      "en_US": "Understood!"
     },
     {
       "id": "pl_msg_00000361_00155",
-      "en_US": "TELL ME AGAIN"
+      "en_US": "Tell Me Again"
     },
     {
       "id": "pl_msg_00000361_00156",
-      "en_US": "OLD AMBER"
+      "en_US": "Old Amber"
     },
     {
       "id": "pl_msg_00000361_00157",
-      "en_US": "HELIX FOSSIL"
+      "en_US": "Helix Fossil"
     },
     {
       "id": "pl_msg_00000361_00158",
-      "en_US": "DOME FOSSIL"
+      "en_US": "Dome Fossil"
     },
     {
       "id": "pl_msg_00000361_00159",
-      "en_US": "ROOT FOSSIL"
+      "en_US": "Root Fossil"
     },
     {
       "id": "pl_msg_00000361_00160",
-      "en_US": "CLAW FOSSIL"
+      "en_US": "Claw Fossil"
     },
     {
       "id": "pl_msg_00000361_00161",
-      "en_US": "ARMOR FOSSIL"
+      "en_US": "Armor Fossil"
     },
     {
       "id": "pl_msg_00000361_00162",
-      "en_US": "SKULL FOSSIL"
+      "en_US": "Skull Fossil"
     },
     {
       "id": "MenuEntries_Text_BattlesForTwo",
-      "en_US": "BATTLES FOR TWO"
+      "en_US": "Battles for Two"
     },
     {
       "id": "MenuEntries_Text_BattlesForFour",
-      "en_US": "BATTLES FOR FOUR"
+      "en_US": "Battles for Four"
     },
     {
       "id": "pl_msg_00000361_00165",
-      "en_US": "GREET"
+      "en_US": "Greet"
     },
     {
       "id": "pl_msg_00000361_00166",
-      "en_US": "CONVERSE"
+      "en_US": "Converse"
     },
     {
       "id": "pl_msg_00000361_00167",
-      "en_US": "CHAT"
+      "en_US": "Chat"
     },
     {
       "id": "MenuEntries_Text_PrizeExchange_Prize",
@@ -706,7 +707,7 @@
     },
     {
       "id": "MenuEntries_Text_PrizeExchange_NoThanks",
-      "en_US": "NO THANKS"
+      "en_US": "No Thanks"
     },
     {
       "id": "pl_msg_00000361_00170",
@@ -726,95 +727,95 @@
     },
     {
       "id": "MenuEntries_Text_CoinCaseClown_Right",
-      "en_US": "RIGHT"
+      "en_US": "Right"
     },
     {
       "id": "MenuEntries_Text_CoinCaseClown_Left",
-      "en_US": "LEFT"
+      "en_US": "Left"
     },
     {
       "id": "pl_msg_00000361_00176",
-      "en_US": "VISUAL"
+      "en_US": "Visual"
     },
     {
       "id": "pl_msg_00000361_00177",
-      "en_US": "DANCE"
+      "en_US": "Dance"
     },
     {
       "id": "pl_msg_00000361_00178",
-      "en_US": "ACTING"
+      "en_US": "Acting"
     },
     {
       "id": "pl_msg_00000361_00179",
-      "en_US": "PRACTICE"
+      "en_US": "Practice"
     },
     {
       "id": "MenuEntries_Text_UndergroundManHousePCHeading_Flags",
-      "en_US": "FLAGS"
+      "en_US": "Flags"
     },
     {
       "id": "MenuEntries_Text_UndergroundManHousePCHeading_Spheres",
-      "en_US": "SPHERES"
+      "en_US": "Spheres"
     },
     {
       "id": "MenuEntries_Text_UndergroundManHousePCHeading_Traps",
-      "en_US": "TRAPS"
+      "en_US": "Traps"
     },
     {
       "id": "MenuEntries_Text_UndergroundManHousePCHeading_Goods",
-      "en_US": "GOODS"
+      "en_US": "Goods"
     },
     {
       "id": "MenuEntries_Text_UndergroundManHousePCHeading_Treasures",
-      "en_US": "TREASURES"
+      "en_US": "Treasures"
     },
     {
       "id": "pl_msg_00000361_00185",
-      "en_US": "CHALLENGE EARLIER ROOM"
+      "en_US": "Challenge Earlier Room"
     },
     {
       "id": "MenuEntries_Text_Area1",
-      "en_US": "AREA 1"
+      "en_US": "Area 1"
     },
     {
       "id": "MenuEntries_Text_Area2",
-      "en_US": "AREA 2"
+      "en_US": "Area 2"
     },
     {
       "id": "MenuEntries_Text_Area3",
-      "en_US": "AREA 3"
+      "en_US": "Area 3"
     },
     {
       "id": "MenuEntries_Text_Area4",
-      "en_US": "AREA 4"
+      "en_US": "Area 4"
     },
     {
       "id": "MenuEntries_Text_Area5",
-      "en_US": "AREA 5"
+      "en_US": "Area 5"
     },
     {
       "id": "MenuEntries_Text_Area6",
-      "en_US": "AREA 6"
+      "en_US": "Area 6"
     },
     {
       "id": "MenuEntries_Text_GreatMarshTramExit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "pl_msg_00000361_00193",
-      "en_US": "RED SHARD"
+      "en_US": "Red Shard"
     },
     {
       "id": "pl_msg_00000361_00194",
-      "en_US": "BLUE SHARD"
+      "en_US": "Blue Shard"
     },
     {
       "id": "pl_msg_00000361_00195",
-      "en_US": "YELLOW SHARD"
+      "en_US": "Yellow Shard"
     },
     {
       "id": "pl_msg_00000361_00196",
-      "en_US": "GREEN SHARD"
+      "en_US": "Green Shard"
     },
     {
       "id": "pl_msg_00000361_00197",
@@ -822,35 +823,35 @@
     },
     {
       "id": "MenuEntries_Text_PalPark_BasicRules",
-      "en_US": "BASIC RULES"
+      "en_US": "Basic Rules"
     },
     {
       "id": "MenuEntries_Text_PalPark_CatchingShow",
-      "en_US": "CATCHING SHOW"
+      "en_US": "Catching Show"
     },
     {
       "id": "MenuEntries_Text_PalPark_StockingPokemon",
-      "en_US": "STOCKING POKéMON"
+      "en_US": "Stocking Pokémon"
     },
     {
       "id": "MenuEntries_Text_PalPark_Stocking2_Unused",
-      "en_US": "STOCKING 2"
+      "en_US": "Stocking 2"
     },
     {
       "id": "MenuEntries_Text_PalPark_Understood",
-      "en_US": "UNDERSTOOD!"
+      "en_US": "Understood!"
     },
     {
       "id": "MenuEntries_Text_PalPark_Enter",
-      "en_US": "ENTER"
+      "en_US": "Enter"
     },
     {
       "id": "MenuEntries_Text_PalPark_Info",
-      "en_US": "INFO"
+      "en_US": "Info"
     },
     {
       "id": "MenuEntries_Text_PalPark_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "pl_msg_00000361_00206",
@@ -866,79 +867,79 @@
     },
     {
       "id": "pl_msg_00000361_00209",
-      "en_US": "RED SHARD"
+      "en_US": "Red Shard"
     },
     {
       "id": "pl_msg_00000361_00210",
-      "en_US": "BLUE SHARD"
+      "en_US": "Blue Shard"
     },
     {
       "id": "pl_msg_00000361_00211",
-      "en_US": "YELLOW SHARD"
+      "en_US": "Yellow Shard"
     },
     {
       "id": "pl_msg_00000361_00212",
-      "en_US": "GREEN SHARD"
+      "en_US": "Green Shard"
     },
     {
       "id": "MenuEntries_Text_CanalaveDock_IronIsland",
-      "en_US": "IRON ISLAND"
+      "en_US": "Iron Island"
     },
     {
       "id": "MenuEntries_Text_CanalaveDock_FullmoonIsland",
-      "en_US": "FULLMOON ISLAND"
+      "en_US": "Fullmoon Island"
     },
     {
       "id": "MenuEntries_Text_CanalaveDock_NewmoonIsland",
-      "en_US": "NEWMOON ISLAND"
+      "en_US": "Newmoon Island"
     },
     {
       "id": "pl_msg_00000361_00216",
-      "en_US": "FIGHT AREA"
+      "en_US": "Fight Area"
     },
     {
       "id": "pl_msg_00000361_00217",
-      "en_US": "SNOWPOINT CITY"
+      "en_US": "Snowpoint City"
     },
     {
       "id": "MenuEntries_Text_CanalaveDock_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_FreshWater",
-      "en_US": "FRESH WATER{CURSOR_X 80}$200"
+      "en_US": "Fresh Water{CURSOR_X 80}$200"
     },
     {
       "id": "MenuEntries_Text_SodaPop",
-      "en_US": "SODA POP{CURSOR_X 80}$300"
+      "en_US": "Soda Pop{CURSOR_X 80}$300"
     },
     {
       "id": "MenuEntries_Text_Lemonade",
-      "en_US": "LEMONADE{CURSOR_X 80}$350"
+      "en_US": "Lemonade{CURSOR_X 80}$350"
     },
     {
       "id": "MenuEntries_Text_NoThanks",
-      "en_US": "NO THANKS"
+      "en_US": "No Thanks"
     },
     {
       "id": "MenuEntries_Text_MulchShop_GrowthMulch",
-      "en_US": "GROWTH MULCH{CURSOR_X 90}$200"
+      "en_US": "Growth Mulch{CURSOR_X 90}$200"
     },
     {
       "id": "MenuEntries_Text_MulchShop_DampMulch",
-      "en_US": "DAMP MULCH{CURSOR_X 90}$200"
+      "en_US": "Damp Mulch{CURSOR_X 90}$200"
     },
     {
       "id": "MenuEntries_Text_MulchShop_StableMulch",
-      "en_US": "STABLE MULCH{CURSOR_X 90}$200"
+      "en_US": "Stable Mulch{CURSOR_X 90}$200"
     },
     {
       "id": "MenuEntries_Text_MulchShop_GooeyMulch",
-      "en_US": "GOOEY MULCH{CURSOR_X 90}$200"
+      "en_US": "Gooey Mulch{CURSOR_X 90}$200"
     },
     {
       "id": "MenuEntries_Text_MulchShop_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_NothingThanks",
@@ -958,183 +959,183 @@
     },
     {
       "id": "pl_msg_00000361_00232",
-      "en_US": "NO THANKS"
+      "en_US": "No Thanks"
     },
     {
       "id": "MenuEntries_Text_DigitalWatch",
-      "en_US": "DIGITAL WATCH"
+      "en_US": "Digital Watch"
     },
     {
       "id": "MenuEntries_Text_Stopwatch",
-      "en_US": "STOPWATCH"
+      "en_US": "Stopwatch"
     },
     {
       "id": "MenuEntries_Text_Calculator",
-      "en_US": "CALCULATOR"
+      "en_US": "Calculator"
     },
     {
       "id": "MenuEntries_Text_MemoPad",
-      "en_US": "MEMO PAD"
+      "en_US": "Memo Pad"
     },
     {
       "id": "MenuEntries_Text_AnalogWatch",
-      "en_US": "ANALOG WATCH"
+      "en_US": "Analog Watch"
     },
     {
       "id": "MenuEntries_Text_DotArtist",
-      "en_US": "DOT ARTIST"
+      "en_US": "Dot Artist"
     },
     {
       "id": "MenuEntries_Text_PokemonList",
-      "en_US": "POKéMON LIST"
+      "en_US": "Pokémon List"
     },
     {
       "id": "MenuEntries_Text_FriendshipChecker",
-      "en_US": "FRIENDSHIP CHECKER"
+      "en_US": "Friendship Checker"
     },
     {
       "id": "MenuEntries_Text_DowsingMachine",
-      "en_US": "DOWSING MACHINE"
+      "en_US": "Dowsing Machine"
     },
     {
       "id": "MenuEntries_Text_Counter",
-      "en_US": "COUNTER"
+      "en_US": "Counter"
     },
     {
       "id": "MenuEntries_Text_Pedometer",
-      "en_US": "PEDOMETER"
+      "en_US": "Pedometer"
     },
     {
       "id": "MenuEntries_Text_DayCareChecker",
-      "en_US": "DAY-CARE CHECKER"
+      "en_US": "Day-Care Checker"
     },
     {
       "id": "MenuEntries_Text_Roulette",
-      "en_US": "ROULETTE"
+      "en_US": "Roulette"
     },
     {
       "id": "MenuEntries_Text_CoinToss",
-      "en_US": "COIN TOSS"
+      "en_US": "Coin Toss"
     },
     {
       "id": "MenuEntries_Text_MoveTester",
-      "en_US": "MOVE TESTER"
+      "en_US": "Move Tester"
     },
     {
       "id": "MenuEntries_Text_MatchupChecker",
-      "en_US": "MATCHUP CHECKER"
+      "en_US": "Matchup Checker"
     },
     {
       "id": "MenuEntries_Text_AlarmClock",
-      "en_US": "ALARM CLOCK"
+      "en_US": "Alarm Clock"
     },
     {
       "id": "MenuEntries_Text_KitchenTimer",
-      "en_US": "KITCHEN TIMER"
+      "en_US": "Kitchen Timer"
     },
     {
       "id": "MenuEntries_Text_MarkingMap",
-      "en_US": "MARKING MAP"
+      "en_US": "Marking Map"
     },
     {
       "id": "MenuEntries_Text_BerrySearcher",
-      "en_US": "BERRY SEARCHER"
+      "en_US": "Berry Searcher"
     },
     {
       "id": "MenuEntries_Text_ColorChanger",
-      "en_US": "COLOR CHANGER"
+      "en_US": "Color Changer"
     },
     {
       "id": "MenuEntries_Text_Calendar",
-      "en_US": "CALENDAR"
+      "en_US": "Calendar"
     },
     {
       "id": "MenuEntries_Text_LinkSearcher",
-      "en_US": "LINK SEARCHER"
+      "en_US": "Link Searcher"
     },
     {
       "id": "MenuEntries_Text_TrainerCounter",
-      "en_US": "TRAINER COUNTER"
+      "en_US": "Trainer Counter"
     },
     {
       "id": "MenuEntries_Text_PokemonHistory",
-      "en_US": "POKéMON HISTORY"
+      "en_US": "Pokémon History"
     },
     {
       "id": "MenuEntries_Text_PoketchDescriptionsExit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_SinnohFolkStory_Part1",
-      "en_US": "PART 1"
+      "en_US": "Part 1"
     },
     {
       "id": "MenuEntries_Text_SinnohFolkStory_Part2",
-      "en_US": "PART 2"
+      "en_US": "Part 2"
     },
     {
       "id": "MenuEntries_Text_SinnohFolkStory_Part3",
-      "en_US": "PART 3"
+      "en_US": "Part 3"
     },
     {
       "id": "MenuEntries_Text_SinnohFolkStory_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_Article_DuskBall",
-      "en_US": "DUSK BALL"
+      "en_US": "Dusk Ball"
     },
     {
       "id": "MenuEntries_Text_Article_HealBall",
-      "en_US": "HEAL BALL"
+      "en_US": "Heal Ball"
     },
     {
       "id": "MenuEntries_Text_Article_QuickBall",
-      "en_US": "QUICK BALL"
+      "en_US": "Quick Ball"
     },
     {
       "id": "MenuEntries_Text_Article_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_Article_DiveBall",
-      "en_US": "DIVE BALL"
+      "en_US": "Dive Ball"
     },
     {
       "id": "MenuEntries_Text_GalacticReport_CreationOfSpace",
-      "en_US": "THE CREATION OF SPACE"
+      "en_US": "The Creation of Space"
     },
     {
       "id": "MenuEntries_Text_GalacticReport_MythicalPokemon",
-      "en_US": "MYTHICAL POKéMON"
+      "en_US": "Mythical Pokémon"
     },
     {
       "id": "MenuEntries_Text_GalacticReport_RedChain",
-      "en_US": "RED CHAIN"
+      "en_US": "Red Chain"
     },
     {
       "id": "MenuEntries_Text_GalacticReport_Exit",
-      "en_US": "EXIT"
+      "en_US": "Exit"
     },
     {
       "id": "MenuEntries_Text_Record",
-      "en_US": "RECORD"
+      "en_US": "Record"
     },
     {
       "id": "pl_msg_00000361_00273",
-      "en_US": "RED SHARDS"
+      "en_US": "Red Shards"
     },
     {
       "id": "pl_msg_00000361_00274",
-      "en_US": "BLUE SHARDS"
+      "en_US": "Blue Shards"
     },
     {
       "id": "pl_msg_00000361_00275",
-      "en_US": "YELLOW SHARDS"
+      "en_US": "Yellow Shards"
     },
     {
       "id": "pl_msg_00000361_00276",
-      "en_US": "GREEN SHARDS"
+      "en_US": "Green Shards"
     },
     {
       "id": "pl_msg_00000361_00277",
@@ -1150,27 +1151,27 @@
     },
     {
       "id": "MenuEntries_Text_VolatileStatus_Confusion",
-      "en_US": "CONFUSION"
+      "en_US": "Confusion"
     },
     {
       "id": "MenuEntries_Text_VolatileStatus_Infatuation",
-      "en_US": "INFATUATION"
+      "en_US": "Infatuation"
     },
     {
       "id": "MenuEntries_Text_VolatileStatus_LeechSeed",
-      "en_US": "LEECH SEED"
+      "en_US": "Leech Seed"
     },
     {
       "id": "MenuEntries_Text_VolatileStatus_Nightmare",
-      "en_US": "NIGHTMARE"
+      "en_US": "Nightmare"
     },
     {
       "id": "MenuEntries_Text_VolatileStatus_Encore",
-      "en_US": "ENCORE"
+      "en_US": "Encore"
     },
     {
       "id": "MenuEntries_Text_VolatileStatus_Disable",
-      "en_US": "DISABLE"
+      "en_US": "Disable"
     }
   ]
 }
