@@ -1757,8 +1757,8 @@ _SimplePCMenu:
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _SimplePC_StorageEntry
-    GoToIfEq VAR_0x8008, 1, PreDamageHandler
-    GoToIfEq VAR_0x8008, 2, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 1, _SimplePC_PreDamageHandler
+    GoToIfEq VAR_0x8008, 2, _SimplePC_VolatileStatus_Submenu
     GoToIfEq VAR_0x8008, 3, _SimplePCPokevialHandler
     GoTo _0F70
 
@@ -1833,6 +1833,35 @@ _SimplePC_PostStorage:
 
 _SimplePCPokevialHandler:
     Call _PokevialCore
+    GoTo _SimplePCMenu
+
+_SimplePC_PreDamageHandler:
+    CloseMessage
+    Call _0F94
+    OpenPartyMenuForSetHP
+    ReturnToField
+    Call _0F80
+    GoTo _SimplePCMenu
+
+_SimplePC_VolatileStatus_Submenu:
+    Message CommonStrings_Text_StatusSubmenu_Header
+    InitGlobalTextListMenu 1, 1, 0, VAR_RESULT
+    AddListMenuEntry 26, 0
+    AddListMenuEntry 27, 1
+    AddListMenuEntry 28, 2
+    AddListMenuEntry 29, 3
+    AddListMenuEntry 30, 4
+    AddListMenuEntry 31, 5
+    AddListMenuEntry 5, 6
+    ShowListMenu
+    SetVar VAR_0x8008, VAR_RESULT
+    GoToIfEq VAR_0x8008, 0xFFFE, _SimplePCMenu
+    GoToIfEq VAR_0x8008, 6, _SimplePCMenu
+    CloseMessage
+    Call _0F94
+    OpenPartyMenuForStatusInflict VAR_0x8008
+    ReturnToField
+    Call _0F80
     GoTo _SimplePCMenu
 
     .balign 4, 0
