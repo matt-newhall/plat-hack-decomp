@@ -457,6 +457,24 @@ static void ListMenuSysTaskCallback(SysTask *sysTask, void *param)
         Sound_PlayEffect(SEQ_SE_CONFIRM);
     }
 
+    if (cursorPos == menuManager->cursorPos) {
+        u16 count = menuManager->listMenu->template.count;
+        u16 maxDisplay = menuManager->listMenu->template.maxDisplay;
+        if (JOY_REPEAT(PAD_KEY_UP) && menuManager->cursorPos == 0) {
+            menuManager->listMenu->listPos = count - maxDisplay;
+            menuManager->listMenu->cursorPos = maxDisplay - 1;
+            Sound_PlayEffect(SEQ_SE_CONFIRM);
+            ListMenu_Draw(menuManager->listMenu);
+            ListMenu_CalcTrueCursorPos(menuManager->listMenu, &menuManager->cursorPos);
+        } else if (JOY_REPEAT(PAD_KEY_DOWN) && menuManager->cursorPos == count - 1) {
+            menuManager->listMenu->listPos = 0;
+            menuManager->listMenu->cursorPos = 0;
+            Sound_PlayEffect(SEQ_SE_CONFIRM);
+            ListMenu_Draw(menuManager->listMenu);
+            ListMenu_CalcTrueCursorPos(menuManager->listMenu, &menuManager->cursorPos);
+        }
+    }
+
     if (JOY_REPEAT(PAD_KEY_UP) || JOY_REPEAT(PAD_KEY_DOWN) || JOY_REPEAT(PAD_KEY_LEFT) || JOY_REPEAT(PAD_KEY_RIGHT)) {
         FieldMenuManager_UpdateListMenuAltText(menuManager);
     }

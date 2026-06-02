@@ -99,35 +99,35 @@
     },
     {
       "id": "pl_msg_00000361_00024",
-      "garbage": 8
+      "en_US": "PRE-DAMAGE"
     },
     {
       "id": "pl_msg_00000361_00025",
-      "garbage": 7
+      "en_US": "STATUS"
     },
     {
-      "id": "pl_msg_00000361_00026",
-      "garbage": 6
+      "id": "MenuEntries_Text_Status_Poison",
+      "en_US": "POISON"
     },
     {
-      "id": "pl_msg_00000361_00027",
-      "garbage": 6
+      "id": "MenuEntries_Text_Status_Paralysis",
+      "en_US": "PARALYSIS"
     },
     {
-      "id": "pl_msg_00000361_00028",
-      "garbage": 6
+      "id": "MenuEntries_Text_Status_Sleep",
+      "en_US": "SLEEP"
     },
     {
-      "id": "pl_msg_00000361_00029",
-      "garbage": 8
+      "id": "MenuEntries_Text_Status_Burn",
+      "en_US": "BURN"
     },
     {
-      "id": "pl_msg_00000361_00030",
-      "garbage": 8
+      "id": "MenuEntries_Text_Status_Freeze",
+      "en_US": "FREEZE"
     },
     {
-      "id": "pl_msg_00000361_00031",
-      "garbage": 8
+      "id": "MenuEntries_Text_Status_Toxic",
+      "en_US": "TOXIC"
     },
     {
       "id": "pl_msg_00000361_00032",
@@ -1144,6 +1144,30 @@
     {
       "id": "MenuEntries_Text_StarPieces_10",
       "en_US": "10"
+    },
+    {
+      "id": "MenuEntries_Text_VolatileStatus_Confusion",
+      "en_US": "CONFUSION"
+    },
+    {
+      "id": "MenuEntries_Text_VolatileStatus_Infatuation",
+      "en_US": "INFATUATION"
+    },
+    {
+      "id": "MenuEntries_Text_VolatileStatus_LeechSeed",
+      "en_US": "LEECH SEED"
+    },
+    {
+      "id": "MenuEntries_Text_VolatileStatus_Nightmare",
+      "en_US": "NIGHTMARE"
+    },
+    {
+      "id": "MenuEntries_Text_VolatileStatus_Encore",
+      "en_US": "ENCORE"
+    },
+    {
+      "id": "MenuEntries_Text_VolatileStatus_Disable",
+      "en_US": "DISABLE"
     }
   ]
 }

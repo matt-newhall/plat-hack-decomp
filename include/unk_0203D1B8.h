@@ -49,6 +49,8 @@ PartyMenu *FieldSystem_OpenPartyMenu_SelectForUnionRoomBattle(FieldTask *taskMan
 PartyMenu *FieldSystem_OpenPartyMenu_SelectForContest(int unused, FieldSystem *fieldSystem, enum PokemonContestType contestType, int contestRank, int param4, int selectedMonSlot);
 PartyMenu *FieldSystem_OpenPartyMenu_SelectForSpinTrade(FieldSystem *fieldSystem, int selectedMonSlot);
 PartyMenu *FieldSystem_OpenPartyMenu_SelectForItemUsage(FieldSystem *fieldSystem, enum HeapID heapID, enum Item item);
+PartyMenu *FieldSystem_OpenPartyMenu_InflictStatus(FieldSystem *fieldSystem, u8 statusIndex);
+PartyMenu *FieldSystem_OpenPartyMenu_SetHP(FieldSystem *fieldSystem);
 
 int PartyMenu_GetSelectedSlot(PartyMenu *partyMenu);
 int PartyMenu_GetMenuSelectionResult(PartyMenu *partyMenu);

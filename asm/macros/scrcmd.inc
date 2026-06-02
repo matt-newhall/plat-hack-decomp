@@ -5001,6 +5001,15 @@
     .byte \floor
     .endm
 
+    .macro OpenPartyMenuForStatusInflict statusIndex
+    .short SCRCMD_OPENPARTYMENUFORBSTATUSINFLICT
+    .short \statusIndex
+    .endm
+
+    .macro OpenPartyMenuForSetHP
+    .short SCRCMD_OPENPARTYMENUFORSETHP
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

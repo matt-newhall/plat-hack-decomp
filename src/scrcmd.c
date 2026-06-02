@@ -737,6 +737,8 @@ static BOOL ScrCmd_FinishDistortionWorldGiratinaShadowEvent(ScriptContext *ctx);
 static BOOL ScrCmd_323(ScriptContext *ctx);
 static BOOL ScrCmd_SetPartyGiratinaForm(ScriptContext *ctx);
 static BOOL ScrCmd_CheckPartyHasFatefulEncounterRegigigas(ScriptContext *ctx);
+static BOOL ScrCmd_OpenPartyMenuForStatusInflict(ScriptContext *ctx);
+static BOOL ScrCmd_OpenPartyMenuForSetHP(ScriptContext *ctx);
 static BOOL ScriptContext_WaitForMovement(ScriptContext *ctx);
 static void sub_02040F28(FieldSystem *fieldSystem, SysTask *param1, MapObjectAnimCmd *param2);
 static void sub_02040F5C(SysTask *param0, void *param1);
@@ -7139,4 +7141,21 @@ static BOOL ScrCmd_CheckPartyHasFatefulEncounterRegigigas(ScriptContext *ctx)
     }
 
     return FALSE;
+}
+
+static BOOL ScrCmd_OpenPartyMenuForStatusInflict(ScriptContext *ctx)
+{
+    u16 statusIndex = ScriptContext_GetVar(ctx);
+    void **partyData = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_PARTY_MANAGEMENT_DATA);
+    *partyData = FieldSystem_OpenPartyMenu_InflictStatus(ctx->fieldSystem, (u8)statusIndex);
+    ScriptContext_Pause(ctx, ScriptContext_WaitForApplicationExit);
+    return TRUE;
+}
+
+static BOOL ScrCmd_OpenPartyMenuForSetHP(ScriptContext *ctx)
+{
+    void **partyData = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_PARTY_MANAGEMENT_DATA);
+    *partyData = FieldSystem_OpenPartyMenu_SetHP(ctx->fieldSystem);
+    ScriptContext_Pause(ctx, ScriptContext_WaitForApplicationExit);
+    return TRUE;
 }

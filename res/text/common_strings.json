@@ -873,6 +873,10 @@
         "It will be fixed if you enter the\n",
         "Hall of Fame again.\r"
       ]
+    },
+    {
+      "id": "CommonStrings_Text_StatusSubmenu_Header",
+      "en_US": "Apply a status condition.\r"
     }
   ]
 }

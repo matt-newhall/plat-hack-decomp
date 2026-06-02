@@ -941,22 +941,30 @@ _0C8D:
 
 _0C93:
     AddMenuEntryImm 61, 3
-    AddMenuEntryImm 64, 4
+    AddMenuEntryImm 24, 4
+    AddMenuEntryImm 25, 5
+    AddMenuEntryImm 64, 6
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
     GoToIfEq VAR_0x8008, 1, _0E45
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, _0F2C
+    GoToIfEq VAR_0x8008, 4, PreDamageHandler
+    GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
     GoTo _0F70
 
 _0CDD:
-    AddMenuEntryImm 64, 3
+    AddMenuEntryImm 24, 3
+    AddMenuEntryImm 25, 4
+    AddMenuEntryImm 64, 5
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
     GoToIfEq VAR_0x8008, 1, _0E45
     GoToIfEq VAR_0x8008, 2, _0F62
+    GoToIfEq VAR_0x8008, 3, PreDamageHandler
+    GoToIfEq VAR_0x8008, 4, VolatileStatus_Submenu
     GoTo _0F70
 
 _0D16:
@@ -1110,6 +1118,14 @@ _0F59:
     Message pl_msg_00000213_00131
     GoTo _0C1C
 
+PreDamageHandler:
+    CloseMessage
+    Call _0F94
+    OpenPartyMenuForSetHP
+    ReturnToField
+    Call _0F80
+    GoTo _0C1C
+
 _0F62:
     PlaySE SEQ_SE_DP_PC_LOGIN
     CallCommonScript 0x26DF
@@ -1136,6 +1152,27 @@ _0F94:
     UnloadAnimation ANIMATION_TAG_PC
 _PC_Unload_Skip:
     Return
+
+VolatileStatus_Submenu:
+    Message CommonStrings_Text_StatusSubmenu_Header
+    InitGlobalTextListMenu 1, 1, 0, VAR_RESULT
+    AddListMenuEntry 26, 0
+    AddListMenuEntry 27, 1
+    AddListMenuEntry 28, 2
+    AddListMenuEntry 29, 3
+    AddListMenuEntry 30, 4
+    AddListMenuEntry 31, 5
+    AddListMenuEntry 5, 6
+    ShowListMenu
+    SetVar VAR_0x8008, VAR_RESULT
+    GoToIfEq VAR_0x8008, 0xFFFE, _0C1C
+    GoToIfEq VAR_0x8008, 6, _0C1C
+    CloseMessage
+    Call _0F94
+    OpenPartyMenuForStatusInflict VAR_0x8008
+    ReturnToField
+    Call _0F80
+    GoTo _0C1C
 
 CommonScript_EmptyScript4:
     End

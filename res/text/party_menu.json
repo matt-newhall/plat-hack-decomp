@@ -1048,6 +1048,71 @@
         "{STRVAR_1 1, 0, 0} was trained to\n",
         "its limits!"
       ]
+    },
+    {
+      "id": "PartyMenu_Text_StatusCouldNotBeInflicted",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} is immune to\n",
+        "that status condition!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_MonWasPoisoned",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was poisoned!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_MonWasParalyzed",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was paralyzed!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_MonFellAsleep",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} fell asleep!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_MonWasBurned",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was burned!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_MonWasFrozenSolid",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was frozen solid!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_MonWasBadlyPoisoned",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} was badly poisoned!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_SetHPWhichMon",
+      "en_US": "Set HP for which Pokémon?"
+    },
+    {
+      "id": "PartyMenu_Text_SetHPValue",
+      "en_US": "{STRVAR_1 52, 0, 0}"
+    },
+    {
+      "id": "PartyMenu_Text_SetHPSuccess",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s HP\n",
+        "was set to {STRVAR_1 52, 1, 0}!"
+      ]
+    },
+    {
+      "id": "PartyMenu_Text_SetHPFainted",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}\n",
+        "has fainted!"
+      ]
     }
   ]
 }

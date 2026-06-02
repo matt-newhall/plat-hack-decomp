@@ -1690,6 +1690,23 @@ void *FieldSystem_OpenBattleFrontierRecord(FieldSystem *fieldSystem, u8 challeng
     return args;
 }
 
+PartyMenu *FieldSystem_OpenPartyMenu_InflictStatus(FieldSystem *fieldSystem, u8 statusIndex)
+{
+    PartyMenu *partyMenu = PartyMenu_New(HEAP_ID_FIELD2, fieldSystem, PARTY_MENU_TYPE_BASIC, PARTY_MENU_MODE_INFLICT_STATUS);
+    partyMenu->usedItemID = statusIndex;
+
+    FieldSystem_StartChildProcess(fieldSystem, &gPokemonPartyAppTemplate, partyMenu);
+    return partyMenu;
+}
+
+PartyMenu *FieldSystem_OpenPartyMenu_SetHP(FieldSystem *fieldSystem)
+{
+    PartyMenu *partyMenu = PartyMenu_New(HEAP_ID_FIELD2, fieldSystem, PARTY_MENU_TYPE_BASIC, PARTY_MENU_MODE_SET_HP);
+
+    FieldSystem_StartChildProcess(fieldSystem, &gPokemonPartyAppTemplate, partyMenu);
+    return partyMenu;
+}
+
 PartyMenu *FieldSystem_OpenPartyMenu_SelectForItemUsage(FieldSystem *fieldSystem, enum HeapID heapID, enum Item item)
 {
     PartyMenu *partyMenu = Heap_Alloc(heapID, sizeof(PartyMenu));

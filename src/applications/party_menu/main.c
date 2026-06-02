@@ -3,7 +3,9 @@
 #include <nitro.h>
 #include <string.h>
 
+#include "constants/battle/condition.h"
 #include "constants/graphics.h"
+#include "generated/abilities.h"
 #include "constants/heap.h"
 #include "constants/items.h"
 #include "constants/moves.h"
@@ -63,6 +65,7 @@
 #include "touch_screen.h"
 #include "tv_segment.h"
 #include "unk_0206B9D8.h"
+#include "unk_0208C098.h"
 #include "vram_transfer.h"
 
 #include "res/graphics/party_menu/form_changes/form_change_effects.naix"
@@ -124,7 +127,11 @@ static u8 sub_020805E4(PartyMenuApplication *application);
 static void DrawMemberTouchScreenButton(PartyMenuApplication *application, u8 slot, u8 anim);
 static int PartyMenu_GetTouchScreenPartyBallPressed(PartyMenuApplication *application);
 static u8 HandleSpecialInput(PartyMenuApplication *application);
+static BOOL StatusIsImmuneByTypeOrAbility(Pokemon *mon, u16 statusIndex);
 static int ApplyItemEffectOnPokemon(PartyMenuApplication *application);
+static void DrawHPSpinnerValue(PartyMenuApplication *application, s16 hpValue);
+static void ClearHPSpinnerValue(PartyMenuApplication *application);
+static int HPSpinnerCallback(void *param);
 static u8 CheckItemUsageValidity(PartyMenuApplication *application);
 static int ProcessItemApplication(PartyMenuApplication *application);
 static int UpdatePokemonWithItem(PartyMenuApplication *application, Pokemon *param1, int *param2);
@@ -305,8 +312,13 @@ static BOOL PartyMenu_Init(ApplicationManager *appMan, int *state)
 
     if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE
         || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM
-        || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
-        if (CheckItemSacredAsh(application->partyMenu->usedItemID) == FALSE) {
+        || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM
+        || application->partyMenu->mode == PARTY_MENU_MODE_INFLICT_STATUS
+        || application->partyMenu->mode == PARTY_MENU_MODE_SET_HP) {
+        if (application->partyMenu->mode == PARTY_MENU_MODE_SET_HP) {
+            PartyMenu_PrintShortMessage(application, PartyMenu_Text_SetHPWhichMon, TRUE);
+        } else if (application->partyMenu->mode == PARTY_MENU_MODE_INFLICT_STATUS
+            || CheckItemSacredAsh(application->partyMenu->usedItemID) == FALSE) {
             PartyMenu_PrintShortMessage(application, PartyMenu_Text_UseOnWhichMon, TRUE);
         }
     } else if (application->partyMenu->mode == PARTY_MENU_MODE_TEACH_MOVE) {
@@ -495,8 +507,12 @@ static int sub_0207E490(PartyMenuApplication *application)
     if (IsScreenFadeDone() == TRUE) {
         if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ABILITY_CAPSULE
             || application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM
-            || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM) {
-            if (CheckItemSacredAsh(application->partyMenu->usedItemID) == TRUE) {
+            || application->partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM
+            || application->partyMenu->mode == PARTY_MENU_MODE_INFLICT_STATUS
+            || application->partyMenu->mode == PARTY_MENU_MODE_SET_HP) {
+            if (application->partyMenu->mode != PARTY_MENU_MODE_INFLICT_STATUS
+                && application->partyMenu->mode != PARTY_MENU_MODE_SET_HP
+                && CheckItemSacredAsh(application->partyMenu->usedItemID) == TRUE) {
                 application->stateAfterMessage = PARTY_MENU_STATE_START;
                 return PARTY_MENU_STATE_USE_SACRED_ASH;
             }
@@ -2718,8 +2734,172 @@ static u8 HandleSpecialInput(PartyMenuApplication *application)
     return menuInput;
 }
 
+static BOOL StatusIsImmuneByTypeOrAbility(Pokemon *mon, u16 statusIndex)
+{
+    u32 type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+    u32 type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+    u32 ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+
+    switch (statusIndex) {
+    case 0:
+    case 5:
+        if (type1 == TYPE_POISON || type2 == TYPE_POISON) return TRUE;
+        if (type1 == TYPE_STEEL  || type2 == TYPE_STEEL)  return TRUE;
+        if (ability == ABILITY_IMMUNITY) return TRUE;
+        break;
+    case 1:
+        if (type1 == TYPE_ELECTRIC || type2 == TYPE_ELECTRIC) return TRUE;
+        if (ability == ABILITY_LIMBER) return TRUE;
+        break;
+    case 2:
+        if (ability == ABILITY_INSOMNIA || ability == ABILITY_VITAL_SPIRIT) return TRUE;
+        if (ability == ABILITY_SWEET_VEIL) return TRUE;
+        break;
+    case 3:
+        if (type1 == TYPE_FIRE || type2 == TYPE_FIRE) return TRUE;
+        if (ability == ABILITY_WATER_VEIL || ability == ABILITY_WATER_BUBBLE) return TRUE;
+        break;
+    case 4:
+        if (type1 == TYPE_ICE || type2 == TYPE_ICE) return TRUE;
+        if (ability == ABILITY_MAGMA_ARMOR) return TRUE;
+        break;
+    }
+    return FALSE;
+}
+
+static void DrawHPSpinnerValue(PartyMenuApplication *app, s16 hpValue)
+{
+    Window *window = &app->menuWindows[0];
+    String *fmt = MessageLoader_GetNewString(app->messageLoader, PartyMenu_Text_SetHPValue);
+
+    StringTemplate_SetNumber(app->template, 0, (u32)hpValue, 3, 0, 1);
+    StringTemplate_Format(app->template, app->tmpString, fmt);
+    String_Free(fmt);
+
+    u32 strWidth = Font_CalcStringWidthWithCursorControl(FONT_SYSTEM, app->tmpString);
+    u32 x = (Window_GetWidth(window) * 8 - strWidth) / 2;
+    Window_FillTilemap(window, 15);
+    Text_AddPrinterWithParamsAndColor(window, FONT_SYSTEM, app->tmpString, x, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 15), NULL);
+    Window_ScheduleCopyToVRAM(window);
+}
+
+static void ClearHPSpinnerValue(PartyMenuApplication *app)
+{
+    Window_EraseStandardFrame(&app->menuWindows[0], 0);
+    Window_Remove(&app->menuWindows[0]);
+}
+
+static int HPSpinnerCallback(void *param)
+{
+    PartyMenuApplication *app = (PartyMenuApplication *)param;
+    Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+    u16 maxHP = (u16)Pokemon_GetValue(mon, MON_DATA_MAX_HP, NULL);
+    s16 hpValue = (s16)app->partyMenu->usedItemID;
+
+    u8 changed = sub_0208C15C(&hpValue, maxHP);
+    if (changed != 0) {
+        Sound_PlayEffect(SEQ_SE_DP_BAG_004);
+        app->partyMenu->usedItemID = (u16)hpValue;
+        DrawHPSpinnerValue(app, hpValue);
+    }
+
+    if (JOY_NEW(PAD_BUTTON_A)) {
+        u32 newHP = (u32)hpValue;
+        Pokemon_SetValue(mon, MON_DATA_HP, &newHP);
+        PartyMenu_LoadMember(app, app->currPartySlot);
+        PartyMenu_DrawMemberPanelData(app, app->currPartySlot);
+        PartyMenu_LoadMemberWindowTiles(app, app->currPartySlot);
+
+        ClearHPSpinnerValue(app);
+        String *string = MessageLoader_GetNewString(app->messageLoader, PartyMenu_Text_SetHPSuccess);
+        StringTemplate_SetNickname(app->template, 0, Pokemon_GetBoxPokemon(mon));
+        StringTemplate_SetNumber(app->template, 1, newHP, 3, 0, 1);
+        StringTemplate_Format(app->template, app->tmpString, string);
+        String_Free(string);
+        PartyMenu_PrintLongMessage(app, PRINT_MESSAGE_PRELOADED, TRUE);
+        Sound_PlayEffect(SEQ_SE_DP_KAIFUKU);
+        app->unk_B00 = sub_02085348;
+        return PARTY_MENU_STATE_5;
+    }
+
+    if (JOY_NEW(PAD_BUTTON_B)) {
+        ClearHPSpinnerValue(app);
+        Sprite_SetExplicitPalette2(app->sprites[PARTY_MENU_SPRITE_CURSOR_NORMAL], 0);
+        PartyMenu_PrintShortMessage(app, PartyMenu_Text_SetHPWhichMon, TRUE);
+        return PARTY_MENU_STATE_USE_ITEM;
+    }
+
+    return PARTY_MENU_STATE_5;
+}
+
 static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
 {
+    if (app->partyMenu->mode == PARTY_MENU_MODE_SET_HP) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+        StringTemplate_SetNickname(app->template, 0, Pokemon_GetBoxPokemon(mon));
+
+        if (app->partyMembers[app->currPartySlot].curHP == 0) {
+            String *string = MessageLoader_GetNewString(app->messageLoader, PartyMenu_Text_SetHPFainted);
+            StringTemplate_Format(app->template, app->tmpString, string);
+            String_Free(string);
+            PartyMenu_PrintLongMessage(app, PRINT_MESSAGE_PRELOADED, TRUE);
+            app->unk_B00 = sub_02085348;
+            return PARTY_MENU_STATE_5;
+        }
+
+        u16 curHP = (u16)Pokemon_GetValue(mon, MON_DATA_HP, NULL);
+        app->partyMenu->usedItemID = curHP;
+
+        PartyMenu_OpenHPSpinnerWindow(app);
+        DrawHPSpinnerValue(app, (s16)curHP);
+        app->unk_B00 = HPSpinnerCallback;
+        return PARTY_MENU_STATE_5;
+    }
+
+    if (app->partyMenu->mode == PARTY_MENU_MODE_INFLICT_STATUS) {
+        static const u32 sInflictStatusTable[] = {
+            MON_CONDITION_POISON,
+            MON_CONDITION_PARALYSIS,
+            MON_CONDITION_SLEEP,
+            MON_CONDITION_BURN,
+            MON_CONDITION_FREEZE,
+            MON_CONDITION_TOXIC,
+        };
+        static const u32 sInflictStatusMessages[] = {
+            PartyMenu_Text_MonWasPoisoned,
+            PartyMenu_Text_MonWasParalyzed,
+            PartyMenu_Text_MonFellAsleep,
+            PartyMenu_Text_MonWasBurned,
+            PartyMenu_Text_MonWasFrozenSolid,
+            PartyMenu_Text_MonWasBadlyPoisoned,
+        };
+        u16 statusIndex = app->partyMenu->usedItemID;
+        if (statusIndex < 6) {
+            Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
+            StringTemplate_SetNickname(app->template, 0, Pokemon_GetBoxPokemon(mon));
+            if (StatusIsImmuneByTypeOrAbility(mon, statusIndex)) {
+                String *string = MessageLoader_GetNewString(app->messageLoader, PartyMenu_Text_StatusCouldNotBeInflicted);
+                StringTemplate_Format(app->template, app->tmpString, string);
+                String_Free(string);
+            } else {
+                u32 condition = sInflictStatusTable[statusIndex];
+                Pokemon_SetValue(mon, MON_DATA_STATUS, &condition);
+                PartyMenu_LoadMember(app, app->currPartySlot);
+                PartyMenu_DrawMemberPanelData(app, app->currPartySlot);
+                PartyMenu_LoadMemberWindowTiles(app, app->currPartySlot);
+                PartyMenu_DrawMemberStatusCondition(app, app->currPartySlot, app->partyMembers[app->currPartySlot].statusIcon);
+                String *string = MessageLoader_GetNewString(app->messageLoader, sInflictStatusMessages[statusIndex]);
+                StringTemplate_Format(app->template, app->tmpString, string);
+                String_Free(string);
+            }
+            PartyMenu_PrintLongMessage(app, PRINT_MESSAGE_PRELOADED, TRUE);
+            app->unk_B00 = sub_02085348;
+            return PARTY_MENU_STATE_5;
+        }
+        app->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_DONE;
+        return PARTY_MENU_STATE_32;
+    }
+
     ItemData *itemData = Item_Load(app->partyMenu->usedItemID, 0, HEAP_ID_PARTY_MENU);
 
     if (app->partyMenu->usedItemID == ITEM_GRACIDEA

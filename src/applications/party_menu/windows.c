@@ -1452,3 +1452,10 @@ void PartyMenu_RemoveContextWindow(PartyMenuApplication *application)
     Window_EraseStandardFrame(&application->menuWindows[0], 0);
     Window_Remove(&application->menuWindows[0]);
 }
+
+void PartyMenu_OpenHPSpinnerWindow(PartyMenuApplication *application)
+{
+    Window_Add(application->bgConfig, &application->menuWindows[0],
+               BG_LAYER_MAIN_0, 25, 21, 6, 2, 0, WIN_CONTEXT_WINDOW_BASE_TILE);
+    Window_DrawStandardFrame(&application->menuWindows[0], TRUE, 1, 14);
+}
