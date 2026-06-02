@@ -32,7 +32,7 @@ TurnbackCaveGiratinaRoom_Giratina:
     Message TurnbackCaveGiratinaRoom_Text_GiratinaCry
     CloseMessage
     SetFlag FLAG_MAP_LOCAL
-    StartLegendaryBattle SPECIES_GIRATINA, 47
+    StartLegendaryBattle SPECIES_GIRATINA, 80
     ClearFlag FLAG_MAP_LOCAL
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, TurnbackCaveGiratinaRoom_BlackOut
