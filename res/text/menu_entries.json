@@ -259,7 +259,10 @@
     },
     {
       "id": "pl_msg_00000361_00064",
-      "en_US": "SWITCH OFF"
+    },
+    {
+      "id": "pl_msg_00000361_00065",
+      "en_US": "Pokévial"
     },
     {
       "id": "MenuEntries_Text_PokemonStorageDepositPokemon",

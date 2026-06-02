@@ -943,7 +943,8 @@ _0C93:
     AddMenuEntryImm 61, 3
     AddMenuEntryImm 24, 4
     AddMenuEntryImm 25, 5
-    AddMenuEntryImm 64, 6
+    AddMenuEntryImm 65, 6
+    AddMenuEntryImm 64, 7
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
@@ -952,12 +953,14 @@ _0C93:
     GoToIfEq VAR_0x8008, 3, _0F2C
     GoToIfEq VAR_0x8008, 4, PreDamageHandler
     GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 6, _PCPokevialHandler
     GoTo _0F70
 
 _0CDD:
     AddMenuEntryImm 24, 3
     AddMenuEntryImm 25, 4
-    AddMenuEntryImm 64, 5
+    AddMenuEntryImm 65, 5
+    AddMenuEntryImm 64, 6
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
@@ -965,6 +968,7 @@ _0CDD:
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, PreDamageHandler
     GoToIfEq VAR_0x8008, 4, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 5, _PCPokevialHandler
     GoTo _0F70
 
 _0D16:
@@ -1124,6 +1128,19 @@ PreDamageHandler:
     OpenPartyMenuForSetHP
     ReturnToField
     Call _0F80
+    GoTo _0C1C
+
+_PokevialCore:
+    CloseMessage
+    PlayFanfare SEQ_ASA
+    WaitFanfare
+    HealParty
+    Message pl_msg_00000213_00132
+    CloseMessage
+    Return
+
+_PCPokevialHandler:
+    Call _PokevialCore
     GoTo _0C1C
 
 _0F62:
@@ -1735,12 +1752,14 @@ _SimplePCMenu:
     CallIfSet FLAG_MET_BEBE, _SimplePC_BebePC
     AddMenuEntryImm 24, 1
     AddMenuEntryImm 25, 2
-    AddMenuEntryImm 64, 3
+    AddMenuEntryImm 65, 3
+    AddMenuEntryImm 64, 4
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _SimplePC_StorageEntry
     GoToIfEq VAR_0x8008, 1, PreDamageHandler
     GoToIfEq VAR_0x8008, 2, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 3, _SimplePCPokevialHandler
     GoTo _0F70
 
 _SimplePC_SomeonesPC:
@@ -1811,5 +1830,9 @@ _SimplePC_PostStorage:
     Call _0C06
     FadeScreenIn
     GoTo _SimplePC_StorageLoop
+
+_SimplePCPokevialHandler:
+    Call _PokevialCore
+    GoTo _SimplePCMenu
 
     .balign 4, 0
