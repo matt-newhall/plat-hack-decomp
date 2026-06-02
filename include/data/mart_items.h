@@ -137,12 +137,12 @@ const u16 VeilstoneDeptStoreStock_2F_UP[] = {
 };
 
 const u16 VeilstoneDeptStoreStock_2F_MID[] = {
-    ITEM_PROTEIN,
-    ITEM_IRON,
-    ITEM_CALCIUM,
-    ITEM_ZINC,
-    ITEM_CARBOS,
-    ITEM_HP_UP,
+    ITEM_FIRE_STONE,
+    ITEM_WATER_STONE,
+    ITEM_THUNDERSTONE,
+    ITEM_LEAF_STONE,
+    ITEM_SUN_STONE,
+    ITEM_MOON_STONE,
     SHOP_ITEM_END
 };
 
