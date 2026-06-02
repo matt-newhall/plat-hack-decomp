@@ -62,12 +62,12 @@
       "en_US": "OFF"
     },
     {
-      "id": "OptionsMenu_Text_BattleStyleShift",
-      "en_US": "SHIFT"
-    },
-    {
       "id": "OptionsMenu_Text_BattleStyleSet",
       "en_US": "SET"
+    },
+    {
+      "id": "OptionsMenu_Text_BattleStyleShift",
+      "en_US": "SHIFT"
     },
     {
       "id": "OptionsMenu_Text_SoundModeStereo",
