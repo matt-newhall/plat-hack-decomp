@@ -6288,43 +6288,43 @@
     },
     {
       "id": "BattleStrings_Text_Fight",
-      "en_US": "FIGHT"
+      "en_US": "Fight"
     },
     {
       "id": "BattleStrings_Text_Bag",
-      "en_US": "BAG"
+      "en_US": "Bag"
     },
     {
       "id": "BattleStrings_Text_Pokemon",
-      "en_US": "POKéMON"
+      "en_US": "Pokémon"
     },
     {
       "id": "BattleStrings_Text_Run",
-      "en_US": "RUN"
+      "en_US": "Run"
     },
     {
       "id": "BattleStrings_Text_Cancel",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "BattleStrings_Text_Cancel2",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "BattleStrings_Text_Cancel3",
-      "en_US": "CANCEL"
+      "en_US": "Cancel"
     },
     {
       "id": "BattleStrings_Text_Ball",
-      "en_US": "BALL"
+      "en_US": "Ball"
     },
     {
       "id": "BattleStrings_Text_Bait",
-      "en_US": "BAIT"
+      "en_US": "Bait"
     },
     {
       "id": "BattleStrings_Text_Mud",
-      "en_US": "MUD"
+      "en_US": "Mud"
     },
     {
       "id": "BattleStrings_Text_Dummy934",
@@ -6336,7 +6336,7 @@
     },
     {
       "id": "BattleStrings_Text_Run2",
-      "en_US": "RUN"
+      "en_US": "Run"
     },
     {
       "id": "BattleStrings_Text_CurPPOutOfMaxPP",
@@ -6404,7 +6404,7 @@
     },
     {
       "id": "BattleStrings_Text_SafariBalls",
-      "en_US": "SAFARI BALLS"
+      "en_US": "Safari Balls"
     },
     {
       "id": "BattleStrings_Text_SafariBallsLeft",
@@ -8199,7 +8199,7 @@
     },
     {
       "id": "BattleStrings_Text_ParkBalls",
-      "en_US": "PARK BALLS"
+      "en_US": "Park Balls"
     },
     {
       "id": "BattleStrings_Text_ParkBallsLeft",
@@ -8211,11 +8211,11 @@
     },
     {
       "id": "BattleStrings_Text_BallPalPark",
-      "en_US": "BALL"
+      "en_US": "Ball"
     },
     {
       "id": "BattleStrings_Text_RunPalPark",
-      "en_US": "RUN"
+      "en_US": "Run"
     },
     {
       "id": "BattleStrings_Text_PokemonComeBackPalPark",
