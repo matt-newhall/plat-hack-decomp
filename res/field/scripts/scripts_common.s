@@ -65,7 +65,7 @@
     ScriptEntry CommonScript_SetLookerBGM @ 0x807
     ScriptEntry CommonScript_FadeToDefaultMusic @ 0x808
     ScriptEntry CommonScript_GriseousOrbCouldNotBeRemoved @ 0x809
-    ScriptEntry CommonScript_PortablePC @ 0x80A
+    ScriptEntry CommonScript_PortablePC_Simple @ 0x80A
     ScriptEntryEnd
 
 CommonScript_EmptyScript1:
@@ -1720,12 +1720,96 @@ CommonScript_GriseousOrbCouldNotBeRemoved:
     ReturnCommonScript
     End
 
-CommonScript_PortablePC:
+CommonScript_PortablePC_Simple:
     LockAll
     SetFlag FLAG_UNK_0x0BFF
     PlaySE SEQ_SE_DP_PC_ON
     BufferPlayerName 0
     Message pl_msg_00000213_00032
-    GoTo _0C1C
+
+_SimplePCMenu:
+    BufferPlayerName 0
+    Message pl_msg_00000213_00033
+    InitGlobalTextMenu 1, 1, 0, VAR_0x8006
+    CallIfUnset FLAG_MET_BEBE, _SimplePC_SomeonesPC
+    CallIfSet FLAG_MET_BEBE, _SimplePC_BebePC
+    AddMenuEntryImm 24, 1
+    AddMenuEntryImm 25, 2
+    AddMenuEntryImm 64, 3
+    ShowMenu
+    SetVar VAR_0x8008, VAR_0x8006
+    GoToIfEq VAR_0x8008, 0, _SimplePC_StorageEntry
+    GoToIfEq VAR_0x8008, 1, PreDamageHandler
+    GoToIfEq VAR_0x8008, 2, VolatileStatus_Submenu
+    GoTo _0F70
+
+_SimplePC_SomeonesPC:
+    AddMenuEntryImm 58, 0
+    Return
+
+_SimplePC_BebePC:
+    AddMenuEntryImm 59, 0
+    Return
+
+_SimplePC_StorageEntry:
+    PlaySE SEQ_SE_DP_PC_LOGIN
+    BufferPlayerName 0
+    Message pl_msg_00000213_00034
+    Call _0D2C
+    GoTo _SimplePC_StorageLoop
+
+_SimplePC_StorageLoop:
+    ShowListMenu
+    SetVar VAR_0x8008, VAR_RESULT
+    GoToIfEq VAR_0x8008, 0, _SimplePC_Deposit
+    GoToIfEq VAR_0x8008, 1, _SimplePC_Withdraw
+    GoToIfEq VAR_0x8008, 2, _SimplePC_Move
+    GoToIfEq VAR_0x8008, 3, _SimplePC_MoveItems
+    GoToIfEq VAR_0x8008, 4, _SimplePC_Compare
+    GoTo _SimplePCMenu
+
+_SimplePC_Deposit:
+    CloseMessage
+    Call _0F94
+    OpenPokemonStorage 0
+    ReturnToField
+    GoTo _SimplePC_PostStorage
+
+_SimplePC_Withdraw:
+    CloseMessage
+    Call _0F94
+    OpenPokemonStorage 1
+    ReturnToField
+    GoTo _SimplePC_PostStorage
+
+_SimplePC_Move:
+    CloseMessage
+    Call _0F94
+    OpenPokemonStorage 2
+    ReturnToField
+    GoTo _SimplePC_PostStorage
+
+_SimplePC_MoveItems:
+    CloseMessage
+    Call _0F94
+    OpenPokemonStorage 3
+    ReturnToField
+    GoTo _SimplePC_PostStorage
+
+_SimplePC_Compare:
+    CloseMessage
+    Call _0F94
+    OpenPokemonStorage 4
+    ReturnToField
+    GoTo _SimplePC_PostStorage
+
+_SimplePC_PostStorage:
+    ScrCmd_30B
+    BufferPlayerName 0
+    MessageInstant 33
+    Call _0D2C
+    Call _0C06
+    FadeScreenIn
+    GoTo _SimplePC_StorageLoop
 
     .balign 4, 0
