@@ -1172,6 +1172,86 @@
     {
       "id": "MenuEntries_Text_VolatileStatus_Disable",
       "en_US": "Disable"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_TwinleafTown",
+      "en_US": "Twinleaf Town"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_SandgemTown",
+      "en_US": "Sandgem Town"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_JubilifeCity",
+      "en_US": "Jubilife City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_FloaromaTown",
+      "en_US": "Floaroma Town"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_EternaCity",
+      "en_US": "Eterna City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_OreburghCity",
+      "en_US": "Oreburgh City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_HearthomeCity",
+      "en_US": "Hearthome City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_SolaceonTown",
+      "en_US": "Solaceon Town"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_PastoriaCity",
+      "en_US": "Pastoria City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_VeilstoneCity",
+      "en_US": "Veilstone City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_CelesticTown",
+      "en_US": "Celestic Town"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_SnowpointCity",
+      "en_US": "Snowpoint City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_CanalabeCity",
+      "en_US": "Canalave City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_SunshoreCity",
+      "en_US": "Sunyshore City"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_VictoryRoad",
+      "en_US": "Victory Road"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_PokemonLeague",
+      "en_US": "Pokémon League"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_FightArea",
+      "en_US": "Fight Area"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_SurvivalArea",
+      "en_US": "Survival Area"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_ResortArea",
+      "en_US": "Resort Area"
+    },
+    {
+      "id": "MenuEntries_Text_Drifloon_NeverMind",
+      "en_US": "Never mind"
     }
   ]
 }

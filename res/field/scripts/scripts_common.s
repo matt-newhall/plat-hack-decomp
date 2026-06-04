@@ -66,6 +66,7 @@
     ScriptEntry CommonScript_FadeToDefaultMusic @ 0x808
     ScriptEntry CommonScript_GriseousOrbCouldNotBeRemoved @ 0x809
     ScriptEntry CommonScript_PortablePC_Simple @ 0x80A
+    ScriptEntry CommonScript_Drifloon_Fly @ 0x80B
     ScriptEntryEnd
 
 CommonScript_EmptyScript1:
@@ -1863,5 +1864,250 @@ _SimplePC_VolatileStatus_Submenu:
     ReturnToField
     Call _0F80
     GoTo _SimplePCMenu
+
+    .balign 4, 0
+
+CommonScript_Drifloon_Fly:
+    PlayCry SPECIES_DRIFLOON
+    Message CommonStrings_Text_DrifloonFly_Intro
+    InitGlobalTextListMenu 1, 1, 0, VAR_RESULT
+    CallIfSet FLAG_FIRST_ARRIVAL_TWINLEAF_TOWN, CommonScript_Drifloon_AddTwinleaf
+    CallIfSet FLAG_FIRST_ARRIVAL_SANDGEM_TOWN, CommonScript_Drifloon_AddSandgem
+    CallIfSet FLAG_FIRST_ARRIVAL_JUBILIFE_CITY, CommonScript_Drifloon_AddJubilife
+    CallIfSet FLAG_FIRST_ARRIVAL_FLOAROMA_TOWN, CommonScript_Drifloon_AddFloaroma
+    CallIfSet FLAG_FIRST_ARRIVAL_ETERNA_CITY, CommonScript_Drifloon_AddEterna
+    CallIfSet FLAG_FIRST_ARRIVAL_OREBURGH_CITY, CommonScript_Drifloon_AddOreburgh
+    CallIfSet FLAG_FIRST_ARRIVAL_HEARTHOME_CITY, CommonScript_Drifloon_AddHearthome
+    CallIfSet FLAG_FIRST_ARRIVAL_SOLACEON_TOWN, CommonScript_Drifloon_AddSolaceon
+    CallIfSet FLAG_FIRST_ARRIVAL_PASTORIA_CITY, CommonScript_Drifloon_AddPastoria
+    CallIfSet FLAG_FIRST_ARRIVAL_VEILSTONE_CITY, CommonScript_Drifloon_AddVeilstone
+    CallIfSet FLAG_FIRST_ARRIVAL_CELESTIC_TOWN, CommonScript_Drifloon_AddCelestic
+    CallIfSet FLAG_FIRST_ARRIVAL_SNOWPOINT_CITY, CommonScript_Drifloon_AddSnowpoint
+    CallIfSet FLAG_FIRST_ARRIVAL_FIGHT_AREA, CommonScript_Drifloon_AddFightArea
+    CallIfSet FLAG_FIRST_ARRIVAL_SURVIVAL_AREA, CommonScript_Drifloon_AddSurvivalArea
+    CallIfSet FLAG_FIRST_ARRIVAL_RESORT_AREA, CommonScript_Drifloon_AddResortArea
+    CallIfSet FLAG_FIRST_ARRIVAL_CANALAVE_CITY, CommonScript_Drifloon_AddCanalave
+    CallIfSet FLAG_FIRST_ARRIVAL_SUNYSHORE_CITY, CommonScript_Drifloon_AddSunyshore
+    CallIfSet FLAG_FIRST_ARRIVAL_OUTSIDE_VICTORY_ROAD, CommonScript_Drifloon_AddVictoryRoad
+    CallIfSet FLAG_FIRST_ARRIVAL_POKEMON_LEAGUE, CommonScript_Drifloon_AddPokemonLeague
+    AddListMenuEntry MenuEntries_Text_Drifloon_NeverMind, 0xFF
+    ShowListMenuRememberCursor VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_RESULT, 0xEEEE, CommonScript_Drifloon_Cancel
+    GoToIfEq VAR_RESULT, 0xFF, CommonScript_Drifloon_Cancel
+    GoToIfEq VAR_RESULT, 0, CommonScript_Drifloon_FlyTwinleaf
+    GoToIfEq VAR_RESULT, 1, CommonScript_Drifloon_FlySandgem
+    GoToIfEq VAR_RESULT, 2, CommonScript_Drifloon_FlyJubilife
+    GoToIfEq VAR_RESULT, 3, CommonScript_Drifloon_FlyFloaroma
+    GoToIfEq VAR_RESULT, 4, CommonScript_Drifloon_FlyEterna
+    GoToIfEq VAR_RESULT, 5, CommonScript_Drifloon_FlyOreburgh
+    GoToIfEq VAR_RESULT, 6, CommonScript_Drifloon_FlyHearthome
+    GoToIfEq VAR_RESULT, 7, CommonScript_Drifloon_FlySolaceon
+    GoToIfEq VAR_RESULT, 8, CommonScript_Drifloon_FlyPastoria
+    GoToIfEq VAR_RESULT, 9, CommonScript_Drifloon_FlyVeilstone
+    GoToIfEq VAR_RESULT, 10, CommonScript_Drifloon_FlyCelestic
+    GoToIfEq VAR_RESULT, 11, CommonScript_Drifloon_FlySnowpoint
+    GoToIfEq VAR_RESULT, 12, CommonScript_Drifloon_FlyCanalave
+    GoToIfEq VAR_RESULT, 13, CommonScript_Drifloon_FlySunyshore
+    GoToIfEq VAR_RESULT, 14, CommonScript_Drifloon_FlyVictoryRoad
+    GoToIfEq VAR_RESULT, 15, CommonScript_Drifloon_FlyPokemonLeague
+    GoToIfEq VAR_RESULT, 16, CommonScript_Drifloon_FlyFightArea
+    GoToIfEq VAR_RESULT, 17, CommonScript_Drifloon_FlySurvivalArea
+    GoToIfEq VAR_RESULT, 18, CommonScript_Drifloon_FlyResortArea
+    GoTo CommonScript_Drifloon_Cancel
+
+CommonScript_Drifloon_Cancel:
+    CloseMessage
+    ReturnCommonScript
+    End
+
+CommonScript_Drifloon_FlyTwinleaf:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_TWINLEAF_TOWN, 0x74, 0x376
+    End
+
+CommonScript_Drifloon_FlySandgem:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_SANDGEM_TOWN, 0xB1, 0x34B
+    End
+
+CommonScript_Drifloon_FlyJubilife:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_JUBILIFE_CITY, 0xB4, 0x309
+    End
+
+CommonScript_Drifloon_FlyFloaroma:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_FLOAROMA_TOWN, 0xB0, 0x29B
+    End
+
+CommonScript_Drifloon_FlyEterna:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_ETERNA_CITY, 0x131, 0x213
+    End
+
+CommonScript_Drifloon_FlyOreburgh:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_OREBURGH_CITY, 0x12F, 0x2F5
+    End
+
+CommonScript_Drifloon_FlyHearthome:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_HEARTHOME_CITY, 0x1D1, 0x2BA
+    End
+
+CommonScript_Drifloon_FlySolaceon:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_SOLACEON_TOWN, 0x236, 0x291
+    End
+
+CommonScript_Drifloon_FlyPastoria:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_PASTORIA_CITY, 0x258, 0x330
+    End
+
+CommonScript_Drifloon_FlyVeilstone:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_VEILSTONE_CITY, 0x2CD, 0x264
+    End
+
+CommonScript_Drifloon_FlyCelestic:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_CELESTIC_TOWN, 0x1D8, 0x21B
+    End
+
+CommonScript_Drifloon_FlySnowpoint:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_SNOWPOINT_CITY, 0x17B, 0xEA
+    End
+
+CommonScript_Drifloon_FlyCanalave:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_CANALAVE_CITY, 0x3A, 0x2D3
+    End
+
+CommonScript_Drifloon_FlySunyshore:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_SUNYSHORE_CITY, 0x35C, 0x311
+    End
+
+CommonScript_Drifloon_FlyVictoryRoad:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_POKEMON_LEAGUE, 0x34A, 0x257
+    End
+
+CommonScript_Drifloon_FlyPokemonLeague:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_POKEMON_LEAGUE, 0x34F, 0x230
+    End
+
+CommonScript_Drifloon_FlyFightArea:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_FIGHT_AREA, 0x287, 0x1AE
+    End
+
+CommonScript_Drifloon_FlySurvivalArea:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_SURVIVAL_AREA, 0x293, 0x153
+    End
+
+CommonScript_Drifloon_FlyResortArea:
+    CloseMessage
+    ReturnCommonScript
+    UseFly MAP_HEADER_RESORT_AREA, 0x322, 0x1D9
+    End
+
+CommonScript_Drifloon_AddTwinleaf:
+    AddListMenuEntry MenuEntries_Text_Drifloon_TwinleafTown, 0
+    Return
+
+CommonScript_Drifloon_AddSandgem:
+    AddListMenuEntry MenuEntries_Text_Drifloon_SandgemTown, 1
+    Return
+
+CommonScript_Drifloon_AddJubilife:
+    AddListMenuEntry MenuEntries_Text_Drifloon_JubilifeCity, 2
+    Return
+
+CommonScript_Drifloon_AddFloaroma:
+    AddListMenuEntry MenuEntries_Text_Drifloon_FloaromaTown, 3
+    Return
+
+CommonScript_Drifloon_AddEterna:
+    AddListMenuEntry MenuEntries_Text_Drifloon_EternaCity, 4
+    Return
+
+CommonScript_Drifloon_AddOreburgh:
+    AddListMenuEntry MenuEntries_Text_Drifloon_OreburghCity, 5
+    Return
+
+CommonScript_Drifloon_AddHearthome:
+    AddListMenuEntry MenuEntries_Text_Drifloon_HearthomeCity, 6
+    Return
+
+CommonScript_Drifloon_AddSolaceon:
+    AddListMenuEntry MenuEntries_Text_Drifloon_SolaceonTown, 7
+    Return
+
+CommonScript_Drifloon_AddPastoria:
+    AddListMenuEntry MenuEntries_Text_Drifloon_PastoriaCity, 8
+    Return
+
+CommonScript_Drifloon_AddVeilstone:
+    AddListMenuEntry MenuEntries_Text_Drifloon_VeilstoneCity, 9
+    Return
+
+CommonScript_Drifloon_AddCelestic:
+    AddListMenuEntry MenuEntries_Text_Drifloon_CelesticTown, 10
+    Return
+
+CommonScript_Drifloon_AddSnowpoint:
+    AddListMenuEntry MenuEntries_Text_Drifloon_SnowpointCity, 11
+    Return
+
+CommonScript_Drifloon_AddCanalave:
+    AddListMenuEntry MenuEntries_Text_Drifloon_CanalabeCity, 12
+    Return
+
+CommonScript_Drifloon_AddSunyshore:
+    AddListMenuEntry MenuEntries_Text_Drifloon_SunshoreCity, 13
+    Return
+
+CommonScript_Drifloon_AddVictoryRoad:
+    AddListMenuEntry MenuEntries_Text_Drifloon_VictoryRoad, 14
+    Return
+
+CommonScript_Drifloon_AddPokemonLeague:
+    AddListMenuEntry MenuEntries_Text_Drifloon_PokemonLeague, 15
+    Return
+
+CommonScript_Drifloon_AddFightArea:
+    AddListMenuEntry MenuEntries_Text_Drifloon_FightArea, 16
+    Return
+
+CommonScript_Drifloon_AddSurvivalArea:
+    AddListMenuEntry MenuEntries_Text_Drifloon_SurvivalArea, 17
+    Return
+
+CommonScript_Drifloon_AddResortArea:
+    AddListMenuEntry MenuEntries_Text_Drifloon_ResortArea, 18
+    Return
 
     .balign 4, 0

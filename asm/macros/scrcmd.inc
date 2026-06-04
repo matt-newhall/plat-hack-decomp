@@ -5270,6 +5270,10 @@
     CallCommonScript 0x7D2
     .endm
 
+    .macro Common_CallDrifloon
+    CallCommonScript 0x80B
+    .endm
+
     .macro Common_SaveGame
     CallCommonScript 0x7D6
     .endm

@@ -28,6 +28,7 @@
     ScriptEntry FightArea_BattleGirl2
     ScriptEntry FightArea_Sailor3
     ScriptEntry FightArea_Buck
+    ScriptEntry FightArea_DrifloonInteract
     ScriptEntryEnd
 
 FightArea_OnTransition:
@@ -699,3 +700,11 @@ FightArea_Sailor3:
     End
 
     .balign 0
+
+FightArea_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

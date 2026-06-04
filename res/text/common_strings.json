@@ -881,6 +881,14 @@
     {
       "id": "CommonStrings_Text_StatusSubmenu_Header",
       "en_US": "Apply a status condition.\r"
+    },
+    {
+      "id": "CommonStrings_Text_DrifloonFly_Intro",
+      "en_US": [
+        "Floooooon!\r",
+        "(Hi trainer! Where would you like\n",
+        "to fly to today?)"
+      ]
     }
   ]
 }

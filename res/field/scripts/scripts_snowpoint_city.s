@@ -15,6 +15,7 @@
     ScriptEntry SnowpointCity_MapSign
     ScriptEntry SnowpointCity_GymSign
     ScriptEntry SnowpointCity_SailorSSSpiral
+    ScriptEntry SnowpointCity_DrifloonInteract
     ScriptEntryEnd
 
 SnowpointCity_OnTransition:
@@ -309,3 +310,13 @@ SnowpointCity_Movement_PlayerWalkToShip:
     WalkNormalSouth
     Delay15
     EndMovement
+
+    .balign 4, 0
+
+SnowpointCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

@@ -35,6 +35,7 @@
     ScriptEntry VeilstoneCity_Looker
     ScriptEntry VeilstoneCity_Guitarist3
     ScriptEntry VeilstoneCity_BattleGirl3
+    ScriptEntry VeilstoneCity_DrifloonInteract
     ScriptEntryEnd
 
 VeilstoneCity_OnTransition:
@@ -1410,3 +1411,11 @@ VeilstoneCity_BattleGirl3:
     End
 
     .balign 4, 0
+
+VeilstoneCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

@@ -32,6 +32,7 @@
     ScriptEntry EternaCity_TriggerCynthiaTryGiveEgg
     ScriptEntry EternaCity_TriggerCynthiaBlockBikeShop
     ScriptEntry EternaCity_Cynthia
+    ScriptEntry EternaCity_DrifloonInteract
     ScriptEntryEnd
 
 EternaCity_OnTransition:
@@ -1296,3 +1297,13 @@ EternaCity_Movement_PlayerWatchCynthiaLeaveEast:
     Delay4
     WalkOnSpotNormalWest
     EndMovement
+
+    .balign 4, 0
+
+EternaCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

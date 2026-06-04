@@ -15,6 +15,7 @@
     ScriptEntry CelesticTown_MapSign
     ScriptEntry CelesticTown_EtchingDialga
     ScriptEntry CelesticTown_EtchingPalkia
+    ScriptEntry CelesticTown_DrifloonInteract
     ScriptEntryEnd
 
 CelesticTown_OnTransition:
@@ -292,3 +293,11 @@ CelesticTown_EtchingPalkia:
     End
 
     .balign 4, 0
+
+CelesticTown_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

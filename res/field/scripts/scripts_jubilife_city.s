@@ -32,6 +32,7 @@
     ScriptEntry JubilifeCity_LandmarkSignJubilifeTV
     ScriptEntry JubilifeCity_LandmarkSignGlobalTerminal
     ScriptEntry JubilifeCity_TriggerLookerPalPad
+    ScriptEntry JubilifeCity_DrifloonInteract
     ScriptEntryEnd
 
 JubilifeCity_OnTransition:
@@ -1674,3 +1675,11 @@ JubilifeCity_Movement_LookerWalkOnSpotWestEast:
     Delay8 2
     WalkOnSpotNormalEast
     EndMovement
+
+JubilifeCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

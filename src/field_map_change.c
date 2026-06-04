@@ -796,6 +796,21 @@ void FieldTask_ChangeMapChangeFly(FieldTask *task, int mapId, int warpId, int x,
     FieldTask_InitJump(task, FieldTask_MapChangeFly, mapChangeData);
 }
 
+void FieldTask_StartMapChangeFlyFromTask(FieldTask *task, int mapId, int warpId, int x, int z, int dir)
+{
+    Location location;
+
+    Location_Set(&location, mapId, warpId, x, z, dir);
+
+    MapChangeFlyData *mapChangeData = Heap_AllocAtEnd(HEAP_ID_FIELD2, sizeof(MapChangeFlyData));
+
+    mapChangeData->state = 0;
+    mapChangeData->task = NULL;
+    mapChangeData->location = location;
+
+    FieldTask_InitCall(task, FieldTask_MapChangeFly, mapChangeData);
+}
+
 static BOOL FieldTask_MapChangeFly(FieldTask *task)
 {
     FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);

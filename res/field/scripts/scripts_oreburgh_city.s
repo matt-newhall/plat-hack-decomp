@@ -24,6 +24,7 @@
     ScriptEntry OreburghCity_BattleGirl2
     ScriptEntry OreburghCity_Machop3
     ScriptEntry OreburghCity_Machop2
+    ScriptEntry OreburghCity_DrifloonInteract
     ScriptEntryEnd
 
 OreburghCity_Rival:
@@ -549,3 +550,11 @@ OreburghCity_Machop2:
     End
 
     .balign 4, 0
+
+OreburghCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

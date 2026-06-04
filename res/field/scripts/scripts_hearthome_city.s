@@ -36,6 +36,7 @@
     ScriptEntry HearthomeCity_SignPoffinHouse
     ScriptEntry HearthomeCity_GymGuide
     ScriptEntry HearthomeCity_BlackBelt2
+    ScriptEntry HearthomeCity_DrifloonInteract
     ScriptEntryEnd
 
 HearthomeCity_OnTransition:
@@ -580,3 +581,11 @@ HearthomeCity_BlackBelt2:
     End
 
     .balign 4, 0
+
+HearthomeCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

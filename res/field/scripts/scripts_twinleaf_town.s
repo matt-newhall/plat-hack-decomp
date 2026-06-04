@@ -12,6 +12,7 @@
     ScriptEntry TwinleafTown_MapSign
     ScriptEntry TwinleafTown_LandmarkSignPlayerMailbox
     ScriptEntry TwinleafTown_LandmarkSignRivalMailbox
+    ScriptEntry TwinleafTown_DrifloonInteract
     ScriptEntryEnd
 
 TwinleafTown_OnTransition:
@@ -513,3 +514,11 @@ TwinleafTown_LandmarkSignRivalMailbox:
     End
 
     .balign 4, 0
+
+TwinleafTown_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

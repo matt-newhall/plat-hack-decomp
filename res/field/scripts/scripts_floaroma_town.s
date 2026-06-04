@@ -13,6 +13,7 @@
     ScriptEntry FloaromaTown_LandmarkSignFlowerShop
     ScriptEntry FloaromaTown_LandmarkSignFloaromaMeadow
     ScriptEntry FloaromaTown_Beauty
+    ScriptEntry FloaromaTown_DrifloonInteract
     ScriptEntryEnd
 
 FloaromaTown_OnTransition:
@@ -133,3 +134,11 @@ FloaromaTown_BeautyEnd:
     End
 
     .balign 4, 0
+
+FloaromaTown_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

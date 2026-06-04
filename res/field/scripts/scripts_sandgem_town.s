@@ -15,6 +15,7 @@
     ScriptEntry SandgemTown_LandmarkSignCounterpartMailbox
     ScriptEntry SandgemTown_LandmarkSignPokeMart
     ScriptEntry SandgemTown_LandmarkSignPokemonCenter
+    ScriptEntry SandgemTown_DrifloonInteract
     ScriptEntryEnd
 
 SandgemTown_OnTransition:
@@ -700,3 +701,11 @@ SandgemTown_LandmarkSignPokemonCenter:
     End
 
     .balign 4, 0
+
+SandgemTown_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

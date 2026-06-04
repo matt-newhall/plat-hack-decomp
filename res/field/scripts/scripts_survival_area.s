@@ -13,6 +13,7 @@
     ScriptEntry SurvivalArea_OnTransition
     ScriptEntry SurvivalArea_OnLoad
     ScriptEntry SurvivalArea_Rival
+    ScriptEntry SurvivalArea_DrifloonInteract
     ScriptEntryEnd
 
 SurvivalArea_OnTransition:
@@ -220,3 +221,11 @@ SurvivalArea_LostRivalBattle:
     End
 
     .balign 4, 0
+
+SurvivalArea_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

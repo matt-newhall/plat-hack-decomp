@@ -26,6 +26,7 @@
     ScriptEntry PastoriaCity_TriggerBomb
     ScriptEntry PastoriaCity_TriggerBlockGreatMarsh
     ScriptEntry PastoriaCity_TriggerFaceBoard
+    ScriptEntry PastoriaCity_DrifloonInteract
     ScriptEntryEnd
 
 PastoriaCity_OnTransition:
@@ -983,3 +984,13 @@ PastoriaCity_Movement_CroagunkLeave:
 PastoriaCity_Movement_PlayerWalkOnSpotSouth:
     WalkOnSpotNormalSouth
     EndMovement
+
+    .balign 4, 0
+
+PastoriaCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

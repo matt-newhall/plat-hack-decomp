@@ -22,6 +22,7 @@
     ScriptEntry SunyshoreCity_UnusedSealMerchant
     ScriptEntry SunyshoreCity_Flint
     ScriptEntry SunyshoreCity_OnTransition
+    ScriptEntry SunyshoreCity_DrifloonInteract
     ScriptEntryEnd
 
 SunyshoreCity_OnTransition:
@@ -689,3 +690,13 @@ SunyshoreCity_Movement_PlayerWatchFlintLeaveWest:
     WalkOnSpotNormalSouth
     WalkOnSpotNormalEast
     EndMovement
+
+    .balign 4, 0
+
+SunyshoreCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

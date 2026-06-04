@@ -18,6 +18,7 @@
     ScriptEntry ResortArea_Byron
     ScriptEntry ResortArea_OnTransition
     ScriptEntry ResortArea_SignVilla
+    ScriptEntry ResortArea_DrifloonInteract
     ScriptEntryEnd
 
 ResortArea_OnTransition:
@@ -414,3 +415,11 @@ ResortArea_SignVilla:
     End
 
     .balign 4, 0
+
+ResortArea_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

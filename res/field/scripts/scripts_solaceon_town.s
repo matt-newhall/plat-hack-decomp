@@ -15,6 +15,7 @@
     ScriptEntry SolaceonTown_OnTransition
     ScriptEntry SolaceonTown_OnResume
     ScriptEntry SolaceonTown_TriggerRival
+    ScriptEntry SolaceonTown_DrifloonInteract
     ScriptEntryEnd
 
 SolaceonTown_OnResume:
@@ -172,3 +173,13 @@ SolaceonTown_Movement_PlayerNoticeRival:
 SolaceonTown_Movement_PlayerFaceNorth:
     FaceNorth
     EndMovement
+
+    .balign 4, 0
+
+SolaceonTown_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

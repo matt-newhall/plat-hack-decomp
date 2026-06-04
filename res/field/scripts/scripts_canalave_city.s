@@ -30,6 +30,7 @@
     ScriptEntry CanalaveCity_OnFrameAfterDarkrai
     ScriptEntry CanalaveCity_OnLoad
     ScriptEntry CanalaveCity_RivalLibrary
+    ScriptEntry CanalaveCity_DrifloonInteract
     ScriptEntryEnd
 
 CanalaveCity_OnTransition:
@@ -721,3 +722,13 @@ CanalaveCity_Movement_EnterDoor:
     WalkNormalNorth
     SetInvisible
     EndMovement
+
+    .balign 4, 0
+
+CanalaveCity_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

@@ -5,6 +5,7 @@
     ScriptEntry PokemonLeague_ArrowSignPokemonleague
     ScriptEntry PokemonLeague_SignboardVictoryRoad
     ScriptEntry PokemonLeague_Statue
+    ScriptEntry PokemonLeague_DrifloonInteract
     ScriptEntryEnd
 
 PokemonLeague_ArrowSignPokemonleague:
@@ -20,3 +21,11 @@ PokemonLeague_Statue:
     End
 
     .balign 4, 0
+
+PokemonLeague_DrifloonInteract:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Common_CallDrifloon
+    ReleaseAll
+    End

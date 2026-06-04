@@ -1953,8 +1953,8 @@ static BOOL ScrCmd_InitLocalTextListMenu(ScriptContext *ctx)
 static BOOL ScrCmd_AddListMenuEntry(ScriptContext *ctx)
 {
     FieldMenuManager **fieldMenuMan = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_FIELD_MENU_MANAGER);
-    u8 entryStringID = ScriptContext_GetVar(ctx);
-    u8 altTextStringID = ScriptContext_GetVar(ctx);
+    u16 entryStringID = ScriptContext_GetVar(ctx);
+    u16 altTextStringID = ScriptContext_GetVar(ctx);
     u8 entryIndex = ScriptContext_GetVar(ctx);
 
     FieldMenuManager_AddListMenuEntry(*fieldMenuMan, entryStringID, altTextStringID, entryIndex);
@@ -3655,7 +3655,7 @@ static BOOL ScrCmd_UseFly(ScriptContext *ctx)
     u16 x = ScriptContext_GetVar(ctx);
     u16 z = ScriptContext_GetVar(ctx);
 
-    FieldTask_StartMapChangeFly(ctx->fieldSystem, mapID, -1, x, z, FACE_DOWN);
+    FieldTask_StartMapChangeFlyFromTask(ctx->task, mapID, -1, x, z, FACE_DOWN);
     return TRUE;
 }
 
