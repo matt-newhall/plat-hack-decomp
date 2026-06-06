@@ -179,6 +179,10 @@ void FieldInput_Update(FieldInput *input, FieldSystem *fieldSystem, u16 pressedK
 
 BOOL FieldInput_Process(const FieldInput *input, FieldSystem *fieldSystem)
 {
+    if (Player_MoveState(fieldSystem->playerAvatar) == PLAYER_MOVE_STATE_START) {
+        FollowerMon_SpawnIfNeeded(fieldSystem);
+    }
+
     if (input->dummy5 == FALSE && FieldSystem_RunInitScript(fieldSystem, INIT_SCRIPT_ON_FRAME_TABLE) == TRUE) {
         return TRUE;
     }
