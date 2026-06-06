@@ -5010,6 +5010,19 @@
     .short SCRCMD_OPENPARTYMENUFORSETHP
     .endm
 
+    .macro SendOutFollowingPoke
+    .short SCRCMD_SENDOUTFOLLOWINGPOKE
+    .endm
+
+    .macro SendBackFollowingPoke
+    .short SCRCMD_SENDBACKFOLLOWINGPOKE
+    .endm
+
+    .macro CheckHasFollower destVarID
+    .short SCRCMD_CHECKHASFOLLOWER
+    .short \destVarID
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

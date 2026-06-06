@@ -1,12 +1,16 @@
 #include "scrcmd_system_flags.h"
 
 #include "generated/badges.h"
+#include "generated/movement_types.h"
 
 #include "struct_defs/player_data.h"
 
+#include "field/field_system.h"
 #include "field_overworld_state.h"
 #include "field_script_context.h"
+#include "follower_mon.h"
 #include "inlines.h"
+#include "map_object.h"
 #include "player_avatar.h"
 #include "pokedex.h"
 #include "save_player.h"
@@ -232,5 +236,34 @@ BOOL ScrCmd_Defog(ScriptContext *ctx)
         GF_ASSERT(FALSE);
     }
 
+    return FALSE;
+}
+
+BOOL ScrCmd_SendOutFollowingPoke(ScriptContext *ctx)
+{
+    FollowerMon_UpdateFollower(ctx->fieldSystem);
+    return FALSE;
+}
+
+BOOL ScrCmd_SendBackFollowingPoke(ScriptContext *ctx)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
+        fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower != NULL) {
+        MapObject_Delete(follower);
+    }
+
+    fieldSystem->followMon.active = FALSE;
+
+    return FALSE;
+}
+
+BOOL ScrCmd_CheckHasFollower(ScriptContext *ctx)
+{
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+    *destVar = MapObjMan_GetLocalMapObjByMovementType(
+        ctx->fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER) != NULL;
     return FALSE;
 }

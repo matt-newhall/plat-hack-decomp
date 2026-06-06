@@ -847,6 +847,9 @@ ScriptCommand(SCRCMD_CAPITALIZEFIRSTLETTER,                                ScrCm
 ScriptCommand(SCRCMD_BUFFERFLOORNUMBER,                                    ScrCmd_BufferFloorNumber)
 ScriptCommand(SCRCMD_OPENPARTYMENUFORBSTATUSINFLICT,                       ScrCmd_OpenPartyMenuForStatusInflict)
 ScriptCommand(SCRCMD_OPENPARTYMENUFORSETHP,                                ScrCmd_OpenPartyMenuForSetHP)
+ScriptCommand(SCRCMD_SENDOUTFOLLOWINGPOKE,                                 ScrCmd_SendOutFollowingPoke)
+ScriptCommand(SCRCMD_SENDBACKFOLLOWINGPOKE,                                ScrCmd_SendBackFollowingPoke)
+ScriptCommand(SCRCMD_CHECKHASFOLLOWER,                                     ScrCmd_CheckHasFollower)
 
 // clang-format on
 
