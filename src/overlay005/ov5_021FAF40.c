@@ -19,6 +19,11 @@
 #include "overlay005/ov5_021EB1A0.h"
 #include "overlay005/ov5_021ECA70.h"
 #include "overlay005/ov5_021ECC20.h"
+#include "overlay005/ov5_021ECE40.h"
+
+#include "billboard.h"
+#include "constants/map_object.h"
+#include "map_object.h"
 #include "overlay005/struct_ov5_021EC700.h"
 #include "overlay005/struct_ov5_021ECD10.h"
 #include "overlay005/struct_ov5_021ED2D0.h"
@@ -95,6 +100,48 @@ static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FB0C8 = {
 static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FAFD8 = {
     ov5_021EB2EC,
     ov5_021EB398,
+    ov5_021EB314,
+    ov5_021EB328,
+    ov5_021EB354
+};
+
+static void FollowerMon_AnimCallback(MapObject *mapObj)
+{
+    Billboard *billboard;
+    int dir;
+    int animNum;
+    int draw;
+
+    if (ov5_021EDD94(mapObj) == 1) {
+        return;
+    }
+
+    billboard = ov5_021EB1A0(mapObj);
+    if (billboard == NULL) {
+        return;
+    }
+
+    dir     = MapObject_GetFacingDir(mapObj);
+    animNum = ov5_021EDF18(dir);
+    Billboard_SetAnimNum(billboard, animNum);
+
+    Billboard_AdvanceAnim(billboard, FX32_ONE);
+
+    ov5_021EDEB4(mapObj, billboard);
+
+    draw = 1;
+    if (MapObject_CheckStatusFlag(mapObj, MAP_OBJ_STATUS_HIDE)) {
+        draw = 0;
+    }
+    if (MapObject_CheckStatusFlag(mapObj, MAP_OBJ_STATUS_12) && !MapObject_CheckStatusFlag(mapObj, MAP_OBJ_STATUS_13)) {
+        draw = 0;
+    }
+    Billboard_SetDrawFlag(billboard, draw);
+}
+
+static const UnkStruct_ov5_021FB0F0 Unk_ov5_FollowerMon = {
+    ov5_021EB2EC,
+    FollowerMon_AnimCallback,
     ov5_021EB314,
     ov5_021EB328,
     ov5_021EB354
@@ -471,6 +518,536 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { 0x111, &Unk_ov5_021FAFB0 },
     { 0x112, &Unk_ov5_021FB0DC },
     { 0x113, &Unk_ov5_021FB0DC },
+    { OBJ_EVENT_GFX_PKMN_BULBASAUR, &Unk_ov5_FollowerMon },  // SPECIES_BULBASAUR
+    { OBJ_EVENT_GFX_PKMN_IVYSAUR, &Unk_ov5_FollowerMon },  // SPECIES_IVYSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR, &Unk_ov5_FollowerMon },  // SPECIES_VENUSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_CHARMANDER, &Unk_ov5_FollowerMon },  // SPECIES_CHARMANDER
+    { OBJ_EVENT_GFX_PKMN_CHARMELEON, &Unk_ov5_FollowerMon },  // SPECIES_CHARMELEON
+    { OBJ_EVENT_GFX_PKMN_CHARIZARD, &Unk_ov5_FollowerMon },  // SPECIES_CHARIZARD
+    { OBJ_EVENT_GFX_PKMN_SQUIRTLE, &Unk_ov5_FollowerMon },  // SPECIES_SQUIRTLE
+    { OBJ_EVENT_GFX_PKMN_WARTORTLE, &Unk_ov5_FollowerMon },  // SPECIES_WARTORTLE
+    { OBJ_EVENT_GFX_PKMN_BLASTOISE, &Unk_ov5_FollowerMon },  // SPECIES_BLASTOISE
+    { OBJ_EVENT_GFX_PKMN_CATERPIE, &Unk_ov5_FollowerMon },  // SPECIES_CATERPIE
+    { OBJ_EVENT_GFX_PKMN_METAPOD, &Unk_ov5_FollowerMon },  // SPECIES_METAPOD
+    { OBJ_EVENT_GFX_PKMN_BUTTERFREE, &Unk_ov5_FollowerMon },  // SPECIES_BUTTERFREE
+    { OBJ_EVENT_GFX_PKMN_WEEDLE, &Unk_ov5_FollowerMon },  // SPECIES_WEEDLE
+    { OBJ_EVENT_GFX_PKMN_KAKUNA, &Unk_ov5_FollowerMon },  // SPECIES_KAKUNA
+    { OBJ_EVENT_GFX_PKMN_BEEDRILL, &Unk_ov5_FollowerMon },  // SPECIES_BEEDRILL
+    { OBJ_EVENT_GFX_PKMN_PIDGEY, &Unk_ov5_FollowerMon },  // SPECIES_PIDGEY
+    { OBJ_EVENT_GFX_PKMN_PIDGEOTTO, &Unk_ov5_FollowerMon },  // SPECIES_PIDGEOTTO
+    { OBJ_EVENT_GFX_PKMN_PIDGEOT, &Unk_ov5_FollowerMon },  // SPECIES_PIDGEOT
+    { OBJ_EVENT_GFX_PKMN_RATTATA, &Unk_ov5_FollowerMon },  // SPECIES_RATTATA
+    { OBJ_EVENT_GFX_PKMN_RATICATE, &Unk_ov5_FollowerMon },  // SPECIES_RATICATE
+    { OBJ_EVENT_GFX_PKMN_SPEAROW, &Unk_ov5_FollowerMon },  // SPECIES_SPEAROW
+    { OBJ_EVENT_GFX_PKMN_FEAROW, &Unk_ov5_FollowerMon },  // SPECIES_FEAROW
+    { OBJ_EVENT_GFX_PKMN_EKANS, &Unk_ov5_FollowerMon },  // SPECIES_EKANS
+    { OBJ_EVENT_GFX_PKMN_ARBOK, &Unk_ov5_FollowerMon },  // SPECIES_ARBOK
+    { OBJ_EVENT_GFX_PKMN_PIKACHU, &Unk_ov5_FollowerMon },  // SPECIES_PIKACHU
+    { OBJ_EVENT_GFX_PKMN_PIKACHU_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_RAICHU, &Unk_ov5_FollowerMon },  // SPECIES_RAICHU
+    { OBJ_EVENT_GFX_PKMN_SANDSHREW, &Unk_ov5_FollowerMon },  // SPECIES_SANDSHREW
+    { OBJ_EVENT_GFX_PKMN_SANDSLASH, &Unk_ov5_FollowerMon },  // SPECIES_SANDSLASH
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_F, &Unk_ov5_FollowerMon },  // SPECIES_NIDORAN_F
+    { OBJ_EVENT_GFX_PKMN_NIDORINA, &Unk_ov5_FollowerMon },  // SPECIES_NIDORINA
+    { OBJ_EVENT_GFX_PKMN_NIDOQUEEN, &Unk_ov5_FollowerMon },  // SPECIES_NIDOQUEEN
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_M, &Unk_ov5_FollowerMon },  // SPECIES_NIDORAN_M
+    { OBJ_EVENT_GFX_PKMN_NIDORINO, &Unk_ov5_FollowerMon },  // SPECIES_NIDORINO
+    { OBJ_EVENT_GFX_PKMN_NIDOKING, &Unk_ov5_FollowerMon },  // SPECIES_NIDOKING
+    { OBJ_EVENT_GFX_PKMN_CLEFAIRY, &Unk_ov5_FollowerMon },  // SPECIES_CLEFAIRY
+    { OBJ_EVENT_GFX_PKMN_CLEFABLE, &Unk_ov5_FollowerMon },  // SPECIES_CLEFABLE
+    { OBJ_EVENT_GFX_PKMN_VULPIX, &Unk_ov5_FollowerMon },  // SPECIES_VULPIX
+    { OBJ_EVENT_GFX_PKMN_NINETALES, &Unk_ov5_FollowerMon },  // SPECIES_NINETALES
+    { OBJ_EVENT_GFX_PKMN_JIGGLYPUFF, &Unk_ov5_FollowerMon },  // SPECIES_JIGGLYPUFF
+    { OBJ_EVENT_GFX_PKMN_WIGGLYTUFF, &Unk_ov5_FollowerMon },  // SPECIES_WIGGLYTUFF
+    { OBJ_EVENT_GFX_PKMN_ZUBAT, &Unk_ov5_FollowerMon },  // SPECIES_ZUBAT
+    { OBJ_EVENT_GFX_PKMN_GOLBAT, &Unk_ov5_FollowerMon },  // SPECIES_GOLBAT
+    { OBJ_EVENT_GFX_PKMN_ODDISH, &Unk_ov5_FollowerMon },  // SPECIES_ODDISH
+    { OBJ_EVENT_GFX_PKMN_GLOOM, &Unk_ov5_FollowerMon },  // SPECIES_GLOOM
+    { OBJ_EVENT_GFX_PKMN_VILEPLUME, &Unk_ov5_FollowerMon },  // SPECIES_VILEPLUME
+    { OBJ_EVENT_GFX_PKMN_PARAS, &Unk_ov5_FollowerMon },  // SPECIES_PARAS
+    { OBJ_EVENT_GFX_PKMN_PARASECT, &Unk_ov5_FollowerMon },  // SPECIES_PARASECT
+    { OBJ_EVENT_GFX_PKMN_VENONAT, &Unk_ov5_FollowerMon },  // SPECIES_VENONAT
+    { OBJ_EVENT_GFX_PKMN_VENOMOTH, &Unk_ov5_FollowerMon },  // SPECIES_VENOMOTH
+    { OBJ_EVENT_GFX_PKMN_DIGLETT, &Unk_ov5_FollowerMon },  // SPECIES_DIGLETT
+    { OBJ_EVENT_GFX_PKMN_DUGTRIO, &Unk_ov5_FollowerMon },  // SPECIES_DUGTRIO
+    { OBJ_EVENT_GFX_PKMN_MEOWTH, &Unk_ov5_FollowerMon },  // SPECIES_MEOWTH
+    { OBJ_EVENT_GFX_PKMN_PERSIAN, &Unk_ov5_FollowerMon },  // SPECIES_PERSIAN
+    { OBJ_EVENT_GFX_PKMN_PSYDUCK, &Unk_ov5_FollowerMon },  // SPECIES_PSYDUCK
+    { OBJ_EVENT_GFX_PKMN_GOLDUCK, &Unk_ov5_FollowerMon },  // SPECIES_GOLDUCK
+    { OBJ_EVENT_GFX_PKMN_MANKEY, &Unk_ov5_FollowerMon },  // SPECIES_MANKEY
+    { OBJ_EVENT_GFX_PKMN_PRIMEAPE, &Unk_ov5_FollowerMon },  // SPECIES_PRIMEAPE
+    { OBJ_EVENT_GFX_PKMN_GROWLITHE, &Unk_ov5_FollowerMon },  // SPECIES_GROWLITHE
+    { OBJ_EVENT_GFX_PKMN_ARCANINE, &Unk_ov5_FollowerMon },  // SPECIES_ARCANINE
+    { OBJ_EVENT_GFX_PKMN_POLIWAG, &Unk_ov5_FollowerMon },  // SPECIES_POLIWAG
+    { OBJ_EVENT_GFX_PKMN_POLIWHIRL, &Unk_ov5_FollowerMon },  // SPECIES_POLIWHIRL
+    { OBJ_EVENT_GFX_PKMN_POLIWRATH, &Unk_ov5_FollowerMon },  // SPECIES_POLIWRATH
+    { OBJ_EVENT_GFX_PKMN_ABRA, &Unk_ov5_FollowerMon },  // SPECIES_ABRA
+    { OBJ_EVENT_GFX_PKMN_KADABRA, &Unk_ov5_FollowerMon },  // SPECIES_KADABRA
+    { OBJ_EVENT_GFX_PKMN_ALAKAZAM, &Unk_ov5_FollowerMon },  // SPECIES_ALAKAZAM
+    { OBJ_EVENT_GFX_PKMN_MACHOP, &Unk_ov5_FollowerMon },  // SPECIES_MACHOP
+    { OBJ_EVENT_GFX_PKMN_MACHOKE, &Unk_ov5_FollowerMon },  // SPECIES_MACHOKE
+    { OBJ_EVENT_GFX_PKMN_MACHAMP, &Unk_ov5_FollowerMon },  // SPECIES_MACHAMP
+    { OBJ_EVENT_GFX_PKMN_BELLSPROUT, &Unk_ov5_FollowerMon },  // SPECIES_BELLSPROUT
+    { OBJ_EVENT_GFX_PKMN_WEEPINBELL, &Unk_ov5_FollowerMon },  // SPECIES_WEEPINBELL
+    { OBJ_EVENT_GFX_PKMN_VICTREEBEL, &Unk_ov5_FollowerMon },  // SPECIES_VICTREEBEL
+    { OBJ_EVENT_GFX_PKMN_TENTACOOL, &Unk_ov5_FollowerMon },  // SPECIES_TENTACOOL
+    { OBJ_EVENT_GFX_PKMN_TENTACRUEL, &Unk_ov5_FollowerMon },  // SPECIES_TENTACRUEL
+    { OBJ_EVENT_GFX_PKMN_GEODUDE, &Unk_ov5_FollowerMon },  // SPECIES_GEODUDE
+    { OBJ_EVENT_GFX_PKMN_GRAVELER, &Unk_ov5_FollowerMon },  // SPECIES_GRAVELER
+    { OBJ_EVENT_GFX_PKMN_GOLEM, &Unk_ov5_FollowerMon },  // SPECIES_GOLEM
+    { OBJ_EVENT_GFX_PKMN_PONYTA, &Unk_ov5_FollowerMon },  // SPECIES_PONYTA
+    { OBJ_EVENT_GFX_PKMN_RAPIDASH, &Unk_ov5_FollowerMon },  // SPECIES_RAPIDASH
+    { OBJ_EVENT_GFX_PKMN_SLOWPOKE, &Unk_ov5_FollowerMon },  // SPECIES_SLOWPOKE
+    { OBJ_EVENT_GFX_PKMN_SLOWBRO, &Unk_ov5_FollowerMon },  // SPECIES_SLOWBRO
+    { OBJ_EVENT_GFX_PKMN_MAGNEMITE, &Unk_ov5_FollowerMon },  // SPECIES_MAGNEMITE
+    { OBJ_EVENT_GFX_PKMN_MAGNETON, &Unk_ov5_FollowerMon },  // SPECIES_MAGNETON
+    { OBJ_EVENT_GFX_PKMN_FARFETCHD, &Unk_ov5_FollowerMon },  // SPECIES_FARFETCHD
+    { OBJ_EVENT_GFX_PKMN_DODUO, &Unk_ov5_FollowerMon },  // SPECIES_DODUO
+    { OBJ_EVENT_GFX_PKMN_DODRIO, &Unk_ov5_FollowerMon },  // SPECIES_DODRIO
+    { OBJ_EVENT_GFX_PKMN_SEEL, &Unk_ov5_FollowerMon },  // SPECIES_SEEL
+    { OBJ_EVENT_GFX_PKMN_DEWGONG, &Unk_ov5_FollowerMon },  // SPECIES_DEWGONG
+    { OBJ_EVENT_GFX_PKMN_GRIMER, &Unk_ov5_FollowerMon },  // SPECIES_GRIMER
+    { OBJ_EVENT_GFX_PKMN_MUK, &Unk_ov5_FollowerMon },  // SPECIES_MUK
+    { OBJ_EVENT_GFX_PKMN_SHELLDER, &Unk_ov5_FollowerMon },  // SPECIES_SHELLDER
+    { OBJ_EVENT_GFX_PKMN_CLOYSTER, &Unk_ov5_FollowerMon },  // SPECIES_CLOYSTER
+    { OBJ_EVENT_GFX_PKMN_GASTLY, &Unk_ov5_FollowerMon },  // SPECIES_GASTLY
+    { OBJ_EVENT_GFX_PKMN_HAUNTER, &Unk_ov5_FollowerMon },  // SPECIES_HAUNTER
+    { OBJ_EVENT_GFX_PKMN_GENGAR, &Unk_ov5_FollowerMon },  // SPECIES_GENGAR
+    { OBJ_EVENT_GFX_PKMN_ONIX, &Unk_ov5_FollowerMon },  // SPECIES_ONIX
+    { OBJ_EVENT_GFX_PKMN_DROWZEE, &Unk_ov5_FollowerMon },  // SPECIES_DROWZEE
+    { OBJ_EVENT_GFX_PKMN_HYPNO, &Unk_ov5_FollowerMon },  // SPECIES_HYPNO
+    { OBJ_EVENT_GFX_PKMN_KRABBY, &Unk_ov5_FollowerMon },  // SPECIES_KRABBY
+    { OBJ_EVENT_GFX_PKMN_KINGLER, &Unk_ov5_FollowerMon },  // SPECIES_KINGLER
+    { OBJ_EVENT_GFX_PKMN_VOLTORB, &Unk_ov5_FollowerMon },  // SPECIES_VOLTORB
+    { OBJ_EVENT_GFX_PKMN_ELECTRODE, &Unk_ov5_FollowerMon },  // SPECIES_ELECTRODE
+    { OBJ_EVENT_GFX_PKMN_EXEGGCUTE, &Unk_ov5_FollowerMon },  // SPECIES_EXEGGCUTE
+    { OBJ_EVENT_GFX_PKMN_EXEGGUTOR, &Unk_ov5_FollowerMon },  // SPECIES_EXEGGUTOR
+    { OBJ_EVENT_GFX_PKMN_CUBONE, &Unk_ov5_FollowerMon },  // SPECIES_CUBONE
+    { OBJ_EVENT_GFX_PKMN_MAROWAK, &Unk_ov5_FollowerMon },  // SPECIES_MAROWAK
+    { OBJ_EVENT_GFX_PKMN_HITMONLEE, &Unk_ov5_FollowerMon },  // SPECIES_HITMONLEE
+    { OBJ_EVENT_GFX_PKMN_HITMONCHAN, &Unk_ov5_FollowerMon },  // SPECIES_HITMONCHAN
+    { OBJ_EVENT_GFX_PKMN_LICKITUNG, &Unk_ov5_FollowerMon },  // SPECIES_LICKITUNG
+    { OBJ_EVENT_GFX_PKMN_KOFFING, &Unk_ov5_FollowerMon },  // SPECIES_KOFFING
+    { OBJ_EVENT_GFX_PKMN_WEEZING, &Unk_ov5_FollowerMon },  // SPECIES_WEEZING
+    { OBJ_EVENT_GFX_PKMN_RHYHORN, &Unk_ov5_FollowerMon },  // SPECIES_RHYHORN
+    { OBJ_EVENT_GFX_PKMN_RHYDON, &Unk_ov5_FollowerMon },  // SPECIES_RHYDON
+    { OBJ_EVENT_GFX_PKMN_CHANSEY, &Unk_ov5_FollowerMon },  // SPECIES_CHANSEY
+    { OBJ_EVENT_GFX_PKMN_TANGELA, &Unk_ov5_FollowerMon },  // SPECIES_TANGELA
+    { OBJ_EVENT_GFX_PKMN_KANGASKHAN, &Unk_ov5_FollowerMon },  // SPECIES_KANGASKHAN
+    { OBJ_EVENT_GFX_PKMN_HORSEA, &Unk_ov5_FollowerMon },  // SPECIES_HORSEA
+    { OBJ_EVENT_GFX_PKMN_SEADRA, &Unk_ov5_FollowerMon },  // SPECIES_SEADRA
+    { OBJ_EVENT_GFX_PKMN_GOLDEEN, &Unk_ov5_FollowerMon },  // SPECIES_GOLDEEN
+    { OBJ_EVENT_GFX_PKMN_SEAKING, &Unk_ov5_FollowerMon },  // SPECIES_SEAKING
+    { OBJ_EVENT_GFX_PKMN_STARYU, &Unk_ov5_FollowerMon },  // SPECIES_STARYU
+    { OBJ_EVENT_GFX_PKMN_STARMIE, &Unk_ov5_FollowerMon },  // SPECIES_STARMIE
+    { OBJ_EVENT_GFX_PKMN_MR_MIME, &Unk_ov5_FollowerMon },  // SPECIES_MR_MIME
+    { OBJ_EVENT_GFX_PKMN_SCYTHER, &Unk_ov5_FollowerMon },  // SPECIES_SCYTHER
+    { OBJ_EVENT_GFX_PKMN_JYNX, &Unk_ov5_FollowerMon },  // SPECIES_JYNX
+    { OBJ_EVENT_GFX_PKMN_ELECTABUZZ, &Unk_ov5_FollowerMon },  // SPECIES_ELECTABUZZ
+    { OBJ_EVENT_GFX_PKMN_MAGMAR, &Unk_ov5_FollowerMon },  // SPECIES_MAGMAR
+    { OBJ_EVENT_GFX_PKMN_PINSIR, &Unk_ov5_FollowerMon },  // SPECIES_PINSIR
+    { OBJ_EVENT_GFX_PKMN_TAUROS, &Unk_ov5_FollowerMon },  // SPECIES_TAUROS
+    { OBJ_EVENT_GFX_PKMN_MAGIKARP, &Unk_ov5_FollowerMon },  // SPECIES_MAGIKARP
+    { OBJ_EVENT_GFX_PKMN_GYARADOS, &Unk_ov5_FollowerMon },  // SPECIES_GYARADOS
+    { OBJ_EVENT_GFX_PKMN_LAPRAS, &Unk_ov5_FollowerMon },  // SPECIES_LAPRAS
+    { OBJ_EVENT_GFX_PKMN_DITTO, &Unk_ov5_FollowerMon },  // SPECIES_DITTO
+    { OBJ_EVENT_GFX_PKMN_EEVEE, &Unk_ov5_FollowerMon },  // SPECIES_EEVEE
+    { OBJ_EVENT_GFX_PKMN_VAPOREON, &Unk_ov5_FollowerMon },  // SPECIES_VAPOREON
+    { OBJ_EVENT_GFX_PKMN_JOLTEON, &Unk_ov5_FollowerMon },  // SPECIES_JOLTEON
+    { OBJ_EVENT_GFX_PKMN_FLAREON, &Unk_ov5_FollowerMon },  // SPECIES_FLAREON
+    { OBJ_EVENT_GFX_PKMN_PORYGON, &Unk_ov5_FollowerMon },  // SPECIES_PORYGON
+    { OBJ_EVENT_GFX_PKMN_OMANYTE, &Unk_ov5_FollowerMon },  // SPECIES_OMANYTE
+    { OBJ_EVENT_GFX_PKMN_OMASTAR, &Unk_ov5_FollowerMon },  // SPECIES_OMASTAR
+    { OBJ_EVENT_GFX_PKMN_KABUTO, &Unk_ov5_FollowerMon },  // SPECIES_KABUTO
+    { OBJ_EVENT_GFX_PKMN_KABUTOPS, &Unk_ov5_FollowerMon },  // SPECIES_KABUTOPS
+    { OBJ_EVENT_GFX_PKMN_AERODACTYL, &Unk_ov5_FollowerMon },  // SPECIES_AERODACTYL
+    { OBJ_EVENT_GFX_PKMN_SNORLAX, &Unk_ov5_FollowerMon },  // SPECIES_SNORLAX
+    { OBJ_EVENT_GFX_PKMN_ARTICUNO, &Unk_ov5_FollowerMon },  // SPECIES_ARTICUNO
+    { OBJ_EVENT_GFX_PKMN_ZAPDOS, &Unk_ov5_FollowerMon },  // SPECIES_ZAPDOS
+    { OBJ_EVENT_GFX_PKMN_MOLTRES, &Unk_ov5_FollowerMon },  // SPECIES_MOLTRES
+    { OBJ_EVENT_GFX_PKMN_DRATINI, &Unk_ov5_FollowerMon },  // SPECIES_DRATINI
+    { OBJ_EVENT_GFX_PKMN_DRAGONAIR, &Unk_ov5_FollowerMon },  // SPECIES_DRAGONAIR
+    { OBJ_EVENT_GFX_PKMN_DRAGONITE, &Unk_ov5_FollowerMon },  // SPECIES_DRAGONITE
+    { OBJ_EVENT_GFX_PKMN_MEWTWO, &Unk_ov5_FollowerMon },  // SPECIES_MEWTWO
+    { OBJ_EVENT_GFX_PKMN_MEW, &Unk_ov5_FollowerMon },  // SPECIES_MEW
+    { OBJ_EVENT_GFX_PKMN_CHIKORITA, &Unk_ov5_FollowerMon },  // SPECIES_CHIKORITA
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF, &Unk_ov5_FollowerMon },  // SPECIES_BAYLEEF
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_CYNDAQUIL, &Unk_ov5_FollowerMon },  // SPECIES_CYNDAQUIL
+    { OBJ_EVENT_GFX_PKMN_QUILAVA, &Unk_ov5_FollowerMon },  // SPECIES_QUILAVA
+    { OBJ_EVENT_GFX_PKMN_TYPHLOSION, &Unk_ov5_FollowerMon },  // SPECIES_TYPHLOSION
+    { OBJ_EVENT_GFX_PKMN_TOTODILE, &Unk_ov5_FollowerMon },  // SPECIES_TOTODILE
+    { OBJ_EVENT_GFX_PKMN_CROCONAW, &Unk_ov5_FollowerMon },  // SPECIES_CROCONAW
+    { OBJ_EVENT_GFX_PKMN_FERALIGATR, &Unk_ov5_FollowerMon },  // SPECIES_FERALIGATR
+    { OBJ_EVENT_GFX_PKMN_SENTRET, &Unk_ov5_FollowerMon },  // SPECIES_SENTRET
+    { OBJ_EVENT_GFX_PKMN_FURRET, &Unk_ov5_FollowerMon },  // SPECIES_FURRET
+    { OBJ_EVENT_GFX_PKMN_HOOTHOOT, &Unk_ov5_FollowerMon },  // SPECIES_HOOTHOOT
+    { OBJ_EVENT_GFX_PKMN_NOCTOWL, &Unk_ov5_FollowerMon },  // SPECIES_NOCTOWL
+    { OBJ_EVENT_GFX_PKMN_LEDYBA, &Unk_ov5_FollowerMon },  // SPECIES_LEDYBA
+    { OBJ_EVENT_GFX_PKMN_LEDIAN, &Unk_ov5_FollowerMon },  // SPECIES_LEDIAN
+    { OBJ_EVENT_GFX_PKMN_SPINARAK, &Unk_ov5_FollowerMon },  // SPECIES_SPINARAK
+    { OBJ_EVENT_GFX_PKMN_ARIADOS, &Unk_ov5_FollowerMon },  // SPECIES_ARIADOS
+    { OBJ_EVENT_GFX_PKMN_CROBAT, &Unk_ov5_FollowerMon },  // SPECIES_CROBAT
+    { OBJ_EVENT_GFX_PKMN_CHINCHOU, &Unk_ov5_FollowerMon },  // SPECIES_CHINCHOU
+    { OBJ_EVENT_GFX_PKMN_LANTURN, &Unk_ov5_FollowerMon },  // SPECIES_LANTURN
+    { OBJ_EVENT_GFX_PKMN_PICHU, &Unk_ov5_FollowerMon },  // SPECIES_PICHU
+    { OBJ_EVENT_GFX_PKMN_CLEFFA, &Unk_ov5_FollowerMon },  // SPECIES_CLEFFA
+    { OBJ_EVENT_GFX_PKMN_IGGLYBUFF, &Unk_ov5_FollowerMon },  // SPECIES_IGGLYBUFF
+    { OBJ_EVENT_GFX_PKMN_TOGEPI, &Unk_ov5_FollowerMon },  // SPECIES_TOGEPI
+    { OBJ_EVENT_GFX_PKMN_TOGETIC, &Unk_ov5_FollowerMon },  // SPECIES_TOGETIC
+    { OBJ_EVENT_GFX_PKMN_NATU, &Unk_ov5_FollowerMon },  // SPECIES_NATU
+    { OBJ_EVENT_GFX_PKMN_XATU, &Unk_ov5_FollowerMon },  // SPECIES_XATU
+    { OBJ_EVENT_GFX_PKMN_MAREEP, &Unk_ov5_FollowerMon },  // SPECIES_MAREEP
+    { OBJ_EVENT_GFX_PKMN_FLAAFFY, &Unk_ov5_FollowerMon },  // SPECIES_FLAAFFY
+    { OBJ_EVENT_GFX_PKMN_AMPHAROS, &Unk_ov5_FollowerMon },  // SPECIES_AMPHAROS
+    { OBJ_EVENT_GFX_PKMN_BELLOSSOM, &Unk_ov5_FollowerMon },  // SPECIES_BELLOSSOM
+    { OBJ_EVENT_GFX_PKMN_MARILL, &Unk_ov5_FollowerMon },  // SPECIES_MARILL
+    { OBJ_EVENT_GFX_PKMN_AZUMARILL, &Unk_ov5_FollowerMon },  // SPECIES_AZUMARILL
+    { OBJ_EVENT_GFX_PKMN_SUDOWOODO, &Unk_ov5_FollowerMon },  // SPECIES_SUDOWOODO
+    { OBJ_EVENT_GFX_PKMN_POLITOED, &Unk_ov5_FollowerMon },  // SPECIES_POLITOED
+    { OBJ_EVENT_GFX_PKMN_HOPPIP, &Unk_ov5_FollowerMon },  // SPECIES_HOPPIP
+    { OBJ_EVENT_GFX_PKMN_SKIPLOOM, &Unk_ov5_FollowerMon },  // SPECIES_SKIPLOOM
+    { OBJ_EVENT_GFX_PKMN_JUMPLUFF, &Unk_ov5_FollowerMon },  // SPECIES_JUMPLUFF
+    { OBJ_EVENT_GFX_PKMN_AIPOM, &Unk_ov5_FollowerMon },  // SPECIES_AIPOM
+    { OBJ_EVENT_GFX_PKMN_SUNKERN, &Unk_ov5_FollowerMon },  // SPECIES_SUNKERN
+    { OBJ_EVENT_GFX_PKMN_SUNFLORA, &Unk_ov5_FollowerMon },  // SPECIES_SUNFLORA
+    { OBJ_EVENT_GFX_PKMN_YANMA, &Unk_ov5_FollowerMon },  // SPECIES_YANMA
+    { OBJ_EVENT_GFX_PKMN_WOOPER, &Unk_ov5_FollowerMon },  // SPECIES_WOOPER
+    { OBJ_EVENT_GFX_PKMN_QUAGSIRE, &Unk_ov5_FollowerMon },  // SPECIES_QUAGSIRE
+    { OBJ_EVENT_GFX_PKMN_ESPEON, &Unk_ov5_FollowerMon },  // SPECIES_ESPEON
+    { OBJ_EVENT_GFX_PKMN_UMBREON, &Unk_ov5_FollowerMon },  // SPECIES_UMBREON
+    { OBJ_EVENT_GFX_PKMN_MURKROW, &Unk_ov5_FollowerMon },  // SPECIES_MURKROW
+    { OBJ_EVENT_GFX_PKMN_SLOWKING, &Unk_ov5_FollowerMon },  // SPECIES_SLOWKING
+    { OBJ_EVENT_GFX_PKMN_MISDREAVUS, &Unk_ov5_FollowerMon },  // SPECIES_MISDREAVUS
+    { OBJ_EVENT_GFX_PKMN_UNOWN, &Unk_ov5_FollowerMon },  // SPECIES_UNOWN
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET, &Unk_ov5_FollowerMon },  // SPECIES_WOBBUFFET
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_GIRAFARIG, &Unk_ov5_FollowerMon },  // SPECIES_GIRAFARIG
+    { OBJ_EVENT_GFX_PKMN_PINECO, &Unk_ov5_FollowerMon },  // SPECIES_PINECO
+    { OBJ_EVENT_GFX_PKMN_FORRETRESS, &Unk_ov5_FollowerMon },  // SPECIES_FORRETRESS
+    { OBJ_EVENT_GFX_PKMN_DUNSPARCE, &Unk_ov5_FollowerMon },  // SPECIES_DUNSPARCE
+    { OBJ_EVENT_GFX_PKMN_GLIGAR, &Unk_ov5_FollowerMon },  // SPECIES_GLIGAR
+    { OBJ_EVENT_GFX_PKMN_STEELIX, &Unk_ov5_FollowerMon },  // SPECIES_STEELIX
+    { OBJ_EVENT_GFX_PKMN_STEELIX_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_SNUBBULL, &Unk_ov5_FollowerMon },  // SPECIES_SNUBBULL
+    { OBJ_EVENT_GFX_PKMN_GRANBULL, &Unk_ov5_FollowerMon },  // SPECIES_GRANBULL
+    { OBJ_EVENT_GFX_PKMN_QWILFISH, &Unk_ov5_FollowerMon },  // SPECIES_QWILFISH
+    { OBJ_EVENT_GFX_PKMN_SCIZOR, &Unk_ov5_FollowerMon },  // SPECIES_SCIZOR
+    { OBJ_EVENT_GFX_PKMN_SHUCKLE, &Unk_ov5_FollowerMon },  // SPECIES_SHUCKLE
+    { OBJ_EVENT_GFX_PKMN_HERACROSS, &Unk_ov5_FollowerMon },  // SPECIES_HERACROSS
+    { OBJ_EVENT_GFX_PKMN_HERACROSS_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_SNEASEL, &Unk_ov5_FollowerMon },  // SPECIES_SNEASEL
+    { OBJ_EVENT_GFX_PKMN_TEDDIURSA, &Unk_ov5_FollowerMon },  // SPECIES_TEDDIURSA
+    { OBJ_EVENT_GFX_PKMN_URSARING, &Unk_ov5_FollowerMon },  // SPECIES_URSARING
+    { OBJ_EVENT_GFX_PKMN_SLUGMA, &Unk_ov5_FollowerMon },  // SPECIES_SLUGMA
+    { OBJ_EVENT_GFX_PKMN_MAGCARGO, &Unk_ov5_FollowerMon },  // SPECIES_MAGCARGO
+    { OBJ_EVENT_GFX_PKMN_SWINUB, &Unk_ov5_FollowerMon },  // SPECIES_SWINUB
+    { OBJ_EVENT_GFX_PKMN_PILOSWINE, &Unk_ov5_FollowerMon },  // SPECIES_PILOSWINE
+    { OBJ_EVENT_GFX_PKMN_CORSOLA, &Unk_ov5_FollowerMon },  // SPECIES_CORSOLA
+    { OBJ_EVENT_GFX_PKMN_REMORAID, &Unk_ov5_FollowerMon },  // SPECIES_REMORAID
+    { OBJ_EVENT_GFX_PKMN_OCTILLERY, &Unk_ov5_FollowerMon },  // SPECIES_OCTILLERY
+    { OBJ_EVENT_GFX_PKMN_DELIBIRD, &Unk_ov5_FollowerMon },  // SPECIES_DELIBIRD
+    { OBJ_EVENT_GFX_PKMN_MANTINE, &Unk_ov5_FollowerMon },  // SPECIES_MANTINE
+    { OBJ_EVENT_GFX_PKMN_SKARMORY, &Unk_ov5_FollowerMon },  // SPECIES_SKARMORY
+    { OBJ_EVENT_GFX_PKMN_HOUNDOUR, &Unk_ov5_FollowerMon },  // SPECIES_HOUNDOUR
+    { OBJ_EVENT_GFX_PKMN_HOUNDOOM, &Unk_ov5_FollowerMon },  // SPECIES_HOUNDOOM
+    { OBJ_EVENT_GFX_PKMN_KINGDRA, &Unk_ov5_FollowerMon },  // SPECIES_KINGDRA
+    { OBJ_EVENT_GFX_PKMN_PHANPY, &Unk_ov5_FollowerMon },  // SPECIES_PHANPY
+    { OBJ_EVENT_GFX_PKMN_DONPHAN, &Unk_ov5_FollowerMon },  // SPECIES_DONPHAN
+    { OBJ_EVENT_GFX_PKMN_PORYGON2, &Unk_ov5_FollowerMon },  // SPECIES_PORYGON2
+    { OBJ_EVENT_GFX_PKMN_STANTLER, &Unk_ov5_FollowerMon },  // SPECIES_STANTLER
+    { OBJ_EVENT_GFX_PKMN_SMEARGLE, &Unk_ov5_FollowerMon },  // SPECIES_SMEARGLE
+    { OBJ_EVENT_GFX_PKMN_TYROGUE, &Unk_ov5_FollowerMon },  // SPECIES_TYROGUE
+    { OBJ_EVENT_GFX_PKMN_HITMONTOP, &Unk_ov5_FollowerMon },  // SPECIES_HITMONTOP
+    { OBJ_EVENT_GFX_PKMN_SMOOCHUM, &Unk_ov5_FollowerMon },  // SPECIES_SMOOCHUM
+    { OBJ_EVENT_GFX_PKMN_ELEKID, &Unk_ov5_FollowerMon },  // SPECIES_ELEKID
+    { OBJ_EVENT_GFX_PKMN_MAGBY, &Unk_ov5_FollowerMon },  // SPECIES_MAGBY
+    { OBJ_EVENT_GFX_PKMN_MILTANK, &Unk_ov5_FollowerMon },  // SPECIES_MILTANK
+    { OBJ_EVENT_GFX_PKMN_BLISSEY, &Unk_ov5_FollowerMon },  // SPECIES_BLISSEY
+    { OBJ_EVENT_GFX_PKMN_RAIKOU, &Unk_ov5_FollowerMon },  // SPECIES_RAIKOU
+    { OBJ_EVENT_GFX_PKMN_ENTEI, &Unk_ov5_FollowerMon },  // SPECIES_ENTEI
+    { OBJ_EVENT_GFX_PKMN_SUICUNE, &Unk_ov5_FollowerMon },  // SPECIES_SUICUNE
+    { OBJ_EVENT_GFX_PKMN_LARVITAR, &Unk_ov5_FollowerMon },  // SPECIES_LARVITAR
+    { OBJ_EVENT_GFX_PKMN_PUPITAR, &Unk_ov5_FollowerMon },  // SPECIES_PUPITAR
+    { OBJ_EVENT_GFX_PKMN_TYRANITAR, &Unk_ov5_FollowerMon },  // SPECIES_TYRANITAR
+    { OBJ_EVENT_GFX_PKMN_LUGIA, &Unk_ov5_FollowerMon },  // SPECIES_LUGIA
+    { OBJ_EVENT_GFX_PKMN_HO_OH, &Unk_ov5_FollowerMon },  // SPECIES_HO_OH
+    { OBJ_EVENT_GFX_PKMN_CELEBI, &Unk_ov5_FollowerMon },  // SPECIES_CELEBI
+    { OBJ_EVENT_GFX_PKMN_TREECKO, &Unk_ov5_FollowerMon },  // SPECIES_TREECKO
+    { OBJ_EVENT_GFX_PKMN_GROVYLE, &Unk_ov5_FollowerMon },  // SPECIES_GROVYLE
+    { OBJ_EVENT_GFX_PKMN_SCEPTILE, &Unk_ov5_FollowerMon },  // SPECIES_SCEPTILE
+    { OBJ_EVENT_GFX_PKMN_TORCHIC, &Unk_ov5_FollowerMon },  // SPECIES_TORCHIC
+    { OBJ_EVENT_GFX_PKMN_COMBUSKEN, &Unk_ov5_FollowerMon },  // SPECIES_COMBUSKEN
+    { OBJ_EVENT_GFX_PKMN_BLAZIKEN, &Unk_ov5_FollowerMon },  // SPECIES_BLAZIKEN
+    { OBJ_EVENT_GFX_PKMN_MUDKIP, &Unk_ov5_FollowerMon },  // SPECIES_MUDKIP
+    { OBJ_EVENT_GFX_PKMN_MARSHTOMP, &Unk_ov5_FollowerMon },  // SPECIES_MARSHTOMP
+    { OBJ_EVENT_GFX_PKMN_SWAMPERT, &Unk_ov5_FollowerMon },  // SPECIES_SWAMPERT
+    { OBJ_EVENT_GFX_PKMN_POOCHYENA, &Unk_ov5_FollowerMon },  // SPECIES_POOCHYENA
+    { OBJ_EVENT_GFX_PKMN_MIGHTYENA, &Unk_ov5_FollowerMon },  // SPECIES_MIGHTYENA
+    { OBJ_EVENT_GFX_PKMN_ZIGZAGOON, &Unk_ov5_FollowerMon },  // SPECIES_ZIGZAGOON
+    { OBJ_EVENT_GFX_PKMN_LINOONE, &Unk_ov5_FollowerMon },  // SPECIES_LINOONE
+    { OBJ_EVENT_GFX_PKMN_WURMPLE, &Unk_ov5_FollowerMon },  // SPECIES_WURMPLE
+    { OBJ_EVENT_GFX_PKMN_SILCOON, &Unk_ov5_FollowerMon },  // SPECIES_SILCOON
+    { OBJ_EVENT_GFX_PKMN_BEAUTIFLY, &Unk_ov5_FollowerMon },  // SPECIES_BEAUTIFLY
+    { OBJ_EVENT_GFX_PKMN_CASCOON, &Unk_ov5_FollowerMon },  // SPECIES_CASCOON
+    { OBJ_EVENT_GFX_PKMN_DUSTOX, &Unk_ov5_FollowerMon },  // SPECIES_DUSTOX
+    { OBJ_EVENT_GFX_PKMN_LOTAD, &Unk_ov5_FollowerMon },  // SPECIES_LOTAD
+    { OBJ_EVENT_GFX_PKMN_LOMBRE, &Unk_ov5_FollowerMon },  // SPECIES_LOMBRE
+    { OBJ_EVENT_GFX_PKMN_LUDICOLO, &Unk_ov5_FollowerMon },  // SPECIES_LUDICOLO
+    { OBJ_EVENT_GFX_PKMN_SEEDOT, &Unk_ov5_FollowerMon },  // SPECIES_SEEDOT
+    { OBJ_EVENT_GFX_PKMN_NUZLEAF, &Unk_ov5_FollowerMon },  // SPECIES_NUZLEAF
+    { OBJ_EVENT_GFX_PKMN_SHIFTRY, &Unk_ov5_FollowerMon },  // SPECIES_SHIFTRY
+    { OBJ_EVENT_GFX_PKMN_TAILLOW, &Unk_ov5_FollowerMon },  // SPECIES_TAILLOW
+    { OBJ_EVENT_GFX_PKMN_SWELLOW, &Unk_ov5_FollowerMon },  // SPECIES_SWELLOW
+    { OBJ_EVENT_GFX_PKMN_WINGULL, &Unk_ov5_FollowerMon },  // SPECIES_WINGULL
+    { OBJ_EVENT_GFX_PKMN_PELIPPER, &Unk_ov5_FollowerMon },  // SPECIES_PELIPPER
+    { OBJ_EVENT_GFX_PKMN_RALTS, &Unk_ov5_FollowerMon },  // SPECIES_RALTS
+    { OBJ_EVENT_GFX_PKMN_KIRLIA, &Unk_ov5_FollowerMon },  // SPECIES_KIRLIA
+    { OBJ_EVENT_GFX_PKMN_GARDEVOIR, &Unk_ov5_FollowerMon },  // SPECIES_GARDEVOIR
+    { OBJ_EVENT_GFX_PKMN_SURSKIT, &Unk_ov5_FollowerMon },  // SPECIES_SURSKIT
+    { OBJ_EVENT_GFX_PKMN_MASQUERAIN, &Unk_ov5_FollowerMon },  // SPECIES_MASQUERAIN
+    { OBJ_EVENT_GFX_PKMN_SHROOMISH, &Unk_ov5_FollowerMon },  // SPECIES_SHROOMISH
+    { OBJ_EVENT_GFX_PKMN_BRELOOM, &Unk_ov5_FollowerMon },  // SPECIES_BRELOOM
+    { OBJ_EVENT_GFX_PKMN_SLAKOTH, &Unk_ov5_FollowerMon },  // SPECIES_SLAKOTH
+    { OBJ_EVENT_GFX_PKMN_VIGOROTH, &Unk_ov5_FollowerMon },  // SPECIES_VIGOROTH
+    { OBJ_EVENT_GFX_PKMN_SLAKING, &Unk_ov5_FollowerMon },  // SPECIES_SLAKING
+    { OBJ_EVENT_GFX_PKMN_NINCADA, &Unk_ov5_FollowerMon },  // SPECIES_NINCADA
+    { OBJ_EVENT_GFX_PKMN_NINJASK, &Unk_ov5_FollowerMon },  // SPECIES_NINJASK
+    { OBJ_EVENT_GFX_PKMN_SHEDINJA, &Unk_ov5_FollowerMon },  // SPECIES_SHEDINJA
+    { OBJ_EVENT_GFX_PKMN_WHISMUR, &Unk_ov5_FollowerMon },  // SPECIES_WHISMUR
+    { OBJ_EVENT_GFX_PKMN_LOUDRED, &Unk_ov5_FollowerMon },  // SPECIES_LOUDRED
+    { OBJ_EVENT_GFX_PKMN_EXPLOUD, &Unk_ov5_FollowerMon },  // SPECIES_EXPLOUD
+    { OBJ_EVENT_GFX_PKMN_MAKUHITA, &Unk_ov5_FollowerMon },  // SPECIES_MAKUHITA
+    { OBJ_EVENT_GFX_PKMN_HARIYAMA, &Unk_ov5_FollowerMon },  // SPECIES_HARIYAMA
+    { OBJ_EVENT_GFX_PKMN_AZURILL, &Unk_ov5_FollowerMon },  // SPECIES_AZURILL
+    { OBJ_EVENT_GFX_PKMN_NOSEPASS, &Unk_ov5_FollowerMon },  // SPECIES_NOSEPASS
+    { OBJ_EVENT_GFX_PKMN_SKITTY, &Unk_ov5_FollowerMon },  // SPECIES_SKITTY
+    { OBJ_EVENT_GFX_PKMN_DELCATTY, &Unk_ov5_FollowerMon },  // SPECIES_DELCATTY
+    { OBJ_EVENT_GFX_PKMN_SABLEYE, &Unk_ov5_FollowerMon },  // SPECIES_SABLEYE
+    { OBJ_EVENT_GFX_PKMN_MAWILE, &Unk_ov5_FollowerMon },  // SPECIES_MAWILE
+    { OBJ_EVENT_GFX_PKMN_ARON, &Unk_ov5_FollowerMon },  // SPECIES_ARON
+    { OBJ_EVENT_GFX_PKMN_LAIRON, &Unk_ov5_FollowerMon },  // SPECIES_LAIRON
+    { OBJ_EVENT_GFX_PKMN_AGGRON, &Unk_ov5_FollowerMon },  // SPECIES_AGGRON
+    { OBJ_EVENT_GFX_PKMN_MEDITITE, &Unk_ov5_FollowerMon },  // SPECIES_MEDITITE
+    { OBJ_EVENT_GFX_PKMN_MEDICHAM, &Unk_ov5_FollowerMon },  // SPECIES_MEDICHAM
+    { OBJ_EVENT_GFX_PKMN_ELECTRIKE, &Unk_ov5_FollowerMon },  // SPECIES_ELECTRIKE
+    { OBJ_EVENT_GFX_PKMN_MANECTRIC, &Unk_ov5_FollowerMon },  // SPECIES_MANECTRIC
+    { OBJ_EVENT_GFX_PKMN_PLUSLE, &Unk_ov5_FollowerMon },  // SPECIES_PLUSLE
+    { OBJ_EVENT_GFX_PKMN_MINUN, &Unk_ov5_FollowerMon },  // SPECIES_MINUN
+    { OBJ_EVENT_GFX_PKMN_VOLBEAT, &Unk_ov5_FollowerMon },  // SPECIES_VOLBEAT
+    { OBJ_EVENT_GFX_PKMN_ILLUMISE, &Unk_ov5_FollowerMon },  // SPECIES_ILLUMISE
+    { OBJ_EVENT_GFX_PKMN_ROSELIA, &Unk_ov5_FollowerMon },  // SPECIES_ROSELIA
+    { OBJ_EVENT_GFX_PKMN_GULPIN, &Unk_ov5_FollowerMon },  // SPECIES_GULPIN
+    { OBJ_EVENT_GFX_PKMN_SWALOT, &Unk_ov5_FollowerMon },  // SPECIES_SWALOT
+    { OBJ_EVENT_GFX_PKMN_CARVANHA, &Unk_ov5_FollowerMon },  // SPECIES_CARVANHA
+    { OBJ_EVENT_GFX_PKMN_SHARPEDO, &Unk_ov5_FollowerMon },  // SPECIES_SHARPEDO
+    { OBJ_EVENT_GFX_PKMN_WAILMER, &Unk_ov5_FollowerMon },  // SPECIES_WAILMER
+    { OBJ_EVENT_GFX_PKMN_WAILORD, &Unk_ov5_FollowerMon },  // SPECIES_WAILORD
+    { OBJ_EVENT_GFX_PKMN_NUMEL, &Unk_ov5_FollowerMon },  // SPECIES_NUMEL
+    { OBJ_EVENT_GFX_PKMN_CAMERUPT, &Unk_ov5_FollowerMon },  // SPECIES_CAMERUPT
+    { OBJ_EVENT_GFX_PKMN_TORKOAL, &Unk_ov5_FollowerMon },  // SPECIES_TORKOAL
+    { OBJ_EVENT_GFX_PKMN_SPOINK, &Unk_ov5_FollowerMon },  // SPECIES_SPOINK
+    { OBJ_EVENT_GFX_PKMN_GRUMPIG, &Unk_ov5_FollowerMon },  // SPECIES_GRUMPIG
+    { OBJ_EVENT_GFX_PKMN_SPINDA, &Unk_ov5_FollowerMon },  // SPECIES_SPINDA
+    { OBJ_EVENT_GFX_PKMN_TRAPINCH, &Unk_ov5_FollowerMon },  // SPECIES_TRAPINCH
+    { OBJ_EVENT_GFX_PKMN_VIBRAVA, &Unk_ov5_FollowerMon },  // SPECIES_VIBRAVA
+    { OBJ_EVENT_GFX_PKMN_FLYGON, &Unk_ov5_FollowerMon },  // SPECIES_FLYGON
+    { OBJ_EVENT_GFX_PKMN_CACNEA, &Unk_ov5_FollowerMon },  // SPECIES_CACNEA
+    { OBJ_EVENT_GFX_PKMN_CACTURNE, &Unk_ov5_FollowerMon },  // SPECIES_CACTURNE
+    { OBJ_EVENT_GFX_PKMN_SWABLU, &Unk_ov5_FollowerMon },  // SPECIES_SWABLU
+    { OBJ_EVENT_GFX_PKMN_ALTARIA, &Unk_ov5_FollowerMon },  // SPECIES_ALTARIA
+    { OBJ_EVENT_GFX_PKMN_ZANGOOSE, &Unk_ov5_FollowerMon },  // SPECIES_ZANGOOSE
+    { OBJ_EVENT_GFX_PKMN_SEVIPER, &Unk_ov5_FollowerMon },  // SPECIES_SEVIPER
+    { OBJ_EVENT_GFX_PKMN_LUNATONE, &Unk_ov5_FollowerMon },  // SPECIES_LUNATONE
+    { OBJ_EVENT_GFX_PKMN_SOLROCK, &Unk_ov5_FollowerMon },  // SPECIES_SOLROCK
+    { OBJ_EVENT_GFX_PKMN_BARBOACH, &Unk_ov5_FollowerMon },  // SPECIES_BARBOACH
+    { OBJ_EVENT_GFX_PKMN_WHISCASH, &Unk_ov5_FollowerMon },  // SPECIES_WHISCASH
+    { OBJ_EVENT_GFX_PKMN_CORPHISH, &Unk_ov5_FollowerMon },  // SPECIES_CORPHISH
+    { OBJ_EVENT_GFX_PKMN_CRAWDAUNT, &Unk_ov5_FollowerMon },  // SPECIES_CRAWDAUNT
+    { OBJ_EVENT_GFX_PKMN_BALTOY, &Unk_ov5_FollowerMon },  // SPECIES_BALTOY
+    { OBJ_EVENT_GFX_PKMN_CLAYDOL, &Unk_ov5_FollowerMon },  // SPECIES_CLAYDOL
+    { OBJ_EVENT_GFX_PKMN_LILEEP, &Unk_ov5_FollowerMon },  // SPECIES_LILEEP
+    { OBJ_EVENT_GFX_PKMN_CRADILY, &Unk_ov5_FollowerMon },  // SPECIES_CRADILY
+    { OBJ_EVENT_GFX_PKMN_ANORITH, &Unk_ov5_FollowerMon },  // SPECIES_ANORITH
+    { OBJ_EVENT_GFX_PKMN_ARMALDO, &Unk_ov5_FollowerMon },  // SPECIES_ARMALDO
+    { OBJ_EVENT_GFX_PKMN_FEEBAS, &Unk_ov5_FollowerMon },  // SPECIES_FEEBAS
+    { OBJ_EVENT_GFX_PKMN_MILOTIC, &Unk_ov5_FollowerMon },  // SPECIES_MILOTIC
+    { OBJ_EVENT_GFX_PKMN_CASTFORM, &Unk_ov5_FollowerMon },  // SPECIES_CASTFORM
+    { OBJ_EVENT_GFX_PKMN_KECLEON, &Unk_ov5_FollowerMon },  // SPECIES_KECLEON
+    { OBJ_EVENT_GFX_PKMN_SHUPPET, &Unk_ov5_FollowerMon },  // SPECIES_SHUPPET
+    { OBJ_EVENT_GFX_PKMN_BANETTE, &Unk_ov5_FollowerMon },  // SPECIES_BANETTE
+    { OBJ_EVENT_GFX_PKMN_DUSKULL, &Unk_ov5_FollowerMon },  // SPECIES_DUSKULL
+    { OBJ_EVENT_GFX_PKMN_DUSCLOPS, &Unk_ov5_FollowerMon },  // SPECIES_DUSCLOPS
+    { OBJ_EVENT_GFX_PKMN_TROPIUS, &Unk_ov5_FollowerMon },  // SPECIES_TROPIUS
+    { OBJ_EVENT_GFX_PKMN_CHIMECHO, &Unk_ov5_FollowerMon },  // SPECIES_CHIMECHO
+    { OBJ_EVENT_GFX_PKMN_ABSOL, &Unk_ov5_FollowerMon },  // SPECIES_ABSOL
+    { OBJ_EVENT_GFX_PKMN_WYNAUT, &Unk_ov5_FollowerMon },  // SPECIES_WYNAUT
+    { OBJ_EVENT_GFX_PKMN_SNORUNT, &Unk_ov5_FollowerMon },  // SPECIES_SNORUNT
+    { OBJ_EVENT_GFX_PKMN_GLALIE, &Unk_ov5_FollowerMon },  // SPECIES_GLALIE
+    { OBJ_EVENT_GFX_PKMN_SPHEAL, &Unk_ov5_FollowerMon },  // SPECIES_SPHEAL
+    { OBJ_EVENT_GFX_PKMN_SEALEO, &Unk_ov5_FollowerMon },  // SPECIES_SEALEO
+    { OBJ_EVENT_GFX_PKMN_WALREIN, &Unk_ov5_FollowerMon },  // SPECIES_WALREIN
+    { OBJ_EVENT_GFX_PKMN_CLAMPERL, &Unk_ov5_FollowerMon },  // SPECIES_CLAMPERL
+    { OBJ_EVENT_GFX_PKMN_HUNTAIL, &Unk_ov5_FollowerMon },  // SPECIES_HUNTAIL
+    { OBJ_EVENT_GFX_PKMN_GOREBYSS, &Unk_ov5_FollowerMon },  // SPECIES_GOREBYSS
+    { OBJ_EVENT_GFX_PKMN_RELICANTH, &Unk_ov5_FollowerMon },  // SPECIES_RELICANTH
+    { OBJ_EVENT_GFX_PKMN_LUVDISC, &Unk_ov5_FollowerMon },  // SPECIES_LUVDISC
+    { OBJ_EVENT_GFX_PKMN_BAGON, &Unk_ov5_FollowerMon },  // SPECIES_BAGON
+    { OBJ_EVENT_GFX_PKMN_SHELGON, &Unk_ov5_FollowerMon },  // SPECIES_SHELGON
+    { OBJ_EVENT_GFX_PKMN_SALAMENCE, &Unk_ov5_FollowerMon },  // SPECIES_SALAMENCE
+    { OBJ_EVENT_GFX_PKMN_BELDUM, &Unk_ov5_FollowerMon },  // SPECIES_BELDUM
+    { OBJ_EVENT_GFX_PKMN_METANG, &Unk_ov5_FollowerMon },  // SPECIES_METANG
+    { OBJ_EVENT_GFX_PKMN_METAGROSS, &Unk_ov5_FollowerMon },  // SPECIES_METAGROSS
+    { OBJ_EVENT_GFX_PKMN_REGIROCK, &Unk_ov5_FollowerMon },  // SPECIES_REGIROCK
+    { OBJ_EVENT_GFX_PKMN_REGICE, &Unk_ov5_FollowerMon },  // SPECIES_REGICE
+    { OBJ_EVENT_GFX_PKMN_REGISTEEL, &Unk_ov5_FollowerMon },  // SPECIES_REGISTEEL
+    { OBJ_EVENT_GFX_PKMN_LATIAS, &Unk_ov5_FollowerMon },  // SPECIES_LATIAS
+    { OBJ_EVENT_GFX_PKMN_LATIOS, &Unk_ov5_FollowerMon },  // SPECIES_LATIOS
+    { OBJ_EVENT_GFX_PKMN_KYOGRE, &Unk_ov5_FollowerMon },  // SPECIES_KYOGRE
+    { OBJ_EVENT_GFX_PKMN_GROUDON, &Unk_ov5_FollowerMon },  // SPECIES_GROUDON
+    { OBJ_EVENT_GFX_PKMN_RAYQUAZA, &Unk_ov5_FollowerMon },  // SPECIES_RAYQUAZA
+    { OBJ_EVENT_GFX_PKMN_JIRACHI, &Unk_ov5_FollowerMon },  // SPECIES_JIRACHI
+    { OBJ_EVENT_GFX_PKMN_DEOXYS, &Unk_ov5_FollowerMon },  // SPECIES_DEOXYS
+    { OBJ_EVENT_GFX_PKMN_TURTWIG, &Unk_ov5_FollowerMon },  // SPECIES_TURTWIG
+    { OBJ_EVENT_GFX_PKMN_GROTLE, &Unk_ov5_FollowerMon },  // SPECIES_GROTLE
+    { OBJ_EVENT_GFX_PKMN_TORTERRA, &Unk_ov5_FollowerMon },  // SPECIES_TORTERRA
+    { OBJ_EVENT_GFX_PKMN_CHIMCHAR, &Unk_ov5_FollowerMon },  // SPECIES_CHIMCHAR
+    { OBJ_EVENT_GFX_PKMN_MONFERNO, &Unk_ov5_FollowerMon },  // SPECIES_MONFERNO
+    { OBJ_EVENT_GFX_PKMN_INFERNAPE, &Unk_ov5_FollowerMon },  // SPECIES_INFERNAPE
+    { OBJ_EVENT_GFX_PKMN_PIPLUP, &Unk_ov5_FollowerMon },  // SPECIES_PIPLUP
+    { OBJ_EVENT_GFX_PKMN_PRINPLUP, &Unk_ov5_FollowerMon },  // SPECIES_PRINPLUP
+    { OBJ_EVENT_GFX_PKMN_EMPOLEON, &Unk_ov5_FollowerMon },  // SPECIES_EMPOLEON
+    { OBJ_EVENT_GFX_PKMN_STARLY, &Unk_ov5_FollowerMon },  // SPECIES_STARLY
+    { OBJ_EVENT_GFX_PKMN_STARAVIA, &Unk_ov5_FollowerMon },  // SPECIES_STARAVIA
+    { OBJ_EVENT_GFX_PKMN_STARAPTOR, &Unk_ov5_FollowerMon },  // SPECIES_STARAPTOR
+    { OBJ_EVENT_GFX_PKMN_BIDOOF, &Unk_ov5_FollowerMon },  // SPECIES_BIDOOF
+    { OBJ_EVENT_GFX_PKMN_BIBAREL, &Unk_ov5_FollowerMon },  // SPECIES_BIBAREL
+    { OBJ_EVENT_GFX_PKMN_KRICKETOT, &Unk_ov5_FollowerMon },  // SPECIES_KRICKETOT
+    { OBJ_EVENT_GFX_PKMN_KRICKETUNE, &Unk_ov5_FollowerMon },  // SPECIES_KRICKETUNE
+    { OBJ_EVENT_GFX_PKMN_SHINX, &Unk_ov5_FollowerMon },  // SPECIES_SHINX
+    { OBJ_EVENT_GFX_PKMN_LUXIO, &Unk_ov5_FollowerMon },  // SPECIES_LUXIO
+    { OBJ_EVENT_GFX_PKMN_LUXRAY, &Unk_ov5_FollowerMon },  // SPECIES_LUXRAY
+    { OBJ_EVENT_GFX_PKMN_BUDEW, &Unk_ov5_FollowerMon },  // SPECIES_BUDEW
+    { OBJ_EVENT_GFX_PKMN_ROSERADE, &Unk_ov5_FollowerMon },  // SPECIES_ROSERADE
+    { OBJ_EVENT_GFX_PKMN_CRANIDOS, &Unk_ov5_FollowerMon },  // SPECIES_CRANIDOS
+    { OBJ_EVENT_GFX_PKMN_RAMPARDOS, &Unk_ov5_FollowerMon },  // SPECIES_RAMPARDOS
+    { OBJ_EVENT_GFX_PKMN_SHIELDON, &Unk_ov5_FollowerMon },  // SPECIES_SHIELDON
+    { OBJ_EVENT_GFX_PKMN_BASTIODON, &Unk_ov5_FollowerMon },  // SPECIES_BASTIODON
+    { OBJ_EVENT_GFX_PKMN_BURMY, &Unk_ov5_FollowerMon },  // SPECIES_BURMY
+    { OBJ_EVENT_GFX_PKMN_WORMADAM, &Unk_ov5_FollowerMon },  // SPECIES_WORMADAM
+    { OBJ_EVENT_GFX_PKMN_MOTHIM, &Unk_ov5_FollowerMon },  // SPECIES_MOTHIM
+    { OBJ_EVENT_GFX_PKMN_COMBEE, &Unk_ov5_FollowerMon },  // SPECIES_COMBEE
+    { OBJ_EVENT_GFX_PKMN_COMBEE_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_VESPIQUEN, &Unk_ov5_FollowerMon },  // SPECIES_VESPIQUEN
+    { OBJ_EVENT_GFX_PKMN_PACHIRISU, &Unk_ov5_FollowerMon },  // SPECIES_PACHIRISU
+    { OBJ_EVENT_GFX_PKMN_BUIZEL, &Unk_ov5_FollowerMon },  // SPECIES_BUIZEL
+    { OBJ_EVENT_GFX_PKMN_FLOATZEL, &Unk_ov5_FollowerMon },  // SPECIES_FLOATZEL
+    { OBJ_EVENT_GFX_PKMN_CHERUBI, &Unk_ov5_FollowerMon },  // SPECIES_CHERUBI
+    { OBJ_EVENT_GFX_PKMN_CHERRIM, &Unk_ov5_FollowerMon },  // SPECIES_CHERRIM
+    { OBJ_EVENT_GFX_PKMN_SHELLOS, &Unk_ov5_FollowerMon },  // SPECIES_SHELLOS
+    { OBJ_EVENT_GFX_PKMN_GASTRODON, &Unk_ov5_FollowerMon },  // SPECIES_GASTRODON
+    { OBJ_EVENT_GFX_PKMN_AMBIPOM, &Unk_ov5_FollowerMon },  // SPECIES_AMBIPOM
+    { OBJ_EVENT_GFX_PKMN_DRIFLOON, &Unk_ov5_FollowerMon },  // SPECIES_DRIFLOON
+    { OBJ_EVENT_GFX_PKMN_DRIFBLIM, &Unk_ov5_FollowerMon },  // SPECIES_DRIFBLIM
+    { OBJ_EVENT_GFX_PKMN_BUNEARY, &Unk_ov5_FollowerMon },  // SPECIES_BUNEARY
+    { OBJ_EVENT_GFX_PKMN_LOPUNNY, &Unk_ov5_FollowerMon },  // SPECIES_LOPUNNY
+    { OBJ_EVENT_GFX_PKMN_MISMAGIUS, &Unk_ov5_FollowerMon },  // SPECIES_MISMAGIUS
+    { OBJ_EVENT_GFX_PKMN_HONCHKROW, &Unk_ov5_FollowerMon },  // SPECIES_HONCHKROW
+    { OBJ_EVENT_GFX_PKMN_GLAMEOW, &Unk_ov5_FollowerMon },  // SPECIES_GLAMEOW
+    { OBJ_EVENT_GFX_PKMN_PURUGLY, &Unk_ov5_FollowerMon },  // SPECIES_PURUGLY
+    { OBJ_EVENT_GFX_PKMN_CHINGLING, &Unk_ov5_FollowerMon },  // SPECIES_CHINGLING
+    { OBJ_EVENT_GFX_PKMN_STUNKY, &Unk_ov5_FollowerMon },  // SPECIES_STUNKY
+    { OBJ_EVENT_GFX_PKMN_SKUNTANK, &Unk_ov5_FollowerMon },  // SPECIES_SKUNTANK
+    { OBJ_EVENT_GFX_PKMN_BRONZOR, &Unk_ov5_FollowerMon },  // SPECIES_BRONZOR
+    { OBJ_EVENT_GFX_PKMN_BRONZONG, &Unk_ov5_FollowerMon },  // SPECIES_BRONZONG
+    { OBJ_EVENT_GFX_PKMN_BONSLY, &Unk_ov5_FollowerMon },  // SPECIES_BONSLY
+    { OBJ_EVENT_GFX_PKMN_MIMEJR, &Unk_ov5_FollowerMon },  // SPECIES_MIMEJR
+    { OBJ_EVENT_GFX_PKMN_HAPPINY, &Unk_ov5_FollowerMon },  // SPECIES_HAPPINY
+    { OBJ_EVENT_GFX_PKMN_CHATOT, &Unk_ov5_FollowerMon },  // SPECIES_CHATOT
+    { OBJ_EVENT_GFX_PKMN_SPIRITOMB, &Unk_ov5_FollowerMon },  // SPECIES_SPIRITOMB
+    { OBJ_EVENT_GFX_PKMN_GIBLE, &Unk_ov5_FollowerMon },  // SPECIES_GIBLE
+    { OBJ_EVENT_GFX_PKMN_GABITE, &Unk_ov5_FollowerMon },  // SPECIES_GABITE
+    { OBJ_EVENT_GFX_PKMN_GARCHOMP, &Unk_ov5_FollowerMon },  // SPECIES_GARCHOMP
+    { OBJ_EVENT_GFX_PKMN_MUNCHLAX, &Unk_ov5_FollowerMon },  // SPECIES_MUNCHLAX
+    { OBJ_EVENT_GFX_PKMN_RIOLU, &Unk_ov5_FollowerMon },  // SPECIES_RIOLU
+    { OBJ_EVENT_GFX_PKMN_LUCARIO, &Unk_ov5_FollowerMon },  // SPECIES_LUCARIO
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS, &Unk_ov5_FollowerMon },  // SPECIES_HIPPOPOTAS
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON, &Unk_ov5_FollowerMon },  // SPECIES_HIPPOWDON
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON_F, &Unk_ov5_FollowerMon },  // female
+    { OBJ_EVENT_GFX_PKMN_SKORUPI, &Unk_ov5_FollowerMon },  // SPECIES_SKORUPI
+    { OBJ_EVENT_GFX_PKMN_DRAPION, &Unk_ov5_FollowerMon },  // SPECIES_DRAPION
+    { OBJ_EVENT_GFX_PKMN_CROAGUNK, &Unk_ov5_FollowerMon },  // SPECIES_CROAGUNK
+    { OBJ_EVENT_GFX_PKMN_TOXICROAK, &Unk_ov5_FollowerMon },  // SPECIES_TOXICROAK
+    { OBJ_EVENT_GFX_PKMN_CARNIVINE, &Unk_ov5_FollowerMon },  // SPECIES_CARNIVINE
+    { OBJ_EVENT_GFX_PKMN_FINNEON, &Unk_ov5_FollowerMon },  // SPECIES_FINNEON
+    { OBJ_EVENT_GFX_PKMN_LUMINEON, &Unk_ov5_FollowerMon },  // SPECIES_LUMINEON
+    { OBJ_EVENT_GFX_PKMN_MANTYKE, &Unk_ov5_FollowerMon },  // SPECIES_MANTYKE
+    { OBJ_EVENT_GFX_PKMN_SNOVER, &Unk_ov5_FollowerMon },  // SPECIES_SNOVER
+    { OBJ_EVENT_GFX_PKMN_ABOMASNOW, &Unk_ov5_FollowerMon },  // SPECIES_ABOMASNOW
+    { OBJ_EVENT_GFX_PKMN_WEAVILE, &Unk_ov5_FollowerMon },  // SPECIES_WEAVILE
+    { OBJ_EVENT_GFX_PKMN_MAGNEZONE, &Unk_ov5_FollowerMon },  // SPECIES_MAGNEZONE
+    { OBJ_EVENT_GFX_PKMN_LICKILICKY, &Unk_ov5_FollowerMon },  // SPECIES_LICKILICKY
+    { OBJ_EVENT_GFX_PKMN_RHYPERIOR, &Unk_ov5_FollowerMon },  // SPECIES_RHYPERIOR
+    { OBJ_EVENT_GFX_PKMN_TANGROWTH, &Unk_ov5_FollowerMon },  // SPECIES_TANGROWTH
+    { OBJ_EVENT_GFX_PKMN_ELECTIVIRE, &Unk_ov5_FollowerMon },  // SPECIES_ELECTIVIRE
+    { OBJ_EVENT_GFX_PKMN_MAGMORTAR, &Unk_ov5_FollowerMon },  // SPECIES_MAGMORTAR
+    { OBJ_EVENT_GFX_PKMN_TOGEKISS, &Unk_ov5_FollowerMon },  // SPECIES_TOGEKISS
+    { OBJ_EVENT_GFX_PKMN_LEAFEON, &Unk_ov5_FollowerMon },  // SPECIES_LEAFEON
+    { OBJ_EVENT_GFX_PKMN_GLACEON, &Unk_ov5_FollowerMon },  // SPECIES_GLACEON
+    { OBJ_EVENT_GFX_PKMN_GLISCOR, &Unk_ov5_FollowerMon },  // SPECIES_GLISCOR
+    { OBJ_EVENT_GFX_PKMN_MAMOSWINE, &Unk_ov5_FollowerMon },  // SPECIES_MAMOSWINE
+    { OBJ_EVENT_GFX_PKMN_PORYGON_Z, &Unk_ov5_FollowerMon },  // SPECIES_PORYGON_Z
+    { OBJ_EVENT_GFX_PKMN_GALLADE, &Unk_ov5_FollowerMon },  // SPECIES_GALLADE
+    { OBJ_EVENT_GFX_PKMN_PROBOPASS, &Unk_ov5_FollowerMon },  // SPECIES_PROBOPASS
+    { OBJ_EVENT_GFX_PKMN_DUSKNOIR, &Unk_ov5_FollowerMon },  // SPECIES_DUSKNOIR
+    { OBJ_EVENT_GFX_PKMN_FROSLASS, &Unk_ov5_FollowerMon },  // SPECIES_FROSLASS
+    { OBJ_EVENT_GFX_PKMN_ROTOM, &Unk_ov5_FollowerMon },  // SPECIES_ROTOM
+    { OBJ_EVENT_GFX_PKMN_UXIE, &Unk_ov5_FollowerMon },  // SPECIES_UXIE
+    { OBJ_EVENT_GFX_PKMN_MESPRIT, &Unk_ov5_FollowerMon },  // SPECIES_MESPRIT
+    { OBJ_EVENT_GFX_PKMN_AZELF, &Unk_ov5_FollowerMon },  // SPECIES_AZELF
+    { OBJ_EVENT_GFX_PKMN_DIALGA, &Unk_ov5_FollowerMon },  // SPECIES_DIALGA
+    { OBJ_EVENT_GFX_PKMN_PALKIA, &Unk_ov5_FollowerMon },  // SPECIES_PALKIA
+    { OBJ_EVENT_GFX_PKMN_HEATRAN, &Unk_ov5_FollowerMon },  // SPECIES_HEATRAN
+    { OBJ_EVENT_GFX_PKMN_REGIGIGAS, &Unk_ov5_FollowerMon },  // SPECIES_REGIGIGAS
+    { OBJ_EVENT_GFX_PKMN_GIRATINA, &Unk_ov5_FollowerMon },  // SPECIES_GIRATINA
+    { OBJ_EVENT_GFX_PKMN_CRESSELIA, &Unk_ov5_FollowerMon },  // SPECIES_CRESSELIA
+    { OBJ_EVENT_GFX_PKMN_PHIONE, &Unk_ov5_FollowerMon },  // SPECIES_PHIONE
+    { OBJ_EVENT_GFX_PKMN_MANAPHY, &Unk_ov5_FollowerMon },  // SPECIES_MANAPHY
+    { OBJ_EVENT_GFX_PKMN_DARKRAI, &Unk_ov5_FollowerMon },  // SPECIES_DARKRAI
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN, &Unk_ov5_FollowerMon },  // SPECIES_SHAYMIN
+    { OBJ_EVENT_GFX_PKMN_ARCEUS, &Unk_ov5_FollowerMon },  // SPECIES_ARCEUS
+    { OBJ_EVENT_GFX_PKMN_SCREAM_TAIL, &Unk_ov5_FollowerMon },  // SPECIES_SCREAM_TAIL
+    { OBJ_EVENT_GFX_PKMN_BRUTE_BONNET, &Unk_ov5_FollowerMon },  // SPECIES_BRUTE_BONNET
+    { OBJ_EVENT_GFX_PKMN_SLITHER_WING, &Unk_ov5_FollowerMon },  // SPECIES_SLITHER_WING
+    { OBJ_EVENT_GFX_PKMN_SANDY_SHOCKS, &Unk_ov5_FollowerMon },  // SPECIES_SANDY_SHOCKS
+    { OBJ_EVENT_GFX_PKMN_IRON_TREADS, &Unk_ov5_FollowerMon },  // SPECIES_IRON_TREADS
+    { OBJ_EVENT_GFX_PKMN_IRON_HANDS, &Unk_ov5_FollowerMon },  // SPECIES_IRON_HANDS
+    { OBJ_EVENT_GFX_PKMN_IRON_JUGULIS, &Unk_ov5_FollowerMon },  // SPECIES_IRON_JUGULIS
+    { OBJ_EVENT_GFX_PKMN_IRON_MOTH, &Unk_ov5_FollowerMon },  // SPECIES_IRON_MOTH
+    { OBJ_EVENT_GFX_PKMN_FRIGIBAX, &Unk_ov5_FollowerMon },  // SPECIES_FRIGIBAX
+    { OBJ_EVENT_GFX_PKMN_ARCTIBAX, &Unk_ov5_FollowerMon },  // SPECIES_ARCTIBAX
+    { OBJ_EVENT_GFX_PKMN_BAXCALIBUR, &Unk_ov5_FollowerMon },  // SPECIES_BAXCALIBUR
+    { OBJ_EVENT_GFX_PKMN_WO_CHIEN, &Unk_ov5_FollowerMon },  // SPECIES_WO_CHIEN
+    { OBJ_EVENT_GFX_PKMN_CHIEN_PAO, &Unk_ov5_FollowerMon },  // SPECIES_CHIEN_PAO
+    { OBJ_EVENT_GFX_PKMN_TING_LU, &Unk_ov5_FollowerMon },  // SPECIES_TING_LU
+    { OBJ_EVENT_GFX_PKMN_CHI_YU, &Unk_ov5_FollowerMon },  // SPECIES_CHI_YU
+    { OBJ_EVENT_GFX_PKMN_IRON_VALIANT, &Unk_ov5_FollowerMon },  // SPECIES_IRON_VALIANT
+    { OBJ_EVENT_GFX_PKMN_KORAIDON, &Unk_ov5_FollowerMon },  // SPECIES_KORAIDON
+    { OBJ_EVENT_GFX_PKMN_MIRAIDON, &Unk_ov5_FollowerMon },  // SPECIES_MIRAIDON
+    { OBJ_EVENT_GFX_PKMN_IRON_LEAVES, &Unk_ov5_FollowerMon },  // SPECIES_IRON_LEAVES
+    { OBJ_EVENT_GFX_PKMN_POLTCHAGEIST, &Unk_ov5_FollowerMon },  // SPECIES_POLTCHAGEIST
+    { OBJ_EVENT_GFX_PKMN_SINISTCHA, &Unk_ov5_FollowerMon },  // SPECIES_SINISTCHA
+    { OBJ_EVENT_GFX_PKMN_OKIDOGI, &Unk_ov5_FollowerMon },  // SPECIES_OKIDOGI
+    { OBJ_EVENT_GFX_PKMN_MUNKIDORI, &Unk_ov5_FollowerMon },  // SPECIES_MUNKIDORI
+    { OBJ_EVENT_GFX_PKMN_FEZANDIPITI, &Unk_ov5_FollowerMon },  // SPECIES_FEZANDIPITI
+    { OBJ_EVENT_GFX_PKMN_OGERPON, &Unk_ov5_FollowerMon },  // SPECIES_OGERPON
+    { OBJ_EVENT_GFX_PKMN_GOUGING_FIRE, &Unk_ov5_FollowerMon },  // SPECIES_GOUGING_FIRE
+    { OBJ_EVENT_GFX_PKMN_RAGING_BOLT, &Unk_ov5_FollowerMon },  // SPECIES_RAGING_BOLT
+    { OBJ_EVENT_GFX_PKMN_IRON_BOULDER, &Unk_ov5_FollowerMon },  // SPECIES_IRON_BOULDER
+    { OBJ_EVENT_GFX_PKMN_IRON_CROWN, &Unk_ov5_FollowerMon },  // SPECIES_IRON_CROWN
+    { OBJ_EVENT_GFX_PKMN_TERAPAGOS, &Unk_ov5_FollowerMon },  // SPECIES_TERAPAGOS
     { 0xffff, NULL }
 };
 
@@ -915,6 +1492,536 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { 0x111, 0x16E },
     { 0x112, 0x16B },
     { 0x113, 0x16C },
+    { OBJ_EVENT_GFX_PKMN_BULBASAUR, 0x1d8 },  // SPECIES_BULBASAUR
+    { OBJ_EVENT_GFX_PKMN_IVYSAUR, 0x1d9 },  // SPECIES_IVYSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR, 0x1da },  // SPECIES_VENUSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR_F, 0x1db },  // female
+    { OBJ_EVENT_GFX_PKMN_CHARMANDER, 0x1dc },  // SPECIES_CHARMANDER
+    { OBJ_EVENT_GFX_PKMN_CHARMELEON, 0x1dd },  // SPECIES_CHARMELEON
+    { OBJ_EVENT_GFX_PKMN_CHARIZARD, 0x1de },  // SPECIES_CHARIZARD
+    { OBJ_EVENT_GFX_PKMN_SQUIRTLE, 0x1df },  // SPECIES_SQUIRTLE
+    { OBJ_EVENT_GFX_PKMN_WARTORTLE, 0x1e0 },  // SPECIES_WARTORTLE
+    { OBJ_EVENT_GFX_PKMN_BLASTOISE, 0x1e1 },  // SPECIES_BLASTOISE
+    { OBJ_EVENT_GFX_PKMN_CATERPIE, 0x1e2 },  // SPECIES_CATERPIE
+    { OBJ_EVENT_GFX_PKMN_METAPOD, 0x1e3 },  // SPECIES_METAPOD
+    { OBJ_EVENT_GFX_PKMN_BUTTERFREE, 0x1e4 },  // SPECIES_BUTTERFREE
+    { OBJ_EVENT_GFX_PKMN_WEEDLE, 0x1e5 },  // SPECIES_WEEDLE
+    { OBJ_EVENT_GFX_PKMN_KAKUNA, 0x1e6 },  // SPECIES_KAKUNA
+    { OBJ_EVENT_GFX_PKMN_BEEDRILL, 0x1e7 },  // SPECIES_BEEDRILL
+    { OBJ_EVENT_GFX_PKMN_PIDGEY, 0x1e8 },  // SPECIES_PIDGEY
+    { OBJ_EVENT_GFX_PKMN_PIDGEOTTO, 0x1e9 },  // SPECIES_PIDGEOTTO
+    { OBJ_EVENT_GFX_PKMN_PIDGEOT, 0x1ea },  // SPECIES_PIDGEOT
+    { OBJ_EVENT_GFX_PKMN_RATTATA, 0x1eb },  // SPECIES_RATTATA
+    { OBJ_EVENT_GFX_PKMN_RATICATE, 0x1ec },  // SPECIES_RATICATE
+    { OBJ_EVENT_GFX_PKMN_SPEAROW, 0x1ed },  // SPECIES_SPEAROW
+    { OBJ_EVENT_GFX_PKMN_FEAROW, 0x1ee },  // SPECIES_FEAROW
+    { OBJ_EVENT_GFX_PKMN_EKANS, 0x1ef },  // SPECIES_EKANS
+    { OBJ_EVENT_GFX_PKMN_ARBOK, 0x1f0 },  // SPECIES_ARBOK
+    { OBJ_EVENT_GFX_PKMN_PIKACHU, 0x1f1 },  // SPECIES_PIKACHU
+    { OBJ_EVENT_GFX_PKMN_PIKACHU_F, 0x1f2 },  // female
+    { OBJ_EVENT_GFX_PKMN_RAICHU, 0x1f3 },  // SPECIES_RAICHU
+    { OBJ_EVENT_GFX_PKMN_SANDSHREW, 0x1f4 },  // SPECIES_SANDSHREW
+    { OBJ_EVENT_GFX_PKMN_SANDSLASH, 0x1f5 },  // SPECIES_SANDSLASH
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_F, 0x1f6 },  // SPECIES_NIDORAN_F
+    { OBJ_EVENT_GFX_PKMN_NIDORINA, 0x1f7 },  // SPECIES_NIDORINA
+    { OBJ_EVENT_GFX_PKMN_NIDOQUEEN, 0x1f8 },  // SPECIES_NIDOQUEEN
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_M, 0x1f9 },  // SPECIES_NIDORAN_M
+    { OBJ_EVENT_GFX_PKMN_NIDORINO, 0x1fa },  // SPECIES_NIDORINO
+    { OBJ_EVENT_GFX_PKMN_NIDOKING, 0x1fb },  // SPECIES_NIDOKING
+    { OBJ_EVENT_GFX_PKMN_CLEFAIRY, 0x1fc },  // SPECIES_CLEFAIRY
+    { OBJ_EVENT_GFX_PKMN_CLEFABLE, 0x1fd },  // SPECIES_CLEFABLE
+    { OBJ_EVENT_GFX_PKMN_VULPIX, 0x1fe },  // SPECIES_VULPIX
+    { OBJ_EVENT_GFX_PKMN_NINETALES, 0x1ff },  // SPECIES_NINETALES
+    { OBJ_EVENT_GFX_PKMN_JIGGLYPUFF, 0x200 },  // SPECIES_JIGGLYPUFF
+    { OBJ_EVENT_GFX_PKMN_WIGGLYTUFF, 0x201 },  // SPECIES_WIGGLYTUFF
+    { OBJ_EVENT_GFX_PKMN_ZUBAT, 0x202 },  // SPECIES_ZUBAT
+    { OBJ_EVENT_GFX_PKMN_GOLBAT, 0x203 },  // SPECIES_GOLBAT
+    { OBJ_EVENT_GFX_PKMN_ODDISH, 0x204 },  // SPECIES_ODDISH
+    { OBJ_EVENT_GFX_PKMN_GLOOM, 0x205 },  // SPECIES_GLOOM
+    { OBJ_EVENT_GFX_PKMN_VILEPLUME, 0x206 },  // SPECIES_VILEPLUME
+    { OBJ_EVENT_GFX_PKMN_PARAS, 0x207 },  // SPECIES_PARAS
+    { OBJ_EVENT_GFX_PKMN_PARASECT, 0x208 },  // SPECIES_PARASECT
+    { OBJ_EVENT_GFX_PKMN_VENONAT, 0x209 },  // SPECIES_VENONAT
+    { OBJ_EVENT_GFX_PKMN_VENOMOTH, 0x20a },  // SPECIES_VENOMOTH
+    { OBJ_EVENT_GFX_PKMN_DIGLETT, 0x20b },  // SPECIES_DIGLETT
+    { OBJ_EVENT_GFX_PKMN_DUGTRIO, 0x20c },  // SPECIES_DUGTRIO
+    { OBJ_EVENT_GFX_PKMN_MEOWTH, 0x20d },  // SPECIES_MEOWTH
+    { OBJ_EVENT_GFX_PKMN_PERSIAN, 0x20e },  // SPECIES_PERSIAN
+    { OBJ_EVENT_GFX_PKMN_PSYDUCK, 0x20f },  // SPECIES_PSYDUCK
+    { OBJ_EVENT_GFX_PKMN_GOLDUCK, 0x210 },  // SPECIES_GOLDUCK
+    { OBJ_EVENT_GFX_PKMN_MANKEY, 0x211 },  // SPECIES_MANKEY
+    { OBJ_EVENT_GFX_PKMN_PRIMEAPE, 0x212 },  // SPECIES_PRIMEAPE
+    { OBJ_EVENT_GFX_PKMN_GROWLITHE, 0x213 },  // SPECIES_GROWLITHE
+    { OBJ_EVENT_GFX_PKMN_ARCANINE, 0x214 },  // SPECIES_ARCANINE
+    { OBJ_EVENT_GFX_PKMN_POLIWAG, 0x215 },  // SPECIES_POLIWAG
+    { OBJ_EVENT_GFX_PKMN_POLIWHIRL, 0x216 },  // SPECIES_POLIWHIRL
+    { OBJ_EVENT_GFX_PKMN_POLIWRATH, 0x217 },  // SPECIES_POLIWRATH
+    { OBJ_EVENT_GFX_PKMN_ABRA, 0x218 },  // SPECIES_ABRA
+    { OBJ_EVENT_GFX_PKMN_KADABRA, 0x219 },  // SPECIES_KADABRA
+    { OBJ_EVENT_GFX_PKMN_ALAKAZAM, 0x21a },  // SPECIES_ALAKAZAM
+    { OBJ_EVENT_GFX_PKMN_MACHOP, 0x21b },  // SPECIES_MACHOP
+    { OBJ_EVENT_GFX_PKMN_MACHOKE, 0x21c },  // SPECIES_MACHOKE
+    { OBJ_EVENT_GFX_PKMN_MACHAMP, 0x21d },  // SPECIES_MACHAMP
+    { OBJ_EVENT_GFX_PKMN_BELLSPROUT, 0x21e },  // SPECIES_BELLSPROUT
+    { OBJ_EVENT_GFX_PKMN_WEEPINBELL, 0x21f },  // SPECIES_WEEPINBELL
+    { OBJ_EVENT_GFX_PKMN_VICTREEBEL, 0x220 },  // SPECIES_VICTREEBEL
+    { OBJ_EVENT_GFX_PKMN_TENTACOOL, 0x221 },  // SPECIES_TENTACOOL
+    { OBJ_EVENT_GFX_PKMN_TENTACRUEL, 0x222 },  // SPECIES_TENTACRUEL
+    { OBJ_EVENT_GFX_PKMN_GEODUDE, 0x223 },  // SPECIES_GEODUDE
+    { OBJ_EVENT_GFX_PKMN_GRAVELER, 0x224 },  // SPECIES_GRAVELER
+    { OBJ_EVENT_GFX_PKMN_GOLEM, 0x225 },  // SPECIES_GOLEM
+    { OBJ_EVENT_GFX_PKMN_PONYTA, 0x226 },  // SPECIES_PONYTA
+    { OBJ_EVENT_GFX_PKMN_RAPIDASH, 0x227 },  // SPECIES_RAPIDASH
+    { OBJ_EVENT_GFX_PKMN_SLOWPOKE, 0x228 },  // SPECIES_SLOWPOKE
+    { OBJ_EVENT_GFX_PKMN_SLOWBRO, 0x229 },  // SPECIES_SLOWBRO
+    { OBJ_EVENT_GFX_PKMN_MAGNEMITE, 0x22a },  // SPECIES_MAGNEMITE
+    { OBJ_EVENT_GFX_PKMN_MAGNETON, 0x22b },  // SPECIES_MAGNETON
+    { OBJ_EVENT_GFX_PKMN_FARFETCHD, 0x22c },  // SPECIES_FARFETCHD
+    { OBJ_EVENT_GFX_PKMN_DODUO, 0x22d },  // SPECIES_DODUO
+    { OBJ_EVENT_GFX_PKMN_DODRIO, 0x22e },  // SPECIES_DODRIO
+    { OBJ_EVENT_GFX_PKMN_SEEL, 0x22f },  // SPECIES_SEEL
+    { OBJ_EVENT_GFX_PKMN_DEWGONG, 0x230 },  // SPECIES_DEWGONG
+    { OBJ_EVENT_GFX_PKMN_GRIMER, 0x231 },  // SPECIES_GRIMER
+    { OBJ_EVENT_GFX_PKMN_MUK, 0x232 },  // SPECIES_MUK
+    { OBJ_EVENT_GFX_PKMN_SHELLDER, 0x233 },  // SPECIES_SHELLDER
+    { OBJ_EVENT_GFX_PKMN_CLOYSTER, 0x234 },  // SPECIES_CLOYSTER
+    { OBJ_EVENT_GFX_PKMN_GASTLY, 0x235 },  // SPECIES_GASTLY
+    { OBJ_EVENT_GFX_PKMN_HAUNTER, 0x236 },  // SPECIES_HAUNTER
+    { OBJ_EVENT_GFX_PKMN_GENGAR, 0x237 },  // SPECIES_GENGAR
+    { OBJ_EVENT_GFX_PKMN_ONIX, 0x238 },  // SPECIES_ONIX
+    { OBJ_EVENT_GFX_PKMN_DROWZEE, 0x239 },  // SPECIES_DROWZEE
+    { OBJ_EVENT_GFX_PKMN_HYPNO, 0x23a },  // SPECIES_HYPNO
+    { OBJ_EVENT_GFX_PKMN_KRABBY, 0x23b },  // SPECIES_KRABBY
+    { OBJ_EVENT_GFX_PKMN_KINGLER, 0x23c },  // SPECIES_KINGLER
+    { OBJ_EVENT_GFX_PKMN_VOLTORB, 0x23d },  // SPECIES_VOLTORB
+    { OBJ_EVENT_GFX_PKMN_ELECTRODE, 0x23e },  // SPECIES_ELECTRODE
+    { OBJ_EVENT_GFX_PKMN_EXEGGCUTE, 0x23f },  // SPECIES_EXEGGCUTE
+    { OBJ_EVENT_GFX_PKMN_EXEGGUTOR, 0x240 },  // SPECIES_EXEGGUTOR
+    { OBJ_EVENT_GFX_PKMN_CUBONE, 0x241 },  // SPECIES_CUBONE
+    { OBJ_EVENT_GFX_PKMN_MAROWAK, 0x242 },  // SPECIES_MAROWAK
+    { OBJ_EVENT_GFX_PKMN_HITMONLEE, 0x243 },  // SPECIES_HITMONLEE
+    { OBJ_EVENT_GFX_PKMN_HITMONCHAN, 0x244 },  // SPECIES_HITMONCHAN
+    { OBJ_EVENT_GFX_PKMN_LICKITUNG, 0x245 },  // SPECIES_LICKITUNG
+    { OBJ_EVENT_GFX_PKMN_KOFFING, 0x246 },  // SPECIES_KOFFING
+    { OBJ_EVENT_GFX_PKMN_WEEZING, 0x247 },  // SPECIES_WEEZING
+    { OBJ_EVENT_GFX_PKMN_RHYHORN, 0x248 },  // SPECIES_RHYHORN
+    { OBJ_EVENT_GFX_PKMN_RHYDON, 0x249 },  // SPECIES_RHYDON
+    { OBJ_EVENT_GFX_PKMN_CHANSEY, 0x24a },  // SPECIES_CHANSEY
+    { OBJ_EVENT_GFX_PKMN_TANGELA, 0x24b },  // SPECIES_TANGELA
+    { OBJ_EVENT_GFX_PKMN_KANGASKHAN, 0x24c },  // SPECIES_KANGASKHAN
+    { OBJ_EVENT_GFX_PKMN_HORSEA, 0x24d },  // SPECIES_HORSEA
+    { OBJ_EVENT_GFX_PKMN_SEADRA, 0x24e },  // SPECIES_SEADRA
+    { OBJ_EVENT_GFX_PKMN_GOLDEEN, 0x24f },  // SPECIES_GOLDEEN
+    { OBJ_EVENT_GFX_PKMN_SEAKING, 0x250 },  // SPECIES_SEAKING
+    { OBJ_EVENT_GFX_PKMN_STARYU, 0x251 },  // SPECIES_STARYU
+    { OBJ_EVENT_GFX_PKMN_STARMIE, 0x252 },  // SPECIES_STARMIE
+    { OBJ_EVENT_GFX_PKMN_MR_MIME, 0x253 },  // SPECIES_MR_MIME
+    { OBJ_EVENT_GFX_PKMN_SCYTHER, 0x254 },  // SPECIES_SCYTHER
+    { OBJ_EVENT_GFX_PKMN_JYNX, 0x255 },  // SPECIES_JYNX
+    { OBJ_EVENT_GFX_PKMN_ELECTABUZZ, 0x256 },  // SPECIES_ELECTABUZZ
+    { OBJ_EVENT_GFX_PKMN_MAGMAR, 0x257 },  // SPECIES_MAGMAR
+    { OBJ_EVENT_GFX_PKMN_PINSIR, 0x258 },  // SPECIES_PINSIR
+    { OBJ_EVENT_GFX_PKMN_TAUROS, 0x259 },  // SPECIES_TAUROS
+    { OBJ_EVENT_GFX_PKMN_MAGIKARP, 0x25a },  // SPECIES_MAGIKARP
+    { OBJ_EVENT_GFX_PKMN_GYARADOS, 0x25b },  // SPECIES_GYARADOS
+    { OBJ_EVENT_GFX_PKMN_LAPRAS, 0x25c },  // SPECIES_LAPRAS
+    { OBJ_EVENT_GFX_PKMN_DITTO, 0x25d },  // SPECIES_DITTO
+    { OBJ_EVENT_GFX_PKMN_EEVEE, 0x25e },  // SPECIES_EEVEE
+    { OBJ_EVENT_GFX_PKMN_VAPOREON, 0x25f },  // SPECIES_VAPOREON
+    { OBJ_EVENT_GFX_PKMN_JOLTEON, 0x260 },  // SPECIES_JOLTEON
+    { OBJ_EVENT_GFX_PKMN_FLAREON, 0x261 },  // SPECIES_FLAREON
+    { OBJ_EVENT_GFX_PKMN_PORYGON, 0x262 },  // SPECIES_PORYGON
+    { OBJ_EVENT_GFX_PKMN_OMANYTE, 0x263 },  // SPECIES_OMANYTE
+    { OBJ_EVENT_GFX_PKMN_OMASTAR, 0x264 },  // SPECIES_OMASTAR
+    { OBJ_EVENT_GFX_PKMN_KABUTO, 0x265 },  // SPECIES_KABUTO
+    { OBJ_EVENT_GFX_PKMN_KABUTOPS, 0x266 },  // SPECIES_KABUTOPS
+    { OBJ_EVENT_GFX_PKMN_AERODACTYL, 0x267 },  // SPECIES_AERODACTYL
+    { OBJ_EVENT_GFX_PKMN_SNORLAX, 0x268 },  // SPECIES_SNORLAX
+    { OBJ_EVENT_GFX_PKMN_ARTICUNO, 0x269 },  // SPECIES_ARTICUNO
+    { OBJ_EVENT_GFX_PKMN_ZAPDOS, 0x26a },  // SPECIES_ZAPDOS
+    { OBJ_EVENT_GFX_PKMN_MOLTRES, 0x26b },  // SPECIES_MOLTRES
+    { OBJ_EVENT_GFX_PKMN_DRATINI, 0x26c },  // SPECIES_DRATINI
+    { OBJ_EVENT_GFX_PKMN_DRAGONAIR, 0x26d },  // SPECIES_DRAGONAIR
+    { OBJ_EVENT_GFX_PKMN_DRAGONITE, 0x26e },  // SPECIES_DRAGONITE
+    { OBJ_EVENT_GFX_PKMN_MEWTWO, 0x26f },  // SPECIES_MEWTWO
+    { OBJ_EVENT_GFX_PKMN_MEW, 0x270 },  // SPECIES_MEW
+    { OBJ_EVENT_GFX_PKMN_CHIKORITA, 0x271 },  // SPECIES_CHIKORITA
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF, 0x272 },  // SPECIES_BAYLEEF
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF_F, 0x273 },  // female
+    { OBJ_EVENT_GFX_PKMN_CYNDAQUIL, 0x274 },  // SPECIES_CYNDAQUIL
+    { OBJ_EVENT_GFX_PKMN_QUILAVA, 0x275 },  // SPECIES_QUILAVA
+    { OBJ_EVENT_GFX_PKMN_TYPHLOSION, 0x276 },  // SPECIES_TYPHLOSION
+    { OBJ_EVENT_GFX_PKMN_TOTODILE, 0x277 },  // SPECIES_TOTODILE
+    { OBJ_EVENT_GFX_PKMN_CROCONAW, 0x278 },  // SPECIES_CROCONAW
+    { OBJ_EVENT_GFX_PKMN_FERALIGATR, 0x279 },  // SPECIES_FERALIGATR
+    { OBJ_EVENT_GFX_PKMN_SENTRET, 0x27a },  // SPECIES_SENTRET
+    { OBJ_EVENT_GFX_PKMN_FURRET, 0x27b },  // SPECIES_FURRET
+    { OBJ_EVENT_GFX_PKMN_HOOTHOOT, 0x27c },  // SPECIES_HOOTHOOT
+    { OBJ_EVENT_GFX_PKMN_NOCTOWL, 0x27d },  // SPECIES_NOCTOWL
+    { OBJ_EVENT_GFX_PKMN_LEDYBA, 0x27e },  // SPECIES_LEDYBA
+    { OBJ_EVENT_GFX_PKMN_LEDIAN, 0x27f },  // SPECIES_LEDIAN
+    { OBJ_EVENT_GFX_PKMN_SPINARAK, 0x280 },  // SPECIES_SPINARAK
+    { OBJ_EVENT_GFX_PKMN_ARIADOS, 0x281 },  // SPECIES_ARIADOS
+    { OBJ_EVENT_GFX_PKMN_CROBAT, 0x282 },  // SPECIES_CROBAT
+    { OBJ_EVENT_GFX_PKMN_CHINCHOU, 0x283 },  // SPECIES_CHINCHOU
+    { OBJ_EVENT_GFX_PKMN_LANTURN, 0x284 },  // SPECIES_LANTURN
+    { OBJ_EVENT_GFX_PKMN_PICHU, 0x285 },  // SPECIES_PICHU
+    { OBJ_EVENT_GFX_PKMN_CLEFFA, 0x286 },  // SPECIES_CLEFFA
+    { OBJ_EVENT_GFX_PKMN_IGGLYBUFF, 0x287 },  // SPECIES_IGGLYBUFF
+    { OBJ_EVENT_GFX_PKMN_TOGEPI, 0x288 },  // SPECIES_TOGEPI
+    { OBJ_EVENT_GFX_PKMN_TOGETIC, 0x289 },  // SPECIES_TOGETIC
+    { OBJ_EVENT_GFX_PKMN_NATU, 0x28a },  // SPECIES_NATU
+    { OBJ_EVENT_GFX_PKMN_XATU, 0x28b },  // SPECIES_XATU
+    { OBJ_EVENT_GFX_PKMN_MAREEP, 0x28c },  // SPECIES_MAREEP
+    { OBJ_EVENT_GFX_PKMN_FLAAFFY, 0x28d },  // SPECIES_FLAAFFY
+    { OBJ_EVENT_GFX_PKMN_AMPHAROS, 0x28e },  // SPECIES_AMPHAROS
+    { OBJ_EVENT_GFX_PKMN_BELLOSSOM, 0x28f },  // SPECIES_BELLOSSOM
+    { OBJ_EVENT_GFX_PKMN_MARILL, 0x290 },  // SPECIES_MARILL
+    { OBJ_EVENT_GFX_PKMN_AZUMARILL, 0x291 },  // SPECIES_AZUMARILL
+    { OBJ_EVENT_GFX_PKMN_SUDOWOODO, 0x292 },  // SPECIES_SUDOWOODO
+    { OBJ_EVENT_GFX_PKMN_POLITOED, 0x293 },  // SPECIES_POLITOED
+    { OBJ_EVENT_GFX_PKMN_HOPPIP, 0x294 },  // SPECIES_HOPPIP
+    { OBJ_EVENT_GFX_PKMN_SKIPLOOM, 0x295 },  // SPECIES_SKIPLOOM
+    { OBJ_EVENT_GFX_PKMN_JUMPLUFF, 0x296 },  // SPECIES_JUMPLUFF
+    { OBJ_EVENT_GFX_PKMN_AIPOM, 0x297 },  // SPECIES_AIPOM
+    { OBJ_EVENT_GFX_PKMN_SUNKERN, 0x298 },  // SPECIES_SUNKERN
+    { OBJ_EVENT_GFX_PKMN_SUNFLORA, 0x299 },  // SPECIES_SUNFLORA
+    { OBJ_EVENT_GFX_PKMN_YANMA, 0x29a },  // SPECIES_YANMA
+    { OBJ_EVENT_GFX_PKMN_WOOPER, 0x29b },  // SPECIES_WOOPER
+    { OBJ_EVENT_GFX_PKMN_QUAGSIRE, 0x29c },  // SPECIES_QUAGSIRE
+    { OBJ_EVENT_GFX_PKMN_ESPEON, 0x29d },  // SPECIES_ESPEON
+    { OBJ_EVENT_GFX_PKMN_UMBREON, 0x29e },  // SPECIES_UMBREON
+    { OBJ_EVENT_GFX_PKMN_MURKROW, 0x29f },  // SPECIES_MURKROW
+    { OBJ_EVENT_GFX_PKMN_SLOWKING, 0x2a0 },  // SPECIES_SLOWKING
+    { OBJ_EVENT_GFX_PKMN_MISDREAVUS, 0x2a1 },  // SPECIES_MISDREAVUS
+    { OBJ_EVENT_GFX_PKMN_UNOWN, 0x2a2 },  // SPECIES_UNOWN
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET, 0x2a3 },  // SPECIES_WOBBUFFET
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET_F, 0x2a4 },  // female
+    { OBJ_EVENT_GFX_PKMN_GIRAFARIG, 0x2a5 },  // SPECIES_GIRAFARIG
+    { OBJ_EVENT_GFX_PKMN_PINECO, 0x2a6 },  // SPECIES_PINECO
+    { OBJ_EVENT_GFX_PKMN_FORRETRESS, 0x2a7 },  // SPECIES_FORRETRESS
+    { OBJ_EVENT_GFX_PKMN_DUNSPARCE, 0x2a8 },  // SPECIES_DUNSPARCE
+    { OBJ_EVENT_GFX_PKMN_GLIGAR, 0x2a9 },  // SPECIES_GLIGAR
+    { OBJ_EVENT_GFX_PKMN_STEELIX, 0x2aa },  // SPECIES_STEELIX
+    { OBJ_EVENT_GFX_PKMN_STEELIX_F, 0x2ab },  // female
+    { OBJ_EVENT_GFX_PKMN_SNUBBULL, 0x2ac },  // SPECIES_SNUBBULL
+    { OBJ_EVENT_GFX_PKMN_GRANBULL, 0x2ad },  // SPECIES_GRANBULL
+    { OBJ_EVENT_GFX_PKMN_QWILFISH, 0x2ae },  // SPECIES_QWILFISH
+    { OBJ_EVENT_GFX_PKMN_SCIZOR, 0x2af },  // SPECIES_SCIZOR
+    { OBJ_EVENT_GFX_PKMN_SHUCKLE, 0x2b0 },  // SPECIES_SHUCKLE
+    { OBJ_EVENT_GFX_PKMN_HERACROSS, 0x2b1 },  // SPECIES_HERACROSS
+    { OBJ_EVENT_GFX_PKMN_HERACROSS_F, 0x2b2 },  // female
+    { OBJ_EVENT_GFX_PKMN_SNEASEL, 0x2b3 },  // SPECIES_SNEASEL
+    { OBJ_EVENT_GFX_PKMN_TEDDIURSA, 0x2b4 },  // SPECIES_TEDDIURSA
+    { OBJ_EVENT_GFX_PKMN_URSARING, 0x2b5 },  // SPECIES_URSARING
+    { OBJ_EVENT_GFX_PKMN_SLUGMA, 0x2b6 },  // SPECIES_SLUGMA
+    { OBJ_EVENT_GFX_PKMN_MAGCARGO, 0x2b7 },  // SPECIES_MAGCARGO
+    { OBJ_EVENT_GFX_PKMN_SWINUB, 0x2b8 },  // SPECIES_SWINUB
+    { OBJ_EVENT_GFX_PKMN_PILOSWINE, 0x2b9 },  // SPECIES_PILOSWINE
+    { OBJ_EVENT_GFX_PKMN_CORSOLA, 0x2ba },  // SPECIES_CORSOLA
+    { OBJ_EVENT_GFX_PKMN_REMORAID, 0x2bb },  // SPECIES_REMORAID
+    { OBJ_EVENT_GFX_PKMN_OCTILLERY, 0x2bc },  // SPECIES_OCTILLERY
+    { OBJ_EVENT_GFX_PKMN_DELIBIRD, 0x2bd },  // SPECIES_DELIBIRD
+    { OBJ_EVENT_GFX_PKMN_MANTINE, 0x2be },  // SPECIES_MANTINE
+    { OBJ_EVENT_GFX_PKMN_SKARMORY, 0x2bf },  // SPECIES_SKARMORY
+    { OBJ_EVENT_GFX_PKMN_HOUNDOUR, 0x2c0 },  // SPECIES_HOUNDOUR
+    { OBJ_EVENT_GFX_PKMN_HOUNDOOM, 0x2c1 },  // SPECIES_HOUNDOOM
+    { OBJ_EVENT_GFX_PKMN_KINGDRA, 0x2c2 },  // SPECIES_KINGDRA
+    { OBJ_EVENT_GFX_PKMN_PHANPY, 0x2c3 },  // SPECIES_PHANPY
+    { OBJ_EVENT_GFX_PKMN_DONPHAN, 0x2c4 },  // SPECIES_DONPHAN
+    { OBJ_EVENT_GFX_PKMN_PORYGON2, 0x2c5 },  // SPECIES_PORYGON2
+    { OBJ_EVENT_GFX_PKMN_STANTLER, 0x2c6 },  // SPECIES_STANTLER
+    { OBJ_EVENT_GFX_PKMN_SMEARGLE, 0x2c7 },  // SPECIES_SMEARGLE
+    { OBJ_EVENT_GFX_PKMN_TYROGUE, 0x2c8 },  // SPECIES_TYROGUE
+    { OBJ_EVENT_GFX_PKMN_HITMONTOP, 0x2c9 },  // SPECIES_HITMONTOP
+    { OBJ_EVENT_GFX_PKMN_SMOOCHUM, 0x2ca },  // SPECIES_SMOOCHUM
+    { OBJ_EVENT_GFX_PKMN_ELEKID, 0x2cb },  // SPECIES_ELEKID
+    { OBJ_EVENT_GFX_PKMN_MAGBY, 0x2cc },  // SPECIES_MAGBY
+    { OBJ_EVENT_GFX_PKMN_MILTANK, 0x2cd },  // SPECIES_MILTANK
+    { OBJ_EVENT_GFX_PKMN_BLISSEY, 0x2ce },  // SPECIES_BLISSEY
+    { OBJ_EVENT_GFX_PKMN_RAIKOU, 0x2cf },  // SPECIES_RAIKOU
+    { OBJ_EVENT_GFX_PKMN_ENTEI, 0x2d0 },  // SPECIES_ENTEI
+    { OBJ_EVENT_GFX_PKMN_SUICUNE, 0x2d1 },  // SPECIES_SUICUNE
+    { OBJ_EVENT_GFX_PKMN_LARVITAR, 0x2d2 },  // SPECIES_LARVITAR
+    { OBJ_EVENT_GFX_PKMN_PUPITAR, 0x2d3 },  // SPECIES_PUPITAR
+    { OBJ_EVENT_GFX_PKMN_TYRANITAR, 0x2d4 },  // SPECIES_TYRANITAR
+    { OBJ_EVENT_GFX_PKMN_LUGIA, 0x2d5 },  // SPECIES_LUGIA
+    { OBJ_EVENT_GFX_PKMN_HO_OH, 0x2d6 },  // SPECIES_HO_OH
+    { OBJ_EVENT_GFX_PKMN_CELEBI, 0x2d7 },  // SPECIES_CELEBI
+    { OBJ_EVENT_GFX_PKMN_TREECKO, 0x2d8 },  // SPECIES_TREECKO
+    { OBJ_EVENT_GFX_PKMN_GROVYLE, 0x2d9 },  // SPECIES_GROVYLE
+    { OBJ_EVENT_GFX_PKMN_SCEPTILE, 0x2da },  // SPECIES_SCEPTILE
+    { OBJ_EVENT_GFX_PKMN_TORCHIC, 0x2db },  // SPECIES_TORCHIC
+    { OBJ_EVENT_GFX_PKMN_COMBUSKEN, 0x2dc },  // SPECIES_COMBUSKEN
+    { OBJ_EVENT_GFX_PKMN_BLAZIKEN, 0x2dd },  // SPECIES_BLAZIKEN
+    { OBJ_EVENT_GFX_PKMN_MUDKIP, 0x2de },  // SPECIES_MUDKIP
+    { OBJ_EVENT_GFX_PKMN_MARSHTOMP, 0x2df },  // SPECIES_MARSHTOMP
+    { OBJ_EVENT_GFX_PKMN_SWAMPERT, 0x2e0 },  // SPECIES_SWAMPERT
+    { OBJ_EVENT_GFX_PKMN_POOCHYENA, 0x2e1 },  // SPECIES_POOCHYENA
+    { OBJ_EVENT_GFX_PKMN_MIGHTYENA, 0x2e2 },  // SPECIES_MIGHTYENA
+    { OBJ_EVENT_GFX_PKMN_ZIGZAGOON, 0x2e3 },  // SPECIES_ZIGZAGOON
+    { OBJ_EVENT_GFX_PKMN_LINOONE, 0x2e4 },  // SPECIES_LINOONE
+    { OBJ_EVENT_GFX_PKMN_WURMPLE, 0x2e5 },  // SPECIES_WURMPLE
+    { OBJ_EVENT_GFX_PKMN_SILCOON, 0x2e6 },  // SPECIES_SILCOON
+    { OBJ_EVENT_GFX_PKMN_BEAUTIFLY, 0x2e7 },  // SPECIES_BEAUTIFLY
+    { OBJ_EVENT_GFX_PKMN_CASCOON, 0x2e8 },  // SPECIES_CASCOON
+    { OBJ_EVENT_GFX_PKMN_DUSTOX, 0x2e9 },  // SPECIES_DUSTOX
+    { OBJ_EVENT_GFX_PKMN_LOTAD, 0x2ea },  // SPECIES_LOTAD
+    { OBJ_EVENT_GFX_PKMN_LOMBRE, 0x2eb },  // SPECIES_LOMBRE
+    { OBJ_EVENT_GFX_PKMN_LUDICOLO, 0x2ec },  // SPECIES_LUDICOLO
+    { OBJ_EVENT_GFX_PKMN_SEEDOT, 0x2ed },  // SPECIES_SEEDOT
+    { OBJ_EVENT_GFX_PKMN_NUZLEAF, 0x2ee },  // SPECIES_NUZLEAF
+    { OBJ_EVENT_GFX_PKMN_SHIFTRY, 0x2ef },  // SPECIES_SHIFTRY
+    { OBJ_EVENT_GFX_PKMN_TAILLOW, 0x2f0 },  // SPECIES_TAILLOW
+    { OBJ_EVENT_GFX_PKMN_SWELLOW, 0x2f1 },  // SPECIES_SWELLOW
+    { OBJ_EVENT_GFX_PKMN_WINGULL, 0x2f2 },  // SPECIES_WINGULL
+    { OBJ_EVENT_GFX_PKMN_PELIPPER, 0x2f3 },  // SPECIES_PELIPPER
+    { OBJ_EVENT_GFX_PKMN_RALTS, 0x2f4 },  // SPECIES_RALTS
+    { OBJ_EVENT_GFX_PKMN_KIRLIA, 0x2f5 },  // SPECIES_KIRLIA
+    { OBJ_EVENT_GFX_PKMN_GARDEVOIR, 0x2f6 },  // SPECIES_GARDEVOIR
+    { OBJ_EVENT_GFX_PKMN_SURSKIT, 0x2f7 },  // SPECIES_SURSKIT
+    { OBJ_EVENT_GFX_PKMN_MASQUERAIN, 0x2f8 },  // SPECIES_MASQUERAIN
+    { OBJ_EVENT_GFX_PKMN_SHROOMISH, 0x2f9 },  // SPECIES_SHROOMISH
+    { OBJ_EVENT_GFX_PKMN_BRELOOM, 0x2fa },  // SPECIES_BRELOOM
+    { OBJ_EVENT_GFX_PKMN_SLAKOTH, 0x2fb },  // SPECIES_SLAKOTH
+    { OBJ_EVENT_GFX_PKMN_VIGOROTH, 0x2fc },  // SPECIES_VIGOROTH
+    { OBJ_EVENT_GFX_PKMN_SLAKING, 0x2fd },  // SPECIES_SLAKING
+    { OBJ_EVENT_GFX_PKMN_NINCADA, 0x2fe },  // SPECIES_NINCADA
+    { OBJ_EVENT_GFX_PKMN_NINJASK, 0x2ff },  // SPECIES_NINJASK
+    { OBJ_EVENT_GFX_PKMN_SHEDINJA, 0x300 },  // SPECIES_SHEDINJA
+    { OBJ_EVENT_GFX_PKMN_WHISMUR, 0x301 },  // SPECIES_WHISMUR
+    { OBJ_EVENT_GFX_PKMN_LOUDRED, 0x302 },  // SPECIES_LOUDRED
+    { OBJ_EVENT_GFX_PKMN_EXPLOUD, 0x303 },  // SPECIES_EXPLOUD
+    { OBJ_EVENT_GFX_PKMN_MAKUHITA, 0x304 },  // SPECIES_MAKUHITA
+    { OBJ_EVENT_GFX_PKMN_HARIYAMA, 0x305 },  // SPECIES_HARIYAMA
+    { OBJ_EVENT_GFX_PKMN_AZURILL, 0x306 },  // SPECIES_AZURILL
+    { OBJ_EVENT_GFX_PKMN_NOSEPASS, 0x307 },  // SPECIES_NOSEPASS
+    { OBJ_EVENT_GFX_PKMN_SKITTY, 0x308 },  // SPECIES_SKITTY
+    { OBJ_EVENT_GFX_PKMN_DELCATTY, 0x309 },  // SPECIES_DELCATTY
+    { OBJ_EVENT_GFX_PKMN_SABLEYE, 0x30a },  // SPECIES_SABLEYE
+    { OBJ_EVENT_GFX_PKMN_MAWILE, 0x30b },  // SPECIES_MAWILE
+    { OBJ_EVENT_GFX_PKMN_ARON, 0x30c },  // SPECIES_ARON
+    { OBJ_EVENT_GFX_PKMN_LAIRON, 0x30d },  // SPECIES_LAIRON
+    { OBJ_EVENT_GFX_PKMN_AGGRON, 0x30e },  // SPECIES_AGGRON
+    { OBJ_EVENT_GFX_PKMN_MEDITITE, 0x30f },  // SPECIES_MEDITITE
+    { OBJ_EVENT_GFX_PKMN_MEDICHAM, 0x310 },  // SPECIES_MEDICHAM
+    { OBJ_EVENT_GFX_PKMN_ELECTRIKE, 0x311 },  // SPECIES_ELECTRIKE
+    { OBJ_EVENT_GFX_PKMN_MANECTRIC, 0x312 },  // SPECIES_MANECTRIC
+    { OBJ_EVENT_GFX_PKMN_PLUSLE, 0x313 },  // SPECIES_PLUSLE
+    { OBJ_EVENT_GFX_PKMN_MINUN, 0x314 },  // SPECIES_MINUN
+    { OBJ_EVENT_GFX_PKMN_VOLBEAT, 0x315 },  // SPECIES_VOLBEAT
+    { OBJ_EVENT_GFX_PKMN_ILLUMISE, 0x316 },  // SPECIES_ILLUMISE
+    { OBJ_EVENT_GFX_PKMN_ROSELIA, 0x317 },  // SPECIES_ROSELIA
+    { OBJ_EVENT_GFX_PKMN_GULPIN, 0x318 },  // SPECIES_GULPIN
+    { OBJ_EVENT_GFX_PKMN_SWALOT, 0x319 },  // SPECIES_SWALOT
+    { OBJ_EVENT_GFX_PKMN_CARVANHA, 0x31a },  // SPECIES_CARVANHA
+    { OBJ_EVENT_GFX_PKMN_SHARPEDO, 0x31b },  // SPECIES_SHARPEDO
+    { OBJ_EVENT_GFX_PKMN_WAILMER, 0x31c },  // SPECIES_WAILMER
+    { OBJ_EVENT_GFX_PKMN_WAILORD, 0x31d },  // SPECIES_WAILORD
+    { OBJ_EVENT_GFX_PKMN_NUMEL, 0x31e },  // SPECIES_NUMEL
+    { OBJ_EVENT_GFX_PKMN_CAMERUPT, 0x31f },  // SPECIES_CAMERUPT
+    { OBJ_EVENT_GFX_PKMN_TORKOAL, 0x320 },  // SPECIES_TORKOAL
+    { OBJ_EVENT_GFX_PKMN_SPOINK, 0x321 },  // SPECIES_SPOINK
+    { OBJ_EVENT_GFX_PKMN_GRUMPIG, 0x322 },  // SPECIES_GRUMPIG
+    { OBJ_EVENT_GFX_PKMN_SPINDA, 0x323 },  // SPECIES_SPINDA
+    { OBJ_EVENT_GFX_PKMN_TRAPINCH, 0x324 },  // SPECIES_TRAPINCH
+    { OBJ_EVENT_GFX_PKMN_VIBRAVA, 0x325 },  // SPECIES_VIBRAVA
+    { OBJ_EVENT_GFX_PKMN_FLYGON, 0x326 },  // SPECIES_FLYGON
+    { OBJ_EVENT_GFX_PKMN_CACNEA, 0x327 },  // SPECIES_CACNEA
+    { OBJ_EVENT_GFX_PKMN_CACTURNE, 0x328 },  // SPECIES_CACTURNE
+    { OBJ_EVENT_GFX_PKMN_SWABLU, 0x329 },  // SPECIES_SWABLU
+    { OBJ_EVENT_GFX_PKMN_ALTARIA, 0x32a },  // SPECIES_ALTARIA
+    { OBJ_EVENT_GFX_PKMN_ZANGOOSE, 0x32b },  // SPECIES_ZANGOOSE
+    { OBJ_EVENT_GFX_PKMN_SEVIPER, 0x32c },  // SPECIES_SEVIPER
+    { OBJ_EVENT_GFX_PKMN_LUNATONE, 0x32d },  // SPECIES_LUNATONE
+    { OBJ_EVENT_GFX_PKMN_SOLROCK, 0x32e },  // SPECIES_SOLROCK
+    { OBJ_EVENT_GFX_PKMN_BARBOACH, 0x32f },  // SPECIES_BARBOACH
+    { OBJ_EVENT_GFX_PKMN_WHISCASH, 0x330 },  // SPECIES_WHISCASH
+    { OBJ_EVENT_GFX_PKMN_CORPHISH, 0x331 },  // SPECIES_CORPHISH
+    { OBJ_EVENT_GFX_PKMN_CRAWDAUNT, 0x332 },  // SPECIES_CRAWDAUNT
+    { OBJ_EVENT_GFX_PKMN_BALTOY, 0x333 },  // SPECIES_BALTOY
+    { OBJ_EVENT_GFX_PKMN_CLAYDOL, 0x334 },  // SPECIES_CLAYDOL
+    { OBJ_EVENT_GFX_PKMN_LILEEP, 0x335 },  // SPECIES_LILEEP
+    { OBJ_EVENT_GFX_PKMN_CRADILY, 0x336 },  // SPECIES_CRADILY
+    { OBJ_EVENT_GFX_PKMN_ANORITH, 0x337 },  // SPECIES_ANORITH
+    { OBJ_EVENT_GFX_PKMN_ARMALDO, 0x338 },  // SPECIES_ARMALDO
+    { OBJ_EVENT_GFX_PKMN_FEEBAS, 0x339 },  // SPECIES_FEEBAS
+    { OBJ_EVENT_GFX_PKMN_MILOTIC, 0x33a },  // SPECIES_MILOTIC
+    { OBJ_EVENT_GFX_PKMN_CASTFORM, 0x33b },  // SPECIES_CASTFORM
+    { OBJ_EVENT_GFX_PKMN_KECLEON, 0x33c },  // SPECIES_KECLEON
+    { OBJ_EVENT_GFX_PKMN_SHUPPET, 0x33d },  // SPECIES_SHUPPET
+    { OBJ_EVENT_GFX_PKMN_BANETTE, 0x33e },  // SPECIES_BANETTE
+    { OBJ_EVENT_GFX_PKMN_DUSKULL, 0x33f },  // SPECIES_DUSKULL
+    { OBJ_EVENT_GFX_PKMN_DUSCLOPS, 0x340 },  // SPECIES_DUSCLOPS
+    { OBJ_EVENT_GFX_PKMN_TROPIUS, 0x341 },  // SPECIES_TROPIUS
+    { OBJ_EVENT_GFX_PKMN_CHIMECHO, 0x342 },  // SPECIES_CHIMECHO
+    { OBJ_EVENT_GFX_PKMN_ABSOL, 0x343 },  // SPECIES_ABSOL
+    { OBJ_EVENT_GFX_PKMN_WYNAUT, 0x344 },  // SPECIES_WYNAUT
+    { OBJ_EVENT_GFX_PKMN_SNORUNT, 0x345 },  // SPECIES_SNORUNT
+    { OBJ_EVENT_GFX_PKMN_GLALIE, 0x346 },  // SPECIES_GLALIE
+    { OBJ_EVENT_GFX_PKMN_SPHEAL, 0x347 },  // SPECIES_SPHEAL
+    { OBJ_EVENT_GFX_PKMN_SEALEO, 0x348 },  // SPECIES_SEALEO
+    { OBJ_EVENT_GFX_PKMN_WALREIN, 0x349 },  // SPECIES_WALREIN
+    { OBJ_EVENT_GFX_PKMN_CLAMPERL, 0x34a },  // SPECIES_CLAMPERL
+    { OBJ_EVENT_GFX_PKMN_HUNTAIL, 0x34b },  // SPECIES_HUNTAIL
+    { OBJ_EVENT_GFX_PKMN_GOREBYSS, 0x34c },  // SPECIES_GOREBYSS
+    { OBJ_EVENT_GFX_PKMN_RELICANTH, 0x34d },  // SPECIES_RELICANTH
+    { OBJ_EVENT_GFX_PKMN_LUVDISC, 0x34e },  // SPECIES_LUVDISC
+    { OBJ_EVENT_GFX_PKMN_BAGON, 0x34f },  // SPECIES_BAGON
+    { OBJ_EVENT_GFX_PKMN_SHELGON, 0x350 },  // SPECIES_SHELGON
+    { OBJ_EVENT_GFX_PKMN_SALAMENCE, 0x351 },  // SPECIES_SALAMENCE
+    { OBJ_EVENT_GFX_PKMN_BELDUM, 0x352 },  // SPECIES_BELDUM
+    { OBJ_EVENT_GFX_PKMN_METANG, 0x353 },  // SPECIES_METANG
+    { OBJ_EVENT_GFX_PKMN_METAGROSS, 0x354 },  // SPECIES_METAGROSS
+    { OBJ_EVENT_GFX_PKMN_REGIROCK, 0x355 },  // SPECIES_REGIROCK
+    { OBJ_EVENT_GFX_PKMN_REGICE, 0x356 },  // SPECIES_REGICE
+    { OBJ_EVENT_GFX_PKMN_REGISTEEL, 0x357 },  // SPECIES_REGISTEEL
+    { OBJ_EVENT_GFX_PKMN_LATIAS, 0x358 },  // SPECIES_LATIAS
+    { OBJ_EVENT_GFX_PKMN_LATIOS, 0x359 },  // SPECIES_LATIOS
+    { OBJ_EVENT_GFX_PKMN_KYOGRE, 0x35a },  // SPECIES_KYOGRE
+    { OBJ_EVENT_GFX_PKMN_GROUDON, 0x35b },  // SPECIES_GROUDON
+    { OBJ_EVENT_GFX_PKMN_RAYQUAZA, 0x35c },  // SPECIES_RAYQUAZA
+    { OBJ_EVENT_GFX_PKMN_JIRACHI, 0x35d },  // SPECIES_JIRACHI
+    { OBJ_EVENT_GFX_PKMN_DEOXYS, 0x35e },  // SPECIES_DEOXYS
+    { OBJ_EVENT_GFX_PKMN_TURTWIG, 0x35f },  // SPECIES_TURTWIG
+    { OBJ_EVENT_GFX_PKMN_GROTLE, 0x360 },  // SPECIES_GROTLE
+    { OBJ_EVENT_GFX_PKMN_TORTERRA, 0x361 },  // SPECIES_TORTERRA
+    { OBJ_EVENT_GFX_PKMN_CHIMCHAR, 0x362 },  // SPECIES_CHIMCHAR
+    { OBJ_EVENT_GFX_PKMN_MONFERNO, 0x363 },  // SPECIES_MONFERNO
+    { OBJ_EVENT_GFX_PKMN_INFERNAPE, 0x364 },  // SPECIES_INFERNAPE
+    { OBJ_EVENT_GFX_PKMN_PIPLUP, 0x365 },  // SPECIES_PIPLUP
+    { OBJ_EVENT_GFX_PKMN_PRINPLUP, 0x366 },  // SPECIES_PRINPLUP
+    { OBJ_EVENT_GFX_PKMN_EMPOLEON, 0x367 },  // SPECIES_EMPOLEON
+    { OBJ_EVENT_GFX_PKMN_STARLY, 0x368 },  // SPECIES_STARLY
+    { OBJ_EVENT_GFX_PKMN_STARAVIA, 0x369 },  // SPECIES_STARAVIA
+    { OBJ_EVENT_GFX_PKMN_STARAPTOR, 0x36a },  // SPECIES_STARAPTOR
+    { OBJ_EVENT_GFX_PKMN_BIDOOF, 0x36b },  // SPECIES_BIDOOF
+    { OBJ_EVENT_GFX_PKMN_BIBAREL, 0x36c },  // SPECIES_BIBAREL
+    { OBJ_EVENT_GFX_PKMN_KRICKETOT, 0x36d },  // SPECIES_KRICKETOT
+    { OBJ_EVENT_GFX_PKMN_KRICKETUNE, 0x36e },  // SPECIES_KRICKETUNE
+    { OBJ_EVENT_GFX_PKMN_SHINX, 0x36f },  // SPECIES_SHINX
+    { OBJ_EVENT_GFX_PKMN_LUXIO, 0x370 },  // SPECIES_LUXIO
+    { OBJ_EVENT_GFX_PKMN_LUXRAY, 0x371 },  // SPECIES_LUXRAY
+    { OBJ_EVENT_GFX_PKMN_BUDEW, 0x372 },  // SPECIES_BUDEW
+    { OBJ_EVENT_GFX_PKMN_ROSERADE, 0x373 },  // SPECIES_ROSERADE
+    { OBJ_EVENT_GFX_PKMN_CRANIDOS, 0x374 },  // SPECIES_CRANIDOS
+    { OBJ_EVENT_GFX_PKMN_RAMPARDOS, 0x375 },  // SPECIES_RAMPARDOS
+    { OBJ_EVENT_GFX_PKMN_SHIELDON, 0x376 },  // SPECIES_SHIELDON
+    { OBJ_EVENT_GFX_PKMN_BASTIODON, 0x377 },  // SPECIES_BASTIODON
+    { OBJ_EVENT_GFX_PKMN_BURMY, 0x378 },  // SPECIES_BURMY
+    { OBJ_EVENT_GFX_PKMN_WORMADAM, 0x379 },  // SPECIES_WORMADAM
+    { OBJ_EVENT_GFX_PKMN_MOTHIM, 0x37a },  // SPECIES_MOTHIM
+    { OBJ_EVENT_GFX_PKMN_COMBEE, 0x37b },  // SPECIES_COMBEE
+    { OBJ_EVENT_GFX_PKMN_COMBEE_F, 0x37c },  // female
+    { OBJ_EVENT_GFX_PKMN_VESPIQUEN, 0x37d },  // SPECIES_VESPIQUEN
+    { OBJ_EVENT_GFX_PKMN_PACHIRISU, 0x37e },  // SPECIES_PACHIRISU
+    { OBJ_EVENT_GFX_PKMN_BUIZEL, 0x37f },  // SPECIES_BUIZEL
+    { OBJ_EVENT_GFX_PKMN_FLOATZEL, 0x380 },  // SPECIES_FLOATZEL
+    { OBJ_EVENT_GFX_PKMN_CHERUBI, 0x381 },  // SPECIES_CHERUBI
+    { OBJ_EVENT_GFX_PKMN_CHERRIM, 0x382 },  // SPECIES_CHERRIM
+    { OBJ_EVENT_GFX_PKMN_SHELLOS, 0x383 },  // SPECIES_SHELLOS
+    { OBJ_EVENT_GFX_PKMN_GASTRODON, 0x384 },  // SPECIES_GASTRODON
+    { OBJ_EVENT_GFX_PKMN_AMBIPOM, 0x385 },  // SPECIES_AMBIPOM
+    { OBJ_EVENT_GFX_PKMN_DRIFLOON, 0x386 },  // SPECIES_DRIFLOON
+    { OBJ_EVENT_GFX_PKMN_DRIFBLIM, 0x387 },  // SPECIES_DRIFBLIM
+    { OBJ_EVENT_GFX_PKMN_BUNEARY, 0x388 },  // SPECIES_BUNEARY
+    { OBJ_EVENT_GFX_PKMN_LOPUNNY, 0x389 },  // SPECIES_LOPUNNY
+    { OBJ_EVENT_GFX_PKMN_MISMAGIUS, 0x38a },  // SPECIES_MISMAGIUS
+    { OBJ_EVENT_GFX_PKMN_HONCHKROW, 0x38b },  // SPECIES_HONCHKROW
+    { OBJ_EVENT_GFX_PKMN_GLAMEOW, 0x38c },  // SPECIES_GLAMEOW
+    { OBJ_EVENT_GFX_PKMN_PURUGLY, 0x38d },  // SPECIES_PURUGLY
+    { OBJ_EVENT_GFX_PKMN_CHINGLING, 0x38e },  // SPECIES_CHINGLING
+    { OBJ_EVENT_GFX_PKMN_STUNKY, 0x38f },  // SPECIES_STUNKY
+    { OBJ_EVENT_GFX_PKMN_SKUNTANK, 0x390 },  // SPECIES_SKUNTANK
+    { OBJ_EVENT_GFX_PKMN_BRONZOR, 0x391 },  // SPECIES_BRONZOR
+    { OBJ_EVENT_GFX_PKMN_BRONZONG, 0x392 },  // SPECIES_BRONZONG
+    { OBJ_EVENT_GFX_PKMN_BONSLY, 0x393 },  // SPECIES_BONSLY
+    { OBJ_EVENT_GFX_PKMN_MIMEJR, 0x394 },  // SPECIES_MIMEJR
+    { OBJ_EVENT_GFX_PKMN_HAPPINY, 0x395 },  // SPECIES_HAPPINY
+    { OBJ_EVENT_GFX_PKMN_CHATOT, 0x396 },  // SPECIES_CHATOT
+    { OBJ_EVENT_GFX_PKMN_SPIRITOMB, 0x397 },  // SPECIES_SPIRITOMB
+    { OBJ_EVENT_GFX_PKMN_GIBLE, 0x398 },  // SPECIES_GIBLE
+    { OBJ_EVENT_GFX_PKMN_GABITE, 0x399 },  // SPECIES_GABITE
+    { OBJ_EVENT_GFX_PKMN_GARCHOMP, 0x39a },  // SPECIES_GARCHOMP
+    { OBJ_EVENT_GFX_PKMN_MUNCHLAX, 0x39b },  // SPECIES_MUNCHLAX
+    { OBJ_EVENT_GFX_PKMN_RIOLU, 0x39c },  // SPECIES_RIOLU
+    { OBJ_EVENT_GFX_PKMN_LUCARIO, 0x39d },  // SPECIES_LUCARIO
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS, 0x39e },  // SPECIES_HIPPOPOTAS
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS_F, 0x39f },  // female
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON, 0x3a0 },  // SPECIES_HIPPOWDON
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON_F, 0x3a1 },  // female
+    { OBJ_EVENT_GFX_PKMN_SKORUPI, 0x3a2 },  // SPECIES_SKORUPI
+    { OBJ_EVENT_GFX_PKMN_DRAPION, 0x3a3 },  // SPECIES_DRAPION
+    { OBJ_EVENT_GFX_PKMN_CROAGUNK, 0x3a4 },  // SPECIES_CROAGUNK
+    { OBJ_EVENT_GFX_PKMN_TOXICROAK, 0x3a5 },  // SPECIES_TOXICROAK
+    { OBJ_EVENT_GFX_PKMN_CARNIVINE, 0x3a6 },  // SPECIES_CARNIVINE
+    { OBJ_EVENT_GFX_PKMN_FINNEON, 0x3a7 },  // SPECIES_FINNEON
+    { OBJ_EVENT_GFX_PKMN_LUMINEON, 0x3a8 },  // SPECIES_LUMINEON
+    { OBJ_EVENT_GFX_PKMN_MANTYKE, 0x3a9 },  // SPECIES_MANTYKE
+    { OBJ_EVENT_GFX_PKMN_SNOVER, 0x3aa },  // SPECIES_SNOVER
+    { OBJ_EVENT_GFX_PKMN_ABOMASNOW, 0x3ab },  // SPECIES_ABOMASNOW
+    { OBJ_EVENT_GFX_PKMN_WEAVILE, 0x3ac },  // SPECIES_WEAVILE
+    { OBJ_EVENT_GFX_PKMN_MAGNEZONE, 0x3ad },  // SPECIES_MAGNEZONE
+    { OBJ_EVENT_GFX_PKMN_LICKILICKY, 0x3ae },  // SPECIES_LICKILICKY
+    { OBJ_EVENT_GFX_PKMN_RHYPERIOR, 0x3af },  // SPECIES_RHYPERIOR
+    { OBJ_EVENT_GFX_PKMN_TANGROWTH, 0x3b0 },  // SPECIES_TANGROWTH
+    { OBJ_EVENT_GFX_PKMN_ELECTIVIRE, 0x3b1 },  // SPECIES_ELECTIVIRE
+    { OBJ_EVENT_GFX_PKMN_MAGMORTAR, 0x3b2 },  // SPECIES_MAGMORTAR
+    { OBJ_EVENT_GFX_PKMN_TOGEKISS, 0x3b3 },  // SPECIES_TOGEKISS
+    { OBJ_EVENT_GFX_PKMN_LEAFEON, 0x3b4 },  // SPECIES_LEAFEON
+    { OBJ_EVENT_GFX_PKMN_GLACEON, 0x3b5 },  // SPECIES_GLACEON
+    { OBJ_EVENT_GFX_PKMN_GLISCOR, 0x3b6 },  // SPECIES_GLISCOR
+    { OBJ_EVENT_GFX_PKMN_MAMOSWINE, 0x3b7 },  // SPECIES_MAMOSWINE
+    { OBJ_EVENT_GFX_PKMN_PORYGON_Z, 0x3b8 },  // SPECIES_PORYGON_Z
+    { OBJ_EVENT_GFX_PKMN_GALLADE, 0x3b9 },  // SPECIES_GALLADE
+    { OBJ_EVENT_GFX_PKMN_PROBOPASS, 0x3ba },  // SPECIES_PROBOPASS
+    { OBJ_EVENT_GFX_PKMN_DUSKNOIR, 0x3bb },  // SPECIES_DUSKNOIR
+    { OBJ_EVENT_GFX_PKMN_FROSLASS, 0x3bc },  // SPECIES_FROSLASS
+    { OBJ_EVENT_GFX_PKMN_ROTOM, 0x3bd },  // SPECIES_ROTOM
+    { OBJ_EVENT_GFX_PKMN_UXIE, 0x3be },  // SPECIES_UXIE
+    { OBJ_EVENT_GFX_PKMN_MESPRIT, 0x3bf },  // SPECIES_MESPRIT
+    { OBJ_EVENT_GFX_PKMN_AZELF, 0x3c0 },  // SPECIES_AZELF
+    { OBJ_EVENT_GFX_PKMN_DIALGA, 0x3c1 },  // SPECIES_DIALGA
+    { OBJ_EVENT_GFX_PKMN_PALKIA, 0x3c2 },  // SPECIES_PALKIA
+    { OBJ_EVENT_GFX_PKMN_HEATRAN, 0x3c3 },  // SPECIES_HEATRAN
+    { OBJ_EVENT_GFX_PKMN_REGIGIGAS, 0x3c4 },  // SPECIES_REGIGIGAS
+    { OBJ_EVENT_GFX_PKMN_GIRATINA, 0x3c5 },  // SPECIES_GIRATINA
+    { OBJ_EVENT_GFX_PKMN_CRESSELIA, 0x3c6 },  // SPECIES_CRESSELIA
+    { OBJ_EVENT_GFX_PKMN_PHIONE, 0x3c7 },  // SPECIES_PHIONE
+    { OBJ_EVENT_GFX_PKMN_MANAPHY, 0x3c8 },  // SPECIES_MANAPHY
+    { OBJ_EVENT_GFX_PKMN_DARKRAI, 0x3c9 },  // SPECIES_DARKRAI
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN, 0x3ca },  // SPECIES_SHAYMIN
+    { OBJ_EVENT_GFX_PKMN_ARCEUS, 0x3cb },  // SPECIES_ARCEUS
+    { OBJ_EVENT_GFX_PKMN_SCREAM_TAIL, 0x3cc },  // SPECIES_SCREAM_TAIL
+    { OBJ_EVENT_GFX_PKMN_BRUTE_BONNET, 0x3cd },  // SPECIES_BRUTE_BONNET
+    { OBJ_EVENT_GFX_PKMN_SLITHER_WING, 0x3ce },  // SPECIES_SLITHER_WING
+    { OBJ_EVENT_GFX_PKMN_SANDY_SHOCKS, 0x3cf },  // SPECIES_SANDY_SHOCKS
+    { OBJ_EVENT_GFX_PKMN_IRON_TREADS, 0x3d0 },  // SPECIES_IRON_TREADS
+    { OBJ_EVENT_GFX_PKMN_IRON_HANDS, 0x3d1 },  // SPECIES_IRON_HANDS
+    { OBJ_EVENT_GFX_PKMN_IRON_JUGULIS, 0x3d2 },  // SPECIES_IRON_JUGULIS
+    { OBJ_EVENT_GFX_PKMN_IRON_MOTH, 0x3d3 },  // SPECIES_IRON_MOTH
+    { OBJ_EVENT_GFX_PKMN_FRIGIBAX, 0x3d4 },  // SPECIES_FRIGIBAX
+    { OBJ_EVENT_GFX_PKMN_ARCTIBAX, 0x3d5 },  // SPECIES_ARCTIBAX
+    { OBJ_EVENT_GFX_PKMN_BAXCALIBUR, 0x3d6 },  // SPECIES_BAXCALIBUR
+    { OBJ_EVENT_GFX_PKMN_WO_CHIEN, 0x3d7 },  // SPECIES_WO_CHIEN
+    { OBJ_EVENT_GFX_PKMN_CHIEN_PAO, 0x3d8 },  // SPECIES_CHIEN_PAO
+    { OBJ_EVENT_GFX_PKMN_TING_LU, 0x3d9 },  // SPECIES_TING_LU
+    { OBJ_EVENT_GFX_PKMN_CHI_YU, 0x3da },  // SPECIES_CHI_YU
+    { OBJ_EVENT_GFX_PKMN_IRON_VALIANT, 0x3db },  // SPECIES_IRON_VALIANT
+    { OBJ_EVENT_GFX_PKMN_KORAIDON, 0x3dc },  // SPECIES_KORAIDON
+    { OBJ_EVENT_GFX_PKMN_MIRAIDON, 0x3dd },  // SPECIES_MIRAIDON
+    { OBJ_EVENT_GFX_PKMN_IRON_LEAVES, 0x3de },  // SPECIES_IRON_LEAVES
+    { OBJ_EVENT_GFX_PKMN_POLTCHAGEIST, 0x3df },  // SPECIES_POLTCHAGEIST
+    { OBJ_EVENT_GFX_PKMN_SINISTCHA, 0x3e0 },  // SPECIES_SINISTCHA
+    { OBJ_EVENT_GFX_PKMN_OKIDOGI, 0x3e1 },  // SPECIES_OKIDOGI
+    { OBJ_EVENT_GFX_PKMN_MUNKIDORI, 0x3e2 },  // SPECIES_MUNKIDORI
+    { OBJ_EVENT_GFX_PKMN_FEZANDIPITI, 0x3e3 },  // SPECIES_FEZANDIPITI
+    { OBJ_EVENT_GFX_PKMN_OGERPON, 0x3e4 },  // SPECIES_OGERPON
+    { OBJ_EVENT_GFX_PKMN_GOUGING_FIRE, 0x3e5 },  // SPECIES_GOUGING_FIRE
+    { OBJ_EVENT_GFX_PKMN_RAGING_BOLT, 0x3e6 },  // SPECIES_RAGING_BOLT
+    { OBJ_EVENT_GFX_PKMN_IRON_BOULDER, 0x3e7 },  // SPECIES_IRON_BOULDER
+    { OBJ_EVENT_GFX_PKMN_IRON_CROWN, 0x3e8 },  // SPECIES_IRON_CROWN
+    { OBJ_EVENT_GFX_PKMN_TERAPAGOS, 0x3e9 },  // SPECIES_TERAPAGOS
     { 0xffff, 0x0 }
 };
 
@@ -964,6 +2071,7 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FB5BC[] = {
     { 0x14, 0x1D1 },
     { 0x15, 0x1D2 },
     { 0x16, 0x1D3 },
+    { 0x17, 0x1D7 },
     { 0xffff, 0x0 }
 };
 
@@ -1574,6 +2682,536 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { 0x111, 0x9, 0xE, Unk_ov5_021FB11C },
     { 0x112, 0x9, 0xD, Unk_ov5_021FB248 },
     { 0x113, 0x9, 0xD, Unk_ov5_021FB248 },
+    { OBJ_EVENT_GFX_PKMN_BULBASAUR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BULBASAUR
+    { OBJ_EVENT_GFX_PKMN_IVYSAUR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IVYSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VENUSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_CHARMANDER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHARMANDER
+    { OBJ_EVENT_GFX_PKMN_CHARMELEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHARMELEON
+    { OBJ_EVENT_GFX_PKMN_CHARIZARD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHARIZARD
+    { OBJ_EVENT_GFX_PKMN_SQUIRTLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SQUIRTLE
+    { OBJ_EVENT_GFX_PKMN_WARTORTLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WARTORTLE
+    { OBJ_EVENT_GFX_PKMN_BLASTOISE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BLASTOISE
+    { OBJ_EVENT_GFX_PKMN_CATERPIE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CATERPIE
+    { OBJ_EVENT_GFX_PKMN_METAPOD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_METAPOD
+    { OBJ_EVENT_GFX_PKMN_BUTTERFREE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BUTTERFREE
+    { OBJ_EVENT_GFX_PKMN_WEEDLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WEEDLE
+    { OBJ_EVENT_GFX_PKMN_KAKUNA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KAKUNA
+    { OBJ_EVENT_GFX_PKMN_BEEDRILL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BEEDRILL
+    { OBJ_EVENT_GFX_PKMN_PIDGEY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PIDGEY
+    { OBJ_EVENT_GFX_PKMN_PIDGEOTTO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PIDGEOTTO
+    { OBJ_EVENT_GFX_PKMN_PIDGEOT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PIDGEOT
+    { OBJ_EVENT_GFX_PKMN_RATTATA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RATTATA
+    { OBJ_EVENT_GFX_PKMN_RATICATE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RATICATE
+    { OBJ_EVENT_GFX_PKMN_SPEAROW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SPEAROW
+    { OBJ_EVENT_GFX_PKMN_FEAROW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FEAROW
+    { OBJ_EVENT_GFX_PKMN_EKANS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_EKANS
+    { OBJ_EVENT_GFX_PKMN_ARBOK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARBOK
+    { OBJ_EVENT_GFX_PKMN_PIKACHU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PIKACHU
+    { OBJ_EVENT_GFX_PKMN_PIKACHU_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_RAICHU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RAICHU
+    { OBJ_EVENT_GFX_PKMN_SANDSHREW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SANDSHREW
+    { OBJ_EVENT_GFX_PKMN_SANDSLASH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SANDSLASH
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NIDORAN_F
+    { OBJ_EVENT_GFX_PKMN_NIDORINA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NIDORINA
+    { OBJ_EVENT_GFX_PKMN_NIDOQUEEN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NIDOQUEEN
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_M, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NIDORAN_M
+    { OBJ_EVENT_GFX_PKMN_NIDORINO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NIDORINO
+    { OBJ_EVENT_GFX_PKMN_NIDOKING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NIDOKING
+    { OBJ_EVENT_GFX_PKMN_CLEFAIRY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CLEFAIRY
+    { OBJ_EVENT_GFX_PKMN_CLEFABLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CLEFABLE
+    { OBJ_EVENT_GFX_PKMN_VULPIX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VULPIX
+    { OBJ_EVENT_GFX_PKMN_NINETALES, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NINETALES
+    { OBJ_EVENT_GFX_PKMN_JIGGLYPUFF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_JIGGLYPUFF
+    { OBJ_EVENT_GFX_PKMN_WIGGLYTUFF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WIGGLYTUFF
+    { OBJ_EVENT_GFX_PKMN_ZUBAT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ZUBAT
+    { OBJ_EVENT_GFX_PKMN_GOLBAT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GOLBAT
+    { OBJ_EVENT_GFX_PKMN_ODDISH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ODDISH
+    { OBJ_EVENT_GFX_PKMN_GLOOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GLOOM
+    { OBJ_EVENT_GFX_PKMN_VILEPLUME, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VILEPLUME
+    { OBJ_EVENT_GFX_PKMN_PARAS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PARAS
+    { OBJ_EVENT_GFX_PKMN_PARASECT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PARASECT
+    { OBJ_EVENT_GFX_PKMN_VENONAT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VENONAT
+    { OBJ_EVENT_GFX_PKMN_VENOMOTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VENOMOTH
+    { OBJ_EVENT_GFX_PKMN_DIGLETT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DIGLETT
+    { OBJ_EVENT_GFX_PKMN_DUGTRIO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DUGTRIO
+    { OBJ_EVENT_GFX_PKMN_MEOWTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MEOWTH
+    { OBJ_EVENT_GFX_PKMN_PERSIAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PERSIAN
+    { OBJ_EVENT_GFX_PKMN_PSYDUCK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PSYDUCK
+    { OBJ_EVENT_GFX_PKMN_GOLDUCK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GOLDUCK
+    { OBJ_EVENT_GFX_PKMN_MANKEY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MANKEY
+    { OBJ_EVENT_GFX_PKMN_PRIMEAPE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PRIMEAPE
+    { OBJ_EVENT_GFX_PKMN_GROWLITHE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GROWLITHE
+    { OBJ_EVENT_GFX_PKMN_ARCANINE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARCANINE
+    { OBJ_EVENT_GFX_PKMN_POLIWAG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_POLIWAG
+    { OBJ_EVENT_GFX_PKMN_POLIWHIRL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_POLIWHIRL
+    { OBJ_EVENT_GFX_PKMN_POLIWRATH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_POLIWRATH
+    { OBJ_EVENT_GFX_PKMN_ABRA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ABRA
+    { OBJ_EVENT_GFX_PKMN_KADABRA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KADABRA
+    { OBJ_EVENT_GFX_PKMN_ALAKAZAM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ALAKAZAM
+    { OBJ_EVENT_GFX_PKMN_MACHOP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MACHOP
+    { OBJ_EVENT_GFX_PKMN_MACHOKE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MACHOKE
+    { OBJ_EVENT_GFX_PKMN_MACHAMP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MACHAMP
+    { OBJ_EVENT_GFX_PKMN_BELLSPROUT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BELLSPROUT
+    { OBJ_EVENT_GFX_PKMN_WEEPINBELL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WEEPINBELL
+    { OBJ_EVENT_GFX_PKMN_VICTREEBEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VICTREEBEL
+    { OBJ_EVENT_GFX_PKMN_TENTACOOL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TENTACOOL
+    { OBJ_EVENT_GFX_PKMN_TENTACRUEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TENTACRUEL
+    { OBJ_EVENT_GFX_PKMN_GEODUDE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GEODUDE
+    { OBJ_EVENT_GFX_PKMN_GRAVELER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GRAVELER
+    { OBJ_EVENT_GFX_PKMN_GOLEM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GOLEM
+    { OBJ_EVENT_GFX_PKMN_PONYTA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PONYTA
+    { OBJ_EVENT_GFX_PKMN_RAPIDASH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RAPIDASH
+    { OBJ_EVENT_GFX_PKMN_SLOWPOKE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLOWPOKE
+    { OBJ_EVENT_GFX_PKMN_SLOWBRO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLOWBRO
+    { OBJ_EVENT_GFX_PKMN_MAGNEMITE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGNEMITE
+    { OBJ_EVENT_GFX_PKMN_MAGNETON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGNETON
+    { OBJ_EVENT_GFX_PKMN_FARFETCHD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FARFETCHD
+    { OBJ_EVENT_GFX_PKMN_DODUO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DODUO
+    { OBJ_EVENT_GFX_PKMN_DODRIO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DODRIO
+    { OBJ_EVENT_GFX_PKMN_SEEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SEEL
+    { OBJ_EVENT_GFX_PKMN_DEWGONG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DEWGONG
+    { OBJ_EVENT_GFX_PKMN_GRIMER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GRIMER
+    { OBJ_EVENT_GFX_PKMN_MUK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MUK
+    { OBJ_EVENT_GFX_PKMN_SHELLDER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHELLDER
+    { OBJ_EVENT_GFX_PKMN_CLOYSTER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CLOYSTER
+    { OBJ_EVENT_GFX_PKMN_GASTLY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GASTLY
+    { OBJ_EVENT_GFX_PKMN_HAUNTER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HAUNTER
+    { OBJ_EVENT_GFX_PKMN_GENGAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GENGAR
+    { OBJ_EVENT_GFX_PKMN_ONIX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ONIX
+    { OBJ_EVENT_GFX_PKMN_DROWZEE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DROWZEE
+    { OBJ_EVENT_GFX_PKMN_HYPNO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HYPNO
+    { OBJ_EVENT_GFX_PKMN_KRABBY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KRABBY
+    { OBJ_EVENT_GFX_PKMN_KINGLER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KINGLER
+    { OBJ_EVENT_GFX_PKMN_VOLTORB, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VOLTORB
+    { OBJ_EVENT_GFX_PKMN_ELECTRODE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ELECTRODE
+    { OBJ_EVENT_GFX_PKMN_EXEGGCUTE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_EXEGGCUTE
+    { OBJ_EVENT_GFX_PKMN_EXEGGUTOR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_EXEGGUTOR
+    { OBJ_EVENT_GFX_PKMN_CUBONE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CUBONE
+    { OBJ_EVENT_GFX_PKMN_MAROWAK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAROWAK
+    { OBJ_EVENT_GFX_PKMN_HITMONLEE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HITMONLEE
+    { OBJ_EVENT_GFX_PKMN_HITMONCHAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HITMONCHAN
+    { OBJ_EVENT_GFX_PKMN_LICKITUNG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LICKITUNG
+    { OBJ_EVENT_GFX_PKMN_KOFFING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KOFFING
+    { OBJ_EVENT_GFX_PKMN_WEEZING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WEEZING
+    { OBJ_EVENT_GFX_PKMN_RHYHORN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RHYHORN
+    { OBJ_EVENT_GFX_PKMN_RHYDON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RHYDON
+    { OBJ_EVENT_GFX_PKMN_CHANSEY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHANSEY
+    { OBJ_EVENT_GFX_PKMN_TANGELA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TANGELA
+    { OBJ_EVENT_GFX_PKMN_KANGASKHAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KANGASKHAN
+    { OBJ_EVENT_GFX_PKMN_HORSEA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HORSEA
+    { OBJ_EVENT_GFX_PKMN_SEADRA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SEADRA
+    { OBJ_EVENT_GFX_PKMN_GOLDEEN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GOLDEEN
+    { OBJ_EVENT_GFX_PKMN_SEAKING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SEAKING
+    { OBJ_EVENT_GFX_PKMN_STARYU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STARYU
+    { OBJ_EVENT_GFX_PKMN_STARMIE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STARMIE
+    { OBJ_EVENT_GFX_PKMN_MR_MIME, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MR_MIME
+    { OBJ_EVENT_GFX_PKMN_SCYTHER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SCYTHER
+    { OBJ_EVENT_GFX_PKMN_JYNX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_JYNX
+    { OBJ_EVENT_GFX_PKMN_ELECTABUZZ, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ELECTABUZZ
+    { OBJ_EVENT_GFX_PKMN_MAGMAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGMAR
+    { OBJ_EVENT_GFX_PKMN_PINSIR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PINSIR
+    { OBJ_EVENT_GFX_PKMN_TAUROS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TAUROS
+    { OBJ_EVENT_GFX_PKMN_MAGIKARP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGIKARP
+    { OBJ_EVENT_GFX_PKMN_GYARADOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GYARADOS
+    { OBJ_EVENT_GFX_PKMN_LAPRAS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LAPRAS
+    { OBJ_EVENT_GFX_PKMN_DITTO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DITTO
+    { OBJ_EVENT_GFX_PKMN_EEVEE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_EEVEE
+    { OBJ_EVENT_GFX_PKMN_VAPOREON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VAPOREON
+    { OBJ_EVENT_GFX_PKMN_JOLTEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_JOLTEON
+    { OBJ_EVENT_GFX_PKMN_FLAREON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FLAREON
+    { OBJ_EVENT_GFX_PKMN_PORYGON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PORYGON
+    { OBJ_EVENT_GFX_PKMN_OMANYTE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_OMANYTE
+    { OBJ_EVENT_GFX_PKMN_OMASTAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_OMASTAR
+    { OBJ_EVENT_GFX_PKMN_KABUTO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KABUTO
+    { OBJ_EVENT_GFX_PKMN_KABUTOPS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KABUTOPS
+    { OBJ_EVENT_GFX_PKMN_AERODACTYL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AERODACTYL
+    { OBJ_EVENT_GFX_PKMN_SNORLAX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SNORLAX
+    { OBJ_EVENT_GFX_PKMN_ARTICUNO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARTICUNO
+    { OBJ_EVENT_GFX_PKMN_ZAPDOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ZAPDOS
+    { OBJ_EVENT_GFX_PKMN_MOLTRES, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MOLTRES
+    { OBJ_EVENT_GFX_PKMN_DRATINI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DRATINI
+    { OBJ_EVENT_GFX_PKMN_DRAGONAIR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DRAGONAIR
+    { OBJ_EVENT_GFX_PKMN_DRAGONITE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DRAGONITE
+    { OBJ_EVENT_GFX_PKMN_MEWTWO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MEWTWO
+    { OBJ_EVENT_GFX_PKMN_MEW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MEW
+    { OBJ_EVENT_GFX_PKMN_CHIKORITA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHIKORITA
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BAYLEEF
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_CYNDAQUIL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CYNDAQUIL
+    { OBJ_EVENT_GFX_PKMN_QUILAVA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_QUILAVA
+    { OBJ_EVENT_GFX_PKMN_TYPHLOSION, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TYPHLOSION
+    { OBJ_EVENT_GFX_PKMN_TOTODILE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TOTODILE
+    { OBJ_EVENT_GFX_PKMN_CROCONAW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CROCONAW
+    { OBJ_EVENT_GFX_PKMN_FERALIGATR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FERALIGATR
+    { OBJ_EVENT_GFX_PKMN_SENTRET, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SENTRET
+    { OBJ_EVENT_GFX_PKMN_FURRET, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FURRET
+    { OBJ_EVENT_GFX_PKMN_HOOTHOOT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HOOTHOOT
+    { OBJ_EVENT_GFX_PKMN_NOCTOWL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NOCTOWL
+    { OBJ_EVENT_GFX_PKMN_LEDYBA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LEDYBA
+    { OBJ_EVENT_GFX_PKMN_LEDIAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LEDIAN
+    { OBJ_EVENT_GFX_PKMN_SPINARAK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SPINARAK
+    { OBJ_EVENT_GFX_PKMN_ARIADOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARIADOS
+    { OBJ_EVENT_GFX_PKMN_CROBAT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CROBAT
+    { OBJ_EVENT_GFX_PKMN_CHINCHOU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHINCHOU
+    { OBJ_EVENT_GFX_PKMN_LANTURN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LANTURN
+    { OBJ_EVENT_GFX_PKMN_PICHU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PICHU
+    { OBJ_EVENT_GFX_PKMN_CLEFFA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CLEFFA
+    { OBJ_EVENT_GFX_PKMN_IGGLYBUFF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IGGLYBUFF
+    { OBJ_EVENT_GFX_PKMN_TOGEPI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TOGEPI
+    { OBJ_EVENT_GFX_PKMN_TOGETIC, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TOGETIC
+    { OBJ_EVENT_GFX_PKMN_NATU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NATU
+    { OBJ_EVENT_GFX_PKMN_XATU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_XATU
+    { OBJ_EVENT_GFX_PKMN_MAREEP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAREEP
+    { OBJ_EVENT_GFX_PKMN_FLAAFFY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FLAAFFY
+    { OBJ_EVENT_GFX_PKMN_AMPHAROS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AMPHAROS
+    { OBJ_EVENT_GFX_PKMN_BELLOSSOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BELLOSSOM
+    { OBJ_EVENT_GFX_PKMN_MARILL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MARILL
+    { OBJ_EVENT_GFX_PKMN_AZUMARILL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AZUMARILL
+    { OBJ_EVENT_GFX_PKMN_SUDOWOODO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SUDOWOODO
+    { OBJ_EVENT_GFX_PKMN_POLITOED, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_POLITOED
+    { OBJ_EVENT_GFX_PKMN_HOPPIP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HOPPIP
+    { OBJ_EVENT_GFX_PKMN_SKIPLOOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SKIPLOOM
+    { OBJ_EVENT_GFX_PKMN_JUMPLUFF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_JUMPLUFF
+    { OBJ_EVENT_GFX_PKMN_AIPOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AIPOM
+    { OBJ_EVENT_GFX_PKMN_SUNKERN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SUNKERN
+    { OBJ_EVENT_GFX_PKMN_SUNFLORA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SUNFLORA
+    { OBJ_EVENT_GFX_PKMN_YANMA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_YANMA
+    { OBJ_EVENT_GFX_PKMN_WOOPER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WOOPER
+    { OBJ_EVENT_GFX_PKMN_QUAGSIRE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_QUAGSIRE
+    { OBJ_EVENT_GFX_PKMN_ESPEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ESPEON
+    { OBJ_EVENT_GFX_PKMN_UMBREON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_UMBREON
+    { OBJ_EVENT_GFX_PKMN_MURKROW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MURKROW
+    { OBJ_EVENT_GFX_PKMN_SLOWKING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLOWKING
+    { OBJ_EVENT_GFX_PKMN_MISDREAVUS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MISDREAVUS
+    { OBJ_EVENT_GFX_PKMN_UNOWN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_UNOWN
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WOBBUFFET
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_GIRAFARIG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GIRAFARIG
+    { OBJ_EVENT_GFX_PKMN_PINECO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PINECO
+    { OBJ_EVENT_GFX_PKMN_FORRETRESS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FORRETRESS
+    { OBJ_EVENT_GFX_PKMN_DUNSPARCE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DUNSPARCE
+    { OBJ_EVENT_GFX_PKMN_GLIGAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GLIGAR
+    { OBJ_EVENT_GFX_PKMN_STEELIX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STEELIX
+    { OBJ_EVENT_GFX_PKMN_STEELIX_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_SNUBBULL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SNUBBULL
+    { OBJ_EVENT_GFX_PKMN_GRANBULL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GRANBULL
+    { OBJ_EVENT_GFX_PKMN_QWILFISH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_QWILFISH
+    { OBJ_EVENT_GFX_PKMN_SCIZOR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SCIZOR
+    { OBJ_EVENT_GFX_PKMN_SHUCKLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHUCKLE
+    { OBJ_EVENT_GFX_PKMN_HERACROSS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HERACROSS
+    { OBJ_EVENT_GFX_PKMN_HERACROSS_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_SNEASEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SNEASEL
+    { OBJ_EVENT_GFX_PKMN_TEDDIURSA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TEDDIURSA
+    { OBJ_EVENT_GFX_PKMN_URSARING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_URSARING
+    { OBJ_EVENT_GFX_PKMN_SLUGMA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLUGMA
+    { OBJ_EVENT_GFX_PKMN_MAGCARGO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGCARGO
+    { OBJ_EVENT_GFX_PKMN_SWINUB, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SWINUB
+    { OBJ_EVENT_GFX_PKMN_PILOSWINE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PILOSWINE
+    { OBJ_EVENT_GFX_PKMN_CORSOLA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CORSOLA
+    { OBJ_EVENT_GFX_PKMN_REMORAID, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_REMORAID
+    { OBJ_EVENT_GFX_PKMN_OCTILLERY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_OCTILLERY
+    { OBJ_EVENT_GFX_PKMN_DELIBIRD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DELIBIRD
+    { OBJ_EVENT_GFX_PKMN_MANTINE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MANTINE
+    { OBJ_EVENT_GFX_PKMN_SKARMORY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SKARMORY
+    { OBJ_EVENT_GFX_PKMN_HOUNDOUR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HOUNDOUR
+    { OBJ_EVENT_GFX_PKMN_HOUNDOOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HOUNDOOM
+    { OBJ_EVENT_GFX_PKMN_KINGDRA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KINGDRA
+    { OBJ_EVENT_GFX_PKMN_PHANPY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PHANPY
+    { OBJ_EVENT_GFX_PKMN_DONPHAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DONPHAN
+    { OBJ_EVENT_GFX_PKMN_PORYGON2, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PORYGON2
+    { OBJ_EVENT_GFX_PKMN_STANTLER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STANTLER
+    { OBJ_EVENT_GFX_PKMN_SMEARGLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SMEARGLE
+    { OBJ_EVENT_GFX_PKMN_TYROGUE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TYROGUE
+    { OBJ_EVENT_GFX_PKMN_HITMONTOP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HITMONTOP
+    { OBJ_EVENT_GFX_PKMN_SMOOCHUM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SMOOCHUM
+    { OBJ_EVENT_GFX_PKMN_ELEKID, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ELEKID
+    { OBJ_EVENT_GFX_PKMN_MAGBY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGBY
+    { OBJ_EVENT_GFX_PKMN_MILTANK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MILTANK
+    { OBJ_EVENT_GFX_PKMN_BLISSEY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BLISSEY
+    { OBJ_EVENT_GFX_PKMN_RAIKOU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RAIKOU
+    { OBJ_EVENT_GFX_PKMN_ENTEI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ENTEI
+    { OBJ_EVENT_GFX_PKMN_SUICUNE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SUICUNE
+    { OBJ_EVENT_GFX_PKMN_LARVITAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LARVITAR
+    { OBJ_EVENT_GFX_PKMN_PUPITAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PUPITAR
+    { OBJ_EVENT_GFX_PKMN_TYRANITAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TYRANITAR
+    { OBJ_EVENT_GFX_PKMN_LUGIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUGIA
+    { OBJ_EVENT_GFX_PKMN_HO_OH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HO_OH
+    { OBJ_EVENT_GFX_PKMN_CELEBI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CELEBI
+    { OBJ_EVENT_GFX_PKMN_TREECKO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TREECKO
+    { OBJ_EVENT_GFX_PKMN_GROVYLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GROVYLE
+    { OBJ_EVENT_GFX_PKMN_SCEPTILE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SCEPTILE
+    { OBJ_EVENT_GFX_PKMN_TORCHIC, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TORCHIC
+    { OBJ_EVENT_GFX_PKMN_COMBUSKEN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_COMBUSKEN
+    { OBJ_EVENT_GFX_PKMN_BLAZIKEN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BLAZIKEN
+    { OBJ_EVENT_GFX_PKMN_MUDKIP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MUDKIP
+    { OBJ_EVENT_GFX_PKMN_MARSHTOMP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MARSHTOMP
+    { OBJ_EVENT_GFX_PKMN_SWAMPERT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SWAMPERT
+    { OBJ_EVENT_GFX_PKMN_POOCHYENA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_POOCHYENA
+    { OBJ_EVENT_GFX_PKMN_MIGHTYENA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MIGHTYENA
+    { OBJ_EVENT_GFX_PKMN_ZIGZAGOON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ZIGZAGOON
+    { OBJ_EVENT_GFX_PKMN_LINOONE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LINOONE
+    { OBJ_EVENT_GFX_PKMN_WURMPLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WURMPLE
+    { OBJ_EVENT_GFX_PKMN_SILCOON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SILCOON
+    { OBJ_EVENT_GFX_PKMN_BEAUTIFLY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BEAUTIFLY
+    { OBJ_EVENT_GFX_PKMN_CASCOON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CASCOON
+    { OBJ_EVENT_GFX_PKMN_DUSTOX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DUSTOX
+    { OBJ_EVENT_GFX_PKMN_LOTAD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LOTAD
+    { OBJ_EVENT_GFX_PKMN_LOMBRE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LOMBRE
+    { OBJ_EVENT_GFX_PKMN_LUDICOLO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUDICOLO
+    { OBJ_EVENT_GFX_PKMN_SEEDOT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SEEDOT
+    { OBJ_EVENT_GFX_PKMN_NUZLEAF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NUZLEAF
+    { OBJ_EVENT_GFX_PKMN_SHIFTRY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHIFTRY
+    { OBJ_EVENT_GFX_PKMN_TAILLOW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TAILLOW
+    { OBJ_EVENT_GFX_PKMN_SWELLOW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SWELLOW
+    { OBJ_EVENT_GFX_PKMN_WINGULL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WINGULL
+    { OBJ_EVENT_GFX_PKMN_PELIPPER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PELIPPER
+    { OBJ_EVENT_GFX_PKMN_RALTS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RALTS
+    { OBJ_EVENT_GFX_PKMN_KIRLIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KIRLIA
+    { OBJ_EVENT_GFX_PKMN_GARDEVOIR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GARDEVOIR
+    { OBJ_EVENT_GFX_PKMN_SURSKIT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SURSKIT
+    { OBJ_EVENT_GFX_PKMN_MASQUERAIN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MASQUERAIN
+    { OBJ_EVENT_GFX_PKMN_SHROOMISH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHROOMISH
+    { OBJ_EVENT_GFX_PKMN_BRELOOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BRELOOM
+    { OBJ_EVENT_GFX_PKMN_SLAKOTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLAKOTH
+    { OBJ_EVENT_GFX_PKMN_VIGOROTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VIGOROTH
+    { OBJ_EVENT_GFX_PKMN_SLAKING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLAKING
+    { OBJ_EVENT_GFX_PKMN_NINCADA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NINCADA
+    { OBJ_EVENT_GFX_PKMN_NINJASK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NINJASK
+    { OBJ_EVENT_GFX_PKMN_SHEDINJA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHEDINJA
+    { OBJ_EVENT_GFX_PKMN_WHISMUR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WHISMUR
+    { OBJ_EVENT_GFX_PKMN_LOUDRED, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LOUDRED
+    { OBJ_EVENT_GFX_PKMN_EXPLOUD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_EXPLOUD
+    { OBJ_EVENT_GFX_PKMN_MAKUHITA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAKUHITA
+    { OBJ_EVENT_GFX_PKMN_HARIYAMA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HARIYAMA
+    { OBJ_EVENT_GFX_PKMN_AZURILL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AZURILL
+    { OBJ_EVENT_GFX_PKMN_NOSEPASS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NOSEPASS
+    { OBJ_EVENT_GFX_PKMN_SKITTY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SKITTY
+    { OBJ_EVENT_GFX_PKMN_DELCATTY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DELCATTY
+    { OBJ_EVENT_GFX_PKMN_SABLEYE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SABLEYE
+    { OBJ_EVENT_GFX_PKMN_MAWILE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAWILE
+    { OBJ_EVENT_GFX_PKMN_ARON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARON
+    { OBJ_EVENT_GFX_PKMN_LAIRON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LAIRON
+    { OBJ_EVENT_GFX_PKMN_AGGRON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AGGRON
+    { OBJ_EVENT_GFX_PKMN_MEDITITE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MEDITITE
+    { OBJ_EVENT_GFX_PKMN_MEDICHAM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MEDICHAM
+    { OBJ_EVENT_GFX_PKMN_ELECTRIKE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ELECTRIKE
+    { OBJ_EVENT_GFX_PKMN_MANECTRIC, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MANECTRIC
+    { OBJ_EVENT_GFX_PKMN_PLUSLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PLUSLE
+    { OBJ_EVENT_GFX_PKMN_MINUN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MINUN
+    { OBJ_EVENT_GFX_PKMN_VOLBEAT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VOLBEAT
+    { OBJ_EVENT_GFX_PKMN_ILLUMISE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ILLUMISE
+    { OBJ_EVENT_GFX_PKMN_ROSELIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROSELIA
+    { OBJ_EVENT_GFX_PKMN_GULPIN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GULPIN
+    { OBJ_EVENT_GFX_PKMN_SWALOT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SWALOT
+    { OBJ_EVENT_GFX_PKMN_CARVANHA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CARVANHA
+    { OBJ_EVENT_GFX_PKMN_SHARPEDO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHARPEDO
+    { OBJ_EVENT_GFX_PKMN_WAILMER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WAILMER
+    { OBJ_EVENT_GFX_PKMN_WAILORD, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WAILORD
+    { OBJ_EVENT_GFX_PKMN_NUMEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_NUMEL
+    { OBJ_EVENT_GFX_PKMN_CAMERUPT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CAMERUPT
+    { OBJ_EVENT_GFX_PKMN_TORKOAL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TORKOAL
+    { OBJ_EVENT_GFX_PKMN_SPOINK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SPOINK
+    { OBJ_EVENT_GFX_PKMN_GRUMPIG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GRUMPIG
+    { OBJ_EVENT_GFX_PKMN_SPINDA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SPINDA
+    { OBJ_EVENT_GFX_PKMN_TRAPINCH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TRAPINCH
+    { OBJ_EVENT_GFX_PKMN_VIBRAVA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VIBRAVA
+    { OBJ_EVENT_GFX_PKMN_FLYGON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FLYGON
+    { OBJ_EVENT_GFX_PKMN_CACNEA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CACNEA
+    { OBJ_EVENT_GFX_PKMN_CACTURNE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CACTURNE
+    { OBJ_EVENT_GFX_PKMN_SWABLU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SWABLU
+    { OBJ_EVENT_GFX_PKMN_ALTARIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ALTARIA
+    { OBJ_EVENT_GFX_PKMN_ZANGOOSE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ZANGOOSE
+    { OBJ_EVENT_GFX_PKMN_SEVIPER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SEVIPER
+    { OBJ_EVENT_GFX_PKMN_LUNATONE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUNATONE
+    { OBJ_EVENT_GFX_PKMN_SOLROCK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SOLROCK
+    { OBJ_EVENT_GFX_PKMN_BARBOACH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BARBOACH
+    { OBJ_EVENT_GFX_PKMN_WHISCASH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WHISCASH
+    { OBJ_EVENT_GFX_PKMN_CORPHISH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CORPHISH
+    { OBJ_EVENT_GFX_PKMN_CRAWDAUNT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CRAWDAUNT
+    { OBJ_EVENT_GFX_PKMN_BALTOY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BALTOY
+    { OBJ_EVENT_GFX_PKMN_CLAYDOL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CLAYDOL
+    { OBJ_EVENT_GFX_PKMN_LILEEP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LILEEP
+    { OBJ_EVENT_GFX_PKMN_CRADILY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CRADILY
+    { OBJ_EVENT_GFX_PKMN_ANORITH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ANORITH
+    { OBJ_EVENT_GFX_PKMN_ARMALDO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARMALDO
+    { OBJ_EVENT_GFX_PKMN_FEEBAS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FEEBAS
+    { OBJ_EVENT_GFX_PKMN_MILOTIC, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MILOTIC
+    { OBJ_EVENT_GFX_PKMN_CASTFORM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CASTFORM
+    { OBJ_EVENT_GFX_PKMN_KECLEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KECLEON
+    { OBJ_EVENT_GFX_PKMN_SHUPPET, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHUPPET
+    { OBJ_EVENT_GFX_PKMN_BANETTE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BANETTE
+    { OBJ_EVENT_GFX_PKMN_DUSKULL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DUSKULL
+    { OBJ_EVENT_GFX_PKMN_DUSCLOPS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DUSCLOPS
+    { OBJ_EVENT_GFX_PKMN_TROPIUS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TROPIUS
+    { OBJ_EVENT_GFX_PKMN_CHIMECHO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHIMECHO
+    { OBJ_EVENT_GFX_PKMN_ABSOL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ABSOL
+    { OBJ_EVENT_GFX_PKMN_WYNAUT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WYNAUT
+    { OBJ_EVENT_GFX_PKMN_SNORUNT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SNORUNT
+    { OBJ_EVENT_GFX_PKMN_GLALIE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GLALIE
+    { OBJ_EVENT_GFX_PKMN_SPHEAL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SPHEAL
+    { OBJ_EVENT_GFX_PKMN_SEALEO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SEALEO
+    { OBJ_EVENT_GFX_PKMN_WALREIN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WALREIN
+    { OBJ_EVENT_GFX_PKMN_CLAMPERL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CLAMPERL
+    { OBJ_EVENT_GFX_PKMN_HUNTAIL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HUNTAIL
+    { OBJ_EVENT_GFX_PKMN_GOREBYSS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GOREBYSS
+    { OBJ_EVENT_GFX_PKMN_RELICANTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RELICANTH
+    { OBJ_EVENT_GFX_PKMN_LUVDISC, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUVDISC
+    { OBJ_EVENT_GFX_PKMN_BAGON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BAGON
+    { OBJ_EVENT_GFX_PKMN_SHELGON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHELGON
+    { OBJ_EVENT_GFX_PKMN_SALAMENCE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SALAMENCE
+    { OBJ_EVENT_GFX_PKMN_BELDUM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BELDUM
+    { OBJ_EVENT_GFX_PKMN_METANG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_METANG
+    { OBJ_EVENT_GFX_PKMN_METAGROSS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_METAGROSS
+    { OBJ_EVENT_GFX_PKMN_REGIROCK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_REGIROCK
+    { OBJ_EVENT_GFX_PKMN_REGICE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_REGICE
+    { OBJ_EVENT_GFX_PKMN_REGISTEEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_REGISTEEL
+    { OBJ_EVENT_GFX_PKMN_LATIAS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LATIAS
+    { OBJ_EVENT_GFX_PKMN_LATIOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LATIOS
+    { OBJ_EVENT_GFX_PKMN_KYOGRE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KYOGRE
+    { OBJ_EVENT_GFX_PKMN_GROUDON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GROUDON
+    { OBJ_EVENT_GFX_PKMN_RAYQUAZA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RAYQUAZA
+    { OBJ_EVENT_GFX_PKMN_JIRACHI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_JIRACHI
+    { OBJ_EVENT_GFX_PKMN_DEOXYS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DEOXYS
+    { OBJ_EVENT_GFX_PKMN_TURTWIG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TURTWIG
+    { OBJ_EVENT_GFX_PKMN_GROTLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GROTLE
+    { OBJ_EVENT_GFX_PKMN_TORTERRA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TORTERRA
+    { OBJ_EVENT_GFX_PKMN_CHIMCHAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHIMCHAR
+    { OBJ_EVENT_GFX_PKMN_MONFERNO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MONFERNO
+    { OBJ_EVENT_GFX_PKMN_INFERNAPE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_INFERNAPE
+    { OBJ_EVENT_GFX_PKMN_PIPLUP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PIPLUP
+    { OBJ_EVENT_GFX_PKMN_PRINPLUP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PRINPLUP
+    { OBJ_EVENT_GFX_PKMN_EMPOLEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_EMPOLEON
+    { OBJ_EVENT_GFX_PKMN_STARLY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STARLY
+    { OBJ_EVENT_GFX_PKMN_STARAVIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STARAVIA
+    { OBJ_EVENT_GFX_PKMN_STARAPTOR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STARAPTOR
+    { OBJ_EVENT_GFX_PKMN_BIDOOF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BIDOOF
+    { OBJ_EVENT_GFX_PKMN_BIBAREL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BIBAREL
+    { OBJ_EVENT_GFX_PKMN_KRICKETOT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KRICKETOT
+    { OBJ_EVENT_GFX_PKMN_KRICKETUNE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KRICKETUNE
+    { OBJ_EVENT_GFX_PKMN_SHINX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHINX
+    { OBJ_EVENT_GFX_PKMN_LUXIO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUXIO
+    { OBJ_EVENT_GFX_PKMN_LUXRAY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUXRAY
+    { OBJ_EVENT_GFX_PKMN_BUDEW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BUDEW
+    { OBJ_EVENT_GFX_PKMN_ROSERADE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROSERADE
+    { OBJ_EVENT_GFX_PKMN_CRANIDOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CRANIDOS
+    { OBJ_EVENT_GFX_PKMN_RAMPARDOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RAMPARDOS
+    { OBJ_EVENT_GFX_PKMN_SHIELDON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHIELDON
+    { OBJ_EVENT_GFX_PKMN_BASTIODON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BASTIODON
+    { OBJ_EVENT_GFX_PKMN_BURMY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BURMY
+    { OBJ_EVENT_GFX_PKMN_WORMADAM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WORMADAM
+    { OBJ_EVENT_GFX_PKMN_MOTHIM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MOTHIM
+    { OBJ_EVENT_GFX_PKMN_COMBEE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_COMBEE
+    { OBJ_EVENT_GFX_PKMN_COMBEE_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_VESPIQUEN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_VESPIQUEN
+    { OBJ_EVENT_GFX_PKMN_PACHIRISU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PACHIRISU
+    { OBJ_EVENT_GFX_PKMN_BUIZEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BUIZEL
+    { OBJ_EVENT_GFX_PKMN_FLOATZEL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FLOATZEL
+    { OBJ_EVENT_GFX_PKMN_CHERUBI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHERUBI
+    { OBJ_EVENT_GFX_PKMN_CHERRIM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHERRIM
+    { OBJ_EVENT_GFX_PKMN_SHELLOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHELLOS
+    { OBJ_EVENT_GFX_PKMN_GASTRODON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GASTRODON
+    { OBJ_EVENT_GFX_PKMN_AMBIPOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AMBIPOM
+    { OBJ_EVENT_GFX_PKMN_DRIFLOON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DRIFLOON
+    { OBJ_EVENT_GFX_PKMN_DRIFBLIM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DRIFBLIM
+    { OBJ_EVENT_GFX_PKMN_BUNEARY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BUNEARY
+    { OBJ_EVENT_GFX_PKMN_LOPUNNY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LOPUNNY
+    { OBJ_EVENT_GFX_PKMN_MISMAGIUS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MISMAGIUS
+    { OBJ_EVENT_GFX_PKMN_HONCHKROW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HONCHKROW
+    { OBJ_EVENT_GFX_PKMN_GLAMEOW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GLAMEOW
+    { OBJ_EVENT_GFX_PKMN_PURUGLY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PURUGLY
+    { OBJ_EVENT_GFX_PKMN_CHINGLING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHINGLING
+    { OBJ_EVENT_GFX_PKMN_STUNKY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_STUNKY
+    { OBJ_EVENT_GFX_PKMN_SKUNTANK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SKUNTANK
+    { OBJ_EVENT_GFX_PKMN_BRONZOR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BRONZOR
+    { OBJ_EVENT_GFX_PKMN_BRONZONG, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BRONZONG
+    { OBJ_EVENT_GFX_PKMN_BONSLY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BONSLY
+    { OBJ_EVENT_GFX_PKMN_MIMEJR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MIMEJR
+    { OBJ_EVENT_GFX_PKMN_HAPPINY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HAPPINY
+    { OBJ_EVENT_GFX_PKMN_CHATOT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHATOT
+    { OBJ_EVENT_GFX_PKMN_SPIRITOMB, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SPIRITOMB
+    { OBJ_EVENT_GFX_PKMN_GIBLE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GIBLE
+    { OBJ_EVENT_GFX_PKMN_GABITE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GABITE
+    { OBJ_EVENT_GFX_PKMN_GARCHOMP, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GARCHOMP
+    { OBJ_EVENT_GFX_PKMN_MUNCHLAX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MUNCHLAX
+    { OBJ_EVENT_GFX_PKMN_RIOLU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RIOLU
+    { OBJ_EVENT_GFX_PKMN_LUCARIO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUCARIO
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HIPPOPOTAS
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HIPPOWDON
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON_F, 0x0, 0x17, Unk_ov5_021FB2C0 },  // female
+    { OBJ_EVENT_GFX_PKMN_SKORUPI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SKORUPI
+    { OBJ_EVENT_GFX_PKMN_DRAPION, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DRAPION
+    { OBJ_EVENT_GFX_PKMN_CROAGUNK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CROAGUNK
+    { OBJ_EVENT_GFX_PKMN_TOXICROAK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TOXICROAK
+    { OBJ_EVENT_GFX_PKMN_CARNIVINE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CARNIVINE
+    { OBJ_EVENT_GFX_PKMN_FINNEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FINNEON
+    { OBJ_EVENT_GFX_PKMN_LUMINEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LUMINEON
+    { OBJ_EVENT_GFX_PKMN_MANTYKE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MANTYKE
+    { OBJ_EVENT_GFX_PKMN_SNOVER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SNOVER
+    { OBJ_EVENT_GFX_PKMN_ABOMASNOW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ABOMASNOW
+    { OBJ_EVENT_GFX_PKMN_WEAVILE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WEAVILE
+    { OBJ_EVENT_GFX_PKMN_MAGNEZONE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGNEZONE
+    { OBJ_EVENT_GFX_PKMN_LICKILICKY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LICKILICKY
+    { OBJ_EVENT_GFX_PKMN_RHYPERIOR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RHYPERIOR
+    { OBJ_EVENT_GFX_PKMN_TANGROWTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TANGROWTH
+    { OBJ_EVENT_GFX_PKMN_ELECTIVIRE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ELECTIVIRE
+    { OBJ_EVENT_GFX_PKMN_MAGMORTAR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAGMORTAR
+    { OBJ_EVENT_GFX_PKMN_TOGEKISS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TOGEKISS
+    { OBJ_EVENT_GFX_PKMN_LEAFEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_LEAFEON
+    { OBJ_EVENT_GFX_PKMN_GLACEON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GLACEON
+    { OBJ_EVENT_GFX_PKMN_GLISCOR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GLISCOR
+    { OBJ_EVENT_GFX_PKMN_MAMOSWINE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MAMOSWINE
+    { OBJ_EVENT_GFX_PKMN_PORYGON_Z, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PORYGON_Z
+    { OBJ_EVENT_GFX_PKMN_GALLADE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GALLADE
+    { OBJ_EVENT_GFX_PKMN_PROBOPASS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PROBOPASS
+    { OBJ_EVENT_GFX_PKMN_DUSKNOIR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DUSKNOIR
+    { OBJ_EVENT_GFX_PKMN_FROSLASS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FROSLASS
+    { OBJ_EVENT_GFX_PKMN_ROTOM, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROTOM
+    { OBJ_EVENT_GFX_PKMN_UXIE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_UXIE
+    { OBJ_EVENT_GFX_PKMN_MESPRIT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MESPRIT
+    { OBJ_EVENT_GFX_PKMN_AZELF, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_AZELF
+    { OBJ_EVENT_GFX_PKMN_DIALGA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DIALGA
+    { OBJ_EVENT_GFX_PKMN_PALKIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PALKIA
+    { OBJ_EVENT_GFX_PKMN_HEATRAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_HEATRAN
+    { OBJ_EVENT_GFX_PKMN_REGIGIGAS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_REGIGIGAS
+    { OBJ_EVENT_GFX_PKMN_GIRATINA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GIRATINA
+    { OBJ_EVENT_GFX_PKMN_CRESSELIA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CRESSELIA
+    { OBJ_EVENT_GFX_PKMN_PHIONE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_PHIONE
+    { OBJ_EVENT_GFX_PKMN_MANAPHY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MANAPHY
+    { OBJ_EVENT_GFX_PKMN_DARKRAI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DARKRAI
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHAYMIN
+    { OBJ_EVENT_GFX_PKMN_ARCEUS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARCEUS
+    { OBJ_EVENT_GFX_PKMN_SCREAM_TAIL, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SCREAM_TAIL
+    { OBJ_EVENT_GFX_PKMN_BRUTE_BONNET, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BRUTE_BONNET
+    { OBJ_EVENT_GFX_PKMN_SLITHER_WING, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SLITHER_WING
+    { OBJ_EVENT_GFX_PKMN_SANDY_SHOCKS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SANDY_SHOCKS
+    { OBJ_EVENT_GFX_PKMN_IRON_TREADS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_TREADS
+    { OBJ_EVENT_GFX_PKMN_IRON_HANDS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_HANDS
+    { OBJ_EVENT_GFX_PKMN_IRON_JUGULIS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_JUGULIS
+    { OBJ_EVENT_GFX_PKMN_IRON_MOTH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_MOTH
+    { OBJ_EVENT_GFX_PKMN_FRIGIBAX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FRIGIBAX
+    { OBJ_EVENT_GFX_PKMN_ARCTIBAX, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARCTIBAX
+    { OBJ_EVENT_GFX_PKMN_BAXCALIBUR, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BAXCALIBUR
+    { OBJ_EVENT_GFX_PKMN_WO_CHIEN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WO_CHIEN
+    { OBJ_EVENT_GFX_PKMN_CHIEN_PAO, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHIEN_PAO
+    { OBJ_EVENT_GFX_PKMN_TING_LU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TING_LU
+    { OBJ_EVENT_GFX_PKMN_CHI_YU, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_CHI_YU
+    { OBJ_EVENT_GFX_PKMN_IRON_VALIANT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_VALIANT
+    { OBJ_EVENT_GFX_PKMN_KORAIDON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_KORAIDON
+    { OBJ_EVENT_GFX_PKMN_MIRAIDON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MIRAIDON
+    { OBJ_EVENT_GFX_PKMN_IRON_LEAVES, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_LEAVES
+    { OBJ_EVENT_GFX_PKMN_POLTCHAGEIST, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_POLTCHAGEIST
+    { OBJ_EVENT_GFX_PKMN_SINISTCHA, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SINISTCHA
+    { OBJ_EVENT_GFX_PKMN_OKIDOGI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_OKIDOGI
+    { OBJ_EVENT_GFX_PKMN_MUNKIDORI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_MUNKIDORI
+    { OBJ_EVENT_GFX_PKMN_FEZANDIPITI, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_FEZANDIPITI
+    { OBJ_EVENT_GFX_PKMN_OGERPON, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_OGERPON
+    { OBJ_EVENT_GFX_PKMN_GOUGING_FIRE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GOUGING_FIRE
+    { OBJ_EVENT_GFX_PKMN_RAGING_BOLT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_RAGING_BOLT
+    { OBJ_EVENT_GFX_PKMN_IRON_BOULDER, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_BOULDER
+    { OBJ_EVENT_GFX_PKMN_IRON_CROWN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_IRON_CROWN
+    { OBJ_EVENT_GFX_PKMN_TERAPAGOS, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_TERAPAGOS
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -1842,6 +3480,536 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { 0x111, 0x1, 0x0, 0x1, 0x1, 0x0 },
     { 0x112, 0x1, 0x0, 0x1, 0x1, 0x0 },
     { 0x113, 0x1, 0x0, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_PKMN_BULBASAUR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BULBASAUR
+    { OBJ_EVENT_GFX_PKMN_IVYSAUR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IVYSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VENUSAUR
+    { OBJ_EVENT_GFX_PKMN_VENUSAUR_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_CHARMANDER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHARMANDER
+    { OBJ_EVENT_GFX_PKMN_CHARMELEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHARMELEON
+    { OBJ_EVENT_GFX_PKMN_CHARIZARD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHARIZARD
+    { OBJ_EVENT_GFX_PKMN_SQUIRTLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SQUIRTLE
+    { OBJ_EVENT_GFX_PKMN_WARTORTLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WARTORTLE
+    { OBJ_EVENT_GFX_PKMN_BLASTOISE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BLASTOISE
+    { OBJ_EVENT_GFX_PKMN_CATERPIE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CATERPIE
+    { OBJ_EVENT_GFX_PKMN_METAPOD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_METAPOD
+    { OBJ_EVENT_GFX_PKMN_BUTTERFREE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BUTTERFREE
+    { OBJ_EVENT_GFX_PKMN_WEEDLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WEEDLE
+    { OBJ_EVENT_GFX_PKMN_KAKUNA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KAKUNA
+    { OBJ_EVENT_GFX_PKMN_BEEDRILL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BEEDRILL
+    { OBJ_EVENT_GFX_PKMN_PIDGEY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PIDGEY
+    { OBJ_EVENT_GFX_PKMN_PIDGEOTTO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PIDGEOTTO
+    { OBJ_EVENT_GFX_PKMN_PIDGEOT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PIDGEOT
+    { OBJ_EVENT_GFX_PKMN_RATTATA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RATTATA
+    { OBJ_EVENT_GFX_PKMN_RATICATE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RATICATE
+    { OBJ_EVENT_GFX_PKMN_SPEAROW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SPEAROW
+    { OBJ_EVENT_GFX_PKMN_FEAROW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FEAROW
+    { OBJ_EVENT_GFX_PKMN_EKANS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_EKANS
+    { OBJ_EVENT_GFX_PKMN_ARBOK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARBOK
+    { OBJ_EVENT_GFX_PKMN_PIKACHU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PIKACHU
+    { OBJ_EVENT_GFX_PKMN_PIKACHU_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_RAICHU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RAICHU
+    { OBJ_EVENT_GFX_PKMN_SANDSHREW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SANDSHREW
+    { OBJ_EVENT_GFX_PKMN_SANDSLASH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SANDSLASH
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NIDORAN_F
+    { OBJ_EVENT_GFX_PKMN_NIDORINA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NIDORINA
+    { OBJ_EVENT_GFX_PKMN_NIDOQUEEN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NIDOQUEEN
+    { OBJ_EVENT_GFX_PKMN_NIDORAN_M, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NIDORAN_M
+    { OBJ_EVENT_GFX_PKMN_NIDORINO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NIDORINO
+    { OBJ_EVENT_GFX_PKMN_NIDOKING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NIDOKING
+    { OBJ_EVENT_GFX_PKMN_CLEFAIRY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CLEFAIRY
+    { OBJ_EVENT_GFX_PKMN_CLEFABLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CLEFABLE
+    { OBJ_EVENT_GFX_PKMN_VULPIX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VULPIX
+    { OBJ_EVENT_GFX_PKMN_NINETALES, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NINETALES
+    { OBJ_EVENT_GFX_PKMN_JIGGLYPUFF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_JIGGLYPUFF
+    { OBJ_EVENT_GFX_PKMN_WIGGLYTUFF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WIGGLYTUFF
+    { OBJ_EVENT_GFX_PKMN_ZUBAT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ZUBAT
+    { OBJ_EVENT_GFX_PKMN_GOLBAT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GOLBAT
+    { OBJ_EVENT_GFX_PKMN_ODDISH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ODDISH
+    { OBJ_EVENT_GFX_PKMN_GLOOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GLOOM
+    { OBJ_EVENT_GFX_PKMN_VILEPLUME, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VILEPLUME
+    { OBJ_EVENT_GFX_PKMN_PARAS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PARAS
+    { OBJ_EVENT_GFX_PKMN_PARASECT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PARASECT
+    { OBJ_EVENT_GFX_PKMN_VENONAT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VENONAT
+    { OBJ_EVENT_GFX_PKMN_VENOMOTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VENOMOTH
+    { OBJ_EVENT_GFX_PKMN_DIGLETT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DIGLETT
+    { OBJ_EVENT_GFX_PKMN_DUGTRIO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DUGTRIO
+    { OBJ_EVENT_GFX_PKMN_MEOWTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MEOWTH
+    { OBJ_EVENT_GFX_PKMN_PERSIAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PERSIAN
+    { OBJ_EVENT_GFX_PKMN_PSYDUCK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PSYDUCK
+    { OBJ_EVENT_GFX_PKMN_GOLDUCK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GOLDUCK
+    { OBJ_EVENT_GFX_PKMN_MANKEY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MANKEY
+    { OBJ_EVENT_GFX_PKMN_PRIMEAPE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PRIMEAPE
+    { OBJ_EVENT_GFX_PKMN_GROWLITHE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GROWLITHE
+    { OBJ_EVENT_GFX_PKMN_ARCANINE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARCANINE
+    { OBJ_EVENT_GFX_PKMN_POLIWAG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_POLIWAG
+    { OBJ_EVENT_GFX_PKMN_POLIWHIRL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_POLIWHIRL
+    { OBJ_EVENT_GFX_PKMN_POLIWRATH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_POLIWRATH
+    { OBJ_EVENT_GFX_PKMN_ABRA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ABRA
+    { OBJ_EVENT_GFX_PKMN_KADABRA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KADABRA
+    { OBJ_EVENT_GFX_PKMN_ALAKAZAM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ALAKAZAM
+    { OBJ_EVENT_GFX_PKMN_MACHOP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MACHOP
+    { OBJ_EVENT_GFX_PKMN_MACHOKE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MACHOKE
+    { OBJ_EVENT_GFX_PKMN_MACHAMP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MACHAMP
+    { OBJ_EVENT_GFX_PKMN_BELLSPROUT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BELLSPROUT
+    { OBJ_EVENT_GFX_PKMN_WEEPINBELL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WEEPINBELL
+    { OBJ_EVENT_GFX_PKMN_VICTREEBEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VICTREEBEL
+    { OBJ_EVENT_GFX_PKMN_TENTACOOL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TENTACOOL
+    { OBJ_EVENT_GFX_PKMN_TENTACRUEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TENTACRUEL
+    { OBJ_EVENT_GFX_PKMN_GEODUDE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GEODUDE
+    { OBJ_EVENT_GFX_PKMN_GRAVELER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GRAVELER
+    { OBJ_EVENT_GFX_PKMN_GOLEM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GOLEM
+    { OBJ_EVENT_GFX_PKMN_PONYTA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PONYTA
+    { OBJ_EVENT_GFX_PKMN_RAPIDASH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RAPIDASH
+    { OBJ_EVENT_GFX_PKMN_SLOWPOKE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLOWPOKE
+    { OBJ_EVENT_GFX_PKMN_SLOWBRO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLOWBRO
+    { OBJ_EVENT_GFX_PKMN_MAGNEMITE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGNEMITE
+    { OBJ_EVENT_GFX_PKMN_MAGNETON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGNETON
+    { OBJ_EVENT_GFX_PKMN_FARFETCHD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FARFETCHD
+    { OBJ_EVENT_GFX_PKMN_DODUO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DODUO
+    { OBJ_EVENT_GFX_PKMN_DODRIO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DODRIO
+    { OBJ_EVENT_GFX_PKMN_SEEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SEEL
+    { OBJ_EVENT_GFX_PKMN_DEWGONG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DEWGONG
+    { OBJ_EVENT_GFX_PKMN_GRIMER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GRIMER
+    { OBJ_EVENT_GFX_PKMN_MUK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MUK
+    { OBJ_EVENT_GFX_PKMN_SHELLDER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHELLDER
+    { OBJ_EVENT_GFX_PKMN_CLOYSTER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CLOYSTER
+    { OBJ_EVENT_GFX_PKMN_GASTLY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GASTLY
+    { OBJ_EVENT_GFX_PKMN_HAUNTER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HAUNTER
+    { OBJ_EVENT_GFX_PKMN_GENGAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GENGAR
+    { OBJ_EVENT_GFX_PKMN_ONIX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ONIX
+    { OBJ_EVENT_GFX_PKMN_DROWZEE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DROWZEE
+    { OBJ_EVENT_GFX_PKMN_HYPNO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HYPNO
+    { OBJ_EVENT_GFX_PKMN_KRABBY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KRABBY
+    { OBJ_EVENT_GFX_PKMN_KINGLER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KINGLER
+    { OBJ_EVENT_GFX_PKMN_VOLTORB, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VOLTORB
+    { OBJ_EVENT_GFX_PKMN_ELECTRODE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ELECTRODE
+    { OBJ_EVENT_GFX_PKMN_EXEGGCUTE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_EXEGGCUTE
+    { OBJ_EVENT_GFX_PKMN_EXEGGUTOR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_EXEGGUTOR
+    { OBJ_EVENT_GFX_PKMN_CUBONE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CUBONE
+    { OBJ_EVENT_GFX_PKMN_MAROWAK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAROWAK
+    { OBJ_EVENT_GFX_PKMN_HITMONLEE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HITMONLEE
+    { OBJ_EVENT_GFX_PKMN_HITMONCHAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HITMONCHAN
+    { OBJ_EVENT_GFX_PKMN_LICKITUNG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LICKITUNG
+    { OBJ_EVENT_GFX_PKMN_KOFFING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KOFFING
+    { OBJ_EVENT_GFX_PKMN_WEEZING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WEEZING
+    { OBJ_EVENT_GFX_PKMN_RHYHORN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RHYHORN
+    { OBJ_EVENT_GFX_PKMN_RHYDON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RHYDON
+    { OBJ_EVENT_GFX_PKMN_CHANSEY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHANSEY
+    { OBJ_EVENT_GFX_PKMN_TANGELA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TANGELA
+    { OBJ_EVENT_GFX_PKMN_KANGASKHAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KANGASKHAN
+    { OBJ_EVENT_GFX_PKMN_HORSEA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HORSEA
+    { OBJ_EVENT_GFX_PKMN_SEADRA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SEADRA
+    { OBJ_EVENT_GFX_PKMN_GOLDEEN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GOLDEEN
+    { OBJ_EVENT_GFX_PKMN_SEAKING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SEAKING
+    { OBJ_EVENT_GFX_PKMN_STARYU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STARYU
+    { OBJ_EVENT_GFX_PKMN_STARMIE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STARMIE
+    { OBJ_EVENT_GFX_PKMN_MR_MIME, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MR_MIME
+    { OBJ_EVENT_GFX_PKMN_SCYTHER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SCYTHER
+    { OBJ_EVENT_GFX_PKMN_JYNX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_JYNX
+    { OBJ_EVENT_GFX_PKMN_ELECTABUZZ, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ELECTABUZZ
+    { OBJ_EVENT_GFX_PKMN_MAGMAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGMAR
+    { OBJ_EVENT_GFX_PKMN_PINSIR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PINSIR
+    { OBJ_EVENT_GFX_PKMN_TAUROS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TAUROS
+    { OBJ_EVENT_GFX_PKMN_MAGIKARP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGIKARP
+    { OBJ_EVENT_GFX_PKMN_GYARADOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GYARADOS
+    { OBJ_EVENT_GFX_PKMN_LAPRAS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LAPRAS
+    { OBJ_EVENT_GFX_PKMN_DITTO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DITTO
+    { OBJ_EVENT_GFX_PKMN_EEVEE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_EEVEE
+    { OBJ_EVENT_GFX_PKMN_VAPOREON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VAPOREON
+    { OBJ_EVENT_GFX_PKMN_JOLTEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_JOLTEON
+    { OBJ_EVENT_GFX_PKMN_FLAREON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FLAREON
+    { OBJ_EVENT_GFX_PKMN_PORYGON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PORYGON
+    { OBJ_EVENT_GFX_PKMN_OMANYTE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_OMANYTE
+    { OBJ_EVENT_GFX_PKMN_OMASTAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_OMASTAR
+    { OBJ_EVENT_GFX_PKMN_KABUTO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KABUTO
+    { OBJ_EVENT_GFX_PKMN_KABUTOPS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KABUTOPS
+    { OBJ_EVENT_GFX_PKMN_AERODACTYL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AERODACTYL
+    { OBJ_EVENT_GFX_PKMN_SNORLAX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SNORLAX
+    { OBJ_EVENT_GFX_PKMN_ARTICUNO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARTICUNO
+    { OBJ_EVENT_GFX_PKMN_ZAPDOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ZAPDOS
+    { OBJ_EVENT_GFX_PKMN_MOLTRES, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MOLTRES
+    { OBJ_EVENT_GFX_PKMN_DRATINI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DRATINI
+    { OBJ_EVENT_GFX_PKMN_DRAGONAIR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DRAGONAIR
+    { OBJ_EVENT_GFX_PKMN_DRAGONITE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DRAGONITE
+    { OBJ_EVENT_GFX_PKMN_MEWTWO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MEWTWO
+    { OBJ_EVENT_GFX_PKMN_MEW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MEW
+    { OBJ_EVENT_GFX_PKMN_CHIKORITA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHIKORITA
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BAYLEEF
+    { OBJ_EVENT_GFX_PKMN_BAYLEEF_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_CYNDAQUIL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CYNDAQUIL
+    { OBJ_EVENT_GFX_PKMN_QUILAVA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_QUILAVA
+    { OBJ_EVENT_GFX_PKMN_TYPHLOSION, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TYPHLOSION
+    { OBJ_EVENT_GFX_PKMN_TOTODILE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TOTODILE
+    { OBJ_EVENT_GFX_PKMN_CROCONAW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CROCONAW
+    { OBJ_EVENT_GFX_PKMN_FERALIGATR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FERALIGATR
+    { OBJ_EVENT_GFX_PKMN_SENTRET, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SENTRET
+    { OBJ_EVENT_GFX_PKMN_FURRET, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FURRET
+    { OBJ_EVENT_GFX_PKMN_HOOTHOOT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HOOTHOOT
+    { OBJ_EVENT_GFX_PKMN_NOCTOWL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NOCTOWL
+    { OBJ_EVENT_GFX_PKMN_LEDYBA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LEDYBA
+    { OBJ_EVENT_GFX_PKMN_LEDIAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LEDIAN
+    { OBJ_EVENT_GFX_PKMN_SPINARAK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SPINARAK
+    { OBJ_EVENT_GFX_PKMN_ARIADOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARIADOS
+    { OBJ_EVENT_GFX_PKMN_CROBAT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CROBAT
+    { OBJ_EVENT_GFX_PKMN_CHINCHOU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHINCHOU
+    { OBJ_EVENT_GFX_PKMN_LANTURN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LANTURN
+    { OBJ_EVENT_GFX_PKMN_PICHU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PICHU
+    { OBJ_EVENT_GFX_PKMN_CLEFFA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CLEFFA
+    { OBJ_EVENT_GFX_PKMN_IGGLYBUFF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IGGLYBUFF
+    { OBJ_EVENT_GFX_PKMN_TOGEPI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TOGEPI
+    { OBJ_EVENT_GFX_PKMN_TOGETIC, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TOGETIC
+    { OBJ_EVENT_GFX_PKMN_NATU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NATU
+    { OBJ_EVENT_GFX_PKMN_XATU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_XATU
+    { OBJ_EVENT_GFX_PKMN_MAREEP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAREEP
+    { OBJ_EVENT_GFX_PKMN_FLAAFFY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FLAAFFY
+    { OBJ_EVENT_GFX_PKMN_AMPHAROS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AMPHAROS
+    { OBJ_EVENT_GFX_PKMN_BELLOSSOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BELLOSSOM
+    { OBJ_EVENT_GFX_PKMN_MARILL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MARILL
+    { OBJ_EVENT_GFX_PKMN_AZUMARILL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AZUMARILL
+    { OBJ_EVENT_GFX_PKMN_SUDOWOODO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SUDOWOODO
+    { OBJ_EVENT_GFX_PKMN_POLITOED, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_POLITOED
+    { OBJ_EVENT_GFX_PKMN_HOPPIP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HOPPIP
+    { OBJ_EVENT_GFX_PKMN_SKIPLOOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SKIPLOOM
+    { OBJ_EVENT_GFX_PKMN_JUMPLUFF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_JUMPLUFF
+    { OBJ_EVENT_GFX_PKMN_AIPOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AIPOM
+    { OBJ_EVENT_GFX_PKMN_SUNKERN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SUNKERN
+    { OBJ_EVENT_GFX_PKMN_SUNFLORA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SUNFLORA
+    { OBJ_EVENT_GFX_PKMN_YANMA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_YANMA
+    { OBJ_EVENT_GFX_PKMN_WOOPER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WOOPER
+    { OBJ_EVENT_GFX_PKMN_QUAGSIRE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_QUAGSIRE
+    { OBJ_EVENT_GFX_PKMN_ESPEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ESPEON
+    { OBJ_EVENT_GFX_PKMN_UMBREON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_UMBREON
+    { OBJ_EVENT_GFX_PKMN_MURKROW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MURKROW
+    { OBJ_EVENT_GFX_PKMN_SLOWKING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLOWKING
+    { OBJ_EVENT_GFX_PKMN_MISDREAVUS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MISDREAVUS
+    { OBJ_EVENT_GFX_PKMN_UNOWN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_UNOWN
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WOBBUFFET
+    { OBJ_EVENT_GFX_PKMN_WOBBUFFET_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_GIRAFARIG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GIRAFARIG
+    { OBJ_EVENT_GFX_PKMN_PINECO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PINECO
+    { OBJ_EVENT_GFX_PKMN_FORRETRESS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FORRETRESS
+    { OBJ_EVENT_GFX_PKMN_DUNSPARCE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DUNSPARCE
+    { OBJ_EVENT_GFX_PKMN_GLIGAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GLIGAR
+    { OBJ_EVENT_GFX_PKMN_STEELIX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STEELIX
+    { OBJ_EVENT_GFX_PKMN_STEELIX_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_SNUBBULL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SNUBBULL
+    { OBJ_EVENT_GFX_PKMN_GRANBULL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GRANBULL
+    { OBJ_EVENT_GFX_PKMN_QWILFISH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_QWILFISH
+    { OBJ_EVENT_GFX_PKMN_SCIZOR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SCIZOR
+    { OBJ_EVENT_GFX_PKMN_SHUCKLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHUCKLE
+    { OBJ_EVENT_GFX_PKMN_HERACROSS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HERACROSS
+    { OBJ_EVENT_GFX_PKMN_HERACROSS_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_SNEASEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SNEASEL
+    { OBJ_EVENT_GFX_PKMN_TEDDIURSA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TEDDIURSA
+    { OBJ_EVENT_GFX_PKMN_URSARING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_URSARING
+    { OBJ_EVENT_GFX_PKMN_SLUGMA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLUGMA
+    { OBJ_EVENT_GFX_PKMN_MAGCARGO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGCARGO
+    { OBJ_EVENT_GFX_PKMN_SWINUB, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SWINUB
+    { OBJ_EVENT_GFX_PKMN_PILOSWINE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PILOSWINE
+    { OBJ_EVENT_GFX_PKMN_CORSOLA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CORSOLA
+    { OBJ_EVENT_GFX_PKMN_REMORAID, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_REMORAID
+    { OBJ_EVENT_GFX_PKMN_OCTILLERY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_OCTILLERY
+    { OBJ_EVENT_GFX_PKMN_DELIBIRD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DELIBIRD
+    { OBJ_EVENT_GFX_PKMN_MANTINE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MANTINE
+    { OBJ_EVENT_GFX_PKMN_SKARMORY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SKARMORY
+    { OBJ_EVENT_GFX_PKMN_HOUNDOUR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HOUNDOUR
+    { OBJ_EVENT_GFX_PKMN_HOUNDOOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HOUNDOOM
+    { OBJ_EVENT_GFX_PKMN_KINGDRA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KINGDRA
+    { OBJ_EVENT_GFX_PKMN_PHANPY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PHANPY
+    { OBJ_EVENT_GFX_PKMN_DONPHAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DONPHAN
+    { OBJ_EVENT_GFX_PKMN_PORYGON2, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PORYGON2
+    { OBJ_EVENT_GFX_PKMN_STANTLER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STANTLER
+    { OBJ_EVENT_GFX_PKMN_SMEARGLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SMEARGLE
+    { OBJ_EVENT_GFX_PKMN_TYROGUE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TYROGUE
+    { OBJ_EVENT_GFX_PKMN_HITMONTOP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HITMONTOP
+    { OBJ_EVENT_GFX_PKMN_SMOOCHUM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SMOOCHUM
+    { OBJ_EVENT_GFX_PKMN_ELEKID, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ELEKID
+    { OBJ_EVENT_GFX_PKMN_MAGBY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGBY
+    { OBJ_EVENT_GFX_PKMN_MILTANK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MILTANK
+    { OBJ_EVENT_GFX_PKMN_BLISSEY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BLISSEY
+    { OBJ_EVENT_GFX_PKMN_RAIKOU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RAIKOU
+    { OBJ_EVENT_GFX_PKMN_ENTEI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ENTEI
+    { OBJ_EVENT_GFX_PKMN_SUICUNE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SUICUNE
+    { OBJ_EVENT_GFX_PKMN_LARVITAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LARVITAR
+    { OBJ_EVENT_GFX_PKMN_PUPITAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PUPITAR
+    { OBJ_EVENT_GFX_PKMN_TYRANITAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TYRANITAR
+    { OBJ_EVENT_GFX_PKMN_LUGIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUGIA
+    { OBJ_EVENT_GFX_PKMN_HO_OH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HO_OH
+    { OBJ_EVENT_GFX_PKMN_CELEBI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CELEBI
+    { OBJ_EVENT_GFX_PKMN_TREECKO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TREECKO
+    { OBJ_EVENT_GFX_PKMN_GROVYLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GROVYLE
+    { OBJ_EVENT_GFX_PKMN_SCEPTILE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SCEPTILE
+    { OBJ_EVENT_GFX_PKMN_TORCHIC, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TORCHIC
+    { OBJ_EVENT_GFX_PKMN_COMBUSKEN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_COMBUSKEN
+    { OBJ_EVENT_GFX_PKMN_BLAZIKEN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BLAZIKEN
+    { OBJ_EVENT_GFX_PKMN_MUDKIP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MUDKIP
+    { OBJ_EVENT_GFX_PKMN_MARSHTOMP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MARSHTOMP
+    { OBJ_EVENT_GFX_PKMN_SWAMPERT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SWAMPERT
+    { OBJ_EVENT_GFX_PKMN_POOCHYENA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_POOCHYENA
+    { OBJ_EVENT_GFX_PKMN_MIGHTYENA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MIGHTYENA
+    { OBJ_EVENT_GFX_PKMN_ZIGZAGOON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ZIGZAGOON
+    { OBJ_EVENT_GFX_PKMN_LINOONE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LINOONE
+    { OBJ_EVENT_GFX_PKMN_WURMPLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WURMPLE
+    { OBJ_EVENT_GFX_PKMN_SILCOON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SILCOON
+    { OBJ_EVENT_GFX_PKMN_BEAUTIFLY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BEAUTIFLY
+    { OBJ_EVENT_GFX_PKMN_CASCOON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CASCOON
+    { OBJ_EVENT_GFX_PKMN_DUSTOX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DUSTOX
+    { OBJ_EVENT_GFX_PKMN_LOTAD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LOTAD
+    { OBJ_EVENT_GFX_PKMN_LOMBRE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LOMBRE
+    { OBJ_EVENT_GFX_PKMN_LUDICOLO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUDICOLO
+    { OBJ_EVENT_GFX_PKMN_SEEDOT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SEEDOT
+    { OBJ_EVENT_GFX_PKMN_NUZLEAF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NUZLEAF
+    { OBJ_EVENT_GFX_PKMN_SHIFTRY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHIFTRY
+    { OBJ_EVENT_GFX_PKMN_TAILLOW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TAILLOW
+    { OBJ_EVENT_GFX_PKMN_SWELLOW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SWELLOW
+    { OBJ_EVENT_GFX_PKMN_WINGULL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WINGULL
+    { OBJ_EVENT_GFX_PKMN_PELIPPER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PELIPPER
+    { OBJ_EVENT_GFX_PKMN_RALTS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RALTS
+    { OBJ_EVENT_GFX_PKMN_KIRLIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KIRLIA
+    { OBJ_EVENT_GFX_PKMN_GARDEVOIR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GARDEVOIR
+    { OBJ_EVENT_GFX_PKMN_SURSKIT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SURSKIT
+    { OBJ_EVENT_GFX_PKMN_MASQUERAIN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MASQUERAIN
+    { OBJ_EVENT_GFX_PKMN_SHROOMISH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHROOMISH
+    { OBJ_EVENT_GFX_PKMN_BRELOOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BRELOOM
+    { OBJ_EVENT_GFX_PKMN_SLAKOTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLAKOTH
+    { OBJ_EVENT_GFX_PKMN_VIGOROTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VIGOROTH
+    { OBJ_EVENT_GFX_PKMN_SLAKING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLAKING
+    { OBJ_EVENT_GFX_PKMN_NINCADA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NINCADA
+    { OBJ_EVENT_GFX_PKMN_NINJASK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NINJASK
+    { OBJ_EVENT_GFX_PKMN_SHEDINJA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHEDINJA
+    { OBJ_EVENT_GFX_PKMN_WHISMUR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WHISMUR
+    { OBJ_EVENT_GFX_PKMN_LOUDRED, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LOUDRED
+    { OBJ_EVENT_GFX_PKMN_EXPLOUD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_EXPLOUD
+    { OBJ_EVENT_GFX_PKMN_MAKUHITA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAKUHITA
+    { OBJ_EVENT_GFX_PKMN_HARIYAMA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HARIYAMA
+    { OBJ_EVENT_GFX_PKMN_AZURILL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AZURILL
+    { OBJ_EVENT_GFX_PKMN_NOSEPASS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NOSEPASS
+    { OBJ_EVENT_GFX_PKMN_SKITTY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SKITTY
+    { OBJ_EVENT_GFX_PKMN_DELCATTY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DELCATTY
+    { OBJ_EVENT_GFX_PKMN_SABLEYE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SABLEYE
+    { OBJ_EVENT_GFX_PKMN_MAWILE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAWILE
+    { OBJ_EVENT_GFX_PKMN_ARON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARON
+    { OBJ_EVENT_GFX_PKMN_LAIRON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LAIRON
+    { OBJ_EVENT_GFX_PKMN_AGGRON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AGGRON
+    { OBJ_EVENT_GFX_PKMN_MEDITITE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MEDITITE
+    { OBJ_EVENT_GFX_PKMN_MEDICHAM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MEDICHAM
+    { OBJ_EVENT_GFX_PKMN_ELECTRIKE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ELECTRIKE
+    { OBJ_EVENT_GFX_PKMN_MANECTRIC, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MANECTRIC
+    { OBJ_EVENT_GFX_PKMN_PLUSLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PLUSLE
+    { OBJ_EVENT_GFX_PKMN_MINUN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MINUN
+    { OBJ_EVENT_GFX_PKMN_VOLBEAT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VOLBEAT
+    { OBJ_EVENT_GFX_PKMN_ILLUMISE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ILLUMISE
+    { OBJ_EVENT_GFX_PKMN_ROSELIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROSELIA
+    { OBJ_EVENT_GFX_PKMN_GULPIN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GULPIN
+    { OBJ_EVENT_GFX_PKMN_SWALOT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SWALOT
+    { OBJ_EVENT_GFX_PKMN_CARVANHA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CARVANHA
+    { OBJ_EVENT_GFX_PKMN_SHARPEDO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHARPEDO
+    { OBJ_EVENT_GFX_PKMN_WAILMER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WAILMER
+    { OBJ_EVENT_GFX_PKMN_WAILORD, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WAILORD
+    { OBJ_EVENT_GFX_PKMN_NUMEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_NUMEL
+    { OBJ_EVENT_GFX_PKMN_CAMERUPT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CAMERUPT
+    { OBJ_EVENT_GFX_PKMN_TORKOAL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TORKOAL
+    { OBJ_EVENT_GFX_PKMN_SPOINK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SPOINK
+    { OBJ_EVENT_GFX_PKMN_GRUMPIG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GRUMPIG
+    { OBJ_EVENT_GFX_PKMN_SPINDA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SPINDA
+    { OBJ_EVENT_GFX_PKMN_TRAPINCH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TRAPINCH
+    { OBJ_EVENT_GFX_PKMN_VIBRAVA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VIBRAVA
+    { OBJ_EVENT_GFX_PKMN_FLYGON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FLYGON
+    { OBJ_EVENT_GFX_PKMN_CACNEA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CACNEA
+    { OBJ_EVENT_GFX_PKMN_CACTURNE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CACTURNE
+    { OBJ_EVENT_GFX_PKMN_SWABLU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SWABLU
+    { OBJ_EVENT_GFX_PKMN_ALTARIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ALTARIA
+    { OBJ_EVENT_GFX_PKMN_ZANGOOSE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ZANGOOSE
+    { OBJ_EVENT_GFX_PKMN_SEVIPER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SEVIPER
+    { OBJ_EVENT_GFX_PKMN_LUNATONE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUNATONE
+    { OBJ_EVENT_GFX_PKMN_SOLROCK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SOLROCK
+    { OBJ_EVENT_GFX_PKMN_BARBOACH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BARBOACH
+    { OBJ_EVENT_GFX_PKMN_WHISCASH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WHISCASH
+    { OBJ_EVENT_GFX_PKMN_CORPHISH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CORPHISH
+    { OBJ_EVENT_GFX_PKMN_CRAWDAUNT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CRAWDAUNT
+    { OBJ_EVENT_GFX_PKMN_BALTOY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BALTOY
+    { OBJ_EVENT_GFX_PKMN_CLAYDOL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CLAYDOL
+    { OBJ_EVENT_GFX_PKMN_LILEEP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LILEEP
+    { OBJ_EVENT_GFX_PKMN_CRADILY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CRADILY
+    { OBJ_EVENT_GFX_PKMN_ANORITH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ANORITH
+    { OBJ_EVENT_GFX_PKMN_ARMALDO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARMALDO
+    { OBJ_EVENT_GFX_PKMN_FEEBAS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FEEBAS
+    { OBJ_EVENT_GFX_PKMN_MILOTIC, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MILOTIC
+    { OBJ_EVENT_GFX_PKMN_CASTFORM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CASTFORM
+    { OBJ_EVENT_GFX_PKMN_KECLEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KECLEON
+    { OBJ_EVENT_GFX_PKMN_SHUPPET, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHUPPET
+    { OBJ_EVENT_GFX_PKMN_BANETTE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BANETTE
+    { OBJ_EVENT_GFX_PKMN_DUSKULL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DUSKULL
+    { OBJ_EVENT_GFX_PKMN_DUSCLOPS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DUSCLOPS
+    { OBJ_EVENT_GFX_PKMN_TROPIUS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TROPIUS
+    { OBJ_EVENT_GFX_PKMN_CHIMECHO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHIMECHO
+    { OBJ_EVENT_GFX_PKMN_ABSOL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ABSOL
+    { OBJ_EVENT_GFX_PKMN_WYNAUT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WYNAUT
+    { OBJ_EVENT_GFX_PKMN_SNORUNT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SNORUNT
+    { OBJ_EVENT_GFX_PKMN_GLALIE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GLALIE
+    { OBJ_EVENT_GFX_PKMN_SPHEAL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SPHEAL
+    { OBJ_EVENT_GFX_PKMN_SEALEO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SEALEO
+    { OBJ_EVENT_GFX_PKMN_WALREIN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WALREIN
+    { OBJ_EVENT_GFX_PKMN_CLAMPERL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CLAMPERL
+    { OBJ_EVENT_GFX_PKMN_HUNTAIL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HUNTAIL
+    { OBJ_EVENT_GFX_PKMN_GOREBYSS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GOREBYSS
+    { OBJ_EVENT_GFX_PKMN_RELICANTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RELICANTH
+    { OBJ_EVENT_GFX_PKMN_LUVDISC, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUVDISC
+    { OBJ_EVENT_GFX_PKMN_BAGON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BAGON
+    { OBJ_EVENT_GFX_PKMN_SHELGON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHELGON
+    { OBJ_EVENT_GFX_PKMN_SALAMENCE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SALAMENCE
+    { OBJ_EVENT_GFX_PKMN_BELDUM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BELDUM
+    { OBJ_EVENT_GFX_PKMN_METANG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_METANG
+    { OBJ_EVENT_GFX_PKMN_METAGROSS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_METAGROSS
+    { OBJ_EVENT_GFX_PKMN_REGIROCK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_REGIROCK
+    { OBJ_EVENT_GFX_PKMN_REGICE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_REGICE
+    { OBJ_EVENT_GFX_PKMN_REGISTEEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_REGISTEEL
+    { OBJ_EVENT_GFX_PKMN_LATIAS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LATIAS
+    { OBJ_EVENT_GFX_PKMN_LATIOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LATIOS
+    { OBJ_EVENT_GFX_PKMN_KYOGRE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KYOGRE
+    { OBJ_EVENT_GFX_PKMN_GROUDON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GROUDON
+    { OBJ_EVENT_GFX_PKMN_RAYQUAZA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RAYQUAZA
+    { OBJ_EVENT_GFX_PKMN_JIRACHI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_JIRACHI
+    { OBJ_EVENT_GFX_PKMN_DEOXYS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DEOXYS
+    { OBJ_EVENT_GFX_PKMN_TURTWIG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TURTWIG
+    { OBJ_EVENT_GFX_PKMN_GROTLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GROTLE
+    { OBJ_EVENT_GFX_PKMN_TORTERRA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TORTERRA
+    { OBJ_EVENT_GFX_PKMN_CHIMCHAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHIMCHAR
+    { OBJ_EVENT_GFX_PKMN_MONFERNO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MONFERNO
+    { OBJ_EVENT_GFX_PKMN_INFERNAPE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_INFERNAPE
+    { OBJ_EVENT_GFX_PKMN_PIPLUP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PIPLUP
+    { OBJ_EVENT_GFX_PKMN_PRINPLUP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PRINPLUP
+    { OBJ_EVENT_GFX_PKMN_EMPOLEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_EMPOLEON
+    { OBJ_EVENT_GFX_PKMN_STARLY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STARLY
+    { OBJ_EVENT_GFX_PKMN_STARAVIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STARAVIA
+    { OBJ_EVENT_GFX_PKMN_STARAPTOR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STARAPTOR
+    { OBJ_EVENT_GFX_PKMN_BIDOOF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BIDOOF
+    { OBJ_EVENT_GFX_PKMN_BIBAREL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BIBAREL
+    { OBJ_EVENT_GFX_PKMN_KRICKETOT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KRICKETOT
+    { OBJ_EVENT_GFX_PKMN_KRICKETUNE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KRICKETUNE
+    { OBJ_EVENT_GFX_PKMN_SHINX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHINX
+    { OBJ_EVENT_GFX_PKMN_LUXIO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUXIO
+    { OBJ_EVENT_GFX_PKMN_LUXRAY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUXRAY
+    { OBJ_EVENT_GFX_PKMN_BUDEW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BUDEW
+    { OBJ_EVENT_GFX_PKMN_ROSERADE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROSERADE
+    { OBJ_EVENT_GFX_PKMN_CRANIDOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CRANIDOS
+    { OBJ_EVENT_GFX_PKMN_RAMPARDOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RAMPARDOS
+    { OBJ_EVENT_GFX_PKMN_SHIELDON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHIELDON
+    { OBJ_EVENT_GFX_PKMN_BASTIODON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BASTIODON
+    { OBJ_EVENT_GFX_PKMN_BURMY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BURMY
+    { OBJ_EVENT_GFX_PKMN_WORMADAM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WORMADAM
+    { OBJ_EVENT_GFX_PKMN_MOTHIM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MOTHIM
+    { OBJ_EVENT_GFX_PKMN_COMBEE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_COMBEE
+    { OBJ_EVENT_GFX_PKMN_COMBEE_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_VESPIQUEN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_VESPIQUEN
+    { OBJ_EVENT_GFX_PKMN_PACHIRISU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PACHIRISU
+    { OBJ_EVENT_GFX_PKMN_BUIZEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BUIZEL
+    { OBJ_EVENT_GFX_PKMN_FLOATZEL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FLOATZEL
+    { OBJ_EVENT_GFX_PKMN_CHERUBI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHERUBI
+    { OBJ_EVENT_GFX_PKMN_CHERRIM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHERRIM
+    { OBJ_EVENT_GFX_PKMN_SHELLOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHELLOS
+    { OBJ_EVENT_GFX_PKMN_GASTRODON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GASTRODON
+    { OBJ_EVENT_GFX_PKMN_AMBIPOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AMBIPOM
+    { OBJ_EVENT_GFX_PKMN_DRIFLOON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DRIFLOON
+    { OBJ_EVENT_GFX_PKMN_DRIFBLIM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DRIFBLIM
+    { OBJ_EVENT_GFX_PKMN_BUNEARY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BUNEARY
+    { OBJ_EVENT_GFX_PKMN_LOPUNNY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LOPUNNY
+    { OBJ_EVENT_GFX_PKMN_MISMAGIUS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MISMAGIUS
+    { OBJ_EVENT_GFX_PKMN_HONCHKROW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HONCHKROW
+    { OBJ_EVENT_GFX_PKMN_GLAMEOW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GLAMEOW
+    { OBJ_EVENT_GFX_PKMN_PURUGLY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PURUGLY
+    { OBJ_EVENT_GFX_PKMN_CHINGLING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHINGLING
+    { OBJ_EVENT_GFX_PKMN_STUNKY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_STUNKY
+    { OBJ_EVENT_GFX_PKMN_SKUNTANK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SKUNTANK
+    { OBJ_EVENT_GFX_PKMN_BRONZOR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BRONZOR
+    { OBJ_EVENT_GFX_PKMN_BRONZONG, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BRONZONG
+    { OBJ_EVENT_GFX_PKMN_BONSLY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BONSLY
+    { OBJ_EVENT_GFX_PKMN_MIMEJR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MIMEJR
+    { OBJ_EVENT_GFX_PKMN_HAPPINY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HAPPINY
+    { OBJ_EVENT_GFX_PKMN_CHATOT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHATOT
+    { OBJ_EVENT_GFX_PKMN_SPIRITOMB, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SPIRITOMB
+    { OBJ_EVENT_GFX_PKMN_GIBLE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GIBLE
+    { OBJ_EVENT_GFX_PKMN_GABITE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GABITE
+    { OBJ_EVENT_GFX_PKMN_GARCHOMP, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GARCHOMP
+    { OBJ_EVENT_GFX_PKMN_MUNCHLAX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MUNCHLAX
+    { OBJ_EVENT_GFX_PKMN_RIOLU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RIOLU
+    { OBJ_EVENT_GFX_PKMN_LUCARIO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUCARIO
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HIPPOPOTAS
+    { OBJ_EVENT_GFX_PKMN_HIPPOPOTAS_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HIPPOWDON
+    { OBJ_EVENT_GFX_PKMN_HIPPOWDON_F, 0x1, 0x1, 0x1, 0x1, 0x0 },  // female
+    { OBJ_EVENT_GFX_PKMN_SKORUPI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SKORUPI
+    { OBJ_EVENT_GFX_PKMN_DRAPION, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DRAPION
+    { OBJ_EVENT_GFX_PKMN_CROAGUNK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CROAGUNK
+    { OBJ_EVENT_GFX_PKMN_TOXICROAK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TOXICROAK
+    { OBJ_EVENT_GFX_PKMN_CARNIVINE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CARNIVINE
+    { OBJ_EVENT_GFX_PKMN_FINNEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FINNEON
+    { OBJ_EVENT_GFX_PKMN_LUMINEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LUMINEON
+    { OBJ_EVENT_GFX_PKMN_MANTYKE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MANTYKE
+    { OBJ_EVENT_GFX_PKMN_SNOVER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SNOVER
+    { OBJ_EVENT_GFX_PKMN_ABOMASNOW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ABOMASNOW
+    { OBJ_EVENT_GFX_PKMN_WEAVILE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WEAVILE
+    { OBJ_EVENT_GFX_PKMN_MAGNEZONE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGNEZONE
+    { OBJ_EVENT_GFX_PKMN_LICKILICKY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LICKILICKY
+    { OBJ_EVENT_GFX_PKMN_RHYPERIOR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RHYPERIOR
+    { OBJ_EVENT_GFX_PKMN_TANGROWTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TANGROWTH
+    { OBJ_EVENT_GFX_PKMN_ELECTIVIRE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ELECTIVIRE
+    { OBJ_EVENT_GFX_PKMN_MAGMORTAR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAGMORTAR
+    { OBJ_EVENT_GFX_PKMN_TOGEKISS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TOGEKISS
+    { OBJ_EVENT_GFX_PKMN_LEAFEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_LEAFEON
+    { OBJ_EVENT_GFX_PKMN_GLACEON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GLACEON
+    { OBJ_EVENT_GFX_PKMN_GLISCOR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GLISCOR
+    { OBJ_EVENT_GFX_PKMN_MAMOSWINE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MAMOSWINE
+    { OBJ_EVENT_GFX_PKMN_PORYGON_Z, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PORYGON_Z
+    { OBJ_EVENT_GFX_PKMN_GALLADE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GALLADE
+    { OBJ_EVENT_GFX_PKMN_PROBOPASS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PROBOPASS
+    { OBJ_EVENT_GFX_PKMN_DUSKNOIR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DUSKNOIR
+    { OBJ_EVENT_GFX_PKMN_FROSLASS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FROSLASS
+    { OBJ_EVENT_GFX_PKMN_ROTOM, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROTOM
+    { OBJ_EVENT_GFX_PKMN_UXIE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_UXIE
+    { OBJ_EVENT_GFX_PKMN_MESPRIT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MESPRIT
+    { OBJ_EVENT_GFX_PKMN_AZELF, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_AZELF
+    { OBJ_EVENT_GFX_PKMN_DIALGA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DIALGA
+    { OBJ_EVENT_GFX_PKMN_PALKIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PALKIA
+    { OBJ_EVENT_GFX_PKMN_HEATRAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_HEATRAN
+    { OBJ_EVENT_GFX_PKMN_REGIGIGAS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_REGIGIGAS
+    { OBJ_EVENT_GFX_PKMN_GIRATINA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GIRATINA
+    { OBJ_EVENT_GFX_PKMN_CRESSELIA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CRESSELIA
+    { OBJ_EVENT_GFX_PKMN_PHIONE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_PHIONE
+    { OBJ_EVENT_GFX_PKMN_MANAPHY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MANAPHY
+    { OBJ_EVENT_GFX_PKMN_DARKRAI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DARKRAI
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHAYMIN
+    { OBJ_EVENT_GFX_PKMN_ARCEUS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARCEUS
+    { OBJ_EVENT_GFX_PKMN_SCREAM_TAIL, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SCREAM_TAIL
+    { OBJ_EVENT_GFX_PKMN_BRUTE_BONNET, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BRUTE_BONNET
+    { OBJ_EVENT_GFX_PKMN_SLITHER_WING, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SLITHER_WING
+    { OBJ_EVENT_GFX_PKMN_SANDY_SHOCKS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SANDY_SHOCKS
+    { OBJ_EVENT_GFX_PKMN_IRON_TREADS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_TREADS
+    { OBJ_EVENT_GFX_PKMN_IRON_HANDS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_HANDS
+    { OBJ_EVENT_GFX_PKMN_IRON_JUGULIS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_JUGULIS
+    { OBJ_EVENT_GFX_PKMN_IRON_MOTH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_MOTH
+    { OBJ_EVENT_GFX_PKMN_FRIGIBAX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FRIGIBAX
+    { OBJ_EVENT_GFX_PKMN_ARCTIBAX, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARCTIBAX
+    { OBJ_EVENT_GFX_PKMN_BAXCALIBUR, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BAXCALIBUR
+    { OBJ_EVENT_GFX_PKMN_WO_CHIEN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WO_CHIEN
+    { OBJ_EVENT_GFX_PKMN_CHIEN_PAO, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHIEN_PAO
+    { OBJ_EVENT_GFX_PKMN_TING_LU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TING_LU
+    { OBJ_EVENT_GFX_PKMN_CHI_YU, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_CHI_YU
+    { OBJ_EVENT_GFX_PKMN_IRON_VALIANT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_VALIANT
+    { OBJ_EVENT_GFX_PKMN_KORAIDON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_KORAIDON
+    { OBJ_EVENT_GFX_PKMN_MIRAIDON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MIRAIDON
+    { OBJ_EVENT_GFX_PKMN_IRON_LEAVES, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_LEAVES
+    { OBJ_EVENT_GFX_PKMN_POLTCHAGEIST, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_POLTCHAGEIST
+    { OBJ_EVENT_GFX_PKMN_SINISTCHA, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SINISTCHA
+    { OBJ_EVENT_GFX_PKMN_OKIDOGI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_OKIDOGI
+    { OBJ_EVENT_GFX_PKMN_MUNKIDORI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_MUNKIDORI
+    { OBJ_EVENT_GFX_PKMN_FEZANDIPITI, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_FEZANDIPITI
+    { OBJ_EVENT_GFX_PKMN_OGERPON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_OGERPON
+    { OBJ_EVENT_GFX_PKMN_GOUGING_FIRE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GOUGING_FIRE
+    { OBJ_EVENT_GFX_PKMN_RAGING_BOLT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_RAGING_BOLT
+    { OBJ_EVENT_GFX_PKMN_IRON_BOULDER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_BOULDER
+    { OBJ_EVENT_GFX_PKMN_IRON_CROWN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_IRON_CROWN
+    { OBJ_EVENT_GFX_PKMN_TERAPAGOS, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_TERAPAGOS
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
