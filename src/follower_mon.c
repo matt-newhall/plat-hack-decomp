@@ -9,7 +9,6 @@
 #include "map_header_data.h"
 #include "map_object.h"
 #include "map_object_move.h"
-#include "map_tile_behavior.h"
 #include "party.h"
 #include "player_avatar.h"
 #include "pokemon.h"
@@ -72,17 +71,8 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     case FACE_RIGHT: x -= 1; break;
     }
 
-    {
-        u8 behavior = TerrainCollisionManager_GetTileBehavior(fieldSystem, x, z);
-        if (TileBehavior_IsNull(behavior)
-                || TileBehavior_IsDoor(behavior)
-                || TileBehavior_IsWarpPanel(behavior)
-                || TileBehavior_IsWarpEntranceNorth(behavior)
-                || TileBehavior_IsWarpEntranceSouth(behavior)
-                || TileBehavior_IsWarpEntranceEast(behavior)
-                || TileBehavior_IsWarpEntranceWest(behavior)) {
-            return;
-        }
+    if (TileBehavior_IsNull(TerrainCollisionManager_GetTileBehavior(fieldSystem, x, z))) {
+        return;
     }
 
     {
