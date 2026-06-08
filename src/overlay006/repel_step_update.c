@@ -13,7 +13,8 @@ BOOL Repel_UpdateSteps(SaveData *saveData, FieldSystem *fieldSystem)
 {
     u8 *repelSteps = SpecialEncounter_GetRepelSteps(SaveData_GetSpecialEncounters(saveData));
 
-    if (*repelSteps > 0) {
+
+    if (*repelSteps > 0 && !(*repelSteps == 254)) {
         (*repelSteps)--;
 
         if (*repelSteps == 0) {

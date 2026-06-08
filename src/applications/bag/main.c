@@ -176,6 +176,7 @@ static int RunItemUseCallback(BagController *controller);
 static int TMHMUseTask(BagController *controller);
 static BOOL UseItemInBag(BagController *controller, u16 item);
 static String *TryUseRepel(BagController *controller, u16 item);
+static String *TryUseInfiniteRepel(BagController *controller);
 static void TrashSelectedItem(BagController *controller);
 static int InBagItemUseTask(BagController *controller);
 static void ToggleHideItemSprite(BagController *controller, u8 hide);
@@ -2245,6 +2246,8 @@ static BOOL UseItemInBag(BagController *controller, u16 item)
         controller->selectedItemCount = 0;
     } else if (item == ITEM_MAX_REPEL || item == ITEM_SUPER_REPEL || item == ITEM_REPEL) {
         string = TryUseRepel(controller, item);
+    } else if (item == ITEM_INFINITE_REPEL) {
+        string = TryUseInfiniteRepel(controller);
     } else {
         return FALSE;
     }
@@ -2267,6 +2270,21 @@ static String *TryUseRepel(BagController *controller, u16 item)
     Sound_PlayEffect(SEQ_SE_DP_CARD2);
 
     return MessageLoader_GetNewString(controller->bagStringsLoader, Bag_Text_UsedRepel);
+}
+
+static String *TryUseInfiniteRepel(BagController *controller)
+{
+    controller->selectedItemCount = 0;
+
+    if (SpecialEncounter_RepelStepsEmpty(GetSpecialEncounter(controller)) == FALSE) {
+        SetRepelSteps(controller, 0);
+        return MessageLoader_GetNewString(controller->bagStringsLoader, Bag_Text_InfiniteRepelDisabled);
+    }
+
+    Sound_PlayEffect(SEQ_SE_DP_CARD2);
+    SetRepelSteps(controller, 254);
+
+    return MessageLoader_GetNewString(controller->bagStringsLoader, Bag_Text_InfiniteRepelEnabled);
 }
 
 static void TrashSelectedItem(BagController *controller)

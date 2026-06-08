@@ -511,6 +511,19 @@
     {
       "id": "Bag_Text_CannotUseNoFishing",
       "en_US": "There’s nothing to be caught here..."
+    },
+    {
+      "id": "Bag_Text_InfiniteRepelEnabled",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} used the {STRVAR_1 8, 1, 0}.\n",
+        "Wild Pokémon will be repelled."
+      ]
+    },
+    {
+      "id": "Bag_Text_InfiniteRepelDisabled",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} disabled the {STRVAR_1 8, 1, 0}."
+      ]
     }
   ]
 }

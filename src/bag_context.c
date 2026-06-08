@@ -15,6 +15,9 @@
 #include "message.h"
 #include "save_player.h"
 #include "savedata.h"
+#include "sound.h"
+#include "sound_playback.h"
+#include "special_encounter.h"
 #include "string_gf.h"
 #include "string_template.h"
 #include "trainer_info.h"
@@ -163,6 +166,18 @@ BOOL BagContext_FormatUsageMessage(SaveData *saveData, String *dstString, u16 it
     } else if (item == ITEM_COIN_CASE) {
         templateString = MessageLoader_GetNewString(msgLoader, Bag_Text_CoinCaseMessage);
         StringTemplate_SetNumber(template, 0, GetNumCoins(saveData), 5, PADDING_MODE_NONE, CHARSET_MODE_EN);
+    } else if (item == ITEM_INFINITE_REPEL) {
+        SpecialEncounter *speEnc = SaveData_GetSpecialEncounters(saveData);
+        if (SpecialEncounter_RepelStepsEmpty(speEnc) == FALSE) {
+            *SpecialEncounter_GetRepelSteps(speEnc) = 0;
+            templateString = MessageLoader_GetNewString(msgLoader, Bag_Text_InfiniteRepelDisabled);
+        } else {
+            Sound_PlayEffect(SEQ_SE_DP_CARD2);
+            *SpecialEncounter_GetRepelSteps(speEnc) = 254;
+            templateString = MessageLoader_GetNewString(msgLoader, Bag_Text_InfiniteRepelEnabled);
+        }
+        StringTemplate_SetPlayerName(template, 0, SaveData_GetTrainerInfo(saveData));
+        StringTemplate_SetItemName(template, 1, item);
     } else {
         StringTemplate_Free(template);
         MessageLoader_Free(msgLoader);
