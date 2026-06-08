@@ -21,6 +21,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     Pokemon *lead;
     u16 species;
     u8  gender;
+    BOOL isShiny;
     u16 gfxID;
     MapObject *follower;
     int x;
@@ -46,7 +47,8 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
 
     species = (u16)Pokemon_GetValue(lead, MON_DATA_SPECIES, NULL);
     gender  = (u8)Pokemon_GetValue(lead, MON_DATA_GENDER, NULL);
-    gfxID   = FollowerMon_GetGfxID(species, (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL), gender == GENDER_FEMALE);
+    isShiny = (BOOL)Pokemon_IsShiny(lead);
+    gfxID   = FollowerMon_GetGfxID(species, (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL), gender == GENDER_FEMALE, isShiny);
 
     if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
         return;
