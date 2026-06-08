@@ -4,6 +4,6 @@
 
 #include <nitro.h>
 
-u16 FollowerMon_GetGfxID(u16 species, BOOL isFemale);
+u16 FollowerMon_GetGfxID(u16 species, u8 form, BOOL isFemale);
 
 #endif // POKEPLATINUM_FOLLOWER_MON_GFX_H

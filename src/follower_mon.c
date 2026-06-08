@@ -46,7 +46,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
 
     species = (u16)Pokemon_GetValue(lead, MON_DATA_SPECIES, NULL);
     gender  = (u8)Pokemon_GetValue(lead, MON_DATA_GENDER, NULL);
-    gfxID   = FollowerMon_GetGfxID(species, gender == GENDER_FEMALE);
+    gfxID   = FollowerMon_GetGfxID(species, (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL), gender == GENDER_FEMALE);
 
     if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
         return;

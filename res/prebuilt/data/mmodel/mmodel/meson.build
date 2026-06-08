@@ -990,6 +990,21 @@ mmodel_files = files(
     'mmodel_00001018.bin',
     'mmodel_00001019.bin',
     'mmodel_00001020.bin',
+    'mmodel_00001021.bin',
+    'mmodel_00001022.bin',
+    'mmodel_00001023.bin',
+    'mmodel_00001024.bin',
+    'mmodel_00001025.bin',
+    'mmodel_00001026.bin',
+    'mmodel_00001027.bin',
+    'mmodel_00001028.bin',
+    'mmodel_00001029.bin',
+    'mmodel_00001030.bin',
+    'mmodel_00001031.bin',
+    'mmodel_00001032.bin',
+    'mmodel_00001033.bin',
+    'mmodel_00001034.bin',
+    'mmodel_00001035.bin',
 )
 
 mmodel_files_targets = []

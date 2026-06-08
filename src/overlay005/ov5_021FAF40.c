@@ -1036,6 +1036,21 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_PKMN_ARCEUS_ICE, &Unk_ov5_FollowerMon },  // SPECIES_ARCEUS ice type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DRAGON, &Unk_ov5_FollowerMon },  // SPECIES_ARCEUS dragon type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DARK, &Unk_ov5_FollowerMon },  // SPECIES_ARCEUS dark type
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_ATTACK, &Unk_ov5_FollowerMon },  // SPECIES_DEOXYS attack form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_DEFENSE, &Unk_ov5_FollowerMon },  // SPECIES_DEOXYS defense form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_SPEED, &Unk_ov5_FollowerMon },  // SPECIES_DEOXYS speed form
+    { OBJ_EVENT_GFX_PKMN_BURMY_SANDY, &Unk_ov5_FollowerMon },  // SPECIES_BURMY sandy cloak
+    { OBJ_EVENT_GFX_PKMN_BURMY_TRASH, &Unk_ov5_FollowerMon },  // SPECIES_BURMY trash cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_SANDY, &Unk_ov5_FollowerMon },  // SPECIES_WORMADAM sandy cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_TRASH, &Unk_ov5_FollowerMon },  // SPECIES_WORMADAM trash cloak
+    { OBJ_EVENT_GFX_PKMN_SHELLOS_EAST, &Unk_ov5_FollowerMon },  // SPECIES_SHELLOS east sea
+    { OBJ_EVENT_GFX_PKMN_GASTRODON_EAST, &Unk_ov5_FollowerMon },  // SPECIES_GASTRODON east sea
+    { OBJ_EVENT_GFX_PKMN_ROTOM_HEAT, &Unk_ov5_FollowerMon },  // SPECIES_ROTOM heat
+    { OBJ_EVENT_GFX_PKMN_ROTOM_WASH, &Unk_ov5_FollowerMon },  // SPECIES_ROTOM wash
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FROST, &Unk_ov5_FollowerMon },  // SPECIES_ROTOM frost
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FAN, &Unk_ov5_FollowerMon },  // SPECIES_ROTOM fan
+    { OBJ_EVENT_GFX_PKMN_ROTOM_MOW, &Unk_ov5_FollowerMon },  // SPECIES_ROTOM mow
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY, &Unk_ov5_FollowerMon },  // SPECIES_SHAYMIN sky form
     { 0xffff, NULL }
 };
 
@@ -1998,6 +2013,21 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { OBJ_EVENT_GFX_PKMN_ARCEUS_ICE, 0x3db },  // SPECIES_ARCEUS ice type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DRAGON, 0x3dc },  // SPECIES_ARCEUS dragon type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DARK, 0x3dd },  // SPECIES_ARCEUS dark type
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_ATTACK, 0x3df },  // SPECIES_DEOXYS attack form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_DEFENSE, 0x3e0 },  // SPECIES_DEOXYS defense form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_SPEED, 0x3e1 },  // SPECIES_DEOXYS speed form
+    { OBJ_EVENT_GFX_PKMN_BURMY_SANDY, 0x3e2 },  // SPECIES_BURMY sandy cloak
+    { OBJ_EVENT_GFX_PKMN_BURMY_TRASH, 0x3e3 },  // SPECIES_BURMY trash cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_SANDY, 0x3e4 },  // SPECIES_WORMADAM sandy cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_TRASH, 0x3e5 },  // SPECIES_WORMADAM trash cloak
+    { OBJ_EVENT_GFX_PKMN_SHELLOS_EAST, 0x3e6 },  // SPECIES_SHELLOS east sea
+    { OBJ_EVENT_GFX_PKMN_GASTRODON_EAST, 0x3e7 },  // SPECIES_GASTRODON east sea
+    { OBJ_EVENT_GFX_PKMN_ROTOM_HEAT, 0x3e8 },  // SPECIES_ROTOM heat
+    { OBJ_EVENT_GFX_PKMN_ROTOM_WASH, 0x3e9 },  // SPECIES_ROTOM wash
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FROST, 0x3ea },  // SPECIES_ROTOM frost
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FAN, 0x3eb },  // SPECIES_ROTOM fan
+    { OBJ_EVENT_GFX_PKMN_ROTOM_MOW, 0x3ec },  // SPECIES_ROTOM mow
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY, 0x3ed },  // SPECIES_SHAYMIN sky form
     { 0xffff, 0x0 }
 };
 
@@ -2020,7 +2050,7 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FB484[] = {
     { 0xf, 0x1B7 },
     { 0x10, 0x1BC },
     { 0x11, 0x1A5 },
-    { 0x12, 0x3FC },
+    { 0x12, 0x3DE },
     { 0xffff, 0x0 }
 };
 
@@ -3177,6 +3207,21 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { OBJ_EVENT_GFX_PKMN_ARCEUS_ICE, 0x12, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARCEUS ice type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DRAGON, 0x12, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARCEUS dragon type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DARK, 0x12, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ARCEUS dark type
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_ATTACK, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DEOXYS attack form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_DEFENSE, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DEOXYS defense form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_SPEED, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_DEOXYS speed form
+    { OBJ_EVENT_GFX_PKMN_BURMY_SANDY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BURMY sandy cloak
+    { OBJ_EVENT_GFX_PKMN_BURMY_TRASH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_BURMY trash cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_SANDY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WORMADAM sandy cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_TRASH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_WORMADAM trash cloak
+    { OBJ_EVENT_GFX_PKMN_SHELLOS_EAST, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHELLOS east sea
+    { OBJ_EVENT_GFX_PKMN_GASTRODON_EAST, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_GASTRODON east sea
+    { OBJ_EVENT_GFX_PKMN_ROTOM_HEAT, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROTOM heat
+    { OBJ_EVENT_GFX_PKMN_ROTOM_WASH, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROTOM wash
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FROST, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROTOM frost
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FAN, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROTOM fan
+    { OBJ_EVENT_GFX_PKMN_ROTOM_MOW, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_ROTOM mow
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // SPECIES_SHAYMIN sky form
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -3963,6 +4008,21 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_PKMN_ARCEUS_ICE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARCEUS ice type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DRAGON, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARCEUS dragon type
     { OBJ_EVENT_GFX_PKMN_ARCEUS_DARK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ARCEUS dark type
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_ATTACK, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DEOXYS attack form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_DEFENSE, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DEOXYS defense form
+    { OBJ_EVENT_GFX_PKMN_DEOXYS_SPEED, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_DEOXYS speed form
+    { OBJ_EVENT_GFX_PKMN_BURMY_SANDY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BURMY sandy cloak
+    { OBJ_EVENT_GFX_PKMN_BURMY_TRASH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_BURMY trash cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_SANDY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WORMADAM sandy cloak
+    { OBJ_EVENT_GFX_PKMN_WORMADAM_TRASH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_WORMADAM trash cloak
+    { OBJ_EVENT_GFX_PKMN_SHELLOS_EAST, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHELLOS east sea
+    { OBJ_EVENT_GFX_PKMN_GASTRODON_EAST, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_GASTRODON east sea
+    { OBJ_EVENT_GFX_PKMN_ROTOM_HEAT, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROTOM heat
+    { OBJ_EVENT_GFX_PKMN_ROTOM_WASH, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROTOM wash
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FROST, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROTOM frost
+    { OBJ_EVENT_GFX_PKMN_ROTOM_FAN, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROTOM fan
+    { OBJ_EVENT_GFX_PKMN_ROTOM_MOW, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_ROTOM mow
+    { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // SPECIES_SHAYMIN sky form
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
