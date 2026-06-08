@@ -38,7 +38,7 @@ static void BillboardList_Reset(BillboardList *list);
 static void BillboardList_Draw(BillboardList *list);
 static void UpdateTexPlttAddressesForCurrentFrame(Billboard *billboard);
 static void UpdateModelTextureAddresses(NNSG3dResMdl *model, const NNSG3dResTex *texture, u8 textureIdx);
-static void UpdateMaterialTextureAddresses(NNSG3dResMat *material, const NNSG3dResDictTexToMatIdxData *texToMatDict, u32 textureAddress);
+static void UpdateMaterialTextureAddresses(NNSG3dResMat *material, const NNSG3dResDictTexToMatIdxData *texToMatDict, u32 textureAddress, u32 textureSizeFmt);
 static void UpdateModelPlttAddresses(NNSG3dResMdl *model, const NNSG3dResTex *texture, u8 plttIdx);
 static void UpdateMaterialPlttAddresses(NNSG3dResMat *material, const NNSG3dResDictPlttToMatIdxData *plttToMatDict, u32 plttAddress);
 static void BillboardList_InitBillboards(BillboardList *list);
@@ -682,23 +682,26 @@ static void UpdateModelTextureAddresses(NNSG3dResMdl *model, const NNSG3dResTex 
     const NNSG3dResDict *textureDict = (NNSG3dResDict *)((u8 *)material + material->ofsDictTexToMatList);
     const NNSG3dResDictTexData *textureData = NNS_G3dGetTexDataByIdx(texture, textureIdx);
     u32 textureAddress = textureData->texImageParam & NNS_G3D_TEXIMAGE_PARAM_TEX_ADDR_MASK;
+    u32 textureSizeFmt = textureData->texImageParam & (NNS_G3D_TEXIMAGE_PARAM_S_SIZE_MASK | NNS_G3D_TEXIMAGE_PARAM_T_SIZE_MASK | NNS_G3D_TEXIMAGE_PARAM_TEXFMT_MASK);
 
     for (int i = 0; i < textureDict->numEntry; ++i) {
         const NNSG3dResDictTexToMatIdxData *texToMatDict = (NNSG3dResDictTexToMatIdxData *)NNS_G3dGetResDataByIdx(textureDict, i);
 
         if (texToMatDict->flag & 1) {
-            UpdateMaterialTextureAddresses(material, texToMatDict, textureAddress);
+            UpdateMaterialTextureAddresses(material, texToMatDict, textureAddress, textureSizeFmt);
         }
     }
 }
 
-static void UpdateMaterialTextureAddresses(NNSG3dResMat *material, const NNSG3dResDictTexToMatIdxData *texToMatDict, u32 textureAddress)
+static void UpdateMaterialTextureAddresses(NNSG3dResMat *material, const NNSG3dResDictTexToMatIdxData *texToMatDict, u32 textureAddress, u32 textureSizeFmt)
 {
     u8 *texMaterials = (u8 *)material + texToMatDict->offset;
 
     for (int i = 0; i < texToMatDict->numIdx; i++) {
         NNSG3dResMatData *materialData = NNS_G3dGetMatDataByIdx(material, *(texMaterials + i));
         GF_ASSERT((materialData->texImageParam & NNS_G3D_TEXIMAGE_PARAM_TEX_ADDR_MASK) + textureAddress <= NNS_G3D_TEXIMAGE_PARAM_TEX_ADDR_MASK);
+        materialData->texImageParam &= ~(NNS_G3D_TEXIMAGE_PARAM_S_SIZE_MASK | NNS_G3D_TEXIMAGE_PARAM_T_SIZE_MASK | NNS_G3D_TEXIMAGE_PARAM_TEXFMT_MASK);
+        materialData->texImageParam |= textureSizeFmt;
         materialData->texImageParam += textureAddress;
     }
 }
