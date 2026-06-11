@@ -8,6 +8,7 @@
 #include "location.h"
 #include "map_header_data.h"
 #include "map_object.h"
+#include "script_manager.h"
 #include "map_object_move.h"
 #include "party.h"
 #include "player_avatar.h"
@@ -57,6 +58,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
     if (follower != NULL) {
         if (MapObject_GetGraphicsID(follower) == gfxID) {
+            MapObject_SetScript(follower, SCRIPT_ID(FOLLOWER_PARTNERS, 6));
             return;
         }
         MapObject_SetFlagAndDeleteObject(follower);
@@ -84,7 +86,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         ObjectEvent_SetMovementType(&objectEvent, MOVEMENT_TYPE_FOLLOW_PLAYER);
         ObjectEvent_SetTrainerType(&objectEvent, 0);
         ObjectEvent_SetHiddenFlag(&objectEvent, 0);
-        ObjectEvent_SetScript(&objectEvent, 0xFFFF);
+        ObjectEvent_SetScript(&objectEvent, SCRIPT_ID(FOLLOWER_PARTNERS, 6));
         ObjectEvent_SetInitialDir(&objectEvent, dir);
         ObjectEvent_SetDataAt(&objectEvent, 0, 0);
         ObjectEvent_SetDataAt(&objectEvent, 0, 1);

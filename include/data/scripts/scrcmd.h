@@ -850,6 +850,10 @@ ScriptCommand(SCRCMD_OPENPARTYMENUFORSETHP,                                ScrCm
 ScriptCommand(SCRCMD_SENDOUTFOLLOWINGPOKE,                                 ScrCmd_SendOutFollowingPoke)
 ScriptCommand(SCRCMD_SENDBACKFOLLOWINGPOKE,                                ScrCmd_SendBackFollowingPoke)
 ScriptCommand(SCRCMD_CHECKHASFOLLOWER,                                     ScrCmd_CheckHasFollower)
+ScriptCommand(SCRCMD_FOLLOWPOKEFACEPLAYER,                                 ScrCmd_FollowPokeFacePlayer)
+ScriptCommand(SCRCMD_GETFOLLOWERPARTYSLOT,                                 ScrCmd_GetFollowerPartySlot)
+ScriptCommand(SCRCMD_GETFOLLOWERMONHPPERCENT,                              ScrCmd_GetFollowerMonHPPercent)
+ScriptCommand(SCRCMD_GETFOLLOWERMONSTATUS,                                 ScrCmd_GetFollowerMonStatus)
 
 // clang-format on
 

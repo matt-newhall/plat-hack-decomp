@@ -378,6 +378,221 @@
         "But, then again, it sounds like it’d\n",
         "be a lot of hard work!"
       ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Sleep_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is fighting off\n",
+        "sleep somehow..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Sleep_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0}’s head is\n",
+        "drooping..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Sleep_2",
+      "en_US": "{STRVAR_1 3, 0, 0} looks very sleepy..."
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Sleep_3",
+      "en_US": "{STRVAR_1 3, 0, 0} let out a big yawn."
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Poison",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is trembling from\n",
+        "the effects of the poison..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Burn",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0}’s burn looks\n",
+        "really painful!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Frozen_0",
+      "en_US": [
+        "...{STRVAR_1 3, 0, 0} seems to have\n",
+        "stiffened up and can’t move."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Frozen_1",
+      "en_US": [
+        "......{STRVAR_1 3, 0, 0} seems\n",
+        "a little cold."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Frozen_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is shivering\n",
+        "from the cold..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Paralyzed_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is trembling\n",
+        "and can barely move!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Paralyzed_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems to be having\n",
+        "trouble moving..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Status_Paralyzed_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is working hard\n",
+        "to keep up with you..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryLow_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} looks like\n",
+        "it’s about to collapse!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryLow_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is wobbling...\n",
+        "It’s barely hanging on!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryLow_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems to be\n",
+        "in a lot of pain..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryLow_3",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is struggling\n",
+        "to keep up with you..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Low_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0}’s head is drooping...\n",
+        "It looks very tired."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Low_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems a little\n",
+        "under the weather..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Low_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is making\n",
+        "a sad face..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Low_3",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems unhappy\n",
+        "somehow..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Medium_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is looking at you\n",
+        "with a blank expression."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Medium_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems to be\n",
+        "sensing something..."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Medium_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems\n",
+        "a little timid."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Medium_3",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is sniffing\n",
+        "the air curiously."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_High_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} seems very happy\n",
+        "to be walking with you!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_High_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} smiled at you\n",
+        "cheerfully!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_High_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} wants to play!\n",
+        "It’s bouncing around excitedly!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_High_3",
+      "en_US": "{STRVAR_1 3, 0, 0} bumped into you!"
+    },
+    {
+      "id": "FollowerPartners_Text_VeryHigh_0",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is so happy\n",
+        "it started spinning in circles!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryHigh_1",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is jumping\n",
+        "for joy!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryHigh_2",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} is looking at you\n",
+        "with pure adoration!"
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_VeryHigh_3",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} nuzzled up\n",
+        "close to you!"
+      ]
     }
   ]
 }

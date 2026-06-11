@@ -5023,6 +5023,25 @@
     .short \destVarID
     .endm
 
+    .macro FollowPokeFacePlayer
+    .short SCRCMD_FOLLOWPOKEFACEPLAYER
+    .endm
+
+    .macro GetFollowerPartySlot destVarID
+    .short SCRCMD_GETFOLLOWERPARTYSLOT
+    .short \destVarID
+    .endm
+
+    .macro GetFollowerMonHPPercent destVarID
+    .short SCRCMD_GETFOLLOWERMONHPPERCENT
+    .short \destVarID
+    .endm
+
+    .macro GetFollowerMonStatus destVarID
+    .short SCRCMD_GETFOLLOWERMONSTATUS
+    .short \destVarID
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

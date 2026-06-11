@@ -5,15 +5,21 @@
 
 #include "struct_defs/player_data.h"
 
+#include "constants/battle/condition.h"
 #include "field/field_system.h"
 #include "field_overworld_state.h"
 #include "field_script_context.h"
 #include "follower_mon.h"
 #include "inlines.h"
 #include "map_object.h"
+#include "map_object_move.h"
+#include "overlay005/ov5_021ECC20.h"
+#include "party.h"
 #include "player_avatar.h"
 #include "pokedex.h"
+#include "pokemon.h"
 #include "save_player.h"
+#include "savedata.h"
 #include "system_flags.h"
 #include "trainer_info.h"
 #include "vars_flags.h"
@@ -265,5 +271,90 @@ BOOL ScrCmd_CheckHasFollower(ScriptContext *ctx)
     u16 *destVar = ScriptContext_GetVarPointer(ctx);
     *destVar = MapObjMan_GetLocalMapObjByMovementType(
         ctx->fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER) != NULL;
+    return FALSE;
+}
+
+BOOL ScrCmd_FollowPokeFacePlayer(ScriptContext *ctx)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
+        fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower == NULL) {
+        return FALSE;
+    }
+
+    int playerDir = PlayerAvatar_GetDir(fieldSystem->playerAvatar);
+    ov5_021ECDFC(follower, Direction_GetOpposite(playerDir));
+    return FALSE;
+}
+
+BOOL ScrCmd_GetFollowerPartySlot(ScriptContext *ctx)
+{
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+    Party *party = SaveData_GetParty(ctx->fieldSystem->saveData);
+    int count = Party_GetCurrentCount(party);
+    int i;
+    for (i = 0; i < count; i++) {
+        if (Pokemon_GetValue(Party_GetPokemonBySlotIndex(party, i), MON_DATA_HP, NULL)) {
+            *destVar = (u16)i;
+            return FALSE;
+        }
+    }
+    *destVar = 0;
+    return FALSE;
+}
+
+static Pokemon *GetFollowerLead(FieldSystem *fieldSystem)
+{
+    Party *party = SaveData_GetParty(fieldSystem->saveData);
+    int count = Party_GetCurrentCount(party);
+    int i;
+    for (i = 0; i < count; i++) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(party, i);
+        if (Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
+            return mon;
+        }
+    }
+    return Party_GetPokemonBySlotIndex(party, 0);
+}
+
+BOOL ScrCmd_GetFollowerMonHPPercent(ScriptContext *ctx)
+{
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+    Pokemon *lead = GetFollowerLead(ctx->fieldSystem);
+    u32 hp = Pokemon_GetValue(lead, MON_DATA_HP, NULL);
+    u32 maxHp = Pokemon_GetValue(lead, MON_DATA_MAX_HP, NULL);
+    *destVar = (maxHp > 0) ? (u16)(hp * 100 / maxHp) : 0;
+    return FALSE;
+}
+
+#define FOLLOWER_STATUS_NONE      0
+#define FOLLOWER_STATUS_SLEEP     1
+#define FOLLOWER_STATUS_POISON    2
+#define FOLLOWER_STATUS_BURN      3
+#define FOLLOWER_STATUS_FROZEN    4
+#define FOLLOWER_STATUS_PARALYZED 5
+
+BOOL ScrCmd_GetFollowerMonStatus(ScriptContext *ctx)
+{
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+    Pokemon *lead = GetFollowerLead(ctx->fieldSystem);
+    u32 condition = Pokemon_GetValue(lead, MON_DATA_STATUS, NULL);
+
+    if (condition & MON_CONDITION_SLEEP) {
+        *destVar = FOLLOWER_STATUS_SLEEP;
+    } else if (condition & MON_CONDITION_ANY_POISON) {
+        *destVar = FOLLOWER_STATUS_POISON;
+    } else if (condition & MON_CONDITION_BURN) {
+        *destVar = FOLLOWER_STATUS_BURN;
+    } else if (condition & MON_CONDITION_FREEZE) {
+        *destVar = FOLLOWER_STATUS_FROZEN;
+    } else if (condition & MON_CONDITION_PARALYSIS) {
+        *destVar = FOLLOWER_STATUS_PARALYZED;
+    } else {
+        *destVar = FOLLOWER_STATUS_NONE;
+    }
+
     return FALSE;
 }
