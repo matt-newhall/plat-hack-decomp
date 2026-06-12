@@ -4470,10 +4470,7 @@ BOOL Pokemon_CanShayminSkyForm(Pokemon *mon)
     return species == SPECIES_SHAYMIN
         && monForm == SHAYMIN_FORM_LAND
         && currentHP > 0
-        && fatefulEncounter == TRUE
-        && (condition & MON_CONDITION_FREEZE) == FALSE
-        && rtcTime.hour >= 4
-        && rtcTime.hour < 20;
+        && (condition & MON_CONDITION_FREEZE) == FALSE;
 }
 
 void Party_SetShayminLandForm(Party *party)
