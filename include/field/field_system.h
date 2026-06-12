@@ -66,6 +66,12 @@ typedef struct FieldProcessManager {
     BOOL kill;
 } FieldProcessManager;
 
+typedef struct FollowMon {
+    u16 species;
+    u8  gender;
+    u8  active;
+} FollowMon;
+
 typedef struct FieldSystem_t {
     FieldProcessManager *processManager;
     FieldSystem_sub2 *unk_04;
@@ -117,6 +123,7 @@ typedef struct FieldSystem_t {
     u8 *battleSubscreenCursorOn;
     u32 unk_C0;
     UnkStruct_ov66_0222DCE0_sub1 unk_C4;
+    FollowMon followMon;
 } FieldSystem;
 
 #endif // POKEPLATINUM_FIELD_SYSTEM_H

@@ -50,6 +50,8 @@
 #include "unk_020528D0.h"
 #include "vars_flags.h"
 
+#include "follower_mon.h"
+
 typedef struct Encounter {
     int *resultMaskPtr;
     int introEffectID;
@@ -206,6 +208,7 @@ static BOOL FieldTask_Encounter(FieldTask *task)
         break;
 
     case 4:
+        FollowerMon_UpdateFollower(fieldSystem);
         MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
         FieldTransition_FadeIn(task);
         (*state)++;
@@ -418,6 +421,7 @@ static BOOL FieldTask_WildEncounter(FieldTask *task)
         break;
 
     case 4:
+        FollowerMon_UpdateFollower(fieldSystem);
         RoamerAfterBattle_UpdateRoamers(fieldSystem, encounter->dto);
         FieldTransition_FadeIn(task);
         encounter->state++;
@@ -496,6 +500,7 @@ static BOOL FieldTask_SafariEncounter(FieldTask *task)
         break;
 
     case 5:
+        FollowerMon_UpdateFollower(fieldSystem);
         MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
         FieldTransition_FadeIn(task);
         (*state)++;
@@ -625,6 +630,7 @@ static BOOL FieldTask_PalParkEncounter(FieldTask *task)
         break;
 
     case 5:
+        FollowerMon_UpdateFollower(fieldSystem);
         MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
         FieldTransition_FadeIn(task);
         (*state)++;
@@ -699,6 +705,7 @@ static BOOL FieldTask_CatchingTutorialEncounter(FieldTask *task)
         break;
 
     case 5:
+        FollowerMon_UpdateFollower(fieldSystem);
         MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
         FieldTransition_FadeIn(task);
         (*state)++;

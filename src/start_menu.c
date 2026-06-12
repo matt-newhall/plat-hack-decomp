@@ -70,6 +70,7 @@
 #include "string_gf.h"
 #include "string_list.h"
 #include "string_template.h"
+#include "follower_mon.h"
 #include "system_flags.h"
 #include "system_vars.h"
 #include "text.h"
@@ -454,6 +455,7 @@ static BOOL StartMenu_Main(FieldTask *fieldTask)
         break;
     case START_MENU_STATE_REINIT:
         if (FieldSystem_IsRunningFieldMap(fieldSystem)) {
+            FollowerMon_UpdateFollower(fieldSystem);
             MapObjectMan_PauseAllMovement(fieldSystem->mapObjMan);
             StartMenu_InitMenu(fieldTask);
             StartMenu_PrintBallCount(fieldTask);

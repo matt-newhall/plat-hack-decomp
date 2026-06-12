@@ -222,6 +222,8 @@
 #include "unk_0209C194.h"
 #include "vars_flags.h"
 
+#include "follower_mon.h"
+
 #include "constdata/const_020F8BE0.h"
 #include "res/text/bank/mystery_gift_phrase.h"
 
@@ -2887,6 +2889,8 @@ static BOOL ScriptContext_WaitForPokemonStorageClose(ScriptContext *ctx)
     if (FieldSystem_IsRunningApplication(fieldSystem)) {
         return FALSE;
     }
+
+    FollowerMon_UpdateFollower(fieldSystem);
 
     if (pokemonStorageSession->recordBoxUseInJournal == TRUE) {
         void *journalEntryLocationEvent;

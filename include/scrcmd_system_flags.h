@@ -23,5 +23,12 @@ BOOL ScrCmd_SetGameCompleted(ScriptContext *ctx);
 BOOL ScrCmd_Strength(ScriptContext *ctx);
 BOOL ScrCmd_Flash(ScriptContext *ctx);
 BOOL ScrCmd_Defog(ScriptContext *ctx);
+BOOL ScrCmd_SendOutFollowingPoke(ScriptContext *ctx);
+BOOL ScrCmd_SendBackFollowingPoke(ScriptContext *ctx);
+BOOL ScrCmd_CheckHasFollower(ScriptContext *ctx);
+BOOL ScrCmd_FollowPokeFacePlayer(ScriptContext *ctx);
+BOOL ScrCmd_GetFollowerPartySlot(ScriptContext *ctx);
+BOOL ScrCmd_GetFollowerMonHPPercent(ScriptContext *ctx);
+BOOL ScrCmd_GetFollowerMonStatus(ScriptContext *ctx);
 
 #endif // POKEPLATINUM_SCRCMD_SYSTEM_FLAGS_H

@@ -5010,6 +5010,38 @@
     .short SCRCMD_OPENPARTYMENUFORSETHP
     .endm
 
+    .macro SendOutFollowingPoke
+    .short SCRCMD_SENDOUTFOLLOWINGPOKE
+    .endm
+
+    .macro SendBackFollowingPoke
+    .short SCRCMD_SENDBACKFOLLOWINGPOKE
+    .endm
+
+    .macro CheckHasFollower destVarID
+    .short SCRCMD_CHECKHASFOLLOWER
+    .short \destVarID
+    .endm
+
+    .macro FollowPokeFacePlayer
+    .short SCRCMD_FOLLOWPOKEFACEPLAYER
+    .endm
+
+    .macro GetFollowerPartySlot destVarID
+    .short SCRCMD_GETFOLLOWERPARTYSLOT
+    .short \destVarID
+    .endm
+
+    .macro GetFollowerMonHPPercent destVarID
+    .short SCRCMD_GETFOLLOWERMONHPPERCENT
+    .short \destVarID
+    .endm
+
+    .macro GetFollowerMonStatus destVarID
+    .short SCRCMD_GETFOLLOWERMONSTATUS
+    .short \destVarID
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

@@ -2641,10 +2641,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = fashion_case_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_SEAL_BAG] = {
-        .dataID = 0x19E,
-        .iconID = seal_bag_NCGR,
-        .paletteID = seal_bag_NCLR,
+    [ITEM_INFINITE_REPEL] = {
+        .dataID = 0x1D6,
+        .iconID = repel_NCGR,
+        .paletteID = repel_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_PAL_PAD] = {

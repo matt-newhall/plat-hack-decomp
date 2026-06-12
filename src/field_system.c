@@ -36,6 +36,8 @@
 #include "pokeradar.h"
 #include "savedata.h"
 #include "system.h"
+#include "system_flags.h"
+#include "vars_flags.h"
 #include "unk_0205F180.h"
 #include "unk_0209C370.h"
 

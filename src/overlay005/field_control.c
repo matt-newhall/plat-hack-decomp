@@ -70,6 +70,9 @@
 #include "unk_0205F180.h"
 #include "vars_flags.h"
 
+#include "follower_mon.h"
+
+static void FollowerMon_SpawnIfNeeded(FieldSystem *fieldSystem);
 static BOOL Field_CheckMapTransition(FieldSystem *fieldSystem, const FieldInput *input);
 static u16 Field_TileBehaviorToScript(FieldSystem *fieldSystem, u8 behavior);
 static BOOL Field_CheckWildEncounter(FieldSystem *fieldSystem);
@@ -176,6 +179,10 @@ void FieldInput_Update(FieldInput *input, FieldSystem *fieldSystem, u16 pressedK
 
 BOOL FieldInput_Process(const FieldInput *input, FieldSystem *fieldSystem)
 {
+    if (Player_MoveState(fieldSystem->playerAvatar) == PLAYER_MOVE_STATE_START) {
+        FollowerMon_SpawnIfNeeded(fieldSystem);
+    }
+
     if (input->dummy5 == FALSE && FieldSystem_RunInitScript(fieldSystem, INIT_SCRIPT_ON_FRAME_TABLE) == TRUE) {
         return TRUE;
     }
@@ -199,9 +206,11 @@ BOOL FieldInput_Process(const FieldInput *input, FieldSystem *fieldSystem)
     }
 
     if (input->movement) {
+        BOOL stepResult;
         SystemFlag_ClearStep(SaveData_GetVarsFlags(fieldSystem->saveData));
-
-        if (Field_ProcessStep(fieldSystem) == TRUE) {
+        stepResult = Field_ProcessStep(fieldSystem);
+        FollowerMon_SpawnIfNeeded(fieldSystem);
+        if (stepResult == TRUE) {
             return TRUE;
         }
     }
@@ -703,6 +712,11 @@ u16 Field_TileBehaviorToScript(FieldSystem *fieldSystem, u8 behavior)
     }
 
     return 0xffff;
+}
+
+static void FollowerMon_SpawnIfNeeded(FieldSystem *fieldSystem)
+{
+    FollowerMon_UpdateFollower(fieldSystem);
 }
 
 static BOOL Field_ProcessStep(FieldSystem *fieldSystem)
