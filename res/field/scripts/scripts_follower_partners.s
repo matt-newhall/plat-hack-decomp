@@ -243,6 +243,8 @@ FollowerMon_Talk:
     FollowPokeFacePlayer
     GetFollowerPartySlot VAR_RESULT
     BufferPartyMonNickname 0, VAR_RESULT
+    GetPartyMonSpecies VAR_RESULT, VAR_FOLLOWER_MON_SPECIES
+    PlayCry VAR_FOLLOWER_MON_SPECIES
     GetFollowerMonStatus VAR_RESULT
     GoToIfNe VAR_RESULT, 0, FollowerMon_Talk_Status
     GetFollowerMonHPPercent VAR_RESULT
@@ -418,6 +420,7 @@ FollowerMon_Talk_VeryHigh_2:
     GoTo FollowerMon_Talk_End
 
 FollowerMon_Talk_End:
+    WaitCry
     WaitButton
     CloseMessage
     ReleaseAll
