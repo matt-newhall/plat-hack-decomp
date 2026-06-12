@@ -322,6 +322,14 @@ struct BattleContext {
 
     u32 battleProgressFlag : 1;
     u32 padding3154_01 : 31;
+
+    u8 dancerPendingMask;
+    u8 paddingDancer[3];
+    u16 dancerMove;
+    u16 paddingDancer2;
+    int dancerOriginalAttacker;
+    int dancerOriginalDefender;
+    BOOL isDancerCopy;
 };
 
 #endif // POKEPLATINUM_BATTLE_CONTEXT_H
