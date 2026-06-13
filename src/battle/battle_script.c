@@ -8926,8 +8926,6 @@ static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *
         battleCtx->movePower = 860;
     }
 
-    ConsoleLog("Move Power is %d\n", battleCtx->movePower);
-
     return FALSE;
 }
 
