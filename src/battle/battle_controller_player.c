@@ -2520,7 +2520,8 @@ static BOOL BattleControllerPlayer_CheckStatusDisruption(BattleSystem *battleSys
             if (ATTACKING_MON.status & MON_CONDITION_FREEZE) {
                 if (BattleSystem_RandNext(battleSys) % 5 != 0) {
                     if (moveEffect != BATTLE_EFFECT_THAW_AND_BURN_HIT
-                        && moveEffect != BATTLE_EFFECT_RECOIL_BURN_HIT) {
+                        && moveEffect != BATTLE_EFFECT_RECOIL_BURN_HIT
+                        && battleCtx->moveCur != MOVE_SCALD) {
                         LOAD_SUBSEQ(subscript_frozen);
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
                         battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
@@ -2767,7 +2768,9 @@ static BOOL BattleControllerPlayer_CheckStatusDisruption(BattleSystem *battleSys
 
         case CHECK_STATUS_STATE_SELF_THAW:
             if ((ATTACKING_MON.status & MON_CONDITION_FREEZE)
-                && (moveEffect == BATTLE_EFFECT_THAW_AND_BURN_HIT || moveEffect == BATTLE_EFFECT_RECOIL_BURN_HIT)) {
+                && (moveEffect == BATTLE_EFFECT_THAW_AND_BURN_HIT
+                    || moveEffect == BATTLE_EFFECT_RECOIL_BURN_HIT
+                    || battleCtx->moveCur == MOVE_SCALD)) {
                 LOAD_SUBSEQ(subscript_defrosted_by_move);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -4107,7 +4110,7 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && DEFENDING_MON.curHP
-            && moveType == TYPE_FIRE) {
+            && (moveType == TYPE_FIRE || battleCtx->moveCur == MOVE_SCALD)) {
             battleCtx->msgBattlerTemp = battleCtx->defender;
 
             LOAD_SUBSEQ(subscript_thaw_out);
