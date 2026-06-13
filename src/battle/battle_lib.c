@@ -8103,7 +8103,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = movePower * 75 / 100;
     }
 
-    if (DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END && battleCtx->battleMons[battleCtx->defender].newlySwitched == TRUE) {
+    if (attackerParams.ability == ABILITY_STAKEOUT
+        && DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
+        && battleCtx->battleMons[battleCtx->defender].newlySwitched == TRUE) {
         movePower *= 2;
     }
 
