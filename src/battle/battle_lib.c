@@ -8356,6 +8356,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
+    for (i = 0; i < NELEMS(sSoundMoves); i++) {
+        if (sSoundMoves[i] == move && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_PUNK_ROCK)) {
+            damage /= 2;
+            break;
+        }
+    }
+
     if (defenderParams.curHP == defenderParams.maxHP && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_MULTISCALE)) {
         damage /= 2;
     }
