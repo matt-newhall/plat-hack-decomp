@@ -4,16 +4,11 @@ pl_waza_tbl_subdirs = [
     '0000',
 ]
 
-anim_script_subdirs = [
-    '0000',
-]
-
 move_consts = fs.read(moves_txt).splitlines()
 foreach move : move_consts
     if move.startswith('MOVE_') and move != 'MOVE_NONE'
         move_name = move.replace('MOVE_', '').to_lower()
         pl_waza_tbl_subdirs += move_name
-        anim_script_subdirs += move_name
     endif
 endforeach
 
@@ -36,45 +31,4 @@ pl_waza_tbl_narc = custom_target('pl_waza_tbl.narc',
     ]
 )
 
-anim_script_srcs = []
-foreach subdir : anim_script_subdirs
-    anim_script_srcs += subdir / 'anim.s'
-endforeach
-
-relative_build_dir = fs.relative_to(meson.current_build_dir(), meson.project_build_root())
-
-anim_scripts_root = meson.current_source_dir()
-
-anim_scripts_basename = 'anim_scripts'
-anim_scripts_narc_name = anim_scripts_basename + '.narc'
-anim_scripts_order_name = anim_scripts_basename + '.order'
-
-anim_scripts_private_dir = relative_build_dir / anim_scripts_narc_name + '.p'
-
-anim_scripts_order = custom_target(anim_scripts_order_name,
-    output: anim_scripts_order_name,
-    input: [ moves_txt ],
-    command: [ ordergen_battle_anim_scripts_py, '@INPUT@', meson.current_source_dir(), '@OUTPUT@' ],
-)
-
-anim_scripts_narc = custom_target(anim_scripts_narc_name,
-    output: [
-        anim_scripts_narc_name,
-    ],
-    input: battle_anim_script_bin_gen.process(
-        anim_script_srcs,
-        extra_args: ['--out-dir', anim_scripts_private_dir, '--parent-dir'],
-        preserve_path_from: anim_scripts_root,
-    ),
-    command: [
-        nitroarc_exe,
-        '--create',
-        '--files-from', anim_scripts_order,
-        '--exclude', '*.d',
-        '--file', '@OUTPUT0@',
-        '@PRIVATE_DIR@',
-    ],
-)
-
 nitrofs_files += pl_waza_tbl_narc
-nitrofs_files += anim_scripts_narc

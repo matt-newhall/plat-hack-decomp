@@ -504,5 +504,8 @@ battle_particles_narc = custom_target('battle_particles.narc',
     ],
 )
 
-nitrofs_files += battle_particles_narc
+# NOTE: waza_particle.narc is shipped prebuilt (Waza-Editor edits) via
+# res/prebuilt/wazaeffect/effectdata/. The target below is still built so its
+# .naix index header (consumed in res/battle/meson.build) stays in sync; only
+# the freshly-built NARC is no longer packed into the ROM.
 naix_headers += battle_particles_narc[1]
