@@ -125,7 +125,21 @@ BOOL ScrCmd_CheckHasPartner(ScriptContext *ctx)
 
 BOOL ScrCmd_SetHasPartner(ScriptContext *ctx)
 {
-    SystemFlag_SetHasPartner(SaveData_GetVarsFlags(ctx->fieldSystem->saveData));
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    VarsFlags *varsFlags = SaveData_GetVarsFlags(fieldSystem->saveData);
+
+    if (SystemFlag_CheckHasPartner(varsFlags) == FALSE) {
+        MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
+            fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+        if (follower != NULL) {
+            MapObject_Delete(follower);
+        }
+
+        fieldSystem->followMon.active = FALSE;
+    }
+
+    SystemFlag_SetHasPartner(varsFlags);
     return FALSE;
 }
 

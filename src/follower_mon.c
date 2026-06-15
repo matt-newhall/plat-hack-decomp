@@ -14,6 +14,7 @@
 #include "player_avatar.h"
 #include "pokemon.h"
 #include "savedata.h"
+#include "system_flags.h"
 #include "terrain_collision_manager.h"
 
 #define FOLLOWER_LOCAL_ID 253
@@ -117,6 +118,10 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     MapObject *follower;
     int x, z, dir;
 
+    if (SystemFlag_CheckHasPartner(SaveData_GetVarsFlags(fieldSystem->saveData)) == TRUE) {
+        return;
+    }
+
     gfxID = FollowerMon_GetLeadGfxID(fieldSystem, &species, &gender);
 
     if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
@@ -160,6 +165,10 @@ void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
     int x, z, dir;
 
     if (fieldSystem->followMon.active == FALSE) {
+        return;
+    }
+
+    if (SystemFlag_CheckHasPartner(SaveData_GetVarsFlags(fieldSystem->saveData)) == TRUE) {
         return;
     }
 
