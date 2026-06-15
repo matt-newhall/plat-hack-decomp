@@ -2961,7 +2961,7 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
 
     if (Item_Get(itemData, ITEM_PARAM_EDGE_POKEMON) != 0) {
         Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
-        if (Pokemon_GetExpToNextLevel(mon) < 2) {
+        if (Pokemon_GetExpToNextLevel(mon) < 2 || Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) == MAX_POKEMON_LEVEL) {
             PartyMenu_PrintLongMessage(app, PartyMenu_Text_ItWontHaveAnyEffect, TRUE);
             app->currPartySlot = 7;
             app->unk_B00 = sub_02085348;
