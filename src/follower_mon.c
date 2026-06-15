@@ -16,23 +16,14 @@
 #include "savedata.h"
 #include "terrain_collision_manager.h"
 
-void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
-{
-    Party *party;
-    Pokemon *lead;
-    u16 species;
-    u8  gender;
-    BOOL isShiny;
-    u16 gfxID;
-    MapObject *follower;
-    int x;
-    int z;
-    int i;
-    int partyCount;
-    int dir;
+#define FOLLOWER_LOCAL_ID 253
 
-    party = SaveData_GetParty(fieldSystem->saveData);
-    partyCount = Party_GetCurrentCount(party);
+static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *gender)
+{
+    Party *party = SaveData_GetParty(fieldSystem->saveData);
+    int partyCount = Party_GetCurrentCount(party);
+    Pokemon *lead = NULL;
+    int i;
 
     for (i = 0; i < partyCount; i++) {
         lead = Party_GetPokemonBySlotIndex(party, i);
@@ -42,26 +33,98 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         }
     }
 
-    if (Pokemon_GetValue(lead, MON_DATA_IS_EGG, NULL)) {
-        return;
+    if (lead == NULL || Pokemon_GetValue(lead, MON_DATA_IS_EGG, NULL)) {
+        return OBJ_EVENT_GFX_INVISIBLE;
     }
 
-    species = (u16)Pokemon_GetValue(lead, MON_DATA_SPECIES, NULL);
-    gender  = (u8)Pokemon_GetValue(lead, MON_DATA_GENDER, NULL);
-    isShiny = (BOOL)Pokemon_IsShiny(lead);
-    gfxID   = FollowerMon_GetGfxID(species, (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL), gender == GENDER_FEMALE, isShiny);
+    *species = (u16)Pokemon_GetValue(lead, MON_DATA_SPECIES, NULL);
+    *gender  = (u8)Pokemon_GetValue(lead, MON_DATA_GENDER, NULL);
+
+    return FollowerMon_GetGfxID(
+        *species,
+        (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL),
+        *gender == GENDER_FEMALE,
+        (BOOL)Pokemon_IsShiny(lead));
+}
+
+static void FollowerMon_StorePosition(FieldSystem *fieldSystem, MapObject *follower, u16 species, u8 gender)
+{
+    fieldSystem->followMon.species = species;
+    fieldSystem->followMon.gender  = gender;
+    fieldSystem->followMon.x       = (s16)MapObject_GetX(follower);
+    fieldSystem->followMon.z       = (s16)MapObject_GetZ(follower);
+    fieldSystem->followMon.dir     = (u8)MapObject_GetFacingDir(follower);
+    fieldSystem->followMon.active  = TRUE;
+}
+
+static MapObject *FollowerMon_Spawn(FieldSystem *fieldSystem, u16 gfxID, int x, int z, int dir)
+{
+    ObjectEvent objectEvent;
+    MapObject *follower;
+
+    ObjectEvent_SetLocalID(&objectEvent, FOLLOWER_LOCAL_ID);
+    ObjectEvent_SetGraphicsID(&objectEvent, gfxID);
+    ObjectEvent_SetMovementType(&objectEvent, MOVEMENT_TYPE_FOLLOW_PLAYER);
+    ObjectEvent_SetTrainerType(&objectEvent, 0);
+    ObjectEvent_SetHiddenFlag(&objectEvent, 0);
+    ObjectEvent_SetScript(&objectEvent, SCRIPT_ID(FOLLOWER_PARTNERS, 6));
+    ObjectEvent_SetInitialDir(&objectEvent, dir);
+    ObjectEvent_SetDataAt(&objectEvent, 0, 0);
+    ObjectEvent_SetDataAt(&objectEvent, 0, 1);
+    ObjectEvent_SetDataAt(&objectEvent, 0, 2);
+    ObjectEvent_SetMovementRangeX(&objectEvent, 0);
+    ObjectEvent_SetMovementRangeZ(&objectEvent, 0);
+    ObjectEvent_SetX(&objectEvent, x);
+    ObjectEvent_SetY(&objectEvent, 0);
+    ObjectEvent_SetZ(&objectEvent, z);
+
+    follower = MapObjectMan_AddMapObjectFromHeader(
+        fieldSystem->mapObjMan, &objectEvent, fieldSystem->location->mapId);
+
+    if (follower == NULL) {
+        return NULL;
+    }
+
+    MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_PERSISTENT);
+    MapObject_RecalculateObjectHeight(follower);
+
+    return follower;
+}
+
+static MapObject *FollowerMon_FindAndReuse(FieldSystem *fieldSystem, u16 gfxID, u16 species, u8 gender)
+{
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower == NULL) {
+        return NULL;
+    }
+
+    if (MapObject_GetGraphicsID(follower) == gfxID) {
+        MapObject_SetScript(follower, SCRIPT_ID(FOLLOWER_PARTNERS, 6));
+        FollowerMon_StorePosition(fieldSystem, follower, species, gender);
+        return follower;
+    }
+
+    MapObject_SetFlagAndDeleteObject(follower);
+    return NULL;
+}
+
+void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
+{
+    u16 species;
+    u8  gender;
+    u16 gfxID;
+    MapObject *follower;
+    int x, z, dir;
+
+    gfxID = FollowerMon_GetLeadGfxID(fieldSystem, &species, &gender);
 
     if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
         return;
     }
 
-    follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
-    if (follower != NULL) {
-        if (MapObject_GetGraphicsID(follower) == gfxID) {
-            MapObject_SetScript(follower, SCRIPT_ID(FOLLOWER_PARTNERS, 6));
-            return;
-        }
-        MapObject_SetFlagAndDeleteObject(follower);
+    if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
+        return;
     }
 
     x   = Player_GetXPos(fieldSystem->playerAvatar);
@@ -79,35 +142,64 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         return;
     }
 
-    {
-        ObjectEvent objectEvent;
-        ObjectEvent_SetLocalID(&objectEvent, 253);
-        ObjectEvent_SetGraphicsID(&objectEvent, gfxID);
-        ObjectEvent_SetMovementType(&objectEvent, MOVEMENT_TYPE_FOLLOW_PLAYER);
-        ObjectEvent_SetTrainerType(&objectEvent, 0);
-        ObjectEvent_SetHiddenFlag(&objectEvent, 0);
-        ObjectEvent_SetScript(&objectEvent, SCRIPT_ID(FOLLOWER_PARTNERS, 6));
-        ObjectEvent_SetInitialDir(&objectEvent, dir);
-        ObjectEvent_SetDataAt(&objectEvent, 0, 0);
-        ObjectEvent_SetDataAt(&objectEvent, 0, 1);
-        ObjectEvent_SetDataAt(&objectEvent, 0, 2);
-        ObjectEvent_SetMovementRangeX(&objectEvent, 0);
-        ObjectEvent_SetMovementRangeZ(&objectEvent, 0);
-        ObjectEvent_SetX(&objectEvent, x);
-        ObjectEvent_SetY(&objectEvent, 0);
-        ObjectEvent_SetZ(&objectEvent, z);
-        follower = MapObjectMan_AddMapObjectFromHeader(
-            fieldSystem->mapObjMan, &objectEvent, fieldSystem->location->mapId);
-    }
+    follower = FollowerMon_Spawn(fieldSystem, gfxID, x, z, dir);
 
     if (follower == NULL) {
         return;
     }
 
-    MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_PERSISTENT);
-    MapObject_RecalculateObjectHeight(follower);
+    FollowerMon_StorePosition(fieldSystem, follower, species, gender);
+}
 
-    fieldSystem->followMon.species = species;
-    fieldSystem->followMon.gender  = gender;
-    fieldSystem->followMon.active  = TRUE;
+void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
+{
+    u16 species;
+    u8  gender;
+    u16 gfxID;
+    MapObject *follower;
+    int x, z, dir;
+
+    if (fieldSystem->followMon.active == FALSE) {
+        return;
+    }
+
+    gfxID = FollowerMon_GetLeadGfxID(fieldSystem, &species, &gender);
+
+    if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
+        return;
+    }
+
+    if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
+        return;
+    }
+
+    x   = fieldSystem->followMon.x;
+    z   = fieldSystem->followMon.z;
+    dir = fieldSystem->followMon.dir;
+
+    if (TileBehavior_IsNull(TerrainCollisionManager_GetTileBehavior(fieldSystem, x, z))) {
+        return;
+    }
+
+    follower = FollowerMon_Spawn(fieldSystem, gfxID, x, z, dir);
+
+    if (follower == NULL) {
+        return;
+    }
+
+    FollowerMon_StorePosition(fieldSystem, follower, species, gender);
+}
+
+void FollowerMon_SaveState(FieldSystem *fieldSystem)
+{
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower != NULL) {
+        fieldSystem->followMon.x      = (s16)MapObject_GetX(follower);
+        fieldSystem->followMon.z      = (s16)MapObject_GetZ(follower);
+        fieldSystem->followMon.dir    = (u8)MapObject_GetFacingDir(follower);
+        fieldSystem->followMon.active = TRUE;
+    } else {
+        fieldSystem->followMon.active = FALSE;
+    }
 }

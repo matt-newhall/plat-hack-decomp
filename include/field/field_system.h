@@ -70,6 +70,9 @@ typedef struct FollowMon {
     u16 species;
     u8  gender;
     u8  active;
+    s16 x;
+    s16 z;
+    u8  dir;
 } FollowMon;
 
 typedef struct FieldSystem_t {

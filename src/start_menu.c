@@ -423,6 +423,7 @@ static BOOL StartMenu_Main(FieldTask *fieldTask)
 
     switch (menu->state) {
     case START_MENU_STATE_INIT:
+        FollowerMon_SaveState(fieldSystem);
         MapObjectMan_PauseAllMovement(fieldSystem->mapObjMan);
         ItemUseContext_Init(fieldSystem, &menu->itemUseCtx);
         FieldMoves_SetUsableMoves(fieldSystem, &menu->fieldMoveContext);
@@ -455,7 +456,7 @@ static BOOL StartMenu_Main(FieldTask *fieldTask)
         break;
     case START_MENU_STATE_REINIT:
         if (FieldSystem_IsRunningFieldMap(fieldSystem)) {
-            FollowerMon_UpdateFollower(fieldSystem);
+            FollowerMon_RestoreFollower(fieldSystem);
             MapObjectMan_PauseAllMovement(fieldSystem->mapObjMan);
             StartMenu_InitMenu(fieldTask);
             StartMenu_PrintBallCount(fieldTask);

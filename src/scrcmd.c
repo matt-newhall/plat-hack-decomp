@@ -2890,7 +2890,7 @@ static BOOL ScriptContext_WaitForPokemonStorageClose(ScriptContext *ctx)
         return FALSE;
     }
 
-    FollowerMon_UpdateFollower(fieldSystem);
+    FollowerMon_RestoreFollower(fieldSystem);
 
     if (pokemonStorageSession->recordBoxUseInJournal == TRUE) {
         void *journalEntryLocationEvent;
@@ -3303,6 +3303,7 @@ static BOOL ScrCmd_OpenPokemonStorage(ScriptContext *ctx)
     pokemonStorageSession->boxMode = ScriptContext_ReadByte(ctx);
     *partyManagementData = pokemonStorageSession;
 
+    FollowerMon_SaveState(ctx->fieldSystem);
     FieldSystem_OpenPokemonStorage(ctx->fieldSystem, *partyManagementData);
     ScriptContext_Pause(ctx, ScriptContext_WaitForPokemonStorageClose);
 
