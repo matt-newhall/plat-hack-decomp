@@ -3194,41 +3194,10 @@ static int PartyMenu_ProcessAbilityCapsuleConfirmation(PartyMenuApplication *app
         Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, application->currPartySlot);
 
         if (application->partyMenu->usedItemID == ITEM_SHINY_CHARM) {
-            u32 monOTID = Pokemon_GetValue(mon, MON_DATA_OT_ID, NULL);
-            u32 monPersonality = Pokemon_GetValue(mon, MON_DATA_PERSONALITY, NULL);
-            u32 pidLow = monPersonality & 0xFFFF;
-            u32 oldPidHigh = (monPersonality >> 16) & 0xFFFF;
-            // Block order is (PID & 0x3E000) >> 13, spanning pidLow bits 13-15 (unchanged)
-            // and pidHigh bits 0-1 — preserve by requiring (candidate & 3) == (oldPidHigh & 3).
-            u32 oldBlockKey = (monPersonality & 0x3E000) >> 13;
-            u32 xorBase = ((monOTID >> 16) & 0xFFFF) ^ (monOTID & 0xFFFF) ^ pidLow;
-            u32 pidHigh = oldPidHigh;
-            u32 resultTextID;
+            u8 shinyOverride = Pokemon_GetValue(mon, MON_DATA_SHINY_OVERRIDE, NULL) ^ 1;
+            Pokemon_SetValue(mon, MON_DATA_SHINY_OVERRIDE, &shinyOverride);
 
-            if (Pokemon_IsShiny(mon)) {
-                // Revert to not-shiny: find pidHigh with xorBase ^ pidHigh >= 16
-                for (u32 candidate = (oldPidHigh & 3); candidate <= 0xFFFF; candidate += 4) {
-                    if ((xorBase ^ candidate) >= 16) {
-                        pidHigh = candidate;
-                        break;
-                    }
-                }
-                resultTextID = PartyMenu_Text_NoLongerShiny;
-            } else {
-                // Make shiny: pidHigh = (xorBase & 0xFFF0) | k, pick k preserving block order
-                u32 shinyBase = xorBase & 0xFFF0;
-                for (u32 k = 0; k < 16; k++) {
-                    u32 candidate = shinyBase | k;
-                    if (((((candidate << 16) | pidLow) & 0x3E000) >> 13) == oldBlockKey) {
-                        pidHigh = candidate;
-                        break;
-                    }
-                }
-                resultTextID = PartyMenu_Text_BecameShiny;
-            }
-
-            u32 newPersonality = (pidHigh << 16) | pidLow;
-            Pokemon_SetValue(mon, MON_DATA_PERSONALITY, &newPersonality);
+            u32 resultTextID = Pokemon_IsShiny(mon) ? PartyMenu_Text_BecameShiny : PartyMenu_Text_NoLongerShiny;
 
             String *successStr = MessageLoader_GetNewString(application->messageLoader, resultTextID);
             StringTemplate_SetNickname(application->template, 0, Pokemon_GetBoxPokemon(mon));

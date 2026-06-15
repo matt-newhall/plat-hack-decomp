@@ -1059,6 +1059,10 @@ static u32 BoxPokemon_GetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam 
         result = monDataBlockB->unused2 & 0x3;
         break;
 
+    case MON_DATA_SHINY_OVERRIDE:
+        result = (monDataBlockB->unused2 & 0x4) >> 2;
+        break;
+
     case MON_DATA_NICKNAME:
         if (boxMon->checksumFailed) {
             // TODO confirm this should be SPECIES_BAD_EGG (lines up with checksum failure check but not throughly checked this call tree)
@@ -1616,6 +1620,10 @@ static void BoxPokemon_SetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam
 
     case MON_DATA_ABILITY_SLOT:
         monDataBlockB->unused2 = (monDataBlockB->unused2 & ~0x3) | (*u8Value & 0x3);
+        break;
+
+    case MON_DATA_SHINY_OVERRIDE:
+        monDataBlockB->unused2 = (monDataBlockB->unused2 & ~0x4) | ((*u8Value & 0x1) << 2);
         break;
 
     case MON_DATA_NICKNAME_AND_FLAG: {
@@ -2746,8 +2754,9 @@ static u8 BoxPokemon_IsShiny(BoxPokemon *boxMon)
 {
     u32 monOTID = BoxPokemon_GetValue(boxMon, MON_DATA_OT_ID, NULL);
     u32 monPersonality = BoxPokemon_GetValue(boxMon, MON_DATA_PERSONALITY, NULL);
+    u8 shinyOverride = BoxPokemon_GetValue(boxMon, MON_DATA_SHINY_OVERRIDE, NULL);
 
-    return Pokemon_IsPersonalityShiny(monOTID, monPersonality);
+    return Pokemon_IsPersonalityShiny(monOTID, monPersonality) ^ shinyOverride;
 }
 
 static inline BOOL Pokemon_InlineIsPersonalityShiny(u32 monOTID, u32 monPersonality)
