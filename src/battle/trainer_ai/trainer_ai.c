@@ -48,7 +48,6 @@ static const u16 sNoDamageCalcMoveEffects[] = {
 };
 
 static const u16 sAltPowerMoveEffects[] = {
-    BATTLE_EFFECT_RANDOM_TYPE_BASED_ON_IVS,
     BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED,
     BATTLE_EFFECT_NATURAL_GIFT,
     BATTLE_EFFECT_JUDGEMENT,
