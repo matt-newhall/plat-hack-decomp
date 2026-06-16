@@ -269,6 +269,7 @@ _0478:
 _0487:
     Message FieldMoves_Text_PokemonUsedRockClimb
     CloseMessage
+    SendBackFollowingPoke
     UseRockClimb VAR_0x8004
     GetCurrentMapID VAR_0x8004
     CreateJournalEvent LOCATION_EVENT_USED_ROCK_CLIMB, VAR_0x8004, 0, 0, 0
@@ -309,6 +310,7 @@ _0512:
 _051F:
     Message FieldMoves_Text_PokemonUsedSurf
     CloseMessage
+    SendBackFollowingPoke
     UseSurf VAR_0x8004
     GetCurrentMapID VAR_0x8004
     CreateJournalEvent LOCATION_EVENT_USED_SURF, VAR_0x8004, 0, 0, 0

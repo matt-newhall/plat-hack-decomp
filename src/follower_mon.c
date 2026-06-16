@@ -1,5 +1,7 @@
 #include "follower_mon.h"
 
+#include "constants/player_avatar.h"
+
 #include "field/field_system.h"
 #include "generated/genders.h"
 #include "generated/movement_types.h"
@@ -119,6 +121,11 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     int x, z, dir;
 
     if (SystemFlag_CheckHasPartner(SaveData_GetVarsFlags(fieldSystem->saveData)) == TRUE) {
+        return;
+    }
+
+    // Surf/Waterfall
+    if (PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) == PLAYER_STATE_SURFING) {
         return;
     }
 
