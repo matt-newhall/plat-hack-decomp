@@ -47,6 +47,7 @@ DistortionWorldGiratinaRoom_GoToSendoffSpring:
     CloseMessage
     EnableHiddenLocation HIDDEN_LOCATION_SPRING_PATH
     SetVar VAR_EXITED_DISTORTION_WORLD_STATE, 1
+    ClearFlag FLAG_HIDE_SENDOFF_SPRING_CYNTHIA
     PlaySE SEQ_SE_PL_SYUWA
     FadeScreenOut
     WaitFadeScreen

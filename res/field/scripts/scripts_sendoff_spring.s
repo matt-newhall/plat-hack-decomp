@@ -10,6 +10,9 @@
 
 SendoffSpring_OnTransition:
     CallIfSet FLAG_CAUGHT_GIRATINA, SendoffSpring_ShowTurnbackCaveItem
+    GoToIfGe VAR_EXITED_DISTORTION_WORLD_STATE, 1, SendoffSpring_OnTransitionEnd
+    SetFlag FLAG_HIDE_SENDOFF_SPRING_CYNTHIA
+SendoffSpring_OnTransitionEnd:
     End
 
 SendoffSpring_ShowTurnbackCaveItem:

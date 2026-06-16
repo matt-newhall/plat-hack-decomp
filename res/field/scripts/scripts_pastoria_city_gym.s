@@ -1,4 +1,5 @@
 #include "macros/scrcmd.inc"
+#include "generated/hidden_locations.h"
 #include "res/text/bank/pastoria_city_gym.h"
 
 
@@ -56,6 +57,7 @@ PastoriaGym_Wake:
     PlayFanfare SEQ_BADGE
     WaitFanfare
     GiveBadge BADGE_ID_FEN
+    EnableHiddenLocation HIDDEN_LOCATION_SPRING_PATH
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_BADGE_EARNED
     SetTrainerFlag TRAINER_FISHERMAN_ERICK
     SetTrainerFlag TRAINER_SAILOR_DAMIAN
