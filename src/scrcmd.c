@@ -3770,6 +3770,7 @@ static BOOL ScrCmd_SetPlayerBike(ScriptContext *ctx)
     u8 rideBike = ScriptContext_ReadByte(ctx);
 
     if (rideBike == TRUE) {
+        FollowerMon_Despawn(ctx->fieldSystem);
         FieldBGM_SetOverride(ctx->fieldSystem, SEQ_BICYCLE);
         FieldBGM_TryFadeOut(ctx->fieldSystem, SEQ_BICYCLE, 1);
         PlayerAvatar_SetTransitionState(ctx->fieldSystem->playerAvatar, PLAYER_TRANSITION_CYCLING);

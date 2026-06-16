@@ -32,6 +32,7 @@
 #include "field_message.h"
 #include "field_system.h"
 #include "field_task.h"
+#include "follower_mon.h"
 #include "game_options.h"
 #include "heap.h"
 #include "item.h"
@@ -451,6 +452,8 @@ static BOOL MountOrUnmountBicycle(FieldTask *task)
             FieldBGM_SetOverride(fieldSystem, SEQ_NONE);
             FieldBGM_TryFadeOut(fieldSystem, FieldBGM_GetEffective(fieldSystem, fieldSystem->location->mapId), 1);
         } else {
+            FollowerMon_Despawn(fieldSystem);
+
             FieldBGM_SetOverride(fieldSystem, SEQ_BICYCLE);
             FieldBGM_TryFadeOut(fieldSystem, SEQ_BICYCLE, 1);
             MapObject_SetPauseMovementOff(Player_MapObject(fieldSystem->playerAvatar));

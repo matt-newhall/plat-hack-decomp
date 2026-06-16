@@ -267,16 +267,7 @@ BOOL ScrCmd_SendOutFollowingPoke(ScriptContext *ctx)
 
 BOOL ScrCmd_SendBackFollowingPoke(ScriptContext *ctx)
 {
-    FieldSystem *fieldSystem = ctx->fieldSystem;
-    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
-        fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
-
-    if (follower != NULL) {
-        MapObject_Delete(follower);
-    }
-
-    fieldSystem->followMon.active = FALSE;
-
+    FollowerMon_Despawn(ctx->fieldSystem);
     return FALSE;
 }
 

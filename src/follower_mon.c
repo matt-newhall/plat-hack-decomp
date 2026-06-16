@@ -124,8 +124,9 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         return;
     }
 
-    // Surf/Waterfall
-    if (PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) == PLAYER_STATE_SURFING) {
+    // Surf/Waterfall/Bike
+    if (PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) == PLAYER_STATE_SURFING
+        || PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) == PLAYER_STATE_CYCLING) {
         return;
     }
 
@@ -218,4 +219,15 @@ void FollowerMon_SaveState(FieldSystem *fieldSystem)
     } else {
         fieldSystem->followMon.active = FALSE;
     }
+}
+
+void FollowerMon_Despawn(FieldSystem *fieldSystem)
+{
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower != NULL) {
+        MapObject_Delete(follower);
+    }
+
+    fieldSystem->followMon.active = FALSE;
 }
