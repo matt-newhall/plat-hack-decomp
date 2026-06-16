@@ -5,7 +5,9 @@
       "id": "FieldMoves_Text_WouldYouLikeToUseCut",
       "en_US": [
         "This tree looks like it can be\n",
-        "cut down! Would you like to cut it?"
+        "cut down!\r",
+        "Call on {STRVAR_1 0, 0, 0}\n",
+        "to use Cut?"
       ]
     },
     {
@@ -22,8 +24,9 @@
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseRockSmash",
       "en_US": [
-        "This rock appears to be breakable.\n",
-        "Would you like to use Rock Smash?"
+        "This rock appears to be breakable.\r",
+        "Call on {STRVAR_1 0, 0, 0}\n",
+        "to use Rock Smash?"
       ]
     },
     {
@@ -42,7 +45,8 @@
       "en_US": [
         "It’s a big boulder, but a Pokémon\n",
         "may be able to push it aside.\r",
-        "Would you like to use Strength?"
+        "Call on {STRVAR_1 0, 0, 0}\n",
+        "to use Strength?"
       ]
     },
     {
@@ -77,8 +81,9 @@
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseSurf",
       "en_US": [
-        "The water is a deep blue color...\n",
-        "Would you like to surf on it?"
+        "The water is a deep blue color...\r",
+        "Call on {STRVAR_1 0, 0, 0}\n",
+        "to use Surf?"
       ]
     },
     {
@@ -113,8 +118,9 @@
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseRockClimb",
       "en_US": [
-        "The wall is very rocky...\n",
-        "Would you like to use Rock Climb?"
+        "The wall is very rocky...\r",
+        "Call on {STRVAR_1 0, 0, 0}\n",
+        "to use Rock Climb?"
       ]
     },
     {
@@ -138,8 +144,9 @@
     {
       "id": "FieldMoves_Text_WouldYouLikeToUseWaterfall",
       "en_US": [
-        "It’s a large waterfall.\n",
-        "Would you like to use Waterfall?"
+        "It’s a large waterfall.\r",
+        "Call on {STRVAR_1 0, 0, 0}\n",
+        "to use Waterfall?"
       ]
     },
     {

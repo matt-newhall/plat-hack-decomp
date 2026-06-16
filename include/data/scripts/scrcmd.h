@@ -854,6 +854,7 @@ ScriptCommand(SCRCMD_FOLLOWPOKEFACEPLAYER,                                 ScrCm
 ScriptCommand(SCRCMD_GETFOLLOWERPARTYSLOT,                                 ScrCmd_GetFollowerPartySlot)
 ScriptCommand(SCRCMD_GETFOLLOWERMONHPPERCENT,                              ScrCmd_GetFollowerMonHPPercent)
 ScriptCommand(SCRCMD_GETFOLLOWERMONSTATUS,                                 ScrCmd_GetFollowerMonStatus)
+ScriptCommand(SCRCMD_PLAYHMSUMMONCUTIN,                                    ScrCmd_PlayHMSummonCutIn)
 
 // clang-format on
 

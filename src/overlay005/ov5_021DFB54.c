@@ -53,6 +53,7 @@ typedef struct MonRideTask {
     int playerGender;
     Pokemon *partyMon;
     SysTask *HMCutInTask;
+    BOOL ownsMon;
 } MonRideTask;
 
 typedef struct SurfTaskEnv {
@@ -167,7 +168,7 @@ static void ov5_021E10C0(void *param0, const Billboard *param1);
 static MapObject *ov5_021E10D4(PlayerAvatar *playerAvatar, int param1);
 static void *MonRideTaskEnv_New(int size);
 static void MonRideTaskEnv_Free(void *taskEnv);
-static Pokemon *GetPokemonByIndex(FieldSystem *fieldSystem, int partySlot);
+static Pokemon *CreateHMSummonMon(enum HeapID heapID, u16 species);
 static void ov5_021E0DE0(FieldSystem *fieldSystem);
 static BOOL ov5_021E0E10(FieldTask *param0);
 static int SubTask_RockClimb_PlayCutIn(RockClimbTaskEnv *taskEnv);
@@ -627,13 +628,14 @@ static void SurfTask_Start(FieldSystem *fieldSystem, int direction, const MonRid
     FieldTask_InitCall(fieldSystem->task, FieldTask_UseSurf, taskEnv);
 }
 
-void FieldTask_StartUseSurf(FieldTask *task, int direction, int partySlot)
+void FieldTask_StartUseSurf(FieldTask *task, int direction, u16 species)
 {
     MonRideTask monRideTask;
     FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);
-    Pokemon *partyMon = GetPokemonByIndex(fieldSystem, partySlot);
+    Pokemon *summonMon = CreateHMSummonMon(HEAP_ID_FIELD2, species);
 
-    MonRideTask_Init(fieldSystem, partyMon, &monRideTask);
+    MonRideTask_Init(fieldSystem, summonMon, &monRideTask);
+    monRideTask.ownsMon = TRUE;
     SurfTask_Start(fieldSystem, direction, &monRideTask);
 }
 
@@ -1011,13 +1013,14 @@ static void RockClimbTask_Start(FieldSystem *fieldSystem, int direction, const M
     FieldTask_InitCall(fieldSystem->task, FieldTask_UseRockClimb, taskEnv);
 }
 
-void FieldTask_StartUseRockClimb(FieldTask *task, int direction, int partySlot)
+void FieldTask_StartUseRockClimb(FieldTask *task, int direction, u16 species)
 {
     MonRideTask monRideTask;
     FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);
-    Pokemon *partyMon = GetPokemonByIndex(fieldSystem, partySlot);
+    Pokemon *summonMon = CreateHMSummonMon(HEAP_ID_FIELD2, species);
 
-    MonRideTask_Init(fieldSystem, partyMon, &monRideTask);
+    MonRideTask_Init(fieldSystem, summonMon, &monRideTask);
+    monRideTask.ownsMon = TRUE;
     RockClimbTask_Start(fieldSystem, direction, &monRideTask);
 }
 
@@ -1182,13 +1185,14 @@ void ov5_021E097C(FieldSystem *fieldSystem, int param1)
     FieldSystem_CreateTask(fieldSystem, FieldTask_UseWaterfall, taskEnv);
 }
 
-void FieldTask_StartUseWaterfall(FieldTask *task, int direction, int partySlot)
+void FieldTask_StartUseWaterfall(FieldTask *task, int direction, u16 species)
 {
     MonRideTask monRideTask;
     FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);
-    Pokemon *partyMon = GetPokemonByIndex(fieldSystem, partySlot);
+    Pokemon *summonMon = CreateHMSummonMon(HEAP_ID_FIELD2, species);
 
-    MonRideTask_Init(fieldSystem, partyMon, &monRideTask);
+    MonRideTask_Init(fieldSystem, summonMon, &monRideTask);
+    monRideTask.ownsMon = TRUE;
 
     {
         WaterfallTaskEnv *taskEnv = WaterfallTaskEnv_New(fieldSystem, direction, &monRideTask);
@@ -1710,6 +1714,15 @@ static void MonRideTask_Init(FieldSystem *fieldSystem, Pokemon *partyMon, MonRid
     monRideTask->playCutIn = TRUE;
     monRideTask->partyMon = partyMon;
     monRideTask->playerGender = PlayerAvatar_Gender(fieldSystem->playerAvatar);
+    monRideTask->ownsMon = FALSE;
+}
+
+static Pokemon *CreateHMSummonMon(enum HeapID heapID, u16 species)
+{
+    Pokemon *mon = Pokemon_New(heapID);
+    Pokemon_InitWith(mon, species, 50, INIT_IVS_RANDOM, FALSE, 0, OTID_NOT_SET, 0);
+
+    return mon;
 }
 
 static void NewMonRideCutIn(FieldSystem *fieldSystem, MonRideTask *monRideTask)
@@ -1721,6 +1734,13 @@ static BOOL CheckMonRideCutInFinished(MonRideTask *monRideTask)
 {
     if (HMCutIn_IsFinished(monRideTask->HMCutInTask) == TRUE) {
         HMCutIn_EndTask(monRideTask->HMCutInTask);
+
+        if (monRideTask->ownsMon == TRUE) {
+            Heap_Free(monRideTask->partyMon);
+            monRideTask->partyMon = NULL;
+            monRideTask->ownsMon = FALSE;
+        }
+
         return TRUE;
     }
 
@@ -1779,10 +1799,4 @@ static void *MonRideTaskEnv_New(int size)
 static void MonRideTaskEnv_Free(void *taskEnv)
 {
     Heap_FreeExplicit(HEAP_ID_FIELD1, taskEnv);
-}
-
-static Pokemon *GetPokemonByIndex(FieldSystem *fieldSystem, int partySlot)
-{
-    Pokemon *partyMon = Party_GetPokemonBySlotIndex(SaveData_GetParty(fieldSystem->saveData), partySlot);
-    return partyMon;
 }

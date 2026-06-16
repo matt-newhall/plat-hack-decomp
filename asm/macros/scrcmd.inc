@@ -5042,6 +5042,11 @@
     .short \destVarID
     .endm
 
+    .macro PlayHMSummonCutIn species
+    .short SCRCMD_PLAYHMSUMMONCUTIN
+    .short \species
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

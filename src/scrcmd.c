@@ -413,6 +413,8 @@ static BOOL ScrCmd_0C3(ScriptContext *ctx);
 static BOOL ScrCmd_0C4(ScriptContext *ctx);
 static BOOL ScrCmd_0C5(ScriptContext *ctx);
 static BOOL sub_02042C80(ScriptContext *ctx);
+static BOOL ScrCmd_PlayHMSummonCutIn(ScriptContext *ctx);
+static BOOL WaitHMSummonCutIn(ScriptContext *ctx);
 static BOOL ScrCmd_ChangeIntoContestAttire(ScriptContext *ctx);
 static BOOL ScrCmd_CheckPlayerOnBike(ScriptContext *ctx);
 static BOOL ScrCmd_SetPlayerBike(ScriptContext *ctx);
@@ -3702,6 +3704,48 @@ static BOOL sub_02042C80(ScriptContext *ctx)
 
     if (HMCutIn_IsFinished(*v0) == TRUE) {
         HMCutIn_EndTask(*v0);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+typedef struct HMSummonCutIn {
+    SysTask *cutInTask;
+    Pokemon *mon;
+} HMSummonCutIn;
+
+static Pokemon *CreateHMSummonMon(enum HeapID heapID, u16 species)
+{
+    Pokemon *mon = Pokemon_New(heapID);
+    Pokemon_InitWith(mon, species, 50, INIT_IVS_RANDOM, FALSE, 0, OTID_NOT_SET, 0);
+
+    return mon;
+}
+
+static BOOL ScrCmd_PlayHMSummonCutIn(ScriptContext *ctx)
+{
+    void **dataPtr = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_DATA_PTR);
+    u16 species = ScriptContext_GetVar(ctx);
+
+    HMSummonCutIn *summon = Heap_Alloc(HEAP_ID_FIELD2, sizeof(HMSummonCutIn));
+    summon->mon = CreateHMSummonMon(HEAP_ID_FIELD2, species);
+    summon->cutInTask = HMCutIn_StartTask(ctx->fieldSystem, 0, summon->mon, PlayerAvatar_Gender(ctx->fieldSystem->playerAvatar));
+    *dataPtr = summon;
+
+    ScriptContext_Pause(ctx, WaitHMSummonCutIn);
+    return TRUE;
+}
+
+static BOOL WaitHMSummonCutIn(ScriptContext *ctx)
+{
+    void **dataPtr = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_DATA_PTR);
+    HMSummonCutIn *summon = *dataPtr;
+
+    if (HMCutIn_IsFinished(summon->cutInTask) == TRUE) {
+        HMCutIn_EndTask(summon->cutInTask);
+        Heap_Free(summon->mon);
+        Heap_Free(summon);
         return TRUE;
     }
 

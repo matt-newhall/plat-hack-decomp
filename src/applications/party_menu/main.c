@@ -1848,6 +1848,21 @@ static void sub_0207FFC8(PartyMenuApplication *application)
     Sprite_SetExplicitPalette2(application->sprites[PARTY_MENU_SPRITE_CURSOR_NORMAL], 1);
 }
 
+static BOOL IsSummonOnlyFieldMove(u16 move)
+{
+    switch (move) {
+    case MOVE_CUT:
+    case MOVE_SURF:
+    case MOVE_STRENGTH:
+    case MOVE_ROCK_SMASH:
+    case MOVE_WATERFALL:
+    case MOVE_ROCK_CLIMB:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 static u8 GetContextMenuEntriesForPartyMon(PartyMenuApplication *application, u8 *menuEntriesBuffer)
 {
     Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, application->currPartySlot);
@@ -1868,7 +1883,7 @@ static u8 GetContextMenuEntriesForPartyMon(PartyMenuApplication *application, u8
 
                 fieldEffect = GetFieldMoveIndex(move);
 
-                if (fieldEffect != 0xff) {
+                if (fieldEffect != 0xff && IsSummonOnlyFieldMove(move) == FALSE) {
                     menuEntriesBuffer[count] = fieldEffect;
                     count++;
                     PartyMenu_SetKnownFieldMove(application, move, fieldMoveIndex);

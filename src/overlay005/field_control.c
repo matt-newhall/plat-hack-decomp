@@ -701,13 +701,12 @@ u16 Field_TileBehaviorToScript(FieldSystem *fieldSystem, u8 behavior)
     }
 
     if (PlayerAvatar_GetPlayerState(fieldSystem->playerAvatar) != PLAYER_STATE_SURFING) {
-        TrainerInfo *info = SaveData_GetTrainerInfo(fieldSystem->saveData);
+        VarsFlags *varsFlags = SaveData_GetVarsFlags(fieldSystem->saveData);
         u32 distortionBehavior = PlayerAvatar_GetDistortionCurrTileBehaviour(fieldSystem->playerAvatar);
 
-        if (PlayerAvatar_CanUseSurf(fieldSystem->playerAvatar, distortionBehavior, behavior) && TrainerInfo_HasBadge(info, 3)) {
-            if (Party_HasMonWithMove(SaveData_GetParty(fieldSystem->saveData), MOVE_SURF) != PARTY_SLOT_NONE) {
-                return SCRIPT_ID(FIELD_MOVES, 4);
-            }
+        if (PlayerAvatar_CanUseSurf(fieldSystem->playerAvatar, distortionBehavior, behavior)
+            && VarsFlags_CheckFlag(varsFlags, FLAG_SURF_UNLOCKED)) {
+            return SCRIPT_ID(FIELD_MOVES, 4);
         }
     }
 
