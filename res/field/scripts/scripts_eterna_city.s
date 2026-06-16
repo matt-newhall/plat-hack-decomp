@@ -388,11 +388,6 @@ EternaCity_Statue:
     End
 
 EternaCity_PokemonBreederF2:
-    GoToIfSet FLAG_EXPLORER_KIT_RECEIVED, EternaCity_GoingUndergroundWithTheExplorerKitIsABlastIsntIt
-    NPCMessage EternaCity_Text_OhDontTellMeYouDontHaveAnExplorerKit2
-    End
-
-EternaCity_GoingUndergroundWithTheExplorerKitIsABlastIsntIt:
     NPCMessage EternaCity_Text_GoingUndergroundWithTheExplorerKitIsABlastIsntIt
     End
 

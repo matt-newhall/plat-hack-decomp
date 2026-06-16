@@ -674,16 +674,6 @@
             "value": 0
         },
         {
-            "script": 20,
-            "x": 303,
-            "z": 565,
-            "y": 0,
-            "width": 5,
-            "length": 1,
-            "var": "VAR_ETERNA_CITY_BLOCK_EXITS_STATE",
-            "value": 1
-        },
-        {
             "script": 23,
             "x": 297,
             "z": 532,

@@ -19,7 +19,6 @@ CycleShop_PokefanM:
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     SetFlag FLAG_RECEIVED_BICYCLE
-    SetVar VAR_ETERNA_CITY_BLOCK_EXITS_STATE, 1
     SetBlackOutWarpId 9
     GoTo CycleShop_ThisIsTheLatestModelSoIllReadTheOperatingManualToYou
     End

@@ -22,6 +22,7 @@ EternaCityUndergroundManHouse_UndergroundMan:
     GoToIfGe VAR_CURRENT_UNDERGROUND_MISSION, 9, EternaCityUndergroundManHouse_FromNowOnYouAreTheSpelunkingMaster
     GoToIfSet FLAG_ACCEPTED_UNDERGROUND_MAN_AS_MENTOR, EternaCityUndergroundManHouse_GoToCurrentMission
     GoToIfSet FLAG_EXPLORER_KIT_RECEIVED, EternaCityUndergroundManHouse_LetMeMentorYouAsYouBecomeAFullFledgedSpelunker
+    GoToIfUnset FLAG_GAME_COMPLETED, EternaCityUndergroundManHouse_YouCanCallMeTheUndergroundManBeforeChampion
     Message EternaCityUndergroundManHouse_Text_YouCanCallMeTheUndergroundManIllMakeAGiftOfThisToYou
     SetVar VAR_0x8004, ITEM_EXPLORER_KIT
     SetVar VAR_0x8005, 1
@@ -33,6 +34,13 @@ EternaCityUndergroundManHouse_UndergroundMan:
     GoToIfEq VAR_RESULT, MENU_NO, EternaCityUndergroundManHouse_ICantForceYouToAcceptMyProposalIfYoureNotInclined
     SetFlag FLAG_ACCEPTED_UNDERGROUND_MAN_AS_MENTOR
     GoTo EternaCityUndergroundManHouse_GoToCurrentMission
+
+EternaCityUndergroundManHouse_YouCanCallMeTheUndergroundManBeforeChampion:
+    Message EternaCityUndergroundManHouse_Text_YouCanCallMeTheUndergroundManBeforeChampion
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
 
 EternaCityUndergroundManHouse_LetMeMentorYouAsYouBecomeAFullFledgedSpelunker:
     Message EternaCityUndergroundManHouse_Text_LetMeMentorYouAsYouBecomeAFullFledgedSpelunker
