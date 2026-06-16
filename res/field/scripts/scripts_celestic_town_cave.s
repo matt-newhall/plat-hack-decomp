@@ -131,6 +131,7 @@ CelesticTownCave_DefeatedCyrus:
     Common_GiveItemQuantity
     SetFlag FLAG_HIDE_CELESTIC_TOWN_ELDER
     ClearFlag FLAG_HIDE_CELESTIC_TOWN_NORTH_HOUSE_ELDER
+    SetFlag FLAG_HIDE_MT_CORONET_1F_NORTH_ROOM_1_GRUNTS_M
     SetFlag FLAG_DUMMY_2445
     Message CelesticTownCave_Text_SurfAcrossWater
     CloseMessage
