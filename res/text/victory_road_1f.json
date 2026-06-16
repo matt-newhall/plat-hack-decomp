@@ -62,6 +62,35 @@
     {
       "id": "VictoryRoad1F_Text_Dummy12",
       "garbage": 11
+    },
+    {
+      "id": "VictoryRoad1F_Text_LeagueCheckBlock",
+      "en_US": [
+        "Hmm, young trainer!\r",
+        "Have you investigated all of what\n",
+        "Victory Road has to offer?\r",
+        "Seek out a great trainer and\n",
+        "defeat them.\r",
+        "Only then will you be ready for the\n",
+        "true test of the Pokémon League."
+      ]
+    },
+    {
+      "id": "VictoryRoad1F_Text_LeagueCheckAllow",
+      "en_US": [
+        "Hmm, young trainer... Oh?\r",
+        "You have proven yourself worthy and\n",
+        "conquered all that Victory Road has\f",
+        "to offer... Well done!\r",
+        "Go on through. The League awaits!"
+      ]
+    },
+    {
+      "id": "VictoryRoad1F_Text_LeagueCheckTalk",
+      "en_US": [
+        "The Pokémon League lies just ahead.\n",
+        "Give it everything you have!"
+      ]
     }
   ]
 }
