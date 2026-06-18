@@ -79,9 +79,7 @@ HearthomeGym_FantinaMain:
     SetTrainerFlag TRAINER_SCHOOL_KID_MACKENZIE
     SetTrainerFlag TRAINER_YOUNGSTER_DONNY
     CreateJournalEvent LOCATION_EVENT_BEAT_GYM_LEADER, 91, TRAINER_LEADER_FANTINA, 0, 0
-    SetVar VAR_HEARTHOME_STATE, 1
     SetFlag FLAG_HIDE_HEARTHOME_ROUTE_209_ROADBLOCK
-    ClearFlag FLAG_HIDE_HEARTHOME_ROUTE_209_GATE_RIVAL
     Message HearthomeGym_Text_FantinaExplainRelicBadge
     GoTo HearthomeGym_FantinaTryGiveTM65
 

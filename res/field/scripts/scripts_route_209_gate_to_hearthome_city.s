@@ -54,6 +54,7 @@ Route209GateToHearthomeCity_PostRivalBattle:
     BufferPlayerName 1
     Message Route209GateToHearthomeCity_Text_MySurefireWinningStrategyDoesntWork
     CloseMessage
+    SetFlag FLAG_HIDE_HEARTHOME_ROUTE_209_GATE_RIVAL
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     CallIfEq VAR_0x8005, 5, Route209GateToHearthomeCity_RivalLeaveZ5
     CallIfEq VAR_0x8005, 6, Route209GateToHearthomeCity_RivalLeaveZ6
@@ -63,7 +64,7 @@ Route209GateToHearthomeCity_PostRivalBattle:
     PlaySE SEQ_SE_DP_KAIDAN2
     RemoveObject LOCALID_RIVAL
     WaitSE SEQ_SE_DP_KAIDAN2
-    SetVar VAR_HEARTHOME_STATE, 2
+    SetVar VAR_HEARTHOME_STATE, 1
     ReleaseAll
     End
 
