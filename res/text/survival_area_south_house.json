@@ -4,11 +4,12 @@
     {
       "id": "SurvivalAreaSouthHouse_Text_YouWantTM",
       "en_US": [
-        "There’s a move that doubles in power\n",
-        "if the Pokémon using it is poisoned,\f",
-        "paralyzed, or burned.\r",
-        "I’ve got the Technical Machine for\n",
-        "it right here. You want it?\r"
+        "Ah, there was a Pokémon inside my\n",
+        "laptop?! I hope the poor thing’s okay.\r",
+        "Thanks for your help anyway. I have\n",
+        "this disk that I thought might be for\f",
+        "my laptop too, but on second thoughts,\f",
+        "it might be better off with you."
       ]
     },
     {
@@ -18,6 +19,41 @@
         "to have.\r",
         "Your opponent will think twice about\n",
         "poisoning or paralyzing your Pokémon."
+      ]
+    },
+    {
+      "id": "SurvivalAreaSouthHouse_Text_RotomPCBeforeFight",
+      "en_US": [
+        "Inside the laptop...\n",
+        "There appears to be a Pokémon?...\r",
+        "The Pokémon appears as if it will come\n",
+        "out. Want to thump the laptop?"
+      ]
+    },
+    {
+      "id": "SurvivalAreaSouthHouse_Text_RotomPCConfirmFight",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} thumped the laptop!\r"
+      ]
+    },
+    {
+      "id": "SurvivalAreaSouthHouse_Text_RotomPCFailCatch",
+      "en_US": [
+        "ROTOM fled somewhere..."
+      ]
+    },
+    {
+      "id": "SurvivalAreaSouthHouse_Text_RotomPCAfterFight",
+      "en_US": [
+        "It’s just an ordinary laptop."
+      ]
+    },
+    {
+      "id": "SurvivalAreaSouthHouse_Text_FacadeTMGoToPC",
+      "en_US": [
+        "My laptop’s been acting up recently...\n",
+        "Could you possibly take a look at it?\f",
+        "I’ll make it worth your while!"
       ]
     }
   ]
