@@ -1,11 +1,13 @@
 #include "macros/scrcmd.inc"
 #include "res/text/bank/veilstone_city_prize_exchange.h"
 #include "res/text/bank/menu_entries.h"
+#include "res/field/events/events_veilstone_city_prize_exchange.h"
 
 
     ScriptEntry VeilstoneCityPrizeExchange_Receptionist
     ScriptEntry VeilstoneCityPrizeExchange_Guitarist
     ScriptEntry VeilstoneCityPrizeExchange_OldMan
+    ScriptEntry VeilstoneCityPrizeExchange_AceTrainer
     ScriptEntryEnd
 
 VeilstoneCityPrizeExchange_Receptionist:
@@ -164,5 +166,21 @@ VeilstoneCityPrizeExchange_GuitaristEnd:
 VeilstoneCityPrizeExchange_OldMan:
     NPCMessage VeilstoneCityPrizeExchange_Text_IHaveNoCoins
     End
+
+VeilstoneCityPrizeExchange_AceTrainer:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message VeilstoneCityPrizeExchange_Text_BlockPrizes
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_ACE_TRAINER_M, VeilstoneCityPrizeExchange_Movement_AceTrainerFaceNorth
+    WaitMovement
+    ReleaseAll
+    End
+
+VeilstoneCityPrizeExchange_Movement_AceTrainerFaceNorth:
+    FaceNorth
+    EndMovement
 
     .balign 4, 0

@@ -114,6 +114,13 @@
         "They have prizes I really want.\n",
         "But Coins, I have none!"
       ]
+    },
+    {
+      "id": "VeilstoneCityPrizeExchange_Text_BlockPrizes",
+      "en_US": [
+        "Can’t you see the queue? I was\n",
+        "here first, get in line!"
+      ]
     }
   ]
 }
