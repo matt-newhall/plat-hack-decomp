@@ -87,21 +87,6 @@
             "y": 1
         },
         {
-            "id": "LOCALID_RIVAL",
-            "graphics_id": "OBJ_EVENT_GFX_BARRY",
-            "movement_type": "MOVEMENT_TYPE_LOOK_WEST",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_ROUTE_203_RIVAL",
-            "script": 0,
-            "initial_dir": 2,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 201,
-            "z": 757,
-            "y": 1
-        },
-        {
             "id": "LOCALID_ARROW_SIGNPOST_JUBILIFE_CITY",
             "graphics_id": "OBJ_EVENT_GFX_ARROW_SIGNPOST",
             "movement_type": "MOVEMENT_TYPE_NONE",
@@ -312,16 +297,5 @@
             "dest_warp_id": 0
         }
     ],
-    "coord_events": [
-        {
-            "script": 6,
-            "x": 196,
-            "z": 757,
-            "y": 0,
-            "width": 1,
-            "length": 4,
-            "var": "VAR_ROUTE_203_RIVAL_STATE",
-            "value": 0
-        }
-    ]
+    "coord_events": []
 }

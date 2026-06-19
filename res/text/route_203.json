@@ -2,32 +2,6 @@
   "key": 40596,
   "messages": [
     {
-      "id": "Route203_Text_OfCourseIGotTougherIllDemonstrateItToYou",
-      "en_US": [
-        "{STRVAR_1 3, 0, 0}: Hey! {STRVAR_1 3, 1, 0}!\n",
-        "Tell me you got a little tougher!\r",
-        "Me? Do you even need to ask?\n",
-        "Of course I got tougher!\r",
-        "Come on!\n",
-        "I’ll demonstrate it to you!\r"
-      ]
-    },
-    {
-      "id": "Route203_Text_WhatDoYouMeanILost",
-      "en_US": [
-        "{STRVAR_1 3, 0, 0}: Waah!\n",
-        "What do you mean I lost?!\r",
-        "Well, that’s it!\n",
-        "That’s the last time I’ll ever lose!\r",
-        "I’m going to be the world’s toughest\n",
-        "Trainer, and you know it!\r",
-        "The first thing to do is take on\n",
-        "the Oreburgh City Pokémon Gym!\r",
-        "I’m gonna toughen up for that,\n",
-        "totally!\r"
-      ]
-    },
-    {
       "id": "Route203_Text_YourFavoritePokemonShouldBePlacedAtTheTop",
       "en_US": [
         "Your favorite Pokémon should be placed\n",
