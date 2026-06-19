@@ -6,7 +6,6 @@
     ScriptEntry AcuityLakefront_OnTransition
     ScriptEntry AcuityLakefront_OnLoad
     ScriptEntry AcuityLakefront_ArrowSignpostLakeAcuity
-    ScriptEntry AcuityLakefront_TriggerRival
     ScriptEntryEnd
 
 AcuityLakefront_OnLoad:
@@ -40,40 +39,4 @@ AcuityLakefront_ArrowSignpostLakeAcuity:
     ShowArrowSign AcuityLakefront_Text_SignLakeAcuityAhead
     End
 
-AcuityLakefront_TriggerRival:
-    LockAll
-    GetPlayerMapPos VAR_0x8004, VAR_0x8005
-    AddFreeCamera VAR_0x8004, VAR_0x8005
-    ApplyFreeCameraMovement AcuityLakefront_Movement_CameraMoveNorth
-    WaitMovement
-    WaitTime 15, VAR_RESULT
-    BufferRivalName 0
-    BufferPlayerName 1
-    Message AcuityLakefront_Text_CantClimbWithoutBadge
-    CloseMessage
-    ApplyMovement LOCALID_RIVAL, AcuityLakefront_Movement_RivalLeave
-    WaitMovement
-    RemoveObject LOCALID_RIVAL
-    ApplyFreeCameraMovement AcuityLakefront_Movement_CameraMoveSouth
-    WaitMovement
-    RestoreCamera
-    SetVar VAR_ACUITY_LAKEFRONT_STATE, 1
-    ReleaseAll
-    End
-
     .balign 4, 0
-AcuityLakefront_Movement_CameraMoveNorth:
-    WalkNormalNorth 6
-    EndMovement
-
-    .balign 4, 0
-AcuityLakefront_Movement_CameraMoveSouth:
-    WalkNormalSouth 6
-    EndMovement
-
-    .balign 4, 0
-AcuityLakefront_Movement_RivalLeave:
-    WalkNormalNorth 3
-    WalkNormalWest
-    WalkNormalNorth 4
-    EndMovement
