@@ -222,6 +222,15 @@
       "en_US": "MACHOP: Gwooh! Gogogooh!"
     },
     {
+      "id": "OreburghCity_Text_CollectorCheckOutTheGym",
+      "en_US": [
+        "Heya kid!\r",
+        "Have you checked out the gym\n",
+        "in Oreburgh City?\r",
+        "Check it out before you leave!"
+      ]
+    },
+    {
       "id": "OreburghCity_Text_MapSign",
       "en_US": [
         "Oreburgh City\n",

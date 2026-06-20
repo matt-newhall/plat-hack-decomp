@@ -25,6 +25,7 @@
     ScriptEntry OreburghCity_Machop3
     ScriptEntry OreburghCity_Machop2
     ScriptEntry OreburghCity_DrifloonInteract
+    ScriptEntry OreburghCity_Collector
     ScriptEntryEnd
 
 OreburghCity_Rival:
@@ -308,36 +309,36 @@ OreburghCity_Worker4:
 OreburghCity_TriggerYoungster:
     LockAll
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
-    GoToIfEq VAR_0x8005, 748, OreburghCity_YoungsterWalkToPlayerZ748
-    GoToIfEq VAR_0x8005, 749, OreburghCity_YoungsterWalkToPlayerZ749
-    GoToIfEq VAR_0x8005, 750, OreburghCity_YoungsterWalkToPlayerZ750
-    GoTo OreburghCity_YoungsterWalkToPlayerZ751
+    GoToIfEq VAR_0x8004, 296, OreburghCity_YoungsterApproachX296
+    GoToIfEq VAR_0x8004, 297, OreburghCity_YoungsterApproachX297
+    GoToIfEq VAR_0x8004, 298, OreburghCity_YoungsterApproachX298
+    GoTo OreburghCity_YoungsterApproachX299
     End
 
-OreburghCity_YoungsterWalkToPlayerZ748:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkOnSpotSouth
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToPlayerZ748
+OreburghCity_YoungsterApproachX296:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerFaceEast
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterApproachWest3
     WaitMovement
     GoTo OreburghCity_IllTakeYouToThePokemonGym
     End
 
-OreburghCity_YoungsterWalkToPlayerZ749:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkOnSpotSouth
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToPlayerZ749
+OreburghCity_YoungsterApproachX297:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerFaceEast
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterApproachWest2
     WaitMovement
     GoTo OreburghCity_IllTakeYouToThePokemonGym
     End
 
-OreburghCity_YoungsterWalkToPlayerZ750:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkOnSpotSouth
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToPlayerZ750
+OreburghCity_YoungsterApproachX298:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerFaceEast
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterApproachWest1
     WaitMovement
     GoTo OreburghCity_IllTakeYouToThePokemonGym
     End
 
-OreburghCity_YoungsterWalkToPlayerZ751:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkOnSpotSouth
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToPlayerZ751
+OreburghCity_YoungsterApproachX299:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerFaceEast
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterApproachWest0
     WaitMovement
     GoTo OreburghCity_IllTakeYouToThePokemonGym
     End
@@ -347,36 +348,36 @@ OreburghCity_IllTakeYouToThePokemonGym:
     CloseMessage
     Common_SetFollowMeBGM
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
-    GoToIfEq VAR_0x8005, 748, OreburghCity_WalkWithYoungsterToTheGymZ748
-    GoToIfEq VAR_0x8005, 749, OreburghCity_WalkWithYoungsterToTheGymZ749
-    GoToIfEq VAR_0x8005, 750, OreburghCity_WalkWithYoungsterToTheGymZ750
-    GoToIfEq VAR_0x8005, 751, OreburghCity_WalkWithYoungsterToTheGymZ751
+    GoToIfEq VAR_0x8004, 299, OreburghCity_WalkWithYoungsterToTheGymX299
+    GoToIfEq VAR_0x8004, 298, OreburghCity_WalkWithYoungsterToTheGymX298
+    GoToIfEq VAR_0x8004, 297, OreburghCity_WalkWithYoungsterToTheGymX297
+    GoTo OreburghCity_WalkWithYoungsterToTheGymX296
     End
 
-OreburghCity_WalkWithYoungsterToTheGymZ748:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymZ748
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymZ748
+OreburghCity_WalkWithYoungsterToTheGymX299:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymX299
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymX299
     WaitMovement
     GoTo OreburghCity_HuhTheresSomeoneThere
     End
 
-OreburghCity_WalkWithYoungsterToTheGymZ749:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymZ749
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymZ749
+OreburghCity_WalkWithYoungsterToTheGymX298:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymX298
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymX298
     WaitMovement
     GoTo OreburghCity_HuhTheresSomeoneThere
     End
 
-OreburghCity_WalkWithYoungsterToTheGymZ750:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymZ750
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymZ750
+OreburghCity_WalkWithYoungsterToTheGymX297:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymX297
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymX297
     WaitMovement
     GoTo OreburghCity_HuhTheresSomeoneThere
     End
 
-OreburghCity_WalkWithYoungsterToTheGymZ751:
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymZ751
-    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymZ751
+OreburghCity_WalkWithYoungsterToTheGymX296:
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerWalkToTheGymX296
+    ApplyMovement LOCALID_YOUNGSTER, OreburghCity_Movement_YoungsterWalkToTheGymX296
     WaitMovement
     GoTo OreburghCity_HuhTheresSomeoneThere
     End
@@ -391,96 +392,90 @@ OreburghCity_HuhTheresSomeoneThere:
     End
 
     .balign 4, 0
-OreburghCity_Movement_PlayerWalkOnSpotSouth:
-    WalkOnSpotNormalSouth
+OreburghCity_Movement_PlayerFaceEast:
+    WalkOnSpotNormalEast
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_PlayerWalkToTheGymZ748:
-    WalkNormalSouth
-    WalkNormalEast
-    WalkNormalSouth 10
-    WalkNormalEast 12
+OreburghCity_Movement_YoungsterApproachWest3:
+    EmoteExclamationMark
+    WalkNormalWest 3
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_PlayerWalkToTheGymZ749:
-    WalkNormalSouth
-    WalkNormalEast
-    WalkNormalSouth 9
-    WalkNormalEast 12
+OreburghCity_Movement_YoungsterApproachWest2:
+    EmoteExclamationMark
+    WalkNormalWest 2
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_PlayerWalkToTheGymZ750:
-    WalkNormalSouth
-    WalkNormalEast
-    WalkNormalSouth 8
-    WalkNormalEast 12
+OreburghCity_Movement_YoungsterApproachWest1:
+    EmoteExclamationMark
+    WalkNormalWest
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_PlayerWalkToTheGymZ751:
-    WalkNormalSouth
-    WalkNormalEast
-    WalkNormalSouth 7
-    WalkNormalEast 12
-    EndMovement
-
-    .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToTheGymZ748:
-    WalkNormalEast
-    WalkNormalSouth 10
-    WalkNormalEast 13
+OreburghCity_Movement_YoungsterApproachWest0:
+    EmoteExclamationMark
     WalkOnSpotNormalWest
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToTheGymZ749:
+OreburghCity_Movement_PlayerWalkToTheGymX299:
+    Delay8 2
+    WalkNormalWest
+    WalkNormalSouth 12
+    WalkNormalWest 13
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_PlayerWalkToTheGymX298:
+    Delay8 2
+    WalkNormalSouth 12
+    WalkNormalWest 13
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_PlayerWalkToTheGymX297:
     WalkNormalEast
-    WalkNormalSouth 9
-    WalkNormalEast 13
-    WalkOnSpotNormalWest
+    WalkNormalSouth 12
+    WalkNormalWest 13
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToTheGymZ750:
+OreburghCity_Movement_PlayerWalkToTheGymX296:
+    WalkNormalEast 2
+    WalkNormalSouth 12
+    WalkNormalWest 13
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_YoungsterWalkToTheGymX299:
+    WalkNormalSouth
+    WalkNormalWest 2
+    WalkNormalSouth 11
+    WalkNormalWest 14
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_YoungsterWalkToTheGymX298:
+    WalkNormalSouth
+    WalkNormalWest
+    WalkNormalSouth 11
+    WalkNormalWest 14
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_YoungsterWalkToTheGymX297:
+    WalkNormalSouth 12
+    WalkNormalWest 14
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_YoungsterWalkToTheGymX296:
     WalkNormalEast
-    WalkNormalSouth 8
-    WalkNormalEast 13
-    WalkOnSpotNormalWest
-    EndMovement
-
-    .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToTheGymZ751:
-    WalkNormalEast
-    WalkNormalSouth 7
-    WalkNormalEast 13
-    WalkOnSpotNormalWest
-    EndMovement
-
-    .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToPlayerZ748:
-    EmoteExclamationMark
-    WalkNormalNorth 3
-    EndMovement
-
-    .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToPlayerZ749:
-    EmoteExclamationMark
-    WalkNormalNorth 2
-    EndMovement
-
-    .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToPlayerZ750:
-    EmoteExclamationMark
-    WalkNormalNorth
-    EndMovement
-
-    .balign 4, 0
-OreburghCity_Movement_YoungsterWalkToPlayerZ751:
-    EmoteExclamationMark
-    WalkOnSpotNormalNorth
+    WalkNormalSouth 12
+    WalkNormalWest 14
     EndMovement
 
 OreburghCity_BattleGirl1:
@@ -556,5 +551,15 @@ OreburghCity_DrifloonInteract:
     LockAll
     FacePlayer
     Common_CallDrifloon
+    ReleaseAll
+    End
+
+OreburghCity_Collector:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message OreburghCity_Text_CollectorCheckOutTheGym
+    WaitButton
+    CloseMessage
     ReleaseAll
     End

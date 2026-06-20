@@ -97,16 +97,16 @@
         {
             "id": "LOCALID_YOUNGSTER",
             "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
-            "movement_type": "MOVEMENT_TYPE_LOOK_NORTH",
+            "movement_type": "MOVEMENT_TYPE_LOOK_WEST",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "0",
             "script": 2,
-            "initial_dir": 0,
+            "initial_dir": 2,
             "data": [],
-            "movement_range_x": 1,
-            "movement_range_z": 1,
-            "x": 266,
-            "z": 752,
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 300,
+            "z": 747,
             "y": 3
         },
         {
@@ -362,10 +362,10 @@
             "script": 10,
             "initial_dir": 2,
             "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 2,
+            "movement_range_x": 2,
+            "movement_range_z": 0,
             "x": 292,
-            "z": 759,
+            "z": 761,
             "y": 5
         },
         {
@@ -472,6 +472,36 @@
             "x": 301,
             "z": 757,
             "y": 0
+        },
+        {
+            "id": "LOCALID_COLLECTOR",
+            "graphics_id": "OBJ_EVENT_GFX_COLLECTOR",
+            "movement_type": "MOVEMENT_TYPE_LOOK_EAST",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_OREBURGH_CITY_COLLECTOR",
+            "script": 24,
+            "initial_dir": 3,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 258,
+            "z": 749,
+            "y": 3
+        },
+        {
+            "id": "LOCALID_VENT_6",
+            "graphics_id": "OBJ_EVENT_GFX_VENT",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "0",
+            "script": 2027,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 300,
+            "z": 746,
+            "y": 0
         }
     ],
     "warp_events": [
@@ -574,12 +604,12 @@
     ],
     "coord_events": [
         {
-            "script": 3, 
-            "x": 266,
-            "z": 748,
+            "script": 3,
+            "x": 296,
+            "z": 747,
             "y": 0,
-            "width": 1,
-            "length": 4,
+            "width": 4,
+            "length": 1,
             "var": "VAR_OREBURGH_STATE",
             "value": 0
         },
