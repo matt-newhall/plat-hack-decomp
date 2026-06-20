@@ -1,19 +1,30 @@
 {
-    "name": "Angelica",
-    "class": "TRAINER_CLASS_PICNICKER",
+    "name": "Dawn",
+    "class": "TRAINER_CLASS_DP_PLAYER_FEMALE_2",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_RATTATA",
+            "species": "SPECIES_TURTWIG",
+            "form": 0,
+            "level": 7,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_SKITTY",
             "form": 0,
             "level": 5,
             "item": null,
             "moves": null,
-            "iv_scale": 0,
+            "iv_scale": 255,
             "ball_seal": 0
         }
     ],

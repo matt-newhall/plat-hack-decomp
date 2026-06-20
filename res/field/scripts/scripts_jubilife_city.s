@@ -37,6 +37,7 @@
 
 JubilifeCity_OnTransition:
     CallIfEq VAR_JUBILIFE_CITY_STATE, 0, JubilifeCity_SetLookerPositionFirstArrival
+    CallIfEq VAR_JUBILIFE_CITY_STATE, 1, JubilifeCity_SetLookerPositionNorthBlock
     CallIfGe VAR_JUBILIFE_CITY_STATE, 3, JubilifeCity_SetCounterpartPositionTeamGalactic
     GetPlayerGender VAR_MAP_LOCAL_0
     GoToIfEq VAR_MAP_LOCAL_0, GENDER_MALE, JubilifeCity_SetCounterpartGraphicsDawn
@@ -47,6 +48,12 @@ JubilifeCity_SetLookerPositionFirstArrival:
     SetObjectEventPos LOCALID_LOOKER, 177, 774
     SetObjectEventDir LOCALID_LOOKER, DIR_SOUTH
     SetObjectEventMovementType LOCALID_LOOKER, MOVEMENT_TYPE_LOOK_SOUTH
+    Return
+
+JubilifeCity_SetLookerPositionNorthBlock:
+    SetObjectEventPos LOCALID_LOOKER, 172, 742
+    SetObjectEventDir LOCALID_LOOKER, DIR_EAST
+    SetObjectEventMovementType LOCALID_LOOKER, MOVEMENT_TYPE_LOOK_EAST
     Return
 
 JubilifeCity_SetCounterpartPositionTeamGalactic:
@@ -270,8 +277,8 @@ JubilifeCity_LookerGiveVSRecorderAndLeave:
     ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWatchLookerLeave
     ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerLeaveFistArrival
     WaitMovement
-    SetPosition LOCALID_LOOKER, 186, 0, 756, DIR_SOUTH
-    SetObjectEventPos LOCALID_LOOKER, 186, 756
+    SetPosition LOCALID_LOOKER, 172, 0, 742, DIR_EAST
+    SetObjectEventPos LOCALID_LOOKER, 172, 742
     Common_FadeToDefaultMusic4
     Return
 
@@ -562,36 +569,36 @@ JubilifeCity_Movement_PlayerStepBackEast:
 JubilifeCity_TriggerLookerBlockRoute203:
     LockAll
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
-    GoToIfEq VAR_0x8005, 757, JubilifeCity_LookerWalkToPlayerZ757
-    GoToIfEq VAR_0x8005, 758, JubilifeCity_LookerWalkToPlayerZ758
-    GoToIfEq VAR_0x8005, 759, JubilifeCity_LookerWalkToPlayerZ759
-    GoToIfEq VAR_0x8005, 760, JubilifeCity_LookerWalkToPlayerZ760
+    GoToIfEq VAR_0x8004, 173, JubilifeCity_LookerWalkToPlayerX173
+    GoToIfEq VAR_0x8004, 174, JubilifeCity_LookerWalkToPlayerX174
+    GoToIfEq VAR_0x8004, 175, JubilifeCity_LookerWalkToPlayerX175
+    GoToIfEq VAR_0x8004, 176, JubilifeCity_LookerWalkToPlayerX176
     End
 
-JubilifeCity_LookerWalkToPlayerZ757:
-    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotWest
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerZ757
+JubilifeCity_LookerWalkToPlayerX173:
+    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotNorth
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerX173
     WaitMovement
     GoTo JubilifeCity_LookerBlockPlayer
     End
 
-JubilifeCity_LookerWalkToPlayerZ758:
-    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotWest
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerZ758
+JubilifeCity_LookerWalkToPlayerX174:
+    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotNorth
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerX174
     WaitMovement
     GoTo JubilifeCity_LookerBlockPlayer
     End
 
-JubilifeCity_LookerWalkToPlayerZ759:
-    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotWest
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerZ759
+JubilifeCity_LookerWalkToPlayerX175:
+    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotNorth
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerX175
     WaitMovement
     GoTo JubilifeCity_LookerBlockPlayer
     End
 
-JubilifeCity_LookerWalkToPlayerZ760:
-    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotWest
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerZ760
+JubilifeCity_LookerWalkToPlayerX176:
+    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkOnSpotNorth
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkToPlayerX176
     WaitMovement
     GoTo JubilifeCity_LookerBlockPlayer
     End
@@ -599,14 +606,13 @@ JubilifeCity_LookerWalkToPlayerZ760:
 JubilifeCity_LookerBlockPlayer:
     Call JubilifeCity_LookerBlockPlayerMessage
     CloseMessage
-    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkWestWithLooker
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkWestWithPlayer
+    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkSouthWithLooker
     WaitMovement
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
-    GoToIfEq VAR_0x8005, 757, JubilifeCity_LookerWalkBackZ757
-    GoToIfEq VAR_0x8005, 758, JubilifeCity_LookerWalkBackZ758
-    GoToIfEq VAR_0x8005, 759, JubilifeCity_LookerWalkBackZ759
-    GoToIfEq VAR_0x8005, 760, JubilifeCity_LookerWalkBackZ760
+    GoToIfEq VAR_0x8004, 173, JubilifeCity_LookerWalkBackX173
+    GoToIfEq VAR_0x8004, 174, JubilifeCity_LookerWalkBackX174
+    GoToIfEq VAR_0x8004, 175, JubilifeCity_LookerWalkBackX175
+    GoToIfEq VAR_0x8004, 176, JubilifeCity_LookerWalkBackX176
     End
 
 JubilifeCity_LookerBlockPlayerMessage:
@@ -637,26 +643,26 @@ JubilifeCity_ItIsYouHaveYouNotObtainedAPoketch:
     Message JubilifeCity_Text_ItIsYouHaveYouNotObtainedAPoketch
     Return
 
-JubilifeCity_LookerWalkBackZ757:
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackZ757
+JubilifeCity_LookerWalkBackX173:
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackX173
     WaitMovement
     GoTo JubilifeCity_Movement_LookerRelease
     End
 
-JubilifeCity_LookerWalkBackZ758:
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackZ758
+JubilifeCity_LookerWalkBackX174:
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackX174
     WaitMovement
     GoTo JubilifeCity_Movement_LookerRelease
     End
 
-JubilifeCity_LookerWalkBackZ759:
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackZ759
+JubilifeCity_LookerWalkBackX175:
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackX175
     WaitMovement
     GoTo JubilifeCity_Movement_LookerRelease
     End
 
-JubilifeCity_LookerWalkBackZ760:
-    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackZ760
+JubilifeCity_LookerWalkBackX176:
+    ApplyMovement LOCALID_LOOKER, JubilifeCity_Movement_LookerWalkBackX176
     WaitMovement
     GoTo JubilifeCity_Movement_LookerRelease
     End
@@ -666,9 +672,9 @@ JubilifeCity_Movement_LookerRelease:
     End
 
     .balign 4, 0
-JubilifeCity_Movement_PlayerWalkOnSpotWest:
+JubilifeCity_Movement_PlayerWalkOnSpotNorth:
     Delay8 5
-    WalkOnSpotNormalWest
+    WalkOnSpotNormalNorth
     EndMovement
 
     .balign 4, 0
@@ -678,75 +684,62 @@ JubilifeCity_Movement_PlayerFaceWest:
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_PlayerWalkWestWithLooker:
-    WalkNormalWest
-    EndMovement
-
-    .balign 4, 0
-JubilifeCity_Movement_LookerWalkToPlayerZ757:
-    FaceSouth
-    EmoteExclamationMark
-    Delay16
+JubilifeCity_Movement_PlayerWalkSouthWithLooker:
     WalkNormalSouth
-    WalkNormalEast
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_LookerWalkToPlayerZ758:
-    FaceSouth
+JubilifeCity_Movement_LookerWalkToPlayerX173:
+    FaceEast
     EmoteExclamationMark
     Delay16
-    WalkNormalSouth 2
-    WalkNormalEast
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_LookerWalkToPlayerZ759:
-    FaceSouth
+JubilifeCity_Movement_LookerWalkToPlayerX174:
+    FaceEast
     EmoteExclamationMark
     Delay16
-    WalkNormalSouth 3
     WalkNormalEast
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_LookerWalkToPlayerZ760:
-    FaceSouth
+JubilifeCity_Movement_LookerWalkToPlayerX175:
+    FaceEast
     EmoteExclamationMark
     Delay16
-    WalkNormalSouth 4
-    WalkNormalEast
+    WalkNormalEast 2
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_LookerWalkWestWithPlayer:
-    LockDir
+JubilifeCity_Movement_LookerWalkToPlayerX176:
+    FaceEast
+    EmoteExclamationMark
+    Delay16
+    WalkNormalEast 3
+    EndMovement
+
+    .balign 4, 0
+JubilifeCity_Movement_LookerWalkBackX173:
+    FaceEast
+    EndMovement
+
+    .balign 4, 0
+JubilifeCity_Movement_LookerWalkBackX174:
     WalkNormalWest
-    UnlockDir
+    FaceEast
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_LookerWalkBackZ757:
-    WalkNormalNorth
-    WalkOnSpotNormalSouth
+JubilifeCity_Movement_LookerWalkBackX175:
+    WalkNormalWest 2
+    FaceEast
     EndMovement
 
     .balign 4, 0
-JubilifeCity_Movement_LookerWalkBackZ758:
-    WalkNormalNorth 2
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-JubilifeCity_Movement_LookerWalkBackZ759:
-    WalkNormalNorth 3
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-JubilifeCity_Movement_LookerWalkBackZ760:
-    WalkNormalNorth 4
-    WalkOnSpotNormalSouth
+JubilifeCity_Movement_LookerWalkBackX176:
+    WalkNormalWest 3
+    FaceEast
     EndMovement
 
 JubilifeCity_Looker:
@@ -954,13 +947,11 @@ JubilifeCity_CounterpartAndProfRowanLeave:
 JubilifeCity_CollectorJubilifeTV:
     RemoveObject LOCALID_COUNTERPART
     RemoveObject LOCALID_PROF_ROWAN
+    SetFlag FLAG_HIDE_JUBILIFE_CITY_COUNTERPART
+    SetFlag FLAG_HIDE_JUBILIFE_ROWAN
     ClearFlag FLAG_HIDE_SANDGEM_TOWN_LAB_PROF_ROWAN
-    SetVar VAR_JUBILIFE_CITY_STATE, 4
-    SetVar VAR_JUBILIFE_LOOKER_PAL_PAD_STATE, 2
+    SetVar VAR_JUBILIFE_CITY_STATE, 2
     SetVar VAR_OREBURGH_STATE, 3
-    RemoveObject LOCALID_CLOWN_1
-    RemoveObject LOCALID_CLOWN_2
-    RemoveObject LOCALID_CLOWN_3
     SetObjectEventPos LOCALID_COLLECTOR, 174, 750
     SetObjectEventMovementType LOCALID_COLLECTOR, MOVEMENT_TYPE_LOOK_NORTH
     ClearFlag FLAG_HIDE_JUBILIFE_CITY_COLLECTOR
@@ -1325,10 +1316,7 @@ JubilifeCity_TriggerPoketchCampaign:
     CallIfEq VAR_0x8004, 176, JubilifeCity_PoketchCoPresidentWalkToPlayerX176
     Message JubilifeCity_Text_YouCallYourselfAPokemonTrainerAndYetYouHaveNoPoketch
     SetVar VAR_POKETCH_CAMPAIGN_STATE, 2
-    Message JubilifeCity_Text_AllYouHaveToDoIsFindThreeClownsInJubilifeCity
-    WaitButton
-    CloseMessage
-    ReleaseAll
+    GoTo JubilifeCity_GivePoketch
     End
 
 JubilifeCity_PoketchCoPresidentWalkToPlayerX172:
@@ -1424,12 +1412,8 @@ JubilifeCity_IncreaseObtainedCouponsCount:
     Return
 
 JubilifeCity_GivePoketch:
-    Message JubilifeCity_Text_InReturnForTheseCouponsIPresentYouThisPokemonWatch
-    RemoveItem ITEM_COUPON_1, 1, VAR_RESULT
-    RemoveItem ITEM_COUPON_2, 1, VAR_RESULT
-    RemoveItem ITEM_COUPON_3, 1, VAR_RESULT
     ScrCmd_131
-    SetVar VAR_JUBILIFE_CITY_STATE, 2
+    SetVar VAR_JUBILIFE_CITY_STATE, 3
     RegisterPoketchApp POKETCH_APPID_DIGITALWATCH
     RegisterPoketchApp POKETCH_APPID_CALCULATOR
     RegisterPoketchApp POKETCH_APPID_PEDOMETER
@@ -1467,6 +1451,16 @@ JubilifeCity_RemovePoketchCoPresident:
     ClearFlag FLAG_HIDE_POKETCH_CO_1F_POKETCH_CO_PRESIDENT
     RemoveObject LOCALID_LOOKER
     SetFlag FLAG_HIDE_JUBILIFE_CITY_LOOKER
+    ClearFlag FLAG_HIDE_JUBILIFE_GALACTIC_GRUNTS
+    ClearFlag FLAG_HIDE_JUBILIFE_ROWAN
+    ClearFlag FLAG_HIDE_JUBILIFE_CITY_COUNTERPART
+    SetObjectEventPos LOCALID_COUNTERPART, 176, 739
+    SetObjectEventDir LOCALID_COUNTERPART, DIR_WEST
+    SetObjectEventMovementType LOCALID_COUNTERPART, MOVEMENT_TYPE_LOOK_WEST
+    AddObject LOCALID_GRUNT_M_1
+    AddObject LOCALID_GRUNT_M_2
+    AddObject LOCALID_PROF_ROWAN
+    AddObject LOCALID_COUNTERPART
     ReleaseAll
     End
 
@@ -1498,35 +1492,6 @@ JubilifeCity_Clown1:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_OBTAINED_COUPON_1, JubilifeCity_Clown1ObtainedCoupon
-    Message JubilifeCity_Text_DoesAPokemonGrowByDefeatingOthersAndGainingExpPoints
-    ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_YES, JubilifeCity_Clown1CorrectAnswer
-    GoToIfEq VAR_RESULT, MENU_NO, JubilifeCity_Clown1WrongAnswer
-    End
-
-JubilifeCity_Clown1CorrectAnswer:
-    PlaySE SEQ_SE_DP_PINPON
-    Message JubilifeCity_Text_DingDingYoureAbsolutelyCorrect1
-    Message JubilifeCity_Text_PokemonGrowStrongerByDefeatingOtherPokemonInBattle
-    Message JubilifeCity_Text_HereYouGoYourPoketchCoupon1
-    SetVar VAR_0x8004, ITEM_COUPON_1
-    SetVar VAR_0x8005, 1
-    SetFlag FLAG_OBTAINED_COUPON_1
-    Common_GiveItemQuantityNoLineFeed
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_Clown1WrongAnswer:
-    PlaySE SEQ_SE_DP_BOX03
-    Message JubilifeCity_Text_BzzzztThatsTheWrongAnswer1
-    WaitButton
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_Clown1ObtainedCoupon:
     Message JubilifeCity_Text_PokemonGrowStrongerThroughBattling
     WaitButton
     CloseMessage
@@ -1537,35 +1502,6 @@ JubilifeCity_Clown2:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_OBTAINED_COUPON_2, JubilifeCity_Clown2ObtainedCoupon
-    Message JubilifeCity_Text_AskJustLikePokemonTypesTheMovesOfPokemonAlsoHaveTypes
-    ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_YES, JubilifeCity_Clown2CorrectAnswer
-    GoToIfEq VAR_RESULT, MENU_NO, JubilifeCity_Clown2WrongAnswer
-    End
-
-JubilifeCity_Clown2CorrectAnswer:
-    PlaySE SEQ_SE_DP_PINPON
-    Message JubilifeCity_Text_DingDingYoureAbsolutelyCorrect2
-    Message JubilifeCity_Text_IfThePokemonsTypeMatchesItsMovesTypeThatMoveIsMadeMuchMorePowerful
-    Message JubilifeCity_Text_HereYouGoYourPoketchCoupon2
-    SetVar VAR_0x8004, ITEM_COUPON_2
-    SetVar VAR_0x8005, 1
-    SetFlag FLAG_OBTAINED_COUPON_2
-    Common_GiveItemQuantityNoLineFeed
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_Clown2WrongAnswer:
-    PlaySE SEQ_SE_DP_BOX03
-    Message JubilifeCity_Text_BzzzztThatsTheWrongAnswer2
-    WaitButton
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_Clown2ObtainedCoupon:
     Message JubilifeCity_Text_IfThePokemonsTypeMatchesItsMovesTypeThatMoveIsMadeMuchMorePowerful2
     WaitButton
     CloseMessage
@@ -1576,45 +1512,7 @@ JubilifeCity_Clown3:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfLt VAR_POKETCH_CAMPAIGN_STATE, 2, JubilifeCity_YouShouldStickAround
-    GoToIfSet FLAG_OBTAINED_COUPON_3, JubilifeCity_Clown3ObtainedCoupon
-    Message JubilifeCity_Text_CanAPokemonHoldAnItem
-    ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_YES, JubilifeCity_Clown3CorrectAnswer
-    GoToIfEq VAR_RESULT, MENU_NO, JubilifeCity_Clown3WrongAnswer
-    End
-
-JubilifeCity_Clown3CorrectAnswer:
-    PlaySE SEQ_SE_DP_PINPON
-    Message JubilifeCity_Text_DingDingYoureAbsolutelyCorrect3
-    Message JubilifeCity_Text_APokemonMayHoldASingleItem
-    Message JubilifeCity_Text_HereYouGoYourPoketchCoupon3
-    SetPosition LOCALID_POKETCH_CO_PRESIDENT, 174, 1, 771, DIR_SOUTH
-    SetVar VAR_0x8004, ITEM_COUPON_3
-    SetVar VAR_0x8005, 1
-    SetFlag FLAG_OBTAINED_COUPON_3
-    Common_GiveItemQuantityNoLineFeed
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_Clown3WrongAnswer:
-    PlaySE SEQ_SE_DP_BOX03
-    Message JubilifeCity_Text_BzzzztThatsTheWrongAnswer3
-    WaitButton
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_Clown3ObtainedCoupon:
     Message JubilifeCity_Text_APokemonMayHoldASingleItem2
-    WaitButton
-    CloseMessage
-    ReleaseAll
-    End
-
-JubilifeCity_YouShouldStickAround:
-    Message JubilifeCity_Text_YouShouldStickAround
     WaitButton
     CloseMessage
     ReleaseAll

@@ -96,42 +96,88 @@ Route202_CheckStartCatchingTutorial:
 
 Route202_DawnIHaventShownYouHowToCatchAPokemon:
     Common_SetCounterpartBGM
-    BufferCounterpartName 0
-    BufferPlayerName 1
+    BufferPlayerName 0
     Message Route202_Text_DawnIHaventShownYouHowToCatchAPokemon
     GoTo Route202_DoCatchingTutorial
 
 Route202_LucasDoYouKnowHowToCatchAPokemon:
     Common_SetCounterpartBGM
-    BufferCounterpartName 0
-    BufferPlayerName 1
+    BufferPlayerName 0
     Message Route202_Text_LucasDoYouKnowHowToCatchAPokemon
     GoTo Route202_DoCatchingTutorial
 
 Route202_DoCatchingTutorial:
+    WaitButton
     CloseMessage
-    ApplyMovement LOCALID_COUNTERPART, Route202_Movement_CounterpartWalkWestIntoTallGrass
-    ApplyMovement LOCALID_PLAYER, Route202_Movement_PlayerWalkWestIntoTallGrass
-    WaitMovement
-    StartCatchingTutorial
+    GoToIfSet FLAG_BEATEN_202_RIVAL, Route202_TellYourFamily
+    GetPlayerGender VAR_RESULT
+    GoToIfEq VAR_RESULT, GENDER_MALE, Route202_RivalBattleDawn
+    GoToIfEq VAR_RESULT, GENDER_FEMALE, Route202_RivalBattleLucas
+    End
+
+Route202_RivalBattleDawn:
+    GetPlayerStarterSpecies VAR_RESULT
+    GoToIfEq VAR_RESULT, SPECIES_TURTWIG, Route202_DawnBattleTurtwig
+    GoToIfEq VAR_RESULT, SPECIES_CHIMCHAR, Route202_DawnBattleChimchar
+    GoTo Route202_DawnBattlePiplup
+
+Route202_DawnBattleTurtwig:
+    StartTrainerBattle TRAINER_DUMMY_050, TRAINER_NONE
+    GoTo Route202_RivalBattleResult
+
+Route202_DawnBattleChimchar:
+    StartTrainerBattle TRAINER_DUMMY_008, TRAINER_NONE
+    GoTo Route202_RivalBattleResult
+
+Route202_DawnBattlePiplup:
+    StartTrainerBattle TRAINER_DUMMY_009, TRAINER_NONE
+    GoTo Route202_RivalBattleResult
+
+Route202_RivalBattleLucas:
+    GetPlayerStarterSpecies VAR_RESULT
+    GoToIfEq VAR_RESULT, SPECIES_TURTWIG, Route202_LucasBattleTurtwig
+    GoToIfEq VAR_RESULT, SPECIES_CHIMCHAR, Route202_LucasBattleChimchar
+    GoTo Route202_LucasBattlePiplup
+
+Route202_LucasBattleTurtwig:
+    StartTrainerBattle TRAINER_DUMMY_007, TRAINER_NONE
+    GoTo Route202_RivalBattleResult
+
+Route202_LucasBattleChimchar:
+    StartTrainerBattle TRAINER_DUMMY_005, TRAINER_NONE
+    GoTo Route202_RivalBattleResult
+
+Route202_LucasBattlePiplup:
+    StartTrainerBattle TRAINER_DUMMY_006, TRAINER_NONE
+    GoTo Route202_RivalBattleResult
+
+Route202_RivalBattleResult:
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, Route202_RivalBattleLost
     ApplyMovement LOCALID_COUNTERPART, Route202_Movement_CounterpartWalkOnSpotEastAfterCatchingTutorial
     WaitMovement
     GetPlayerGender VAR_RESULT
-    GoToIfEq VAR_RESULT, GENDER_MALE, Route202_DawnToGetYouStartedIllGiveYouFivePokeBalls
-    GoToIfEq VAR_RESULT, GENDER_FEMALE, Route202_LucasHereIllGiveYouFivePokeballsToGetYouStarted
+    GoToIfEq VAR_RESULT, GENDER_MALE, Route202_DawnVictory
+    GoToIfEq VAR_RESULT, GENDER_FEMALE, Route202_LucasVictory
     End
 
-Route202_DawnToGetYouStartedIllGiveYouFivePokeBalls:
+Route202_RivalBattleLost:
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+Route202_DawnVictory:
     BufferPlayerName 0
     Message Route202_Text_DawnToGetYouStartedIllGiveYouFivePokeBalls
     GoTo Route202_GivePokeballs
 
-Route202_LucasHereIllGiveYouFivePokeballsToGetYouStarted:
+Route202_LucasVictory:
     BufferPlayerName 0
     Message Route202_Text_LucasHereIllGiveYouFivePokeballsToGetYouStarted
     GoTo Route202_GivePokeballs
 
 Route202_GivePokeballs:
+    WaitButton
     SetVar VAR_0x8004, ITEM_POKE_BALL
     SetVar VAR_0x8005, 5
     Common_GiveItemQuantity
@@ -150,10 +196,12 @@ Route202_LucasLeave:
     GoTo Route202_CounterpartLeave
 
 Route202_CounterpartLeave:
+    WaitButton
     CloseMessage
     ApplyMovement LOCALID_COUNTERPART, Route202_Movement_CounterpartLeaveCatchingTutorial
     WaitMovement
     RemoveObject LOCALID_COUNTERPART
+    SetFlag FLAG_BEATEN_202_RIVAL
     SetVar VAR_ROUTE_202_STATE, 1
     ReleaseAll
     End
@@ -165,8 +213,7 @@ Route202_TellYourFamily:
     End
 
 Route202_DawnTellYourFamily:
-    BufferCounterpartName 0
-    BufferPlayerName 1
+    BufferPlayerName 0
     CallIfUnset FLAG_TALKED_TO_ROUTE_202_COUNTERPART, Route202_DawnDidYouTellYourFamily
     CallIfSet FLAG_TALKED_TO_ROUTE_202_COUNTERPART, Route202_DawnYouShouldGoTellYourFamily
     GoTo Route202_CloseMessageTellYourFamily
@@ -180,8 +227,7 @@ Route202_DawnYouShouldGoTellYourFamily:
     Return
 
 Route202_LucasTellYourFamily:
-    BufferCounterpartName 0
-    BufferPlayerName 1
+    BufferPlayerName 0
     CallIfUnset FLAG_TALKED_TO_ROUTE_202_COUNTERPART, Route202_LucasDidYouTellYourFamily
     CallIfSet FLAG_TALKED_TO_ROUTE_202_COUNTERPART, Route202_LucasWhyDontYouGoTellYourFamily
     GoTo Route202_CloseMessageTellYourFamily

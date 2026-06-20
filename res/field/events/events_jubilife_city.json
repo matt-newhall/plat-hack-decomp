@@ -644,11 +644,11 @@
         },
         {
             "script": 3,
-            "x": 188,
-            "z": 757,
+            "x": 173,
+            "z": 742,
             "y": 0,
-            "width": 1,
-            "length": 4,
+            "width": 4,
+            "length": 1,
             "var": "VAR_JUBILIFE_CITY_STATE",
             "value": 1
         },
@@ -670,16 +670,6 @@
             "width": 5,
             "length": 1,
             "var": "VAR_POKETCH_CAMPAIGN_STATE",
-            "value": 1
-        },
-        {
-            "script": 28,
-            "x": 188,
-            "z": 757,
-            "y": 0,
-            "width": 1,
-            "length": 4,
-            "var": "VAR_JUBILIFE_LOOKER_PAL_PAD_STATE",
             "value": 1
         }
     ]
