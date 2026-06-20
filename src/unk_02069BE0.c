@@ -231,6 +231,12 @@ static int sub_02069D8C(MapObject *mapObj)
         u32 v6 = sub_02069D50(mapObj);
         int v7 = sub_02064488(v2, v3, v4, v5);
 
+        // never step onto the player's tile
+        if ((v2 + MapObject_GetDxFromDir(v7) == Player_GetXPos(playerAvatar))
+            && (v3 + MapObject_GetDzFromDir(v7) == Player_GetZPos(playerAvatar))) {
+            return 0;
+        }
+
         v6 = MovementAction_TurnActionTowardsDir(v7, v6);
         sub_02065668(mapObj, v6);
 

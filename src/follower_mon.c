@@ -1,12 +1,16 @@
 #include "follower_mon.h"
 
+#include "constants/map_object.h"
 #include "constants/player_avatar.h"
+
+#include "generated/movement_actions.h"
 
 #include "field/field_system.h"
 #include "generated/genders.h"
 #include "generated/movement_types.h"
 #include "generated/object_events_gfx.h"
 #include "follower_mon_gfx.h"
+#include "heap.h"
 #include "location.h"
 #include "map_header_data.h"
 #include "map_object.h"
@@ -18,6 +22,7 @@
 #include "savedata.h"
 #include "system_flags.h"
 #include "terrain_collision_manager.h"
+#include "unk_020655F4.h"
 
 #define FOLLOWER_LOCAL_ID 253
 
@@ -219,6 +224,160 @@ void FollowerMon_SaveState(FieldSystem *fieldSystem)
     } else {
         fieldSystem->followMon.active = FALSE;
     }
+}
+
+static BOOL FollowerMon_IsDelayAction(u16 action)
+{
+    switch (action) {
+    case MOVEMENT_ACTION_DELAY_1:
+    case MOVEMENT_ACTION_DELAY_2:
+    case MOVEMENT_ACTION_DELAY_4:
+    case MOVEMENT_ACTION_DELAY_8:
+    case MOVEMENT_ACTION_DELAY_15:
+    case MOVEMENT_ACTION_DELAY_16:
+    case MOVEMENT_ACTION_DELAY_32:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static BOOL FollowerMon_IsStationaryAction(u16 action, int dir)
+{
+    static const u16 bases[] = {
+        MOVEMENT_ACTION_FACE_NORTH,
+        MOVEMENT_ACTION_WALK_ON_SPOT_SLOWER_NORTH,
+        MOVEMENT_ACTION_WALK_ON_SPOT_SLOW_NORTH,
+        MOVEMENT_ACTION_WALK_ON_SPOT_NORMAL_NORTH,
+        MOVEMENT_ACTION_WALK_ON_SPOT_FAST_NORTH,
+        MOVEMENT_ACTION_WALK_ON_SPOT_FASTER_NORTH,
+        MOVEMENT_ACTION_JUMP_ON_SPOT_SLOW_NORTH,
+        MOVEMENT_ACTION_JUMP_ON_SPOT_FAST_NORTH,
+    };
+
+    for (u32 i = 0; i < NELEMS(bases); i++) {
+        if (MovementAction_TurnActionTowardsDir(dir, bases[i]) == action) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+static void FollowerMon_PushAnim(MapObjectAnimCmd *cmds, int *out, u16 action, u16 count)
+{
+    if (*out > 0 && cmds[*out - 1].movementAction == action) {
+        cmds[*out - 1].count += count;
+        return;
+    }
+
+    cmds[*out].movementAction = action;
+    cmds[*out].count = count;
+    (*out)++;
+}
+
+static int FollowerMon_DirFromDelta(int dx, int dz)
+{
+    if (dx == 0 && dz < 0) {
+        return DIR_NORTH;
+    }
+    if (dx == 0 && dz > 0) {
+        return DIR_SOUTH;
+    }
+    if (dx < 0 && dz == 0) {
+        return DIR_WEST;
+    }
+    if (dx > 0 && dz == 0) {
+        return DIR_EAST;
+    }
+    return DIR_NONE;
+}
+
+MapObjectAnimCmd *FollowerMon_BuildTrailingAnim(FieldSystem *fieldSystem, const MapObjectAnimCmd *playerCmds)
+{
+    MapObject *follower;
+    MapObjectAnimCmd *result;
+    int px, pz, fx, fz, cmdCount, totalCount, out, moves;
+
+    if (SystemFlag_CheckHasPartner(SaveData_GetVarsFlags(fieldSystem->saveData)) == TRUE) {
+        return NULL;
+    }
+
+    follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower == NULL) {
+        return NULL;
+    }
+
+    px = Player_GetXPos(fieldSystem->playerAvatar);
+    pz = Player_GetZPos(fieldSystem->playerAvatar);
+    fx = MapObject_GetX(follower);
+    fz = MapObject_GetZ(follower);
+
+    cmdCount = 0;
+    totalCount = 0;
+    while (playerCmds[cmdCount].movementAction != MOVEMENT_ACTION_END) {
+        totalCount += playerCmds[cmdCount].count;
+        cmdCount++;
+    }
+
+    result = Heap_Alloc(HEAP_ID_FIELD1, sizeof(MapObjectAnimCmd) * (totalCount + cmdCount + 1));
+
+    if (result == NULL) {
+        return NULL;
+    }
+
+    out = 0;
+    moves = 0;
+
+    for (int i = 0; i < cmdCount; i++) {
+        u16 action = playerCmds[i].movementAction;
+        u16 count = playerCmds[i].count;
+        int dir = MovementAction_GetDirFromAction(action);
+
+        if (FollowerMon_IsDelayAction(action)) {
+            FollowerMon_PushAnim(result, &out, action, count);
+            continue;
+        }
+
+        if (dir == DIR_NONE || FollowerMon_IsStationaryAction(action, dir)) {
+            continue;
+        }
+
+        for (int step = 0; step < count; step++) {
+            int pnx = px + MapObject_GetDxFromDir(dir);
+            int pnz = pz + MapObject_GetDzFromDir(dir);
+            int fStepDir;
+
+            if (pnx == fx && pnz == fz) {
+                fStepDir = dir;
+            } else {
+                fStepDir = FollowerMon_DirFromDelta(px - fx, pz - fz);
+
+                if (fStepDir == DIR_NONE) {
+                    fStepDir = dir;
+                }
+            }
+
+            FollowerMon_PushAnim(result, &out, MovementAction_TurnActionTowardsDir(fStepDir, action), 1);
+
+            fx += MapObject_GetDxFromDir(fStepDir);
+            fz += MapObject_GetDzFromDir(fStepDir);
+            px = pnx;
+            pz = pnz;
+            moves++;
+        }
+    }
+
+    if (moves == 0) {
+        Heap_Free(result);
+        return NULL;
+    }
+
+    result[out].movementAction = MOVEMENT_ACTION_END;
+    result[out].count = 0;
+
+    return result;
 }
 
 void FollowerMon_Despawn(FieldSystem *fieldSystem)

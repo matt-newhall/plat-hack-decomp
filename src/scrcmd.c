@@ -2047,6 +2047,26 @@ static BOOL ScrCmd_ApplyMovement(ScriptContext *ctx)
     u8 *movementCount = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_MOVEMENT_COUNT);
     (*movementCount)++;
     sub_02040F28(ctx->fieldSystem, task, NULL);
+
+    // when the player is forcibly moved, force follower to walk behind still
+    if (localID == LOCALID_PLAYER) {
+        MapObjectAnimCmd *followerCmds = FollowerMon_BuildTrailingAnim(
+            ctx->fieldSystem, (const MapObjectAnimCmd *)(ctx->scriptPtr + movementOffset));
+
+        if (followerCmds != NULL) {
+            MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
+                ctx->fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+            if (follower != NULL) {
+                SysTask *followerTask = MapObject_StartAnimation(follower, followerCmds);
+                (*movementCount)++;
+                sub_02040F28(ctx->fieldSystem, followerTask, followerCmds);
+            } else {
+                Heap_Free(followerCmds);
+            }
+        }
+    }
+
     return FALSE;
 }
 
