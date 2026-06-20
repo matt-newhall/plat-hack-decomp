@@ -31,7 +31,6 @@
 
 PastoriaCity_OnTransition:
     SetVar VAR_PASTORIA_CITY_TRY_CROAGUNK_SCENE_STATE, 0
-    SetFlag FLAG_HIDE_ROUTE_212_BLOCKADE
     CallIfEq VAR_PASTORIA_STATE, 5, PastoriaCity_SetRivalPositionAfterExplosion
     CallIfEq VAR_PASTORIA_STATE, 4, PastoriaCity_SetRivalPositionAfterGym
     CallIfEq VAR_PASTORIA_STATE, 4, PastoriaCity_SetCrasherWakePositionAfterGym
