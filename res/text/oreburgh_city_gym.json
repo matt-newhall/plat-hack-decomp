@@ -20,7 +20,7 @@
       "en_US": [
         "This is embarrassing...\r",
         "I went and lost to a Trainer who\n",
-        "didn’t have a single Gym Badge...\r",
+        "only had a single Gym Badge...\r",
         "But that’s tough. You were strong,\n",
         "and I was weak. That’s all there is.\r",
         "According to Pokémon League rules,\n",
@@ -43,6 +43,9 @@
         "Having that Coal Badge means your\n",
         "Pokémon can now use the hidden move\f",
         "Rock Smash outside of battle.\r",
+        "Now that you have two Gym Badges,\n",
+        "all Pokémon you received in trades\f",
+        "will obey you up to Lv. 30.\r",
         "You should also take this, too.\r"
       ]
     },
