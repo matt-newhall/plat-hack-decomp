@@ -11,6 +11,25 @@
         "SOMETHING\f",
         "ANEW AND ALIVE"
       ]
+    },
+    {
+      "id": "SolaceonRuinsRoom7_Text_Fantina",
+      "en_US": [
+        "Yes?\n",
+        "I beg your pardon?\r",
+        "Ah oui, the ruins you are here for?\n",
+        "I very much enjoy them myself.\r",
+        "Incidentally, Fantina, the Gym Leader\n",
+        "of Hearthome, is also interested in\f",
+        "these ruins.\r",
+        "She is, how do you say, très\n",
+        "fantastique!\r",
+        "Fantina being myself, of course!\r",
+        "Mmm, let me see...\n",
+        "You also seem to be très strong.\r",
+        "Enfin, so it shall be.\n",
+        "I wait for you at the Gym!"
+      ]
     }
   ]
 }
