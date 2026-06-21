@@ -544,11 +544,9 @@ EternaCity_BugCatcher2:
     FacePlayer
     GoToIfUnset FLAG_RECEIVED_BICYCLE, EternaCity_ItFeelsGreatRidingABikeWithTheWindInYourFaceDoesntIt
     GoToIfGe VAR_ROUTE_207_COUNTERPART_TRIGGER_STATE, 1, EternaCity_ItFeelsGreatRidingABikeWithTheWindInYourFaceDoesntIt
-    Message EternaCity_Text_OhWowYouGotABicycle2
+    Message EternaCity_Text_OhWowYouGotABicycle
     WaitButton
     CloseMessage
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2FaceSouth
-    WaitMovement
     ReleaseAll
     End
 
@@ -556,116 +554,14 @@ EternaCity_ItFeelsGreatRidingABikeWithTheWindInYourFaceDoesntIt:
     Message EternaCity_Text_ItFeelsGreatRidingABikeWithTheWindInYourFaceDoesntIt
     WaitButton
     CloseMessage
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2FaceSouth
-    WaitMovement
     ReleaseAll
+    End
+
+EternaCity_BugCatcher2EternaCity_TriggerBlockExitWest:
     End
 
 EternaCity_TriggerBlockExitWest:
-    LockAll
-    GetPlayerMapPos VAR_0x8004, VAR_0x8005
-    CallIfEq VAR_0x8005, 532, EternaCity_BugCatcher2BlockExitWestZ532
-    CallIfEq VAR_0x8005, 533, EternaCity_BugCatcher2BlockExitWestZ533
-    CallIfEq VAR_0x8005, 534, EternaCity_BugCatcher2BlockExitWestZ534
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerFaceNorth
-    WaitMovement
-    Message EternaCity_Text_OhWowYouGotABicycle
-    CloseMessage
-    CallIfEq VAR_0x8005, 532, EternaCity_PushBackPlayerZ532
-    CallIfEq VAR_0x8005, 533, EternaCity_PushBackPlayerZ533
-    CallIfEq VAR_0x8005, 534, EternaCity_PushBackPlayerZ534
-    ReleaseAll
     End
-
-EternaCity_BugCatcher2BlockExitWestZ532:
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2BlockExitWestZ532
-    WaitMovement
-    Return
-
-EternaCity_BugCatcher2BlockExitWestZ533:
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2BlockExitWestZ533
-    WaitMovement
-    Return
-
-EternaCity_BugCatcher2BlockExitWestZ534:
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2BlockExitWestZ534
-    WaitMovement
-    Return
-
-EternaCity_PushBackPlayerZ532:
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2PushPlayerAndMoveBackZ532
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerGetPushedBack
-    WaitMovement
-    Return
-
-EternaCity_PushBackPlayerZ533:
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2PushPlayerAndMoveBackZ533
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerGetPushedBack
-    WaitMovement
-    Return
-
-EternaCity_PushBackPlayerZ534:
-    ApplyMovement LOCALID_BUG_CATCHER_2, EternaCity_Movement_BugCatcher2PushPlayerAndMoveBackZ534
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerGetPushedBack
-    WaitMovement
-    Return
-
-    .balign 4, 0
-EternaCity_Movement_PlayerGetPushedBack:
-    WalkNormalEast
-    WalkOnSpotNormalWest
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_PlayerFaceNorth:
-    FaceNorth
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2FaceSouth:
-    FaceSouth
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2BlockExitWestZ532:
-    FaceSouth
-    EmoteExclamationMark
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2BlockExitWestZ533:
-    FaceSouth
-    EmoteExclamationMark
-    WalkNormalSouth
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2BlockExitWestZ534:
-    FaceSouth
-    EmoteExclamationMark
-    WalkNormalSouth 2
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2PushPlayerAndMoveBackZ532:
-    WalkNormalSouth
-    WalkNormalNorth
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2PushPlayerAndMoveBackZ533:
-    WalkNormalSouth
-    WalkNormalNorth 2
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-EternaCity_Movement_BugCatcher2PushPlayerAndMoveBackZ534:
-    WalkNormalSouth
-    WalkNormalNorth 3
-    WalkOnSpotNormalSouth
-    EndMovement
 
 EternaCity_Gardenia:
     PlaySE SEQ_SE_CONFIRM
