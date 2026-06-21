@@ -1,0 +1,42 @@
+{
+    "name": "Noah",
+    "class": "TRAINER_CLASS_HIKER",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_GEODUDE",
+            "form": 0,
+            "level": 20,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_PRE_BATTLE",
+            "en_US": [
+                "Stub pre-battle message"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Stub defeat message"
+            ]
+        },
+        {
+            "type": "TRMSG_POST_BATTLE",
+            "en_US": [
+                "Stub post-battle message"
+            ]
+        }
+    ]
+}
