@@ -122,15 +122,15 @@ Route202_RivalBattleDawn:
     GoTo Route202_DawnBattlePiplup
 
 Route202_DawnBattleTurtwig:
-    StartTrainerBattle TRAINER_DUMMY_050, TRAINER_NONE
+    StartTrainerBattle TRAINER_DAWN_ROUTE_202_TURTWIG, TRAINER_NONE
     GoTo Route202_RivalBattleResult
 
 Route202_DawnBattleChimchar:
-    StartTrainerBattle TRAINER_DUMMY_008, TRAINER_NONE
+    StartTrainerBattle TRAINER_DAWN_ROUTE_202_CHIMCHAR, TRAINER_NONE
     GoTo Route202_RivalBattleResult
 
 Route202_DawnBattlePiplup:
-    StartTrainerBattle TRAINER_DUMMY_009, TRAINER_NONE
+    StartTrainerBattle TRAINER_DAWN_ROUTE_202_PIPLUP, TRAINER_NONE
     GoTo Route202_RivalBattleResult
 
 Route202_RivalBattleLucas:
@@ -140,15 +140,15 @@ Route202_RivalBattleLucas:
     GoTo Route202_LucasBattlePiplup
 
 Route202_LucasBattleTurtwig:
-    StartTrainerBattle TRAINER_DUMMY_007, TRAINER_NONE
+    StartTrainerBattle TRAINER_LUCAS_ROUTE_202_TURTWIG, TRAINER_NONE
     GoTo Route202_RivalBattleResult
 
 Route202_LucasBattleChimchar:
-    StartTrainerBattle TRAINER_DUMMY_005, TRAINER_NONE
+    StartTrainerBattle TRAINER_LUCAS_ROUTE_202_CHIMCHAR, TRAINER_NONE
     GoTo Route202_RivalBattleResult
 
 Route202_LucasBattlePiplup:
-    StartTrainerBattle TRAINER_DUMMY_006, TRAINER_NONE
+    StartTrainerBattle TRAINER_LUCAS_ROUTE_202_PIPLUP, TRAINER_NONE
     GoTo Route202_RivalBattleResult
 
 Route202_RivalBattleResult:
