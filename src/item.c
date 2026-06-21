@@ -2605,8 +2605,8 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = loot_sack_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_RULE_BOOK] = {
-        .dataID = 0x198,
+    [ITEM_MINI_PC] = {
+        .dataID = 0x1D7,
         .iconID = rule_book_NCGR,
         .paletteID = rule_book_NCLR,
         .gen3ID = GBA_ITEM_NONE,

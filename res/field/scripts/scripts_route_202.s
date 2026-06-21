@@ -178,8 +178,8 @@ Route202_LucasVictory:
 
 Route202_GivePokeballs:
     WaitButton
-    SetVar VAR_0x8004, ITEM_POKE_BALL
-    SetVar VAR_0x8005, 5
+    SetVar VAR_0x8004, ITEM_MINI_PC
+    SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     GetPlayerGender VAR_RESULT
     GoToIfEq VAR_RESULT, GENDER_MALE, Route202_DawnLeave
@@ -203,6 +203,9 @@ Route202_CounterpartLeave:
     RemoveObject LOCALID_COUNTERPART
     SetFlag FLAG_BEATEN_202_RIVAL
     SetVar VAR_ROUTE_202_STATE, 1
+    Message Route202_Text_MiniPCTutorial
+    WaitButton
+    CloseMessage
     ReleaseAll
     End
 

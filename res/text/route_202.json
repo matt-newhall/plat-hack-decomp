@@ -45,7 +45,7 @@
     {
       "id": "Route202_Text_DawnByeNow",
       "en_US": [
-        "It’s a Pocket PC.\r",
+        "It’s a Mini PC.\r",
         "It allows you to access your storage,\n",
         "wherever you can get connection.\r",
         "Make sure to catch lots of Pokémon\n",
@@ -102,7 +102,7 @@
     {
       "id": "Route202_Text_LucasSeeYouAround",
       "en_US": [
-        "It’s a Pocket PC.\r",
+        "It’s a Mini PC.\r",
         "It allows you to access your storage,\n",
         "wherever you can get connection.\r",
         "Make sure to catch lots of Pokémon\n",
@@ -214,6 +214,13 @@
         "So, if your aim is to keep seeing the\n",
         "same kind of Pokémon, you should\f",
         "consider using Repels.\r"
+      ]
+    },
+    {
+      "id": "Route202_Text_MiniPCTutorial",
+      "en_US": [
+        "(Note: the Mini PC can be accessed\n",
+        "by pressing R in the overworld.)"
       ]
     }
   ]

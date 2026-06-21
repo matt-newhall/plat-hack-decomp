@@ -28,6 +28,7 @@
 #include "overlay009/ov9_02249960.h"
 #include "underground/manager.h"
 
+#include "bag.h"
 #include "catching_show.h"
 #include "comm_player_manager.h"
 #include "communication_information.h"
@@ -340,7 +341,8 @@ BOOL FieldInput_Process(const FieldInput *input, FieldSystem *fieldSystem)
         return TRUE;
     }
 
-    if (input->dummy2 && FieldSystem_IsInValidLocation(fieldSystem) == TRUE) {
+    if (input->dummy2 && FieldSystem_IsInValidLocation(fieldSystem) == TRUE
+        && Bag_GetItemQuantity(SaveData_GetBag(fieldSystem->saveData), ITEM_MINI_PC, HEAP_ID_FIELD2) > 0) {
         FieldSystem_TriggerPortablePC(fieldSystem);
         return TRUE;
     }
