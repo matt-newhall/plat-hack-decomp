@@ -37,7 +37,7 @@ G3DPipelineBuffers *G3DPipeline_InitEx(enum HeapID heapID, enum VramManagerType 
         NNS_GfdInitLnkPlttVramManager(plttVramSize * PALETTE_VRAM_BLOCK_SIZE, buffers->paletteBuffer, bufferSize, TRUE);
     } else {
         // BUG: This should be NNS_GfdInitFrmPlttVramManager
-        NNS_GfdInitFrmTexVramManager(plttVramSize * PALETTE_VRAM_BLOCK_SIZE, TRUE);
+        NNS_GfdInitFrmPlttVramManager(plttVramSize * PALETTE_VRAM_BLOCK_SIZE, TRUE);
     }
 
     if (cb != NULL) {
