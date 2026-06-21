@@ -1,0 +1,71 @@
+{
+  "key": 16414,
+  "messages": [
+    {
+      "id": "SolaceonRuinsRoom6_Text_CounterpartTalk",
+      "en_US": [
+        "Placeholder: counterpart idle line."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_DawnNoticePlayer",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0}!"
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_LucasNoticePlayer",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0}."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_DawnReady",
+      "en_US": [
+        "Placeholder: Dawn asks if you’re ready to battle."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_LucasReady",
+      "en_US": [
+        "Placeholder: Lucas asks if you’re ready to battle."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_DawnHereICome",
+      "en_US": [
+        "Placeholder: Dawn pre-battle line."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_LucasHereICome",
+      "en_US": [
+        "Placeholder: Lucas pre-battle line."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_DawnDefeat",
+      "en_US": [
+        "Placeholder: Dawn post-battle defeat line."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_LucasDefeat",
+      "en_US": [
+        "Placeholder: Lucas post-battle defeat line."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_DawnDecline",
+      "en_US": [
+        "Placeholder: Dawn line when you decline."
+      ]
+    },
+    {
+      "id": "SolaceonRuinsRoom6_Text_LucasDecline",
+      "en_US": [
+        "Placeholder: Lucas line when you decline."
+      ]
+    }
+  ]
+}
