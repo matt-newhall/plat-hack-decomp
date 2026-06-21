@@ -978,9 +978,100 @@ EternaCity_GiveTogepiEgg:
     Message EternaCity_Text_ThatsWonderfulThePokemonInsideTheEggIsHappyToo
     Message EternaCity_Text_KeepThatEggWithYouInYourPartyOfPokemon
     CloseMessage
-    GiveEgg SPECIES_TOGEPI, SPECIAL_METLOC_NAME_CYNTHIA
+    GetRandom VAR_RESULT, 18
+    GoToIfEq VAR_RESULT, 0, EternaCity_GiveEgg0
+    GoToIfEq VAR_RESULT, 1, EternaCity_GiveEgg1
+    GoToIfEq VAR_RESULT, 2, EternaCity_GiveEgg2
+    GoToIfEq VAR_RESULT, 3, EternaCity_GiveEgg3
+    GoToIfEq VAR_RESULT, 4, EternaCity_GiveEgg4
+    GoToIfEq VAR_RESULT, 5, EternaCity_GiveEgg5
+    GoToIfEq VAR_RESULT, 6, EternaCity_GiveEgg6
+    GoToIfEq VAR_RESULT, 7, EternaCity_GiveEgg7
+    GoToIfEq VAR_RESULT, 8, EternaCity_GiveEgg8
+    GoToIfEq VAR_RESULT, 9, EternaCity_GiveEgg9
+    GoToIfEq VAR_RESULT, 10, EternaCity_GiveEgg10
+    GoToIfEq VAR_RESULT, 11, EternaCity_GiveEgg11
+    GoToIfEq VAR_RESULT, 12, EternaCity_GiveEgg12
+    GoToIfEq VAR_RESULT, 13, EternaCity_GiveEgg13
+    GoToIfEq VAR_RESULT, 14, EternaCity_GiveEgg14
+    GoToIfEq VAR_RESULT, 15, EternaCity_GiveEgg15
+    GoToIfEq VAR_RESULT, 16, EternaCity_GiveEgg16
+    GoToIfEq VAR_RESULT, 17, EternaCity_GiveEgg17
     SetVar VAR_ETERNA_CITY_STATE, 5
     Return
+
+EternaCity_GiveEgg0:
+    GiveEgg SPECIES_MANKEY, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg1:
+    GiveEgg SPECIES_ELECTRIKE, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg2:
+    GiveEgg SPECIES_AIPOM, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg3:
+    GiveEgg SPECIES_DODUO, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg4:
+    GiveEgg SPECIES_BUIZEL, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg5:
+    GiveEgg SPECIES_PONYTA, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg6:
+    GiveEgg SPECIES_TANGELA, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg7:
+    GiveEgg SPECIES_KRICKETOT, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg8:
+    GiveEgg SPECIES_SPOINK, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg9:
+    GiveEgg SPECIES_SNUBBULL, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg10:
+    GiveEgg SPECIES_POOCHYENA, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg11:
+    GiveEgg SPECIES_MISDREAVUS, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg12:
+    GiveEgg SPECIES_GULPIN, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg13:
+    GiveEgg SPECIES_SMOOCHUM, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg14:
+    GiveEgg SPECIES_SWABLU, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg15:
+    GiveEgg SPECIES_NOSEPASS, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg16:
+    GiveEgg SPECIES_HIPPOPOTAS, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
+EternaCity_GiveEgg17:
+    GiveEgg SPECIES_BRONZOR, SPECIAL_METLOC_NAME_CYNTHIA
+    Return
+
 
 EternaCity_PartyIsFull:
     Call EternaCity_OhYouDontHaveRoomForThisEgg
