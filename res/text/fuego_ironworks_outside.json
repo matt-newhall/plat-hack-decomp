@@ -7,6 +7,35 @@
         "Fuego Ironworks\n",
         "Home to Molten Foundries"
       ]
+    },
+    {
+      "id": "FuegoIronworksOutside_Text_Cameraman",
+      "en_US": [
+        "Sorry bud, cameras are rolling."
+      ]
+    },
+    {
+      "id": "FuegoIronworksOutside_Text_InterviewerLeft",
+      "en_US": [
+        "Is Fuego your Fore-name?"
+      ]
+    },
+    {
+      "id": "FuegoIronworksOutside_Text_InterviewerRight",
+      "en_US": [
+        "Have the recent attacks on the\n",
+        "Valley Windworks concerned you about\f",
+        "the security of the Ironworks?"
+      ]
+    },
+    {
+      "id": "FuegoIronworksOutside_Text_PolicemanThereIsAnInterview",
+      "en_US": [
+        "There’s an interview taking place with\n",
+        "the Fuego Foreman currently.\r",
+        "Try coming back later if you want\n",
+        "to look around."
+      ]
     }
   ]
 }

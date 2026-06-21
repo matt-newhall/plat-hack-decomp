@@ -80,6 +80,7 @@ EternaGym_Gardenia:
     SetTrainerFlag TRAINER_LASS_CAROLINE
     SetTrainerFlag TRAINER_BEAUTY_LINDSAY
     ClearFlag FLAG_UNK_0x01FC
+    SetFlag FLAG_HIDE_FUEGO_IRONWORKS_INTERVIEWERS
     CreateJournalEvent LOCATION_EVENT_BEAT_GYM_LEADER, 67, TRAINER_LEADER_GARDENIA, 0, 0
     Message EternaGym_Text_GardeniaExplainForestBadge
     GoTo EternaGym_GardeniaGiveTM86
