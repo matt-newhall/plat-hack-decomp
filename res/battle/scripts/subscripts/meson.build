@@ -344,5 +344,6 @@ subscript_files = files(
     'subscript_air_balloon_entry.s',
     'subscript_ability_stat_boost.s',
     'subscript_gooey.s',
-    'subscript_cloud_nine.s'
+    'subscript_cloud_nine.s',
+    'subscript_dancer.s'
 )

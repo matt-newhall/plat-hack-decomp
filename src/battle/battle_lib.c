@@ -3837,6 +3837,23 @@ BOOL BattleSystem_IsWindMove(u16 move) {
     return FALSE;
 };
 
+static u16 sDanceMoves[] = {
+    MOVE_QUIVER_DANCE,
+    MOVE_DRAGON_DANCE,
+    MOVE_FEATHER_DANCE,
+    MOVE_PETAL_DANCE,
+    MOVE_SWORDS_DANCE,
+    MOVE_TEETER_DANCE
+};
+
+BOOL BattleSystem_IsDanceMove(u16 move) {
+    for (int i = 0; sDanceMoves[i] != 0; i++) {
+        if (sDanceMoves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+};
+
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
     int subscript = NULL, moveType;
