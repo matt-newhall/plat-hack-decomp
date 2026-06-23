@@ -647,6 +647,17 @@
         "Visit Beautiful Lake Valor!\n",
         "Right off Rt. 214!"
       ]
+    },
+    {
+      "id": "VeilstoneCity_Text_GruntNorthWest",
+      "en_US": [
+        "Grunt: Hey, you!\n",
+        "Yeah, you!\r",
+        "This area’s off limits by the order\n",
+        "of Team Galactic!\r",
+        "So don’t try anything or we’ll\n",
+        "have to deal with you ourselves!"
+      ]
     }
   ]
 }

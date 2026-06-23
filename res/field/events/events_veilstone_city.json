@@ -538,6 +538,36 @@
             "x": 715,
             "z": 612,
             "y": 0
+        },
+        {
+            "id": "LOCALID_GALACTIC_M_NORTHWEST_BLOCK",
+            "graphics_id": "OBJ_EVENT_GFX_GRUNT_M",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_VEILSTONE_CITY_GALACTIC_WAREHOUSE_HM02",
+            "script": 34,
+            "initial_dir": 3,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 678,
+            "z": 598,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_GALACTIC_F_NORTHWEST_BLOCK",
+            "graphics_id": "OBJ_EVENT_GFX_GRUNT_F",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_VEILSTONE_CITY_GALACTIC_WAREHOUSE_HM02",
+            "script": 34,
+            "initial_dir": 3,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 678,
+            "z": 599,
+            "y": 0
         }
     ],
     "warp_events": [

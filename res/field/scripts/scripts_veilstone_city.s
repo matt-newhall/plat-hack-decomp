@@ -36,6 +36,7 @@
     ScriptEntry VeilstoneCity_Guitarist3
     ScriptEntry VeilstoneCity_BattleGirl3
     ScriptEntry VeilstoneCity_DrifloonInteract
+    ScriptEntry VeilstoneCity_GruntBlockNorthWest
     ScriptEntryEnd
 
 VeilstoneCity_OnTransition:
@@ -1419,3 +1420,13 @@ VeilstoneCity_DrifloonInteract:
     Common_CallDrifloon
     ReleaseAll
     End
+
+VeilstoneCity_GruntBlockNorthWest:
+	PlayFanfare SEQ_SE_CONFIRM
+	LockAll
+	FacePlayer
+	Message 69
+	WaitButton
+	CloseMessage
+	ReleaseAll
+End
