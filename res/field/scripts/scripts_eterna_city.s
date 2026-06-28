@@ -179,7 +179,7 @@ EternaCity_CynthiaGiveCut:
     CallIfEq VAR_0x8005, 522, EternaCity_CynthiaWalkOnSpotEastNorth
     CallIfNe VAR_0x8005, 522, EternaCity_CynthiaWalkOnSpotEastWest
     Message EternaCity_Text_TryUsingThisItShouldBeHelpful
-    SetVar VAR_0x8004, ITEM_TM43
+    SetVar VAR_0x8004, ITEM_HM01
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     Message EternaCity_Text_RememberTheHiddenMoveCutCanBeUsedInTheField
