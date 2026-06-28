@@ -181,7 +181,8 @@ SnowpointCity_SailorSSSpiral:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfUnset FLAG_GAME_COMPLETED, SnowpointCity_ILookForwardToAGreatTrainer
+    CheckBadgeAcquired BADGE_ID_ICICLE, VAR_RESULT
+    GoToIfEq VAR_RESULT, 0, SnowpointCity_ILookForwardToAGreatTrainer
     Message SnowpointCity_Text_SailToBattleZone
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_YES, SnowpointCity_TakeShipToBattleZone
