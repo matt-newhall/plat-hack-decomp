@@ -25,8 +25,7 @@ FieldMoves_CutTree:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    CheckBadgeAcquired BADGE_ID_FOREST, VAR_RESULT
-    GoToIfEq VAR_RESULT, 0, _008E
+    GoToIfUnset FLAG_CUT_UNLOCKED, _008E
     SetVar VAR_0x8004, SPECIES_SCYTHER
     BufferSpeciesNameFromVar 0, VAR_0x8004, 0, 0
     Message FieldMoves_Text_WouldYouLikeToUseCut
