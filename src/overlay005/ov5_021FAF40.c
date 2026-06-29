@@ -1584,6 +1584,13 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_PKMN_ROTOM_FAN_SHINY, &Unk_ov5_FollowerMon },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_ROTOM_MOW_SHINY, &Unk_ov5_FollowerMon },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY_SHINY, &Unk_ov5_FollowerMon },  // shiny alt form
+    { OBJ_EVENT_GFX_FALKNER, &Unk_ov5_021FAFD8 },  // Johto gym leader (standard NPC)
+    { OBJ_EVENT_GFX_BUGSY, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_WHITNEY, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_MORTY, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_CHUCK, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_PRYCE, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_CLAIR, &Unk_ov5_021FAFD8 },
     { 0xffff, NULL }
 };
 
@@ -3094,6 +3101,13 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { OBJ_EVENT_GFX_PKMN_ROTOM_FAN_SHINY, 0x600 },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_ROTOM_MOW_SHINY, 0x601 },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY_SHINY, 0x602 },  // shiny alt form
+    { OBJ_EVENT_GFX_FALKNER, 0x603 },  // mmodel_00001569
+    { OBJ_EVENT_GFX_BUGSY, 0x604 },  // mmodel_00001570
+    { OBJ_EVENT_GFX_WHITNEY, 0x605 },  // mmodel_00001571
+    { OBJ_EVENT_GFX_MORTY, 0x606 },  // mmodel_00001572
+    { OBJ_EVENT_GFX_CHUCK, 0x607 },  // mmodel_00001573
+    { OBJ_EVENT_GFX_PRYCE, 0x608 },  // mmodel_00001574
+    { OBJ_EVENT_GFX_CLAIR, 0x609 },  // mmodel_00001575
     { 0xffff, 0x0 }
 };
 
@@ -4821,6 +4835,13 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { OBJ_EVENT_GFX_PKMN_ROTOM_FAN_SHINY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_ROTOM_MOW_SHINY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY_SHINY, 0x0, 0x17, Unk_ov5_021FB2C0 },  // shiny alt form
+    { OBJ_EVENT_GFX_FALKNER, 0x0, 0x0, Unk_ov5_021FB2C0 },  // Johto gym leader (standard NPC)
+    { OBJ_EVENT_GFX_BUGSY, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_WHITNEY, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_MORTY, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_CHUCK, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_PRYCE, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_CLAIR, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -6155,6 +6176,13 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_PKMN_ROTOM_FAN_SHINY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_ROTOM_MOW_SHINY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // shiny alt form
     { OBJ_EVENT_GFX_PKMN_SHAYMIN_SKY_SHINY, 0x1, 0x1, 0x1, 0x1, 0x0 },  // shiny alt form
+    { OBJ_EVENT_GFX_FALKNER, 0x1, 0x1, 0x1, 0x1, 0x0 },  // Johto gym leader (standard NPC)
+    { OBJ_EVENT_GFX_BUGSY, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_WHITNEY, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_MORTY, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_CHUCK, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_PRYCE, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_CLAIR, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
