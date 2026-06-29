@@ -934,6 +934,7 @@ JubilifeCity_LucasTheProfessorStudiesTheEvolutionOfPokemonToo:
     End
 
 JubilifeCity_CounterpartAndProfRowanLeave:
+    Call JubilifeCity_RowanGiveGifts
     BufferPlayerName 0
     Message JubilifeCity_Text_WhyDontYouCollectAllTheGymBadgesOfSinnoh
     CloseMessage
@@ -943,6 +944,21 @@ JubilifeCity_CounterpartAndProfRowanLeave:
     WaitMovement
     GoTo JubilifeCity_CollectorJubilifeTV
     End
+
+JubilifeCity_RowanGiveGifts:
+    Message JubilifeCity_Text_RowanBeforeIGiveYouThese
+    SetVar VAR_0x8004, ITEM_CANDY_BAG
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    SetVar VAR_0x8004, ITEM_TRAINING_KIT
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    SetVar VAR_0x8004, ITEM_INFINITE_REPEL
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    Message JubilifeCity_Text_RowanExplainGifts
+    CloseMessage
+    Return
 
 JubilifeCity_CollectorJubilifeTV:
     RemoveObject LOCALID_COUNTERPART

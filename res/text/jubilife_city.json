@@ -750,6 +750,26 @@
       ]
     },
     {
+      "id": "JubilifeCity_Text_RowanBeforeIGiveYouThese",
+      "en_US": [
+        "Rowan: Before I go, allow me to give\n",
+        "you a few things for your journey.\r"
+      ]
+    },
+    {
+      "id": "JubilifeCity_Text_RowanExplainGifts",
+      "en_US": [
+        "Rowan: The Candy Bag holds an endless\n",
+        "supply of treats to raise a Pokémon’s level.\r",
+        "The Training Kit will help you strengthen\n",
+        "your team as you travel.\r",
+        "And the Infinite Repel wards off weaker\n",
+        "Pokémon. It never runs out.\r",
+        "Use them well! I expect great things\n",
+        "from you.\r"
+      ]
+    },
+    {
       "id": "JubilifeCity_Text_OhThatWasVeryGood",
       "en_US": [
         "Oh, that was very good!\n",
