@@ -6,7 +6,7 @@
 
     ScriptEntry JubilifeCity_OnTransition
     ScriptEntry JubilifeCity_TriggerFirstArrival
-    ScriptEntry JubilifeCity_TriggerLookerBlockRoute203
+    ScriptEntry JubilifeCity_TriggerLookerBlockRoute204
     ScriptEntry JubilifeCity_TriggerTeamGalactic
     ScriptEntry JubilifeCity_Looker
     ScriptEntry JubilifeCity_SchoolKidM1
@@ -566,7 +566,7 @@ JubilifeCity_Movement_PlayerStepBackEast:
     WalkNormalEast
     EndMovement
 
-JubilifeCity_TriggerLookerBlockRoute203:
+JubilifeCity_TriggerLookerBlockRoute204:
     LockAll
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 173, JubilifeCity_LookerWalkToPlayerX173
@@ -1413,7 +1413,6 @@ JubilifeCity_IncreaseObtainedCouponsCount:
 
 JubilifeCity_GivePoketch:
     ScrCmd_131
-    SetVar VAR_JUBILIFE_CITY_STATE, 3
     RegisterPoketchApp POKETCH_APPID_DIGITALWATCH
     RegisterPoketchApp POKETCH_APPID_CALCULATOR
     RegisterPoketchApp POKETCH_APPID_PEDOMETER
@@ -1449,14 +1448,6 @@ JubilifeCity_RemovePoketchCoPresident:
     RemoveObject LOCALID_POKETCH_CO_PRESIDENT
     SetFlag FLAG_OBTAINED_POKETCH
     ClearFlag FLAG_HIDE_POKETCH_CO_1F_POKETCH_CO_PRESIDENT
-    RemoveObject LOCALID_LOOKER
-    SetObjectEventPos LOCALID_COUNTERPART, 176, 739
-    SetObjectEventDir LOCALID_COUNTERPART, DIR_WEST
-    SetObjectEventMovementType LOCALID_COUNTERPART, MOVEMENT_TYPE_LOOK_WEST
-    AddObject LOCALID_GRUNT_M_1
-    AddObject LOCALID_GRUNT_M_2
-    AddObject LOCALID_PROF_ROWAN
-    AddObject LOCALID_COUNTERPART
     ReleaseAll
     End
 

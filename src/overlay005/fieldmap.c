@@ -8,6 +8,8 @@
 #include "constants/field/map.h"
 #include "constants/field/map_load.h"
 #include "constants/heap.h"
+#include "generated/genders.h"
+#include "generated/object_events_gfx.h"
 
 #include "field/field_system.h"
 #include "field/field_system_sub2_decl.h"
@@ -74,10 +76,12 @@
 #include "pokeradar.h"
 #include "render_oam.h"
 #include "resource_collection.h"
+#include "save_player.h"
 #include "savedata_misc.h"
 #include "screen_fade.h"
 #include "script_manager.h"
 #include "system.h"
+#include "trainer_info.h"
 #include "unk_0202419C.h"
 #include "unk_020559DC.h"
 #include "vram_transfer.h"
@@ -197,6 +201,14 @@ static BOOL FieldMap_Init(ApplicationManager *appMan, int *state)
         fieldSystem->unk_04->unk_04 = ov5_021D1A94(fieldSystem, HEAP_ID_FIELD1, 8);
 
         ov5_021D1414();
+
+        {
+            // The counterpart (Dawn/Lucas) uses the opposite-gender player gfx,
+            // which the real player never uses. Route it to bank D so it doesn't
+            // compete with the following Pokemon for shared texture VRAM.
+            int gender = TrainerInfo_Gender(SaveData_GetTrainerInfo(fieldSystem->saveData));
+            LargeSpriteVram_ForceGfxIdToBankD(gender == GENDER_MALE ? OBJ_EVENT_GFX_PLAYER_F : OBJ_EVENT_GFX_PLAYER_M);
+        }
 
         VramTransfer_New(128, HEAP_ID_FIELD1);
         BillboardLists_Create(4, HEAP_ID_FIELD1);

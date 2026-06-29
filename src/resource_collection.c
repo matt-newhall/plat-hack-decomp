@@ -34,11 +34,20 @@
 
 static BOOL sBankDSlotUsed[BANK_D_SLOT_COUNT];
 
+// gfx id whose textures are forced into bank D regardless of size, or
+// RESOURCE_ID_INVALID for none. Set per field load in fieldmap.c.
+static int sBankDForcedGfxId = RESOURCE_ID_INVALID;
+
 void LargeSpriteVram_ResetBankD(void)
 {
     for (int i = 0; i < BANK_D_SLOT_COUNT; i++) {
         sBankDSlotUsed[i] = FALSE;
     }
+}
+
+void LargeSpriteVram_ForceGfxIdToBankD(int gfxId)
+{
+    sBankDForcedGfxId = gfxId;
 }
 
 static NNSGfdTexKey BankD_AllocTexVram(u32 size)
@@ -85,7 +94,7 @@ static Resource *ResourceCollection_AllocResource(ResourceCollection *collection
 static void Resource_Init(Resource *resource);
 static TextureResource *TextureResourceManager_AllocTexture(const TextureResourceManager *texMgr);
 static void TextureResource_Init(TextureResource *texResource);
-static void TexRes_AllocVRam(const NNSG3dResTex *texRes, NNSGfdTexKey *texKey, NNSGfdTexKey *tex4x4Key, NNSGfdPlttKey *paletteKey);
+static void TexRes_AllocVRam(const NNSG3dResTex *texRes, NNSGfdTexKey *texKey, NNSGfdTexKey *tex4x4Key, NNSGfdPlttKey *paletteKey, BOOL forceBankD);
 static NNSG3dResTex *TextureResource_GetTexRes(const TextureResource *texResource);
 static NNSG3dResTex *TextureResource_GetTexResWithData(const TextureResource *texResource);
 static void TexRes_UploadToVRam(NNSG3dResTex *texRes, TextureResource *texResource);
@@ -452,7 +461,9 @@ void TextureResource_AllocVRam(TextureResource *texResource)
     }
 
     NNSG3dResTex *texRes = TextureResource_GetTexResWithData(texResource);
-    TexRes_AllocVRam(texRes, &texResource->texKey, &texResource->tex4x4Key, &texResource->paletteKey);
+    BOOL forceBankD = (sBankDForcedGfxId != RESOURCE_ID_INVALID
+        && Resource_GetID(texResource->resource) == sBankDForcedGfxId);
+    TexRes_AllocVRam(texRes, &texResource->texKey, &texResource->tex4x4Key, &texResource->paletteKey, forceBankD);
 }
 
 NNSGfdTexKey TextureResource_GetTexKey(const TextureResource *texResource)
@@ -514,16 +525,17 @@ static NNSG3dResTex *TextureResource_GetTexResWithData(const TextureResource *te
     return NNS_G3dGetTex(texData);
 }
 
-static void TexRes_AllocVRam(const NNSG3dResTex *texRes, NNSGfdTexKey *texKey, NNSGfdTexKey *tex4x4Key, NNSGfdPlttKey *paletteKey)
+static void TexRes_AllocVRam(const NNSG3dResTex *texRes, NNSGfdTexKey *texKey, NNSGfdTexKey *tex4x4Key, NNSGfdPlttKey *paletteKey, BOOL forceBankD)
 {
     u32 texSize = NNS_G3dTexGetRequiredSize(texRes);
     u32 tex4x4Size = NNS_G3dTex4x4GetRequiredSize(texRes);
     u32 paletteSize = NNS_G3dPlttGetRequiredSize(texRes);
 
     if (texSize != 0) {
-        // Large sprites get their own bank-D region so they don't compete with
-        // map geometry + normal sprites in the shared A+B pool.
-        if (texSize > LARGE_TEX_VRAM_THRESHOLD) {
+        // Large sprites (or a caller-flagged gfx id) get their own bank-D region
+        // so they don't compete with map geometry + normal sprites in the shared
+        // A+B pool.
+        if (forceBankD || texSize > LARGE_TEX_VRAM_THRESHOLD) {
             *texKey = BankD_AllocTexVram(texSize);
         } else {
             *texKey = NNS_GfdAllocTexVram(texSize, FALSE, 0);

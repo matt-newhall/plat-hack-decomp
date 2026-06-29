@@ -76,4 +76,11 @@ u32 Utility_GetStrippedTextureResourceSize(NNSG3dResFileHeader *resFile);
 // Call once at overworld 3D init so each field session starts with all slots free.
 void LargeSpriteVram_ResetBankD(void);
 
+// Forces every texture belonging to this gfx id into the dedicated bank-D region
+// instead of the shared A+B pool, regardless of size. Use for a player-type
+// overworld sprite (e.g. the Jubilife counterpart) that would otherwise starve
+// the following Pokemon's texture VRAM on a busy map. Pass RESOURCE_ID_INVALID
+// to disable.
+void LargeSpriteVram_ForceGfxIdToBankD(int gfxId);
+
 #endif // POKEPLATINUM_RESOURCE_MANAGER_H
