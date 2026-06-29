@@ -10,6 +10,77 @@
 
 #define RESOURCE_ID_INVALID (-1)
 
+// --- Dedicated bank-D texture-image VRAM region for large overworld sprites ---
+//
+// The overworld maps banks A+B (256 KB) as texture slots 0-1, managed by the
+// shared NNS Lnk manager; map geometry + every billboard compete for it. Large
+// 64x64 sprites (e.g. Giratina-Origin followers, ~16 KB each) can exhaust it
+// when many small sprites are also resident. To let large and small coexist,
+// fieldmap.c maps the otherwise-unused bank D as texture slot 2 (base address
+// 0x40000), and large texture allocations are routed here instead of into the
+// shared pool. The NNS manager never touches slot 2, so the two never collide.
+//
+// Bank D is also borrowed by the legendary/mythical encounter motion-blur effect
+// (encounter_effect.c remaps texture to bank A only during the effect); the
+// follower is hidden during encounters and respawns with a fresh texture upload
+// afterwards, so no re-upload hook is needed here.
+//
+// Layout: 4 fixed 32 KB slots. Covers up to four concurrent large sprites of
+// <= 32 KB each (a 16-colour 64x64 16-frame sheet is exactly 32 KB).
+#define BANK_D_TEX_BASE          0x40000 // texture-image address of slot 2 (bank D)
+#define BANK_D_SLOT_SIZE         0x8000  // 32 KB per slot
+#define BANK_D_SLOT_COUNT        4       // 4 * 32 KB = 128 KB (all of bank D)
+#define LARGE_TEX_VRAM_THRESHOLD 0x3000  // texSize > 12 KB routes to bank D
+
+static BOOL sBankDSlotUsed[BANK_D_SLOT_COUNT];
+
+void LargeSpriteVram_ResetBankD(void)
+{
+    for (int i = 0; i < BANK_D_SLOT_COUNT; i++) {
+        sBankDSlotUsed[i] = FALSE;
+    }
+}
+
+static NNSGfdTexKey BankD_AllocTexVram(u32 size)
+{
+    if (size > BANK_D_SLOT_SIZE) {
+        return NNS_GFD_ALLOC_ERROR_TEXKEY;
+    }
+
+    size = NNSi_GfdGetTexKeyRoundupSize(size);
+
+    for (int i = 0; i < BANK_D_SLOT_COUNT; i++) {
+        if (!sBankDSlotUsed[i]) {
+            sBankDSlotUsed[i] = TRUE;
+            return NNS_GfdMakeTexKey(BANK_D_TEX_BASE + i * BANK_D_SLOT_SIZE, size, FALSE);
+        }
+    }
+
+    return NNS_GFD_ALLOC_ERROR_TEXKEY;
+}
+
+static BOOL BankD_OwnsTexKey(NNSGfdTexKey key)
+{
+    if (key == NNS_GFD_ALLOC_ERROR_TEXKEY) {
+        return FALSE;
+    }
+
+    u32 addr = NNS_GfdGetTexKeyAddr(key);
+    return addr >= BANK_D_TEX_BASE && addr < BANK_D_TEX_BASE + (BANK_D_SLOT_COUNT * BANK_D_SLOT_SIZE);
+}
+
+static int BankD_FreeTexVram(NNSGfdTexKey key)
+{
+    int slot = (NNS_GfdGetTexKeyAddr(key) - BANK_D_TEX_BASE) / BANK_D_SLOT_SIZE;
+
+    if (slot >= 0 && slot < BANK_D_SLOT_COUNT && sBankDSlotUsed[slot]) {
+        sBankDSlotUsed[slot] = FALSE;
+        return 0;
+    }
+
+    return 1;
+}
+
 static Resource *ResourceCollection_AllocResource(ResourceCollection *collection);
 static void Resource_Init(Resource *resource);
 static TextureResource *TextureResourceManager_AllocTexture(const TextureResourceManager *texMgr);
@@ -250,7 +321,11 @@ void TextureResourceManager_RemoveTexture(TextureResourceManager *texMgr, Textur
     }
 
     if (texResource->texKey != NNS_GFD_ALLOC_ERROR_TEXKEY) {
-        GF_ASSERT(NNS_GfdFreeTexVram(texResource->texKey) == 0);
+        if (BankD_OwnsTexKey(texResource->texKey)) {
+            GF_ASSERT(BankD_FreeTexVram(texResource->texKey) == 0);
+        } else {
+            GF_ASSERT(NNS_GfdFreeTexVram(texResource->texKey) == 0);
+        }
     }
 
     if (texResource->tex4x4Key != NNS_GFD_ALLOC_ERROR_TEXKEY) {
@@ -446,7 +521,13 @@ static void TexRes_AllocVRam(const NNSG3dResTex *texRes, NNSGfdTexKey *texKey, N
     u32 paletteSize = NNS_G3dPlttGetRequiredSize(texRes);
 
     if (texSize != 0) {
-        *texKey = NNS_GfdAllocTexVram(texSize, FALSE, 0);
+        // Large sprites get their own bank-D region so they don't compete with
+        // map geometry + normal sprites in the shared A+B pool.
+        if (texSize > LARGE_TEX_VRAM_THRESHOLD) {
+            *texKey = BankD_AllocTexVram(texSize);
+        } else {
+            *texKey = NNS_GfdAllocTexVram(texSize, FALSE, 0);
+        }
     }
 
     if (tex4x4Size != 0) {

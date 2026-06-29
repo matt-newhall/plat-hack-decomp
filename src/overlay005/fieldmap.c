@@ -73,6 +73,7 @@
 #include "pltt_transfer.h"
 #include "pokeradar.h"
 #include "render_oam.h"
+#include "resource_collection.h"
 #include "savedata_misc.h"
 #include "screen_fade.h"
 #include "script_manager.h"
@@ -529,11 +530,12 @@ static void ov5_021D1414(void)
         GX_VRAM_OBJEXTPLTT_NONE,
         GX_VRAM_SUB_OBJ_16_I,
         GX_VRAM_SUB_OBJEXTPLTT_NONE,
-        GX_VRAM_TEX_01_AB,
+        GX_VRAM_TEX_012_ABD, // A+B = shared 256 KB pool (slots 0-1); D = dedicated large-sprite region (slot 2)
         GX_VRAM_TEXPLTT_0123_E
     };
 
     GXLayers_SetBanks(&v0);
+    LargeSpriteVram_ResetBankD();
 }
 
 void ov5_021D1434(BgConfig *bgl)

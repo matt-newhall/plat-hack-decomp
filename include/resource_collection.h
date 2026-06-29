@@ -72,4 +72,8 @@ NNSGfdTexKey TextureResource_GetTex4x4Key(const TextureResource *texResource);
 NNSGfdPlttKey TextureResource_GetPaletteKey(const TextureResource *texResource);
 u32 Utility_GetStrippedTextureResourceSize(NNSG3dResFileHeader *resFile);
 
+// Clears the dedicated bank-D large-sprite texture region (see resource_collection.c).
+// Call once at overworld 3D init so each field session starts with all slots free.
+void LargeSpriteVram_ResetBankD(void);
+
 #endif // POKEPLATINUM_RESOURCE_MANAGER_H
