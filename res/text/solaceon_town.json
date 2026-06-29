@@ -134,6 +134,74 @@
         "Pokémon News Press\n",
         "Wanted: Pro Pokémon Catcher!"
       ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerCowgirl",
+      "en_US": [
+        "Yee-haw! Roll ’em, Whitney!\r",
+        "That Miltank’s got more grit than\n",
+        "any of the cattle back at the ranch!"
+      ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerHiker",
+      "en_US": [
+        "You made it just in time!\r",
+        "Two Gym Leaders all the way from\n",
+        "Johto, slugging it out up the route.\r",
+        "Falkner’s the Flying type, Whitney’s\n",
+        "the Normal type... what a clash!\r",
+        "Whoop-there it goes again!\n",
+        "Sorry, I can’t look away."
+      ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerYoungster1",
+      "en_US": [
+        "I’m telling you, Whitney’s Miltank\n",
+        "is gonna roll right over that bird!\r",
+        "Rollout just keeps hitting harder\n",
+        "and harder!"
+      ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerYoungster2",
+      "en_US": [
+        "No way, no way! Falkner’s Pidgeot\n",
+        "is way too fast to get hit!\r",
+        "One Roost and it’s good as new.\n",
+        "You’ll see!"
+      ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerGuitarist",
+      "en_US": [
+        "The tension, the crowd, that big\n",
+        "clash up there...\r",
+        "This battle’s got a killer rhythm.\n",
+        "I feel a new song coming on."
+      ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerClown",
+      "en_US": [
+        "Heh heh! I’ll bet you a balloon\n",
+        "Whitney bawls if she loses.\r",
+        "She always turns on the waterworks!\r",
+        "Ooh-nice hit! Where was I?\n",
+        "Right, right back to the show!"
+      ]
+    },
+    {
+      "id": "SolaceonTown_Text_OnlookerArtist",
+      "en_US": [
+        "Magnificent...\r",
+        "The way that Pidgeot carves the\n",
+        "sky, the power in Miltank’s charge.\r",
+        "I simply must capture it on canvas.\r",
+        "Forgive me, I cannot tear my eyes\n",
+        "from such a masterpiece."
+      ]
     }
   ]
 }

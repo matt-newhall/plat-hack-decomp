@@ -16,6 +16,13 @@
     ScriptEntry SolaceonTown_OnResume
     ScriptEntry SolaceonTown_TriggerRival
     ScriptEntry SolaceonTown_DrifloonInteract
+    ScriptEntry SolaceonTown_Onlooker1
+    ScriptEntry SolaceonTown_Onlooker2
+    ScriptEntry SolaceonTown_Onlooker3
+    ScriptEntry SolaceonTown_Onlooker4
+    ScriptEntry SolaceonTown_Onlooker5
+    ScriptEntry SolaceonTown_Onlooker6
+    ScriptEntry SolaceonTown_Onlooker7
     ScriptEntryEnd
 
 SolaceonTown_OnResume:
@@ -183,3 +190,60 @@ SolaceonTown_DrifloonInteract:
     Common_CallDrifloon
     ReleaseAll
     End
+
+SolaceonTown_Onlooker1:
+    EventMessage SolaceonTown_Text_OnlookerCowgirl
+    End
+
+SolaceonTown_Onlooker2:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message SolaceonTown_Text_OnlookerHiker
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_ONLOOKER_2, SolaceonTown_Movement_OnlookerWatchFight
+    WaitMovement
+    ReleaseAll
+    End
+
+SolaceonTown_Onlooker3:
+    EventMessage SolaceonTown_Text_OnlookerYoungster1
+    End
+
+SolaceonTown_Onlooker4:
+    EventMessage SolaceonTown_Text_OnlookerYoungster2
+    End
+
+SolaceonTown_Onlooker5:
+    EventMessage SolaceonTown_Text_OnlookerGuitarist
+    End
+
+SolaceonTown_Onlooker6:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message SolaceonTown_Text_OnlookerClown
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_ONLOOKER_6, SolaceonTown_Movement_OnlookerWatchFight
+    WaitMovement
+    ReleaseAll
+    End
+
+SolaceonTown_Onlooker7:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message SolaceonTown_Text_OnlookerArtist
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_ONLOOKER_7, SolaceonTown_Movement_OnlookerWatchFight
+    WaitMovement
+    ReleaseAll
+    End
+
+    .balign 4, 0
+SolaceonTown_Movement_OnlookerWatchFight:
+    FaceNorth
+    EndMovement
