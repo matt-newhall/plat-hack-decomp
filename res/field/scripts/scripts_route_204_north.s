@@ -45,7 +45,7 @@ Route204North_ArrowSignpostFloaromaTown:
 
 Route204North_RivalTrigger:
     LockAll
-    ClearFlag FLAG_HIDE_ROUTE_203_RIVAL
+    ClearFlag FLAG_HIDE_ROUTE_204_RIVAL
     AddObject LOCALID_RIVAL
     ApplyMovement LOCALID_RIVAL, Route204North_Movement_RivalNoticePlayer
     WaitMovement
@@ -125,13 +125,13 @@ Route204North_RivalLeaveX172:
 
 Route204North_RemoveRival:
     RemoveObject LOCALID_RIVAL
-    SetFlag FLAG_HIDE_ROUTE_203_RIVAL
+    SetFlag FLAG_HIDE_ROUTE_204_RIVAL
     SetVar VAR_ROUTE_204_RIVAL_STATE, 1
     ReleaseAll
     End
 
 Route204North_BlackOutRivalBattle:
-    SetFlag FLAG_HIDE_ROUTE_203_RIVAL
+    SetFlag FLAG_HIDE_ROUTE_204_RIVAL
     BlackOutFromBattle
     ReleaseAll
     End
