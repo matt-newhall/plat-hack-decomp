@@ -64,6 +64,13 @@ typedef struct {
     u32 unk_D0C;
 } UnkStruct_ov6_022487F8;
 
+static u32 sRockSmashBreakTargetLocalID = 0;
+
+void ov6_SetRockSmashBreakTargetLocalID(u32 localID)
+{
+    sRockSmashBreakTargetLocalID = localID;
+}
+
 static void ov6_02248050(MapObjectManager *param0, u32 param1, Easy3DObject *param2)
 {
     int v0;
@@ -304,7 +311,8 @@ static void ov6_022483A0(UnkStruct_ov5_021D1BEC *param0, FieldSystem *fieldSyste
     v2 = NARC_ctor(NARC_INDEX_GRAPHIC__HIDEN_EFFECT, HEAP_ID_FIELD1);
 
     ov6_02248140(&v0->unk_00, v2, 8, 4, 4, &v0->unk_DC);
-    ov6_02248050(fieldSystem->mapObjMan, 0, &v0->unk_00.unk_00);
+    ov6_02248050(fieldSystem->mapObjMan, sRockSmashBreakTargetLocalID, &v0->unk_00.unk_00);
+    sRockSmashBreakTargetLocalID = 0;
 
     Sound_PlayEffect(SEQ_SE_DP_FW088);
     NARC_dtor(v2);

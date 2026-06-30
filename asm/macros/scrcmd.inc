@@ -4018,6 +4018,12 @@
     .short \arg1
     .endm
 
+    .macro RockSmashBreakAtObject localID, resultVar
+    .short SCRCMD_ROCKSMASHBREAKATOBJECT
+    .short \localID
+    .short \resultVar
+    .endm
+
     .macro ScrCmd_29F arg0
     .short SCRCMD_29F
     .short \arg0

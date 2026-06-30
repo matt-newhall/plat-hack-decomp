@@ -4,6 +4,7 @@
 #include "field/field_system_decl.h"
 #include "overlay005/struct_ov5_021D1BEC_decl.h"
 
+void ov6_SetRockSmashBreakTargetLocalID(u32 localID);
 UnkStruct_ov5_021D1BEC *ov6_0224830C(FieldSystem *fieldSystem);
 void ov6_02248320(UnkStruct_ov5_021D1BEC *param0);
 BOOL ov6_02248328(UnkStruct_ov5_021D1BEC *param0);

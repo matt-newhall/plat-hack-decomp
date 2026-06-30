@@ -1,9 +1,11 @@
 {
-    "name": "Angelica",
-    "class": "TRAINER_CLASS_WAITRESS",
+    "name": "Paul",
+    "class": "TRAINER_CLASS_PAUL",
     "items": [],
     "ai_flags": [
-        "AI_FLAG_BASIC"
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
     ],
     "double_battle": false,
     "party": [
@@ -19,16 +21,10 @@
     ],
     "messages": [
         {
-            "type": "TRMSG_PRE_BATTLE",
-            "garbage": 32
-        },
-        {
             "type": "TRMSG_DEFEAT",
-            "garbage": 16
-        },
-        {
-            "type": "TRMSG_POST_BATTLE",
-            "garbage": 30
+            "en_US": [
+                "Hmph."
+            ]
         }
     ]
 }

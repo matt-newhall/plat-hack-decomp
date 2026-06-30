@@ -77,6 +77,7 @@
 #include "overlay006/ov6_0223E140.h"
 #include "overlay006/ov6_02243004.h"
 #include "overlay006/ov6_02247830.h"
+#include "overlay006/ov6_02248050.h"
 #include "overlay006/ov6_02248948.h"
 #include "overlay006/pc_animation.h"
 #include "overlay006/swarm.h"
@@ -680,6 +681,7 @@ static BOOL ScrCmd_CheckShouldShowGhost(ScriptContext *ctx);
 static BOOL ScrCmd_OpenPartyMenuForDaycare(ScriptContext *ctx);
 static BOOL ScrCmd_291(ScriptContext *ctx);
 static BOOL ScrCmd_29E(ScriptContext *ctx);
+static BOOL ScrCmd_RockSmashBreakAtObject(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundTalkCounter(ScriptContext *ctx);
 static BOOL ScrCmd_29F(ScriptContext *ctx);
 static BOOL ScrCmd_Unused_2A1(ScriptContext *ctx);
@@ -6438,6 +6440,22 @@ static BOOL ScrCmd_29E(ScriptContext *ctx)
         GF_ASSERT(0);
         break;
     }
+
+    return TRUE;
+}
+
+// Like ScrCmd_29E case 2 (Rock Smash break particle + sound in front of a map
+// object), but targets the object with the given localID instead of the
+// hardcoded localID 0. Used by the Route 203 Hariyama cutscene so the smash
+// effect lands on the rock Hariyama is facing.
+static BOOL ScrCmd_RockSmashBreakAtObject(ScriptContext *ctx)
+{
+    u16 localID = ScriptContext_GetVar(ctx);
+    u16 *resultPtr = ScriptContext_GetVarPointer(ctx);
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+
+    ov6_SetRockSmashBreakTargetLocalID(localID);
+    ov6_0224899C(fieldSystem, resultPtr, 2, HEAP_ID_FIELD3);
 
     return TRUE;
 }

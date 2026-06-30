@@ -45,6 +45,39 @@
         "If the PP of moves runs low, head for\n",
         "any Pokémon Center."
       ]
+    },
+    {
+        "id": "Route203_Text_PaulIntro",
+        "en_US": [
+            "Paul intro"
+        ]
+    },
+    {
+        "id": "Route203_Text_PaulAfterBattle",
+        "en_US": [
+            "Paul after"
+        ]
+    },
+    {
+        "id": "Route203_Text_PaulHariyama",
+        "en_US": [
+            "Paul hariyama"
+        ]
+    },
+    {
+        "id": "Route203_Text_HariyamaLearnedRockSmash",
+        "en_US": [
+            "(HARIYAMA can now be called upon to\n",
+            "break small rocks!)"
+        ]
+    },
+    {
+        "id": "Route203_Text_HariyamaFlavour",
+        "en_US": [
+            "HARIYAMA lets out a hearty bellow.\n",
+            "It seems eager to find more rocks\f",
+            "to break."
+        ]
     }
   ]
 }
