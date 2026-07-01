@@ -508,6 +508,10 @@
     {
       "id": "LocationNames_Text_LostTower",
       "en_US": "Lost Tower"
+    },
+    {
+      "id": "LocationNames_Text_CoronetMountaintop",
+      "en_US": "Coronet Mountaintop"
     }
   ]
 }
