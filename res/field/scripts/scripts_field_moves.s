@@ -125,9 +125,8 @@ FieldMoves_Rock:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    CheckBadgeAcquired BADGE_ID_COAL, VAR_RESULT
-    GoToIfEq VAR_RESULT, 0, _0275
-    SetVar VAR_0x8004, SPECIES_TYRANITAR
+    GoToIfUnset FLAG_ROCK_SMASH_UNLOCKED, _0275
+    SetVar VAR_0x8004, SPECIES_HARIYAMA
     BufferSpeciesNameFromVar 0, VAR_0x8004, 0, 0
     Message FieldMoves_Text_WouldYouLikeToUseRockSmash
     ShowYesNoMenu VAR_RESULT
