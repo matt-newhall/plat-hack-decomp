@@ -11,6 +11,10 @@
     ScriptEntry Route213_ArrowSignPastoriaCity
     ScriptEntry Route213_SignHotelGrandLake
     ScriptEntry Route213_SignDrFootstepsHouse
+    ScriptEntry Route213_PolicemanSpottedYou
+    ScriptEntry Route213_PolicemanTalkDirect
+    ScriptEntry Route213_TriggerForceGruntM
+    ScriptEntry Route213_TriggerForceGruntMEast
     ScriptEntryEnd
 
 Route213_OnTransition:
@@ -32,7 +36,7 @@ Route213_ShowGruntM:
     End
 
 Route213_SetGruntMPositionNearPastoria:
-    SetObjectEventPos LOCALID_GRUNT_M, 654, 812
+    SetObjectEventPos LOCALID_GRUNT_M, 650, 812
     SetObjectEventDir LOCALID_GRUNT_M, DIR_EAST
     SetObjectEventMovementType LOCALID_GRUNT_M, MOVEMENT_TYPE_LOOK_EAST
     Return
@@ -196,6 +200,57 @@ Route213_LookerLeaveSouth:
     WaitMovement
     Return
 
+Route213_PolicemanSpottedYou:
+    GoToIfSet FLAG_HIDE_ROUTE_213_POLICEMAN, Route213_PolicemanDone
+    LockAll
+    ApplyMovement LOCALID_POLICEMAN, Route213_Movement_PolicemanExclamationMark
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerFacePoliceman
+    WaitMovement
+    Message Route213_Text_PolicemanStop
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerBackUp
+    WaitMovement
+    ReleaseAll
+    End
+
+Route213_PolicemanDone:
+    End
+
+Route213_PolicemanTalkDirect:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message Route213_Text_PolicemanStop
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_POLICEMAN, Route213_Movement_PolicemanLookWest
+    WaitMovement
+    ReleaseAll
+    End
+
+    .balign 4, 0
+Route213_Movement_PolicemanExclamationMark:
+    EmoteExclamationMark
+    Delay8
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerFacePoliceman:
+    FaceEast
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerBackUp:
+    WalkNormalNorth
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PolicemanLookWest:
+    FaceWest
+    EndMovement
+
     .balign 4, 0
 Route213_Movement_LookerEnterEast:
     WalkFastEast 10
@@ -337,5 +392,110 @@ Route213_SignHotelGrandLake:
 Route213_SignDrFootstepsHouse:
     ShowLandmarkSign Route213_Text_SignDrFootstepsHouse
     End
+
+Route213_TriggerForceGruntM:
+    GoToIfSet FLAG_HIDE_ROUTE_213_GRUNT_M, Route213_ForceGruntMSkip
+    GoToIfSet FLAG_TALKED_TO_ROUTE_213_GRUNT_M, Route213_ForceGruntMSkip
+    LockAll
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerFaceGruntM
+    WaitMovement
+    Message Route213_Text_WeNeededEnergy
+    CloseMessage
+    ApplyMovement LOCALID_GRUNT_M, Route213_Movement_GruntMNoticePlayerWest
+    WaitMovement
+    Message Route213_Text_YouWereEavesdropping
+    CloseMessage
+    ApplyMovement LOCALID_GRUNT_M, Route213_Movement_GruntMLeaveNorthSouthEast
+    WaitMovement
+    GoTo Route213_MoveGruntMEast
+    End
+
+Route213_ForceGruntMSkip:
+    End
+
+    .balign 4, 0
+Route213_Movement_GruntMNoticePlayerWest:
+    FaceWest
+    EmoteExclamationMark
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerFaceGruntM:
+    WalkOnSpotNormalEast
+    EndMovement
+
+Route213_TriggerForceGruntMEast:
+    GoToIfUnset FLAG_TALKED_TO_ROUTE_213_GRUNT_M, Route213_ForceGruntMSkip
+    GoToIfSet FLAG_ROUTE_213_GRUNT_M_LEFT, Route213_ForceGruntMSkip
+    LockAll
+    GetPlayerMapPos VAR_0x8000, VAR_0x8001
+    CallIfEq VAR_0x8001, 832, Route213_ForceGruntMEastCenterZ832
+    CallIfEq VAR_0x8001, 833, Route213_ForceGruntMEastCenterZ833
+    CallIfEq VAR_0x8001, 834, Route213_ForceGruntMEastCenterZ834
+    CallIfEq VAR_0x8001, 835, Route213_ForceGruntMEastCenterZ835
+    CallIfEq VAR_0x8001, 836, Route213_ForceGruntMEastCenterZ836
+    Message Route213_Text_BombPacksAWallop
+    CloseMessage
+    ApplyMovement LOCALID_GRUNT_M, Route213_Movement_GruntMNoticePlayerWest
+    WaitMovement
+    Message Route213_Text_YoureAPersistentPest
+    CloseMessage
+    GetPlayerDir VAR_0x8004
+    GoTo Route213_GruntMEastLeaveNorthSouthEast
+    End
+
+Route213_ForceGruntMEastCenterZ832:
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerCenterZ832
+    WaitMovement
+    Return
+
+Route213_ForceGruntMEastCenterZ833:
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerCenterZ833
+    WaitMovement
+    Return
+
+Route213_ForceGruntMEastCenterZ834:
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerCenterZ834
+    WaitMovement
+    Return
+
+Route213_ForceGruntMEastCenterZ835:
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerCenterZ835
+    WaitMovement
+    Return
+
+Route213_ForceGruntMEastCenterZ836:
+    ApplyMovement LOCALID_PLAYER, Route213_Movement_PlayerCenterZ836
+    WaitMovement
+    Return
+
+    .balign 4, 0
+Route213_Movement_PlayerCenterZ832:
+    WalkNormalSouth
+    WalkNormalEast 2
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerCenterZ833:
+    WalkNormalEast 2
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerCenterZ834:
+    WalkNormalNorth
+    WalkNormalEast 2
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerCenterZ835:
+    WalkNormalNorth 2
+    WalkNormalEast 2
+    EndMovement
+
+    .balign 4, 0
+Route213_Movement_PlayerCenterZ836:
+    WalkNormalNorth 3
+    WalkNormalEast 2
+    EndMovement
 
     .balign 4, 0

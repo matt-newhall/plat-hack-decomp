@@ -124,6 +124,14 @@
         "Dr. Footstep’s House\n",
         "Footprints Reveal All"
       ]
+    },
+    {
+      "id": "Route213_Text_PolicemanStop",
+      "en_US": [
+        "Watch your step, kid.\r",
+        "We’re on the lookout for\n",
+        "a suspicious individual."
+      ]
     }
   ]
 }

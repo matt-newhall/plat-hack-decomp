@@ -27,6 +27,7 @@
     ScriptEntry PastoriaCity_TriggerBlockGreatMarsh
     ScriptEntry PastoriaCity_TriggerFaceBoard
     ScriptEntry PastoriaCity_DrifloonInteract
+    ScriptEntry PastoriaCity_TriggerForceGruntM
     ScriptEntryEnd
 
 PastoriaCity_OnTransition:
@@ -699,6 +700,7 @@ PastoriaCity_GoAfterThatGoon:
     SetFlag FLAG_HIDE_VEILSTONE_CITY_GALACTIC_WAREHOUSE_LOOKER
     SetVar VAR_PASTORIA_STATE, 5
     SetFlag FLAG_PASTORIA_CITY_GRUNT_M_MOVED_EAST
+    SetFlag FLAG_HIDE_ROUTE_213_POLICEMAN
     BufferRivalName 0
     BufferPlayerName 1
     Message PastoriaCity_Text_GoAfterThatGoon
@@ -993,3 +995,30 @@ PastoriaCity_DrifloonInteract:
     Common_CallDrifloon
     ReleaseAll
     End
+
+PastoriaCity_TriggerForceGruntM:
+    GoToIfUnset FLAG_PASTORIA_CITY_GRUNT_M_MOVED_EAST, PastoriaCity_ForceGruntMSkip
+    GoToIfSet FLAG_TALKED_TO_PASTORIA_CITY_GRUNT_M, PastoriaCity_ForceGruntMSkip
+    LockAll
+    ApplyMovement LOCALID_GRUNT_M, PastoriaCity_Movement_GruntMNoticePlayerWest
+    ApplyMovement LOCALID_PLAYER, PastoriaCity_Movement_PlayerFaceGruntM
+    WaitMovement
+    GoTo PastoriaCity_StopChasingMe
+    End
+
+PastoriaCity_ForceGruntMSkip:
+    End
+
+    .balign 4, 0
+PastoriaCity_Movement_GruntMNoticePlayerWest:
+    EmoteExclamationMark
+    Delay8
+    WalkOnSpotNormalWest
+    EndMovement
+
+    .balign 4, 0
+PastoriaCity_Movement_PlayerFaceGruntM:
+    WalkOnSpotNormalEast
+    EndMovement
+
+    .balign 4, 0

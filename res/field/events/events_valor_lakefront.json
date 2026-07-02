@@ -270,6 +270,26 @@
             "length": 3,
             "var": "VAR_UNK_0x4112",
             "value": 0
+        },
+        {
+            "script": 10,
+            "x": 713,
+            "z": 788,
+            "y": 0,
+            "width": 1,
+            "length": 3,
+            "var": "VAR_PASTORIA_STATE",
+            "value": 5
+        },
+        {
+            "script": 11,
+            "x": 722,
+            "z": 775,
+            "y": 0,
+            "width": 3,
+            "length": 1,
+            "var": "VAR_PASTORIA_STATE",
+            "value": 5
         }
     ]
 }

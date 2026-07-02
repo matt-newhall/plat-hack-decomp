@@ -12,6 +12,8 @@
     ScriptEntry ValorLakefront_SignSevenStarsRestaurant
     ScriptEntry ValorLakefront_Collector
     ScriptEntry ValorLakefront_TriggerBlockSunyshore
+    ScriptEntry ValorLakefront_TriggerForceGrunt
+    ScriptEntry ValorLakefront_TriggerForceBattle
     ScriptEntryEnd
 
 ValorLakefront_OnTransition:
@@ -228,9 +230,12 @@ ValorLakefront_Cynthia:
     CallIfEq VAR_0x8000, DIR_WEST, ValorLakefront_CynthiaFacePlayerWest
     CallIfEq VAR_0x8000, DIR_EAST, ValorLakefront_CynthiaFacePlayerEast
     Message ValorLakefront_Text_HaveYouSeenPsyduck
-    ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_YES, ValorLakefront_YeahThatsRight
-    GoToIfEq VAR_RESULT, MENU_NO, ValorLakefront_YouHaventSeen
+    SetVar VAR_0x8004, ITEM_SECRETPOTION
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    Message ValorLakefront_Text_SeeYouLater
+    CloseMessage
+    GoTo ValorLakefront_CynthiaLeave
     End
 
 ValorLakefront_SetCynthiaPositionNorth:
@@ -328,26 +333,6 @@ ValorLakefront_RivalFacePlayerEast:
     ApplyMovement LOCALID_RIVAL, ValorLakefront_Movement_RivalWalkOnSpotWest
     WaitMovement
     Return
-
-ValorLakefront_YeahThatsRight:
-    Message ValorLakefront_Text_YeahThatsRight
-    GoTo ValorLakefront_UseMedicineOnPsyduck
-    End
-
-ValorLakefront_YouHaventSeen:
-    Message ValorLakefront_Text_YouHaventSeen
-    GoTo ValorLakefront_UseMedicineOnPsyduck
-    End
-
-ValorLakefront_UseMedicineOnPsyduck:
-    Message ValorLakefront_Text_UseMedicineOnPsyduck
-    SetVar VAR_0x8004, ITEM_SECRETPOTION
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
-    Message ValorLakefront_Text_SeeYouLater
-    CloseMessage
-    GoTo ValorLakefront_CynthiaLeave
-    End
 
 ValorLakefront_CynthiaLeave:
     ApplyMovement LOCALID_CYNTHIA, ValorLakefront_Movement_CynthiaLeave
@@ -615,3 +600,80 @@ ValorLakefront_Movement_PlayerGetPushedWest:
     WalkNormalWest
     UnlockDir
     EndMovement
+
+ValorLakefront_TriggerForceGrunt:
+    GoToIfSet FLAG_HIDE_VALOR_LAKEFRONT_GRUNT_M, ValorLakefront_ForceGruntSkip
+    GoToIfSet FLAG_TALKED_TO_VALOR_LAKEFRONT_GRUNT_M, ValorLakefront_ForceGruntSkip
+    LockAll
+    ApplyMovement LOCALID_GRUNT_M, ValorLakefront_Movement_GruntMNoticePlayerWest
+    ApplyMovement LOCALID_PLAYER, ValorLakefront_Movement_PlayerFaceGruntM
+    WaitMovement
+    Message ValorLakefront_Text_WhyAmIRunning
+    Message ValorLakefront_Text_YouWereEavesdropping
+    CloseMessage
+    ApplyMovement LOCALID_GRUNT_M, ValorLakefront_Movement_GruntMLeaveNorthWestEast
+    WaitMovement
+    GoTo ValorLakefront_MoveGruntMNorth
+    End
+
+ValorLakefront_ForceGruntSkip:
+    End
+
+    .balign 4, 0
+ValorLakefront_Movement_GruntMNoticePlayerWest:
+    EmoteExclamationMark
+    Delay8
+    WalkOnSpotNormalWest
+    EndMovement
+
+    .balign 4, 0
+ValorLakefront_Movement_PlayerFaceGruntM:
+    WalkOnSpotNormalEast
+    EndMovement
+
+ValorLakefront_TriggerForceBattle:
+    GoToIfUnset FLAG_TALKED_TO_VALOR_LAKEFRONT_GRUNT_M, ValorLakefront_ForceGruntSkip
+    LockAll
+    GetPlayerMapPos VAR_0x8000, VAR_0x8001
+    CallIfEq VAR_0x8000, 722, ValorLakefront_ForceBattleCenterEast
+    CallIfEq VAR_0x8000, 724, ValorLakefront_ForceBattleCenterWest
+    ApplyMovement LOCALID_PLAYER, ValorLakefront_Movement_PlayerApproachGruntM
+    WaitMovement
+    ApplyMovement LOCALID_GRUNT_M, ValorLakefront_Movement_GruntMNoticePlayerSouth
+    WaitMovement
+    GoTo ValorLakefront_GruntM
+    End
+
+ValorLakefront_ForceBattleCenterEast:
+    ApplyMovement LOCALID_PLAYER, ValorLakefront_Movement_PlayerCenterEast
+    WaitMovement
+    Return
+
+ValorLakefront_ForceBattleCenterWest:
+    ApplyMovement LOCALID_PLAYER, ValorLakefront_Movement_PlayerCenterWest
+    WaitMovement
+    Return
+
+    .balign 4, 0
+ValorLakefront_Movement_PlayerCenterEast:
+    WalkNormalEast
+    EndMovement
+
+    .balign 4, 0
+ValorLakefront_Movement_PlayerCenterWest:
+    WalkNormalWest
+    EndMovement
+
+    .balign 4, 0
+ValorLakefront_Movement_PlayerApproachGruntM:
+    WalkNormalNorth 5
+    EndMovement
+
+    .balign 4, 0
+ValorLakefront_Movement_GruntMNoticePlayerSouth:
+    EmoteExclamationMark
+    Delay8
+    WalkOnSpotNormalSouth
+    EndMovement
+
+    .balign 4, 0
