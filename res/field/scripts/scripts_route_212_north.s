@@ -1,4 +1,5 @@
 #include "macros/scrcmd.inc"
+#include "res/field/events/events_route_212_north.h"
 #include "res/text/bank/route_212_north.h"
 
 
@@ -12,6 +13,7 @@
     ScriptEntry Route212North_PolicemanDylan
     ScriptEntry Route212North_PolicemanCaleb
     ScriptEntry Route212North_OnTransition
+    ScriptEntry Route212North_PolicemanBlockSouth
     ScriptEntryEnd
 
 Route212North_OnTransition:
@@ -77,5 +79,37 @@ Route212North_PolicemanDylan:
 Route212North_PolicemanCaleb:
     NPCMessage Route212North_Text_PatrolTooMuch
     End
+
+Route212North_PolicemanBlockSouth:
+    GoToIfSet FLAG_MANSION_ROCKET_CLEARED, Route212North_Ignore
+    LockAll
+    ApplyMovement LOCALID_POLICEMAN_BLOCK, Route212North_Movement_PolicemanExclamationMark
+    ApplyMovement LOCALID_PLAYER, Route212North_Movement_PlayerLookEast
+    WaitMovement
+	Message Route212North_Text_PolicemanBlock
+	WaitButton
+	CloseMessage
+    ApplyMovement LOCALID_PLAYER, Route212North_Movement_PlayerMoveBack
+	WaitMovement
+	ReleaseAll
+
+Route212North_Ignore:
+    End
+
+    .balign 4, 0
+Route212North_Movement_PolicemanExclamationMark:
+    EmoteExclamationMark
+    Delay8 4
+    EndMovement
+
+    .balign 4, 0
+Route212North_Movement_PlayerLookEast:
+    FaceEast
+    EndMovement
+
+    .balign 4, 0
+Route212North_Movement_PlayerMoveBack:
+    WalkNormalNorth
+    EndMovement
 
     .balign 4, 0

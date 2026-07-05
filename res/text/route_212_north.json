@@ -69,6 +69,21 @@
         "The items in the Bag can be\n",
         "reorganized by pressing SELECT."
       ]
+    },
+    {
+      "id": "Route212North_Text_PolicemanBlock",
+      "en_US": [
+        "Hi trainer, sorry but this way is\n",
+        "off-limits currently.\r",
+        "A gang of shady characters in black\n",
+        "uniforms has barged into the Pokémon\f",
+        "Mansion and taken the whole place over!\r",
+        "Poor Mr. Backlot must be worried sick\n",
+        "about his Pokémon and his staff.\r",
+        "I need to stand guard here, but could\n",
+        "you possibly go and drive those\f",
+        "ruffians out of the mansion?"
+      ]
     }
   ]
 }
