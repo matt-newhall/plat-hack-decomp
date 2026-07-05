@@ -12262,6 +12262,39 @@
             "ppr": 0,
             "ply": "PLAYER_PV",
             "unkB": [0,0]
+        },
+        {
+            "name": "SEQ_GS_D_AJITO",
+            "fileName": "SEQ_GS_D_AJITO.sseq",
+            "unkA": 0,
+            "bnk": "BANK_BGM_DUNGEON9",
+            "vol": 81,
+            "cpr": 30,
+            "ppr": 64,
+            "ply": "PLAYER_FIELD",
+            "unkB": [0,0]
+        },
+        {
+            "name": "SEQ_GS_VS_ROCKET",
+            "fileName": "SEQ_GS_VS_ROCKET.sseq",
+            "unkA": 0,
+            "bnk": "BANK_BGM_BATTLE1",
+            "vol": 102,
+            "cpr": 30,
+            "ppr": 64,
+            "ply": "PLAYER_BGM",
+            "unkB": [0,0]
+        },
+        {
+            "name": "SEQ_GS_EYE_ROCKET",
+            "fileName": "SEQ_GS_EYE_ROCKET.sseq",
+            "unkA": 0,
+            "bnk": "BANK_GS_BASIC",
+            "vol": 71,
+            "cpr": 30,
+            "ppr": 64,
+            "ply": "PLAYER_BGM",
+            "unkB": [0,0]
         }
     ],
     "seqarcInfo": [],
@@ -17725,6 +17758,36 @@
                 "WAVE_ARC_SE_HIROBA",
                 "",
                 ""]
+        },
+        {
+            "name": "BANK_BGM_DUNGEON9",
+            "fileName": "BANK_BGM_DUNGEON9.sbnk",
+            "unkA": 0,
+            "wa": [
+                "WAVE_ARC_BGM_DUNGEON9",
+                "",
+                "",
+                ""]
+        },
+        {
+            "name": "BANK_BGM_BATTLE1",
+            "fileName": "BANK_BGM_BATTLE1.sbnk",
+            "unkA": 0,
+            "wa": [
+                "WAVE_ARC_BGM_BATTLE1",
+                "",
+                "",
+                ""]
+        },
+        {
+            "name": "BANK_GS_BASIC",
+            "fileName": "BANK_GS_BASIC.sbnk",
+            "unkA": 0,
+            "wa": [
+                "WAVE_ARC_GS_BASIC",
+                "",
+                "",
+                ""]
         }
     ],
     "wavarcInfo": [
@@ -20581,6 +20644,21 @@
         {
             "name": "WAVE_ARC_SE_HIROBA",
             "fileName": "WAVE_ARC_SE_HIROBA.swar",
+            "unkA": 0
+        },
+        {
+            "name": "WAVE_ARC_BGM_DUNGEON9",
+            "fileName": "WAVE_ARC_BGM_DUNGEON9.swar",
+            "unkA": 0
+        },
+        {
+            "name": "WAVE_ARC_BGM_BATTLE1",
+            "fileName": "WAVE_ARC_BGM_BATTLE1.swar",
+            "unkA": 0
+        },
+        {
+            "name": "WAVE_ARC_GS_BASIC",
+            "fileName": "WAVE_ARC_GS_BASIC.swar",
             "unkA": 0
         }
     ],

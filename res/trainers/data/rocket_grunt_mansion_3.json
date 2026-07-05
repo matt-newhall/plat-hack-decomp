@@ -1,0 +1,37 @@
+{
+    "name": "Grunt",
+    "class": "TRAINER_CLASS_ROCKET_GRUNT",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_GRIMER",
+            "form": 0,
+            "level": 29,
+            "item": null,
+            "moves": null,
+            "iv_scale": 30,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_ZUBAT",
+            "form": 0,
+            "level": 28,
+            "item": null,
+            "moves": null,
+            "iv_scale": 30,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "This wasn’t part of the plan!\n"
+            ]
+        }
+    ]
+}

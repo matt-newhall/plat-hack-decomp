@@ -48,6 +48,24 @@
         "{STRVAR_1 3, 0, 0} and the Pokémon became\n",
         "fully healed from the nap!"
       ]
+    },
+    {
+      "id": "PokemonMansionMaidsRoom_Text_MaidMiddlePanic",
+      "en_US": [
+        "Eeek! Team Rocket is everywhere!\r",
+        "We can’t do our chores while they’re\n",
+        "barging into our rooms like this!\r",
+        "Won’t somebody get rid of them?"
+      ]
+    },
+    {
+      "id": "PokemonMansionMaidsRoom_Text_MaidEastPanic",
+      "en_US": [
+        "I’m not hiding! I’m, er’\n",
+        "keeping an eye on that ruffian!\r",
+        "Somebody has to protect\n",
+        "the master’s linens!"
+      ]
     }
   ]
 }

@@ -108,5 +108,8 @@ static u8 sTrainerClassPrizeMul[] = {
     [TRAINER_CLASS_DP_PLAYER_MALE_2]        = 0,
     [TRAINER_CLASS_DP_PLAYER_FEMALE_2]      = 0,
     [TRAINER_CLASS_PAUL]                    = 25,
+    [TRAINER_CLASS_ROCKET_GRUNT]            = 10,
+    [TRAINER_CLASS_ROCKET_EXECUTIVE]        = 20,
+    [TRAINER_CLASS_ROCKET_GRUNT_F]          = 10,
 };
 // clang-format on

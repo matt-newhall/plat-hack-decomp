@@ -11,6 +11,7 @@ PokemonMansionMaidsRoom_MaidMiddle:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    GoToIfUnset FLAG_MANSION_ROCKET_CLEARED, PokemonMansionMaidsRoom_MaidMiddlePanic
     GoToIfSet FLAG_RECEIVED_POKEMON_MANSION_MAIDS_ROOM_SOOTHE_BELL, PokemonMansionMaidsRoom_TrainerThatPokemonLove
     Message PokemonMansionMaidsRoom_Text_PutThisOnPokemon
     SetVar VAR_0x8004, ITEM_SOOTHE_BELL
@@ -36,7 +37,19 @@ PokemonMansionMaidsRoom_TrainerThatPokemonLove:
     End
 
 PokemonMansionMaidsRoom_MaidEast:
+    GoToIfUnset FLAG_MANSION_ROCKET_CLEARED, PokemonMansionMaidsRoom_MaidEastPanic
     NPCMessage PokemonMansionMaidsRoom_Text_ImNotLoafing
+    End
+
+PokemonMansionMaidsRoom_MaidEastPanic:
+    NPCMessage PokemonMansionMaidsRoom_Text_MaidEastPanic
+    End
+
+PokemonMansionMaidsRoom_MaidMiddlePanic:
+    Message PokemonMansionMaidsRoom_Text_MaidMiddlePanic
+    WaitButton
+    CloseMessage
+    ReleaseAll
     End
 
 PokemonMansionMaidsRoom_Bed:

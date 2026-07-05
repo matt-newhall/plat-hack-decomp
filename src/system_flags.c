@@ -340,6 +340,14 @@ u16 SystemFlag_GetAltMusicForHeader(VarsFlags *varsFlags, enum MapHeader mapHead
         }
         break;
 
+    case MAP_HEADER_POKEMON_MANSION:
+    case MAP_HEADER_POKEMON_MANSION_MAIDS_ROOM:
+    case MAP_HEADER_POKEMON_MANSION_OFFICE:
+        if (CheckFlag(varsFlags, FLAG_ALT_MUSIC_POKEMON_MANSION) == TRUE) {
+            sdatID = SEQ_GS_D_AJITO;
+        }
+        break;
+
     default:
         break;
     }

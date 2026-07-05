@@ -209,6 +209,16 @@
     {
       "id": "PokemonMansionOffice_Text_PlayerPutBookBack",
       "en_US": "{STRVAR_1 3, 0, 0} put the book back."
+    },
+    {
+      "id": "PokemonMansionOffice_Text_PolicemanRocketGuard",
+      "en_US": [
+        "You there! Stay back!\r",
+        "This statue is Mr. Backlot’s prized\n",
+        "possession, and these Team Rocket\n",
+        "hooligans have their eyes on it!\r",
+        "Steal it? Not on my watch!"
+      ]
     }
   ]
 }

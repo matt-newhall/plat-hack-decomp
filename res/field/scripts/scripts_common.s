@@ -6,6 +6,9 @@
 #include "generated/tutor_locations.h"
 #include "res/text/bank/common_strings.h"
 #include "res/text/bank/menu_entries.h"
+#include "res/field/events/events_pokemon_mansion.h"
+#include "res/field/events/events_pokemon_mansion_office.h"
+#include "res/field/events/events_pokemon_mansion_maids_room.h"
 
     ScriptEntry CommonScript_HandleSignpostInput @ 0x7D0
     ScriptEntry CommonScript_CheckBagPocketForItem @ 0x7D1
@@ -67,6 +70,16 @@
     ScriptEntry CommonScript_GriseousOrbCouldNotBeRemoved @ 0x809
     ScriptEntry CommonScript_PortablePC_Simple @ 0x80A
     ScriptEntry CommonScript_Drifloon_Fly @ 0x80B
+    ScriptEntry CommonScript_RocketMansionGrunt1 @ 0x80C
+    ScriptEntry CommonScript_RocketMansionGrunt2 @ 0x80D
+    ScriptEntry CommonScript_RocketMansionGrunt3 @ 0x80E
+    ScriptEntry CommonScript_RocketMansionGrunt4 @ 0x80F
+    ScriptEntry CommonScript_RocketMansionGrunt5 @ 0x810
+    ScriptEntry CommonScript_RocketMansionGrunt6 @ 0x811
+    ScriptEntry CommonScript_RocketMansionGrunt7 @ 0x812
+    ScriptEntry CommonScript_RocketMansionAriana @ 0x813
+    ScriptEntry CommonScript_RocketMansionBacklot @ 0x814
+    ScriptEntry CommonScript_RocketMansionButler @ 0x815
     ScriptEntryEnd
 
 CommonScript_EmptyScript1:
@@ -79,6 +92,13 @@ CommonScript_PokecenterNurse:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    @ TEMP TEST HOOK: toggle Surf access each time you talk to a nurse
+    GoToIfSet FLAG_SURF_UNLOCKED, CommonScript_PokecenterNurse_ClearSurfFlag
+    SetFlag FLAG_SURF_UNLOCKED
+    GoTo CommonScript_PokecenterNurse_AfterSurfToggle
+CommonScript_PokecenterNurse_ClearSurfFlag:
+    ClearFlag FLAG_SURF_UNLOCKED
+CommonScript_PokecenterNurse_AfterSurfToggle:
     GetTrainerCardLevel VAR_RESULT
     GoToIfGe VAR_RESULT, TRAINER_CARD_LEVEL_GOLD, CommonScript_PokecenterNurse_GoldCard
     SetVar VAR_0x8004, CommonStrings_Text_PokecenterGreeting_Day
@@ -2109,5 +2129,324 @@ CommonScript_Drifloon_AddSurvivalArea:
 CommonScript_Drifloon_AddResortArea:
     AddListMenuEntry MenuEntries_Text_Drifloon_ResortArea, 18
     Return
+
+    .balign 4, 0
+CommonScript_RocketMansionGrunt1:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_1
+    Message CommonStrings_Text_RocketGrunt1Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_1
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_1
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_1
+    RemoveObject LOCALID_MANSION_ROCKET_GRUNT_1
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansionGrunt2:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_2
+    Message CommonStrings_Text_RocketGrunt2Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_2
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_2
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_2
+    RemoveObject LOCALID_MANSION_ROCKET_GRUNT_2
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansionGrunt3:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_3
+    Message CommonStrings_Text_RocketGrunt3Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_3
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_3
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_3
+    RemoveObject LOCALID_OFFICE_ROCKET_GRUNT_1
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansionGrunt4:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_4
+    Message CommonStrings_Text_RocketGrunt4Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_4
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_4
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_4
+    RemoveObject LOCALID_OFFICE_ROCKET_GRUNT_2
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansionGrunt5:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_5
+    Message CommonStrings_Text_RocketGrunt5Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_5
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_5
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_5
+    RemoveObject LOCALID_MAIDS_ROCKET_GRUNT_1
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansionGrunt6:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_6
+    Message CommonStrings_Text_RocketGrunt6Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_6
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_6
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_6
+    RemoveObject LOCALID_MAIDS_ROCKET_GRUNT_2
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansionGrunt7:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayTrainerEncounterBGM TRAINER_ROCKET_GRUNT_MANSION_7
+    Message CommonStrings_Text_RocketGrunt7Intro
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_GRUNT_MANSION_7
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_RocketGruntFlee
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetTrainerFlag TRAINER_ROCKET_GRUNT_MANSION_7
+    SetFlag FLAG_HIDE_MANSION_ROCKET_GRUNT_7
+    RemoveObject LOCALID_MAIDS_ROCKET_GRUNT_3
+    FadeScreenIn
+    WaitFadeScreen
+    GoTo CommonScript_RocketMansion_AnnounceRemaining
+
+CommonScript_RocketMansion_CountRemaining:
+    SetVar VAR_0x8004, 0
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_1, CommonScript_RocketMansion_Count2
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_Count2:
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_2, CommonScript_RocketMansion_Count3
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_Count3:
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_3, CommonScript_RocketMansion_Count4
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_Count4:
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_4, CommonScript_RocketMansion_Count5
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_Count5:
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_5, CommonScript_RocketMansion_Count6
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_Count6:
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_6, CommonScript_RocketMansion_Count7
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_Count7:
+    GoToIfSet FLAG_HIDE_MANSION_ROCKET_GRUNT_7, CommonScript_RocketMansion_CountDone
+    AddVar VAR_0x8004, 1
+CommonScript_RocketMansion_CountDone:
+    Return
+
+CommonScript_RocketMansion_AnnounceRemaining:
+    Call CommonScript_RocketMansion_CountRemaining
+    GoToIfEq VAR_0x8004, 0, CommonScript_RocketMansion_AllGruntsDefeated
+    GoToIfEq VAR_0x8004, 1, CommonScript_RocketMansion_OneGruntLeft
+    BufferNumber 0, VAR_0x8004
+    Message CommonStrings_Text_RocketGruntsRemain
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+CommonScript_RocketMansion_OneGruntLeft:
+    Message CommonStrings_Text_RocketOneGruntLeft
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+CommonScript_RocketMansion_AllGruntsDefeated:
+    SetFlag FLAG_MANSION_ALL_GRUNTS_DEFEATED
+    Message CommonStrings_Text_RocketAllGruntsDefeated
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+CommonScript_RocketMansion_BlackOut:
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+CommonScript_RocketMansionAriana:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    GoToIfUnset FLAG_MANSION_ALL_GRUNTS_DEFEATED, CommonScript_RocketMansion_ArianaBrushOff
+    PlayTrainerEncounterBGM TRAINER_ROCKET_ARIANA
+    Message CommonStrings_Text_ArianaChallenge
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_ROCKET_ARIANA
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, CommonScript_RocketMansion_BlackOut
+    Message CommonStrings_Text_ArianaDefeat
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    SetFlag FLAG_MANSION_ROCKET_CLEARED
+    RemoveObject LOCALID_MANSION_ARIANA
+    SetPosition LOCALID_PLAYER, 33, 0, 7, DIR_NORTH
+    CheckHasFollower VAR_RESULT
+    CallIfEq VAR_RESULT, TRUE, CommonScript_RocketMansion_PlaceFollower
+    ClearFlag FLAG_HIDE_MANSION_STAFF_PRE_CLEAR
+    ClearFlag FLAG_ALT_MUSIC_POKEMON_MANSION
+    FadeOutBGM 0, 30
+    StopMusic 0
+    PlayDefaultMusic
+    FadeInBGM 30
+    FadeScreenIn
+    WaitFadeScreen
+    ApplyMovement LOCALID_MANSION_BACKLOT, CommonScript_RocketMansion_Movement_BacklotApproach
+    ApplyMovement LOCALID_MANSION_BUTLER, CommonScript_RocketMansion_Movement_ButlerApproach
+    WaitMovement
+    Message CommonStrings_Text_BacklotThanks
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_MANSION_BACKLOT, CommonScript_RocketMansion_Movement_BacklotLeave
+    ApplyMovement LOCALID_MANSION_BUTLER, CommonScript_RocketMansion_Movement_ButlerLeave
+    WaitMovement
+    RemoveObject LOCALID_MANSION_BACKLOT
+    RemoveObject LOCALID_MANSION_BUTLER
+    ReleaseAll
+    End
+
+CommonScript_RocketMansion_PlaceFollower:
+    SetPosition 253, 33, 0, 8, DIR_NORTH
+    Return
+
+CommonScript_RocketMansion_ArianaBrushOff:
+    Message CommonStrings_Text_ArianaBrushOff
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+CommonScript_RocketMansionBacklot:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message CommonStrings_Text_BacklotWorried
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+CommonScript_RocketMansionButler:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message CommonStrings_Text_ButlerWorried
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+    .balign 4, 0
+CommonScript_RocketMansion_Movement_BacklotApproach:
+    WalkNormalSouth 3
+    EndMovement
+
+    .balign 4, 0
+CommonScript_RocketMansion_Movement_ButlerApproach:
+    WalkNormalSouth 3
+    EndMovement
+
+    .balign 4, 0
+CommonScript_RocketMansion_Movement_BacklotLeave:
+    WalkNormalEast 1
+    WalkNormalSouth 1
+    WalkNormalEast 8
+    SetInvisible
+    EndMovement
+
+    .balign 4, 0
+CommonScript_RocketMansion_Movement_ButlerLeave:
+    WalkNormalEast 2
+    WalkNormalSouth 1
+    WalkNormalEast 8
+    SetInvisible
+    EndMovement
 
     .balign 4, 0

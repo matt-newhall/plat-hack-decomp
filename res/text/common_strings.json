@@ -889,6 +889,140 @@
         "(Hi trainer! Where would you like\n",
         "to fly to today?)"
       ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt1Intro",
+      "en_US": [
+        "Hey! This mansion is Team Rocket\n",
+        "property now. Scram, kid!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt2Intro",
+      "en_US": [
+        "A trainer? Ugh, they didn’t tell me\n",
+        "there would be trainers here!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt3Intro",
+      "en_US": [
+        "Snooping around, are we?\n",
+        "You’ll regret crossing Team Rocket!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt4Intro",
+      "en_US": [
+        "The boss said no witnesses...\n",
+        "Nothing personal, kid!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt5Intro",
+      "en_US": [
+        "This beats hiding out in Kanto!\n",
+        "At least until you showed up..."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt6Intro",
+      "en_US": [
+        "Aren’t the furnishings lovely?\n",
+        "They’ll fetch a fine price!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGrunt7Intro",
+      "en_US": [
+        "How did you get in here?!\n",
+        "No matter. I’ll deal with you myself!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGruntFlee",
+      "en_US": [
+        "I’m not sticking around\n",
+        "for more of this!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketGruntsRemain",
+      "en_US": [
+        "{STRVAR_1 52, 0, 0} Team Rocket Grunts still lurk\n",
+        "somewhere in the mansion!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketOneGruntLeft",
+      "en_US": [
+        "Just 1 Team Rocket Grunt still lurks\n",
+        "somewhere in the mansion!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_RocketAllGruntsDefeated",
+      "en_US": [
+        "All of Team Rocket’s Grunts have\n",
+        "been defeated!\r",
+        "Only the executive Ariana remains..."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_ArianaBrushOff",
+      "en_US": [
+        "Fufufu... I don’t waste my time\n",
+        "on nobodies.\r",
+        "Deal with every last one of my Grunts,\n",
+        "then we can talk."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_ArianaChallenge",
+      "en_US": [
+        "So you’re the brat who dismantled\n",
+        "my entire operation.\r",
+        "I am Ariana, executive of Team Rocket.\n",
+        "Allow me to show you how the boss’s\n",
+        "favorite deals with pests!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_ArianaDefeat",
+      "en_US": [
+        "This mansion wasn’t worth\n",
+        "the trouble anyway.\r",
+        "Team Rocket is withdrawing.\n",
+        "But don’t think this is over, brat..."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_BacklotWorried",
+      "en_US": [
+        "Oh, it’s terrible! Those ruffians\n",
+        "have taken over my beautiful home!\r",
+        "Someone must drive them out..."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_BacklotThanks",
+      "en_US": [
+        "Oh! Oh my! You’ve driven every last\n",
+        "one of those ruffians out!\r",
+        "You have the eternal gratitude of\n",
+        "Mr. Backlot, my young friend!\r",
+        "Do come visit me in my office.\n",
+        "You are always welcome here!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_ButlerWorried",
+      "en_US": [
+        "The master puts on a brave face,\n",
+        "but he is beside himself with grief.\r",
+        "If only somebody could rid us of\n",
+        "these dreadful Team Rocket types’"
+      ]
     }
   ]
 }

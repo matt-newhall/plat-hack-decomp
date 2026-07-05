@@ -22,6 +22,9 @@
 // clang-format off
 // Class, Eyes meet theme
 const static u16 sTrainerEncounterBGMs[][2] = {
+    { TRAINER_CLASS_ROCKET_GRUNT,            SEQ_GS_EYE_ROCKET },
+    { TRAINER_CLASS_ROCKET_GRUNT_F,          SEQ_GS_EYE_ROCKET },
+    { TRAINER_CLASS_ROCKET_EXECUTIVE,        SEQ_GS_EYE_ROCKET },
     { TRAINER_CLASS_AROMA_LADY,              SEQ_EYE_LADY },
     { TRAINER_CLASS_RUIN_MANIAC,             SEQ_EYE_MOUNT },
     { TRAINER_CLASS_INTERVIEWERS,            SEQ_EYE_FUN },

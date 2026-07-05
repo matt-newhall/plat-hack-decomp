@@ -54,6 +54,7 @@ PokemonMansion_MaidWest:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    GoToIfUnset FLAG_MANSION_ROCKET_CLEARED, PokemonMansion_MaidWestRocketPresent
     GoToIfDefeated TRAINER_RICH_BOY_LIAM, PokemonMansion_VisitAgainTomorrow
     GoToIfDefeated TRAINER_LADY_CELESTE, PokemonMansion_VisitAgainTomorrow
     GetPlayerDir VAR_RESULT
@@ -201,6 +202,13 @@ PokemonMansion_FiveMaidKnockoutChallenge:
 PokemonMansion_VisitAgainTomorrow:
     Message PokemonMansion_Text_VisitAgainTomorrow
     GoTo PokemonMansion_MaidChallengeEnd
+    End
+
+PokemonMansion_MaidWestRocketPresent:
+    Message PokemonMansion_Text_MaidWestRocketPresent
+    WaitButton
+    CloseMessage
+    ReleaseAll
     End
 
 PokemonMansion_SetOpponentLiam:

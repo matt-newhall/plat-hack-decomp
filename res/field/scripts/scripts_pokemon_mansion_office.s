@@ -10,9 +10,16 @@
     ScriptEntry PokemonMansionOffice_TriggerBlockStatue
     ScriptEntry PokemonMansionOffice_Statue
     ScriptEntry PokemonMansionOffice_Book
+    ScriptEntry PokemonMansionOffice_PolicemanRocket
     ScriptEntryEnd
 
 PokemonMansionOffice_OnTransition:
+    GoToIfDefeated TRAINER_ROCKET_GRUNT_MANSION_4, PokemonMansionOffice_TimeOfDayPoliceman
+    SetFlag FLAG_HIDE_POKEMON_MANSION_OFFICE_POLICEMAN
+    SetVar VAR_POKEMON_MANSION_OFFICE_BLOCK_STATUE_STATE, 1
+    End
+
+PokemonMansionOffice_TimeOfDayPoliceman:
     GetHour VAR_MAP_LOCAL_0
     GoToIfEq VAR_MAP_LOCAL_0, 0, PokemonMansionOffice_SetBlockStatue
     GoToIfEq VAR_MAP_LOCAL_0, 1, PokemonMansionOffice_SetBlockStatue
@@ -327,5 +334,24 @@ PokemonMansionOffice_BookEnd:
     CloseMessage
     ReleaseAll
     End
+
+    .balign 4, 0
+
+PokemonMansionOffice_PolicemanRocket:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message PokemonMansionOffice_Text_PolicemanRocketGuard
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_OFFICE_POLICEMAN_ROCKET, PokemonMansionOffice_Movement_PolicemanRocketFaceWest
+    WaitMovement
+    ReleaseAll
+    End
+
+    .balign 4, 0
+PokemonMansionOffice_Movement_PolicemanRocketFaceWest:
+    FaceWest
+    EndMovement
 
     .balign 4, 0

@@ -8,7 +8,7 @@
 #include "game_options.h"
 #include "sys_task.h"
 
-#define SOUND_SYSTEM_HEAP_SIZE           0xBBC00 // ~750kB
+#define SOUND_SYSTEM_HEAP_SIZE           0xCBC00 // ~815kB (vanilla 0xBBC00; +64kB so imported HGSS battle banks fit alongside battle SE)
 #define SOUND_SYSTEM_CAPTURE_BUFFER_SIZE 0x1000
 #define SOUND_HEAP_STATE_INVALID         -1
 #define SOUND_FILTER_MAX_SIZE            8

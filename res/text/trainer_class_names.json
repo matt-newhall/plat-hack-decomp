@@ -424,6 +424,18 @@
     {
       "id": "pl_msg_00000619_00104",
       "en_US": "₧₦ Trainer"
+    },
+    {
+      "id": "pl_msg_00000619_00106",
+      "en_US": "Team Rocket"
+    },
+    {
+      "id": "pl_msg_00000619_00107",
+      "en_US": "Executive"
+    },
+    {
+      "id": "pl_msg_00000619_00108",
+      "en_US": "Team Rocket"
     }
   ]
 }

@@ -1592,6 +1592,9 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_PRYCE, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_CLAIR, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_PAUL, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_ROCKETW, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_ROCKETM, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_RKANBUW, &Unk_ov5_021FAFD8 },
     { 0xffff, NULL }
 };
 
@@ -3110,6 +3113,9 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { OBJ_EVENT_GFX_PRYCE, 0x608 },  // mmodel_00001574
     { OBJ_EVENT_GFX_CLAIR, 0x609 },  // mmodel_00001575
     { OBJ_EVENT_GFX_PAUL, 0x60A },  // mmodel_00001576
+    { OBJ_EVENT_GFX_ROCKETW, 0x60B },  // mmodel_00001577
+    { OBJ_EVENT_GFX_ROCKETM, 0x60C },  // mmodel_00001578
+    { OBJ_EVENT_GFX_RKANBUW, 0x60D },  // mmodel_00001579
     { 0xffff, 0x0 }
 };
 
@@ -4845,6 +4851,9 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { OBJ_EVENT_GFX_PRYCE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_CLAIR, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_PAUL, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_ROCKETW, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_ROCKETM, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_RKANBUW, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -6187,6 +6196,9 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_PRYCE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_CLAIR, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_PAUL, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_ROCKETW, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_ROCKETM, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_RKANBUW, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 

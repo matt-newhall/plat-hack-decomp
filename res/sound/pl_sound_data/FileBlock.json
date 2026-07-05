@@ -11960,6 +11960,128 @@
                 "1E.swav",
                 "1F.swav"
             ]
+        },
+        {
+            "name": "SEQ_GS_D_AJITO.sseq",
+            "type": "SEQ",
+            "MD5": "6ca00dff205e11cd046d433b0f331b03"
+        },
+        {
+            "name": "SEQ_GS_VS_ROCKET.sseq",
+            "type": "SEQ",
+            "MD5": "2092685d28e512aee1cca779f7c6a46d"
+        },
+        {
+            "name": "SEQ_GS_EYE_ROCKET.sseq",
+            "type": "SEQ",
+            "MD5": "3c07e981815a45e15cb172687756a70f"
+        },
+        {
+            "name": "BANK_BGM_DUNGEON9.sbnk",
+            "type": "BANK",
+            "MD5": "2ffbbb25b5914ead0cf4842a0042f6ed"
+        },
+        {
+            "name": "BANK_BGM_BATTLE1.sbnk",
+            "type": "BANK",
+            "MD5": "29845c8e44c4525c57eb60fb5c52cd64"
+        },
+        {
+            "name": "BANK_GS_BASIC.sbnk",
+            "type": "BANK",
+            "MD5": "54de450c30341971180e1d89143f6787"
+        },
+        {
+            "name": "WAVE_ARC_BGM_DUNGEON9.swar",
+            "type": "WAVARC",
+            "MD5": "73fe112f833dcae108a93d0b69ea142a",
+            "subFile": [
+                "00.swav",
+                "01.swav",
+                "02.swav",
+                "03.swav",
+                "04.swav",
+                "05.swav",
+                "06.swav",
+                "07.swav",
+                "08.swav",
+                "09.swav",
+                "0A.swav",
+                "0B.swav",
+                "0C.swav",
+                "0D.swav",
+                "0E.swav",
+                "0F.swav",
+                "10.swav",
+                "11.swav",
+                "12.swav",
+                "13.swav",
+                "14.swav",
+                "15.swav",
+                "16.swav"
+            ]
+        },
+        {
+            "name": "WAVE_ARC_BGM_BATTLE1.swar",
+            "type": "WAVARC",
+            "MD5": "a4bc336f756a8ea952bfad91c5f461c1",
+            "subFile": [
+                "00.swav",
+                "01.swav",
+                "02.swav",
+                "03.swav",
+                "04.swav",
+                "05.swav",
+                "06.swav",
+                "07.swav",
+                "08.swav",
+                "09.swav",
+                "0A.swav",
+                "0B.swav",
+                "0C.swav",
+                "0D.swav",
+                "0E.swav",
+                "0F.swav",
+                "10.swav",
+                "11.swav",
+                "12.swav",
+                "13.swav",
+                "14.swav",
+                "15.swav",
+                "16.swav",
+                "17.swav",
+                "18.swav",
+                "19.swav",
+                "1A.swav",
+                "1B.swav",
+                "1C.swav",
+                "1D.swav",
+                "1E.swav"
+            ]
+        },
+        {
+            "name": "WAVE_ARC_GS_BASIC.swar",
+            "type": "WAVARC",
+            "MD5": "3c6dd2679abb3bbc9d226c56828e9de7",
+            "subFile": [
+                "00.swav",
+                "01.swav",
+                "02.swav",
+                "03.swav",
+                "04.swav",
+                "05.swav",
+                "06.swav",
+                "07.swav",
+                "08.swav",
+                "09.swav",
+                "0A.swav",
+                "0B.swav",
+                "0C.swav",
+                "0D.swav",
+                "0E.swav",
+                "0F.swav",
+                "10.swav"
+            ]
         }
     ]
 }
