@@ -32,15 +32,7 @@ TurnbackCavePillar1Room1_ReadBook:
     PlaySE SEQ_SE_PL_SYUWA
     FadeScreenOut
     WaitFadeScreen
-    CheckHasCaughtSpecies SPECIES_UNOWN, VAR_RESULT
-    GoToIfEq VAR_RESULT, TRUE, TurnbackCavePillar1Room1_WarpTunnel
-    Warp MAP_HEADER_RUIN_MANIAC_CAVE_LONG, 0, 30, 7, DIR_SOUTH
-    FadeScreenIn
-    WaitFadeScreen
-    End
-
-TurnbackCavePillar1Room1_WarpTunnel:
-    Warp MAP_HEADER_MANIAC_TUNNEL, 0, 45, 7, DIR_SOUTH
+    Warp MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_3, 0, 25, 16, DIR_SOUTH
     FadeScreenIn
     WaitFadeScreen
     End
