@@ -782,8 +782,8 @@ static int sub_02085C50(void *applicationPtr)
         if (Text_IsPrinterActive(application->textPrinterID) == 0) {
             if (gSystem.pressedKeys & (PAD_BUTTON_A | PAD_BUTTON_B)) {
                 Sound_PlayEffect(SEQ_SE_CONFIRM);
-                PartyMenu_DrawLevelUpStatIncreases(application);
-                application->unk_B13 = 1;
+                application->partyMenu->levelUpMoveIndex = 0;
+                application->unk_B13 = 3;
             }
         }
         break;
