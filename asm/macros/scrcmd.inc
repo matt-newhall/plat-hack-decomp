@@ -5053,6 +5053,16 @@
     .short \species
     .endm
 
+    .macro ShowMapNamePopup
+    .short SCRCMD_SHOWMAPNAMEPOPUP
+    .endm
+
+    .macro CheckHasCaughtSpecies species, destVarID
+    .short SCRCMD_CHECKHASCAUGHTSPECIES
+    .short \species
+    .short \destVarID
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

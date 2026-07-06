@@ -96,23 +96,23 @@ TurnbackCaveGiratinaRoom_Inscription:
 TurnbackCaveGiratinaRoom_Portal:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    Message TurnbackCaveGiratinaRoom_Text_GoToDistortionWorld
+    Message TurnbackCaveGiratinaRoom_Text_MysteriousPortal
     ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_YES, TurnbackCaveGiratinaRoom_GoToDistortionWorld
+    GoToIfEq VAR_RESULT, MENU_YES, TurnbackCaveGiratinaRoom_EnterPortal
     GoTo TurnbackCaveGiratinaRoom_PortalEnd
     End
 
-TurnbackCaveGiratinaRoom_GoToDistortionWorld:
+TurnbackCaveGiratinaRoom_EnterPortal:
     BufferPlayerName 0
     Message TurnbackCaveGiratinaRoom_Text_PlayerLeaptIntoPortal
     CloseMessage
     PlaySE SEQ_SE_PL_SYUWA
-    SetPartyGiratinaForm GIRATINA_FORM_ORIGIN
     FadeScreenOut
     WaitFadeScreen
-    Warp MAP_HEADER_DISTORTION_WORLD_TURNBACK_CAVE_ROOM, 0, 116, 75, DIR_SOUTH
+    Warp MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_1, 0, 11, 13, DIR_NORTH
     FadeScreenIn
     WaitFadeScreen
+    ShowMapNamePopup
     End
 
 TurnbackCaveGiratinaRoom_PortalEnd:

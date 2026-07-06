@@ -54,6 +54,7 @@
 #include "overlay005/footprint_type.h"
 #include "overlay005/honey_tree.h"
 #include "overlay005/land_data.h"
+#include "overlay005/map_name_popup.h"
 #include "overlay005/map_object_anim_cmd.h"
 #include "overlay005/ov5_021D431C.h"
 #include "overlay005/ov5_021D5EB8.h"
@@ -665,6 +666,8 @@ static BOOL ScrCmd_27F(ScriptContext *ctx);
 static BOOL ScrCmd_CheckIsTodayPlayerBirthday(ScriptContext *ctx);
 static BOOL ScrCmd_GetUnownFormsSeenCount(ScriptContext *ctx);
 static BOOL ScrCmd_InitTurnbackCave(ScriptContext *ctx);
+static BOOL ScrCmd_ShowMapNamePopup(ScriptContext *ctx);
+static BOOL ScrCmd_CheckHasCaughtSpecies(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundItemsGivenAway(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundFossilsUnearthed(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundTrapsSet(ScriptContext *ctx);
@@ -6224,6 +6227,22 @@ static BOOL ScrCmd_InitTurnbackCave(ScriptContext *ctx)
         MapHeaderData_SetWarpEventDestHeaderID(ctx->fieldSystem, warpID, destHeaderID);
     }
 
+    return FALSE;
+}
+
+static BOOL ScrCmd_ShowMapNamePopup(ScriptContext *ctx)
+{
+    FieldSystem_RequestLocationName(ctx->fieldSystem);
+    return FALSE;
+}
+
+static BOOL ScrCmd_CheckHasCaughtSpecies(ScriptContext *ctx)
+{
+    const Pokedex *pokedex = SaveData_GetPokedex(ctx->fieldSystem->saveData);
+    u16 species = ScriptContext_GetVar(ctx);
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+
+    *destVar = Pokedex_HasCaughtSpecies(pokedex, species);
     return FALSE;
 }
 

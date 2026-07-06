@@ -512,6 +512,10 @@
     {
       "id": "LocationNames_Text_CoronetMountaintop",
       "en_US": "Coronet Mountaintop"
+    },
+    {
+      "id": "LocationNames_Text_Unknown",
+      "en_US": "???"
     }
   ]
 }

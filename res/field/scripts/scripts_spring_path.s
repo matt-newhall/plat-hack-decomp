@@ -15,6 +15,7 @@ SpringPath_Psyduck:
     End
 
 SpringPath_UseSecretPotion:
+    SetFlag FLAG_HIDE_TURNBACK_CAVE_GIRATINA_ROOM_GIRATINA
     PlayCry SPECIES_PSYDUCK
     WaitCry
     ApplyMovement LOCALID_PSYDUCK_3, SpringPath_Movement_PsyduckExclamationMark

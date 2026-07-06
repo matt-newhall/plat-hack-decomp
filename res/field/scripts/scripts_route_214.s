@@ -9,11 +9,9 @@
     ScriptEntryEnd
 
 Route214_OnLoad:
-    GetUnownFormsSeenCount VAR_MAP_LOCAL_0
-    GoToIfGe VAR_MAP_LOCAL_0, 26, Route214_RemoveWarpsManiacCaveShortAndLong
-    GoToIfGe VAR_MAP_LOCAL_0, 10, Route214_RemoveWarpsManiacCaveShortAndTunnel
-    GoToIfLt VAR_MAP_LOCAL_0, 10, Route214_RemoveWarpsManiacCaveLongAndTunnel
-    End
+    CheckHasCaughtSpecies SPECIES_UNOWN, VAR_MAP_LOCAL_0
+    GoToIfEq VAR_MAP_LOCAL_0, TRUE, Route214_RemoveWarpsManiacCaveShortAndLong
+    GoTo Route214_RemoveWarpsManiacCaveShortAndTunnel
 
 Route214_RemoveWarpsManiacCaveShortAndLong:
     SetWarpEventPos 2, 710, 670
@@ -31,11 +29,9 @@ Route214_RemoveWarpsManiacCaveLongAndTunnel:
     End
 
 Route214_OnTransition:
-    GetUnownFormsSeenCount VAR_MAP_LOCAL_0
-    GoToIfGe VAR_MAP_LOCAL_0, 26, Route214_RemoveWarpsManiacCaveShortAndLong
-    GoToIfGe VAR_MAP_LOCAL_0, 10, Route214_RemoveWarpsManiacCaveShortAndTunnel
-    GoToIfLt VAR_MAP_LOCAL_0, 10, Route214_RemoveWarpsManiacCaveLongAndTunnel
-    End
+    CheckHasCaughtSpecies SPECIES_UNOWN, VAR_MAP_LOCAL_0
+    GoToIfEq VAR_MAP_LOCAL_0, TRUE, Route214_RemoveWarpsManiacCaveShortAndLong
+    GoTo Route214_RemoveWarpsManiacCaveShortAndTunnel
 
 Route214_ArrowSignVeilstoneCity:
     ShowArrowSign Route214_Text_SignVeilstoneCity

@@ -10,12 +10,10 @@
       "en_US": "GIRATINA disappeared..."
     },
     {
-      "id": "TurnbackCaveGiratinaRoom_Text_GoToDistortionWorld",
+      "id": "TurnbackCaveGiratinaRoom_Text_MysteriousPortal",
       "en_US": [
-        "It’s a portal leading to the\n",
-        "Distortion World...\r",
-        "Would you like to leap into the portal\n",
-        "and go to the Distortion World?"
+        "A mysterious portal...\r",
+        "Hop into it?"
       ]
     },
     {
@@ -29,6 +27,24 @@
         "That where life sparkles...\n",
         "That where life has faded...\r",
         "A place where two worlds overlap..."
+      ]
+    },
+    {
+      "id": "TurnbackCaveGiratinaRoom_Text_CursedBook",
+      "en_US": [
+        "An old book lies open in the\n",
+        "moss...\r",
+        "Its pages crawl with symbols\n",
+        "that shift as you read.\r",
+        "Read on?"
+      ]
+    },
+    {
+      "id": "TurnbackCaveGiratinaRoom_Text_CursedBookRead",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} reads the\n",
+        "final line...\r",
+        "Everything goes dark."
       ]
     }
   ]

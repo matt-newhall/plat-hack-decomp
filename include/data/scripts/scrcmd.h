@@ -856,6 +856,8 @@ ScriptCommand(SCRCMD_GETFOLLOWERMONHPPERCENT,                              ScrCm
 ScriptCommand(SCRCMD_GETFOLLOWERMONSTATUS,                                 ScrCmd_GetFollowerMonStatus)
 ScriptCommand(SCRCMD_PLAYHMSUMMONCUTIN,                                    ScrCmd_PlayHMSummonCutIn)
 ScriptCommand(SCRCMD_ROCKSMASHBREAKATOBJECT,                               ScrCmd_RockSmashBreakAtObject)
+ScriptCommand(SCRCMD_SHOWMAPNAMEPOPUP,                                     ScrCmd_ShowMapNamePopup)
+ScriptCommand(SCRCMD_CHECKHASCAUGHTSPECIES,                                ScrCmd_CheckHasCaughtSpecies)
 
 // clang-format on
 
