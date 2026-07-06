@@ -37,6 +37,8 @@
 
 #include "res/text/bank/party_menu.h"
 
+static int PartyMenu_ContinueOrExitAfterItemUse(PartyMenuApplication *application);
+static int PartyMenu_WaitLastItemMessageThenExit(void *applicationPtr);
 static int sub_02085384(void *applicationPtr);
 static int sub_02085424(void *applicationPtr);
 static int sub_020855C4(void *applicationPtr);
@@ -417,6 +419,47 @@ void sub_020852B8(PartyMenuApplication *application)
 }
 
 int sub_02085348(void *param0)
+{
+    PartyMenuApplication *application = (PartyMenuApplication *)param0;
+
+    if (Text_IsPrinterActive(application->textPrinterID) != 0) {
+        return 5;
+    }
+
+    if (gSystem.pressedKeys & (PAD_BUTTON_A | PAD_BUTTON_B)) {
+        return PartyMenu_ContinueOrExitAfterItemUse(application);
+    }
+
+    return 5;
+}
+
+static int PartyMenu_ContinueOrExitAfterItemUse(PartyMenuApplication *application)
+{
+    if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM
+        && application->currPartySlot != 7) {
+        u16 remaining = Bag_GetItemQuantity(application->partyMenu->bag, application->partyMenu->usedItemID, HEAP_ID_PARTY_MENU);
+
+        if (remaining > 0) {
+            Window_EraseMessageBox(&application->windows[PARTY_MENU_WIN_LONG_MESSAGE], 1);
+            Sprite_SetExplicitPalette2(application->sprites[PARTY_MENU_SPRITE_CURSOR_NORMAL], 0);
+            PartyMenu_PrintShortMessage(application, PartyMenu_Text_UseOnWhichMon, TRUE);
+            return PARTY_MENU_STATE_USE_ITEM;
+        }
+
+        String *string = MessageLoader_GetNewString(application->messageLoader, PartyMenu_Text_UsedLastItem);
+        StringTemplate_SetItemName(application->template, 0, application->partyMenu->usedItemID);
+        StringTemplate_Format(application->template, application->tmpString, string);
+        String_Free(string);
+        PartyMenu_PrintLongMessage(application, PRINT_MESSAGE_PRELOADED, TRUE);
+        application->unk_B00 = PartyMenu_WaitLastItemMessageThenExit;
+        return PARTY_MENU_STATE_5;
+    }
+
+    application->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_DONE;
+    return PARTY_MENU_STATE_32;
+}
+
+static int PartyMenu_WaitLastItemMessageThenExit(void *param0)
 {
     PartyMenuApplication *application = (PartyMenuApplication *)param0;
 
@@ -830,11 +873,11 @@ static int sub_02085C50(void *applicationPtr)
 
         if (application->partyMenu->evoTargetSpecies != 0) {
             application->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_EVOLVE_BY_LEVEL;
-        } else {
-            application->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_DONE;
+            return PARTY_MENU_STATE_32;
         }
+
+        return PartyMenu_ContinueOrExitAfterItemUse(application);
     }
-        return 32;
     }
 
     return 5;

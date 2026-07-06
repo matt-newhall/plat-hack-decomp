@@ -1113,6 +1113,10 @@
         "{STRVAR_1 1, 0, 0}\n",
         "has fainted!"
       ]
+    },
+    {
+      "id": "PartyMenu_Text_UsedLastItem",
+      "en_US": "You used your last {STRVAR_1 8, 0, 0}."
     }
   ]
 }
