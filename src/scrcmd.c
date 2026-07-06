@@ -6196,34 +6196,8 @@ static BOOL ScrCmd_InitTurnbackCave(ScriptContext *ctx)
 
     if (pillarsSeen >= 3) {
         destHeaderID = MAP_HEADER_TURNBACK_CAVE_GIRATINA_ROOM;
-    } else if (roomsVisited >= 30) {
-        destHeaderID = MAP_HEADER_TURNBACK_CAVE_ENTRANCE;
-    } else if (LCRNG_Next() % 100 < 25) {
-        destHeaderID = MAP_HEADER_TURNBACK_CAVE_PILLAR_ROOM;
     } else {
-        static const u16 pillarRooms[] = {
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_1,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_2,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_3,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_4,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_5,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_6,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_1,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_2,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_3,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_4,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_5,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_2_ROOM_6,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_1,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_2,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_3,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_4,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_5,
-            MAP_HEADER_TURNBACK_CAVE_PILLAR_3_ROOM_6
-        };
-
-        destHeaderID = LCRNG_Next() % 6;
-        destHeaderID = pillarRooms[destHeaderID + (pillarsSeen * 6)];
+        destHeaderID = MAP_HEADER_TURNBACK_CAVE_PILLAR_ROOM;
     }
 
     if (xPos == 11) {
