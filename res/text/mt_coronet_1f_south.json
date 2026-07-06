@@ -27,6 +27,33 @@
         "I find this state of affairs to be\n",
         "deplorable...\r"
       ]
+    },
+    {
+      "id": "MtCoronet1FSouth_Text_SaturnAgrees",
+      "en_US": [
+        "...Indeed, Master Cyrus.\n",
+        "Such strife should never have been.\r"
+      ]
+    },
+    {
+      "id": "MtCoronet1FSouth_Text_SaturnSpotsYou",
+      "en_US": [
+        "You there...\r",
+        "You are the trainer who defeated\n",
+        "Commanders Mars and Jupiter!\r",
+        "So you are the one meddling in\n",
+        "the plans of Team Galactic...\r",
+        "I, Saturn, shall put an end to\n",
+        "your interference here and now!\r"
+      ]
+    },
+    {
+      "id": "MtCoronet1FSouth_Text_SaturnDefeated",
+      "en_US": [
+        "...Tch. Defeated, am I?\r",
+        "No matter. You cannot hope to stop\n",
+        "what the boss has set in motion...\r"
+      ]
     }
   ]
 }

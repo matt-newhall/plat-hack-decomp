@@ -1,0 +1,48 @@
+{
+    "name": "Saturn",
+    "class": "TRAINER_CLASS_COMMANDER_SATURN",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_GOLBAT",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_NONE",
+            "moves": null,
+            "iv_scale": 100,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_BRONZOR",
+            "form": 0,
+            "level": 34,
+            "item": "ITEM_NONE",
+            "moves": null,
+            "iv_scale": 100,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_TOXICROAK",
+            "form": 0,
+            "level": 36,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": null,
+            "iv_scale": 100,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "...You are stronger than I anticipated.\n"
+            ]
+        }
+    ]
+}
