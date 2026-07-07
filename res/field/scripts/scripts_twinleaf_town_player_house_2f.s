@@ -32,8 +32,43 @@ TwinleafTownPlayerHouse2F_OnFrame_ConcludeSpecialProgram:
     WaitFanfare
     CloseMessage
     PlayDefaultMusic
+    Call TwinleafTownPlayerHouse2F_SelectLevelCap
     ReleaseAll
     End
+
+TwinleafTownPlayerHouse2F_SelectLevelCap:
+    Message TwinleafTownPlayerHouse2F_Text_LevelCapIntro
+    InitLocalTextMenu 1, 1, 0, VAR_RESULT, FALSE
+    AddMenuEntry TwinleafTownPlayerHouse2F_Text_LevelCapOptionAdvanced, 0
+    AddMenuEntry TwinleafTownPlayerHouse2F_Text_LevelCapOptionStandard, 1
+    AddMenuEntry TwinleafTownPlayerHouse2F_Text_LevelCapOptionNone, 2
+    ShowMenu
+    GoToIfEq VAR_RESULT, 0, TwinleafTownPlayerHouse2F_LevelCapAdvanced
+    GoToIfEq VAR_RESULT, 1, TwinleafTownPlayerHouse2F_LevelCapStandard
+    GoTo TwinleafTownPlayerHouse2F_LevelCapNone
+
+TwinleafTownPlayerHouse2F_LevelCapAdvanced:
+    SetFlag FLAG_LEVEL_CAP_ALL_BOSSES
+    SetLevelCap 14
+    Message TwinleafTownPlayerHouse2F_Text_LevelCapEnabledAllBosses
+    WaitButton
+    CloseMessage
+    Return
+
+TwinleafTownPlayerHouse2F_LevelCapStandard:
+    SetFlag FLAG_LEVEL_CAP_GYM_LEADERS
+    SetLevelCap 14
+    Message TwinleafTownPlayerHouse2F_Text_LevelCapEnabledGymLeaders
+    WaitButton
+    CloseMessage
+    Return
+
+TwinleafTownPlayerHouse2F_LevelCapNone:
+    SetLevelCap 100
+    Message TwinleafTownPlayerHouse2F_Text_LevelCapDisabled
+    WaitButton
+    CloseMessage
+    Return
 
 TwinleafTownPlayerHouse2F_Wii:
     EventMessage TwinleafTownPlayerHouse2F_Text_ItsAWii

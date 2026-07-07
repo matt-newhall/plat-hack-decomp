@@ -5063,6 +5063,11 @@
     .short \destVarID
     .endm
 
+    .macro SetLevelCap level
+    .short SCRCMD_SETLEVELCAP
+    .short \level
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

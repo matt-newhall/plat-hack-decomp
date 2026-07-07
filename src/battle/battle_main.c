@@ -8,6 +8,7 @@
 #include "constants/battle.h"
 #include "constants/battle/battle_controller.h"
 #include "constants/heap.h"
+#include "constants/pokemon.h"
 #include "generated/game_records.h"
 #include "generated/trainer_classes.h"
 
@@ -74,6 +75,7 @@
 #include "sys_task.h"
 #include "sys_task_manager.h"
 #include "system.h"
+#include "system_vars.h"
 #include "text.h"
 #include "touch_pad.h"
 #include "trainer_info.h"
@@ -1056,6 +1058,7 @@ static void BattleSys_New(BattleSystem *battleSys, FieldBattleDTO *dto)
     battleSys->visitedContestHall = dto->visitedContestHall;
     battleSys->metBebe = dto->metBebe;
     battleSys->fieldWeather = dto->fieldWeather;
+    battleSys->levelCap = dto->saveData != NULL ? SystemVars_GetLevelCap(SaveData_GetVarsFlags(dto->saveData)) : MAX_POKEMON_LEVEL;
     battleSys->records = dto->records;
 
     GF_ASSERT(dto->records != NULL);

@@ -60,6 +60,7 @@
 #include "string_list.h"
 #include "string_template.h"
 #include "system.h"
+#include "system_vars.h"
 #include "text.h"
 #include "touch_pad.h"
 #include "touch_screen.h"
@@ -2974,9 +2975,13 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
         return 6;
     }
 
+    u8 levelCap = SystemVars_GetLevelCap(SaveData_GetVarsFlags(FieldSystem_GetSaveData(app->partyMenu->fieldSystem)));
+
     if (Item_Get(itemData, ITEM_PARAM_EDGE_POKEMON) != 0) {
         Pokemon *mon = Party_GetPokemonBySlotIndex(app->partyMenu->party, app->currPartySlot);
-        if (Pokemon_GetExpToNextLevel(mon) < 2 || Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) == MAX_POKEMON_LEVEL) {
+        if (Pokemon_GetExpToNextLevel(mon) < 2
+            || Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) == MAX_POKEMON_LEVEL
+            || Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) >= levelCap) {
             PartyMenu_PrintLongMessage(app, PartyMenu_Text_ItWontHaveAnyEffect, TRUE);
             app->currPartySlot = 7;
             app->unk_B00 = sub_02085348;
@@ -2987,7 +2992,7 @@ static int ApplyItemEffectOnPokemon(PartyMenuApplication *app)
         return 5;
     }
 
-    if (Party_CheckItemEffectsOnMember(app->partyMenu->party, app->partyMenu->usedItemID, app->currPartySlot, 0, HEAP_ID_PARTY_MENU) == 1) {
+    if (Party_CheckItemEffectsOnMember(app->partyMenu->party, app->partyMenu->usedItemID, app->currPartySlot, 0, levelCap, HEAP_ID_PARTY_MENU) == 1) {
         if (Item_Get(itemData, ITEM_PARAM_FIELD_POCKET) != POCKET_KEY_ITEMS) {
             Bag_TryRemoveItem(app->partyMenu->bag, app->partyMenu->usedItemID, 1, HEAP_ID_PARTY_MENU);
         }

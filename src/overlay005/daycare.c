@@ -167,7 +167,19 @@ static void ov5_021E63E0(Pokemon *param0)
     Pokemon_CalcLevelAndStats(param0);
 }
 
-static int Daycare_MoveToPartyFromDaycareMon(Party *party, DaycareMon *daycareMon, StringTemplate *template)
+static u32 Daycare_ClampExpToLevelCap(u16 species, u32 oldExp, u32 newExp, u8 levelCap)
+{
+    if (levelCap != 0 && levelCap < MAX_POKEMON_LEVEL) {
+        u32 capExp = Pokemon_GetSpeciesBaseExpAt(species, levelCap);
+        if (newExp > capExp) {
+            return oldExp > capExp ? oldExp : capExp;
+        }
+    }
+
+    return newExp;
+}
+
+static int Daycare_MoveToPartyFromDaycareMon(Party *party, DaycareMon *daycareMon, StringTemplate *template, u8 levelCap)
 {
     Pokemon *mon = Pokemon_New(HEAP_ID_FIELD1);
     BoxPokemon *boxMon = DaycareMon_GetBoxMon(daycareMon);
@@ -180,8 +192,9 @@ static int Daycare_MoveToPartyFromDaycareMon(Party *party, DaycareMon *daycareMo
     Pokemon_FromBoxPokemon(boxMon, mon);
 
     if (Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) != MAX_POKEMON_LEVEL) {
-        experience = Pokemon_GetValue(mon, MON_DATA_EXPERIENCE, NULL);
-        experience += DaycareMon_GetSteps(daycareMon);
+        u32 oldExperience = Pokemon_GetValue(mon, MON_DATA_EXPERIENCE, NULL);
+        experience = oldExperience + DaycareMon_GetSteps(daycareMon);
+        experience = Daycare_ClampExpToLevelCap(species, oldExperience, experience, levelCap);
         Pokemon_SetValue(mon, MON_DATA_EXPERIENCE, (u8 *)&experience);
         ov5_021E63E0(mon);
     }
@@ -198,28 +211,29 @@ static int Daycare_MoveToPartyFromDaycareMon(Party *party, DaycareMon *daycareMo
     return species;
 }
 
-u16 Daycare_MoveToPartyFromDaycareSlot(Party *party, StringTemplate *template, Daycare *daycare, u8 daycareSlot)
+u16 Daycare_MoveToPartyFromDaycareSlot(Party *party, StringTemplate *template, Daycare *daycare, u8 daycareSlot, u8 levelCap)
 {
     u16 movedSpecies;
     DaycareMon *daycareMon = Daycare_GetDaycareMon(daycare, daycareSlot);
 
-    movedSpecies = Daycare_MoveToPartyFromDaycareMon(party, daycareMon, template);
+    movedSpecies = Daycare_MoveToPartyFromDaycareMon(party, daycareMon, template, levelCap);
     Daycare_ShiftMonSlots(daycare);
 
     return movedSpecies;
 }
 
-int BoxPokemon_GiveExperience(BoxPokemon *boxMon, u32 givenExp)
+int BoxPokemon_GiveExperience(BoxPokemon *boxMon, u32 givenExp, u8 levelCap)
 {
     Pokemon *mon = Pokemon_New(HEAP_ID_FIELD1);
     BoxPokemon *boxMonRef = Pokemon_GetBoxPokemon(mon);
     int level;
-    u32 exp;
+    u32 exp, oldExp;
 
     BoxPokemon_Copy(boxMon, boxMonRef);
 
-    exp = BoxPokemon_GetValue(boxMonRef, MON_DATA_EXPERIENCE, NULL);
-    exp += givenExp;
+    oldExp = BoxPokemon_GetValue(boxMonRef, MON_DATA_EXPERIENCE, NULL);
+    exp = oldExp + givenExp;
+    exp = Daycare_ClampExpToLevelCap(BoxPokemon_GetValue(boxMonRef, MON_DATA_SPECIES, NULL), oldExp, exp, levelCap);
 
     BoxPokemon_SetValue(boxMonRef, MON_DATA_EXPERIENCE, (u8 *)&exp);
     level = BoxPokemon_GetLevel(boxMonRef);
@@ -228,45 +242,45 @@ int BoxPokemon_GiveExperience(BoxPokemon *boxMon, u32 givenExp)
     return level;
 }
 
-static int Daycare_GiveDaycareMonExperience(DaycareMon *daycareMon)
+static int Daycare_GiveDaycareMonExperience(DaycareMon *daycareMon, u8 levelCap)
 {
     u8 level, newLevel;
     BoxPokemon *boxMon = DaycareMon_GetBoxMon(daycareMon);
     level = BoxPokemon_GetLevel(boxMon);
-    newLevel = BoxPokemon_GiveExperience(boxMon, DaycareMon_GetSteps(daycareMon));
+    newLevel = BoxPokemon_GiveExperience(boxMon, DaycareMon_GetSteps(daycareMon), levelCap);
 
     return newLevel - level;
 }
 
-int DaycareMon_GiveExperience(DaycareMon *daycareMon)
+int DaycareMon_GiveExperience(DaycareMon *daycareMon, u8 levelCap)
 {
     u8 level;
     BoxPokemon *boxMon = DaycareMon_GetBoxMon(daycareMon);
-    level = BoxPokemon_GiveExperience(boxMon, DaycareMon_GetSteps(daycareMon));
+    level = BoxPokemon_GiveExperience(boxMon, DaycareMon_GetSteps(daycareMon), levelCap);
 
     return level;
 }
 
-static u8 DaycareMon_BufferGainedLevels(DaycareMon *daycareMon, StringTemplate *template)
+static u8 DaycareMon_BufferGainedLevels(DaycareMon *daycareMon, StringTemplate *template, u8 levelCap)
 {
     int levelsGained;
     String *string;
     charcode_t nickname[MON_NAME_LEN + 1];
     BoxPokemon *boxMon = DaycareMon_GetBoxMon(daycareMon);
 
-    levelsGained = Daycare_GiveDaycareMonExperience(daycareMon);
+    levelsGained = Daycare_GiveDaycareMonExperience(daycareMon, levelCap);
 
     StringTemplate_SetNumber(template, 1, levelsGained, 3, PADDING_MODE_NONE, CHARSET_MODE_EN);
     StringTemplate_SetNickname(template, 0, boxMon);
     return levelsGained;
 }
 
-static int DaycareMon_BufferDaycarePrice(DaycareMon *daycareMon, StringTemplate *template)
+static int DaycareMon_BufferDaycarePrice(DaycareMon *daycareMon, StringTemplate *template, u8 levelCap)
 {
     u16 gainedLevels;
     BoxPokemon *boxMon = DaycareMon_GetBoxMon(daycareMon);
 
-    gainedLevels = Daycare_GiveDaycareMonExperience(daycareMon);
+    gainedLevels = Daycare_GiveDaycareMonExperience(daycareMon, levelCap);
     StringTemplate_SetNickname(template, 0, boxMon);
 
     gainedLevels = gainedLevels * 100 + 100;
@@ -275,19 +289,19 @@ static int DaycareMon_BufferDaycarePrice(DaycareMon *daycareMon, StringTemplate 
     return gainedLevels;
 }
 
-int Daycare_BufferDaycarePriceBySlot(Daycare *daycare, u8 slot, StringTemplate *template)
+int Daycare_BufferDaycarePriceBySlot(Daycare *daycare, u8 slot, StringTemplate *template, u8 levelCap)
 {
     DaycareMon *daycareMon = Daycare_GetDaycareMon(daycare, slot);
-    return DaycareMon_BufferDaycarePrice(daycareMon, template);
+    return DaycareMon_BufferDaycarePrice(daycareMon, template, levelCap);
 }
 
-u8 Daycare_BufferGainedLevelsInSlot(Daycare *daycare, int slot, StringTemplate *template)
+u8 Daycare_BufferGainedLevelsInSlot(Daycare *daycare, int slot, StringTemplate *template, u8 levelCap)
 {
     DaycareMon *daycareMon = Daycare_GetDaycareMon(daycare, slot);
     BoxPokemon *boxMon = DaycareMon_GetBoxMon(daycareMon);
 
     if (BoxPokemon_GetValue(boxMon, MON_DATA_SPECIES, NULL) != SPECIES_NONE) {
-        return DaycareMon_BufferGainedLevels(daycareMon, template);
+        return DaycareMon_BufferGainedLevels(daycareMon, template, levelCap);
     }
 
     return 0;
@@ -1015,7 +1029,7 @@ void ov5_021E72BC(Daycare *daycare, StringTemplate *strTemplate)
     }
 }
 
-void Daycare_BufferNicknameLevelGender(Daycare *daycare, u32 idxNickname, u32 idxLevel, u32 idxGender, u8 slot, StringTemplate *template)
+void Daycare_BufferNicknameLevelGender(Daycare *daycare, u32 idxNickname, u32 idxLevel, u32 idxGender, u8 slot, StringTemplate *template, u8 levelCap)
 {
     DaycareMon *daycareMon;
     BoxPokemon *boxMon;
@@ -1027,7 +1041,7 @@ void Daycare_BufferNicknameLevelGender(Daycare *daycare, u32 idxNickname, u32 id
 
     StringTemplate_SetNickname(template, idxNickname, boxMon);
 
-    level = BoxPokemon_GiveExperience(boxMon, DaycareMon_GetSteps(daycareMon));
+    level = BoxPokemon_GiveExperience(boxMon, DaycareMon_GetSteps(daycareMon), levelCap);
     StringTemplate_SetNumber(template, idxLevel, level, 3, PADDING_MODE_NONE, CHARSET_MODE_EN);
     gender = BoxPokemon_GetValue(boxMon, MON_DATA_GENDER, NULL);
 

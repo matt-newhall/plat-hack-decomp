@@ -552,3 +552,13 @@ u16 SystemVars_GetWiFiFrontierCleared(VarsFlags *varsFlags)
 {
     return TryGetVarValue(varsFlags, VAR_WIFI_FRONTIER_CLEARED);
 }
+
+u8 SystemVars_GetLevelCap(VarsFlags *varsFlags)
+{
+    return TryGetVarValue(varsFlags, VAR_LEVEL_CAP);
+}
+
+BOOL SystemVars_SetLevelCap(VarsFlags *varsFlags, u8 level)
+{
+    return TrySetVarToValue(varsFlags, VAR_LEVEL_CAP, level);
+}

@@ -70,5 +70,7 @@ void SystemVars_SetRoamingSpeciesState(VarsFlags *varsFlags, u16 species, u16 st
 u16 SystemVars_GetDistortionWorldCyrusApperanceState(VarsFlags *varsFlags);
 void SystemVars_SetDistortionWorldCyrusApperanceState(VarsFlags *varsFlags, u16 state);
 u16 SystemVars_GetWiFiFrontierCleared(VarsFlags *varsFlags);
+u8 SystemVars_GetLevelCap(VarsFlags *varsFlags);
+BOOL SystemVars_SetLevelCap(VarsFlags *varsFlags, u8 level);
 
 #endif // POKEPLATINUM_SYSTEM_VARS_H

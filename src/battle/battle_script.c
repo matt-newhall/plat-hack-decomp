@@ -10726,6 +10726,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
         }
 
         u32 totalExp = 0;
+        BOOL atLevelCap = FALSE;
         msg.id = BattleStrings_Text_PokemonGainedExpPoints; // "{0} gained {1} Exp. Points!"
 
         if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) != MAX_POKEMON_LEVEL) {
@@ -10755,9 +10756,26 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
                 msg.id = BattleStrings_Text_PokemonGainedABoostedExpPoints; // "{0} gained a boosted {1} Exp. Points!"
             }
 
-            u32 newExp = Pokemon_GetValue(mon, MON_DATA_EXPERIENCE, NULL);
+            u8 levelCap = BattleSystem_GetLevelCap(data->battleSys);
+
+            if (totalExp != 0 && levelCap != 0 && levelCap < MAX_POKEMON_LEVEL
+                && Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL) >= levelCap) {
+                atLevelCap = TRUE;
+                totalExp = 0;
+                msg.id = BattleStrings_Text_PokemonGainedExpPoints;
+            }
+
+            u32 oldExp = Pokemon_GetValue(mon, MON_DATA_EXPERIENCE, NULL);
+            u32 newExp = oldExp;
             data->tmpData[GET_EXP_NEW_EXP] = newExp - Pokemon_GetCurrentLevelBaseExp(mon);
             newExp += totalExp;
+
+            if (levelCap != 0 && levelCap < MAX_POKEMON_LEVEL) {
+                u32 capExp = Pokemon_GetSpeciesBaseExpAt(Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL), levelCap);
+                if (newExp > capExp) {
+                    newExp = oldExp > capExp ? oldExp : capExp;
+                }
+            }
 
             if (slot == data->battleCtx->selectedPartySlot[expBattler]) {
                 data->battleCtx->battleMons[expBattler].exp = newExp;
@@ -10770,7 +10788,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
                 data->battleCtx->battleMons[data->battleCtx->faintedMon].formNum);
         }
 
-        if (totalExp) {
+        if (totalExp || atLevelCap) {
             msg.tags = TAG_NICKNAME_NUM;
             msg.params[0] = expBattler | (slot << 8);
             msg.params[1] = totalExp;

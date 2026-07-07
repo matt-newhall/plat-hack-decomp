@@ -99,6 +99,7 @@ MessageLoader *BattleSystem_GetMessageLoader(BattleSystem *battleSys);
 MessageLoader *BattleSystem_GetAttackMessageLoader(BattleSystem *battleSys);
 PaletteData *BattleSystem_GetPaletteData(BattleSystem *battleSys);
 Pokedex *BattleSystem_GetPokedex(BattleSystem *battleSys);
+u8 BattleSystem_GetLevelCap(BattleSystem *battleSys);
 u8 *BattleSystem_GetServerMessage(BattleSystem *battleSys);
 u8 *BattleSystem_GetClientMessage(BattleSystem *battleSys);
 u16 *BattleSystem_GetServerReadIndex(BattleSystem *battleSys);

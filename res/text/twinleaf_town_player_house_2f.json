@@ -86,6 +86,54 @@
         "OK, {STRVAR_1 3, 1, 0}? If you’re late, I’m\n",
         "fining you $10 million!\r"
       ]
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapIntro",
+      "en_US": [
+        "Welcome to Pokémon Tempered Platinum!\r",
+        "You now have an opportunity to set\n",
+        "the level caps for your playthrough.\r",
+        "{COLOR 1}Note: the level cap setting cannot be\n",
+        "changed throughout your playthrough.{COLOR 0}\r",
+        "Standard level caps will limit your level\n",
+        "from exceeding the highest levelled\f",
+        "Pokémon of the next gym leader.\r",
+        "Advanced Caps will set a level cap for\n",
+        "almost all bosses, and is only\f",
+        "recommended for players playing\f",
+        "alongside documentation.\r",
+        "Would you like to enable level caps?\r"
+      ]
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapOptionAdvanced",
+      "en_US": "Advanced Caps"
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapOptionStandard",
+      "en_US": "Standard Caps"
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapOptionNone",
+      "en_US": "No Caps"
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapEnabledAllBosses",
+      "en_US": [
+        "Understood! Level caps will be enabled\n",
+        "for all boss trainers."
+      ]
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapEnabledGymLeaders",
+      "en_US": [
+        "Understood! Level caps will be enabled\n",
+        "for gym leaders only."
+      ]
+    },
+    {
+      "id": "TwinleafTownPlayerHouse2F_Text_LevelCapDisabled",
+      "en_US": "Understood! Level caps will be disabled."
     }
   ]
 }

@@ -232,6 +232,11 @@ Pokedex *BattleSystem_GetPokedex(BattleSystem *battleSys)
     return battleSys->pokedex;
 }
 
+u8 BattleSystem_GetLevelCap(BattleSystem *battleSys)
+{
+    return battleSys->levelCap;
+}
+
 u8 *BattleSystem_GetServerMessage(BattleSystem *battleSys)
 {
     return &battleSys->serverMessage[0];

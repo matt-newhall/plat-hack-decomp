@@ -16,6 +16,7 @@
 #include "save_player.h"
 #include "savedata.h"
 #include "script_manager.h"
+#include "system_vars.h"
 #include "trainer_info.h"
 
 BOOL ScrCmd_BufferDaycareMonNicknames(ScriptContext *ctx)
@@ -77,7 +78,7 @@ BOOL ScrCmd_MoveMonToPartyFromDaycareSlot(ScriptContext *ctx)
 
     daycare = SaveData_SaveTable(saveData, SAVE_TABLE_ENTRY_DAYCARE);
     party = SaveData_GetParty(fieldSystem->saveData);
-    *destVar = Daycare_MoveToPartyFromDaycareSlot(party, *template, daycare, daycareSlot);
+    *destVar = Daycare_MoveToPartyFromDaycareSlot(party, *template, daycare, daycareSlot, SystemVars_GetLevelCap(SaveData_GetVarsFlags(saveData)));
 
     return FALSE;
 }
@@ -92,7 +93,7 @@ BOOL ScrCmd_BufferDaycarePriceBySlot(ScriptContext *ctx)
     u8 daycareSlot = ScriptContext_GetVar(ctx);
 
     daycare = SaveData_SaveTable(saveData, SAVE_TABLE_ENTRY_DAYCARE);
-    *destVar = Daycare_BufferDaycarePriceBySlot(daycare, daycareSlot, *template);
+    *destVar = Daycare_BufferDaycarePriceBySlot(daycare, daycareSlot, *template, SystemVars_GetLevelCap(SaveData_GetVarsFlags(saveData)));
 
     return FALSE;
 }
@@ -107,7 +108,7 @@ BOOL ScrCmd_BufferDaycareGainedLevelsBySlot(ScriptContext *ctx)
     u16 daycareSlot = ScriptContext_GetVar(ctx);
 
     daycare = SaveData_SaveTable(saveData, SAVE_TABLE_ENTRY_DAYCARE);
-    *destVar = Daycare_BufferGainedLevelsInSlot(daycare, daycareSlot, *template);
+    *destVar = Daycare_BufferGainedLevelsInSlot(daycare, daycareSlot, *template, SystemVars_GetLevelCap(SaveData_GetVarsFlags(saveData)));
 
     return FALSE;
 }
@@ -153,7 +154,7 @@ BOOL ScrCmd_BufferDaycareNicknameLevelGender(ScriptContext *ctx)
     u8 templateArgGender = ScriptContext_GetVar(ctx);
     u8 daycareSlot = ScriptContext_GetVar(ctx);
 
-    Daycare_BufferNicknameLevelGender(SaveData_GetDaycare(saveData), templateArgNickname, templateArgLevel, templateArgGender, daycareSlot, *strTemplate);
+    Daycare_BufferNicknameLevelGender(SaveData_GetDaycare(saveData), templateArgNickname, templateArgLevel, templateArgGender, daycareSlot, *strTemplate, SystemVars_GetLevelCap(SaveData_GetVarsFlags(saveData)));
     return FALSE;
 }
 

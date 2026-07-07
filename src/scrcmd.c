@@ -668,6 +668,7 @@ static BOOL ScrCmd_GetUnownFormsSeenCount(ScriptContext *ctx);
 static BOOL ScrCmd_InitTurnbackCave(ScriptContext *ctx);
 static BOOL ScrCmd_ShowMapNamePopup(ScriptContext *ctx);
 static BOOL ScrCmd_CheckHasCaughtSpecies(ScriptContext *ctx);
+static BOOL ScrCmd_SetLevelCap(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundItemsGivenAway(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundFossilsUnearthed(ScriptContext *ctx);
 static BOOL ScrCmd_GetUndergroundTrapsSet(ScriptContext *ctx);
@@ -6243,6 +6244,14 @@ static BOOL ScrCmd_CheckHasCaughtSpecies(ScriptContext *ctx)
     u16 *destVar = ScriptContext_GetVarPointer(ctx);
 
     *destVar = Pokedex_HasCaughtSpecies(pokedex, species);
+    return FALSE;
+}
+
+static BOOL ScrCmd_SetLevelCap(ScriptContext *ctx)
+{
+    u16 level = ScriptContext_GetVar(ctx);
+    VarsFlags *varsFlags = SaveData_GetVarsFlags(ctx->fieldSystem->saveData);
+    SystemVars_SetLevelCap(varsFlags, level);
     return FALSE;
 }
 

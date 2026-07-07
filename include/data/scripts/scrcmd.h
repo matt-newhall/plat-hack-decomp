@@ -858,6 +858,7 @@ ScriptCommand(SCRCMD_PLAYHMSUMMONCUTIN,                                    ScrCm
 ScriptCommand(SCRCMD_ROCKSMASHBREAKATOBJECT,                               ScrCmd_RockSmashBreakAtObject)
 ScriptCommand(SCRCMD_SHOWMAPNAMEPOPUP,                                     ScrCmd_ShowMapNamePopup)
 ScriptCommand(SCRCMD_CHECKHASCAUGHTSPECIES,                                ScrCmd_CheckHasCaughtSpecies)
+ScriptCommand(SCRCMD_SETLEVELCAP,                                          ScrCmd_SetLevelCap)
 
 // clang-format on
 

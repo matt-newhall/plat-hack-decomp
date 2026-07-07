@@ -14,6 +14,7 @@
 #include "pokemon_icon.h"
 #include "sys_task.h"
 #include "sys_task_manager.h"
+#include "system_vars.h"
 #include "touch_screen.h"
 
 typedef struct PoketchDaycare {
@@ -46,7 +47,7 @@ static BOOL State_LoadApp(PoketchDaycareChecker *appData);
 static BOOL State_UpdateApp(PoketchDaycareChecker *appData);
 static BOOL State_UnloadApp(PoketchDaycareChecker *appData);
 static BOOL ScreenIsPressed(PoketchDaycareChecker *appData);
-static void LoadDaycareSummary(DaycareStatus *daycareStatus, Daycare *daycare);
+static void LoadDaycareSummary(DaycareStatus *daycareStatus, Daycare *daycare, u8 levelCap);
 
 static void NitroStaticInit(void)
 {
@@ -73,7 +74,7 @@ static BOOL Init(PoketchDaycareChecker *appData, PoketchSystem *poketchSys, BgCo
 {
     appData->daycareSaveData = SaveData_GetDaycare(PoketchSystem_GetSaveData(poketchSys));
 
-    LoadDaycareSummary(&appData->daycareStatus, appData->daycareSaveData);
+    LoadDaycareSummary(&appData->daycareStatus, appData->daycareSaveData, SystemVars_GetLevelCap(SaveData_GetVarsFlags(PoketchSystem_GetSaveData(poketchSys))));
 
     if (PoketchDaycareCheckerGraphics_New(&appData->graphics, &appData->daycareStatus, bgConfig)) {
         appData->state = STATE_LOAD_APP;
@@ -156,7 +157,7 @@ static BOOL State_UpdateApp(PoketchDaycareChecker *appData)
     switch (appData->subState) {
     case 0:
         if (ScreenIsPressed(appData)) {
-            LoadDaycareSummary(&appData->daycareStatus, appData->daycareSaveData);
+            LoadDaycareSummary(&appData->daycareStatus, appData->daycareSaveData, SystemVars_GetLevelCap(SaveData_GetVarsFlags(PoketchSystem_GetSaveData(appData->poketchSys))));
             PoketchDaycareCheckerGraphics_StartTask(appData->graphics, DAYCARE_CHECKER_GRAPHICS_RELOAD);
             appData->subState++;
         }
@@ -203,7 +204,7 @@ static BOOL ScreenIsPressed(PoketchDaycareChecker *apData)
     return FALSE;
 }
 
-static void LoadDaycareSummary(DaycareStatus *daycareStatus, Daycare *daycare)
+static void LoadDaycareSummary(DaycareStatus *daycareStatus, Daycare *daycare, u8 levelCap)
 {
     DaycareMon *daycareMon;
     BoxPokemon *boxMon;
@@ -220,7 +221,7 @@ static void LoadDaycareSummary(DaycareStatus *daycareStatus, Daycare *daycare)
         daycareStatus->iconSpriteIndices[slot] = BoxPokemon_IconSpriteIndex(boxMon);
         daycareStatus->species[slot] = BoxPokemon_GetValue(boxMon, MON_DATA_SPECIES, NULL);
         daycareStatus->forms[slot] = BoxPokemon_GetValue(boxMon, MON_DATA_FORM, NULL);
-        daycareStatus->levels[slot] = DaycareMon_GiveExperience(daycareMon);
+        daycareStatus->levels[slot] = DaycareMon_GiveExperience(daycareMon, levelCap);
         daycareStatus->genders[slot] = BoxPokemon_GetGender(boxMon);
 
         BoxPokemon_ExitDecryptionContext(boxMon, reencrypt);
