@@ -1043,13 +1043,6 @@
       ]
     },
     {
-      "id": "PartyMenu_Text_TrainingKitTrainedToItsLimits",
-      "en_US": [
-        "{STRVAR_1 1, 0, 0} was trained to\n",
-        "its limits!"
-      ]
-    },
-    {
       "id": "PartyMenu_Text_StatusCouldNotBeInflicted",
       "en_US": [
         "{STRVAR_1 1, 0, 0} is immune to\n",

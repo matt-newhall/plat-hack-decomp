@@ -950,9 +950,6 @@ JubilifeCity_RowanGiveGifts:
     SetVar VAR_0x8004, ITEM_CANDY_BAG
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
-    SetVar VAR_0x8004, ITEM_TRAINING_KIT
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
     SetVar VAR_0x8004, ITEM_INFINITE_REPEL
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
