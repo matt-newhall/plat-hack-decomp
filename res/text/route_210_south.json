@@ -105,6 +105,98 @@
         "Rt. 210\n",
         "Solaceon Town"
       ]
+    },
+    {
+      "id": "Route210South_Text_ExhibitionWinnerWhitney",
+      "en_US": [
+        "And there we have it, folks!\n",
+        "The winner is... Whitney!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_FalknerThanks",
+      "en_US": [
+        "Falkner: A fine battle, Whitney.\n",
+        "Your Miltank was simply too much."
+      ]
+    },
+    {
+      "id": "Route210South_Text_WhitneyThanks",
+      "en_US": [
+        "Whitney: Hee-hee! Your Pidgeot gave\n",
+        "it everything, Falkner. Well flown!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_CommentatorCallOver",
+      "en_US": [
+        "Gentleman: You there! Yes, you!\n",
+        "Come over here for a moment!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_CommentatorGreet5Badges",
+      "en_US": [
+        "Gentleman: Five Gym Badges already?\n",
+        "You’re quite the Trainer!\r",
+        "Falkner, Whitney! Come and meet\n",
+        "this promising challenger!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_CommentatorPrizeBattle",
+      "en_US": [
+        "Gentleman: Here’s the deal. Battle one\n",
+        "of them, and a fine prize is yours!\r",
+        "So, who will it be?"
+      ]
+    },
+    {
+      "id": "Route210South_Text_FalknerLetsGo",
+      "en_US": [
+        "Falkner: You chose me?\n",
+        "Then show me your resolve!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_WhitneyLetsGo",
+      "en_US": [
+        "Whitney: Me? Hee-hee!\n",
+        "Don’t expect me to go easy on you!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_CommentatorVictoryComment",
+      "en_US": [
+        "Gentleman: Incredible! A decisive win!\n",
+        "The crowd goes wild!\r",
+        "You’ve more than earned it.\n",
+        "We’ll be on our way now. Farewell!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_CommentatorIdle",
+      "en_US": [
+        "Gentleman: Quiet, please! Falkner and\n",
+        "Whitney are in an exhibition match!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_FalknerThanksReward",
+      "en_US": [
+        "Falkner: A superb match!\n",
+        "Your spirit is admirable.\r",
+        "Take this TM as a token of\n",
+        "my respect."
+      ]
+    },
+    {
+      "id": "Route210South_Text_WhitneyThanksReward",
+      "en_US": [
+        "Whitney: Hee-hee, you beat me!\r",
+        "Here, take this TM.\n",
+        "You more than earned it!"
+      ]
     }
   ]
 }

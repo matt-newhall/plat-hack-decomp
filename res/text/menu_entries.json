@@ -1252,6 +1252,14 @@
     {
       "id": "MenuEntries_Text_Drifloon_NeverMind",
       "en_US": "Never mind"
+    },
+    {
+      "id": "MenuEntries_Text_Route210Leaders_Falkner",
+      "en_US": "Falkner"
+    },
+    {
+      "id": "MenuEntries_Text_Route210Leaders_Whitney",
+      "en_US": "Whitney"
     }
   ]
 }

@@ -436,6 +436,14 @@
     {
       "id": "pl_msg_00000620_00108",
       "en_US": "a Team Rocket"
+    },
+    {
+      "id": "pl_msg_00000620_00109",
+      "en_US": "a Leader"
+    },
+    {
+      "id": "pl_msg_00000620_001110",
+      "en_US": "a Leader"
     }
   ]
 }

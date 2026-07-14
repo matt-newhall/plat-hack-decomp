@@ -1,0 +1,44 @@
+{
+    "name": "Falkner",
+    "class": "TRAINER_CLASS_LEADER_FALKNER",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_STARAVIA",
+            "form": 0,
+            "level": 30,
+            "item": null,
+            "moves": null,
+            "iv_scale": 0,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_PRE_BATTLE",
+            "en_US": [
+                "Falkner: Let’s see how you handle\n",
+                "bird Pokémon!"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Falkner: Impressive flying instincts!"
+            ]
+        },
+        {
+            "type": "TRMSG_POST_BATTLE",
+            "en_US": [
+                "Falkner: You’ve earned this prize.\n",
+                "Well fought!"
+            ]
+        }
+    ]
+}

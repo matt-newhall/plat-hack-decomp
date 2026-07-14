@@ -1,0 +1,44 @@
+{
+    "name": "Whitney",
+    "class": "TRAINER_CLASS_LEADER_WHITNEY",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MILTANK",
+            "form": 0,
+            "level": 30,
+            "item": null,
+            "moves": null,
+            "iv_scale": 0,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_PRE_BATTLE",
+            "en_US": [
+                "Whitney: My Pokémon are tough!\n",
+                "Don’t underestimate me!"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Whitney: Y-you’re really strong..."
+            ]
+        },
+        {
+            "type": "TRMSG_POST_BATTLE",
+            "en_US": [
+                "Whitney: Take your prize. You won it\n",
+                "fair and square!"
+            ]
+        }
+    ]
+}
