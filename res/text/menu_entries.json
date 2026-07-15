@@ -1260,6 +1260,22 @@
     {
       "id": "MenuEntries_Text_Route210Leaders_Whitney",
       "en_US": "Whitney"
+    },
+    {
+      "id": "MenuEntries_Text_PalPark_ChooseLucas",
+      "en_US": "Lucas"
+    },
+    {
+      "id": "MenuEntries_Text_PalPark_ChooseDawn",
+      "en_US": "Dawn"
+    },
+    {
+      "id": "MenuEntries_Text_PalPark_ChooseBarryBuffered",
+      "en_US": "{STRVAR_1 1, 0, 0}"
+    },
+    {
+      "id": "MenuEntries_Text_PalPark_ChoosePaul",
+      "en_US": "Paul"
     }
   ]
 }

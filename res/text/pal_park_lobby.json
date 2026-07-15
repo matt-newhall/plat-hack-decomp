@@ -2,17 +2,10 @@
   "key": 32395,
   "messages": [
     {
-      "id": "PalParkLobby_Text_Oak_ThisIsPalPark_PlayerMale",
+      "id": "PalParkLobby_Text_Paul_ThisIsPalParkAndWelcome",
       "en_US": [
-        "Oak: Ah, {STRVAR_1 3, 0, 0}!\n",
-        "This is it! This is Pal Park!\r"
-      ]
-    },
-    {
-      "id": "PalParkLobby_Text_Oak_ThisIsPalPark_PlayerFemale",
-      "en_US": [
-        "Oak: Ah, {STRVAR_1 3, 0, 0}!\n",
-        "This is it! This is Pal Park!\r"
+        "Paul: Ah, {STRVAR_1 3, 0, 0}!\n",
+        "This is it! This is Pal Park!"
       ]
     },
     {
@@ -643,6 +636,102 @@
     {
       "id": "PalParkLobby_Text_Dummy74",
       "garbage": 52
+    },
+    {
+      "id": "PalParkLobby_Text_Barry_Greeting",
+      "en_US": [
+        "TEMP Barry greeting dialogue"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Paul_Response",
+      "en_US": [
+        "TEMP Paul response to Barry"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Barry_Response",
+      "en_US": [
+        "TEMP Barry response back to Paul"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Barry_LetUsSeeSomethingCool",
+      "en_US": [
+        "TEMP Barry suggesting they look out the window"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Paul_LookOutWindow",
+      "en_US": [
+        "TEMP Paul agreeing to look out window"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Counterpart_Arrival",
+      "en_US": [
+        "TEMP Counterpart arriving dialogue"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Barry_AboutMultiBattle",
+      "en_US": [
+        "TEMP Barry saying let’s do a multi battle"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Paul_ReadyForMultiBattle",
+      "en_US": [
+        "TEMP Paul ready for multi battle"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Counterpart_Agrees",
+      "en_US": [
+        "TEMP Counterpart agrees"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_ChooseTeammate",
+      "en_US": [
+        "TEMP Asking which teammate to pick"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Barry_BattleStart",
+      "en_US": [
+        "TEMP Barry ready for battle start (when picked)"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Paul_BattleStart",
+      "en_US": [
+        "TEMP Paul ready for battle start (when picked)"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_Counterpart_BattleStart",
+      "en_US": [
+        "TEMP Counterpart ready for battle start (when picked)"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_BarryWins_Line1",
+      "en_US": [
+        "TEMP Barry post-battle victory line 1"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_PaulWins_Line1",
+      "en_US": [
+        "TEMP Paul post-battle victory line 1"
+      ]
+    },
+    {
+      "id": "PalParkLobby_Text_CounterpartWins_Line1",
+      "en_US": [
+        "TEMP Counterpart post-battle victory line 1"
+      ]
     }
   ]
 }

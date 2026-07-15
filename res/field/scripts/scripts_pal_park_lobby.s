@@ -15,7 +15,7 @@
     ScriptEntry PalParkLobby_ShowWatcherBoy
     ScriptEntry PalParkLobby_ComplaintsLady
     ScriptEntry PalParkLobby_RecordGuy
-    ScriptEntry PalParkLobby_OnFrameProfOak
+    ScriptEntry PalParkLobby_OnFramePaul
     ScriptEntry PalParkLobby_PoketchAppLady
     ScriptEntry PalParkLobby_OnFrameExitPalPark
     ScriptEntry PalParkLobby_GBASlotGiftLady
@@ -24,6 +24,19 @@
 PalParkLobby_OnTransition:
     ClearFlag FLAG_ALT_MUSIC_PAL_PARK
     SetFlag FLAG_FIRST_ARRIVAL_POKE_PARK_FRONT_GATE
+    SetFlag FLAG_HIDE_PAL_PARK_LOBBY_COUNTERPART
+    GetPlayerGender VAR_0x8009
+    GoToIfEq VAR_0x8009, GENDER_MALE, PalParkLobby_SetCounterpartGraphicsDawn
+    GoToIfEq VAR_0x8009, GENDER_FEMALE, PalParkLobby_SetCounterpartGraphicsLucas
+    End
+
+PalParkLobby_SetCounterpartGraphicsDawn:
+    SetVar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_PLAYER_F
+    GoToIfNe VAR_PAL_PARK_STATE, 0, PalParkLobby_SetWorkerPosAndDir
+    End
+
+PalParkLobby_SetCounterpartGraphicsLucas:
+    SetVar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_PLAYER_M
     GoToIfNe VAR_PAL_PARK_STATE, 0, PalParkLobby_SetWorkerPosAndDir
     End
 
@@ -342,70 +355,407 @@ PalParkLobby_RecordGuy:
     NPCMessage PalParkLobby_Text_CurrentRecordHolder
     End
 
-PalParkLobby_OnFrameProfOak:
+PalParkLobby_OnFramePaul:
     LockAll
     ClearFlag FLAG_ETERNA_CITY_SOUTH_HOUSE_HIDE_PROF_OAK
     SetVar VAR_CATCHING_SHOW_RECORD, 2000
-    ApplyMovement LOCALID_PROF_OAK, PalParkLobby_Movement_ProfOakNoticePlayer
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulNoticePlayer
     WaitMovement
-    GetPlayerGender VAR_MAP_LOCAL_0
     BufferPlayerName 0
-    GoToIfEq VAR_MAP_LOCAL_0, GENDER_MALE, PalParkLobby_ThisIsPalPark_PlayerMale
-    GoTo PalParkLobby_ThisIsPalPark_PlayerFemale
-
-PalParkLobby_ThisIsPalPark_PlayerMale:
-    Message PalParkLobby_Text_Oak_ThisIsPalPark_PlayerMale
-    GoTo PalParkLobby_PokemonFromAroundTheCountry
-
-PalParkLobby_ThisIsPalPark_PlayerFemale:
-    Message PalParkLobby_Text_Oak_ThisIsPalPark_PlayerFemale
-    GoTo PalParkLobby_PokemonFromAroundTheCountry
-
-PalParkLobby_PokemonFromAroundTheCountry:
-    Message PalParkLobby_Text_Oak_PokemonFromAroundTheCountry
+    Message PalParkLobby_Text_Paul_ThisIsPalParkAndWelcome
+    WaitButton
     CloseMessage
-    ApplyMovement LOCALID_PROF_OAK, PalParkLobby_Movement_ProfOakExclamationMark
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulWalkUpstairs
+    ApplyMovement LOCALID_PLAYER, PalParkLobby_Movement_PlayerWalkUpstairs
     WaitMovement
-    Message PalParkLobby_Text_Oak_GiftTrainerCounterApp
-    SetVar VAR_0x8004, POKETCH_APPID_TRAINERCOUNTER
-    Common_GivePoketchApp
-    Message PalParkLobby_Text_Oak_InEternaForSomeTime
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulNotice
+    ApplyMovement LOCALID_BARRY, PalParkLobby_Movement_BarryNotice
+    WaitMovement
+    ApplyMovement LOCALID_BARRY, PalParkLobby_Movement_BarryApproachPaul
+    WaitMovement
+    Message PalParkLobby_Text_Barry_Greeting
+    WaitButton
     CloseMessage
-    WaitTime 15, VAR_RESULT
-    ApplyMovement LOCALID_PLAYER, PalParkLobby_Movement_PlayerMoveAside
+    Message PalParkLobby_Text_Paul_Response
+    WaitButton
+    CloseMessage
+    Message PalParkLobby_Text_Barry_Response
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_BARRY, PalParkLobby_Movement_BarryToWindow
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulToWindow
+    ApplyMovement LOCALID_PLAYER, PalParkLobby_Movement_PlayerToWindow
     WaitMovement
-    ApplyMovement LOCALID_PROF_OAK, PalParkLobby_Movement_ProfOakLeave
+    Message PalParkLobby_Text_Barry_LetUsSeeSomethingCool
+    WaitButton
+    CloseMessage
+    Message PalParkLobby_Text_Paul_LookOutWindow
+    WaitButton
+    CloseMessage
+    Call PalParkLobby_ShowCounterpart
+    ApplyMovement LOCALID_COUNTERPART, PalParkLobby_Movement_CounterpartArrive
     WaitMovement
+    ApplyMovement LOCALID_COUNTERPART, PalParkLobby_Movement_CounterpartArriveLocked
+    WaitMovement
+    Message PalParkLobby_Text_Counterpart_Arrival
+    WaitButton
+    CloseMessage
+    GoTo PalParkLobby_CounterpartArrived
+
+PalParkLobby_ShowCounterpart:
+    ClearFlag FLAG_HIDE_PAL_PARK_LOBBY_COUNTERPART
+    AddObject LOCALID_COUNTERPART
+    LockObject LOCALID_COUNTERPART
+    Return
+
+PalParkLobby_CounterpartArrived:
+    ApplyMovement LOCALID_BARRY, PalParkLobby_Movement_BarryFaceEast
+    ApplyMovement LOCALID_PLAYER, PalParkLobby_Movement_PlayerFaceSouth
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulFaceEast
+    WaitMovement
+    ApplyMovement LOCALID_COUNTERPART, PalParkLobby_Movement_CounterpartApproach
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, PalParkLobby_Movement_PlayerFaceWest
+    WaitMovement
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulStepBack
+    WaitMovement
+    Message PalParkLobby_Text_Barry_AboutMultiBattle
+    WaitButton
+    CloseMessage
+    Message PalParkLobby_Text_Paul_ReadyForMultiBattle
+    WaitButton
+    CloseMessage
+    Message PalParkLobby_Text_Counterpart_Agrees
+    WaitButton
+    CloseMessage
+    GoTo PalParkLobby_ChooseTeammate
+
+PalParkLobby_ChooseTeammate:
+    Message PalParkLobby_Text_ChooseTeammate
+    BufferRivalName 1
+    GetPlayerGender VAR_0x8009
+    GoToIfEq VAR_0x8009, GENDER_MALE, PalParkLobby_ChooseTeammateShowDawn
+    GoTo PalParkLobby_ChooseTeammateShowLucas
+
+PalParkLobby_ChooseTeammateShowDawn:
+    InitGlobalTextMenu 1, 1, 0, VAR_RESULT, FALSE
+    AddMenuEntry MenuEntries_Text_PalPark_ChooseDawn, 0
+    AddMenuEntry MenuEntries_Text_PalPark_ChooseBarryBuffered, 1
+    AddMenuEntry MenuEntries_Text_PalPark_ChoosePaul, 2
+    ShowMenu
+    SetVar VAR_0x8008, VAR_RESULT
+    CloseMessage
+    GoToIfEq VAR_0x8008, 0, PalParkLobby_ChooseCounterpart
+    GoToIfEq VAR_0x8008, 1, PalParkLobby_ChooseBarry
+    GoTo PalParkLobby_ChoosePaul
+
+PalParkLobby_ChooseTeammateShowLucas:
+    InitGlobalTextMenu 1, 1, 0, VAR_RESULT, FALSE
+    AddMenuEntry MenuEntries_Text_PalPark_ChooseLucas, 0
+    AddMenuEntry MenuEntries_Text_PalPark_ChooseBarryBuffered, 1
+    AddMenuEntry MenuEntries_Text_PalPark_ChoosePaul, 2
+    ShowMenu
+    SetVar VAR_0x8008, VAR_RESULT
+    CloseMessage
+    GoToIfEq VAR_0x8008, 0, PalParkLobby_ChooseCounterpart
+    GoToIfEq VAR_0x8008, 1, PalParkLobby_ChooseBarry
+    GoTo PalParkLobby_ChoosePaul
+
+PalParkLobby_ChooseCounterpart:
+    SetVar VAR_0x8007, 0
+    GoTo PalParkLobby_CheckPlayerStarter
+
+PalParkLobby_ChooseBarry:
+    SetVar VAR_0x8007, 1
+    GoTo PalParkLobby_CheckPlayerStarter
+
+PalParkLobby_ChoosePaul:
+    SetVar VAR_0x8007, 2
+    GoTo PalParkLobby_CheckPlayerStarter
+
+    @ Pick the opposing-starter set from the starter the player owns.
+    @ VAR_0x800A = 0 (player Turtwig), 1 (player Piplup), 2 (player Chimchar).
+    @ The rival trainers come in consecutive TURTWIG/PIPLUP/CHIMCHAR slots
+    @ named for the player's starter, so adding VAR_0x800A to the _TURTWIG
+    @ base selects the right one. Barry gets the starter super-effective
+    @ against yours; the counterpart (Dawn/Lucas) gets the remaining one:
+    @   Barry  TRAINER_RIVAL_PAL_PARK_*  / _*_ALLY
+    @   Paul   TRAINER_PAUL_PAL_PARK     / _ALLY
+    @   Dawn   TRAINER_DAWN_PAL_PARK_*   / _*_ALLY
+    @   Lucas  TRAINER_LUCAS_PAL_PARK_*  / _*_ALLY
+PalParkLobby_CheckPlayerStarter:
+    GetPlayerStarterSpecies VAR_RESULT
+    GoToIfEq VAR_RESULT, SPECIES_TURTWIG, PalParkLobby_SetStarterVariant0
+    GoToIfEq VAR_RESULT, SPECIES_PIPLUP, PalParkLobby_SetStarterVariant1
+    GoTo PalParkLobby_SetStarterVariant2
+
+PalParkLobby_SetStarterVariant0:
+    SetVar VAR_0x800A, 0
+    GoTo PalParkLobby_PrepareMultiBattle
+
+PalParkLobby_SetStarterVariant1:
+    SetVar VAR_0x800A, 1
+    GoTo PalParkLobby_PrepareMultiBattle
+
+PalParkLobby_SetStarterVariant2:
+    SetVar VAR_0x800A, 2
+    GoTo PalParkLobby_PrepareMultiBattle
+
+PalParkLobby_PrepareMultiBattle:
+    GoToIfEq VAR_0x8007, 0, PalParkLobby_RepositionCounterpartAlly
+    GoToIfEq VAR_0x8007, 1, PalParkLobby_RepositionBarryAlly
+    GoTo PalParkLobby_RepositionPaulAlly
+
+PalParkLobby_RepositionCounterpartAlly:
+    FadeScreenOut
+    WaitFadeScreen
+    SetVar VAR_0x800B, TRAINER_RIVAL_PAL_PARK_TURTWIG
+    AddVar VAR_0x800B, VAR_0x800A
+    GoToIfEq VAR_0x8009, GENDER_MALE, PalParkLobby_CounterpartAllyDawn
+    GoTo PalParkLobby_CounterpartAllyLucas
+
+PalParkLobby_CounterpartAllyDawn:
+    SetVar VAR_0x800C, TRAINER_DAWN_PAL_PARK_TURTWIG_ALLY
+    AddVar VAR_0x800C, VAR_0x800A
+    GoTo PalParkLobby_BattleWithCounterpart
+
+PalParkLobby_CounterpartAllyLucas:
+    SetVar VAR_0x800C, TRAINER_LUCAS_PAL_PARK_TURTWIG_ALLY
+    AddVar VAR_0x800C, VAR_0x800A
+    GoTo PalParkLobby_BattleWithCounterpart
+
+PalParkLobby_RepositionBarryAlly:
+    FadeScreenOut
+    WaitFadeScreen
+    ApplyMovement LOCALID_BARRY, PalParkLobby_Movement_BarryToAllyPosition
+    ApplyMovement LOCALID_COUNTERPART, PalParkLobby_Movement_CounterpartToBarryPosition
+    WaitMovement
+    SetVar VAR_0x800B, TRAINER_RIVAL_PAL_PARK_TURTWIG_ALLY
+    AddVar VAR_0x800B, VAR_0x800A
+    GoToIfEq VAR_0x8009, GENDER_MALE, PalParkLobby_BarryAllyDawn
+    GoTo PalParkLobby_BarryAllyLucas
+
+PalParkLobby_BarryAllyDawn:
+    SetVar VAR_0x800C, TRAINER_DAWN_PAL_PARK_TURTWIG
+    AddVar VAR_0x800C, VAR_0x800A
+    GoTo PalParkLobby_BattleWithBarryAlly
+
+PalParkLobby_BarryAllyLucas:
+    SetVar VAR_0x800C, TRAINER_LUCAS_PAL_PARK_TURTWIG
+    AddVar VAR_0x800C, VAR_0x800A
+    GoTo PalParkLobby_BattleWithBarryAlly
+
+PalParkLobby_RepositionPaulAlly:
+    FadeScreenOut
+    WaitFadeScreen
+    ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulToAllyPosition
+    ApplyMovement LOCALID_COUNTERPART, PalParkLobby_Movement_CounterpartToPaulPosition
+    WaitMovement
+    SetVar VAR_0x800B, TRAINER_RIVAL_PAL_PARK_TURTWIG
+    AddVar VAR_0x800B, VAR_0x800A
+    GoToIfEq VAR_0x8009, GENDER_MALE, PalParkLobby_PaulAllyDawn
+    GoTo PalParkLobby_PaulAllyLucas
+
+PalParkLobby_PaulAllyDawn:
+    SetVar VAR_0x800C, TRAINER_DAWN_PAL_PARK_TURTWIG
+    AddVar VAR_0x800C, VAR_0x800A
+    GoTo PalParkLobby_BattleWithPaulAlly
+
+PalParkLobby_PaulAllyLucas:
+    SetVar VAR_0x800C, TRAINER_LUCAS_PAL_PARK_TURTWIG
+    AddVar VAR_0x800C, VAR_0x800A
+    GoTo PalParkLobby_BattleWithPaulAlly
+
+PalParkLobby_BattleWithCounterpart:
+    FadeScreenIn
+    WaitFadeScreen
+    Message PalParkLobby_Text_Counterpart_BattleStart
+    WaitButton
+    CloseMessage
+    StartTagBattle VAR_0x800C, VAR_0x800B, TRAINER_PAUL_PAL_PARK
+    GoTo PalParkLobby_CheckBattleResult
+
+PalParkLobby_BattleWithBarryAlly:
+    FadeScreenIn
+    WaitFadeScreen
+    Message PalParkLobby_Text_Barry_BattleStart
+    WaitButton
+    CloseMessage
+    StartTagBattle VAR_0x800B, TRAINER_PAUL_PAL_PARK, VAR_0x800C
+    GoTo PalParkLobby_CheckBattleResult
+
+PalParkLobby_BattleWithPaulAlly:
+    FadeScreenIn
+    WaitFadeScreen
+    Message PalParkLobby_Text_Paul_BattleStart
+    WaitButton
+    CloseMessage
+    StartTagBattle TRAINER_PAUL_PAL_PARK_ALLY, VAR_0x800B, VAR_0x800C
+    GoTo PalParkLobby_CheckBattleResult
+
+PalParkLobby_CheckBattleResult:
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, PalParkLobby_BattleLost
+    GoTo PalParkLobby_BattleWon
+
+PalParkLobby_BattleLost:
+    ReleaseAll
+    End
+
+PalParkLobby_BattleWon:
+    Message PalParkLobby_Text_BarryWins_Line1
+    WaitButton
+    CloseMessage
+    Message PalParkLobby_Text_PaulWins_Line1
+    WaitButton
+    CloseMessage
+    Message PalParkLobby_Text_CounterpartWins_Line1
+    WaitButton
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
     PlaySE SEQ_SE_DP_KAIDAN2
-    RemoveObject LOCALID_PROF_OAK
-    WaitSE SEQ_SE_DP_KAIDAN2
+    RemoveObject LOCALID_BARRY
+    RemoveObject LOCALID_PAUL
+    RemoveObject LOCALID_COUNTERPART
+    SetFlag FLAG_HIDE_PAL_PARK_LOBBY_RIVALS
+    SetFlag FLAG_HIDE_PAL_PARK_LOBBY_COUNTERPART
     SetVar VAR_PAL_PARK_LOBBY_STATE, 1
+    FadeScreenIn
+    WaitFadeScreen
     ReleaseAll
     End
 
     .balign 4, 0
-PalParkLobby_Movement_ProfOakNoticePlayer:
+PalParkLobby_Movement_PaulNoticePlayer:
     EmoteExclamationMark
     Delay8
     WalkNormalSouth 3
     EndMovement
 
     .balign 4, 0
-PalParkLobby_Movement_ProfOakExclamationMark:
+PalParkLobby_Movement_PaulWalkUpstairs:
+    WalkNormalNorth 5
+    WalkNormalEast 7
+    WalkNormalNorth 8
+    WalkNormalWest 6
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PaulNotice:
     EmoteExclamationMark
     Delay8
     EndMovement
 
     .balign 4, 0
-PalParkLobby_Movement_ProfOakLeave:
-    WalkNormalSouth
-    WalkOnSpotNormalSouth
+PalParkLobby_Movement_BarryNotice:
+    FaceEast
+    EmoteExclamationMark
+    Delay8
     EndMovement
 
     .balign 4, 0
-PalParkLobby_Movement_PlayerMoveAside:
-    WalkNormalEast
-    WalkOnSpotNormalWest
+PalParkLobby_Movement_PlayerWalkUpstairs:
+    WalkNormalNorth 6
+    WalkNormalEast 7
+    WalkNormalNorth 8
+    WalkNormalWest 5
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_BarryApproachPaul:
+    WalkNormalSouth 1
+    WalkNormalEast 3
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_BarryToWindow:
+    WalkNormalWest 5
+    WalkNormalNorth 1
+    WalkOnSpotFastNorth
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PaulToWindow:
+    WalkNormalWest 5
+    WalkNormalNorth 1
+    WalkOnSpotFastNorth
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PlayerToWindow:
+    WalkNormalWest 5
+    WalkNormalNorth 1
+    WalkOnSpotFastNorth
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_CounterpartArrive:
+    WalkNormalWest 6
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_CounterpartArriveLocked:
+    EmoteExclamationMark
+    Delay8
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_BarryFaceEast:
+    WalkOnSpotFastEast
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PlayerFaceSouth:
+    WalkOnSpotFastSouth
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PaulFaceEast:
+    WalkOnSpotFastEast
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_CounterpartApproach:
+    WalkNormalWest 3
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PlayerFaceWest:
+    WalkOnSpotFastWest
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PaulStepBack:
+    WalkNormalSouth 1
+    WalkNormalWest 1
+    WalkOnSpotFastEast
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_BarryToAllyPosition:
+    WalkNormalEast 2
+    WalkNormalSouth 1
+    WalkOnSpotFastWest
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_CounterpartToBarryPosition:
+    WalkNormalWest 2
+    WalkNormalNorth 1
+    WalkOnSpotFastEast
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_PaulToAllyPosition:
+    WalkNormalEast 2
+    WalkOnSpotFastWest
+    EndMovement
+
+    .balign 4, 0
+PalParkLobby_Movement_CounterpartToPaulPosition:
+    WalkNormalWest 2
+    WalkOnSpotFastEast
     EndMovement
 
 PalParkLobby_PoketchAppLady:
