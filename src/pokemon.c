@@ -5086,6 +5086,9 @@ int SpriteSystem_TrainerClassBackSpriteIndex(enum TrainerClass trainerClass)
     case TRAINER_CLASS_RIVAL:
         trainerClass = rival_back_NCGR / TRAINER_CLASS_NUM_FILETYPES;
         break;
+    case TRAINER_CLASS_PAUL:
+        trainerClass = paul_back_NCGR / TRAINER_CLASS_NUM_FILETYPES;
+        break;
     case TRAINER_CLASS_TRAINER_CHERYL:
     case TRAINER_CLASS_TRAINER_RILEY:
     case TRAINER_CLASS_TRAINER_MARLEY:
