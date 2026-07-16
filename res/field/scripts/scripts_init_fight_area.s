@@ -1,7 +1,7 @@
 #include "macros/scrcmd.inc"
 
 
-    InitScriptEntry_OnTransition 15
+    InitScriptEntry_OnTransition 14
     InitScriptEntry_OnFrameTable InitScriptFrameTable
     InitScriptEntryEnd
 

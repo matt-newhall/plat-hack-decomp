@@ -16,30 +16,15 @@
     ScriptEntry FightArea_ArrowSignpostRt225
     ScriptEntry FightArea_Sailor2
     ScriptEntry FightArea_BlackBelt1
-    ScriptEntry FightArea_Rival
     ScriptEntry FightArea_OnTransition
-    ScriptEntry FightArea_AceTrainerM2
-    ScriptEntry FightArea_BlackBelt2
-    ScriptEntry FightArea_Flint
-    ScriptEntry FightArea_Volkner
-    ScriptEntry FightArea_AceTrainerM3
-    ScriptEntry FightArea_AceTrainerF2
-    ScriptEntry FightArea_BlackBelt3
-    ScriptEntry FightArea_BattleGirl2
-    ScriptEntry FightArea_Sailor3
     ScriptEntry FightArea_Buck
     ScriptEntry FightArea_DrifloonInteract
+    ScriptEntry FightArea_Palmer
+    ScriptEntry FightArea_TriggerPalmerBlockFrontier
     ScriptEntryEnd
 
 FightArea_OnTransition:
-    GoToIfEq VAR_FIGHT_AREA_STATE, 1, FightArea_SetRivalPositionBattleFrontierGate
     GoToIfGe VAR_STARK_MOUNTAIN_ROOM_3_STATE, 1, FightArea_HideRival
-    End
-
-FightArea_SetRivalPositionBattleFrontierGate:
-    SetObjectEventPos LOCALID_RIVAL, 655, 426
-    SetObjectEventMovementType LOCALID_RIVAL, MOVEMENT_TYPE_LOOK_NORTH
-    SetObjectEventDir LOCALID_RIVAL, DIR_NORTH
     End
 
 FightArea_HideRival:
@@ -71,65 +56,25 @@ FightArea_OnFrameRival:
     Message FightArea_Text_ComeWithMe
     CloseMessage
     Common_SetFollowMeBGM
-    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkToVolknerFlint
-    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalWalkToVolknerFlint
+    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkToPokecenter
+    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalWalkToPokecenter
+    WaitMovement
+    BufferRivalName 0
+    Message FightArea_Text_WhereAreTheDrifloon
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkToFrontierGate
+    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalWalkToFrontierGate
     WaitMovement
     Common_FadeToDefaultMusic3
     SetVar VAR_FIGHT_AREA_STATE, 1
     ScrCmd_32E
-    Message FightArea_Text_LetsTeamUp
-    ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_NO, FightArea_INeedYourHelp
-    Call FightArea_BattleVolknerFlint
-    GoToIfEq VAR_RESULT, FALSE, FightArea_LostBattleVolknerFlint
-    Call FightArea_PostBattleVolknerFlint
-    ReleaseAll
-    End
-
-FightArea_BattleVolknerFlint:
-    BufferRivalName 0
-    Message FightArea_Text_WeCanWhoopEm
-    CloseMessage
-    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkNorth
-    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalWalkNorth
-    WaitMovement
-    ApplyMovement LOCALID_FLINT, FightArea_Movement_FlintWalkOnSpotSouth
-    WaitMovement
-    Message FightArea_Text_LetFlintSeeSpirit
-    ApplyMovement LOCALID_VOLKNER, FightArea_Movement_VolknerWalkOnSpotSouth
-    WaitMovement
-    Message FightArea_Text_ShowMeSkills
-    CloseMessage
-    Call FightArea_SetRivalPartnerTeam
-    StartTagBattle VAR_0x8004, TRAINER_LEADER_VOLKNER_FIGHT_AREA, TRAINER_ELITE_FOUR_FLINT_FIGHT_AREA
-    CheckWonBattle VAR_RESULT
-    Return
-
-FightArea_PostBattleVolknerFlint:
-    ApplyMovement LOCALID_VOLKNER, FightArea_Movement_VolknerWalkOnSpotWest
-    WaitMovement
-    Message FightArea_Text_FlintEllipses
-    Message FightArea_Text_DontBurnOut
-    ApplyMovement LOCALID_VOLKNER, FightArea_Movement_VolknerWalkOnSpotSouth2
-    WaitMovement
-    Message FightArea_Text_ThatWasABlast
-    CloseMessage
-    FadeScreenOut
-    WaitFadeScreen
-    RemoveObject LOCALID_FLINT
-    RemoveObject LOCALID_VOLKNER
-    RemoveObject LOCALID_ACE_TRAINER_M_3
-    RemoveObject LOCALID_ACE_TRAINER_F_2
-    RemoveObject LOCALID_BLACK_BELT_3
-    RemoveObject LOCALID_BATTLE_GIRL_2
-    RemoveObject LOCALID_SAILOR_3
-    FadeScreenIn
-    WaitFadeScreen
     ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalFacePlayer
     ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerFaceRival
     WaitMovement
     BufferRivalName 0
     Message FightArea_Text_ImOffToTheFronti
+    SetObjectEventPos LOCALID_PALMER, 655, 423
     ClearFlag FLAG_HIDE_FIGHT_AREA_PALMER
     AddObject LOCALID_PALMER
     StopSE SEQ_SE_CONFIRM
@@ -153,11 +98,8 @@ FightArea_PostBattleVolknerFlint:
     Message FightArea_Text_IfItIsntRival
     Message FightArea_Text_LookingForwardToChallenge
     CloseMessage
-    ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerLeave
-    WaitMovement
-    PlaySE SEQ_SE_DP_KAIDAN2
-    RemoveObject LOCALID_PALMER
-    WaitSE SEQ_SE_DP_KAIDAN2
+    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalLookWest
+    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerLookEast
     BufferRivalName 0
     Message FightArea_Text_DadIsTowerTycoon
     Message FightArea_Text_WhatToDo
@@ -176,43 +118,9 @@ FightArea_PostBattleVolknerFlint:
     ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWatchBuckLeave
     WaitMovement
     RemoveObject LOCALID_BUCK
-    GetNationalDexEnabled VAR_RESULT
-    CallIfEq VAR_RESULT, TRUE, FightArea_RemoveBlockade
     SetVar VAR_FIGHT_AREA_STATE, 2
-    Return
-
-FightArea_RemoveBlockade:
-    RemoveObject LOCALID_ACE_TRAINER_M_2
-    RemoveObject LOCALID_BLACK_BELT_2
-    SetFlag FLAG_HIDE_FIGHT_AREA_BLOCKADE
-    Return
-
-FightArea_INeedYourHelp:
-    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalWalkOnSpotWest
-    WaitMovement
-    BufferRivalName 0
-    Message FightArea_Text_INeedYourHelp
-    WaitButton
-    CloseMessage
     ReleaseAll
     End
-
-FightArea_LostBattleVolknerFlint:
-    BlackOutFromBattle
-    ReleaseAll
-    End
-
-FightArea_SetRivalPartnerTeam:
-    GetPlayerStarterSpecies VAR_RESULT
-    SetVar VAR_0x8004, TRAINER_RIVAL_FIGHT_AREA_CHIMCHAR
-    GoToIfEq VAR_RESULT, SPECIES_CHIMCHAR, FightArea_SetRivalPartnerTeamReturn
-    SetVar VAR_0x8004, TRAINER_RIVAL_FIGHT_AREA_TURTWIG
-    GoToIfEq VAR_RESULT, SPECIES_TURTWIG, FightArea_SetRivalPartnerTeamReturn
-    SetVar VAR_0x8004, TRAINER_RIVAL_FIGHT_AREA_PIPLUP
-    Return
-
-FightArea_SetRivalPartnerTeamReturn:
-    Return
 
     .balign 4, 0
 FightArea_Movement_RivalNoticePlayer:
@@ -225,10 +133,16 @@ FightArea_UnusedMovement:
     EndMovement
 
     .balign 4, 0
-FightArea_Movement_RivalWalkToVolknerFlint:
+FightArea_Movement_RivalWalkToPokecenter:
     WalkNormalEast 17
     WalkNormalNorth 2
-    WalkNormalEast 9
+    WalkNormalEast 2
+    WalkOnSpotNormalNorth
+    EndMovement
+
+    .balign 4, 0
+FightArea_Movement_RivalWalkToFrontierGate:
+    WalkNormalEast 7
     WalkNormalNorth 6
     WalkNormalEast
     WalkOnSpotNormalNorth
@@ -267,11 +181,6 @@ FightArea_Movement_RivalLeave:
     EndMovement
 
     .balign 4, 0
-FightArea_Movement_RivalWalkOnSpotWest:
-    WalkOnSpotFastWest
-    EndMovement
-
-    .balign 4, 0
 FightArea_Movement_PalmerEnter:
     WalkFastSouth
     EndMovement
@@ -286,20 +195,21 @@ FightArea_Movement_PalmerLookAround:
     EndMovement
 
     .balign 4, 0
-FightArea_Movement_PalmerLeave:
-    WalkFastNorth
-    EndMovement
-
-    .balign 4, 0
 FightArea_Movement_PlayerWalkToRival:
     WalkNormalEast 4
     EndMovement
 
     .balign 4, 0
-FightArea_Movement_PlayerWalkToVolknerFlint:
+FightArea_Movement_PlayerWalkToPokecenter:
     WalkNormalEast 18
     WalkNormalNorth 2
-    WalkNormalEast 9
+    WalkNormalEast 1
+    WalkOnSpotNormalNorth
+    EndMovement
+
+    .balign 4, 0
+FightArea_Movement_PlayerWalkToFrontierGate:
+    WalkNormalEast 8
     WalkNormalNorth 6
     EndMovement
 
@@ -344,44 +254,13 @@ FightArea_Movement_PlayerFaceBuck:
     EndMovement
 
     .balign 4, 0
-FightArea_Movement_FlintWalkOnSpotSouth:
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_FlintFaceSouth:
-    FaceSouth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_VolknerWalkOnSpotSouth:
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_VolknerWalkOnSpotWest:
-    WalkOnSpotNormalWest
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_VolknerWalkOnSpotSouth2:
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_VolknerFaceSouth:
-    FaceSouth
-    EndMovement
-
-    .balign 4, 0
 FightArea_Movement_BuckWalkToPlayer:
-    WalkNormalNorth
     WalkNormalWest 2
     EndMovement
 
     .balign 4, 0
 FightArea_Movement_BuckLeave:
-    WalkNormalSouth 8
+    WalkNormalSouth 7
     EndMovement
 
 FightArea_UnusedMovement4:
@@ -559,109 +438,6 @@ FightArea_Movement_PlayerWalkToShipWest:
     Delay15
     EndMovement
 
-FightArea_Rival:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    ApplyMovement LOCALID_RIVAL, FightArea_Movement_RivalWalkOnSpotNorth
-    WaitMovement
-    GetPlayerDir VAR_0x8004
-    CallIfEq VAR_0x8004, DIR_EAST, FightArea_PlayerWalkToBattlePositionEast
-    CallIfEq VAR_0x8004, DIR_WEST, FightArea_PlayerWalkToBattlePositionWest
-    CallIfEq VAR_0x8004, DIR_SOUTH, FightArea_PlayerWalkToBattlePositionSouth
-    CallIfEq VAR_0x8004, DIR_NORTH, FightArea_PlayerWalkToBattlePositionNorth
-    BufferRivalName 0
-    Message FightArea_Text_LetsShowThem
-    ShowYesNoMenu VAR_RESULT
-    GoToIfEq VAR_RESULT, MENU_NO, FightArea_INeedYourHelp
-    Call FightArea_BattleVolknerFlint
-    GoToIfEq VAR_RESULT, FALSE, FightArea_LostBattleVolknerFlint
-    Call FightArea_PostBattleVolknerFlint
-    ReleaseAll
-    End
-
-FightArea_PlayerWalkToBattlePositionEast:
-    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkOnSpotNorth
-    WaitMovement
-    Return
-
-FightArea_PlayerWalkToBattlePositionWest:
-    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkToBattlePositionWest
-    WaitMovement
-    Return
-
-FightArea_PlayerWalkToBattlePositionSouth:
-    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkToBattlePositionSouth
-    WaitMovement
-    Return
-
-FightArea_PlayerWalkToBattlePositionNorth:
-    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerWalkToBattlePositionNorth
-    WaitMovement
-    Return
-
-    .balign 4, 0
-FightArea_Movement_RivalWalkOnSpotNorth:
-    WalkOnSpotNormalNorth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_PlayerWalkOnSpotNorth:
-    WalkOnSpotNormalNorth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_PlayerWalkToBattlePositionWest:
-    WalkNormalSouth
-    WalkNormalWest 2
-    WalkNormalNorth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_PlayerWalkToBattlePositionSouth:
-    WalkNormalWest
-    WalkNormalSouth
-    WalkOnSpotNormalNorth
-    EndMovement
-
-    .balign 4, 0
-FightArea_Movement_PlayerWalkToBattlePositionNorth:
-    WalkNormalWest
-    WalkNormalNorth
-    EndMovement
-
-FightArea_AceTrainerM2:
-    NPCMessage FightArea_Text_YouHavePokedexDoYou
-    End
-
-FightArea_BlackBelt2:
-    NPCMessage FightArea_Text_HaveYouBeenToFrontier
-    End
-
-FightArea_Flint:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    Message FightArea_Text_UpToTheChallenge
-    WaitButton
-    ApplyMovement LOCALID_FLINT, FightArea_Movement_FlintFaceSouth
-    WaitMovement
-    CloseMessage
-    ReleaseAll
-    End
-
-FightArea_Volkner:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    Message FightArea_Text_SorryAboutMyFriend
-    WaitButton
-    ApplyMovement LOCALID_VOLKNER, FightArea_Movement_VolknerFaceSouth
-    WaitMovement
-    CloseMessage
-    ReleaseAll
-    End
-
 FightArea_Buck:
     PlaySE SEQ_SE_CONFIRM
     LockAll
@@ -679,26 +455,6 @@ FightArea_Movement_BuckWalkOnSpotWest:
     WalkOnSpotNormalWest
     EndMovement
 
-FightArea_AceTrainerM3:
-    NPCMessage FightArea_Text_LearnALotByWatching
-    End
-
-FightArea_AceTrainerF2:
-    NPCMessage FightArea_Text_IMustBeLucky
-    End
-
-FightArea_BlackBelt3:
-    NPCMessage FightArea_Text_LotToThink
-    End
-
-FightArea_BattleGirl2:
-    NPCMessage FightArea_Text_AreVolknerAndFlintFriends
-    End
-
-FightArea_Sailor3:
-    NPCMessage FightArea_Text_ThatCombinationsIntriguing
-    End
-
     .balign 0
 
 FightArea_DrifloonInteract:
@@ -708,3 +464,54 @@ FightArea_DrifloonInteract:
     Common_CallDrifloon
     ReleaseAll
     End
+
+FightArea_Palmer:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message FightArea_Text_FrontierIsOffLimits
+    WaitButton
+    ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
+    WaitMovement
+    CloseMessage
+    ReleaseAll
+    End
+
+FightArea_TriggerPalmerBlockFrontier:
+    LockAll
+    ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerNoticePlayer
+    WaitMovement
+    Message FightArea_Text_FrontierIsOffLimits
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, FightArea_Movement_PlayerStepBackSouth
+    ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
+    WaitMovement
+    ReleaseAll
+    End
+
+    .balign 4, 0
+FightArea_Movement_PalmerNoticePlayer:
+    WalkOnSpotNormalWest
+    EmoteExclamationMark
+    EndMovement
+
+    .balign 4, 0
+FightArea_Movement_PalmerFaceSouth:
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+FightArea_Movement_PlayerStepBackSouth:
+    WalkNormalSouth
+    EndMovement
+
+    .balign 4, 0
+FightArea_Movement_PlayerLookEast:
+    WalkOnSpotNormalEast
+    EndMovement
+
+    .balign 4, 0
+FightArea_Movement_RivalLookWest:
+    WalkOnSpotNormalWest
+    EndMovement

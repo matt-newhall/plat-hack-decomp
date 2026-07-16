@@ -12,6 +12,18 @@
       ]
     },
     {
+      "id": "FightArea_Text_WhereAreTheDrifloon",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0}: Whoa, hold up a sec!\n",
+        "Something’s missing around here...\r",
+        "There’s always a bunch of Drifloon\n",
+        "bobbing about outside the Center.\r",
+        "Not a single one of them today.\n",
+        "Where’d they all float off to?\r",
+        "...Eh, forget it. Come on!"
+      ]
+    },
+    {
       "id": "FightArea_Text_LetsTeamUp",
       "en_US": [
         "{STRVAR_1 3, 0, 0}: {STRVAR_1 3, 1, 0}, I tried to\n",
@@ -22,8 +34,7 @@
         "Like, they’re saying they want to test\n",
         "me if I’m good enough and all that.\r",
         "Like, as if I need to prove anything.\n",
-        "So, let’s team up.\r",
-        "Like we did at the Spear Pillar.\n",
+        "So, let’s team up.\f",
         "Let’s show those guys how good we are!\r"
       ]
     },
@@ -131,7 +142,13 @@
       "id": "FightArea_Text_ImOffToTheFronti",
       "en_US": [
         "{STRVAR_1 3, 0, 0}: See?\n",
-        "I got a lot tougher, yeah?\r",
+        "This place is super cool, right!?\r",
+        "I’ve been told by the master that\n",
+        "everyone on this island is super\f",
+        "competitive, so there should be a\f",
+        "bunch of cool Trainers to fight!\r",
+        "I also heard they love Double\n",
+        "battles here, so watch out for that.\r",
         "OK, I’m off to the Fronti...\r"
       ]
     },
@@ -171,16 +188,36 @@
         "Battle Frontier challenge?\r",
         "The Frontier has five facilities that\n",
         "are all dedicated to battling.\r",
-        "Each one has a unique set of rules,\n",
-        "so they’re all different.\r",
-        "Of course, you have to be good to win\n",
-        "at any of them.\r",
+        "Or at least, usually there are...\r",
+        "All the Frontier Brains are on\n",
+        "vacation currently!\r",
+        "We’ve got lots of new trainers on the\n",
+        "island currently that all of us are\f",
+        "scattered around trying to find the\f",
+        "best of the best.\r",
+        "If you manage to beat them all, I’d\n",
+        "like to be your final test to see if\f",
+        "you’ve got what it takes to challenge\f",
+        "the real Frontier!\r",
         "Anyway, I’m satisfied to see that\n",
         "you’re both doing well.\r",
-        "I’ll go back to my usual place in the\n",
-        "Battle Tower.\r",
         "I’ll be looking forward to your\n",
         "challenge.\r"
+      ]
+    },
+    {
+      "id": "FightArea_Text_FrontierIsOffLimits",
+      "en_US": [
+        "Palmer: Sorry, but the Frontier’s\n",
+        "closed up tight for the moment.\r",
+        "Every last one of the Brains is off\n",
+        "on vacation, if you can believe it.\f",
+        "I’m not letting anyone inside without\f",
+        "them!\r",
+        "Go find the Trainers scattered around\n",
+        "the island first.\r",
+        "Beat every one of them, and then you\n",
+        "can come and talk to me!"
       ]
     },
     {
@@ -225,9 +262,10 @@
       "id": "FightArea_Text_ComeToSurvivalArea",
       "en_US": [
         "Hey, hey.\n",
-        "I just watched you two battle.\r",
-        "You’re something special, aren’t you?\n",
-        "Beating an Elite Four like that.\r",
+        "Looks like you two know Palmer.\r",
+        "You must be something special, huh?\n",
+        "Getting here in the first place is no\f",
+        "small feat!\r",
         "Oh, right, howdy.\n",
         "The name’s Buck.\r",
         "I’m usually training at the Survival\n",
