@@ -20,6 +20,7 @@
 #include "constants/pokemon.h"
 #include "generated/ai_flags.h"
 #include "generated/items.h"
+#include "generated/natures.h"
 #include "generated/species.h"
 #include "generated/trainers.h"
 #include "generated/trainer_classes.h"
@@ -169,11 +170,17 @@ Container proc_trainer(datafile_t *df, enum TrainerID trainer) {
         // We always store the maximum possible data, then trim it when packing
         u16 species = dp_u16(dp_lookup(dp_objmemb(party_member, "species"), "Species"));
         u16 form    = dp_u8(dp_objmemb(party_member, "form"));
+        u16 nature = TRAINER_MON_NATURE_NONE;
+        if (dp_hasmemb(party_member, "nature")) {
+            nature = dp_u16(dp_lookup(dp_objmemb(party_member, "nature"), "Nature"));
+        }
+
         trparty.party[i] = (TrainerMonWithMovesAndItem){
             .ivScale = dp_u16(dp_objmemb(party_member, "iv_scale")),
             .level   = dp_u16(dp_objmemb(party_member, "level")),
             .species = (u16)(species | (form << TRAINER_MON_FORM_SHIFT)),
             .cbSeal  = dp_u16(dp_objmemb(party_member, "ball_seal")),
+            .nature  = nature,
         };
 
         if (party_has_items) trparty.party[i].item = dp_u16(dp_lookup(dp_objmemb(party_member, "item"), "Item"));
@@ -410,6 +417,10 @@ static void pack(Container *trainer) {
         copy_size = sizeof(trainer->party.party[i].cbSeal);
         memcpy(p, &trainer->party.party[i].cbSeal, copy_size);
         p += copy_size;
+
+        copy_size = sizeof(trainer->party.party[i].nature);
+        memcpy(p, &trainer->party.party[i].nature, copy_size);
+        p += copy_size;
     }
 
     // TRAINER_NONE has 0 party members, but a non-zero file size in the archive
@@ -432,6 +443,7 @@ static void pre_init(void) {
     dp_regmetang(AIFlag);
     dp_regmetang(Item);
     dp_regmetang(Move);
+    dp_regmetang(Nature);
     dp_regmetang(Species);
     dp_regmetang(TrainerClass);
     dp_regmetang(TrainerMessageType);
