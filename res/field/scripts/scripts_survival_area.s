@@ -22,11 +22,11 @@ SurvivalArea_OnTransition:
 
 SurvivalArea_SetRivalMessageTryRemoveWarp:
     GetRandom VAR_RANDOM_SURVIVAL_AREA_RIVAL_MESSAGE, 3
-    GoToIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, SurvivalArea_RemoveWarpBattleground
+    GoToIfUnset FLAG_HALL_OF_FAME_ENTERED, SurvivalArea_RemoveWarpBattleground
     End
 
 SurvivalArea_OnLoad:
-    GoToIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, SurvivalArea_RemoveWarpBattleground
+    GoToIfUnset FLAG_HALL_OF_FAME_ENTERED, SurvivalArea_RemoveWarpBattleground
     End
 
 SurvivalArea_RemoveWarpBattleground:

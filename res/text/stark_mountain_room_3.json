@@ -4,20 +4,8 @@
     {
       "id": "StarkMountainRoom3_Text_MagmaStoneWillBeMine",
       "en_US": [
-        "Charon: ...Cyrus disappeared.\n",
-        "Mars and Jupiter quit.\r",
-        "Saturn said he would look after what\n",
-        "remains of Team Galactic.\r",
-        "But he won’t join me.\n",
-        "So foolish of him!\r",
-        "So very foolish of the rest of them!\n",
-        "Throwing away Team Galactic!\r",
-        "After all the effort we took as a team\n",
-        "to make it grow...\r",
-        "That power could have made us rich\n",
-        "beyond imagination.\r",
-        "But, enough of that.\n",
-        "The Magma Stone will be mine.\r"
+        "Charon: Ah you.\n",
+        "From the Valley Windworks."
       ]
     },
     {
@@ -28,118 +16,114 @@
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_BossOfRebornGalactic",
+      "id": "StarkMountainRoom3_Text_CharonRedChain",
       "en_US": [
         "Charon: Eh? What’s this, then?\n",
         "Chased me here, have you?\r",
         "I like seeing children try their best,\n",
         "but too bad for you--you’re too late.\r",
-        "With this Magma Stone I will let awaken\n",
-        "the legendary HEATRAN!\r",
-        "I will control the volcano’s eruptions\n",
-        "to extort money by the millions!\r",
-        "Fear me! For I am Charon!\n",
-        "The boss of the reborn Team Galactic!\r"
+        "Do you imagine I climbed this wretched\n",
+        "furnace for a pretty rock?\r",
+        "The Red Chain requires power. Raw,\n",
+        "obscene quantities of it.\r",
+        "And this mountain has been hoarding\n",
+        "the finest battery in Sinnoh."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_GoGoGo",
-      "en_US": "???: Go, go, go!\r"
-    },
-    {
-      "id": "StarkMountainRoom3_Text_NoTheMagmaStone",
+      "id": "StarkMountainRoom3_Text_CharonUseMagmaStone",
       "en_US": [
-        "Charon: No! The Magma Stone!\r",
-        "What?! What is going on?!\r"
+        "Charon: Now. Let us wake the thing up."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_ExcellentWorkCroagunk",
-      "en_US": "???: Excellent work, CROAGUNK!\r"
-    },
-    {
-      "id": "StarkMountainRoom3_Text_DisguisingWasNotEasy",
+      "id": "StarkMountainRoom3_Text_HeatranAwakens",
       "en_US": [
-        "Looker: Pah!\r",
-        "Disguising myself as a boulder for\n",
-        "stakeout was not easy!\r"
+        "The mountain screamed.\r",
+        "Something enormous pulled itself out\n",
+        "of the rock face..."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_RequestCooperation",
+      "id": "StarkMountainRoom3_Text_CharonMasterBall",
       "en_US": [
-        "Now, old-timer, the International Police\n",
-        "cordially requests your cooperation.\r",
-        "I am sure you have much to tell us\n",
-        "about the new Team Galactic.\r",
-        "With Cyrus, Mars, and Jupiter gone,\n",
-        "you are all that is left.\r"
+        "Charon: Magnificent.\n",
+        "Now hold still.\r",
+        "Charon used the Master Ball!"
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_ItsThePolice",
+      "id": "StarkMountainRoom3_Text_CharonCaughtHeatran",
       "en_US": [
-        "Grunt 1: Hey!\n",
-        "It’s the International Police!\r"
+        "Charon: Gotcha.\r",
+        "Cyrus said it could not be done.\n",
+        "Cyrus says a great many things."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_OneThingToBeDone",
+      "id": "StarkMountainRoom3_Text_CharonChallenge",
       "en_US": [
-        "Grunt 2: Yeah!\n",
-        "It’s the International Police all right!\r",
-        "There’s only one thing to be done!\r"
+        "Charon: Still here?\r",
+        "You have that look about you. The one\n",
+        "that thinks it can fix this.\r",
+        "Very well. Let us be quick about it.\n",
+        "I have a schedule to keep."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_RunAway",
+      "id": "StarkMountainRoom3_Text_BuckHealsYou",
       "en_US": [
-        "Grunt 1: Run away!\n",
-        "Grunt 2: Run away!\r"
+        "Buck: I can handle these two!\r",
+        "Here--take this, quick!\n",
+        "Your Pokémon are good as new!\r",
+        "Don’t let that old creep leave with it!"
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_IKnowNothing",
+      "id": "StarkMountainRoom3_Text_CharonDefeated",
       "en_US": [
-        "Charon: Gah... What a mess...\r",
-        "...Uh, International Police?\n",
-        "What are you saying? I know nothing!\r",
-        "A new Team Galactic?\n",
-        "Extorting with HEATRAN?\r",
-        "Merely the blathering of this harmless\n",
-        "old man! All said in jest!\r",
-        "Besides, among Team Galactic’s\n",
-        "Commanders, I was the most junior...\r"
+        "Charon: ...How tiresome."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_NoResistingArrest",
+      "id": "StarkMountainRoom3_Text_CharonEscapes",
       "en_US": [
-        "Looker: You can tell us all about it.\n",
-        "We have plenty of time.\r",
-        "Oh, no, no. No resisting arrest.\n",
-        "You can’t win three-on-one, no?\r",
-        "OK, Officers, over here, if you\n",
-        "will.\r"
+        "Charon: You have won a battle.\n",
+        "Do you think that is the same thing?\r",
+        "The specimen is in my pocket. It was\n",
+        "in my pocket before we battled.\r",
+        "Run along and tell someone. Tell the\n",
+        "police, if it comforts you.\r",
+        "By the time anyone listens, Cyrus will\n",
+        "have finished his chain."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_TakeHimSomewhereCool",
+      "id": "StarkMountainRoom3_Text_BuckAftermath",
       "en_US": [
-        "Looker: He is an old man.\n",
-        "This heat cannot be good for him.\r",
-        "Quickly, take him somewhere cool.\n",
-        "Yes, the cooler will do!\r"
+        "Buck: ...He took it.\r",
+        "HEATRAN has been defending this\n",
+        "mountain since before both of us\f",
+        "were born...\r",
+        "And I let some lab rat walk off with\n",
+        "the mountain’s heart in his coat."
       ]
     },
     {
-      "id": "StarkMountainRoom3_Text_ExitThisEnvironment",
+      "id": "StarkMountainRoom3_Text_BuckTeleportOut",
       "en_US": [
-        "Looker: {STRVAR_1 3, 0, 0}!\r",
-        "And you, unfamiliar boy!\n",
-        "I wish to say something.\r",
-        "First, it is too hot!\n",
-        "Let us exit this environment!\r"
+        "Buck: I can’t stay in here.\n",
+        "Not with it this quiet.\r",
+        "Hold onto me, {STRVAR_1 3, 0, 0}.\n",
+        "I’ll get us out."
+      ]
+    },
+    {
+      "id": "StarkMountainRoom3_Text_CharonNotWorthIt",
+      "en_US": [
+        "Charon: One Pokémon?\r",
+        "I am not going to waste a battle on\n",
+        "that. Come back when you are armed.\r"
       ]
     },
     {

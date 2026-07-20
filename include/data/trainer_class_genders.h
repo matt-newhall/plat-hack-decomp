@@ -114,5 +114,6 @@ static const u8 sTrainerClassGender[] = {
     [TRAINER_CLASS_ROCKET_GRUNT_F]          = GENDER_FEMALE,
     [TRAINER_CLASS_LEADER_FALKNER]          = GENDER_MALE,
     [TRAINER_CLASS_LEADER_WHITNEY]          = GENDER_FEMALE,
+    [TRAINER_CLASS_COMMANDER_CHARON]        = GENDER_MALE,
 };
 // clang-format on

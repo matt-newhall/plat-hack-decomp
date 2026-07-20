@@ -123,6 +123,9 @@ PokemonLeagueHallOfFame_Movement_CynthiaFaceMachine:
 PokemonLeagueHallOfFame_SetHallOfFameVictoryFlagsAndVars:
     ClearFlag FLAG_HIDE_DAY_CARE_GYM_GUIDE
     ClearFlag FLAG_ALT_MUSIC_CHAMPION_ROOM
+    SetFlag FLAG_HALL_OF_FAME_ENTERED
+    ClearFlag FLAG_HIDE_SURVIVAL_AREA_RIVAL
+    ClearFlag FLAG_HIDE_BATTLEGROUND_BUCK
     CallIfUnset FLAG_CAUGHT_DIALGA, PokemonLeagueHallOfFame_ResetSpearPillarDialgaState
     CallIfUnset FLAG_CAUGHT_PALKIA, PokemonLeagueHallOfFame_ResetSpearPillarPalkiaState
     CallIfUnset FLAG_CAUGHT_HEATRAN, PokemonLeagueHallOfFame_TryShowStarkMountainHeatran

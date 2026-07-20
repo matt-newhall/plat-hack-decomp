@@ -15,15 +15,15 @@ PokemonLeagueBerthaRoom_Bertha:
     PlayTrainerEncounterBGM TRAINER_ELITE_FOUR_BERTHA
     Message PokemonLeagueBerthaRoom_Text_BerthaIntro
     CloseMessage
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueBerthaRoom_StartBerthaBattle
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueBerthaRoom_StartBerthaRematchBattle
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueBerthaRoom_StartBerthaBattle
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueBerthaRoom_StartBerthaRematchBattle
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, PokemonLeagueBerthaRoom_BlackOut
     SetFlag FLAG_DEFEATED_BERTHA
     PlaySE SEQ_SE_DP_KI_GASYAN
     RemoveObject LOCALID_EXIT_DOOR
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueBerthaRoom_CreateJournalEventDefeatedBertha
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueBerthaRoom_CreateJournalEventDefeatedRematchBertha
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueBerthaRoom_CreateJournalEventDefeatedBertha
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueBerthaRoom_CreateJournalEventDefeatedRematchBertha
     Message PokemonLeagueBerthaRoom_Text_BerthaDefeat
     WaitButton
     CloseMessage

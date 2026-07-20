@@ -266,6 +266,7 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
     case TRAINER_CLASS_COMMANDER_MARS:
     case TRAINER_CLASS_COMMANDER_JUPITER:
     case TRAINER_CLASS_COMMANDER_SATURN:
+    case TRAINER_CLASS_COMMANDER_CHARON:
         result = ENCEFF_GALACTIC_CMDR;
         break;
     case TRAINER_CLASS_GALACTIC_GRUNT_MALE:

@@ -327,7 +327,7 @@ GameCorner_Looker:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, GameCorner_Looker_PostStarkMountain
+    GoToIfSet FLAG_HALL_OF_FAME_ENTERED, GameCorner_Looker_PostStarkMountain
     Message GameCorner_Text_Looker
     GoTo GameCorner_Looker_End
     End

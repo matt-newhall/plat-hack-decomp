@@ -14,18 +14,19 @@
       "id": "StarkMountainOutside_Text_CanHeReplaceCyrus",
       "en_US": [
         "Grunt 2: Yeah, but...\n",
-        "Can that old guy really take over?\f",
-        "Can he replace Master Cyrus?\r"
+        "All this just for a bit of heat?\r",
+        "Aren’t the Veilstone generators\n",
+        "enough for Master Cyrus?\r"
       ]
     },
     {
       "id": "StarkMountainOutside_Text_GoodTimeToBeDone",
       "en_US": [
-        "Grunt 1: Yeah, I hear you...\r",
-        "That elder Charon is a Commander,\n",
-        "but he can’t replace Master Cyrus.\r",
-        "...Maybe this is a good time for me to\n",
-        "be done with this Team Galactic thing...\r"
+        "Grunt 1: Not even close.\r",
+        "Commander Charon says this mountain\n",
+        "burns hotter than anytthing we built.\r",
+        "Master Cyrus needs that power... and\n",
+        "I’m not about to tell him no."
       ]
     },
     {
@@ -97,15 +98,20 @@
     {
       "id": "StarkMountainOutside_Text_FarewellMyFriend",
       "en_US": [
-        "Looker: I, also, will take my leave.\r",
-        "“The more wonderful the meeting, the\n",
-        "sadder the parting.”\r",
-        "That is a quote I have heard many years\n",
-        "ago in a foreign land.\r",
-        "Its meaning...\n",
-        "I understand it better now.\r",
-        "Farewell, {STRVAR_1 3, 0, 0}, my friend!\n",
-        "Long may you cherish Pokémon!\r"
+        "Buck: Hey.\n",
+        "Everything may not have gone our way.\r",
+        "But I want to thank you for helping\n",
+        "rid this place of Team Galactic.\r",
+        "Being able to use the power of the\n",
+        "mountain, HEATRAN...\r",
+        "{STRVAR_1 3, 0, 0}, you need to put a\n",
+        "stop to whatever they’re planning.\r",
+        "Don’t count me out though! The Magma\n",
+        "Stone is sacred, and I’ll stop at\f",
+        "nothing to return it here and restore\f",
+        "Stark Mountain to how it should be.\r",
+        "I’m sure we’ll meet again\n",
+        "soon, {STRVAR_1 3, 0, 0}."
       ]
     },
     {

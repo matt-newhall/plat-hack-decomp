@@ -11,7 +11,7 @@
 CelesticTownCave_Painting:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    GoToIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, CelesticTownCave_PaintingCynthia
+    GoToIfSet FLAG_HALL_OF_FAME_ENTERED, CelesticTownCave_PaintingCynthia
     GoTo CelesticTownCave_ExaminePainting
     End
 
