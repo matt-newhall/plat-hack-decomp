@@ -223,6 +223,41 @@
     {
       "id": "ResortArea_Text_SignVilla",
       "en_US": "A Somewhat Impressive Villa"
+    },
+    {
+      "id": "ResortArea_Text_CaitlinTalk",
+      "en_US": [
+        "..."
+      ]
+    },
+    {
+      "id": "ResortArea_Text_DarachTalk",
+      "en_US": [
+        "Hiiiii\n"
+      ]
+    },
+    {
+      "id": "ResortArea_Text_DefeatedDarach",
+      "en_US": [
+        "You beat me epic nice\n",
+        "Ok here is Lapras"
+      ]
+    },
+    {
+      "id": "ResortArea_Text_AlreadyBeatenDarach",
+      "en_US": [
+        "I get it u won"
+      ]
+    },
+    {
+      "id": "ResortArea_Text_BlockResortMansion",
+      "en_US": [
+        "Hey, this is Ms. Caitlin’s\n",
+        "mansion here.\r",
+        "She’s currently in the process\n",
+        "of selling this place as she’s\f",
+        "moving to Unova soon."
+      ]
     }
   ]
 }

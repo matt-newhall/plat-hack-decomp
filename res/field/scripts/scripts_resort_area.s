@@ -19,9 +19,13 @@
     ScriptEntry ResortArea_OnTransition
     ScriptEntry ResortArea_SignVilla
     ScriptEntry ResortArea_DrifloonInteract
+    ScriptEntry ResortArea_DarachInteract
+    ScriptEntry ResortArea_CaitlinInteract
+    ScriptEntry ResortArea_SchoolKidM
     ScriptEntryEnd
 
 ResortArea_OnTransition:
+    CallIfEq VAR_RESORT_AREA_STATE, 1, ResortArea_MoveSchoolKidMToVilla
     SetFlag FLAG_HIDE_RESORT_AREA_PROF_ROWAN
     SetFlag FLAG_HIDE_RESORT_AREA_ROARK
     SetFlag FLAG_HIDE_RESORT_AREA_GARDENIA
@@ -29,6 +33,7 @@ ResortArea_OnTransition:
     SetFlag FLAG_HIDE_RESORT_AREA_BYRON
     GoToIfEq VAR_RESORT_VILLA_VISITOR, VILLA_VISITOR_NONE, ResortArea_DontShowVisitor
     GoToIfEq VAR_RESORT_AREA_STATE, 0, ResortArea_DontShowVisitor
+    GoToIfEq VAR_RESORT_AREA_STATE, 1, ResortArea_DontShowVisitor
     GoToIfSet FLAG_VILLA_VISITOR_INSIDE, ResortArea_DontShowVisitor
     CallIfEq VAR_RESORT_VILLA_VISITOR, VILLA_VISITOR_PROF_ROWAN, ResortArea_ShowProfRowan
     CallIfEq VAR_RESORT_VILLA_VISITOR, VILLA_VISITOR_ROARK, ResortArea_ShowRoark
@@ -38,6 +43,20 @@ ResortArea_OnTransition:
     End
 
 ResortArea_DontShowVisitor:
+    End
+
+ResortArea_MoveSchoolKidMToVilla:
+    SetObjectEventPos LOCALID_SCHOOL_KID_M, 816, 473
+    SetObjectEventDir LOCALID_SCHOOL_KID_M, DIR_WEST
+    SetObjectEventMovementType LOCALID_SCHOOL_KID_M, MOVEMENT_TYPE_LOOK_WEST
+    Return
+
+ResortArea_SchoolKidM:
+    GoToIfNe VAR_RESORT_AREA_STATE, 0, ResortArea_SchoolKidMSayNothing
+    NPCMessage ResortArea_Text_BlockResortMansion
+    End
+
+ResortArea_SchoolKidMSayNothing:
     End
 
 ResortArea_ShowProfRowan:
@@ -132,7 +151,7 @@ ResortArea_TriggerSchoolKidM:
     WaitForAnimation ANIMATION_TAG_DOOR_1
     UnloadAnimation ANIMATION_TAG_DOOR_1
     RemoveObject LOCALID_SCHOOL_KID_M
-    SetVar VAR_RESORT_AREA_STATE, 1
+    SetVar VAR_RESORT_AREA_STATE, 2
     SetVar VAR_RESORT_VILLA_VISITOR, VILLA_VISITOR_NONE
     FadeScreenOut
     WaitFadeScreen
@@ -414,8 +433,6 @@ ResortArea_SignVilla:
     ShowLandmarkSign ResortArea_Text_SignVilla
     End
 
-    .balign 4, 0
-
 ResortArea_DrifloonInteract:
     PlaySE SEQ_SE_CONFIRM
     LockAll
@@ -423,3 +440,50 @@ ResortArea_DrifloonInteract:
     Common_CallDrifloon
     ReleaseAll
     End
+
+ResortArea_DarachInteract:
+    LockAll
+    FacePlayer
+    GoToIfUnset FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA, ResortArea_DarachUnfought
+    Message ResortArea_Text_AlreadyBeatenDarach
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+ResortArea_DarachUnfought:
+    Message ResortArea_Text_DarachTalk
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_CASTLE_VALET_DARACH_RESORT_AREA
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, ResortArea_BlackOut
+    Message ResortArea_Text_DefeatedDarach
+    WaitButton
+    CloseMessage
+    SetFlag FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA
+    SetFlag FLAG_SURF_UNLOCKED
+    GetTrainerCardLevel VAR_RESULT
+    ReleaseAll
+    End
+
+ResortArea_BlackOut:
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+ResortArea_CaitlinInteract:
+    LockAll
+    FacePlayer
+    Message ResortArea_Text_CaitlinTalk
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_CAITLIN, ResortArea_Movement_CaitlinFaceWest
+    WaitMovement
+    ReleaseAll
+    End
+
+    .balign 4, 0
+ResortArea_Movement_CaitlinFaceWest:
+    FaceWest
+    EndMovement

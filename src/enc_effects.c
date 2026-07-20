@@ -63,6 +63,8 @@ enum EncEffectsPairID {
     ENCEFF_DOUBLE_WILD,
     ENCEFF_FRONTIER_BRAIN,
     ENCEFF_DOUBLE_LEADER,
+    ENCEFF_DOUBLE_FRONTIER_BRAIN,
+    ENCEFF_CASTLE_VALET,
 
     ENCEFF_NORMAL_TRAINER,
     ENCEFF_NORMAL_WILD,
@@ -108,6 +110,8 @@ static const EncEffectsPair sEncEffectsTable[ENCEFF_MAX] = {
     [ENCEFF_DOUBLE_WILD] = { ENCEFF_CUTIN_DOUBLE, SEQ_BATTLE_WILD_POKEMON },
     [ENCEFF_FRONTIER_BRAIN] = { ENCEFF_CUTIN_FRONTIER, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_DOUBLE_LEADER] = { ENCEFF_CUTIN_DOUBLE, SEQ_BATTLE_GYM_LEADER },
+    [ENCEFF_DOUBLE_FRONTIER_BRAIN] = { ENCEFF_CUTIN_FRONTIER, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_CASTLE_VALET] = { ENCEFF_CUTIN_CASTLE_VALET, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_NORMAL_TRAINER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_TRAINER },
     [ENCEFF_NORMAL_WILD] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_WILD_POKEMON },
     [ENCEFF_ROCKET] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_GS_VS_ROCKET },
@@ -140,6 +144,12 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
                 return trainerEffect;
             }
 
+            // Inside the Frontier, Darach is just another brain; the mugshot
+            // cut-in is reserved for his battles out in the field.
+            if (trainerEffect == ENCEFF_CASTLE_VALET) {
+                return ENCEFF_FRONTIER_BRAIN;
+            }
+
             if (battleType & BATTLE_TYPE_DOUBLES) {
                 return ENCEFF_DOUBLE_BATTLE;
             }
@@ -151,13 +161,20 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
             return trainerEffect;
         }
 
-        // There is a bug here that is never realized in as-released Platinum:
-        // When any single trainer with special encounter effects is challenged
-        // to a double battle, that trainer will lose all of those special
-        // encounter effects and be treated as any normal double battle.
+        // Trainers with special encounter effects otherwise lose all of those
+        // effects when challenged to a double battle outside of the Frontier;
+        // classes handled here keep their own effects instead.
         if (battleType & BATTLE_TYPE_DOUBLES) {
             if (trainerEffect == ENCEFF_LEADER_VOLKNER) {
                 return ENCEFF_DOUBLE_LEADER;
+            }
+
+            if (trainerEffect == ENCEFF_FRONTIER_BRAIN) {
+                return ENCEFF_DOUBLE_FRONTIER_BRAIN;
+            }
+
+            if (trainerEffect == ENCEFF_CASTLE_VALET) {
+                return trainerEffect;
             }
 
             return ENCEFF_DOUBLE_BATTLE;
@@ -282,8 +299,10 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
     case TRAINER_CLASS_HALL_MATRON:
     case TRAINER_CLASS_FACTORY_HEAD:
     case TRAINER_CLASS_ARCADE_STAR:
-    case TRAINER_CLASS_CASTLE_VALET:
         result = ENCEFF_FRONTIER_BRAIN;
+        break;
+    case TRAINER_CLASS_CASTLE_VALET:
+        result = ENCEFF_CASTLE_VALET;
         break;
     case TRAINER_CLASS_LEADER_FALKNER:
         result = ENCEFF_LEADER_FALKNER;

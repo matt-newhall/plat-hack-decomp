@@ -148,7 +148,9 @@ static const SysTaskFunc sEncounterEffectTaskFuncs[] = {
     EncounterEffect_GalacticBoss,
 
     EncounterEffect_Frontier,
-    EncounterEffect_Double
+    EncounterEffect_Double,
+
+    EncounterEffect_CastleValetDarach
 };
 
 static const u8 Unk_ov5_021F9988[8] = {
@@ -763,19 +765,20 @@ void ov5_021DE5A4(UnkStruct_ov5_021DE47C *param0, UnkStruct_ov5_021DE5A4 *param1
     }
 }
 
-void EncounterEffect_BlendTrainerSpritePltt(Sprite *mugshotSprite, enum HeapID heapID, enum TrainerClass trainerClass, u8 fraction, u16 target)
+void EncounterEffect_BlendTrainerSpritePltt(Sprite *mugshotSprite, enum HeapID heapID, enum TrainerClass trainerClass, u8 fraction, u16 target, u8 paletteCount)
 {
     TrainerClassGraphicIndex classIndex;
     NNSG2dPaletteData *paletteData;
     void *nclrBuffer;
     u16 *objPltt;
+    u32 plttSize = PALETTE_SIZE_BYTES * paletteCount;
 
     SpriteSystem_SetTrainerClassGraphicsIndex(trainerClass, FACE_FRONT, &classIndex);
-    objPltt = Heap_Alloc(heapID, PALETTE_SIZE_BYTES);
+    objPltt = Heap_Alloc(heapID, plttSize);
     nclrBuffer = Graphics_GetPlttData(classIndex.narcID, classIndex.palette, &paletteData, heapID);
-    BlendPalette(paletteData->pRawData, objPltt, SLOTS_PER_PALETTE, fraction, target);
+    BlendPalette(paletteData->pRawData, objPltt, SLOTS_PER_PALETTE * paletteCount, fraction, target);
 
-    ov5_021DE67C(mugshotSprite, objPltt, PALETTE_SIZE_BYTES);
+    ov5_021DE67C(mugshotSprite, objPltt, plttSize);
 
     Heap_Free(objPltt);
     Heap_Free(nclrBuffer);

@@ -1,0 +1,52 @@
+{
+    "name": "Darach",
+    "class": "TRAINER_CLASS_CASTLE_VALET",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": true,
+    "party": [
+        {
+            "species": "SPECIES_LAPRAS",
+            "form": 0,
+            "level": 60,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_LUCARIO",
+            "form": 0,
+            "level": 60,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_PRE_BATTLE",
+            "garbage": 29
+        },
+        {
+            "type": "TRMSG_WIN",
+            "en_US": [
+                "Ah, a most valiant effort.\r",
+                "Though I was lucky enough to win this\n",
+                "time, the next time...\r"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Your skills are superlative as ever!\n",
+                "My admiration knows no bounds.\r"
+            ]
+        }
+    ]
+}

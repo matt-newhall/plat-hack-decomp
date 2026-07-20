@@ -2590,7 +2590,10 @@ typedef struct GymLeaderEncounterParam {
     fx32 endX;
     u32 trainerID;
     u16 trainerClass;
-    u16 unused; // this was likely meant to be a flip flag
+    // Vanilla always sets this to 1 and never reads it; it now carries the number
+    // of 16-colour palettes the mugshot needs. Darach's is a two-palette sprite
+    // because Caitlin shares it, and hers is the second.
+    u16 mugshotPlttCount;
     // The rest are NARC indices
     u8 mugshotPlttIdx;
     u8 mugshotTileIdx;
@@ -2604,12 +2607,12 @@ typedef struct GymLeaderEncounterParam {
 
 #define GYM_LEADER(NAME) (TRAINER_CLASS_LEADER_##NAME - TRAINER_CLASS_LEADER_ROARK)
 
-static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
+static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
     {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_ROARK,
         .trainerClass = TRAINER_CLASS_LEADER_ROARK,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_roark_mugshot_NCLR,
         .mugshotTileIdx = leader_roark_mugshot_NCGR,
         .mugshotCellIdx = leader_roark_mugshot_cell_NCER,
@@ -2623,7 +2626,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_GARDENIA,
         .trainerClass = TRAINER_CLASS_LEADER_GARDENIA,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_gardenia_mugshot_NCLR,
         .mugshotTileIdx = leader_gardenia_mugshot_NCGR,
         .mugshotCellIdx = leader_gardenia_mugshot_cell_NCER,
@@ -2637,7 +2640,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_WAKE,
         .trainerClass = TRAINER_CLASS_LEADER_WAKE,
-        .unused = 0,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_wake_mugshot_NCLR,
         .mugshotTileIdx = leader_wake_mugshot_NCGR,
         .mugshotCellIdx = leader_wake_mugshot_cell_NCER,
@@ -2651,7 +2654,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_MAYLENE,
         .trainerClass = TRAINER_CLASS_LEADER_MAYLENE,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_maylene_mugshot_NCLR,
         .mugshotTileIdx = leader_maylene_mugshot_NCGR,
         .mugshotCellIdx = leader_maylene_mugshot_cell_NCER,
@@ -2665,7 +2668,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_FANTINA,
         .trainerClass = TRAINER_CLASS_LEADER_FANTINA,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_fantina_mugshot_NCLR,
         .mugshotTileIdx = leader_fantina_mugshot_NCGR,
         .mugshotCellIdx = leader_fantina_mugshot_cell_NCER,
@@ -2679,7 +2682,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_CANDICE,
         .trainerClass = TRAINER_CLASS_LEADER_CANDICE,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_candice_mugshot_NCLR,
         .mugshotTileIdx = leader_candice_mugshot_NCGR,
         .mugshotCellIdx = leader_candice_mugshot_cell_NCER,
@@ -2693,7 +2696,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_BYRON,
         .trainerClass = TRAINER_CLASS_LEADER_BYRON,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_byron_mugshot_NCLR,
         .mugshotTileIdx = leader_byron_mugshot_NCGR,
         .mugshotCellIdx = leader_byron_mugshot_cell_NCER,
@@ -2707,7 +2710,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_VOLKNER,
         .trainerClass = TRAINER_CLASS_LEADER_VOLKNER,
-        .unused = 1,
+        .mugshotPlttCount = 1,
         .mugshotPlttIdx = leader_volkner_mugshot_NCLR,
         .mugshotTileIdx = leader_volkner_mugshot_NCGR,
         .mugshotCellIdx = leader_volkner_mugshot_cell_NCER,
@@ -2715,6 +2718,20 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[8] = {
         .bannerPlttIdx = leader_volkner_banner_NCLR,
         .bannerTileIdx = leader_volkner_banner_NCGR,
         .bannerTilemapIdx = leader_volkner_banner_NSCR,
+        .padding = 0,
+    },
+    {
+        .endX = 214 * FX32_ONE,
+        .trainerID = TRAINER_CASTLE_VALET_DARACH_RESORT_AREA,
+        .trainerClass = TRAINER_CLASS_CASTLE_VALET,
+        .mugshotPlttCount = 2,
+        .mugshotPlttIdx = castle_valet_mugshot_NCLR,
+        .mugshotTileIdx = castle_valet_field_mugshot_NCGR,
+        .mugshotCellIdx = castle_valet_field_mugshot_cell_NCER,
+        .mugshotAnimIdx = castle_valet_mugshot_anim_NANR,
+        .bannerPlttIdx = castle_valet_field_banner_NCLR,
+        .bannerTileIdx = castle_valet_field_banner_NCGR,
+        .bannerTilemapIdx = castle_valet_field_banner_NSCR,
         .padding = 0,
     },
 };
@@ -2921,7 +2938,7 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
         EncounterEffect_InitSpriteCollection(&leaderEncEffect->unk_44, 8, 3);
 
         ov5_021DE4CC(
-            encEffect->narc, &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[0], param->mugshotPlttIdx, 1, param->mugshotTileIdx, param->mugshotCellIdx, param->mugshotAnimIdx, 600000);
+            encEffect->narc, &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[0], param->mugshotPlttIdx, param->mugshotPlttCount, param->mugshotTileIdx, param->mugshotCellIdx, param->mugshotAnimIdx, 600000);
 
         ov5_021DE4CC(
             encEffect->narc, &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[1], 51, 1, 52, 53, 54, 600000 + 1);
@@ -2931,7 +2948,7 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
         Sprite_SetDrawFlag(leaderEncEffect->mugshotSprite, FALSE);
         ov5_021E5128(&leaderEncEffect->unk_250, &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[1], FX32_CONST(72), FX32_CONST(74), heapID);
 
-        EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 14, GX_RGB(0, 0, 0));
+        EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 14, GX_RGB(0, 0, 0), param->mugshotPlttCount);
 
         leaderEncEffect->unk_40 = ov5_021DECEC();
 
@@ -3037,7 +3054,7 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
         ov5_021DEF8C(&leaderEncEffect->unk_18.currentValue);
 
         if (v1 == 1) {
-            EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 0, GX_RGB(0, 0, 0));
+            EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 0, GX_RGB(0, 0, 0), param->mugshotPlttCount);
 
             BrightnessController_SetScreenBrightness(-14, GX_BLEND_PLANEMASK_BG0 | GX_BLEND_PLANEMASK_BD, BRIGHTNESS_MAIN_SCREEN);
 
@@ -3205,6 +3222,16 @@ void EncounterEffect_LeaderVolkner(SysTask *task, void *param)
     }
 }
 
+void EncounterEffect_CastleValetDarach(SysTask *task, void *param)
+{
+    EncounterEffect *encEffect = param;
+    BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[8]);
+
+    if (done == TRUE) {
+        EncounterEffect_Finish(encEffect, task);
+    }
+}
+
 static u32 FieldSystem_GetTrainerGender(FieldSystem *fieldSystem)
 {
     return TrainerInfo_Gender(SaveData_GetTrainerInfo(fieldSystem->saveData));
@@ -3274,12 +3301,12 @@ static BOOL EncounterEffect_EliteFourChampion(EncounterEffect *encEffect, enum H
         }
 
         if (v0->unk_368) {
-            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[0], heapID, 0, 14, GX_RGB(0, 0, 0));
+            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[0], heapID, 0, 14, GX_RGB(0, 0, 0), 1);
         } else {
-            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[0], heapID, 1, 14, GX_RGB(0, 0, 0));
+            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[0], heapID, 1, 14, GX_RGB(0, 0, 0), 1);
         }
 
-        EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[1], heapID, param->trainerClass, 14, GX_RGB(0, 0, 0));
+        EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[1], heapID, param->trainerClass, 14, GX_RGB(0, 0, 0), 1);
 
         GXLayers_EngineAToggleLayers(GX_PLANEMASK_OBJ, 1);
 
@@ -3418,9 +3445,9 @@ static BOOL EncounterEffect_EliteFourChampion(EncounterEffect *encEffect, enum H
         ov5_021DEF8C(&v0->unk_48.currentValue);
 
         if (v1 == 1) {
-            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[0], heapID, v0->unk_368, 0, GX_RGB(0, 0, 0));
+            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[0], heapID, v0->unk_368, 0, GX_RGB(0, 0, 0), 1);
 
-            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[1], heapID, param->trainerClass, 0, GX_RGB(0, 0, 0));
+            EncounterEffect_BlendTrainerSpritePltt(v0->unk_2CC[1], heapID, param->trainerClass, 0, GX_RGB(0, 0, 0), 1);
 
             Sprite_SetAnimateFlag(v0->unk_2CC[2], 1);
             Sprite_SetAnimSpeed(v0->unk_2CC[2], FX32_ONE * 2);

@@ -226,16 +226,16 @@
         {
             "id": "LOCALID_SCHOOL_KID_M",
             "graphics_id": "OBJ_EVENT_GFX_SCHOOL_KID_M",
-            "movement_type": "MOVEMENT_TYPE_LOOK_WEST",
+            "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_HIDE_RESORT_AREA_SCHOOL_KID_M",
-            "script": 0,
-            "initial_dir": 2,
+            "script": 19,
+            "initial_dir": 1,
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 816,
-            "z": 473,
+            "x": 822,
+            "z": 470,
             "y": 0
         },
         {
@@ -327,6 +327,51 @@
             "x": 800,
             "z": 473,
             "y": 0
+        },
+        {
+            "id": "LOCALID_DARACH",
+            "graphics_id": "OBJ_EVENT_GFX_DARACH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_DARACH_CAITLYN_RESORT_AREA",
+            "script": 17,
+            "initial_dir": 2,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 824,
+            "z": 473,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_CAITLIN",
+            "graphics_id": "OBJ_EVENT_GFX_CAITLIN",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_DARACH_CAITLYN_RESORT_AREA",
+            "script": 18,
+            "initial_dir": 2,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 824,
+            "z": 474,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_LAPRAS",
+            "graphics_id": "OBJ_EVENT_GFX_PKMN_LAPRAS",
+            "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH_WEST_AND_EAST",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_DARACH_CAITLYN_RESORT_AREA",
+            "script": 0,
+            "initial_dir": 2,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 826,
+            "z": 474,
+            "y": 0
         }
     ],
     "warp_events": [
@@ -364,7 +409,7 @@
             "width": 1,
             "length": 3,
             "var": "VAR_RESORT_AREA_STATE",
-            "value": 0
+            "value": 1
         }
     ]
 }

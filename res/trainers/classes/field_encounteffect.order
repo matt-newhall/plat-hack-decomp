@@ -153,3 +153,8 @@ player_female/mugshot.NCLR
 player_female/mugshot.NCGR
 player_female/mugshot_cell.NCER
 player_female/mugshot_anim.NANR
+castle_valet/field_mugshot.NCGR
+castle_valet/field_mugshot_cell.NCER
+castle_valet/field_banner.NCLR
+castle_valet/field_banner.NCGR
+castle_valet/field_banner.NSCR
