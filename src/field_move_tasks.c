@@ -375,6 +375,12 @@ static enum FieldMoveError FieldMoves_CheckFly(const FieldMoveContext *fieldMove
         return FIELD_MOVE_ERROR_LOCATION;
     }
 
+    // hack to disable Fly after beating Darach and before beating Palmer to force Route 230
+    if (FieldSystem_CheckFlag(fieldMoveContext->fieldSystem, FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA) == TRUE
+        && FieldSystem_CheckFlag(fieldMoveContext->fieldSystem, FLAG_BEATEN_PALMER_FIGHT_AREA_QUEST) == FALSE) {
+        return FIELD_MOVE_ERROR_LOCATION;
+    }
+
     if (PlayerTravellingWithPartner(fieldMoveContext) == TRUE) {
         return FIELD_MOVE_ERROR_PARTNER;
     }

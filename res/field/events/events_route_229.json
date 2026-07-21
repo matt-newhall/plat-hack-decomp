@@ -315,8 +315,34 @@
             "x": 805,
             "z": 451,
             "y": 0
+        },
+        {
+            "id": "LOCALID_BLOCKER",
+            "graphics_id": "OBJ_EVENT_GFX_ACE_TRAINER_F",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_ROUTE_229_BLOCK_DESERT",
+            "script": 3,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 792,
+            "z": 426,
+            "y": 0
         }
     ],
     "warp_events": [],
-    "coord_events": []
+    "coord_events": [
+        {
+            "script": 4,
+            "x": 792,
+            "z": 422,
+            "y": 0,
+            "width": 1,
+            "length": 4,
+            "var": "VAR_FIGHT_AREA_STATE",
+            "value": 2
+        }
+    ]
 }

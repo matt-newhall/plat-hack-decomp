@@ -463,6 +463,8 @@ ResortArea_DarachUnfought:
     CloseMessage
     SetFlag FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA
     SetFlag FLAG_SURF_UNLOCKED
+    ClearFlag FLAG_HIDE_ROUTE_229_BLOCK_DESERT
+    SetBlackOutWarpId 18
     GetTrainerCardLevel VAR_RESULT
     ReleaseAll
     End

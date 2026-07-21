@@ -332,6 +332,7 @@ BattleTowerBattleRoom_PalmerQuest:
     SetVar VAR_PALMER_FIGHT_AREA_EVENT, 2
     SetFlag FLAG_BEATEN_PALMER_FIGHT_AREA_QUEST
     ClearFlag FLAG_HIDE_ISLAND_FLYABLE_DRIFLOONS
+    SetFlag FLAG_HIDE_ROUTE_229_BLOCK_DESERT
     RestoreCamera
     FadeScreenOut
     WaitFadeScreen
