@@ -2610,7 +2610,7 @@ typedef struct GymLeaderEncounterParam {
 
 #define GYM_LEADER(NAME) (TRAINER_CLASS_LEADER_##NAME - TRAINER_CLASS_LEADER_ROARK)
 
-static const GymLeaderEncounterParam sGymLeaderEncounterParams[10] = {
+static const GymLeaderEncounterParam sGymLeaderEncounterParams[11] = {
     {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_ROARK,
@@ -2746,11 +2746,23 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[10] = {
         .mugshotTileIdx = tower_tycoon_field_mugshot_NCGR,
         .mugshotCellIdx = tower_tycoon_field_mugshot_cell_NCER,
         .mugshotAnimIdx = tower_tycoon_mugshot_anim_NANR,
-        // Palmer's authentic Battle Tower VS banner (green chevron shimmer),
-        // reused directly from the frontier assets rather than a recolour.
         .bannerPlttIdx = tower_tycoon_banner_NCLR,
         .bannerTileIdx = tower_tycoon_banner_NCGR,
         .bannerTilemapIdx = tower_tycoon_banner_NSCR,
+        .useOwnMugshotPltt = 1,
+    },
+    {
+        .endX = 214 * FX32_ONE,
+        .trainerID = TRAINER_ARCADE_STAR_DAHLIA_ROUTE_225,
+        .trainerClass = TRAINER_CLASS_ARCADE_STAR,
+        .mugshotPlttCount = 1,
+        .mugshotPlttIdx = arcade_star_mugshot_NCLR,
+        .mugshotTileIdx = arcade_star_field_mugshot_NCGR,
+        .mugshotCellIdx = arcade_star_field_mugshot_cell_NCER,
+        .mugshotAnimIdx = arcade_star_mugshot_anim_NANR,
+        .bannerPlttIdx = arcade_star_banner_NCLR,
+        .bannerTileIdx = arcade_star_banner_NCGR,
+        .bannerTilemapIdx = arcade_star_banner_NSCR,
         .useOwnMugshotPltt = 1,
     },
 };
@@ -3266,6 +3278,16 @@ void EncounterEffect_TowerTycoonPalmer(SysTask *task, void *param)
 {
     EncounterEffect *encEffect = param;
     BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[9]);
+
+    if (done == TRUE) {
+        EncounterEffect_Finish(encEffect, task);
+    }
+}
+
+void EncounterEffect_ArcadeStarDahlia(SysTask *task, void *param)
+{
+    EncounterEffect *encEffect = param;
+    BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[10]);
 
     if (done == TRUE) {
         EncounterEffect_Finish(encEffect, task);

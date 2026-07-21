@@ -14,6 +14,51 @@
         "Rt. 225\n",
         "Survival Area"
       ]
+    },
+    {
+      "id": "Route225_Text_DahliaChallenge",
+      "en_US": [
+        "Dahlia: Hey, hey! You’ve got the\n",
+        "look of a battler who lives for\f",
+        "the thrill!\r",
+        "I can’t just let you stroll on by.\n",
+        "Come on, let’s make this exciting!"
+      ]
+    },
+    {
+      "id": "Route225_Text_DahliaDefeated",
+      "en_US": [
+        "Dahlia: How fabulous of you!\r",
+        "Your love of Pokémon shone through,\n",
+        "and, in turn, your Pokémon believed\f",
+        "in you.\r",
+        "That is why you handled everything\n",
+        "thrown your way splendidly.\r",
+        "A most wonderful victory it was!\r",
+        "Here, take these... you earned ’em."
+      ]
+    },
+    {
+      "id": "Route225_Text_DahliaFarewell",
+      "en_US": [
+        "Dahlia: Keep chasing those thrilling\n",
+        "battles, challenger!\r",
+        "I’ll be letting the other Brains hear\n",
+        "of you, that’s be sure.\r",
+        "Maybe our paths will cross again.\r",
+        "Till then... stay sharp!"
+      ]
+    },
+    {
+      "id": "Route225_Text_DahliaNotReady",
+      "en_US": [
+        "Dahlia: Whoa there! A double battle\n",
+        "needs two Pokémon fit to fight,\f",
+        "you know?\r",
+        "Patch up your team! Then come find\n",
+        "me...\r",
+        "I’m not going anywhere!"
+      ]
     }
   ]
 }
