@@ -21,6 +21,7 @@
     ScriptEntry FightArea_DrifloonInteract
     ScriptEntry FightArea_Palmer
     ScriptEntry FightArea_TriggerPalmerBlockFrontier
+    ScriptEntry FightArea_PalmerFarewell
     ScriptEntryEnd
 
 FightArea_OnTransition:
@@ -351,6 +352,15 @@ FightArea_Sailor2:
     FacePlayer
     FacePlayer
     GetPlayerDir VAR_0x8004
+    GoToIfUnset FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA, FightArea_BasicSailorDialogue
+    GoToIfSet FLAG_BEATEN_PALMER_FIGHT_AREA_QUEST, FightArea_BasicSailorDialogue
+    Message FightArea_Text_SailorWhilePalmerActive
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+FightArea_BasicSailorDialogue:
     Message FightArea_Text_SailToSnowpointCity
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_YES, FightArea_SailToSnowpointCity
@@ -469,6 +479,30 @@ FightArea_Palmer:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    GoToIfUnset FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA, FightArea_DarachUnfought
+    Message FightArea_Text_PalmerPreBattle
+    WaitButton
+    CloseMessage
+    CheckHasTwoAliveMons VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, FightArea_PalmerNeedTwoMons
+    SetVar VAR_UNK_0x40D9, 0
+    SetVar VAR_PALMER_FIGHT_AREA_EVENT, 1
+    FadeScreenOut
+    WaitFadeScreen
+    Warp MAP_HEADER_BATTLE_TOWER_BATTLE_ROOM, 0, 4, 6, DIR_EAST
+    FadeScreenIn
+    WaitFadeScreen
+    ReleaseAll
+    End
+
+FightArea_PalmerNeedTwoMons:
+    Message FightArea_Text_PalmerNeedTwoMons
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+FightArea_DarachUnfought:
     Message FightArea_Text_FrontierIsOffLimits
     WaitButton
     ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
@@ -478,6 +512,7 @@ FightArea_Palmer:
     End
 
 FightArea_TriggerPalmerBlockFrontier:
+    GoToIfSet FLAG_BEATEN_PALMER_FIGHT_AREA_QUEST, FightArea_PalmerBlockLifted
     LockAll
     ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerNoticePlayer
     WaitMovement
@@ -489,6 +524,30 @@ FightArea_TriggerPalmerBlockFrontier:
     WaitMovement
     ReleaseAll
     End
+
+FightArea_PalmerBlockLifted:
+    End
+
+FightArea_PalmerFarewell:
+    LockAll
+    ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
+    WaitMovement
+    Message FightArea_Text_PalmerFarewell
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerEnterFrontier
+    WaitMovement
+    PlaySE SEQ_SE_DP_KAIDAN2
+    RemoveObject LOCALID_PALMER
+    SetFlag FLAG_HIDE_FIGHT_AREA_PALMER
+    SetVar VAR_PALMER_FIGHT_AREA_EVENT, 0
+    ReleaseAll
+    End
+
+    .balign 4, 0
+FightArea_Movement_PalmerEnterFrontier:
+    WalkNormalNorth
+    EndMovement
 
     .balign 4, 0
 FightArea_Movement_PalmerNoticePlayer:

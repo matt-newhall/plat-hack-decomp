@@ -65,6 +65,7 @@ enum EncEffectsPairID {
     ENCEFF_DOUBLE_LEADER,
     ENCEFF_DOUBLE_FRONTIER_BRAIN,
     ENCEFF_CASTLE_VALET,
+    ENCEFF_TOWER_TYCOON,
 
     ENCEFF_NORMAL_TRAINER,
     ENCEFF_NORMAL_WILD,
@@ -112,6 +113,7 @@ static const EncEffectsPair sEncEffectsTable[ENCEFF_MAX] = {
     [ENCEFF_DOUBLE_LEADER] = { ENCEFF_CUTIN_DOUBLE, SEQ_BATTLE_GYM_LEADER },
     [ENCEFF_DOUBLE_FRONTIER_BRAIN] = { ENCEFF_CUTIN_FRONTIER, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_CASTLE_VALET] = { ENCEFF_CUTIN_CASTLE_VALET, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_TOWER_TYCOON] = { ENCEFF_CUTIN_TOWER_TYCOON, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_NORMAL_TRAINER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_TRAINER },
     [ENCEFF_NORMAL_WILD] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_WILD_POKEMON },
     [ENCEFF_ROCKET] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_GS_VS_ROCKET },
@@ -144,9 +146,9 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
                 return trainerEffect;
             }
 
-            // Inside the Frontier, Darach is just another brain; the mugshot
-            // cut-in is reserved for his battles out in the field.
-            if (trainerEffect == ENCEFF_CASTLE_VALET) {
+            // janky exception to get brains in ROM hack not in the frontier
+            // to show their VS sprites and music correctly
+            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON) {
                 return ENCEFF_FRONTIER_BRAIN;
             }
 
@@ -161,19 +163,21 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
             return trainerEffect;
         }
 
-        // Trainers with special encounter effects otherwise lose all of those
-        // effects when challenged to a double battle outside of the Frontier;
-        // classes handled here keep their own effects instead.
+        // There is a bug here that is never realized in as-released Platinum:
+        // When any single trainer with special encounter effects is challenged
+        // to a double battle, that trainer will lose all of those special
+        // encounter effects and be treated as any normal double battle.
         if (battleType & BATTLE_TYPE_DOUBLES) {
             if (trainerEffect == ENCEFF_LEADER_VOLKNER) {
                 return ENCEFF_DOUBLE_LEADER;
             }
 
+            // here is our not-great sets of overrides for the above bug
             if (trainerEffect == ENCEFF_FRONTIER_BRAIN) {
                 return ENCEFF_DOUBLE_FRONTIER_BRAIN;
             }
 
-            if (trainerEffect == ENCEFF_CASTLE_VALET) {
+            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON) {
                 return trainerEffect;
             }
 
@@ -295,7 +299,6 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
     case TRAINER_CLASS_ROCKET_EXECUTIVE:
         result = ENCEFF_ROCKET;
         break;
-    case TRAINER_CLASS_TOWER_TYCOON:
     case TRAINER_CLASS_HALL_MATRON:
     case TRAINER_CLASS_FACTORY_HEAD:
     case TRAINER_CLASS_ARCADE_STAR:
@@ -303,6 +306,9 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
         break;
     case TRAINER_CLASS_CASTLE_VALET:
         result = ENCEFF_CASTLE_VALET;
+        break;
+    case TRAINER_CLASS_TOWER_TYCOON:
+        result = ENCEFF_TOWER_TYCOON;
         break;
     case TRAINER_CLASS_LEADER_FALKNER:
         result = ENCEFF_LEADER_FALKNER;

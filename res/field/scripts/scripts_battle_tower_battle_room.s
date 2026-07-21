@@ -9,6 +9,7 @@
     ScriptEntry _012C
     ScriptEntry _0058
     ScriptEntry _0037
+    ScriptEntry BattleTowerBattleRoom_PalmerQuest
     ScriptEntryEnd
 
 _0016:
@@ -20,12 +21,18 @@ _0035:
     End
 
 _0037:
+    GoToIfEq VAR_PALMER_FIGHT_AREA_EVENT, 1, BattleTowerBattleRoom_PalmerQuestOnResume
     HideObject LOCALID_PLAYER
     GoToIfEq VAR_UNK_0x40D9, 3, _004A
     End
 
 _004A:
     SetPosition 2, 5, 0, 6, DIR_EAST
+    End
+
+BattleTowerBattleRoom_PalmerQuestOnResume:
+    HideObject 0
+    HideObject 2
     End
 
 _0058:
@@ -299,6 +306,48 @@ _04CE:
     WaitMovement
     Return
 
+BattleTowerBattleRoom_PalmerQuest:
+    LockAll
+    AddFreeCamera 7, 6
+    ApplyFreeCameraMovement BattleTowerBattleRoom_Movement_CameraPanEast
+    WaitMovement
+    SetVar VAR_OBJ_GFX_ID_1, 169
+    ClearFlag FLAG_UNK_0x01CB
+    AddObject 1
+    ApplyMovement 1, _05A8
+    WaitMovement
+    Message BattleTowerBattleRoom_Text_PalmerQuestPreBattle
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, _0540
+    ApplyMovement 1, _0548
+    WaitMovement
+    StartTrainerBattle TRAINER_TOWER_TYCOON_PALMER_FIGHT_AREA
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, BattleTowerBattleRoom_PalmerQuestBlackOut
+    Message BattleTowerBattleRoom_Text_PalmerQuestPostBattle
+    WaitButton
+    CloseMessage
+    SetFlag FLAG_UNK_0x01CB
+    SetVar VAR_PALMER_FIGHT_AREA_EVENT, 2
+    SetFlag FLAG_BEATEN_PALMER_FIGHT_AREA_QUEST
+    ClearFlag FLAG_HIDE_ISLAND_FLYABLE_DRIFLOONS
+    RestoreCamera
+    FadeScreenOut
+    WaitFadeScreen
+    Warp MAP_HEADER_FIGHT_AREA, 0, 655, 425, DIR_NORTH
+    FadeScreenIn
+    WaitFadeScreen
+    ReleaseAll
+    End
+
+BattleTowerBattleRoom_PalmerQuestBlackOut:
+    SetFlag FLAG_UNK_0x01CB
+    SetVar VAR_PALMER_FIGHT_AREA_EVENT, 0
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
 BattleTowerBattleRoom_UnusedMovement:
     Delay4
     FaceWest
@@ -387,4 +436,9 @@ _05A8:
     FaceSouth
     WalkSlowSouth 3
     FaceWest
+    EndMovement
+
+    .balign 4, 0
+BattleTowerBattleRoom_Movement_CameraPanEast:
+    WalkNormalEast 3
     EndMovement

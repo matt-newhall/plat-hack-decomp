@@ -208,6 +208,27 @@
         "Saving...\n",
         "Don’t turn off the power."
       ]
+    },
+    {
+      "id": "BattleTowerBattleRoom_Text_PalmerQuestPreBattle",
+      "en_US": [
+        "Palmer: This is the Battle Tower.\n",
+        "It’s where I do all my best work.\r",
+        "No rules, no records, no ranks --\n",
+        "just you and me.\r",
+        "Show me what you’ve got!"
+      ]
+    },
+    {
+      "id": "BattleTowerBattleRoom_Text_PalmerQuestPostBattle",
+      "en_US": [
+        "Palmer: Ahaha! That was some\n",
+        "battle!\r",
+        "The Frontier’s open again, and the\n",
+        "Tower’s yours to challenge.\r",
+        "Come on, let’s head back to the\n",
+        "Fight Area."
+      ]
     }
   ]
 }

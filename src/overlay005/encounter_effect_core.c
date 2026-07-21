@@ -2602,12 +2602,15 @@ typedef struct GymLeaderEncounterParam {
     u8 bannerPlttIdx;
     u8 bannerTileIdx;
     u8 bannerTilemapIdx;
-    u8 padding;
+    // When set, the mugshot is blended with its own palette (mugshotPlttIdx) rather
+    // than the trainer class front-sprite palette. Required for Frontier Brains whose
+    // mugshot art is indexed to a palette that differs from the class palette.
+    u8 useOwnMugshotPltt;
 } GymLeaderEncounterParam;
 
 #define GYM_LEADER(NAME) (TRAINER_CLASS_LEADER_##NAME - TRAINER_CLASS_LEADER_ROARK)
 
-static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
+static const GymLeaderEncounterParam sGymLeaderEncounterParams[10] = {
     {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_ROARK,
@@ -2620,7 +2623,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_roark_banner_NCLR,
         .bannerTileIdx = leader_roark_banner_NCGR,
         .bannerTilemapIdx = leader_roark_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2634,7 +2637,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_gardenia_banner_NCLR,
         .bannerTileIdx = leader_gardenia_banner_NCGR,
         .bannerTilemapIdx = leader_gardenia_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2648,7 +2651,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_wake_banner_NCLR,
         .bannerTileIdx = leader_wake_banner_NCGR,
         .bannerTilemapIdx = leader_wake_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2662,7 +2665,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_maylene_banner_NCLR,
         .bannerTileIdx = leader_maylene_banner_NCGR,
         .bannerTilemapIdx = leader_maylene_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2676,7 +2679,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_fantina_banner_NCLR,
         .bannerTileIdx = leader_fantina_banner_NCGR,
         .bannerTilemapIdx = leader_fantina_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2690,7 +2693,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_candice_banner_NCLR,
         .bannerTileIdx = leader_candice_banner_NCGR,
         .bannerTilemapIdx = leader_candice_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2704,7 +2707,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_byron_banner_NCLR,
         .bannerTileIdx = leader_byron_banner_NCGR,
         .bannerTilemapIdx = leader_byron_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2718,7 +2721,7 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = leader_volkner_banner_NCLR,
         .bannerTileIdx = leader_volkner_banner_NCGR,
         .bannerTilemapIdx = leader_volkner_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
     },
     {
         .endX = 214 * FX32_ONE,
@@ -2732,7 +2735,23 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[9] = {
         .bannerPlttIdx = castle_valet_field_banner_NCLR,
         .bannerTileIdx = castle_valet_field_banner_NCGR,
         .bannerTilemapIdx = castle_valet_field_banner_NSCR,
-        .padding = 0,
+        .useOwnMugshotPltt = 0,
+    },
+    {
+        .endX = 214 * FX32_ONE,
+        .trainerID = TRAINER_TOWER_TYCOON_PALMER_FIGHT_AREA,
+        .trainerClass = TRAINER_CLASS_TOWER_TYCOON,
+        .mugshotPlttCount = 1,
+        .mugshotPlttIdx = tower_tycoon_mugshot_NCLR,
+        .mugshotTileIdx = tower_tycoon_field_mugshot_NCGR,
+        .mugshotCellIdx = tower_tycoon_field_mugshot_cell_NCER,
+        .mugshotAnimIdx = tower_tycoon_mugshot_anim_NANR,
+        // Palmer's authentic Battle Tower VS banner (green chevron shimmer),
+        // reused directly from the frontier assets rather than a recolour.
+        .bannerPlttIdx = tower_tycoon_banner_NCLR,
+        .bannerTileIdx = tower_tycoon_banner_NCGR,
+        .bannerTilemapIdx = tower_tycoon_banner_NSCR,
+        .useOwnMugshotPltt = 1,
     },
 };
 
@@ -2919,6 +2938,9 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
     int v5;
     int v6;
     String *trainerName;
+    // Frontier Brains use their own (taller, lower) banner, whose vertical centre
+    // matches the mugshot Y the real Tower cut-in uses (80); leaders sit at 66.
+    fx32 mugshotY = (param->useOwnMugshotPltt ? 80 : 66) * FX32_ONE;
 
     switch (encEffect->state) {
     case 0:
@@ -2944,11 +2966,15 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
             encEffect->narc, &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[1], 51, 1, 52, 53, 54, 600000 + 1);
 
         leaderEncEffect->mugshotSprite = ov5_021DE62C(
-            &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[0], 272 * FX32_ONE, 66 * FX32_ONE, 0, 0);
+            &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[0], 272 * FX32_ONE, mugshotY, 0, 0);
         Sprite_SetDrawFlag(leaderEncEffect->mugshotSprite, FALSE);
         ov5_021E5128(&leaderEncEffect->unk_250, &leaderEncEffect->unk_44, &leaderEncEffect->unk_1E4[1], FX32_CONST(72), FX32_CONST(74), heapID);
 
-        EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 14, GX_RGB(0, 0, 0), param->mugshotPlttCount);
+        if (param->useOwnMugshotPltt) {
+            EncounterEffect_BlendMugshotSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->mugshotPlttIdx, 14, GX_RGB(0, 0, 0), param->mugshotPlttCount);
+        } else {
+            EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 14, GX_RGB(0, 0, 0), param->mugshotPlttCount);
+        }
 
         leaderEncEffect->unk_40 = ov5_021DECEC();
 
@@ -3018,7 +3044,7 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
         Sprite_SetExplicitPriority(leaderEncEffect->mugshotSprite, 0);
 
         v3 = VecFx32_FromXYZ(
-            leaderEncEffect->unk_00.currentValue, 66 * FX32_ONE, 0);
+            leaderEncEffect->unk_00.currentValue, mugshotY, 0);
         Sprite_SetPosition(leaderEncEffect->mugshotSprite, &v3);
 
         encEffect->state++;
@@ -3028,7 +3054,7 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
 
         v1 = QuadraticInterpolationTaskFX32_Update(&leaderEncEffect->unk_00);
         v3 = VecFx32_FromXYZ(
-            leaderEncEffect->unk_00.currentValue, 66 * FX32_ONE, 0);
+            leaderEncEffect->unk_00.currentValue, mugshotY, 0);
         Sprite_SetPosition(leaderEncEffect->mugshotSprite, &v3);
 
         if (v1 == 1) {
@@ -3054,7 +3080,11 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
         ov5_021DEF8C(&leaderEncEffect->unk_18.currentValue);
 
         if (v1 == 1) {
-            EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 0, GX_RGB(0, 0, 0), param->mugshotPlttCount);
+            if (param->useOwnMugshotPltt) {
+                EncounterEffect_BlendMugshotSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->mugshotPlttIdx, 0, GX_RGB(0, 0, 0), param->mugshotPlttCount);
+            } else {
+                EncounterEffect_BlendTrainerSpritePltt(leaderEncEffect->mugshotSprite, heapID, param->trainerClass, 0, GX_RGB(0, 0, 0), param->mugshotPlttCount);
+            }
 
             BrightnessController_SetScreenBrightness(-14, GX_BLEND_PLANEMASK_BG0 | GX_BLEND_PLANEMASK_BD, BRIGHTNESS_MAIN_SCREEN);
 
@@ -3226,6 +3256,16 @@ void EncounterEffect_CastleValetDarach(SysTask *task, void *param)
 {
     EncounterEffect *encEffect = param;
     BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[8]);
+
+    if (done == TRUE) {
+        EncounterEffect_Finish(encEffect, task);
+    }
+}
+
+void EncounterEffect_TowerTycoonPalmer(SysTask *task, void *param)
+{
+    EncounterEffect *encEffect = param;
+    BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[9]);
 
     if (done == TRUE) {
         EncounterEffect_Finish(encEffect, task);

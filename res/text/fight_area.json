@@ -521,6 +521,47 @@
         "There’s no end to Pokémon.\n",
         "That’s what I’m saying, {STRVAR_1 3, 1, 0}."
       ]
+    },
+    {
+      "id": "FightArea_Text_PalmerFarewell",
+      "en_US": [
+        "Palmer: Hah! A battle worthy of the\n",
+        "Tower Tycoon. It was an honour.\r",
+        "You can Surf now, can’t you?\r",
+        "Then you should set your sights on\n",
+        "Canalave City. Go on, get out there!"
+      ]
+    },
+    {
+      "id": "FightArea_Text_PalmerPreBattle",
+      "en_US": [
+        "Palmer: Neat, you beat all of the\n",
+        "Frontier Brains!\r",
+        "That means you know who your final\n",
+        "challenge is, hm?\r",
+        "Let’s make this a really special fight.\r",
+        "We’ll head over to my prized facility\n",
+        "here at the Battle Frontier...\r",
+        "The Battle Tower!"
+      ]
+    },
+    {
+      "id": "FightArea_Text_SailorWhilePalmerActive",
+      "en_US": [
+        "What’s up? Seems like Palmer’s\n",
+        "waiting for ya.\r",
+        "See what he wants and then we\n",
+        "can set sail for Snowpoint City."
+      ]
+    },
+    {
+      "id": "FightArea_Text_PalmerNeedTwoMons",
+      "en_US": [
+        "Woah, looks like you only have\n",
+        "the one Pokémon currently.\r",
+        "Come on back when you have at least\n",
+        "two Pokémon raring to go."
+      ]
     }
   ]
 }

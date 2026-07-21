@@ -150,7 +150,8 @@ static const SysTaskFunc sEncounterEffectTaskFuncs[] = {
     EncounterEffect_Frontier,
     EncounterEffect_Double,
 
-    EncounterEffect_CastleValetDarach
+    EncounterEffect_CastleValetDarach,
+    EncounterEffect_TowerTycoonPalmer
 };
 
 static const u8 Unk_ov5_021F9988[8] = {
@@ -776,6 +777,27 @@ void EncounterEffect_BlendTrainerSpritePltt(Sprite *mugshotSprite, enum HeapID h
     SpriteSystem_SetTrainerClassGraphicsIndex(trainerClass, FACE_FRONT, &classIndex);
     objPltt = Heap_Alloc(heapID, plttSize);
     nclrBuffer = Graphics_GetPlttData(classIndex.narcID, classIndex.palette, &paletteData, heapID);
+    BlendPalette(paletteData->pRawData, objPltt, SLOTS_PER_PALETTE * paletteCount, fraction, target);
+
+    ov5_021DE67C(mugshotSprite, objPltt, plttSize);
+
+    Heap_Free(objPltt);
+    Heap_Free(nclrBuffer);
+}
+
+// As above, but blends the mugshot's own palette (loaded from the field encounter
+// NARC) rather than the trainer class front-sprite palette. Frontier Brain mugshots
+// are indexed to their own palette, which differs from the class palette, so they
+// must be blended with their own or they render with scrambled colours.
+void EncounterEffect_BlendMugshotSpritePltt(Sprite *mugshotSprite, enum HeapID heapID, u32 mugshotPlttIdx, u8 fraction, u16 target, u8 paletteCount)
+{
+    NNSG2dPaletteData *paletteData;
+    void *nclrBuffer;
+    u16 *objPltt;
+    u32 plttSize = PALETTE_SIZE_BYTES * paletteCount;
+
+    objPltt = Heap_Alloc(heapID, plttSize);
+    nclrBuffer = Graphics_GetPlttData(NARC_INDEX_GRAPHIC__FIELD_ENCOUNTEFFECT, mugshotPlttIdx, &paletteData, heapID);
     BlendPalette(paletteData->pRawData, objPltt, SLOTS_PER_PALETTE * paletteCount, fraction, target);
 
     ov5_021DE67C(mugshotSprite, objPltt, plttSize);
