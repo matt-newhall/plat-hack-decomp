@@ -134,6 +134,52 @@
         "Rt. 227\n",
         "Stark Mountain"
       ]
+    },
+    {
+      "id": "Route227_Text_Thorton_Prebattle",
+      "en_US": [
+        "Thorton: ...Hm. A subject appears.\n",
+        "A Trainer bound for Stark Mountain.\r",
+        "I am Thorton. I analyze data.\n",
+        "Win ratios, movesets, patterns.\r",
+        "Your records, however, are\n",
+        "incomplete. I will collect them\f",
+        "myself. Brace yourself.\f",
+        "Consider this research."
+      ]
+    },
+    {
+      "id": "Route227_Text_ThortonDefeated",
+      "en_US": [
+        "Thorton: Hmm...\n",
+        "I got handed the loss here.\r",
+        "It’s not making me happy at all, losing.\n",
+        "Even though I’m not happy, I did glean\f",
+        "some useful data, I suppose.\r",
+        "That makes me glad I battled you.\r",
+        "Please, take this as a reward."
+      ]
+    },
+    {
+      "id": "Route227_Text_ThortonThatsVoltSwitchGoodbye",
+      "en_US": [
+        "Thorton: The data says it suits a\n",
+        "Trainer of your type.\r",
+        "TM75, Volt Switch. Strike, then\n",
+        "withdraw. Highly efficient.\r",
+        "I return to the Factory to revise\n",
+        "my models. Farewell."
+      ]
+    },
+    {
+      "id": "Route227_Text_ThortonLessThanTwoMons",
+      "en_US": [
+        "Thorton: Insufficient sample size.\r",
+        "A proper analysis requires two\n",
+        "Pokémon able to battle.\r",
+        "Return once your team is ready.\n",
+        "I will continue my observations."
+      ]
     }
   ]
 }

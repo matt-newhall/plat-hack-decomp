@@ -4,10 +4,13 @@
 #include <string.h>
 
 #include "constants/heap.h"
+#include "constants/overworld_weather.h"
 
 #include "field/field_system.h"
+#include "field/field_system_sub2_t.h"
 #include "overlay005/encounter_effect.h"
 #include "overlay005/map_name_popup.h"
+#include "overlay005/ov5_021D5EB8.h"
 
 #include "field_system.h"
 #include "field_task.h"
@@ -29,6 +32,15 @@ static BOOL FieldTask_RunEncounterEffect(FieldTask *task)
 
     switch (data->taskState) {
     case 0:
+        // VS cut-ins like for gym leaders, frontier brains, etc - show a
+        // background that the overworld weather would then draw over.
+        // Think the volcanic ash on Route 227, sandstorm on Route 228, etc
+        // dispel the weather temporarily - it will be set back when we
+        // load back in
+        if (fieldSystem->unk_04->unk_0C != NULL) {
+            ov5_021D5F24(fieldSystem->unk_04->unk_0C, OVERWORLD_WEATHER_CLEAR);
+        }
+
         EncounterEffect_Start(data->encEffectID, fieldSystem, &data->done);
         Sound_SetSceneAndPlayBGM(SOUND_SCENE_BATTLE, data->battleBGM, 1);
         data->taskState++;

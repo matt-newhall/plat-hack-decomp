@@ -2610,7 +2610,7 @@ typedef struct GymLeaderEncounterParam {
 
 #define GYM_LEADER(NAME) (TRAINER_CLASS_LEADER_##NAME - TRAINER_CLASS_LEADER_ROARK)
 
-static const GymLeaderEncounterParam sGymLeaderEncounterParams[11] = {
+static const GymLeaderEncounterParam sGymLeaderEncounterParams[12] = {
     {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_ROARK,
@@ -2763,6 +2763,20 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[11] = {
         .bannerPlttIdx = arcade_star_banner_NCLR,
         .bannerTileIdx = arcade_star_banner_NCGR,
         .bannerTilemapIdx = arcade_star_banner_NSCR,
+        .useOwnMugshotPltt = 1,
+    },
+    {
+        .endX = 214 * FX32_ONE,
+        .trainerID = TRAINER_FACTORY_HEAD_THORTON_ROUTE_227,
+        .trainerClass = TRAINER_CLASS_FACTORY_HEAD,
+        .mugshotPlttCount = 1,
+        .mugshotPlttIdx = factory_head_mugshot_NCLR,
+        .mugshotTileIdx = factory_head_field_mugshot_NCGR,
+        .mugshotCellIdx = factory_head_field_mugshot_cell_NCER,
+        .mugshotAnimIdx = factory_head_mugshot_anim_NANR,
+        .bannerPlttIdx = factory_head_banner_NCLR,
+        .bannerTileIdx = factory_head_banner_NCGR,
+        .bannerTilemapIdx = factory_head_banner_NSCR,
         .useOwnMugshotPltt = 1,
     },
 };
@@ -2963,6 +2977,7 @@ static BOOL EncounterEffect_GymLeader(EncounterEffect *encEffect, enum HeapID he
         Graphics_LoadPaletteFromOpenNARC(encEffect->narc, 11, 0, 2 * 0x20, 0x20, heapID);
 
         GXLayers_EngineAToggleLayers(GX_PLANEMASK_BG2, FALSE);
+        Bg_ClearTilemap(encEffect->fieldSystem->bgConfig, 2);
         Window_Add(encEffect->fieldSystem->bgConfig, &leaderEncEffect->unk_2E0, 2, 0, 10, 16, 2, 2, 1);
         Window_FillTilemap(&leaderEncEffect->unk_2E0, 0);
         trainerName = EncounterEffect_GetGymLeaderName(param->trainerID, heapID);
@@ -3288,6 +3303,16 @@ void EncounterEffect_ArcadeStarDahlia(SysTask *task, void *param)
 {
     EncounterEffect *encEffect = param;
     BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[10]);
+
+    if (done == TRUE) {
+        EncounterEffect_Finish(encEffect, task);
+    }
+}
+
+void EncounterEffect_FactoryHeadThorton(SysTask *task, void *param)
+{
+    EncounterEffect *encEffect = param;
+    BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[11]);
 
     if (done == TRUE) {
         EncounterEffect_Finish(encEffect, task);

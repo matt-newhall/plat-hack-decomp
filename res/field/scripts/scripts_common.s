@@ -92,7 +92,6 @@ CommonScript_PokecenterNurse:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    SetFlag FLAG_HIDE_ROUTE_229_BLOCK_DESERT
     GoToIfGe VAR_RESULT, TRAINER_CARD_LEVEL_GOLD, CommonScript_PokecenterNurse_GoldCard
     SetVar VAR_0x8004, CommonStrings_Text_PokecenterGreeting_Day
     GetTimeOfDay VAR_RESULT
