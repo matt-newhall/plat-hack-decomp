@@ -333,6 +333,8 @@ BattleTowerBattleRoom_PalmerQuest:
     SetFlag FLAG_BEATEN_PALMER_FIGHT_AREA_QUEST
     ClearFlag FLAG_HIDE_ISLAND_FLYABLE_DRIFLOONS
     SetFlag FLAG_HIDE_ROUTE_229_BLOCK_DESERT
+    SetFlag FLAG_HIDE_DARACH_CAITLYN_RESORT_AREA
+    SetVar VAR_RESORT_AREA_STATE, 1
     RestoreCamera
     FadeScreenOut
     WaitFadeScreen
