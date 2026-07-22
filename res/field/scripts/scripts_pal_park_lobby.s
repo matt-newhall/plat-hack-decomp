@@ -357,7 +357,6 @@ PalParkLobby_RecordGuy:
 
 PalParkLobby_OnFramePaul:
     LockAll
-    ClearFlag FLAG_ETERNA_CITY_SOUTH_HOUSE_HIDE_PROF_OAK
     SetVar VAR_CATCHING_SHOW_RECORD, 2000
     ApplyMovement LOCALID_PAUL, PalParkLobby_Movement_PaulNoticePlayer
     WaitMovement

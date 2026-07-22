@@ -561,6 +561,7 @@ SandgemTownLab_EnableNationalDex:
     ApplyMovement LOCALID_PROF_OAK, SandgemTownLab_Movement_ProfOakLeave
     WaitMovement
     RemoveObject 4
+    ClearFlag FLAG_ETERNA_CITY_SOUTH_HOUSE_HIDE_PROF_OAK
     Message SandgemTownLab_Text_OffHeGoesAsBusyAsEver
     CloseMessage
     WaitTime 15, VAR_RESULT

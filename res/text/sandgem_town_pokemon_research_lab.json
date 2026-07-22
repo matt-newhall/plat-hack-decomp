@@ -413,8 +413,8 @@
     {
       "id": "SandgemTownLab_Text_MaleYouShouldVisitThePalParkToo",
       "en_US": [
-        "{STRVAR_1 3, 0, 0}, you should make an\n",
-        "effort to visit the Pal Park, too.\r",
+        "{STRVAR_1 3, 0, 0}, I believe you have\n",
+        "already visited the Pal Park!\r",
         "Oops! I’ll be late for my meeting if\n",
         "I don’t get going!\r",
         "OK, it was a pleasure seeing the both\n",
@@ -424,8 +424,8 @@
     {
       "id": "SandgemTownLab_Text_FemaleYouShouldVisitThePalParkToo",
       "en_US": [
-        "{STRVAR_1 3, 0, 0}, you should make an\n",
-        "effort to visit the Pal Park, too.\r",
+        "{STRVAR_1 3, 0, 0}, I believe you have\n",
+        "already visited the Pal Park!\r",
         "Oops! I’ll be late for my meeting if\n",
         "I don’t get going!\r",
         "OK, it was a pleasure seeing the both\n",
