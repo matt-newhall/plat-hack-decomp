@@ -551,6 +551,8 @@ SandgemTownLab_EnableNationalDex:
     Message SandgemTownLab_Text_PlayersPokedexWasUpgradedWithTheNationalMode
     WaitFanfare
     Message SandgemTownLab_Text_ItWontBeEasyToCompleteTheNationalPokedex
+    SetVar VAR_0x8004, POKETCH_APPID_TRAINERCOUNTER
+    Common_GivePoketchApp
     Message SandgemTownLab_Text_PlayerWillGetTheJobDone
     Message SandgemTownLab_Text_IveHeardThatThePalParkIsNowOpen
     BufferPlayerName 0
