@@ -537,6 +537,12 @@ FightArea_PalmerFarewell:
     Message FightArea_Text_PalmerFarewell
     WaitButton
     CloseMessage
+    SetVar VAR_0x8004, ITEM_ASSAULT_VEST
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    Message FightArea_Text_PalmerAssaultVest
+    WaitButton
+    CloseMessage
     ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerEnterFrontier
     WaitMovement
     PlaySE SEQ_SE_DP_KAIDAN2
