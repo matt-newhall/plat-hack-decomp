@@ -22,10 +22,11 @@ _0032:
 
 _0038:
     LockAll
+    Call _02C1
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, BattleFrontierGateToFightArea_HandleNotBeatenEliteFour
     SetVar VAR_UNK_0x4113, 1
     SetFlag FLAG_HIDE_JUBILIFE_TV_3F_GLOBAL_RANKING_ROOM_WORKER
     SetFlag FLAG_HIDE_JUBILIFE_TV_3F_GROUP_RANKING_ROOM_WORKER
-    Call _02C1
     Message 0
     CloseMessage
     Call _02F5
@@ -293,3 +294,23 @@ _037E:
 _0391:
     NPCMessage 35
     End
+
+BattleFrontierGateToFightArea_HandleNotBeatenEliteFour:
+    Message 36
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, BattleFrontierGateToFightArea_Movement_PlayerLeave
+    WaitMovement
+    PlaySE SEQ_SE_DP_KAIDAN2
+    FadeScreenOut
+    WaitFadeScreen
+    Warp MAP_HEADER_FIGHT_AREA, 0, 654, 424, DIR_SOUTH
+    FadeScreenIn
+    WaitFadeScreen
+    ReleaseAll
+    End
+
+    .balign 4, 0
+BattleFrontierGateToFightArea_Movement_PlayerLeave:
+    FaceSouth
+    EndMovement

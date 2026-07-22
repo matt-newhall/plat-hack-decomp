@@ -532,6 +532,8 @@ FightArea_PalmerFarewell:
     LockAll
     ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
     WaitMovement
+    BufferRivalName 0
+    BufferPlayerName 1
     Message FightArea_Text_PalmerFarewell
     WaitButton
     CloseMessage

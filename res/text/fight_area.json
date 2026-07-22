@@ -527,9 +527,27 @@
       "en_US": [
         "Palmer: Hah! A battle worthy of the\n",
         "Tower Tycoon. It was an honour.\r",
+        "The rest of the Brains are still\n",
+        "away for their breaks, so you’ll\f",
+        "have to wait a short while before\f",
+        "taking on the whole Frontier.\r",
+        "We’re eagerly awaiting your\n",
+        "challenge though!\r",
         "You can Surf now, can’t you?\r",
         "Then you should set your sights on\n",
-        "Canalave City. Go on, get out there!"
+        "Canalave City. Go on, get out there!\r",
+        "Oh, and one more thing.\r",
+        "Thanks for keeping an eye on\n",
+        "{STRVAR_1 3, 0, 0}.\r",
+        "He’s a great kid and I’m sure you\n",
+        "have your hands full keeping up\f",
+        "with him.\r",
+        "But he really values you as a\n",
+        "friend, and as a rival to push\f",
+        "him more and more.\r",
+        "After battling you today, I’m\n",
+        "lucky enough to see what he means!\r",
+        "Be seeing you later, {STRVAR_1 3, 1, 0}!"
       ]
     },
     {
