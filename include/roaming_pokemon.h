@@ -33,12 +33,13 @@ enum RoamerRouteIndex {
     RI_ROUTE_220,
     RI_ROUTE_221,
     RI_ROUTE_222,
+    RI_ROUTE_223,
+    RI_ROUTE_224,
     RI_VALLEY_WINDWORKS_OUTSIDE,
     RI_FUEGO_IRONWORKS_OUTSIDE,
     RI_MAX,
 };
 
-void RoamingPokemon_MoveToRandomMap(SpecialEncounter *speEnc, const u8 roamerSlot);
 void RoamingPokemon_RandomizeAllLocations(SpecialEncounter *speEnc);
 void RoamingPokemon_MoveAllLocations(SpecialEncounter *speEnc);
 int RoamingPokemon_GetRouteFromId(const u8 id);

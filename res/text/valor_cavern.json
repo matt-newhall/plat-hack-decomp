@@ -39,17 +39,6 @@
         "By now, Mars should have captured\n",
         "the Pokémon of Lake Verity...\r"
       ]
-    },
-    {
-      "id": "ValorCavern_Text_AzelfCry",
-      "en_US": "Kyuuun...\r"
-    },
-    {
-      "id": "ValorCavern_Text_AzelfDisappeared",
-      "en_US": [
-        "AZELF disappeared deep into\n",
-        "the cavern..."
-      ]
     }
   ]
 }

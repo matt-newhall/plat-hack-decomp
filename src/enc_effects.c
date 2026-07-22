@@ -344,9 +344,6 @@ static u32 EncEffects_WildPokemonEffect(Party *wildParty, int mapHeaderID)
     case SPECIES_SHAYMIN:
         result = ENCEFF_SHAYMIN;
         break;
-    case SPECIES_CRESSELIA:
-        result = ENCEFF_CRESSELIA;
-        break;
     case SPECIES_GIRATINA:
         result = ENCEFF_GIRATINA;
         break;
@@ -364,11 +361,10 @@ static u32 EncEffects_WildPokemonEffect(Party *wildParty, int mapHeaderID)
         result = ENCEFF_MINOR_LEGENDARIES;
         break;
     case SPECIES_MESPRIT:
-        result = ENCEFF_MESPRIT;
-        break;
     case SPECIES_UXIE:
     case SPECIES_AZELF:
-        result = ENCEFF_UXIE_AZELF;
+    case SPECIES_CRESSELIA:
+        result = ENCEFF_MINOR_LEGENDARIES;
         break;
     case SPECIES_DIALGA:
     case SPECIES_PALKIA:
@@ -380,8 +376,13 @@ static u32 EncEffects_WildPokemonEffect(Party *wildParty, int mapHeaderID)
     case SPECIES_MOLTRES:
     case SPECIES_ARTICUNO:
     case SPECIES_ZAPDOS:
+    case SPECIES_LATIOS:
+    case SPECIES_LATIAS:
+    case SPECIES_RAIKOU:
+    case SPECIES_SUICUNE:
+    case SPECIES_ENTEI:
         if (mapHeaderID != ZONE_ID_PAL_PARK) {
-            result = ENCEFF_KANTO_BIRDS;
+            result = ENCEFF_MINOR_LEGENDARIES;
         }
         break;
     default:

@@ -102,19 +102,24 @@ static void SetupSprites(MarkingMapGraphics *graphics, const MarkingMapData *map
         }
     }
 
+    // we are grouping all roamers, so just show one icon
+    BOOL herdActive = FALSE;
     for (int i = 0; i < ROAMING_SLOT_MAX; i++) {
-        int positionFound = PoketchMap_GetPositionFromMapID(mapData->roamerData[i].mapID, &x, &y);
-
-        animData.translation.x = x << FX32_SHIFT;
-        animData.translation.y = y << FX32_SHIFT;
-        animData.priority = 8;
-        animData.animIdx = ANIMATION_INDEX_ROAMER;
-
-        graphics->roamerSprites[i] = PoketchAnimation_SetupNewAnimatedSprite(graphics->animMan, &animData, &graphics->animData);
-
-        if ((mapData->roamerData[i].isActive == FALSE) || (positionFound == FALSE)) {
-            PoketchAnimation_HideSprite(graphics->roamerSprites[i], TRUE);
+        if (mapData->roamerData[i].isActive && PoketchMap_GetPositionFromMapID(mapData->roamerData[i].mapID, &x, &y)) {
+            herdActive = TRUE;
+            break;
         }
+    }
+
+    animData.translation.x = x << FX32_SHIFT;
+    animData.translation.y = y << FX32_SHIFT;
+    animData.priority = 8;
+    animData.animIdx = ANIMATION_INDEX_ROAMER;
+
+    graphics->roamerSprite = PoketchAnimation_SetupNewAnimatedSprite(graphics->animMan, &animData, &graphics->animData);
+
+    if (herdActive == FALSE) {
+        PoketchAnimation_HideSprite(graphics->roamerSprite, TRUE);
     }
 
     graphics->updateTask = SysTask_Start(Task_UpdateMap, graphics, 3);
@@ -138,11 +143,9 @@ static void UnloadSprites(MarkingMapGraphics *graphics)
         }
     }
 
-    for (int i = 0; i < ROAMING_SLOT_MAX; i++) {
-        if (graphics->roamerSprites[i]) {
-            PoketchAnimation_RemoveAnimatedSprite(graphics->animMan, graphics->roamerSprites[i]);
-            graphics->roamerSprites[i] = NULL;
-        }
+    if (graphics->roamerSprite) {
+        PoketchAnimation_RemoveAnimatedSprite(graphics->animMan, graphics->roamerSprite);
+        graphics->roamerSprite = NULL;
     }
 
     PoketchAnimation_RemoveAnimatedSprite(graphics->animMan, graphics->playerCursorSprite);
@@ -242,17 +245,16 @@ static void Task_UpdateMap(SysTask *task, void *taskData)
         PoketchMap_GetPositionOnMap(mapData->playerX, mapData->playerY, &x, &y);
         PoketchAnimation_SetSpritePosition(graphics->playerCursorSprite, x << FX32_SHIFT, y << FX32_SHIFT);
 
+        BOOL herdShown = FALSE;
+
         for (u32 i = 0; i < ROAMING_SLOT_MAX; i++) {
-            if (mapData->roamerData[i].isActive) {
-                if (PoketchMap_GetPositionFromMapID(mapData->roamerData[i].mapID, &x, &y)) {
-                    PoketchAnimation_SetSpritePosition(graphics->roamerSprites[i], x << FX32_SHIFT, y << FX32_SHIFT);
-                    PoketchAnimation_HideSprite(graphics->roamerSprites[i], FALSE);
-                } else {
-                    PoketchAnimation_HideSprite(graphics->roamerSprites[i], TRUE);
-                }
-            } else {
-                PoketchAnimation_HideSprite(graphics->roamerSprites[i], TRUE);
+            if (mapData->roamerData[i].isActive && PoketchMap_GetPositionFromMapID(mapData->roamerData[i].mapID, &x, &y)) {
+                PoketchAnimation_SetSpritePosition(graphics->roamerSprite, x << FX32_SHIFT, y << FX32_SHIFT);
+                herdShown = TRUE;
+                break;
             }
         }
+
+        PoketchAnimation_HideSprite(graphics->roamerSprite, herdShown == FALSE);
     }
 }

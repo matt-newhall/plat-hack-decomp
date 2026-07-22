@@ -59,6 +59,7 @@ void Poketch_Init(Poketch *poketch)
 
     poketch->dotArtModifiedByPlayer = 0;
     Poketch_RegisterApp(poketch, POKETCH_APPID_DIGITALWATCH);
+    Poketch_RegisterApp(poketch, POKETCH_APPID_MARKINGMAP);
 }
 
 void Poketch_Enable(Poketch *poketch)

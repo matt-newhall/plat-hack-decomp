@@ -11,6 +11,7 @@
 #include "field/field_system.h"
 
 #include "field_battle_data_transfer.h"
+#include "heap.h"
 #include "inlines.h"
 #include "party.h"
 #include "pokemon.h"
@@ -40,12 +41,23 @@ void RoamerAfterBattle_UpdateRoamers(FieldSystem *fieldSystem, FieldBattleDTO *b
         roamerStatus = (u8)(Pokemon_GetValue(enemyMon, MON_DATA_STATUS, NULL));
 
         if (battleParams->resultMask == BATTLE_RESULT_WIN && roamerHP == 0) {
-            SpecialEncounter_ZeroRoamerData(&roamer);
-            SystemVars_SetRoamingSpeciesState(SaveData_GetVarsFlags(fieldSystem->saveData), wildSpecies, ROAMER_STATE_DEFEATED);
+            // Defeated: roamer stays in pool at full HP
+            Pokemon *healedMon = Pokemon_New(HEAP_ID_FIELD1);
+
+            Pokemon_InitAndCalcStats(
+                healedMon,
+                Roamer_GetData(roamer, ROAMER_DATA_SPECIES),
+                Roamer_GetData(roamer, ROAMER_DATA_LEVEL),
+                Roamer_GetData(roamer, ROAMER_DATA_IVS),
+                Roamer_GetData(roamer, ROAMER_DATA_PERSONALITY));
+            Roamer_SetData(roamer, ROAMER_DATA_CURRENT_HP, Pokemon_GetValue(healedMon, MON_DATA_MAX_HP, NULL));
+            Roamer_SetData(roamer, ROAMER_DATA_STATUS, 0);
+            Heap_Free(healedMon);
         } else if (battleParams->resultMask == BATTLE_RESULT_CAPTURED_MON) {
             SpecialEncounter_ZeroRoamerData(&roamer);
             SystemVars_SetRoamingSpeciesState(SaveData_GetVarsFlags(fieldSystem->saveData), wildSpecies, ROAMER_STATE_CAPTURED);
         } else {
+            // Fled: keep chip damage
             Roamer_SetData(roamer, ROAMER_DATA_CURRENT_HP, roamerHP);
             Roamer_SetData(roamer, ROAMER_DATA_STATUS, roamerStatus);
         }
@@ -58,19 +70,16 @@ void RoamerAfterBattle_UpdateRoamers(FieldSystem *fieldSystem, FieldBattleDTO *b
     }
 }
 
-// For all roamers, moves to a random location if they are on the current map
+// Relocates the whole roamer herd if it is currently on the player's map.
 static void MoveRoamersOffMap(SpecialEncounter *speEnc, const int currentMap)
 {
-    int roamerMap;
-    u8 i;
-
-    for (i = 0; i < ROAMING_SLOT_MAX; i++) {
+    for (u8 i = 0; i < ROAMING_SLOT_MAX; i++) {
         if (SpecialEncounter_IsRoamerActive(speEnc, i)) {
-            roamerMap = RoamingPokemon_GetRouteFromId(SpecialEncounter_GetRoamerRouteIndex(speEnc, i));
-
-            if (currentMap == roamerMap) {
-                RoamingPokemon_MoveToRandomMap(speEnc, i);
+            if (currentMap == RoamingPokemon_GetRouteFromId(SpecialEncounter_GetRoamerRouteIndex(speEnc, i))) {
+                RoamingPokemon_MoveAllLocations(speEnc);
             }
+
+            break;
         }
     }
 }

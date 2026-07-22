@@ -5,7 +5,6 @@
 
     ScriptEntry ValorCavern_OnTransition
     ScriptEntry ValorCavern_OnLoad
-    ScriptEntry ValorCavern_Azelf
     ScriptEntry ValorCavern_Saturn
     ScriptEntryEnd
 
@@ -25,45 +24,8 @@ ValorCavern_RemoveWarpLakeValorDrained:
 
 ValorCavern_OnLoad:
     SetFlag FLAG_FIRST_ARRIVAL_VALOR_CAVERN
-    CallIfSet FLAG_MAP_LOCAL, ValorCavern_RemoveAzelf
     GoToIfUnset FLAG_GALACTIC_LEFT_LAKE_VALOR, ValorCavern_RemoveWarpLakeValorNormal
     GoToIfSet FLAG_GALACTIC_LEFT_LAKE_VALOR, ValorCavern_RemoveWarpLakeValorDrained
-    End
-
-ValorCavern_RemoveAzelf:
-    SetFlag FLAG_HIDE_VALOR_CAVERN_AZELF
-    RemoveObject LOCALID_AZELF
-    ClearFlag FLAG_MAP_LOCAL
-    Return
-
-ValorCavern_Azelf:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    PlayCry SPECIES_AZELF
-    Message ValorCavern_Text_AzelfCry
-    CloseMessage
-    SetFlag FLAG_MAP_LOCAL
-    StartLegendaryBattle SPECIES_AZELF, 50
-    ClearFlag FLAG_MAP_LOCAL
-    CheckWonBattle VAR_RESULT
-    GoToIfEq VAR_RESULT, FALSE, ValorCavern_LostBattleAzelf
-    CheckDidNotCapture VAR_RESULT
-    GoToIfEq VAR_RESULT, TRUE, ValorCavern_AzelfDisappeared
-    SetFlag FLAG_CAUGHT_AZELF
-    ReleaseAll
-    End
-
-ValorCavern_AzelfDisappeared:
-    Message ValorCavern_Text_AzelfDisappeared
-    WaitButton
-    CloseMessage
-    ReleaseAll
-    End
-
-ValorCavern_LostBattleAzelf:
-    BlackOutFromBattle
-    ReleaseAll
     End
 
 ValorCavern_Saturn:

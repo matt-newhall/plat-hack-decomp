@@ -109,9 +109,18 @@ SandgemTownLab_WhyNotObtainSunyshoresBadge:
     CloseMessage
     SetFlag FLAG_HIDE_VALOR_LAKEFRONT_COLLECTOR
     SetVar VAR_UNK_0x4112, 1
-    ClearFlag FLAG_HIDE_VERITY_CAVERN_MESPRIT
-    ClearFlag FLAG_HIDE_VALOR_CAVERN_AZELF
-    ClearFlag FLAG_HIDE_ACUITY_CAVERN_UXIE
+    ActivateRoamingPokemon ROAMING_SLOT_MESPRIT
+    ActivateRoamingPokemon ROAMING_SLOT_UXIE
+    ActivateRoamingPokemon ROAMING_SLOT_AZELF
+    ActivateRoamingPokemon ROAMING_SLOT_CRESSELIA
+    ActivateRoamingPokemon ROAMING_SLOT_MOLTRES
+    ActivateRoamingPokemon ROAMING_SLOT_ZAPDOS
+    ActivateRoamingPokemon ROAMING_SLOT_ARTICUNO
+    ActivateRoamingPokemon ROAMING_SLOT_LATIOS
+    ActivateRoamingPokemon ROAMING_SLOT_LATIAS
+    ActivateRoamingPokemon ROAMING_SLOT_RAIKOU
+    ActivateRoamingPokemon ROAMING_SLOT_SUICUNE
+    ActivateRoamingPokemon ROAMING_SLOT_ENTEI
     SetVar VAR_SANDGEM_TOWN_LAB_STATE, 3
     ReleaseAll
     End

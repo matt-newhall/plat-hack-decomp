@@ -16,134 +16,18 @@
 #include "special_encounter.h"
 #include "trainer_info.h"
 
-typedef struct NearbyRoutes {
-    u16 numPossibilities;
-    u16 adjacentRouteIndexes[5];
-} NearbyRoutes;
+static u8 PickHerdLocation(void);
+static void MoveHerd(SpecialEncounter *speEnc, const int playerPreviousMap);
 
-static void MoveRoamerRandom(SpecialEncounter *speEnc, const u8 roamerSlot, const int playerPreviousMap);
-static void MoveRoamerNearby(SpecialEncounter *param0, const u8 roamerSlot, const int playerPreviousMap);
-static void SetNewMapLocation(SpecialEncounter *speEnc, const u8 roamerSlot, const u8 newMapIndex, const int newMapId);
-
-// Includes adjacent routes as well as routes connected to adjacent towns.
-// e.g. Route 202's entry includes both routes connected to Sandgem Town and all 3 routes connected to Jubilife City.
-static const NearbyRoutes sNearbyRoutes[RI_MAX] = {
-    [RI_ROUTE_201] = {
-        2,
-        { RI_ROUTE_202, RI_ROUTE_219, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_202] = {
-        5,
-        { RI_ROUTE_201, RI_ROUTE_203, RI_ROUTE_204_SOUTH, RI_ROUTE_218, RI_ROUTE_219 },
-    },
-    [RI_ROUTE_203] = {
-        4,
-        { RI_ROUTE_202, RI_ROUTE_204_SOUTH, RI_ROUTE_207, RI_ROUTE_218, 0xFFFF },
-    },
-    [RI_ROUTE_204_SOUTH] = {
-        4,
-        { RI_ROUTE_202, RI_ROUTE_203, RI_ROUTE_204_NORTH, RI_ROUTE_218, 0xFFFF },
-    },
-    [RI_ROUTE_204_NORTH] = {
-        2,
-        { RI_ROUTE_204_SOUTH, RI_ROUTE_205_SOUTH, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_205_SOUTH] = {
-        4,
-        { RI_ROUTE_204_NORTH, RI_ROUTE_205_NORTH, RI_VALLEY_WINDWORKS_OUTSIDE, RI_FUEGO_IRONWORKS_OUTSIDE, 0xFFFF },
-    },
-    [RI_ROUTE_205_NORTH] = {
-        3,
-        { RI_ROUTE_205_SOUTH, RI_ROUTE_206, 9, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_206] = {
-        3,
-        { RI_ROUTE_205_NORTH, RI_ROUTE_207, RI_ROUTE_211_WEST, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_207] = {
-        3,
-        { RI_ROUTE_203, RI_ROUTE_206, RI_ROUTE_208, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_208] = {
-        3,
-        { RI_ROUTE_207, RI_ROUTE_209, RI_ROUTE_212_NORTH, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_209] = {
-        3,
-        { RI_ROUTE_208, RI_ROUTE_210_SOUTH, RI_ROUTE_212_NORTH, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_210_SOUTH] = {
-        3,
-        { RI_ROUTE_209, RI_ROUTE_210_NORTH, RI_ROUTE_215, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_210_NORTH] = {
-        2,
-        { RI_ROUTE_210_SOUTH, RI_ROUTE_211_EAST, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_211_WEST] = {
-        4,
-        { RI_ROUTE_205_NORTH, RI_ROUTE_206, RI_ROUTE_211_EAST, RI_ROUTE_216, 0xFFFF },
-    },
-    [RI_ROUTE_211_EAST] = {
-        3,
-        { RI_ROUTE_210_NORTH, RI_ROUTE_211_WEST, RI_ROUTE_216, 0xFFFF },
-    },
-    [RI_ROUTE_212_NORTH] = {
-        3,
-        { RI_ROUTE_208, RI_ROUTE_209, RI_ROUTE_212_SOUTH, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_212_SOUTH] = {
-        2,
-        { RI_ROUTE_212_NORTH, RI_ROUTE_213, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_213] = {
-        3,
-        { RI_ROUTE_212_SOUTH, RI_ROUTE_214, RI_ROUTE_222, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_214] = {
-        3,
-        { RI_ROUTE_213, RI_ROUTE_215, RI_ROUTE_222, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_215] = {
-        2,
-        { RI_ROUTE_210_SOUTH, RI_ROUTE_214, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_216] = {
-        3,
-        { RI_ROUTE_211_WEST, RI_ROUTE_211_EAST, RI_ROUTE_217, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_217] = {
-        1,
-        { RI_ROUTE_216, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_218] = {
-        3,
-        { RI_ROUTE_202, RI_ROUTE_203, RI_ROUTE_204_SOUTH, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_219] = {
-        3,
-        { RI_ROUTE_201, RI_ROUTE_202, RI_ROUTE_220, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_220] = {
-        2,
-        { RI_ROUTE_219, RI_ROUTE_221, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_221] = {
-        1,
-        { RI_ROUTE_220, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_ROUTE_222] = {
-        2,
-        { RI_ROUTE_213, RI_ROUTE_214, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_VALLEY_WINDWORKS_OUTSIDE] = {
-        1,
-        { RI_ROUTE_205_SOUTH, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
-    [RI_FUEGO_IRONWORKS_OUTSIDE] = {
-        1,
-        { RI_ROUTE_205_SOUTH, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF },
-    },
+// filter roamers to just these regions and they are now a shared pool
+// like Run and Bun
+static const u8 sRoamerAllowedRoutes[] = {
+    RI_ROUTE_219,
+    RI_ROUTE_220,
+    RI_ROUTE_221,
+    RI_ROUTE_222,
+    RI_ROUTE_223,
+    RI_ROUTE_224,
 };
 
 // All outdoor areas with encounters on the mainland except Trophy Garden, Great Marsh, and the ones past Sunyshore City
@@ -175,41 +59,62 @@ static const int RoamingPokemonRoutes[RI_MAX] = {
     [RI_ROUTE_220] = MAP_HEADER_ROUTE_220,
     [RI_ROUTE_221] = MAP_HEADER_ROUTE_221,
     [RI_ROUTE_222] = MAP_HEADER_ROUTE_222,
+    [RI_ROUTE_223] = MAP_HEADER_ROUTE_223,
+    [RI_ROUTE_224] = MAP_HEADER_ROUTE_224,
     [RI_VALLEY_WINDWORKS_OUTSIDE] = MAP_HEADER_VALLEY_WINDWORKS_OUTSIDE,
     [RI_FUEGO_IRONWORKS_OUTSIDE] = MAP_HEADER_FUEGO_IRONWORKS_OUTSIDE,
 };
 
-void RoamingPokemon_MoveToRandomMap(SpecialEncounter *speEnc, const u8 roamerSlot)
+static u8 PickHerdLocation(void)
 {
-    int previousMap = SpecialEncounter_GetPlayerPreviousMap(speEnc);
-    MoveRoamerRandom(speEnc, roamerSlot, previousMap);
+    return sRoamerAllowedRoutes[LCRNG_RandMod(NELEMS(sRoamerAllowedRoutes))];
+}
+
+// moves roamers to a new location
+static void MoveHerd(SpecialEncounter *speEnc, const int playerPreviousMap)
+{
+    int currentRoute = -1;
+    u8 newIndex;
+    int newRoute;
+
+    for (u8 i = 0; i < ROAMING_SLOT_MAX; i++) {
+        if (SpecialEncounter_IsRoamerActive(speEnc, i)) {
+            currentRoute = RoamingPokemonRoutes[SpecialEncounter_GetRoamerRouteIndex(speEnc, i)];
+            break;
+        }
+    }
+
+    if (currentRoute == -1) {
+        return;
+    }
+
+    while (TRUE) {
+        newIndex = PickHerdLocation();
+        newRoute = RoamingPokemonRoutes[newIndex];
+
+        if ((newRoute != playerPreviousMap) && (newRoute != currentRoute)) {
+            break;
+        }
+    }
+
+    for (u8 i = 0; i < ROAMING_SLOT_MAX; i++) {
+        if (SpecialEncounter_IsRoamerActive(speEnc, i)) {
+            SpecialEncounter_SetRoamerRouteIndex(speEnc, i, newIndex);
+            Roamer_SetData(SpecialEncounter_GetRoamer(speEnc, i), ROAMER_DATA_MAP_ID, newRoute);
+        }
+    }
 }
 
 // Used when Teleporting/Flying
 void RoamingPokemon_RandomizeAllLocations(SpecialEncounter *speEnc)
 {
-    for (u8 i = 0; i < ROAMING_SLOT_MAX; i++) {
-        if (SpecialEncounter_IsRoamerActive(speEnc, i)) {
-            RoamingPokemon_MoveToRandomMap(speEnc, i);
-        }
-    }
+    MoveHerd(speEnc, SpecialEncounter_GetPlayerPreviousMap(speEnc));
 }
 
-// Moves all Roamers. For each, it has a 1/16 chance to randomize its location. Otherwise, it will move to a nearby route.
-void RoamingPokemon_MoveAllLocations(SpecialEncounter *specialEncounter)
+// When the player changes maps. Moves the whole roamer herd to a new allowed route.
+void RoamingPokemon_MoveAllLocations(SpecialEncounter *speEnc)
 {
-    for (u8 i = 0; i < ROAMING_SLOT_MAX; i++) {
-        if (SpecialEncounter_IsRoamerActive(specialEncounter, i)) {
-            if (LCRNG_RandMod(16) == 0) {
-                RoamingPokemon_MoveToRandomMap(specialEncounter, i);
-            } else {
-                {
-                    int previousMap = SpecialEncounter_GetPlayerPreviousMap(specialEncounter);
-                    MoveRoamerNearby(specialEncounter, i, previousMap);
-                }
-            }
-        }
-    }
+    MoveHerd(speEnc, SpecialEncounter_GetPlayerPreviousMap(speEnc));
 }
 
 int RoamingPokemon_GetRouteFromId(const u8 routeId)
@@ -243,7 +148,6 @@ void RoamingPokemon_ActivateSlot(SaveData *saveData, const u8 slot)
     Pokemon *roamerMonData;
     Roamer *newRoamer;
     SpecialEncounter *speEnc;
-    int previouslyVisitedMap;
     TrainerInfo *trainer;
     int species;
     u8 level;
@@ -260,9 +164,9 @@ void RoamingPokemon_ActivateSlot(SaveData *saveData, const u8 slot)
         species = SPECIES_CRESSELIA;
         level = 50;
         break;
-    case ROAMING_SLOT_DARKRAI:
-        species = SPECIES_DARKRAI;
-        level = 40;
+    case ROAMING_SLOT_UXIE:
+        species = SPECIES_UXIE;
+        level = 60;
         break;
     case ROAMING_SLOT_MOLTRES:
         species = SPECIES_MOLTRES;
@@ -274,6 +178,30 @@ void RoamingPokemon_ActivateSlot(SaveData *saveData, const u8 slot)
         break;
     case ROAMING_SLOT_ARTICUNO:
         species = SPECIES_ARTICUNO;
+        level = 60;
+        break;
+    case ROAMING_SLOT_AZELF:
+        species = SPECIES_AZELF;
+        level = 60;
+        break;
+    case ROAMING_SLOT_LATIOS:
+        species = SPECIES_LATIOS;
+        level = 60;
+        break;
+    case ROAMING_SLOT_LATIAS:
+        species = SPECIES_LATIAS;
+        level = 60;
+        break;
+    case ROAMING_SLOT_RAIKOU:
+        species = SPECIES_RAIKOU;
+        level = 60;
+        break;
+    case ROAMING_SLOT_SUICUNE:
+        species = SPECIES_SUICUNE;
+        level = 60;
+        break;
+    case ROAMING_SLOT_ENTEI:
+        species = SPECIES_ENTEI;
         level = 60;
         break;
     default:
@@ -296,66 +224,19 @@ void RoamingPokemon_ActivateSlot(SaveData *saveData, const u8 slot)
     Roamer_SetData(newRoamer, ROAMER_DATA_CURRENT_HP, Pokemon_GetValue(roamerMonData, MON_DATA_MAX_HP, NULL));
     Heap_Free(roamerMonData);
 
-    previouslyVisitedMap = SpecialEncounter_GetPlayerPreviousMap(speEnc);
-    MoveRoamerRandom(speEnc, slot, previouslyVisitedMap);
-}
+    int herdIndex = -1;
 
-static void MoveRoamerRandom(SpecialEncounter *specialEncounter, const u8 roamerSlot, const int playerPreviousMap)
-{
-    u8 newIndex;
-    int currentRoute;
-    int newRoute;
-
-    currentRoute = RoamingPokemonRoutes[SpecialEncounter_GetRoamerRouteIndex(specialEncounter, roamerSlot)];
-
-    while (TRUE) {
-        newIndex = LCRNG_RandMod(RI_MAX);
-        newRoute = RoamingPokemonRoutes[newIndex];
-
-        if ((newRoute != playerPreviousMap) && (newRoute != currentRoute)) {
-            SetNewMapLocation(specialEncounter, roamerSlot, newIndex, newRoute);
+    for (u8 i = 0; i < ROAMING_SLOT_MAX; i++) {
+        if ((i != slot) && SpecialEncounter_IsRoamerActive(speEnc, i)) {
+            herdIndex = SpecialEncounter_GetRoamerRouteIndex(speEnc, i);
             break;
         }
     }
-}
 
-static void MoveRoamerNearby(SpecialEncounter *specialEncounter, const u8 roamerSlot, const int playerPreviousMap)
-{
-    const NearbyRoutes *possibleNewRoutes;
-    u8 newMapIndex;
-    int newMapId;
-
-    possibleNewRoutes = &(sNearbyRoutes[SpecialEncounter_GetRoamerRouteIndex(specialEncounter, roamerSlot)]);
-
-    if (possibleNewRoutes->numPossibilities == 1) {
-        newMapIndex = possibleNewRoutes->adjacentRouteIndexes[0];
-        newMapId = RoamingPokemonRoutes[newMapIndex];
-
-        if (newMapId == playerPreviousMap) {
-            MoveRoamerRandom(specialEncounter, roamerSlot, playerPreviousMap);
-        } else {
-            SetNewMapLocation(specialEncounter, roamerSlot, newMapIndex, newMapId);
-        }
-    } else {
-        u8 nearbyIndex;
-
-        while (TRUE) {
-            nearbyIndex = LCRNG_RandMod(possibleNewRoutes->numPossibilities);
-            newMapIndex = possibleNewRoutes->adjacentRouteIndexes[nearbyIndex];
-            newMapId = RoamingPokemonRoutes[newMapIndex];
-
-            if (newMapId != playerPreviousMap) {
-                SetNewMapLocation(specialEncounter, roamerSlot, newMapIndex, newMapId);
-                break;
-            }
-        }
+    if (herdIndex == -1) {
+        herdIndex = PickHerdLocation();
     }
-}
 
-static void SetNewMapLocation(SpecialEncounter *specialEncounter, const u8 roamerSlot, const u8 newMapIndex, const int newMapId)
-{
-    Roamer *roamer = SpecialEncounter_GetRoamer(specialEncounter, roamerSlot);
-
-    SpecialEncounter_SetRoamerRouteIndex(specialEncounter, roamerSlot, newMapIndex);
-    Roamer_SetData(roamer, ROAMER_DATA_MAP_ID, newMapId);
+    SpecialEncounter_SetRoamerRouteIndex(speEnc, slot, herdIndex);
+    Roamer_SetData(newRoamer, ROAMER_DATA_MAP_ID, RoamingPokemonRoutes[herdIndex]);
 }
