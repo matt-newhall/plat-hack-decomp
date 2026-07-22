@@ -121,6 +121,7 @@ SandgemTownLab_WhyNotObtainSunyshoresBadge:
     ActivateRoamingPokemon ROAMING_SLOT_RAIKOU
     ActivateRoamingPokemon ROAMING_SLOT_SUICUNE
     ActivateRoamingPokemon ROAMING_SLOT_ENTEI
+    SetFlag FLAG_REGIS_UNLOCKED
     SetVar VAR_SANDGEM_TOWN_LAB_STATE, 3
     ReleaseAll
     End
