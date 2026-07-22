@@ -1,0 +1,51 @@
+{
+    "name": "Argenta",
+    "class": "TRAINER_CLASS_HALL_MATRON",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": true,
+    "party": [
+        {
+            "species": "SPECIES_LAPRAS",
+            "form": 0,
+            "level": 60,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_LUCARIO",
+            "form": 0,
+            "level": 60,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_PRE_BATTLE",
+            "garbage": 29
+        },
+        {
+            "type": "TRMSG_WIN",
+            "en_US": [
+                "Fufu...\n",
+                "The house always wins.\r"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Oh, dear... The trouble with fun is that\n",
+                "it is over so quickly.\r"
+            ]
+        }
+    ]
+}

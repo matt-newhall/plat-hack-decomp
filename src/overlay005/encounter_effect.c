@@ -153,7 +153,8 @@ static const SysTaskFunc sEncounterEffectTaskFuncs[] = {
     EncounterEffect_CastleValetDarach,
     EncounterEffect_TowerTycoonPalmer,
     EncounterEffect_ArcadeStarDahlia,
-    EncounterEffect_FactoryHeadThorton
+    EncounterEffect_FactoryHeadThorton,
+    EncounterEffect_HallMatronArgenta
 };
 
 static const u8 Unk_ov5_021F9988[8] = {

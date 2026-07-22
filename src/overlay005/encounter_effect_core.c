@@ -2610,7 +2610,7 @@ typedef struct GymLeaderEncounterParam {
 
 #define GYM_LEADER(NAME) (TRAINER_CLASS_LEADER_##NAME - TRAINER_CLASS_LEADER_ROARK)
 
-static const GymLeaderEncounterParam sGymLeaderEncounterParams[12] = {
+static const GymLeaderEncounterParam sGymLeaderEncounterParams[13] = {
     {
         .endX = 214 * FX32_ONE,
         .trainerID = TRAINER_LEADER_ROARK,
@@ -2777,6 +2777,20 @@ static const GymLeaderEncounterParam sGymLeaderEncounterParams[12] = {
         .bannerPlttIdx = factory_head_banner_NCLR,
         .bannerTileIdx = factory_head_banner_NCGR,
         .bannerTilemapIdx = factory_head_banner_NSCR,
+        .useOwnMugshotPltt = 1,
+    },
+    {
+        .endX = 214 * FX32_ONE,
+        .trainerID = TRAINER_HALL_MATRON_ARGENTA_ROUTE_228,
+        .trainerClass = TRAINER_CLASS_HALL_MATRON,
+        .mugshotPlttCount = 1,
+        .mugshotPlttIdx = hall_matron_mugshot_NCLR,
+        .mugshotTileIdx = hall_matron_field_mugshot_NCGR,
+        .mugshotCellIdx = hall_matron_field_mugshot_cell_NCER,
+        .mugshotAnimIdx = hall_matron_mugshot_anim_NANR,
+        .bannerPlttIdx = hall_matron_banner_NCLR,
+        .bannerTileIdx = hall_matron_banner_NCGR,
+        .bannerTilemapIdx = hall_matron_banner_NSCR,
         .useOwnMugshotPltt = 1,
     },
 };
@@ -3313,6 +3327,16 @@ void EncounterEffect_FactoryHeadThorton(SysTask *task, void *param)
 {
     EncounterEffect *encEffect = param;
     BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[11]);
+
+    if (done == TRUE) {
+        EncounterEffect_Finish(encEffect, task);
+    }
+}
+
+void EncounterEffect_HallMatronArgenta(SysTask *task, void *param)
+{
+    EncounterEffect *encEffect = param;
+    BOOL done = EncounterEffect_GymLeader(encEffect, HEAP_ID_FIELD1, &sGymLeaderEncounterParams[12]);
 
     if (done == TRUE) {
         EncounterEffect_Finish(encEffect, task);

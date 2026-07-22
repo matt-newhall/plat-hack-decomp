@@ -68,6 +68,7 @@ enum EncEffectsPairID {
     ENCEFF_TOWER_TYCOON,
     ENCEFF_ARCADE_STAR,
     ENCEFF_FACTORY_HEAD,
+    ENCEFF_HALL_MATRON,
 
     ENCEFF_NORMAL_TRAINER,
     ENCEFF_NORMAL_WILD,
@@ -118,6 +119,7 @@ static const EncEffectsPair sEncEffectsTable[ENCEFF_MAX] = {
     [ENCEFF_TOWER_TYCOON] = { ENCEFF_CUTIN_TOWER_TYCOON, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_ARCADE_STAR] = { ENCEFF_CUTIN_ARCADE_STAR, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_FACTORY_HEAD] = { ENCEFF_CUTIN_FACTORY_HEAD, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_HALL_MATRON] = { ENCEFF_CUTIN_HALL_MATRON, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_NORMAL_TRAINER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_TRAINER },
     [ENCEFF_NORMAL_WILD] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_WILD_POKEMON },
     [ENCEFF_ROCKET] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_GS_VS_ROCKET },
@@ -152,7 +154,7 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
 
             // janky exception to get brains in ROM hack not in the frontier
             // to show their VS sprites and music correctly
-            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON || trainerEffect == ENCEFF_ARCADE_STAR || trainerEffect == ENCEFF_FACTORY_HEAD) {
+            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON || trainerEffect == ENCEFF_ARCADE_STAR || trainerEffect == ENCEFF_FACTORY_HEAD || trainerEffect == ENCEFF_HALL_MATRON) {
                 return ENCEFF_FRONTIER_BRAIN;
             }
 
@@ -181,7 +183,7 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
                 return ENCEFF_DOUBLE_FRONTIER_BRAIN;
             }
 
-            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON || trainerEffect == ENCEFF_ARCADE_STAR || trainerEffect == ENCEFF_FACTORY_HEAD) {
+            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON || trainerEffect == ENCEFF_ARCADE_STAR || trainerEffect == ENCEFF_FACTORY_HEAD || trainerEffect == ENCEFF_HALL_MATRON) {
                 return trainerEffect;
             }
 
@@ -304,7 +306,7 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
         result = ENCEFF_ROCKET;
         break;
     case TRAINER_CLASS_HALL_MATRON:
-        result = ENCEFF_FRONTIER_BRAIN;
+        result = ENCEFF_HALL_MATRON;
         break;
     case TRAINER_CLASS_FACTORY_HEAD:
         result = ENCEFF_FACTORY_HEAD;

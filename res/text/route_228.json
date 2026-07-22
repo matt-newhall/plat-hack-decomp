@@ -14,6 +14,63 @@
         "Rt. 228\n",
         "Rt. 229"
       ]
+    },
+    {
+      "id": "Route228_Text_ArgentaPrebattle",
+      "en_US": [
+        "Argenta: Oh my! A challenger, all\n",
+        "the way out here?\r",
+        "How delightful. I am Argenta,\n",
+        "matron of the Battle Hall.\r",
+        "I imagine there were tense moments\n",
+        "getting here with your chosen one.\r",
+        "But understand that one shines the\n",
+        "brightest when a challenge is overcome.\r",
+        "We Frontier Brains still talk while we\n",
+        "are on vacation, and I’ve already heard\f",
+        "so much about you thanks to Dahlia and\f",
+        "darling Thorton!\r",
+        "Do show me your favorite Pokémon.\r",
+        "I must battle them for myself and see if\n",
+        "that brilliance is genuine."
+      ]
+    },
+    {
+      "id": "Route228_Text_ArgentaDefeated",
+      "en_US": [
+        "Argenta: Fufu... Splendid!\n",
+        "Simply splendid.\r",
+        "A good Trainer doesn’t force their\n",
+        "favorite on anyone.\r",
+        "A good one keeps with their favorite\n",
+        "without drama or fanfare.\r",
+        "That is how I see it, at least.\r",
+        "And, by the way I see it, you’re an\n",
+        "excellent Trainer!\r",
+        "The house does not often lose, yet\n",
+        "you made it look so easy.\r",
+        "Here, take this to remember your win."
+      ]
+    },
+    {
+      "id": "Route228_Text_ArgentaFarewell",
+      "en_US": [
+        "Those Ability Capsules allow you to\n",
+        "change a Pokémon’s Ability.\r",
+        "A favorite needn’t be left behind\n",
+        "for such a small reason.\r",
+        "I shall remember this. Until we\n",
+        "meet again in the Hall."
+      ]
+    },
+    {
+      "id": "Route228_Text_ArgentaNotReady",
+      "en_US": [
+        "Argenta: Oh dear. A performance\n",
+        "needs two partners, you know.\r",
+        "Return to me with two Pokemon fit\n",
+        "to battle, and we shall play."
+      ]
     }
   ]
 }

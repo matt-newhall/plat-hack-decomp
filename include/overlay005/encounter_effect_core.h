@@ -38,5 +38,6 @@ void EncounterEffect_CastleValetDarach(SysTask *task, void *param);
 void EncounterEffect_TowerTycoonPalmer(SysTask *task, void *param);
 void EncounterEffect_ArcadeStarDahlia(SysTask *task, void *param);
 void EncounterEffect_FactoryHeadThorton(SysTask *task, void *param);
+void EncounterEffect_HallMatronArgenta(SysTask *task, void *param);
 
 #endif // POKEPLATINUM_ENCOUNTER_EFFECT_CORE_H

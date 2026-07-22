@@ -148,7 +148,7 @@ endforeach
 # granularity, so the two copies are not interchangeable. Note that ncgr_cell_gen
 # picks the cell file up via -preservepath rather than as a declared input: after
 # editing field_mugshot_cell.json, touch field_mugshot.png or the tile data goes stale.
-foreach brain : ['castle_valet', 'tower_tycoon', 'arcade_star', 'factory_head']
+foreach brain : ['castle_valet', 'tower_tycoon', 'arcade_star', 'factory_head', 'hall_matron']
     trainer_encounter_mugshot_png += files(brain / 'field_mugshot.png')
     trainer_encounter_cell_json += files(brain / 'field_mugshot_cell.json')
 endforeach
