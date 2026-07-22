@@ -13,7 +13,6 @@ EternaCitySouthHouse_ProfOak:
     GoToIfSet FLAG_CAUGHT_ROAMING_LEGENDARY_BIRDS, EternaCitySouthHouse_PokedexRatingsCheckOak2
     Call EternaCitySouthHouse_CheckCaughtAllRoamingLegendaryBirds
     GoToIfEq VAR_RESULT, TRUE, EternaCitySouthHouse_CaughtAllRoamingLegendaryBirds
-    GoToIfSet FLAG_ACTIVATED_ROAMING_LEGENDARY_BIRDS, EternaCitySouthHouse_TryReactivateRoamingLegendaryBirds
     GoToIfSet FLAG_RECEIVED_ETERNA_CITY_SOUTH_HOUSE_UPGRADE, EternaCitySouthHouse_PokedexRatingsCheckOak
     BufferPlayerName 0
     Message EternaCitySouthHouse_Text_HowIsYourPokedexComingAlong
