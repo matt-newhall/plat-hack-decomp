@@ -103,6 +103,8 @@ static void MoveHerd(SpecialEncounter *speEnc, const int playerPreviousMap)
             Roamer_SetData(SpecialEncounter_GetRoamer(speEnc, i), ROAMER_DATA_MAP_ID, newRoute);
         }
     }
+
+    SpecialEncounter_FlagRoamerPositionsChanged();
 }
 
 // Used when Teleporting/Flying

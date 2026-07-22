@@ -41,6 +41,8 @@ int SpecialEncounter_GetPlayerPreviousMap(SpecialEncounter *speEnc);
 u8 SpecialEncounter_GetRoamerRouteIndex(SpecialEncounter *speEnc, const u8 roamerId);
 void SpecialEncounter_SetRoamerRouteIndex(SpecialEncounter *speEnc, const u8 roamerId, const u8 routeIndex);
 u8 SpecialEncounter_IsRoamerActive(SpecialEncounter *speEnc, const u8 slot);
+void SpecialEncounter_FlagRoamerPositionsChanged(void);
+BOOL SpecialEncounter_ConsumeRoamerPositionsChanged(void);
 void SpecialEncounter_ZeroRoamerData(Roamer **roamer);
 Roamer *SpecialEncounter_GetRoamer(SpecialEncounter *speEnc, const u8 slot);
 u32 Roamer_GetData(const Roamer *roamer, const u8 dataType);

@@ -111,6 +111,11 @@ static BOOL Init(PoketchMarkingMap *appData, PoketchSystem *poketchSys, BgConfig
     for (i = 0; i < ROAMING_SLOT_MAX; i++) {
         appData->roamers[i] = SpecialEncounter_GetRoamer(speEnc, i);
         appData->mapData.roamerData[i].isActive = Roamer_GetData(appData->roamers[i], ROAMER_DATA_ACTIVE);
+
+        if (appData->mapData.roamerData[i].isActive) {
+            appData->mapData.roamerData[i].mapID = Roamer_GetData(appData->roamers[i], ROAMER_DATA_MAP_ID);
+        }
+
         appData->roamerLookups = 0;
     }
 
@@ -296,6 +301,18 @@ static void UpdateMarkerPriorities(PoketchMarkingMap *appData, int activeMarker)
 static BOOL CheckPositionsUpdated(PoketchMarkingMap *appData)
 {
     BOOL updated = FALSE;
+
+    if (SpecialEncounter_ConsumeRoamerPositionsChanged()) {
+        for (int i = 0; i < ROAMING_SLOT_MAX; i++) {
+            appData->mapData.roamerData[i].isActive = Roamer_GetData(appData->roamers[i], ROAMER_DATA_ACTIVE);
+
+            if (appData->mapData.roamerData[i].isActive) {
+                appData->mapData.roamerData[i].mapID = Roamer_GetData(appData->roamers[i], ROAMER_DATA_MAP_ID);
+            }
+        }
+
+        updated = TRUE;
+    }
 
     if (PoketchSystem_IsPlayerMoving(appData->poketchSys)) {
         int x, y;

@@ -10,9 +10,24 @@
 #include "roaming_pokemon.h"
 #include "savedata.h"
 
+static BOOL sRoamerPositionsChanged;
+
 int SpecialEncounter_SaveSize(void)
 {
     return sizeof(SpecialEncounter);
+}
+
+void SpecialEncounter_FlagRoamerPositionsChanged(void)
+{
+    sRoamerPositionsChanged = TRUE;
+}
+
+BOOL SpecialEncounter_ConsumeRoamerPositionsChanged(void)
+{
+    BOOL changed = sRoamerPositionsChanged;
+
+    sRoamerPositionsChanged = FALSE;
+    return changed;
 }
 
 void SpecialEncounter_Init(SpecialEncounter *specialEncounter)

@@ -63,6 +63,7 @@ void RoamerAfterBattle_UpdateRoamers(FieldSystem *fieldSystem, FieldBattleDTO *b
         }
 
         MoveRoamersOffMap(specialEncounter, fieldSystem->location->mapId); // all roamers leave if you encounter one
+        SpecialEncounter_FlagRoamerPositionsChanged();
     } else {
         if (LCRNG_RandMod(100) < 30) { // 30% chance for roamers to leave even if you don't encounter one
             MoveRoamersOffMap(specialEncounter, fieldSystem->location->mapId);
