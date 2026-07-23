@@ -2,6 +2,7 @@
 
 #include "constants/map_object.h"
 #include "constants/player_avatar.h"
+#include "constants/scrcmd.h"
 
 #include "generated/movement_actions.h"
 
@@ -24,7 +25,9 @@
 #include "terrain_collision_manager.h"
 #include "unk_020655F4.h"
 
-#define FOLLOWER_LOCAL_ID 253
+// i initially had this on 0xFD but that was an ID collision with
+// some dynamic objects like Veilstone Gym tires
+#define FOLLOWER_LOCAL_ID LOCALID_FOLLOWER
 
 static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *gender)
 {
