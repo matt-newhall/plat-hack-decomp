@@ -451,6 +451,7 @@ static BOOL ScrCmd_StartFirstBattle(ScriptContext *ctx);
 static BOOL ScrCmd_StartCatchingTutorial(ScriptContext *ctx);
 static BOOL ScrCmd_SlatherHoneyTree(ScriptContext *ctx);
 static BOOL ScrCmd_GetHoneyTreeStatus(ScriptContext *ctx);
+static BOOL ScrCmd_GetHoneyTreeSpecies(ScriptContext *ctx);
 static BOOL ScrCmd_StartHoneyTreeBattle(ScriptContext *ctx);
 static BOOL ScrCmd_12A(ScriptContext *ctx);
 static BOOL ScrCmd_StartSignatureApp(ScriptContext *ctx);
@@ -4146,6 +4147,15 @@ static BOOL ScrCmd_GetHoneyTreeStatus(ScriptContext *ctx)
     u16 *var = ScriptContext_GetVarPointer(ctx);
 
     *var = HoneyTree_GetTreeSlatherStatus(fieldSystem);
+    return FALSE;
+}
+
+static BOOL ScrCmd_GetHoneyTreeSpecies(ScriptContext *ctx)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    u16 *var = ScriptContext_GetVarPointer(ctx);
+
+    *var = HoneyTree_GetSpecies(fieldSystem);
     return FALSE;
 }
 

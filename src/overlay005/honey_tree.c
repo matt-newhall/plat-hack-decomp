@@ -19,24 +19,28 @@
 #include "save_player.h"
 #include "special_encounter.h"
 #include "terrain_collision_manager.h"
-#include "trainer_info.h"
 
 #include "res/field/props/models/prop_models.naix"
 
-#define TREE_GROUP_NO_ENCOUNTER 0
-#define TREE_GROUP_A            1
-#define TREE_GROUP_B            2
-#define TREE_GROUP_C            3
+#define HONEY_ROLL_NONE 0xFFFF
 
-static void GetTreeEncounterGroup(const BOOL isMunchlaxTree, u8 *param1);
-static void GetTreeEncounterSlot(u8 *slot);
+// Single weighted honey-tree encounter table
+typedef struct HoneyEncounterHeader {
+    u16 count;
+    u16 totalWeight;
+} HoneyEncounterHeader;
+
+typedef struct HoneyEncounter {
+    u16 species;
+    u16 weight;
+} HoneyEncounter;
+
 static void DoTreeShakingAnimation(FieldSystem *fieldSystem, MapPropManager *param1, const int param2);
 static u8 GetTreeIdFromMapId(const int param0);
-static const int GetEncounterTableFromGroup(const u8 param0);
-static const int GetShakesFromGroup(const u8 param0);
 static const BOOL GetShakingValue(const int numShakes, u8 *value);
 static const BOOL SixHoursSinceSlathered(const int param0);
-static BOOL IsMunchlaxTree(const u32 param0, const u8 param1);
+static u8 *HoneyTree_ReadTable(void);
+static u16 RollHoneyEncounter(const u8 *table);
 
 static const int sHoneyTreeMapIds[NUM_HONEY_TREES] = {
     MAP_HEADER_ROUTE_205_SOUTH,
@@ -141,7 +145,6 @@ void HoneyTree_SlatherTree(FieldSystem *fieldSystem)
     u8 treeId;
     PlayerHoneyTreeStates *treeDat;
     HoneyTree *tree;
-    BOOL munchlaxTree;
 
     treeId = GetTreeIdFromMapId(fieldSystem->location->mapId);
     GF_ASSERT(treeId != NUM_HONEY_TREES);
@@ -149,33 +152,17 @@ void HoneyTree_SlatherTree(FieldSystem *fieldSystem)
     treeDat = SpecialEncounter_GetPlayerHoneyTreeStates(SaveData_GetSpecialEncounters(fieldSystem->saveData));
     tree = SpecialEncounter_GetHoneyTree(treeId, treeDat);
 
-    tree->minutesRemaining = (24 * 60); // slathering lasts for one day
+    tree->minutesRemaining = (24 * 60); // kept non-zero so the tree reads as slathered until the immediate battle unslathers it
 
-    TrainerInfo *trainer = SaveData_GetTrainerInfo(fieldSystem->saveData);
-    munchlaxTree = IsMunchlaxTree(TrainerInfo_ID(trainer), treeId);
+    // Honey trees give an immediate encounter
+    u8 *table = HoneyTree_ReadTable();
+    u16 index = RollHoneyEncounter(table);
+    Heap_Free(table);
 
-    // Slathering the same tree twice in succession has a 90% chance to give the same group again.
-    if (SpecialEncounter_GetLastSlatheredTreeId(treeDat) == treeId) {
-        if ((LCRNG_RandMod(100)) < 90) {
-            GetTreeEncounterSlot(&tree->encounterSlot);
-            tree->numShakes = GetShakesFromGroup(tree->encounterGroup);
-            return;
-        }
-    }
-
-    GetTreeEncounterGroup(munchlaxTree, &tree->encounterGroup);
-
-    if (tree->encounterGroup != TREE_GROUP_NO_ENCOUNTER) {
-        GetTreeEncounterSlot(&tree->encounterSlot);
-
-        tree->encounterTableIndex = GetEncounterTableFromGroup(tree->encounterGroup);
-    } else {
-        tree->encounterTableIndex = 0;
-        tree->encounterSlot = 0;
-        tree->minutesRemaining = 0;
-    }
-
-    tree->numShakes = GetShakesFromGroup(tree->encounterGroup);
+    tree->encounterTableIndex = 0;
+    tree->encounterGroup = 0;
+    tree->numShakes = 0;
+    tree->encounterSlot = (index == HONEY_ROLL_NONE) ? 0 : (u8)index;
 
     SpecialEncounter_SetLastSlatheredTreeId(treeId, treeDat);
 }
@@ -204,120 +191,6 @@ void HoneyTree_StopShaking(FieldSystem *fieldSystem)
 
         fieldSystem->unk_A8->trees[treeId].isShaking = FALSE;
     }
-}
-
-// Group 0 is no encounter. Group 3 is Munchlax.
-// For munchlax trees the rates are 9/20/70/1.
-// For normal trees the rates are 10/70/20/0.
-static void GetTreeEncounterGroup(const BOOL isMunchlaxTree, u8 *group)
-{
-    int roll = LCRNG_RandMod(100);
-
-    if (isMunchlaxTree) {
-        if (roll < 1) {
-            *group = TREE_GROUP_C;
-        } else if (roll < 10) {
-            *group = TREE_GROUP_NO_ENCOUNTER;
-        } else if (roll < 30) {
-            *group = TREE_GROUP_A;
-        } else {
-            *group = TREE_GROUP_B;
-        }
-    } else {
-        if (roll < 10) {
-            *group = TREE_GROUP_NO_ENCOUNTER;
-        } else if (roll < 30) {
-            *group = TREE_GROUP_B;
-        } else {
-            *group = TREE_GROUP_A;
-        }
-    }
-}
-
-// Rates per slot are 40, 20, 20, 10, 5, 5
-static void GetTreeEncounterSlot(u8 *slot)
-{
-    int roll = LCRNG_RandMod(100);
-
-    if (roll < 5) {
-        *slot = 5;
-    } else if (roll < 10) {
-        *slot = 4;
-    } else if (roll < 20) {
-        *slot = 3;
-    } else if (roll < 40) {
-        *slot = 2;
-    } else if (roll < 60) {
-        *slot = 1;
-    } else {
-        *slot = 0;
-    }
-}
-
-// Return value is used to read from the encounter table NARC. This is effectively group - 1.
-static const int GetEncounterTableFromGroup(const u8 group)
-{
-    int table;
-
-    if (group == TREE_GROUP_C) {
-        table = 2;
-    } else if (group == TREE_GROUP_B) {
-        table = 1;
-    } else {
-        table = 0;
-    }
-
-    return table;
-}
-
-static const int GetShakesFromGroup(const u8 group)
-{
-    int numShakes;
-    int roll = LCRNG_RandMod(100);
-
-    if (group == TREE_GROUP_C) {
-        if (roll < 5) {
-            numShakes = 2;
-        } else if (roll < 6) {
-            numShakes = 1;
-        } else if (roll < 7) {
-            numShakes = 0;
-        } else {
-            numShakes = 3;
-        }
-    } else if (group == TREE_GROUP_B) {
-        if (roll < 75) {
-            numShakes = 2;
-        } else if (roll < 95) {
-            numShakes = 1;
-        } else if (roll < 96) {
-            numShakes = 0;
-        } else {
-            numShakes = 3;
-        }
-    } else if (group == TREE_GROUP_A) {
-        if (roll < 19) {
-            numShakes = 2;
-        } else if (roll < 79) {
-            numShakes = 1;
-        } else if (roll < 99) {
-            numShakes = 0;
-        } else {
-            numShakes = 3;
-        }
-    } else {
-        if (roll < 1) {
-            numShakes = 2;
-        } else if (roll < 19) {
-            numShakes = 1;
-        } else if (roll < 99) {
-            numShakes = 0;
-        } else {
-            numShakes = 3;
-        }
-    }
-
-    return numShakes;
 }
 
 // Related to the Honey Tree shaking animation. Not sure what exactly this value represents. Number of times the anim repeats, maybe?
@@ -405,41 +278,35 @@ static const BOOL SixHoursSinceSlathered(const int minutesLeft)
     }
 }
 
-static BOOL IsMunchlaxTree(const u32 trainerId, const u8 treeId)
+static u8 *HoneyTree_ReadTable(void)
 {
-    u8 i, j;
-    u8 munchlaxTreeIds[4];
+    int member = ((GAME_VERSION == VERSION_DIAMOND) || (GAME_VERSION == VERSION_PLATINUM))
+        ? sEncounterTableIndexes_DPt[0]
+        : sEncounterTableIndexes_P_Unused[0];
 
-    munchlaxTreeIds[0] = (trainerId >> 24) & 0xff;
-    munchlaxTreeIds[1] = (trainerId >> 16) & 0xff;
-    munchlaxTreeIds[2] = (trainerId >> 8) & 0xff;
-    munchlaxTreeIds[3] = trainerId & 0xff;
+    return NARC_AllocAtEndAndReadWholeMemberByIndexPair(NARC_INDEX_ARC__ENCDATA_EX, member, HEAP_ID_FIELD1);
+}
 
-    munchlaxTreeIds[0] %= NUM_HONEY_TREES;
-    munchlaxTreeIds[1] %= NUM_HONEY_TREES;
-    munchlaxTreeIds[2] %= NUM_HONEY_TREES;
-    munchlaxTreeIds[3] %= NUM_HONEY_TREES;
+static u16 RollHoneyEncounter(const u8 *table)
+{
+    const HoneyEncounterHeader *header = (const HoneyEncounterHeader *)table;
+    const HoneyEncounter *entries = (const HoneyEncounter *)(table + sizeof(HoneyEncounterHeader));
 
-    // Increments tree IDs if they are equal, so the player will always have 4 possible Munchlax trees.
-    for (i = 1; i < 4; i++) {
-        for (j = 0; j < i; j++) {
-            if (munchlaxTreeIds[j] == munchlaxTreeIds[i]) {
-                munchlaxTreeIds[i]++;
-
-                if (munchlaxTreeIds[i] >= NUM_HONEY_TREES) {
-                    munchlaxTreeIds[i] = 0;
-                }
-            }
-        }
+    if (header->totalWeight == 0) {
+        return HONEY_ROLL_NONE;
     }
 
-    for (i = 0; i < 4; i++) {
-        if (treeId == munchlaxTreeIds[i]) {
-            return TRUE;
+    int roll = LCRNG_RandMod(header->totalWeight);
+
+    for (u16 i = 0; i < header->count; i++) {
+        if (roll < entries[i].weight) {
+            return i;
         }
+
+        roll -= entries[i].weight;
     }
 
-    return FALSE;
+    return HONEY_ROLL_NONE;
 }
 
 int HoneyTree_GetSpecies(FieldSystem *fieldSystem)
@@ -447,19 +314,14 @@ int HoneyTree_GetSpecies(FieldSystem *fieldSystem)
     u8 treeId = GetTreeIdFromMapId(fieldSystem->location->mapId);
     GF_ASSERT(treeId != NUM_HONEY_TREES);
 
-    int *narcData;
-    int species;
     PlayerHoneyTreeStates *treeDat = SpecialEncounter_GetPlayerHoneyTreeStates(SaveData_GetSpecialEncounters(fieldSystem->saveData));
     HoneyTree *tree = SpecialEncounter_GetHoneyTree(treeId, treeDat);
 
-    if ((GAME_VERSION == VERSION_DIAMOND) || (GAME_VERSION == VERSION_PLATINUM)) {
-        narcData = NARC_AllocAtEndAndReadWholeMemberByIndexPair(NARC_INDEX_ARC__ENCDATA_EX, sEncounterTableIndexes_DPt[tree->encounterTableIndex], HEAP_ID_FIELD1);
-    } else {
-        narcData = NARC_AllocAtEndAndReadWholeMemberByIndexPair(NARC_INDEX_ARC__ENCDATA_EX, sEncounterTableIndexes_P_Unused[tree->encounterTableIndex], HEAP_ID_FIELD1);
-    }
+    u8 *table = HoneyTree_ReadTable();
+    const HoneyEncounter *entries = (const HoneyEncounter *)(table + sizeof(HoneyEncounterHeader));
 
-    species = narcData[tree->encounterSlot];
-    Heap_Free(narcData);
+    int species = entries[tree->encounterSlot].species;
+    Heap_Free(table);
 
     return species;
 }

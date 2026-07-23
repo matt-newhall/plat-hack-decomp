@@ -517,12 +517,14 @@ _06D5:
     RemoveItem ITEM_HONEY, 1, VAR_RESULT
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_HONEY_USED
     SlatherHoneyTree
-    WaitTime 10, VAR_RESULT
     Message pl_msg_00000213_00051
     WaitButton
     CloseMessage
-    ReleaseAll
-    End
+    WaitTime 20, VAR_RESULT
+    GetHoneyTreeSpecies VAR_RESULT
+    PlayCry VAR_RESULT
+    WaitCry
+    GoTo _06F4
 
 _06F4:
     IncrementGameRecord RECORD_UNK_117
