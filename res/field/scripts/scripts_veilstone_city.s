@@ -609,7 +609,6 @@ VeilstoneCity_EnterWarehouseZ597:
     End
 
 VeilstoneCity_WarpToWarehouse:
-    SetFlag FLAG_HIDE_PASTORIA_CITY_RIVAL
     SetFlag FLAG_HIDE_VEILSTONE_CITY_LOOKER
     ClearFlag FLAG_HIDE_VEILSTONE_CITY_GALACTIC_WAREHOUSE_LOOKER
     SetVar VAR_VEILSTONE_CITY_GALACTIC_WAREHOUSE_STATE, 1
@@ -1422,11 +1421,11 @@ VeilstoneCity_DrifloonInteract:
     End
 
 VeilstoneCity_GruntBlockNorthWest:
-	PlayFanfare SEQ_SE_CONFIRM
+	PlaySE SEQ_SE_CONFIRM
 	LockAll
 	FacePlayer
-	Message 69
+	Message VeilstoneCity_Text_GruntNorthWest
 	WaitButton
 	CloseMessage
 	ReleaseAll
-End
+    End
