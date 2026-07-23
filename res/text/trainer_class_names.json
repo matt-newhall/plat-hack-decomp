@@ -448,6 +448,10 @@
     {
       "id": "pl_msg_00000619_00111",
       "en_US": "Commander"
+    },
+    {
+      "id": "pl_msg_00000619_00112",
+      "en_US": "Leader"
     }
   ]
 }

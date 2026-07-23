@@ -76,6 +76,7 @@ enum EncEffectsPairID {
     ENCEFF_ROCKET,
     ENCEFF_LEADER_FALKNER,
     ENCEFF_LEADER_WHITNEY,
+    ENCEFF_LEADER_JASMINE,
 
     ENCEFF_MAX,
 };
@@ -124,7 +125,8 @@ static const EncEffectsPair sEncEffectsTable[ENCEFF_MAX] = {
     [ENCEFF_NORMAL_WILD] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_WILD_POKEMON },
     [ENCEFF_ROCKET] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_GS_VS_ROCKET },
     [ENCEFF_LEADER_FALKNER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_GYM_LEADER },
-    [ENCEFF_LEADER_WHITNEY] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_GYM_LEADER }
+    [ENCEFF_LEADER_WHITNEY] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_GYM_LEADER },
+    [ENCEFF_LEADER_JASMINE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_GYM_LEADER }
 };
 
 static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto);
@@ -325,6 +327,9 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
         break;
     case TRAINER_CLASS_LEADER_WHITNEY:
         result = ENCEFF_LEADER_WHITNEY;
+        break;
+    case TRAINER_CLASS_LEADER_JASMINE:
+        result = ENCEFF_LEADER_JASMINE;
         break;
     default:
         break;
