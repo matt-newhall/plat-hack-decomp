@@ -70,7 +70,8 @@ enum ShopStates {
     SHOP_STATE_REINIT_SHOP,
     SHOP_STATE_REINIT_MERCHANT_MESSAGE,
     SHOP_STATE_SHOW_EXIT_MESSAGE,
-    SHOP_STATE_EXIT
+    SHOP_STATE_EXIT,
+    SHOP_STATE_ENTER_BP_MODE
 };
 
 #define MAX_ITEM_SHOWN 7
@@ -101,6 +102,11 @@ typedef struct {
     u16 *itemsPtr;
     u8 itemsCount;
     u8 unused[2];
+    u16 *normalItemsPtr;
+    u16 *bpItemsPtr;
+    u8 normalItemsCount;
+    u8 bpItemsCount;
+    u8 bpMode;
     u8 state;
     String *string;
     u8 bgPriorities[4];
