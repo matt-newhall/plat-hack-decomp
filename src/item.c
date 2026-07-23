@@ -2607,8 +2607,8 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     },
     [ITEM_MINI_PC] = {
         .dataID = 0x1D7,
-        .iconID = rule_book_NCGR,
-        .paletteID = rule_book_NCLR,
+        .iconID = scanner_NCGR,
+        .paletteID = scanner_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_POKE_RADAR] = {
