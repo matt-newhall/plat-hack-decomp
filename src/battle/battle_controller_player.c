@@ -4773,13 +4773,16 @@ static BOOL BattleControllerPlayer_CheckBattleOver(BattleSystem *battleSys, Batt
         case TRAINER_CLASS_LEADER_CANDICE:
         case TRAINER_CLASS_LEADER_BYRON:
         case TRAINER_CLASS_LEADER_VOLKNER:
+            Sound_PlayBGM(SEQ_VICTORY_GYM_LEADER);
+            break;
+
         case TRAINER_CLASS_LEADER_FALKNER:
         case TRAINER_CLASS_LEADER_WHITNEY:
         case TRAINER_CLASS_LEADER_JASMINE:
         case TRAINER_CLASS_LEADER_MORTY:
         case TRAINER_CLASS_LEADER_PRYCE:
         case TRAINER_CLASS_LEADER_CLAIRE:
-            Sound_PlayBGM(SEQ_VICTORY_GYM_LEADER);
+            Sound_PlayBGM(SEQ_VICTORY_HGSS_GYM_LEADER);
             break;
 
         case TRAINER_CLASS_TOWER_TYCOON:
