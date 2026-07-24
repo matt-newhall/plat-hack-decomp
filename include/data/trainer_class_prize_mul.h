@@ -115,5 +115,8 @@ static u8 sTrainerClassPrizeMul[] = {
     [TRAINER_CLASS_LEADER_WHITNEY]          = 30,
     [TRAINER_CLASS_COMMANDER_CHARON]        = 20,
     [TRAINER_CLASS_LEADER_JASMINE]          = 30,
+    [TRAINER_CLASS_LEADER_MORTY]            = 30,
+    [TRAINER_CLASS_LEADER_PRYCE]            = 30,
+    [TRAINER_CLASS_LEADER_CLAIRE]           = 30,
 };
 // clang-format on
