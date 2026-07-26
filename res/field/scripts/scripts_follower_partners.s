@@ -9,6 +9,7 @@
     ScriptEntry FollowerPartners_Mira
     ScriptEntry FollowerPartners_Marley
     ScriptEntry FollowerMon_Talk
+    ScriptEntry FollowerPartners_Paul
     ScriptEntryEnd
 
 FollowerPartners_Rival:
@@ -421,6 +422,37 @@ FollowerMon_Talk_VeryHigh_2:
 
 FollowerMon_Talk_End:
     WaitCry
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+FollowerPartners_Paul:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    GoToIfGe VAR_FOLLOWER_PAUL_TIMES_TALKED, 2, FollowerPartners_Paul_WereWastingTime
+    GoToIfEq VAR_FOLLOWER_PAUL_TIMES_TALKED, 1, FollowerPartners_Paul_ThisLakeIsCrawlingWithWeakMagikarp
+    BufferPlayerName 0
+    Message FollowerPartners_Text_Paul_DontGetTheWrongIdea
+    GoTo FollowerPartners_Paul_IncreaseTimesTalked
+    End
+
+FollowerPartners_Paul_ThisLakeIsCrawlingWithWeakMagikarp:
+    BufferPlayerName 0
+    Message FollowerPartners_Text_Paul_ThisLakeIsCrawlingWithWeakMagikarp
+    GoTo FollowerPartners_Paul_IncreaseTimesTalked
+    End
+
+FollowerPartners_Paul_WereWastingTime:
+    Message FollowerPartners_Text_Paul_WereWastingTime
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+FollowerPartners_Paul_IncreaseTimesTalked:
+    AddVar VAR_FOLLOWER_PAUL_TIMES_TALKED, 1
     WaitButton
     CloseMessage
     ReleaseAll

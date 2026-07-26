@@ -35,6 +35,32 @@
     {
       "id": "LakeValorDrained_Text_MagikarpIsFlopping",
       "en_US": "A MAGIKARP is weakly flopping about..."
+    },
+    {
+      "id": "LakeValorDrained_Text_PaulJoin",
+      "en_US": [
+        "...You again. Guessing you also\n",
+        "heard the loud explosion.\r",
+        "Team Galactic drained a whole lake\n",
+        "just to grab a Pokémon. Pathetic.\r",
+        "I’m going in there. Keep up if you\n",
+        "can. Don’t slow me down."
+      ]
+    },
+    {
+      "id": "LakeValorDrained_Text_PlayerDecidedToGoWithPaul",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} decided to go with\n",
+        "Paul!"
+      ]
+    },
+    {
+      "id": "LakeValorDrained_Text_PaulStepBack",
+      "en_US": [
+        "Backing out already?\r",
+        "Fine. I’ll wait right here.\n",
+        "Come find me when you’re ready."
+      ]
     }
   ]
 }
