@@ -106,6 +106,9 @@ VeilstoneCity_TriggerCrasherWake:
     Message VeilstoneCity_Text_YoureChallengingTheGymLeader
     Message VeilstoneCity_Text_ImCrasherWakeOfPastoriaGym
     CloseMessage
+    GetPlayerGender VAR_0x8004
+    CallIfEq VAR_0x8004, GENDER_MALE, VeilstoneCity_DawnWakeChat
+    CallIfEq VAR_0x8004, GENDER_FEMALE, VeilstoneCity_LucasWakeChat
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     CallIfEq VAR_0x8004, 681, VeilstoneCity_CrasherWakeLeaveX681
     CallIfEq VAR_0x8004, 682, VeilstoneCity_CrasherWakeLeaveX682
@@ -135,6 +138,22 @@ VeilstoneCity_DawnWillYouTakeTheGymChallenge:
 VeilstoneCity_LucasWillYouTakeOnTheGymLeader:
     BufferPlayerName 0
     Message VeilstoneCity_Text_LucasWillYouTakeOnTheGymLeader
+    Return
+
+VeilstoneCity_DawnWakeChat:
+    BufferPlayerName 0
+    Message VeilstoneCity_Text_DawnNiceToMeetYou
+    CloseMessage
+    Message VeilstoneCity_Text_WakeThemeSong
+    CloseMessage
+    Return
+
+VeilstoneCity_LucasWakeChat:
+    BufferPlayerName 0
+    Message VeilstoneCity_Text_LucasNiceToMeetYou
+    CloseMessage
+    Message VeilstoneCity_Text_WakeThemeSong
+    CloseMessage
     Return
 
 VeilstoneCity_DawnGoodLuck:
