@@ -1,19 +1,50 @@
 {
   "key": 48768,
-  "messages": [
-    {
-      "id": "Route226_Text_SignRt226SurvivalArea",
-      "en_US": [
-        "Rt. 226\n",
-        "Survival Area"
-      ]
-    },
-    {
-      "id": "Route226_Text_SignRt227Rt228",
-      "en_US": [
-        "Rt. 227\n",
-        "Rt. 228"
-      ]
-    }
-  ]
+    "messages": [
+        {
+            "id": "Route226_Text_SignRt226SurvivalArea",
+            "en_US": [
+                "Rt. 226\n",
+                "Survival Area"
+            ]
+        },
+        {
+            "id": "Route226_Text_SignRt227Rt228",
+            "en_US": [
+                "Rt. 227\n",
+                "Rt. 228"
+            ]
+        },
+        {
+            "id": "Route226_Text_Grunt_KeepEyesPeeled",
+            "en_US": [
+                "Grunt 1: Remember, keep your eyes\n",
+                "peeled for the kid that interfered\f",
+                "at the Valley Windworks.\r"
+            ]
+        },
+        {
+            "id": "Route226_Text_Grunt_SoLongAgo",
+            "en_US": [
+                "Grunt 2: That was so long ago!\n",
+                "I don’t remember what they look like.\r"
+            ]
+        },
+        {
+            "id": "Route226_Text_Grunt_CommanderCharon",
+            "en_US": [
+                "Grunt 1: Well then we’ll just have to\n",
+                "block anyone from getting through\f",
+                "until Commander Charon is finished at\f",
+                "the volcano.\r"
+            ]
+        },
+        {
+            "id": "Route226_Text_SignGrunt_FromTheWest",
+            "en_US": [
+                "Grunt 2: But what if someone comes from\n",
+                "the west?\r"
+            ]
+        }
+    ]
 }
