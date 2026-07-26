@@ -58,7 +58,7 @@ StarkMountainRoom1_OnlyOnePokemon:
     PlaySE SEQ_SE_DP_KAIDAN2
     FadeScreenOut
     WaitFadeScreen
-    Warp MAP_HEADER_ROUTE_227, 0, 750, 232, DIR_SOUTH
+    Warp MAP_HEADER_STARK_MOUNTAIN_OUTSIDE, 0, 750, 232, DIR_SOUTH
     FadeScreenIn
     WaitFadeScreen
     ReleaseAll
