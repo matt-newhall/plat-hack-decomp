@@ -34,6 +34,19 @@
         "Rt. 229\n",
         "Resort Area"
       ]
+    },
+    {
+      "id": "Route229_Text_BlockDesertPersonSpeak",
+      "en_US": [
+        "Hey pal, the desert’s blocked\n",
+        "currently, huge dust clouds.\r",
+        "If you want to head over to the\n",
+        "Fight Area, I’d recommend going\f",
+        "south and then west through\f",
+        "Route 230.\r",
+        "Oh, thought you could skip it?\r",
+        "Nice try, lol."
+      ]
     }
   ]
 }

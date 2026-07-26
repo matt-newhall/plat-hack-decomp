@@ -25,19 +25,12 @@ FullmoonIslandForest_Cresselia:
     LockObject LOCALID_CRESSELIA
     SetFlag FLAG_HIDE_FULLMOON_ISLAND_FOREST_CRESSELIA
     RemoveObject LOCALID_CRESSELIA
-    ActivateRoamingPokemon ROAMING_SLOT_CRESSELIA
-    GoToIfEq VAR_ROAMING_CRESSELIA_STATE, ROAMER_STATE_RESET, FullmoonIslandForest_ResetCresseliaRoamingState
     ClearFlag FLAG_OBTAINED_FULLMOON_ISLAND_FOREST_LUNAR_WING
     AddObject LOCALID_ITEM_LUNAR_WING
     SetFlag FLAG_OBTAINED_LUNAR_WING
     Message FullmoonIslandForest_Text_SomethingSparkling
     WaitButton
     CloseMessage
-    ReleaseAll
-    End
-
-FullmoonIslandForest_ResetCresseliaRoamingState:
-    SetVar VAR_ROAMING_CRESSELIA_STATE, ROAMER_STATE_ROAMING
     ReleaseAll
     End
 

@@ -11977,6 +11977,16 @@
             "MD5": "3c07e981815a45e15cb172687756a70f"
         },
         {
+            "name": "SEQ_BATTLE_HGSS_GYM_LEADER.sseq",
+            "type": "SEQ",
+            "MD5": "00000000000000000000000000000000"
+        },
+        {
+            "name": "SEQ_VICTORY_HGSS_GYM_LEADER.sseq",
+            "type": "SEQ",
+            "MD5": "00000000000000000000000000000000"
+        },
+        {
             "name": "BANK_BGM_DUNGEON9.sbnk",
             "type": "BANK",
             "MD5": "2ffbbb25b5914ead0cf4842a0042f6ed"
@@ -11990,6 +12000,16 @@
             "name": "BANK_GS_BASIC.sbnk",
             "type": "BANK",
             "MD5": "54de450c30341971180e1d89143f6787"
+        },
+        {
+            "name": "BANK_BATTLE_HGSS_GYM_LEADER.sbnk",
+            "type": "BANK",
+            "MD5": "00000000000000000000000000000000"
+        },
+        {
+            "name": "BANK_VICTORY_HGSS_GYM_LEADER.sbnk",
+            "type": "BANK",
+            "MD5": "00000000000000000000000000000000"
         },
         {
             "name": "WAVE_ARC_BGM_DUNGEON9.swar",
@@ -12081,6 +12101,76 @@
                 "0E.swav",
                 "0F.swav",
                 "10.swav"
+            ]
+        },
+        {
+            "name": "WAVE_ARC_BATTLE_HGSS_GYM_LEADER.swar",
+            "type": "WAVARC",
+            "MD5": "00000000000000000000000000000000",
+            "subFile": [
+                "00.swav",
+                "01.swav",
+                "02.swav",
+                "03.swav",
+                "04.swav",
+                "05.swav",
+                "06.swav",
+                "07.swav",
+                "08.swav",
+                "09.swav",
+                "0A.swav",
+                "0B.swav",
+                "0C.swav",
+                "0D.swav",
+                "0E.swav",
+                "0F.swav",
+                "10.swav",
+                "11.swav",
+                "12.swav",
+                "13.swav",
+                "14.swav",
+                "15.swav",
+                "16.swav",
+                "17.swav",
+                "18.swav",
+                "19.swav",
+                "1A.swav",
+                "1B.swav",
+                "1C.swav",
+                "1D.swav",
+                "1E.swav",
+                "1F.swav",
+                "20.swav",
+                "21.swav"
+            ]
+        },
+        {
+            "name": "WAVE_ARC_VICTORY_HGSS_GYM_LEADER.swar",
+            "type": "WAVARC",
+            "MD5": "00000000000000000000000000000000",
+            "subFile": [
+                "00.swav",
+                "01.swav",
+                "02.swav",
+                "03.swav",
+                "04.swav",
+                "05.swav",
+                "06.swav",
+                "07.swav",
+                "08.swav",
+                "09.swav",
+                "0A.swav",
+                "0B.swav",
+                "0C.swav",
+                "0D.swav",
+                "0E.swav",
+                "0F.swav",
+                "10.swav",
+                "11.swav",
+                "12.swav",
+                "13.swav",
+                "14.swav",
+                "15.swav"
             ]
         }
     ]

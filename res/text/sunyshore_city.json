@@ -283,6 +283,54 @@
         "Pokémon Rock\n",
         "Sunyshore’s Heritage Site"
       ]
+    },
+    {
+      "id": "SunyshoreCity_Text_JasmineChallenge",
+      "en_US": [
+        "Jasmine: ...Was that your friend?\r",
+        "Seeing how you two got along made me\n",
+        "happy somehow.\r",
+        "...Um... Watching the two of you...\n",
+        "It made me want to battle again.\r",
+        "I came all this way to get stronger,\n",
+        "after all.\r",
+        "...So... please...\n",
+        "Would you have a battle with me?"
+      ]
+    },
+    {
+      "id": "SunyshoreCity_Text_JasmineReadyNow",
+      "en_US": [
+        "Jasmine: ...Oh! It’s you again.\r",
+        "...Um... I’m still hoping we can\n",
+        "have that battle.\r",
+        "Are you ready now?"
+      ]
+    },
+    {
+      "id": "SunyshoreCity_Text_JasmineLetsBattle",
+      "en_US": [
+        "...Thank you.\n",
+        "I’ll give it everything I have!\r"
+      ]
+    },
+    {
+      "id": "SunyshoreCity_Text_JasmineIllBeWaiting",
+      "en_US": [
+        "...Oh... I understand.\r",
+        "Please take your time.\n",
+        "I’ll be waiting right here."
+      ]
+    },
+    {
+      "id": "SunyshoreCity_Text_JasmineThanksForMatch",
+      "en_US": [
+        "Jasmine: ...You really are strong.\r",
+        "Thank you for the match.\n",
+        "It made me feel sort of warm inside.\r",
+        "It may seem odd, but I’d like you to\n",
+        "have this as my thanks.\r"
+      ]
     }
   ]
 }

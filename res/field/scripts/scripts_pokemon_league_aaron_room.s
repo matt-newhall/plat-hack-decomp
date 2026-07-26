@@ -15,15 +15,15 @@ PokemonLeagueAaronRoom_Aaron:
     PlayTrainerEncounterBGM TRAINER_ELITE_FOUR_AARON
     Message PokemonLeagueAaronRoom_Text_AaronIntro
     CloseMessage
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueAaronRoom_StartAaronBattle
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueAaronRoom_StartAaronRematchBattle
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueAaronRoom_StartAaronBattle
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueAaronRoom_StartAaronRematchBattle
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, PokemonLeagueAaronRoom_BlackOut
     SetFlag FLAG_DEFEATED_AARON
     PlaySE SEQ_SE_DP_KI_GASYAN
     RemoveObject LOCALID_EXIT_DOOR
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueAaronRoom_CreateJournalEventDefeatedAaron
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueAaronRoom_CreateJournalEventDefeatedRematchAaron
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueAaronRoom_CreateJournalEventDefeatedAaron
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueAaronRoom_CreateJournalEventDefeatedRematchAaron
     Message PokemonLeagueAaronRoom_Text_AaronDefeat
     WaitButton
     CloseMessage

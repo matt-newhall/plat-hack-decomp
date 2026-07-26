@@ -1801,6 +1801,11 @@
     .short \destVar
     .endm
 
+    .macro GetHoneyTreeSpecies destVar
+    .short SCRCMD_GETHONEYTREESPECIES
+    .short \destVar
+    .endm
+
     .macro StartHoneyTreeBattle
     .short SCRCMD_STARTHONEYTREEBATTLE
     .endm

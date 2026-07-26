@@ -5,12 +5,13 @@
 
     ScriptEntry ValorCavern_OnTransition
     ScriptEntry ValorCavern_OnLoad
-    ScriptEntry ValorCavern_Azelf
     ScriptEntry ValorCavern_Saturn
+    ScriptEntry ValorCavern_OnFrameSaturnBattle
     ScriptEntryEnd
 
 ValorCavern_OnTransition:
     SetFlag FLAG_FIRST_ARRIVAL_VALOR_CAVERN
+    ClearHasPartner
     GoToIfUnset FLAG_GALACTIC_LEFT_LAKE_VALOR, ValorCavern_RemoveWarpLakeValorNormal
     GoToIfSet FLAG_GALACTIC_LEFT_LAKE_VALOR, ValorCavern_RemoveWarpLakeValorDrained
     End
@@ -25,51 +26,15 @@ ValorCavern_RemoveWarpLakeValorDrained:
 
 ValorCavern_OnLoad:
     SetFlag FLAG_FIRST_ARRIVAL_VALOR_CAVERN
-    CallIfSet FLAG_MAP_LOCAL, ValorCavern_RemoveAzelf
     GoToIfUnset FLAG_GALACTIC_LEFT_LAKE_VALOR, ValorCavern_RemoveWarpLakeValorNormal
     GoToIfSet FLAG_GALACTIC_LEFT_LAKE_VALOR, ValorCavern_RemoveWarpLakeValorDrained
-    End
-
-ValorCavern_RemoveAzelf:
-    SetFlag FLAG_HIDE_VALOR_CAVERN_AZELF
-    RemoveObject LOCALID_AZELF
-    ClearFlag FLAG_MAP_LOCAL
-    Return
-
-ValorCavern_Azelf:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    PlayCry SPECIES_AZELF
-    Message ValorCavern_Text_AzelfCry
-    CloseMessage
-    SetFlag FLAG_MAP_LOCAL
-    StartLegendaryBattle SPECIES_AZELF, 50
-    ClearFlag FLAG_MAP_LOCAL
-    CheckWonBattle VAR_RESULT
-    GoToIfEq VAR_RESULT, FALSE, ValorCavern_LostBattleAzelf
-    CheckDidNotCapture VAR_RESULT
-    GoToIfEq VAR_RESULT, TRUE, ValorCavern_AzelfDisappeared
-    SetFlag FLAG_CAUGHT_AZELF
-    ReleaseAll
-    End
-
-ValorCavern_AzelfDisappeared:
-    Message ValorCavern_Text_AzelfDisappeared
-    WaitButton
-    CloseMessage
-    ReleaseAll
-    End
-
-ValorCavern_LostBattleAzelf:
-    BlackOutFromBattle
-    ReleaseAll
     End
 
 ValorCavern_Saturn:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     Message ValorCavern_Text_SaturnMissionIsProceeding
+    WaitButton
     CloseMessage
     FacePlayer
     ApplyMovement LOCALID_SATURN, ValorCavern_Movement_SaturnExclamationMark
@@ -101,5 +66,78 @@ ValorCavern_LostBattleCommanderSaturn:
     BlackOutFromBattle
     ReleaseAll
     End
+
+    .balign 4, 0
+ValorCavern_OnFrameSaturnBattle:
+    GoToIfSet FLAG_HIDE_LAKE_VALOR_GALACTIC, ValorCavern_OnFrameSaturnBattle_Skip
+    LockAll
+    SetPlayerBike FALSE
+    ApplyMovement LOCALID_PAUL, ValorCavern_Movement_PaulApproach
+    ApplyMovement LOCALID_PLAYER, ValorCavern_Movement_PlayerApproach
+    WaitMovement
+    ApplyMovement LOCALID_SATURN, ValorCavern_Movement_SaturnNotice
+    WaitMovement
+    WaitTime 30, VAR_RESULT
+    Message ValorCavern_Text_SaturnMissionIsProceeding
+    WaitButton
+    CloseMessage
+    Message ValorCavern_Text_SaturnBattleIntro
+    WaitButton
+    CloseMessage
+    Message ValorCavern_Text_PaulTeamUp
+    WaitButton
+    CloseMessage
+    StartTagBattle TRAINER_PAUL_LAKE_VALOR_ALLY, TRAINER_COMMANDER_SATURN_VALOR_CAVERN, TRAINER_GALACTIC_GRUNT_VALOR_CAVERN
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, ValorCavern_LostBattleCommanderSaturn
+    Message ValorCavern_Text_SaturnPostBattle
+    CloseMessage
+    FadeScreenOut
+    WaitFadeScreen
+    RemoveObject LOCALID_SATURN
+    RemoveObject LOCALID_GALACTIC_GRUNT_VALOR_CAVERN
+    FadeScreenIn
+    WaitFadeScreen
+    Message ValorCavern_Text_PaulFarewell
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PAUL, ValorCavern_Movement_PaulLeave
+    WaitMovement
+    PlaySE SEQ_SE_DP_KAIDAN2
+    RemoveObject LOCALID_PAUL
+    WaitSE SEQ_SE_DP_KAIDAN2
+    ClearHasPartner
+    SetFlag FLAG_DEFEATED_COMMANDER_SATURN_VALOR_CAVERN
+    SetFlag FLAG_ALT_MUSIC_LAKE_VALOR
+    SetVar VAR_VALOR_CAVERN_SATURN_STATE, 1
+    SetVar VAR_LAKE_VALOR_PAUL_STATE, 2
+    ReleaseAll
+    End
+
+ValorCavern_OnFrameSaturnBattle_Skip:
+    End
+
+    .balign 4, 0
+ValorCavern_Movement_PlayerApproach:
+    WalkNormalNorth 8
+    EndMovement
+
+    .balign 4, 0
+ValorCavern_Movement_PaulApproach:
+    WalkNormalNorth 8
+    EndMovement
+
+    .balign 4, 0
+ValorCavern_Movement_SaturnNotice:
+    EmoteExclamationMark
+    Delay15
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+ValorCavern_Movement_PaulLeave:
+    WalkNormalSouth 8
+    SetInvisible
+    EndMovement
 
     .balign 4, 0

@@ -290,7 +290,7 @@ FieldMoves_Water:
     LockAll
     CheckHasPartner VAR_RESULT
     GoToIfEq VAR_RESULT, 1, _0512
-    SetVar VAR_0x8004, SPECIES_BIBAREL
+    SetVar VAR_0x8004, SPECIES_LAPRAS
     BufferSpeciesNameFromVar 0, VAR_0x8004, 0, 0
     Message FieldMoves_Text_WouldYouLikeToUseSurf
     ShowYesNoMenu VAR_RESULT

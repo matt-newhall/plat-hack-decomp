@@ -140,6 +140,8 @@ BOOL PoketchMap_GetPositionFromMapID(enum MapID mapID, u32 *x, u32 *y)
         { MAP_467, 59, 162 },
         { MAP_392, 74, 162 },
         { MAP_395, 170, 138 },
+        { MAP_468, 182, 114 },
+        { MAP_399, 188, 90 },
         { MAP_200, 68, 114 },
         { MAP_204, 56, 102 }
     };

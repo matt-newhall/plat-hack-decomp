@@ -34,6 +34,7 @@ StarkMountainOutside_TriggerGrunts:
     ApplyMovement LOCALID_GRUNT_M_1, StarkMountainOutside_Movement_GruntM1WalkOnSpotWestNorth
     WaitMovement
     Message StarkMountainOutside_Text_GoodTimeToBeDone
+    WaitButton
     CloseMessage
     ApplyMovement LOCALID_GRUNT_M_1, StarkMountainOutside_Movement_GruntM1EnterStarkMountain
     ApplyMovement LOCALID_GRUNT_M_2, StarkMountainOutside_Movement_GruntM2EnterStarkMountain
@@ -103,43 +104,14 @@ StarkMountainOutside_Movement_GruntM2EnterStarkMountain:
 
 StarkMountainOutside_OnFrameLookerBuck:
     LockAll
-    Message StarkMountainOutside_Text_InhaledVolcanicAsh
-    CloseMessage
-    WaitTime 15, VAR_RESULT
-    Message StarkMountainOutside_Text_MagmaStone
-    ApplyMovement LOCALID_BUCK, StarkMountainOutside_Movement_BuckWalkOnSpotEast
-    WaitMovement
-    Message StarkMountainOutside_Text_IllPutItBack
-    CloseMessage
-    ApplyMovement LOCALID_BUCK, StarkMountainOutside_Movement_BuckEnterStarkMountain
-    WaitMovement
-    ApplyMovement LOCALID_LOOKER, StarkMountainOutside_Movement_LookerWalkOnSpotWestSouth
-    WaitMovement
-    BufferPlayerName 0
-    Message StarkMountainOutside_Text_WorkIsFinished
-    CloseMessage
-    WaitTime 15, VAR_RESULT
-    ApplyMovement LOCALID_BUCK, StarkMountainOutside_Movement_BuckExitStarkMountain
-    ApplyMovement LOCALID_LOOKER, StarkMountainOutside_Movement_LookerWalkOnSpotWest
-    WaitMovement
-    BufferPlayerName 0
-    Message StarkMountainOutside_Text_SwingByMyPlace
-    CloseMessage
-    ApplyMovement LOCALID_BUCK, StarkMountainOutside_Movement_BuckLeave
-    ApplyMovement LOCALID_PLAYER, StarkMountainOutside_Movement_PlayerWalkOnSpotWest
-    WaitMovement
-    RemoveObject LOCALID_BUCK
-    ApplyMovement LOCALID_LOOKER, StarkMountainOutside_Movement_LookerWalkOnSpotSouth
-    ApplyMovement LOCALID_PLAYER, StarkMountainOutside_Movement_PlayerWalkOnSpotNorth
-    WaitMovement
     BufferPlayerName 0
     Message StarkMountainOutside_Text_FarewellMyFriend
+    WaitButton
     CloseMessage
-    FadeScreenOut
-    WaitFadeScreen
-    RemoveObject LOCALID_LOOKER
-    FadeScreenIn
-    WaitFadeScreen
+    ApplyMovement LOCALID_BUCK, StarkMountainOutside_Movement_BuckLeave
+    WaitMovement
+    RemoveObject LOCALID_BUCK
+    SetFlag FLAG_HIDE_STARK_MOUNTAIN_OUTSIDE_BUCK
     SetVar VAR_STARK_MOUNTAIN_OUTSIDE_STATE, 3
     ReleaseAll
     End
@@ -182,7 +154,7 @@ StarkMountainOutside_Movement_BuckExitStarkMountain:
 
     .balign 4, 0
 StarkMountainOutside_Movement_BuckLeave:
-    WalkNormalSouth 2
+    WalkNormalSouth 1
     WalkNormalWest 5
     WalkNormalNorth 2
     WalkNormalWest 3

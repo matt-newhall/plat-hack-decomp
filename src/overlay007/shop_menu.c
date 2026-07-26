@@ -72,6 +72,8 @@
 static u8 Shop_GetCameraPosDest(FieldSystem *fieldSystem);
 static u8 Shop_Exit(FieldSystem *fieldSystem, ShopMenu *shopMenu);
 static void Shop_ShowContextMenu(ShopMenu *shopMenu);
+static void Shop_BuildBPItems(ShopMenu *shopMenu);
+static void Shop_EnterBPMode(ShopMenu *shopMenu);
 static void Shop_InitStringUtil(ShopMenu *shopMenu);
 static void Shop_InitContextMenu(ShopMenu *shopMenu);
 static u8 Shop_SelectContextMenu(ShopMenu *shopMenu);
@@ -211,6 +213,17 @@ static const WindowTemplate sShop_FrontierCurrMoneyWindowTemplate = {
     .baseTile = 0x28
 };
 
+// pokemart BP item shop
+static const u16 sBPStoreItems[] = {
+    ITEM_HP_UP,
+    ITEM_PROTEIN,
+    ITEM_IRON,
+    ITEM_CALCIUM,
+    ITEM_ZINC,
+    ITEM_CARBOS,
+    SHOP_ITEM_END,
+};
+
 static void Shop_SetItemsForSale(ShopMenu *shopMenu, u16 *itemsPtr)
 {
     u16 i;
@@ -221,12 +234,45 @@ static void Shop_SetItemsForSale(ShopMenu *shopMenu, u16 *itemsPtr)
         }
     }
 
-    shopMenu->itemsCount = i;
-    shopMenu->itemsPtr = Heap_Alloc(HEAP_ID_FIELD2, shopMenu->itemsCount * sizeof(u16));
+    shopMenu->normalItemsCount = i;
+    shopMenu->normalItemsPtr = Heap_Alloc(HEAP_ID_FIELD2, shopMenu->normalItemsCount * sizeof(u16));
 
-    for (i = 0; i < shopMenu->itemsCount; i++) {
-        shopMenu->itemsPtr[i] = itemsPtr[i];
+    for (i = 0; i < shopMenu->normalItemsCount; i++) {
+        shopMenu->normalItemsPtr[i] = itemsPtr[i];
     }
+
+    shopMenu->itemsPtr = shopMenu->normalItemsPtr;
+    shopMenu->itemsCount = shopMenu->normalItemsCount;
+}
+
+static void Shop_BuildBPItems(ShopMenu *shopMenu)
+{
+    u16 i;
+
+    for (i = 0; i < MAX_SHOP_ITEMS; i++) {
+        if (sBPStoreItems[i] == SHOP_ITEM_END) {
+            break;
+        }
+    }
+
+    shopMenu->bpItemsCount = i;
+    shopMenu->bpItemsPtr = Heap_Alloc(HEAP_ID_FIELD2, shopMenu->bpItemsCount * sizeof(u16));
+
+    for (i = 0; i < shopMenu->bpItemsCount; i++) {
+        shopMenu->bpItemsPtr[i] = sBPStoreItems[i];
+    }
+}
+
+static void Shop_EnterBPMode(ShopMenu *shopMenu)
+{
+    if (shopMenu->bpItemsPtr == NULL) {
+        Shop_BuildBPItems(shopMenu);
+    }
+
+    shopMenu->itemsPtr = shopMenu->bpItemsPtr;
+    shopMenu->itemsCount = shopMenu->bpItemsCount;
+    shopMenu->martType = MART_TYPE_FRONTIER;
+    shopMenu->bpMode = TRUE;
 }
 
 static ShopMenu *Shop_Alloc(void)
@@ -348,6 +394,10 @@ BOOL FieldTask_InitShop(FieldTask *task)
         break;
     case SHOP_STATE_EXIT:
         return Shop_Exit(fieldSystem, shopMenu);
+    case SHOP_STATE_ENTER_BP_MODE:
+        Shop_EnterBPMode(shopMenu);
+        shopMenu->state = SHOP_STATE_INIT_CAMERA;
+        break;
     }
 
     if ((shopMenu->state >= SHOP_STATE_SELECT_BUY_MENU) && (shopMenu->state <= SHOP_STATE_FINISH_FREE_PREMIER)) {
@@ -377,13 +427,14 @@ static void Shop_InitContextMenu(ShopMenu *shopMenu)
     u8 maxOptions;
 
     if (shopMenu->martType == MART_TYPE_NORMAL) {
-        maxOptions = 3;
+        maxOptions = 4;
         shopMenu->optionsList = StringList_New(maxOptions, HEAP_ID_FIELD2);
 
         StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00015, SHOP_STATE_INIT_CAMERA);
+        StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, ShopMenu_Text_BuyWithBP, SHOP_STATE_ENTER_BP_MODE);
         StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00016, 14);
         StringList_AddFromMessageBank(shopMenu->optionsList, shopMenu->msgLoader, pl_msg_00000543_00017, MENU_CANCEL);
-        Window_Add(shopMenu->bgConfig, &shopMenu->windows[0], BG_LAYER_MAIN_3, 1, 1, 13, 6, FIELD_MESSAGE_PALETTE_INDEX, (((1024 - (18 + 12) - 9 - (32 * 8)) - (18 + 12 + 24)) - (27 * 4)) - (13 * 6));
+        Window_Add(shopMenu->bgConfig, &shopMenu->windows[0], BG_LAYER_MAIN_3, 1, 1, 13, 8, FIELD_MESSAGE_PALETTE_INDEX, (((1024 - (18 + 12) - 9 - (32 * 8)) - (18 + 12 + 24)) - (27 * 4)) - (13 * 8));
     } else if (shopMenu->martType == MART_TYPE_FRONTIER) {
         maxOptions = 2;
         shopMenu->optionsList = StringList_New(maxOptions, HEAP_ID_FIELD2);
@@ -478,7 +529,12 @@ static u8 Shop_Exit(FieldSystem *fieldSystem, ShopMenu *shopMenu)
         }
 
         FontSpecialChars_Free(shopMenu->unk_2B4);
-        Heap_Free(shopMenu->itemsPtr);
+        Heap_Free(shopMenu->normalItemsPtr);
+
+        if (shopMenu->bpItemsPtr != NULL) {
+            Heap_Free(shopMenu->bpItemsPtr);
+        }
+
         Heap_Free(shopMenu);
 
         return TRUE;
@@ -1393,6 +1449,24 @@ static u16 Shop_GetItemBPPrice(ShopMenu *shopMenu, u16 itemId)
         { ITEM_TM26, 80 }
     };
 
+    // pokemart BP prices
+    static const u16 itemToBpPriceBPMode[][2] = {
+        { ITEM_HP_UP, 10 },
+        { ITEM_PROTEIN, 10 },
+        { ITEM_IRON, 10 },
+        { ITEM_CALCIUM, 10 },
+        { ITEM_ZINC, 10 },
+        { ITEM_CARBOS, 10 },
+    };
+
+    if (shopMenu->bpMode) {
+        for (u32 i = 0; i < (NELEMS(itemToBpPriceBPMode)); i++) {
+            if (itemToBpPriceBPMode[i][0] == itemId) {
+                return itemToBpPriceBPMode[i][1];
+            }
+        }
+    }
+
     for (u32 i = 0; i < (NELEMS(itemToBpPrice)); i++) {
         if (itemToBpPrice[i][0] == itemId) {
             return itemToBpPrice[i][1];
@@ -1422,6 +1496,13 @@ static void Shop_TakeMoney(ShopMenu *shopMenu, u32 amount)
 
 static u8 Shop_MoveCameraBack(FieldSystem *fieldSystem, ShopMenu *shopMenu)
 {
+    if (shopMenu->bpMode) {
+        shopMenu->itemsPtr = shopMenu->normalItemsPtr;
+        shopMenu->itemsCount = shopMenu->normalItemsCount;
+        shopMenu->martType = MART_TYPE_NORMAL;
+        shopMenu->bpMode = FALSE;
+    }
+
     if (shopMenu->cameraPosCurr != shopMenu->cameraPosDest) {
         VecFx32 targetPosDelta = { -8 * FX32_ONE, 0, 0 };
 

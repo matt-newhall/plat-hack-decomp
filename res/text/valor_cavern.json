@@ -7,7 +7,7 @@
         "The mission is proceeding without\n",
         "a hitch. The boss should be pleased.\r",
         "Everything is for everyone, and\n",
-        "for the good of Team Galactic!\r"
+        "for the good of Team Galactic!"
       ]
     },
     {
@@ -21,7 +21,7 @@
         "But anything and anyone that opposes\n",
         "Team Galactic must be crushed!\r",
         "Even the very thought of opposition\n",
-        "will not be tolerated!\r"
+        "will not be tolerated!"
       ]
     },
     {
@@ -41,14 +41,28 @@
       ]
     },
     {
-      "id": "ValorCavern_Text_AzelfCry",
-      "en_US": "Kyuuun...\r"
+      "id": "ValorCavern_Text_PaulTeamUp",
+      "en_US": [
+        "Two of them. Figures.\r",
+        "We finish this together. Don’t\n",
+        "hold back now."
+      ]
     },
     {
-      "id": "ValorCavern_Text_AzelfDisappeared",
+      "id": "ValorCavern_Text_PaulFarewell",
       "en_US": [
-        "AZELF disappeared deep into\n",
-        "the cavern..."
+        "That’s that.\r",
+        "To think that Team Galactic would\n",
+        "destroy a whole lake just to capture\f",
+        "a single Pokémon.\r",
+        "Usually I don’t care for Pokémon that\n",
+        "can’t battle. They’re pathetic.\r",
+        "But...\r",
+        "Hmph, anyways.\r",
+        "You didn’t drag me down. I’ll give\n",
+        "you that much.\r",
+        "Don’t expect me to go easy next time\n",
+        "we meet. Later."
       ]
     }
   ]

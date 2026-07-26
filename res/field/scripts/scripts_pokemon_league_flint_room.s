@@ -16,15 +16,15 @@ PokemonLeagueFlintRoom_Flint:
     CallIfUnset FLAG_GAME_COMPLETED, PokemonLeagueFlintRoom_FlintIntro
     CallIfSet FLAG_GAME_COMPLETED, PokemonLeagueFlintRoom_FlintGameCompletedIntro
     CloseMessage
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueFlintRoom_StartFlintBattle
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueFlintRoom_StartFlintRematchBattle
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueFlintRoom_StartFlintBattle
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueFlintRoom_StartFlintRematchBattle
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, PokemonLeagueFlintRoom_BlackOut
     SetFlag FLAG_DEFEATED_FLINT
     PlaySE SEQ_SE_DP_KI_GASYAN
     RemoveObject LOCALID_EXIT_DOOR
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueFlintRoom_CreateJournalEventDefeatedFlint
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueFlintRoom_CreateJournalEventDefeatedRematchFlint
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueFlintRoom_CreateJournalEventDefeatedFlint
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueFlintRoom_CreateJournalEventDefeatedRematchFlint
     CallIfUnset FLAG_GAME_COMPLETED, PokemonLeagueFlintRoom_FlintDefeat
     CallIfSet FLAG_GAME_COMPLETED, PokemonLeagueFlintRoom_FlintGameCompletedDefeat
     WaitButton

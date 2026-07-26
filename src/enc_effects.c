@@ -63,16 +63,28 @@ enum EncEffectsPairID {
     ENCEFF_DOUBLE_WILD,
     ENCEFF_FRONTIER_BRAIN,
     ENCEFF_DOUBLE_LEADER,
+    ENCEFF_DOUBLE_FRONTIER_BRAIN,
+    ENCEFF_CASTLE_VALET,
+    ENCEFF_TOWER_TYCOON,
+    ENCEFF_ARCADE_STAR,
+    ENCEFF_FACTORY_HEAD,
+    ENCEFF_HALL_MATRON,
 
     ENCEFF_NORMAL_TRAINER,
     ENCEFF_NORMAL_WILD,
 
     ENCEFF_ROCKET,
+    ENCEFF_LEADER_FALKNER,
+    ENCEFF_LEADER_WHITNEY,
+    ENCEFF_LEADER_JASMINE,
+    ENCEFF_LEADER_MORTY,
+    ENCEFF_LEADER_PRYCE,
+    ENCEFF_LEADER_CLAIRE,
 
     ENCEFF_MAX,
 };
 
-static const EncEffectsPair sEncEffectsTable[36] = {
+static const EncEffectsPair sEncEffectsTable[ENCEFF_MAX] = {
     [ENCEFF_LEADER_ROARK] = { ENCEFF_CUTIN_LEADER_ROARK, SEQ_BATTLE_GYM_LEADER },
     [ENCEFF_LEADER_GARDENIA] = { ENCEFF_CUTIN_LEADER_GARDENIA, SEQ_BATTLE_GYM_LEADER },
     [ENCEFF_LEADER_WAKE] = { ENCEFF_CUTIN_LEADER_WAKE, SEQ_BATTLE_GYM_LEADER },
@@ -106,9 +118,21 @@ static const EncEffectsPair sEncEffectsTable[36] = {
     [ENCEFF_DOUBLE_WILD] = { ENCEFF_CUTIN_DOUBLE, SEQ_BATTLE_WILD_POKEMON },
     [ENCEFF_FRONTIER_BRAIN] = { ENCEFF_CUTIN_FRONTIER, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_DOUBLE_LEADER] = { ENCEFF_CUTIN_DOUBLE, SEQ_BATTLE_GYM_LEADER },
+    [ENCEFF_DOUBLE_FRONTIER_BRAIN] = { ENCEFF_CUTIN_FRONTIER, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_CASTLE_VALET] = { ENCEFF_CUTIN_CASTLE_VALET, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_TOWER_TYCOON] = { ENCEFF_CUTIN_TOWER_TYCOON, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_ARCADE_STAR] = { ENCEFF_CUTIN_ARCADE_STAR, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_FACTORY_HEAD] = { ENCEFF_CUTIN_FACTORY_HEAD, SEQ_BATTLE_FRONTIER_BRAIN },
+    [ENCEFF_HALL_MATRON] = { ENCEFF_CUTIN_HALL_MATRON, SEQ_BATTLE_FRONTIER_BRAIN },
     [ENCEFF_NORMAL_TRAINER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_TRAINER },
     [ENCEFF_NORMAL_WILD] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_WILD_POKEMON },
-    [ENCEFF_ROCKET] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_GS_VS_ROCKET }
+    [ENCEFF_ROCKET] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_GS_VS_ROCKET },
+    [ENCEFF_LEADER_FALKNER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
+    [ENCEFF_LEADER_WHITNEY] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
+    [ENCEFF_LEADER_JASMINE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
+    [ENCEFF_LEADER_MORTY] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
+    [ENCEFF_LEADER_PRYCE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
+    [ENCEFF_LEADER_CLAIRE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER }
 };
 
 static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto);
@@ -136,6 +160,12 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
                 return trainerEffect;
             }
 
+            // janky exception to get brains in ROM hack not in the frontier
+            // to show their VS sprites and music correctly
+            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON || trainerEffect == ENCEFF_ARCADE_STAR || trainerEffect == ENCEFF_FACTORY_HEAD || trainerEffect == ENCEFF_HALL_MATRON) {
+                return ENCEFF_FRONTIER_BRAIN;
+            }
+
             if (battleType & BATTLE_TYPE_DOUBLES) {
                 return ENCEFF_DOUBLE_BATTLE;
             }
@@ -154,6 +184,15 @@ static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto)
         if (battleType & BATTLE_TYPE_DOUBLES) {
             if (trainerEffect == ENCEFF_LEADER_VOLKNER) {
                 return ENCEFF_DOUBLE_LEADER;
+            }
+
+            // here is our not-great sets of overrides for the above bug
+            if (trainerEffect == ENCEFF_FRONTIER_BRAIN) {
+                return ENCEFF_DOUBLE_FRONTIER_BRAIN;
+            }
+
+            if (trainerEffect == ENCEFF_CASTLE_VALET || trainerEffect == ENCEFF_TOWER_TYCOON || trainerEffect == ENCEFF_ARCADE_STAR || trainerEffect == ENCEFF_FACTORY_HEAD || trainerEffect == ENCEFF_HALL_MATRON) {
+                return trainerEffect;
             }
 
             return ENCEFF_DOUBLE_BATTLE;
@@ -262,6 +301,7 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
     case TRAINER_CLASS_COMMANDER_MARS:
     case TRAINER_CLASS_COMMANDER_JUPITER:
     case TRAINER_CLASS_COMMANDER_SATURN:
+    case TRAINER_CLASS_COMMANDER_CHARON:
         result = ENCEFF_GALACTIC_CMDR;
         break;
     case TRAINER_CLASS_GALACTIC_GRUNT_MALE:
@@ -273,12 +313,38 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
     case TRAINER_CLASS_ROCKET_EXECUTIVE:
         result = ENCEFF_ROCKET;
         break;
-    case TRAINER_CLASS_TOWER_TYCOON:
     case TRAINER_CLASS_HALL_MATRON:
+        result = ENCEFF_HALL_MATRON;
+        break;
     case TRAINER_CLASS_FACTORY_HEAD:
-    case TRAINER_CLASS_ARCADE_STAR:
+        result = ENCEFF_FACTORY_HEAD;
+        break;
     case TRAINER_CLASS_CASTLE_VALET:
-        result = ENCEFF_FRONTIER_BRAIN;
+        result = ENCEFF_CASTLE_VALET;
+        break;
+    case TRAINER_CLASS_TOWER_TYCOON:
+        result = ENCEFF_TOWER_TYCOON;
+        break;
+    case TRAINER_CLASS_ARCADE_STAR:
+        result = ENCEFF_ARCADE_STAR;
+        break;
+    case TRAINER_CLASS_LEADER_FALKNER:
+        result = ENCEFF_LEADER_FALKNER;
+        break;
+    case TRAINER_CLASS_LEADER_WHITNEY:
+        result = ENCEFF_LEADER_WHITNEY;
+        break;
+    case TRAINER_CLASS_LEADER_JASMINE:
+        result = ENCEFF_LEADER_JASMINE;
+        break;
+    case TRAINER_CLASS_LEADER_MORTY:
+        result = ENCEFF_LEADER_MORTY;
+        break;
+    case TRAINER_CLASS_LEADER_PRYCE:
+        result = ENCEFF_LEADER_PRYCE;
+        break;
+    case TRAINER_CLASS_LEADER_CLAIRE:
+        result = ENCEFF_LEADER_CLAIRE;
         break;
     default:
         break;
@@ -298,9 +364,6 @@ static u32 EncEffects_WildPokemonEffect(Party *wildParty, int mapHeaderID)
     case SPECIES_SHAYMIN:
         result = ENCEFF_SHAYMIN;
         break;
-    case SPECIES_CRESSELIA:
-        result = ENCEFF_CRESSELIA;
-        break;
     case SPECIES_GIRATINA:
         result = ENCEFF_GIRATINA;
         break;
@@ -318,11 +381,10 @@ static u32 EncEffects_WildPokemonEffect(Party *wildParty, int mapHeaderID)
         result = ENCEFF_MINOR_LEGENDARIES;
         break;
     case SPECIES_MESPRIT:
-        result = ENCEFF_MESPRIT;
-        break;
     case SPECIES_UXIE:
     case SPECIES_AZELF:
-        result = ENCEFF_UXIE_AZELF;
+    case SPECIES_CRESSELIA:
+        result = ENCEFF_MINOR_LEGENDARIES;
         break;
     case SPECIES_DIALGA:
     case SPECIES_PALKIA:
@@ -334,8 +396,13 @@ static u32 EncEffects_WildPokemonEffect(Party *wildParty, int mapHeaderID)
     case SPECIES_MOLTRES:
     case SPECIES_ARTICUNO:
     case SPECIES_ZAPDOS:
+    case SPECIES_LATIOS:
+    case SPECIES_LATIAS:
+    case SPECIES_RAIKOU:
+    case SPECIES_SUICUNE:
+    case SPECIES_ENTEI:
         if (mapHeaderID != ZONE_ID_PAL_PARK) {
-            result = ENCEFF_KANTO_BIRDS;
+            result = ENCEFF_MINOR_LEGENDARIES;
         }
         break;
     default:

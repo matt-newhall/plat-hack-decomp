@@ -19,14 +19,14 @@ PokemonLeagueChampionRoom_OnFrame:
     CallIfSet FLAG_GAME_COMPLETED, PokemonLeagueChampionRoom_CynthiaGameCompletedIntro
     CloseMessage
     SetFlag FLAG_ALT_MUSIC_CHAMPION_ROOM
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueChampionRoom_StartCynthiaBattle
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueChampionRoom_StartCynthiaRematchBattle
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueChampionRoom_StartCynthiaBattle
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueChampionRoom_StartCynthiaRematchBattle
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, PokemonLeagueChampionRoom_BlackOut
     Message PokemonLeagueChampionRoom_Text_CynthiaDefeat
     SetFlag FLAG_DEFEATED_CYNTHIA
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueChampionRoom_CreateJournalEventDefeatedCynthia
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueChampionRoom_CreateJournalEventDefeatedRematchCynthia
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueChampionRoom_CreateJournalEventDefeatedCynthia
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueChampionRoom_CreateJournalEventDefeatedRematchCynthia
     Message PokemonLeagueChampionRoom_Text_ComeWithMe
     CloseMessage
     ApplyMovement LOCALID_CYNTHIA, PokemonLeagueChampionRoom_CynthiaMoveAwayFromElevator

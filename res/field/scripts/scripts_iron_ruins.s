@@ -27,9 +27,7 @@ IronRuins_Statue:
     FacePlayer
     GoToIfEq VAR_IRON_RUINS_STATE, RUINS_STATE_CAUGHT_REGI, IronRuins_CaughtRegisteelStatueStoppedEmanatingPower
     GoToIfEq VAR_IRON_RUINS_STATE, RUINS_STATE_DID_NOT_CATCH_REGI, IronRuins_DidNotCatchRegisteelStatueStoppedEmanatingPower
-    GoToIfUnset FLAG_GAME_COMPLETED, IronRuins_ItsAStatueOfAPokemonBecomeStrongerYouMust
-    CheckPartyHasFatefulEncounterRegigigas VAR_RESULT
-    GoToIfEq VAR_RESULT, 0, IronRuins_ItsAStatueOfAPokemon
+    GoToIfUnset FLAG_REGIS_UNLOCKED, IronRuins_ItsAStatueOfAPokemonBecomeStrongerYouMust
     GoToIfEq VAR_IRON_RUINS_STATE, RUINS_STATE_ACTIVATED_STATUE, IronRuins_EncounterRegisteel
     GoToIfLt VAR_IRON_RUINS_STATE, RUINS_STATE_ACTIVATED_ALL_DOTS, IronRuins_ItsAStatueOfAPokemon
     WaitSE SEQ_SE_CONFIRM
@@ -44,7 +42,7 @@ IronRuins_EncounterRegisteel:
     Message IronRuins_Text_RegisteelCry
     WaitCry
     CloseMessage
-    StartLegendaryBattle SPECIES_REGISTEEL, 30
+    StartLegendaryBattle SPECIES_REGISTEEL, 80
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, IronRuins_BlackOut
     CheckDidNotCapture VAR_RESULT
@@ -139,7 +137,7 @@ IronRuins_DotEnd:
     End
 
 IronRuins_ActivateStatue:
-    GoToIfUnset FLAG_GAME_COMPLETED, IronRuins_DotEnd
+    GoToIfUnset FLAG_REGIS_UNLOCKED, IronRuins_DotEnd
     WaitSE SEQ_SE_CONFIRM
     ScrCmd_29F 1
     SetVar VAR_IRON_RUINS_STATE, RUINS_STATE_ACTIVATED_STATUE

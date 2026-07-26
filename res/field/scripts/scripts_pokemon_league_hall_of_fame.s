@@ -123,18 +123,14 @@ PokemonLeagueHallOfFame_Movement_CynthiaFaceMachine:
 PokemonLeagueHallOfFame_SetHallOfFameVictoryFlagsAndVars:
     ClearFlag FLAG_HIDE_DAY_CARE_GYM_GUIDE
     ClearFlag FLAG_ALT_MUSIC_CHAMPION_ROOM
+    SetFlag FLAG_HALL_OF_FAME_ENTERED
+    ClearFlag FLAG_HIDE_SURVIVAL_AREA_RIVAL
+    ClearFlag FLAG_HIDE_BATTLEGROUND_BUCK
     CallIfUnset FLAG_CAUGHT_DIALGA, PokemonLeagueHallOfFame_ResetSpearPillarDialgaState
     CallIfUnset FLAG_CAUGHT_PALKIA, PokemonLeagueHallOfFame_ResetSpearPillarPalkiaState
     CallIfUnset FLAG_CAUGHT_HEATRAN, PokemonLeagueHallOfFame_TryShowStarkMountainHeatran
     CallIfUnset FLAG_CAUGHT_REGIGIGAS, PokemonLeagueHallOfFame_TryShowSnowpointTempleRegigigas
-    CallIfUnset FLAG_CAUGHT_AZELF, PokemonLeagueHallOfFame_ShowValorCavernAzelf
-    CallIfUnset FLAG_CAUGHT_UXIE, PokemonLeagueHallOfFame_ShowAcuityCavernUxie
     CallIfUnset FLAG_CAUGHT_GIRATINA, PokemonLeagueHallOfFame_ShowTurnbackCaveGiratina
-    CallIfEq VAR_ROAMING_MESPRIT_STATE, ROAMER_STATE_DEFEATED, PokemonLeagueHallOfFame_ResetRoamingMesprit
-    CallIfEq VAR_ROAMING_CRESSELIA_STATE, ROAMER_STATE_DEFEATED, PokemonLeagueHallOfFame_ResetRoamingCresselia
-    CallIfEq VAR_ROAMING_MOLTRES_STATE, ROAMER_STATE_DEFEATED, PokemonLeagueHallOfFame_ResetRoamingMoltres
-    CallIfEq VAR_ROAMING_ZAPDOS_STATE, ROAMER_STATE_DEFEATED, PokemonLeagueHallOfFame_ResetRoamingZapdos
-    CallIfEq VAR_ROAMING_ARTICUNO_STATE, ROAMER_STATE_DEFEATED, PokemonLeagueHallOfFame_ResetRoamingArticuno
     CallIfEq VAR_PLAYER_HOUSE_POSTGAME_STATE, 0, PokemonLeagueHallOfFame_IncreasePlayerHousePostgameState
     ClearFlag FLAG_HIDE_SANDGEM_TOWN_COUNTERPART
     CallIfUnset FLAG_VEILSTONE_STORE_B1F_SPOKEN_TO_PROF_ROWAN, PokemonLeagueHallOfFame_ShowVeilstoneStoreB1FProfRowan
@@ -169,38 +165,8 @@ PokemonLeagueHallOfFame_TryShowSnowpointTempleRegigigas:
 PokemonLeagueHallOfFame_DontShowSnowpointTempleRegigigas:
     Return
 
-PokemonLeagueHallOfFame_ShowValorCavernAzelf:
-    ClearFlag FLAG_HIDE_VALOR_CAVERN_AZELF
-    Return
-
-PokemonLeagueHallOfFame_ShowAcuityCavernUxie:
-    ClearFlag FLAG_HIDE_ACUITY_CAVERN_UXIE
-    Return
-
 PokemonLeagueHallOfFame_ShowTurnbackCaveGiratina:
     ClearFlag FLAG_HIDE_TURNBACK_CAVE_GIRATINA_ROOM_GIRATINA
-    Return
-
-PokemonLeagueHallOfFame_ResetRoamingMesprit:
-    ClearFlag FLAG_HIDE_VERITY_CAVERN_MESPRIT
-    SetVar VAR_ROAMING_MESPRIT_STATE, ROAMER_STATE_RESET
-    Return
-
-PokemonLeagueHallOfFame_ResetRoamingCresselia:
-    ClearFlag FLAG_HIDE_FULLMOON_ISLAND_FOREST_CRESSELIA
-    SetVar VAR_ROAMING_CRESSELIA_STATE, ROAMER_STATE_RESET
-    Return
-
-PokemonLeagueHallOfFame_ResetRoamingMoltres:
-    SetVar VAR_ROAMING_MOLTRES_STATE, ROAMER_STATE_RESET
-    Return
-
-PokemonLeagueHallOfFame_ResetRoamingZapdos:
-    SetVar VAR_ROAMING_ZAPDOS_STATE, ROAMER_STATE_RESET
-    Return
-
-PokemonLeagueHallOfFame_ResetRoamingArticuno:
-    SetVar VAR_ROAMING_ARTICUNO_STATE, ROAMER_STATE_RESET
     Return
 
 PokemonLeagueHallOfFame_ShowVeilstoneStoreB1FProfRowan:

@@ -7,6 +7,7 @@
     ScriptEntry Route227_ArrowSignpostStarkMountain
     ScriptEntry Route227_TriggerBuck
     ScriptEntry Route227_Buck
+    ScriptEntry Route227_Thorton
     ScriptEntryEnd
 
 Route227_TriggerWakeRival:
@@ -211,6 +212,85 @@ Route227_GoonsCausingTrouble:
     ReleaseAll
     End
 
+Route227_Thorton:
+    GoToIfSet FLAG_HIDE_THORTON_ROUTE_227, Route227_ThortonEnd
+    LockAll
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 765, Route227_ThortonEncounter765
+    CallIfEq VAR_0x8004, 766, Route227_ThortonEncounter766
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonFaceSouthAlertX767
+    WaitMovement
+    GoTo Route227_ThortonTalk
+
+Route227_ThortonEncounter765:
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonFaceSouthAlertX765
+    WaitMovement
+    GoTo Route227_ThortonTalk
+
+Route227_ThortonEncounter766:
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonFaceSouthAlertX766
+    WaitMovement
+    GoTo Route227_ThortonTalk
+
+Route227_ThortonTalk:
+    CheckHasTwoAliveMons VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, Route227_ThortonNotReady
+    Message Route227_Text_Thorton_Prebattle
+    WaitButton
+    CloseMessage
+    StartTrainerBattle TRAINER_FACTORY_HEAD_THORTON_ROUTE_227
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, Route227_ThortonBlackOut
+    Message Route227_Text_ThortonDefeated
+    WaitButton
+    CloseMessage
+    SetVar VAR_0x8004, ITEM_TM75
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    Message Route227_Text_ThortonThatsVoltSwitchGoodbye
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonLeave
+    WaitMovement
+    RemoveObject LOCALID_FACTORY_HEAD_THORTON
+    SetFlag FLAG_HIDE_THORTON_ROUTE_227
+    ReleaseAll
+    End
+
+Route227_ThortonBlackOut:
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+Route227_ThortonEnd:
+    End
+
+Route227_ThortonNotReady:
+    Message Route227_Text_ThortonLessThanTwoMons
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, Route227_Movement_MovePlayerBack
+    WaitMovement
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 765, Route227_ThortonRetreat765
+    CallIfEq VAR_0x8004, 766, Route227_ThortonRetreat766
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonRetreat767
+    WaitMovement
+    ReleaseAll
+    End
+
+Route227_ThortonRetreat765:
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonRetreat765
+    WaitMovement
+    ReleaseAll
+    End
+
+Route227_ThortonRetreat766:
+    ApplyMovement LOCALID_FACTORY_HEAD_THORTON, Route227_Movement_ThortonRetreat766
+    WaitMovement
+    ReleaseAll
+    End
+
     .balign 4, 0
 Route227_Movement_PlayerFaceBuck:
     FaceNorth
@@ -236,4 +316,60 @@ Route227_Movement_BuckWalkOnSpotNorth:
     .balign 4, 0
 Route227_Movement_BuckWalkOnSpotSouth:
     WalkOnSpotNormalSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonFaceSouthAlertX765:
+    FaceSouth
+    EmoteExclamationMark
+    WalkNormalWest
+    WalkNormalSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonFaceSouthAlertX766:
+    FaceSouth
+    EmoteExclamationMark
+    WalkNormalSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonFaceSouthAlertX767:
+    FaceSouth
+    EmoteExclamationMark
+    WalkNormalEast
+    WalkNormalSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_MovePlayerBack:
+    WalkNormalSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonRetreat765:
+    WalkNormalNorth
+    WalkNormalEast
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonRetreat766:
+    WalkNormalNorth
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonRetreat767:
+    WalkNormalNorth
+    WalkNormalWest
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_ThortonLeave:
+    WalkNormalWest 4
+    JumpFarSouth 1
+    WalkNormalSouth 4
+    WalkNormalWest 7
     EndMovement

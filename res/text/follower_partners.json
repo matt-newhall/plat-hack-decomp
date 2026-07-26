@@ -380,6 +380,38 @@
       ]
     },
     {
+      "id": "FollowerPartners_Text_Paul_DontGetTheWrongIdea",
+      "en_US": [
+        "Paul: Don’t get the wrong idea.\n",
+        "I’m not here to make friends.\r",
+        "Team Galactic drained this lake for\n",
+        "their own ends.\r",
+        "That’s reason enough for me to put\n",
+        "them down."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Paul_ThisLakeIsCrawlingWithWeakMagikarp",
+      "en_US": [
+        "Paul: This lake is crawling with\n",
+        "weak Magikarp.\r",
+        "But that being said, it’s pathetic\n",
+        "to blow up a whole lake and the\f",
+        "Pokémon in it...\r",
+        "A Pokémon that can’t battle is\n",
+        "worthless to me.\r",
+        "Yours had better be different,\n",
+        "{STRVAR_1 3, 0, 0}."
+      ]
+    },
+    {
+      "id": "FollowerPartners_Text_Paul_WereWastingTime",
+      "en_US": [
+        "Paul: We’re wasting time.\r",
+        "If you can keep up, then keep up."
+      ]
+    },
+    {
       "id": "FollowerPartners_Text_Status_Sleep_0",
       "en_US": [
         "{STRVAR_1 3, 0, 0} is fighting off\n",

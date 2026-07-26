@@ -1456,8 +1456,7 @@ static void AddRoamerToEnemyParty(const u32 trainerID, Roamer *roamer, FieldBatt
     Heap_Free(mon);
 }
 
-// 50% chance to encounter a roamer if there is one on the current map.
-// If there are multiple on the same map, picks one randomly.
+// Guaranteed to encounter a roamer if there is one on the current map.
 static BOOL TryEncounterRoamer(FieldSystem *fieldSystem, Roamer **encounteredRoamer)
 {
     Roamer *roamers[ROAMING_SLOT_MAX];
@@ -1475,8 +1474,6 @@ static BOOL TryEncounterRoamer(FieldSystem *fieldSystem, Roamer **encounteredRoa
     }
 
     if (numRoamersOnMap == 0) {
-        return FALSE;
-    } else if (LCRNG_RandMod(2) == 0) {
         return FALSE;
     }
 

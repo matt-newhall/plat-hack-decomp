@@ -1,9 +1,12 @@
 #include "macros/scrcmd.inc"
 #include "res/text/bank/route_229.h"
+#include "res/field/events/events_route_229.h"
 
 
     ScriptEntry Route229_PokefanM
     ScriptEntry Route229_ArrowSignpostResortArea
+    ScriptEntry Route229_SpeakToDesertBlocker
+    ScriptEntry Route229_SpeakToDesertBlockerStep
     ScriptEntryEnd
 
 Route229_PokefanM:
@@ -42,4 +45,45 @@ Route229_ArrowSignpostResortArea:
     ShowArrowSign Route229_Text_SignRt229ResortArea
     End
 
+Route229_SpeakToDesertBlocker:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    Message Route229_Text_BlockDesertPersonSpeak
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+Route229_SpeakToDesertBlockerStep:
+    GoToIfSet FLAG_HIDE_ROUTE_229_BLOCK_DESERT, Route229_DesertBlockStep_NoOp
+    LockAll
+    ApplyMovement LOCALID_PLAYER, Route229_Movement_PlayerLookSouth
+    ApplyMovement LOCALID_BLOCKER, Route229_Movement_BlockerNoticeYou
+    WaitMovement
+    Message Route229_Text_BlockDesertPersonSpeak
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, Route229_Movement_PlayerStepBack
+    WaitMovement
+    ReleaseAll
+    End
+
+Route229_DesertBlockStep_NoOp:
+    End
+
     .balign 4, 0
+Route229_Movement_PlayerLookSouth:
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+Route229_Movement_BlockerNoticeYou:
+    FaceNorth
+    EmoteExclamationMark
+    EndMovement
+
+    .balign 4, 0
+Route229_Movement_PlayerStepBack:
+    WalkNormalEast
+    EndMovement

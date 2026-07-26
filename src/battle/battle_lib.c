@@ -8667,11 +8667,6 @@ void BattleSystem_SortMonActionOrder(BattleSystem *battleSys, BattleContext *bat
     }
 }
 
-void BattleSystem_SortRemainingActionOrder(BattleSystem *battleSys, BattleContext *battleCtx)
-{
-    
-}
-
 static const enum BattleSubAnimation sEffectsAlwaysShown[] = {
     BATTLE_ANIMATION_SUB_OUT,
     BATTLE_ANIMATION_SUB_IN,

@@ -4776,6 +4776,15 @@ static BOOL BattleControllerPlayer_CheckBattleOver(BattleSystem *battleSys, Batt
             Sound_PlayBGM(SEQ_VICTORY_GYM_LEADER);
             break;
 
+        case TRAINER_CLASS_LEADER_FALKNER:
+        case TRAINER_CLASS_LEADER_WHITNEY:
+        case TRAINER_CLASS_LEADER_JASMINE:
+        case TRAINER_CLASS_LEADER_MORTY:
+        case TRAINER_CLASS_LEADER_PRYCE:
+        case TRAINER_CLASS_LEADER_CLAIRE:
+            Sound_PlayBGM(SEQ_VICTORY_HGSS_GYM_LEADER);
+            break;
+
         case TRAINER_CLASS_TOWER_TYCOON:
         case TRAINER_CLASS_HALL_MATRON:
         case TRAINER_CLASS_FACTORY_HEAD:
@@ -4791,6 +4800,7 @@ static BOOL BattleControllerPlayer_CheckBattleOver(BattleSystem *battleSys, Batt
         case TRAINER_CLASS_COMMANDER_MARS:
         case TRAINER_CLASS_COMMANDER_JUPITER:
         case TRAINER_CLASS_COMMANDER_SATURN:
+        case TRAINER_CLASS_COMMANDER_CHARON:
         case TRAINER_CLASS_GALACTIC_GRUNT_MALE:
         case TRAINER_CLASS_GALACTIC_GRUNT_FEMALE:
             Sound_PlayBGM(SEQ_VICTORY_GALACTIC_GRUNT);

@@ -34,5 +34,10 @@ void EncounterEffect_EliteFourBertha(SysTask *task, void *param);
 void EncounterEffect_EliteFourFlint(SysTask *task, void *param);
 void EncounterEffect_EliteFourLucian(SysTask *task, void *param);
 void EncounterEffect_ChampionCynthia(SysTask *task, void *param);
+void EncounterEffect_CastleValetDarach(SysTask *task, void *param);
+void EncounterEffect_TowerTycoonPalmer(SysTask *task, void *param);
+void EncounterEffect_ArcadeStarDahlia(SysTask *task, void *param);
+void EncounterEffect_FactoryHeadThorton(SysTask *task, void *param);
+void EncounterEffect_HallMatronArgenta(SysTask *task, void *param);
 
 #endif // POKEPLATINUM_ENCOUNTER_EFFECT_CORE_H

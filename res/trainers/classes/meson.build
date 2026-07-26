@@ -141,6 +141,25 @@ foreach trainer_class : trainer_class_dirnames
     endif
 endforeach
 
+# Darach, Palmer and Dahlia are fought out in the field as well as in the Frontier.
+# The Frontier's own intro renderer wants mapping type 128; the field cut-in's mugshot
+# sprite wants the gym leader format, so their mugshots are built a second time
+# under `field_` names. The cell file carries CharName in units of the mapping
+# granularity, so the two copies are not interchangeable. Note that ncgr_cell_gen
+# picks the cell file up via -preservepath rather than as a declared input: after
+# editing field_mugshot_cell.json, touch field_mugshot.png or the tile data goes stale.
+foreach brain : ['castle_valet', 'tower_tycoon', 'arcade_star', 'factory_head', 'hall_matron']
+    trainer_encounter_mugshot_png += files(brain / 'field_mugshot.png')
+    trainer_encounter_cell_json += files(brain / 'field_mugshot_cell.json')
+endforeach
+
+# Darach additionally uses a recoloured field banner (the Battle Castle banner isn't
+# in the field encounter NARC). Palmer instead reuses his real Tower banner directly,
+# so he needs no field_ banner of his own.
+trainer_encounter_banner_png += files('castle_valet' / 'field_banner.png')
+trainer_encounter_pal += files('castle_valet' / 'field_banner.png')
+trainer_encounter_copy += files('castle_valet' / 'field_banner.NSCR')
+
 # dp_rival is not a trainer class
 # but the back sprite is present in the default rom
 trainer_back_png += files('dp_rival' / 'back.png')

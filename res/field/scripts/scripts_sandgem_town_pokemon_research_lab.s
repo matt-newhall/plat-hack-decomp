@@ -109,9 +109,19 @@ SandgemTownLab_WhyNotObtainSunyshoresBadge:
     CloseMessage
     SetFlag FLAG_HIDE_VALOR_LAKEFRONT_COLLECTOR
     SetVar VAR_UNK_0x4112, 1
-    ClearFlag FLAG_HIDE_VERITY_CAVERN_MESPRIT
-    ClearFlag FLAG_HIDE_VALOR_CAVERN_AZELF
-    ClearFlag FLAG_HIDE_ACUITY_CAVERN_UXIE
+    ActivateRoamingPokemon ROAMING_SLOT_MESPRIT
+    ActivateRoamingPokemon ROAMING_SLOT_UXIE
+    ActivateRoamingPokemon ROAMING_SLOT_AZELF
+    ActivateRoamingPokemon ROAMING_SLOT_CRESSELIA
+    ActivateRoamingPokemon ROAMING_SLOT_MOLTRES
+    ActivateRoamingPokemon ROAMING_SLOT_ZAPDOS
+    ActivateRoamingPokemon ROAMING_SLOT_ARTICUNO
+    ActivateRoamingPokemon ROAMING_SLOT_LATIOS
+    ActivateRoamingPokemon ROAMING_SLOT_LATIAS
+    ActivateRoamingPokemon ROAMING_SLOT_RAIKOU
+    ActivateRoamingPokemon ROAMING_SLOT_SUICUNE
+    ActivateRoamingPokemon ROAMING_SLOT_ENTEI
+    SetFlag FLAG_REGIS_UNLOCKED
     SetVar VAR_SANDGEM_TOWN_LAB_STATE, 3
     ReleaseAll
     End
@@ -535,13 +545,14 @@ SandgemTownLab_EnableNationalDex:
     WaitMovement
     Message SandgemTownLab_Text_LetMeUpgradeYourPokedex
     CallIfSet FLAG_GAME_COMPLETED, SandgemTownLab_GameCompletedReturn
-    CallIfGe VAR_FIGHT_AREA_STATE, 2, _079C
     SetNationalDexEnabled
     BufferPlayerName 0
     PlayFanfare SEQ_FANFA4
     Message SandgemTownLab_Text_PlayersPokedexWasUpgradedWithTheNationalMode
     WaitFanfare
     Message SandgemTownLab_Text_ItWontBeEasyToCompleteTheNationalPokedex
+    SetVar VAR_0x8004, POKETCH_APPID_TRAINERCOUNTER
+    Common_GivePoketchApp
     Message SandgemTownLab_Text_PlayerWillGetTheJobDone
     Message SandgemTownLab_Text_IveHeardThatThePalParkIsNowOpen
     BufferPlayerName 0
@@ -552,6 +563,7 @@ SandgemTownLab_EnableNationalDex:
     ApplyMovement LOCALID_PROF_OAK, SandgemTownLab_Movement_ProfOakLeave
     WaitMovement
     RemoveObject 4
+    ClearFlag FLAG_ETERNA_CITY_SOUTH_HOUSE_HIDE_PROF_OAK
     Message SandgemTownLab_Text_OffHeGoesAsBusyAsEver
     CloseMessage
     WaitTime 15, VAR_RESULT
@@ -567,10 +579,6 @@ SandgemTownLab_EnableNationalDex:
     CloseMessage
     ReleaseAll
     End
-
-_079C:
-    SetFlag FLAG_HIDE_FIGHT_AREA_BLOCKADE
-    Return
 
 SandgemTownLab_GameCompletedReturn:
     Return

@@ -15,15 +15,15 @@ PokemonLeagueLucianRoom_Lucian:
     PlayTrainerEncounterBGM TRAINER_ELITE_FOUR_LUCIAN
     Message PokemonLeagueLucianRoom_Text_LucianIntro
     CloseMessage
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueLucianRoom_StartLucianBattle
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueLucianRoom_StartLucianRematchBattle
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueLucianRoom_StartLucianBattle
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueLucianRoom_StartLucianRematchBattle
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, PokemonLeagueLucianRoom_BlackOut
     SetFlag FLAG_DEFEATED_LUCIAN
     PlaySE SEQ_SE_DP_KI_GASYAN
     RemoveObject LOCALID_EXIT_DOOR
-    CallIfUnset FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueLucianRoom_CreateJournalEventDefeatedLucian
-    CallIfSet FLAG_ARRESTED_CHARON_STARK_MOUNTAIN, PokemonLeagueLucianRoom_CreateJournalEventDefeatedRematchLucian
+    CallIfUnset FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueLucianRoom_CreateJournalEventDefeatedLucian
+    CallIfSet FLAG_HALL_OF_FAME_ENTERED, PokemonLeagueLucianRoom_CreateJournalEventDefeatedRematchLucian
     Message PokemonLeagueLucianRoom_Text_LucianDefeat
     WaitButton
     CloseMessage

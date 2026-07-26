@@ -153,3 +153,16 @@ player_female/mugshot.NCLR
 player_female/mugshot.NCGR
 player_female/mugshot_cell.NCER
 player_female/mugshot_anim.NANR
+castle_valet/field_mugshot.NCGR
+castle_valet/field_mugshot_cell.NCER
+castle_valet/field_banner.NCLR
+castle_valet/field_banner.NCGR
+castle_valet/field_banner.NSCR
+tower_tycoon/field_mugshot.NCGR
+tower_tycoon/field_mugshot_cell.NCER
+arcade_star/field_mugshot.NCGR
+arcade_star/field_mugshot_cell.NCER
+factory_head/field_mugshot.NCGR
+factory_head/field_mugshot_cell.NCER
+hall_matron/field_mugshot.NCGR
+hall_matron/field_mugshot_cell.NCER

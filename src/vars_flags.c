@@ -3,9 +3,11 @@
 #include <nitro.h>
 #include <string.h>
 
+#include "constants/pokemon.h"
 #include "constants/savedata/save_table.h"
 
 #include "savedata.h"
+#include "system_vars.h"
 
 #define GET_FLAG_BIT(flagID) (1 << (flagID % 8))
 
@@ -20,6 +22,9 @@ int VarsFlags_SaveSize(void)
 void VarsFlags_Init(VarsFlags *varsFlags)
 {
     memset(varsFlags, 0, sizeof(VarsFlags));
+
+    // init save flags to level cap of 100
+    SystemVars_SetLevelCap(varsFlags, MAX_POKEMON_LEVEL);
 }
 
 VarsFlags *SaveData_GetVarsFlags(SaveData *saveData)

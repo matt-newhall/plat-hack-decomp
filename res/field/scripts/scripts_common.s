@@ -92,14 +92,6 @@ CommonScript_PokecenterNurse:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    @ TEMP TEST HOOK: toggle Surf access each time you talk to a nurse
-    GoToIfSet FLAG_SURF_UNLOCKED, CommonScript_PokecenterNurse_ClearSurfFlag
-    SetFlag FLAG_SURF_UNLOCKED
-    GoTo CommonScript_PokecenterNurse_AfterSurfToggle
-CommonScript_PokecenterNurse_ClearSurfFlag:
-    ClearFlag FLAG_SURF_UNLOCKED
-CommonScript_PokecenterNurse_AfterSurfToggle:
-    GetTrainerCardLevel VAR_RESULT
     GoToIfGe VAR_RESULT, TRAINER_CARD_LEVEL_GOLD, CommonScript_PokecenterNurse_GoldCard
     SetVar VAR_0x8004, CommonStrings_Text_PokecenterGreeting_Day
     GetTimeOfDay VAR_RESULT
@@ -525,12 +517,14 @@ _06D5:
     RemoveItem ITEM_HONEY, 1, VAR_RESULT
     IncrementTrainerScore2 TRAINER_SCORE_EVENT_HONEY_USED
     SlatherHoneyTree
-    WaitTime 10, VAR_RESULT
     Message pl_msg_00000213_00051
     WaitButton
     CloseMessage
-    ReleaseAll
-    End
+    WaitTime 20, VAR_RESULT
+    GetHoneyTreeSpecies VAR_RESULT
+    PlayCry VAR_RESULT
+    WaitCry
+    GoTo _06F4
 
 _06F4:
     IncrementGameRecord RECORD_UNK_117

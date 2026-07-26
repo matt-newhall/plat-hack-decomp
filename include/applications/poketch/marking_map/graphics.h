@@ -41,7 +41,7 @@ typedef struct MarkingMapGraphics {
     PoketchAnimation_AnimationManager *animMan;
     PoketchAnimation_AnimatedSpriteData *markerSprites[NUM_MARKING_MAP_ICONS];
     PoketchAnimation_AnimatedSpriteData *hiddenLocationSprites[HIDDEN_LOCATION_MAX];
-    PoketchAnimation_AnimatedSpriteData *roamerSprites[ROAMING_SLOT_MAX];
+    PoketchAnimation_AnimatedSpriteData *roamerSprite;
     PoketchAnimation_AnimatedSpriteData *playerCursorSprite;
     PoketchAnimation_SpriteData animData;
     SysTask *updateTask;

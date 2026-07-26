@@ -384,7 +384,9 @@
         "Oak: I’m afraid it won’t be easy to\n",
         "complete the National Pokédex.\r",
         "However, I’m sure you will make an\n",
-        "honest attempt on our behalf!\r"
+        "honest attempt on our behalf!\r",
+        "Let me make a gift of this Trainer\n",
+        "Counter app for your Pokétch.\r"
       ]
     },
     {
@@ -413,8 +415,8 @@
     {
       "id": "SandgemTownLab_Text_MaleYouShouldVisitThePalParkToo",
       "en_US": [
-        "{STRVAR_1 3, 0, 0}, you should make an\n",
-        "effort to visit the Pal Park, too.\r",
+        "{STRVAR_1 3, 0, 0}, I believe you have\n",
+        "already visited the Pal Park!\r",
         "Oops! I’ll be late for my meeting if\n",
         "I don’t get going!\r",
         "OK, it was a pleasure seeing the both\n",
@@ -424,8 +426,8 @@
     {
       "id": "SandgemTownLab_Text_FemaleYouShouldVisitThePalParkToo",
       "en_US": [
-        "{STRVAR_1 3, 0, 0}, you should make an\n",
-        "effort to visit the Pal Park, too.\r",
+        "{STRVAR_1 3, 0, 0}, I believe you have\n",
+        "already visited the Pal Park!\r",
         "Oops! I’ll be late for my meeting if\n",
         "I don’t get going!\r",
         "OK, it was a pleasure seeing the both\n",
@@ -558,8 +560,17 @@
       "en_US": [
         "Rowan: Oh, yes, there was something\n",
         "I had to tell you.\r",
-        "The three Pokémon of the lakes appear\n",
-        "to have returned to their homes.\r",
+        "The appearance of the Distortion World\n",
+        "appears to have caused many powerful\f",
+        "Pokémon to appear in Sinnoh.\r",
+        "Not only that, but the three Pokémon\n",
+        "of the lakes do not appear to have\f",
+        "returned to their homes immediately.\r",
+        "I have upgraded your Poketch to\n",
+        "displaythe positions of these\f",
+        "powerful Pokémon.\n",
+        "Who knows? They may help you on your\n",
+        "journey!\r",
         "So, tell me.\n",
         "How are things going for you?\r",
         "The Pokédex...?\r",

@@ -436,6 +436,34 @@
     {
       "id": "pl_msg_00000620_00108",
       "en_US": "a Team Rocket"
+    },
+    {
+      "id": "pl_msg_00000620_00109",
+      "en_US": "a Leader"
+    },
+    {
+      "id": "pl_msg_00000620_001110",
+      "en_US": "a Leader"
+    },
+    {
+      "id": "pl_msg_00000620_001111",
+      "en_US": "a Commander"
+    },
+    {
+      "id": "pl_msg_00000620_00112",
+      "en_US": "a Leader"
+    },
+    {
+      "id": "pl_msg_00000620_00113",
+      "en_US": "a Leader"
+    },
+    {
+      "id": "pl_msg_00000620_00114",
+      "en_US": "a Leader"
+    },
+    {
+      "id": "pl_msg_00000620_00115",
+      "en_US": "a Leader"
     }
   ]
 }

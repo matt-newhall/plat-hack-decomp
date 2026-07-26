@@ -4,7 +4,7 @@
 
 
     ScriptEntry StarkMountainOutside_OnTransition
-    ScriptEntry StarkMountainOutside_OnFrameTeamGalactic
+    ScriptEntry StarkMountainRoom1_OnFrameGruntAmbush
     ScriptEntryEnd
 
 StarkMountainOutside_OnTransition:
@@ -12,74 +12,47 @@ StarkMountainOutside_OnTransition:
     SetFlag FLAG_HIDE_ROUTE_227_BUCK
     End
 
-StarkMountainOutside_OnFrameTeamGalactic:
+StarkMountainRoom1_OnFrameGruntAmbush:
     LockAll
-    ApplyMovement LOCALID_MARS, StarkMountainRoom1_Movement_MarsWalkOnSpotSouth
+    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom1_Movement_GruntWalkSouth
+    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom1_Movement_GruntWalkSouth
     WaitMovement
-    Message StarkMountainRoom1_Text_IllMakeYouTalk
+    Message StarkMountainRoom1_Text_NobodyFollowsUsUp
     CloseMessage
-    ApplyMovement LOCALID_MARS, StarkMountainRoom1_Movement_MarsWalkSouth
-    WaitMovement
-    StartTrainerBattle TRAINER_COMMANDER_MARS_STARK_MOUNTAIN
+    CheckHasTwoAliveMons VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, StarkMountainRoom1_OnlyOnePokemon
+    StartTrainerBattle TRAINER_GALACTIC_GRUNT_STARK_MOUNTAIN_1, TRAINER_GALACTIC_GRUNT_STARK_MOUNTAIN_2
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, StarkMountainRoom1_LostBattle
-    Message StarkMountainRoom1_Text_PokemonLetMeDown
+    Message StarkMountainRoom1_Text_CharonWillHaveOurHeads
     CloseMessage
-    ApplyMovement LOCALID_MARS, StarkMountainRoom1_Movement_MarsWalkBack
-    WaitMovement
-    ApplyMovement LOCALID_JUPITER, StarkMountainRoom1_Movement_JupiterWalkOnSpotWestSouth
-    WaitMovement
-    Message StarkMountainRoom1_Text_IllGoUpNext
-    CloseMessage
-    ApplyMovement LOCALID_JUPITER, StarkMountainRoom1_Movement_JupiterWalkSouth
-    WaitMovement
-    StartTrainerBattle TRAINER_COMMANDER_JUPITER_STARK_MOUNTAIN
-    CheckWonBattle VAR_RESULT
-    GoToIfEq VAR_RESULT, FALSE, StarkMountainRoom1_LostBattle
-    Message StarkMountainRoom1_Text_HowDareYou
-    CloseMessage
-    WaitTime 15, VAR_RESULT
-    ApplyMovement LOCALID_MARS, StarkMountainRoom1_Movement_MarsExclamationMark
-    ApplyMovement LOCALID_JUPITER, StarkMountainRoom1_Movement_JupiterFaceMars
-    WaitMovement
-    Message StarkMountainRoom1_Text_ThatsItForMe
-    ApplyMovement LOCALID_JUPITER, StarkMountainRoom1_Movement_JupiterWalkOnSpotNorth
-    WaitMovement
-    Message StarkMountainRoom1_Text_ImQuittingToo
-    CloseMessage
-    ApplyMovement LOCALID_MARS, StarkMountainRoom1_Movement_MarsWalkOnSpotNorthSouth
-    WaitMovement
-    Message StarkMountainRoom1_Text_BackToOrdinaryGirls
-    CloseMessage
-    ApplyMovement LOCALID_MARS, StarkMountainRoom1_Movement_MarsLeave
     ApplyMovement LOCALID_PLAYER, StarkMountainRoom1_Movement_PlayerMoveAside
     WaitMovement
-    PlaySE SEQ_SE_DP_KAIDAN2
-    WaitSE SEQ_SE_DP_KAIDAN2
-    ApplyMovement LOCALID_JUPITER, StarkMountainRoom1_Movement_JupiterWalkOnSpotEast
-    WaitMovement
-    Message StarkMountainRoom1_Text_NotOrdinaryGirl
-    CloseMessage
-    ApplyMovement LOCALID_JUPITER, StarkMountainRoom1_Movement_JupiterLeave
+    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom1_Movement_GruntM1Flee
     WaitMovement
     PlaySE SEQ_SE_DP_KAIDAN2
     WaitSE SEQ_SE_DP_KAIDAN2
-    ApplyMovement LOCALID_CHARON, StarkMountainRoom1_Movement_CharonWalkOnSpotSouth
-    ApplyMovement LOCALID_PLAYER, StarkMountainRoom1_Movement_PlayerWalkOnSpotNorth
+    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom1_Movement_GruntM2WalkOnSpotWest
     WaitMovement
-    Message StarkMountainRoom1_Text_ImpressionableAndImpetuous
-    Message StarkMountainRoom1_Text_OffToCollectMagmaStone
+    Message StarkMountainRoom1_Text_YouDidntSeeUs
     CloseMessage
-    ApplyMovement LOCALID_CHARON, StarkMountainRoom1_Movement_CharonLeave
-    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom1_Movement_GruntM1Leave
-    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom1_Movement_GruntM2Leave
+    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom1_Movement_GruntM2Flee
     WaitMovement
-    RemoveObject LOCALID_CHARON
-    RemoveObject LOCALID_MARS
-    RemoveObject LOCALID_JUPITER
+    PlaySE SEQ_SE_DP_KAIDAN2
+    WaitSE SEQ_SE_DP_KAIDAN2
     RemoveObject LOCALID_GRUNT_M_1
     RemoveObject LOCALID_GRUNT_M_2
+    SetFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_1_TEAM_GALACTIC
     SetVar VAR_STARK_MOUNTAIN_ROOM_1_STATE, 1
+    ReleaseAll
+    End
+
+StarkMountainRoom1_OnlyOnePokemon:
+    Message StarkMountainRoom1_Text_OnlyOnePokemon
+    CloseMessage
+    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom1_Movement_GruntWalkBack
+    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom1_Movement_GruntWalkBack
+    WaitMovement
     ReleaseAll
     End
 
@@ -89,40 +62,14 @@ StarkMountainRoom1_LostBattle:
     End
 
     .balign 4, 0
-StarkMountainRoom1_Movement_MarsWalkOnSpotSouth:
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_MarsWalkSouth:
+StarkMountainRoom1_Movement_GruntWalkSouth:
     WalkNormalSouth
     EndMovement
 
     .balign 4, 0
-StarkMountainRoom1_Movement_MarsWalkBack:
+StarkMountainRoom1_Movement_GruntWalkBack:
     WalkNormalNorth
     WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_MarsExclamationMark:
-    EmoteExclamationMark
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_MarsWalkOnSpotNorthSouth:
-    WalkOnSpotNormalNorth
-    Delay8 2
-    WalkOnSpotNormalSouth
-    Delay8 2
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_MarsLeave:
-    WalkNormalSouth 2
-    Delay8
-    WalkNormalSouth
-    SetInvisible
     EndMovement
 
     .balign 4, 0
@@ -133,64 +80,19 @@ StarkMountainRoom1_Movement_PlayerMoveAside:
     EndMovement
 
     .balign 4, 0
-StarkMountainRoom1_Movement_PlayerWalkOnSpotNorth:
-    WalkOnSpotNormalNorth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_JupiterWalkOnSpotWestSouth:
-    WalkOnSpotNormalWest
-    Delay8 2
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_JupiterWalkSouth:
-    WalkNormalSouth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_JupiterWalkOnSpotNorth:
-    WalkOnSpotNormalNorth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_JupiterWalkOnSpotEast:
-    WalkOnSpotNormalEast
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_JupiterLeave:
-    WalkNormalWest
+StarkMountainRoom1_Movement_GruntM1Flee:
     WalkNormalSouth 2
     SetInvisible
     EndMovement
 
     .balign 4, 0
-StarkMountainRoom1_Movement_JupiterFaceMars:
-    Delay8
-    WalkOnSpotNormalNorth
+StarkMountainRoom1_Movement_GruntM2WalkOnSpotWest:
+    WalkOnSpotNormalWest
     EndMovement
 
     .balign 4, 0
-StarkMountainRoom1_Movement_CharonWalkOnSpotSouth:
-    WalkOnSpotNormalSouth
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_CharonLeave:
-    WalkNormalNorth 7
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_GruntM1Leave:
-    WalkNormalEast
-    WalkNormalNorth 7
-    EndMovement
-
-    .balign 4, 0
-StarkMountainRoom1_Movement_GruntM2Leave:
-    Delay8
+StarkMountainRoom1_Movement_GruntM2Flee:
     WalkNormalWest
-    WalkNormalNorth 7
+    WalkNormalSouth 2
+    SetInvisible
     EndMovement

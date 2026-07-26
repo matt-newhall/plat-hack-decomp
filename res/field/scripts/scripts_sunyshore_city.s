@@ -44,12 +44,13 @@ SunyshoreCity_SetFlintPositionAtGate:
 
 SunyshoreCity_TriggerRivalAndJasmine:
     LockAll
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfSet FLAG_SUNYSHORE_CITY_RIVAL_DEPARTED, SunyshoreCity_JasmineApproachAgain
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineNoticePlayer
     WaitMovement
     ClearFlag FLAG_HIDE_SUNYSHORE_CITY_RIVAL
     AddObject LOCALID_RIVAL
     LockObject LOCALID_RIVAL
-    GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 853, SunyshoreCity_RivalEnterX853
     GoToIfEq VAR_0x8004, 854, SunyshoreCity_RivalEnterX854
     GoToIfEq VAR_0x8004, 855, SunyshoreCity_RivalEnterX855
@@ -112,6 +113,21 @@ SunyshoreCity_RivalAndJasmine:
     CallIfEq VAR_0x8004, 856, SunyshoreCity_RivalLeaveX856
     CallIfEq VAR_0x8004, 857, SunyshoreCity_RivalLeaveX857
     RemoveObject LOCALID_RIVAL
+    SetFlag FLAG_SUNYSHORE_CITY_RIVAL_DEPARTED
+    Call SunyshoreCity_JasmineApproachPlayer
+    Message SunyshoreCity_Text_JasmineChallenge
+    GoTo SunyshoreCity_JasmineAskToBattle
+    End
+
+SunyshoreCity_JasmineApproachAgain:
+    ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineNoticePlayer
+    WaitMovement
+    Call SunyshoreCity_JasmineApproachPlayer
+    Message SunyshoreCity_Text_JasmineReadyNow
+    GoTo SunyshoreCity_JasmineAskToBattle
+    End
+
+SunyshoreCity_JasmineApproachPlayer:
     CallIfEq VAR_0x8004, 853, SunyshoreCity_JasmineWalkToPlayerX853
     CallIfEq VAR_0x8004, 854, SunyshoreCity_JasmineWalkToPlayerX854
     CallIfEq VAR_0x8004, 855, SunyshoreCity_JasmineWalkToPlayerX855
@@ -119,17 +135,51 @@ SunyshoreCity_RivalAndJasmine:
     CallIfEq VAR_0x8004, 857, SunyshoreCity_JasmineWalkToPlayerX857
     ApplyMovement LOCALID_PLAYER, SunyshoreCity_Movement_PlayerWalkOnSpotNorth
     WaitMovement
-    Message SunyshoreCity_Text_HaveThisAsMyThanks
+    Return
+
+SunyshoreCity_JasmineAskToBattle:
+    ShowYesNoMenu VAR_RESULT
+    GoToIfEq VAR_RESULT, MENU_NO, SunyshoreCity_JasmineDeclined
+    Message SunyshoreCity_Text_JasmineLetsBattle
+    CloseMessage
+    StartTrainerBattle TRAINER_LEADER_JASMINE
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, SunyshoreCity_JasmineBlackOut
+    GoTo SunyshoreCity_JasmineDefeated
+    End
+
+SunyshoreCity_JasmineBlackOut:
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+SunyshoreCity_JasmineDeclined:
+    Message SunyshoreCity_Text_JasmineIllBeWaiting
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_PLAYER, SunyshoreCity_Movement_PlayerStepBackSouth
+    WaitMovement
+    Call SunyshoreCity_JasmineReturnToPost
+    ReleaseAll
+    End
+
+SunyshoreCity_JasmineDefeated:
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    Message SunyshoreCity_Text_JasmineThanksForMatch
     Call SunyshoreCity_GiveWaterfall
     CloseMessage
+    Call SunyshoreCity_JasmineReturnToPost
+    SetVar VAR_SUNYSHORE_STATE, 3
+    ReleaseAll
+    End
+
+SunyshoreCity_JasmineReturnToPost:
     CallIfEq VAR_0x8004, 853, SunyshoreCity_JasmineLeaveX853
     CallIfEq VAR_0x8004, 854, SunyshoreCity_JasmineLeaveX854
     CallIfEq VAR_0x8004, 855, SunyshoreCity_JasmineLeaveX855
     CallIfEq VAR_0x8004, 856, SunyshoreCity_JasmineLeaveX856
     CallIfEq VAR_0x8004, 857, SunyshoreCity_JasmineLeaveX857
-    SetVar VAR_SUNYSHORE_STATE, 3
-    ReleaseAll
-    End
+    Return
 
 SunyshoreCity_RivalFacePlayerX853:
     ApplyMovement LOCALID_RIVAL, SunyshoreCity_Movement_RivalWalkOnSpotWest
@@ -411,6 +461,11 @@ SunyshoreCity_Movement_PlayerWatchRivalLeave:
     .balign 4, 0
 SunyshoreCity_Movement_PlayerWalkOnSpotNorth:
     WalkOnSpotNormalNorth
+    EndMovement
+
+    .balign 4, 0
+SunyshoreCity_Movement_PlayerStepBackSouth:
+    WalkNormalSouth
     EndMovement
 
 SunyshoreCity_Jasmine:

@@ -859,6 +859,7 @@ ScriptCommand(SCRCMD_ROCKSMASHBREAKATOBJECT,                               ScrCm
 ScriptCommand(SCRCMD_SHOWMAPNAMEPOPUP,                                     ScrCmd_ShowMapNamePopup)
 ScriptCommand(SCRCMD_CHECKHASCAUGHTSPECIES,                                ScrCmd_CheckHasCaughtSpecies)
 ScriptCommand(SCRCMD_SETLEVELCAP,                                          ScrCmd_SetLevelCap)
+ScriptCommand(SCRCMD_GETHONEYTREESPECIES,                                  ScrCmd_GetHoneyTreeSpecies)
 
 // clang-format on
 

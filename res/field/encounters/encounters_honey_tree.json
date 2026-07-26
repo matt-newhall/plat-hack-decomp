@@ -1,26 +1,18 @@
 {
-    "common": [
-        "SPECIES_COMBEE",
-        "SPECIES_WURMPLE",
-        "SPECIES_BURMY",
-        "SPECIES_CHERUBI",
-        "SPECIES_AIPOM",
-        "SPECIES_AIPOM"
-    ],
-    "uncommon": [
-        "SPECIES_BURMY",
-        "SPECIES_CHERUBI",
-        "SPECIES_COMBEE",
-        "SPECIES_AIPOM",
-        "SPECIES_AIPOM",
-        "SPECIES_HERACROSS"
-    ],
-    "rare": [
-        "SPECIES_MUNCHLAX",
-        "SPECIES_MUNCHLAX",
-        "SPECIES_MUNCHLAX",
-        "SPECIES_MUNCHLAX",
-        "SPECIES_MUNCHLAX",
-        "SPECIES_MUNCHLAX"
+    "encounters": [
+        { "species": "SPECIES_WURMPLE",   "weight": 20 },
+        { "species": "SPECIES_WEEDLE",    "weight": 20 },
+        { "species": "SPECIES_CATERPIE",  "weight": 20 },
+        { "species": "SPECIES_BURMY",     "weight": 15 },
+        { "species": "SPECIES_COMBEE",    "weight": 15 },
+        { "species": "SPECIES_SPINARAK",  "weight": 10 },
+        { "species": "SPECIES_LEDYBA",    "weight": 10 },
+        { "species": "SPECIES_SILCOON",   "weight": 7 },
+        { "species": "SPECIES_CASCOON",   "weight": 7 },
+        { "species": "SPECIES_CHERUBI",   "weight": 5 },
+        { "species": "SPECIES_AIPOM",     "weight": 5 },
+        { "species": "SPECIES_SCYTHER",   "weight": 3 },
+        { "species": "SPECIES_HERACROSS", "weight": 3 },
+        { "species": "SPECIES_MUNCHLAX",  "weight": 1 }
     ]
 }

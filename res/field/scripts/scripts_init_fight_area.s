@@ -1,11 +1,12 @@
 #include "macros/scrcmd.inc"
 
 
-    InitScriptEntry_OnTransition 15
+    InitScriptEntry_OnTransition 14
     InitScriptEntry_OnFrameTable InitScriptFrameTable
     InitScriptEntryEnd
 
 InitScriptFrameTable:
+    InitScriptGoToIfEqual VAR_PALMER_FIGHT_AREA_EVENT, 2, 19
     InitScriptGoToIfEqual VAR_FIGHT_AREA_STATE, 0, 1
     InitScriptFrameTableEnd
 

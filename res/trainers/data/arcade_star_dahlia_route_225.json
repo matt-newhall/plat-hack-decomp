@@ -1,0 +1,51 @@
+{
+    "name": "Dahlia",
+    "class": "TRAINER_CLASS_ARCADE_STAR",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": true,
+    "party": [
+        {
+            "species": "SPECIES_LAPRAS",
+            "form": 0,
+            "level": 60,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_LUCARIO",
+            "form": 0,
+            "level": 60,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_PRE_BATTLE",
+            "garbage": 29
+        },
+        {
+            "type": "TRMSG_WIN",
+            "en_US": [
+                "Yeah! That’s the spirit I like!\n",
+                "But the win goes to me this time!\r"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Wow, you’re really something else!\n",
+                "That was a blast to battle!\r"
+            ]
+        }
+    ]
+}

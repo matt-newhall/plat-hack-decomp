@@ -1,0 +1,87 @@
+{
+    "name": "Jasmine",
+    "class": "TRAINER_CLASS_LEADER_JASMINE",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MAGNEZONE",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_FLASH_CANNON",
+                "MOVE_SIGNAL_BEAM",
+                "MOVE_THUNDER_WAVE"
+            ],
+            "iv_scale": 250,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_SKARMORY",
+            "form": 0,
+            "level": 48,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_BRAVE_BIRD",
+                "MOVE_STEEL_WING",
+                "MOVE_SPIKES",
+                "MOVE_ROOST"
+            ],
+            "iv_scale": 250,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_BRONZONG",
+            "form": 0,
+            "level": 49,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_GYRO_BALL",
+                "MOVE_EARTHQUAKE",
+                "MOVE_EXTRASENSORY",
+                "MOVE_LIGHT_SCREEN"
+            ],
+            "iv_scale": 250,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_STEELIX",
+            "form": 0,
+            "level": 51,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_IRON_TAIL",
+                "MOVE_EARTHQUAKE",
+                "MOVE_CRUNCH",
+                "MOVE_ROCK_SLIDE"
+            ],
+            "iv_scale": 2500,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_LAST_BATTLER",
+            "en_US": [
+                "...Um... This one is my partner.\n",
+                "Please don’t hold back.\n"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "...I lost... but I’m glad.\r",
+                "I came all this way to find out how\n",
+                "strong I could become.\r",
+                "Thank you for showing me.\n"
+            ]
+        }
+    ]
+}

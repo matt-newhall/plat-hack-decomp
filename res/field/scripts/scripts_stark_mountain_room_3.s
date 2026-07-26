@@ -132,9 +132,6 @@ StarkMountainRoom3_UnusedMovement6:
 
 StarkMountainRoom3_OnFrameCharon:
     LockAll
-    Message StarkMountainRoom3_Text_MagmaStoneWillBeMine
-    CloseMessage
-    WaitSE SEQ_SE_CONFIRM
     PlaySE SEQ_SE_DP_FW089
     ScrCmd_29F 0
     StopSE SEQ_SE_DP_FW089
@@ -145,101 +142,133 @@ StarkMountainRoom3_OnFrameCharon:
     WaitMovement
     Message StarkMountainRoom3_Text_WhatsGoingOnHere
     CloseMessage
-    ApplyMovement LOCALID_CHARON, StarkMountainRoom3_Movement_CharonGrabMagmaStone
+    Message StarkMountainRoom3_Text_MagmaStoneWillBeMine
+    WaitButton
+    CloseMessage
+    Message StarkMountainRoom3_Text_CharonRedChain
+    WaitButton
+    CloseMessage
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    AddFreeCamera VAR_0x8004, VAR_0x8005
+    ApplyFreeCameraMovement StarkMountainRoom3_Movement_CameraMoveNorth
     WaitMovement
+    ApplyMovement LOCALID_CHARON, StarkMountainRoom3_Movement_CharonApproachStone
+    WaitMovement
+    Message StarkMountainRoom3_Text_CharonUseMagmaStone
+    WaitButton
+    CloseMessage
+    ReleaseObject LOCALID_MAGMA_STONE
+    FlickerObject LOCALID_MAGMA_STONE, 6, 8
+    ShakeObject LOCALID_MAGMA_STONE, 8, 90, 1, 0
+    LockObject LOCALID_MAGMA_STONE
+    PlaySE SEQ_SE_DP_FW089
+    ScrCmd_29F 0
+    StopSE SEQ_SE_DP_FW089
+    FadeScreenOut FADE_SCREEN_SPEED_SLOW, COLOR_WHITE
+    WaitFadeScreen
     RemoveObject LOCALID_MAGMA_STONE
-    Message StarkMountainRoom3_Text_BossOfRebornGalactic
-    Message StarkMountainRoom3_Text_GoGoGo
-    PlayCry SPECIES_CROAGUNK
-    WaitCry
+    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_HEATRAN
+    AddObject LOCALID_HEATRAN
+    FadeScreenIn FADE_SCREEN_SPEED_SLOW, COLOR_WHITE
+    WaitFadeScreen
+    PlayCry SPECIES_HEATRAN
+    ReleaseObject LOCALID_HEATRAN
+    ShakeObject LOCALID_HEATRAN, 8, 90, 3, 0
+    LockObject LOCALID_HEATRAN
+    Message StarkMountainRoom3_Text_HeatranAwakens
+    WaitButton
     CloseMessage
-    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_CROAGUNK
-    AddObject LOCALID_CROAGUNK
-    ApplyMovement LOCALID_CROAGUNK, StarkMountainRoom3_Movement_CroagunkStealMagmaStone
-    WaitMovement
-    ApplyMovement LOCALID_CHARON, StarkMountainRoom3_Movement_CharonLookAround
-    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom3_Movement_GruntM1WalkOnSpotEast
-    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom3_Movement_GruntM2WalkOnSpotEast
-    WaitMovement
-    Message StarkMountainRoom3_Text_NoTheMagmaStone
+    Message StarkMountainRoom3_Text_CharonMasterBall
+    WaitButton
     CloseMessage
-    WaitTime 15, VAR_RESULT
-    Message StarkMountainRoom3_Text_ExcellentWorkCroagunk
-    CloseMessage
-    RemoveObject LOCALID_CROAGUNK
-    RemoveObject LOCALID_ROCK_SMASH_LOOKER
-    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_LOOKER
-    AddObject LOCALID_LOOKER
-    Common_SetLookerBGM
-    Message StarkMountainRoom3_Text_DisguisingWasNotEasy
-    CloseMessage
-    ApplyMovement LOCALID_LOOKER, StarkMountainRoom3_Movement_LookerWalkToCharon
-    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom3_Movement_GruntM1WatchLookerWalkToCharon
-    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom3_Movement_GruntM2WatchLookerWalkToCharon
-    WaitMovement
-    Message StarkMountainRoom3_Text_RequestCooperation
-    CloseMessage
-    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom3_Movement_GruntM1FaceGruntM2
-    WaitMovement
-    Message StarkMountainRoom3_Text_ItsThePolice
-    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom3_Movement_GruntM2FaceGruntM1
-    WaitMovement
-    Message StarkMountainRoom3_Text_OneThingToBeDone
-    CloseMessage
-    WaitTime 15, VAR_RESULT
-    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom3_Movement_GruntM1WalkOnSpotFastEast
-    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom3_Movement_GruntM2WalkOnSpotFastWest
-    WaitMovement
-    Message StarkMountainRoom3_Text_RunAway
-    CloseMessage
-    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom3_Movement_GruntM1Leave
-    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom3_Movement_GruntM2Leave
-    ApplyMovement LOCALID_PLAYER, StarkMountainRoom3_Movement_PlayerWatchGruntsLeave
-    WaitMovement
-    ApplyMovement LOCALID_CHARON, StarkMountainRoom3_Movement_CharonWalkOnSpotSouth
-    WaitMovement
-    Message StarkMountainRoom3_Text_IKnowNothing
-    Message StarkMountainRoom3_Text_NoResistingArrest
-    CloseMessage
-    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_POLICEMEN
-    AddObject LOCALID_POLICEMAN_1
-    ApplyMovement LOCALID_POLICEMAN_1, StarkMountainRoom3_Movement_Policeman1Enter
-    WaitMovement
-    AddObject LOCALID_POLICEMAN_2
-    ApplyMovement LOCALID_POLICEMAN_2, StarkMountainRoom3_Movement_Policeman2Enter
-    WaitMovement
-    Message StarkMountainRoom3_Text_TakeHimSomewhereCool
+    PlaySE SEQ_SE_DP_NAGERU
+    WaitSE SEQ_SE_DP_NAGERU
+    FadeScreenOut FADE_SCREEN_SPEED_FAST, COLOR_WHITE
+    WaitFadeScreen
+    RemoveObject LOCALID_HEATRAN
+    SetFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_HEATRAN
+    FadeScreenIn FADE_SCREEN_SPEED_FAST, COLOR_WHITE
+    WaitFadeScreen
+    PlaySE SEQ_SE_DP_BOWA
+    WaitSE SEQ_SE_DP_BOWA
+    Message StarkMountainRoom3_Text_CharonCaughtHeatran
+    WaitButton
     CloseMessage
     ApplyMovement LOCALID_CHARON, StarkMountainRoom3_Movement_CharonWalkSouth
-    ApplyMovement LOCALID_LOOKER, StarkMountainRoom3_Movement_LookerPushCharonSouth
+    ApplyFreeCameraMovement StarkMountainRoom3_Movement_CameraMoveSouth
     WaitMovement
-    ApplyMovement LOCALID_CHARON, StarkMountainRoom3_Movement_CharonLeave
-    ApplyMovement LOCALID_POLICEMAN_1, StarkMountainRoom3_Movement_Policeman1LeaveWithCharon
-    ApplyMovement LOCALID_POLICEMAN_2, StarkMountainRoom3_Movement_Policeman2LeaveWithCharon
+    RestoreCamera
+    ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom3_Movement_GruntM1HoldBuck
+    ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom3_Movement_GruntM2HoldBuck
     WaitMovement
-    RemoveObject LOCALID_CHARON
-    RemoveObject LOCALID_POLICEMAN_1
-    RemoveObject LOCALID_POLICEMAN_2
-    BufferPlayerName 0
-    Message StarkMountainRoom3_Text_ExitThisEnvironment
+    Message StarkMountainRoom3_Text_CharonChallenge
+    WaitButton
     CloseMessage
-    SetVar VAR_STARK_MOUNTAIN_OUTSIDE_STATE, 2
-    SetFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_BUCK
-    SetFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_LOOKER
-    SetVar VAR_STARK_MOUNTAIN_ROOM_3_STATE, 1
-    SetFlag FLAG_ARRESTED_CHARON_STARK_MOUNTAIN
-    ClearFlag FLAG_HIDE_GAME_CORNER_LOOKER
-    ClearFlag FLAG_HIDE_SURVIVAL_AREA_RIVAL
-    ClearFlag FLAG_HIDE_BATTLEGROUND_BUCK
-    ClearFlag FLAG_HIDE_SURVIVAL_AREA_BUCK
-    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_OUTSIDE_BUCK
-    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_OUTSIDE_LOOKER
+    Message StarkMountainRoom3_Text_BuckHealsYou
+    WaitButton
+    CloseMessage
+    HealParty
+    CheckHasTwoAliveMons VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, StarkMountainRoom3_CharonNotWorthIt
+    StartTrainerBattle TRAINER_CHARON_STARK_MOUNTAIN
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, StarkMountainRoom3_CharonLostBattle
+    GoTo StarkMountainRoom3_CharonDefeated
+    End
+
+StarkMountainRoom3_CharonLostBattle:
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+StarkMountainRoom3_CharonNotWorthIt:
+    Message StarkMountainRoom3_Text_CharonNotWorthIt
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+StarkMountainRoom3_CharonDefeated:
+    Message StarkMountainRoom3_Text_CharonDefeated
+    WaitButton
+    CloseMessage
+    Message StarkMountainRoom3_Text_CharonEscapes
+    WaitButton
+    CloseMessage
     FadeScreenOut
     WaitFadeScreen
-    Warp MAP_HEADER_STARK_MOUNTAIN_OUTSIDE, 0, 751, 233, DIR_NORTH
+    RemoveObject LOCALID_CHARON
+    RemoveObject LOCALID_GRUNT_M_1
+    RemoveObject LOCALID_GRUNT_M_2
+    SetFlag FLAG_HIDE_STARK_MOUNTAIN_ROOM_3_TEAM_GALACTIC
+    FadeScreenIn
+    WaitFadeScreen
+    ApplyMovement LOCALID_BUCK, StarkMountainRoom3_Movement_BuckWalkOnSpotNorth
+    WaitMovement
+    Message StarkMountainRoom3_Text_BuckAftermath
+    WaitButton
+    CloseMessage
+    ApplyMovement LOCALID_BUCK, StarkMountainRoom3_Movement_BuckFaceEast
+    ApplyMovement LOCALID_PLAYER, StarkMountainRoom3_Movement_PlayerFaceWest
+    WaitMovement
+    BufferPlayerName 0
+    Message StarkMountainRoom3_Text_BuckTeleportOut
+    WaitButton
+    CloseMessage
+    SetVar VAR_STARK_MOUNTAIN_ROOM_3_STATE, 1
+    SetVar VAR_STARK_MOUNTAIN_OUTSIDE_STATE, 2
+    ClearFlag FLAG_HIDE_STARK_MOUNTAIN_OUTSIDE_BUCK
+    FadeScreenOut
+    WaitFadeScreen
+    Warp MAP_HEADER_STARK_MOUNTAIN_OUTSIDE, 0, 751, 233, DIR_WEST
     FadeScreenIn
     WaitFadeScreen
     End
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_CharonApproachStone:
+    WalkNormalNorth 2
+    EndMovement
 
     .balign 4, 0
 StarkMountainRoom3_Movement_PlayerWalkNorth:
@@ -258,6 +287,27 @@ StarkMountainRoom3_Movement_PlayerWatchGruntsLeave:
 StarkMountainRoom3_Movement_BuckWalkNorth:
     Delay8
     WalkNormalNorth 2
+    EndMovement
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_CameraMoveNorth:
+    WalkNormalNorth 4
+    EndMovement
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_CameraMoveSouth:
+    Delay8 2
+    WalkNormalSouth 4
+    EndMovement
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_BuckFaceEast:
+    WalkOnSpotNormalEast
+    EndMovement
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_PlayerFaceWest:
+    WalkOnSpotNormalWest
     EndMovement
 
     .balign 4, 0
@@ -332,6 +382,19 @@ StarkMountainRoom3_Movement_GruntM1FaceGruntM2:
     .balign 4, 0
 StarkMountainRoom3_Movement_GruntM2FaceGruntM1:
     WalkOnSpotNormalWest
+    EndMovement
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_GruntM1HoldBuck:
+    WalkNormalWest
+    WalkNormalSouth
+    EndMovement
+
+    .balign 4, 0
+StarkMountainRoom3_Movement_GruntM2HoldBuck:
+    WalkNormalSouth
+    WalkNormalWest 2
+    WalkOnSpotNormalSouth
     EndMovement
 
     .balign 4, 0
