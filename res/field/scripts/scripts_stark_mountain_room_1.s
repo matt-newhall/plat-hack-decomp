@@ -53,6 +53,14 @@ StarkMountainRoom1_OnlyOnePokemon:
     ApplyMovement LOCALID_GRUNT_M_1, StarkMountainRoom1_Movement_GruntWalkBack
     ApplyMovement LOCALID_GRUNT_M_2, StarkMountainRoom1_Movement_GruntWalkBack
     WaitMovement
+    ApplyMovement LOCALID_PLAYER, StarkMountainRoom1_Movement_PlayerWalkSouth
+    WaitMovement
+    PlaySE SEQ_SE_DP_KAIDAN2
+    FadeScreenOut
+    WaitFadeScreen
+    Warp MAP_HEADER_ROUTE_227, 0, 750, 232, DIR_SOUTH
+    FadeScreenIn
+    WaitFadeScreen
     ReleaseAll
     End
 
@@ -77,6 +85,11 @@ StarkMountainRoom1_Movement_PlayerMoveAside:
     Delay8 2
     WalkNormalWest
     WalkOnSpotNormalEast
+    EndMovement
+
+ .balign 4, 0
+StarkMountainRoom1_Movement_PlayerWalkSouth:
+    WalkNormalSouth
     EndMovement
 
     .balign 4, 0
