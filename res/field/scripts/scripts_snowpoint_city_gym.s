@@ -6,6 +6,7 @@
     ScriptEntry SnowpointGym_Candice
     ScriptEntry SnowpointGym_GymGuide
     ScriptEntry SnowpointGym_GymStatue
+    ScriptEntry SnowpointGym_Sneasel
     ScriptEntryEnd
 
 SnowpointGym_Init:
@@ -115,6 +116,18 @@ SnowpointGym_GymStatueAfterBadge:
     BufferRivalName 2
     Message SnowpointGym_Text_GymStatueAfterBadge
     WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+SnowpointGym_Sneasel:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayCry SPECIES_SNEASEL
+    Message SnowpointGym_Text_Sneasel
+    WaitButton
+    WaitCry
     CloseMessage
     ReleaseAll
     End

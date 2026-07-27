@@ -40,6 +40,9 @@
         "Because you have it, you can use the\n",
         "hidden move Rock Climb anytime, even\f",
         "when you’re not in a battle.\r",
+        "Feel free to call on my partner\n",
+        "Sneasel here when you need to scale\f",
+        "any jagged cliff faces!\r",
         "Oh, and take this, too.\r"
       ]
     },
@@ -117,6 +120,12 @@
         "Certified Trainers:\n",
         "{STRVAR_1 3, 0, 0}\f",
         "{STRVAR_1 3, 1, 0}"
+      ]
+    },
+    {
+      "id": "SnowpointGym_Text_Sneasel",
+      "en_US": [
+        "Pyahh!"
       ]
     }
   ]
