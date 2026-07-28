@@ -1,0 +1,105 @@
+{
+    "name": "Paul",
+    "class": "TRAINER_CLASS_PAUL",
+    "items": [],
+    "ai_flags": [
+        "AI_FLAG_BASIC",
+        "AI_FLAG_EVAL_ATTACK",
+        "AI_FLAG_EXPERT"
+    ],
+    "double_battle": false,
+    "party": [
+        {
+            "species": "SPECIES_MURKROW",
+            "form": 0,
+            "level": 38,
+            "item": null,
+            "moves": [
+                "MOVE_NIGHT_SLASH",
+                "MOVE_WING_ATTACK",
+                "MOVE_TAUNT",
+                "MOVE_HAZE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_URSARING",
+            "form": 0,
+            "level": 38,
+            "item": null,
+            "moves": [
+                "MOVE_SLASH",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_FAKE_TEARS",
+                "MOVE_SWAGGER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_GASTRODON",
+            "form": 0,
+            "level": 39,
+            "item": null,
+            "moves": [
+                "MOVE_MUDDY_WATER",
+                "MOVE_MUD_BOMB",
+                "MOVE_ANCIENT_POWER",
+                "MOVE_RECOVER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_MAGMAR",
+            "form": 0,
+            "level": 39,
+            "item": null,
+            "moves": [
+                "MOVE_FLAMETHROWER",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_PSYCHIC",
+                "MOVE_CONFUSE_RAY"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_ELECTABUZZ",
+            "form": 0,
+            "level": 41,
+            "item": null,
+            "moves": [
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_ICE_PUNCH",
+                "MOVE_CROSS_CHOP",
+                "MOVE_LIGHT_SCREEN"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0
+        }
+    ],
+    "messages": [
+        {
+            "type": "TRMSG_LAST_BATTLER",
+            "en_US": [
+                "One left. Show me whether it was\n",
+                "worth bringing."
+            ]
+        },
+        {
+            "type": "TRMSG_LAST_BATTLER_HALF_HP",
+            "en_US": [
+                "Stay standing.\n"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Hmph. The snow didn’t slow you\n",
+                "down at all."
+            ]
+        }
+    ]
+}

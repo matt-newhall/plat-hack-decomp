@@ -52,6 +52,31 @@
     {
       "id": "AcuityLakefront_Text_SignLakeAcuityAhead",
       "en_US": "Lake Acuity ahead"
+    },
+    {
+      "id": "AcuityLakefront_Text_PaulNotice",
+      "en_US": [
+        "Oh, {STRVAR_1 3, 0, 0}.\n"
+      ]
+    },
+    {
+      "id": "AcuityLakefront_Text_PaulPreBattle",
+      "en_US": [
+        "There’s a Gym waiting for you past\n",
+        "this snow.\r",
+        "I’m not letting you walk into it\n",
+        "without finding out what you’re worth.\f",
+        "Show me."
+      ]
+    },
+    {
+      "id": "AcuityLakefront_Text_PaulAfterBattle",
+      "en_US": [
+        "...Fine.\n",
+        "You’re ready for the Gym.\r",
+        "Don’t make me regret saying that,\n",
+        "{STRVAR_1 3, 0, 0}."
+      ]
     }
   ]
 }
