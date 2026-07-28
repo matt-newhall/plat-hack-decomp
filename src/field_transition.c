@@ -12,6 +12,7 @@
 #include "overlay005/map_name_popup.h"
 #include "overlay005/ov5_021D5EB8.h"
 
+#include "enc_effects.h"
 #include "field_system.h"
 #include "field_task.h"
 #include "heap.h"
@@ -32,12 +33,10 @@ static BOOL FieldTask_RunEncounterEffect(FieldTask *task)
 
     switch (data->taskState) {
     case 0:
-        // VS cut-ins like for gym leaders, frontier brains, etc - show a
-        // background that the overworld weather would then draw over.
-        // Think the volcanic ash on Route 227, sandstorm on Route 228, etc
-        // dispel the weather temporarily - it will be set back when we
-        // load back in
-        if (fieldSystem->unk_04->unk_0C != NULL) {
+        // overworld weather would draw over Thorton and Agenta's VS cut-ins
+        // so we dispel it temporarily
+        if ((data->encEffectID == ENCEFF_CUTIN_FACTORY_HEAD || data->encEffectID == ENCEFF_CUTIN_HALL_MATRON)
+            && fieldSystem->unk_04->unk_0C != NULL) {
             ov5_021D5F24(fieldSystem->unk_04->unk_0C, OVERWORLD_WEATHER_CLEAR);
         }
 
