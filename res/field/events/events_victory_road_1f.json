@@ -232,6 +232,21 @@
             "x": 38,
             "z": 17,
             "y": 0
+        },
+        {
+            "id": "LOCALID_PAUL",
+            "graphics_id": "OBJ_EVENT_GFX_PAUL",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_VICTORY_ROAD_1F_PAUL",
+            "script": 0,
+            "initial_dir": 2,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 42,
+            "z": 41,
+            "y": 0
         }
     ],
     "warp_events": [
@@ -323,6 +338,16 @@
             "width": 3,
             "length": 1,
             "var": "VAR_VICTORY_ROAD_LEAGUECHECK_STATE",
+            "value": 0
+        },
+        {
+            "script": 5,
+            "x": 37,
+            "z": 40,
+            "y": 0,
+            "width": 1,
+            "length": 3,
+            "var": "0",
             "value": 0
         }
     ]

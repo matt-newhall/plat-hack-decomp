@@ -20,16 +20,45 @@
       ]
     },
     {
-      "id": "VictoryRoad1F_Text_Dummy2",
-      "garbage": 72
+      "id": "VictoryRoad1F_Text_PaulNotice",
+      "en_US": [
+        "...{STRVAR_1 3, 0, 0}.\n",
+        "Of course it’s you."
+      ]
     },
     {
-      "id": "VictoryRoad1F_Text_Dummy3",
-      "garbage": 32
+      "id": "VictoryRoad1F_Text_PaulPreBattle",
+      "en_US": [
+        "So you made it this far.\n",
+        "I expected nothing less.\r",
+        "Lake Valor. Pal Park. Every time I\n",
+        "looked up, you were standing there.\r",
+        "I used to think strength was simply\n",
+        "something a Trainer had, or didn’t.\r",
+        "It isn’t. It’s something a team is\n",
+        "given, by whoever raises them.\r",
+        "I learned that watching you.\n",
+        "Don’t make me regret admitting it.\r",
+        "Now show me what you’ve built.\n",
+        "Hold back and I won’t forgive it."
+      ]
     },
     {
-      "id": "VictoryRoad1F_Text_Dummy4",
-      "garbage": 37
+      "id": "VictoryRoad1F_Text_PaulAfterBattle",
+      "en_US": [
+        "...Enough. Rest, all of you.\n",
+        "You gave me everything I asked for.\r",
+        "The failing there was mine.\n",
+        "Not theirs. That’s the truth of it.\r",
+        "And you saw the gap between us\n",
+        "before I did. That’s worth knowing.\r",
+        "So I’m going back to train. Properly.\n",
+        "There won’t be a second loss.\r",
+        "Go on, {STRVAR_1 3, 0, 0}.\n",
+        "The League is waiting.\r",
+        "Win it. I won’t accept less from\n",
+        "someone who beat me."
+      ]
     },
     {
       "id": "VictoryRoad1F_Text_Dummy5",
