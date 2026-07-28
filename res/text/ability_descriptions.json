@@ -1180,6 +1180,13 @@
         "Gives priority to\n",
         "status moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00169",
+      "en_US": [
+        "Copies dancing moves\n",
+        "used by other Pokémon."
+      ]
     }
   ]
 }

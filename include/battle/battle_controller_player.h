@@ -55,6 +55,7 @@ enum BattleControlSequence {
     BATTLE_CONTROL_FIGHT_END,
     BATTLE_CONTROL_END_WAIT,
     BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH,
+    BATTLE_CONTROL_DANCER_TURN,
 };
 
 enum BattleControllerPlayerInput {

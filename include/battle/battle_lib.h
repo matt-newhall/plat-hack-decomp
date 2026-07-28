@@ -832,6 +832,14 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 BOOL BattleSystem_IsSoundMove(u16 move);
 
 /**
+ * @brief Checks if selected move is a dance move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a dance move.
+ */
+BOOL BattleSystem_IsDanceMove(u16 move);
+
+/**
  * @brief Trigger an end-of-turn ability for the battler.
  *
  * If an end-of-turn ability is triggered, then the respective subscript will
