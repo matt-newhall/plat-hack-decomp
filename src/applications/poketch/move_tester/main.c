@@ -92,7 +92,8 @@ static const u8 sMoveTesterTypeOrder[] = {
     TYPE_GHOST,
     TYPE_DRAGON,
     TYPE_DARK,
-    TYPE_STEEL
+    TYPE_STEEL,
+    TYPE_FAIRY
 };
 
 static void NitroStaticInit(void);
