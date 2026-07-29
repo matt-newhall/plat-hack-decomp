@@ -245,7 +245,7 @@
     ScriptEntry VisibleItems_LakeValor_TM25
     ScriptEntry VisibleItems_LakeAcuity_TM14
     ScriptEntry VisibleItems_SnowpointTempleB1F_MaxRevive
-    ScriptEntry VisibleItems_SnowpointTempleB4F_FullHeal
+    ScriptEntry VisibleItems_SnowpointTempleB4F_HeartScale
     ScriptEntry VisibleItems_GalacticHQB2F_BerserkGene
     ScriptEntry VisibleItems_BattlePark_RazorFang
     ScriptEntry VisibleItems_Route216_QuickPowder
@@ -1790,8 +1790,8 @@ VisibleItems_SnowpointTempleB1F_MaxRevive:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_SnowpointTempleB4F_FullHeal:
-    SetVar VAR_0x8008, ITEM_FULL_HEAL
+VisibleItems_SnowpointTempleB4F_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
