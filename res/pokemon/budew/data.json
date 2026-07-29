@@ -93,7 +93,11 @@
         ]
     },
     "evolutions": [
-        [ "EVO_LEVEL_HAPPINESS", "SPECIES_ROSELIA" ]
+        [
+            "EVO_LEVEL",
+            16,
+            "SPECIES_ROSELIA"
+        ]
     ],
     "offspring": "SPECIES_BUDEW",
     "footprint": {

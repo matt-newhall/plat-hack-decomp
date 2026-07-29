@@ -112,7 +112,11 @@
         ]
     },
     "evolutions": [
-        [ "EVO_LEVEL_HAPPINESS", "SPECIES_LUCARIO" ]
+        [
+            "EVO_LEVEL",
+            27,
+            "SPECIES_LUCARIO"
+        ]
     ],
     "offspring": "SPECIES_RIOLU",
     "footprint": {

@@ -34,7 +34,6 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_ANCIENT_POWER" ],
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_ODOR_SLEUTH" ],
             [ 1, "MOVE_FREEZE_DRY" ],
@@ -49,6 +48,7 @@
             [ 32, "MOVE_TAKE_DOWN" ],
             [ 33, "MOVE_FURY_ATTACK" ],
             [ 40, "MOVE_EARTHQUAKE" ],
+            [ 42, "MOVE_ANCIENT_POWER" ],
             [ 48, "MOVE_MIST" ],
             [ 56, "MOVE_BLIZZARD" ],
             [ 65, "MOVE_AMNESIA" ]

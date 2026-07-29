@@ -132,7 +132,11 @@
         ]
     },
     "evolutions": [
-        [ "EVO_LEVEL_HAPPINESS", "SPECIES_BLISSEY" ]
+        [
+            "EVO_LEVEL",
+            50,
+            "SPECIES_BLISSEY"
+        ]
     ],
     "offspring": "SPECIES_HAPPINY",
     "footprint": {

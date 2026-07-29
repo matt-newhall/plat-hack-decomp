@@ -48,13 +48,13 @@
     },
     "evolutions": [
         [
-            "EVO_LEVEL_FEMALE",
+            "EVO_LEVEL",
             20,
             "SPECIES_WORMADAM"
         ],
         [
-            "EVO_LEVEL_MALE",
-            20,
+            "EVO_USE_ITEM",
+            "ITEM_DAWN_STONE",
             "SPECIES_MOTHIM"
         ]
     ],

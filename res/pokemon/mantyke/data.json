@@ -100,8 +100,8 @@
     },
     "evolutions": [
         [
-            "EVO_LEVEL_SPECIES_IN_PARTY",
-            "SPECIES_REMORAID",
+            "EVO_LEVEL",
+            26,
             "SPECIES_MANTINE"
         ]
     ],
