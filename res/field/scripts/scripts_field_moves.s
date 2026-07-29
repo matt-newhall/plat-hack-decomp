@@ -406,9 +406,8 @@ _0675:
 FieldMoves_Waterfall:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    CheckBadgeAcquired BADGE_ID_BEACON, VAR_RESULT
-    GoToIfEq VAR_RESULT, 0, _06C3
-    SetVar VAR_0x8004, SPECIES_SEAKING
+    GoToIfUnset FLAG_WATERFALL_UNLOCKED, _06C3
+    SetVar VAR_0x8004, SPECIES_EMPOLEON
     BufferSpeciesNameFromVar 0, VAR_0x8004, 0, 0
     Message FieldMoves_Text_WouldYouLikeToUseWaterfall
     ShowYesNoMenu VAR_RESULT

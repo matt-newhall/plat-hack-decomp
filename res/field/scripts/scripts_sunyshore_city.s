@@ -23,6 +23,7 @@
     ScriptEntry SunyshoreCity_Flint
     ScriptEntry SunyshoreCity_OnTransition
     ScriptEntry SunyshoreCity_DrifloonInteract
+    ScriptEntry SunyshoreCity_Empoleon
     ScriptEntryEnd
 
 SunyshoreCity_OnTransition:
@@ -47,6 +48,7 @@ SunyshoreCity_TriggerRivalAndJasmine:
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfSet FLAG_SUNYSHORE_CITY_RIVAL_DEPARTED, SunyshoreCity_JasmineApproachAgain
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineNoticePlayer
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_EmpoleonLookSouth
     WaitMovement
     ClearFlag FLAG_HIDE_SUNYSHORE_CITY_RIVAL
     AddObject LOCALID_RIVAL
@@ -121,6 +123,7 @@ SunyshoreCity_RivalAndJasmine:
 
 SunyshoreCity_JasmineApproachAgain:
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineNoticePlayer
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_EmpoleonLookSouth
     WaitMovement
     Call SunyshoreCity_JasmineApproachPlayer
     Message SunyshoreCity_Text_JasmineReadyNow
@@ -159,6 +162,7 @@ SunyshoreCity_JasmineDeclined:
     CloseMessage
     ApplyMovement LOCALID_PLAYER, SunyshoreCity_Movement_PlayerStepBackSouth
     WaitMovement
+    Call SunyshoreCity_EmpoleonReturnToPost
     Call SunyshoreCity_JasmineReturnToPost
     ReleaseAll
     End
@@ -179,6 +183,34 @@ SunyshoreCity_JasmineReturnToPost:
     CallIfEq VAR_0x8004, 855, SunyshoreCity_JasmineLeaveX855
     CallIfEq VAR_0x8004, 856, SunyshoreCity_JasmineLeaveX856
     CallIfEq VAR_0x8004, 857, SunyshoreCity_JasmineLeaveX857
+    Return
+
+SunyshoreCity_EmpoleonReturnToPost:
+    CallIfEq VAR_0x8004, 853, SunyshoreCity_EmpoleonLeaveX853
+    CallIfEq VAR_0x8004, 854, SunyshoreCity_EmpoleonLeaveX854
+    CallIfEq VAR_0x8004, 855, SunyshoreCity_EmpoleonLeaveX855
+    CallIfEq VAR_0x8004, 856, SunyshoreCity_EmpoleonLeaveX856
+    CallIfEq VAR_0x8004, 857, SunyshoreCity_EmpoleonLeaveX857
+    Return
+
+SunyshoreCity_EmpoleonLeaveX853:
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineLeaveX853
+    Return
+
+SunyshoreCity_EmpoleonLeaveX854:
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineLeaveX854
+    Return
+
+SunyshoreCity_EmpoleonLeaveX855:
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineLeaveX855
+    Return
+
+SunyshoreCity_EmpoleonLeaveX856:
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineLeaveX856
+    Return
+
+SunyshoreCity_EmpoleonLeaveX857:
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineLeaveX857
     Return
 
 SunyshoreCity_RivalFacePlayerX853:
@@ -237,26 +269,31 @@ SunyshoreCity_RivalLeaveX857:
 
 SunyshoreCity_JasmineWalkToPlayerX853:
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineWalkToPlayerX853
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineWalkToPlayerX853
     WaitMovement
     Return
 
 SunyshoreCity_JasmineWalkToPlayerX854:
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineWalkToPlayerX854
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineWalkToPlayerX854
     WaitMovement
     Return
 
 SunyshoreCity_JasmineWalkToPlayerX855:
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineWalkToPlayerX855
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineWalkToPlayerX855
     WaitMovement
     Return
 
 SunyshoreCity_JasmineWalkToPlayerX856:
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineWalkToPlayerX856
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineWalkToPlayerX856
     WaitMovement
     Return
 
 SunyshoreCity_JasmineWalkToPlayerX857:
     ApplyMovement LOCALID_JASMINE, SunyshoreCity_Movement_JasmineWalkToPlayerX857
+    ApplyMovement LOCALID_EMPOLEON, SunyshoreCity_Movement_JasmineWalkToPlayerX857
     WaitMovement
     Return
 
@@ -347,6 +384,12 @@ SunyshoreCity_Movement_JasmineLeaveX857:
     WalkNormalNorth
     WalkOnSpotNormalSouth
     EndMovement
+
+    .balign 4, 0
+SunyshoreCity_Movement_EmpoleonLookSouth:
+    WalkOnSpotNormalSouth
+    EndMovement
+
 
     .balign 4, 0
 SunyshoreCity_Movement_RivalEnterX853:
@@ -493,12 +536,25 @@ SunyshoreCity_ICameToGetStronger:
     ReleaseAll
     End
 
+SunyshoreCity_Empoleon:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayCry SPECIES_EMPOLEON
+    Message SunyshoreCity_Text_Empoleon
+    WaitButton
+    WaitCry
+    CloseMessage
+    ReleaseAll
+    End
+
 SunyshoreCity_GiveWaterfall:
     Message SunyshoreCity_Text_ThisIsntMuchBut
     SetVar VAR_0x8004, ITEM_HM07
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     SetFlag FLAG_RECEIVED_SUNYSHORE_CITY_HM07
+    SetFlag FLAG_WATERFALL_UNLOCKED
     Message SunyshoreCity_Text_ThatHMContainsWaterfall
     Return
 

@@ -43,9 +43,14 @@
     {
       "id": "SunyshoreGymRoom3_Text_VolknerExplainBeaconBadge",
       "en_US": [
-        "That Beacon Badge lets you use\n",
+        "That Beacon Badge clears you to use\n",
         "the hidden move Waterfall even when\f",
         "you’re not in a battle.\r",
+        "Mind you, a Badge won’t haul you up\n",
+        "a river. You’ll want a Pokémon with\f",
+        "the power for that.\r",
+        "Ask around by the shore--someone\n",
+        "there has just the partner.\r",
         "Waterfall happens to be key if you’re\n",
         "going to the Pokémon League.\r",
         "Also, because you’ve collected all\n",
