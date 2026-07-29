@@ -3,7 +3,7 @@
 
 
     ScriptEntry VisibleItems_Route202_Potion
-    ScriptEntry VisibleItems_Route203_Repel
+    ScriptEntry VisibleItems_Route203_SuperPotion
     ScriptEntry VisibleItems_Route203_PokeBall
     ScriptEntry VisibleItems_OreburghGateB1F_TM01
     ScriptEntry VisibleItems_OreburghGateB1F_TM31
@@ -12,7 +12,7 @@
     ScriptEntry VisibleItems_OreburghMineB2F_EscapeRope
     ScriptEntry VisibleItems_OreburghMineB2F_Potion
     ScriptEntry VisibleItems_Route204South_SeaIncense
-    ScriptEntry VisibleItems_Route204South_HPUp
+    ScriptEntry VisibleItems_Route204South_HeartScale
     ScriptEntry VisibleItems_RavagedPath_TM39
     ScriptEntry VisibleItems_RavagedPath_LuckIncense
     ScriptEntry VisibleItems_RavagedPath_TM03
@@ -34,7 +34,7 @@
     ScriptEntry VisibleItems_EternaForestOutside_SilverPowder
     ScriptEntry VisibleItems_Route206_PoisonBarb
     ScriptEntry VisibleItems_Route206_PPUp
-    ScriptEntry VisibleItems_Route206_SuperRepel
+    ScriptEntry VisibleItems_Route206_Ether
     ScriptEntry VisibleItems_Route206_BurnHeal
     ScriptEntry VisibleItems_WaywardCave1F_TM32
     ScriptEntry VisibleItems_WaywardCave1F_Revive
@@ -43,14 +43,14 @@
     ScriptEntry VisibleItems_WaywardCave1F_TM26
     ScriptEntry VisibleItems_MtCoronet4FRooms1And2_LustrousOrb
     ScriptEntry VisibleItems_WaywardCaveB1F_MaxEther
-    ScriptEntry VisibleItems_WaywardCaveB1F_RareCandy
+    ScriptEntry VisibleItems_WaywardCaveB1F_UltraBall
     ScriptEntry VisibleItems_WaywardCaveB1F_GripClaw
     ScriptEntry VisibleItems_Route207_PokeBall
     ScriptEntry VisibleItems_Route207_Revive
-    ScriptEntry VisibleItems_Route207_Iron
-    ScriptEntry VisibleItems_MtCoronet1FSouth_Protein
+    ScriptEntry VisibleItems_Route207_HeartScale
+    ScriptEntry VisibleItems_MtCoronet1FSouth_RoomService
     ScriptEntry VisibleItems_MtCoronet1FSouth_DawnStone
-    ScriptEntry VisibleItems_Route208_Carbos
+    ScriptEntry VisibleItems_Route208_HeartScale
     ScriptEntry VisibleItems_Route208_GreatBall
     ScriptEntry VisibleItems_Route208_Ether
     ScriptEntry VisibleItems_AmitySquare_TM45
@@ -64,7 +64,7 @@
     ScriptEntry VisibleItems_Route212South_FullHeal
     ScriptEntry VisibleItems_Route212South_TM84
     ScriptEntry VisibleItems_Route212South_TM62
-    ScriptEntry VisibleItems_Route212South_Zinc
+    ScriptEntry VisibleItems_Route212South_UltraBall
     ScriptEntry VisibleItems_Route212South_HyperPotion
     ScriptEntry VisibleItems_Route212South_TM06
     ScriptEntry VisibleItems_Route212South_Revive
@@ -83,14 +83,14 @@
     ScriptEntry VisibleItems_Route213_MaxRevive
     ScriptEntry VisibleItems_Route213_WaterStone
     ScriptEntry VisibleItems_Route213_PPUp
-    ScriptEntry VisibleItems_Route213_Protein
+    ScriptEntry VisibleItems_Route213_HeartScale
     ScriptEntry VisibleItems_Route204South_ParlyzHeal
     ScriptEntry VisibleItems_ValorLakefront_TM85
     ScriptEntry VisibleItems_ValorLakefront_UltraBall
     ScriptEntry VisibleItems_EternaForest_Ether
     ScriptEntry VisibleItems_Route209_GreatBall
     ScriptEntry VisibleItems_Route209_HyperPotion
-    ScriptEntry VisibleItems_Route209_Calcium
+    ScriptEntry VisibleItems_Route209_Revive
     ScriptEntry VisibleItems_Route209_TM47
     ScriptEntry VisibleItems_Route209_TM19
     ScriptEntry VisibleItems_Route209LostTower2F_OvalStone
@@ -101,58 +101,58 @@
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_OddIncense
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_Nugget
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_HM05
-    ScriptEntry VisibleItems_Route210South_SuperRepel
-    ScriptEntry VisibleItems_Route210South_MaxRepel
+    ScriptEntry VisibleItems_Route210South_GreatBall
+    ScriptEntry VisibleItems_Route210South_LuckyPunch
     ScriptEntry VisibleItems_Route221_PureIncense
     ScriptEntry VisibleItems_Route210South_NestBall
     ScriptEntry VisibleItems_Route210South_HyperPotion
     ScriptEntry VisibleItems_Route215_FistPlate
     ScriptEntry VisibleItems_Route215_HyperPotion
     ScriptEntry VisibleItems_Route215_MaxEther
-    ScriptEntry VisibleItems_Route215_FullHeal
+    ScriptEntry VisibleItems_Route215_DomeFossil
     ScriptEntry VisibleItems_Route215_TM34
     ScriptEntry VisibleItems_VeilstoneCity_FullIncense
-    ScriptEntry VisibleItems_VeilstoneCity_RareCandy
+    ScriptEntry VisibleItems_VeilstoneCity_SmokeBall
     ScriptEntry VisibleItems_VeilstoneCityGalacticWarehouse_DuskStone
     ScriptEntry VisibleItems_Route214_BigRoot
     ScriptEntry VisibleItems_Route214_RedShard
-    ScriptEntry VisibleItems_Route214_MaxRepel
-    ScriptEntry VisibleItems_Route214_RareCandy
+    ScriptEntry VisibleItems_Route214_Metronome
+    ScriptEntry VisibleItems_Route214_HeartScale
     ScriptEntry VisibleItems_RuinManiacCaveOrTunnel_TM28
     ScriptEntry VisibleItems_Route210North_SmokeBall
     ScriptEntry VisibleItems_Route210North_WaveIncense
     ScriptEntry VisibleItems_Route210North_TM30
     ScriptEntry VisibleItems_FuegoIronworksBuilding_TM35
     ScriptEntry VisibleItems_FuegoIronworksBuilding_RockIncense
-    ScriptEntry VisibleItems_FuegoIronworksBuilding_Calcium
+    ScriptEntry VisibleItems_FuegoIronworksBuilding_WaterStone
     ScriptEntry VisibleItems_FuegoIronworksBuilding_FireStone
     ScriptEntry VisibleItems_Route219_Antidote
     ScriptEntry VisibleItems_Route220_SplashPlate
-    ScriptEntry VisibleItems_Route205South_Repel
-    ScriptEntry VisibleItems_Route220_Carbos
-    ScriptEntry VisibleItems_Route220_MaxRepel
+    ScriptEntry VisibleItems_Route205South_MuscleBand
+    ScriptEntry VisibleItems_Route220_AirBalloon
+    ScriptEntry VisibleItems_Route220_UltraBall
     ScriptEntry VisibleItems_Route221_UltraBall
-    ScriptEntry VisibleItems_Route221_Protein
+    ScriptEntry VisibleItems_Route221_MaxElixir
     ScriptEntry VisibleItems_Route221_TM81
-    ScriptEntry VisibleItems_Route218_RareCandy
+    ScriptEntry VisibleItems_Route218_CustapBerry
     ScriptEntry VisibleItems_Route218_HyperPotion
     ScriptEntry VisibleItems_CanalaveCity_TM89
     ScriptEntry VisibleItems_IronIslandB1FLeftRoom_Protector
     ScriptEntry VisibleItems_IronIslandB1FRightRoom_EscapeRope
-    ScriptEntry VisibleItems_IronIslandB1FRightRoom_MaxRepel
+    ScriptEntry VisibleItems_IronIslandB1FRightRoom_RoseIncense
     ScriptEntry VisibleItems_IronIslandB2FRightRoom_Elixir
     ScriptEntry VisibleItems_IronIslandB2FRightRoom_TM23
     ScriptEntry VisibleItems_IronIslandB2FLeftRoom_DuskBall
     ScriptEntry VisibleItems_IronIslandB2FLeftRoom_MaxPotion
     ScriptEntry VisibleItems_IronIslandB2FLeftRoom_UltraBall
-    ScriptEntry VisibleItems_IronIslandB2FLeftRoom_HPUp
+    ScriptEntry VisibleItems_IronIslandB2FLeftRoom_WhiteHerb
     ScriptEntry VisibleItems_IronIslandB3F_ShinyStone
     ScriptEntry VisibleItems_Route207_SuperPotion
     ScriptEntry VisibleItems_FloaromaMeadow_MiracleSeed
     ScriptEntry VisibleItems_Route211East_TM29
     ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_TM69
     ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_EscapeRope
-    ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_RareCandy
+    ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_StarPiece
     ScriptEntry VisibleItems_MtCoronetB1F_SoftSand
     ScriptEntry VisibleItems_MtCoronetB1F_LightClay
     ScriptEntry VisibleItems_MtCoronetB1F_UltraBall
@@ -164,7 +164,7 @@
     ScriptEntry VisibleItems_Route216_FullHeal
     ScriptEntry VisibleItems_Route217_TM07
     ScriptEntry VisibleItems_Route217_HM08
-    ScriptEntry VisibleItems_Route217_Iron
+    ScriptEntry VisibleItems_Route217_HeavyDutyBoots
     ScriptEntry VisibleItems_AcuityLakefront_UltraBall
     ScriptEntry VisibleItems_GalacticHQB2F_TM36
     ScriptEntry VisibleItems_GalacticHQ1F_TM49
@@ -174,19 +174,19 @@
     ScriptEntry VisibleItems_OreburghGateB1F_BigPearl
     ScriptEntry VisibleItems_MtCoronet2F_MaxRevive
     ScriptEntry VisibleItems_MtCoronet2F_TM80
-    ScriptEntry VisibleItems_MtCoronet2F_MaxRepel
+    ScriptEntry VisibleItems_MtCoronet2F_HyperPotion
     ScriptEntry VisibleItems_MtCoronet2F_EscapeRope
     ScriptEntry VisibleItems_MtCoronet1FNorthRoom_TM02
-    ScriptEntry VisibleItems_Route222_Carbos
+    ScriptEntry VisibleItems_Route222_Honey
     ScriptEntry VisibleItems_Route222_FullRestore
     ScriptEntry VisibleItems_SunyshoreCity_Thunderstone
     ScriptEntry VisibleItems_Route223_UltraBall
     ScriptEntry VisibleItems_Route223_DiveBall
     ScriptEntry VisibleItems_Route223_TM18
     ScriptEntry VisibleItems_VictoryRoad1F_TM41
-    ScriptEntry VisibleItems_VictoryRoad1F_MaxRepel
-    ScriptEntry VisibleItems_VictoryRoad1F_RareCandy
-    ScriptEntry VisibleItems_VictoryRoad1F_Zinc
+    ScriptEntry VisibleItems_VictoryRoad1F_MaxRevive
+    ScriptEntry VisibleItems_VictoryRoad1F_MaxEther
+    ScriptEntry VisibleItems_VictoryRoad1F_PPUp
     ScriptEntry VisibleItems_VictoryRoad1F_RazorClaw
     ScriptEntry VisibleItems_VictoryRoad2F_MaxElixir
     ScriptEntry VisibleItems_VictoryRoad2F_FullRestore
@@ -197,22 +197,22 @@
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_DuskStone
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_Nugget
     ScriptEntry VisibleItems_Route224_RazorClaw
-    ScriptEntry VisibleItems_Route224_RareCandy
+    ScriptEntry VisibleItems_Route224_PixiePlate
     ScriptEntry VisibleItems_Route224_DestinyKnot
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_Leftovers
     ScriptEntry VisibleItems_Route225_RazorFang
-    ScriptEntry VisibleItems_Route225_RareCandy
-    ScriptEntry VisibleItems_Route225_HPUp
+    ScriptEntry VisibleItems_Route225_FullRestore
+    ScriptEntry VisibleItems_Route225_PPUp
     ScriptEntry VisibleItems_Route225_LaxIncense
     ScriptEntry VisibleItems_Route225_DubiousDisc
     ScriptEntry VisibleItems_Route225_DawnStone
-    ScriptEntry VisibleItems_Route225_Revive
+    ScriptEntry VisibleItems_Route225_ShedShell
     ScriptEntry VisibleItems_Route226_TM53
     ScriptEntry VisibleItems_Route226_LaggingTail
-    ScriptEntry VisibleItems_Route226_Carbos
-    ScriptEntry VisibleItems_Route227_Charcoal
-    ScriptEntry VisibleItems_Route227_Zinc
-    ScriptEntry VisibleItems_StarkMountainOutside_MaxElixir
+    ScriptEntry VisibleItems_Route226_OldAmber
+    ScriptEntry VisibleItems_Route227_ArmorFossil
+    ScriptEntry VisibleItems_Route227_SkullFossil
+    ScriptEntry VisibleItems_StarkMountainOutside_Charcoal
     ScriptEntry VisibleItems_StarkMountainOutside_LifeOrb
     ScriptEntry VisibleItems_StarkMountainRoom1_FullHeal
     ScriptEntry VisibleItems_StarkMountainRoom1_EscapeRope
@@ -222,20 +222,20 @@
     ScriptEntry VisibleItems_StarkMountainRoom2_IronBall
     ScriptEntry VisibleItems_StarkMountainRoom2_MaxElixir
     ScriptEntry VisibleItems_StarkMountainRoom2_Nugget
-    ScriptEntry VisibleItems_StarkMountainRoom2_RareCandy
+    ScriptEntry VisibleItems_StarkMountainRoom2_FireStone
     ScriptEntry VisibleItems_StarkMountainRoom2_UltraBall
     ScriptEntry VisibleItems_StarkMountainRoom2_MaxRevive
-    ScriptEntry VisibleItems_StarkMountainRoom2_Calcium
+    ScriptEntry VisibleItems_StarkMountainRoom2_FlameOrb
     ScriptEntry VisibleItems_Route228_Protector
-    ScriptEntry VisibleItems_Route228_Iron
+    ScriptEntry VisibleItems_Route228_HeartScale
     ScriptEntry VisibleItems_Route228_ShinyStone
-    ScriptEntry VisibleItems_Route228_ShedShell
+    ScriptEntry VisibleItems_Route228_Revive
     ScriptEntry VisibleItems_Route228_TM37
     ScriptEntry VisibleItems_Route229_ReaperCloth
-    ScriptEntry VisibleItems_Route229_Protein
+    ScriptEntry VisibleItems_Route221_StarPiece
     ScriptEntry VisibleItems_Route229_FullRestore
     ScriptEntry VisibleItems_ResortArea_Nugget
-    ScriptEntry VisibleItems_Route230_RareCandy
+    ScriptEntry VisibleItems_Route230_LoadedDice
     ScriptEntry VisibleItems_FloaromaMeadow_LeafStone
     ScriptEntry VisibleItems_OreburghMineB1F_PokeBall
     ScriptEntry VisibleItems_VeilstoneCityGalacticWarehouse_HM02
@@ -244,11 +244,11 @@
     ScriptEntry VisibleItems_LakeVerity_TM38
     ScriptEntry VisibleItems_LakeValor_TM25
     ScriptEntry VisibleItems_LakeAcuity_TM14
-    ScriptEntry VisibleItems_SnowpointTempleB1F_Calcium
+    ScriptEntry VisibleItems_SnowpointTempleB1F_MaxRevive
     ScriptEntry VisibleItems_SnowpointTempleB4F_FullHeal
-    ScriptEntry VisibleItems_GalacticHQB2F_Zinc
+    ScriptEntry VisibleItems_GalacticHQB2F_BerserkGene
     ScriptEntry VisibleItems_BattlePark_RazorFang
-    ScriptEntry VisibleItems_Route216_HPUp
+    ScriptEntry VisibleItems_Route216_QuickPowder
     ScriptEntry VisibleItems_OldChateauBackWestRoom_DreadPlate
     ScriptEntry VisibleItems_OldChateauBackEastRoom_TM90
     ScriptEntry VisibleItems_EternaForest_Potion
@@ -268,26 +268,26 @@
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding3F_XSpecial
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding4F_BlueShard
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding4F_Upgrade
-    ScriptEntry VisibleItems_OldChateauDiningArea_RareCandy
+    ScriptEntry VisibleItems_OldChateauDiningArea_Eviolite
     ScriptEntry VisibleItems_OldChateauDiningArea_BigPearl
     ScriptEntry VisibleItems_Route209_Ether
     ScriptEntry VisibleItems_SolaceonTown_PPUp
-    ScriptEntry VisibleItems_Route215_HPUp
+    ScriptEntry VisibleItems_Route215_HelixFossil
     ScriptEntry VisibleItems_VeilstoneCity_StarPiece
-    ScriptEntry VisibleItems_Route212North_Iron
+    ScriptEntry VisibleItems_Route212North_HeartScale
     ScriptEntry VisibleItems_Route212North_GreenShard
     ScriptEntry VisibleItems_Route212South_BlueShard
     ScriptEntry VisibleItems_Route212South_Elixir
-    ScriptEntry VisibleItems_SolaceonTown_RareCandy
+    ScriptEntry VisibleItems_SolaceonTown_BigMushroom
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding4F_Revive
     ScriptEntry VisibleItems_Route210North_RedShard
-    ScriptEntry VisibleItems_Route210North_Zinc
+    ScriptEntry VisibleItems_Route210North_HeartScale
     ScriptEntry VisibleItems_FuegoIronworksBuilding_BlueShard
     ScriptEntry VisibleItems_FuegoIronworksBuilding_RedShard
     ScriptEntry VisibleItems_FuegoIronworksBuilding_GreenShard
     ScriptEntry VisibleItems_FuegoIronworksBuilding_YellowShard
     ScriptEntry VisibleItems_FloaromaMeadow_UltraBall
-    ScriptEntry VisibleItems_FloaromaMeadow_RareCandy
+    ScriptEntry VisibleItems_FloaromaMeadow_HeartScale
     ScriptEntry VisibleItems_IronIslandB2FLeftRoom_RedShard
     ScriptEntry VisibleItems_IronIslandB1FLeftRoom_YellowShard
     ScriptEntry VisibleItems_IronIslandB2FLeftRoom_Nugget
@@ -296,14 +296,14 @@
     ScriptEntry VisibleItems_Route216_Revive
     ScriptEntry VisibleItems_Route217_BlueShard
     ScriptEntry VisibleItems_Route217_UltraBall
-    ScriptEntry VisibleItems_Route217_RareCandy
-    ScriptEntry VisibleItems_GalacticHQ3F_Protein
+    ScriptEntry VisibleItems_Route217_BrightPowder
+    ScriptEntry VisibleItems_GalacticHQ3F_GreenShard
     ScriptEntry VisibleItems_GalacticHQLaboratory_FullRestore
     ScriptEntry VisibleItems_GalacticHQ1F_DubiousDisc
     ScriptEntry VisibleItems_GalacticHQ2F_GreenShard
     ScriptEntry VisibleItems_Route222_QuickBall
     ScriptEntry VisibleItems_Route222_PPUp
-    ScriptEntry VisibleItems_Route223_RareCandy
+    ScriptEntry VisibleItems_Route223_HeartScale
     ScriptEntry VisibleItems_Route224_Upgrade
     ScriptEntry VisibleItems_Route224_RepeatBall
     ScriptEntry VisibleItems_Route224_PPMax
@@ -315,10 +315,10 @@
     ScriptEntry VisibleItems_SnowpointCity_UltraBall
     ScriptEntry VisibleItems_SurvivalArea_RedShard
     ScriptEntry VisibleItems_VictoryRoadB1F_UltraBall
-    ScriptEntry VisibleItems_VictoryRoadB1F_Calcium
-    ScriptEntry VisibleItems_SurvivalArea_RareCandy
-    ScriptEntry VisibleItems_ValorLakefront_Iron
-    ScriptEntry VisibleItems_Route211East_Carbos
+    ScriptEntry VisibleItems_VictoryRoadB1F_HeartScale
+    ScriptEntry VisibleItems_SurvivalArea_ThickClub
+    ScriptEntry VisibleItems_ValorLakefront_HeartScale
+    ScriptEntry VisibleItems_Route211East_Ether
     ScriptEntry VisibleItems_Route214_Magmarizer
     ScriptEntry VisibleItems_ValleyWindworksOutside_Electirizer
     ScriptEntry VisibleItems_CelesticTown_DragonFang
@@ -338,8 +338,8 @@ VisibleItems_Route202_Potion:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route203_Repel:
-    SetVar VAR_0x8008, ITEM_REPEL
+VisibleItems_Route203_SuperPotion:
+    SetVar VAR_0x8008, ITEM_SUPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -392,8 +392,8 @@ VisibleItems_Route204South_SeaIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route204South_HPUp:
-    SetVar VAR_0x8008, ITEM_HP_UP
+VisibleItems_Route204South_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -524,8 +524,8 @@ VisibleItems_Route206_PPUp:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route206_SuperRepel:
-    SetVar VAR_0x8008, ITEM_SUPER_REPEL
+VisibleItems_Route206_Ether:
+    SetVar VAR_0x8008, ITEM_ETHER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -578,8 +578,8 @@ VisibleItems_WaywardCaveB1F_MaxEther:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_WaywardCaveB1F_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_WaywardCaveB1F_UltraBall:
+    SetVar VAR_0x8008, ITEM_ULTRA_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -602,14 +602,14 @@ VisibleItems_Route207_Revive:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route207_Iron:
-    SetVar VAR_0x8008, ITEM_IRON
+VisibleItems_Route207_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_MtCoronet1FSouth_Protein:
-    SetVar VAR_0x8008, ITEM_PROTEIN
+VisibleItems_MtCoronet1FSouth_RoomService
+    SetVar VAR_0x8008, ITEM_ROOM_SERVICE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -620,8 +620,8 @@ VisibleItems_MtCoronet1FSouth_DawnStone:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route208_Carbos:
-    SetVar VAR_0x8008, ITEM_CARBOS
+VisibleItems_Route208_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -704,8 +704,8 @@ VisibleItems_Route212South_TM62:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route212South_Zinc:
-    SetVar VAR_0x8008, ITEM_ZINC
+VisibleItems_Route212South_UltraBall:
+    SetVar VAR_0x8008, ITEM_ULTRA_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -818,8 +818,8 @@ VisibleItems_Route213_PPUp:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route213_Protein:
-    SetVar VAR_0x8008, ITEM_PROTEIN
+VisibleItems_Route213_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -860,8 +860,8 @@ VisibleItems_Route209_HyperPotion:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route209_Calcium:
-    SetVar VAR_0x8008, ITEM_CALCIUM
+VisibleItems_Route209_Revive:
+    SetVar VAR_0x8008, ITEM_REVIVE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -926,14 +926,14 @@ VisibleItems_SolaceonRuinsRoom7_HM05:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route210South_SuperRepel:
-    SetVar VAR_0x8008, ITEM_SUPER_REPEL
+VisibleItems_Route210South_GreatBall:
+    SetVar VAR_0x8008, ITEM_GREAT_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route210South_MaxRepel:
-    SetVar VAR_0x8008, ITEM_MAX_REPEL
+VisibleItems_Route210South_LuckyPunch:
+    SetVar VAR_0x8008, ITEM_LUCKY_PUNCH
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -974,8 +974,8 @@ VisibleItems_Route215_MaxEther:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route215_FullHeal:
-    SetVar VAR_0x8008, ITEM_FULL_HEAL
+VisibleItems_Route215_DomeFossil:
+    SetVar VAR_0x8008, ITEM_DOME_FOSSIL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -992,8 +992,8 @@ VisibleItems_VeilstoneCity_FullIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_VeilstoneCity_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_VeilstoneCity_SmokeBall:
+    SetVar VAR_0x8008, ITEM_SMOKE_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1016,14 +1016,14 @@ VisibleItems_Route214_RedShard:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route214_MaxRepel:
-    SetVar VAR_0x8008, ITEM_MAX_REPEL
+VisibleItems_Route214_Metronome:
+    SetVar VAR_0x8008, ITEM_METRONOME
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route214_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route214_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1064,8 +1064,8 @@ VisibleItems_FuegoIronworksBuilding_RockIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_FuegoIronworksBuilding_Calcium:
-    SetVar VAR_0x8008, ITEM_CALCIUM
+VisibleItems_FuegoIronworksBuilding_WaterStone:
+    SetVar VAR_0x8008, ITEM_WATER_STONE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1088,20 +1088,20 @@ VisibleItems_Route220_SplashPlate:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route205South_Repel:
-    SetVar VAR_0x8008, ITEM_REPEL
+VisibleItems_Route205South_MuscleBand:
+    SetVar VAR_0x8008, ITEM_MUSCLE_BAND
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route220_Carbos:
-    SetVar VAR_0x8008, ITEM_CARBOS
+VisibleItems_Route220_AirBalloon:
+    SetVar VAR_0x8008, ITEM_AIR_BALLOON
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route220_MaxRepel:
-    SetVar VAR_0x8008, ITEM_MAX_REPEL
+VisibleItems_Route220_UltraBall:
+    SetVar VAR_0x8008, ITEM_ULTRA_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1112,8 +1112,8 @@ VisibleItems_Route221_UltraBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route221_Protein:
-    SetVar VAR_0x8008, ITEM_PROTEIN
+VisibleItems_Route221_MaxElixir:
+    SetVar VAR_0x8008, ITEM_MAX_ELIXIR
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1124,8 +1124,8 @@ VisibleItems_Route221_TM81:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route218_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route218_CustapBerry:
+    SetVar VAR_0x8008, ITEM_CUSTAP_BERRY
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1154,8 +1154,8 @@ VisibleItems_IronIslandB1FRightRoom_EscapeRope:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_IronIslandB1FRightRoom_MaxRepel:
-    SetVar VAR_0x8008, ITEM_MAX_REPEL
+VisibleItems_IronIslandB1FRightRoom_RoseIncense:
+    SetVar VAR_0x8008, ITEM_ROSE_INCENSE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1190,8 +1190,8 @@ VisibleItems_IronIslandB2FLeftRoom_UltraBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_IronIslandB2FLeftRoom_HPUp:
-    SetVar VAR_0x8008, ITEM_HP_UP
+VisibleItems_IronIslandB2FLeftRoom_WhiteHerb:
+    SetVar VAR_0x8008, ITEM_WHITE_HERB
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1232,8 +1232,8 @@ VisibleItems_MtCoronet1FNorthRoom1_EscapeRope:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_MtCoronet1FNorthRoom1_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_MtCoronet1FNorthRoom1_StarPiece:
+    SetVar VAR_0x8008, ITEM_STAR_PIECE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1304,8 +1304,8 @@ VisibleItems_Route217_HM08:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route217_Iron:
-    SetVar VAR_0x8008, ITEM_IRON
+VisibleItems_Route217_HeavyDutyBoots:
+    SetVar VAR_0x8008, ITEM_HEAVY_DUTY_BOOTS
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1364,8 +1364,8 @@ VisibleItems_MtCoronet2F_TM80:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_MtCoronet2F_MaxRepel:
-    SetVar VAR_0x8008, ITEM_MAX_REPEL
+VisibleItems_MtCoronet2F_HyperPotion:
+    SetVar VAR_0x8008, ITEM_HYPER_POTION
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1382,8 +1382,8 @@ VisibleItems_MtCoronet1FNorthRoom_TM02:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route222_Carbos:
-    SetVar VAR_0x8008, ITEM_CARBOS
+VisibleItems_Route222_Honey:
+    SetVar VAR_0x8008, ITEM_HONEY
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1424,20 +1424,20 @@ VisibleItems_VictoryRoad1F_TM41:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_VictoryRoad1F_MaxRepel:
-    SetVar VAR_0x8008, ITEM_MAX_REPEL
+VisibleItems_VictoryRoad1F_MaxRevive:
+    SetVar VAR_0x8008, ITEM_MAX_REVIVE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_VictoryRoad1F_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_VictoryRoad1F_MaxEther:
+    SetVar VAR_0x8008, ITEM_MAX_ETHER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_VictoryRoad1F_Zinc:
-    SetVar VAR_0x8008, ITEM_ZINC
+VisibleItems_VictoryRoad1F_PPUp:
+    SetVar VAR_0x8008, ITEM_PP_UP
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1502,8 +1502,8 @@ VisibleItems_Route224_RazorClaw:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route224_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route224_PixiePlate:
+    SetVar VAR_0x8008, ITEM_PIXIE_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1526,14 +1526,14 @@ VisibleItems_Route225_RazorFang:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route225_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route225_FullRestore:
+    SetVar VAR_0x8008, ITEM_FULL_RESTORE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route225_HPUp:
-    SetVar VAR_0x8008, ITEM_HP_UP
+VisibleItems_Route225_PPUp:
+    SetVar VAR_0x8008, ITEM_PP_UP
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1556,8 +1556,8 @@ VisibleItems_Route225_DawnStone:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route225_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+VisibleItems_Route225_ShedShell:
+    SetVar VAR_0x8008, ITEM_SHED_SHELL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1574,26 +1574,26 @@ VisibleItems_Route226_LaggingTail:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route226_Carbos:
-    SetVar VAR_0x8008, ITEM_CARBOS
+VisibleItems_Route226_OldAmber:
+    SetVar VAR_0x8008, ITEM_OLD_AMBER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route227_Charcoal:
+VisibleItems_Route227_ArmorFossil:
+    SetVar VAR_0x8008, ITEM_ARMOR_FOSSIL
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_Route227_SkullFossil:
+    SetVar VAR_0x8008, ITEM_SKULL_FOSSIL
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_StarkMountainOutside_Charcoal:
     SetVar VAR_0x8008, ITEM_CHARCOAL
-    SetVar VAR_0x8009, 1
-    GoTo VisibleItems_TryGiveItem
-    End
-
-VisibleItems_Route227_Zinc:
-    SetVar VAR_0x8008, ITEM_ZINC
-    SetVar VAR_0x8009, 1
-    GoTo VisibleItems_TryGiveItem
-    End
-
-VisibleItems_StarkMountainOutside_MaxElixir:
-    SetVar VAR_0x8008, ITEM_MAX_ELIXIR
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1652,8 +1652,8 @@ VisibleItems_StarkMountainRoom2_Nugget:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_StarkMountainRoom2_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_StarkMountainRoom2_FireStone:
+    SetVar VAR_0x8008, ITEM_FIRE_STONE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1670,8 +1670,8 @@ VisibleItems_StarkMountainRoom2_MaxRevive:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_StarkMountainRoom2_Calcium:
-    SetVar VAR_0x8008, ITEM_CALCIUM
+VisibleItems_StarkMountainRoom2_FlameOrb:
+    SetVar VAR_0x8008, ITEM_FLAME_ORB
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1682,8 +1682,8 @@ VisibleItems_Route228_Protector:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route228_Iron:
-    SetVar VAR_0x8008, ITEM_IRON
+VisibleItems_Route228_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1694,8 +1694,8 @@ VisibleItems_Route228_ShinyStone:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route228_ShedShell:
-    SetVar VAR_0x8008, ITEM_SHED_SHELL
+VisibleItems_Route228_Revive:
+    SetVar VAR_0x8008, ITEM_REVIVE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1712,8 +1712,8 @@ VisibleItems_Route229_ReaperCloth:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route229_Protein:
-    SetVar VAR_0x8008, ITEM_PROTEIN
+VisibleItems_Route229_StarPiece:
+    SetVar VAR_0x8008, ITEM_STAR_PIECE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1730,8 +1730,8 @@ VisibleItems_ResortArea_Nugget:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route230_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route230_LoadedDice:
+    SetVar VAR_0x8008, ITEM_LOADED_DICE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1784,8 +1784,8 @@ VisibleItems_LakeAcuity_TM14:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_SnowpointTempleB1F_Calcium:
-    SetVar VAR_0x8008, ITEM_CALCIUM
+VisibleItems_SnowpointTempleB1F_MaxRevive:
+    SetVar VAR_0x8008, ITEM_MAX_REVIVE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1796,8 +1796,8 @@ VisibleItems_SnowpointTempleB4F_FullHeal:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_GalacticHQB2F_Zinc:
-    SetVar VAR_0x8008, ITEM_ZINC
+VisibleItems_GalacticHQB2F_BerserkGene:
+    SetVar VAR_0x8008, ITEM_BERSERK_GENE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1808,8 +1808,8 @@ VisibleItems_BattlePark_RazorFang:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route216_HPUp:
-    SetVar VAR_0x8008, ITEM_HP_UP
+VisibleItems_Route216_QuickPowder:
+    SetVar VAR_0x8008, ITEM_QUICK_POWDER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1928,8 +1928,8 @@ VisibleItems_TeamGalacticEternaBuilding4F_Upgrade:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_OldChateauDiningArea_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_OldChateauDiningArea_Eviolite:
+    SetVar VAR_0x8008, ITEM_EVIOLITE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1952,8 +1952,8 @@ VisibleItems_SolaceonTown_PPUp:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route215_HPUp:
-    SetVar VAR_0x8008, ITEM_HP_UP
+VisibleItems_Route215_HelixFossil:
+    SetVar VAR_0x8008, ITEM_HELIX_FOSSIL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1964,8 +1964,8 @@ VisibleItems_VeilstoneCity_StarPiece:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route212North_Iron:
-    SetVar VAR_0x8008, ITEM_IRON
+VisibleItems_Route212North_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1988,8 +1988,8 @@ VisibleItems_Route212South_Elixir:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_SolaceonTown_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_SolaceonTown_BigMushroom:
+    SetVar VAR_0x8008, ITEM_BIG_MUSHROOM
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2006,8 +2006,8 @@ VisibleItems_Route210North_RedShard:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route210North_Zinc:
-    SetVar VAR_0x8008, ITEM_ZINC
+VisibleItems_Route210North_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2042,8 +2042,8 @@ VisibleItems_FloaromaMeadow_UltraBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_FloaromaMeadow_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_FloaromaMeadow_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2096,14 +2096,14 @@ VisibleItems_Route217_UltraBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route217_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route217_BrightPowder:
+    SetVar VAR_0x8008, ITEM_BRIGHTPOWDER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_GalacticHQ3F_Protein:
-    SetVar VAR_0x8008, ITEM_PROTEIN
+VisibleItems_GalacticHQ3F_GreenShard:
+    SetVar VAR_0x8008, ITEM_GREEN_SHARD
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2138,8 +2138,8 @@ VisibleItems_Route222_PPUp:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route223_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_Route223_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2210,26 +2210,26 @@ VisibleItems_VictoryRoadB1F_UltraBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_VictoryRoadB1F_Calcium:
-    SetVar VAR_0x8008, ITEM_CALCIUM
+VisibleItems_VictoryRoadB1F_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_SurvivalArea_RareCandy:
-    SetVar VAR_0x8008, ITEM_RARE_CANDY
+VisibleItems_SurvivalArea_ThickClub:
+    SetVar VAR_0x8008, ITEM_THICK_CLUB
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_ValorLakefront_Iron:
-    SetVar VAR_0x8008, ITEM_IRON
+VisibleItems_ValorLakefront_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route211East_Carbos:
-    SetVar VAR_0x8008, ITEM_CARBOS
+VisibleItems_Route211East_Ether:
+    SetVar VAR_0x8008, ITEM_ETHER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
