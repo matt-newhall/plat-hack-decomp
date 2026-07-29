@@ -232,7 +232,7 @@
     ScriptEntry VisibleItems_Route228_Revive
     ScriptEntry VisibleItems_Route228_TM37
     ScriptEntry VisibleItems_Route229_ReaperCloth
-    ScriptEntry VisibleItems_Route221_StarPiece
+    ScriptEntry VisibleItems_Route229_StarPiece
     ScriptEntry VisibleItems_Route229_FullRestore
     ScriptEntry VisibleItems_ResortArea_Nugget
     ScriptEntry VisibleItems_Route230_LoadedDice
@@ -608,7 +608,7 @@ VisibleItems_Route207_HeartScale:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_MtCoronet1FSouth_RoomService
+VisibleItems_MtCoronet1FSouth_RoomService:
     SetVar VAR_0x8008, ITEM_ROOM_SERVICE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
