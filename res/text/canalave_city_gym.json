@@ -33,9 +33,16 @@
     {
       "id": "CanalaveGym_Text_ByronExplainMineBadge",
       "en_US": [
-        "Having the Mine Badge enables you to\n",
-        "use the hidden move Strength anytime\f",
-        "outside of battle.\r",
+        "A Badge alone is a poor prize for\f",
+        "power like that!\r",
+        "See my Aggron over there?\n",
+        "It has hauled rock at my side since\f",
+        "before Roark could lift a pick.\r",
+        "From now on, it’s yours to call on\n",
+        "out in the field.\r",
+        "When a boulder blocks your path,\n",
+        "give a whistle--Aggron will shove it\f",
+        "aside with Strength!\r",
         "And you now have six Gym Badges.\r",
         "That means all Pokémon up to Lv. 70\n",
         "will obey you without question.\r",
@@ -111,6 +118,12 @@
         "Certified Trainers:\n",
         "{STRVAR_1 3, 0, 0}\f",
         "{STRVAR_1 3, 1, 0}"
+      ]
+    },
+    {
+      "id": "CanalaveGym_Text_Aggron",
+      "en_US": [
+        "Garroorah!\n"
       ]
     }
   ]

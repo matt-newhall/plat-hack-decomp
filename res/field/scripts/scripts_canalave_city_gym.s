@@ -6,6 +6,7 @@
     ScriptEntry CanalaveGym_Byron
     ScriptEntry CanalaveGym_GymGuide
     ScriptEntry CanalaveGym_GymStatue
+    ScriptEntry CanalaveGym_Aggron
     ScriptEntryEnd
 
 CanalaveGym_Init:
@@ -122,3 +123,17 @@ CanalaveGym_GymStatueAfterBadge:
     CloseMessage
     ReleaseAll
     End
+
+CanalaveGym_Aggron:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    PlayCry SPECIES_AGGRON
+    Message CanalaveGym_Text_Aggron
+    WaitButton
+    WaitCry
+    CloseMessage
+    ReleaseAll
+    End
+
+    .balign 4, 0

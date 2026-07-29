@@ -182,7 +182,7 @@ FieldMoves_Boulder:
     GoToIfEq VAR_RESULT, 1, _03BD
     CheckBadgeAcquired BADGE_ID_MINE, VAR_RESULT
     GoToIfEq VAR_RESULT, 0, _0372
-    SetVar VAR_0x8004, SPECIES_MACHAMP
+    SetVar VAR_0x8004, SPECIES_AGGRON
     BufferSpeciesNameFromVar 0, VAR_0x8004, 0, 0
     Message FieldMoves_Text_WouldYouLikeToUseStrength
     ShowYesNoMenu VAR_RESULT
