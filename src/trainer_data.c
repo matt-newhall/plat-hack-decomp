@@ -211,6 +211,8 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
             }
 
             rnd = (rnd << 8) + genderMod;
+            if (trmon[i].nature != TRAINER_MON_NATURE_NONE)
+                rnd += (trmon[i].nature - (rnd % 25) + 25) % 25;
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
@@ -236,6 +238,8 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
             }
 
             rnd = (rnd << 8) + genderMod;
+            if (trmon[i].nature != TRAINER_MON_NATURE_NONE)
+                rnd += (trmon[i].nature - (rnd % 25) + 25) % 25;
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
@@ -266,6 +270,8 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
             }
 
             rnd = (rnd << 8) + genderMod;
+            if (trmon[i].nature != TRAINER_MON_NATURE_NONE)
+                rnd += (trmon[i].nature - (rnd % 25) + 25) % 25;
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
@@ -292,6 +298,8 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
             }
 
             rnd = (rnd << 8) + genderMod;
+            if (trmon[i].nature != TRAINER_MON_NATURE_NONE)
+                rnd += (trmon[i].nature - (rnd % 25) + 25) % 25;
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
