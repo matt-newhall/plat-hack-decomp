@@ -747,10 +747,12 @@ static UnkStruct_ov5_021D69B8 Unk_ov5_02201D78[31] = {
     { 0xffff, 0x7, sizeof(UnkStruct_ov5_021DB04C), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB04C },
     { 0xffff, 0x4, (sizeof(int) * 10), NULL, NULL, 0x0, 0x0, NULL, ov5_021DA748 },
     { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021D84D4 },
-    { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021D8638 },
+    // OVERWORLD_WEATHER_INVERSE (added)
+    { 0xffff, 0xffff, sizeof(u32), NULL, NULL, 0x0, 0x0, NULL, ov5_021D7604 },
     { 0xffff, 0x2, (sizeof(int) * 10), NULL, NULL, 0x0, 0x0, NULL, ov5_021D97E8 },
     { 0x1, 0x0, sizeof(UnkStruct_ov5_021D9984), NULL, NULL, 0x0, 0x0, NULL, ov5_021D823C },
-    { 0x2, 0xffff, sizeof(UnkStruct_ov5_021D9984), NULL, NULL, 0x0, 0x0, NULL, ov5_021D8948 },
+    // OVERWORLD_WEATHER_INVERSE_MIST (added): looks like Eterna Forest
+    { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
     { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
     { 0xffff, 0xA, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3A8 },
     { 0xffff, 0xA, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3C4 },

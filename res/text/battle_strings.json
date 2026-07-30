@@ -9304,6 +9304,13 @@
         "The foe’s {STRVAR_1 1, 0, 0} is overflowing\n",
         "with space power!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_InverseBattleAnnounced",
+      "en_US": [
+        "The rules of this world\n",
+        "are inverted!"
+      ]
     }
   ]
 }

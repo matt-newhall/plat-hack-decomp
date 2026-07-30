@@ -589,10 +589,22 @@ BOOL BattleSystem_TypeMatchup(BattleSystem *battleSys, int idx, u8 *moveType, u8
  * @param attackingType
  * @param defendingType1
  * @param defendingType2
+ * @param inverse // inverse battle flag
  * @return The total multiplier of the attacking type against a defender with
  * the pair of types.
  */
-int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2);
+int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2, BOOL inverse);
+
+/**
+ * @brief Reflect a type-chart multiplier for an Inverse Battle.
+ *
+ * The inverse chart has no immunities, so immune match-ups become
+ * super-effective rather than staying at 0x.
+ *
+ * @param mul   Multiplier from the type-chart
+ * @return The inverted multiplier
+ */
+int BattleSystem_InvertTypeMul(int mul);
 
 /**
  * @brief Determines if a move is an invoker-class move.

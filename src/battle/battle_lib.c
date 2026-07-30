@@ -55,6 +55,8 @@
 #define TRMSG_LAST_BATTLER_HALF_HP_FLAG   4
 
 static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry, BOOL isAnticipation);
+static BOOL IsInverseBattle(BattleContext *battleCtx);
+static u8 TypeMulForBattle(BattleContext *battleCtx, int chartEntry);
 void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, BattleContext *battleCtx, int move, int attacker, int defender, u32 *moveStatusMask);
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum BattleSideEffectType type, u32 effect);
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus);
@@ -2691,7 +2693,12 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
     int itemEffect = Battler_HeldItemEffect(battleCtx, defender);
     BOOL result = TRUE;
 
+    // An Inverse Battle has no type-based immunities, so there is nothing for the
+    // grounding and immunity-piercing effects below to remove.
+    BOOL immunitiesApply = IsInverseBattle(battleCtx) == FALSE;
+
     if ((itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED || (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN))
+        && immunitiesApply
         && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
         && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
@@ -2703,6 +2710,7 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
     }
 
     if (isAnticipation == FALSE
+        && immunitiesApply
         && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
         && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
         && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
@@ -2710,6 +2718,7 @@ static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defe
     }
 
     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MIRACLE_EYE)
+        && immunitiesApply
         && sTypeMatchupMultipliers[chartEntry][1] == TYPE_DARK
         && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
@@ -2784,13 +2793,13 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
             if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
                 if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
                     && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, TRUE) == TRUE) {
-                    ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], 0, TRUE, moveStatusMask);
+                    ApplyTypeMultiplier(battleCtx, attacker, TypeMulForBattle(battleCtx, chartEntry), 0, TRUE, moveStatusMask);
                 }
 
                 if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
                     && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
                     && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, TRUE) == TRUE) {
-                    ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], 0, TRUE, moveStatusMask);
+                    ApplyTypeMultiplier(battleCtx, attacker, TypeMulForBattle(battleCtx, chartEntry), 0, TRUE, moveStatusMask);
                 }
             }
 
@@ -2853,8 +2862,15 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
-    if (move == MOVE_FREEZE_DRY && (MON_HAS_TYPE(defender, TYPE_WATER))) {
-        damage *= 4;
+    if (move == MOVE_FREEZE_DRY && MON_HAS_TYPE(defender, TYPE_WATER) && IsInverseBattle(battleCtx) == FALSE) {
+        // this is spaghetti, but there's no way of changing freeze dry to a type
+        // that is not-very-effective vs. water-types without being ice-type so
+        // this is fine
+        if (moveType == TYPE_ICE) {
+            damage *= 4;
+        } else {
+            damage *= 2;
+        }
     }
 
     if (moveType == TYPE_GROUND
@@ -2880,9 +2896,10 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
 
         while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
             if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                // The Ghost-type immunities are listed separately and ignored as a batch
-                if ((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
-                    || Battler_Ability(battleCtx, attacker) == ABILITY_SCRAPPY) {
+                // The Ghost-type immunities are listed separately and ignored as a batch (except in inverse battles)
+                if (((battleCtx->battleMons[defender].statusVolatile & VOLATILE_CONDITION_FORESIGHT)
+                        || Battler_Ability(battleCtx, attacker) == ABILITY_SCRAPPY)
+                    && IsInverseBattle(battleCtx) == FALSE) {
                     break;
                 } else {
                     chartEntry++;
@@ -2891,11 +2908,13 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
             }
 
             if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
+                u8 typeMul = TypeMulForBattle(battleCtx, chartEntry);
+
                 if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL)
                     && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, FALSE) == TRUE) {
-                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+                    damage = ApplyTypeMultiplier(battleCtx, attacker, typeMul, damage, movePower, moveStatusMask);
 
-                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                    if (typeMul == TYPE_MULTI_SUPER_EFF) {
                         totalMul *= 2;
                     }
                 }
@@ -2903,9 +2922,9 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
                 if (sTypeMatchupMultipliers[chartEntry][1] == BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
                     && BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL) != BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL)
                     && BasicTypeMulApplies(battleCtx, attacker, defender, chartEntry, FALSE) == TRUE) {
-                    damage = ApplyTypeMultiplier(battleCtx, attacker, sTypeMatchupMultipliers[chartEntry][2], damage, movePower, moveStatusMask);
+                    damage = ApplyTypeMultiplier(battleCtx, attacker, typeMul, damage, movePower, moveStatusMask);
 
-                    if (sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_SUPER_EFF) {
+                    if (typeMul == TYPE_MULTI_SUPER_EFF) {
                         totalMul *= 2;
                     }
                 }
@@ -2915,7 +2934,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
-    if (move == MOVE_FREEZE_DRY && (MON_HAS_TYPE(defender, TYPE_WATER))) {
+    if (move == MOVE_FREEZE_DRY && MON_HAS_TYPE(defender, TYPE_WATER) && IsInverseBattle(battleCtx) == FALSE) {
         *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
         if (MON_HAS_TYPE(defender, TYPE_WATER) && !(MON_HAS_TYPE(defender, TYPE_STEEL) || MON_HAS_TYPE(defender, TYPE_ICE) || MON_HAS_TYPE(defender, TYPE_FIRE))) {
             *moveStatusMask |= MOVE_STATUS_SUPER_EFFECTIVE;
@@ -3003,7 +3022,7 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 
         while (sTypeMatchupMultipliers[chartEntry][0] != 0xFF) {
             if (sTypeMatchupMultipliers[chartEntry][0] == 0xFE) {
-                if (attackerAbility == ABILITY_SCRAPPY) {
+                if (attackerAbility == ABILITY_SCRAPPY && IsInverseBattle(battleCtx) == FALSE) {
                     break;
                 } else {
                     chartEntry++;
@@ -3014,13 +3033,13 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
             if (sTypeMatchupMultipliers[chartEntry][0] == moveType) {
                 if (sTypeMatchupMultipliers[chartEntry][1] == defenderType1
                     && NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
-                    UpdateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
+                    UpdateMoveStatusForTypeMul(TypeMulForBattle(battleCtx, chartEntry), moveStatusMask);
                 }
 
                 if (sTypeMatchupMultipliers[chartEntry][1] == defenderType2
                     && defenderType1 != defenderType2
                     && NoImmunityOverrides(battleCtx, defenderItemEffect, chartEntry) == TRUE) {
-                    UpdateMoveStatusForTypeMul(sTypeMatchupMultipliers[chartEntry][2], moveStatusMask);
+                    UpdateMoveStatusForTypeMul(TypeMulForBattle(battleCtx, chartEntry), moveStatusMask);
                 }
             }
 
@@ -3059,6 +3078,7 @@ static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int ch
     BOOL result = TRUE;
 
     if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        && IsInverseBattle(battleCtx) == FALSE
         && sTypeMatchupMultipliers[chartEntry][1] == TYPE_FLYING
         && sTypeMatchupMultipliers[chartEntry][2] == TYPE_MULTI_IMMUNE) {
         result = FALSE;
@@ -3098,6 +3118,58 @@ static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask)
         }
         break;
     }
+}
+
+/**
+ * @brief Reflect a type-chart multiplier for an Inverse Battle.
+ *
+ * The inverse chart has no immunities, so immune match-ups become
+ * super-effective rather than staying at 0x.
+ *
+ * @param mul   Multiplier from the type-chart
+ * @return The inverted multiplier
+ */
+int BattleSystem_InvertTypeMul(int mul)
+{
+    switch (mul) {
+    case TYPE_MULTI_SUPER_EFF:
+        return TYPE_MULTI_NOT_VERY_EFF;
+
+    case TYPE_MULTI_NOT_VERY_EFF:
+    case TYPE_MULTI_IMMUNE:
+        return TYPE_MULTI_SUPER_EFF;
+    }
+
+    return mul;
+}
+
+/**
+ * @brief Checks if the type chart is inverted for the active battle.
+ *
+ * @param battleCtx
+ * @return TRUE if this is an Inverse Battle, FALSE otherwise
+ */
+static BOOL IsInverseBattle(BattleContext *battleCtx)
+{
+    return (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) != FALSE;
+}
+
+/**
+ * @brief Get a type-chart entry's multiplier, respecting Inverse Battles.
+ *
+ * @param battleCtx
+ * @param chartEntry    Index of the entry into the type-chart
+ * @return The multiplier which should be applied for the given entry
+ */
+static u8 TypeMulForBattle(BattleContext *battleCtx, int chartEntry)
+{
+    u8 mul = sTypeMatchupMultipliers[chartEntry][2];
+
+    if (IsInverseBattle(battleCtx) == TRUE) {
+        mul = BattleSystem_InvertTypeMul(mul);
+    }
+
+    return mul;
 }
 
 BOOL BattleContext_MoveFailed(BattleContext *battleCtx, int battler)
@@ -3322,20 +3394,27 @@ BOOL BattleSystem_TypeMatchup(BattleSystem *battleSys, int idx, u8 *moveType, u8
     return result;
 }
 
-int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2)
+int BattleSystem_TypeMatchupMultiplier(u8 attackingType, u8 defendingType1, u8 defendingType2, BOOL inverse)
 {
     int i = 0;
     int mul = 40;
+    int entryMul;
 
     while (sTypeMatchupMultipliers[i][0] != 0xFF) {
         if (sTypeMatchupMultipliers[i][0] == attackingType) {
+            entryMul = sTypeMatchupMultipliers[i][2];
+
+            if (inverse == TRUE) {
+                entryMul = BattleSystem_InvertTypeMul(entryMul);
+            }
+
             if (sTypeMatchupMultipliers[i][1] == defendingType1) {
-                mul = mul * sTypeMatchupMultipliers[i][2] / 10;
+                mul = mul * entryMul / 10;
             }
 
             if (sTypeMatchupMultipliers[i][1] == defendingType2
                 && defendingType1 != defendingType2) {
-                mul = mul * sTypeMatchupMultipliers[i][2] / 10;
+                mul = mul * entryMul / 10;
             }
         }
 
@@ -4198,6 +4277,12 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 case OVERWORLD_WEATHER_TWISTED_DIMENSIONS:
                     subscript = subscript_overworld_twisted_dimensions;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_INVERSE:
+                case OVERWORLD_WEATHER_INVERSE_MIST:
+                    subscript = subscript_overworld_inverse;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 

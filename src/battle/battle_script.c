@@ -4894,6 +4894,10 @@ static BOOL BtlCmd_TryConversion2(BattleSystem *battleSys, BattleContext *battle
             // Get a random entry from the type matchup table
             BattleSystem_TypeMatchup(battleSys, 0xFFFF, &atkType, &defType, &typeMulti);
 
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) {
+                typeMulti = BattleSystem_InvertTypeMul(typeMulti);
+            }
+
             // Check if the accessed entry has an attacking type which matches the source move
             // and a defending type which results in a favorable matchup
             if (atkType == moveType
@@ -4909,6 +4913,10 @@ static BOOL BtlCmd_TryConversion2(BattleSystem *battleSys, BattleContext *battle
         // Fallback to a linear search through the table for the first entry which matches the criteria
         i = 0;
         while (BattleSystem_TypeMatchup(battleSys, i, &atkType, &defType, &typeMulti) == TRUE) {
+            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) {
+                typeMulti = BattleSystem_InvertTypeMul(typeMulti);
+            }
+
             if (atkType == moveType
                 && typeMulti <= TYPE_MULTI_NOT_VERY_EFF
                 && MON_IS_NOT_TYPE(battleCtx->attacker, defType)) {
@@ -8766,7 +8774,7 @@ static BOOL BtlCmd_CheckStealthRock(BattleSystem *battleSys, BattleContext *batt
 
     if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_STEALTH_ROCK)
         && battleCtx->battleMons[battler].curHP) {
-        switch (BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, type1, type2)) {
+        switch (BattleSystem_TypeMatchupMultiplier(TYPE_ROCK, type1, type2, (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) != FALSE)) {
         case TYPE_MULTI_QUADRUPLE_DAMAGE:
             battleCtx->hpCalcTemp = 2;
             break;
