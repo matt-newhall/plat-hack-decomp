@@ -11223,6 +11223,10 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
  * that they participating in the defeat of an opponent with the given species
  * and form.
  *
+ * Tempered Platinum: this gets skipped entirely - no EVs from battle (it was
+ * easier than setting EVs to 0 in every data file & also disables the Power
+ * items)
+ *
  * @param party     The Party struct
  * @param slot      Slot in the party deserving EV payout
  * @param species   The species of the defeated foe
@@ -11230,6 +11234,8 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
  */
 static void BattleScript_CalcEffortValues(Party *party, int slot, int species, int form)
 {
+    return;
+
     // must declare C89-style to match
     int stat;
     s16 tmp = 0;
