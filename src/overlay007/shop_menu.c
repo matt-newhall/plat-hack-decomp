@@ -215,12 +215,26 @@ static const WindowTemplate sShop_FrontierCurrMoneyWindowTemplate = {
 
 // pokemart BP item shop
 static const u16 sBPStoreItems[] = {
+    ITEM_IRON,
+    ITEM_ZINC,
     ITEM_HP_UP,
     ITEM_PROTEIN,
-    ITEM_IRON,
     ITEM_CALCIUM,
-    ITEM_ZINC,
     ITEM_CARBOS,
+    ITEM_AIR_BALLOON,
+    ITEM_BERSERK_GENE,
+    ITEM_THROAT_SPRAY,
+    ITEM_ROOM_SERVICE,
+    ITEM_MENTAL_HERB,
+    ITEM_POWER_HERB,
+    ITEM_WHITE_HERB,
+    ITEM_ABILITY_CAPSULE,
+    ITEM_WEAKNESS_POLICY,
+    ITEM_FOCUS_SASH,
+    ITEM_LIFE_ORB,
+    ITEM_CHOICE_BAND,
+    ITEM_CHOICE_SPECS,
+    ITEM_CHOICE_SCARF,
     SHOP_ITEM_END,
 };
 
@@ -1451,12 +1465,26 @@ static u16 Shop_GetItemBPPrice(ShopMenu *shopMenu, u16 itemId)
 
     // pokemart BP prices
     static const u16 itemToBpPriceBPMode[][2] = {
-        { ITEM_HP_UP, 10 },
-        { ITEM_PROTEIN, 10 },
-        { ITEM_IRON, 10 },
-        { ITEM_CALCIUM, 10 },
-        { ITEM_ZINC, 10 },
-        { ITEM_CARBOS, 10 },
+        { ITEM_IRON, 2 },
+        { ITEM_ZINC, 2 },
+        { ITEM_HP_UP, 4 },
+        { ITEM_PROTEIN, 4 },
+        { ITEM_CALCIUM, 4 },
+        { ITEM_CARBOS, 6 },
+        { ITEM_AIR_BALLOON, 10 },
+        { ITEM_BERSERK_GENE, 10 },
+        { ITEM_THROAT_SPRAY, 10 },
+        { ITEM_ROOM_SERVICE, 10 },
+        { ITEM_MENTAL_HERB, 10 },
+        { ITEM_POWER_HERB, 15 },
+        { ITEM_WHITE_HERB, 15 },
+        { ITEM_ABILITY_CAPSULE, 15 },
+        { ITEM_WEAKNESS_POLICY, 20 },
+        { ITEM_FOCUS_SASH, 20 },
+        { ITEM_LIFE_ORB, 50 },
+        { ITEM_CHOICE_BAND, 70 },
+        { ITEM_CHOICE_SPECS, 70 },
+        { ITEM_CHOICE_SCARF, 70 },
     };
 
     if (shopMenu->bpMode) {
