@@ -7,7 +7,7 @@
         "special_attack": 20,
         "special_defense": 30
     },
-    "types": [ "TYPE_GROUND", "TYPE_GROUND" ],
+    "types": [ "TYPE_GROUND", "TYPE_POISON" ],
     "catch_rate": 255,
     "base_exp_reward": 93,
     "ev_yields": {

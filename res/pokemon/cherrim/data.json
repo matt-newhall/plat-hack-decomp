@@ -7,7 +7,7 @@
         "special_attack": 87,
         "special_defense": 78
     },
-    "types": [ "TYPE_GRASS", "TYPE_GRASS" ],
+    "types": [ "TYPE_GRASS", "TYPE_FAIRY" ],
     "catch_rate": 75,
     "base_exp_reward": 133,
     "ev_yields": {
