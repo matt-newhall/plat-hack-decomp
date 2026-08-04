@@ -7438,6 +7438,10 @@ BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler)
         return FALSE;
     }
 
+    if (Pokemon_IsMegaStoneFor(battleCtx->battleMons[battler].species, item)) {
+        return FALSE;
+    }
+
     if (((item == ITEM_FLAME_PLATE)
         || (item == ITEM_SPLASH_PLATE)
         || (item == ITEM_ZAP_PLATE)

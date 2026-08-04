@@ -257,6 +257,7 @@ ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTO,                BtlCmd_ShowAbilityPopu
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTOSAVED,           BtlCmd_ShowAbilityPopupAutoSaved)
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPAUTOFOREFFECTHOLDER, BtlCmd_ShowAbilityPopupAutoForEffectHolder)
 ScriptCommand(BTLCMD_SETUPEJECTPACK,                      BtlCmd_SetupEjectPack)
+ScriptCommand(BTLCMD_CHECKMEGASTONELOCKED,                BtlCmd_CheckMegaStoneLocked)
 
 // clang-format on
 

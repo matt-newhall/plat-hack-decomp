@@ -2986,6 +2986,11 @@ int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem)
     return -1;
 }
 
+BOOL Pokemon_IsMegaStoneFor(u16 monSpecies, u16 item)
+{
+    return Pokemon_MegaEvolutionForm(monSpecies, item) != -1;
+}
+
 /**
  * @brief Get the form a Mega Evolved species reverts to.
  *

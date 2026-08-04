@@ -339,6 +339,7 @@ static BOOL BtlCmd_TryRandomStatus(BattleSystem *battleSys, BattleContext *battl
 static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -5230,6 +5231,9 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (DEFENDING_MON.moveEffectsData.custapBerry || DEFENDING_MON.moveEffectsData.quickClaw) {
         // The defender activated a Custap Berry or a Quick Claw this turn.
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    } else if (Pokemon_IsMegaStoneFor(DEFENDING_MON.species, DEFENDING_MON.heldItem)) {
+        // The defender is holding its own Mega Stone, which cannot be taken.
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else if (DEFENDING_MON.heldItem && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE) {
         // The defender has a held item, but has the ability Sticky Hold.
@@ -13559,4 +13563,18 @@ static void BattleAI_SetAbility(BattleContext *battleCtx, u8 battler, u8 ability
 static void BattleAI_SetHeldItem(BattleContext *battleCtx, u8 battler, u16 item)
 {
     battleCtx->aiContext.battlerHeldItems[battler] = item;
+}
+
+static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpLocked = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    if (Pokemon_IsMegaStoneFor(battleCtx->battleMons[battler].species, battleCtx->battleMons[battler].heldItem)) {
+        BattleScript_Iter(battleCtx, jumpLocked);
+    }
+
+    return FALSE;
 }

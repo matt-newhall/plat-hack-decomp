@@ -484,6 +484,7 @@ int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem);
  * @return TRUE if the Pokemon is Mega Evolved.
  */
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm);
+BOOL Pokemon_IsMegaStoneFor(u16 monSpecies, u16 item);
 
 /**
  * @brief Revert a Mega Evolved Pokemon to its base form, recalculating its

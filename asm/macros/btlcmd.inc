@@ -1376,6 +1376,12 @@
     .long BTLCMD_SETUPEJECTPACK
     .endm
 
+    .macro CheckMegaStoneLocked battler:req, jump_if_locked:req
+    .long BTLCMD_CHECKMEGASTONELOCKED
+    .long \battler
+    .long \jump_if_locked
+    .endm
+
     .text
     .globl _start
 _start:
