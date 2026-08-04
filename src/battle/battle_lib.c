@@ -7555,6 +7555,8 @@ BOOL BattleSystem_TriggerMegaEvolution(BattleSystem *battleSys, BattleContext *b
     battleCtx->battleMons[battler].spAttack = Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL);
     battleCtx->battleMons[battler].spDefense = Pokemon_GetValue(mon, MON_DATA_SP_DEF, NULL);
     battleCtx->battleMons[battler].ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+    battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].formNum = form;
     battleCtx->battleStatusMask2 |= SYSCTL_RECALC_MON_STATS;
 
