@@ -3354,6 +3354,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
         memberIndex = 152 + (face / 2) + form * 2;
         break;
 
+    case SPECIES_LUCARIO:
+        if (form == LUCARIO_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
     default:
         narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
         memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
