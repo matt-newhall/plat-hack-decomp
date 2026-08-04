@@ -4203,3 +4203,52 @@ void BattleAnimScriptFunc_ScrollSwitchedBg(BattleAnimSystem *system)
 
     BattleAnimSystem_StartAnimTask(ctx->common.battleAnimSys, BattleAnimTask_ScrollSwitchedBg, ctx);
 }
+
+typedef struct MegaShellContext {
+    BattleAnimScriptFuncCommon common;
+    SpriteManager *spriteMan;
+    ManagedSprite *sprite;
+    XYTransformContext scale;
+    u16 framesLeft;
+} MegaShellContext;
+
+static void BattleAnimTask_MegaShell(SysTask *task, void *param)
+{
+    MegaShellContext *ctx = param;
+
+    ScaleLerpContext_UpdateAndApplyToSprite(&ctx->scale, ctx->sprite);
+
+    if (ctx->framesLeft != 0) {
+        ctx->framesLeft--;
+        SpriteSystem_DrawSprites(ctx->spriteMan);
+        return;
+    }
+
+    BattleAnimSystem_EndAnimTask(ctx->common.battleAnimSys, task);
+    Heap_Free(ctx);
+}
+
+void BattleAnimSpriteFunc_MegaShell(BattleAnimSystem *system, SpriteSystem *spriteSys, SpriteManager *spriteMan, ManagedSprite *sprite)
+{
+    MegaShellContext *ctx = BattleAnimUtil_Alloc(system, sizeof(MegaShellContext));
+
+    BattleAnimSystem_GetCommonData(system, &ctx->common);
+    ctx->spriteMan = spriteMan;
+    ctx->sprite = sprite;
+    ctx->framesLeft = BattleAnimSystem_GetScriptVar(system, 1);
+
+    int battler = BattleAnimSystem_GetAttacker(system);
+    ManagedSprite_SetPositionXY(sprite,
+        BattleAnimUtil_GetBattlerPos(system, battler, BATTLE_ANIM_POSITION_MON_X),
+        BattleAnimUtil_GetBattlerPos(system, battler, BATTLE_ANIM_POSITION_MON_Y));
+
+    ManagedSprite_SetAffineOverwriteMode(sprite, AFFINE_OVERWRITE_MODE_DOUBLE);
+    ManagedSprite_SetExplicitOamMode(sprite, GX_OAM_MODE_XLU);
+    ManagedSprite_SetDrawFlag(sprite, TRUE);
+
+    ScaleLerpContext_Init(&ctx->scale, 1, 100, 135,
+        BattleAnimSystem_GetScriptVar(system, 0));
+    ScaleLerpContext_ApplyToSprite(&ctx->scale, sprite);
+
+    BattleAnimSystem_StartAnimTask(ctx->common.battleAnimSys, BattleAnimTask_MegaShell, ctx);
+}

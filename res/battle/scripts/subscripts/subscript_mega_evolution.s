@@ -20,8 +20,8 @@ _016:
     ChangeForm BTLSCR_MSG_TEMP
     PlaySound BTLSCR_MSG_TEMP, 1984
     Wait
-    // {0} transformed!
-    PrintMessage BattleStrings_Text_PokemonTransformed_Ally, TAG_NICKNAME, BTLSCR_MSG_TEMP
+    // {0} has Mega Evolved into Mega {1}!
+    PrintMessage BattleStrings_Text_MegaEvolved_Ally, TAG_NICKNAME_POKE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     Wait
     WaitButtonABTime 30
     CompareMonDataToValue OPCODE_FLAG_NOT, BTLSCR_MSG_TEMP, BATTLEMON_VOLATILE_STATUS, VOLATILE_CONDITION_SUBSTITUTE, _058

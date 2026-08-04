@@ -45,5 +45,6 @@ void BattleAnimScriptFunc_SetBgGrayscale(BattleAnimSystem *system);
 void BattleAnimScriptFunc_SetPokemonSpritePriority(BattleAnimSystem *system);
 void BattleAnimScriptFunc_RenderPokemonSprites(BattleAnimSystem *system);
 void BattleAnimScriptFunc_ScrollSwitchedBg(BattleAnimSystem *system);
+void BattleAnimSpriteFunc_MegaShell(BattleAnimSystem *system, SpriteSystem *spriteSys, SpriteManager *spriteMan, ManagedSprite *sprite);
 
 #endif // POKEPLATINUM_SCRIPT_FUNCS_3_H

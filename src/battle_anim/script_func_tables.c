@@ -136,7 +136,8 @@ static const BattleAnimScriptSpriteFunc sBattleAnimScriptSpriteFuncs[] = {
     ov12_022346A4,
     ov12_02234A10,
     ov12_022348C8,
-    ov12_02234D98
+    ov12_02234D98,
+    BattleAnimSpriteFunc_MegaShell
 };
 
 static const BattleAnimScriptSpriteFunc sUnusedSpriteFuncs[] = {
