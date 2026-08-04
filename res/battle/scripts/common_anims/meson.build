@@ -23,7 +23,7 @@ anim_subscript_files = files(
     'weather_hail.s',
     'weather_sandstorm.s',
     'weather_sun.s',
-    'dummy23.s',
+    'mega_evolution.s',
     'dummy24.s',
     'substitute_in.s',
     'substitute_out.s',

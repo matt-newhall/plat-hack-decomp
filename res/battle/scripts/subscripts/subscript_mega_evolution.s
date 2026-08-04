@@ -15,11 +15,10 @@ _016:
     Wait
     WaitButtonABTime 30
     PlaySound BTLSCR_MSG_TEMP, 1980
-    SetMosaic BTLSCR_MSG_TEMP, 8, 1
-    Wait
+    PlayBattleAnimation BTLSCR_MSG_TEMP, BATTLE_ANIMATION_MEGA_EVOLUTION
+    WaitTime 150
     ChangeForm BTLSCR_MSG_TEMP
     PlaySound BTLSCR_MSG_TEMP, 1984
-    SetMosaic BTLSCR_MSG_TEMP, 0, 1
     Wait
     // {0} transformed!
     PrintMessage BattleStrings_Text_PokemonTransformed_Ally, TAG_NICKNAME, BTLSCR_MSG_TEMP
