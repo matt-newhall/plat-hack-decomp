@@ -2785,16 +2785,16 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = parcel_NCLR,
         .gen3ID = GBA_ITEM_OAKS_PARCEL,
     },
-    [ITEM_COUPON_1] = {
-        .dataID = 0x1B6,
-        .iconID = coupon_1_NCGR,
-        .paletteID = coupon_1_NCLR,
+    [ITEM_MEGA_RING] = {
+        .dataID = 0x1D8,
+        .iconID = mega_ring_NCGR,
+        .paletteID = mega_ring_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_COUPON_2] = {
-        .dataID = 0x1B7,
-        .iconID = coupon_2_NCGR,
-        .paletteID = coupon_2_NCLR,
+    [ITEM_LUCARIONITE] = {
+        .dataID = 0x1D9,
+        .iconID = lucarionite_NCGR,
+        .paletteID = lucarionite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_COUPON_3] = {

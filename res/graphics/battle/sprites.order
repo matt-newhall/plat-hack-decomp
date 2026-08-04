@@ -344,3 +344,8 @@ interface/top_stock_anim.NANR.lz
 interface/ability_popup_diagonal_left.NCGR.lz
 interface/ability_popup_diagonal_right.NCGR.lz
 interface/ability_popup_diagonal_left.NCLR
+interface/mega_icon.NCGR.lz
+interface/mega_icon.NCLR
+interface/mega_icon_cell.NCER.lz
+interface/mega_icon_dim.NCGR.lz
+interface/mega_icon_dim.NCLR

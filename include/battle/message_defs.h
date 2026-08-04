@@ -146,6 +146,8 @@ typedef struct MoveSelectMenuMessage {
     u16 moves[LEARNED_MOVES_MAX];
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppMax[LEARNED_MOVES_MAX];
+    u8 canMega;
+    u8 padding_15[3];
 } MoveSelectMenuMessage;
 
 typedef struct TargetSelectMenuMessage {

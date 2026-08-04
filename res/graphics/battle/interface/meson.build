@@ -68,4 +68,21 @@ battle_sprites += [
     preserve_path_from: base_directory,
     extra_args: [ '-bitdepth', '4' ],
   ),
+
+  ncgr_cell_lz_gen.process(
+    files('mega_icon.png', 'mega_icon_dim.png'),
+    preserve_path_from: base_directory,
+    extra_args: [ '-bitdepth', '4', '-clobbersize' ],
+  ),
+
+  nclr_gen.process(
+    files('mega_icon.png', 'mega_icon_dim.png'),
+    preserve_path_from: base_directory,
+    extra_args: [ '-nopad', '-invertsize', '-pcmp', '-bitdepth', '4' ],
+  ),
+
+  ncer_lz_gen.process(
+    files('mega_icon_cell.json'),
+    preserve_path_from: base_directory,
+  ),
 ]

@@ -26,6 +26,12 @@ argparser.add_argument('-se', '--sprite-entries',
 argparser.add_argument('-pe', '--palette-entries',
                        required=True, type=int,
                        help='Number of entries to interpret from the list as NCLR-sources')
+argparser.add_argument('-xs', '--extra-sprites',
+                       default=0, type=int,
+                       help='Number of trailing NCGR-sources appended after the shared entries')
+argparser.add_argument('-xp', '--extra-palettes',
+                       default=0, type=int,
+                       help='Number of trailing NCLR-sources appended after the extra sprites')
 argparser.add_argument('files',
                        nargs='+',
                        help='List of files to process in-order')
@@ -61,13 +67,9 @@ for i in range(args.sprite_entries, args.sprite_entries + args.palette_entries):
         '-comp', '10'
     ])
 
-# The last five entries are the Substitute sprite and in-battle shadows
-sub_back = args.files[-5]
-sub_front = args.files[-4]
-sub_pal = args.files[-3]
-shadows = args.files[-2]
-shadows_pal = args.files[-1]
+# The next five entries are the Substitute sprite and in-battle shadows
 i = args.sprite_entries + args.palette_entries
+sub_back, sub_front, sub_pal, shadows, shadows_pal = args.files[i:i + 5]
 
 subprocess.run([
     args.nitrogfx,
@@ -106,6 +108,28 @@ subprocess.run([
     '-nopad',
     '-comp', '10'
 ])
+
+extras = args.files[i + 5:]
+extras_start = i + 3
+
+for j in range(args.extra_sprites):
+    subprocess.run([
+        args.nitrogfx,
+        extras[j],
+        private_dir / f'pl_otherpoke_{(extras_start + j):04}.NCGR',
+        '-encodefronttoback',
+        '-scan',
+    ])
+
+for j in range(args.extra_palettes):
+    subprocess.run([
+        args.nitrogfx,
+        extras[args.extra_sprites + j],
+        private_dir / f'pl_otherpoke_{(extras_start + args.extra_sprites + j):04}.NCLR',
+        '-bitdepth', '8',
+        '-nopad',
+        '-comp', '10'
+    ])
 
 subprocess.run([
     args.narc,

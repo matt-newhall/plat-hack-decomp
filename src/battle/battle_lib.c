@@ -7500,6 +7500,96 @@ BOOL BattleSystem_PokemonIsOT(BattleSystem *battleSys, Pokemon *mon)
     return FALSE;
 }
 
+/**
+ * @brief Get the megaEvolveUsed bit which owns a battler's Mega Evolution.
+ *
+ * A Mega Evolution belongs to a trainer, not to a side. This mirrors how the engine
+ * decides whether a battler has a party of its own: in a 2vs2 every slot is a separate
+ * trainer, and in a tag battle only the opposing slots are. Where a single trainer
+ * commands both slots they share one Mega Evolution between them. Battler bits and side
+ * bits are kept apart so that they cannot collide.
+ *
+ * @param battleSys
+ * @param battler
+ * @return The flag to test and set for this battler.
+ */
+static u32 BattleSystem_MegaEvolveOwner(BattleSystem *battleSys, int battler)
+{
+    u32 battleType = BattleSystem_GetBattleType(battleSys);
+    int side = BattleSystem_GetBattlerSide(battleSys, battler);
+
+    if ((battleType & BATTLE_TYPE_2vs2)
+        || ((battleType & BATTLE_TYPE_TAG) && side != BATTLER_US)) {
+        return FlagIndex(battler);
+    }
+
+    return FlagIndex(MAX_BATTLERS + side);
+}
+
+BOOL BattleSystem_TriggerMegaEvolution(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    int form = BattleSystem_MegaEvolutionForm(battleSys, battleCtx, battler);
+
+    if (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US
+        && (battleCtx->megaEvolveArmed & FlagIndex(battler)) == FALSE) {
+        return FALSE;
+    }
+
+    if (form == -1) {
+        return FALSE;
+    }
+
+    battleCtx->megaEvolveArmed &= ~FlagIndex(battler);
+    battleCtx->megaEvolveUsed |= BattleSystem_MegaEvolveOwner(battleSys, battler);
+
+    Pokemon *mon = Pokemon_New(HEAP_ID_BATTLE);
+
+    Pokemon_Copy(BattleSystem_GetPartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]), mon);
+    Pokemon_SetValue(mon, MON_DATA_FORM, &form);
+    Pokemon_CalcAbility(mon);
+    Pokemon_CalcLevelAndStats(mon);
+
+    battleCtx->battleMons[battler].attack = Pokemon_GetValue(mon, MON_DATA_ATK, NULL);
+    battleCtx->battleMons[battler].defense = Pokemon_GetValue(mon, MON_DATA_DEF, NULL);
+    battleCtx->battleMons[battler].speed = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+    battleCtx->battleMons[battler].spAttack = Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL);
+    battleCtx->battleMons[battler].spDefense = Pokemon_GetValue(mon, MON_DATA_SP_DEF, NULL);
+    battleCtx->battleMons[battler].ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+    battleCtx->battleMons[battler].formNum = form;
+    battleCtx->battleStatusMask2 |= SYSCTL_RECALC_MON_STATS;
+
+    Heap_Free(mon);
+
+    BattleController_EmitUpdatePartyMon(battleSys, battleCtx, battler);
+
+    return TRUE;
+}
+
+int BattleSystem_MegaEvolutionForm(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    Bag *bag = BattleSystem_GetBag(battleSys);
+    int form = Pokemon_MegaEvolutionForm(battleCtx->battleMons[battler].species, battleCtx->battleMons[battler].heldItem);
+
+    // one mega per trainer
+    if (form == -1
+        || (battleCtx->megaEvolveUsed & BattleSystem_MegaEvolveOwner(battleSys, battler))
+        || (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TRANSFORM)
+        || battleCtx->battleMons[battler].curHP == 0
+        || battleCtx->battleMons[battler].formNum == form) {
+        return -1;
+    }
+
+    if (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US) {
+        if (bag == NULL || Bag_CanRemoveItem(bag, ITEM_MEGA_RING, 1, HEAP_ID_BATTLE) == FALSE) {
+            return -1;
+        }
+    } else if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_TRAINER) == FALSE) {
+        return -1;
+    }
+
+    return form;
+}
+
 BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
 {
     int i;

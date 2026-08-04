@@ -345,5 +345,6 @@ subscript_files = files(
     'subscript_ability_stat_boost.s',
     'subscript_gooey.s',
     'subscript_cloud_nine.s',
-    'subscript_overworld_inverse.s'
+    'subscript_overworld_inverse.s',
+    'subscript_mega_evolution.s'
 )

@@ -467,6 +467,37 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
 u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm);
 
 /**
+ * @brief Get the form a Pokemon would Mega Evolve into with the given held item.
+ *
+ * @param monSpecies
+ * @param heldItem
+ * @return The Mega Evolved form, or -1 if this species cannot Mega Evolve with
+ * that item.
+ */
+int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem);
+
+/**
+ * @brief Check whether a species/form pair is a Mega Evolved form.
+ *
+ * @param monSpecies
+ * @param monForm
+ * @return TRUE if the Pokemon is Mega Evolved.
+ */
+BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm);
+
+/**
+ * @brief Revert a Mega Evolved Pokemon to its base form, recalculating its
+ * ability and stats.
+ *
+ * Mega Evolution is written through to the party Pokemon so that it survives
+ * switching out, so it must be undone before the party leaves the battle.
+ *
+ * @param mon
+ * @return TRUE if the Pokemon was Mega Evolved and has been reverted.
+ */
+BOOL Pokemon_TryRevertMegaForm(Pokemon *mon);
+
+/**
  * @brief Load the Y-offset applied to a Pokemon's sprite-face on display.
  *
  * @param mon

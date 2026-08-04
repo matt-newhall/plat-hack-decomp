@@ -36,6 +36,9 @@ poke_icon_files = []
 pokegra_files = []
 otherpoke_index = {} # otherpoke uses a unique, non-uniform structure
 
+otherpoke_extra_sprites = []
+otherpoke_extra_palettes = []
+
 pokemon_data_root = meson.current_source_dir()
 
 # 1. These static files must always exist.
@@ -159,6 +162,7 @@ poke_icon_files += [
     rotom_frost_icon,
     rotom_fan_icon,
     rotom_mow_icon,
+    lucario_mega_icon,
 ]
 
 otherpoke_files = []
@@ -310,6 +314,8 @@ pl_otherpoke_narc = custom_target('pl_otherpoke.narc',
     input: [
         otherpoke_files,
         form_sprites_shared,
+        otherpoke_extra_sprites,
+        otherpoke_extra_palettes,
     ],
     depends: [ py_consts_generators ],
     command: [
@@ -320,8 +326,12 @@ pl_otherpoke_narc = custom_target('pl_otherpoke.narc',
         '--output-dir', '@OUTDIR@',
         '--sprite-entries', '154',
         '--palette-entries', '94',
+        '--extra-sprites', otherpoke_extra_sprites.length().to_string(),
+        '--extra-palettes', otherpoke_extra_palettes.length().to_string(),
         otherpoke_files,
         form_sprites_shared,
+        otherpoke_extra_sprites,
+        otherpoke_extra_palettes,
     ],
 )
 naix_headers += pl_otherpoke_narc[1]

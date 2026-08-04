@@ -933,6 +933,17 @@ ChatotCry *BattleSystem_GetChatotCry(BattleSystem *battleSys, int battler)
     }
 }
 
+void BattleSystem_RevertMegaEvolvedMons(BattleSystem *battleSys)
+{
+    int i, slot;
+
+    for (i = 0; i < battleSys->maxBattlers; i++) {
+        for (slot = 0; slot < BattleSystem_GetPartyCount(battleSys, i); slot++) {
+            Pokemon_TryRevertMegaForm(BattleSystem_GetPartyPokemon(battleSys, i, slot));
+        }
+    }
+}
+
 void BattleSystem_SetBurmyForm(BattleSystem *battleSys)
 {
     int i, form;
@@ -1775,6 +1786,7 @@ static void BattleMessage_CheckSide(BattleSystem *battleSys, BattleMessage *batt
     case TAG_NICKNAME_ITEM_MOVE:
     case TAG_NICKNAME_ITEM_STAT:
     case TAG_NICKNAME_ITEM_STATUS:
+    case TAG_NICKNAME_ITEM_TRNAME:
     case TAG_NICKNAME_BOX_BOX:
         if (BattleSystem_GetBattlerSide(battleSys, battleMsg->params[0] & 0xFF)) {
             battleMsg->id++;
@@ -2087,6 +2099,12 @@ static void BattleMessage_FillFormatBuffers(BattleSystem *battleSys, BattleMessa
         BattleMessage_SetNickname(battleSys, 0, battleMsg->params[0]);
         BattleMessage_SetItemName(battleSys, 1, battleMsg->params[1]);
         BattleMessage_SetMoveName(battleSys, 2, battleMsg->params[2]);
+        break;
+
+    case TAG_NICKNAME_ITEM_TRNAME:
+        BattleMessage_SetNickname(battleSys, 0, battleMsg->params[0]);
+        BattleMessage_SetItemName(battleSys, 1, battleMsg->params[1]);
+        BattleMessage_SetTrainerName(battleSys, 2, battleMsg->params[2]);
         break;
 
     case TAG_NICKNAME_ITEM_STAT:

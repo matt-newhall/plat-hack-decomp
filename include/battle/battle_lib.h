@@ -1269,6 +1269,30 @@ BOOL BattleSystem_PokemonIsOT(BattleSystem *battleSys, Pokemon *mon);
 BOOL BattleSystem_TriggerFormChange(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript);
 
 /**
+ * @brief Check whether a battler is able to Mega Evolve right now.
+ *
+ * Shared by the move menu, which uses it to decide whether to offer the button, and by
+ * the form-change trigger, so that the two cannot disagree.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @return The form it would Mega Evolve into, or -1 if it cannot.
+ */
+int BattleSystem_MegaEvolutionForm(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+
+/**
+ * @brief Mega Evolve a battler which armed the option from the move menu, updating its
+ * stats, ability and form, and consuming the armed flag.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler Mega Evolved, and subscript_mega_evolution should be run.
+ */
+BOOL BattleSystem_TriggerMegaEvolution(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+
+/**
  * @brief Initialize the party order buffer.
  *
  * @param battleSys

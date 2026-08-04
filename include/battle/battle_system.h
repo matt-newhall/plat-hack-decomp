@@ -214,6 +214,15 @@ int BattleSystem_GetBattleStyle(BattleSystem *battleSys);
 PokemonAnimManager *BattleSystem_GetPokemonAnimManager(BattleSystem *battleSys);
 ChatotCry *BattleSystem_GetChatotCry(BattleSystem *battleSys, int battler);
 void BattleSystem_SetBurmyForm(BattleSystem *battleSys);
+
+/**
+ * @brief Revert every Mega Evolved Pokemon in every party taking part in the battle.
+ *
+ * Must be called on the way out of any battle, for every battle type.
+ *
+ * @param battleSys
+ */
+void BattleSystem_RevertMegaEvolvedMons(BattleSystem *battleSys);
 void ov16_0223EF2C(BattleSystem *battleSys, int param1, int param2);
 void BattleSystem_EnqueuePokemonHistory(BattleSystem *battleSys, Pokemon *mon);
 void BattleSystem_InitCaptureAttempt(BattleSystem *battleSys, Pokemon *mon);

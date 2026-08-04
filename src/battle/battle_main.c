@@ -695,6 +695,7 @@ static void BattleMain_CopyBattleSysToDTOAndFree(ApplicationManager *appMan)
 
     SetScreenColorBrightness(DS_SCREEN_MAIN, COLOR_BLACK);
     SetScreenColorBrightness(DS_SCREEN_SUB, COLOR_BLACK);
+    BattleSystem_RevertMegaEvolvedMons(battleSys);
     BattleSystem_SetBurmyForm(battleSys);
 
     if (battleSys->resultMask != BATTLE_RESULT_CAPTURED_MON) {

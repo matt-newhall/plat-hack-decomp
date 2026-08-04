@@ -772,6 +772,7 @@ void BattleController_EmitShowMoveSelectMenu(BattleSystem *battleSys, BattleCont
     }
 
     message.invalidMoves = BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_ALL);
+    message.canMega = BattleSystem_MegaEvolutionForm(battleSys, battleCtx, battler) != -1;
 
     SendMessage(battleSys, COMM_RECIPIENT_CLIENT, battler, &message, sizeof(MoveSelectMenuMessage));
 }

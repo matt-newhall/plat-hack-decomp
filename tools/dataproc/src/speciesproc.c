@@ -224,6 +224,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "rotom/forms/frost",
     "rotom/forms/fan",
     "rotom/forms/mow",
+    "lucario/forms/mega",
 };
 
 #define NATIONAL_DEX_MAX SPECIES_EGG

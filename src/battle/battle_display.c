@@ -24,6 +24,7 @@
 #include "battle/battle_anim_battler_context.h"
 #include "battle/battle_context.h"
 #include "battle/battle_controller.h"
+#include "battle/battle_controller_player.h"
 #include "battle/battle_cursor.h"
 #include "battle/battle_lib.h"
 #include "battle/battle_main.h"
@@ -786,6 +787,7 @@ typedef struct MoveSelectMenuData {
     u8 state;
     u8 unused;
     u16 invalidMoves;
+    u8 canMega;
 } MoveSelectMenuData;
 
 void BattleDisplay_InitTaskShowMoveSelectMenu(BattleSystem *battleSys, BattlerData *battlerData, MoveSelectMenuMessage *message)
@@ -807,6 +809,7 @@ void BattleDisplay_InitTaskShowMoveSelectMenu(BattleSystem *battleSys, BattlerDa
     }
 
     moveSelectMenuData->invalidMoves = message->invalidMoves;
+    moveSelectMenuData->canMega = message->canMega;
 
     SysTask_Start(battlerData->taskFuncs.showMoveSelectMenu, moveSelectMenuData, 0);
 }
@@ -3552,7 +3555,7 @@ static void Task_PlayerShowMoveSelectMenu(SysTask *task, void *data)
 
         v8.unk_10 = moveSelectMenuData->battlerType;
 
-        ov16_02268C04(bgNarc, objNarc, v2, 11, 0, &v8);
+        ov16_02268C04(bgNarc, objNarc, v2, moveSelectMenuData->canMega ? MENU_MOVE_SELECT_MEGA : MENU_MOVE_SELECT, 0, &v8);
         NARC_dtor(bgNarc);
         NARC_dtor(objNarc);
         moveSelectMenuData->state++;
@@ -3560,12 +3563,26 @@ static void Task_PlayerShowMoveSelectMenu(SysTask *task, void *data)
     case 1:
         moveSelectMenuData->input = BattleSystem_MenuInput(v2);
 
+        if (moveSelectMenuData->input == PLAYER_INPUT_MOVE_MEGA) {
+            BattleContext *battleCtx = BattleSystem_GetBattleContext(moveSelectMenuData->battleSys);
+
+            battleCtx->megaEvolveArmed ^= FlagIndex(moveSelectMenuData->battler);
+            BattleSystem_RefreshMegaButton(v2, (battleCtx->megaEvolveArmed & FlagIndex(moveSelectMenuData->battler)) != 0);
+            Sound_PlayEffect(SEQ_SE_DP_DECIDE);
+            moveSelectMenuData->input = 0xFFFFFFFF;
+            break;
+        }
+
         if (moveSelectMenuData->input != 0xFFFFFFFF) {
             Sound_PlayEffect(SEQ_SE_DP_DECIDE);
             moveSelectMenuData->state++;
         }
         break;
     case 2:
+        if (moveSelectMenuData->input == 0xFF) {
+            BattleSystem_GetBattleContext(moveSelectMenuData->battleSys)->megaEvolveArmed &= ~FlagIndex(moveSelectMenuData->battler);
+        }
+
         if (moveSelectMenuData->input != 0xFF) {
             if ((BattleSystem_GetBattleType(moveSelectMenuData->battleSys) & BATTLE_TYPE_DOUBLES) == FALSE) {
                 ov16_0226BCCC(v2, 0);
@@ -3575,6 +3592,7 @@ static void Task_PlayerShowMoveSelectMenu(SysTask *task, void *data)
             }
         }
 
+        BattleSystem_HideMegaButton(v2);
         ov16_02265790(moveSelectMenuData->battleSys, moveSelectMenuData->battler, moveSelectMenuData->input);
         moveSelectMenuData->state++;
         break;

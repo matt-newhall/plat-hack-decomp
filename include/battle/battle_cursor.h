@@ -15,7 +15,27 @@ void *ov16_022687C8(NARC *param0, NARC *param1, BattleSystem *battleSys, int par
 void ov16_02268A14(UnkStruct_ov16_02268A14 *param0);
 void ov16_02268A88(UnkStruct_ov16_02268A14 *param0);
 void ov16_02268B8C(UnkStruct_ov16_02268A14 *param0);
+#define MENU_MOVE_SELECT      11
+#define MENU_MOVE_SELECT_MEGA 19
+
 void ov16_02268C04(NARC *param0, NARC *param1, UnkStruct_ov16_02268A14 *param2, int param3, int param4, void *param5);
+
+/**
+ * @brief Redraw the Mega Evolution button in its armed or idle state.
+ *
+ * Does nothing unless the move menu offering the button is the one on screen.
+ *
+ * @param param0
+ * @param armed
+ */
+void BattleSystem_RefreshMegaButton(UnkStruct_ov16_02268A14 *param0, BOOL armed);
+
+/**
+ * @brief Remove the Mega Evolution button and free its sprite resources.
+ *
+ * @param param0
+ */
+void BattleSystem_HideMegaButton(UnkStruct_ov16_02268A14 *param0);
 void ov16_02268D40(NARC *param0, UnkStruct_ov16_02268A14 *param1);
 void ov16_0226914C(UnkStruct_ov16_02268A14 *param0, const u8 *param1);
 void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[]);

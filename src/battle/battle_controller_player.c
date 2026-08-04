@@ -785,7 +785,8 @@ static void BattleControllerPlayer_CalcTurnOrder(BattleSystem *battleSys, Battle
 enum PreMoveActionState {
     PRE_MOVE_ACTION_START = 0,
 
-    PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS = PRE_MOVE_ACTION_START,
+    PRE_MOVE_ACTION_STATE_MEGA_EVOLUTION = PRE_MOVE_ACTION_START,
+    PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS,
     PRE_MOVE_ACTION_STATE_SPEED_RNG,
 
     PRE_MOVE_ACTION_END
@@ -799,6 +800,31 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
 
     do {
         switch (battleCtx->turnStartCheckState) {
+        case PRE_MOVE_ACTION_STATE_MEGA_EVOLUTION:
+            while (battleCtx->turnStartCheckTemp < maxBattlers) {
+                battler = battleCtx->monSpeedOrder[battleCtx->turnStartCheckTemp];
+                battleCtx->turnStartCheckTemp++;
+
+                if (BattleSystem_TriggerMegaEvolution(battleSys, battleCtx, battler) == TRUE) {
+                    BattleController_EmitClearMessageBox(battleSys);
+                    battleCtx->msgBattlerTemp = battler;
+
+                    LOAD_SUBSEQ(subscript_mega_evolution);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+            }
+
+            // Dynamic Speed recalculation
+            BattleSystem_SortMonActionOrder(battleSys, battleCtx);
+            BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
+
+            battleCtx->turnStartCheckTemp = 0;
+            battleCtx->turnStartCheckState++;
+            break;
+
         case PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS:
             while (battleCtx->turnStartCheckTemp < maxBattlers) {
                 battler = battleCtx->battlerActionOrder[battleCtx->turnStartCheckTemp];

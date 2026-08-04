@@ -2934,6 +2934,12 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
         spriteTemplate->palette = 244 + shiny + form * 2;
         break;
 
+    case SPECIES_LUCARIO:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 251 + (face / 2) + form * 2;
+        spriteTemplate->palette = 255 + shiny + form * 2;
+        break;
+
     default:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_POKEGRA;
         spriteTemplate->character = species * 6 + face + (gender != GENDER_FEMALE ? 1 : 0); // ternary must remain to match
@@ -2945,6 +2951,74 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
             spriteTemplate->personality = personality;
         }
     }
+}
+
+typedef struct MegaEvolution {
+    u16 stone;
+    u16 species;
+    u8 baseForm;
+    u8 megaForm;
+} MegaEvolution;
+
+static const MegaEvolution sMegaEvolutions[] = {
+    { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA },
+};
+
+BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
+{
+    for (int i = 0; i < NELEMS(sMegaEvolutions); i++) {
+        if (sMegaEvolutions[i].species == monSpecies && sMegaEvolutions[i].megaForm == monForm) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem)
+{
+    for (int i = 0; i < NELEMS(sMegaEvolutions); i++) {
+        if (sMegaEvolutions[i].species == monSpecies && sMegaEvolutions[i].stone == heldItem) {
+            return sMegaEvolutions[i].megaForm;
+        }
+    }
+
+    return -1;
+}
+
+/**
+ * @brief Get the form a Mega Evolved species reverts to.
+ *
+ * @param monSpecies
+ * @param monForm
+ * @return The base form, or -1 if this species/form pair is not a Mega Evolution.
+ */
+static int Pokemon_MegaBaseForm(u16 monSpecies, u8 monForm)
+{
+    for (int i = 0; i < NELEMS(sMegaEvolutions); i++) {
+        if (sMegaEvolutions[i].species == monSpecies && sMegaEvolutions[i].megaForm == monForm) {
+            return sMegaEvolutions[i].baseForm;
+        }
+    }
+
+    return -1;
+}
+
+BOOL Pokemon_TryRevertMegaForm(Pokemon *mon)
+{
+    u16 monSpecies = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+    u8 monForm = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
+    int baseForm = Pokemon_MegaBaseForm(monSpecies, monForm);
+
+    if (baseForm == -1) {
+        return FALSE;
+    }
+
+    Pokemon_SetValue(mon, MON_DATA_FORM, &baseForm);
+    Pokemon_CalcAbility(mon);
+    Pokemon_CalcLevelAndStats(mon);
+
+    return TRUE;
 }
 
 u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
@@ -3012,6 +3086,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_GIRATINA:
         if (monForm > GIRATINA_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_LUCARIO:
+        if (monForm > LUCARIO_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -4967,6 +5046,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_ROTOM:
         if (monForm && monForm <= ROTOM_FORM_COUNT - 1) {
             monSpecies = (503 - 1) + monForm;
+        }
+        break;
+    case SPECIES_LUCARIO:
+        if (monForm && monForm <= LUCARIO_FORM_COUNT - 1) {
+            monSpecies = (508 - 1) + monForm;
         }
         break;
     default:

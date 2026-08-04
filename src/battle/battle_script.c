@@ -11742,6 +11742,8 @@ static void BattleScript_CatchMonTask(SysTask *task, void *inData)
             BattleSystem_InitCaptureAttempt(data->battleSys, mon);
             BattleController_EmitIncrementRecord(data->battleSys, 0, 0, RECORD_CAUGHT_POKEMON);
 
+            Pokemon_TryRevertMegaForm(mon);
+
             if (Party_AddPokemon(party, mon) == TRUE) {
                 if (data->seqNum == SEQ_CATCH_MON_DIDNT_GIVE_NICKNAME) {
                     sub_02015738(ov16_0223E220(data->battleSys), 1);
@@ -12318,6 +12320,7 @@ static void BattleMessageParams_Make(BattleContext *battleCtx, BattleMessagePara
     case TAG_NICKNAME_ITEM_MOVE:
     case TAG_NICKNAME_ITEM_STAT:
     case TAG_NICKNAME_ITEM_STATUS:
+    case TAG_NICKNAME_ITEM_TRNAME:
     case TAG_NICKNAME_BOX_BOX:
     case TAG_ITEM_NICKNAME_FLAVOR:
     case TAG_TRNAME_NICKNAME_NICKNAME:
@@ -12583,6 +12586,12 @@ static void BattleMessage_Make(BattleSystem *battleSys, BattleContext *battleCtx
         msg->params[0] = BattleMessage_NameTag(battleSys, battleCtx, msgParams->params[0]);
         msg->params[1] = BattleMessage_ItemTag(battleCtx, msgParams->params[1]);
         msg->params[2] = BattleMessage_NameTag(battleSys, battleCtx, msgParams->params[2]);
+        break;
+
+    case TAG_NICKNAME_ITEM_TRNAME:
+        msg->params[0] = BattleMessage_NameTag(battleSys, battleCtx, msgParams->params[0]);
+        msg->params[1] = BattleMessage_ItemTag(battleCtx, msgParams->params[1]);
+        msg->params[2] = BattleMessage_TrainerNameTag(battleSys, battleCtx, msgParams->params[2]);
         break;
 
     case TAG_NICKNAME_ITEM_MOVE:
