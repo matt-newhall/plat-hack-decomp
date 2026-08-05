@@ -486,6 +486,7 @@ int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem);
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm);
 BOOL Pokemon_IsMegaStoneFor(u16 monSpecies, u16 item);
 int Pokemon_MegaFormWeight(u16 monSpecies, u8 monForm);
+s8 Pokemon_MegaFormShadowXOffset(u16 monSpecies, u8 monForm);
 
 /**
  * @brief Revert a Mega Evolved Pokemon to its base form, recalculating its

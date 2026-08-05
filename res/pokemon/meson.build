@@ -165,6 +165,7 @@ poke_icon_files += [
     lucario_mega_icon,
     tyranitar_mega_icon,
     venusaur_mega_icon,
+    blastoise_mega_icon,
 ]
 
 otherpoke_files = []

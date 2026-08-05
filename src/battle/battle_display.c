@@ -267,6 +267,7 @@ void BattleDisplay_InitTaskSetEncounter(BattleSystem *battleSys, BattlerData *ba
 
     PokemonSprite_LoadYOffset(battlerData->narc, &height, message->species);
     PokemonSprite_LoadXOffsetShadow(battlerData->narc, &shadowXOffset, message->species);
+    shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
     PokemonSprite_LoadShadowSize(battlerData->narc, &shadowSize, message->species);
     PokemonSprite_LoadAnimFrames(battlerData->narc, &animFrames[0], message->species, battlerData->battlerType);
 
@@ -372,6 +373,7 @@ void BattleDisplay_InitTaskShowEncounter(BattleSystem *battleSys, BattlerData *b
 
     PokemonSprite_LoadYOffset(battlerData->narc, &monShowData->height, message->species);
     PokemonSprite_LoadXOffsetShadow(battlerData->narc, &monShowData->shadowXOffset, message->species);
+    monShowData->shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
     PokemonSprite_LoadShadowSize(battlerData->narc, &monShowData->shadowSize, message->species);
     ov16_02263B10(battlerData);
 
@@ -417,6 +419,7 @@ void BattleDisplay_InitTaskShowPokemon(BattleSystem *battleSys, BattlerData *bat
 
     PokemonSprite_LoadYOffset(battlerData->narc, &monShowData->height, message->species);
     PokemonSprite_LoadXOffsetShadow(battlerData->narc, &monShowData->shadowXOffset, message->species);
+    monShowData->shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
     PokemonSprite_LoadShadowSize(battlerData->narc, &monShowData->shadowSize, message->species);
     ov16_02263B10(battlerData);
 

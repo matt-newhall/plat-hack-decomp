@@ -2937,19 +2937,25 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
     case SPECIES_VENUSAUR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 251 + (face / 2) + form * 2;
-        spriteTemplate->palette = 263 + shiny + form * 2;
+        spriteTemplate->palette = 267 + shiny + form * 2;
+        break;
+
+    case SPECIES_BLASTOISE:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 255 + (face / 2) + form * 2;
+        spriteTemplate->palette = 271 + shiny + form * 2;
         break;
 
     case SPECIES_TYRANITAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 255 + (face / 2) + form * 2;
-        spriteTemplate->palette = 267 + shiny + form * 2;
+        spriteTemplate->character = 259 + (face / 2) + form * 2;
+        spriteTemplate->palette = 275 + shiny + form * 2;
         break;
 
     case SPECIES_LUCARIO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 259 + (face / 2) + form * 2;
-        spriteTemplate->palette = 271 + shiny + form * 2;
+        spriteTemplate->character = 263 + (face / 2) + form * 2;
+        spriteTemplate->palette = 279 + shiny + form * 2;
         break;
 
     default:
@@ -2971,12 +2977,14 @@ typedef struct MegaEvolution {
     u8 baseForm;
     u8 megaForm;
     u16 weight;
+    s8 shadowXOffset;
 } MegaEvolution;
 
 static const MegaEvolution sMegaEvolutions[] = {
-    { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA, 575 },
-    { ITEM_TYRANITARITE, SPECIES_TYRANITAR, TYRANITAR_FORM_BASE, TYRANITAR_FORM_MEGA, 2550 },
-    { ITEM_VENUSAURITE, SPECIES_VENUSAUR, VENUSAUR_FORM_BASE, VENUSAUR_FORM_MEGA, 1555 },
+    { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA, 575, 0 },
+    { ITEM_TYRANITARITE, SPECIES_TYRANITAR, TYRANITAR_FORM_BASE, TYRANITAR_FORM_MEGA, 2550, 0 },
+    { ITEM_VENUSAURITE, SPECIES_VENUSAUR, VENUSAUR_FORM_BASE, VENUSAUR_FORM_MEGA, 1555, 0 },
+    { ITEM_BLASTOISINITE, SPECIES_BLASTOISE, BLASTOISE_FORM_BASE, BLASTOISE_FORM_MEGA, 1011, 15 },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -3004,6 +3012,17 @@ int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem)
 BOOL Pokemon_IsMegaStoneFor(u16 monSpecies, u16 item)
 {
     return Pokemon_MegaEvolutionForm(monSpecies, item) != -1;
+}
+
+s8 Pokemon_MegaFormShadowXOffset(u16 monSpecies, u8 monForm)
+{
+    for (int i = 0; i < NELEMS(sMegaEvolutions); i++) {
+        if (sMegaEvolutions[i].species == monSpecies && sMegaEvolutions[i].megaForm == monForm) {
+            return sMegaEvolutions[i].shadowXOffset;
+        }
+    }
+
+    return 0;
 }
 
 int Pokemon_MegaFormWeight(u16 monSpecies, u8 monForm)
@@ -3132,6 +3151,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_VENUSAUR:
         if (monForm > VENUSAUR_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_BLASTOISE:
+        if (monForm > BLASTOISE_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -3406,6 +3430,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
 
     case SPECIES_VENUSAUR:
         if (form == VENUSAUR_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_BLASTOISE:
+        if (form == BLASTOISE_FORM_MEGA && face == FACE_FRONT) {
             return 1;
         }
 
@@ -5120,6 +5153,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_VENUSAUR:
         if (monForm && monForm <= VENUSAUR_FORM_COUNT - 1) {
             monSpecies = (510 - 1) + monForm;
+        }
+        break;
+    case SPECIES_BLASTOISE:
+        if (monForm && monForm <= BLASTOISE_FORM_COUNT - 1) {
+            monSpecies = (511 - 1) + monForm;
         }
         break;
     default:

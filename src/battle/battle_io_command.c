@@ -703,6 +703,11 @@ static void BtlIOCmd_ChangeWeatherForm(BattleSystem *battleSys, BattlerData *bat
     y = ov12_022384CC(battlerData->battlerType, 1) + y;
     PokemonSprite_SetAttribute(battlerData->monSprite, MON_SPRITE_Y_CENTER, y);
 
+    s8 shadowXOffset;
+    PokemonSprite_LoadXOffsetShadow(battlerData->narc, &shadowXOffset, message->species);
+    shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
+    PokemonSprite_SetAttribute(battlerData->monSprite, MON_SPRITE_SHADOW_X_OFFSET, shadowXOffset);
+
     BattleController_EmitClearCommand(battleSys, battlerData->battler, message->command);
     ZeroDataBuffer(battlerData);
 }

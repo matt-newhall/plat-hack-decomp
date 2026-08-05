@@ -53,6 +53,7 @@ enum FormIconIndex {
     ICON_LUCARIO_MEGA,
     ICON_TYRANITAR_MEGA,
     ICON_VENUSAUR_MEGA,
+    ICON_BLASTOISE_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {

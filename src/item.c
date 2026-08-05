@@ -2767,11 +2767,11 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = venusaurite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_CONTEST_PASS] = {
-        .dataID = 0x1B3,
-        .iconID = contest_pass_NCGR,
-        .paletteID = contest_pass_NCLR,
-        .gen3ID = GBA_ITEM_CONTEST_PASS,
+    [ITEM_BLASTOISINITE] = {
+        .dataID = 0x1DC,
+        .iconID = blastoisinite_NCGR,
+        .paletteID = blastoisinite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_MAGMA_STONE] = {
         .dataID = 0x1B4,
