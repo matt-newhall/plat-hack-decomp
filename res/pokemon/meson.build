@@ -164,6 +164,7 @@ poke_icon_files += [
     rotom_mow_icon,
     lucario_mega_icon,
     tyranitar_mega_icon,
+    venusaur_mega_icon,
 ]
 
 otherpoke_files = []

@@ -2934,16 +2934,22 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
         spriteTemplate->palette = 244 + shiny + form * 2;
         break;
 
-    case SPECIES_TYRANITAR:
+    case SPECIES_VENUSAUR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 251 + (face / 2) + form * 2;
-        spriteTemplate->palette = 259 + shiny + form * 2;
+        spriteTemplate->palette = 263 + shiny + form * 2;
+        break;
+
+    case SPECIES_TYRANITAR:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 255 + (face / 2) + form * 2;
+        spriteTemplate->palette = 267 + shiny + form * 2;
         break;
 
     case SPECIES_LUCARIO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 255 + (face / 2) + form * 2;
-        spriteTemplate->palette = 263 + shiny + form * 2;
+        spriteTemplate->character = 259 + (face / 2) + form * 2;
+        spriteTemplate->palette = 271 + shiny + form * 2;
         break;
 
     default:
@@ -2970,6 +2976,7 @@ typedef struct MegaEvolution {
 static const MegaEvolution sMegaEvolutions[] = {
     { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA, 575 },
     { ITEM_TYRANITARITE, SPECIES_TYRANITAR, TYRANITAR_FORM_BASE, TYRANITAR_FORM_MEGA, 2550 },
+    { ITEM_VENUSAURITE, SPECIES_VENUSAUR, VENUSAUR_FORM_BASE, VENUSAUR_FORM_MEGA, 1555 },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -3120,6 +3127,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_TYRANITAR:
         if (monForm > TYRANITAR_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_VENUSAUR:
+        if (monForm > VENUSAUR_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -3385,6 +3397,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
 
     case SPECIES_LUCARIO:
         if (form == LUCARIO_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_VENUSAUR:
+        if (form == VENUSAUR_FORM_MEGA && face == FACE_FRONT) {
             return 1;
         }
 
@@ -5094,6 +5115,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_TYRANITAR:
         if (monForm && monForm <= TYRANITAR_FORM_COUNT - 1) {
             monSpecies = (509 - 1) + monForm;
+        }
+        break;
+    case SPECIES_VENUSAUR:
+        if (monForm && monForm <= VENUSAUR_FORM_COUNT - 1) {
+            monSpecies = (510 - 1) + monForm;
         }
         break;
     default:
