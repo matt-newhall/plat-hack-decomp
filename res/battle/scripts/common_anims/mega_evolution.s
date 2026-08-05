@@ -10,12 +10,14 @@ L_0:
     LoadCellResObj 0, 32
     LoadAnimResObj 0, 32
     AddSpriteWithFunc 0, 33, 32, 32, 32, 32, 0, 0, 73, 75
-    PlayPannedSoundEffect 1957, BATTLE_SOUND_PAN_LEFT
+    PlayPannedSoundEffect SEQ_SE_DP_W360, BATTLE_SOUND_PAN_LEFT
     CreateEmitter 0, 1, EMITTER_CB_SET_POS_TO_ATTACKER
     CreateEmitter 0, 2, EMITTER_CB_SET_POS_TO_ATTACKER
     CreateEmitter 0, 3, EMITTER_CB_SET_POS_TO_ATTACKER
     CreateEmitter 0, 4, EMITTER_CB_SET_POS_TO_ATTACKER
-    Delay 100
+    Delay 75
+    PlayPannedSoundEffect SEQ_SE_DP_W360C, BATTLE_SOUND_PAN_LEFT
+    Delay 25
     UnloadParticleSystem 0
     FreeSpriteManager 0
     WaitForAnimTasks

@@ -14,11 +14,9 @@ _016:
     PrintMessage BattleStrings_Text_MegaStoneReacting_Ally, TAG_NICKNAME_ITEM_TRNAME, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_MSG_BATTLER_TEMP
     Wait
     WaitButtonABTime 30
-    PlaySound BTLSCR_MSG_TEMP, 1980
     PlayBattleAnimation BTLSCR_MSG_TEMP, BATTLE_ANIMATION_MEGA_EVOLUTION
     WaitTime 150
     ChangeForm BTLSCR_MSG_TEMP
-    PlaySound BTLSCR_MSG_TEMP, 1984
     Wait
     // {0} has Mega Evolved into Mega {1}!
     PrintMessage BattleStrings_Text_MegaEvolved_Ally, TAG_NICKNAME_POKE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
