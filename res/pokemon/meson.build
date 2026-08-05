@@ -163,6 +163,7 @@ poke_icon_files += [
     rotom_fan_icon,
     rotom_mow_icon,
     lucario_mega_icon,
+    tyranitar_mega_icon,
 ]
 
 otherpoke_files = []

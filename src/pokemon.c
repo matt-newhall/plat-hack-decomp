@@ -2934,10 +2934,16 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
         spriteTemplate->palette = 244 + shiny + form * 2;
         break;
 
-    case SPECIES_LUCARIO:
+    case SPECIES_TYRANITAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 251 + (face / 2) + form * 2;
-        spriteTemplate->palette = 255 + shiny + form * 2;
+        spriteTemplate->palette = 259 + shiny + form * 2;
+        break;
+
+    case SPECIES_LUCARIO:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 255 + (face / 2) + form * 2;
+        spriteTemplate->palette = 263 + shiny + form * 2;
         break;
 
     default:
@@ -2962,6 +2968,7 @@ typedef struct MegaEvolution {
 
 static const MegaEvolution sMegaEvolutions[] = {
     { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA },
+    { ITEM_TYRANITARITE, SPECIES_TYRANITAR, TYRANITAR_FORM_BASE, TYRANITAR_FORM_MEGA },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -3096,6 +3103,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_LUCARIO:
         if (monForm > LUCARIO_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_TYRANITAR:
+        if (monForm > TYRANITAR_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -5065,6 +5077,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_LUCARIO:
         if (monForm && monForm <= LUCARIO_FORM_COUNT - 1) {
             monSpecies = (508 - 1) + monForm;
+        }
+        break;
+    case SPECIES_TYRANITAR:
+        if (monForm && monForm <= TYRANITAR_FORM_COUNT - 1) {
+            monSpecies = (509 - 1) + monForm;
         }
         break;
     default:

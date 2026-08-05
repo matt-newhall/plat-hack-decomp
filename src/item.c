@@ -2797,10 +2797,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = lucarionite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_COUPON_3] = {
-        .dataID = 0x1B8,
-        .iconID = coupon_3_NCGR,
-        .paletteID = coupon_3_NCLR,
+    [ITEM_TYRANITARITE] = {
+        .dataID = 0x1DA,
+        .iconID = tyranitarite_NCGR,
+        .paletteID = tyranitarite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_STORAGE_KEY] = {
