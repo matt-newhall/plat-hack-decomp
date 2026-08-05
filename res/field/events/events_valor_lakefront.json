@@ -81,7 +81,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM85",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_VALOR_LAKEFRONT_TM85",

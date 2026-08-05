@@ -70,7 +70,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM24",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_VALLEY_WINDWORKS_OUTSIDE_TM24",

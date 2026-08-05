@@ -170,7 +170,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM01",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_OREBURGH_GATE_B1F_TM01",
@@ -200,7 +200,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM31",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_OREBURGH_GATE_B1F_TM31",
@@ -215,7 +215,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM70",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_OREBURGH_GATE_B1F_TM70",

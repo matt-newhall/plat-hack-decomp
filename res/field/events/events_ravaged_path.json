@@ -348,7 +348,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM39",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_RAVAGED_PATH_TM39",
@@ -378,7 +378,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM03",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_RAVAGED_PATH_TM03",

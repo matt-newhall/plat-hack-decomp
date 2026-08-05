@@ -397,7 +397,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM84",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM84",
@@ -412,7 +412,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM62",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM62",
@@ -457,7 +457,7 @@
         },
         {
             "id": "LOCALID_ITEM_TM06",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM06",
