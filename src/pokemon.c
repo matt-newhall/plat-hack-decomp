@@ -2964,11 +2964,12 @@ typedef struct MegaEvolution {
     u16 species;
     u8 baseForm;
     u8 megaForm;
+    u16 weight;
 } MegaEvolution;
 
 static const MegaEvolution sMegaEvolutions[] = {
-    { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA },
-    { ITEM_TYRANITARITE, SPECIES_TYRANITAR, TYRANITAR_FORM_BASE, TYRANITAR_FORM_MEGA },
+    { ITEM_LUCARIONITE, SPECIES_LUCARIO, LUCARIO_FORM_BASE, LUCARIO_FORM_MEGA, 575 },
+    { ITEM_TYRANITARITE, SPECIES_TYRANITAR, TYRANITAR_FORM_BASE, TYRANITAR_FORM_MEGA, 2550 },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -2996,6 +2997,17 @@ int Pokemon_MegaEvolutionForm(u16 monSpecies, u16 heldItem)
 BOOL Pokemon_IsMegaStoneFor(u16 monSpecies, u16 item)
 {
     return Pokemon_MegaEvolutionForm(monSpecies, item) != -1;
+}
+
+int Pokemon_MegaFormWeight(u16 monSpecies, u8 monForm)
+{
+    for (int i = 0; i < NELEMS(sMegaEvolutions); i++) {
+        if (sMegaEvolutions[i].species == monSpecies && sMegaEvolutions[i].megaForm == monForm) {
+            return sMegaEvolutions[i].weight;
+        }
+    }
+
+    return -1;
 }
 
 /**

@@ -163,6 +163,12 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
 
     battleCtx->battleMons[battler].weight = Pokedex_HeightWeightData_Weight(heightWeightData, battleCtx->battleMons[battler].species);
 
+    // weight needs to be re-initialised for megas
+    int megaWeight = Pokemon_MegaFormWeight(battleCtx->battleMons[battler].species, battleCtx->battleMons[battler].formNum);
+    if (megaWeight != -1) {
+        battleCtx->battleMons[battler].weight = megaWeight;
+    }
+
     Pokedex_HeightWeightData_Release(heightWeightData);
     Pokedex_HeightWeightData_Free(heightWeightData);
     Pokemon_GetValue(mon, MON_DATA_NICKNAME, battleCtx->battleMons[battler].nickname);
@@ -7562,6 +7568,12 @@ BOOL BattleSystem_TriggerMegaEvolution(BattleSystem *battleSys, BattleContext *b
     battleCtx->battleMons[battler].type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
     battleCtx->battleMons[battler].type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
     battleCtx->battleMons[battler].formNum = form;
+
+    // weight needs to be re-initialised for megas
+    int megaWeight = Pokemon_MegaFormWeight(battleCtx->battleMons[battler].species, form);
+    if (megaWeight != -1) {
+        battleCtx->battleMons[battler].weight = megaWeight;
+    }
     battleCtx->battleStatusMask2 |= SYSCTL_RECALC_MON_STATS;
 
     Heap_Free(mon);
