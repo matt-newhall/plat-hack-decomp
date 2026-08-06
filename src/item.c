@@ -2887,6 +2887,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = sablenite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_MAWILITE] = {
+        .dataID = 0x1EB,
+        .iconID = mawilite_NCGR,
+        .paletteID = mawilite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

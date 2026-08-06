@@ -68,6 +68,7 @@ enum FormIconIndex {
     ICON_BLAZIKEN_MEGA,
     ICON_SWAMPERT_MEGA,
     ICON_SABLEYE_MEGA,
+    ICON_MAWILE_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {
