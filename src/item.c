@@ -2773,10 +2773,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = blastoisinite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_MAGMA_STONE] = {
-        .dataID = 0x1B4,
-        .iconID = magma_stone_NCGR,
-        .paletteID = magma_stone_NCLR,
+    [ITEM_SLOWBRONITE] = {
+        .dataID = 0x1DF,
+        .iconID = slowbronite_NCGR,
+        .paletteID = slowbronite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_PARCEL] = {
