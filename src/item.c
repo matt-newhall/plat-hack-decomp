@@ -2941,6 +2941,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = glalitite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_SALAMENCITE] = {
+        .dataID = 0x1F4,
+        .iconID = salamencite_NCGR,
+        .paletteID = salamencite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
