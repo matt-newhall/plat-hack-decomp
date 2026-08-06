@@ -3464,6 +3464,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
         memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
         break;
 
+    case SPECIES_TYRANITAR:
+        if (form == TYRANITAR_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
     case SPECIES_VENUSAUR:
         if (form == VENUSAUR_FORM_MEGA && face == FACE_FRONT) {
             return 1;
