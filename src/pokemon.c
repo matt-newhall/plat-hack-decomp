@@ -2937,55 +2937,61 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
     case SPECIES_VENUSAUR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 251 + (face / 2) + form * 2;
-        spriteTemplate->palette = 287 + shiny + form * 2;
+        spriteTemplate->palette = 291 + shiny + form * 2;
         break;
 
     case SPECIES_BLASTOISE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 255 + (face / 2) + form * 2;
-        spriteTemplate->palette = 291 + shiny + form * 2;
+        spriteTemplate->palette = 295 + shiny + form * 2;
         break;
 
     case SPECIES_BEEDRILL:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 259 + (face / 2) + form * 2;
-        spriteTemplate->palette = 295 + shiny + form * 2;
+        spriteTemplate->palette = 299 + shiny + form * 2;
         break;
 
     case SPECIES_PIDGEOT:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 263 + (face / 2) + form * 2;
-        spriteTemplate->palette = 299 + shiny + form * 2;
+        spriteTemplate->palette = 303 + shiny + form * 2;
         break;
 
     case SPECIES_SLOWBRO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 267 + (face / 2) + form * 2;
-        spriteTemplate->palette = 303 + shiny + form * 2;
+        spriteTemplate->palette = 307 + shiny + form * 2;
         break;
 
     case SPECIES_GENGAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 271 + (face / 2) + form * 2;
-        spriteTemplate->palette = 307 + shiny + form * 2;
+        spriteTemplate->palette = 311 + shiny + form * 2;
         break;
 
     case SPECIES_PINSIR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 275 + (face / 2) + form * 2;
-        spriteTemplate->palette = 311 + shiny + form * 2;
+        spriteTemplate->palette = 315 + shiny + form * 2;
+        break;
+
+    case SPECIES_AMPHAROS:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 279 + (face / 2) + form * 2;
+        spriteTemplate->palette = 319 + shiny + form * 2;
         break;
 
     case SPECIES_TYRANITAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 279 + (face / 2) + form * 2;
-        spriteTemplate->palette = 315 + shiny + form * 2;
+        spriteTemplate->character = 283 + (face / 2) + form * 2;
+        spriteTemplate->palette = 323 + shiny + form * 2;
         break;
 
     case SPECIES_LUCARIO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 283 + (face / 2) + form * 2;
-        spriteTemplate->palette = 319 + shiny + form * 2;
+        spriteTemplate->character = 287 + (face / 2) + form * 2;
+        spriteTemplate->palette = 327 + shiny + form * 2;
         break;
 
     default:
@@ -3020,6 +3026,7 @@ static const MegaEvolution sMegaEvolutions[] = {
     { ITEM_SLOWBRONITE, SPECIES_SLOWBRO, SLOWBRO_FORM_BASE, SLOWBRO_FORM_MEGA, 1200, 0 },
     { ITEM_GENGARITE, SPECIES_GENGAR, GENGAR_FORM_BASE, GENGAR_FORM_MEGA, 405, 2 },
     { ITEM_PINSIRITE, SPECIES_PINSIR, PINSIR_FORM_BASE, PINSIR_FORM_MEGA, 590, 0 },
+    { ITEM_AMPHAROSITE, SPECIES_AMPHAROS, AMPHAROS_FORM_BASE, AMPHAROS_FORM_MEGA, 615, 0 },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -3216,6 +3223,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_PINSIR:
         if (monForm > PINSIR_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_AMPHAROS:
+        if (monForm > AMPHAROS_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -3545,6 +3557,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
     case SPECIES_PINSIR:
         if (form == PINSIR_FORM_MEGA && face == FACE_FRONT) {
             return 4;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_AMPHAROS:
+        if (form == AMPHAROS_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
         }
 
         narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
@@ -5288,6 +5309,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_PINSIR:
         if (monForm && monForm <= PINSIR_FORM_COUNT - 1) {
             monSpecies = (516 - 1) + monForm;
+        }
+        break;
+    case SPECIES_AMPHAROS:
+        if (monForm && monForm <= AMPHAROS_FORM_COUNT - 1) {
+            monSpecies = (517 - 1) + monForm;
         }
         break;
     default:

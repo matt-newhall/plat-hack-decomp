@@ -2833,6 +2833,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = secret_key_NCLR,
         .gen3ID = GBA_ITEM_SECRET_KEY,
     },
+    [ITEM_AMPHAROSITE] = {
+        .dataID = 0x1E2,
+        .iconID = ampharosite_NCGR,
+        .paletteID = ampharosite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
