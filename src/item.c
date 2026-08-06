@@ -2893,6 +2893,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = mawilite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_AGGRONITE] = {
+        .dataID = 0x1EC,
+        .iconID = aggronite_NCGR,
+        .paletteID = aggronite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

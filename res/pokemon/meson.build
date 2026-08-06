@@ -181,6 +181,7 @@ poke_icon_files += [
     swampert_mega_icon,
     sableye_mega_icon,
     mawile_mega_icon,
+    aggron_mega_icon,
 ]
 
 otherpoke_files = []
