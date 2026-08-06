@@ -49,6 +49,7 @@ item_icon_pngs = files(
     'contest_pass.png',
     'cornn_berry.png',
     'lucarionite.png',
+    'beedrillite.png',
     'blastoisinite.png',
     'venusaurite.png',
     'tyranitarite.png',
@@ -376,6 +377,7 @@ item_icon_pals = files(
     'contest_pass.pal',
     'cornn_berry.pal',
     'lucarionite.pal',
+    'beedrillite.pal',
     'blastoisinite.pal',
     'venusaurite.pal',
     'tyranitarite.pal',
@@ -725,7 +727,6 @@ item_icon_nclrs = nclr_gen.process(item_icon_pals,
 )
 
 item_icon_unused_ncgrs = files(
-    'unused_367.NCGR',
     'unused_369.NCGR',
     'unused_371.NCGR',
     'unused_376.NCGR',
@@ -758,7 +759,6 @@ item_icon_unused_ncgrs = files(
 )
 
 item_icon_unused_nclrs = files(
-    'unused_368.NCLR',
     'unused_370.NCLR',
     'unused_372.NCLR',
     'unused_377.NCLR',

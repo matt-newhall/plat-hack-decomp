@@ -445,11 +445,11 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = white_flute_NCLR,
         .gen3ID = GBA_ITEM_WHITE_FLUTE,
     },
-    [ITEM_SHOAL_SALT] = {
-        .dataID = 0x46,
-        .iconID = energypowder_NCGR,
-        .paletteID = shoal_salt_NCLR,
-        .gen3ID = GBA_ITEM_SHOAL_SALT,
+    [ITEM_BEEDRILLITE] = {
+        .dataID = 0x1DD,
+        .iconID = beedrillite_NCGR,
+        .paletteID = beedrillite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_SHOAL_SHELL] = {
         .dataID = 0x47,

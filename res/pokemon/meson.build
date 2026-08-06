@@ -166,6 +166,7 @@ poke_icon_files += [
     tyranitar_mega_icon,
     venusaur_mega_icon,
     blastoise_mega_icon,
+    beedrill_mega_icon,
 ]
 
 otherpoke_files = []
