@@ -226,6 +226,8 @@ struct BattleContext {
     u32 battleStatusMask2;
     u32 megaEvolveArmed; // battlers who chose Mega Evolution alongside this turn's move
     u32 megaEvolveUsed; // trainers who have already Mega Evolved this battle
+    BOOL megaAbilityCheckPending;
+    BOOL megaEvolutionResolved;
 
     int damage;
     int hitDamage;

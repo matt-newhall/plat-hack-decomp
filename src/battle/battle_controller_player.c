@@ -63,6 +63,7 @@ static void BattleControllerPlayer_InitCommandSelection(BattleSystem *battleSys,
 static void BattleControllerPlayer_CommandSelectionInput(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_CalcTurnOrder(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, BattleContext *battleCtx);
+static void BattleControllerPlayer_CheckMegaEvolution(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_BranchActions(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys, BattleContext *battleCtx);
 static void BattleControllerPlayer_CheckMonConditions(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -175,7 +176,8 @@ static const BattleControlFunc sBattleControlCommands[] = {
     [BATTLE_CONTROL_SCREEN_WIPE] = BattleControllerPlayer_ScreenWipe,
     [BATTLE_CONTROL_FIGHT_END] = BattleControllerPlayer_EndFight,
     [BATTLE_CONTROL_END_WAIT] = BattleControllerPlayer_EndWait,
-    [BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH] = BattleControllerPlayer_NeutralizingGasPreSwitch
+    [BATTLE_CONTROL_NEUTRALIZING_GAS_PRE_SWITCH] = BattleControllerPlayer_NeutralizingGasPreSwitch,
+    [BATTLE_CONTROL_CHECK_MEGA_EVOLUTION] = BattleControllerPlayer_CheckMegaEvolution
 };
 
 void *BattleContext_New(BattleSystem *battleSys)
@@ -779,14 +781,14 @@ static void BattleControllerPlayer_CalcTurnOrder(BattleSystem *battleSys, Battle
         }
     }
 
+    battleCtx->megaEvolutionResolved = FALSE;
     battleCtx->command = BATTLE_CONTROL_CHECK_PRE_MOVE_ACTIONS;
 }
 
 enum PreMoveActionState {
     PRE_MOVE_ACTION_START = 0,
 
-    PRE_MOVE_ACTION_STATE_MEGA_EVOLUTION = PRE_MOVE_ACTION_START,
-    PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS,
+    PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS = PRE_MOVE_ACTION_START,
     PRE_MOVE_ACTION_STATE_SPEED_RNG,
 
     PRE_MOVE_ACTION_END
@@ -800,46 +802,6 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
 
     do {
         switch (battleCtx->turnStartCheckState) {
-        case PRE_MOVE_ACTION_STATE_MEGA_EVOLUTION:
-            if (battleCtx->megaAbilityCheckPending) {
-                int nextSeq = BattleSystem_TriggerEffectOnSwitch(battleSys, battleCtx);
-
-                if (nextSeq) {
-                    LOAD_SUBSEQ(nextSeq);
-                    battleCtx->commandNext = battleCtx->command;
-                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-
-                    return;
-                }
-
-                battleCtx->megaAbilityCheckPending = FALSE;
-            }
-
-            while (battleCtx->turnStartCheckTemp < maxBattlers) {
-                battler = battleCtx->monSpeedOrder[battleCtx->turnStartCheckTemp];
-                battleCtx->turnStartCheckTemp++;
-
-                if (BattleSystem_TriggerMegaEvolution(battleSys, battleCtx, battler) == TRUE) {
-                    BattleController_EmitClearMessageBox(battleSys);
-                    battleCtx->msgBattlerTemp = battler;
-                    battleCtx->megaAbilityCheckPending = TRUE;
-
-                    LOAD_SUBSEQ(subscript_mega_evolution);
-                    battleCtx->commandNext = battleCtx->command;
-                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-
-                    return;
-                }
-            }
-
-            // Dynamic Speed recalculation
-            BattleSystem_SortMonActionOrder(battleSys, battleCtx);
-            BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
-
-            battleCtx->turnStartCheckTemp = 0;
-            battleCtx->turnStartCheckState++;
-            break;
-
         case PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS:
             while (battleCtx->turnStartCheckTemp < maxBattlers) {
                 battler = battleCtx->battlerActionOrder[battleCtx->turnStartCheckTemp];
@@ -890,6 +852,64 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
     }
 }
 
+/**
+ * @brief Mega Evolve every battler which is set to do so this turn, in Speed
+ * order, then announce whatever abilities the new forms brought with them.
+ *
+ * BranchActions defers this until each of the turn's escape attempts, items, and
+ * switches has been handled, so a Mega Evolution is the last thing to happen
+ * before the first move of the turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void BattleControllerPlayer_CheckMegaEvolution(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    if (battleCtx->megaAbilityCheckPending) {
+        int nextSeq = BattleSystem_TriggerEffectOnSwitch(battleSys, battleCtx);
+
+        if (nextSeq) {
+            LOAD_SUBSEQ(nextSeq);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            return;
+        }
+
+        battleCtx->megaAbilityCheckPending = FALSE;
+    }
+
+    while (battleCtx->turnStartCheckTemp < maxBattlers) {
+        int battler = battleCtx->monSpeedOrder[battleCtx->turnStartCheckTemp];
+        battleCtx->turnStartCheckTemp++;
+
+        if (battleCtx->battlerActions[battler][BATTLE_ACTION_SELECTED_COMMAND] == PLAYER_INPUT_PARTY) {
+            continue;
+        }
+
+        if (BattleSystem_TriggerMegaEvolution(battleSys, battleCtx, battler) == TRUE) {
+            BattleController_EmitClearMessageBox(battleSys);
+            battleCtx->msgBattlerTemp = battler;
+            battleCtx->megaAbilityCheckPending = TRUE;
+
+            LOAD_SUBSEQ(subscript_mega_evolution);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            return;
+        }
+    }
+
+    // Dynamic Speed recalculation
+    BattleSystem_SortMonActionOrder(battleSys, battleCtx);
+    BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
+
+    battleCtx->turnStartCheckTemp = 0;
+    battleCtx->command = BATTLE_CONTROL_BRANCH_ACTIONS;
+}
+
 static void BattleControllerPlayer_BranchActions(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
@@ -906,12 +926,28 @@ static void BattleControllerPlayer_BranchActions(BattleSystem *battleSys, Battle
     }
 
     BattleSystem_SortMonSpeedOrder(battleSys, battleCtx);
+
+    int nextCommand;
     if (battleCtx->waitingBattlers == 0) {
         battleCtx->turnOrderCounter = 0;
-        battleCtx->command = BATTLE_CONTROL_CHECK_FIELD_CONDITIONS;
+        nextCommand = BATTLE_CONTROL_CHECK_FIELD_CONDITIONS;
     } else {
-        battleCtx->command = battleCtx->battlerActions[battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]][BATTLE_ACTION_PICK_COMMAND];
+        nextCommand = battleCtx->battlerActions[battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]][BATTLE_ACTION_PICK_COMMAND];
     }
+
+    // Mega Evolution resolves after every escape attempt, item, and switch of the
+    // turn, but before the first move.
+    if (battleCtx->megaEvolutionResolved == FALSE
+        && nextCommand != BATTLE_CONTROL_RUN
+        && nextCommand != BATTLE_CONTROL_ITEM
+        && nextCommand != BATTLE_CONTROL_PARTY) {
+        battleCtx->megaEvolutionResolved = TRUE;
+        battleCtx->command = BATTLE_CONTROL_CHECK_MEGA_EVOLUTION;
+
+        return;
+    }
+
+    battleCtx->command = nextCommand;
 }
 
 enum FieldCondCheckState {
