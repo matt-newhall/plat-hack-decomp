@@ -169,6 +169,7 @@ poke_icon_files += [
     beedrill_mega_icon,
     pidgeot_mega_icon,
     slowbro_mega_icon,
+    gengar_mega_icon,
 ]
 
 otherpoke_files = []

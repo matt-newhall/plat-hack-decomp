@@ -2599,10 +2599,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = explorer_kit_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_LOOT_SACK] = {
-        .dataID = 0x197,
-        .iconID = loot_sack_NCGR,
-        .paletteID = loot_sack_NCLR,
+    [ITEM_GENGARITE] = {
+        .dataID = 0x1E0,
+        .iconID = gengarite_NCGR,
+        .paletteID = gengarite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_MINI_PC] = {
