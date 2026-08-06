@@ -266,6 +266,7 @@ void BattleDisplay_InitTaskSetEncounter(BattleSystem *battleSys, BattlerData *ba
     yOffset = LoadPokemonSpriteYOffset(message->species, message->gender, monEncounterData->face, message->formNum, message->personality);
 
     PokemonSprite_LoadYOffset(battlerData->narc, &height, message->species);
+    height += Pokemon_MegaFormSpriteLift(message->species, message->formNum);
     PokemonSprite_LoadXOffsetShadow(battlerData->narc, &shadowXOffset, message->species);
     shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
     PokemonSprite_LoadShadowSize(battlerData->narc, &shadowSize, message->species);
@@ -372,6 +373,7 @@ void BattleDisplay_InitTaskShowEncounter(BattleSystem *battleSys, BattlerData *b
     monShowData->yOffset = LoadPokemonSpriteYOffset(message->species, message->gender, monShowData->face, message->formNum, message->personality);
 
     PokemonSprite_LoadYOffset(battlerData->narc, &monShowData->height, message->species);
+    monShowData->height += Pokemon_MegaFormSpriteLift(message->species, message->formNum);
     PokemonSprite_LoadXOffsetShadow(battlerData->narc, &monShowData->shadowXOffset, message->species);
     monShowData->shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
     PokemonSprite_LoadShadowSize(battlerData->narc, &monShowData->shadowSize, message->species);
@@ -418,6 +420,7 @@ void BattleDisplay_InitTaskShowPokemon(BattleSystem *battleSys, BattlerData *bat
     monShowData->yOffset = LoadPokemonSpriteYOffset(message->species, message->gender, monShowData->face, message->formNum, message->personality);
 
     PokemonSprite_LoadYOffset(battlerData->narc, &monShowData->height, message->species);
+    monShowData->height += Pokemon_MegaFormSpriteLift(message->species, message->formNum);
     PokemonSprite_LoadXOffsetShadow(battlerData->narc, &monShowData->shadowXOffset, message->species);
     monShowData->shadowXOffset += Pokemon_MegaFormShadowXOffset(message->species, message->formNum);
     PokemonSprite_LoadShadowSize(battlerData->narc, &monShowData->shadowSize, message->species);
