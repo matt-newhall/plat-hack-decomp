@@ -2857,6 +2857,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = heracronite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_HOUNDOOMINITE] = {
+        .dataID = 0x1E6,
+        .iconID = houndoominite_NCGR,
+        .paletteID = houndoominite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
