@@ -73,6 +73,7 @@ enum FormIconIndex {
     ICON_MEDICHAM_MEGA,
     ICON_MANECTRIC_MEGA,
     ICON_BANETTE_MEGA,
+    ICON_ALAKAZAM_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {

@@ -1928,6 +1928,10 @@
     {
       "id": "pl_msg_00000393_00481",
       "en_US": "a {COLOR 255}Banettite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00482",
+      "en_US": "a {COLOR 255}Alakazite{COLOR 0}"
     }
   ]
 }

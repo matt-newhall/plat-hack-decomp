@@ -185,6 +185,7 @@ poke_icon_files += [
     medicham_mega_icon,
     manectric_mega_icon,
     banette_mega_icon,
+    alakazam_mega_icon,
 ]
 
 otherpoke_files = []
