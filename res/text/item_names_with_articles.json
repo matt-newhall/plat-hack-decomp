@@ -1916,6 +1916,10 @@
     {
       "id": "pl_msg_00000393_00478",
       "en_US": "a {COLOR 255}Aggronite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00479",
+      "en_US": "a {COLOR 255}Medichamite{COLOR 0}"
     }
   ]
 }

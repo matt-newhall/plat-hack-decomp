@@ -2899,6 +2899,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = aggronite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_MEDICHAMITE] = {
+        .dataID = 0x1ED,
+        .iconID = medichamite_NCGR,
+        .paletteID = medichamite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

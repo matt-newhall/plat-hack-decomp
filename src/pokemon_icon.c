@@ -162,6 +162,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_AGGRON) {
             return IconTilesIndex(ICON_AGGRON_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_MEDICHAM) {
+            return IconTilesIndex(ICON_MEDICHAM_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -206,6 +210,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_SABLEYE:
     case SPECIES_MAWILE:
     case SPECIES_AGGRON:
+    case SPECIES_MEDICHAM:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -281,6 +286,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_MAWILE_MEGA + form - 1;
         } else if (species == SPECIES_AGGRON) {
             species = ICON_AGGRON_MEGA + form - 1;
+        } else if (species == SPECIES_MEDICHAM) {
+            species = ICON_MEDICHAM_MEGA + form - 1;
         }
     }
 
