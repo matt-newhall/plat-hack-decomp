@@ -167,6 +167,7 @@ poke_icon_files += [
     venusaur_mega_icon,
     blastoise_mega_icon,
     beedrill_mega_icon,
+    pidgeot_mega_icon,
 ]
 
 otherpoke_files = []

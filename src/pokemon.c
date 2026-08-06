@@ -2937,31 +2937,37 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
     case SPECIES_VENUSAUR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 251 + (face / 2) + form * 2;
-        spriteTemplate->palette = 271 + shiny + form * 2;
+        spriteTemplate->palette = 275 + shiny + form * 2;
         break;
 
     case SPECIES_BLASTOISE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 255 + (face / 2) + form * 2;
-        spriteTemplate->palette = 275 + shiny + form * 2;
+        spriteTemplate->palette = 279 + shiny + form * 2;
         break;
 
     case SPECIES_BEEDRILL:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 259 + (face / 2) + form * 2;
-        spriteTemplate->palette = 279 + shiny + form * 2;
+        spriteTemplate->palette = 283 + shiny + form * 2;
+        break;
+
+    case SPECIES_PIDGEOT:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 263 + (face / 2) + form * 2;
+        spriteTemplate->palette = 287 + shiny + form * 2;
         break;
 
     case SPECIES_TYRANITAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 263 + (face / 2) + form * 2;
-        spriteTemplate->palette = 283 + shiny + form * 2;
+        spriteTemplate->character = 267 + (face / 2) + form * 2;
+        spriteTemplate->palette = 291 + shiny + form * 2;
         break;
 
     case SPECIES_LUCARIO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 267 + (face / 2) + form * 2;
-        spriteTemplate->palette = 287 + shiny + form * 2;
+        spriteTemplate->character = 271 + (face / 2) + form * 2;
+        spriteTemplate->palette = 295 + shiny + form * 2;
         break;
 
     default:
@@ -2992,6 +2998,7 @@ static const MegaEvolution sMegaEvolutions[] = {
     { ITEM_VENUSAURITE, SPECIES_VENUSAUR, VENUSAUR_FORM_BASE, VENUSAUR_FORM_MEGA, 1555, 0 },
     { ITEM_BLASTOISINITE, SPECIES_BLASTOISE, BLASTOISE_FORM_BASE, BLASTOISE_FORM_MEGA, 1011, 15 },
     { ITEM_BEEDRILLITE, SPECIES_BEEDRILL, BEEDRILL_FORM_BASE, BEEDRILL_FORM_MEGA, 405, 0 },
+    { ITEM_PIDGEOTITE, SPECIES_PIDGEOT, PIDGEOT_FORM_BASE, PIDGEOT_FORM_MEGA, 505, 0 },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -3168,6 +3175,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_BEEDRILL:
         if (monForm > BEEDRILL_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_PIDGEOT:
+        if (monForm > PIDGEOT_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -3451,6 +3463,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
 
     case SPECIES_BLASTOISE:
         if (form == BLASTOISE_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_PIDGEOT:
+        if (form == PIDGEOT_FORM_MEGA && face == FACE_FRONT) {
             return 1;
         }
 
@@ -5175,6 +5196,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_BEEDRILL:
         if (monForm && monForm <= BEEDRILL_FORM_COUNT - 1) {
             monSpecies = (512 - 1) + monForm;
+        }
+        break;
+    case SPECIES_PIDGEOT:
+        if (monForm && monForm <= PIDGEOT_FORM_COUNT - 1) {
+            monSpecies = (513 - 1) + monForm;
         }
         break;
     default:

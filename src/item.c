@@ -451,11 +451,11 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = beedrillite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_SHOAL_SHELL] = {
-        .dataID = 0x47,
-        .iconID = shoal_shell_NCGR,
-        .paletteID = shoal_shell_NCLR,
-        .gen3ID = GBA_ITEM_SHOAL_SHELL,
+    [ITEM_PIDGEOTITE] = {
+        .dataID = 0x1DE,
+        .iconID = pidgeotite_NCGR,
+        .paletteID = pidgeotite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_RED_SHARD] = {
         .dataID = 0x48,
