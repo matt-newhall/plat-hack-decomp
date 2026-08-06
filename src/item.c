@@ -2953,6 +2953,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = lopunnite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_GARCHOMPITE] = {
+        .dataID = 0x1F6,
+        .iconID = garchompite_NCGR,
+        .paletteID = garchompite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

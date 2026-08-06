@@ -191,6 +191,7 @@ poke_icon_files += [
     glalie_mega_icon,
     salamence_mega_icon,
     lopunny_mega_icon,
+    garchomp_mega_icon,
 ]
 
 otherpoke_files = []

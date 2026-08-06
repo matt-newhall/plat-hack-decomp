@@ -198,6 +198,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_LOPUNNY) {
             return IconTilesIndex(ICON_LOPUNNY_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_GARCHOMP) {
+            return IconTilesIndex(ICON_GARCHOMP_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -251,6 +255,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_GLALIE:
     case SPECIES_SALAMENCE:
     case SPECIES_LOPUNNY:
+    case SPECIES_GARCHOMP:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -344,6 +349,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_SALAMENCE_MEGA + form - 1;
         } else if (species == SPECIES_LOPUNNY) {
             species = ICON_LOPUNNY_MEGA + form - 1;
+        } else if (species == SPECIES_GARCHOMP) {
+            species = ICON_GARCHOMP_MEGA + form - 1;
         }
     }
 
