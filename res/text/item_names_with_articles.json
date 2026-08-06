@@ -1884,6 +1884,10 @@
     {
       "id": "pl_msg_00000393_00470",
       "en_US": "a {COLOR 255}Scizorite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00471",
+      "en_US": "a {COLOR 255}Heracronite{COLOR 0}"
     }
   ]
 }

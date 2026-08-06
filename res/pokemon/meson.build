@@ -174,6 +174,7 @@ poke_icon_files += [
     ampharos_mega_icon,
     steelix_mega_icon,
     scizor_mega_icon,
+    heracross_mega_icon,
 ]
 
 otherpoke_files = []

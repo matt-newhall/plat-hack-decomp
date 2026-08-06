@@ -130,6 +130,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_SCIZOR) {
             return IconTilesIndex(ICON_SCIZOR_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_HERACROSS) {
+            return IconTilesIndex(ICON_HERACROSS_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -166,6 +170,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_AMPHAROS:
     case SPECIES_STEELIX:
     case SPECIES_SCIZOR:
+    case SPECIES_HERACROSS:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -225,6 +230,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_STEELIX_MEGA + form - 1;
         } else if (species == SPECIES_SCIZOR) {
             species = ICON_SCIZOR_MEGA + form - 1;
+        } else if (species == SPECIES_HERACROSS) {
+            species = ICON_HERACROSS_MEGA + form - 1;
         }
     }
 
