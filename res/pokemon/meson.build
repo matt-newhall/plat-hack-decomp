@@ -178,6 +178,7 @@ poke_icon_files += [
     houndoom_mega_icon,
     sceptile_mega_icon,
     blaziken_mega_icon,
+    swampert_mega_icon,
 ]
 
 otherpoke_files = []

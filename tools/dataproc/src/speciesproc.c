@@ -240,6 +240,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "houndoom/forms/mega",
     "sceptile/forms/mega",
     "blaziken/forms/mega",
+    "swampert/forms/mega",
 };
 
 #define NATIONAL_DEX_MAX SPECIES_EGG
