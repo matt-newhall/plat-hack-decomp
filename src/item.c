@@ -2929,6 +2929,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = gyaradosite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_ABSOLITE] = {
+        .dataID = 0x1F2,
+        .iconID = absolite_NCGR,
+        .paletteID = absolite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

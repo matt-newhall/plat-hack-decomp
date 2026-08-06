@@ -1936,6 +1936,10 @@
     {
       "id": "pl_msg_00000393_00483",
       "en_US": "a {COLOR 255}Gyaradosite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00484",
+      "en_US": "a {COLOR 255}Absolite{COLOR 0}"
     }
   ]
 }
