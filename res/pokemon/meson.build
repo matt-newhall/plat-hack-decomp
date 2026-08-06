@@ -183,6 +183,7 @@ poke_icon_files += [
     mawile_mega_icon,
     aggron_mega_icon,
     medicham_mega_icon,
+    manectric_mega_icon,
 ]
 
 otherpoke_files = []

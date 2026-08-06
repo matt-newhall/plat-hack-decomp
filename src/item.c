@@ -2905,6 +2905,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = medichamite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_MANECTITE] = {
+        .dataID = 0x1EE,
+        .iconID = manectite_NCGR,
+        .paletteID = manectite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
