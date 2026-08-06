@@ -193,6 +193,7 @@ poke_icon_files += [
     lopunny_mega_icon,
     garchomp_mega_icon,
     abomasnow_mega_icon,
+    gallade_mega_icon,
 ]
 
 otherpoke_files = []
