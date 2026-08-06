@@ -186,6 +186,7 @@ poke_icon_files += [
     manectric_mega_icon,
     banette_mega_icon,
     alakazam_mega_icon,
+    gyarados_mega_icon,
 ]
 
 otherpoke_files = []
