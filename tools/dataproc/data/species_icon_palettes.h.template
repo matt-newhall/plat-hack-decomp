@@ -64,6 +64,7 @@ enum FormIconIndex {
     ICON_SCIZOR_MEGA,
     ICON_HERACROSS_MEGA,
     ICON_HOUNDOOM_MEGA,
+    ICON_SCEPTILE_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {

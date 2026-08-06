@@ -1892,6 +1892,10 @@
     {
       "id": "pl_msg_00000393_00472",
       "en_US": "a {COLOR 255}Houndoominite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00473",
+      "en_US": "a {COLOR 255}Sceptilite{COLOR 0}"
     }
   ]
 }
