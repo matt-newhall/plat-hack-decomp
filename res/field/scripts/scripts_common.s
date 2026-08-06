@@ -2387,7 +2387,7 @@ CommonScript_RocketMansionAriana:
     End
 
 CommonScript_RocketMansion_PlaceFollower:
-    SetPosition 253, 33, 0, 8, DIR_NORTH
+    SetPosition LOCALID_FOLLOWER, 33, 0, 8, DIR_NORTH
     Return
 
 CommonScript_RocketMansion_ArianaBrushOff:
