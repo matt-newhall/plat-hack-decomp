@@ -2839,6 +2839,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = ampharosite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_STEELIXITE] = {
+        .dataID = 0x1E3,
+        .iconID = steelixite_NCGR,
+        .paletteID = steelixite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

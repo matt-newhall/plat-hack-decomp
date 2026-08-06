@@ -172,6 +172,7 @@ poke_icon_files += [
     gengar_mega_icon,
     pinsir_mega_icon,
     ampharos_mega_icon,
+    steelix_mega_icon,
 ]
 
 otherpoke_files = []
