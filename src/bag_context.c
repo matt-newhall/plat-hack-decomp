@@ -153,9 +153,6 @@ BOOL BagContext_FormatUsageMessage(SaveData *saveData, String *dstString, u16 it
 
     if (item == ITEM_NONE) {
         templateString = MessageLoader_GetNewString(msgLoader, Bag_Text_KeyItemInfo);
-    } else if (item == ITEM_POINT_CARD) {
-        templateString = MessageLoader_GetNewString(msgLoader, Bag_Text_PointCardMessage);
-        StringTemplate_SetNumber(template, 0, GetNumBattlePoints(saveData), 4, PADDING_MODE_NONE, CHARSET_MODE_EN);
     } else if (item == ITEM_SEAL_CASE) {
         templateString = MessageLoader_GetNewString(msgLoader, Bag_Text_SealCaseMessage);
         StringTemplate_SetNumber(template, 0, CalcTotalBallSeals(saveData), 4, PADDING_MODE_NONE, CHARSET_MODE_EN);

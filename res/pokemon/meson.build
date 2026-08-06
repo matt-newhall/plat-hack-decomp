@@ -170,6 +170,7 @@ poke_icon_files += [
     pidgeot_mega_icon,
     slowbro_mega_icon,
     gengar_mega_icon,
+    pinsir_mega_icon,
 ]
 
 otherpoke_files = []

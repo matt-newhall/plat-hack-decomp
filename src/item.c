@@ -2617,10 +2617,10 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = poke_radar_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
-    [ITEM_POINT_CARD] = {
-        .dataID = 0x19A,
-        .iconID = point_card_NCGR,
-        .paletteID = point_card_NCLR,
+    [ITEM_PINSIRITE] = {
+        .dataID = 0x1E1,
+        .iconID = pinsirite_NCGR,
+        .paletteID = pinsirite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_JOURNAL] = {

@@ -232,6 +232,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "pidgeot/forms/mega",
     "slowbro/forms/mega",
     "gengar/forms/mega",
+    "pinsir/forms/mega",
 };
 
 #define NATIONAL_DEX_MAX SPECIES_EGG

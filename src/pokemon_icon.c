@@ -114,6 +114,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_GENGAR) {
             return IconTilesIndex(ICON_GENGAR_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_PINSIR) {
+            return IconTilesIndex(ICON_PINSIR_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -146,6 +150,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_PIDGEOT:
     case SPECIES_SLOWBRO:
     case SPECIES_GENGAR:
+    case SPECIES_PINSIR:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -197,6 +202,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_SLOWBRO_MEGA + form - 1;
         } else if (species == SPECIES_GENGAR) {
             species = ICON_GENGAR_MEGA + form - 1;
+        } else if (species == SPECIES_PINSIR) {
+            species = ICON_PINSIR_MEGA + form - 1;
         }
     }
 
