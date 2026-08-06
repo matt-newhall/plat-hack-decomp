@@ -9,7 +9,7 @@
     },
     "types": [
         "TYPE_STEEL",
-        "TYPE_STEEL"
+        "TYPE_GROUND"
     ],
     "catch_rate": 25,
     "base_exp_reward": 196,
