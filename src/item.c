@@ -2881,6 +2881,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = swampertite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_SABLENITE] = {
+        .dataID = 0x1EA,
+        .iconID = sablenite_NCGR,
+        .paletteID = sablenite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

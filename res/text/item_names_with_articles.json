@@ -1904,6 +1904,10 @@
     {
       "id": "pl_msg_00000393_00475",
       "en_US": "a {COLOR 255}Swampertite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00476",
+      "en_US": "a {COLOR 255}Sablenite{COLOR 0}"
     }
   ]
 }

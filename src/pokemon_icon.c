@@ -150,6 +150,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_SWAMPERT) {
             return IconTilesIndex(ICON_SWAMPERT_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_SABLEYE) {
+            return IconTilesIndex(ICON_SABLEYE_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -191,6 +195,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_SCEPTILE:
     case SPECIES_BLAZIKEN:
     case SPECIES_SWAMPERT:
+    case SPECIES_SABLEYE:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -260,6 +265,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_BLAZIKEN_MEGA + form - 1;
         } else if (species == SPECIES_SWAMPERT) {
             species = ICON_SWAMPERT_MEGA + form - 1;
+        } else if (species == SPECIES_SABLEYE) {
+            species = ICON_SABLEYE_MEGA + form - 1;
         }
     }
 
