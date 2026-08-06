@@ -801,6 +801,20 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
     do {
         switch (battleCtx->turnStartCheckState) {
         case PRE_MOVE_ACTION_STATE_MEGA_EVOLUTION:
+            if (battleCtx->megaAbilityCheckPending) {
+                int nextSeq = BattleSystem_TriggerEffectOnSwitch(battleSys, battleCtx);
+
+                if (nextSeq) {
+                    LOAD_SUBSEQ(nextSeq);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+
+                battleCtx->megaAbilityCheckPending = FALSE;
+            }
+
             while (battleCtx->turnStartCheckTemp < maxBattlers) {
                 battler = battleCtx->monSpeedOrder[battleCtx->turnStartCheckTemp];
                 battleCtx->turnStartCheckTemp++;
@@ -808,6 +822,7 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
                 if (BattleSystem_TriggerMegaEvolution(battleSys, battleCtx, battler) == TRUE) {
                     BattleController_EmitClearMessageBox(battleSys);
                     battleCtx->msgBattlerTemp = battler;
+                    battleCtx->megaAbilityCheckPending = TRUE;
 
                     LOAD_SUBSEQ(subscript_mega_evolution);
                     battleCtx->commandNext = battleCtx->command;
