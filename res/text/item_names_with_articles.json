@@ -1948,6 +1948,10 @@
     {
       "id": "pl_msg_00000393_00486",
       "en_US": "a {COLOR 255}Salamencite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00487",
+      "en_US": "a {COLOR 255}Lopunnite{COLOR 0}"
     }
   ]
 }

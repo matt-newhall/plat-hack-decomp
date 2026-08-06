@@ -190,6 +190,7 @@ poke_icon_files += [
     absol_mega_icon,
     glalie_mega_icon,
     salamence_mega_icon,
+    lopunny_mega_icon,
 ]
 
 otherpoke_files = []
