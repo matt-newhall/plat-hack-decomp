@@ -1924,6 +1924,10 @@
     {
       "id": "pl_msg_00000393_00480",
       "en_US": "a {COLOR 255}Manectite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00481",
+      "en_US": "a {COLOR 255}Banettite{COLOR 0}"
     }
   ]
 }

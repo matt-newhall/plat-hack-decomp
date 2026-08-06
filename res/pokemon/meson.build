@@ -184,6 +184,7 @@ poke_icon_files += [
     aggron_mega_icon,
     medicham_mega_icon,
     manectric_mega_icon,
+    banette_mega_icon,
 ]
 
 otherpoke_files = []

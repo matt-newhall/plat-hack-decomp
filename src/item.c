@@ -2911,6 +2911,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = manectite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_BANETTITE] = {
+        .dataID = 0x1EF,
+        .iconID = banettite_NCGR,
+        .paletteID = banettite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
