@@ -1379,7 +1379,7 @@
     .macro CheckMegaStoneLocked battler:req, jump_if_locked:req
     .long BTLCMD_CHECKMEGASTONELOCKED
     .long \battler
-    .long \jump_if_locked
+    .long (\jump_if_locked-.) / 4 - 1
     .endm
 
     .text
