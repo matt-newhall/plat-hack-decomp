@@ -177,6 +177,7 @@ poke_icon_files += [
     heracross_mega_icon,
     houndoom_mega_icon,
     sceptile_mega_icon,
+    blaziken_mega_icon,
 ]
 
 otherpoke_files = []
