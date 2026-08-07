@@ -1208,6 +1208,13 @@
         "All Normal type moves\n",
         "become the Dragon type."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00173",
+      "en_US": [
+        "Damages the foe landing\n",
+        "the finishing hit."
+      ]
     }
   ]
 }

@@ -5281,6 +5281,21 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
         }
         break;
 
+    case ABILITY_INNARDS_OUT:
+        if (battleCtx->defender == battleCtx->faintedMon
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
+            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && ATTACKING_MON.curHP
+            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+            && DEFENDER_SELF_TURN_FLAGS.totalDamageTaken) {
+            battleCtx->hpCalcTemp = DEFENDER_SELF_TURN_FLAGS.totalDamageTaken;
+            battleCtx->msgBattlerTemp = battleCtx->attacker;
+
+            *subscript = subscript_aftermath;
+            result = TRUE;
+        }
+        break;
+
     case ABILITY_ELECTROMORPHOSIS:
         if (DEFENDING_MON.curHP
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken

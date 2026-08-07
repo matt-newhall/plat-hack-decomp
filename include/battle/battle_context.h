@@ -95,6 +95,7 @@ typedef struct SelfTurnFlags {
     int specialDamageLastAttacker;
     int statusFlags;
     int shellBellDamageDealt;
+    int totalDamageTaken;
 } SelfTurnFlags;
 
 typedef struct MoveFailFlags {

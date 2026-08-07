@@ -51,3 +51,4 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Strong Jaw
 - Tough Claws
 - Dragonize
+- Innards Out

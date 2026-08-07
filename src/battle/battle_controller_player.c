@@ -3763,8 +3763,10 @@ static void BattleControllerPlayer_UpdateHP(BattleSystem *battleSys, BattleConte
 
         if (DEFENDING_MON.curHP + battleCtx->damage <= 0) {
             ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt += DEFENDING_MON.curHP * -1;
+            DEFENDER_SELF_TURN_FLAGS.totalDamageTaken += DEFENDING_MON.curHP * -1;
         } else {
             ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt += battleCtx->damage;
+            DEFENDER_SELF_TURN_FLAGS.totalDamageTaken += battleCtx->damage;
         }
 
         DEFENDER_TURN_FLAGS.lastDamageTaken = battleCtx->damage;
