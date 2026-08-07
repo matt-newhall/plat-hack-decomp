@@ -3277,7 +3277,7 @@ static const MegaEvolution sMegaEvolutions[] = {
     { ITEM_CHARIZARDITE_Y, SPECIES_CHARIZARD, CHARIZARD_FORM_BASE, CHARIZARD_FORM_MEGA_Y, 1005, 0, 0 },
     { ITEM_CHARIZARDITE_X, SPECIES_CHARIZARD, CHARIZARD_FORM_BASE, CHARIZARD_FORM_MEGA_X, 1105, -10, 0 },
     { ITEM_RAICHUNITE_Y, SPECIES_RAICHU, RAICHU_FORM_BASE, RAICHU_FORM_MEGA_Y, 260, -6, 11 },
-    { ITEM_RAICHUNITE_X, SPECIES_RAICHU, RAICHU_FORM_BASE, RAICHU_FORM_MEGA_X, 380, 0, 0 },
+    { ITEM_RAICHUNITE_X, SPECIES_RAICHU, RAICHU_FORM_BASE, RAICHU_FORM_MEGA_X, 380, -20, 0 },
     { ITEM_MEWTWONITE_X, SPECIES_MEWTWO, MEWTWO_FORM_BASE, MEWTWO_FORM_MEGA_X, 1270, 0, 2 },
     { ITEM_MEWTWONITE_Y, SPECIES_MEWTWO, MEWTWO_FORM_BASE, MEWTWO_FORM_MEGA_Y, 330, 0, 5 },
     { ITEM_LATIOSITE, SPECIES_LATIOS, LATIOS_FORM_BASE, LATIOS_FORM_MEGA, 700, 0, 0 },
@@ -4122,6 +4122,24 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
 
     case SPECIES_METAGROSS:
         if (form == METAGROSS_FORM_MEGA && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_RAICHU:
+        if (form == RAICHU_FORM_MEGA_X && face == FACE_FRONT) {
+            return 1;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_FERALIGATR:
+        if (form == FERALIGATR_FORM_MEGA && face == FACE_FRONT) {
             return 1;
         }
 
