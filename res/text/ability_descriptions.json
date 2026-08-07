@@ -1194,6 +1194,13 @@
         "Boosts the power of\n",
         "biting moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00171",
+      "en_US": [
+        "Boosts the power of\n",
+        "contact moves."
+      ]
     }
   ]
 }

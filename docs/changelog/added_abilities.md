@@ -49,3 +49,4 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Prankster
 - Pixilate
 - Strong Jaw
+- Tough Claws

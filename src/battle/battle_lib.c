@@ -8359,6 +8359,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
+    if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
+        if (attackerParams.ability == ABILITY_TOUGH_CLAWS) {
+            movePower = movePower * 13 / 10;
+        }
+    }
+
     if (NO_CLOUD_NINE) {
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 15 / 10;
