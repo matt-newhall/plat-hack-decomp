@@ -225,6 +225,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "rotom/forms/fan",
     "rotom/forms/mow",
     "lucario/forms/mega",
+    "lucario/forms/mega_z",
     "tyranitar/forms/mega",
     "venusaur/forms/mega",
     "blastoise/forms/mega",

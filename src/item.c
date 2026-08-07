@@ -3007,6 +3007,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = froslassite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_LUCARIONITE_Z] = {
+        .dataID = 0x1FF,
+        .iconID = lucarionite_z_NCGR,
+        .paletteID = lucarionite_z_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
