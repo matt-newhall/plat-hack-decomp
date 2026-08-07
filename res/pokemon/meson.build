@@ -203,6 +203,7 @@ poke_icon_files += [
     clefable_mega_icon,
     froslass_mega_icon,
     charizard_mega_y_icon,
+    raichu_mega_y_icon,
 ]
 
 otherpoke_files = []
