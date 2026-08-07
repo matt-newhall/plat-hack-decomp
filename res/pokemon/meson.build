@@ -199,6 +199,7 @@ poke_icon_files += [
     sharpedo_mega_icon,
     dragonite_mega_icon,
     clefable_mega_icon,
+    froslass_mega_icon,
 ]
 
 otherpoke_files = []
