@@ -1968,6 +1968,10 @@
     {
       "id": "pl_msg_00000393_00491",
       "en_US": "a {COLOR 255}Gardevoirite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00492",
+      "en_US": "a {COLOR 255}Altarianite{COLOR 0}"
     }
   ]
 }

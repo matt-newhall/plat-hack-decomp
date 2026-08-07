@@ -195,6 +195,7 @@ poke_icon_files += [
     abomasnow_mega_icon,
     gallade_mega_icon,
     gardevoir_mega_icon,
+    altaria_mega_icon,
 ]
 
 otherpoke_files = []
