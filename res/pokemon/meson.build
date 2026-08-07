@@ -205,6 +205,7 @@ poke_icon_files += [
     charizard_mega_y_icon,
     raichu_mega_y_icon,
     mewtwo_mega_x_icon,
+    mewtwo_mega_y_icon,
 ]
 
 otherpoke_files = []
