@@ -196,6 +196,7 @@ poke_icon_files += [
     gallade_mega_icon,
     gardevoir_mega_icon,
     altaria_mega_icon,
+    sharpedo_mega_icon,
 ]
 
 otherpoke_files = []

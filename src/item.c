@@ -2983,6 +2983,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = altarianite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_SHARPEDONITE] = {
+        .dataID = 0x1FB,
+        .iconID = sharpedonite_NCGR,
+        .paletteID = sharpedonite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
