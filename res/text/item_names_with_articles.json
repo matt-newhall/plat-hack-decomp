@@ -2004,6 +2004,10 @@
     {
       "id": "pl_msg_00000393_00500",
       "en_US": "a {COLOR 255}Raichunite Y{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00501",
+      "en_US": "a {COLOR 255}Mewtwonite X{COLOR 0}"
     }
   ]
 }
