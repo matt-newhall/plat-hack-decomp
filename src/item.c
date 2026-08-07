@@ -3043,6 +3043,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = mewtwonite_y_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_LATIOSITE] = {
+        .dataID = 0x205,
+        .iconID = latiosite_NCGR,
+        .paletteID = latiosite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

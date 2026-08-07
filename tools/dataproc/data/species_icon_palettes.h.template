@@ -94,6 +94,7 @@ enum FormIconIndex {
     ICON_RAICHU_MEGA_Y,
     ICON_MEWTWO_MEGA_X,
     ICON_MEWTWO_MEGA_Y,
+    ICON_LATIOS_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {
