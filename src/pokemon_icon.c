@@ -236,7 +236,7 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         }
 
         if (species == SPECIES_CHARIZARD) {
-            return IconTilesIndex(ICON_CHARIZARD_MEGA_Y) + form - 1;
+            return IconTilesIndex(ICON_CHARIZARD_MEGA_X) + form - 1;
         }
 
         if (species == SPECIES_RAICHU) {
@@ -443,7 +443,7 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
         } else if (species == SPECIES_FROSLASS) {
             species = ICON_FROSLASS_MEGA + form - 1;
         } else if (species == SPECIES_CHARIZARD) {
-            species = ICON_CHARIZARD_MEGA_Y + form - 1;
+            species = ICON_CHARIZARD_MEGA_X + form - 1;
         } else if (species == SPECIES_RAICHU) {
             species = ICON_RAICHU_MEGA_Y + form - 1;
         } else if (species == SPECIES_MEWTWO) {

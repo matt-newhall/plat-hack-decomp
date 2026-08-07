@@ -1,12 +1,16 @@
 species_data_files += files('data.json', 'sprite_data.json')
 
+species_data_files += files('forms/mega_x/data.json')
 species_data_files += files('forms/mega_y/data.json')
 
+charizard_mega_x_icon = files('forms/mega_x/icon.png')
 charizard_mega_y_icon = files('forms/mega_y/icon.png')
 
 otherpoke_extra_sprites += files(
     'forms/base/back.png',
     'forms/base/front.png',
+    'forms/mega_x/back.png',
+    'forms/mega_x/front.png',
     'forms/mega_y/back.png',
     'forms/mega_y/front.png',
 )
@@ -14,6 +18,8 @@ otherpoke_extra_sprites += files(
 otherpoke_extra_palettes += files(
     'forms/base/normal.pal',
     'forms/base/shiny.pal',
+    'forms/mega_x/normal.pal',
+    'forms/mega_x/shiny.pal',
     'forms/mega_y/normal.pal',
     'forms/mega_y/shiny.pal',
 )

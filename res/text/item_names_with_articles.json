@@ -2028,6 +2028,10 @@
     {
       "id": "pl_msg_00000393_00506",
       "en_US": "a {COLOR 255}Metagrossite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00507",
+      "en_US": "a {COLOR 255}Charizardite X{COLOR 0}"
     }
   ]
 }

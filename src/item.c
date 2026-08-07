@@ -3067,6 +3067,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = metagrossite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_CHARIZARDITE_X] = {
+        .dataID = 0x209,
+        .iconID = charizardite_x_NCGR,
+        .paletteID = charizardite_x_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
