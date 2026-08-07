@@ -213,6 +213,7 @@ poke_icon_files += [
     aerodactyl_mega_icon,
     metagross_mega_icon,
     feraligatr_mega_icon,
+    victreebel_mega_icon,
 ]
 
 otherpoke_files = []

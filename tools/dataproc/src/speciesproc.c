@@ -275,6 +275,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "aerodactyl/forms/mega",
     "metagross/forms/mega",
     "feraligatr/forms/mega",
+    "victreebel/forms/mega",
 };
 
 #define NATIONAL_DEX_MAX SPECIES_EGG

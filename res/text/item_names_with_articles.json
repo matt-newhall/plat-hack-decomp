@@ -2040,6 +2040,10 @@
     {
       "id": "pl_msg_00000393_00509",
       "en_US": "a {COLOR 255}Raichunite X{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00510",
+      "en_US": "a {COLOR 255}Victreebelite{COLOR 0}"
     }
   ]
 }
