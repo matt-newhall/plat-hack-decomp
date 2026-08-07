@@ -189,6 +189,7 @@ poke_icon_files += [
     alakazam_mega_icon,
     gyarados_mega_icon,
     absol_mega_icon,
+    absol_mega_z_icon,
     glalie_mega_icon,
     salamence_mega_icon,
     lopunny_mega_icon,

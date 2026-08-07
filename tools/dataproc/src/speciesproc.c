@@ -251,6 +251,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "alakazam/forms/mega",
     "gyarados/forms/mega",
     "absol/forms/mega",
+    "absol/forms/mega_z",
     "glalie/forms/mega",
     "salamence/forms/mega",
     "lopunny/forms/mega",

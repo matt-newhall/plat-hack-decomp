@@ -3013,6 +3013,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = lucarionite_z_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_ABSOLITE_Z] = {
+        .dataID = 0x200,
+        .iconID = absolite_z_NCGR,
+        .paletteID = absolite_z_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
