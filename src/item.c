@@ -3055,6 +3055,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = latiasite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_AERODACTYLITE] = {
+        .dataID = 0x207,
+        .iconID = aerodactylite_NCGR,
+        .paletteID = aerodactylite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

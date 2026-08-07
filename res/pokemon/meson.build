@@ -208,6 +208,7 @@ poke_icon_files += [
     mewtwo_mega_y_icon,
     latios_mega_icon,
     latias_mega_icon,
+    aerodactyl_mega_icon,
 ]
 
 otherpoke_files = []
