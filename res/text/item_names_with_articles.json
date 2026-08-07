@@ -1964,6 +1964,10 @@
     {
       "id": "pl_msg_00000393_00490",
       "en_US": "a {COLOR 255}Galladite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00491",
+      "en_US": "a {COLOR 255}Gardevoirite{COLOR 0}"
     }
   ]
 }
