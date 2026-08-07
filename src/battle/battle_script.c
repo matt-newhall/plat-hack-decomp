@@ -340,6 +340,7 @@ static BOOL BtlCmd_CalcStoredPowerPower(BattleSystem *battleSys, BattleContext *
 static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -13578,6 +13579,34 @@ static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     if (Pokemon_IsMegaStoneFor(battleCtx->battleMons[battler].species, battleCtx->battleMons[battler].heldItem)) {
         BattleScript_Iter(battleCtx, jumpLocked);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Mega Evolve the attacker, if it is armed to do so, and play the
+ * Mega Evolution sequence before the current move resolves (to ensure
+ * Pursuit happens after Mega Evolution).
+ *
+ * Side effects:
+ * - battleCtx->msgBattlerTemp is set to the attacker
+ * - battleCtx->megaAbilityCheckPending is set if the attacker evolved
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    if (BattleSystem_TriggerMegaEvolution(battleSys, battleCtx, battleCtx->attacker) == TRUE) {
+        BattleController_EmitClearMessageBox(battleSys);
+        battleCtx->msgBattlerTemp = battleCtx->attacker;
+        battleCtx->megaAbilityCheckPending = TRUE;
+
+        BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_mega_evolution);
     }
 
     return FALSE;

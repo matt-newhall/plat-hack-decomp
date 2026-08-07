@@ -6,6 +6,7 @@ _000:
 
 _001:
     TryPursuit _238
+    TryMegaEvolveAttacker
     UpdateVar OPCODE_SET, BTLVAR_POWER_MULTI, 20
     CalcCrit 
     CalcDamage 

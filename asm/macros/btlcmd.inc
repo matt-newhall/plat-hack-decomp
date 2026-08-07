@@ -1382,6 +1382,10 @@
     .long (\jump_if_locked-.) / 4 - 1
     .endm
 
+    .macro TryMegaEvolveAttacker
+    .long BTLCMD_TRYMEGAEVOLVEATTACKER
+    .endm
+
     .text
     .globl _start
 _start:
