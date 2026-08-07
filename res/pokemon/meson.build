@@ -204,6 +204,7 @@ poke_icon_files += [
     froslass_mega_icon,
     charizard_mega_x_icon,
     charizard_mega_y_icon,
+    raichu_mega_x_icon,
     raichu_mega_y_icon,
     mewtwo_mega_x_icon,
     mewtwo_mega_y_icon,

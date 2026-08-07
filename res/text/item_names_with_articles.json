@@ -2036,6 +2036,10 @@
     {
       "id": "pl_msg_00000393_00508",
       "en_US": "a {COLOR 255}Feraligite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00509",
+      "en_US": "a {COLOR 255}Raichunite X{COLOR 0}"
     }
   ]
 }

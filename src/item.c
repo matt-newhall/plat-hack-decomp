@@ -3079,6 +3079,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = feraligite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_RAICHUNITE_X] = {
+        .dataID = 0x20B,
+        .iconID = raichunite_x_NCGR,
+        .paletteID = raichunite_x_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

@@ -266,6 +266,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "froslass/forms/mega",
     "charizard/forms/mega_x",
     "charizard/forms/mega_y",
+    "raichu/forms/mega_x",
     "raichu/forms/mega_y",
     "mewtwo/forms/mega_x",
     "mewtwo/forms/mega_y",
