@@ -3926,6 +3926,16 @@ BOOL BattleSystem_IsWindMove(u16 move) {
     return FALSE;
 };
 
+static u16 sJawMoves[] = {
+    MOVE_BITE,
+    MOVE_CRUNCH,
+    MOVE_FIRE_FANG,
+    MOVE_HYPER_FANG,
+    MOVE_ICE_FANG,
+    MOVE_POISON_FANG,
+    MOVE_THUNDER_FANG
+};
+
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
     int subscript = NULL, moveType;
@@ -8338,6 +8348,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     for (i = 0; i < NELEMS(sSoundMoves); i++) {
         if (sSoundMoves[i] == move && attackerParams.ability == ABILITY_PUNK_ROCK) {
             movePower = movePower * 13 / 10;
+            break;
+        }
+    }
+
+    for (i = 0; i < NELEMS(sJawMoves); i++) {
+        if (sJawMoves[i] == move && attackerParams.ability == ABILITY_STRONG_JAW) {
+            movePower = movePower * 15 / 10;
             break;
         }
     }

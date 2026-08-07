@@ -1187,6 +1187,13 @@
         "All Normal type moves\n",
         "become the Fairy type."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00170",
+      "en_US": [
+        "Boosts the power of\n",
+        "biting moves."
+      ]
     }
   ]
 }
