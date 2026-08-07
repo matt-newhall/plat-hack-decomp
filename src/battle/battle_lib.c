@@ -8038,7 +8038,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = inPower;
     }
 
-    if (attackerParams.ability == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
+    if (move == MOVE_STRUGGLE) {
+        moveType = MOVE_DATA(move).type;
+    } else if (attackerParams.ability == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_NORMAL;
         movePower = movePower * 12 / 10;
     } else if (attackerParams.ability == ABILITY_AERILATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
@@ -8101,7 +8103,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     for (i = 0; i < NELEMS(sTypeBoostingItems); i++) {
-        if (attackerParams.heldItemEffect == sTypeBoostingItems[i].itemEffect
+        if (move != MOVE_STRUGGLE
+            && attackerParams.heldItemEffect == sTypeBoostingItems[i].itemEffect
             && moveType == sTypeBoostingItems[i].type) {
             movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
             break;
