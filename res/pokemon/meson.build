@@ -198,6 +198,7 @@ poke_icon_files += [
     altaria_mega_icon,
     sharpedo_mega_icon,
     dragonite_mega_icon,
+    clefable_mega_icon,
 ]
 
 otherpoke_files = []

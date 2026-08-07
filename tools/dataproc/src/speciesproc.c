@@ -260,6 +260,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "altaria/forms/mega",
     "sharpedo/forms/mega",
     "dragonite/forms/mega",
+    "clefable/forms/mega",
 };
 
 #define NATIONAL_DEX_MAX SPECIES_EGG

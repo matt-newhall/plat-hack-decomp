@@ -2995,6 +2995,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = dragoninite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_CLEFABLITE] = {
+        .dataID = 0x1FD,
+        .iconID = clefablite_NCGR,
+        .paletteID = clefablite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

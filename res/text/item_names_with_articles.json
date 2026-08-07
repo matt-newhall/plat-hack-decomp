@@ -1980,6 +1980,10 @@
     {
       "id": "pl_msg_00000393_00494",
       "en_US": "a {COLOR 255}Dragoninite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00495",
+      "en_US": "a {COLOR 255}Clefablite{COLOR 0}"
     }
   ]
 }
