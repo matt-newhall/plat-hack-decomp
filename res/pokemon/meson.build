@@ -202,6 +202,7 @@ poke_icon_files += [
     dragonite_mega_icon,
     clefable_mega_icon,
     froslass_mega_icon,
+    charizard_mega_y_icon,
 ]
 
 otherpoke_files = []

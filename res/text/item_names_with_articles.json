@@ -1996,6 +1996,10 @@
     {
       "id": "pl_msg_00000393_00498",
       "en_US": "a {COLOR 255}Absolite Z{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00499",
+      "en_US": "a {COLOR 255}Charizardite Y{COLOR 0}"
     }
   ]
 }

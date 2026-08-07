@@ -90,6 +90,7 @@ enum FormIconIndex {
     ICON_DRAGONITE_MEGA,
     ICON_CLEFABLE_MEGA,
     ICON_FROSLASS_MEGA,
+    ICON_CHARIZARD_MEGA_Y,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {
