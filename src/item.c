@@ -3049,6 +3049,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = latiosite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_LATIASITE] = {
+        .dataID = 0x206,
+        .iconID = latiasite_NCGR,
+        .paletteID = latiasite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
