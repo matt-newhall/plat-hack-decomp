@@ -1201,6 +1201,13 @@
         "Boosts the power of\n",
         "contact moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00172",
+      "en_US": [
+        "All Normal type moves\n",
+        "become the Dragon type."
+      ]
     }
   ]
 }

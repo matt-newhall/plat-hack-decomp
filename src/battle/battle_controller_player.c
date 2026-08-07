@@ -3024,6 +3024,13 @@ static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
         && move != MOVE_WEATHER_BALL
         && move != MOVE_NATURAL_GIFT) {
         return TYPE_FAIRY;
+    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_DRAGONIZE
+        && MOVE_DATA(move).type == TYPE_NORMAL
+        && move != MOVE_JUDGMENT
+        && move != MOVE_HIDDEN_POWER
+        && move != MOVE_WEATHER_BALL
+        && move != MOVE_NATURAL_GIFT) {
+        return TYPE_DRAGON;
     } else if (Battler_Ability(battleCtx, attacker) == ABILITY_GALVANIZE
         && MOVE_DATA(move).type == TYPE_NORMAL
         && move != MOVE_JUDGMENT
@@ -3976,6 +3983,13 @@ static inline int CalcCurrentMoveType(BattleContext *battleCtx)
         && battleCtx->moveCur != MOVE_WEATHER_BALL
         && battleCtx->moveCur != MOVE_NATURAL_GIFT) {
         return TYPE_FAIRY;
+    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_DRAGONIZE
+        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
+        && battleCtx->moveCur != MOVE_JUDGMENT
+        && battleCtx->moveCur != MOVE_HIDDEN_POWER
+        && battleCtx->moveCur != MOVE_WEATHER_BALL
+        && battleCtx->moveCur != MOVE_NATURAL_GIFT) {
+        return TYPE_DRAGON;
     } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_GALVANIZE
         && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
         && battleCtx->moveCur != MOVE_JUDGMENT
@@ -5339,6 +5353,13 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                     && battleCtx->moveCur != MOVE_WEATHER_BALL
                     && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
                     moveType = TYPE_FAIRY;
+                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_DRAGONIZE
+                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
+                    && battleCtx->moveCur != MOVE_JUDGMENT
+                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
+                    && battleCtx->moveCur != MOVE_WEATHER_BALL
+                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
+                    moveType = TYPE_DRAGON;
                 } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_GALVANIZE
                     && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
                     && battleCtx->moveCur != MOVE_JUDGMENT
