@@ -2048,6 +2048,10 @@
     {
       "id": "pl_msg_00000393_00511",
       "en_US": "a {COLOR 255}Meganiumite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00512",
+      "en_US": "a {COLOR 255}Skarmorite{COLOR 0}"
     }
   ]
 }

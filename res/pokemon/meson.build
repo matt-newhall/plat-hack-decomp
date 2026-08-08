@@ -215,6 +215,7 @@ poke_icon_files += [
     feraligatr_mega_icon,
     victreebel_mega_icon,
     meganium_mega_icon,
+    skarmory_mega_icon,
 ]
 
 otherpoke_files = []
