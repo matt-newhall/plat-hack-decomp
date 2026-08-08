@@ -341,6 +341,7 @@ static BOOL BtlCmd_TryAuroraVeil(BattleSystem *battleSys, BattleContext *battleC
 static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -2873,6 +2874,27 @@ static inline void SetupNicknameAbilityNicknameAbilityMsg(BattleContext *battleC
 }
 
 /**
+ * @brief Check if the pending stat stage change should be inverted by Contrary.
+ *
+ * Mold Breaker only ignores Contrary for stat changes inflicted by its user's
+ * move, so changes the battler inflicts on itself and changes originating from
+ * its own held item are checked against the raw ability instead.
+ *
+ * @param battleCtx
+ * @return TRUE if the change should be inverted.
+ */
+static inline BOOL StatStageChangeIsInverted(BattleContext *battleCtx)
+{
+    int battler = battleCtx->sideEffectMon;
+
+    if (battleCtx->attacker == battler || battleCtx->sideEffectType == SIDE_EFFECT_TYPE_HELD_ITEM) {
+        return Battler_Ability(battleCtx, battler) == ABILITY_CONTRARY;
+    }
+
+    return Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_CONTRARY);
+}
+
+/**
  * @brief Try to change the stat stage for a target battler.
  *
  * This handles all of the logic related to whether or not a stat stage change
@@ -2931,6 +2953,11 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE;
         stageChange = 1;
         battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
+    }
+
+    if (StatStageChangeIsInverted(battleCtx)) {
+        stageChange = -stageChange;
+        battleCtx->scriptTemp = stageChange > 0 ? BATTLE_ANIMATION_STAT_BOOST : BATTLE_ANIMATION_STAT_DROP;
     }
 
     if (stageChange > 0) {
@@ -3070,10 +3097,16 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
             }
         }
 
-        SetupNicknameStatMsg(battleCtx,
-            stageChange == -1 ? BattleStrings_Text_PokemonsStatFell_Ally : // "{0}'s {1} fell!"
-                BattleStrings_Text_PokemonsStatHarshlyFell_Ally, // "{0}'s {1} harshly fell!"
-            statOffset);
+        int msgId;
+        if (stageChange == -1) {
+            msgId = BattleStrings_Text_PokemonsStatFell_Ally;
+        } else if (stageChange == -3) {
+            msgId = BattleStrings_Text_PokemonsStatSeverelyFell_Ally;
+        } else {
+            msgId = BattleStrings_Text_PokemonsStatHarshlyFell_Ally;
+        }
+        // "{0}'s {1} fell!" or "{0}'s {1} harshly fell!" or "{0}'s {1} severely fell!"
+        SetupNicknameStatMsg(battleCtx, msgId, statOffset);
 
         mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
 
@@ -13658,6 +13691,31 @@ static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext 
         battleCtx->megaAbilityCheckPending = TRUE;
 
         BattleScript_Call(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_mega_evolution);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check if a battler has an active Contrary.
+ *
+ * Inputs:
+ * 1. The battler to be checked
+ * 2. The distance to jump if Contrary is active
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpIfContrary = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    if (Battler_Ability(battleCtx, battler) == ABILITY_CONTRARY) {
+        BattleScript_Iter(battleCtx, jumpIfContrary);
     }
 
     return FALSE;

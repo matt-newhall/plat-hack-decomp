@@ -708,6 +708,19 @@ u8 Battler_Ability(BattleContext *battleCtx, int battler);
 BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defender, int ability);
 
 /**
+ * @brief Check if a battler still has room for a stat stage to be raised.
+ *
+ * Contrary inverts the change, so a Contrary holder has room to "raise" a stat
+ * until that stat bottoms out rather than until it maxes out.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param stat      The stat to check, e.g. BATTLE_STAT_ATTACK.
+ * @return TRUE if a raise applied to the battler would change the stage.
+ */
+BOOL Battler_CanRaiseStatStage(BattleContext *battleCtx, int battler, int stat);
+
+/**
  * @brief Checks if there are any Pokemon which can act as a replacement for a
  * fainted one.
  *

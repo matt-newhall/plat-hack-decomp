@@ -1386,6 +1386,12 @@
     .long BTLCMD_TRYMEGAEVOLVEATTACKER
     .endm
 
+    .macro CheckContrary battler:req, jump_if_contrary:req
+    .long BTLCMD_CHECKCONTRARY
+    .long \battler
+    .long (\jump_if_contrary-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

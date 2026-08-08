@@ -55,3 +55,4 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Mega Sol
 - Stalwart
 - Parental Bond
+- Contrary

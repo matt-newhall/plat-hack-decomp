@@ -4,6 +4,7 @@
 
 _000:
     // If both Attack and Sp.Atk are already at -6, the move fails entirely — no stat drops, no switch.
+    CheckContrary BTLSCR_DEFENDER, _do_stat_drops
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_DEFENDER, BATTLEMON_ATTACK_STAGE, 0, _do_stat_drops
     CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_SP_ATTACK_STAGE, 0, _fail_both_at_min
 

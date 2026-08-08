@@ -9353,6 +9353,27 @@
         "The opposing {STRVAR_1 1, 0, 0} has\n",
         "Mega Evolved into Mega {STRVAR_1 0, 1, 0}!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatSeverelyFell_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "severely fell!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatSeverelyFell_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "severely fell!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsStatSeverelyFell_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
+        "severely fell!"
+      ]
     }
   ]
 }

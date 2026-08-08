@@ -1236,6 +1236,13 @@
         "Parent and child\n",
         "attack together."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00177",
+      "en_US": [
+        "Makes stat changes\n",
+        "have an opposite effect."
+      ]
     }
   ]
 }
