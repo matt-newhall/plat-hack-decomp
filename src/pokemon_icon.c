@@ -290,6 +290,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_HEATRAN) {
             return IconTilesIndex(ICON_HEATRAN_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_STARAPTOR) {
+            return IconTilesIndex(ICON_STARAPTOR_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -366,6 +370,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_KANGASKHAN:
     case SPECIES_DARKRAI:
     case SPECIES_HEATRAN:
+    case SPECIES_STARAPTOR:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -505,6 +510,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_DARKRAI_MEGA + form - 1;
         } else if (species == SPECIES_HEATRAN) {
             species = ICON_HEATRAN_MEGA + form - 1;
+        } else if (species == SPECIES_STARAPTOR) {
+            species = ICON_STARAPTOR_MEGA + form - 1;
         }
     }
 

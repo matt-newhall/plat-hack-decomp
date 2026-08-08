@@ -220,6 +220,7 @@ poke_icon_files += [
     kangaskhan_mega_icon,
     darkrai_mega_icon,
     heatran_mega_icon,
+    staraptor_mega_icon,
 ]
 
 otherpoke_files = []

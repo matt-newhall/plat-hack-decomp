@@ -2068,6 +2068,10 @@
     {
       "id": "pl_msg_00000393_00516",
       "en_US": "a {COLOR 255}Garchompite Z{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00517",
+      "en_US": "a {COLOR 255}Staraptite{COLOR 0}"
     }
   ]
 }
