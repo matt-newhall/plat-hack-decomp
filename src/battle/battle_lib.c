@@ -8394,6 +8394,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
+    BOOL megaSol = Battler_Ability(battleCtx, attacker) == ABILITY_MEGA_SOL;
+
     if (NO_CLOUD_NINE) {
         if ((fieldConditions & FIELD_CONDITION_SUNNY) && attackerParams.ability == ABILITY_SOLAR_POWER) {
             spAttackStat = spAttackStat * 15 / 10;
@@ -8405,12 +8407,14 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             movePower = movePower * 13 / 10;
         }
 
-        if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
+        if (megaSol == FALSE
+            && (fieldConditions & FIELD_CONDITION_SANDSTORM)
             && (defenderParams.type1 == TYPE_ROCK || defenderParams.type2 == TYPE_ROCK)) {
             spDefenseStat = spDefenseStat * 15 / 10;
         }
 
-        if ((fieldConditions & FIELD_CONDITION_HAILING)
+        if (megaSol == FALSE
+            && (fieldConditions & FIELD_CONDITION_HAILING)
             && (defenderParams.type1 == TYPE_ICE || defenderParams.type2 == TYPE_ICE)) {
             defenseStat = defenseStat * 15 / 10;
         }
@@ -8554,7 +8558,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (NO_CLOUD_NINE) {
-        if (fieldConditions & FIELD_CONDITION_RAINING) {
+        if ((fieldConditions & FIELD_CONDITION_RAINING) && megaSol == FALSE) {
             switch (moveType) {
             case TYPE_FIRE:
                 damage /= 2;
@@ -8565,11 +8569,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             }
         }
 
-        if ((fieldConditions & FIELD_CONDITION_SOLAR_DOWN) && BattleSystem_IsSolarMove(move)) {
+        if ((fieldConditions & FIELD_CONDITION_SOLAR_DOWN) && BattleSystem_IsSolarMove(move) && megaSol == FALSE) {
             damage /= 2;
         }
 
-        if (fieldConditions & FIELD_CONDITION_SUNNY) {
+        if ((fieldConditions & FIELD_CONDITION_SUNNY) && megaSol == FALSE) {
             switch (moveType) {
             case TYPE_FIRE:
                 damage = damage * 15 / 10;
@@ -8578,6 +8582,17 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
                 damage /= 2;
                 break;
             }
+        }
+    }
+
+    if (megaSol) {
+        switch (moveType) {
+        case TYPE_FIRE:
+            damage = damage * 15 / 10;
+            break;
+        case TYPE_WATER:
+            damage /= 2;
+            break;
         }
     }
 
@@ -9590,7 +9605,11 @@ static int CalcMoveType(BattleSystem *battleSys, BattleContext *battleCtx, int i
         break;
 
     case MOVE_WEATHER_BALL:
-        if (NO_CLOUD_NINE
+        type = TYPE_NORMAL;
+
+        if (Battler_Ability(battleCtx, item) == ABILITY_MEGA_SOL) {
+            type = TYPE_FIRE;
+        } else if (NO_CLOUD_NINE
             && battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER) {
             if (WEATHER_IS_RAIN) {
                 type = TYPE_WATER;
@@ -10292,7 +10311,11 @@ int Move_CalcVariableType(BattleSystem *battleSys, BattleContext *battleCtx, Pok
         break;
 
     case MOVE_WEATHER_BALL:
-        if (NO_CLOUD_NINE) {
+        type = TYPE_NORMAL;
+
+        if (Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL) == ABILITY_MEGA_SOL) {
+            type = TYPE_FIRE;
+        } else if (NO_CLOUD_NINE) {
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER) {
                 if (WEATHER_IS_RAIN) {
                     type = TYPE_WATER;

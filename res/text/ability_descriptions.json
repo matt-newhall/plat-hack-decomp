@@ -1215,6 +1215,13 @@
         "Damages the foe landing\n",
         "the finishing hit."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00174",
+      "en_US": [
+        "All moves are used as if\n",
+        "sunshine is active."
+      ]
     }
   ]
 }

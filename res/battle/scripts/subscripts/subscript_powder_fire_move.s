@@ -6,6 +6,7 @@ _000:
     PrintAttackMessage
     Wait
     WaitButtonABTime 30
+    CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_MEGA_SOL, _005
     CheckIgnoreWeather _005
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_RAINING, _005
     // The rain quenched the powder!

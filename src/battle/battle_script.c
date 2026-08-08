@@ -6129,6 +6129,11 @@ static BOOL BtlCmd_WeatherHPRecovery(BattleSystem *battleSys, BattleContext *bat
 {
     BattleScript_Iter(battleCtx, 1);
 
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MEGA_SOL) {
+        battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * 20, 30);
+        return FALSE;
+    }
+
     if (NO_WEATHER) {
         battleCtx->hpCalcTemp = ATTACKING_MON.maxHP / 2;
     } else if (WEATHER_IS_SUN) {
@@ -7078,6 +7083,12 @@ static BOOL BtlCmd_CalcHeavySlamPower(BattleSystem *battleSys, BattleContext *ba
 static BOOL BtlCmd_CalcWeatherBallParams(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MEGA_SOL) {
+        battleCtx->movePower = CURRENT_MOVE_DATA.power * 2;
+        battleCtx->moveType = TYPE_FIRE;
+        return FALSE;
+    }
 
     if (NO_CLOUD_NINE) {
         if (battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER) {

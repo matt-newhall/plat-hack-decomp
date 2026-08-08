@@ -3287,7 +3287,11 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
         break;
 
     case MOVE_WEATHER_BALL:
-        if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER)) {
+        result = TYPE_NORMAL;
+
+        if (Battler_Ability(battleCtx, battler) == ABILITY_MEGA_SOL) {
+            result = TYPE_FIRE;
+        } else if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER)) {
             if (WEATHER_IS_RAIN) {
                 result = TYPE_WATER;
             }

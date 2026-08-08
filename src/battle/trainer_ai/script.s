@@ -552,9 +552,12 @@ Basic_CheckAlreadyUnderLightScreen:
     PopOrEnd 
 
 Basic_CheckAuroraVeil:
+    // If the attacker has Mega Sol, score -10 (move will fail; it never sees hail).
     // If not currently hailing, score -10 (move will fail).
     // If already under the effect of Aurora Veil, score -10.
     // If already under the effect of both Light Screen and Reflect, score -8.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MEGA_SOL, ScoreMinus10
     LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_HAILING, ScoreMinus10
     IfFieldConditionsMask FIELD_CONDITION_AURORA_VEIL_PERM, ScoreMinus10
@@ -2561,8 +2564,11 @@ Expert_Conversion_End:
 
 Expert_Synthesis:
     // Treat Synthesis-type effects like any other recovery move, but additional score -2 if the
-    // weather is Hail, Rain, or Sand.
-    LoadCurrentWeather 
+    // weather is Hail, Rain, or Sand. Mega Sol always heals as though in sun, so it takes no
+    // penalty regardless of the weather.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_Recovery
+    LoadCurrentWeather
     IfLoadedEqualTo AI_WEATHER_HAILING, Expert_Synthesis_ScoreMinus2
     IfLoadedEqualTo AI_WEATHER_RAINING, Expert_Synthesis_ScoreMinus2
     IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_Synthesis_ScoreMinus2
@@ -2684,6 +2690,8 @@ Expert_AuroraVeil:
     // If the attacker's HP is < 50%, score -2.
     //
     // If the attacker's HP is >= 90%, 50% of additional score +1.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_AuroraVeil_ScoreMinus10
     LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_AuroraVeil_ScoreMinus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_AuroraVeil_ScoreMinus2
@@ -3870,8 +3878,12 @@ Expert_ChargeTurnNoInvuln:
     GoTo Expert_ChargeTurnNoInvuln_CheckForPowerHerb
 
 Expert_ChargeTurnNoInvuln_CheckForSunnyWeather:
-    LoadCurrentWeather 
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_ChargeTurnNoInvuln_SkipsChargeTurn
+    LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_ChargeTurnNoInvuln_CheckForPowerHerb
+
+Expert_ChargeTurnNoInvuln_SkipsChargeTurn:
     AddToMoveScore 2
     GoTo Expert_ChargeTurnNoInvuln_End
 
@@ -5725,7 +5737,9 @@ Expert_Blizzard:
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Blizzard_TryScoreMinus3
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Blizzard_TryScoreMinus3
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Blizzard_TryScoreMinus3
-    LoadCurrentWeather 
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_Blizzard_End
+    LoadCurrentWeather
     IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_Blizzard_End
     AddToMoveScore 1
     GoTo Expert_Blizzard_End
