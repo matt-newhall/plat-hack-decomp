@@ -1600,6 +1600,7 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_ROCKETM, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_RKANBUW, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_ITEM_TM, &Unk_ov5_021FB0A0 },
+    { OBJ_EVENT_GFX_ITEM_MEGA_STONE, &Unk_ov5_021FB0A0 },
     { 0xffff, NULL }
 };
 
@@ -3126,6 +3127,7 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { OBJ_EVENT_GFX_ROCKETM, 0x60C },  // mmodel_00001578
     { OBJ_EVENT_GFX_RKANBUW, 0x60D },  // mmodel_00001579
     { OBJ_EVENT_GFX_ITEM_TM, 0x60E },  // mmodel_00001580
+    { OBJ_EVENT_GFX_ITEM_MEGA_STONE, 0x613 },  // mmodel_00001585
     { 0xffff, 0x0 }
 };
 
@@ -4869,6 +4871,7 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { OBJ_EVENT_GFX_ROCKETM, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_RKANBUW, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_ITEM_TM, 0x1, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_ITEM_MEGA_STONE, 0x1, 0x0, Unk_ov5_021FB2C0 },
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -6219,6 +6222,7 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_ROCKETM, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_RKANBUW, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_ITEM_TM, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_ITEM_MEGA_STONE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
