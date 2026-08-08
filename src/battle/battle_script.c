@@ -1415,6 +1415,15 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->damage = (battleCtx->damage * 9) / 4;
     }
 
+    // Parental Bond second hit 1/4 damage
+    if ((battleCtx->battleStatusMask2 & SYSCTL_PARENTAL_BOND_ACTIVE)
+        && battleCtx->multiHitCounter < battleCtx->multiHitNumHits) {
+        battleCtx->damage /= 4;
+
+        if (battleCtx->damage == 0) {
+            battleCtx->damage = 1;
+        }
+    }
 }
 
 /**
@@ -2189,6 +2198,7 @@ static BOOL BtlCmd_GoToMoveScript(BattleSystem *battleSys, BattleContext *battle
         battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
         BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__SUB_SEQ, subscript_no_target);
     } else {
+        BattleSystem_TryParentalBond(battleSys, battleCtx);
         BattleScript_Jump(battleCtx, NARC_INDEX_BATTLE__SKILL__WAZA_SEQ, battleCtx->moveCur);
     }
 
@@ -5864,7 +5874,9 @@ static BOOL BtlCmd_CalcFuryCutterPower(BattleSystem *battleSys, BattleContext *b
 {
     BattleScript_Iter(battleCtx, 1);
 
-    if (ATTACKING_MON.moveEffectsData.furyCutterCount < 5) {
+    // Fury Cutter counts uses of the move, not individual strikes
+    if (battleCtx->multiHitCounter == battleCtx->multiHitNumHits
+        && ATTACKING_MON.moveEffectsData.furyCutterCount < 5) {
         ATTACKING_MON.moveEffectsData.furyCutterCount++;
     }
 
@@ -5952,14 +5964,27 @@ static BOOL BtlCmd_Present(BattleSystem *battleSys, BattleContext *battleCtx)
     int jumpIfHeal = BattleScript_Read(battleCtx);
     int rnd = BattleSystem_RandNext(battleSys) & 0xFF;
 
+    BOOL parentalBond = (battleCtx->battleStatusMask2 & SYSCTL_PARENTAL_BOND_ACTIVE) != FALSE;
+
     if (rnd < (255 * 40 / 100)) {
         battleCtx->movePower = 40;
     } else if (rnd < (255 * 70 / 100)) {
         battleCtx->movePower = 80;
     } else if (rnd < (255 * 80 / 100)) {
         battleCtx->movePower = 120;
+    } else if (parentalBond && battleCtx->multiHitCounter < battleCtx->multiHitNumHits) {
+        // Parental Bond's second strike always damages once the first one has.
+        battleCtx->movePower = 40;
     } else {
         battleCtx->hpCalcTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, 4);
+
+        // Present which heals only strikes once.
+        if (parentalBond) {
+            battleCtx->battleStatusMask2 &= ~SYSCTL_PARENTAL_BOND_ACTIVE;
+            battleCtx->multiHitCounter = 0;
+            battleCtx->multiHitNumHits = 0;
+        }
+
         BattleScript_Iter(battleCtx, jumpIfHeal);
     }
 

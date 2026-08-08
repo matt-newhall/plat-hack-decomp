@@ -1229,6 +1229,13 @@
         "Ignores effects that\n",
         "would draw in moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00176",
+      "en_US": [
+        "Parent and child\n",
+        "attack together."
+      ]
     }
   ]
 }

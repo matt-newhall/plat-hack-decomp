@@ -3497,6 +3497,7 @@ static void BattleControllerPlayer_BeforeMove(BattleSystem *battleSys, BattleCon
     } else {
         battleCtx->battleStatusMask2 |= SYSCTL_MOVE_SUCCEEDED;
 
+        BattleSystem_TryParentalBond(battleSys, battleCtx);
         BattleSystem_LoadScript(battleCtx, 0, battleCtx->moveCur);
         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
         battleCtx->commandNext = BATTLE_CONTROL_TRY_MOVE;

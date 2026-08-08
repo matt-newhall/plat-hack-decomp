@@ -241,6 +241,24 @@ BOOL BattleSystem_TriggerPrimaryEffect(BattleSystem *battleSys, BattleContext *b
 BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext *battleCtx, int *effect);
 
 /**
+ * @brief Check if Parental Bond is able to turn a move into a two-strike move.
+ *
+ * @param battleCtx
+ * @param move
+ * @return TRUE if the move can be doubled up, FALSE otherwise.
+ */
+BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move);
+
+/**
+ * @brief Arm the multi-hit loop for Parental Bond, if the attacker's ability and
+ * the move it is about to use both permit it.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+void BattleSystem_TryParentalBond(BattleSystem *battleSys, BattleContext *battleCtx);
+
+/**
  * @brief Find the defender for the move.
  *
  * The defender can be chosen at random in certain scenarios, but only while

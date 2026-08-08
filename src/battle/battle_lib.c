@@ -1616,10 +1616,45 @@ static inline void SetupSideEffect(BattleContext *battleCtx, int *effect, int so
     battleCtx->sideEffectIndirectFlags = 0;
 }
 
+/**
+ * @brief Check if a self-inflicted side effect must be held back until the last
+ * strike of a Parental Bond move.
+ *
+ * Recoil which is proportional to the damage dealt can safely apply on each
+ * strike, since the total is the same either way. Recoil which is a fixed
+ * fraction of the user's max HP cannot; Struggle and Steel Beam would each cost
+ * the user its entire HP bar across two strikes instead of half.
+ *
+ * @param battleCtx
+ * @return TRUE if the pending side effect must be deferred; FALSE otherwise.
+ */
+static BOOL ParentalBondDefersSideEffect(BattleContext *battleCtx)
+{
+    if ((battleCtx->battleStatusMask2 & SYSCTL_PARENTAL_BOND_ACTIVE) == FALSE
+        || battleCtx->multiHitCounter <= 1) {
+        return FALSE;
+    }
+
+    // stop the attack if we can't attack again
+    if (battleCtx->faintedMon != BATTLER_NONE
+        || (ATTACKING_MON.status & MON_CONDITION_SLEEP)
+        || (battleCtx->moveStatusFlags & MOVE_STATUS_MULTI_HIT_DISRUPTED)) {
+        return FALSE;
+    }
+
+    u32 subscript = battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_SUBSCRIPT_POINTER;
+
+    return subscript == MOVE_SUBSCRIPT_PTR_STRUGGLE || subscript == MOVE_SUBSCRIPT_PTR_STEEL_BEAM;
+}
+
 BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext *battleCtx, int *effect)
 {
     BOOL result = FALSE;
     u16 effectChance;
+
+    if (ParentalBondDefersSideEffect(battleCtx)) {
+        return FALSE;
+    }
 
     if (battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_ON_HIT) {
         SetupSideEffect(battleCtx, effect, SIDE_EFFECT_TYPE_INDIRECT);
@@ -1695,6 +1730,102 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
     }
 
     return result;
+}
+
+BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move)
+{
+    if (MOVE_DATA(move).class == CLASS_STATUS) {
+        return FALSE;
+    }
+
+    switch (MOVE_DATA(move).effect) {
+    // Moves which already strike more than once
+    case BATTLE_EFFECT_MULTI_HIT:
+    case BATTLE_EFFECT_HIT_TWICE:
+    case BATTLE_EFFECT_POISON_MULTI_HIT:
+    case BATTLE_EFFECT_HIT_THREE_TIMES:
+    case BATTLE_EFFECT_BEAT_UP:
+
+    // Don't double Parental Bond on these
+    case BATTLE_EFFECT_ONE_HIT_KO:
+    case BATTLE_EFFECT_FLING:
+    case BATTLE_EFFECT_HALVE_DEFENSE:
+    case BATTLE_EFFECT_HALVE_SP_DEFENSE:
+    case BATTLE_EFFECT_UPROAR:
+    case BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO:
+    case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+
+    case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT:
+    case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
+    case BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN:
+    case BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP:
+    case BATTLE_EFFECT_CHARGE_TURN_DEF_UP:
+    case BATTLE_EFFECT_FLY:
+    case BATTLE_EFFECT_DIG:
+    case BATTLE_EFFECT_DIVE:
+    case BATTLE_EFFECT_BOUNCE:
+    case BATTLE_EFFECT_SHADOW_FORCE:
+
+    case BATTLE_EFFECT_SPIT_UP:
+    case BATTLE_EFFECT_NATURAL_GIFT:
+    case BATTLE_EFFECT_BIDE:
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+/**
+ * @brief Count how many battlers the attacker's move will actually hit.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return The number of battlers which will be struck by the current move.
+ */
+static int CurrentMoveTargetCount(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int range = CURRENT_MOVE_DATA.range;
+    if (range != RANGE_ADJACENT_OPPONENTS && range != RANGE_ALL_ADJACENT) {
+        return 1;
+    }
+
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+    int attackerSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
+    int count = 0;
+
+    for (int battler = 0; battler < maxBattlers; battler++) {
+        if ((battleCtx->battlersSwitchingMask & FlagIndex(battler))
+            || battleCtx->battleMons[battler].curHP == 0
+            || battler == battleCtx->attacker) {
+            continue;
+        }
+
+        if (range == RANGE_ALL_ADJACENT
+            || BattleSystem_GetBattlerSide(battleSys, battler) != attackerSide) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+void BattleSystem_TryParentalBond(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    battleCtx->battleStatusMask2 &= ~SYSCTL_PARENTAL_BOND_ACTIVE;
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_PARENTAL_BOND
+        || battleCtx->multiHitNumHits != 0
+        || battleCtx->defender == BATTLER_NONE
+        || BattleSystem_ParentalBondAppliesToMove(battleCtx, battleCtx->moveCur) == FALSE
+        || CurrentMoveTargetCount(battleSys, battleCtx) != 1) {
+        return;
+    }
+
+    battleCtx->multiHitCounter = 2;
+    battleCtx->multiHitNumHits = 2;
+    battleCtx->multiHitAccuracyCheck = SYSCTL_MULTI_HIT_MOVE;
+    battleCtx->afterMoveMessageType = AFTER_MOVE_MESSAGE_MULTI_HIT;
+    battleCtx->battleStatusMask2 |= SYSCTL_PARENTAL_BOND_ACTIVE;
 }
 
 int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move, BOOL randomize, int inRange)
@@ -9088,6 +9219,11 @@ BOOL BattleSystem_CanSnatchRestSwallow(BattleSystem *battleSys, BattleContext *b
 
 void BattleSystem_DecPPForPressure(BattleContext *battleCtx, int attacker, int defender)
 {
+    // Pressure costs one extra PP per use of a move, not per strike
+    if (battleCtx->multiHitCounter != battleCtx->multiHitNumHits) {
+        return;
+    }
+
     if (defender != BATTLER_NONE
         && Battler_Ability(battleCtx, defender) == ABILITY_PRESSURE
         && battleCtx->battleMons[attacker].ppCur[battleCtx->moveSlot[attacker]]) {
@@ -9985,6 +10121,11 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                     damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveDefender, defender, battler, damageToTarget);
                     damageToTarget *= hitMultiplier;
 
+                    if (Battler_Ability(battleCtx, defender) == ABILITY_PARENTAL_BOND
+                        && BattleSystem_ParentalBondAppliesToMove(battleCtx, moveDefender)) {
+                        damageToTarget = damageToTarget * 5 / 4;
+                    }
+
                     if (damageToTarget >= battlerPokemonCurHP) {
                         // AI can be OHKO'd by the player
                         isTrainerKOAI = 1;
@@ -10138,6 +10279,11 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 
                     damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveBattler, battler, defender, damageToTarget);
                     damageToTarget *= hitMultiplier;
+
+                    if (Battler_Ability(battleCtx, battler) == ABILITY_PARENTAL_BOND
+                        && BattleSystem_ParentalBondAppliesToMove(battleCtx, moveBattler)) {
+                        damageToTarget = damageToTarget * 5 / 4;
+                    }
 
                     if (damageToTarget >= defenderPokemonCurHP) {
                         if (moveBattler == MOVE_PURSUIT) {
