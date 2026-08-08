@@ -2072,6 +2072,10 @@
     {
       "id": "pl_msg_00000393_00517",
       "en_US": "a {COLOR 255}Staraptite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00518",
+      "en_US": "a {COLOR 255}Cameruptite{COLOR 0}"
     }
   ]
 }

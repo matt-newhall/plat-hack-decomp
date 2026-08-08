@@ -283,6 +283,7 @@ static const char *alt_forms_with_data[] = { // NOTE: also implicitly defines th
     "darkrai/forms/mega",
     "heatran/forms/mega",
     "staraptor/forms/mega",
+    "camerupt/forms/mega",
 };
 
 #define NATIONAL_DEX_MAX SPECIES_EGG
