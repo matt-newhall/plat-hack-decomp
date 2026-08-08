@@ -3091,6 +3091,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = victreebelite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_MEGANIUMITE] = {
+        .dataID = 0x20D,
+        .iconID = meganiumite_NCGR,
+        .paletteID = meganiumite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
