@@ -278,6 +278,10 @@ u32 PokeIconSpriteIndex(u32 species, u32 isEgg, u32 form)
         if (species == SPECIES_SKARMORY) {
             return IconTilesIndex(ICON_SKARMORY_MEGA) + form - 1;
         }
+
+        if (species == SPECIES_KANGASKHAN) {
+            return IconTilesIndex(ICON_KANGASKHAN_MEGA) + form - 1;
+        }
     }
 
     if (species > NATIONAL_DEX_COUNT) {
@@ -351,6 +355,7 @@ u16 BoxPokemon_IconFormOffset(const BoxPokemon *boxMon)
     case SPECIES_VICTREEBEL:
     case SPECIES_MEGANIUM:
     case SPECIES_SKARMORY:
+    case SPECIES_KANGASKHAN:
         return BoxPokemon_GetValue((BoxPokemon *)boxMon, MON_DATA_FORM, NULL);
     }
 
@@ -484,6 +489,8 @@ const u8 PokeIconPaletteIndex(u32 species, u32 form, u32 isEgg)
             species = ICON_MEGANIUM_MEGA + form - 1;
         } else if (species == SPECIES_SKARMORY) {
             species = ICON_SKARMORY_MEGA + form - 1;
+        } else if (species == SPECIES_KANGASKHAN) {
+            species = ICON_KANGASKHAN_MEGA + form - 1;
         }
     }
 

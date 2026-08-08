@@ -3103,6 +3103,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = skarmorite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_KANGASKHANITE] = {
+        .dataID = 0x20F,
+        .iconID = kangaskhanite_NCGR,
+        .paletteID = kangaskhanite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

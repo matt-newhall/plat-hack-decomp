@@ -2937,295 +2937,301 @@ void BuildPokemonSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 speci
     case SPECIES_VENUSAUR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 251 + (face / 2) + form * 2;
-        spriteTemplate->palette = 457 + shiny + form * 2;
+        spriteTemplate->palette = 461 + shiny + form * 2;
         break;
 
     case SPECIES_CHARIZARD:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 255 + (face / 2) + form * 2;
-        spriteTemplate->palette = 461 + shiny + form * 2;
+        spriteTemplate->palette = 465 + shiny + form * 2;
         break;
 
     case SPECIES_BLASTOISE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 261 + (face / 2) + form * 2;
-        spriteTemplate->palette = 467 + shiny + form * 2;
+        spriteTemplate->palette = 471 + shiny + form * 2;
         break;
 
     case SPECIES_BEEDRILL:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 265 + (face / 2) + form * 2;
-        spriteTemplate->palette = 471 + shiny + form * 2;
+        spriteTemplate->palette = 475 + shiny + form * 2;
         break;
 
     case SPECIES_PIDGEOT:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 269 + (face / 2) + form * 2;
-        spriteTemplate->palette = 475 + shiny + form * 2;
+        spriteTemplate->palette = 479 + shiny + form * 2;
         break;
 
     case SPECIES_RAICHU:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 273 + (face / 2) + form * 2;
-        spriteTemplate->palette = 479 + shiny + form * 2;
+        spriteTemplate->palette = 483 + shiny + form * 2;
         break;
 
     case SPECIES_CLEFABLE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 279 + (face / 2) + form * 2;
-        spriteTemplate->palette = 485 + shiny + form * 2;
+        spriteTemplate->palette = 489 + shiny + form * 2;
         break;
 
     case SPECIES_ALAKAZAM:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 283 + (face / 2) + form * 2;
-        spriteTemplate->palette = 489 + shiny + form * 2;
+        spriteTemplate->palette = 493 + shiny + form * 2;
         break;
 
     case SPECIES_VICTREEBEL:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 287 + (face / 2) + form * 2;
-        spriteTemplate->palette = 493 + shiny + form * 2;
+        spriteTemplate->palette = 497 + shiny + form * 2;
         break;
 
     case SPECIES_SLOWBRO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 291 + (face / 2) + form * 2;
-        spriteTemplate->palette = 497 + shiny + form * 2;
+        spriteTemplate->palette = 501 + shiny + form * 2;
         break;
 
     case SPECIES_GENGAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
         spriteTemplate->character = 295 + (face / 2) + form * 2;
-        spriteTemplate->palette = 501 + shiny + form * 2;
+        spriteTemplate->palette = 505 + shiny + form * 2;
+        break;
+
+    case SPECIES_KANGASKHAN:
+        spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
+        spriteTemplate->character = 299 + (face / 2) + form * 2;
+        spriteTemplate->palette = 509 + shiny + form * 2;
         break;
 
     case SPECIES_PINSIR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 299 + (face / 2) + form * 2;
-        spriteTemplate->palette = 505 + shiny + form * 2;
+        spriteTemplate->character = 303 + (face / 2) + form * 2;
+        spriteTemplate->palette = 513 + shiny + form * 2;
         break;
 
     case SPECIES_GYARADOS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 303 + (face / 2) + form * 2;
-        spriteTemplate->palette = 509 + shiny + form * 2;
+        spriteTemplate->character = 307 + (face / 2) + form * 2;
+        spriteTemplate->palette = 517 + shiny + form * 2;
         break;
 
     case SPECIES_AERODACTYL:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 307 + (face / 2) + form * 2;
-        spriteTemplate->palette = 513 + shiny + form * 2;
+        spriteTemplate->character = 311 + (face / 2) + form * 2;
+        spriteTemplate->palette = 521 + shiny + form * 2;
         break;
 
     case SPECIES_DRAGONITE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 311 + (face / 2) + form * 2;
-        spriteTemplate->palette = 517 + shiny + form * 2;
+        spriteTemplate->character = 315 + (face / 2) + form * 2;
+        spriteTemplate->palette = 525 + shiny + form * 2;
         break;
 
     case SPECIES_MEWTWO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 315 + (face / 2) + form * 2;
-        spriteTemplate->palette = 521 + shiny + form * 2;
+        spriteTemplate->character = 319 + (face / 2) + form * 2;
+        spriteTemplate->palette = 529 + shiny + form * 2;
         break;
 
     case SPECIES_MEGANIUM:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 321 + (face / 2) + form * 2;
-        spriteTemplate->palette = 527 + shiny + form * 2;
+        spriteTemplate->character = 325 + (face / 2) + form * 2;
+        spriteTemplate->palette = 535 + shiny + form * 2;
         break;
 
     case SPECIES_FERALIGATR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 325 + (face / 2) + form * 2;
-        spriteTemplate->palette = 531 + shiny + form * 2;
+        spriteTemplate->character = 329 + (face / 2) + form * 2;
+        spriteTemplate->palette = 539 + shiny + form * 2;
         break;
 
     case SPECIES_AMPHAROS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 329 + (face / 2) + form * 2;
-        spriteTemplate->palette = 535 + shiny + form * 2;
+        spriteTemplate->character = 333 + (face / 2) + form * 2;
+        spriteTemplate->palette = 543 + shiny + form * 2;
         break;
 
     case SPECIES_STEELIX:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 333 + (face / 2) + form * 2;
-        spriteTemplate->palette = 539 + shiny + form * 2;
+        spriteTemplate->character = 337 + (face / 2) + form * 2;
+        spriteTemplate->palette = 547 + shiny + form * 2;
         break;
 
     case SPECIES_SCIZOR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 337 + (face / 2) + form * 2;
-        spriteTemplate->palette = 543 + shiny + form * 2;
+        spriteTemplate->character = 341 + (face / 2) + form * 2;
+        spriteTemplate->palette = 551 + shiny + form * 2;
         break;
 
     case SPECIES_HERACROSS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 341 + (face / 2) + form * 2;
-        spriteTemplate->palette = 547 + shiny + form * 2;
+        spriteTemplate->character = 345 + (face / 2) + form * 2;
+        spriteTemplate->palette = 555 + shiny + form * 2;
         break;
 
     case SPECIES_SKARMORY:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 345 + (face / 2) + form * 2;
-        spriteTemplate->palette = 551 + shiny + form * 2;
+        spriteTemplate->character = 349 + (face / 2) + form * 2;
+        spriteTemplate->palette = 559 + shiny + form * 2;
         break;
 
     case SPECIES_HOUNDOOM:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 349 + (face / 2) + form * 2;
-        spriteTemplate->palette = 555 + shiny + form * 2;
+        spriteTemplate->character = 353 + (face / 2) + form * 2;
+        spriteTemplate->palette = 563 + shiny + form * 2;
         break;
 
     case SPECIES_TYRANITAR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 353 + (face / 2) + form * 2;
-        spriteTemplate->palette = 559 + shiny + form * 2;
+        spriteTemplate->character = 357 + (face / 2) + form * 2;
+        spriteTemplate->palette = 567 + shiny + form * 2;
         break;
 
     case SPECIES_SCEPTILE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 357 + (face / 2) + form * 2;
-        spriteTemplate->palette = 563 + shiny + form * 2;
+        spriteTemplate->character = 361 + (face / 2) + form * 2;
+        spriteTemplate->palette = 571 + shiny + form * 2;
         break;
 
     case SPECIES_BLAZIKEN:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 361 + (face / 2) + form * 2;
-        spriteTemplate->palette = 567 + shiny + form * 2;
+        spriteTemplate->character = 365 + (face / 2) + form * 2;
+        spriteTemplate->palette = 575 + shiny + form * 2;
         break;
 
     case SPECIES_SWAMPERT:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 365 + (face / 2) + form * 2;
-        spriteTemplate->palette = 571 + shiny + form * 2;
+        spriteTemplate->character = 369 + (face / 2) + form * 2;
+        spriteTemplate->palette = 579 + shiny + form * 2;
         break;
 
     case SPECIES_GARDEVOIR:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 369 + (face / 2) + form * 2;
-        spriteTemplate->palette = 575 + shiny + form * 2;
+        spriteTemplate->character = 373 + (face / 2) + form * 2;
+        spriteTemplate->palette = 583 + shiny + form * 2;
         break;
 
     case SPECIES_SABLEYE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 373 + (face / 2) + form * 2;
-        spriteTemplate->palette = 579 + shiny + form * 2;
+        spriteTemplate->character = 377 + (face / 2) + form * 2;
+        spriteTemplate->palette = 587 + shiny + form * 2;
         break;
 
     case SPECIES_MAWILE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 377 + (face / 2) + form * 2;
-        spriteTemplate->palette = 583 + shiny + form * 2;
+        spriteTemplate->character = 381 + (face / 2) + form * 2;
+        spriteTemplate->palette = 591 + shiny + form * 2;
         break;
 
     case SPECIES_AGGRON:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 381 + (face / 2) + form * 2;
-        spriteTemplate->palette = 587 + shiny + form * 2;
+        spriteTemplate->character = 385 + (face / 2) + form * 2;
+        spriteTemplate->palette = 595 + shiny + form * 2;
         break;
 
     case SPECIES_MEDICHAM:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 385 + (face / 2) + form * 2;
-        spriteTemplate->palette = 591 + shiny + form * 2;
+        spriteTemplate->character = 389 + (face / 2) + form * 2;
+        spriteTemplate->palette = 599 + shiny + form * 2;
         break;
 
     case SPECIES_MANECTRIC:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 389 + (face / 2) + form * 2;
-        spriteTemplate->palette = 595 + shiny + form * 2;
+        spriteTemplate->character = 393 + (face / 2) + form * 2;
+        spriteTemplate->palette = 603 + shiny + form * 2;
         break;
 
     case SPECIES_SHARPEDO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 393 + (face / 2) + form * 2;
-        spriteTemplate->palette = 599 + shiny + form * 2;
+        spriteTemplate->character = 397 + (face / 2) + form * 2;
+        spriteTemplate->palette = 607 + shiny + form * 2;
         break;
 
     case SPECIES_ALTARIA:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 397 + (face / 2) + form * 2;
-        spriteTemplate->palette = 603 + shiny + form * 2;
+        spriteTemplate->character = 401 + (face / 2) + form * 2;
+        spriteTemplate->palette = 611 + shiny + form * 2;
         break;
 
     case SPECIES_BANETTE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 401 + (face / 2) + form * 2;
-        spriteTemplate->palette = 607 + shiny + form * 2;
+        spriteTemplate->character = 405 + (face / 2) + form * 2;
+        spriteTemplate->palette = 615 + shiny + form * 2;
         break;
 
     case SPECIES_ABSOL:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 405 + (face / 2) + form * 2;
-        spriteTemplate->palette = 611 + shiny + form * 2;
+        spriteTemplate->character = 409 + (face / 2) + form * 2;
+        spriteTemplate->palette = 619 + shiny + form * 2;
         break;
 
     case SPECIES_GLALIE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 411 + (face / 2) + form * 2;
-        spriteTemplate->palette = 617 + shiny + form * 2;
+        spriteTemplate->character = 415 + (face / 2) + form * 2;
+        spriteTemplate->palette = 625 + shiny + form * 2;
         break;
 
     case SPECIES_SALAMENCE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 415 + (face / 2) + form * 2;
-        spriteTemplate->palette = 621 + shiny + form * 2;
+        spriteTemplate->character = 419 + (face / 2) + form * 2;
+        spriteTemplate->palette = 629 + shiny + form * 2;
         break;
 
     case SPECIES_METAGROSS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 419 + (face / 2) + form * 2;
-        spriteTemplate->palette = 625 + shiny + form * 2;
+        spriteTemplate->character = 423 + (face / 2) + form * 2;
+        spriteTemplate->palette = 633 + shiny + form * 2;
         break;
 
     case SPECIES_LATIAS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 423 + (face / 2) + form * 2;
-        spriteTemplate->palette = 629 + shiny + form * 2;
+        spriteTemplate->character = 427 + (face / 2) + form * 2;
+        spriteTemplate->palette = 637 + shiny + form * 2;
         break;
 
     case SPECIES_LATIOS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 427 + (face / 2) + form * 2;
-        spriteTemplate->palette = 633 + shiny + form * 2;
+        spriteTemplate->character = 431 + (face / 2) + form * 2;
+        spriteTemplate->palette = 641 + shiny + form * 2;
         break;
 
     case SPECIES_LOPUNNY:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 431 + (face / 2) + form * 2;
-        spriteTemplate->palette = 637 + shiny + form * 2;
+        spriteTemplate->character = 435 + (face / 2) + form * 2;
+        spriteTemplate->palette = 645 + shiny + form * 2;
         break;
 
     case SPECIES_GARCHOMP:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 435 + (face / 2) + form * 2;
-        spriteTemplate->palette = 641 + shiny + form * 2;
+        spriteTemplate->character = 439 + (face / 2) + form * 2;
+        spriteTemplate->palette = 649 + shiny + form * 2;
         break;
 
     case SPECIES_LUCARIO:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 439 + (face / 2) + form * 2;
-        spriteTemplate->palette = 645 + shiny + form * 2;
+        spriteTemplate->character = 443 + (face / 2) + form * 2;
+        spriteTemplate->palette = 653 + shiny + form * 2;
         break;
 
     case SPECIES_ABOMASNOW:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 445 + (face / 2) + form * 2;
-        spriteTemplate->palette = 651 + shiny + form * 2;
+        spriteTemplate->character = 449 + (face / 2) + form * 2;
+        spriteTemplate->palette = 659 + shiny + form * 2;
         break;
 
     case SPECIES_GALLADE:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 449 + (face / 2) + form * 2;
-        spriteTemplate->palette = 655 + shiny + form * 2;
+        spriteTemplate->character = 453 + (face / 2) + form * 2;
+        spriteTemplate->palette = 663 + shiny + form * 2;
         break;
 
     case SPECIES_FROSLASS:
         spriteTemplate->narcID = NARC_INDEX_POKETOOL__POKEGRA__PL_OTHERPOKE;
-        spriteTemplate->character = 453 + (face / 2) + form * 2;
-        spriteTemplate->palette = 659 + shiny + form * 2;
+        spriteTemplate->character = 457 + (face / 2) + form * 2;
+        spriteTemplate->palette = 667 + shiny + form * 2;
         break;
 
     default:
@@ -3306,6 +3312,7 @@ static const MegaEvolution sMegaEvolutions[] = {
     { ITEM_VICTREEBELITE, SPECIES_VICTREEBEL, VICTREEBEL_FORM_BASE, VICTREEBEL_FORM_MEGA, 1255, 0, 0 },
     { ITEM_MEGANIUMITE, SPECIES_MEGANIUM, MEGANIUM_FORM_BASE, MEGANIUM_FORM_MEGA, 2010, 8, 0 },
     { ITEM_SKARMORITE, SPECIES_SKARMORY, SKARMORY_FORM_BASE, SKARMORY_FORM_MEGA, 404, 0, 0 },
+    { ITEM_KANGASKHANITE, SPECIES_KANGASKHAN, KANGASKHAN_FORM_BASE, KANGASKHAN_FORM_MEGA, 1000, 0, 0 },
 };
 
 BOOL Pokemon_IsMegaForm(u16 monSpecies, u8 monForm)
@@ -3713,6 +3720,11 @@ u8 Pokemon_SanitizeFormId(u16 monSpecies, u8 monForm)
         break;
     case SPECIES_SKARMORY:
         if (monForm > SKARMORY_FORM_COUNT - 1) {
+            monForm = 0;
+        }
+        break;
+    case SPECIES_KANGASKHAN:
+        if (monForm > KANGASKHAN_FORM_COUNT - 1) {
             monForm = 0;
         }
         break;
@@ -4204,6 +4216,15 @@ u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 person
     case SPECIES_SKARMORY:
         if (form == SKARMORY_FORM_MEGA && face == FACE_FRONT) {
             return 2;
+        }
+
+        narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
+        memberIndex = species * 4 + face + (gender != GENDER_FEMALE ? 1 : 0);
+        break;
+
+    case SPECIES_KANGASKHAN:
+        if (form == KANGASKHAN_FORM_MEGA && face == FACE_FRONT) {
+            return 8;
         }
 
         narcID = NARC_INDEX_POKETOOL__POKEGRA__HEIGHT;
@@ -6147,6 +6168,11 @@ static int Pokemon_GetFormNarcIndex(int monSpecies, int monForm)
     case SPECIES_SKARMORY:
         if (monForm && monForm <= SKARMORY_FORM_COUNT - 1) {
             monSpecies = (561 - 1) + monForm;
+        }
+        break;
+    case SPECIES_KANGASKHAN:
+        if (monForm && monForm <= KANGASKHAN_FORM_COUNT - 1) {
+            monSpecies = (562 - 1) + monForm;
         }
         break;
     default:
