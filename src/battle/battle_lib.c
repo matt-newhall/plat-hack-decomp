@@ -1651,8 +1651,16 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 {
     BOOL result = FALSE;
     u16 effectChance;
+    BOOL sheerForce = BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur);
 
     if (ParentalBondDefersSideEffect(battleCtx)) {
+        return FALSE;
+    }
+
+    if (sheerForce
+        && battleCtx->sideEffectIndirectFlags
+        && (battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_PROBABILISTIC) == FALSE) {
+        battleCtx->sideEffectIndirectFlags = 0;
         return FALSE;
     }
 
@@ -1692,7 +1700,7 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 
         GF_ASSERT(effectChance != 0);
 
-        if (BattleSystem_RandNext(battleSys) % 100 < effectChance) {
+        if (sheerForce == FALSE && BattleSystem_RandNext(battleSys) % 100 < effectChance) {
             battleCtx->battleStatusMask |= SYSCTL_APPLY_SECONDARY_EFFECT;
         }
 
@@ -1773,6 +1781,77 @@ BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move)
     }
 
     return TRUE;
+}
+
+BOOL BattleSystem_SheerForceBoostsMove(BattleContext *battleCtx, int attacker, u16 move)
+{
+    if (Battler_Ability(battleCtx, attacker) != ABILITY_SHEER_FORCE
+        || MOVE_DATA(move).class == CLASS_STATUS) {
+        return FALSE;
+    }
+
+    switch (MOVE_DATA(move).effect) {
+    // Chance to inflict a status condition on the target
+    case BATTLE_EFFECT_POISON_HIT:
+    case BATTLE_EFFECT_BURN_HIT:
+    case BATTLE_EFFECT_FREEZE_HIT:
+    case BATTLE_EFFECT_PARALYZE_HIT:
+    case BATTLE_EFFECT_BADLY_POISON_HIT:
+    case BATTLE_EFFECT_CONFUSE_HIT:
+    case BATTLE_EFFECT_TRI_ATTACK:
+    case BATTLE_EFFECT_RANDOM_STATUS:
+    case BATTLE_EFFECT_THAW_AND_BURN_HIT:
+    case BATTLE_EFFECT_POISON_MULTI_HIT:
+    case BATTLE_EFFECT_THUNDER:
+    case BATTLE_EFFECT_BLIZZARD:
+    case BATTLE_EFFECT_HURRICANE:
+    case BATTLE_EFFECT_CHATTER:
+    case BATTLE_EFFECT_SUPER_EFFECTIVE_VS_ICE_FREEZE_HIT:
+    case BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT:
+    case BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT:
+    case BATTLE_EFFECT_BOUNCE:
+
+    // Chance to inflict a status condition alongside recoil
+    case BATTLE_EFFECT_RECOIL_BURN_HIT:
+    case BATTLE_EFFECT_RECOIL_PARALYZE_HIT:
+
+    // Chance to flinch the target
+    case BATTLE_EFFECT_FLINCH_HIT:
+    case BATTLE_EFFECT_FLINCH_BURN_HIT:
+    case BATTLE_EFFECT_FLINCH_FREEZE_HIT:
+    case BATTLE_EFFECT_FLINCH_PARALYZE_HIT:
+    case BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE:
+    case BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT:
+    case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
+    case BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY:
+    case BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP:
+
+    // Chance to lower the target's stats
+    case BATTLE_EFFECT_LOWER_ATTACK_HIT:
+    case BATTLE_EFFECT_LOWER_DEFENSE_HIT:
+    case BATTLE_EFFECT_LOWER_SPEED_HIT:
+    case BATTLE_EFFECT_LOWER_SP_ATK_HIT:
+    case BATTLE_EFFECT_LOWER_SP_DEF_HIT:
+    case BATTLE_EFFECT_LOWER_SP_DEF_2_HIT:
+    case BATTLE_EFFECT_LOWER_ACCURACY_HIT:
+    case BATTLE_EFFECT_LOWER_EVASION_HIT:
+
+    // Chance to raise the user's stats.
+    case BATTLE_EFFECT_RAISE_ATTACK_HIT:
+    case BATTLE_EFFECT_RAISE_DEF_HIT:
+    case BATTLE_EFFECT_RAISE_SP_ATK_HIT:
+    case BATTLE_EFFECT_RAISE_ALL_STATS_HIT:
+    case BATTLE_EFFECT_SPEED_UP:
+
+    // Secret Power's terrain-dependent effect is explicitly an added effect.
+    case BATTLE_EFFECT_SECRET_POWER:
+
+    // Rapid Spin ALSO loses ability to spin hazards
+    case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 /**
@@ -5134,7 +5213,8 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 if (fastestPackMon != BATTLER_NONE
                     && CURRENT_MOVE_DATA.effect != BATTLE_EFFECT_DRAGON_TAIL
                     && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
-                    && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE) {
+                    && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+                    && BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur) == FALSE) {
 
                     BOOL isSpreadMove = (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS
                         || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT);
@@ -5288,6 +5368,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur) == FALSE
             && CURRENT_MOVE_DATA.power
             && !(battleCtx->multiHitNumHits > 1)
             && BattleMon_Get(battleCtx, battleCtx->defender, BATTLEMON_TYPE_1, NULL) != moveType
@@ -8538,6 +8619,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if (attackerParams.ability == ABILITY_TOUGH_CLAWS) {
             movePower = movePower * 13 / 10;
         }
+    }
+
+    if (BattleSystem_SheerForceBoostsMove(battleCtx, attacker, move)) {
+        movePower = movePower * 13 / 10;
     }
 
     BOOL megaSol = Battler_Ability(battleCtx, attacker) == ABILITY_MEGA_SOL;

@@ -250,6 +250,23 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move);
 
 /**
+ * @brief Check if Sheer Force boosts the attacker's move.
+ *
+ * A move is boosted if it is a damaging move with an additional effect, i.e. a
+ * chance to inflict a status condition or flinch on the target, to lower the
+ * target's stats, or to raise the user's stats. The additional effect is
+ * suppressed in exchange; recoil, the user's own stat drops, and inherent move
+ * properties are not additional effects and are left alone.
+ *
+ * @param battleCtx
+ * @param attacker
+ * @param move
+ * @return TRUE if the move's power is boosted and its additional effect must be
+ * suppressed; FALSE otherwise.
+ */
+BOOL BattleSystem_SheerForceBoostsMove(BattleContext *battleCtx, int attacker, u16 move);
+
+/**
  * @brief Arm the multi-hit loop for Parental Bond, if the attacker's ability and
  * the move it is about to use both permit it.
  *

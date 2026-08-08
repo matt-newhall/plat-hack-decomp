@@ -4242,6 +4242,7 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             && DEFENDING_MON.curHP
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
             && Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_ANGER_SHELL
+            && BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur) == FALSE
             && DEFENDING_MON.curHP <= DEFENDING_MON.maxHP / 2
             && (DEFENDING_MON.curHP
                 - DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken
@@ -5324,6 +5325,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
     int maxBattlers = BattleSystem_GetMaxBattlers(battleSys); // unused, but must remain to match
     int itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
     int itemPower = Battler_HeldItemPower(battleCtx, battleCtx->attacker, 0);
+    BOOL sheerForce = BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur);
 
     if (BattleControllerPlayer_AnyFainted(battleCtx, battleCtx->command, battleCtx->command, TRUE) == TRUE) {
         return TRUE;
@@ -5333,7 +5335,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
         switch (battleCtx->afterMoveHitCheckState) {
 
         case AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE:
-            if (Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE) {
+            if (sheerForce == FALSE && Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE) {
                 u8 moveType;
 
                 if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE
@@ -5421,6 +5423,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
             int defenderItemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->defender);
 
             if (defenderItemEffect == HOLD_EFFECT_RED_CARD
+                && sheerForce == FALSE
                 && battleCtx->defender != BATTLER_NONE
                 && Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == FALSE
                 && DEFENDING_MON.curHP
@@ -5501,6 +5504,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
             int fastestButtonMon = BATTLER_NONE;
             if (!packWon
+                && sheerForce == FALSE
                 && CURRENT_MOVE_DATA.effect != BATTLE_EFFECT_DRAGON_TAIL
                 && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
                 && !(battleCtx->multiHitNumHits > 0 && battleCtx->multiHitCounter > 1)
@@ -5636,6 +5640,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
         case AFTER_MOVE_HIT_STATE_SHELL_BELL:
             if (battleCtx->defender != BATTLER_NONE
                 && itemEffect == HOLD_EFFECT_HP_RESTORE_ON_DMG
+                && sheerForce == FALSE
                 && battleCtx->afterMoveHitCheckTemp == 0
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                 && (battleCtx->battleStatusMask & SYSCTL_MOVE_HIT || Battler_SubstituteWasHit(battleCtx, battleCtx->defender))
@@ -5659,6 +5664,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
         case AFTER_MOVE_HIT_STATE_LIFE_ORB:
             if (itemEffect == HOLD_EFFECT_HP_DRAIN_ON_ATK
+                && sheerForce == FALSE
                 && battleCtx->afterMoveHitCheckTemp == 0
                 && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
                 && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
