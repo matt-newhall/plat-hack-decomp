@@ -3109,6 +3109,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = kangaskhanite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_DARKRANITE] = {
+        .dataID = 0x210,
+        .iconID = darkranite_NCGR,
+        .paletteID = darkranite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

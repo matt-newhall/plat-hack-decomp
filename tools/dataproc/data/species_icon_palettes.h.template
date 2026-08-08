@@ -105,6 +105,7 @@ enum FormIconIndex {
     ICON_MEGANIUM_MEGA,
     ICON_SKARMORY_MEGA,
     ICON_KANGASKHAN_MEGA,
+    ICON_DARKRAI_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {

@@ -217,6 +217,7 @@ poke_icon_files += [
     meganium_mega_icon,
     skarmory_mega_icon,
     kangaskhan_mega_icon,
+    darkrai_mega_icon,
 ]
 
 otherpoke_files = []
