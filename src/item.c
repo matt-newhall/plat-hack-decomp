@@ -3115,6 +3115,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = darkranite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_HEATRANITE] = {
+        .dataID = 0x211,
+        .iconID = heatranite_NCGR,
+        .paletteID = heatranite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
