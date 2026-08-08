@@ -6668,7 +6668,11 @@ TagStrategy_CheckElectricMove:
     //  - The target's partner would redirect the move with Lightning Rod, score -1; additional
     //    score -8 if the target's partner is also a Ground type
     //  - The attacker's partner has Lightning Rod, score -10
+    //
+    // Stalwart ignores redirection entirely, so neither penalty applies to its user.
     IfMoveEqualTo MOVE_DISCHARGE, TagStrategy_SpreadElectricMove
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STALWART, TagStrategy_CheckElectric_End
     CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_LIGHTNING_ROD
     IfLoadedEqualTo AI_HAVE, TagStrategy_TargetProtectedByLightningRod
     GoTo TagStrategy_PartnerHasLightningRod
@@ -6717,7 +6721,11 @@ TagStrategy_CheckWaterMove:
     // following which are met:
     //  - The target's partner would redirect the move with Storm Drain, score -1
     //  - The attacker's partner has Storm Drain, score -10
+    //
+    // Stalwart ignores redirection entirely, so neither penalty applies to its user.
     IfMoveEqualTo MOVE_SURF, TagStrategy_SpreadWaterMove
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STALWART, TagStrategy_CheckWater_End
     CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_STORM_DRAIN
     IfLoadedEqualTo AI_NOT_HAVE, TagStrategy_CheckPartnerStormDrain
     AddToMoveScore -1

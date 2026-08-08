@@ -4714,9 +4714,12 @@ static BOOL BtlCmd_Counter(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->damage = -1;
         }
 
-        if (battleCtx->sideConditions[defendingSide].followMe && FOLLOW_ME_MON(defendingSide).curHP) {
+        if (battleCtx->sideConditions[defendingSide].followMe
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
+            && FOLLOW_ME_MON(defendingSide).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defendingSide);
         } else if (battleCtx->sideConditions[defendingSide].ragePowder && RAGE_POWDER_MON(defendingSide).curHP
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
             && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
             battleCtx->defender = RAGE_POWDER_USER(defendingSide);
         } else {
@@ -4789,9 +4792,12 @@ static BOOL BtlCmd_MirrorCoat(BattleSystem *battleSys, BattleContext *battleCtx)
             battleCtx->damage = -1;
         }
 
-        if (battleCtx->sideConditions[defendingSide].followMe && FOLLOW_ME_MON(defendingSide).curHP) {
+        if (battleCtx->sideConditions[defendingSide].followMe
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
+            && FOLLOW_ME_MON(defendingSide).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defendingSide);
         } else if (battleCtx->sideConditions[defendingSide].ragePowder && RAGE_POWDER_MON(defendingSide).curHP
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
             && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
             battleCtx->defender = RAGE_POWDER_USER(defendingSide);
         } else {
@@ -6712,9 +6718,12 @@ static BOOL BtlCmd_MagicCoat(BattleSystem *battleSys, BattleContext *battleCtx)
     battleCtx->magicCoatMon = attacker;
     battleCtx->attacker = battleCtx->defender;
 
-    if (battleCtx->sideConditions[target].followMe && FOLLOW_ME_MON(target).curHP) {
+    if (battleCtx->sideConditions[target].followMe
+        && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
+        && FOLLOW_ME_MON(target).curHP) {
         battleCtx->defender = FOLLOW_ME_USER(target);
     } else if (battleCtx->sideConditions[target].ragePowder && RAGE_POWDER_MON(target).curHP
+        && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
         && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
         battleCtx->defender = RAGE_POWDER_USER(target);
     } else if (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) {
@@ -7443,9 +7452,12 @@ static BOOL BtlCmd_TryMetalBurst(BattleSystem *battleSys, BattleContext *battleC
         && battleCtx->battleMons[ATTACKER_TURN_FLAGS.lastAttacker].curHP) {
         battleCtx->damage = ATTACKER_TURN_FLAGS.lastDamageTaken * 15 / 10;
 
-        if (battleCtx->sideConditions[defending].followMe && FOLLOW_ME_MON(defending).curHP) {
+        if (battleCtx->sideConditions[defending].followMe
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
+            && FOLLOW_ME_MON(defending).curHP) {
             battleCtx->defender = FOLLOW_ME_USER(defending);
         } else if (battleCtx->sideConditions[defending].ragePowder && RAGE_POWDER_MON(defending).curHP
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_STALWART
             && !IS_RAGE_POWDER_IMMUNE(battleCtx->attacker)) {
             battleCtx->defender = RAGE_POWDER_USER(defending);
         } else {

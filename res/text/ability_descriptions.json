@@ -1222,6 +1222,13 @@
         "All moves are used as if\n",
         "sunshine is active."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00175",
+      "en_US": [
+        "Ignores effects that\n",
+        "would draw in moves."
+      ]
     }
   ]
 }

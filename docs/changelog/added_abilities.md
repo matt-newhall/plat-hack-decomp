@@ -53,3 +53,4 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Dragonize
 - Innards Out
 - Mega Sol
+- Stalwart

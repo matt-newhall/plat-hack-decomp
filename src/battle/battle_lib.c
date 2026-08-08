@@ -1792,11 +1792,13 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
             if (battleCtx->sideConditions[enemySide].followMe
+                && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
                 && battleCtx->battleMons[battleCtx->sideConditions[enemySide].followMeUser].curHP) {
                 // If Follow Me is active and the user is still alive, re-point all targets toward them
                 defender = battleCtx->sideConditions[enemySide].followMeUser;
             } else if (battleCtx->sideConditions[enemySide].ragePowder
                 && RAGE_POWDER_MON(enemySide).curHP
+                && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
                 && !IS_RAGE_POWDER_IMMUNE(attacker)) {
                 defender = RAGE_POWDER_USER(enemySide);
             } else if (battleCtx->battleMons[opponents[0]].curHP
@@ -1816,11 +1818,13 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
         int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
 
         if (battleCtx->sideConditions[enemySide].followMe
+            && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
             && battleCtx->battleMons[battleCtx->sideConditions[enemySide].followMeUser].curHP) {
             // If Follow Me is active and the user is still alive, re-point all targets toward them
             defender = battleCtx->sideConditions[enemySide].followMeUser;
         } else if (battleCtx->sideConditions[enemySide].ragePowder
             && RAGE_POWDER_MON(enemySide).curHP
+            && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
             && !IS_RAGE_POWDER_IMMUNE(attacker)) {
             defender = RAGE_POWDER_USER(enemySide);
         } else if (battleCtx->battleMons[target].curHP) {
@@ -1842,7 +1846,8 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
     int battler, moveType; // must declare these first to match
 
     if (battleCtx->defender == BATTLER_NONE
-        || Battler_Ability(battleCtx, attacker) == ABILITY_MOLD_BREAKER) {
+        || Battler_Ability(battleCtx, attacker) == ABILITY_MOLD_BREAKER
+        || Battler_Ability(battleCtx, attacker) == ABILITY_STALWART) {
         return;
     }
 
@@ -1861,7 +1866,8 @@ void BattleSystem_CheckRedirectionAbilities(BattleSystem *battleSys, BattleConte
     }
 
     int defSide = BattleSystem_GetBattlerSide(battleSys, attacker) ^ 1;
-    if (battleCtx->sideConditions[defSide].followMe && FOLLOW_ME_MON(defSide).curHP) {
+    if (battleCtx->sideConditions[defSide].followMe
+        && FOLLOW_ME_MON(defSide).curHP) {
         return;
     }
     if (battleCtx->sideConditions[defSide].ragePowder && RAGE_POWDER_MON(defSide).curHP
