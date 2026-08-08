@@ -194,6 +194,7 @@ poke_icon_files += [
     salamence_mega_icon,
     lopunny_mega_icon,
     garchomp_mega_icon,
+    garchomp_mega_z_icon,
     abomasnow_mega_icon,
     gallade_mega_icon,
     gardevoir_mega_icon,
