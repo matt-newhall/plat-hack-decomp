@@ -1952,18 +1952,11 @@ static void MakeItemActionsMenu(BagController *controller)
             itemActionsIdx++;
         }
 
-        if (controller->bagCtx->mapLoadType == MAP_LOAD_TYPE_COLOSSEUM
-            || controller->bagCtx->mapLoadType == MAP_LOAD_TYPE_UNION) {
-            if (controller->bagCtx->accessiblePockets[controller->bagCtx->currPocketIdx].pocketType == POCKET_MAIL) {
-                itemActions[itemActionsIdx] = ITEM_ACTION_CHECK;
-                itemActionsIdx++;
-            }
-        } else {
+        if (controller->bagCtx->mapLoadType != MAP_LOAD_TYPE_COLOSSEUM
+            && controller->bagCtx->mapLoadType != MAP_LOAD_TYPE_UNION) {
             if (Item_Get(itemData, ITEM_PARAM_FIELD_USE_FUNC) != ITEM_USE_FUNC_NONE) {
                 if (controller->bagCtx->selectedItem == ITEM_BICYCLE && controller->bagCtx->isCycling == TRUE) {
                     itemActions[itemActionsIdx] = ITEM_ACTION_WALK;
-                } else if (controller->bagCtx->accessiblePockets[controller->bagCtx->currPocketIdx].pocketType == POCKET_MAIL) {
-                    itemActions[itemActionsIdx] = ITEM_ACTION_CHECK;
                 } else if (controller->bagCtx->selectedItem == ITEM_POFFIN_CASE) {
                     itemActions[itemActionsIdx] = ITEM_ACTION_OPEN;
                 } else if (controller->bagCtx->accessiblePockets[controller->bagCtx->currPocketIdx].pocketType == POCKET_BERRIES && BerryPatch_IsEmpty(controller->bagCtx->itemUseCtx) == TRUE) {

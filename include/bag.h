@@ -9,7 +9,7 @@
 #define ITEM_POCKET_SIZE        165
 #define KEY_ITEM_POCKET_SIZE    50
 #define TMHM_POCKET_SIZE        100
-#define MAIL_POCKET_SIZE        12
+#define MAIL_POCKET_SIZE        100
 #define MEDICINE_POCKET_SIZE    40
 #define BERRY_POCKET_SIZE       64
 #define POKEBALL_POCKET_SIZE    15

@@ -2568,6 +2568,7 @@ static void BoxAppMan_GiveItemFromBagAction(BoxApplicationManager *boxAppMan, u3
         POCKET_BALLS,
         POCKET_TMHMS,
         POCKET_BERRIES,
+        POCKET_MAIL,
         POCKET_BATTLE_ITEMS,
         POCKET_KEY_ITEMS,
         POCKET_LIST_END,

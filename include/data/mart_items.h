@@ -34,27 +34,23 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
 };
 
 const u16 JubilifeMartSpecialties[] = {
-    ITEM_AIR_MAIL,
     ITEM_HEAL_BALL,
     SHOP_ITEM_END
 };
 
 const u16 OreburghMartSpecialties[] = {
-    ITEM_TUNNEL_MAIL,
     ITEM_HEAL_BALL,
     ITEM_NET_BALL,
     SHOP_ITEM_END
 };
 
 const u16 FloaromaMartSpecialties[] = {
-    ITEM_BLOOM_MAIL,
     ITEM_HEAL_BALL,
     ITEM_NET_BALL,
     SHOP_ITEM_END
 };
 
 const u16 EternaMartSpecialties[] = {
-    ITEM_AIR_MAIL,
     ITEM_HEAL_BALL,
     ITEM_NET_BALL,
     ITEM_NEST_BALL,
@@ -70,7 +66,6 @@ const u16 EternaHerbShopStock[] = {
 };
 
 const u16 HearthomeMartSpecialties[] = {
-    ITEM_HEART_MAIL,
     ITEM_HEAL_BALL,
     ITEM_NET_BALL,
     ITEM_NEST_BALL,
@@ -78,7 +73,6 @@ const u16 HearthomeMartSpecialties[] = {
 };
 
 const u16 SolaceonMartSpecialties[] = {
-    ITEM_AIR_MAIL,
     ITEM_NET_BALL,
     ITEM_NEST_BALL,
     ITEM_DUSK_BALL,
@@ -86,7 +80,6 @@ const u16 SolaceonMartSpecialties[] = {
 };
 
 const u16 PastoriaMartSpecialties[] = {
-    ITEM_AIR_MAIL,
     ITEM_NEST_BALL,
     ITEM_DUSK_BALL,
     ITEM_QUICK_BALL,
@@ -117,10 +110,6 @@ const u16 VeilstoneDeptStoreStock_1F_LEFT[] = {
     ITEM_REPEL,
     ITEM_SUPER_REPEL,
     ITEM_MAX_REPEL,
-    ITEM_GRASS_MAIL,
-    ITEM_FLAME_MAIL,
-    ITEM_BUBBLE_MAIL,
-    ITEM_SPACE_MAIL,
     SHOP_ITEM_END
 };
 
@@ -168,7 +157,6 @@ const u16 VeilstoneDeptStoreStock_3F_DOWN[] = {
 };
 
 const u16 CelesticMartSpecialties[] = {
-    ITEM_AIR_MAIL,
     ITEM_DUSK_BALL,
     ITEM_QUICK_BALL,
     ITEM_TIMER_BALL,
@@ -176,7 +164,6 @@ const u16 CelesticMartSpecialties[] = {
 };
 
 const u16 SnowpointMartSpecialties[] = {
-    ITEM_SNOW_MAIL,
     ITEM_DUSK_BALL,
     ITEM_QUICK_BALL,
     ITEM_TIMER_BALL,
@@ -184,7 +171,6 @@ const u16 SnowpointMartSpecialties[] = {
 };
 
 const u16 CanalaveMartSpecialties[] = {
-    ITEM_AIR_MAIL,
     ITEM_QUICK_BALL,
     ITEM_TIMER_BALL,
     ITEM_REPEAT_BALL,
@@ -192,7 +178,6 @@ const u16 CanalaveMartSpecialties[] = {
 };
 
 const u16 SunyshoreMartSpecialties[] = {
-    ITEM_STEEL_MAIL,
     ITEM_LUXURY_BALL,
     SHOP_ITEM_END
 };

@@ -296,7 +296,7 @@ CommonScript_PlayFanfare_SEQ_FANFA3:
     Return
 
 CommonScript_PlayFanfare_SEQ_FANFA2:
-    PlayFanfare SEQ_FANFA2
+    PlayFanfare SEQ_FANFA6
     Return
 
 CommonScript_Unused:
