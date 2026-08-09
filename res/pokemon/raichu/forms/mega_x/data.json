@@ -34,7 +34,7 @@
         "EGG_GROUP_FAIRY"
     ],
     "abilities": [
-        "ABILITY_LIGHTNING_ROD",
+        "ABILITY_GALVANIZE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
