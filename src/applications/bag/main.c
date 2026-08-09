@@ -1976,6 +1976,9 @@ static void MakeItemActionsMenu(BagController *controller)
                 itemActions[itemActionsIdx] = ITEM_ACTION_TRASH;
                 itemActionsIdx++;
             }
+        } else if (currentPocketType == POCKET_MAIL) {
+            itemActions[itemActionsIdx] = ITEM_ACTION_GIVE;
+            itemActionsIdx++;
         }
         if (Item_Get(itemData, ITEM_PARAM_IS_SELECTABLE)) {
             if (Bag_GetRegisteredItem(controller->bag) == controller->bagCtx->selectedItem) {
@@ -2546,7 +2549,8 @@ static int ProcessItemListInput_GiveToMon(BagController *controller)
         u8 input = ProcessItemListMenuInput(controller);
 
         if (input == ITEM_LIST_INPUT_SELECT_ITEM) {
-            if (Item_LoadParam(controller->bagCtx->selectedItem, ITEM_PARAM_PREVENT_TOSS, HEAP_ID_BAG)) {
+            if (Item_LoadParam(controller->bagCtx->selectedItem, ITEM_PARAM_PREVENT_TOSS, HEAP_ID_BAG)
+                && controller->bagCtx->accessiblePockets[controller->bagCtx->currPocketIdx].pocketType != POCKET_MAIL) {
                 String *string;
 
                 Window_FillTilemap(&controller->windows[BAG_UI_WINDOW_MSG_BOX_WIDE], 15);
