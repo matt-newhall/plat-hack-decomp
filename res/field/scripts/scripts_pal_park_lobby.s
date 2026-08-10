@@ -620,6 +620,7 @@ PalParkLobby_BattleWon:
     SetFlag FLAG_HIDE_PAL_PARK_LOBBY_RIVALS
     SetFlag FLAG_HIDE_PAL_PARK_LOBBY_COUNTERPART
     SetVar VAR_PAL_PARK_LOBBY_STATE, 1
+    SetFlag FLAG_HIDE_VALOR_LAKEFRONT_COLLECTOR
     FadeScreenIn
     WaitFadeScreen
     ReleaseAll
