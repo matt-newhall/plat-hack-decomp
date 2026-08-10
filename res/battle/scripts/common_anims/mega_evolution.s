@@ -28,8 +28,19 @@
     .equ MEGA_CHARGE_FRAMES,      45
     .equ MEGA_CHARGE_AFTER_GLOW,  MEGA_CHARGE_FRAMES - MEGA_CHARGE_GLOW_AT
 
+    .equ MEGA_FLARE_PARTICLES, seed_flare_spa
+    .equ MEGA_FLARE_EMITTER_A, 1
+    .equ MEGA_FLARE_EMITTER_B, 2
+
+    .equ MEGA_FLARE_START_DELAY, 45
+    .equ MEGA_SHELL_FRAMES,      75
+    .equ MEGA_FLARE_LEAD,        MEGA_SHELL_FRAMES - MEGA_FLARE_START_DELAY
+
+    .equ MEGA_BREAK_TAIL_FRAMES, 40
+
     .equ MEGA_CHARGE_SYSTEM, 1
     .equ MEGA_BURST_SYSTEM,  0
+    .equ MEGA_FLARE_SYSTEM,  2
 
     .equ MEGA_SHAKE_TARGET,   BATTLE_ANIM_BATTLER_SPRITES | BATTLE_ANIM_ATTACKER
     .equ MEGA_SHAKE_EXTENT_X, 3
@@ -52,6 +63,8 @@
     LoadParticleSystem MEGA_BURST_SYSTEM, luster_purge_spa
     WaitForAnimTasks
     LoadParticleSystem MEGA_CHARGE_SYSTEM, MEGA_CHARGE_PARTICLES
+    WaitForAnimTasks
+    LoadParticleSystem MEGA_FLARE_SYSTEM, MEGA_FLARE_PARTICLES
     WaitForAnimTasks
     FreePokemonSpriteManager
     RemovePokemonSprite BATTLE_ANIM_MON_SPRITE_0
@@ -89,16 +102,22 @@ L_0:
     LoadPlttRes 0, 32, 1
     LoadCellResObj 0, 32
     LoadAnimResObj 0, 32
-    AddSpriteWithFunc 0, 33, 32, 32, 32, 32, 0, 0, 73, 75
+    AddSpriteWithFunc 0, 33, 32, 32, 32, 32, 0, 0, 73, MEGA_SHELL_FRAMES
     PlayPannedSoundEffect SEQ_SE_DP_W360, BATTLE_SOUND_PAN_LEFT
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 1
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 2
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 3
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 4
-    Delay 75
+    Delay MEGA_FLARE_LEAD
+
+    MegaEvolutionEmitter MEGA_FLARE_SYSTEM, MEGA_FLARE_EMITTER_A
+    MegaEvolutionEmitter MEGA_FLARE_SYSTEM, MEGA_FLARE_EMITTER_B
+    Delay MEGA_FLARE_START_DELAY
+
     PlayPannedSoundEffect SEQ_SE_DP_W360C, BATTLE_SOUND_PAN_LEFT
     Func_Shake MEGA_SHAKE_EXTENT_X, 0, MEGA_SHAKE_INTERVAL, MEGA_SHAKE_CYCLES, MEGA_SHAKE_TARGET
-    Delay 25
+    Delay MEGA_BREAK_TAIL_FRAMES
+    UnloadParticleSystem MEGA_FLARE_SYSTEM
     UnloadParticleSystem MEGA_BURST_SYSTEM
     UnloadParticleSystem MEGA_CHARGE_SYSTEM
     FreeSpriteManager 0
