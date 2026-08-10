@@ -118,6 +118,7 @@ void BattleDisplay_PrintResultMessage(BattleSystem *battleSys, BattlerData *batt
 void BattleDisplay_PrintEscapeMessage(BattleSystem *battleSys, BattlerData *battlerData, EscapeMsgMessage *message);
 void BattleDisplay_PrintForfeitMessage(BattleSystem *battleSys, BattlerData *battlerData);
 void BattleDisplay_RefreshSprite(BattleSystem *battleSys, BattlerData *battlerData, MoveAnimation *moveAnim);
+void BattleDisplay_InitTaskPlayEntryAnimation(BattleSystem *battleSys, BattlerData *battlerData, MonEntryAnimMessage *message);
 void BattleDisplay_FlyMoveHitSoundEffect(BattleSystem *battleSys, BattlerData *battlerData, MoveHitSoundMessage *message);
 void BattleDisplay_PlayMusic(BattleSystem *battleSys, BattlerData *battlerData, MusicPlayMessage *message);
 void BattlerData_SetTaskFuncs(BattleSystem *battleSys, BattlerData *battlerData);

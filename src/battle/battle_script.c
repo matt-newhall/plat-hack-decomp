@@ -342,6 +342,7 @@ static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -10334,6 +10335,28 @@ static BOOL BtlCmd_RefreshSprite(BattleSystem *battleSys, BattleContext *battleC
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     BattleController_EmitRefreshSprite(battleSys, battleCtx, battler);
+
+    return FALSE;
+}
+
+/**
+ * @brief Replay a battler's send-out animation and cry, e.g., after it has
+ * Mega Evolved and its sprite has been swapped out.
+ *
+ * Inputs:
+ * 1. The battler whose entry animation should be replayed.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    BattleController_EmitPlayEntryAnimation(battleSys, battler);
 
     return FALSE;
 }

@@ -122,6 +122,7 @@ void BattleController_EmitResultMessage(BattleSystem *battleSys);
 void BattleController_EmitEscapeMessage(BattleSystem *battleSys, BattleContext *battleCtx);
 void BattleController_EmitForfeitMessage(BattleSystem *battleSys);
 void BattleController_EmitRefreshSprite(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+void BattleController_EmitPlayEntryAnimation(BattleSystem *battleSys, int battler);
 void BattleController_EmitPlayMoveHitSoundEffect(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 void BattleController_EmitPlayMusic(BattleSystem *battleSys, int battler, int bgmID);
 void BattleController_EmitSubmitResult(BattleSystem *battleSys);

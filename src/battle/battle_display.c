@@ -1714,6 +1714,82 @@ void BattleDisplay_RefreshSprite(BattleSystem *battleSys, BattlerData *battlerDa
     BattleController_EmitClearCommand(battleSys, battlerData->battler, animation->command);
 }
 
+typedef struct MonEntryAnimData {
+    BattleSystem *battleSys;
+    BattlerData *battlerData;
+    PokemonSprite *monSprite;
+    enum PokemonCryMod cryMod;
+    u16 species;
+    u8 formNum;
+    u8 command;
+    u8 battler;
+    u8 face;
+    u8 state;
+    u8 unused[1];
+} MonEntryAnimData;
+
+static void Task_PlayEntryAnimation(SysTask *task, void *data)
+{
+    MonEntryAnimData *entryAnimData = data;
+
+    switch (entryAnimData->state) {
+    case 0:
+        PokemonSprite_InitAnim(entryAnimData->monSprite, 1);
+        PokemonSprite_LoadAnim(entryAnimData->battlerData->narc,
+            BattleSystem_GetPokemonAnimManager(entryAnimData->battleSys),
+            entryAnimData->monSprite,
+            entryAnimData->species,
+            entryAnimData->face,
+            0,
+            entryAnimData->battler);
+
+        u8 cryDelay;
+
+        PokemonSprite_LoadCryDelay(entryAnimData->battlerData->narc, &cryDelay, entryAnimData->species, entryAnimData->battlerData->battlerType);
+        Species_PlayDelayedCry(BattleSystem_GetChatotCry(entryAnimData->battleSys, entryAnimData->battler),
+            entryAnimData->cryMod,
+            entryAnimData->species,
+            entryAnimData->formNum,
+            entryAnimData->face == FACE_FRONT ? BATTLE_SOUND_PAN_RIGHT : BATTLE_SOUND_PAN_LEFT,
+            SOUND_VOLUME_MAX,
+            NULL,
+            HEAP_ID_BATTLE,
+            cryDelay);
+
+        entryAnimData->state++;
+        break;
+    case 1:
+        if (PokemonAnimManager_HasAnimCompleted(BattleSystem_GetPokemonAnimManager(entryAnimData->battleSys), entryAnimData->battler) == TRUE
+            && PokemonSprite_IsAnimActive(entryAnimData->monSprite) == FALSE) {
+            entryAnimData->state = 0xFF;
+        }
+        break;
+    default:
+        BattleController_EmitClearCommand(entryAnimData->battleSys, entryAnimData->battler, entryAnimData->command);
+        Heap_Free(data);
+        SysTask_Done(task);
+        break;
+    }
+}
+
+void BattleDisplay_InitTaskPlayEntryAnimation(BattleSystem *battleSys, BattlerData *battlerData, MonEntryAnimMessage *message)
+{
+    MonEntryAnimData *entryAnimData = Heap_Alloc(HEAP_ID_BATTLE, sizeof(MonEntryAnimData));
+
+    entryAnimData->state = 0;
+    entryAnimData->battleSys = battleSys;
+    entryAnimData->battlerData = battlerData;
+    entryAnimData->monSprite = battlerData->monSprite;
+    entryAnimData->command = message->command;
+    entryAnimData->battler = battlerData->battler;
+    entryAnimData->species = message->species;
+    entryAnimData->formNum = message->formNum;
+    entryAnimData->cryMod = message->cryModulation;
+    entryAnimData->face = (battlerData->battlerType & BATTLER_THEM) ? FACE_FRONT : FACE_BACK;
+
+    SysTask_Start(Task_PlayEntryAnimation, entryAnimData, 0);
+}
+
 void BattleDisplay_FlyMoveHitSoundEffect(BattleSystem *battleSys, BattlerData *battlerData, MoveHitSoundMessage *message)
 {
     int pan;
