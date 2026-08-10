@@ -345,6 +345,13 @@ typedef struct MonChangeFormMessage {
     u32 personality;
 } MonChangeFormMessage;
 
+typedef struct MonEntryAnimMessage {
+    u8 command;
+    u8 formNum;
+    u16 species;
+    enum PokemonCryMod cryModulation;
+} MonEntryAnimMessage;
+
 typedef struct RecordIncrementMessage {
     u8 command;
     u8 battlerType;

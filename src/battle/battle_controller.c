@@ -1610,6 +1610,25 @@ void BattleController_EmitChangeWeatherForm(BattleSystem *battleSys, int battler
 }
 
 /**
+ * @brief Emits a message to replay a battler's send-out animation and cry,
+ * e.g., after it has Mega Evolved into a different sprite.
+ *
+ * @param battleSys
+ * @param battler
+ */
+void BattleController_EmitPlayEntryAnimation(BattleSystem *battleSys, int battler)
+{
+    MonEntryAnimMessage message;
+
+    message.command = BATTLE_COMMAND_PLAY_ENTRY_ANIMATION;
+    message.species = battleSys->battleCtx->battleMons[battler].species;
+    message.formNum = battleSys->battleCtx->battleMons[battler].formNum;
+    message.cryModulation = Battler_CryModulation(battleSys->battleCtx, battler, BattleSystem_GetBattlerType(battleSys, battler), 1);
+
+    SendMessage(battleSys, COMM_RECIPIENT_CLIENT, battler, &message, sizeof(MonEntryAnimMessage));
+}
+
+/**
  * @brief Emits a message to update the BG layer
  *
  * @param battleSys

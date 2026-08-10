@@ -109,6 +109,7 @@ static void BtlIOCmd_FlyMoveHitSoundEffect(BattleSystem *battleSys, BattlerData 
 static void BtlIOCmd_PlayMusic(BattleSystem *battleSys, BattlerData *battlerData);
 static void BtlIOCmd_SubmitResult(BattleSystem *battleSys, BattlerData *battlerData);
 static void BtlIOCmd_ClearMessageBox(BattleSystem *battleSys, BattlerData *battlerData);
+static void BtlIOCmd_PlayEntryAnimation(BattleSystem *battleSys, BattlerData *battlerData);
 static void ZeroDataBuffer(BattlerData *battlerData);
 
 extern const u8 sBallThrowTypes[];
@@ -225,6 +226,7 @@ static const BattleCommandPtr sBattleCommands[] = {
     [BATTLE_COMMAND_PLAY_MUSIC] = BtlIOCmd_PlayMusic,
     [BATTLE_COMMAND_SUBMIT_RESULT] = BtlIOCmd_SubmitResult,
     [BATTLE_COMMAND_CLEAR_MESSAGE_BOX] = BtlIOCmd_ClearMessageBox,
+    [BATTLE_COMMAND_PLAY_ENTRY_ANIMATION] = BtlIOCmd_PlayEntryAnimation,
 };
 
 void BattleSystem_ExecuteBattlerCommand(BattleSystem *battleSys, BattlerData *battlerData)
@@ -714,6 +716,14 @@ static void BtlIOCmd_ChangeWeatherForm(BattleSystem *battleSys, BattlerData *bat
     PokemonSprite_SetAttribute(battlerData->monSprite, MON_SPRITE_SHADOW_HEIGHT, spriteLift);
 
     BattleController_EmitClearCommand(battleSys, battlerData->battler, message->command);
+    ZeroDataBuffer(battlerData);
+}
+
+static void BtlIOCmd_PlayEntryAnimation(BattleSystem *battleSys, BattlerData *battlerData)
+{
+    MonEntryAnimMessage *message = (MonEntryAnimMessage *)&battlerData->data[0];
+
+    BattleDisplay_InitTaskPlayEntryAnimation(battleSys, battlerData, message);
     ZeroDataBuffer(battlerData);
 }
 

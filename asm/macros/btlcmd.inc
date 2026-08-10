@@ -1392,6 +1392,11 @@
     .long (\jump_if_contrary-.) / 4 - 1
     .endm
 
+    .macro PlayEntryAnimation battler:req
+    .long BTLCMD_PLAYENTRYANIMATION
+    .long \battler
+    .endm
+
     .text
     .globl _start
 _start:

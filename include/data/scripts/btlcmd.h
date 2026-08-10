@@ -260,6 +260,7 @@ ScriptCommand(BTLCMD_SETUPEJECTPACK,                      BtlCmd_SetupEjectPack)
 ScriptCommand(BTLCMD_CHECKMEGASTONELOCKED,                BtlCmd_CheckMegaStoneLocked)
 ScriptCommand(BTLCMD_TRYMEGAEVOLVEATTACKER,               BtlCmd_TryMegaEvolveAttacker)
 ScriptCommand(BTLCMD_CHECKCONTRARY,                       BtlCmd_CheckContrary)
+ScriptCommand(BTLCMD_PLAYENTRYANIMATION,                  BtlCmd_PlayEntryAnimation)
 
 // clang-format on
 
