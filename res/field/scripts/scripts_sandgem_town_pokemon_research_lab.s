@@ -107,6 +107,8 @@ SandgemTownLab_WhyNotObtainSunyshoresBadge:
     Message SandgemTownLab_Text_WhyNotObtainSunyshoresBadge
     WaitButton
     CloseMessage
+    SetFlag FLAG_HIDE_ROUTE_219_WORKER
+    SetVar VAR_ROUTE_219_STATE 2
     SetVar VAR_UNK_0x4112, 1
     ActivateRoamingPokemon ROAMING_SLOT_MESPRIT
     ActivateRoamingPokemon ROAMING_SLOT_UXIE

@@ -284,36 +284,6 @@
             "x": 250,
             "z": 902,
             "y": 0
-        },
-        {
-            "id": "LOCALID_WORKER_WEST",
-            "graphics_id": "OBJ_EVENT_GFX_WORKER",
-            "movement_type": "MOVEMENT_TYPE_NONE",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_ROUTE_221_WORKER_WEST",
-            "script": 1,
-            "initial_dir": 1,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 306,
-            "z": 912,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_WORKER_EAST",
-            "graphics_id": "OBJ_EVENT_GFX_WORKER",
-            "movement_type": "MOVEMENT_TYPE_NONE",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_ROUTE_221_WORKER_EAST",
-            "script": 2,
-            "initial_dir": 1,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 307,
-            "z": 912,
-            "y": 0
         }
     ],
     "warp_events": [

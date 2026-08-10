@@ -2,11 +2,23 @@
   "key": 39612,
   "messages": [
     {
-      "id": "Route219_Text_SignSandgemBeach",
-      "en_US": [
-        "Rt. 219\n",
-        "Sandgem Beach"
-      ]
+        "id": "Route219_Text_SignSandgemBeach",
+        "en_US": [
+            "Rt. 219\n",
+            "Sandgem Beach"
+        ]
+    },
+    {
+      "id": "Route219_Text_WorkerNoAccess",
+        "en_US": [
+            "Hey kid,\n",
+            "We’re currently hard at work preparing\f",
+            "the new Pal Park for the grand opening.\r",
+            "There are some pretty heavy\n",
+            "renovations going on through here.\r",
+            "It’s not safe for civilians so\n",
+            "no-one is allowed past this point."
+        ]
     }
   ]
 }
