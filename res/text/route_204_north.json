@@ -147,7 +147,22 @@
         {
             "id": "Route204North_Text_PromotionalRouteCongrats",
             "en_US": [
-                "Yay you did it"
+                "Chapeau! It seems that you have \n",
+                "defeated every trainer on Route 204!\f",
+                "Here is your reward as promised.\r",
+                "Would you like the Silk Scarf or\n",
+                "5 Chilan Berries?"
+            ]
+        },
+        {
+            "id": "Route204North_Text_WatchOutForMorePromotions",
+            "en_US": [
+                "Keep an eye out for me around the\n",
+                "region.\r",
+                "There will be plenty more promotions\n",
+                "to come, courtesy of the SBC.\r",
+                "I’m thinking Eterna Forest will be\n",
+                "a good next stop."
             ]
         }
     ]
