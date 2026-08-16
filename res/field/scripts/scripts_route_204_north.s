@@ -41,10 +41,86 @@ Route204North_BagIsFull:
     End
 
 Route204North_JulienTrainerCount:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    SetVar VAR_ROUTE_204_TRAINERS_REMAINING 6
+    SetVar VAR_ROUTE_204_TRAINERS_COUNTED 0
+    GoTo Route204North_CountTrainers
+
+Route204North_CountTrainers:
+    GoToIfEq VAR_ROUTE_204_TRAINERS_COUNTED, 0, Route204North_CheckBugCatcherBrandon
+    GoToIfEq VAR_ROUTE_204_TRAINERS_COUNTED, 1, Route204North_CheckAromaLadyTaylor
+    GoToIfEq VAR_ROUTE_204_TRAINERS_COUNTED, 2, Route204North_CheckTwinsLivAndLiz
+    GoToIfEq VAR_ROUTE_204_TRAINERS_COUNTED, 3, Route204North_CheckLassSarah
+    GoToIfEq VAR_ROUTE_204_TRAINERS_COUNTED, 4, Route204North_CheckLassSamantha
+    GoToIfEq VAR_ROUTE_204_TRAINERS_COUNTED, 5, Route204North_CheckYoungsterTyler
+    GoToIfEq VAR_ROUTE_204_TRAINERS_REMAINING, 1, Route204North_JulienTrainerCountSingular
+    GoToIfEq VAR_ROUTE_204_TRAINERS_REMAINING, 0, Route204North_WonPromotional
     BufferNumber 0, VAR_ROUTE_204_TRAINERS_REMAINING
-    NPCMessage Route204North_Text_JulienTrainerCount
+    Message Route204North_Text_JulienTrainerCount
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+    
+Route204North_JulienTrainerCountSingular:
+    BufferNumber 0, VAR_ROUTE_204_TRAINERS_REMAINING
+    Message Route204North_Text_JulienTrainerCountSingular
+    WaitButton
+    CloseMessage
+    ReleaseAll
     End
 
+Route204North_PromotionalTrainerDefeated:
+    SubVar VAR_ROUTE_204_TRAINERS_REMAINING 1
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+Route204North_WonPromotional:
+    Message Route204North_Text_PromotionalRouteCongrats
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+       
+Route204North_CheckBugCatcherBrandon:
+    CheckTrainerFlag TRAINER_BUG_CATCHER_BRANDON
+    GoToIfDefeated TRAINER_BUG_CATCHER_BRANDON, Route204North_PromotionalTrainerDefeated
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+Route204North_CheckAromaLadyTaylor:
+    CheckTrainerFlag TRAINER_AROMA_LADY_TAYLOR
+    GoToIfDefeated TRAINER_AROMA_LADY_TAYLOR, Route204North_PromotionalTrainerDefeated
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+Route204North_CheckTwinsLivAndLiz:
+    CheckTrainerFlag TRAINER_TWINS_LIV_AND_LIZ
+    GoToIfDefeated TRAINER_TWINS_LIV_AND_LIZ, Route204North_PromotionalTrainerDefeated
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+Route204North_CheckLassSarah:
+    CheckTrainerFlag TRAINER_LASS_SARAH
+    GoToIfDefeated TRAINER_LASS_SARAH, Route204North_PromotionalTrainerDefeated
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+Route204North_CheckLassSamantha:
+    CheckTrainerFlag TRAINER_LASS_SAMANTHA
+    GoToIfDefeated TRAINER_LASS_SAMANTHA, Route204North_PromotionalTrainerDefeated
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+Route204North_CheckYoungsterTyler:
+    CheckTrainerFlag TRAINER_YOUNGSTER_TYLER
+    GoToIfDefeated TRAINER_YOUNGSTER_TYLER, Route204North_PromotionalTrainerDefeated
+    AddVar VAR_ROUTE_204_TRAINERS_COUNTED 1
+    GoTo Route204North_CountTrainers
+
+    
 Route204North_ArrowSignpostFloaromaTown:
     ShowArrowSign Route204North_Text_Rt204FloaromaTown
     End
