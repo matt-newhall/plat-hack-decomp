@@ -7,6 +7,7 @@
     ScriptEntry Route204North_AceTrainerF
     ScriptEntry Route204North_ArrowSignpostFloaromaTown
     ScriptEntry Route204North_RivalTrigger
+    ScriptEntry Route204North_JulienTrainerCount
     ScriptEntryEnd
 
 Route204North_Youngster:
@@ -37,6 +38,11 @@ Route204North_BagIsFull:
     Common_MessageBagIsFull
     CloseMessage
     ReleaseAll
+    End
+
+Route204North_JulienTrainerCount:
+    BufferNumber 0, VAR_ROUTE_204_TRAINERS_REMAINING
+    NPCMessage Route204North_Text_JulienTrainerCount
     End
 
 Route204North_ArrowSignpostFloaromaTown:
@@ -79,6 +85,8 @@ Route204North_RivalIntro:
     BufferPlayerName 1
     Message Route204North_Text_OfCourseIGotTougherIllDemonstrateItToYou
     CloseMessage
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienFaceWest
+    WaitMovement
     GetPlayerStarterSpecies VAR_RESULT
     GoToIfEq VAR_RESULT, SPECIES_TURTWIG, Route204North_StartRivalBattleTurtwig
     GoToIfEq VAR_RESULT, SPECIES_CHIMCHAR, Route204North_StartRivalBattleChimchar
@@ -127,7 +135,7 @@ Route204North_RemoveRival:
     RemoveObject LOCALID_RIVAL
     SetFlag FLAG_HIDE_ROUTE_204_RIVAL
     SetVar VAR_ROUTE_204_RIVAL_STATE, 1
-    ReleaseAll
+    GoTo Route204North_JulienApproachPlayer
     End
 
 Route204North_BlackOutRivalBattle:
@@ -162,9 +170,131 @@ Route204North_Movement_RivalApproachX172:
     WalkFastNorth 1
     EndMovement
 
+Route204North_JulienApproachPlayer:
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_0x8004, 170, Route204North_JulienApproachX170
+    GoToIfEq VAR_0x8004, 171, Route204North_JulienApproachX171
+    GoToIfEq VAR_0x8004, 172, Route204North_JulienApproachX172
+    End
+
+Route204North_JulienApproachX170:
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienApproachX170
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route204North_Movement_PlayerFaceNorth
+    GoTo Route204North_JulienIntro
+
+Route204North_JulienApproachX171:
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienApproachX171
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route204North_Movement_PlayerFaceNorth
+    GoTo Route204North_JulienIntro
+
+Route204North_JulienApproachX172:
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienApproachX172
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route204North_Movement_PlayerFaceNorth
+    GoTo Route204North_JulienIntro
+
+    .balign 4, 0
+Route204North_Movement_JulienApproachX170:
+    WalkNormalNorth 2
+    WalkNormalWest 5
+    WalkNormalSouth 2
+    EndMovement
+
+    .balign 4, 0
+Route204North_Movement_JulienApproachX171:
+    WalkNormalNorth 2
+    WalkNormalWest 4
+    WalkNormalSouth 2
+    EndMovement
+
+    .balign 4, 0
+Route204North_Movement_JulienApproachX172:
+    WalkNormalNorth 2
+    WalkNormalWest 3
+    WalkNormalSouth 2
+    EndMovement
+
+Route204North_JulienIntro:
+    Message Route204North_Text_BonjourChamp
+    ShowYesNoMenu VAR_RESULT
+    GoToIfEq VAR_RESULT, MENU_YES, Route204North_IHaveTime
+    GoToIfEq VAR_RESULT, MENU_NO, Route204North_IDontHaveTime
+    CloseMessage
+
+Route204North_IHaveTime:
+    Message Route204North_Text_SocietyOfBattleConnoisseurs
+    WaitButton
+    CloseMessage
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_0x8004, 170, Route204North_JulienLeaveX170
+    GoToIfEq VAR_0x8004, 171, Route204North_JulienLeaveX171
+    GoToIfEq VAR_0x8004, 172, Route204North_JulienLeaveX172
+    End
+
+Route204North_IDontHaveTime:
+    Message Route204North_Text_SuitYourself
+    WaitButton
+    CloseMessage
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_0x8004, 170, Route204North_JulienLeaveX170
+    GoToIfEq VAR_0x8004, 171, Route204North_JulienLeaveX171
+    GoToIfEq VAR_0x8004, 172, Route204North_JulienLeaveX172
+    End
+
+Route204North_JulienLeaveX170:
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX170
+    WaitMovement
+    ReleaseAll
+    EndMovement
+
+Route204North_JulienLeaveX171:
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX171
+    WaitMovement
+    ReleaseAll
+    EndMovement
+
+Route204North_JulienLeaveX172:
+    ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX172
+    WaitMovement
+    ReleaseAll
+    EndMovement
+
+    .balign 4, 0
+Route204North_Movement_JulienLeaveX170:
+    WalkNormalNorth 2
+    WalkNormalEast 5
+    WalkNormalSouth 2
+    EndMovement
+
+    .balign 4, 0
+Route204North_Movement_JulienLeaveX171:
+    WalkNormalNorth 2
+    WalkNormalEast 4
+    WalkNormalSouth 2
+    EndMovement
+
+    .balign 4, 0
+Route204North_Movement_JulienLeaveX172:
+    WalkNormalNorth 2
+    WalkNormalEast 3
+    WalkNormalSouth 2
+    EndMovement
+
     .balign 4, 0
 Route204North_Movement_PlayerFaceSouth:
     FaceSouth
+    EndMovement
+
+    .balign 4, 0
+Route204North_Movement_PlayerFaceNorth:
+    FaceNorth
+    EndMovement
+
+.balign 4, 0
+Route204North_Movement_JulienFaceWest:
+    FaceWest
     EndMovement
 
     .balign 4, 0

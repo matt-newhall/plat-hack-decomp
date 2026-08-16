@@ -58,19 +58,83 @@
       ]
     },
     {
-      "id": "Route204North_Text_WhatDoYouMeanILost",
-      "en_US": [
-        "{STRVAR_1 3, 0, 0}: Waah!\n",
-        "What do you mean I lost?!\r",
-        "Well, that’s it!\n",
-        "That’s the last time I’ll ever lose!\r",
-        "I’m going to be the world’s toughest\n",
-        "Trainer, and you know it!\r",
-        "The first thing to do is take on\n",
-        "the Eterna City Pokémon Gym!\r",
-        "I’m gonna toughen up for that,\n",
-        "totally!\r"
-      ]
+        "id": "Route204North_Text_WhatDoYouMeanILost",
+        "en_US": [
+            "{STRVAR_1 3, 0, 0}: Waah!\n",
+            "What do you mean I lost?!\r",
+            "Well, that’s it!\n",
+            "That’s the last time I’ll ever lose!\r",
+            "I’m going to be the world’s toughest\n",
+            "Trainer, and you know it!\r",
+            "The first thing to do is take on\n",
+            "the Eterna City Pokémon Gym!\r",
+            "I’m gonna toughen up for that,\n",
+            "totally!\r"
+        ]
+    },
+    {
+        "id": "Route204North_Text_BonjourChamp",
+        "en_US": [
+            "Bonjour, Champ.\n",
+            "I was watching you battle just now.\f",
+            "Your skills were très fantastique!\r",
+            "I have been searching for a trainer\n",
+            "like you.\r",
+            "My name is Julien.\n",
+            "Do you have time to hear about a\f",
+            "promotion the SBC is running all over\f",
+            "the region of Sinnoh?"
+        ]
+    },
+    {
+        "id": "Route204North_Text_SocietyOfBattleConnoisseurs",
+        "en_US": [
+            "As I say, I am a member of the\n",
+            "Society of Battle Connoisseurs\f",
+            "from the Kalos region.\r",
+            "I have been sent on a mission by\n",
+            "Lady Jacinthe to get the Sinnoh region\f",
+            "as excited as we are for Pokémon\f",
+            "battles and to recruit new members.\r",
+            "To achieve this we are running\n",
+            "promotions all over the region.\r",
+            "There are some trainers who linger\n",
+            "off of the beaten path, in order to\f",
+            "avoid Pokémon battles. L’horreur!\r",
+            "If you seek out and defeat all of these\n",
+            "trainers, I will grant you items that\f",
+            "will help in your upcoming battles.\r",
+            "The first of these is here on Route 204.\n",
+            "If you can defeat all the trainers on\f",
+            "both the north and south portions, I \f",
+            "will give you either a Silk Scarf, or\f",
+            "5 Chilan Berries.\r",
+            "Move quickly, as I can’t stay here for\n",
+            "long. If you continue on past the Valley\f",
+            "Windworks I will have to move on.\r",
+            "Come see me when you’ve defeated them.\n",
+            "Good Luck Champ!"
+        ]
+    },
+    {
+        "id": "Route204North_Text_SuitYourself",
+        "en_US": [
+            "Aucun souci. You must be very busy.\n",
+            "At least come see me if you defeat\f",
+            "every trainer on Route 204.\r",
+            "It will be worth your time.\n",
+            "Au revoir."
+        ]
+    },
+    {
+        "id": "Route204North_Text_JulienTrainerCount",
+        "en_US": [
+            "Bonjour again.\n",
+            "There are {STRVAR_1 0, 0, 0} Trainers left to\f",
+            "face on Route 204.\r",
+            "Come see me when you’ve defeated them.\n",
+            "Good Luck Champ!"
+        ]
     }
   ]
 }
