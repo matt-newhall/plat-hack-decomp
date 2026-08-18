@@ -223,6 +223,7 @@ poke_icon_files += [
     staraptor_mega_icon,
     camerupt_mega_icon,
     starmie_mega_icon,
+    chimecho_mega_icon,
 ]
 
 otherpoke_files = []

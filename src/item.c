@@ -3145,6 +3145,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = starminite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_CHIMECHITE] = {
+        .dataID = 0x216,
+        .iconID = chimechite_NCGR,
+        .paletteID = chimechite_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

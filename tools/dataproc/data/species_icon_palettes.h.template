@@ -111,6 +111,7 @@ enum FormIconIndex {
     ICON_STARAPTOR_MEGA,
     ICON_CAMERUPT_MEGA,
     ICON_STARMIE_MEGA,
+    ICON_CHIMECHO_MEGA,
 };
 
 static const u8 sPokemonIconPaletteIndex[] = {

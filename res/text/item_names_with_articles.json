@@ -2080,6 +2080,10 @@
     {
       "id": "pl_msg_00000393_00519",
       "en_US": "a {COLOR 255}Starminite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00520",
+      "en_US": "a {COLOR 255}Chimechite{COLOR 0}"
     }
   ]
 }
