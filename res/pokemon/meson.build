@@ -222,6 +222,7 @@ poke_icon_files += [
     heatran_mega_icon,
     staraptor_mega_icon,
     camerupt_mega_icon,
+    starmie_mega_icon,
 ]
 
 otherpoke_files = []
