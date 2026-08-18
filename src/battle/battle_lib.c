@@ -54,6 +54,11 @@
 #define TRMSG_LAST_BATTLER_FLAG           3
 #define TRMSG_LAST_BATTLER_HALF_HP_FLAG   4
 
+#define MOODY_STAT_COUNT (BATTLE_STAT_SP_DEFENSE - BATTLE_STAT_ATTACK + 1)
+#define MOODY_NO_STAT    (-1)
+
+static BOOL CanLowerStatStage(BattleContext *battleCtx, int battler, int stat);
+static int PickMoodyStat(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL raising, int exclude);
 static BOOL BasicTypeMulApplies(BattleContext *battleCtx, int attacker, int defender, int chartEntry, BOOL isAnticipation);
 static BOOL IsInverseBattle(BattleContext *battleCtx);
 static u8 TypeMulForBattle(BattleContext *battleCtx, int chartEntry);
@@ -4266,6 +4271,60 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
     return subscript;
 }
 
+/**
+ * @brief Check if a battler's stat stage can still be lowered.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param stat
+ * @return TRUE if the stat stage would actually change.
+ */
+static BOOL CanLowerStatStage(BattleContext *battleCtx, int battler, int stat)
+{
+    if (Battler_Ability(battleCtx, battler) == ABILITY_CONTRARY) {
+        return battleCtx->battleMons[battler].statBoosts[stat] < MAX_STAT_STAGE;
+    }
+
+    return battleCtx->battleMons[battler].statBoosts[stat] > MIN_STAT_STAGE;
+}
+
+/**
+ * @brief Pick a random stat for Moody to alter at the end of the turn.
+ *
+ * Only Attack, Defense, Speed, Sp. Attack, and Sp. Defense are eligible;
+ * accuracy and evasion were dropped from Moody in Generation VIII. Stats which
+ * are already capped in the requested direction are skipped, as is the stat
+ * Moody has already chosen to raise.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @param raising   TRUE when picking the stat to raise, FALSE for the drop.
+ * @param exclude   Offset from BATTLE_STAT_ATTACK to skip, or MOODY_NO_STAT.
+ * @return Offset from BATTLE_STAT_ATTACK, or MOODY_NO_STAT if none qualify.
+ */
+static int PickMoodyStat(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL raising, int exclude)
+{
+    int eligible[MOODY_STAT_COUNT];
+    int count = 0;
+
+    for (int i = 0; i < MOODY_STAT_COUNT; i++) {
+        BOOL canChange = raising
+            ? Battler_CanRaiseStatStage(battleCtx, battler, BATTLE_STAT_ATTACK + i)
+            : CanLowerStatStage(battleCtx, battler, BATTLE_STAT_ATTACK + i);
+
+        if (i != exclude && canChange) {
+            eligible[count++] = i;
+        }
+    }
+
+    if (count == 0) {
+        return MOODY_NO_STAT;
+    }
+
+    return eligible[BattleSystem_RandNext(battleSys) % count];
+}
+
 BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     BOOL result = FALSE;
@@ -4282,6 +4341,28 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
             battleCtx->sideEffectMon = battler;
             subscript = subscript_ability_stat_boost;
             result = TRUE;
+        }
+        break;
+
+    case ABILITY_MOODY:
+        if (battleCtx->battleMons[battler].curHP) {
+            int raised = PickMoodyStat(battleSys, battleCtx, battler, TRUE, MOODY_NO_STAT);
+            int lowered = PickMoodyStat(battleSys, battleCtx, battler, FALSE, raised);
+
+            if (raised != MOODY_NO_STAT || lowered != MOODY_NO_STAT) {
+                battleCtx->sideEffectParam = raised == MOODY_NO_STAT
+                    ? MOVE_SUBSCRIPT_PTR_NONE
+                    : MOVE_SUBSCRIPT_PTR_ATTACK_UP_2_STAGES + raised;
+                battleCtx->calcTemp = lowered == MOODY_NO_STAT
+                    ? MOVE_SUBSCRIPT_PTR_NONE
+                    : MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_1_STAGE + lowered;
+
+                battleCtx->sideEffectFlags = MOVE_SIDE_EFFECT_CANNOT_PREVENT;
+                battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+                battleCtx->sideEffectMon = battler;
+                subscript = subscript_moody;
+                result = TRUE;
+            }
         }
         break;
 

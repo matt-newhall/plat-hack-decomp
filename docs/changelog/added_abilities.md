@@ -57,3 +57,4 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Parental Bond
 - Contrary
 - Sheer Force
+- Moody

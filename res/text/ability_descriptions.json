@@ -1250,6 +1250,13 @@
         "Removes added effects\n",
         "to boost move damage."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00179",
+      "en_US": [
+        "Raises a stat sharply and\n",
+        "lowers another each turn."
+      ]
     }
   ]
 }
