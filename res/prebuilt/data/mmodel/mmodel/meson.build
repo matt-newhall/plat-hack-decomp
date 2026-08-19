@@ -1555,6 +1555,14 @@ mmodel_files = files(
     'mmodel_00001583.bin',
     'mmodel_00001584.bin',
     'mmodel_00001585.bin',
+    'mmodel_00001586.bin',
+    'mmodel_00001587.bin',
+    'mmodel_00001588.bin',
+    'mmodel_00001589.bin',
+    'mmodel_00001590.bin',
+    'mmodel_00001591.bin',
+    'mmodel_00001592.bin',
+    'mmodel_00001593.bin',
 )
 
 mmodel_files_targets = []

@@ -28,7 +28,7 @@
     "object_events": [
         {
             "id": "LOCALID_PI_CARLOS",
-            "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+            "graphics_id": "OBJ_EVENT_GFX_PRIVATE_INVESTIGATOR",
             "movement_type": "MOVEMENT_TYPE_LOOK_NORTH_AND_SOUTH",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",

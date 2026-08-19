@@ -12,7 +12,7 @@
     "object_events": [
         {
             "id": "LOCALID_BIRD_KEEPER_KATHERINE",
-            "graphics_id": "OBJ_EVENT_GFX_ACE_TRAINER_F",
+            "graphics_id": "OBJ_EVENT_GFX_BIRD_KEEPER",
             "movement_type": "MOVEMENT_TYPE_LOOK_EAST",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
