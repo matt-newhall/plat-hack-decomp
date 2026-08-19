@@ -958,7 +958,8 @@ _0C93:
     AddMenuEntryImm 61, 3
     AddMenuEntryImm 24, 4
     AddMenuEntryImm 25, 5
-    AddMenuEntryImm 64, 6
+    AddMenuEntryImm 66, 6
+    AddMenuEntryImm 64, 7
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
@@ -967,12 +968,14 @@ _0C93:
     GoToIfEq VAR_0x8008, 3, _0F2C
     GoToIfEq VAR_0x8008, 4, PreDamageHandler
     GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 6, _PCRenameHandler
     GoTo _0F70
 
 _0CDD:
     AddMenuEntryImm 24, 3
     AddMenuEntryImm 25, 4
-    AddMenuEntryImm 64, 5
+    AddMenuEntryImm 66, 5
+    AddMenuEntryImm 64, 6
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
@@ -980,6 +983,7 @@ _0CDD:
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, PreDamageHandler
     GoToIfEq VAR_0x8008, 4, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 5, _PCRenameHandler
     GoTo _0F70
 
 _0D16:
@@ -1139,6 +1143,38 @@ PreDamageHandler:
     OpenPartyMenuForSetHP
     ReturnToField
     Call _0F80
+    GoTo _0C1C
+
+_PCRenameHandler:
+    CloseMessage
+    Call _0F94
+    SelectMoveTutorPokemon
+    GetSelectedPartySlot VAR_0x8008
+    ReturnToField
+    Call _0F80
+    GoToIfEq VAR_0x8008, 0xFF, _0C1C
+    GetPartyMonSpecies VAR_0x8008, VAR_RESULT
+    GoToIfEq VAR_RESULT, SPECIES_NONE, _PCRename_Egg
+    CheckIsPartyMonOutsider VAR_0x8008, VAR_RESULT
+    GoToIfEq VAR_RESULT, TRUE, _PCRename_Outsider
+    SetVar VAR_RESULT, 0
+    Call _0F94
+    OpenPokemonNamingScreen VAR_0x8008, VAR_RESULT
+    Call _0F80
+    GoToIfEq VAR_RESULT, 1, _0C1C
+    IncrementGameRecord RECORD_POKEMON_NICKNAMED
+    GoTo _0C1C
+
+_PCRename_Egg:
+    Message CommonStrings_Text_PCCannotRenameEgg
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCRename_Outsider:
+    Message CommonStrings_Text_PCCannotRenameOutsider
+    WaitButton
+    CloseMessage
     GoTo _0C1C
 
 _PokevialCore:

@@ -1023,6 +1023,17 @@
         "If only somebody could rid us of\n",
         "these dreadful Team Rocket types..."
       ]
+    },
+    {
+      "id": "CommonStrings_Text_PCCannotRenameEgg",
+      "en_US": "The Egg cannot be renamed."
+    },
+    {
+      "id": "CommonStrings_Text_PCCannotRenameOutsider",
+      "en_US": [
+        "That Pokémon was met by another\n",
+        "Trainer. Its name cannot be changed."
+      ]
     }
   ]
 }

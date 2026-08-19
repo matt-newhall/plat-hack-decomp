@@ -266,6 +266,10 @@
             "en_US": "Pokévial"
         },
         {
+            "id": "pl_msg_00000361_00066",
+            "en_US": "Change nickname"
+        },
+        {
             "id": "MenuEntries_Text_PokemonStorageDepositPokemon",
             "en_US": "Deposit Pokémon"
         },
