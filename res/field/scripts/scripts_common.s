@@ -958,8 +958,7 @@ _0C93:
     AddMenuEntryImm 61, 3
     AddMenuEntryImm 24, 4
     AddMenuEntryImm 25, 5
-    AddMenuEntryImm 65, 6
-    AddMenuEntryImm 64, 7
+    AddMenuEntryImm 64, 6
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
@@ -968,14 +967,12 @@ _0C93:
     GoToIfEq VAR_0x8008, 3, _0F2C
     GoToIfEq VAR_0x8008, 4, PreDamageHandler
     GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 6, _PCPokevialHandler
     GoTo _0F70
 
 _0CDD:
     AddMenuEntryImm 24, 3
     AddMenuEntryImm 25, 4
-    AddMenuEntryImm 65, 5
-    AddMenuEntryImm 64, 6
+    AddMenuEntryImm 64, 5
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
@@ -983,7 +980,6 @@ _0CDD:
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, PreDamageHandler
     GoToIfEq VAR_0x8008, 4, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 5, _PCPokevialHandler
     GoTo _0F70
 
 _0D16:
@@ -1153,10 +1149,6 @@ _PokevialCore:
     Message pl_msg_00000213_00132
     CloseMessage
     Return
-
-_PCPokevialHandler:
-    Call _PokevialCore
-    GoTo _0C1C
 
 _0F62:
     PlaySE SEQ_SE_DP_PC_LOGIN
