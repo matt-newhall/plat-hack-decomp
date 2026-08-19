@@ -230,7 +230,7 @@ typedef struct PartyMenu {
     u8 reqLevel;
     int levelUpMoveIndex;
     u16 evoTargetSpecies;
-    u8 padding_3A[2];
+    u16 continueItemID;
     int evoType;
 } PartyMenu;
 

@@ -422,6 +422,12 @@ int sub_02085348(void *param0)
 
 static int PartyMenu_ContinueOrExitAfterItemUse(PartyMenuApplication *application)
 {
+    if (application->partyMenu->mode == PARTY_MENU_MODE_LEVEL_MOVE_DONE
+        && application->partyMenu->continueItemID != ITEM_NONE) {
+        application->partyMenu->mode = PARTY_MENU_MODE_USE_ITEM;
+        application->partyMenu->usedItemID = application->partyMenu->continueItemID;
+    }
+
     if (application->partyMenu->mode == PARTY_MENU_MODE_USE_ITEM
         && application->currPartySlot != 7) {
         u16 remaining = Bag_GetItemQuantity(application->partyMenu->bag, application->partyMenu->usedItemID, HEAP_ID_PARTY_MENU);
@@ -722,6 +728,7 @@ static int sub_02085A70(void *applicationPtr)
     application->monStats[5] = (u16)Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
 
     Party_ApplyItemEffectsToMember(application->partyMenu->party, application->partyMenu->usedItemID, application->currPartySlot, 0, GetCurrentMapLabel(application), HEAP_ID_PARTY_MENU);
+    application->partyMenu->continueItemID = application->partyMenu->usedItemID;
 
     application->partyMembers[application->currPartySlot].level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
     application->partyMembers[application->currPartySlot].curHP = Pokemon_GetValue(mon, MON_DATA_HP, NULL);
