@@ -2,6 +2,7 @@
 #include "generated/distribution_events.h"
 #include "generated/player_transitions.h"
 #include "generated/time_of_day.h"
+#include "generated/natures.h"
 #include "constants/trainer_card_levels.h"
 #include "generated/tutor_locations.h"
 #include "res/text/bank/common_strings.h"
@@ -927,10 +928,10 @@ _PC_Shutdown_Skip:
 _0C1C:
     BufferPlayerName 0
     Message pl_msg_00000213_00033
-    InitGlobalTextMenu 1, 1, 0, VAR_0x8006
+    InitGlobalTextListMenu 1, 1, 0, VAR_0x8006
     CallIfUnset FLAG_MET_BEBE, _0C7B
     CallIfSet FLAG_MET_BEBE, _0C81
-    AddMenuEntryImm 60, 1
+    AddListMenuEntry 60, 1
     GetNationalDexEnabled VAR_RESULT
     CallIfEq VAR_RESULT, 0, _0C87
     CallIfEq VAR_RESULT, 1, _0C8D
@@ -939,55 +940,59 @@ _0C1C:
     End
 
 _0C7B:
-    AddMenuEntryImm 58, 0
+    AddListMenuEntry 58, 0
     Return
 
 _0C81:
-    AddMenuEntryImm 59, 0
+    AddListMenuEntry 59, 0
     Return
 
 _0C87:
-    AddMenuEntryImm 63, 2
+    AddListMenuEntry 63, 2
     Return
 
 _0C8D:
-    AddMenuEntryImm 62, 2
+    AddListMenuEntry 62, 2
     Return
 
 _0C93:
-    AddMenuEntryImm 61, 3
-    AddMenuEntryImm MenuEntries_Text_PC_MaximiseIVs, 4
-    AddMenuEntryImm 24, 5
-    AddMenuEntryImm 25, 6
-    AddMenuEntryImm MenuEntries_Text_PC_ChangeNickname, 7
-    AddMenuEntryImm 64, 8
-    ShowMenu
+    AddListMenuEntry 61, 3
+    AddListMenuEntry MenuEntries_Text_PC_MaximiseIVs, 4
+    AddListMenuEntry MenuEntries_Text_PC_ChangeNature, 5
+    AddListMenuEntry 24, 6
+    AddListMenuEntry 25, 7
+    AddListMenuEntry MenuEntries_Text_PC_ChangeNickname, 8
+    AddListMenuEntry 64, 9
+    ShowListMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
     GoToIfEq VAR_0x8008, 1, _0E45
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, _0F2C
     GoToIfEq VAR_0x8008, 4, _PCMaximiseIVHandler
-    GoToIfEq VAR_0x8008, 5, PreDamageHandler
-    GoToIfEq VAR_0x8008, 6, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 7, _PCRenameHandler
+    GoToIfEq VAR_0x8008, 5, _PCChangeNatureHandler
+    GoToIfEq VAR_0x8008, 6, PreDamageHandler
+    GoToIfEq VAR_0x8008, 7, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 8, _PCRenameHandler
     GoTo _0F70
 
 _0CDD:
-    AddMenuEntryImm MenuEntries_Text_PC_MaximiseIVs, 3
-    AddMenuEntryImm 24, 4
-    AddMenuEntryImm 25, 5
-    AddMenuEntryImm MenuEntries_Text_PC_ChangeNickname, 6
-    AddMenuEntryImm 64, 7
-    ShowMenu
+    AddListMenuEntry MenuEntries_Text_PC_MaximiseIVs, 3
+    AddListMenuEntry MenuEntries_Text_PC_ChangeNature, 4
+    AddListMenuEntry 24, 5
+    AddListMenuEntry 25, 6
+    AddListMenuEntry MenuEntries_Text_PC_ChangeNickname, 7
+    AddListMenuEntry 64, 8
+    ShowListMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
     GoToIfEq VAR_0x8008, 1, _0E45
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, _PCMaximiseIVHandler
-    GoToIfEq VAR_0x8008, 4, PreDamageHandler
-    GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 6, _PCRenameHandler
+    GoToIfEq VAR_0x8008, 4, _PCChangeNatureHandler
+    GoToIfEq VAR_0x8008, 5, PreDamageHandler
+    GoToIfEq VAR_0x8008, 6, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 7, _PCRenameHandler
     GoTo _0F70
 
 _0D16:
@@ -1242,6 +1247,96 @@ _PCMaximiseIV_Failed:
 
 _PCMaximiseIV_NoHeartScale:
     Message CommonStrings_Text_PCMaximiseIVNoHeartScale
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCChangeNatureHandler:
+    CheckItem ITEM_HEART_SCALE, 3, VAR_RESULT
+    GoToIfEq VAR_RESULT, 0, _PCChangeNature_NoHeartScales
+    Message CommonStrings_Text_PCChangeNatureIntro
+    WaitABPress
+    CloseMessage
+    Call _0F94
+    SelectMoveTutorPokemon
+    GetSelectedPartySlot VAR_0x8008
+    ReturnToField
+    Call _0F80
+    GoToIfEq VAR_0x8008, 0xFF, _0C1C
+
+_PCChangeNature_NatureMenu:
+    BufferPartyMonNickname 0, VAR_0x8008
+    Message CommonStrings_Text_PCChangeNatureWhichNature
+    InitGlobalTextListMenu 1, 1, 0, VAR_0x8009
+    AddListMenuEntry MenuEntries_Text_Nature_Adamant, NATURE_ADAMANT
+    AddListMenuEntry MenuEntries_Text_Nature_Bashful, NATURE_BASHFUL
+    AddListMenuEntry MenuEntries_Text_Nature_Bold, NATURE_BOLD
+    AddListMenuEntry MenuEntries_Text_Nature_Brave, NATURE_BRAVE
+    AddListMenuEntry MenuEntries_Text_Nature_Calm, NATURE_CALM
+    AddListMenuEntry MenuEntries_Text_Nature_Careful, NATURE_CAREFUL
+    AddListMenuEntry MenuEntries_Text_Nature_Docile, NATURE_DOCILE
+    AddListMenuEntry MenuEntries_Text_Nature_Gentle, NATURE_GENTLE
+    AddListMenuEntry MenuEntries_Text_Nature_Hardy, NATURE_HARDY
+    AddListMenuEntry MenuEntries_Text_Nature_Hasty, NATURE_HASTY
+    AddListMenuEntry MenuEntries_Text_Nature_Impish, NATURE_IMPISH
+    AddListMenuEntry MenuEntries_Text_Nature_Jolly, NATURE_JOLLY
+    AddListMenuEntry MenuEntries_Text_Nature_Lax, NATURE_LAX
+    AddListMenuEntry MenuEntries_Text_Nature_Lonely, NATURE_LONELY
+    AddListMenuEntry MenuEntries_Text_Nature_Mild, NATURE_MILD
+    AddListMenuEntry MenuEntries_Text_Nature_Modest, NATURE_MODEST
+    AddListMenuEntry MenuEntries_Text_Nature_Naive, NATURE_NAIVE
+    AddListMenuEntry MenuEntries_Text_Nature_Naughty, NATURE_NAUGHTY
+    AddListMenuEntry MenuEntries_Text_Nature_Quiet, NATURE_QUIET
+    AddListMenuEntry MenuEntries_Text_Nature_Quirky, NATURE_QUIRKY
+    AddListMenuEntry MenuEntries_Text_Nature_Rash, NATURE_RASH
+    AddListMenuEntry MenuEntries_Text_Nature_Relaxed, NATURE_RELAXED
+    AddListMenuEntry MenuEntries_Text_Nature_Sassy, NATURE_SASSY
+    AddListMenuEntry MenuEntries_Text_Nature_Serious, NATURE_SERIOUS
+    AddListMenuEntry MenuEntries_Text_Nature_Timid, NATURE_TIMID
+    AddListMenuEntry MenuEntries_Text_ListMenu_Exit, NATURE_COUNT
+    ShowListMenu
+    GoToIfGe VAR_0x8009, NATURE_COUNT, _0C1C
+    GetPartyMonNature VAR_RESULT, VAR_0x8008
+    GoToIfEq VAR_RESULT, VAR_0x8009, _PCChangeNature_AlreadySame
+
+_PCChangeNature_Confirm:
+    BufferPartyMonNickname 0, VAR_0x8008
+    BufferNatureName 1, VAR_0x8009
+    Message CommonStrings_Text_PCChangeNatureConfirm
+    ShowYesNoMenu VAR_RESULT
+    GoToIfEq VAR_RESULT, MENU_YES, _PCChangeNature_Apply
+    GoTo _0C1C
+
+_PCChangeNature_Apply:
+    SetPartyMonNature VAR_0x8008, VAR_0x8009, VAR_RESULT
+    GoToIfEq VAR_RESULT, 0, _PCChangeNature_Failed
+    RemoveItem ITEM_HEART_SCALE, 3, VAR_RESULT
+    BufferPlayerName 2
+    Message CommonStrings_Text_PCChangeNatureInserted
+    WaitButton
+    BufferPartyMonNickname 0, VAR_0x8008
+    BufferNatureName 1, VAR_0x8009
+    Message CommonStrings_Text_PCChangeNatureDone
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCChangeNature_AlreadySame:
+    BufferPartyMonNickname 0, VAR_0x8008
+    BufferNatureName 1, VAR_0x8009
+    Message CommonStrings_Text_PCChangeNatureAlreadySame
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCChangeNature_Failed:
+    Message CommonStrings_Text_PCChangeNatureFailed
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCChangeNature_NoHeartScales:
+    Message CommonStrings_Text_PCChangeNatureNoHeartScales
     WaitButton
     CloseMessage
     GoTo _0C1C

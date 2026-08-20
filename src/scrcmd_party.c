@@ -104,6 +104,33 @@ BOOL ScrCmd_MaximizePartyMonIV(ScriptContext *ctx)
     return FALSE;
 }
 
+BOOL ScrCmd_SetPartyMonNature(ScriptContext *ctx)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    u16 partySlot = ScriptContext_GetVar(ctx);
+    u16 nature = ScriptContext_GetVar(ctx);
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+    u8 natureOverride = nature + 1;
+
+    if (nature >= NATURE_COUNT) {
+        GF_ASSERT(nature < NATURE_COUNT);
+        *destVar = FALSE;
+        return FALSE;
+    }
+
+    Pokemon *mon = Party_GetPokemonBySlotIndex(SaveData_GetParty(fieldSystem->saveData), partySlot);
+
+    Pokemon_SetValue(mon, MON_DATA_NATURE_OVERRIDE, &natureOverride);
+
+    *destVar = (Pokemon_GetValue(mon, MON_DATA_CHECKSUM_FAILED, NULL) == FALSE);
+
+    if (*destVar == TRUE) {
+        Pokemon_CalcStats(mon);
+    }
+
+    return FALSE;
+}
+
 BOOL ScrCmd_GetPartyMonSpecies(ScriptContext *ctx)
 {
     FieldSystem *fieldSystem = ctx->fieldSystem;

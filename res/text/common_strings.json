@@ -1091,6 +1091,65 @@
         "Your {STRVAR_1 1, 0, 0}’s {STRVAR_1 7, 1, 0} IV\n",
         "is already 31."
       ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureNoHeartScales",
+      "en_US": [
+        "Three Heart Scales are needed to\n",
+        "change a Pokémon’s nature."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureIntro",
+      "en_US": [
+        "It costs three Heart Scales to change\n",
+        "the nature of a Pokémon.\r",
+        "Which Pokémon’s nature do you want\n",
+        "to change?"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureWhichNature",
+      "en_US": [
+        "Which nature should we change\n",
+        "{STRVAR_1 1, 0, 0} to?"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureConfirm",
+      "en_US": [
+        "So you want to change the nature of\n",
+        "your {STRVAR_1 1, 0, 0} to {STRVAR_1 7, 1, 0}?\r",
+        "It costs three Heart Scales."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureAlreadySame",
+      "en_US": [
+        "Your {STRVAR_1 1, 0, 0} already has\n",
+        "a {STRVAR_1 7, 1, 0} nature."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureInserted",
+      "en_US": [
+        "{STRVAR_1 3, 2, 0} inserted three Heart Scales\n",
+        "into the PC."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureDone",
+      "en_US": [
+        "Your {STRVAR_1 1, 0, 0} is now\n",
+        "{STRVAR_1 7, 1, 0}!"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCChangeNatureFailed",
+      "en_US": [
+        "The PC could not read that Pokémon’s\n",
+        "data. No Heart Scales were used."
+      ]
     }
   ]
 }

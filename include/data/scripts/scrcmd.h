@@ -863,6 +863,7 @@ ScriptCommand(SCRCMD_GETHONEYTREESPECIES,                                  ScrCm
 ScriptCommand(SCRCMD_MAXIMIZEPARTYMONIV,                                   ScrCmd_MaximizePartyMonIV)
 ScriptCommand(SCRCMD_GETPARTYMONIV,                                        ScrCmd_GetPartyMonIV)
 ScriptCommand(SCRCMD_BUFFERPOKEMONSTATNAME,                                ScrCmd_BufferPokemonStatName)
+ScriptCommand(SCRCMD_SETPARTYMONNATURE,                                    ScrCmd_SetPartyMonNature)
 
 // clang-format on
 

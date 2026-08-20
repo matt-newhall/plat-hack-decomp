@@ -700,6 +700,15 @@ s8 Pokemon_GetFlavorAffinity(Pokemon *mon, enum Flavor flavor);
 s8 Pokemon_GetFlavorAffinityOf(u32 monPersonality, enum Flavor flavor);
 
 /**
+ * @brief Gets the affinitiy of a given nature to a given flavor
+ *
+ * @param monNature
+ * @param flavor
+ * @return 1 if liked flavor, -1 if disliked flavor, else 0
+ */
+s8 Pokemon_GetFlavorAffinityOfNature(u8 monNature, enum Flavor flavor);
+
+/**
  * @brief Gets all moves that the given pokemon species and form can learn by leveling up
  *
  * @param monSpecies

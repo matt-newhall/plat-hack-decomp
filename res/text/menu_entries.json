@@ -398,8 +398,8 @@
             "en_US": "Sp. Def"
         },
         {
-            "id": "pl_msg_00000361_00093",
-            "garbage": 7
+            "id": "MenuEntries_Text_PC_ChangeNature",
+            "en_US": "Change Nature"
         },
         {
             "id": "MenuEntries_Text_BattleTower_Cancel",
@@ -1280,6 +1280,106 @@
         {
             "id": "MenuEntries_Text_Julien_Chilan",
             "en_US": "Chilan Berries"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Adamant",
+            "en_US": "Adamant (+Atk, -SpAtk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Bashful",
+            "en_US": "Bashful (Neutral)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Bold",
+            "en_US": "Bold (+Def, -Atk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Brave",
+            "en_US": "Brave (+Atk, -Spe)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Calm",
+            "en_US": "Calm (+SpDef, -Atk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Careful",
+            "en_US": "Careful (+SpDef, -SpAtk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Docile",
+            "en_US": "Docile (Neutral)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Gentle",
+            "en_US": "Gentle (+SpDef, -Def)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Hardy",
+            "en_US": "Hardy (Neutral)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Hasty",
+            "en_US": "Hasty (+Spe, -Def)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Impish",
+            "en_US": "Impish (+Def, -SpAtk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Jolly",
+            "en_US": "Jolly (+Spe, -SpAtk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Lax",
+            "en_US": "Lax (+Def, -SpDef)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Lonely",
+            "en_US": "Lonely (+Atk, -Def)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Mild",
+            "en_US": "Mild (+SpAtk, -Def)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Modest",
+            "en_US": "Modest (+SpAtk, -Atk)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Naive",
+            "en_US": "Naive (+Spe, -SpDef)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Naughty",
+            "en_US": "Naughty (+Atk, -SpDef)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Quiet",
+            "en_US": "Quiet (+SpAtk, -Spe)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Quirky",
+            "en_US": "Quirky (Neutral)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Rash",
+            "en_US": "Rash (+SpAtk, -SpDef)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Relaxed",
+            "en_US": "Relaxed (+Def, -Spe)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Sassy",
+            "en_US": "Sassy (+SpDef, -Spe)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Serious",
+            "en_US": "Serious (Neutral)"
+        },
+        {
+            "id": "MenuEntries_Text_Nature_Timid",
+            "en_US": "Timid (+Spe, -Atk)"
         }
     ]
 }

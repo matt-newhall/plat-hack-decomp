@@ -5093,6 +5093,13 @@
     .short \stat
     .endm
 
+    .macro SetPartyMonNature partySlot, nature, destVarID
+    .short SCRCMD_SETPARTYMONNATURE
+    .short \partySlot
+    .short \nature
+    .short \destVarID
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

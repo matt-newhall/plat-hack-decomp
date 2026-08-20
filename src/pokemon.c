@@ -1063,6 +1063,10 @@ static u32 BoxPokemon_GetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam 
         result = (monDataBlockB->unused2 & 0x4) >> 2;
         break;
 
+    case MON_DATA_NATURE_OVERRIDE:
+        result = (monDataBlockB->unused2 & 0xF8) >> 3;
+        break;
+
     case MON_DATA_NICKNAME:
         if (boxMon->checksumFailed) {
             // TODO confirm this should be SPECIES_BAD_EGG (lines up with checksum failure check but not throughly checked this call tree)
@@ -1624,6 +1628,10 @@ static void BoxPokemon_SetDataInternal(BoxPokemon *boxMon, enum PokemonDataParam
 
     case MON_DATA_SHINY_OVERRIDE:
         monDataBlockB->unused2 = (monDataBlockB->unused2 & ~0x4) | ((*u8Value & 0x1) << 2);
+        break;
+
+    case MON_DATA_NATURE_OVERRIDE:
+        monDataBlockB->unused2 = (monDataBlockB->unused2 & ~0xF8) | ((*u8Value & 0x1F) << 3);
         break;
 
     case MON_DATA_NICKNAME_AND_FLAG: {
@@ -2410,8 +2418,13 @@ u8 BoxPokemon_GetNature(BoxPokemon *boxMon)
 {
     BOOL reencrypt = BoxPokemon_EnterDecryptionContext(boxMon);
     u32 monPersonality = BoxPokemon_GetValue(boxMon, MON_DATA_PERSONALITY, NULL);
+    u32 natureOverride = BoxPokemon_GetValue(boxMon, MON_DATA_NATURE_OVERRIDE, NULL);
 
     BoxPokemon_ExitDecryptionContext(boxMon, reencrypt);
+
+    if (natureOverride != 0 && natureOverride <= NATURE_COUNT) {
+        return (u8)(natureOverride - 1);
+    }
 
     return Pokemon_GetNatureOf(monPersonality);
 }
@@ -5204,12 +5217,16 @@ s8 Pokemon_GetFlavorAffinity(Pokemon *mon, enum Flavor flavor)
 
 static s8 BoxPokemon_GetFlavorAffinity(BoxPokemon *boxMon, enum Flavor flavor)
 {
-    return Pokemon_GetFlavorAffinityOf(BoxPokemon_GetValue(boxMon, MON_DATA_PERSONALITY, NULL), flavor);
+    return Pokemon_GetFlavorAffinityOfNature(BoxPokemon_GetNature(boxMon), flavor);
 }
 
 s8 Pokemon_GetFlavorAffinityOf(u32 monPersonality, enum Flavor flavor)
 {
-    u8 monNature = Pokemon_GetNatureOf(monPersonality);
+    return Pokemon_GetFlavorAffinityOfNature(Pokemon_GetNatureOf(monPersonality), flavor);
+}
+
+s8 Pokemon_GetFlavorAffinityOfNature(u8 monNature, enum Flavor flavor)
+{
     return sNatureFlavorAffinities[monNature][flavor];
 }
 

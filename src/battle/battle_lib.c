@@ -6105,7 +6105,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SPICY;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_SPICY) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_SPICY) == -1) {
                     subscript = subscript_held_item_dislike_flavor;
                 } else {
                     subscript = subscript_held_item_hp_restore;
@@ -6120,7 +6120,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_DRY;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_DRY) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_DRY) == -1) {
                     subscript = subscript_held_item_dislike_flavor;
                 } else {
                     subscript = subscript_held_item_hp_restore;
@@ -6135,7 +6135,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SWEET;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_SWEET) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_SWEET) == -1) {
                     subscript = subscript_held_item_dislike_flavor;
                 } else {
                     subscript = subscript_held_item_hp_restore;
@@ -6150,7 +6150,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_BITTER;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_BITTER) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_BITTER) == -1) {
                     subscript = subscript_held_item_dislike_flavor;
                 } else {
                     subscript = subscript_held_item_hp_restore;
@@ -6165,7 +6165,7 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SOUR;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_SOUR) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_SOUR) == -1) {
                     subscript = subscript_held_item_dislike_flavor;
                 } else {
                     subscript = subscript_held_item_hp_restore;
@@ -6576,7 +6576,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SPICY;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_SPICY) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_SPICY) == -1) {
                     *subscript = subscript_held_item_dislike_flavor;
                 } else {
                     *subscript = subscript_held_item_hp_restore;
@@ -6591,7 +6591,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_DRY;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_DRY) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_DRY) == -1) {
                     *subscript = subscript_held_item_dislike_flavor;
                 } else {
                     *subscript = subscript_held_item_hp_restore;
@@ -6606,7 +6606,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SWEET;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_SWEET) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_SWEET) == -1) {
                     *subscript = subscript_held_item_dislike_flavor;
                 } else {
                     *subscript = subscript_held_item_hp_restore;
@@ -6621,7 +6621,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_BITTER;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_BITTER) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_BITTER) == -1) {
                     *subscript = subscript_held_item_dislike_flavor;
                 } else {
                     *subscript = subscript_held_item_hp_restore;
@@ -6636,7 +6636,7 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, itemPower);
                 battleCtx->msgTemp = FLAVOR_SOUR;
 
-                if (Pokemon_GetFlavorAffinityOf(battleCtx->battleMons[battler].personality, FLAVOR_SOUR) == -1) {
+                if (Pokemon_GetFlavorAffinityOfNature(battleCtx->battleMons[battler].nature, FLAVOR_SOUR) == -1) {
                     *subscript = subscript_held_item_dislike_flavor;
                 } else {
                     *subscript = subscript_held_item_hp_restore;
@@ -7203,7 +7203,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
             battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
             battleCtx->msgTemp = FLAVOR_SPICY;
 
-            if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SPICY) == -1) {
+            if (Pokemon_GetFlavorAffinityOfNature(ATTACKING_MON.nature, FLAVOR_SPICY) == -1) {
                 nextSeq = subscript_held_item_dislike_flavor;
             } else {
                 nextSeq = subscript_held_item_hp_restore;
@@ -7217,7 +7217,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
         battleCtx->msgTemp = FLAVOR_DRY;
 
-        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_DRY) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(ATTACKING_MON.nature, FLAVOR_DRY) == -1) {
             nextSeq = subscript_held_item_dislike_flavor;
         } else {
             nextSeq = subscript_held_item_hp_restore;
@@ -7230,7 +7230,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
         battleCtx->msgTemp = FLAVOR_SWEET;
 
-        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SWEET) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(ATTACKING_MON.nature, FLAVOR_SWEET) == -1) {
             nextSeq = subscript_held_item_dislike_flavor;
         } else {
             nextSeq = subscript_held_item_hp_restore;
@@ -7243,7 +7243,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
         battleCtx->msgTemp = FLAVOR_BITTER;
 
-        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_BITTER) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(ATTACKING_MON.nature, FLAVOR_BITTER) == -1) {
             nextSeq = subscript_held_item_dislike_flavor;
         } else {
             nextSeq = subscript_held_item_hp_restore;
@@ -7256,7 +7256,7 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP, power);
         battleCtx->msgTemp = FLAVOR_SOUR;
 
-        if (Pokemon_GetFlavorAffinityOf(ATTACKING_MON.personality, FLAVOR_SOUR) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(ATTACKING_MON.nature, FLAVOR_SOUR) == -1) {
             nextSeq = subscript_held_item_dislike_flavor;
         } else {
             nextSeq = subscript_held_item_hp_restore;
@@ -7493,7 +7493,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_SPICY;
 
-        if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_SPICY) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(DEFENDING_MON.nature, FLAVOR_SPICY) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
         } else {
             battleCtx->flingScript = subscript_held_item_hp_restore;
@@ -7504,7 +7504,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_DRY;
 
-        if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_DRY) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(DEFENDING_MON.nature, FLAVOR_DRY) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
         } else {
             battleCtx->flingScript = subscript_held_item_hp_restore;
@@ -7515,7 +7515,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_SWEET;
 
-        if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_SWEET) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(DEFENDING_MON.nature, FLAVOR_SWEET) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
         } else {
             battleCtx->flingScript = subscript_held_item_hp_restore;
@@ -7526,7 +7526,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_BITTER;
 
-        if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_BITTER) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(DEFENDING_MON.nature, FLAVOR_BITTER) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
         } else {
             battleCtx->flingScript = subscript_held_item_hp_restore;
@@ -7537,7 +7537,7 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
         battleCtx->flingTemp = BattleSystem_Divide(DEFENDING_MON.maxHP, effectPower);
         battleCtx->msgTemp = FLAVOR_SOUR;
 
-        if (Pokemon_GetFlavorAffinityOf(DEFENDING_MON.personality, FLAVOR_SOUR) == -1) {
+        if (Pokemon_GetFlavorAffinityOfNature(DEFENDING_MON.nature, FLAVOR_SOUR) == -1) {
             battleCtx->flingScript = subscript_held_item_dislike_flavor;
         } else {
             battleCtx->flingScript = subscript_held_item_hp_restore;
