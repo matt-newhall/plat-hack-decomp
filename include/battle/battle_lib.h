@@ -892,6 +892,14 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
 BOOL BattleSystem_IsSoundMove(u16 move);
 
 /**
+ * @brief Checks if selected move is a wind-based move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a wind-based move.
+ */
+BOOL BattleSystem_IsWindMove(u16 move);
+
+/**
  * @brief Trigger an end-of-turn ability for the battler.
  *
  * If an end-of-turn ability is triggered, then the respective subscript will
@@ -1641,6 +1649,19 @@ void BattleContext_Set(BattleSystem *battleSys, BattleContext *battleCtx, enum B
 BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler);
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler);
+
+/**
+ * @brief Pick a post-KO replacement from among the party members which hold a
+ * super-effective move against the opposing battler.
+ *
+ * Scored by the same ladder as BattleAI_PostKOSwitchIn, but with no party-order
+ * fallback: MAX_PARTY_SIZE means no candidate qualified.
+ *
+ * @param battleSys
+ * @param battler
+ * @return The party slot to switch in, or MAX_PARTY_SIZE if there is none.
+ */
+int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler);
 
 /**
  * @brief Get the switched-to slot determined by the AI for a given battler.

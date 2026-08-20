@@ -7948,9 +7948,9 @@ int BattleSystem_MegaEvolutionForm(BattleSystem *battleSys, BattleContext *battl
     }
 
     if (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US) {
-        if (bag == NULL || Bag_CanRemoveItem(bag, ITEM_MEGA_RING, 1, HEAP_ID_BATTLE) == FALSE) {
-            return -1;
-        }
+        // if (bag == NULL || Bag_CanRemoveItem(bag, ITEM_MEGA_RING, 1, HEAP_ID_BATTLE) == FALSE) {
+        //     return -1;
+        // }
     } else if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_TRAINER) == FALSE) {
         return -1;
     }
@@ -10175,7 +10175,7 @@ BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler)
     return FALSE;
 }
 
-int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
+static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective)
 {
     int i, j;
     u8 defender;
@@ -10201,6 +10201,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     int restoreCount;
     u8 restoredBattler[2];
     BattleMon savedMons[2];
+    BattleMon savedBattlerMon;
+    BOOL hasSuperEffective;
     BattleContext *battleCtx = BattleSystem_GetBattleContext(battleSys);
     u64 lhs, rhs;
     u32 moveStatus;
@@ -10258,6 +10260,8 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     picked = 6;
     firstNotDead = 6;
 
+    savedBattlerMon = battleCtx->battleMons[battler];
+
     for (i = 0; i < partySize; i++) {
         battlerPokemon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
         battlerPokemonSpecies = Pokemon_GetValue(battlerPokemon, MON_DATA_SPECIES_OR_EGG, NULL);
@@ -10288,6 +10292,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             if (battlerPokemonSpecies == SPECIES_WOBBUFFET
                 || battlerPokemonSpecies == SPECIES_WYNAUT
                 || battlerPokemonSpecies == SPECIES_DITTO) {
+                if (requireSuperEffective) {
+                    continue;
+                }
+
                 score = 2;
                 if (score > maxScore) {
                     maxScore = score;
@@ -10451,6 +10459,7 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
             aiMaxDamageToTrainer = 0;
             isAIKOTrainer = 0;
             isPursuitKO = 0;
+            hasSuperEffective = FALSE;
 
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 moveBattler = Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1 + j, NULL);
@@ -10560,6 +10569,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         damageToTarget,
                         &moveStatus);
 
+                    if (moveStatus & MOVE_STATUS_SUPER_EFFECTIVE) {
+                        hasSuperEffective = TRUE;
+                    }
+
                     damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveBattler, battler, defender, damageToTarget);
                     damageToTarget *= hitMultiplier;
 
@@ -10580,6 +10593,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                         aiMaxDamageToTrainer = damageToTarget;
                     }
                 }
+            }
+
+            if (requireSuperEffective && hasSuperEffective == FALSE) {
+                continue;
             }
 
             lhs = (u64)aiMaxDamageToTrainer * (u64)battlerPokemonCurHP;
@@ -10603,10 +10620,10 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
                 score = 0;
             }
 
-                if (score > maxScore) {
-                    maxScore = score;
-                    picked = i;
-                }
+            if (score > maxScore) {
+                maxScore = score;
+                picked = i;
+            }
 
             if (score == 7) {
                 break;
@@ -10614,9 +10631,15 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
         }
     }
 
+    battleCtx->battleMons[battler] = savedBattlerMon;
+
     while (restoreCount-- > 0) {
         battleCtx->battleMons[restoredBattler[restoreCount]] = savedMons[restoreCount];
-            }
+    }
+
+    if (requireSuperEffective) {
+        return picked;
+    }
 
     if (picked < 6) {
         return picked;
@@ -10625,6 +10648,16 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
     } else {
         return 0;
     }
+}
+
+int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
+{
+    return PostKOSwitchIn(battleSys, battler, FALSE);
+}
+
+int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler)
+{
+    return PostKOSwitchIn(battleSys, battler, TRUE);
 }
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)

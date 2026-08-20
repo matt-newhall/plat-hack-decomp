@@ -198,12 +198,12 @@ static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1,
 
 static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, BOOL wantSuperEffective);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
 static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
-static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL TrainerAI_ShouldUseItem(BattleSystem *battleSys, int battler);
 
@@ -3344,8 +3344,8 @@ static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
 
 /**
  * @brief Check if an AI's battler cannot damage the opponent's Pokemon due to
- * Wonder Guard. If so, check for any living party member that can deal damage
- * to that Pokemon, and switch to that mon 66% of the time.
+ * Wonder Guard. If so, switch to the best-scoring party member which can break
+ * through it, 66% of the time.
  *
  * This routine does NOT apply to double-battles.
  *
@@ -3356,11 +3356,11 @@ static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
  */
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i, j;
+    int i;
+    int slot;
     u16 move;
     int moveType;
     u32 effectiveness;
-    Pokemon *mon;
 
     if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
         return FALSE;
@@ -3370,9 +3370,10 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
         // Check if we have a super-effective move against the opponent
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             move = battleCtx->battleMons[battler].moves[i];
-            moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
 
             if (move) {
+                moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+
                 effectiveness = 0;
                 BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, moveType, battler, BATTLER_OPP(battler), 0, &effectiveness);
 
@@ -3382,37 +3383,66 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
             }
         }
 
-        // If we don't, check if any of our party members have a super-effective move
-        for (i = 0; i < BattleSystem_GetPartyCount(battleSys, battler); i++) {
-            mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
+        // Otherwise send in whichever party member scores highest against the Wonder
+        // Guard mon while still being able to break it. One roll for the decision,
+        // not one per candidate.
+        slot = BattleAI_PostKOSwitchInSuperEffective(battleSys, battler);
 
-            if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) != 0
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-                && i != battleCtx->selectedPartySlot[battler]) {
-                for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                    move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                    moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+        if (slot < MAX_PARTY_SIZE && BattleSystem_RandNext(battleSys) % 3 < 2) {
+            battleCtx->aiSwitchedPartySlot[battler] = slot;
+            return TRUE;
+        }
+    }
 
-                    if (move) {
-                        effectiveness = 0;
-                        BattleSystem_CalcEffectiveness(battleCtx,
-                            move,
-                            moveType,
-                            Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                            Battler_Ability(battleCtx, BATTLER_OPP(battler)),
-                            Battler_HeldItemEffect(battleCtx, BATTLER_OPP(battler)),
-                            BattleMon_Get(battleCtx, BATTLER_OPP(battler), BATTLEMON_TYPE_1, NULL),
-                            BattleMon_Get(battleCtx, BATTLER_OPP(battler), BATTLEMON_TYPE_2, NULL),
-                            &effectiveness);
+    return FALSE;
+}
 
-                        // If this party member has a super-effective move, switch 2/3 of the time
-                        if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 3 < 2) {
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
-                            return TRUE;
-                        }
-                    }
+/**
+ * @brief Check whether a party Pokemon holds a damaging move of the wanted
+ * effectiveness against an opposing battler.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param mon
+ * @param defender              The opposing battler. A fainted slot never qualifies.
+ * @param wantSuperEffective    TRUE to look for a super-effective move, FALSE for a
+ *                              normally-effective one.
+ * @return TRUE if such a move exists.
+ */
+static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, BOOL wantSuperEffective)
+{
+    int j;
+    u16 move;
+    int moveType;
+    u32 effectiveness;
+
+    if (battleCtx->battleMons[defender].curHP == 0) {
+        return FALSE;
+    }
+
+    for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+        move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+        if (move && MOVE_DATA(move).power) {
+            moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
+            effectiveness = 0;
+            BattleSystem_CalcEffectiveness(battleCtx,
+                move,
+                moveType,
+                Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
+                Battler_Ability(battleCtx, defender),
+                Battler_HeldItemEffect(battleCtx, defender),
+                BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_1, NULL),
+                BattleMon_Get(battleCtx, defender, BATTLEMON_TYPE_2, NULL),
+                &effectiveness);
+
+            if (wantSuperEffective) {
+                if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                    return TRUE;
                 }
+            } else if (effectiveness == 0) {
+                return TRUE;
             }
         }
     }
@@ -3424,6 +3454,9 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
  * @brief Check if an AI's battler only has moves which do not deal damage to either
  * of the opponent's Pokemon.
  *
+ * Switches 50% of the time to a bench Pokemon which can damage an opponent,
+ * preferring one with a super-effective move. One roll per Pokemon.
+ *
  * @param battleSys
  * @param battleCtx
  * @param battler   The AI's battler.
@@ -3431,7 +3464,8 @@ static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *b
  */
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i, j;
+    int i;
+    int pass;
     u8 defender1, defender2;
     u8 aiSlot1, aiSlot2;
     u16 move;
@@ -3495,120 +3529,25 @@ static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *batt
     start = 0;
     end = BattleSystem_GetPartyCount(battleSys, battler);
 
-    // For each of the AI's active party Pokemon on the bench, check if any of them have a
-    // damaging move which is super-effective against either of the player's active Pokemon
-    // on the battlefield. If any such Pokemon on the bench exists, switch to it 66% of
-    // the time.
-    for (i = start; i < end; i++) {
-        mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
+    // The first pass takes a bench Pokemon with a super-effective move against either
+    // opponent; the second settles for a normally-effective one. Either way it is a
+    // single 50% roll per Pokemon.
+    for (pass = 0; pass < 2; pass++) {
+        for (i = start; i < end; i++) {
+            mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
 
-        if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) != 0
-            && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-            && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-            && i != battleCtx->selectedPartySlot[aiSlot1]
-            && i != battleCtx->selectedPartySlot[aiSlot2]
-            && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
-            && i != battleCtx->aiSwitchedPartySlot[aiSlot2]) {
-            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                type = Move_CalcVariableType(battleSys, battleCtx, mon, move);
-
-                if (move && MOVE_DATA(move).power) {
-                    effectiveness = 0;
-                    if (battleCtx->battleMons[defender1].curHP) {
-                        BattleSystem_CalcEffectiveness(battleCtx,
-                            move,
-                            type,
-                            Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                            Battler_Ability(battleCtx, defender1),
-                            Battler_HeldItemEffect(battleCtx, defender1),
-                            BattleMon_Get(battleCtx, defender1, BATTLEMON_TYPE_1, NULL),
-                            BattleMon_Get(battleCtx, defender1, BATTLEMON_TYPE_2, NULL),
-                            &effectiveness);
-                    }
-
-                    if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 3 < 2) {
-                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                        return TRUE;
-                    }
-
-                    effectiveness = 0;
-                    if (battleCtx->battleMons[defender2].curHP) {
-                        BattleSystem_CalcEffectiveness(battleCtx,
-                            move,
-                            type,
-                            Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                            Battler_Ability(battleCtx, defender2),
-                            Battler_HeldItemEffect(battleCtx, defender2),
-                            BattleMon_Get(battleCtx, defender2, BATTLEMON_TYPE_1, NULL),
-                            BattleMon_Get(battleCtx, defender2, BATTLEMON_TYPE_2, NULL),
-                            &effectiveness);
-                    }
-
-                    if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % 3 < 2) {
-                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                        return TRUE;
-                    }
-                }
-            }
-        }
-    }
-
-    // For each of the AI's active party Pokemon on the bench, check if any of them have a
-    // damaging move which is normally-effective against either of the player's active
-    // Pokemon on the battlefield. If any such Pokemon on the bench exists, switch to it
-    // 50% of the time.
-    for (i = start; i < end; i++) {
-        mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
-
-        if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) != 0
-            && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-            && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-            && i != battleCtx->selectedPartySlot[aiSlot1]
-            && i != battleCtx->selectedPartySlot[aiSlot2]
-            && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
-            && i != battleCtx->aiSwitchedPartySlot[aiSlot2]) {
-            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
-                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                type = Move_CalcVariableType(battleSys, battleCtx, mon, move);
-
-                if (move && MOVE_DATA(move).power) {
-                    effectiveness = 0;
-                    if (battleCtx->battleMons[defender1].curHP) {
-                        BattleSystem_CalcEffectiveness(battleCtx,
-                            move,
-                            type,
-                            Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                            Battler_Ability(battleCtx, defender1),
-                            Battler_HeldItemEffect(battleCtx, defender1),
-                            BattleMon_Get(battleCtx, defender1, BATTLEMON_TYPE_1, NULL),
-                            BattleMon_Get(battleCtx, defender1, BATTLEMON_TYPE_2, NULL),
-                            &effectiveness);
-                    }
-
-                    if (effectiveness == 0 && BattleSystem_RandNext(battleSys) % 2 == 0) {
-                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                        return TRUE;
-                    }
-
-                    effectiveness = 0;
-                    if (battleCtx->battleMons[defender2].curHP) {
-                        BattleSystem_CalcEffectiveness(battleCtx,
-                            move,
-                            type,
-                            Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
-                            Battler_Ability(battleCtx, defender2),
-                            Battler_HeldItemEffect(battleCtx, defender2),
-                            BattleMon_Get(battleCtx, defender2, BATTLEMON_TYPE_1, NULL),
-                            BattleMon_Get(battleCtx, defender2, BATTLEMON_TYPE_2, NULL),
-                            &effectiveness);
-                    }
-
-                    if (effectiveness == 0 && BattleSystem_RandNext(battleSys) % 2 == 0) {
-                        battleCtx->aiSwitchedPartySlot[battler] = i;
-                        return TRUE;
-                    }
-                }
+            if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) != 0
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
+                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
+                && i != battleCtx->selectedPartySlot[aiSlot1]
+                && i != battleCtx->selectedPartySlot[aiSlot2]
+                && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
+                && i != battleCtx->aiSwitchedPartySlot[aiSlot2]
+                && (AI_PartyMonThreatensSlot(battleSys, battleCtx, mon, defender1, pass == 0)
+                    || AI_PartyMonThreatensSlot(battleSys, battleCtx, mon, defender2, pass == 0))
+                && (BattleSystem_RandNext(battleSys) & 1)) {
+                battleCtx->aiSwitchedPartySlot[battler] = i;
+                return TRUE;
             }
         }
     }
@@ -3695,13 +3634,56 @@ static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *bat
 }
 
 /**
- * @brief Check if the AI's party has a Pokemon on the bench which has an "absorbing"
- * ability for the move which was last used on it (specifically, Volt Absorb, Water
- * Absorb, and Flash Fire).
+ * @brief Check whether an ability makes its holder immune to the given move.
  *
- * This routine will skip its checks roughly 33% of the time if the AI's battler has
- * a super-effective move. It will also skip its checks if the AI's active battler
- * is the one with the absorbing ability.
+ * Covers the damage-absorbing abilities plus Levitate, which is not an absorb but
+ * reads identically from the switch AI's point of view.
+ *
+ * @param ability
+ * @param move
+ * @param moveType  The move's resolved type, not its base type.
+ * @return TRUE if the ability absorbs the move.
+ */
+static BOOL AI_AbilityAbsorbsMove(int ability, u16 move, int moveType)
+{
+    switch (ability) {
+    case ABILITY_VOLT_ABSORB:
+    case ABILITY_LIGHTNING_ROD:
+    case ABILITY_MOTOR_DRIVE:
+        return moveType == TYPE_ELECTRIC;
+
+    case ABILITY_WATER_ABSORB:
+    case ABILITY_STORM_DRAIN:
+    case ABILITY_DRY_SKIN:
+        return moveType == TYPE_WATER;
+
+    case ABILITY_FLASH_FIRE:
+        return moveType == TYPE_FIRE;
+
+    case ABILITY_SAP_SIPPER:
+        return moveType == TYPE_GRASS;
+
+    case ABILITY_EARTH_EATER:
+    case ABILITY_LEVITATE:
+        return moveType == TYPE_GROUND;
+
+    case ABILITY_SOUNDPROOF:
+        return BattleSystem_IsSoundMove(move);
+
+    case ABILITY_WIND_RIDER:
+        return BattleSystem_IsWindMove(move);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check if the AI's party has a Pokemon on the bench which is immune to the
+ * move that last hit it and can threaten the attacker back.
+ *
+ * Switches 50% of the time to a bench Pokemon whose ability absorbs the move and
+ * which also holds a super-effective move against the attacker. Mold Breaker on the
+ * attacker disables the check entirely, as it ignores every ability involved.
  *
  * @param battleSys
  * @param battleCtx
@@ -3710,44 +3692,41 @@ static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *bat
  */
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i;
+    int i, j;
     u8 aiSlot1, aiSlot2;
-    u8 moveType;
-    u8 ability;
-    u8 checkAbility;
+    u16 lastMove;
+    int lastMoveType;
+    int attacker;
+    u16 move;
+    int moveType;
+    u32 effectiveness;
+    BOOL hasSuperEffective;
     int start, end;
     Pokemon *mon;
 
-    // If we have a super-effective move against either opponent, do not switch ~33% of the time.
+    // If we already threaten the mon in front of us, only consider the pivot 1/3
+    // of the time. This check sits above the stay-in veto in the cascade, so it is
+    // the only thing holding a winning matchup on the field.
     if (AI_HasSuperEffectiveMove(battleSys, battleCtx, battler, TRUE) && BattleSystem_RandNext(battleSys) % 3 != 0) {
         return FALSE;
     }
 
-    // If we have not been hit by a move by this battler, do not switch.
-    if (battleCtx->moveHit[battler] == MOVE_NONE) {
+    lastMove = battleCtx->moveHit[battler];
+    attacker = battleCtx->moveHitBattler[battler];
+
+    // Nothing has hit us yet, or what did hit us deals no damage.
+    if (lastMove == MOVE_NONE || attacker == BATTLER_NONE || MOVE_DATA(lastMove).power == 0) {
         return FALSE;
     }
 
-    // If the last move that hit us does not deal damage, do not switch.
-    if (MOVE_DATA(battleCtx->moveHit[battler]).power == 0) {
+    if (Battler_Ability(battleCtx, attacker) == ABILITY_MOLD_BREAKER) {
         return FALSE;
     }
 
-    moveType = MOVE_DATA(battleCtx->moveHit[battler]).type;
-    if (moveType == TYPE_FIRE) {
-        checkAbility = ABILITY_FLASH_FIRE;
-    } else if (moveType == TYPE_WATER) {
-        checkAbility = ABILITY_WATER_ABSORB;
-    } else if (moveType == TYPE_ELECTRIC) {
-        checkAbility = ABILITY_VOLT_ABSORB;
-    } else if (moveType == TYPE_GROUND) {
-        checkAbility = ABILITY_EARTH_EATER;
-    } else {
-        return ABILITY_NONE;
-    }
+    lastMoveType = battleCtx->moveHitType[battler];
 
-    // If our ability absorbs the type of the last move that hit us, do not switch.
-    if (Battler_Ability(battleCtx, battler) == checkAbility) {
+    // Our own ability already absorbs it, so there is nothing to gain.
+    if (AI_AbilityAbsorbsMove(Battler_Ability(battleCtx, battler), lastMove, lastMoveType)) {
         return FALSE;
     }
 
@@ -3761,8 +3740,6 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
     start = 0;
     end = BattleSystem_GetPartyCount(battleSys, battler);
 
-    // Check each Pokemon on the bench for one which has an ability that absorbs
-    // the last move that was used.
     for (i = start; i < end; i++) {
         mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
 
@@ -3772,11 +3749,36 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
             && i != battleCtx->selectedPartySlot[aiSlot1]
             && i != battleCtx->selectedPartySlot[aiSlot2]
             && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
-            && i != battleCtx->aiSwitchedPartySlot[aiSlot2]) {
-            ability = Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL);
+            && i != battleCtx->aiSwitchedPartySlot[aiSlot2]
+            && AI_AbilityAbsorbsMove(Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL), lastMove, lastMoveType)) {
+            hasSuperEffective = FALSE;
 
-            // Switch to a matching Pokemon 50% of the time.
-            if (checkAbility == ability && (BattleSystem_RandNext(battleSys) & 1)) {
+            // The pivot is only worth it if the switch-in threatens back.
+            for (j = 0; j < LEARNED_MOVES_MAX; j++) {
+                move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
+
+                if (move) {
+                    moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
+                    effectiveness = 0;
+                    BattleSystem_CalcEffectiveness(battleCtx,
+                        move,
+                        moveType,
+                        Pokemon_GetValue(mon, MON_DATA_ABILITY, NULL),
+                        Battler_Ability(battleCtx, attacker),
+                        Battler_HeldItemEffect(battleCtx, attacker),
+                        BattleMon_Get(battleCtx, attacker, BATTLEMON_TYPE_1, NULL),
+                        BattleMon_Get(battleCtx, attacker, BATTLEMON_TYPE_2, NULL),
+                        &effectiveness);
+
+                    if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                        hasSuperEffective = TRUE;
+                        break;
+                    }
+                }
+            }
+
+            if (hasSuperEffective && (BattleSystem_RandNext(battleSys) & 1)) {
                 battleCtx->aiSwitchedPartySlot[battler] = i;
                 return TRUE;
             }
@@ -3789,6 +3791,8 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
 /**
  * @brief Check if the AI has a party member with a super-effective move, constrained
  * to mons with a certain effectiveness matchup against the move that last hit us.
+ *
+ * Rolls once per qualifying party member, not once per super-effective move.
  *
  * @param battleSys
  * @param battleCtx
@@ -3804,6 +3808,7 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
     u16 move;
     int moveType;
     u32 effectiveness;
+    BOOL hasSuperEffective;
     int start, end;
     Pokemon *mon;
 
@@ -3850,11 +3855,14 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
                 &effectiveness);
 
             if (effectiveness & checkEffectiveness) {
+                hasSuperEffective = FALSE;
+
                 for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                     move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
-                    moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
                     if (move) {
+                        moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
+
                         effectiveness = 0;
                         BattleSystem_CalcEffectiveness(battleCtx,
                             move,
@@ -3866,11 +3874,16 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
                             BattleMon_Get(battleCtx, battleCtx->moveHitBattler[battler], BATTLEMON_TYPE_2, NULL),
                             &effectiveness);
 
-                        if ((effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) && BattleSystem_RandNext(battleSys) % rand == 0) {
-                            battleCtx->aiSwitchedPartySlot[battler] = i;
-                            return TRUE;
+                        if (effectiveness & MOVE_STATUS_SUPER_EFFECTIVE) {
+                            hasSuperEffective = TRUE;
+                            break;
                         }
                     }
+                }
+
+                if (hasSuperEffective && BattleSystem_RandNext(battleSys) % rand == 0) {
+                    battleCtx->aiSwitchedPartySlot[battler] = i;
+                    return TRUE;
                 }
             }
         }
@@ -3910,15 +3923,15 @@ static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *b
         return TRUE;
     }
 
-    // If we have a party member with an immunity to the last move that also has a super-effective
-    // move, switch 50% of the time.
-    if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, MOVE_STATUS_INEFFECTIVE, 1)) {
+    // If we have a party member with an immunity to the last move that also has a
+    // super-effective move, switch 50% of the time.
+    if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, MOVE_STATUS_INEFFECTIVE, 2)) {
         return TRUE;
     }
 
-    // If we have a party member with a resistance to the last move that also has a super-effective
-    // move, switch 50% of the time.
-    if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, MOVE_STATUS_NOT_VERY_EFFECTIVE, 1)) {
+    // If we have a party member which resists the last move and also has a
+    // super-effective move, switch 50% of the time.
+    if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, MOVE_STATUS_NOT_VERY_EFFECTIVE, 2)) {
         return TRUE;
     }
 
@@ -3929,31 +3942,6 @@ static BOOL AI_IsAsleepWithNaturalCure(BattleSystem *battleSys, BattleContext *b
     }
 
     return FALSE;
-}
-
-/**
- * @brief Check if the AI's current battler is heavily stat-boosted (that is,
- * if the sum of its total positive stat stage changes is greater than or
- * equal to 4.)
- *
- * @param battleSys
- * @param battleCtx
- * @param battler   The AI's current battler.
- * @return          TRUE if the AI has a high number of positive stat stages;
- *                  FALSE otherwise.
- */
-static BOOL AI_IsHeavilyStatBoosted(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
-{
-    int stat;
-    u8 numBoosts = 0;
-
-    for (stat = BATTLE_STAT_HP; stat < BATTLE_STAT_MAX; stat++) {
-        if (battleCtx->battleMons[battler].statBoosts[stat] > 6) {
-            numBoosts += battleCtx->battleMons[battler].statBoosts[stat] - 6;
-        }
-    }
-
-    return numBoosts >= 4;
 }
 
 /**
@@ -4038,20 +4026,9 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return FALSE;
         }
 
-        // Never switch if the active battler has 4+ positive stat stages.
-        if (AI_IsHeavilyStatBoosted(battleSys, battleCtx, battler)) {
-            return FALSE;
-        }
-
-        // 33% of the time, switch to a party member with an immunity to the last move that hit
+        // 50% of the time, switch to a party member with an immunity to the last move that hit
         // this battler which also has a super-effective move against an opposing Pokemon.
-        if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, 0x8, 2)) {
-            return TRUE;
-        }
-
-        // 25% of the time, switch to a party member with an immunity to the last move that hit
-        // this battler which also has a super-effective move against an opposing Pokemon.
-        if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, 0x4, 3)) {
+        if (AI_HasPartyMemberWithSuperEffectiveMove(battleSys, battleCtx, battler, MOVE_STATUS_INEFFECTIVE, 2)) {
             return TRUE;
         }
     }
