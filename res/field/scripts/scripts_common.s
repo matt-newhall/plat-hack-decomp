@@ -956,34 +956,38 @@ _0C8D:
 
 _0C93:
     AddMenuEntryImm 61, 3
-    AddMenuEntryImm 24, 4
-    AddMenuEntryImm 25, 5
-    AddMenuEntryImm 66, 6
-    AddMenuEntryImm 64, 7
+    AddMenuEntryImm MenuEntries_Text_PC_MaximiseIVs, 4
+    AddMenuEntryImm 24, 5
+    AddMenuEntryImm 25, 6
+    AddMenuEntryImm MenuEntries_Text_PC_ChangeNickname, 7
+    AddMenuEntryImm 64, 8
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
     GoToIfEq VAR_0x8008, 1, _0E45
     GoToIfEq VAR_0x8008, 2, _0F62
     GoToIfEq VAR_0x8008, 3, _0F2C
-    GoToIfEq VAR_0x8008, 4, PreDamageHandler
-    GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 6, _PCRenameHandler
+    GoToIfEq VAR_0x8008, 4, _PCMaximiseIVHandler
+    GoToIfEq VAR_0x8008, 5, PreDamageHandler
+    GoToIfEq VAR_0x8008, 6, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 7, _PCRenameHandler
     GoTo _0F70
 
 _0CDD:
-    AddMenuEntryImm 24, 3
-    AddMenuEntryImm 25, 4
-    AddMenuEntryImm 66, 5
-    AddMenuEntryImm 64, 6
+    AddMenuEntryImm MenuEntries_Text_PC_MaximiseIVs, 3
+    AddMenuEntryImm 24, 4
+    AddMenuEntryImm 25, 5
+    AddMenuEntryImm MenuEntries_Text_PC_ChangeNickname, 6
+    AddMenuEntryImm 64, 7
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006
     GoToIfEq VAR_0x8008, 0, _0D16
     GoToIfEq VAR_0x8008, 1, _0E45
     GoToIfEq VAR_0x8008, 2, _0F62
-    GoToIfEq VAR_0x8008, 3, PreDamageHandler
-    GoToIfEq VAR_0x8008, 4, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 5, _PCRenameHandler
+    GoToIfEq VAR_0x8008, 3, _PCMaximiseIVHandler
+    GoToIfEq VAR_0x8008, 4, PreDamageHandler
+    GoToIfEq VAR_0x8008, 5, VolatileStatus_Submenu
+    GoToIfEq VAR_0x8008, 6, _PCRenameHandler
     GoTo _0F70
 
 _0D16:
@@ -1163,6 +1167,83 @@ _PCRenameHandler:
     Call _0F80
     GoToIfEq VAR_RESULT, 1, _0C1C
     IncrementGameRecord RECORD_POKEMON_NICKNAMED
+    GoTo _0C1C
+
+_PCMaximiseIVHandler:
+    CheckItem ITEM_HEART_SCALE, 1, VAR_RESULT
+    GoToIfEq VAR_RESULT, 0, _PCMaximiseIV_NoHeartScale
+    Message CommonStrings_Text_PCMaximiseIVIntro
+    WaitABPress
+    CloseMessage
+    Call _0F94
+    SelectMoveTutorPokemon
+    GetSelectedPartySlot VAR_0x8008
+    ReturnToField
+    Call _0F80
+    GoToIfEq VAR_0x8008, 0xFF, _0C1C
+
+_PCMaximiseIV_StatMenu:
+    BufferPartyMonNickname 0, VAR_0x8008
+    Message CommonStrings_Text_PCMaximiseIVWhichStat
+    InitGlobalTextMenu 1, 1, 0, VAR_0x8009
+    AddMenuEntryImm MenuEntries_Text_Stat_HP, 0
+    AddMenuEntryImm MenuEntries_Text_Stat_Attack, 1
+    AddMenuEntryImm MenuEntries_Text_Stat_Defense, 2
+    AddMenuEntryImm MenuEntries_Text_Stat_SpAtk, 4
+    AddMenuEntryImm MenuEntries_Text_Stat_SpDef, 5
+    AddMenuEntryImm MenuEntries_Text_Stat_Speed, 3
+    AddMenuEntryImm MenuEntries_Text_ListMenu_Exit, 6
+    ShowMenu
+    GoToIfEq VAR_0x8009, 0, _PCMaximiseIV_Confirm
+    GoToIfEq VAR_0x8009, 1, _PCMaximiseIV_Confirm
+    GoToIfEq VAR_0x8009, 2, _PCMaximiseIV_Confirm
+    GoToIfEq VAR_0x8009, 3, _PCMaximiseIV_Confirm
+    GoToIfEq VAR_0x8009, 4, _PCMaximiseIV_Confirm
+    GoToIfEq VAR_0x8009, 5, _PCMaximiseIV_Confirm
+    GoTo _0C1C
+
+_PCMaximiseIV_Confirm:
+    BufferPartyMonNickname 0, VAR_0x8008
+    BufferPokemonStatName 1, VAR_0x8009
+    Message CommonStrings_Text_PCMaximiseIVConfirm
+    ShowYesNoMenu VAR_RESULT
+    GoToIfEq VAR_RESULT, MENU_YES, _PCMaximiseIV_Apply
+    GoTo _0C1C
+
+_PCMaximiseIV_Apply:
+    GetPartyMonIV VAR_0x8008, VAR_0x8009, VAR_RESULT
+    GoToIfEq VAR_RESULT, MAX_IVS_SINGLE_STAT, _PCMaximiseIV_AlreadyMax
+    MaximizePartyMonIV VAR_0x8008, VAR_0x8009, VAR_RESULT
+    GoToIfEq VAR_RESULT, 0, _PCMaximiseIV_Failed
+    RemoveItem ITEM_HEART_SCALE, 1, VAR_RESULT
+    BufferPlayerName 2
+    Message CommonStrings_Text_PCMaximiseIVInserted
+    WaitButton
+    BufferPartyMonNickname 0, VAR_0x8008
+    BufferPokemonStatName 1, VAR_0x8009
+    Message CommonStrings_Text_PCMaximiseIVDone
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCMaximiseIV_AlreadyMax:
+    BufferPartyMonNickname 0, VAR_0x8008
+    BufferPokemonStatName 1, VAR_0x8009
+    Message CommonStrings_Text_PCMaximiseIVAlreadyMax
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCMaximiseIV_Failed:
+    Message CommonStrings_Text_PCMaximiseIVFailed
+    WaitButton
+    CloseMessage
+    GoTo _0C1C
+
+_PCMaximiseIV_NoHeartScale:
+    Message CommonStrings_Text_PCMaximiseIVNoHeartScale
+    WaitButton
+    CloseMessage
     GoTo _0C1C
 
 _PCRename_Egg:
@@ -1795,7 +1876,7 @@ _SimplePCMenu:
     CallIfSet FLAG_MET_BEBE, _SimplePC_BebePC
     AddMenuEntryImm 24, 1
     AddMenuEntryImm 25, 2
-    AddMenuEntryImm 65, 3
+    AddMenuEntryImm MenuEntries_Text_PC_Pokevial, 3
     AddMenuEntryImm 64, 4
     ShowMenu
     SetVar VAR_0x8008, VAR_0x8006

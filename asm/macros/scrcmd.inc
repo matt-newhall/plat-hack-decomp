@@ -5073,6 +5073,26 @@
     .short \level
     .endm
 
+    .macro GetPartyMonIV partySlot, stat, destVarID
+    .short SCRCMD_GETPARTYMONIV
+    .short \partySlot
+    .short \stat
+    .short \destVarID
+    .endm
+
+    .macro MaximizePartyMonIV partySlot, stat, destVarID
+    .short SCRCMD_MAXIMIZEPARTYMONIV
+    .short \partySlot
+    .short \stat
+    .short \destVarID
+    .endm
+
+    .macro BufferPokemonStatName templateArg, stat
+    .short SCRCMD_BUFFERPOKEMONSTATNAME
+    .byte \templateArg
+    .short \stat
+    .endm
+
 
 
     .macro GoToIfLt varID, valueOrVarID, offset

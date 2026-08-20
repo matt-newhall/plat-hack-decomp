@@ -31,6 +31,7 @@ BOOL ScrCmd_BufferUndergroundItemName(ScriptContext *ctx);
 BOOL ScrCmd_BufferMapName(ScriptContext *ctx);
 BOOL ScrCmd_BufferBerryName(ScriptContext *ctx);
 BOOL ScrCmd_BufferNatureName(ScriptContext *ctx);
+BOOL ScrCmd_BufferPokemonStatName(ScriptContext *ctx);
 BOOL ScrCmd_BufferAccessoryName(ScriptContext *ctx);
 BOOL ScrCmd_BufferTabletName(ScriptContext *ctx);
 BOOL ScrCmd_BufferPartyMoveName(ScriptContext *ctx);

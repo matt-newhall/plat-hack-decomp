@@ -3,6 +3,7 @@
 #include <nitro.h>
 
 #include "constants/heap.h"
+#include "constants/pokemon.h"
 #include "generated/natures.h"
 #include "generated/species.h"
 
@@ -52,6 +53,53 @@ BOOL ScrCmd_GivePokemonAtLocation(ScriptContext *ctx)
     u16 *success = ScriptContext_GetVarPointer(ctx);
 
     *success = Pokemon_GiveMonFromScript(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, heldItem, metLocation, TERRAIN_MAX);
+
+    return FALSE;
+}
+
+static const enum PokemonDataParam sMaximiseIVParams[] = {
+    MON_DATA_HP_IV,
+    MON_DATA_ATK_IV,
+    MON_DATA_DEF_IV,
+    MON_DATA_SPEED_IV,
+    MON_DATA_SPATK_IV,
+    MON_DATA_SPDEF_IV,
+};
+
+BOOL ScrCmd_GetPartyMonIV(ScriptContext *ctx)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    u16 partySlot = ScriptContext_GetVar(ctx);
+    u16 stat = ScriptContext_GetVar(ctx);
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+
+    GF_ASSERT(stat < NELEMS(sMaximiseIVParams));
+
+    Pokemon *mon = Party_GetPokemonBySlotIndex(SaveData_GetParty(fieldSystem->saveData), partySlot);
+
+    *destVar = Pokemon_GetValue(mon, sMaximiseIVParams[stat], NULL);
+    return FALSE;
+}
+
+BOOL ScrCmd_MaximizePartyMonIV(ScriptContext *ctx)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    u16 partySlot = ScriptContext_GetVar(ctx);
+    u16 stat = ScriptContext_GetVar(ctx);
+    u16 *destVar = ScriptContext_GetVarPointer(ctx);
+    u32 maxIV = MAX_IVS_SINGLE_STAT;
+
+    GF_ASSERT(stat < NELEMS(sMaximiseIVParams));
+
+    Pokemon *mon = Party_GetPokemonBySlotIndex(SaveData_GetParty(fieldSystem->saveData), partySlot);
+
+    Pokemon_SetValue(mon, sMaximiseIVParams[stat], &maxIV);
+
+    *destVar = (Pokemon_GetValue(mon, MON_DATA_CHECKSUM_FAILED, NULL) == FALSE);
+
+    if (*destVar == TRUE) {
+        Pokemon_CalcStats(mon);
+    }
 
     return FALSE;
 }

@@ -103,7 +103,7 @@
         },
         {
             "id": "pl_msg_00000361_00025",
-            "en_US": "Status"
+            "en_US": "Apply Status"
         },
         {
             "id": "MenuEntries_Text_Status_Poison",
@@ -262,14 +262,6 @@
             "en_US": "Switch Off"
         },
         {
-            "id": "pl_msg_00000361_00065",
-            "en_US": "Pokévial"
-        },
-        {
-            "id": "pl_msg_00000361_00066",
-            "en_US": "Change nickname"
-        },
-        {
             "id": "MenuEntries_Text_PokemonStorageDepositPokemon",
             "en_US": "Deposit Pokémon"
         },
@@ -370,40 +362,40 @@
             "en_US": "Cancel"
         },
         {
-            "id": "pl_msg_00000361_00084",
-            "garbage": 8
+            "id": "MenuEntries_Text_PC_Pokevial",
+            "en_US": "Pokévial"
         },
         {
-            "id": "pl_msg_00000361_00085",
-            "garbage": 8
+            "id": "MenuEntries_Text_PC_ChangeNickname",
+            "en_US": "Change Nickname"
         },
         {
-            "id": "pl_msg_00000361_00086",
-            "garbage": 10
+            "id": "MenuEntries_Text_PC_MaximiseIVs",
+            "en_US": "Maximise IVs"
         },
         {
-            "id": "pl_msg_00000361_00087",
-            "garbage": 4
+            "id": "MenuEntries_Text_Stat_HP",
+            "en_US": "HP"
         },
         {
-            "id": "pl_msg_00000361_00088",
-            "garbage": 4
+            "id": "MenuEntries_Text_Stat_Attack",
+            "en_US": "Attack"
         },
         {
-            "id": "pl_msg_00000361_00089",
-            "garbage": 4
+            "id": "MenuEntries_Text_Stat_Defense",
+            "en_US": "Defense"
         },
         {
-            "id": "pl_msg_00000361_00090",
-            "garbage": 4
+            "id": "MenuEntries_Text_Stat_Speed",
+            "en_US": "Speed"
         },
         {
-            "id": "pl_msg_00000361_00091",
-            "garbage": 4
+            "id": "MenuEntries_Text_Stat_SpAtk",
+            "en_US": "Sp. Atk"
         },
         {
-            "id": "pl_msg_00000361_00092",
-            "garbage": 5
+            "id": "MenuEntries_Text_Stat_SpDef",
+            "en_US": "Sp. Def"
         },
         {
             "id": "pl_msg_00000361_00093",
@@ -588,14 +580,6 @@
         {
             "id": "MenuEntries_Text_CounterpartHand_Left",
             "en_US": "Left"
-        },
-        {
-            "id": "MenuEntries_Text_Julien_SilkScarf",
-            "en_US": "Silk Scarf"
-        },
-        {
-            "id": "MenuEntries_Text_Julien_Chilan",
-            "en_US": "Chilan Berries"
         },
         {
             "id": "pl_msg_00000361_00139",
@@ -1288,6 +1272,14 @@
         {
             "id": "MenuEntries_Text_PalPark_ChoosePaul",
             "en_US": "Paul"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_SilkScarf",
+            "en_US": "Silk Scarf"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_Chilan",
+            "en_US": "Chilan Berries"
         }
     ]
 }

@@ -385,6 +385,16 @@ BOOL ScrCmd_BufferNatureName(ScriptContext *ctx)
     return FALSE;
 }
 
+BOOL ScrCmd_BufferPokemonStatName(ScriptContext *ctx)
+{
+    StringTemplate **strTemplate = FieldSystem_GetScriptMemberPtr(ctx->fieldSystem, SCRIPT_MANAGER_STR_TEMPLATE);
+    u8 templateArg = ScriptContext_ReadByte(ctx);
+    u16 stat = ScriptContext_GetVar(ctx);
+
+    StringTemplate_SetPokemonStatName(*strTemplate, templateArg, stat);
+    return FALSE;
+}
+
 BOOL ScrCmd_BufferAccessoryName(ScriptContext *ctx)
 {
     FieldSystem *fieldSystem = ctx->fieldSystem;

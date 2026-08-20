@@ -1034,6 +1034,63 @@
         "That Pokémon was met by another\n",
         "Trainer. Its name cannot be changed."
       ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVNoHeartScale",
+      "en_US": [
+        "A Heart Scale is needed to maximise\n",
+        "a Pokémon’s IV."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVIntro",
+      "en_US": [
+        "It costs one Heart Scale to maximise\n",
+        "an IV of a Pokémon.\r",
+        "Select a Pokémon to change its IVs."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVWhichStat",
+      "en_US": [
+        "Which of your {STRVAR_1 1, 0, 0}’s IVs\n",
+        "do you want to maximise?"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVConfirm",
+      "en_US": [
+        "So you want to maximise your\n",
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 7, 1, 0} IV?"
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVInserted",
+      "en_US": [
+        "{STRVAR_1 3, 2, 0} inserted one Heart Scale\n",
+        "into the PC."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVDone",
+      "en_US": [
+        "Your {STRVAR_1 1, 0, 0}’s {STRVAR_1 7, 1, 0} IV\n",
+        "is now 31."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVFailed",
+      "en_US": [
+        "The PC could not read that Pokémon’s\n",
+        "data. No Heart Scale was used."
+      ]
+    },
+    {
+      "id": "CommonStrings_Text_PCMaximiseIVAlreadyMax",
+      "en_US": [
+        "Your {STRVAR_1 1, 0, 0}’s {STRVAR_1 7, 1, 0} IV\n",
+        "is already 31."
+      ]
     }
   ]
 }

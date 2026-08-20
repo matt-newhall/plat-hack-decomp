@@ -860,6 +860,9 @@ ScriptCommand(SCRCMD_SHOWMAPNAMEPOPUP,                                     ScrCm
 ScriptCommand(SCRCMD_CHECKHASCAUGHTSPECIES,                                ScrCmd_CheckHasCaughtSpecies)
 ScriptCommand(SCRCMD_SETLEVELCAP,                                          ScrCmd_SetLevelCap)
 ScriptCommand(SCRCMD_GETHONEYTREESPECIES,                                  ScrCmd_GetHoneyTreeSpecies)
+ScriptCommand(SCRCMD_MAXIMIZEPARTYMONIV,                                   ScrCmd_MaximizePartyMonIV)
+ScriptCommand(SCRCMD_GETPARTYMONIV,                                        ScrCmd_GetPartyMonIV)
+ScriptCommand(SCRCMD_BUFFERPOKEMONSTATNAME,                                ScrCmd_BufferPokemonStatName)
 
 // clang-format on
 
