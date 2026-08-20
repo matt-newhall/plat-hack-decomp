@@ -1627,6 +1627,19 @@ void BattleContext_Set(BattleSystem *battleSys, BattleContext *battleCtx, enum B
  * @param battler
  * @return The party slot of the Pokemon to be switched in.
  */
+/**
+ * @brief Check if the AI should hold off on choosing a post-KO replacement
+ * until the opposing side has committed to theirs.
+ *
+ * Only the enemy side ever waits; if both sides waited on each other during an
+ * AI-vs-AI double KO, neither would commit and the battle would hang.
+ *
+ * @param battleSys
+ * @param battler
+ * @return TRUE if an opposing battler is still choosing a replacement.
+ */
+BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler);
+
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler);
 
 /**

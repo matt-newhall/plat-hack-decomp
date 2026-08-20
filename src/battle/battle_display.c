@@ -4657,6 +4657,10 @@ static void Task_TrainerShowPartyMenu(SysTask *task, void *data)
     int slot = BattleAI_SwitchedSlot(partyMenuData->battleSys, battler);
 
     if (slot == 6) {
+        if (BattleAI_WaitingOnOpposingSwitch(partyMenuData->battleSys, battler)) {
+            return;
+        }
+
         slot = BattleAI_PostKOSwitchIn(partyMenuData->battleSys, battler);
 
         if (slot == 6) {
