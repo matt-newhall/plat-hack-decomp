@@ -9071,6 +9071,76 @@ int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battl
     return criticalMul;
 }
 
+/**
+ * @brief Get the critical-hit stages a move contributes on its own.
+ *
+ * The effect scripts apply this through BTLVAR_CRITICAL_BOOSTS while the move is executing,
+ * so it has to be derived from the move's effect for anything asking ahead of time.
+ *
+ * @param battleCtx
+ * @param move
+ * @return The number of critical-hit stages the move grants.
+ */
+static int MoveCriticalStages(BattleContext *battleCtx, u16 move)
+{
+    switch (MOVE_DATA(move).effect) {
+    case BATTLE_EFFECT_HIGH_CRITICAL:
+    case BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT:
+    case BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT:
+    case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT:
+    case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
+        return 1;
+    }
+
+    return 0;
+}
+
+/**
+ * @brief Check whether a move is certain to land a critical hit.
+ *
+ * Mirrors the stage arithmetic in BattleSystem_CalcCriticalMulti without consuming any RNG,
+ * so that the AI can ask the question before committing to a move. Anything short of a
+ * certainty reports FALSE; the AI deliberately does not gamble on a possible critical hit.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param defender
+ * @param move
+ * @param ability   The attacker's ability.
+ * @param heldItem  The attacker's held item.
+ * @return TRUE if the move cannot fail to critically hit.
+ */
+BOOL BattleSystem_MoveAlwaysCrits(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, u16 move, int ability, u16 heldItem)
+{
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_BATTLE_ARMOR) == TRUE
+        || Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SHELL_ARMOR) == TRUE
+        || (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, defender)] & SIDE_CONDITION_LUCKY_CHANT)
+        || (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_NO_CRITICAL)) {
+        return FALSE;
+    }
+
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_ALWAYS_CRIT) {
+        return TRUE;
+    }
+
+    int itemEffect = BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_HOLD_EFFECT);
+    u16 species = battleCtx->battleMons[attacker].species;
+
+    int stage = (((battleCtx->battleMons[attacker].statusVolatile & VOLATILE_CONDITION_FOCUS_ENERGY) != FALSE) * 2)
+        + (itemEffect == HOLD_EFFECT_CRITRATE_UP)
+        + MoveCriticalStages(battleCtx, move)
+        + (ability == ABILITY_SUPER_LUCK)
+        + (2 * (itemEffect == HOLD_EFFECT_CHANSEY_CRITRATE_UP && species == SPECIES_CHANSEY))
+        + (2 * (itemEffect == HOLD_EFFECT_FARFETCHD_CRITRATE_UP && species == SPECIES_FARFETCHD));
+
+    if (stage > 4) {
+        stage = 4;
+    }
+
+    return sCriticalStageRates[stage] == 1;
+}
+
 #define FORBIDDEN_BY_MIMIC_DELIM     0xFFFE
 #define FORBIDDEN_BY_METRONOME_DELIM 0xFFFF
 
@@ -10401,6 +10471,13 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, defender, BATTLEMON_LEVEL, NULL);
                     } else {
+                        int defenderAbility = Battler_Ability(battleCtx, defender);
+                        int criticalMul = 1;
+
+                        if (BattleSystem_MoveAlwaysCrits(battleSys, battleCtx, defender, battler, moveDefender, defenderAbility, Battler_HeldItem(battleCtx, defender))) {
+                            criticalMul = defenderAbility == ABILITY_SNIPER ? 3 : 2;
+                        }
+
                         damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                             battleCtx,
                             moveDefender,
@@ -10410,7 +10487,13 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                             moveType,
                             defender,
                             battler,
-                            1);
+                            criticalMul);
+
+                        if (criticalMul == 2) {
+                            damageToTarget = damageToTarget * 3 / 2;
+                        } else if (criticalMul == 3) {
+                            damageToTarget = damageToTarget * 9 / 4;
+                        }
                     }
 
                     moveStatus = 0;
@@ -10564,6 +10647,13 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, battler, BATTLEMON_LEVEL, NULL);
                     } else {
+                        int battlerAbility = Battler_Ability(battleCtx, battler);
+                        int criticalMul = 1;
+
+                        if (BattleSystem_MoveAlwaysCrits(battleSys, battleCtx, battler, defender, moveBattler, battlerAbility, Battler_HeldItem(battleCtx, battler))) {
+                            criticalMul = battlerAbility == ABILITY_SNIPER ? 3 : 2;
+                        }
+
                         damageToTarget = BattleSystem_CalcMoveDamage(battleSys,
                             battleCtx,
                             moveBattler,
@@ -10573,7 +10663,13 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                             moveType,
                             battler,
                             defender,
-                            1);
+                            criticalMul);
+
+                        if (criticalMul == 2) {
+                            damageToTarget = damageToTarget * 3 / 2;
+                        } else if (criticalMul == 3) {
+                            damageToTarget = damageToTarget * 9 / 4;
+                        }
                     }
 
                     moveStatus = 0;

@@ -3402,6 +3402,11 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         // BattleSystem_CalcMoveDamage consumes the attacker's Charge boost as a side effect of
         // applying it
         u32 chargeFlag = battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE;
+        int criticalMul = 1;
+
+        if (BattleSystem_MoveAlwaysCrits(battleSys, battleCtx, attacker, AI_CONTEXT.defender, move, ability, heldItem)) {
+            criticalMul = ability == ABILITY_SNIPER ? 3 : 2;
+        }
 
         damage = BattleSystem_CalcMoveDamage(battleSys,
             battleCtx,
@@ -3412,9 +3417,15 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             type,
             attacker,
             AI_CONTEXT.defender,
-            1);
+            criticalMul);
 
         battleCtx->battleMons[attacker].moveEffectsMask |= chargeFlag;
+
+        if (criticalMul == 2) {
+            damage = damage * 3 / 2;
+        } else if (criticalMul == 3) {
+            damage = damage * 9 / 4;
+        }
     } else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
     }

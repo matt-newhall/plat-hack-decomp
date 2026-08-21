@@ -264,6 +264,20 @@ BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move);
 int BattleSystem_MoveTargetCount(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move);
 
 /**
+ * @brief Check whether a move is certain to land a critical hit.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param defender
+ * @param move
+ * @param ability   The attacker's ability.
+ * @param heldItem  The attacker's held item.
+ * @return TRUE if the move cannot fail to critically hit.
+ */
+BOOL BattleSystem_MoveAlwaysCrits(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, u16 move, int ability, u16 heldItem);
+
+/**
  * @brief Check if Sheer Force boosts the attacker's move.
  *
  * A move is boosted if it is a damaging move with an additional effect, i.e. a
