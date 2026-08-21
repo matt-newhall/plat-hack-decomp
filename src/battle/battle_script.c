@@ -1411,6 +1411,21 @@ static void BattleScript_CalcMoveDamage(BattleSystem *battleSys, BattleContext *
         battleCtx->attacker,
         battleCtx->defender,
         battleCtx->criticalMul);
+
+    if ((ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_CHARGE) && moveType == TYPE_ELECTRIC) {
+        ATTACKING_MON.moveEffectsMask &= ~MOVE_EFFECT_CHARGE;
+    }
+
+    if (ATTACKING_MON.moveEffectsData.meFirst) {
+        if (battleCtx->meFirstTurnOrder == ATTACKING_MON.moveEffectsData.meFirstTurnNumber) {
+            ATTACKING_MON.moveEffectsData.meFirstTurnNumber--;
+        }
+
+        if (battleCtx->meFirstTurnOrder - ATTACKING_MON.moveEffectsData.meFirstTurnNumber >= 2) {
+            ATTACKING_MON.moveEffectsData.meFirst = 0;
+        }
+    }
+
     if (battleCtx->criticalMul == 2) {
         battleCtx->damage = (battleCtx->damage * 3) / 2;
     } else if (battleCtx->criticalMul == 3) {
@@ -6457,6 +6472,12 @@ static BOOL BtlCmd_BeatUp(BattleSystem *battleSys, BattleContext *battleCtx)
                         battleCtx->attacker,
                         battleCtx->defender,
                         battleCtx->criticalMul);
+
+    if (battleCtx->criticalMul == 2) {
+        battleCtx->damage = (battleCtx->damage * 3) / 2;
+    } else if (battleCtx->criticalMul == 3) {
+        battleCtx->damage = (battleCtx->damage * 9) / 4;
+    }
 
     battleCtx->damage = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,

@@ -4142,7 +4142,7 @@ static u16 sSoundMoves[] = {
 };
 
 BOOL BattleSystem_IsSoundMove(u16 move) {
-    for (int i = 0; sSoundMoves[i] != 0; i++) {
+    for (int i = 0; i < NELEMS(sSoundMoves); i++) {
         if (sSoundMoves[i] == move)
             return TRUE;
     }
@@ -4162,7 +4162,7 @@ static u16 sWindMoves[] = {
 };
 
 BOOL BattleSystem_IsWindMove(u16 move) {
-    for (int i = 0; sWindMoves[i] != 0; i++) {
+    for (int i = 0; i < NELEMS(sWindMoves); i++) {
         if (sWindMoves[i] == move)
             return TRUE;
     }
@@ -8268,7 +8268,7 @@ static const u16 sSolarMoves[] = {
 };
 
 BOOL BattleSystem_IsSolarMove(u16 move) {
-    for (int i = 0; sSolarMoves[i] != 0; i++) {
+    for (int i = 0; i < NELEMS(sSolarMoves); i++) {
         if (sSolarMoves[i] == move)
             return TRUE;
     }
@@ -8291,6 +8291,48 @@ typedef struct DamageCalcParams {
     u8 type1;
     u8 type2;
 } DamageCalcParams;
+
+/**
+ * @brief Check if a species has any evolution remaining, e.g. for Eviolite.
+ *
+ * Results are memoized for the two most-recently queried species. The AI can
+ * run the damage calc dozens of times for a single switch decision, and each
+ * cache miss costs a NARC read.
+ *
+ * @param species
+ * @return TRUE if the species can still evolve.
+ */
+static BOOL SpeciesCanEvolve(u16 species)
+{
+    static u16 sCachedSpecies[2] = { SPECIES_NONE, SPECIES_NONE };
+    static BOOL sCachedCanEvolve[2] = { FALSE, FALSE };
+    static u8 sNextCacheSlot = 0;
+
+    SpeciesEvolution evolutions[MAX_EVOLUTIONS];
+    BOOL canEvolve = FALSE;
+    int i;
+
+    for (i = 0; i < NELEMS(sCachedSpecies); i++) {
+        if (sCachedSpecies[i] == species) {
+            return sCachedCanEvolve[i];
+        }
+    }
+
+    NARC_ReadWholeMemberByIndexPair(evolutions, NARC_INDEX_POKETOOL__PERSONAL__EVO, species);
+
+    for (i = 0; i < MAX_EVOLUTIONS; i++) {
+        if (evolutions[i].method != EVO_NONE) {
+            canEvolve = TRUE;
+            break;
+        }
+    }
+
+    sCachedSpecies[sNextCacheSlot] = species;
+    sCachedCanEvolve[sNextCacheSlot] = canEvolve;
+    sNextCacheSlot ^= 1;
+
+    return canEvolve;
+}
 
 int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     BattleContext *battleCtx,
@@ -8412,7 +8454,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE) && moveType == TYPE_ELECTRIC) {
         movePower *= 2;
-        battleCtx->battleMons[attacker].moveEffectsMask &= ~MOVE_EFFECT_CHARGE;
     }
 
     if (battleCtx->turnFlags[attacker].helpingHand && (!(move == MOVE_STRUGGLE && inPower == 40))) {
@@ -8470,23 +8511,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_PIKA_SPATK_UP
         && attackerParams.species == SPECIES_PIKACHU) {
-        attackStat = attackStat *= 2;
-        spAttackStat = spAttackStat *= 2;
+        attackStat *= 2;
+        spAttackStat *= 2;
     }
-    if (defenderParams.heldItemEffect == HOLD_EFFECT_BOOST_DEFENSES) {
-        SpeciesEvolution evolutions[MAX_EVOLUTIONS];
-        NARC_ReadWholeMemberByIndexPair(evolutions, NARC_INDEX_POKETOOL__PERSONAL__EVO, defenderParams.species);
-        BOOL canEvolve = FALSE;
-        for (int i = 0; i < MAX_EVOLUTIONS; i++) {
-            if (evolutions[i].method != EVO_NONE) {
-                canEvolve = TRUE;
-                break;
-            }
-        }
-        if (canEvolve) {
+    if (defenderParams.heldItemEffect == HOLD_EFFECT_BOOST_DEFENSES
+        && SpeciesCanEvolve(defenderParams.species)) {
             defenseStat = defenseStat * (100 + defenderParams.heldItemPower) / 100;
             spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
-        }
     }
     if (defenderParams.heldItemEffect == HOLD_EFFECT_RAISE_SP_DEF_ONLY_STATUS_MOVES) {
         spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
@@ -8664,8 +8695,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (attackerParams.ability == ABILITY_STAKEOUT
-        && DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
-        && battleCtx->battleMons[battleCtx->defender].newlySwitched == TRUE) {
+        && battleCtx->battlerActions[defender][BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
+        && battleCtx->battleMons[defender].newlySwitched == TRUE) {
         movePower *= 2;
     }
 
@@ -8794,7 +8825,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
         damage += 2;
 
-        if ((attackerParams.statusMask & MON_CONDITION_BURN) && attackerParams.ability != ABILITY_GUTS) {
+        if ((attackerParams.statusMask & MON_CONDITION_BURN)
+            && attackerParams.ability != ABILITY_GUTS
+            && MOVE_DATA(move).effect != BATTLE_EFFECT_DOUBLE_POWER_WHEN_STATUSED) {
             damage /= 2;
         }
 
@@ -8943,7 +8976,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             damage *= 2;
         }
 
-        if (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT) {
+        if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
             damage /= 2;
         }
     }
@@ -8982,18 +9015,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (attackerParams.heldItemEffect == HOLD_EFFECT_BOOST_REPEATED) {
-        damage = damage * (10 + battleCtx->battleMons[attacker].moveEffectsData.metronomeTurns) / 10;
+        damage = damage * (100 + attackerParams.heldItemPower * battleCtx->battleMons[attacker].moveEffectsData.metronomeTurns) / 100;
     }
 
     if (battleCtx->battleMons[attacker].moveEffectsData.meFirst) {
-        if (battleCtx->meFirstTurnOrder == battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber) {
-            battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber--;
+        int meFirstTurnNumber = battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber;
+
+        if (battleCtx->meFirstTurnOrder == meFirstTurnNumber) {
+            meFirstTurnNumber--;
         }
 
-        if (battleCtx->meFirstTurnOrder - battleCtx->battleMons[attacker].moveEffectsData.meFirstTurnNumber < 2) {
+        if (battleCtx->meFirstTurnOrder - meFirstTurnNumber < 2) {
             damage = damage * 15 / 10;
-        } else {
-            battleCtx->battleMons[attacker].moveEffectsData.meFirst = 0;
         }
     }
 

@@ -3272,9 +3272,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     // The following moves have their real power computed by a battle-script command at
     // execution time, so scoring never sees it. Mirror each of those commands here.
     case MOVE_FACADE:
-        if (battleCtx->battleMons[attacker].status & MON_CONDITION_BURN) {
-            power = MOVE_DATA(move).power * 4;
-        } else if (battleCtx->battleMons[attacker].status & MON_CONDITION_FACADE_BOOST) {
+        if (battleCtx->battleMons[attacker].status & MON_CONDITION_FACADE_BOOST) {
             power = MOVE_DATA(move).power * 2;
         }
 
@@ -3399,9 +3397,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     if (damage == 0) {
-        // BattleSystem_CalcMoveDamage consumes the attacker's Charge boost as a side effect of
-        // applying it
-        u32 chargeFlag = battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE;
         int criticalMul = 1;
 
         if (BattleSystem_MoveAlwaysCrits(battleSys, battleCtx, attacker, AI_CONTEXT.defender, move, ability, heldItem)) {
@@ -3418,8 +3413,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             attacker,
             AI_CONTEXT.defender,
             criticalMul);
-
-        battleCtx->battleMons[attacker].moveEffectsMask |= chargeFlag;
 
         if (criticalMul == 2) {
             damage = damage * 3 / 2;
