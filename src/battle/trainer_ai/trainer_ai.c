@@ -29,6 +29,7 @@
 #define AI_CONTEXT (battleCtx->aiContext)
 
 // Moves with an effect ID in either of these tables do not use the standard damage-calculation during scoring.
+static const u16 sNoDamageCalcMoveEffects[] = {
     BATTLE_EFFECT_HALVE_DEFENSE,
     BATTLE_EFFECT_HALVE_SP_DEFENSE,
     0xFFFF
@@ -3080,97 +3081,100 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     type = 0;
     effectivenessFlags = 0;
 
+    // heldItem arrives as the raw field rather than through Battler_HeldItem, which is what
+    // suppresses items under Klutz and Embargo everywhere else.
+    if (ability == ABILITY_KLUTZ || embargoTurns != 0) {
+        heldItem = ITEM_NONE;
+    }
+
     switch (move) {
     case MOVE_NATURAL_GIFT:
-        if (ability != ABILITY_KLUTZ && embargoTurns == 0) {
-            power = BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_NATURAL_GIFT_POWER);
+        power = BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_NATURAL_GIFT_POWER);
 
-            if (power) {
-                type = BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_NATURAL_GIFT_TYPE);
-            } else {
-                type = TYPE_NORMAL;
-            }
+        if (power == 0) {
+            return 0;
         }
+
+        type = BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_NATURAL_GIFT_TYPE);
         break;
 
     case MOVE_JUDGMENT:
-        if (ability != ABILITY_KLUTZ && embargoTurns == 0) {
-            power = 0;
+        power = 0;
 
-            switch (BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_HOLD_EFFECT)) {
-            case HOLD_EFFECT_ARCEUS_FIGHTING:
-                type = TYPE_FIGHTING;
-                break;
+        switch (BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_HOLD_EFFECT)) {
+        case HOLD_EFFECT_ARCEUS_FIGHTING:
+            type = TYPE_FIGHTING;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_FLYING:
-                type = TYPE_FLYING;
-                break;
+        case HOLD_EFFECT_ARCEUS_FLYING:
+            type = TYPE_FLYING;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_POISON:
-                type = TYPE_POISON;
-                break;
+        case HOLD_EFFECT_ARCEUS_POISON:
+            type = TYPE_POISON;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_GROUND:
-                type = TYPE_GROUND;
-                break;
+        case HOLD_EFFECT_ARCEUS_GROUND:
+            type = TYPE_GROUND;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_ROCK:
-                type = TYPE_ROCK;
-                break;
+        case HOLD_EFFECT_ARCEUS_ROCK:
+            type = TYPE_ROCK;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_BUG:
-                type = TYPE_BUG;
-                break;
+        case HOLD_EFFECT_ARCEUS_BUG:
+            type = TYPE_BUG;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_GHOST:
-                type = TYPE_GHOST;
-                break;
+        case HOLD_EFFECT_ARCEUS_GHOST:
+            type = TYPE_GHOST;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_STEEL:
-                type = TYPE_STEEL;
-                break;
+        case HOLD_EFFECT_ARCEUS_STEEL:
+            type = TYPE_STEEL;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_FIRE:
-                type = TYPE_FIRE;
-                break;
+        case HOLD_EFFECT_ARCEUS_FIRE:
+            type = TYPE_FIRE;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_WATER:
-                type = TYPE_WATER;
-                break;
+        case HOLD_EFFECT_ARCEUS_WATER:
+            type = TYPE_WATER;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_GRASS:
-                type = TYPE_GRASS;
-                break;
+        case HOLD_EFFECT_ARCEUS_GRASS:
+            type = TYPE_GRASS;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_ELECTRIC:
-                type = TYPE_ELECTRIC;
-                break;
+        case HOLD_EFFECT_ARCEUS_ELECTRIC:
+            type = TYPE_ELECTRIC;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_PSYCHIC:
-                type = TYPE_PSYCHIC;
-                break;
+        case HOLD_EFFECT_ARCEUS_PSYCHIC:
+            type = TYPE_PSYCHIC;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_ICE:
-                type = TYPE_ICE;
-                break;
+        case HOLD_EFFECT_ARCEUS_ICE:
+            type = TYPE_ICE;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_DRAGON:
-                type = TYPE_DRAGON;
-                break;
+        case HOLD_EFFECT_ARCEUS_DRAGON:
+            type = TYPE_DRAGON;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_DARK:
-                type = TYPE_DARK;
-                break;
+        case HOLD_EFFECT_ARCEUS_DARK:
+            type = TYPE_DARK;
+            break;
 
-            case HOLD_EFFECT_ARCEUS_FAIRY:
-                type = TYPE_FAIRY;
-                break;
+        case HOLD_EFFECT_ARCEUS_FAIRY:
+            type = TYPE_FAIRY;
+            break;
 
-            default:
-                type = TYPE_NORMAL;
-                break;
-            }
+        default:
+            type = TYPE_NORMAL;
+            break;
         }
+
         break;
 
     case MOVE_HIDDEN_POWER:
@@ -3189,6 +3193,12 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_GYRO_BALL:
+        if (battleCtx->monSpeedValues[attacker] == 0) {
+            power = 1;
+            type = TYPE_NORMAL;
+            break;
+        }
+
         power = 1 + 25 * battleCtx->monSpeedValues[AI_CONTEXT.defender] / battleCtx->monSpeedValues[attacker];
 
         if (power > 150) {
@@ -3208,7 +3218,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_PSYWAVE:
-        damage = battleCtx->battleMons[attacker].level * (BattleSystem_RandNext(battleSys) % 11 + 5) / 10;
+        // thinking E(X) is roughly half level here
+        damage = battleCtx->battleMons[attacker].level / 2;
         break;
 
     case MOVE_RETURN:
@@ -3232,7 +3243,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         int monWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
 
-        if (Battler_IgnorableAbility(battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
             monWeight /= 2;
         }
 
@@ -3253,14 +3264,14 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
     case MOVE_VENOSHOCK:
         if (battleCtx->battleMons[AI_CONTEXT.defender].status & (MON_CONDITION_POISON | MON_CONDITION_TOXIC)) {
-            power = 130;
+            power = MOVE_DATA(move).power * 2;
         }
 
         break;
 
     case MOVE_HEX:
         if (battleCtx->battleMons[AI_CONTEXT.defender].status & MON_CONDITION_ANY) {
-            power = 130;
+            power = MOVE_DATA(move).power * 2;
         }
 
         break;
@@ -3384,14 +3395,14 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     case MOVE_HEAVY_SLAM: {
-        int atkWeight = battleCtx->battleMons[AI_CONTEXT.attacker].weight;
+        int atkWeight = battleCtx->battleMons[attacker].weight;
         int defWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
 
-        if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_LIGHT_METAL) {
+        if (Battler_Ability(battleCtx, attacker) == ABILITY_LIGHT_METAL) {
             atkWeight /= 2;
         }
 
-        if (Battler_IgnorableAbility(battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
+        if (Battler_IgnorableAbility(battleCtx, attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
             defWeight /= 2;
         }
 
