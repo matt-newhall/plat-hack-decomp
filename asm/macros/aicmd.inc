@@ -655,6 +655,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfDefenderCanKO jump:req
+    .long AICMD_IFDEFENDERCANKO
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry:req

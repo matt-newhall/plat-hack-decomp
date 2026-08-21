@@ -205,6 +205,7 @@ static void AICmd_IfCurrentMoveIsSound(BattleSystem *battleSys, BattleContext *b
 static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2829,6 +2830,50 @@ static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *bat
     }
 
     AI_CONTEXT.calcTemp = AI_MOVE_IS_HIGHEST_DAMAGE;
+}
+
+/**
+ * @brief Check whether the target's best move would knock the attacker out.
+ *
+ * Uses this turn's damage rolls rather than maximum damage.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int defender = AI_CONTEXT.defender;
+
+    u8 ivs[STAT_MAX];
+    for (int i = 0; i < STAT_MAX; i++) {
+        ivs[i] = BattleMon_Get(battleCtx, defender, BATTLEMON_HP_IV + i, NULL);
+    }
+
+    // TrainerAI_CalcAllDamage always scores against AI_CONTEXT.defender, so the two battlers
+    // have to be swapped to measure damage coming the other way.
+    s32 damageVals[LEARNED_MOVES_MAX];
+    AI_CONTEXT.defender = attacker;
+
+    s32 maxDamage = TrainerAI_CalcAllDamage(battleSys,
+        battleCtx,
+        defender,
+        battleCtx->battleMons[defender].moves,
+        damageVals,
+        battleCtx->battleMons[defender].heldItem,
+        ivs,
+        Battler_Ability(battleCtx, defender),
+        battleCtx->battleMons[defender].moveEffectsData.embargoTurns,
+        TRUE);
+
+    AI_CONTEXT.defender = defender;
+
+    if (maxDamage >= battleCtx->battleMons[attacker].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx)

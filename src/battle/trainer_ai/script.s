@@ -846,10 +846,15 @@ Basic_CheckCurrentWeatherIsSun:
     PopOrEnd 
 
 Basic_CheckFirstTurnInBattle:
-    // If it is not the attacker's first turn in battle, score -10.
+    // Fake Out and First Impression simply fail on any turn but the one the user came in on,
+    // so the penalty has to outweigh every bonus EvalAttack can hand them, the last-ditch
+    // priority bonus included.
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedEqualTo FALSE, ScoreMinus10
-    PopOrEnd 
+    IfLoadedNotEqualTo FALSE, Basic_CheckFirstTurnInBattle_Terminate
+    AddToMoveScore -20
+
+Basic_CheckFirstTurnInBattle_Terminate:
+    PopOrEnd
 
 Basic_CheckMaxStockpile:
     // If the Stockpile count is already at 3, score -10.
@@ -5986,23 +5991,39 @@ EvalAttack_ScoreBestDamage_Plus6:
 
 EvalAttack_CheckKill:
     IfCurrentMoveKills ROLL_FOR_DAMAGE, EvalAttack_ApplyKillBonuses
-    GoTo EvalAttack_CheckHighCrit
+    GoTo EvalAttack_CheckLastDitchPriority
 
 EvalAttack_ApplyKillBonuses:
     // Taking the KO first is worth far more than taking it second, so the bonus depends on
     // whether we expect to move first. A speed tie counts as moving first.
     IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, EvalAttack_KillWhenSlower
     AddToMoveScore 6
-    GoTo EvalAttack_CheckHighCrit
+    GoTo EvalAttack_CheckLastDitchPriority
 
 EvalAttack_KillWhenSlower:
     // Priority still buys us the first hit even when we lose the speed check.
     IfCurrentMoveHasPriority EvalAttack_KillWithPriority
     AddToMoveScore 3
-    GoTo EvalAttack_CheckHighCrit
+    GoTo EvalAttack_CheckLastDitchPriority
 
 EvalAttack_KillWithPriority:
     AddToMoveScore 6
+
+EvalAttack_CheckLastDitchPriority:
+    // If we are slower than a target which can knock us out, a priority attack is the only
+    // move we are certain to get away, so score it far above everything else.
+    LoadMovePower
+    IfLoadedEqualTo 0, EvalAttack_CheckHighCrit
+    IfCurrentMoveHasPriority EvalAttack_LastDitch_CheckSpeed
+    GoTo EvalAttack_CheckHighCrit
+
+EvalAttack_LastDitch_CheckSpeed:
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, EvalAttack_CheckHighCrit
+    IfDefenderCanKO EvalAttack_LastDitch_Score
+    GoTo EvalAttack_CheckHighCrit
+
+EvalAttack_LastDitch_Score:
+    AddToMoveScore 11
 
 EvalAttack_CheckHighCrit:
     // A high critical-hit ratio is only worth chasing when the move is already resolving
