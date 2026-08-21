@@ -3290,16 +3290,24 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
         }
     }
 
+    if (move == MOVE_FREEZE_DRY
+        && (defenderType1 == TYPE_WATER || defenderType2 == TYPE_WATER)
+        && IsInverseBattle(battleCtx) == FALSE) {
+        *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
+
+        if (defenderType1 != TYPE_STEEL && defenderType2 != TYPE_STEEL
+            && defenderType1 != TYPE_ICE && defenderType2 != TYPE_ICE
+            && defenderType1 != TYPE_FIRE && defenderType2 != TYPE_FIRE) {
+            *moveStatusMask |= MOVE_STATUS_SUPER_EFFECTIVE;
+        }
+    }
+
     if (attackerAbility != ABILITY_MOLD_BREAKER
         && defenderAbility == ABILITY_WONDER_GUARD
         && MoveIsOnDamagingTurn(battleCtx, move)
         && ((*moveStatusMask & MOVE_STATUS_SUPER_EFFECTIVE) == FALSE
             || (*moveStatusMask & MOVE_STATUS_BASIC_EFFECTIVENESS) == MOVE_STATUS_BASIC_EFFECTIVENESS)) {
         *moveStatusMask |= MOVE_STATUS_INEFFECTIVE;
-    }
-
-    if (move == MOVE_FREEZE_DRY && (defenderType1 == TYPE_WATER || defenderType2 == TYPE_WATER)) {
-        UpdateMoveStatusForTypeMul(4, moveStatusMask);
     }
 
     return;
