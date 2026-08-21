@@ -8252,7 +8252,9 @@ static const u16 sPunchingMoves[] = {
     MOVE_SHADOW_PUNCH,
     MOVE_DRAIN_PUNCH,
     MOVE_BULLET_PUNCH,
-    MOVE_SKY_UPPERCUT
+    MOVE_SKY_UPPERCUT,
+    MOVE_COMET_PUNCH,
+    MOVE_POWER_UP_PUNCH
 };
 
 static const u16 sAuraAndPulseMoves[] = {

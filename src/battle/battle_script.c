@@ -9931,7 +9931,8 @@ static const u16 sPowderMoves[] = {
     MOVE_POWDER,
     MOVE_SLEEP_POWDER,
     MOVE_SPORE,
-    MOVE_STUN_SPORE
+    MOVE_STUN_SPORE,
+    MOVE_RAGE_POWDER
 };
 
 /**
