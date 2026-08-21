@@ -12,6 +12,12 @@ _normal_switch:
     Wait
     WaitButtonABTime 30
     RemoveItem BTLSCR_SIDE_EFFECT_MON
+    TryRegeneratorOnSwitch BTLSCR_SIDE_EFFECT_MON, _regenerator_done
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_MAX_HP, BTLVAR_HP_CALC_TEMP
+    DivideVarByValue BTLVAR_HP_CALC_TEMP, 3
+    UpdateHealthBarValue BTLSCR_SIDE_EFFECT_MON
+
+_regenerator_done:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_TYPE, BATTLE_TYPE_TRAINER, _player_switch
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_EFFECT_MON, 1, _ai_switch
     GoTo _player_switch

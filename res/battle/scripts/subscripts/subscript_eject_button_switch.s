@@ -12,6 +12,12 @@ _normal_switch:
     Wait
     WaitButtonABTime 30
     RemoveItem BTLSCR_DEFENDER
+    TryRegeneratorOnSwitch BTLSCR_DEFENDER, _regenerator_done
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_DEFENDER, BATTLEMON_MAX_HP, BTLVAR_HP_CALC_TEMP
+    DivideVarByValue BTLVAR_HP_CALC_TEMP, 3
+    UpdateHealthBarValue BTLSCR_DEFENDER
+
+_regenerator_done:
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_BATTLE_TYPE, BATTLE_TYPE_TRAINER, _player_switch
     // Trainer battle: player side shows party screen; AI side uses pre-selected slot
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_DEFENDER, 1, _ai_switch

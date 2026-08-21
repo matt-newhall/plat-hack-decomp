@@ -35,6 +35,12 @@ _neutralizing_gas_wearoff_loop:
     GoTo _neutralizing_gas_wearoff_loop
 
 _do_switch:
+    TryRegeneratorOnSwitch BTLSCR_ATTACKER, _regenerator_done
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_ATTACKER, BATTLEMON_MAX_HP, BTLVAR_HP_CALC_TEMP
+    DivideVarByValue BTLVAR_HP_CALC_TEMP, 3
+    UpdateHealthBarValue BTLSCR_ATTACKER
+
+_regenerator_done:
     DeletePokemon BTLSCR_ATTACKER
     Wait
     HealthbarSlideOut BTLSCR_ATTACKER
