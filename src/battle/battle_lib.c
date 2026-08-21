@@ -1226,6 +1226,29 @@ static inline int CompareSpeed_ApplySimple(BattleContext *battleCtx, int battler
     return stage;
 }
 
+void BattleSystem_RollQuickDraw(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    battleCtx->battleMons[battler].moveEffectsData.quickDraw = 0;
+
+    if (battleCtx->battleMons[battler].curHP == 0
+        || Battler_Ability(battleCtx, battler) != ABILITY_QUICK_DRAW
+        || battleCtx->battlerActions[battler][BATTLE_ACTION_SELECTED_COMMAND] != PLAYER_INPUT_FIGHT) {
+        return;
+    }
+
+    u16 move = battleCtx->turnFlags[battler].struggling
+        ? MOVE_STRUGGLE
+        : BattleMon_Get(battleCtx, battler, BATTLEMON_MOVE_1 + battleCtx->moveSlot[battler], NULL);
+
+    if (MOVE_DATA(move).class == CLASS_STATUS) {
+        return;
+    }
+
+    if (BattleSystem_RandNext(battleSys) % 10 < 3) {
+        battleCtx->battleMons[battler].moveEffectsData.quickDraw = 1;
+    }
+}
+
 u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler1, int battler2, BOOL ignoreQuickClaw)
 {
     u8 result = COMPARE_SPEED_FASTER;
@@ -1323,14 +1346,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed *= 2;
     }
 
-    if (battler1Ability == ABILITY_QUICK_DRAW) {
-        if (BattleSystem_RandNext(battleSys) % 10 < 3) {
+    if (battleCtx->battleMons[battler1].moveEffectsData.quickDraw) {
             battler1QuickClaw = 1;
-
-            if (ignoreQuickClaw == FALSE) {
-                battleCtx->battleMons[battler1].moveEffectsData.quickDraw = 1;
-            }
-        }
     }
 
     if (battler1ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
@@ -1402,14 +1419,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler2Speed *= 2;
     }
 
-    if (battler2Ability == ABILITY_QUICK_DRAW) {
-        if (BattleSystem_RandNext(battleSys) % 10 < 3) {
+    if (battleCtx->battleMons[battler2].moveEffectsData.quickDraw) {
             battler2QuickClaw = 1;
-
-            if (ignoreQuickClaw == FALSE) {
-                battleCtx->battleMons[battler2].moveEffectsData.quickDraw = 1;
-            }
-        }
     }
 
     if (battler2ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {

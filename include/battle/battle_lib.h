@@ -182,6 +182,23 @@ void Battler_AddVal(BattleContext *battleCtx, int battler, enum BattleMonParam p
 void BattleMon_AddVal(BattleMon *mon, enum BattleMonParam paramID, int val);
 
 /**
+ * @brief Roll whether Quick Draw activates for a battler this turn.
+ *
+ * Quick Draw only applies to damaging moves, and its 30% chance must be rolled
+ * exactly once per turn after move selection. BattleSystem_CompareBattlerSpeed
+ * is invoked many times per turn — by both speed sorts, by the eject item
+ * ordering and by the AI — so rolling there would re-roll on every comparison,
+ * inflating the activation rate and making the ordering non-transitive. The
+ * result is stashed on the battler as moveEffectsData.quickDraw, mirroring how
+ * speedRand pre-rolls Quick Claw.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ */
+void BattleSystem_RollQuickDraw(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+
+/**
  * @brief Compare the speed of two battlers and determine which of them should
  * move first.
  *

@@ -835,6 +835,7 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
         case PRE_MOVE_ACTION_STATE_SPEED_RNG:
             for (battler = 0; battler < MAX_BATTLERS; battler++) {
                 battleCtx->speedRand[battler] = BattleSystem_RandNext(battleSys);
+                BattleSystem_RollQuickDraw(battleSys, battleCtx, battler);
             }
 
             battleCtx->turnStartCheckState++;
