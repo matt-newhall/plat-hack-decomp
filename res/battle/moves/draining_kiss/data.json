@@ -7,7 +7,7 @@
     "pp": 10,
     "effect": {
         "type": "BATTLE_EFFECT_RECOVER_THREE_QUARTER_DAMAGE_DEALT",
-        "chance": 40
+        "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
