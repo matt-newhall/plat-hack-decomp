@@ -7949,9 +7949,9 @@ int BattleSystem_MegaEvolutionForm(BattleSystem *battleSys, BattleContext *battl
     }
 
     if (BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US) {
-        // if (bag == NULL || Bag_CanRemoveItem(bag, ITEM_MEGA_RING, 1, HEAP_ID_BATTLE) == FALSE) {
-        //     return -1;
-        // }
+        if (bag == NULL || Bag_CanRemoveItem(bag, ITEM_MEGA_RING, 1, HEAP_ID_BATTLE) == FALSE) {
+            return -1;
+        }
     } else if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_TRAINER) == FALSE) {
         return -1;
     }
