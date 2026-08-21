@@ -4,6 +4,7 @@
 #include <string.h>
 
 #include "constants/battle.h"
+#include "constants/battle/battle_script.h"
 #include "constants/items.h"
 #include "constants/species.h"
 #include "generated/abilities.h"
@@ -59,6 +60,8 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_20_DAMAGE_FLAT,
     BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT,
     BATTLE_EFFECT_HEAVY_SLAM,
+    BATTLE_EFFECT_PSYWAVE, // Magnitude; Psywave itself uses RANDOM_DAMAGE_1_TO_150_LEVEL
+    BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP,
     0xFFFF
 };
 
@@ -180,6 +183,8 @@ static void AICmd_IfBattlerFainted(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfBattlerNotFainted(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfLockOnTarget(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfCurrentMoveIsSound(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -194,6 +199,7 @@ static u8 AIScript_Battler(BattleContext *battleCtx, u8 inBattler);
 static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 *moves, s32 *damageVals, u16 heldItem, u8 *ivs, int ability, BOOL embargo, BOOL varyDamage);
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
+static int TrainerAI_SumRaisedStatStages(BattleContext *battleCtx, int battler, int firstStat);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
 static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
@@ -2685,6 +2691,26 @@ static void AICmd_IfLockOnTarget(BattleSystem *battleSys, BattleContext *battleC
     }
 }
 
+static void AICmd_IfCurrentMoveIsSound(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (BattleSystem_IsSoundMove(AI_CONTEXT.move)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (BattleSystem_IsWindMove(AI_CONTEXT.move)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
 /**
  * @brief Push an address for the AI script onto the cursor stack.
  *
@@ -3042,25 +3068,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_MAGNITUDE:
-        // Simulate a Magnitude roll
-        power = BattleSystem_RandNext(battleSys) % 100;
-
-        if (power < 5) {
-            power = 10;
-        } else if (power < 15) {
-            power = 30;
-        } else if (power < 35) {
-            power = 50;
-        } else if (power < 65) {
-            power = 70;
-        } else if (power < 85) {
-            power = 90;
-        } else if (power < 95) {
-            power = 110;
-        } else {
-            power = 150;
-        }
-
+        // Default Magnitude to BP 50
+        power = 50;
         type = TYPE_NORMAL;
         break;
 
@@ -3107,6 +3116,101 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         break;
 
+    // The following moves have their real power computed by a battle-script command at
+    // execution time, so scoring never sees it. Mirror each of those commands here.
+    case MOVE_FACADE:
+        if (battleCtx->battleMons[attacker].status & MON_CONDITION_BURN) {
+            power = MOVE_DATA(move).power * 4;
+        } else if (battleCtx->battleMons[attacker].status & MON_CONDITION_FACADE_BOOST) {
+            power = MOVE_DATA(move).power * 2;
+        }
+
+        break;
+
+    case MOVE_BRINE:
+        if (battleCtx->battleMons[AI_CONTEXT.defender].curHP <= battleCtx->battleMons[AI_CONTEXT.defender].maxHP / 2) {
+            power = MOVE_DATA(move).power * 2;
+        }
+
+        break;
+
+    case MOVE_PAYBACK:
+        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) == COMPARE_SPEED_SLOWER) {
+            power = MOVE_DATA(move).power * 2;
+        }
+
+        break;
+
+    case MOVE_STORED_POWER:
+        power = 20 + 20 * TrainerAI_SumRaisedStatStages(battleCtx, attacker, BATTLE_STAT_ATTACK);
+
+        if (power > 860) {
+            power = 860;
+        }
+
+        break;
+
+    case MOVE_PUNISHMENT:
+        power = 60 + 20 * TrainerAI_SumRaisedStatStages(battleCtx, AI_CONTEXT.defender, BATTLE_STAT_HP);
+
+        if (power > 200) {
+            power = 200;
+        }
+
+        break;
+
+    case MOVE_WEATHER_BALL:
+        power = MOVE_DATA(move).power;
+
+        if (Battler_Ability(battleCtx, attacker) == ABILITY_MEGA_SOL) {
+            power *= 2;
+            type = TYPE_FIRE;
+        } else if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_WEATHER)) {
+            power *= 2;
+
+            if (WEATHER_IS_RAIN) {
+                type = TYPE_WATER;
+            } else if (WEATHER_IS_SAND) {
+                type = TYPE_ROCK;
+            } else if (WEATHER_IS_SUN) {
+                type = TYPE_FIRE;
+            } else if (WEATHER_IS_HAIL) {
+                type = TYPE_ICE;
+            }
+        }
+
+        break;
+
+    case MOVE_FURY_CUTTER:
+        power = MOVE_DATA(move).power;
+
+        for (int i = 0; i < battleCtx->battleMons[attacker].moveEffectsData.furyCutterCount && i < 4; i++) {
+            power *= 2;
+        }
+
+        break;
+
+    case MOVE_ROLLOUT:
+    case MOVE_ICE_BALL: {
+        int rolloutTurns = 0;
+
+        if (battleCtx->battleMons[attacker].statusVolatile & VOLATILE_CONDITION_MOVE_LOCKED) {
+            rolloutTurns = 5 - battleCtx->battleMons[attacker].moveEffectsData.rolloutCount;
+        }
+
+        power = MOVE_DATA(move).power;
+
+        for (int i = 0; i < rolloutTurns; i++) {
+            power *= 2;
+        }
+
+        if (battleCtx->battleMons[attacker].statusVolatile & VOLATILE_CONDITION_DEFENSE_CURL) {
+            power *= 2;
+        }
+
+        break;
+    }
+
     case MOVE_HEAVY_SLAM: {
         int atkWeight = battleCtx->battleMons[AI_CONTEXT.attacker].weight;
         int defWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
@@ -3142,6 +3246,10 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     if (damage == 0) {
+        // BattleSystem_CalcMoveDamage consumes the attacker's Charge boost as a side effect of
+        // applying it
+        u32 chargeFlag = battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE;
+
         damage = BattleSystem_CalcMoveDamage(battleSys,
             battleCtx,
             move,
@@ -3152,6 +3260,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             attacker,
             AI_CONTEXT.defender,
             1);
+
+        battleCtx->battleMons[attacker].moveEffectsMask |= chargeFlag;
     } else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
     }
@@ -3173,6 +3283,28 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     return damage;
+}
+
+/**
+ * @brief Sum a battler's positive stat stages, as used by Stored Power and Punishment.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param firstStat The first stat to count from. Stored Power counts from Attack; Punishment
+ *                  counts from HP. Both are mirrored from their battle-script commands.
+ * @return The total number of stages the battler is boosted by.
+ */
+static int TrainerAI_SumRaisedStatStages(BattleContext *battleCtx, int battler, int firstStat)
+{
+    int sumBoosts = 0;
+
+    for (int i = firstStat; i < BATTLE_STAT_MAX; i++) {
+        if (battleCtx->battleMons[battler].statBoosts[i] > DEFAULT_STAT_STAGE) {
+            sumBoosts += battleCtx->battleMons[battler].statBoosts[i] - DEFAULT_STAT_STAGE;
+        }
+    }
+
+    return sumBoosts;
 }
 
 /**

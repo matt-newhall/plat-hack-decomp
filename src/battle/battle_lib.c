@@ -4063,6 +4063,7 @@ static const u16 sMovesAffectedByHealBlock[] = {
     MOVE_SLACK_OFF,
     MOVE_ROOST,
     MOVE_WISH,
+    MOVE_LIFE_DEW,
 };
 
 BOOL Move_HealBlocked(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move)

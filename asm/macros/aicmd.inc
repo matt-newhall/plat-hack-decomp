@@ -636,6 +636,16 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfCurrentMoveIsSound jump:req
+    .long AICMD_IFCURRENTMOVEISSOUND
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfCurrentMoveIsWind jump:req
+    .long AICMD_IFCURRENTMOVEISWIND
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry:req

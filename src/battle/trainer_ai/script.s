@@ -67,13 +67,16 @@ Basic_CheckForImmunity:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_VOLT_ABSORB, Basic_CheckElectricAbsorption
     IfLoadedEqualTo ABILITY_MOTOR_DRIVE, Basic_CheckElectricAbsorption
+    IfLoadedEqualTo ABILITY_LIGHTNING_ROD, Basic_CheckElectricAbsorption
     IfLoadedEqualTo ABILITY_WATER_ABSORB, Basic_CheckWaterAbsorption
+    IfLoadedEqualTo ABILITY_STORM_DRAIN, Basic_CheckWaterAbsorption
     IfLoadedEqualTo ABILITY_FLASH_FIRE, Basic_CheckFireAbsorption
     IfLoadedEqualTo ABILITY_EARTH_EATER, Basic_CheckGroundAbsorption
     IfLoadedEqualTo ABILITY_SAP_SIPPER, Basic_CheckGrassAbsorption
     IfLoadedEqualTo ABILITY_WONDER_GUARD, Basic_CheckWonderGuard
+    IfLoadedEqualTo ABILITY_WIND_RIDER, Basic_CheckWindAbsorption
     IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckGroundAbsorption
-    IfLoadedEqualTo ABILITY_LEVITATE, Basic_CheckWaterAbsorption2 // BUG: This line should branch on Dry Skin rather than Levitate
+    IfLoadedEqualTo ABILITY_DRY_SKIN, Basic_CheckWaterAbsorption2
     GoTo Basic_NoImmunityAbility
 
 Basic_CheckElectricAbsorption:
@@ -111,27 +114,22 @@ Basic_CheckWaterAbsorption2:
     IfTempEqualTo TYPE_WATER, ScoreMinus12
     GoTo Basic_NoImmunityAbility
 
+Basic_CheckWindAbsorption:
+    IfCurrentMoveIsWind ScoreMinus12
+    GoTo Basic_NoImmunityAbility
+
 Basic_NoImmunityAbility:
     FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, Basic_CheckSoundproof
 
 Basic_CheckSoundproof:
-    // Check for immunity to sound-based moves
+    // Check for immunity to sound-based moves. This defers to the same sound-move list that
+    // the battle engine itself uses, so the two cannot drift apart.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo ABILITY_SOUNDPROOF, Basic_ScoreMoveEffect
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_ScoreMoveEffect
-    IfMoveEqualTo MOVE_GROWL, ScoreMinus10
-    IfMoveEqualTo MOVE_ROAR, ScoreMinus10
-    IfMoveEqualTo MOVE_SING, ScoreMinus10
-    IfMoveEqualTo MOVE_SUPERSONIC, ScoreMinus10
-    IfMoveEqualTo MOVE_SCREECH, ScoreMinus10
-    IfMoveEqualTo MOVE_SNORE, ScoreMinus10
-    IfMoveEqualTo MOVE_UPROAR, ScoreMinus10
-    IfMoveEqualTo MOVE_METAL_SOUND, ScoreMinus10
-    IfMoveEqualTo MOVE_GRASS_WHISTLE, ScoreMinus10
-    IfMoveEqualTo MOVE_BUG_BUZZ, ScoreMinus10
-    IfMoveEqualTo MOVE_CHATTER, ScoreMinus10
+    IfCurrentMoveIsSound ScoreMinus10
 
 Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
@@ -281,7 +279,17 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Basic_CheckCaptivate
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Basic_CheckStealthRock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Basic_CheckLunarDance
-    PopOrEnd 
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_UP, Basic_CheckGrowth
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_3, Basic_CheckHighStatStage_SpAttack
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER, Basic_CheckCharge
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Basic_CheckTaunt
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Basic_CheckImprison
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFORM, Basic_CheckTransform
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STICKY_WEB, Basic_CheckStickyWeb
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Basic_CheckSteelBeam
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEAVE_WITH_1_HP, Basic_CheckEndure
+    PopOrEnd
 
 Basic_CheckCannotSleep:
     // If the target cannot be put to sleep for any reason, score -10.
@@ -1525,7 +1533,78 @@ Basic_CheckLunarDance:
     GoTo ScoreMinus10
 
 Basic_CheckLunarDance_Terminate:
-    PopOrEnd 
+    PopOrEnd
+
+Basic_CheckGrowth:
+    // If the attacker's ability is Simple and either Attack or SpAttack are already at
+    // +3, score -10. Otherwise score -10 only once both are maxed out.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
+    IfLoadedNotEqualTo ABILITY_SIMPLE, Basic_CheckGrowth_NoSimple
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, ScoreMinus10
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, ScoreMinus10
+    PopOrEnd
+
+Basic_CheckGrowth_NoSimple:
+    IfStatStageNotEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Basic_CheckGrowth_Terminate
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, ScoreMinus10
+
+Basic_CheckGrowth_Terminate:
+    PopOrEnd
+
+Basic_CheckCharge:
+    // Charge persists until it is spent, so re-applying it while it is already up wastes
+    // a turn. Otherwise fall through to the usual SpDefense saturation check.
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_CHARGE, ScoreMinus10
+    GoTo Basic_CheckHighStatStage_SpDefense
+
+Basic_CheckTaunt:
+    // If the target is already taunted, score -10.
+    IfTargetIsTaunted ScoreMinus10
+    PopOrEnd
+
+Basic_CheckImprison:
+    // If the attacker has already used Imprison, score -10.
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_IMPRISON, ScoreMinus10
+    PopOrEnd
+
+Basic_CheckTransform:
+    // Transforming into a mon which is itself a copy, or transforming a second time, both
+    // accomplish nothing. Score -10.
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_TRANSFORM, ScoreMinus10
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_TRANSFORM, ScoreMinus10
+    PopOrEnd
+
+Basic_CheckStickyWeb:
+    // If the target's side of the field is already under the effect of Sticky Web, or the
+    // target has nothing left to switch to, score -10.
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STICKY_WEB, ScoreMinus10
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, ScoreMinus10
+    PopOrEnd
+
+Basic_CheckSteelBeam:
+    // Steel Beam costs the user half of their maximum HP on hit, unless they have Magic
+    // Guard. Above half HP the cost is survivable, so leave the score alone.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Basic_CheckSteelBeam_Terminate
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Basic_CheckSteelBeam_Terminate
+
+    // Below half HP this faints the user; if there is nobody left behind them, score -10.
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, ScoreMinus10
+    GoTo ScoreMinus5
+
+Basic_CheckSteelBeam_Terminate:
+    PopOrEnd
+
+Basic_CheckEndure:
+    // Endure shares Protect's diminishing success chance, so score it down the deeper we
+    // already are into a chain of protection moves.
+    LoadProtectChain AI_BATTLER_ATTACKER
+    IfLoadedGreaterThan 1, ScoreMinus10
+    IfLoadedEqualTo 1, ScoreMinus2
+    PopOrEnd
 
 ScoreMinus1:
     AddToMoveScore -1
