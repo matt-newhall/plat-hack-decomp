@@ -126,7 +126,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
     battleCtx->battleMons[battler].newlySwitched = FALSE;
     battleCtx->battleMons[battler].isTightenedFocus = FALSE;
-    battleCtx->battleMons[battler].windRiderSwitchIn = FALSE;
+    battleCtx->battleMons[battler].windRiderTailwindBoosted = FALSE;
     battleCtx->battleMons[battler].neutralizingGasAnnounced = FALSE;
     battleCtx->battleMons[battler].airBalloonAnnounced = FALSE;
     battleCtx->battleMons[battler].cloudNineAnnounced = FALSE;
@@ -1347,7 +1347,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     if (battleCtx->battleMons[battler1].moveEffectsData.quickDraw) {
-            battler1QuickClaw = 1;
+        battler1QuickClaw = 1;
     }
 
     if (battler1ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
@@ -1420,7 +1420,7 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     }
 
     if (battleCtx->battleMons[battler2].moveEffectsData.quickDraw) {
-            battler2QuickClaw = 1;
+        battler2QuickClaw = 1;
     }
 
     if (battler2ItemEffect == HOLD_EFFECT_SOMETIMES_PRIORITY) {
@@ -4238,10 +4238,10 @@ int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, 
             subscript = subscript_absorb_and_attack_up_1_stage;
     }
 
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WIND_RIDER) == TRUE) {
-        if (BattleSystem_IsWindMove(battleCtx->moveCur)) {
-            subscript = subscript_absorb_and_attack_up_1_stage;
-        }
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WIND_RIDER) == TRUE
+        && BattleSystem_IsWindMove(battleCtx->moveCur)
+        && attacker != defender) {
+        subscript = subscript_absorb_and_attack_up_1_stage;
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_VOLT_ABSORB) == TRUE
@@ -5183,18 +5183,25 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     battler != battlerSkillSwapper) {
                     continue;
                 }
-                if (battleCtx->battleMons[battler].windRiderSwitchIn == FALSE
-                    && battleCtx->battleMons[battler].curHP
-                    && Battler_Ability(battleCtx, battler) == ABILITY_WIND_RIDER) {
-                    battleCtx->battleMons[battler].windRiderSwitchIn = TRUE;
+                if (battleCtx->battleMons[battler].curHP == 0
+                    || Battler_Ability(battleCtx, battler) != ABILITY_WIND_RIDER) {
+                    continue;
+                }
 
-                    if (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] & SIDE_CONDITION_TAILWIND
-                        || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM)) {
-                        battleCtx->sideEffectMon = battler;
-                        subscript = subscript_wind_rider;
-                        result = TRUE;
-                        break;
-                    }
+                BOOL tailwindUp = (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] & SIDE_CONDITION_TAILWIND)
+                    || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM);
+
+                if (tailwindUp == FALSE) {
+                    battleCtx->battleMons[battler].windRiderTailwindBoosted = FALSE;
+                    continue;
+                }
+
+                if (battleCtx->battleMons[battler].windRiderTailwindBoosted == FALSE) {
+                    battleCtx->battleMons[battler].windRiderTailwindBoosted = TRUE;
+                    battleCtx->sideEffectMon = battler;
+                    subscript = subscript_wind_rider;
+                    result = TRUE;
+                    break;
                 }
             }
 
@@ -8538,8 +8545,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
     if (defenderParams.heldItemEffect == HOLD_EFFECT_BOOST_DEFENSES
         && SpeciesCanEvolve(defenderParams.species)) {
-            defenseStat = defenseStat * (100 + defenderParams.heldItemPower) / 100;
-            spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
+        defenseStat = defenseStat * (100 + defenderParams.heldItemPower) / 100;
+        spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
     }
     if (defenderParams.heldItemEffect == HOLD_EFFECT_RAISE_SP_DEF_ONLY_STATUS_MOVES) {
         spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;

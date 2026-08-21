@@ -95,7 +95,7 @@ typedef struct BattleMon {
     u32 moldBreakerAnnounced : 1;
     u32 pressureAnnounced : 1;
     u32 unnerveAnnounced : 1;
-    u32 windRiderSwitchIn : 1;
+    u32 windRiderTailwindBoosted : 1;
     u32 costarAnnounced : 1;
     u32 neutralizingGasAnnounced : 1;
     u32 airBalloonAnnounced : 1;

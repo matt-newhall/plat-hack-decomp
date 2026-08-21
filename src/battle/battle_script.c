@@ -5560,7 +5560,7 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
     ATTACKING_MON.friskAnnounced = FALSE;
     ATTACKING_MON.moldBreakerAnnounced = FALSE;
     ATTACKING_MON.pressureAnnounced = FALSE;
-    ATTACKING_MON.windRiderSwitchIn = FALSE;
+    ATTACKING_MON.windRiderTailwindBoosted = FALSE;
     ATTACKING_MON.moveEffectsData.truant = battleCtx->totalTurns & 1;
     ATTACKING_MON.moveEffectsData.slowStartTurnNumber = battleCtx->totalTurns + 1;
     ATTACKING_MON.slowStartAnnounced = FALSE;
@@ -7692,7 +7692,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->defender].friskAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].pressureAnnounced = FALSE;
-    battleCtx->battleMons[battleCtx->defender].windRiderSwitchIn = FALSE;
+    battleCtx->battleMons[battleCtx->defender].windRiderTailwindBoosted = FALSE;
 
     battleCtx->battleMons[battleCtx->attacker].weatherAbilityAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].intimidateAnnounced = FALSE;
@@ -7705,7 +7705,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
-    battleCtx->battleMons[battleCtx->defender].windRiderSwitchIn = FALSE;
+    battleCtx->battleMons[battleCtx->defender].windRiderTailwindBoosted = FALSE;
 
     int ability = battleCtx->battleMons[battleCtx->attacker].ability;
 
