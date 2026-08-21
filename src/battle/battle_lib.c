@@ -5696,6 +5696,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
     case ABILITY_JUSTIFIED:
         if (DEFENDING_MON.curHP
             && CURRENT_MOVE_DATA.type == TYPE_DARK
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NORMALIZE
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
