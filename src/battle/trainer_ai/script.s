@@ -5968,66 +5968,66 @@ EvalAttack_Main:
     // Never target the partner.
     IfTargetIsPartner Terminate
 
-    // If the move's maximum non-critical damage roll kills, then we use a different score routine.
-    IfCurrentMoveKills USE_MAX_DAMAGE, EvalAttack_ApplyKillBonuses
+    // Classify this move against the rest of the moveset, using the damage roll that was
+    // picked for each slot at the start of the turn. Anything which would KO the target also
+    // counts as a best-damage move, so several lethal options compete on equal footing.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, EvalAttack_ScoreBestDamage
+    GoTo EvalAttack_CheckKill
 
-    // If this move does not out-damage all other moves, score -1.
-    FlagMoveDamageScore USE_MAX_DAMAGE
-    IfLoadedEqualTo AI_NOT_HIGHEST_DAMAGE, ScoreMinus1
+EvalAttack_ScoreBestDamage:
+    // 80% chance of score +6, otherwise score +8.
+    IfRandomLessThan 205, EvalAttack_ScoreBestDamage_Plus6
+    AddToMoveScore 8
+    GoTo EvalAttack_CheckKill
 
-    // Explosion, Focus Punch, and Sucker Punch are often deprioritized by this routine.
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, EvalAttack_MaybeDeprioritize
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, EvalAttack_MaybeDeprioritize
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, EvalAttack_MaybeDeprioritize
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING, EvalAttack_MaybeDeprioritize
+EvalAttack_ScoreBestDamage_Plus6:
+    AddToMoveScore 6
 
-    // Check for quad-effectiveness.
-    GoTo EvalAttack_CheckQuadEffective
-
-EvalAttack_MaybeDeprioritize:
-    // ~80% chance of score -2.
-    IfRandomLessThan 51, EvalAttack_CheckQuadEffective
-    AddToMoveScore -2
-
-EvalAttack_CheckQuadEffective:
-    // If quad-effective, 31.25% chance of score +2.
-    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, EvalAttack_TryScorePlus2
-    PopOrEnd 
-
-EvalAttack_TryScorePlus2:
-    IfRandomLessThan 80, EvalAttack_Terminate
-    AddToMoveScore 2
-    PopOrEnd 
+EvalAttack_CheckKill:
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, EvalAttack_ApplyKillBonuses
+    GoTo EvalAttack_CheckHighCrit
 
 EvalAttack_ApplyKillBonuses:
-    // Do not evaluate kills with Explosion or Self-Destruct for this routine.
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, EvalAttack_Terminate
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, EvalAttack_Terminate
+    // Taking the KO first is worth far more than taking it second, so the bonus depends on
+    // whether we expect to move first. A speed tie counts as moving first.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, EvalAttack_KillWhenSlower
+    AddToMoveScore 6
+    GoTo EvalAttack_CheckHighCrit
 
-    // Moves like Focus Punch, Sucker Punch, and Future Sight *may* get +4 score for a kill.
-    // NOTE: Focus Punch and Sucker Punch can never actually reach this state, because the AI never
-    // treats them as able to kill.
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, EvalAttack_TryScorePlus4
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING, EvalAttack_TryScorePlus4
+EvalAttack_KillWhenSlower:
+    // Priority still buys us the first hit even when we lose the speed check.
+    IfCurrentMoveHasPriority EvalAttack_KillWithPriority
+    AddToMoveScore 3
+    GoTo EvalAttack_CheckHighCrit
 
-    // Moves with the "+1 priority" effect get an additional +2 on top of the usual +4 for a kill.
-    // NOTE: this checks the move's _effect_, not the priority score in its data.
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_1, EvalAttack_ScorePlus2
-    GoTo EvalAttack_ScorePlus4
+EvalAttack_KillWithPriority:
+    AddToMoveScore 6
 
-EvalAttack_TryScorePlus4:
-    // ~33.6% of the time, score +4.
-    IfRandomLessThan 170, EvalAttack_Terminate
-    GoTo EvalAttack_ScorePlus4
+EvalAttack_CheckHighCrit:
+    // A high critical-hit ratio is only worth chasing when the move is already resolving
+    // super-effectively: 50% chance of score +1.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable EvalAttack_HighCritEffects, EvalAttack_Terminate
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, EvalAttack_TryScorePlus1
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, EvalAttack_TryScorePlus1
+    PopOrEnd
 
-EvalAttack_ScorePlus2:
-    AddToMoveScore 2
-
-EvalAttack_ScorePlus4:
-    AddToMoveScore 4
+EvalAttack_TryScorePlus1:
+    IfRandomLessThan 128, EvalAttack_Terminate
+    AddToMoveScore 1
 
 EvalAttack_Terminate:
-    PopOrEnd 
+    PopOrEnd
+
+EvalAttack_HighCritEffects:
+    TableEntry BATTLE_EFFECT_HIGH_CRITICAL
+    TableEntry BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT
+    TableEntry BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT
+    TableEntry BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT
+    TableEntry BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH
+    TableEntry BATTLE_EFFECT_ALWAYS_CRIT
+    TableEntry TABLE_END
 
 SetupFirstTurn_Main:
     IfTargetIsPartner Terminate

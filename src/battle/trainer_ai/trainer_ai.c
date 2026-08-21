@@ -36,7 +36,6 @@ static const u16 sNoDamageCalcMoveEffects[] = {
     BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT,
     BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH,
     BATTLE_EFFECT_RECHARGE_AFTER,
-    BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP,
     BATTLE_EFFECT_CHARGE_TURN_DEF_UP,
     BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN,
     BATTLE_EFFECT_SPIT_UP,
@@ -62,6 +61,28 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_HEAVY_SLAM,
     BATTLE_EFFECT_PSYWAVE, // Magnitude; Psywave itself uses RANDOM_DAMAGE_1_TO_150_LEVEL
     BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP,
+    0xFFFF
+};
+
+// Moves whose damage this turn is too unreliable to compete for the "best damaging move"
+// bonus: they either spend a turn charging, escalate over several turns, or cost the user
+// their own Pokemon. They are also skipped when deciding which *other* move is the best, so
+// that an excluded move cannot rob a legitimate pick of the bonus.
+static const u16 sExcludedFromBestDamageMoveEffects[] = {
+    BATTLE_EFFECT_HALVE_DEFENSE, // Explosion
+    BATTLE_EFFECT_HALVE_SP_DEFENSE, // Self-Destruct, Misty Explosion
+    BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO, // Rollout, Ice Ball
+    BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, // Meteor Beam
+    BATTLE_EFFECT_BIND_HIT, // Wrap, Fire Spin, Clamp, Infestation, Sand Tomb, Magma Storm
+    0xFFFF
+};
+
+// Of the above, the moves which should not be treated as able to secure a KO either. The
+// remainder (trapping moves and Meteor Beam) still earn the kill bonuses.
+static const u16 sNoKillCheckMoveEffects[] = {
+    BATTLE_EFFECT_HALVE_DEFENSE,
+    BATTLE_EFFECT_HALVE_SP_DEFENSE,
+    BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO,
     0xFFFF
 };
 
@@ -185,6 +206,8 @@ static void AICmd_LoadAbility(BattleSystem *battleSys, BattleContext *battleCtx)
 static void AICmd_IfLockOnTarget(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveIsSound(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -200,6 +223,8 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, u16 heldItem, u8 *ivs, int attacker, int ability, BOOL embargo, u8 variance);
 static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 static int TrainerAI_SumRaisedStatStages(BattleContext *battleCtx, int battler, int firstStat);
+static BOOL AI_MoveEffectInTable(BattleContext *battleCtx, const u16 *effects, u16 move);
+static BOOL AI_MoveHasDamageEstimate(BattleContext *battleCtx, u16 move);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
 static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
@@ -587,11 +612,16 @@ static void AICmd_AddToMoveScore(BattleSystem *battleSys, BattleContext *battleC
     AIScript_Iter(battleCtx, 1);
 
     int val = AIScript_Read(battleCtx);
-    AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] += val;
+    int score = AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] + val;
 
-    if (AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] < 0) {
-        AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = 0;
+    // Clamping
+    if (score < 0) {
+        score = 0;
+    } else if (score > 127) {
+        score = 127;
     }
+
+    AI_CONTEXT.moveScore[AI_CONTEXT.moveSlot] = score;
 }
 
 static void AICmd_IfHPPercentLessThan(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1540,6 +1570,10 @@ static void AICmd_IfCurrentMoveKills(BattleSystem *battleSys, BattleContext *bat
     BOOL useDamageRoll = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
 
+    if (AI_MoveEffectInTable(battleCtx, sNoKillCheckMoveEffects, AI_CONTEXT.move)) {
+        return;
+    }
+
     int roll;
     if (useDamageRoll == TRUE) {
         roll = AI_CONTEXT.moveDamageRolls[AI_CONTEXT.moveSlot];
@@ -1590,6 +1624,12 @@ static void AICmd_IfCurrentMoveDoesNotKill(BattleSystem *battleSys, BattleContex
 
     BOOL useDamageRoll = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
+
+    // Mirror of AICmd_IfCurrentMoveKills: these moves never count as securing a KO.
+    if (AI_MoveEffectInTable(battleCtx, sNoKillCheckMoveEffects, AI_CONTEXT.move)) {
+        AIScript_Iter(battleCtx, jump);
+        return;
+    }
 
     int roll;
     if (useDamageRoll == TRUE) {
@@ -2687,6 +2727,118 @@ static void AICmd_IfLockOnTarget(BattleSystem *battleSys, BattleContext *battleC
 
     if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_LOCK_ON)
         && battleCtx->battleMons[attacker].moveEffectsData.lockOnTarget == target) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether a move's effect appears in one of the AI's effect tables.
+ *
+ * @param battleCtx
+ * @param effects   A 0xFFFF-terminated table of battle effects.
+ * @param move
+ * @return TRUE if the move's effect is listed.
+ */
+static BOOL AI_MoveEffectInTable(BattleContext *battleCtx, const u16 *effects, u16 move)
+{
+    for (int i = 0; effects[i] != 0xFFFF; i++) {
+        if (MOVE_DATA(move).effect == effects[i]) {
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check whether the AI is able to put a damage figure on a move at all.
+ *
+ * Moves with an alternate-power effect always qualify, because their listed power is only a
+ * placeholder. Everything else needs real power and an effect the AI knows how to model.
+ *
+ * @param battleCtx
+ * @param move
+ * @return TRUE if scoring can compute damage for this move.
+ */
+static BOOL AI_MoveHasDamageEstimate(BattleContext *battleCtx, u16 move)
+{
+    if (AI_MoveEffectInTable(battleCtx, sAltPowerMoveEffects, move)) {
+        return TRUE;
+    }
+
+    return MOVE_DATA(move).power > 1 && AI_MoveEffectInTable(battleCtx, sNoDamageCalcMoveEffects, move) == FALSE;
+}
+
+/**
+ * @brief Classify the current move against the rest of the attacker's moveset, using each
+ * move's own damage roll for this turn.
+ *
+ * A move which would KO the target is always flagged as a best-damage move, so that several
+ * lethal options compete on equal footing rather than only the single biggest hit.
+ *
+ * Sets AI_CONTEXT.calcTemp to AI_NO_COMPARISON_MADE, AI_NOT_HIGHEST_DAMAGE, or
+ * AI_MOVE_IS_HIGHEST_DAMAGE.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    u16 *moves = battleCtx->battleMons[AI_CONTEXT.attacker].moves;
+
+    if (AI_MoveHasDamageEstimate(battleCtx, AI_CONTEXT.move) == FALSE
+        || AI_MoveEffectInTable(battleCtx, sExcludedFromBestDamageMoveEffects, AI_CONTEXT.move)) {
+        AI_CONTEXT.calcTemp = AI_NO_COMPARISON_MADE;
+        return;
+    }
+
+    u8 ivs[STAT_MAX];
+    for (int i = 0; i < STAT_MAX; i++) {
+        ivs[i] = BattleMon_Get(battleCtx, AI_CONTEXT.attacker, BATTLEMON_HP_IV + i, NULL);
+    }
+
+    s32 moveDamage[LEARNED_MOVES_MAX];
+    TrainerAI_CalcAllDamage(battleSys,
+        battleCtx,
+        AI_CONTEXT.attacker,
+        moves,
+        moveDamage,
+        battleCtx->battleMons[AI_CONTEXT.attacker].heldItem,
+        ivs,
+        Battler_Ability(battleCtx, AI_CONTEXT.attacker),
+        battleCtx->battleMons[AI_CONTEXT.attacker].moveEffectsData.embargoTurns,
+        TRUE);
+
+    if (moveDamage[AI_CONTEXT.moveSlot] >= battleCtx->battleMons[AI_CONTEXT.defender].curHP) {
+        AI_CONTEXT.calcTemp = AI_MOVE_IS_HIGHEST_DAMAGE;
+        return;
+    }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (i == AI_CONTEXT.moveSlot
+            || moves[i] == MOVE_NONE
+            || battleCtx->battleMons[AI_CONTEXT.attacker].ppCur[i] == 0
+            || AI_MoveEffectInTable(battleCtx, sExcludedFromBestDamageMoveEffects, moves[i])) {
+            continue;
+        }
+
+        if (moveDamage[i] > moveDamage[AI_CONTEXT.moveSlot]) {
+            AI_CONTEXT.calcTemp = AI_NOT_HIGHEST_DAMAGE;
+            return;
+        }
+    }
+
+    AI_CONTEXT.calcTemp = AI_MOVE_IS_HIGHEST_DAMAGE;
+}
+
+static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (MOVE_DATA(AI_CONTEXT.move).priority > 0) {
         AIScript_Iter(battleCtx, jump);
     }
 }

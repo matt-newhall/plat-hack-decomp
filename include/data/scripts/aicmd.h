@@ -117,6 +117,8 @@ ScriptCommand(AICMD_LOADABILITY,                     AICmd_LoadAbility)
 ScriptCommand(AICMD_IFLOCKONTARGET,                  AICmd_IfLockOnTarget)
 ScriptCommand(AICMD_IFCURRENTMOVEISSOUND,            AICmd_IfCurrentMoveIsSound)
 ScriptCommand(AICMD_IFCURRENTMOVEISWIND,             AICmd_IfCurrentMoveIsWind)
+ScriptCommand(AICMD_FLAGBESTDAMAGEMOVE,              AICmd_FlagBestDamageMove)
+ScriptCommand(AICMD_IFCURRENTMOVEHASPRIORITY,        AICmd_IfCurrentMoveHasPriority)
 
 // clang-format on
 
