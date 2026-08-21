@@ -8370,6 +8370,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = inPower;
     }
 
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_DOUBLE_POWER_WITH_NO_ITEM
+        && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
+        movePower = movePower * 2;
+    }
+
     if (move == MOVE_STRUGGLE) {
         moveType = MOVE_DATA(move).type;
     } else if (attackerParams.ability == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
@@ -8590,11 +8595,6 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if (move == MOVE_KNOCK_OFF && Battler_CanRemoveItem(battleCtx, defender)) {
         movePower = movePower * 150 / 100;
-    }
-
-    if (MOVE_DATA(move).effect == BATTLE_EFFECT_DOUBLE_POWER_WITH_NO_ITEM
-        && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
-        movePower = movePower * 2;
     }
 
     if (attackerParams.ability == ABILITY_SIMPLE) {
