@@ -9019,9 +9019,9 @@ int BattleSystem_CalcDamageVariance(BattleSystem *battleSys, BattleContext *batt
 static const u8 sCriticalStageRates[] = {
     16, // neutral
     8, // +1
-    4, // +2
-    3, // +3
-    2, // +4
+    2, // +2
+    1, // +3, guaranteed
+    1, // +4, guaranteed
 };
 
 int BattleSystem_CalcCriticalMulti(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int criticalStage, u32 sideConditions)
