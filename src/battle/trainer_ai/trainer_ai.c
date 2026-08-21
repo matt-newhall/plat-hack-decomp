@@ -225,7 +225,7 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
 static int TrainerAI_SumRaisedStatStages(BattleContext *battleCtx, int battler, int firstStat);
 static BOOL AI_MoveEffectInTable(BattleContext *battleCtx, const u16 *effects, u16 move);
 static BOOL AI_MoveHasDamageEstimate(BattleContext *battleCtx, u16 move);
-static int TrainerAI_HitCountMultiplier(BattleContext *battleCtx, u16 move, int ability, u16 heldItem);
+static int TrainerAI_HitCountMultiplier(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int ability, u16 heldItem);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
 static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
@@ -3433,7 +3433,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         damage = 0;
     } else {
         damage = BattleSystem_Divide(damage * variance, 100);
-        damage = BattleSystem_Divide(damage * TrainerAI_HitCountMultiplier(battleCtx, move, ability, heldItem), 100);
+        damage = BattleSystem_Divide(damage * TrainerAI_HitCountMultiplier(battleSys, battleCtx, move, attacker, ability, heldItem), 100);
     }
 
     return damage;
@@ -3446,13 +3446,15 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
  * All hits are assumed to land, matching the AI's existing habit of ignoring accuracy. The
  * multi-hit values mirror the switch AI's own damage routine so the two agree.
  *
+ * @param battleSys
  * @param battleCtx
  * @param move
+ * @param attacker  The attacker's battler ID.
  * @param ability   The attacker's ability.
  * @param heldItem  The attacker's held item.
  * @return Percentage multiplier, where 100 means a single hit.
  */
-static int TrainerAI_HitCountMultiplier(BattleContext *battleCtx, u16 move, int ability, u16 heldItem)
+static int TrainerAI_HitCountMultiplier(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int ability, u16 heldItem)
 {
     switch (MOVE_DATA(move).effect) {
     case BATTLE_EFFECT_HIT_TWICE:
@@ -3476,8 +3478,7 @@ static int TrainerAI_HitCountMultiplier(BattleContext *battleCtx, u16 move, int 
 
     if (ability == ABILITY_PARENTAL_BOND
         && BattleSystem_ParentalBondAppliesToMove(battleCtx, move)
-        && MOVE_DATA(move).range != RANGE_ADJACENT_OPPONENTS
-        && MOVE_DATA(move).range != RANGE_ALL_ADJACENT) {
+        && BattleSystem_MoveTargetCount(battleSys, battleCtx, attacker, move) == 1) {
         return 125;
     }
 

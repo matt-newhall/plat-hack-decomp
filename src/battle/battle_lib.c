@@ -1861,27 +1861,34 @@ BOOL BattleSystem_SheerForceBoostsMove(BattleContext *battleCtx, int attacker, u
 }
 
 /**
- * @brief Count how many battlers the attacker's move will actually hit.
+ * @brief Count how many battlers a move will actually hit.
+ *
+ * Spread moves are counted against the battlers still standing, so a move with a multi-target
+ * range reports a single target once the others have fainted or are switching out. Parental
+ * Bond keys on this, which is why Rock Slide strikes twice in a single battle but not in a
+ * double battle with both opponents up.
  *
  * @param battleSys
  * @param battleCtx
- * @return The number of battlers which will be struck by the current move.
+ * @param attacker
+ * @param move
+ * @return The number of battlers which will be struck by the move.
  */
-static int CurrentMoveTargetCount(BattleSystem *battleSys, BattleContext *battleCtx)
+int BattleSystem_MoveTargetCount(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move)
 {
-    int range = CURRENT_MOVE_DATA.range;
+    int range = MOVE_DATA(move).range;
     if (range != RANGE_ADJACENT_OPPONENTS && range != RANGE_ALL_ADJACENT) {
         return 1;
     }
 
     int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
-    int attackerSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
+    int attackerSide = BattleSystem_GetBattlerSide(battleSys, attacker);
     int count = 0;
 
     for (int battler = 0; battler < maxBattlers; battler++) {
         if ((battleCtx->battlersSwitchingMask & FlagIndex(battler))
             || battleCtx->battleMons[battler].curHP == 0
-            || battler == battleCtx->attacker) {
+            || battler == attacker) {
             continue;
         }
 
@@ -1902,7 +1909,7 @@ void BattleSystem_TryParentalBond(BattleSystem *battleSys, BattleContext *battle
         || battleCtx->multiHitNumHits != 0
         || battleCtx->defender == BATTLER_NONE
         || BattleSystem_ParentalBondAppliesToMove(battleCtx, battleCtx->moveCur) == FALSE
-        || CurrentMoveTargetCount(battleSys, battleCtx) != 1) {
+        || BattleSystem_MoveTargetCount(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveCur) != 1) {
         return;
     }
 
@@ -10325,7 +10332,11 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         || moveEffect == BATTLE_EFFECT_POISON_MULTI_HIT) {
                         hitMultiplier = 2;
                     } else if (moveEffect == BATTLE_EFFECT_MULTI_HIT) {
+                        if (Battler_Ability(battleCtx, defender) == ABILITY_SKILL_LINK) {
+                            hitMultiplier = 5;
+                        } else {
                         hitMultiplier = (Battler_HeldItemEffect(battleCtx, defender) == HOLD_EFFECT_LOADED_DICE) ? 4 : 3;
+                        }
                     } else if (moveEffect == BATTLE_EFFECT_HIT_THREE_TIMES) {
                         inPower = MOVE_DATA(moveDefender).power * 2;
                         hitMultiplier = 3;
@@ -10416,7 +10427,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                     damageToTarget *= hitMultiplier;
 
                     if (Battler_Ability(battleCtx, defender) == ABILITY_PARENTAL_BOND
-                        && BattleSystem_ParentalBondAppliesToMove(battleCtx, moveDefender)) {
+                        && BattleSystem_ParentalBondAppliesToMove(battleCtx, moveDefender)
+                        && BattleSystem_MoveTargetCount(battleSys, battleCtx, defender, moveDefender) == 1) {
                         damageToTarget = damageToTarget * 5 / 4;
                     }
 
@@ -10483,7 +10495,11 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         || moveEffect == BATTLE_EFFECT_POISON_MULTI_HIT) {
                         hitMultiplier = 2;
                     } else if (moveEffect == BATTLE_EFFECT_MULTI_HIT) {
+                        if (Battler_Ability(battleCtx, battler) == ABILITY_SKILL_LINK) {
+                            hitMultiplier = 5;
+                        } else {
                         hitMultiplier = (Battler_HeldItemEffect(battleCtx, battler) == HOLD_EFFECT_LOADED_DICE) ? 4 : 3;
+                        }
                     } else if (moveEffect == BATTLE_EFFECT_HIT_THREE_TIMES) {
                         inPower = MOVE_DATA(moveBattler).power * 2;
                         hitMultiplier = 3;
@@ -10578,7 +10594,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                     damageToTarget *= hitMultiplier;
 
                     if (Battler_Ability(battleCtx, battler) == ABILITY_PARENTAL_BOND
-                        && BattleSystem_ParentalBondAppliesToMove(battleCtx, moveBattler)) {
+                        && BattleSystem_ParentalBondAppliesToMove(battleCtx, moveBattler)
+                        && BattleSystem_MoveTargetCount(battleSys, battleCtx, battler, moveBattler) == 1) {
                         damageToTarget = damageToTarget * 5 / 4;
                     }
 

@@ -250,6 +250,20 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
 BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move);
 
 /**
+ * @brief Count how many battlers a move will actually hit.
+ *
+ * Spread moves are counted against the battlers still standing, so a move with a multi-target
+ * range reports a single target once the others have fainted or are switching out.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param move
+ * @return The number of battlers which will be struck by the move.
+ */
+int BattleSystem_MoveTargetCount(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move);
+
+/**
  * @brief Check if Sheer Force boosts the attacker's move.
  *
  * A move is boosted if it is a damaging move with an additional effect, i.e. a
