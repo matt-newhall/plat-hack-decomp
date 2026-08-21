@@ -29,21 +29,8 @@
 #define AI_CONTEXT (battleCtx->aiContext)
 
 // Moves with an effect ID in either of these tables do not use the standard damage-calculation during scoring.
-static const u16 sNoDamageCalcMoveEffects[] = {
     BATTLE_EFFECT_HALVE_DEFENSE,
     BATTLE_EFFECT_HALVE_SP_DEFENSE,
-    BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP,
-    BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT,
-    BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH,
-    BATTLE_EFFECT_RECHARGE_AFTER,
-    BATTLE_EFFECT_CHARGE_TURN_DEF_UP,
-    BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN,
-    BATTLE_EFFECT_SPIT_UP,
-    BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT,
-    BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF,
-    BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP,
-    BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING,
-    BATTLE_EFFECT_RECOIL_HALF,
     0xFFFF
 };
 
@@ -61,6 +48,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_HEAVY_SLAM,
     BATTLE_EFFECT_PSYWAVE, // Magnitude; Psywave itself uses RANDOM_DAMAGE_1_TO_150_LEVEL
     BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP,
+    BATTLE_EFFECT_SPIT_UP,
     0xFFFF
 };
 
@@ -72,8 +60,16 @@ static const u16 sExcludedFromBestDamageMoveEffects[] = {
     BATTLE_EFFECT_HALVE_DEFENSE, // Explosion
     BATTLE_EFFECT_HALVE_SP_DEFENSE, // Self-Destruct, Misty Explosion
     BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO, // Rollout, Ice Ball
-    BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, // Meteor Beam
     BATTLE_EFFECT_BIND_HIT, // Wrap, Fire Spin, Clamp, Infestation, Sand Tomb, Magma Storm
+
+    // Charge moves which leave the user exposed for the turn they spend charging. The
+    // semi-invulnerable charge moves (Fly, Dig, Dive, Bounce, Shadow Force) are deliberately
+    // absent, as dodging for that turn is not the same liability. Solar Beam and Solar Blade
+    // are absent as they resolve in a single turn under sun.
+    BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT,
+    BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, // Sky Attack
+    BATTLE_EFFECT_CHARGE_TURN_DEF_UP, // Skull Bash
+    BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, // Meteor Beam
     0xFFFF
 };
 
@@ -3271,6 +3267,31 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
     // The following moves have their real power computed by a battle-script command at
     // execution time, so scoring never sees it. Mirror each of those commands here.
+    case MOVE_DREAM_EATER:
+        if ((battleCtx->battleMons[AI_CONTEXT.defender].status & MON_CONDITION_SLEEP) == FALSE) {
+            return 0;
+        }
+
+        break;
+
+    case MOVE_SPIT_UP:
+        if (battleCtx->battleMons[attacker].moveEffectsData.stockpileCount == 0) {
+            return 0;
+        }
+
+        power = battleCtx->battleMons[attacker].moveEffectsData.stockpileCount * 100;
+        break;
+
+    case MOVE_ERUPTION:
+    case MOVE_WATER_SPOUT:
+        power = MOVE_DATA(move).power * battleCtx->battleMons[attacker].curHP / battleCtx->battleMons[attacker].maxHP;
+
+        if (power < 1) {
+            power = 1;
+        }
+
+        break;
+
     case MOVE_FACADE:
         if (battleCtx->battleMons[attacker].status & MON_CONDITION_FACADE_BOOST) {
             power = MOVE_DATA(move).power * 2;
