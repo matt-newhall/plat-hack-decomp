@@ -225,6 +225,7 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
 static int TrainerAI_SumRaisedStatStages(BattleContext *battleCtx, int battler, int firstStat);
 static BOOL AI_MoveEffectInTable(BattleContext *battleCtx, const u16 *effects, u16 move);
 static BOOL AI_MoveHasDamageEstimate(BattleContext *battleCtx, u16 move);
+static int TrainerAI_HitCountMultiplier(BattleContext *battleCtx, u16 move, int ability, u16 heldItem);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
 static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
@@ -3432,9 +3433,55 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         damage = 0;
     } else {
         damage = BattleSystem_Divide(damage * variance, 100);
+        damage = BattleSystem_Divide(damage * TrainerAI_HitCountMultiplier(battleCtx, move, ability, heldItem), 100);
     }
 
     return damage;
+}
+
+/**
+ * @brief Work out how many times a move is expected to connect, as a percentage multiplier to
+ * apply to a single hit's damage.
+ *
+ * All hits are assumed to land, matching the AI's existing habit of ignoring accuracy. The
+ * multi-hit values mirror the switch AI's own damage routine so the two agree.
+ *
+ * @param battleCtx
+ * @param move
+ * @param ability   The attacker's ability.
+ * @param heldItem  The attacker's held item.
+ * @return Percentage multiplier, where 100 means a single hit.
+ */
+static int TrainerAI_HitCountMultiplier(BattleContext *battleCtx, u16 move, int ability, u16 heldItem)
+{
+    switch (MOVE_DATA(move).effect) {
+    case BATTLE_EFFECT_HIT_TWICE:
+    case BATTLE_EFFECT_POISON_MULTI_HIT:
+        return 200;
+
+    case BATTLE_EFFECT_HIT_THREE_TIMES:
+        return 600;
+
+    case BATTLE_EFFECT_MULTI_HIT:
+        if (ability == ABILITY_SKILL_LINK) {
+            return 500;
+        }
+
+        if (BattleSystem_GetItemData(battleCtx, heldItem, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_LOADED_DICE) {
+            return 400;
+        }
+
+        return 300;
+    }
+
+    if (ability == ABILITY_PARENTAL_BOND
+        && BattleSystem_ParentalBondAppliesToMove(battleCtx, move)
+        && MOVE_DATA(move).range != RANGE_ADJACENT_OPPONENTS
+        && MOVE_DATA(move).range != RANGE_ALL_ADJACENT) {
+        return 125;
+    }
+
+    return 100;
 }
 
 /**
