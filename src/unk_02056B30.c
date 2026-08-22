@@ -3,6 +3,7 @@
 #include <nitro.h>
 #include <string.h>
 
+#include "generated/map_headers.h"
 #include "generated/movement_actions.h"
 
 #include "struct_decls/map_object.h"
@@ -28,6 +29,7 @@
 #include "location.h"
 #include "map_header.h"
 #include "map_object.h"
+#include "map_object_move.h"
 #include "map_tile_behavior.h"
 #include "player_avatar.h"
 #include "screen_fade.h"
@@ -152,6 +154,22 @@ void sub_02056BDC(FieldSystem *fieldSystem, const int param1, const int param2, 
     FieldSystem_CreateTask(fieldSystem, sub_02056CFC, v0);
 }
 
+/**
+ * @brief Starts the field task for a map change triggered by a warp tile,
+ * picking the screen transition style from the source and destination map types.
+ *
+ * Route 217's forest maze links trees to other trees within the same map. Those
+ * warps arrive facing opposite the direction of travel, so the player steps out
+ * of the destination tree rather than into its dead end, and they use transition
+ * style 0 because the map type pairing has no entry in the table below.
+ *
+ * @param fieldSystem
+ * @param param1 Destination map header ID.
+ * @param param2 Destination warp ID.
+ * @param param3 Destination x.
+ * @param param4 Destination z.
+ * @param param5 Direction the player was travelling when the warp fired.
+ */
 void sub_02056C18(FieldSystem *fieldSystem, const int param1, const int param2, const int param3, const int param4, const int param5)
 {
     int v0;
@@ -161,12 +179,16 @@ void sub_02056C18(FieldSystem *fieldSystem, const int param1, const int param2, 
     v2->unk_00 = 0;
     v2->unk_04 = 0;
 
-    Location_Set(&v2->unk_08, param1, param2, param3, param4, param5);
-
     v0 = fieldSystem->location->mapId;
     v1 = 0;
 
-    if (MapHeader_IsCave(v0)) {
+    const BOOL isRoute217TreeWarp = (v0 == MAP_HEADER_ROUTE_217) && (param1 == MAP_HEADER_ROUTE_217);
+
+    Location_Set(&v2->unk_08, param1, param2, param3, param4, isRoute217TreeWarp ? Direction_GetOpposite(param5) : param5);
+
+    if (isRoute217TreeWarp) {
+        v1 = 0;
+    } else if (MapHeader_IsCave(v0)) {
         if (MapHeader_IsCave(param1)) {
             v1 = 6;
         } else if (MapHeader_IsOutdoors(param1)) {

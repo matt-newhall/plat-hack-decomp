@@ -27,8 +27,8 @@
         {
             "script": 8194,
             "type": 2,
-            "x": 304,
-            "z": 354,
+            "x": 312,
+            "z": 360,
             "y": 0,
             "player_facing_dir": "BG_EVENT_DIR_ALL"
         },
@@ -59,16 +59,16 @@
         {
             "script": 8198,
             "type": 2,
-            "x": 318,
-            "z": 303,
+            "x": 319,
+            "z": 305,
             "y": 0,
             "player_facing_dir": "BG_EVENT_DIR_ALL"
         },
         {
             "script": 8199,
             "type": 2,
-            "x": 314,
-            "z": 348,
+            "x": 298,
+            "z": 342,
             "y": 0,
             "player_facing_dir": "BG_EVENT_DIR_ALL"
         },
@@ -85,16 +85,16 @@
         {
             "id": "LOCALID_SKIER_SHAWN",
             "graphics_id": "OBJ_EVENT_GFX_SKIER_M",
-            "movement_type": "MOVEMENT_TYPE_WALK_WEST_SOUTH_EAST_NORTH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_SKIER_SHAWN",
             "initial_dir": 1,
             "data": [
-                3
+                1
             ],
-            "movement_range_x": 2,
-            "movement_range_z": 8,
+            "movement_range_x": 0,
+            "movement_range_z": 0,
             "x": 318,
             "z": 344,
             "y": 0
@@ -102,18 +102,18 @@
         {
             "id": "LOCALID_SKIER_LEXIE",
             "graphics_id": "OBJ_EVENT_GFX_SKIER_F",
-            "movement_type": "MOVEMENT_TYPE_WALK_NORTH_WEST_SOUTH_EAST",
+            "movement_type": "MOVEMENT_TYPE_WALK_BACK_AND_FORTH",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_SKIER_LEXIE",
-            "initial_dir": 0,
+            "initial_dir": 1,
             "data": [
                 4
             ],
-            "movement_range_x": 4,
-            "movement_range_z": 6,
-            "x": 294,
-            "z": 296,
+            "movement_range_x": 0,
+            "movement_range_z": 3,
+            "x": 305,
+            "z": 298,
             "y": 0
         },
         {
@@ -129,8 +129,8 @@
             ],
             "movement_range_x": 4,
             "movement_range_z": 6,
-            "x": 314,
-            "z": 296,
+            "x": 307,
+            "z": 281,
             "y": 0
         },
         {
@@ -146,8 +146,8 @@
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 291,
-            "z": 344,
+            "x": 299,
+            "z": 346,
             "y": 0
         },
         {
@@ -163,8 +163,8 @@
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 310,
-            "z": 351,
+            "x": 294,
+            "z": 332,
             "y": 0
         },
         {
@@ -263,8 +263,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 296,
-            "z": 305,
+            "x": 319,
+            "z": 324,
             "y": 0
         },
         {
@@ -278,7 +278,7 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 305,
+            "x": 392,
             "z": 330,
             "y": 0
         },
@@ -293,8 +293,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 300,
-            "z": 316,
+            "x": 303,
+            "z": 311,
             "y": 0
         },
         {
@@ -353,8 +353,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 297,
-            "z": 358,
+            "x": 301,
+            "z": 350,
             "y": 0
         },
         {
@@ -368,8 +368,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 311,
-            "z": 350,
+            "x": 318,
+            "z": 348,
             "y": 0
         },
         {
@@ -383,8 +383,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 316,
-            "z": 309,
+            "x": 319,
+            "z": 292,
             "y": 0
         }
     ],
@@ -400,6 +400,414 @@
             "z": 285,
             "dest_header_id": "MAP_HEADER_ROUTE_217_NORTHEAST_HOUSE",
             "dest_warp_id": 0
+        },
+        {
+            "x": 314,
+            "z": 351,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 4
+        },
+        {
+            "x": 315,
+            "z": 351,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 5
+        },
+        {
+            "x": 310,
+            "z": 301,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 2
+        },
+        {
+            "x": 311,
+            "z": 301,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 3
+        },
+        {
+            "x": 306,
+            "z": 366,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 8
+        },
+        {
+            "x": 307,
+            "z": 366,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 9
+        },
+        {
+            "x": 288,
+            "z": 353,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 6
+        },
+        {
+            "x": 289,
+            "z": 353,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 7
+        },
+        {
+            "x": 290,
+            "z": 371,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 12
+        },
+        {
+            "x": 291,
+            "z": 371,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 13
+        },
+        {
+            "x": 288,
+            "z": 337,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 10
+        },
+        {
+            "x": 289,
+            "z": 337,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 11
+        },
+        {
+            "x": 298,
+            "z": 365,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 16
+        },
+        {
+            "x": 299,
+            "z": 365,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 17
+        },
+        {
+            "x": 300,
+            "z": 307,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 14
+        },
+        {
+            "x": 301,
+            "z": 307,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 15
+        },
+        {
+            "x": 316,
+            "z": 309,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 20
+        },
+        {
+            "x": 317,
+            "z": 309,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 21
+        },
+        {
+            "x": 306,
+            "z": 293,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 18
+        },
+        {
+            "x": 307,
+            "z": 293,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 19
+        },
+        {
+            "x": 302,
+            "z": 315,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 24
+        },
+        {
+            "x": 303,
+            "z": 315,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 25
+        },
+        {
+            "x": 314,
+            "z": 317,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 22
+        },
+        {
+            "x": 315,
+            "z": 317,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 23
+        },
+        {
+            "x": 304,
+            "z": 355,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 28
+        },
+        {
+            "x": 305,
+            "z": 355,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 29
+        },
+        {
+            "x": 298,
+            "z": 339,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 26
+        },
+        {
+            "x": 299,
+            "z": 339,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 27
+        },
+        {
+            "x": 290,
+            "z": 329,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 32
+        },
+        {
+            "x": 291,
+            "z": 329,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 33
+        },
+        {
+            "x": 294,
+            "z": 295,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 30
+        },
+        {
+            "x": 295,
+            "z": 295,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 31
+        },
+        {
+            "x": 300,
+            "z": 331,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 36
+        },
+        {
+            "x": 301,
+            "z": 331,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 37
+        },
+        {
+            "x": 302,
+            "z": 291,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 34
+        },
+        {
+            "x": 303,
+            "z": 291,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 35
+        },
+        {
+            "x": 308,
+            "z": 357,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 40
+        },
+        {
+            "x": 309,
+            "z": 357,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 41
+        },
+        {
+            "x": 312,
+            "z": 343,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 38
+        },
+        {
+            "x": 313,
+            "z": 343,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 39
+        },
+        {
+            "x": 308,
+            "z": 325,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 44
+        },
+        {
+            "x": 309,
+            "z": 325,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 45
+        },
+        {
+            "x": 304,
+            "z": 307,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 42
+        },
+        {
+            "x": 305,
+            "z": 307,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 43
+        },
+        {
+            "x": 288,
+            "z": 303,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 48
+        },
+        {
+            "x": 289,
+            "z": 303,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 49
+        },
+        {
+            "x": 300,
+            "z": 301,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 46
+        },
+        {
+            "x": 301,
+            "z": 301,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 47
+        },
+        {
+            "x": 308,
+            "z": 347,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 52
+        },
+        {
+            "x": 309,
+            "z": 347,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 53
+        },
+        {
+            "x": 294,
+            "z": 321,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 50
+        },
+        {
+            "x": 295,
+            "z": 321,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 51
+        },
+        {
+            "x": 292,
+            "z": 345,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 56
+        },
+        {
+            "x": 293,
+            "z": 345,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 57
+        },
+        {
+            "x": 290,
+            "z": 319,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 54
+        },
+        {
+            "x": 291,
+            "z": 319,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 55
+        },
+        {
+            "x": 296,
+            "z": 331,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 60
+        },
+        {
+            "x": 297,
+            "z": 331,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 61
+        },
+        {
+            "x": 298,
+            "z": 317,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 58
+        },
+        {
+            "x": 299,
+            "z": 317,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 59
+        },
+        {
+            "x": 304,
+            "z": 343,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 64
+        },
+        {
+            "x": 305,
+            "z": 343,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 65
+        },
+        {
+            "x": 308,
+            "z": 311,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 62
+        },
+        {
+            "x": 309,
+            "z": 311,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 63
+        },
+        {
+            "x": 292,
+            "z": 305,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 68
+        },
+        {
+            "x": 293,
+            "z": 305,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 69
+        },
+        {
+            "x": 316,
+            "z": 303,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 66
+        },
+        {
+            "x": 317,
+            "z": 303,
+            "dest_header_id": "MAP_HEADER_ROUTE_217",
+            "dest_warp_id": 67
         }
     ],
     "coord_events": [
