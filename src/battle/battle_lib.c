@@ -3112,14 +3112,14 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
-    if (move == MOVE_FREEZE_DRY && MON_HAS_TYPE(defender, TYPE_WATER) && IsInverseBattle(battleCtx) == FALSE) {
+    if (move == MOVE_FREEZE_DRY && MON_HAS_TYPE(defender, TYPE_WATER)) {
         // this is spaghetti, but there's no way of changing freeze dry to a type
         // that is not-very-effective vs. water-types without being ice-type so
         // this is fine
-        if (moveType == TYPE_ICE) {
-            damage *= 4;
-        } else {
+        if (moveType != TYPE_ICE) {
             damage *= 2;
+        } else if (IsInverseBattle(battleCtx) == FALSE) {
+            damage *= 4;
         }
     }
 
@@ -3184,9 +3184,23 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         }
     }
 
-    if (move == MOVE_FREEZE_DRY && MON_HAS_TYPE(defender, TYPE_WATER) && IsInverseBattle(battleCtx) == FALSE) {
+    if (move == MOVE_FREEZE_DRY
+        && MON_HAS_TYPE(defender, TYPE_WATER)
+        && (*moveStatusMask & MOVE_STATUS_INEFFECTIVE) == FALSE
+        && (moveType != TYPE_ICE || IsInverseBattle(battleCtx) == FALSE)) {
+        BOOL superEffective;
+
+        if (IsInverseBattle(battleCtx) == TRUE) {
+            superEffective = TRUE;
+        } else if (moveType == TYPE_ICE) {
+            superEffective = !(MON_HAS_TYPE(defender, TYPE_STEEL) || MON_HAS_TYPE(defender, TYPE_ICE) || MON_HAS_TYPE(defender, TYPE_FIRE));
+        } else {
+            superEffective = !(MON_HAS_TYPE(defender, TYPE_ROCK) || MON_HAS_TYPE(defender, TYPE_STEEL));
+        }
+
         *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
-        if (MON_HAS_TYPE(defender, TYPE_WATER) && !(MON_HAS_TYPE(defender, TYPE_STEEL) || MON_HAS_TYPE(defender, TYPE_ICE) || MON_HAS_TYPE(defender, TYPE_FIRE))) {
+
+        if (superEffective == TRUE) {
             *moveStatusMask |= MOVE_STATUS_SUPER_EFFECTIVE;
         }
     }
@@ -3303,12 +3317,24 @@ void BattleSystem_CalcEffectiveness(BattleContext *battleCtx, int move, int inTy
 
     if (move == MOVE_FREEZE_DRY
         && (defenderType1 == TYPE_WATER || defenderType2 == TYPE_WATER)
-        && IsInverseBattle(battleCtx) == FALSE) {
+        && (*moveStatusMask & MOVE_STATUS_INEFFECTIVE) == FALSE
+        && (moveType != TYPE_ICE || IsInverseBattle(battleCtx) == FALSE)) {
+        BOOL superEffective;
+
+        if (IsInverseBattle(battleCtx) == TRUE) {
+            superEffective = TRUE;
+        } else if (moveType == TYPE_ICE) {
+            superEffective = defenderType1 != TYPE_STEEL && defenderType2 != TYPE_STEEL
+                && defenderType1 != TYPE_ICE && defenderType2 != TYPE_ICE
+                && defenderType1 != TYPE_FIRE && defenderType2 != TYPE_FIRE;
+        } else {
+            superEffective = defenderType1 != TYPE_ROCK && defenderType2 != TYPE_ROCK
+                && defenderType1 != TYPE_STEEL && defenderType2 != TYPE_STEEL;
+        }
+
         *moveStatusMask &= ~MOVE_STATUS_NOT_VERY_EFFECTIVE;
 
-        if (defenderType1 != TYPE_STEEL && defenderType2 != TYPE_STEEL
-            && defenderType1 != TYPE_ICE && defenderType2 != TYPE_ICE
-            && defenderType1 != TYPE_FIRE && defenderType2 != TYPE_FIRE) {
+        if (superEffective == TRUE) {
             *moveStatusMask |= MOVE_STATUS_SUPER_EFFECTIVE;
         }
     }
