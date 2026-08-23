@@ -2381,13 +2381,16 @@ Expert_StatusDefenseDown_End:
 Expert_SpeedDownOnHit:
     // If the target is immune to or would resist the move, do not apply any further modifiers.
     //
-    // Treat the exact moves Icy Wind, Rock Tomb, and Mud Shot as Speed-reducing status moves.
+    // Treat the moves whose Speed drop is guaranteed as Speed-reducing status moves. Bubble and
+    // BubbleBeam are deliberately absent - their drop is only a 10% chance.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_SpeedDownOnHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SpeedDownOnHit_End
     IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_SpeedDownOnHit_End
     IfMoveEqualTo MOVE_ICY_WIND, Expert_StatusSpeedDown
     IfMoveEqualTo MOVE_ROCK_TOMB, Expert_StatusSpeedDown
     IfMoveEqualTo MOVE_MUD_SHOT, Expert_StatusSpeedDown
+    IfMoveEqualTo MOVE_BULLDOZE, Expert_StatusSpeedDown
+    IfMoveEqualTo MOVE_ELECTROWEB, Expert_StatusSpeedDown
     PopOrEnd 
 
 Expert_SpeedDownOnHit_End:
@@ -3702,7 +3705,8 @@ Expert_Pursuit:
     // If it is NOT the attacker's first turn in battle and the opponent has a Ghost or Psychic
     // typing, 50% chance of additional score +1.
     //
-    // If the opponent knows specifically the move U-turn, 50% chance of additional score +1.
+    // If the opponent knows a move which attacks and then switches out, 50% chance of additional
+    // score +1 - Pursuit is what punishes that switch.
     LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo FALSE, Expert_Pursuit_TryScorePlus1
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
@@ -3713,14 +3717,19 @@ Expert_Pursuit:
     IfLoadedEqualTo TYPE_GHOST, Expert_Pursuit_TryScorePlus1
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
     IfLoadedEqualTo TYPE_PSYCHIC, Expert_Pursuit_TryScorePlus1
-    GoTo Expert_Pursuit_CheckUturn
+    GoTo Expert_Pursuit_CheckSwitchMove
 
 Expert_Pursuit_TryScorePlus1:
-    IfRandomLessThan 128, Expert_Pursuit_CheckUturn
+    IfRandomLessThan 128, Expert_Pursuit_CheckSwitchMove
     AddToMoveScore 1
 
-Expert_Pursuit_CheckUturn:
-    IfMoveNotKnown AI_BATTLER_DEFENDER, MOVE_U_TURN, Expert_Pursuit_End
+Expert_Pursuit_CheckSwitchMove:
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_U_TURN, Expert_Pursuit_SwitchMoveKnown
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_VOLT_SWITCH, Expert_Pursuit_SwitchMoveKnown
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FLIP_TURN, Expert_Pursuit_SwitchMoveKnown
+    GoTo Expert_Pursuit_End
+
+Expert_Pursuit_SwitchMoveKnown:
     IfRandomLessThan 128, Expert_Pursuit_End
     AddToMoveScore 1
 
