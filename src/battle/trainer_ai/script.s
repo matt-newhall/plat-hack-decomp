@@ -1695,15 +1695,13 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP, Expert_StatusSpAttackUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_UP, Expert_StatusAccuracyUp
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Expert_StatusEvasionUp
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BYPASS_ACCURACY, Expert_BypassAccuracyMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN, Expert_StatusAttackDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Expert_StatusAttackDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN, Expert_StatusDefenseDown
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN, Expert_StatusSpeedDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN, Expert_StatusSpAttackDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_DOWN, Expert_StatusSpDefenseDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_DOWN, Expert_StatusAccuracyDown
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_DOWN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN, Expert_StatusEvasionDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESET_STAT_CHANGES, Expert_Haze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Expert_Bide
@@ -1711,7 +1709,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Recovery
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_ToxicLeechSeed
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Expert_AuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
@@ -1725,25 +1723,24 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_2, Expert_StatusSpAttackUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_UP_2, Expert_StatusAccuracyUp
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2, Expert_StatusEvasionUp
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN_2, Expert_StatusAttackDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN_2, Expert_StatusDefenseDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_2, Expert_StatusSpeedDown
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN_2, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN_2, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2, Expert_StatusSpAttackDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_DOWN_2, Expert_StatusSpDefenseDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN_2, Expert_StatusAccuracyDown
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_DOWN_2, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_DOWN_2, Expert_StatusEvasionDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Reflect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_StatusParalyze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_Swagger
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SPEED_HIT, Expert_SpeedDownOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_VitalThrow
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_ToxicLeechSeed
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_Disable
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_Counter
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Expert_Encore
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AVERAGE_HP, Expert_PainSplit
@@ -1752,8 +1749,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_SleepTalk
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURE_PARTY_STATUS, Expert_HealBell
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Expert_BindingMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2_MINIMIZE, Expert_StatusEvasionUp
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2_MINIMIZE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURSE, Expert_Curse
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_Protect
@@ -1778,20 +1775,20 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Expert_SpitUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_Hail
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_Flatter
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HELD_ITEMS, Expert_Trick
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_ChangeUserAbility
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_Ingrain
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_MagicCoat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECYCLE, Expert_Recycle
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECYCLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_SCREENS, Expert_BrickBreak
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Expert_Endeavor
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_ChangeUserAbility
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_Refresh
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Snatch
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusDefenseDown
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_StatusSpDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Expert_StatusDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_StatusSpDefenseUp
@@ -1799,32 +1796,49 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_QuiverDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHELL_SMASH, Expert_ShellSmash
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_Gravity
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EAT_BERRY, Expert_Pluck
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_Embargo
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLING, Expert_Fling
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_PsychoShift
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_MOVE_FIRST, Expert_MeFirst
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_MOVE_FIRST, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_ABILITY_TO_INSOMNIA, Expert_WorrySeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING, Expert_SuckerPunch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TOXIC_SPIKES, Expert_ToxicSpikes
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_STAT_CHANGES, Expert_HeartSwap
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Expert_AquaRing
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, Expert_MagnetRise
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_STAT_CHANGES, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Expert_Defog
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRICK_ROOM, Expert_TrickRoom
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Expert_Captivate
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Expert_StealthRock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_HealingWish
 
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STAT_REDUCTION, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CALL_RANDOM_MOVE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INFATUATE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STATUS, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TORMENT, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Expert_StatusMoveBonus
+
     // All other moves have no additional logic.
     PopOrEnd 
+
+Expert_StatusMoveBonus:
+    // Status moves which get no judgement of their own beyond whatever Basic already applied.
+    // +6 puts them level with the bonus EvalAttack hands the best damaging move 80% of the time,
+    // so they compete with attacking rather than being crowded out by it.
+    AddToMoveScore 6
+    PopOrEnd
 
 Expert_StatusSleep:
     // If the attacker knows a move which requires the target to be asleep (Dream Eater or Nightmare
@@ -2169,78 +2183,6 @@ Expert_StatusAccuracyUp_TryScoreMinus2:
 Expert_StatusAccuracyUp_End:
     PopOrEnd 
 
-Expert_StatusEvasionUp:
-    // If the attacker's HP is >= 90%, ~60.9% chance of additional score +3.
-    //
-    // If the attacker is at +3 stat stage or higher, 50% chance of additional score -1.
-    //
-    // If the target is Badly Poisoned:
-    // - If the attacker's HP is > 50%, ~80.5% chance of additional score +3.
-    // - If the attacker's HP is <= 50%, ~55.3% chance of additional score +3.
-    //
-    // If the target is affected by Leech Seed, ~72.7% chance of additional score +3.
-    //
-    // If the attacker is affected by Ingrain or Aqua Ring, 50% chance of additional score +2.
-    //
-    // If the target is affected by Curse, ~72.7% chance of additional score +3.
-    //
-    // If the attacker's HP is > 70%, suppress all further modifiers. Otherwise:
-    // - If the attacker is at exactly +0 stat stage, no further score modifiers.
-    // - If either the attacker's HP or the target's HP are < 40%, score -2.
-    // - Otherwise, ~72.7% chance of score -2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_StatusEvasionUp_CheckUserStatStage
-    IfRandomLessThan 100, Expert_StatusEvasionUp_CheckUserStatStage
-    AddToMoveScore 3
-
-Expert_StatusEvasionUp_CheckUserStatStage:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 9, Expert_StatusEvasionUp_CheckEnemyBadlyPoisoned
-    IfRandomLessThan 128, Expert_StatusEvasionUp_CheckEnemyBadlyPoisoned
-    AddToMoveScore -1
-
-Expert_StatusEvasionUp_CheckEnemyBadlyPoisoned:
-    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_StatusEvasionUp_CheckEnemySeeded
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_StatusEvasionUp_TryScorePlus3
-    IfRandomLessThan 80, Expert_StatusEvasionUp_CheckEnemySeeded
-
-Expert_StatusEvasionUp_TryScorePlus3:
-    IfRandomLessThan 50, Expert_StatusEvasionUp_CheckEnemySeeded
-    AddToMoveScore 3
-
-Expert_StatusEvasionUp_CheckEnemySeeded:
-    IfNotMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_StatusEvasionUp_CheckUserIngrained
-    IfRandomLessThan 70, Expert_StatusEvasionUp_CheckUserIngrained
-    AddToMoveScore 3
-
-Expert_StatusEvasionUp_CheckUserIngrained:
-    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_INGRAIN, Expert_StatusEvasionUp_CheckUserHasAquaRing
-    IfRandomLessThan 128, Expert_StatusEvasionUp_CheckEnemyCursed
-    AddToMoveScore 2
-    GoTo Expert_StatusEvasionUp_CheckEnemyCursed
-
-Expert_StatusEvasionUp_CheckUserHasAquaRing:
-    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_AQUA_RING, Expert_StatusEvasionUp_CheckEnemyCursed
-    IfRandomLessThan 128, Expert_StatusEvasionUp_CheckEnemyCursed
-    AddToMoveScore 2
-    GoTo Expert_StatusEvasionUp_CheckEnemyCursed
-
-Expert_StatusEvasionUp_CheckEnemyCursed:
-    IfNotVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_StatusEvasionUp_CheckHPRanges
-    IfRandomLessThan 70, Expert_StatusEvasionUp_CheckHPRanges
-    AddToMoveScore 3
-
-Expert_StatusEvasionUp_CheckHPRanges:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusEvasionUp_End
-    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 6, Expert_StatusEvasionUp_End
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_StatusEvasionUp_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 40, Expert_StatusEvasionUp_ScoreMinus2
-    IfRandomLessThan 70, Expert_StatusEvasionUp_End
-
-Expert_StatusEvasionUp_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_StatusEvasionUp_End:
-    PopOrEnd 
-
 Expert_BypassAccuracyMove:
     // If the target is at +5 Evasion or higher, or the attacker is at -5 Accuracy or lower, 60.9%
     // chance of score +2, 39.1% chance of score +1.
@@ -2260,67 +2202,6 @@ Expert_BypassAccuracyMove_TryScorePlus1:
     AddToMoveScore 1
 
 Expert_BypassAccuracyMove_End:
-    PopOrEnd 
-
-Expert_StatusAttackDown:
-    // If the target is at any stat stage other than +0, additional score -1. Also, further modify
-    // the score according to all of the following which apply:
-    // - If the attacker's HP is at 90% or lower, additional score -1.
-    // - If the target is at -3 stat stage or lower, 80.5% chance of additional score -2.
-    //
-    // If the target's HP is at 70% or lower, additional score -2.
-    //
-    // If the move last used by the target was not a Special move, 50% chance of score -2.
-    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 6, Expert_StatusAttackDown_CheckTargetHP
-    AddToMoveScore -1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_StatusAttackDown_CheckTargetStatStage
-    AddToMoveScore -1
-
-Expert_StatusAttackDown_CheckTargetStatStage:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 3, Expert_StatusAttackDown_CheckTargetHP
-    IfRandomLessThan 50, Expert_StatusAttackDown_CheckTargetHP
-    AddToMoveScore -2
-
-Expert_StatusAttackDown_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusAttackDown_CheckLastUsedMove
-    AddToMoveScore -2
-
-Expert_StatusAttackDown_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_SPECIAL, Expert_StatusAttackDown_End
-    IfRandomLessThan 128, Expert_StatusAttackDown_End
-    AddToMoveScore -2
-
-Expert_StatusAttackDown_End:
-    PopOrEnd 
-
-Expert_StatusAttackDown_PreSplitPhysicalTypes:
-    TableEntry TYPE_NORMAL
-    TableEntry TYPE_FIGHTING
-    TableEntry TYPE_GROUND
-    TableEntry TYPE_ROCK
-    TableEntry TYPE_BUG
-    TableEntry TYPE_STEEL
-    TableEntry TABLE_END
-
-Expert_StatusDefenseDown:
-    // If the attacker's HP is < 70%, 80.5% chance of additional score -2.
-    //
-    // If the target's stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
-    //
-    // If the target's HP is < 70%, score -2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusDefenseDown_TryScoreMinus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 3, Expert_StatusDefenseDown_CheckTargetHP
-
-Expert_StatusDefenseDown_TryScoreMinus2:
-    IfRandomLessThan 50, Expert_StatusDefenseDown_CheckTargetHP
-    AddToMoveScore -2
-
-Expert_StatusDefenseDown_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusDefenseDown_End
-    AddToMoveScore -2
-
-Expert_StatusDefenseDown_End:
     PopOrEnd 
 
 Expert_SpeedDownOnHit:
@@ -2398,95 +2279,6 @@ Expert_StatusSpAttackDown_PreSplitSpecialTypes:
     TableEntry TYPE_DRAGON
     TableEntry TYPE_DARK
     TableEntry TABLE_END
-
-Expert_StatusSpDefenseDown:
-    // If the attacker's HP is < 70%, 80.5% chance of additional score -2.
-    //
-    // If the target's stat stage is otherwise at -3 or lower, 80.5% chance of additional score -2.
-    //
-    // If the target's HP is < 70%, score -2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusSpDefenseDown_TryScoreMinus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 3, Expert_StatusSpDefenseDown_CheckTargetHP
-
-Expert_StatusSpDefenseDown_TryScoreMinus2:
-    IfRandomLessThan 50, Expert_StatusSpDefenseDown_CheckTargetHP
-    AddToMoveScore -2
-
-Expert_StatusSpDefenseDown_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusSpDefenseDown_End
-    AddToMoveScore -2
-
-Expert_StatusSpDefenseDown_End:
-    PopOrEnd 
-
-Expert_StatusAccuracyDown:
-    // If the target's HP is <= 70% and the attacker's HP is NOT >= 70%, 60.9% chance of additional
-    // score -1.
-    //
-    // If the attacker is at -2 accuracy or lower, 68.75% chance of additional score -2.
-    //
-    // If the target is Badly Poisoned, ~72.7% chance of additional score +2.
-    //
-    // If the target is affected by Leech Seed, ~72.7% chance of additional score +2.
-    //
-    // If the attacker is affected by Ingrain or Aqua Ring, 50% chance of additional score +1.
-    //
-    // If the target is affected by Curse, ~72.7% chance of additional score +2.
-    //
-    // If the attacker's HP is > 70%, suppress all further modifiers. Otherwise:
-    // - If the attacker is at exactly +0 stat stage, no further score modifiers.
-    // - If either the attacker's HP or the target's HP are < 40%, score -2.
-    // - Otherwise, ~72.7% chance of score -2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_StatusAccuracyDown_TryScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusAccuracyDown_CheckUserAccuracy
-
-Expert_StatusAccuracyDown_TryScoreMinus1:
-    IfRandomLessThan 100, Expert_StatusAccuracyDown_CheckUserAccuracy
-    AddToMoveScore -1
-
-Expert_StatusAccuracyDown_CheckUserAccuracy:
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 4, Expert_StatusAccuracyDown_CheckTargetBadlyPoisoned
-    IfRandomLessThan 80, Expert_StatusAccuracyDown_CheckTargetBadlyPoisoned
-    AddToMoveScore -2
-
-Expert_StatusAccuracyDown_CheckTargetBadlyPoisoned:
-    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_StatusAccuracyDown_CheckTargetSeeded
-    IfRandomLessThan 70, Expert_StatusAccuracyDown_CheckTargetSeeded
-    AddToMoveScore 2
-
-Expert_StatusAccuracyDown_CheckTargetSeeded:
-    IfNotMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_StatusAccuracyDown_CheckUserIngrained
-    IfRandomLessThan 70, Expert_StatusAccuracyDown_CheckUserIngrained
-    AddToMoveScore 2
-
-Expert_StatusAccuracyDown_CheckUserIngrained:
-    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_INGRAIN, Expert_StatusAccuracyDown_CheckUserHasAquaRing
-    IfRandomLessThan 128, Expert_StatusAccuracyDown_CheckTargetCursed
-    AddToMoveScore 1
-    GoTo Expert_StatusAccuracyDown_CheckTargetCursed
-
-Expert_StatusAccuracyDown_CheckUserHasAquaRing:
-    IfNotMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_AQUA_RING, Expert_StatusAccuracyDown_CheckTargetCursed
-    IfRandomLessThan 128, Expert_StatusAccuracyDown_CheckTargetCursed
-    AddToMoveScore 1
-
-Expert_StatusAccuracyDown_CheckTargetCursed:
-    IfNotVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_StatusAccuracyDown_CheckHPRanges
-    IfRandomLessThan 70, Expert_StatusAccuracyDown_CheckHPRanges
-    AddToMoveScore 2
-
-Expert_StatusAccuracyDown_CheckHPRanges:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusAccuracyDown_End
-    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 6, Expert_StatusAccuracyDown_End
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_StatusAccuracyDown_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 40, Expert_StatusAccuracyDown_ScoreMinus2
-    IfRandomLessThan 70, Expert_StatusAccuracyDown_End
-
-Expert_StatusAccuracyDown_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_StatusAccuracyDown_End:
-    PopOrEnd 
 
 Expert_StatusEvasionDown:
     // If the attacker's HP is < 70%, 80.5% chance of additional score -2.
@@ -2671,38 +2463,6 @@ Expert_Recovery_TryScorePlus2:
 Expert_Recovery_End:
     PopOrEnd 
 
-Expert_ToxicLeechSeed:
-    // If the attacker has at least one damaging move, apply all of the following which apply:
-    // - If the attacker's HP <= 50%, 80.5% chance of additional score -3.
-    // - If the defender's HP <= 50%, 80.5% chance of additional score -3.
-    //
-    // If the attacker knows a move that either increases its Special Defense by 1 stage or acts as
-    // Protect, 76.6% chance of score +2. (Note: no such move exists in Vanilla that only raises
-    // Special Defense by 1 stage.)
-    IfAttackerHasNoDamagingMoves Expert_ToxicLeechSeed_CheckMoveEffectsKnown
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_ToxicLeechSeed_CheckTargetHP
-    IfRandomLessThan 50, Expert_ToxicLeechSeed_CheckTargetHP
-    AddToMoveScore -3
-
-Expert_ToxicLeechSeed_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_ToxicLeechSeed_CheckMoveEffectsKnown
-    IfRandomLessThan 50, Expert_ToxicLeechSeed_CheckMoveEffectsKnown
-    AddToMoveScore -3
-
-Expert_ToxicLeechSeed_CheckMoveEffectsKnown:
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_SP_DEF_UP, Expert_ToxicLeechSeed_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT, Expert_ToxicLeechSeed_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ToxicLeechSeed_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_ToxicLeechSeed_TryScorePlus2
-    GoTo Expert_ToxicLeechSeed_End
-
-Expert_ToxicLeechSeed_TryScorePlus2:
-    IfRandomLessThan 60, Expert_ToxicLeechSeed_End
-    AddToMoveScore 2
-
-Expert_ToxicLeechSeed_End:
-    PopOrEnd 
-
 Expert_LightScreen:
     // If the attacker's HP is < 50%, score -2.
     //
@@ -2838,22 +2598,6 @@ Expert_BindingMove_TryScorePlus1:
 Expert_BindingMove_End:
     PopOrEnd 
 
-Expert_Swagger:
-    // If the attacker knows Psych Up:
-    // - If the target's attack stat is -3 or higher, score -5 and terminate.
-    // - If it is the first turn of the battle, score +5.
-    // - Otherwise, score +3.
-    //
-    // Otherwise, act identically to Flatter.
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_PSYCH_UP, Expert_Swagger_PsychUp
-
-Expert_Flatter:
-    // 50% chance of additional score +1.
-    //
-    // Otherwise, act identically to any other Confusion-inducing Status move.
-    IfRandomLessThan 128, Expert_StatusConfuse
-    AddToMoveScore 1
-
 Expert_StatusConfuse:
     // If the target's HP is <= 70%, 50% chance of additional score -1.
     IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusConfuse_End
@@ -2870,20 +2614,6 @@ Expert_StatusConfuse_CheckHP:
     AddToMoveScore -1
 
 Expert_StatusConfuse_End:
-    PopOrEnd 
-
-Expert_Swagger_PsychUp:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 3, Expert_Swagger_ScoreMinus5
-    AddToMoveScore 3
-    LoadTurnCount 
-    IfLoadedNotEqualTo 0, Expert_Swagger_End
-    AddToMoveScore 2
-    GoTo Expert_Swagger_End
-
-Expert_Swagger_ScoreMinus5:
-    AddToMoveScore -5
-
-Expert_Swagger_End:
     PopOrEnd 
 
 Expert_Reflect:
@@ -3050,26 +2780,6 @@ Expert_Substitute_TryScorePlus1:
     AddToMoveScore 1
 
 Expert_Substitute_End:
-    PopOrEnd 
-
-Expert_Disable:
-    // If the attacker is slower than the opponent, score +0 and terminate.
-    //
-    // If the opponent's last-used move was a Status move, 60.9% chance of score -1.
-    //
-    // If the opponent's last-used move was a Damaging move, score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Disable_End
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
-    IfLoadedEqualTo 0, Expert_Disable_TryScoreMinus1
-    AddToMoveScore 1
-    GoTo Expert_Disable_End
-
-Expert_Disable_TryScoreMinus1:
-    IfRandomLessThan 100, Expert_Disable_End
-    AddToMoveScore -1
-
-Expert_Disable_End:
     PopOrEnd 
 
 Expert_Counter:
@@ -4169,108 +3879,6 @@ Expert_Trick_BadOpponentItems:
     TableEntry HOLD_EFFECT_HP_RESTORE_PSN_TYPE
     TableEntry TABLE_END
 
-Expert_ChangeUserAbility:
-    // If the attacker has a desirable ability, score -1.
-    //
-    // If the opponent has a desirable ability, 80.5% chance of score +2.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedInTable Expert_ChangeUserAbility_DesirableAbilities, Expert_ChangeUserAbility_ScoreMinus1
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_ChangeUserAbility_DesirableAbilities, Expert_ChangeUserAbility_TryScorePlus2
-
-Expert_ChangeUserAbility_ScoreMinus1:
-    AddToMoveScore -1
-    GoTo Expert_ChangeUserAbility_End
-
-Expert_ChangeUserAbility_TryScorePlus2:
-    IfRandomLessThan 50, Expert_ChangeUserAbility_End
-    AddToMoveScore 2
-
-Expert_ChangeUserAbility_End:
-    PopOrEnd 
-
-Expert_ChangeUserAbility_DesirableAbilities:
-    TableEntry ABILITY_SPEED_BOOST
-    TableEntry ABILITY_BATTLE_ARMOR
-    TableEntry ABILITY_SAND_VEIL
-    TableEntry ABILITY_STATIC
-    TableEntry ABILITY_FLASH_FIRE
-    TableEntry ABILITY_WONDER_GUARD
-    TableEntry ABILITY_EFFECT_SPORE
-    TableEntry ABILITY_SWIFT_SWIM
-    TableEntry ABILITY_HUGE_POWER
-    TableEntry ABILITY_RAIN_DISH
-    TableEntry ABILITY_CUTE_CHARM
-    TableEntry ABILITY_SHED_SKIN
-    TableEntry ABILITY_MARVEL_SCALE
-    TableEntry ABILITY_PURE_POWER
-    TableEntry ABILITY_CHLOROPHYLL
-    TableEntry ABILITY_SHIELD_DUST
-    TableEntry ABILITY_ADAPTABILITY
-    TableEntry ABILITY_MAGIC_GUARD
-    TableEntry ABILITY_MOLD_BREAKER
-    TableEntry ABILITY_SUPER_LUCK
-    TableEntry ABILITY_UNAWARE
-    TableEntry ABILITY_TINTED_LENS
-    TableEntry ABILITY_FILTER
-    TableEntry ABILITY_SOLID_ROCK
-    TableEntry ABILITY_RECKLESS
-    TableEntry TABLE_END
-
-Expert_Ingrain:
-    // No score change.
-    PopOrEnd 
-
-Expert_MagicCoat:
-    // If the opponent's HP <= 30%, 60.9% chance of additional score -1.
-    //
-    // If it is the attacker's first turn in battle, 41.4% chance of score +1.
-    //
-    // If it is not the attacker's first turn in battle, 88.3% chance of score -1.
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_MagicCoat_CheckUserFirstTurn
-    IfRandomLessThan 100, Expert_MagicCoat_CheckUserFirstTurn
-    AddToMoveScore -1
-
-Expert_MagicCoat_CheckUserFirstTurn:
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedEqualTo FALSE, Expert_MagicCoat_TryScoreMinus1
-    IfRandomLessThan 150, Expert_MagicCoat_End
-    AddToMoveScore 1
-    GoTo Expert_MagicCoat_End
-    IfRandomLessThan 50, Expert_MagicCoat_End
-
-Expert_MagicCoat_TryScoreMinus1:
-    IfRandomLessThan 30, Expert_MagicCoat_End
-    AddToMoveScore -1
-
-Expert_MagicCoat_End:
-    PopOrEnd 
-
-Expert_Recycle:
-    // If the attacker's Recyclable item is *not* any of the following, score -2:
-    // - Chesto Berry
-    // - Lum Berry
-    // - Starf Berry
-    //
-    // Otherwise, 80.5% chance of score +1.
-    LoadRecycleItem AI_BATTLER_ATTACKER
-    IfLoadedNotInTable Expert_Recycle_DesirableItems, Expert_Recycle_ScoreMinus2
-    IfRandomLessThan 50, Expert_Recycle_End
-    AddToMoveScore 1
-    GoTo Expert_Recycle_End
-
-Expert_Recycle_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_Recycle_End:
-    PopOrEnd 
-
-Expert_Recycle_DesirableItems:
-    TableEntry ITEM_CHESTO_BERRY
-    TableEntry ITEM_LUM_BERRY
-    TableEntry ITEM_STARF_BERRY
-    TableEntry TABLE_END
-
 Expert_BrickBreak:
     // If the opponent's side of the field is under the effect of Reflect or Light Screen, score +1.
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScorePlus1
@@ -4319,53 +3927,6 @@ Expert_Refresh_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_Refresh_End:
-    PopOrEnd 
-
-Expert_Snatch:
-    // If it is the attacker's first turn in battle, 41.4% chance of score +2.
-    //
-    // 11.7% chance of score +0 and terminate.
-    //
-    // If the attacker is slower than its opponent:
-    // - If the opponent's HP > 25%, 88.3% chance of score -2.
-    // - If the opponent knows a flat-Recovery move or Defense Curl, 41.4% chance of score +2.
-    // - Otherwise, 10.2% chance of score +1.
-    //
-    // If the attacker is faster than its opponent:
-    // - If the attacker is not at full HP, 88.3% chance of score -2.
-    // - If the opponent's HP < 70%, 88.3% chance of score -2.
-    // - Otherwise, 67.6% chance of score -2.
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedEqualTo TRUE, Expert_Snatch_TryScorePlus2
-    IfRandomLessThan 30, Expert_Snatch_End
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Snatch_UserIsSlower
-    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Expert_Snatch_TryScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 70, Expert_Snatch_TryScoreMinus2
-    IfRandomLessThan 60, Expert_Snatch_End
-    GoTo Expert_Snatch_TryScoreMinus2
-
-Expert_Snatch_UserIsSlower:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 25, Expert_Snatch_TryScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Snatch_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Snatch_TryScorePlus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_Snatch_TryScorePlus2
-    GoTo Expert_Snatch_TryScorePlus1
-
-Expert_Snatch_TryScorePlus2:
-    IfRandomLessThan 150, Expert_Snatch_End
-    AddToMoveScore 2
-    GoTo Expert_Snatch_End
-
-Expert_Snatch_TryScorePlus1:
-    IfRandomLessThan 230, Expert_Snatch_TryScoreMinus2
-    AddToMoveScore 1
-    GoTo Expert_Snatch_End
-
-Expert_Snatch_TryScoreMinus2:
-    IfRandomLessThan 30, Expert_Snatch_End
-    AddToMoveScore -2
-
-Expert_Snatch_End:
     PopOrEnd 
 
 Expert_DragonDance:
@@ -4418,29 +3979,6 @@ Expert_ShellSmash_TryScorePlus1:
 
 Expert_ShellSmash_End:
     PopOrEnd
-
-Expert_Gravity:
-    // If the opponent has Levitate, is under the effect of Magnet Rise, or has a Flying typing, 75%
-    // chance of score +1.
-    //
-    // If the attacker's HP >= 60%, 37.5% chance of score +1.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_LEVITATE, Expert_Gravity_TryScorePlus1
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MAGNET_RISE, Expert_Gravity_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_FLYING, Expert_Gravity_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_FLYING, Expert_Gravity_TryScorePlus1
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 60, Expert_Gravity_End
-    IfRandomLessThan 128, Expert_Gravity_TryScorePlus1
-    GoTo Expert_Gravity_End
-
-Expert_Gravity_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Gravity_End
-    AddToMoveScore 1
-
-Expert_Gravity_End:
-    PopOrEnd 
 
 Expert_Pluck:
     // If the opponent resists or is immune to the move, score -1.
@@ -4611,14 +4149,6 @@ Expert_UTurn_ScorePlus1:
 Expert_UTurn_End:
     PopOrEnd 
 
-Expert_Embargo:
-    // 50% chance of score +1.
-    IfRandomLessThan 128, Expert_Embargo_End
-    AddToMoveScore 1
-
-Expert_Embargo_End:
-    PopOrEnd 
-
 Expert_Fling:
     // If the opponent resists or is immune to the move and the attacker is holding an item other than
     // any of the following, score -1:
@@ -4741,137 +4271,6 @@ Expert_HealBlock_TryScorePlus1:
 Expert_HealBlock_End:
     PopOrEnd 
 
-Expert_GastroAcid:
-    // 25% chance of score +0 and terminate.
-    //
-    // If the opponent's HP > 70%, score +1.
-    //
-    // If the opponent's HP <= 70%, 50% chance of score +0, 50% chance of score -1.
-    //
-    // If the opponent's HP <= 50%, 50% chance of score -1, 50% chance of score -2.
-    //
-    // If the opponent's HP <= 30%, 50% chance of score -2, 50% chance of score -3.
-    IfRandomLessThan 64, Expert_GastroAcid_End
-    AddToMoveScore 1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_GastroAcid_End
-    IfRandomLessThan 128, Expert_GastroAcid_ContinueHPCheck
-    AddToMoveScore -1
-
-Expert_GastroAcid_ContinueHPCheck:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_GastroAcid_End
-    AddToMoveScore -1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_GastroAcid_End
-    AddToMoveScore -1
-
-Expert_GastroAcid_End:
-    PopOrEnd 
-
-Expert_Copycat:
-    // If the attacker is slower than its opponent, deals less damage than its opponent, and the
-    // opponent's last-used move is not an encouraged move, 68.75% chance of score -1.
-    //
-    // If the attacker is faster than its opponent:
-    // - If the attacker deals more damage than its opponent, 87.5% chance of score +2.
-    // - If the opponent's last-used move is an encouraged move, 50% chance of score +2.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Copycat_CheckMoveEncouraged
-    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_TryScorePlus2
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    IfLoadedNotInTable Expert_Copycat_EncouragedMoves, Expert_Copycat_CheckMoveEncouraged
-    IfRandomLessThan 128, Expert_Copycat_End
-    AddToMoveScore 2
-    GoTo Expert_Copycat_End
-
-Expert_Copycat_TryScorePlus2:
-    IfRandomLessThan 32, Expert_Copycat_End
-    AddToMoveScore 2
-    GoTo Expert_Copycat_End
-
-Expert_Copycat_CheckMoveEncouraged:
-    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_Copycat_End
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Copycat_EncouragedMoves, Expert_Copycat_End
-    IfRandomLessThan 80, Expert_Copycat_End
-    AddToMoveScore -1
-
-Expert_Copycat_End:
-    PopOrEnd 
-
-Expert_Copycat_EncouragedMoves:
-    TableEntry MOVE_SLEEP_POWDER
-    TableEntry MOVE_LOVELY_KISS
-    TableEntry MOVE_SPORE
-    TableEntry MOVE_HYPNOSIS
-    TableEntry MOVE_SING
-    TableEntry MOVE_GRASS_WHISTLE
-    TableEntry MOVE_SHADOW_PUNCH
-    TableEntry MOVE_SAND_ATTACK
-    TableEntry MOVE_SMOKE_SCREEN
-    TableEntry MOVE_TOXIC
-    TableEntry MOVE_SHEER_COLD
-    TableEntry MOVE_CROSS_CHOP
-    TableEntry MOVE_AEROBLAST
-    TableEntry MOVE_CONFUSE_RAY
-    TableEntry MOVE_SWEET_KISS
-    TableEntry MOVE_SCREECH
-    TableEntry MOVE_COTTON_SPORE
-    TableEntry MOVE_SCARY_FACE
-    TableEntry MOVE_FAKE_TEARS
-    TableEntry MOVE_METAL_SOUND
-    TableEntry MOVE_THUNDER_WAVE
-    TableEntry MOVE_GLARE
-    TableEntry MOVE_POISON_POWDER
-    TableEntry MOVE_SHADOW_BALL
-    TableEntry MOVE_DYNAMIC_PUNCH
-    TableEntry MOVE_HYPER_BEAM
-    TableEntry MOVE_EXTREME_SPEED
-    TableEntry MOVE_ATTRACT
-    TableEntry MOVE_SWAGGER
-    TableEntry MOVE_TORMENT
-    TableEntry MOVE_FLATTER
-    TableEntry MOVE_TRICK
-    TableEntry MOVE_SUPERPOWER
-    TableEntry MOVE_SKILL_SWAP
-    TableEntry MOVE_PSYCHO_SHIFT
-    TableEntry MOVE_SPIKY_SHIELD
-    TableEntry MOVE_SUCKER_PUNCH
-    TableEntry MOVE_HEART_SWAP
-    TableEntry MOVE_CAPTIVATE
-    TableEntry MOVE_DARK_VOID
-    TableEntry TABLE_END
-
-Expert_MeFirst:
-    // If the attacker is slower than its opponent, score -2.
-    //
-    // If the attacker deals more damage than its opponent, 87.5% chance of additional score +1.
-    //
-    // If the opponent's last-used move was a Damaging move, 50% chance of additional score +1.
-    //
-    // 75% chance of score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_MeFirst_ScoreMinus2
-    IfBattlerDealsMoreDamage AI_BATTLER_DEFENDER, USE_MAX_DAMAGE, Expert_MeFirst_TryScorePlus1
-    GoTo Expert_MeFirst_CheckLastUsedMove
-
-Expert_MeFirst_TryScorePlus1:
-    IfRandomLessThan 32, Expert_MeFirst_CheckLastUsedMove
-    AddToMoveScore 1
-
-Expert_MeFirst_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedEqualTo CLASS_STATUS, Expert_MeFirst_TryScorePlus1AndEnd
-    IfRandomLessThan 128, Expert_MeFirst_End
-    AddToMoveScore 1
-
-Expert_MeFirst_TryScorePlus1AndEnd:
-    IfRandomLessThan 64, Expert_MeFirst_End
-    AddToMoveScore 1
-    GoTo Expert_MeFirst_End
-
-Expert_MeFirst_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_MeFirst_End:
-    PopOrEnd 
-
 Expert_WorrySeed:
     // If the opponent knows the move Rest, additional score +1.
     //
@@ -4929,98 +4328,6 @@ Expert_ToxicSpikes_TryScorePlus1:
     AddToMoveScore 1
 
 Expert_ToxicSpikes_End:
-    PopOrEnd 
-
-Expert_HeartSwap:
-    // If the opponent does not have any of the following stats at +2 stage or greater and is not
-    // under the effect of Focus Energy, score -2 and terminate:
-    // - Attack
-    // - Defense
-    // - SpAttack
-    // - SpDefense
-    // - Evasion
-    //
-    // If the attacker has any of the following stats at +0 stage or lower or is not under the
-    // effect of Focus Energy, score +1:
-    // - Attack
-    // - Defense
-    // - SpAttack
-    // - SpDefense
-    //
-    // If the attacker's Evasion stat is at +0 stage or lower, score +2.
-    //
-    // Otherwise, 80.5% chance of score -2.
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 7, Expert_HeartSwap_CheckUserStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 7, Expert_HeartSwap_CheckUserStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 7, Expert_HeartSwap_CheckUserStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 7, Expert_HeartSwap_CheckUserStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_HeartSwap_CheckUserStages
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_FOCUS_ENERGY, Expert_HeartSwap_CheckUserStages
-    GoTo Expert_HeartSwap_ScoreMinus2
-
-Expert_HeartSwap_CheckUserStages:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_HeartSwap_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_HeartSwap_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_HeartSwap_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_HeartSwap_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_HeartSwap_ScorePlus2
-    IfNotVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_FOCUS_ENERGY, Expert_HeartSwap_ScorePlus1
-    IfRandomLessThan 50, Expert_HeartSwap_End
-    GoTo Expert_HeartSwap_ScoreMinus2
-
-Expert_HeartSwap_ScorePlus2:
-    AddToMoveScore 1
-
-Expert_HeartSwap_ScorePlus1:
-    AddToMoveScore 1
-    PopOrEnd 
-
-Expert_HeartSwap_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_HeartSwap_End:
-    PopOrEnd 
-
-Expert_AquaRing:
-    // If the attacker's HP >= 30%, 50% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 30, Expert_AquaRing_End
-    IfRandomLessThan 128, Expert_AquaRing_End
-    AddToMoveScore 1
-
-Expert_AquaRing_End:
-    PopOrEnd 
-
-Expert_MagnetRise:
-    // If the attacker's HP < 50%, ignore all further score changes.
-    //
-    // If the opponent knows one of the following moves, additional score +1:
-    // - Earthquake
-    // - Earth Power
-    //
-    // If the opponent has a Ground typing, score +1. Otherwise, 50% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_MagnetRise_End
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_EARTHQUAKE, Expert_MagnetRise_InitialScorePlus1
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_EARTH_POWER, Expert_MagnetRise_InitialScorePlus1
-    GoTo Expert_MagnetRise_CheckOpponentTyping
-
-Expert_MagnetRise_InitialScorePlus1:
-    AddToMoveScore 1
-
-Expert_MagnetRise_CheckOpponentTyping:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GROUND, Expert_MagnetRise_ScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GROUND, Expert_MagnetRise_ScorePlus1
-    IfRandomLessThan 128, Expert_MagnetRise_End
-
-Expert_MagnetRise_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_MagnetRise_End:
-    PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
     PopOrEnd 
 
 Expert_Defog:
@@ -5112,38 +4419,6 @@ Expert_TrickRoom_TryScorePlus3:
     AddToMoveScore 3
 
 Expert_TrickRoom_End:
-    PopOrEnd 
-
-Expert_Captivate:
-    // If the opponent's SpAttack stat stage is at any value other than +0:
-    // - Start at score -1.
-    // - If the attacker's HP <= 90%, additional score -1.
-    // - If the opponent's SpAttack stat stage is at -3 or lower, 80.5% chance of additional score -2.
-    //
-    // If the opponent's HP <= 70%, additional score -2.
-    //
-    // If the opponent's last-used move was a Physical move, 75% chance of score -1.
-    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 6, Expert_Captivate_CheckOpponentHP
-    AddToMoveScore -1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Captivate_CheckLowStatStage
-    AddToMoveScore -1
-
-Expert_Captivate_CheckLowStatStage:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 3, Expert_Captivate_CheckOpponentHP
-    IfRandomLessThan 50, Expert_Captivate_CheckOpponentHP
-    AddToMoveScore -2
-
-Expert_Captivate_CheckOpponentHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_Captivate_CheckOpponentLastMove
-    AddToMoveScore -2
-
-Expert_Captivate_CheckOpponentLastMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_PHYSICAL, Expert_Captivate_End
-    IfRandomLessThan 64, Expert_Captivate_End
-    AddToMoveScore -1
-
-Expert_Captivate_End:
     PopOrEnd 
 
 Expert_StealthRock:
