@@ -1782,8 +1782,9 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_Synthesis
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_133, Expert_Synthesis
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_134, Expert_Synthesis
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Expert_RainDance
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_SunnyDay
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SANDSTORM, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_BellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Expert_PsychUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_MirrorCoat
@@ -1793,7 +1794,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Expert_SpitUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_Recovery
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_Hail
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
@@ -1821,7 +1822,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EAT_BERRY, Expert_Pluck
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLING, Expert_Fling
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_StatusMoveBonus
@@ -3343,71 +3343,7 @@ Expert_Pursuit_SwitchMoveKnown:
 Expert_Pursuit_End:
     PopOrEnd 
 
-Expert_RainDance:
-    // If the attacker is slower than its opponent and has the ability Swift Swim, score +1 and
-    // terminate.
-    //
-    // If the attacker's HP < 40%, score -1.
-    //
-    // If the current weather is Hail, Sun, or Sandstorm, score +1.
-    //
-    // If the attacker has the ability Rain Dish or is statused and has the ability Hydration,
-    // score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_RainDance_OtherChecks
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_SWIFT_SWIM, Expert_RainDance_ScorePlus1
 
-Expert_RainDance_OtherChecks:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_RainDance_ScoreMinus1
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_HAILING, Expert_RainDance_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_RainDance_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_RainDance_ScorePlus1
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_RAIN_DISH, Expert_RainDance_ScorePlus1
-    IfLoadedNotEqualTo ABILITY_HYDRATION, Expert_RainDance_End
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_RainDance_ScorePlus1
-    GoTo Expert_RainDance_End
-
-Expert_RainDance_ScorePlus1:
-    AddToMoveScore 1
-    GoTo Expert_RainDance_End
-
-Expert_RainDance_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_RainDance_End:
-    PopOrEnd 
-
-Expert_SunnyDay:
-    // If the attacker's HP < 40%, score -1.
-    //
-    // If the current weather is Hail, Rain, or Sandstorm, score +1.
-    //
-    // If the attacker has the ability Flower Gift or is statused and has the ability Leaf Guard,
-    // score +1.
-    // BUG: This should check instead if the attacker is NOT statused, as Leaf Guard has no
-    // effect on existing status conditions.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_SunnyDay_ScoreMinus1
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_HAILING, Expert_SunnyDay_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_RAINING, Expert_SunnyDay_ScorePlus1
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_SunnyDay_ScorePlus1
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_FLOWER_GIFT, Expert_SunnyDay_ScorePlus1
-    IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Expert_SunnyDay_End
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_SunnyDay_ScorePlus1
-    GoTo Expert_SunnyDay_End
-
-Expert_SunnyDay_ScorePlus1:
-    AddToMoveScore 1
-    GoTo Expert_SunnyDay_End
-
-Expert_SunnyDay_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_SunnyDay_End:
-    PopOrEnd 
 
 
 Expert_PsychUp:
@@ -3556,36 +3492,6 @@ Expert_SpitUp:
 Expert_SpitUp_End:
     PopOrEnd 
 
-Expert_Hail:
-    // If the attacker's HP < 40%, score -1 and terminate.
-    //
-    // If the current weather is Sun, Rain, or Sand, additional score +1. If the attacker also knows
-    // the move Blizzard, additional score +2.
-    //
-    // If the attacker has the ability Ice Body, additional score +2.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Hail_ScoreMinus1
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_Hail_ScorePlus1AndCheckBlizzard
-    IfLoadedEqualTo AI_WEATHER_RAINING, Expert_Hail_ScorePlus1AndCheckBlizzard
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_Hail_ScorePlus1AndCheckBlizzard
-    GoTo Expert_Hail_End
-
-Expert_Hail_ScorePlus1AndCheckBlizzard:
-    AddToMoveScore 1
-    IfMoveNotKnown AI_BATTLER_ATTACKER, MOVE_BLIZZARD, Expert_Hail_CheckIceBody
-    AddToMoveScore 2
-
-Expert_Hail_CheckIceBody:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_ICE_BODY, Expert_Hail_End
-    AddToMoveScore 2
-    GoTo Expert_Hail_End
-
-Expert_Hail_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Hail_End:
-    PopOrEnd 
 
 Expert_FocusPunch:
     // If the opponent is immune to or would resist the move, score -1.
@@ -3997,68 +3903,6 @@ Expert_MetalBurst_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_MetalBurst_End:
-    PopOrEnd 
-
-Expert_UTurn:
-    // If the opponent resists or is immune to the move, score -1 and terminate.
-    //
-    // If the attacker is the last living party member, score +2 and terminate.
-    //
-    // If the attacker has a super-effective move on its opponent, 75% chance of additional score -2.
-    //
-    // If no party member deals more damage than the attacker, 75% chance of score -2 and terminate.
-    //
-    // If the opponent's HP > 70%, 75% chance of additional score +1.
-    //
-    // If the opponent's HP > 30%, 50% chance of additional score +1. (Cumulative with the prior check)
-    //
-    // Otherwise, 25% chance of additional score +1.
-    //
-    // If the attacker is faster than its opponent, score +1. Otherwise, 50% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_UTurn_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_UTurn_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_UTurn_ScoreMinus1
-    CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_UTurn_End
-    IfHasSuperEffectiveMove Expert_UTurn_TryScoreMinus2
-    GoTo Expert_UTurn_CheckPartyDamage
-
-Expert_UTurn_ScoreMinus1:
-    AddToMoveScore -1
-    GoTo Expert_UTurn_End
-
-Expert_UTurn_TryScoreMinus2:
-    IfRandomLessThan 64, Expert_UTurn_CheckPartyDamage
-    AddToMoveScore -2
-
-Expert_UTurn_CheckPartyDamage:
-    IfPartyMemberDealsMoreDamage USE_MAX_DAMAGE, Expert_UTurn_CheckTargetHP
-    IfRandomLessThan 64, Expert_UTurn_CheckTargetHP
-    AddToMoveScore -2
-    GoTo Expert_UTurn_End
-
-Expert_UTurn_CheckTargetHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_UTurn_75PercentScorePlus1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_UTurn_50PercentScorePlus1
-    IfRandomLessThan 128, Expert_UTurn_CheckSpeed
-    GoTo Expert_UTurn_50PercentScorePlus1
-
-Expert_UTurn_75PercentScorePlus1:
-    IfRandomLessThan 64, Expert_UTurn_50PercentScorePlus1
-    AddToMoveScore 1
-
-Expert_UTurn_50PercentScorePlus1:
-    IfRandomLessThan 128, Expert_UTurn_CheckSpeed
-    AddToMoveScore 1
-
-Expert_UTurn_CheckSpeed:
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_UTurn_ScorePlus1
-    IfRandomLessThan 128, Expert_UTurn_End
-
-Expert_UTurn_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_UTurn_End:
     PopOrEnd 
 
 Expert_Fling:
