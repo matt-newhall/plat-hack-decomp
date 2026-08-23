@@ -218,6 +218,7 @@ static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, Battl
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2907,6 +2908,43 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
  * @param battleSys
  * @param battleCtx
  */
+/**
+ * @brief Check whether the attacker's best move would knock the target out.
+ *
+ * Uses this turn's damage rolls rather than maximum damage.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+
+    u8 ivs[STAT_MAX];
+    for (int i = 0; i < STAT_MAX; i++) {
+        ivs[i] = BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_IV + i, NULL);
+    }
+
+    s32 damageVals[LEARNED_MOVES_MAX];
+    s32 maxDamage = TrainerAI_CalcAllDamage(battleSys,
+        battleCtx,
+        attacker,
+        battleCtx->battleMons[attacker].moves,
+        damageVals,
+        battleCtx->battleMons[attacker].heldItem,
+        ivs,
+        Battler_Ability(battleCtx, attacker),
+        battleCtx->battleMons[attacker].moveEffectsData.embargoTurns,
+        TRUE);
+
+    if (maxDamage >= battleCtx->battleMons[AI_CONTEXT.defender].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
 static void AICmd_IfDefenderCanKOInHits(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);

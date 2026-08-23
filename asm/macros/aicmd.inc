@@ -693,6 +693,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfAttackerCanKO jump:req
+    .long AICMD_IFATTACKERCANKO
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfParalysisFlipsSpeed jump:req
     .long AICMD_IFPARALYSISFLIPSSPEED
     .long (\jump-.) / 4 - 1

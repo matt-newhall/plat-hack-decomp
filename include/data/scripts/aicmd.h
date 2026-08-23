@@ -129,6 +129,7 @@ ScriptCommand(AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS, AICmd_IfBattlerHasDamagingM
 ScriptCommand(AICMD_IFBATTLERSSHAREMOVE,             AICmd_IfBattlersShareMove)
 ScriptCommand(AICMD_IFANYOPPONENTOUTSPEEDSSIDE,      AICmd_IfAnyOpponentOutspeedsSide)
 ScriptCommand(AICMD_IFPARALYSISFLIPSSPEED,           AICmd_IfParalysisFlipsSpeed)
+ScriptCommand(AICMD_IFATTACKERCANKO,                  AICmd_IfAttackerCanKO)
 
 // clang-format on
 

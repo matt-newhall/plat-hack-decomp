@@ -1725,7 +1725,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Recovery
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Expert_AuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
@@ -2749,15 +2749,48 @@ Expert_Reflect_PreSplitPhysicalTypes:
     TableEntry TABLE_END
 
 Expert_StatusPoison:
-    // If the attacker's HP is < 50% or the defender's HP is <= 50%, score -1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_StatusPoison_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_StatusPoison_End
+    AddToMoveScore 6
+    IfRandomGreaterThan 96, Expert_StatusPoison_End
+    IfAttackerCanKO Expert_StatusPoison_End
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 21, Expert_StatusPoison_End
 
-Expert_StatusPoison_ScoreMinus1:
-    AddToMoveScore -1
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_STEEL, Expert_StatusPoison_End
+    IfLoadedEqualTo TYPE_POISON, Expert_StatusPoison_End
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_STEEL, Expert_StatusPoison_End
+    IfLoadedEqualTo TYPE_POISON, Expert_StatusPoison_End
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_StatusPoison_End
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Expert_StatusPoison_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_IMMUNITY, Expert_StatusPoison_End
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_StatusPoison_End
+    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_StatusPoison_End
+    IfLoadedEqualTo ABILITY_LEAF_GUARD, Expert_StatusPoison_CheckSun
+    IfLoadedEqualTo ABILITY_HYDRATION, Expert_StatusPoison_CheckRain
+    GoTo Expert_StatusPoison_CheckPayoff
+
+Expert_StatusPoison_CheckSun:
+    LoadCurrentWeather 
+    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_StatusPoison_End
+    GoTo Expert_StatusPoison_CheckPayoff
+
+Expert_StatusPoison_CheckRain:
+    LoadCurrentWeather 
+    IfLoadedEqualTo AI_WEATHER_RAINING, Expert_StatusPoison_End
+
+Expert_StatusPoison_CheckPayoff:
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusPoison_CheckTargetIsHarmless
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_VENOSHOCK, Expert_StatusPoison_CheckTargetIsHarmless
+    GoTo Expert_StatusPoison_End
+
+Expert_StatusPoison_CheckTargetIsHarmless:
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_End
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_End
+    AddToMoveScore 2
 
 Expert_StatusPoison_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_StatusParalyze:
     // Paralysis is worth the most when it buys the speed lead outright, when the AI has a way
