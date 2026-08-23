@@ -120,6 +120,12 @@ ScriptCommand(AICMD_IFCURRENTMOVEISWIND,             AICmd_IfCurrentMoveIsWind)
 ScriptCommand(AICMD_FLAGBESTDAMAGEMOVE,              AICmd_FlagBestDamageMove)
 ScriptCommand(AICMD_IFCURRENTMOVEHASPRIORITY,        AICmd_IfCurrentMoveHasPriority)
 ScriptCommand(AICMD_IFDEFENDERCANKO,                 AICmd_IfDefenderCanKO)
+ScriptCommand(AICMD_IFDEFENDERCANKOINHITS,           AICmd_IfDefenderCanKOInHits)
+ScriptCommand(AICMD_IFDEFENDERCANNOTKOINHITS,        AICmd_IfDefenderCannotKOInHits)
+ScriptCommand(AICMD_IFDEFENDERCANKOAFTERSHELLSMASH,  AICmd_IfDefenderCanKOAfterShellSmash)
+ScriptCommand(AICMD_IFDEFENDERCANKOAFTERBELLYDRUM,   AICmd_IfDefenderCanKOAfterBellyDrum)
+ScriptCommand(AICMD_IFBATTLERINCAPACITATED,          AICmd_IfBattlerIncapacitated)
+ScriptCommand(AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS, AICmd_IfBattlerHasDamagingMoveOfClass)
 
 // clang-format on
 

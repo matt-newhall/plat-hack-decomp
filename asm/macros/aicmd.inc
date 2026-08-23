@@ -660,6 +660,41 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfDefenderCanKOInHits hits:req, jump:req
+    .long AICMD_IFDEFENDERCANKOINHITS
+    .long \hits
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCannotKOInHits hits:req, jump:req
+    .long AICMD_IFDEFENDERCANNOTKOINHITS
+    .long \hits
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCanKOAfterShellSmash jump:req
+    .long AICMD_IFDEFENDERCANKOAFTERSHELLSMASH
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCanKOAfterBellyDrum jump:req
+    .long AICMD_IFDEFENDERCANKOAFTERBELLYDRUM
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerIncapacitated battler:req, jump:req
+    .long AICMD_IFBATTLERINCAPACITATED
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasDamagingMoveOfClass battler:req, class:req, jump:req
+    .long AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS
+    .long \battler
+    .long \class
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry:req

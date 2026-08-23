@@ -209,6 +209,12 @@ static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *ba
 static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOInHits(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCannotKOInHits(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOAfterBellyDrum(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2836,18 +2842,16 @@ static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *bat
 }
 
 /**
- * @brief Check whether the target's best move would knock the attacker out.
+ * @brief Compute the damage which the target's best move would deal to the attacker.
  *
  * Uses this turn's damage rolls rather than maximum damage.
  *
  * @param battleSys
  * @param battleCtx
+ * @return The largest damage roll coming back at the attacker.
  */
-static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+static s32 AI_MaxIncomingDamage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    AIScript_Iter(battleCtx, 1);
-    int jump = AIScript_Read(battleCtx);
-
     int attacker = AI_CONTEXT.attacker;
     int defender = AI_CONTEXT.defender;
 
@@ -2874,8 +2878,205 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
 
     AI_CONTEXT.defender = defender;
 
-    if (maxDamage >= battleCtx->battleMons[attacker].curHP) {
+    return maxDamage;
+}
+
+/**
+ * @brief Check whether the target's best move would knock the attacker out.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) >= battleCtx->battleMons[AI_CONTEXT.attacker].curHP) {
         AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether the target's best move would knock the attacker out within a given
+ * number of hits, assuming it keeps picking that move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKOInHits(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int hits = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) * hits >= battleCtx->battleMons[AI_CONTEXT.attacker].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Inverse of AICmd_IfDefenderCanKOInHits.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCannotKOInHits(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int hits = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) * hits < battleCtx->battleMons[AI_CONTEXT.attacker].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether the target could knock the attacker out through the defensive drops
+ * which Shell Smash is about to apply.
+ *
+ * A White Herb restores the drops as soon as they land, so the attacker's current stages
+ * stand in that case.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+    s8 def = mon->statBoosts[BATTLE_STAT_DEFENSE];
+    s8 spDef = mon->statBoosts[BATTLE_STAT_SP_DEFENSE];
+
+    if (Battler_HeldItemEffect(battleCtx, attacker) != HOLD_EFFECT_STATDOWN_RESTORE) {
+        if (mon->statBoosts[BATTLE_STAT_DEFENSE] > 0) {
+            mon->statBoosts[BATTLE_STAT_DEFENSE]--;
+        }
+
+        if (mon->statBoosts[BATTLE_STAT_SP_DEFENSE] > 0) {
+            mon->statBoosts[BATTLE_STAT_SP_DEFENSE]--;
+        }
+    }
+
+    s32 maxDamage = AI_MaxIncomingDamage(battleSys, battleCtx);
+
+    mon->statBoosts[BATTLE_STAT_DEFENSE] = def;
+    mon->statBoosts[BATTLE_STAT_SP_DEFENSE] = spDef;
+
+    if (maxDamage >= mon->curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether the target could knock the attacker out of the HP which Belly Drum
+ * is about to leave it on, counting a pinch berry which the cost would trigger.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKOAfterBellyDrum(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+    int hp = mon->curHP - mon->maxHP / 2;
+
+    if (hp <= mon->maxHP / 2 && Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_HP_PCT_RESTORE) {
+        hp += BattleSystem_Divide(mon->maxHP * Battler_HeldItemPower(battleCtx, attacker, ITEM_POWER_CHECK_ALL), 100);
+    }
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) >= hp) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether a battler will be unable to act this turn.
+ *
+ * Covers sleep, a freeze which none of the battler's own moves would thaw, the recharge turn
+ * owed after a move like Hyper Beam, and a Truant loaf.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler cannot move this turn.
+ */
+static BOOL AI_BattlerIsIncapacitated(BattleContext *battleCtx, int battler)
+{
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) {
+        return TRUE;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_RECHARGING) {
+        return TRUE;
+    }
+
+    if (Battler_CheckTruant(battleCtx, battler)) {
+        return TRUE;
+    }
+
+    if ((battleCtx->battleMons[battler].status & MON_CONDITION_FREEZE) == FALSE) {
+        return FALSE;
+    }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move == MOVE_NONE) {
+            continue;
+        }
+
+        if (move == MOVE_SCALD
+            || MOVE_DATA(move).effect == BATTLE_EFFECT_THAW_AND_BURN_HIT
+            || MOVE_DATA(move).effect == BATTLE_EFFECT_RECOIL_BURN_HIT) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (AI_BattlerIsIncapacitated(battleCtx, battler)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether a battler knows a damaging move of a given class.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int class = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && MOVE_DATA(move).class == class) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
     }
 }
 
