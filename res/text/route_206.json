@@ -1,27 +1,92 @@
 {
   "key": 40576,
-  "messages": [
-    {
-      "id": "Route206_Text_IHeardThereWereTwoCavesOnRoute206",
-      "en_US": [
-        "This is odd... I heard there were two\n",
-        "caves on Route 206.\r",
-        "But I can only find one entrance."
-      ]
-    },
-    {
-      "id": "Route206_Text_Rt206EternaCity",
-      "en_US": [
-        "Rt. 206\n",
-        "Eterna City"
-      ]
-    },
-    {
-      "id": "Route206_Text_Rt206OreburghCity",
-      "en_US": [
-        "Rt. 206\n",
-        "Oreburgh City"
-      ]
-    }
-  ]
+    "messages": [
+        {
+            "id": "Route206_Text_IHeardThereWereTwoCavesOnRoute206",
+            "en_US": [
+                "This is odd... I heard there were two\n",
+                "caves on Route 206.\r",
+                "But I can only find one entrance."
+            ]
+        },
+        {
+            "id": "Route206_Text_Rt206EternaCity",
+            "en_US": [
+                "Rt. 206\n",
+                "Eterna City"
+            ]
+        },
+        {
+            "id": "Route206_Text_Rt206OreburghCity",
+            "en_US": [
+                "Rt. 206\n",
+                "Oreburgh City"
+            ]
+        },
+        {
+            "id": "Route206_Text_ExplainPromotion",
+            "en_US": [
+                "Ah ha. Bonjour, Champ.\n",
+                "Just who I have been waiting for!\r",
+                "Route 206 is our newest promotional\n",
+                "area.\r",
+                "If you defeat all the trainers here,\n",
+                "I will give you either a Wide Lens\f",
+                "or 5 Charti Berries.\r",
+                "But wait, I have more bonne nouvelle.\n",
+                "The SBC has its first Sinnoh Recruit!\r",
+                "He’s a bit... erm how should I put this?\n",
+                "He lacks the certain... je ne sais\f",
+                "quoi that the SBC expects.\r",
+                "I will have to show him the way before\n",
+                "we present him to Lady Jacinthe.\r",
+                "But, this means we can do all new \n",
+                "types of promotion.\r",
+                "In fact there is one up at Wayward\n",
+                "Cave just east and north of here,\f",
+                "under the Cycling Road.\r",
+                "Be sure to give it a challenge\n",
+                "and remember to come see me once\f",
+                "you have beaten all the trainers here.\f",
+                "Good luck, Champ."
+            ]
+        },
+        {
+            "id": "Route206_Text_PromotionalRouteCongrats",
+            "en_US": [
+                "Chapeau! It seems that you have\n",
+                "defeated every trainer on Route 206!\f",
+                "Here is your reward as promised.\r",
+                "Would you like the Wide Lens or\n",
+                "5 Charti Berries?"
+            ]
+        },
+        {
+            "id": "Route206_Text_WatchOutForMorePromotions",
+            "en_US": [
+                "Don’t forget to try out the new\n",
+                "promotion if you haven’t alredy.\r",
+                "We’ll be moving on to Route 209\n",
+                "next."
+            ]
+        },
+        {
+            "id": "Route206_Text_JulienTrainerCount",
+            "en_US": [
+                "There are {STRVAR_1 0, 0, 0} Trainers left to\n",
+                "face on Route 206.\r",
+                "Come see me when you’ve defeated them.\n",
+                "Good luck, Champ!"
+            ]
+        },
+        {
+            "id": "Route206_Text_JulienTrainerCountSingular",
+            "en_US": [
+                "There is {STRVAR_1 0, 0, 0} Trainer left to\n",
+                "face on Route 206.\r",
+                "Come see me when you’ve defeated them.\n",
+                "Good luck, Champ!"
+            ]
+        }
+    ]
 }

@@ -1,5 +1,7 @@
 #include "macros/scrcmd.inc"
 #include "res/text/bank/route_206.h"
+#include "res/text/bank/menu_entries.h"
+#include "res/field/events/events_route_206.h"
 
 
     ScriptEntry Route206_OnTransition
@@ -7,6 +9,8 @@
     ScriptEntry Route206_Hiker
     ScriptEntry Route206_ArrowSignpostEternaCity
     ScriptEntry Route206_ArrowSignpostOreburghCity
+    ScriptEntry Route206_JulienTrainerCount
+    ScriptEntry Route206_JulienApproachesPlayer
     ScriptEntryEnd
 
 Route206_OnTransition:
@@ -54,5 +58,280 @@ Route206_ArrowSignpostEternaCity:
 Route206_ArrowSignpostOreburghCity:
     ShowArrowSign Route206_Text_Rt206OreburghCity
     End
+
+Route206_BagIsFull:
+    Common_MessageBagIsFull
+    CloseMessage
+    ReleaseAll
+    End
+
+Route206_JulienApproachesPlayer:
+    LockAll
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienNoticePlayer
+    WaitMovement
+    SetVar VAR_ROUTE_206_JULIEN_STATE, 1
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_0x8004, 301, Route206_JulienApproachX301
+    GoToIfEq VAR_0x8004, 302, Route206_JulienApproachX302
+    GoToIfEq VAR_0x8004, 303, Route206_JulienApproachX303
+    GoToIfEq VAR_0x8004, 304, Route206_JulienApproachX304
+    End
+
+Route206_JulienIntro:
+    Message Route206_Text_ExplainPromotion
+    WaitButton
+    CloseMessage
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_0x8004, 301, Route206_JulienLeaveX301
+    GoToIfEq VAR_0x8004, 302, Route206_JulienLeaveX302
+    GoToIfEq VAR_0x8004, 303, Route206_JulienLeaveX303
+    GoToIfEq VAR_0x8004, 304, Route206_JulienLeaveX304
+    End
+
+Route206_JulienTrainerCount:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    GoToIfSet FLAG_ROUTE_206_PROMOTIONAL_ITEM_RECIEVED, Route206_PromotionalItemRecieved
+    SetVar VAR_JULIEN_TRAINERS_REMAINING 9
+    SetVar VAR_JULIEN_TRAINERS_COUNTED 0
+    GoTo Route206_CountTrainers
+
+Route206_CountTrainers:
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 0, Route206_CheckCyclistAxel
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 1, Route206_CheckCyclistMegan
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 2, Route206_CheckCyclistJames
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 3, Route206_CheckCyclistNicole
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 4, Route206_CheckCyclistJohn
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 5, Route206_CheckCyclistKayla
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 6, Route206_CheckCyclistRyan
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 7, Route206_CheckCyclistRachel
+    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 8, Route206_CheckHikerTheodore
+    GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 1, Route206_JulienTrainerCountSingular
+    GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 0, Route206_WonPromotional
+    BufferNumber 0, VAR_JULIEN_TRAINERS_REMAINING
+    Message Route206_Text_JulienTrainerCount
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+Route206_JulienTrainerCountSingular:
+    BufferNumber 0, VAR_JULIEN_TRAINERS_REMAINING
+    Message Route206_Text_JulienTrainerCountSingular
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+Route206_PromotionalTrainerDefeated:
+    SubVar VAR_JULIEN_TRAINERS_REMAINING 1
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_WonPromotional:
+    Message Route206_Text_PromotionalRouteCongrats
+    InitGlobalTextListMenu 30, 13, 0, VAR_RESULT, NO_EXIT_ON_B
+    SetMenuXOriginToRight
+    AddListMenuEntry MenuEntries_Text_Julien_WideLens, 0
+    AddListMenuEntry MenuEntries_Text_Julien_Charti, 1
+    ShowListMenu
+    GoToIfEq VAR_RESULT, 0, Route206_GiveWideLens
+    GoToIfEq VAR_RESULT, 1, Route206_GiveCharti
+    End
+
+Route206_GiveWideLens:
+    SetVar VAR_0x8004, ITEM_WIDE_LENS
+    SetVar VAR_0x8005, 1
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route206_BagIsFull
+    Common_GiveItemQuantity
+    SetFlag FLAG_ROUTE_206_PROMOTIONAL_ITEM_RECIEVED
+    GoTo Route206_PromotionalItemRecieved
+
+Route206_GiveCharti:
+    SetVar VAR_0x8004, ITEM_CHARTI_BERRY
+    SetVar VAR_0x8005, 5
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route206_BagIsFull
+    Common_GiveItemQuantity
+    SetFlag FLAG_ROUTE_206_PROMOTIONAL_ITEM_RECIEVED
+    GoTo Route206_PromotionalItemRecieved
+
+Route206_PromotionalItemRecieved:
+    Message Route206_Text_WatchOutForMorePromotions
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+Route206_CheckCyclistAxel:
+    CheckTrainerFlag TRAINER_CYCLIST_AXEL
+    GoToIfDefeated TRAINER_CYCLIST_AXEL, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistMegan:
+    CheckTrainerFlag TRAINER_CYCLIST_MEGAN
+    GoToIfDefeated TRAINER_CYCLIST_MEGAN, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistJames:
+    CheckTrainerFlag TRAINER_CYCLIST_JAMES
+    GoToIfDefeated TRAINER_CYCLIST_JAMES, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistNicole:
+    CheckTrainerFlag TRAINER_CYCLIST_NICOLE
+    GoToIfDefeated TRAINER_CYCLIST_NICOLE, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistJohn:
+    CheckTrainerFlag TRAINER_CYCLIST_JOHN
+    GoToIfDefeated TRAINER_CYCLIST_JOHN, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistKayla:
+    CheckTrainerFlag TRAINER_CYCLIST_KAYLA
+    GoToIfDefeated TRAINER_CYCLIST_KAYLA, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistRyan:
+    CheckTrainerFlag TRAINER_CYCLIST_RYAN
+    GoToIfDefeated TRAINER_CYCLIST_RYAN, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckCyclistRachel:
+    CheckTrainerFlag TRAINER_CYCLIST_RACHEL
+    GoToIfDefeated TRAINER_CYCLIST_RACHEL, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+Route206_CheckHikerTheodore:
+    CheckTrainerFlag TRAINER_HIKER_THEODORE
+    GoToIfDefeated TRAINER_HIKER_THEODORE, Route206_PromotionalTrainerDefeated
+    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    GoTo Route206_CountTrainers
+
+.balign 4, 0
+Route206_Movement_JulienNoticePlayer:
+    EmoteExclamationMark
+    Delay8
+    EndMovement
+
+Route206_JulienApproachX301:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienApproachX301
+    WaitMovement
+    GoTo Route206_JulienIntro
+
+   .balign 4, 0
+Route206_Movement_JulienApproachX301:
+    WalkNormalSouth 2
+    WalkNormalEast 5
+    WalkNormalNorth 1
+    EndMovement
+
+Route206_JulienApproachX302:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienApproachX302
+    WaitMovement
+    GoTo Route206_JulienIntro
+
+   .balign 4, 0
+Route206_Movement_JulienApproachX302:
+    WalkNormalSouth 2
+    WalkNormalEast 6
+    WalkNormalNorth 1
+    EndMovement
+
+
+Route206_JulienApproachX303:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienApproachX303
+    WaitMovement
+    GoTo Route206_JulienIntro
+
+   .balign 4, 0
+Route206_Movement_JulienApproachX303:
+    WalkNormalSouth 2
+    WalkNormalEast 7
+    WalkNormalNorth 1
+    EndMovement
+
+
+Route206_JulienApproachX304:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienApproachX304
+    WaitMovement
+    GoTo Route206_JulienIntro
+
+   .balign 4, 0
+Route206_Movement_JulienApproachX304:
+    WalkNormalSouth 2
+    WalkNormalEast 8
+    WalkNormalNorth 1
+    EndMovement
+
+
+Route206_JulienLeaveX301:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienLeaveX301
+    WaitMovement
+    ReleaseAll
+    End
+
+   .balign 4, 0
+Route206_Movement_JulienLeaveX301:
+    WalkNormalSouth 1
+    WalkNormalWest 5
+    WalkNormalNorth 2
+    FaceEast
+    EndMovement
+
+
+Route206_JulienLeaveX302:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienLeaveX302
+    WaitMovement
+    ReleaseAll
+    End
+
+   .balign 4, 0
+Route206_Movement_JulienLeaveX302:
+    WalkNormalSouth 1
+    WalkNormalWest 6
+    WalkNormalNorth 2
+    FaceEast
+    EndMovement
+
+
+Route206_JulienLeaveX303:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienLeaveX303
+    WaitMovement
+    ReleaseAll
+    End
+
+   .balign 4, 0
+Route206_Movement_JulienLeaveX303:
+    WalkNormalSouth 1
+    WalkNormalWest 7
+    WalkNormalNorth 2
+    FaceEast
+    EndMovement
+
+
+Route206_JulienLeaveX304:
+    ApplyMovement LOCALID_JULIEN, Route206_Movement_JulienLeaveX304
+    WaitMovement
+    ReleaseAll
+    End
+
+   .balign 4, 0
+Route206_Movement_JulienLeaveX304:
+    WalkNormalSouth 1
+    WalkNormalWest 8
+    WalkNormalNorth 2
+    FaceEast
+    EndMovement
+
 
     .balign 4, 0
