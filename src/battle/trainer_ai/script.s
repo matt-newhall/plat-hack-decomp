@@ -2706,12 +2706,9 @@ Expert_Rest_End:
     PopOrEnd 
 
 Expert_OHKOMove:
-    // 25% chance of score +1.
-    IfRandomLessThan 192, Expert_OHKOMove_End
-    AddToMoveScore 1
-
-Expert_OHKOMove_End:
-    PopOrEnd 
+    // Coin flip to tie HDM
+    IfRandomLessThan 128, ScorePlus5
+    GoTo ScorePlus6
 
 
 Expert_Reflect:
