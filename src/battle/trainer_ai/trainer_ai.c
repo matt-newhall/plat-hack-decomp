@@ -52,6 +52,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_SPIT_UP,
     BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP,
     BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP,
+    BATTLE_EFFECT_HALVE_HP,
     0xFFFF
 };
 
@@ -3283,6 +3284,15 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
     case MOVE_SONIC_BOOM:
         damage = 20;
+        break;
+
+    case MOVE_SUPER_FANG:
+        damage = battleCtx->battleMons[AI_CONTEXT.defender].curHP / 2;
+
+        if (damage == 0) {
+            damage = 1;
+        }
+
         break;
 
     case MOVE_LOW_KICK:

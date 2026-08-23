@@ -10572,13 +10572,23 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         inPower = Battler_ItemFlingPower(battleCtx, defender);
                     }
 
+                    BOOL fixedDamage = TRUE;
+
                     if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
                         damageToTarget = 20;
                     } else if (moveEffect == BATTLE_EFFECT_40_DAMAGE_FLAT) {
                         damageToTarget = 40;
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, defender, BATTLEMON_LEVEL, NULL);
+                    } else if (moveEffect == BATTLE_EFFECT_HALVE_HP) {
+                        damageToTarget = battlerPokemonCurHP / 2;
+
+                        if (damageToTarget == 0) {
+                            damageToTarget = 1;
+                        }
                     } else {
+                        fixedDamage = FALSE;
+
                         int defenderAbility = Battler_Ability(battleCtx, defender);
                         int criticalMul = 1;
 
@@ -10604,6 +10614,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         }
                     }
 
+                    if (fixedDamage) {
+                        battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
+                    }
+
                     moveStatus = 0;
                     damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
@@ -10613,6 +10627,11 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         battler,
                         damageToTarget,
                         &moveStatus);
+                    battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
+
+                    if (moveStatus & MOVE_STATUS_IMMUNE) {
+                        damageToTarget = 0;
+                    }
 
                     damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveDefender, defender, battler, damageToTarget);
                     damageToTarget *= hitMultiplier;
@@ -10751,13 +10770,25 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         inPower = Battler_ItemFlingPower(battleCtx, battler);
                     }
 
+                    // Fixed-damage moves bypass the damage formula entirely, so the type chart
+                    // must only decide immunity for them, never scale the result.
+                    BOOL fixedDamage = TRUE;
+
                     if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
                         damageToTarget = 20;
                     } else if (moveEffect == BATTLE_EFFECT_40_DAMAGE_FLAT) {
                         damageToTarget = 40;
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, battler, BATTLEMON_LEVEL, NULL);
+                    } else if (moveEffect == BATTLE_EFFECT_HALVE_HP) {
+                        damageToTarget = defenderPokemonCurHP / 2;
+
+                        if (damageToTarget == 0) {
+                            damageToTarget = 1;
+                        }
                     } else {
+                        fixedDamage = FALSE;
+
                         int battlerAbility = Battler_Ability(battleCtx, battler);
                         int criticalMul = 1;
 
@@ -10783,6 +10814,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         }
                     }
 
+                    if (fixedDamage) {
+                        battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
+                    }
+
                     moveStatus = 0;
                     damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
@@ -10792,6 +10827,11 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         defender,
                         damageToTarget,
                         &moveStatus);
+                    battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
+
+                    if (moveStatus & MOVE_STATUS_IMMUNE) {
+                        damageToTarget = 0;
+                    }
 
                     if (moveStatus & MOVE_STATUS_SUPER_EFFECTIVE) {
                         hasSuperEffective = TRUE;

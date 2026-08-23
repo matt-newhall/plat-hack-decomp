@@ -161,7 +161,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Basic_CheckAuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Basic_CheckOHKOWouldFail
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STAT_REDUCTION, Basic_CheckAlreadyUnderMist
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CRIT_UP_2, Basic_CheckAlreadyPumpedUp
@@ -194,7 +193,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, Basic_CheckAttackerAsleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Basic_CheckLockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Basic_CheckAttackerAsleep
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Basic_CheckMeanLook
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_NIGHTMARE, Basic_CheckNightmare
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2_MINIMIZE, Basic_CheckHighStatStage_Evasion
@@ -263,7 +261,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Basic_CheckEmbargo
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLING, Basic_CheckFling
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Basic_CheckCanPsychoShift
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Basic_CheckHealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Basic_CheckGastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Basic_CheckCopycat
@@ -1707,7 +1704,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurnNoInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_HP, Expert_SuperFang
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIND_HIT, Expert_BindingMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL, Expert_HighCritical
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOIL_QUARTER, Expert_RecoilMove
@@ -2860,14 +2856,6 @@ Expert_OHKOMove:
     AddToMoveScore 1
 
 Expert_OHKOMove_End:
-    PopOrEnd 
-
-Expert_SuperFang:
-    // If the target is at 50% HP or less, score -1.
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_SuperFang_End
-    AddToMoveScore -1
-
-Expert_SuperFang_End:
     PopOrEnd 
 
 Expert_BindingMove:
