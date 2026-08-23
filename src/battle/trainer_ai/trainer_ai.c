@@ -51,6 +51,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP,
     BATTLE_EFFECT_SPIT_UP,
     BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP,
+    BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP,
     0xFFFF
 };
 
@@ -3440,6 +3441,11 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         break;
     }
+
+    case MOVE_FLAIL:
+    case MOVE_REVERSAL:
+        power = BattleAI_CalcFlailPower(battleCtx->battleMons[attacker].curHP, battleCtx->battleMons[attacker].maxHP);
+        break;
 
     case MOVE_TRUMP_CARD: {
         int slot = Battler_SlotForMove(&battleCtx->battleMons[attacker], move);

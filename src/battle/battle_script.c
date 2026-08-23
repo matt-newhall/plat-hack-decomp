@@ -5120,14 +5120,7 @@ static BOOL BtlCmd_TrySleepTalk(BattleSystem *battleSys, BattleContext *battleCt
     return FALSE;
 }
 
-static const u8 sHPPixelsToFlailPower[][2] = {
-    { 1, 200 },
-    { 5, 150 },
-    { 12, 100 },
-    { 21, 80 },
-    { 42, 40 },
-    { 64, 20 },
-};
+#include "data/battle/hp_pixels_to_flail_power.h"
 
 /**
  * @brief Calculate the power for Flail-type moves according to the attacker's

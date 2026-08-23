@@ -1745,7 +1745,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_LockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_SleepTalk
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP, Expert_Reversal
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURE_PARTY_STATUS, Expert_HealBell
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Expert_BindingMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP_2_MINIMIZE, Expert_StatusEvasionUp
@@ -3428,42 +3427,6 @@ Expert_DestinyBond_CheckUserLowHP:
     AddToMoveScore 2
 
 Expert_DestinyBond_End:
-    PopOrEnd 
-
-Expert_Reversal:
-    // If the attacker is slower than its opponent:
-    // - If the attacker's HP > 60%, score -1.
-    // - If the attacker's HP > 40%, score +0.
-    // - Otherwise, 60.9% chance of score +1.
-    //
-    // If the attacker is faster than its opponent:
-    // - If the attacker's HP > 33%, score -1.
-    // - If the attacker's HP > 20%, score +0.
-    // - If the attacker's HP >= 8%, 60.9% chance of score +1.
-    // - If the attacker's HP < 8%, 60.9% chance of score +2, 39.1% chance of score +1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Reversal_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 33, Expert_Reversal_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 20, Expert_Reversal_End
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 8, Expert_Reversal_ScorePlus1
-    GoTo Expert_Reversal_TryScorePlus1
-
-Expert_Reversal_SlowerCheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_Reversal_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_Reversal_End
-    GoTo Expert_Reversal_TryScorePlus1
-
-Expert_Reversal_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_Reversal_TryScorePlus1:
-    IfRandomLessThan 100, Expert_Reversal_End
-    AddToMoveScore 1
-    GoTo Expert_Reversal_End
-
-Expert_Reversal_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Reversal_End:
     PopOrEnd 
 
 Expert_HealBell:

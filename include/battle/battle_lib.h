@@ -523,6 +523,17 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
 int Battler_SlotForMove(BattleMon *mon, u16 move);
 
 /**
+ * @brief Calculate the base power of Flail-type moves from the attacker's remaining HP.
+ *
+ * Mirrors BtlCmd_CalcFlailPower.
+ *
+ * @param curHP
+ * @param maxHP
+ * @return The move's base power
+ */
+u16 BattleAI_CalcFlailPower(int curHP, int maxHP);
+
+/**
  * @brief Apply type-chart effectiveness for a given move against its target.
  *
  * This encapsulates the following multipliers:

@@ -43,6 +43,7 @@
 #include "string_gf.h"
 #include "trainer_data.h"
 #include "trainer_info.h"
+#include "unk_0208C098.h"
 #include "unk_020366A0.h"
 #include "unk_0208C098.h"
 
@@ -10131,15 +10132,19 @@ static u16 BattleAI_CalcWeightBasedPower(int weight)
     return 120;
 }
 
-static u16 BattleAI_CalcFlailPower(int curHP, int maxHP)
+#include "data/battle/hp_pixels_to_flail_power.h"
+
+u16 BattleAI_CalcFlailPower(int curHP, int maxHP)
 {
-    int pixels = ((u64)curHP * 64 + maxHP - 1) / maxHP;
-    if (pixels <= 1)  return 200;
-    if (pixels <= 5)  return 150;
-    if (pixels <= 12) return 100;
-    if (pixels <= 21) return 80;
-    if (pixels <= 42) return 40;
-    return 20;
+    int i, pixels = App_PixelCount(curHP, maxHP, 64);
+
+    for (i = 0; i < NELEMS(sHPPixelsToFlailPower); i++) {
+        if (pixels <= sHPPixelsToFlailPower[i][0]) {
+            break;
+        }
+    }
+
+    return sHPPixelsToFlailPower[i][1];
 }
 
 static u16 BattleAI_CalcTrumpCardPower(int ppCur, BOOL pressure)
