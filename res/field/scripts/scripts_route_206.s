@@ -11,6 +11,7 @@
     ScriptEntry Route206_ArrowSignpostOreburghCity
     ScriptEntry Route206_JulienTrainerCount
     ScriptEntry Route206_JulienApproachesPlayer
+    ScriptEntry Route206_RoySkirmishZone
     ScriptEntryEnd
 
 Route206_OnTransition:
@@ -217,6 +218,55 @@ Route206_CheckHikerTheodore:
     AddVar VAR_JULIEN_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
+Route206_RoySkirmishZone:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    GoToIfSet FLAG_ROY_INTRODUCED, Route206_SkirmishZoneMenu
+    Message Route206_Text_RoyIntroduction
+    SetFlag FLAG_ROY_INTRODUCED
+    GoTo Route206_SkirmishZoneMenu
+
+Route206_SkirmishZoneMenu:
+    Message Route206_Text_RoyWannaChallenge
+    InitGlobalTextListMenu 30, 11, 0, VAR_RESULT
+    SetMenuXOriginToRight
+    AddListMenuEntry MenuEntries_Text_BattleTower_Challenge, 0
+    AddListMenuEntry pl_msg_00000361_00040, 1
+    AddListMenuEntry MenuEntries_Text_Exit, 2
+    ShowListMenu
+    GoToIfEq VAR_RESULT, 0, Route206_ChallengeSkirmishZone
+    GoToIfEq VAR_RESULT, 1, Route206_ShowSkirmishRules
+    CloseMessage
+    ReleaseAll
+    End
+   
+ Route206_ChallengeSkirmishZone:
+    GoToIfSet FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED, Route206_AlreadyChallengedZone
+    Message Route206_Text_KnockEmDead
+    WaitButton
+    CloseMessage
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    GoToIfEq VAR_0x8004, 309, Route206_ChallengeZoneX309
+    GoToIfEq VAR_0x8004, 311, Route206_ChallengeZoneX311
+    GoToIfEq VAR_0x8005, 609, Route206_ChallengeZoneY609
+    End
+
+ Route206_AlreadyChallengedZone:
+    Message Route206_Text_AlreadyChallengedZone
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+ Route206_ShowSkirmishRules:
+    Message Route206_Text_SkirmishZoneRules
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+
 .balign 4, 0
 Route206_Movement_JulienNoticePlayer:
     EmoteExclamationMark
@@ -333,5 +383,67 @@ Route206_Movement_JulienLeaveX304:
     FaceEast
     EndMovement
 
+Route206_ChallengeZoneX309:
+    ApplyMovement LOCALID_ROY, Route206_Movement_RoyMoveRight
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveRight
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
+    WaitMovement
+    SetFlag FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED
+    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 53, DIR_NORTH
+    ReleaseAll
+    End
+
+Route206_ChallengeZoneX311:
+    ApplyMovement LOCALID_ROY, Route206_Movement_RoyMoveLeft
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveLeft
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
+    WaitMovement
+    SetFlag FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED
+    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 53, DIR_NORTH
+    ReleaseAll
+    End
+
+Route206_ChallengeZoneY609:
+    ApplyMovement LOCALID_ROY, Route206_Movement_RoyMoveRight
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
+    WaitMovement
+    SetFlag FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED
+    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 53, DIR_NORTH
+    ReleaseAll
+    End
+
+.balign 4, 0
+Route206_Movement_RoyMoveLeft:
+    WalkNormalWest 1
+    FaceEast
+    EndMovement
+
+.balign 4, 0
+Route206_Movement_RoyMoveRight:
+    WalkNormalEast 1
+    FaceWest
+    EndMovement
+
+.balign 4, 0
+Route206_Movement_PlayerMoveLeft:
+    WalkNormalWest 1
+    EndMovement
+
+.balign 4, 0
+Route206_Movement_PlayerMoveRight:
+    WalkNormalEast 1
+    EndMovement
+
+.balign 4, 0
+Route206_Movement_PlayerMoveUp:
+    WalkNormalNorth 1
+    EndMovement
 
     .balign 4, 0

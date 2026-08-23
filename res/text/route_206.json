@@ -87,6 +87,66 @@
                 "Come see me when you’ve defeated them.\n",
                 "Good luck, Champ!"
             ]
+        },
+        {
+            "id": "Route206_Text_RoyIntroduction",
+            "en_US": [
+                "’Sup, Chump?\n",
+                "The name’s Roy.\r",
+                "I’m the newest member of the Society\n",
+                "of Battle Cono... Connas...\f",
+                "The Battle Society!\r",
+                "Not enough people were battling, so\n",
+                "we turned this boring cave into a\f",
+                "Skirmish Zone.\r",
+                "What’s a Skirmish Zone you ask?\n",
+                "Julien didn’t trust me to explain\f",
+                "the rules so there’s a pamphlet.\r"
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyWannaChallenge",
+            "en_US": [
+                "So, wanna challenge the Skirmish Zone?"
+            ]
+        },
+        {
+            "id": "Route206_Text_KnockEmDead",
+            "en_US": [
+                "Knock ’em dead, Chump."
+            ]
+        },
+        {
+            "id": "Route206_Text_AlreadyChallengedZone",
+            "en_US": [
+                "You’ve already challenged this zone.\n",
+                "What are you trying to pull?"
+            ]
+        },
+        {
+            "id": "Route206_Text_SkirmishZoneRules",
+            "en_US": [
+                "1. You may only challenge each Skimish\n",
+                "Zone once. Once you exit the zone,\f",
+                "defeat the boss, or white out, your\f",
+                "challenge is over.\r",
+                "2. Each trainer you defeat in a zone\n",
+                "grants 2BP, and the boss grants 10BP.\f",
+                "Whiting out forfeits all BP for the zone,\f",
+                "but you may leave at any time and keep\f",
+                "the BP you have accumulated.\f",
+                "3.There will be 5 zones across the\n",
+                "region, each granting 30BP, for a\f",
+                "total of 150BP.r",
+                "BP can be spent at any Pokémart.\n",
+                "Choose how you spend it wisely.\r",
+                "4. While in a Skirmish Zone, you will be \n",
+                "unable to access the PC to change your\f",
+                "party. The Pokévial will still be usable.\r",
+                "5. Once you defeat the next Gym Leader,\n",
+                "the Skirmish Zone will be closed and the\f",
+                "area will return to it’s natural state."
+            ]
         }
     ]
 }

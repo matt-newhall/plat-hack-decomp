@@ -430,7 +430,7 @@
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_HIDE_ROUTE_206_JULIEN_AND_ROY",
-            "script": 6,
+            "script": 8,
             "initial_dir": 1,
             "data": [],
             "movement_range_x": 0,
