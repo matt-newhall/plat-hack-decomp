@@ -1808,6 +1808,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_Refresh
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Expert_Setup
@@ -3005,30 +3006,37 @@ Expert_Counter_PhysicalTypes:
     TableEntry TYPE_STEEL
     TableEntry TABLE_END
 
+Expert_Taunt:
+    // Taunt earns its turn when it shuts a specific threat out: a Trick Room the target is still
+    // able to set, or a Defog which would strip the AI's own Aurora Veil before it moves again.
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_Taunt_CheckDefog
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TRICK_ROOM, ScorePlus9
+
+Expert_Taunt_CheckDefog:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, ScorePlus5
+    IfNotSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_AURORA_VEIL, ScorePlus5
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, ScorePlus9
+    GoTo ScorePlus5
+
 Expert_Encore:
-    // If the opponent is Disabled, 88.3% chance of score +3.
-    //
-    // If the attacker is slower than the opponent, score -2.
-    //
-    // If the opponent's last-used move is not one of a specific set of effects, score -2.
-    //
-    // Otherwise, 88.3% chance of score +3.
-    IfBattlerUnderEffect AI_BATTLER_DEFENDER, CHECK_DISABLE, Expert_Encore_TryScorePlus3
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Encore_ScoreMinus2
+    // Encore needs a move to lock the target into, so it does nothing on the turn the target
+    // came in, nor against one which is already locked.
+    IfBattlerUnderEffect AI_BATTLER_DEFENDER, CHECK_ENCORE, ScoreMinus20
+    LoadIsFirstTurnInBattle AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo FALSE, ScoreMinus20
+
+    // Moving first is what makes Encore worth it, but only against a move worth locking the
+    // target into. Anything else and the turn is better spent elsewhere.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Encore_WhenSlower
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
     LoadEffectOfLoadedMove 
-    IfLoadedNotInTable Expert_Encore_EncouragedMoveEffects, Expert_Encore_ScoreMinus2
+    IfLoadedinTable Expert_Encore_EncouragedMoveEffects, ScorePlus7
+    PopOrEnd
 
-Expert_Encore_TryScorePlus3:
-    IfRandomLessThan 30, Expert_Encore_End
-    AddToMoveScore 3
-    GoTo Expert_Encore_End
+Expert_Encore_WhenSlower:
+    IfRandomLessThan 128, ScorePlus5
+    GoTo ScorePlus6
 
-Expert_Encore_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_Encore_End:
-    PopOrEnd 
 
 Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP
