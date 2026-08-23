@@ -7759,13 +7759,7 @@ static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext
 };
 
 
-static const u8 sCurrentPPScaledPower[] = {
-    200,
-    80,
-    60,
-    50,
-    40,
-};
+#include "data/battle/pp_scaled_power.h"
 
 /**
  * @brief Calculates the base power of Trump Card.

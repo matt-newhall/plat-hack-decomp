@@ -50,6 +50,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_PSYWAVE, // Magnitude; Psywave itself uses RANDOM_DAMAGE_1_TO_150_LEVEL
     BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP,
     BATTLE_EFFECT_SPIT_UP,
+    BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP,
     0xFFFF
 };
 
@@ -3094,6 +3095,7 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 }
 
 #include "data/battle/weight_to_power.h"
+#include "data/battle/pp_scaled_power.h"
 
 /**
  * @brief Damage calculation routine visible to the AI.
@@ -3436,6 +3438,21 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             power *= 2;
         }
 
+        break;
+    }
+
+    case MOVE_TRUMP_CARD: {
+        int slot = Battler_SlotForMove(&battleCtx->battleMons[attacker], move);
+        int ppCur = slot < LEARNED_MOVES_MAX ? battleCtx->battleMons[attacker].ppCur[slot] : 0;
+        int ppCost = Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_PRESSURE ? 2 : 1;
+
+        ppCur = ppCur > ppCost ? ppCur - ppCost : 0;
+
+        if (ppCur > 4) {
+            ppCur = 4;
+        }
+
+        power = sCurrentPPScaledPower[ppCur];
         break;
     }
 

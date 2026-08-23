@@ -1823,7 +1823,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_Embargo
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLING, Expert_Fling
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_PsychoShift
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP, Expert_TrumpCard
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_GastroAcid
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_Copycat
@@ -5283,59 +5282,6 @@ Expert_PsychoShift:
     AddToMoveScore 1
 
 Expert_PsychoShift_End:
-    PopOrEnd 
-
-Expert_TrumpCard:
-    // If the opponent resists or is immune to the move, score -1.
-    //
-    // If the move has 1 PP remaining, score +3.
-    //
-    // If the move has 2 PP remaining, 60.9% chance of score +2, 39.1% chance of score +1.
-    //
-    // If the move has 3 PP remaining, 60.9% chance of score +1.
-    //
-    // If the opponent's ability is Pressure, 88.3% chance of additional score +1.
-    //
-    // If the opponent's Evasion stat stage is +5 or higher or the attacker's Accuracy stat stage is
-    // -5 or lower, 60.9% chance of score +2, 39.1% chance of score +1.
-    //
-    // If the opponent's Evasion stat stage is +3 or higher or the attacker's Accuracy stat stage is
-    // -3 or lower, 60.9% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_TrumpCard_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_TrumpCard_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_TrumpCard_ScoreMinus1
-    LoadCurrentMovePP 
-    IfLoadedEqualTo 1, Expert_TrumpCard_ScorePlus3
-    IfLoadedEqualTo 2, Expert_TrumpCard_ScorePlus1Maybe2
-    IfLoadedEqualTo 3, Expert_TrumpCard_ScorePlus1
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo ABILITY_PRESSURE, Expert_TrumpCard_CheckStats
-    IfRandomLessThan 30, Expert_TrumpCard_CheckStats
-    AddToMoveScore 1
-
-Expert_TrumpCard_CheckStats:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 10, Expert_TrumpCard_ScorePlus1Maybe2
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 2, Expert_TrumpCard_ScorePlus1Maybe2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_TrumpCard_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 4, Expert_TrumpCard_ScorePlus1
-    GoTo Expert_TrumpCard_End
-
-Expert_TrumpCard_ScorePlus1Maybe2:
-    AddToMoveScore 1
-
-Expert_TrumpCard_ScorePlus1:
-    IfRandomLessThan 100, Expert_TrumpCard_End
-    AddToMoveScore 1
-    GoTo Expert_TrumpCard_End
-
-Expert_TrumpCard_ScorePlus3:
-    AddToMoveScore 3
-    GoTo Expert_TrumpCard_End
-
-Expert_TrumpCard_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_TrumpCard_End:
     PopOrEnd 
 
 Expert_HealBlock:

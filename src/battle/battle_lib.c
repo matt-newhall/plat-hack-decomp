@@ -10142,6 +10142,18 @@ static u16 BattleAI_CalcFlailPower(int curHP, int maxHP)
     return 20;
 }
 
+static u16 BattleAI_CalcTrumpCardPower(int ppCur, BOOL pressure)
+{
+    int ppCost = pressure ? 2 : 1;
+    ppCur = ppCur > ppCost ? ppCur - ppCost : 0;
+
+    if (ppCur == 0) return 200;
+    if (ppCur == 1) return 80;
+    if (ppCur == 2) return 60;
+    if (ppCur == 3) return 50;
+    return 40;
+}
+
 static const ItemEffectTypePair sTypeResistBerries[] = {
     { HOLD_EFFECT_WEAKEN_SE_FIRE,     TYPE_FIRE },
     { HOLD_EFFECT_WEAKEN_SE_WATER,    TYPE_WATER },
@@ -10520,6 +10532,9 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         if (inPower < 1) inPower = 1;
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP) {
                         inPower = BattleAI_CalcFlailPower(defenderPokemonCurHP, BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL));
+                    } else if (moveEffect == BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP) {
+                        inPower = BattleAI_CalcTrumpCardPower(Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1_PP + j, NULL),
+                            Battler_Ability(battleCtx, battler) == ABILITY_PRESSURE);
                     } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF) {
                         if ((u32)battlerPokemonCurHP * 2 <= BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL)) {
                             inPower = MOVE_DATA(moveDefender).power * 2;
@@ -10696,6 +10711,9 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         if (inPower < 1) inPower = 1;
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP) {
                         inPower = BattleAI_CalcFlailPower(battlerPokemonCurHP, BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL));
+                    } else if (moveEffect == BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP) {
+                        inPower = BattleAI_CalcTrumpCardPower(Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1_PP + j, NULL),
+                            Battler_Ability(battleCtx, defender) == ABILITY_PRESSURE);
                     } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF) {
                         if ((u32)defenderPokemonCurHP * 2 <= BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL)) {
                             inPower = MOVE_DATA(moveBattler).power * 2;
