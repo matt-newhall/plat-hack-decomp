@@ -285,7 +285,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STICKY_WEB, Basic_CheckStickyWeb
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Basic_CheckSteelBeam
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEAVE_WITH_1_HP, Basic_CheckEndure
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Basic_CheckEndure
     PopOrEnd
 
 Basic_CheckCannotSleep:
