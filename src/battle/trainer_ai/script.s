@@ -133,6 +133,7 @@ Basic_CheckSoundproof:
 
 Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Basic_CheckPowder
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Basic_CheckCannotExplode
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, Basic_CheckCannotExplode
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Basic_CheckDreamEater
@@ -160,7 +161,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Basic_CheckAuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Basic_CheckOHKOWouldFail
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STAT_REDUCTION, Basic_CheckAlreadyUnderMist
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CRIT_UP_2, Basic_CheckAlreadyPumpedUp
@@ -219,8 +219,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Basic_CheckBellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Basic_CheckStatStageImbalance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, ScoreMinus10
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
@@ -599,6 +597,23 @@ Basic_CheckMagnitude:
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckNonStandardDamageOrChargeTurn
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus10
+
+Basic_CheckPowder:
+    // Powder does nothing to a Grass-type, nor to a target behind Safety Goggles or Overcoat.
+    // Mold Breaker ignores the ability, but neither the typing nor the item.
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_OVERCOAT, ScoreMinus10
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckPowder_Terminate
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_OVERCOAT, ScoreMinus10
+
+Basic_CheckPowder_Terminate:
+    PopOrEnd
 
 Basic_CheckNonStandardDamageOrChargeTurn:
     // If the target is immune to this move by its typing or due to the target's ability being
@@ -1703,7 +1718,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Expert_AuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurnNoInvuln
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIND_HIT, Expert_BindingMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIGH_CRITICAL, Expert_HighCritical
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOIL_QUARTER, Expert_RecoilMove
@@ -1728,7 +1743,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_Swagger
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SPEED_HIT, Expert_SpeedDownOnHit
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurnNoInvuln
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_VitalThrow
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECHARGE_AFTER, Expert_RechargeTurn
@@ -1761,10 +1776,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_BellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Expert_PsychUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_MirrorCoat
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurnNoInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Expert_ChargeTurnNoInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_ChargeTurnNoInvuln
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_UnusedSolarbeam
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLY, Expert_ChargeTurnWithInvuln
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
@@ -3910,70 +3923,21 @@ Expert_MirrorCoat_SpecialTypes:
     TableEntry TYPE_DARK
     TableEntry TABLE_END
 
-Expert_ChargeTurnNoInvuln:
-    // If the opponent resists or is immune to the move, score -2 and terminate.
-    //
-    // If the move would skip its charge turn in Sun and the current weather is Sun, score +2.
-    //
-    // If the attacker is holding a Power Herb, score +2.
-    //
-    // If the opponent knows the move Protect, score -2.
-    //
-    // If the attacker's HP <= 38%, score -1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SKIP_CHARGE_TURN_IN_SUN, Expert_ChargeTurnNoInvuln_CheckForSunnyWeather
-    GoTo Expert_ChargeTurnNoInvuln_CheckForPowerHerb
+Expert_ChargeTurn:
+    // Sky Attack, Skull Bash and Meteor Beam spend a turn charging in the open, dealing nothing
+    // and inviting a free hit. A Power Herb resolves them the same turn instead, which is worth
+    // actively chasing: these effects are excluded from EvalAttack's best-damage and KO bonuses,
+    // so the Power Herb case has to supply its own incentive. The semi-invulnerable charge moves
+    // are absent - dodging for the turn is not the same liability - as are Solar Beam and Solar
+    // Blade, which are left entirely to the ordinary damage scoring.
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_CHARGE_SKIP, Expert_ChargeTurn_ScorePlus9
+    AddToMoveScore -20
+    PopOrEnd
 
-Expert_ChargeTurnNoInvuln_CheckForSunnyWeather:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_ChargeTurnNoInvuln_SkipsChargeTurn
-    LoadCurrentWeather
-    IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_ChargeTurnNoInvuln_CheckForPowerHerb
-
-Expert_ChargeTurnNoInvuln_SkipsChargeTurn:
-    AddToMoveScore 2
-    GoTo Expert_ChargeTurnNoInvuln_End
-
-Expert_ChargeTurnNoInvuln_CheckForPowerHerb:
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnNoInvuln_ScorePlus2
-    GoTo Expert_ChargeTurnNoInvuln_CheckForProtectAndHP
-
-Expert_ChargeTurnNoInvuln_ScorePlus2:
-    AddToMoveScore 2
-    GoTo Expert_ChargeTurnNoInvuln_End
-
-Expert_ChargeTurnNoInvuln_CheckForProtectAndHP:
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_ChargeTurnNoInvuln_ScoreMinus2
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 38, Expert_ChargeTurnNoInvuln_End
-    AddToMoveScore -1
-    GoTo Expert_ChargeTurnNoInvuln_End
-
-Expert_ChargeTurnNoInvuln_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_ChargeTurnNoInvuln_End:
-    PopOrEnd 
-
-Expert_UnusedSolarbeam:
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_UnusedSolarbeam_TryScoreMinus3
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_UnusedSolarbeam_TryScoreMinus3
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_UnusedSolarbeam_TryScoreMinus3
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, Expert_UnusedSolarbeam_TryScoreMinus3
-    IfLoadedNotEqualTo AI_WEATHER_RAINING, Expert_UnusedSolarbeam_End
-    AddToMoveScore 1
-    GoTo Expert_UnusedSolarbeam_End
-
-Expert_UnusedSolarbeam_TryScoreMinus3:
-    IfRandomLessThan 50, Expert_UnusedSolarbeam_End
-    AddToMoveScore -3
-
-Expert_UnusedSolarbeam_End:
-    PopOrEnd 
+Expert_ChargeTurn_ScorePlus9:
+    AddToMoveScore 9
+    PopOrEnd
 
 Expert_ChargeTurnWithInvuln:
     // If the attacker is holding a Power Herb, score +2.
@@ -3992,7 +3956,7 @@ Expert_ChargeTurnWithInvuln:
     //
     // If the attacker is faster than its opponent and the opponent's last-used move is not an
     // always-hit effect (e.g. Aerial Ace), 68.75% chance of score +1.
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnNoInvuln_ScorePlus2
+    IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_POWER_HERB, Expert_ChargeTurnWithInvuln_ScorePlus2AndEnd
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT, Expert_ShadowForce
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_ShadowForce
     IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_ShadowForce
@@ -4010,6 +3974,10 @@ Expert_ShadowForce:
 
 Expert_ChargeTurnWithInvuln_ScorePlus1AndEnd:
     AddToMoveScore 1
+    GoTo Expert_ChargeTurnWithInvuln_End
+
+Expert_ChargeTurnWithInvuln_ScorePlus2AndEnd:
+    AddToMoveScore 2
     GoTo Expert_ChargeTurnWithInvuln_End
 
 Expert_ChargeTurnWithInvuln_CheckConditions:
