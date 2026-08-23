@@ -1843,6 +1843,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STICKY_WEB, Expert_StickyWeb
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Expert_Imprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_HealingWish
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SP_DEF_2_HIT, Expert_AcidSpray
 
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STAT_REDUCTION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CALL_RANDOM_MOVE, Expert_StatusMoveBonus
@@ -3005,6 +3006,13 @@ Expert_Counter_PhysicalTypes:
     TableEntry TYPE_GHOST
     TableEntry TYPE_STEEL
     TableEntry TABLE_END
+
+Expert_AcidSpray:
+    IfMoveNotEqualTo MOVE_ACID_SPRAY, Expert_AcidSpray_End
+    AddToMoveScore 6
+
+Expert_AcidSpray_End:
+    PopOrEnd
 
 Expert_Taunt:
     // Taunt earns its turn when it shuts a specific threat out: a Trick Room the target is still
