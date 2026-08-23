@@ -3179,94 +3179,58 @@ Expert_HealBell_End:
 
 
 Expert_Protect:
-    // If the opponent knows either Feint or Shadow Force, 50% chance of additional score -2.
-    //
-    // If the attacker has used Protect more than once already, score -2 and terminate.
-    //
-    // If the attacker is under any of the following effects and is also not Locked Onto by an
-    // opponent, score -2 and terminate:
-    // - Toxic
-    // - Curse
-    // - Perish Song
-    // - Attract
-    // - Leech Seed
-    // - Yawn
-    //
-    // If the opponent knows a Recovery move (not weather-based or Rest) or Defense Curl and the
-    // attacker is not Locked On to a target, score -2 and terminate.
-    //
-    // If the opponent is under any of the following effects, additional score +2:
-    // - Toxic
-    // - Curse
-    // - Perish Song
-    // - Attract
-    // - Leech Seed
-    // - Yawn
-    //
-    // Otherwise, if the battle is doubles, additional score +2.
-    //
-    // Otherwise, if the attacker is Locked Onto by an opponent, additional score +2.
-    //
-    // Otherwise, 33.2% chance of additional score +2.
-    //
-    // 50% of additional score -1 from here-on.
-    //
-    // If the attacker used Protect last turn, score -1 and 50% chance of additional score -1.
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FEINT, Expert_Protect_TryScoreMinus2
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_SHADOW_FORCE, Expert_Protect_TryScoreMinus2
-    GoTo Expert_Protect_CheckStatusConditions
+    // Protect is worth a turn only if the AI survives that turn. Chip damage it is already
+    // taking would finish the job while it sits behind the shield.
+    IfResidualDamageKOsAttacker ScoreMinus20
 
-Expert_Protect_TryScoreMinus2:
-    IfRandomLessThan 128, Expert_Protect_CheckStatusConditions
-    AddToMoveScore -2
-
-Expert_Protect_CheckStatusConditions:
+    // A repeated Protect is read easily, and a third in a row is never worth it.
     LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedGreaterThan 1, Expert_Protect_ScoreMinus2
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_TOXIC, Expert_Protect_CheckAttackerLockedOnto
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CURSE, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_CheckAttackerLockedOnto
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_ATTRACT, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_YAWN, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Protect_CheckAttackerLockedOnto
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_Protect_CheckAttackerLockedOnto
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_Protect_ScorePlus2
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_ScorePlus2
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_ScorePlus2
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_Protect_ScorePlus2
-    LoadBattleType 
-    IfLoadedMask BATTLE_TYPE_DOUBLES, Expert_Protect_ScorePlus2
-    IfLockOnTarget AI_BATTLER_DEFENDER, AI_BATTLER_ATTACKER, Expert_Protect_ScorePlus2
-    IfRandomLessThan 85, Expert_Protect_ScorePlus2
-    GoTo Expert_Protect_TryScoreMinus1
+    IfLoadedGreaterThan 1, ScoreMinus20
+    IfLoadedEqualTo 0, Expert_Protect_Score
+    IfRandomLessThan 128, ScoreMinus20
 
-Expert_Protect_ScorePlus2:
-    AddToMoveScore 2
+Expert_Protect_Score:
+    AddToMoveScore 6
 
-Expert_Protect_TryScoreMinus1:
-    IfRandomLessThan 128, Expert_Protect_CheckEmptyChain
-    AddToMoveScore -1
-
-Expert_Protect_CheckEmptyChain:
-    LoadProtectChain AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_Protect_End
-    AddToMoveScore -1
-    IfRandomLessThan 128, Expert_Protect_End
-    AddToMoveScore -1
-    GoTo Expert_Protect_End
-
-Expert_Protect_CheckAttackerLockedOnto:
-    IfLockOnTarget AI_BATTLER_DEFENDER, AI_BATTLER_ATTACKER, Expert_Protect_End
+    // Stalling costs the AI more than the target when the AI is the one bleeding, and buys more
+    // when the target is.
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY_POISON, Expert_Protect_ScoreMinus2
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_BURN, Expert_Protect_ScoreMinus2
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_CURSE, Expert_Protect_ScoreMinus2
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_ATTRACT, Expert_Protect_ScoreMinus2
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_ScoreMinus2
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_ScoreMinus2
+    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_YAWN, Expert_Protect_ScoreMinus2
+    GoTo Expert_Protect_CheckTarget
 
 Expert_Protect_ScoreMinus2:
     AddToMoveScore -2
 
+Expert_Protect_CheckTarget:
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY_POISON, Expert_Protect_ScorePlus1
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_BURN, Expert_Protect_ScorePlus1
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_Protect_ScorePlus1
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_Protect_ScorePlus1
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_ScorePlus1
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_ScorePlus1
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_Protect_ScorePlus1
+    GoTo Expert_Protect_CheckFirstTurn
+
+Expert_Protect_ScorePlus1:
+    AddToMoveScore 1
+
+Expert_Protect_CheckFirstTurn:
+    // Nothing has been set up to stall for yet on the turn the AI comes in, though in doubles
+    // the partner may still get something out of the turn.
+    LoadBattleType 
+    IfLoadedMask BATTLE_TYPE_DOUBLES, Expert_Protect_End
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo FALSE, Expert_Protect_End
+    AddToMoveScore -1
+
 Expert_Protect_End:
-    PopOrEnd 
+    PopOrEnd
+
 
 
 Expert_Foresight:

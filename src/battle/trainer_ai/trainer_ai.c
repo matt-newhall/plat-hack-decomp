@@ -219,6 +219,7 @@ static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *ba
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2941,6 +2942,152 @@ static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battle
         TRUE);
 
     if (maxDamage >= battleCtx->battleMons[AI_CONTEXT.defender].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Estimate the HP a battler will lose to end-of-turn effects, net of the healing it
+ * gets back over the same window.
+ *
+ * The order mirrors the turn-end sequence in BattleControllerPlayer_CheckMonConditions, so
+ * that a battler which is about to be finished off by chip damage can be spotted before the
+ * AI commits a turn to stalling.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @return Net HP lost at the end of this turn; negative if the battler nets healing.
+ */
+static int AI_ResidualDamage(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    BattleMon *mon = &battleCtx->battleMons[battler];
+    int ability = Battler_Ability(battleCtx, battler);
+    int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    int type1 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL);
+    int type2 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL);
+    int damage = 0;
+
+    if (NO_CLOUD_NINE && (mon->moveEffectsMask & MOVE_EFFECT_NO_WEATHER_DAMAGE) == FALSE) {
+        if (WEATHER_IS_SAND
+            && type1 != TYPE_ROCK && type2 != TYPE_ROCK
+            && type1 != TYPE_STEEL && type2 != TYPE_STEEL
+            && type1 != TYPE_GROUND && type2 != TYPE_GROUND
+            && ability != ABILITY_SAND_VEIL
+            && ability != ABILITY_SAND_FORCE
+            && ability != ABILITY_SAND_RUSH
+            && ability != ABILITY_OVERCOAT
+            && itemEffect != HOLD_EFFECT_OVERCOAT) {
+            damage += BattleSystem_Divide(mon->maxHP, 16);
+        }
+
+        if (WEATHER_IS_HAIL) {
+            if (ability == ABILITY_ICE_BODY) {
+                damage -= BattleSystem_Divide(mon->maxHP, 16);
+            } else if (type1 != TYPE_ICE
+                && type2 != TYPE_ICE
+                && ability != ABILITY_OVERCOAT
+                && ability != ABILITY_SNOW_CLOAK
+                && itemEffect != HOLD_EFFECT_OVERCOAT) {
+                damage += BattleSystem_Divide(mon->maxHP, 16);
+            }
+        }
+
+        if (WEATHER_IS_RAIN && ability == ABILITY_RAIN_DISH) {
+            damage -= BattleSystem_Divide(mon->maxHP, 16);
+        }
+
+        if (WEATHER_IS_SUN && (ability == ABILITY_DRY_SKIN || ability == ABILITY_SOLAR_POWER)) {
+            damage += BattleSystem_Divide(mon->maxHP, 8);
+        } else if (WEATHER_IS_RAIN && ability == ABILITY_DRY_SKIN) {
+            damage -= BattleSystem_Divide(mon->maxHP, 8);
+        }
+    }
+
+    if (itemEffect == HOLD_EFFECT_HP_RESTORE_GRADUAL) {
+        damage -= BattleSystem_Divide(mon->maxHP, 16);
+    }
+
+    if (mon->moveEffectsMask & MOVE_EFFECT_INGRAIN) {
+        damage -= BattleSystem_Divide(mon->maxHP, 16);
+    }
+
+    if (mon->moveEffectsMask & MOVE_EFFECT_AQUA_RING) {
+        damage -= BattleSystem_Divide(mon->maxHP, 16);
+    }
+
+    // Magic Guard stops every source below, and only those.
+    if (ability == ABILITY_MAGIC_GUARD) {
+        return damage;
+    }
+
+    if ((mon->moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+        && battleCtx->battleMons[mon->moveEffectsMask & MOVE_EFFECT_LEECH_SEED_RECIPIENT].curHP) {
+        damage += BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    if (mon->status & MON_CONDITION_POISON) {
+        damage += ability == ABILITY_POISON_HEAL
+            ? -BattleSystem_Divide(mon->maxHP, 8)
+            : BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    if (mon->status & MON_CONDITION_TOXIC) {
+        if (ability == ABILITY_POISON_HEAL) {
+            damage -= BattleSystem_Divide(mon->maxHP, 8);
+        } else {
+            // The counter is incremented before it is applied, so the next tick is one stage
+            // above the stage on the board now.
+            int stage = (mon->status & MON_CONDITION_TOXIC_COUNTER) >> 8;
+
+            if (stage < (MON_CONDITION_TOXIC_COUNTER >> 8)) {
+                stage++;
+            }
+
+            damage += BattleSystem_Divide(mon->maxHP, 16) * stage;
+        }
+    }
+
+    if (mon->status & MON_CONDITION_BURN) {
+        damage += BattleSystem_Divide(mon->maxHP, ability == ABILITY_HEATPROOF ? 32 : 16);
+    }
+
+    if ((mon->statusVolatile & VOLATILE_CONDITION_NIGHTMARE) && (mon->status & MON_CONDITION_SLEEP)) {
+        damage += BattleSystem_Divide(mon->maxHP, 4);
+    }
+
+    if (mon->statusVolatile & VOLATILE_CONDITION_CURSE) {
+        damage += BattleSystem_Divide(mon->maxHP, 4);
+    }
+
+    // The bind counter is decremented before the tick, so the last turn of a bind deals nothing.
+    if ((mon->statusVolatile & VOLATILE_CONDITION_BIND)
+        && (mon->statusVolatile - (1 << VOLATILE_CONDITION_BIND_SHIFT)) & VOLATILE_CONDITION_BIND) {
+        damage += BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    if ((mon->status & MON_CONDITION_SLEEP)
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE_FLAG, battler, ABILITY_BAD_DREAMS)) {
+        damage += BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    return damage;
+}
+
+/**
+ * @brief Check whether end-of-turn chip damage alone would knock the attacker out.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+
+    if (AI_ResidualDamage(battleSys, battleCtx, attacker) >= battleCtx->battleMons[attacker].curHP) {
         AIScript_Iter(battleCtx, jump);
     }
 }
