@@ -693,6 +693,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfParalysisFlipsSpeed jump:req
+    .long AICMD_IFPARALYSISFLIPSSPEED
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfAnyOpponentOutspeedsSide jump:req
     .long AICMD_IFANYOPPONENTOUTSPEEDSSIDE
     .long (\jump-.) / 4 - 1

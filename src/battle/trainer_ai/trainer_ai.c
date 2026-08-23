@@ -217,6 +217,7 @@ static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext 
 static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3144,6 +3145,39 @@ static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleCont
             AIScript_Iter(battleCtx, jump);
             return;
         }
+    }
+}
+
+/**
+ * @brief Check whether paralyzing the target would take the speed lead off it.
+ *
+ * Asks the engine for the comparison with the status applied rather than assuming a fixed
+ * divisor, so the answer tracks whatever the paralysis modifier and Quick Feet actually do.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int defender = AI_CONTEXT.defender;
+
+    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, defender, attacker, TRUE) != COMPARE_SPEED_FASTER) {
+        return;
+    }
+
+    u32 status = battleCtx->battleMons[defender].status;
+    battleCtx->battleMons[defender].status |= MON_CONDITION_PARALYSIS;
+
+    int compare = BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, defender, attacker, TRUE);
+
+    battleCtx->battleMons[defender].status = status;
+
+    if (compare != COMPARE_SPEED_FASTER) {
+        AIScript_Iter(battleCtx, jump);
     }
 }
 

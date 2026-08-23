@@ -2760,20 +2760,32 @@ Expert_StatusPoison_End:
     PopOrEnd 
 
 Expert_StatusParalyze:
-    // If the attacker is slower than its target, 92.2% chance of score +3.
-    //
-    // If the attacker's HP is <= 70%, score -1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_StatusParalyze_TryScorePlus3
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_StatusParalyze_End
-    AddToMoveScore -1
-    GoTo Expert_StatusParalyze_End
+    // Paralysis is worth the most when it buys the speed lead outright, when the AI has a way
+    // to cash the status in, or when it stacks onto a target already losing turns. Fake Out is
+    // left out of the flinch list because it is dead after the turn the user came in on.
+    IfParalysisFlipsSpeed Expert_StatusParalyze_ScorePlus8
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLINCH_HIT, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLINCH_BURN_HIT, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLINCH_FREEZE_HIT, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLINCH_PARALYZE_HIT, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLINCH_MINIMIZE_DOUBLE_HIT, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_FLINCH_DOUBLE_DAMAGE_FLY_OR_BOUNCE, Expert_StatusParalyze_ScorePlus8
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_StatusParalyze_ScorePlus8
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_StatusParalyze_ScorePlus8
+    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_StatusParalyze_ScorePlus8
+    AddToMoveScore 7
+    GoTo Expert_StatusParalyze_TryScoreMinus1
 
-Expert_StatusParalyze_TryScorePlus3:
-    IfRandomLessThan 20, Expert_StatusParalyze_End
-    AddToMoveScore 3
+Expert_StatusParalyze_ScorePlus8:
+    AddToMoveScore 8
+
+Expert_StatusParalyze_TryScoreMinus1:
+    IfRandomLessThan 128, Expert_StatusParalyze_End
+    AddToMoveScore -1
 
 Expert_StatusParalyze_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_StatusParalyzeHit:
     // If the target is immune to or would resist the move, do not apply any further modifiers.
