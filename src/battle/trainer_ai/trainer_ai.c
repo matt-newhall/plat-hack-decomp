@@ -3343,6 +3343,13 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
 
         break;
 
+    case MOVE_SNORE:
+        if ((battleCtx->battleMons[attacker].status & MON_CONDITION_SLEEP) == FALSE) {
+            return 0;
+        }
+
+        break;
+
     case MOVE_SPIT_UP:
         if (battleCtx->battleMons[attacker].moveEffectsData.stockpileCount == 0) {
             return 0;

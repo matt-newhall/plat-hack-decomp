@@ -1716,7 +1716,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIND_HIT, Expert_BindingMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Expert_StatusConfuse
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURE_POWER, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2, Expert_StatusAttackUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_2, Expert_StatusDefenseUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_UP_2, Expert_StatusSpeedUp
@@ -1744,7 +1745,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_Counter
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Expert_Encore
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AVERAGE_HP, Expert_PainSplit
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, Expert_Nightmare
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_LockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_SleepTalk
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
@@ -1803,7 +1803,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_UTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLING, Expert_Fling
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_PsychoShift
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFER_STATUS, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_HEALING, Expert_HealBlock
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SUPRESS_ABILITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_LAST_USED_MOVE, Expert_StatusMoveBonus
@@ -2598,24 +2598,6 @@ Expert_BindingMove_TryScorePlus1:
 Expert_BindingMove_End:
     PopOrEnd 
 
-Expert_StatusConfuse:
-    // If the target's HP is <= 70%, 50% chance of additional score -1.
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_StatusConfuse_End
-    IfRandomLessThan 128, Expert_StatusConfuse_CheckHP
-    AddToMoveScore -1
-
-Expert_StatusConfuse_CheckHP:
-    // If the target's HP is <= 50%, additional score -1.
-    //
-    // If the target's HP is also <= 30%, additional score -1.
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 50, Expert_StatusConfuse_End
-    AddToMoveScore -1
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 30, Expert_StatusConfuse_End
-    AddToMoveScore -1
-
-Expert_StatusConfuse_End:
-    PopOrEnd 
-
 Expert_Reflect:
     // If the attacker's HP is < 50%, score -2.
     //
@@ -2991,11 +2973,6 @@ Expert_PainSplit_ScoreMinus1:
     AddToMoveScore -1
 
 Expert_PainSplit_End:
-    PopOrEnd 
-
-Expert_Nightmare:
-    // Score +2.
-    AddToMoveScore 2
     PopOrEnd 
 
 Expert_LockOn:
@@ -4213,18 +4190,6 @@ Expert_Fling_DesirableFlingEffects:
     TableEntry HOLD_EFFECT_BRN_USER
     TableEntry HOLD_EFFECT_PIKA_SPATK_UP
     TableEntry TABLE_END
-
-Expert_PsychoShift:
-    // If the attacker does not have any status condition, score -10.
-    //
-    // If the opponent's HP >= 30%, 50% chance of score +1.
-    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScoreMinus10
-    IfRandomLessThan 128, Expert_PsychoShift_End
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 30, Expert_PsychoShift_End
-    AddToMoveScore 1
-
-Expert_PsychoShift_End:
-    PopOrEnd 
 
 Expert_HealBlock:
     // If the opponent knows a move with any of the following effects, 90.2% chance of score +1:
