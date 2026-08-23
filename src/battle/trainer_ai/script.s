@@ -1679,6 +1679,22 @@ ScorePlus5:
     AddToMoveScore 5
     PopOrEnd 
 
+ScorePlus6:
+    AddToMoveScore 6
+    PopOrEnd
+
+ScorePlus7:
+    AddToMoveScore 7
+    PopOrEnd
+
+ScorePlus8:
+    AddToMoveScore 8
+    PopOrEnd
+
+ScorePlus9:
+    AddToMoveScore 9
+    PopOrEnd
+
 ScorePlus10:
     AddToMoveScore 10
     PopOrEnd 
@@ -1716,6 +1732,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIND_HIT, Expert_BindingMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO, Expert_Rollout
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURE_POWER, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2, Expert_Setup
@@ -1821,7 +1838,9 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Expert_Defog
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRICK_ROOM, Expert_TrickRoom
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Expert_StealthRock
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEALTH_ROCK, Expert_Hazards
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STICKY_WEB, Expert_StickyWeb
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Expert_Imprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_FULL_RESTORE_NEXT_MON, Expert_HealingWish
 
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STAT_REDUCTION, Expert_StatusMoveBonus
@@ -1986,6 +2005,110 @@ Expert_MirrorMove_MoveTable:
 
 
 
+
+Expert_BindingMove:
+    // Trapping locks the target in and chips it every turn it stays there, so it competes with
+    // the best damaging move rather than sitting under it.
+    IfRandomLessThan 205, ScorePlus6
+    GoTo ScorePlus8
+
+Expert_Rollout:
+    // Rollout snowballs as long as it keeps connecting, and Basic already rules out the cases
+    // where it cannot.
+    GoTo ScorePlus7
+
+Expert_SuckerPunch:
+    // A repeated Sucker Punch is the easiest thing in the game to play around, so back off from
+    // using it twice running whether or not the first one landed.
+    LoadBattlerPreviousMove AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo MOVE_SUCKER_PUNCH, Expert_SuckerPunch_End
+    IfRandomLessThan 128, Expert_SuckerPunch_End
+    AddToMoveScore -20
+
+Expert_SuckerPunch_End:
+    PopOrEnd
+
+Expert_Spikes:
+    // A layer already down means the next one buys less.
+    LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES
+    IfLoadedEqualTo 0, Expert_Hazards
+    AddToMoveScore -1
+    GoTo Expert_Hazards
+
+Expert_ToxicSpikes:
+    LoadSpikesLayers AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES
+    IfLoadedEqualTo 0, Expert_Hazards
+    AddToMoveScore -1
+
+Expert_Hazards:
+    // Hazards pay off over the switches still to come, so they are worth the most on the turn
+    // the AI comes in and worth less every turn after that.
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo FALSE, Expert_Hazards_FirstTurn
+    IfRandomLessThan 64, ScorePlus6
+    GoTo ScorePlus7
+
+Expert_Hazards_FirstTurn:
+    IfRandomLessThan 64, ScorePlus8
+    GoTo ScorePlus9
+
+Expert_StickyWeb:
+    // Sticky Web scores higher than the other hazards: it pays out on the switch itself rather
+    // than only chipping.
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo FALSE, Expert_StickyWeb_FirstTurn
+    IfRandomLessThan 64, ScorePlus6
+    GoTo ScorePlus9
+
+Expert_StickyWeb_FirstTurn:
+    IfRandomLessThan 64, ScorePlus9
+    AddToMoveScore 12
+    PopOrEnd
+
+Expert_Imprison:
+    // Imprison does nothing at all unless the two sides actually share a move.
+    IfBattlersShareMove ScorePlus9
+    GoTo ScoreMinus20
+
+Expert_Tailwind:
+    // Speed control is only worth the turn while something on the other side is still moving
+    // first. Basic already rules out a Tailwind which is up.
+    IfAnyOpponentOutspeedsSide ScorePlus9
+    GoTo ScorePlus5
+
+Expert_TrickRoom:
+    // Setting Trick Room while it is already up would only end it early.
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus20
+    IfAnyOpponentOutspeedsSide ScorePlus10
+    GoTo ScorePlus5
+
+Expert_FakeOut:
+    // Fake Out is worth the turn for the flinch, which Shield Dust and Inner Focus both stop.
+    // Basic already penalises it on every turn but the first.
+    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
+    IfLoadedEqualTo FALSE, Expert_FakeOut_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_SHIELD_DUST, Expert_FakeOut_End
+    IfLoadedEqualTo ABILITY_INNER_FOCUS, Expert_FakeOut_End
+    AddToMoveScore 9
+
+Expert_FakeOut_End:
+    PopOrEnd
+
+Expert_DestinyBond:
+    // Destiny Bond only cashes in if the AI is going down anyway, and it has to move first for
+    // the tag to be on the board when it does.
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DestinyBond_WhenSlower
+    IfDefenderCanKO Expert_DestinyBond_WhenDying
+    GoTo ScorePlus6
+
+Expert_DestinyBond_WhenDying:
+    IfRandomLessThan 50, ScorePlus6
+    GoTo ScorePlus7
+
+Expert_DestinyBond_WhenSlower:
+    IfRandomLessThan 128, ScorePlus6
+    GoTo ScorePlus5
 
 Expert_Setup:
     // Shared entry for every stat-boosting setup move.
@@ -2588,24 +2711,6 @@ Expert_OHKOMove:
 Expert_OHKOMove_End:
     PopOrEnd 
 
-Expert_BindingMove:
-    // If the target is under any of the following conditions or effects, 50% chance of score +1:
-    // - Toxic
-    // - Curse
-    // - Perish Song
-    // - Attract
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_TOXIC, Expert_BindingMove_TryScorePlus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CURSE, Expert_BindingMove_TryScorePlus1
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_BindingMove_TryScorePlus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_BindingMove_TryScorePlus1
-    GoTo Expert_BindingMove_End
-
-Expert_BindingMove_TryScorePlus1:
-    IfRandomLessThan 128, Expert_BindingMove_End
-    AddToMoveScore 1
-
-Expert_BindingMove_End:
-    PopOrEnd 
 
 Expert_Reflect:
     // If the attacker's HP is < 50%, score -2.
@@ -3000,32 +3105,6 @@ Expert_SleepTalk:
     AddToMoveScore -5
     PopOrEnd 
 
-Expert_DestinyBond:
-    // Start at score -1. If the attacker is slower than its opponent, terminate.
-    //
-    // If the attacker's HP > 70%, terminate. Otherwise, 50% chance of additional score +1.
-    //
-    // If the attacker's HP > 50%, terminate. Otherwise, 50% chance of additional score +1.
-    //
-    // If the attacker's HP > 30%, terminate. Otherwise, 60.9% chance of additional score +2.
-    AddToMoveScore -1
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DestinyBond_End
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_DestinyBond_End
-    IfRandomLessThan 128, Expert_DestinyBond_CheckUserMediumHP
-    AddToMoveScore 1
-
-Expert_DestinyBond_CheckUserMediumHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_DestinyBond_End
-    IfRandomLessThan 128, Expert_DestinyBond_CheckUserLowHP
-    AddToMoveScore 1
-
-Expert_DestinyBond_CheckUserLowHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_DestinyBond_End
-    IfRandomLessThan 100, Expert_DestinyBond_End
-    AddToMoveScore 2
-
-Expert_DestinyBond_End:
-    PopOrEnd 
 
 Expert_HealBell:
     // If neither the attacker nor any of its party members have a non-volatile status condition,
@@ -3128,23 +3207,6 @@ Expert_Protect_ScoreMinus2:
 Expert_Protect_End:
     PopOrEnd 
 
-Expert_Spikes:
-    // 50% chance of score +0 and terminate. Otherwise, start at score +1.
-    //
-    // If the attacker knows either Roar or Whirlwind, 75% chance of additional score +1.
-    IfRandomLessThan 128, Expert_Spikes_End
-    AddToMoveScore 1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_Spikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_Spikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DRAGON_TAIL, Expert_Spikes_TryScorePlus1
-    GoTo Expert_Spikes_End
-
-Expert_Spikes_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Spikes_End
-    AddToMoveScore 1
-
-Expert_Spikes_End:
-    PopOrEnd 
 
 Expert_Foresight:
     // If the attacker has a Ghost typing, 47.3% chance of score +2.
@@ -3483,10 +3545,6 @@ Expert_ChargeTurn_ScorePlus9:
     AddToMoveScore 9
     PopOrEnd
 
-Expert_FakeOut:
-    // Score +2.
-    AddToMoveScore 2
-    PopOrEnd 
 
 Expert_SpitUp:
     // If the attacker's Stockpile count is 2 or higher, 68.75% chance of score +2.
@@ -3884,31 +3942,6 @@ Expert_Pluck_ScoreMinus1:
 Expert_Pluck_End:
     PopOrEnd 
 
-Expert_Tailwind:
-    // 25% chance of flat score +0.
-    //
-    // If the attacker is faster than its opponent, score -1.
-    //
-    // If the attacker's HP <= 30%, score -1.
-    //
-    // If the attacker's HP > 75%, score +1.
-    //
-    // Otherwise, 75% chance of score +1.
-    IfRandomLessThan 64, Expert_Tailwind_End
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, Expert_Tailwind_ScoreMinus1
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 31, Expert_Tailwind_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_Tailwind_ScorePlus1
-    IfRandomLessThan 64, Expert_Tailwind_End
-
-Expert_Tailwind_ScorePlus1:
-    AddToMoveScore 1
-    GoTo Expert_Tailwind_End
-
-Expert_Tailwind_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Tailwind_End:
-    PopOrEnd 
 
 Expert_MetalBurst:
     // If the opponent is asleep, infatuated, or confused or they know any of the following move
@@ -4160,42 +4193,7 @@ Expert_WorrySeed_TryScorePlus1:
 Expert_WorrySeed_End:
     PopOrEnd 
 
-Expert_SuckerPunch:
-    // If the opponent resists or is immune to the move, score -1.
-    //
-    // 75% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_SuckerPunch_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_SuckerPunch_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SuckerPunch_ScoreMinus1
-    IfRandomLessThan 64, Expert_SuckerPunch_End
-    AddToMoveScore 1
-    GoTo Expert_SuckerPunch_End
 
-Expert_SuckerPunch_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_SuckerPunch_End:
-    PopOrEnd 
-
-Expert_ToxicSpikes:
-    // 50% chance to ignore all further scoring.
-    //
-    // Start at score +1.
-    //
-    // If the attacker knows specifically the moves Roar or Whirlwind, 75% chance of additional score +1.
-    IfRandomLessThan 128, Expert_ToxicSpikes_End
-    AddToMoveScore 1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_ToxicSpikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_ToxicSpikes_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DRAGON_TAIL, Expert_ToxicSpikes_TryScorePlus1
-    GoTo Expert_ToxicSpikes_End
-
-Expert_ToxicSpikes_TryScorePlus1:
-    IfRandomLessThan 64, Expert_ToxicSpikes_End
-    AddToMoveScore 1
-
-Expert_ToxicSpikes_End:
-    PopOrEnd 
 
 Expert_Defog:
     // If the opponent's side of the field is under the effect of Light Screen or Reflect:
@@ -4262,53 +4260,7 @@ Expert_Defog_CheckOpponentHP:
 Expert_Defog_End:
     PopOrEnd 
 
-Expert_TrickRoom:
-    // If the battle is a Double Battle, ignore all further score modifiers.
-    //
-    // If the attacker's HP <= 30% and there are no remaining party members, score +0.
-    //
-    // If the attacker is faster than its opponent, score -1.
-    //
-    // If the attacker is slower than its opponent, 75% chance of score +3.
-    LoadBattleType 
-    IfLoadedMask BATTLE_TYPE_DOUBLES, Expert_TrickRoom_End
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_TrickRoom_CheckSpeed
-    CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_TrickRoom_End
 
-Expert_TrickRoom_CheckSpeed:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_TrickRoom_TryScorePlus3
-    AddToMoveScore -1
-    GoTo Expert_TrickRoom_End
-
-Expert_TrickRoom_TryScorePlus3:
-    IfRandomLessThan 64, Expert_TrickRoom_End
-    AddToMoveScore 3
-
-Expert_TrickRoom_End:
-    PopOrEnd 
-
-Expert_StealthRock:
-    // 50% chance to ignore all further score modifiers.
-    //
-    // Start at score +1.
-    //
-    // If the attacker knows either of the moves Roar or Whirlwind, 75% chance of additional score +1.
-    IfRandomLessThan 128, Expert_StealthRock_End
-    AddToMoveScore 1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ROAR, Expert_StealthRock_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_WHIRLWIND, Expert_StealthRock_TryScorePlus1
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DRAGON_TAIL, Expert_StealthRock_TryScorePlus1
-    GoTo Expert_StealthRock_End
-
-Expert_StealthRock_TryScorePlus1:
-    IfRandomLessThan 64, Expert_StealthRock_End
-    AddToMoveScore 1
-
-Expert_StealthRock_End:
-    PopOrEnd 
-    PopOrEnd 
-    PopOrEnd 
 
 Expert_HealingWish:
     // If the attacker's HP >= 80% and the attacker is faster than its opponent, 25% of score -5.

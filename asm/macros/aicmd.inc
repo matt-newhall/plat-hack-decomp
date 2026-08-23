@@ -688,6 +688,16 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfBattlersShareMove jump:req
+    .long AICMD_IFBATTLERSSHAREMOVE
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfAnyOpponentOutspeedsSide jump:req
+    .long AICMD_IFANYOPPONENTOUTSPEEDSSIDE
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfBattlerHasDamagingMoveOfClass battler:req, class:req, jump:req
     .long AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS
     .long \battler

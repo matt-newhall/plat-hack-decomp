@@ -126,6 +126,8 @@ ScriptCommand(AICMD_IFDEFENDERCANKOAFTERSHELLSMASH,  AICmd_IfDefenderCanKOAfterS
 ScriptCommand(AICMD_IFDEFENDERCANKOAFTERBELLYDRUM,   AICmd_IfDefenderCanKOAfterBellyDrum)
 ScriptCommand(AICMD_IFBATTLERINCAPACITATED,          AICmd_IfBattlerIncapacitated)
 ScriptCommand(AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS, AICmd_IfBattlerHasDamagingMoveOfClass)
+ScriptCommand(AICMD_IFBATTLERSSHAREMOVE,             AICmd_IfBattlersShareMove)
+ScriptCommand(AICMD_IFANYOPPONENTOUTSPEEDSSIDE,      AICmd_IfAnyOpponentOutspeedsSide)
 
 // clang-format on
 

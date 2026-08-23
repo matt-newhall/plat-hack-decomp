@@ -215,6 +215,8 @@ static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, Battle
 static void AICmd_IfDefenderCanKOAfterBellyDrum(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3074,6 +3076,71 @@ static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, Battl
         u16 move = battleCtx->battleMons[battler].moves[i];
 
         if (move != MOVE_NONE && MOVE_DATA(move).class == class) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
+/**
+ * @brief Check whether the attacker and its target have any move in common.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    u16 *attackerMoves = battleCtx->battleMons[AI_CONTEXT.attacker].moves;
+    u16 *defenderMoves = battleCtx->battleMons[AI_CONTEXT.defender].moves;
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (attackerMoves[i] == MOVE_NONE) {
+            continue;
+        }
+
+        for (int j = 0; j < LEARNED_MOVES_MAX; j++) {
+            if (attackerMoves[i] == defenderMoves[j]) {
+                AIScript_Iter(battleCtx, jump);
+                return;
+            }
+        }
+    }
+}
+
+/**
+ * @brief Check whether any battler on the opposing side outspeeds the attacker or its partner.
+ *
+ * Speed-control moves are only worth the turn while something on the other side is still
+ * moving first, which in a double battle means measuring both of the AI's slots.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int partner = attacker ^ 2;
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    for (int opponent = 0; opponent < maxBattlers; opponent++) {
+        if ((opponent & 1) == (attacker & 1) || battleCtx->battleMons[opponent].curHP == 0) {
+            continue;
+        }
+
+        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, opponent, attacker, TRUE) == COMPARE_SPEED_FASTER) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+
+        if (partner < maxBattlers
+            && battleCtx->battleMons[partner].curHP
+            && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, opponent, partner, TRUE) == COMPARE_SPEED_FASTER) {
             AIScript_Iter(battleCtx, jump);
             return;
         }
