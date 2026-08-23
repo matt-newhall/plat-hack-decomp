@@ -1168,19 +1168,19 @@ Basic_CheckMetalBurst:
     // If the target is immune to Metal Burst due to its typing (?), score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
 
-    // If the target's ability is Stall or they are holding a Shiny Stone, score -10.
-    // BUG: This should use the command LoadHeldItemEffect to check for the Lagging Tail
-    // effect.
+    // If the target moves last anyway - Stall, or a Lagging Tail/Full Incense - it will already
+    // have attacked, so there is nothing left to reflect. Score -10.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_STALL, ScoreMinus10
-    IfHeldItemEqualTo AI_BATTLER_DEFENDER, ITEM_SHINY_STONE, ScoreMinus10
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_PRIORITY_DOWN, ScoreMinus10
 
-    // If the attacker's ability is Stall or they are holding a Shiny Stone, terminate.
-    // BUG: This should use the command LoadHeldItemEffect to check for the Lagging Tail
-    // effect.
+    // If the attacker is the one forced to move last, it is guaranteed to have been hit first,
+    // so skip the speed check below.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_STALL, Basic_CheckMetalBurst_Terminate
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER, ITEM_SHINY_STONE, Basic_CheckMetalBurst_Terminate
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_PRIORITY_DOWN, Basic_CheckMetalBurst_Terminate
 
     // If the attacker is faster than the target, score -10.
     IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus10
