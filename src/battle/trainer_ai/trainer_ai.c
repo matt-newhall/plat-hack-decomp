@@ -75,6 +75,8 @@ static const u16 sExcludedFromBestDamageMoveEffects[] = {
     BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, // Sky Attack
     BATTLE_EFFECT_CHARGE_TURN_DEF_UP, // Skull Bash
     BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, // Meteor Beam
+
+    BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT,
     0xFFFF
 };
 

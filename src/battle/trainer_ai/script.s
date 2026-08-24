@@ -3248,40 +3248,8 @@ Expert_ChargeTurn_ScorePlus9:
 
 
 Expert_FocusPunch:
-    // If the opponent is immune to or would resist the move, score -1.
-    //
-    // If the attacker is behind a Substitute, score +5.
-    //
-    // If the opponent is asleep, score +1.
-    //
-    // If the opponent is confused or infatuated, 60.9% chance of score +1.
-    //
-    // If it is not the attacker's first turn in battle, 21.875% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_FocusPunch_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_FocusPunch_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_FocusPunch_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus5
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_FocusPunch_ScorePlus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_FocusPunch_TryScorePlus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_FocusPunch_TryScorePlus1
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo FALSE, Expert_FocusPunch_End
-    IfRandomLessThan 200, Expert_FocusPunch_End
-    AddToMoveScore 1
-    GoTo Expert_FocusPunch_End
-
-Expert_FocusPunch_ScoreMinus1:
-    AddToMoveScore -1
-    GoTo Expert_FocusPunch_End
-
-Expert_FocusPunch_TryScorePlus1:
-    IfRandomLessThan 100, Expert_FocusPunch_End
-
-Expert_FocusPunch_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_FocusPunch_End:
-    PopOrEnd 
+    AddToMoveScore 6
+    PopOrEnd
 
 Expert_PartingShot:
     AddToMoveScore 6
