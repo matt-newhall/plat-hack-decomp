@@ -688,6 +688,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfTrainerAIFlagNotSet flag:req, jump:req
+    .long AICMD_IFTRAINERAIFLAGNOTSET
+    .long \flag
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfBattlersShareMove jump:req
     .long AICMD_IFBATTLERSSHAREMOVE
     .long (\jump-.) / 4 - 1

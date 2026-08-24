@@ -6,6 +6,7 @@
 #include "constants/items.h"
 #include "constants/battle/trainer_ai.h"
 #include "generated/abilities.h"
+#include "generated/ai_flags.h"
 #include "generated/genders.h"
 #include "generated/pokemon_types.h"
 #include "macros/aicmd.inc"
@@ -1960,26 +1961,44 @@ Expert_Explosion_Score:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Explosion_TryScorePlus8
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Explosion_CoinFlipScorePlus7
     IfRandomLessThan 13, ScorePlus7
-    PopOrEnd
+    GoTo Expert_Explosion_RiskyGamble
 
 Expert_Explosion_TryScorePlus8:
     IfRandomLessThan 179, ScorePlus8
-    PopOrEnd
+    GoTo Expert_Explosion_RiskyGamble
 
 Expert_Explosion_CoinFlipScorePlus7:
     IfRandomLessThan 128, ScorePlus7
+
+Expert_Explosion_RiskyGamble:
+    // Every route into here is one where Expert has just decided the self-KO is not worth it.
+    // A Risky trainer takes it anyway on half of those turns. The last-mon bail above stays out
+    // of this deliberately: blowing up with nothing behind it is not a gamble, it is a loss.
+    IfTrainerAIFlagNotSet AI_FLAG_RISKY, Expert_Explosion_End
+    IfRandomLessThan 128, Expert_Explosion_End
+    AddToMoveScore 6
 
 Expert_Explosion_End:
     PopOrEnd
 
 Expert_Memento:
+    // Memento keeps its own copy of the ladder rather than sharing Explosion's: it is not on the
+    // Risky list, so its rolls must not fall into the gamble above.
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, Expert_Memento_End
     AddToMoveScore 6
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 10, ScorePlus10
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Explosion_TryScorePlus8
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Explosion_CoinFlipScorePlus7
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Memento_TryScorePlus8
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Memento_CoinFlipScorePlus7
     IfRandomLessThan 13, ScorePlus7
+    PopOrEnd
+
+Expert_Memento_TryScorePlus8:
+    IfRandomLessThan 179, ScorePlus8
+    PopOrEnd
+
+Expert_Memento_CoinFlipScorePlus7:
+    IfRandomLessThan 128, ScorePlus7
 
 Expert_Memento_End:
     PopOrEnd
@@ -3398,46 +3417,63 @@ PrioritizeExtremes_Terminate:
     PopOrEnd 
 
 Risky_Main:
-    // Do not target your partner.
-    IfTargetIsPartner Terminate
+    // This flag will never target its partner.
+    IfTargetIsPartner Risky_Terminate
 
-    // Only apply this routine to certain move effects.
+    // Risky only ever nudges: the move has already been judged on its merits by the flags which
+    // ran before this one. Explosion and Selfdestruct are the exception and are handled inside
+    // Expert_Explosion, which is the only place that knows whether it passed on the self-KO.
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHATTER, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Risky_FocusPunch
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RAISE_ALL_STATS_HIT, Risky_GambleIfNotBestDamage
+
     LoadCurrentMoveEffect 
-    IfLoadedNotInTable Risky_RiskyEffects, Risky_Terminate
+    IfLoadedInTable Risky_HighCritEffects, Risky_GambleIfNotBestDamage
+    PopOrEnd
 
-    // 50% of the time, score +2.
+Risky_CoinFlipScorePlus1:
+    // Prediction and low-accuracy gambles. Half the time the AI leans into it.
     IfRandomLessThan 128, Risky_Terminate
-    AddToMoveScore 2
+    AddToMoveScore 1
+    PopOrEnd
+
+Risky_FocusPunch:
+    // Focus Punch either wins the turn outright or throws it away, so Risky is as willing to
+    // talk itself out of it as into it. Three even outcomes, resolved without ever applying
+    // both halves to the same move.
+    IfRandomLessThan 85, Risky_ScorePlus1
+    IfRandomLessThan 128, Risky_Terminate
+    AddToMoveScore -1
+    PopOrEnd
+
+Risky_ScorePlus1:
+    AddToMoveScore 1
+    PopOrEnd
+
+Risky_GambleIfNotBestDamage:
+    // A move already carrying EvalAttack's best-damage bonus does not need talking up. Otherwise
+    // the payoff - a crit, or the omniboost - is worth putting level with the best hit.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Risky_Terminate
+    IfRandomLessThan 128, Risky_Terminate
+    AddToMoveScore 6
 
 Risky_Terminate:
-    PopOrEnd 
+    PopOrEnd
 
-Risky_RiskyEffects:
-    TableEntry BATTLE_EFFECT_STATUS_SLEEP
-    TableEntry BATTLE_EFFECT_HALVE_DEFENSE
-    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
-    TableEntry BATTLE_EFFECT_COPY_MOVE
-    TableEntry BATTLE_EFFECT_ONE_HIT_KO
+Risky_HighCritEffects:
+    // Always-crit and the charge-turn crit moves are left out: the first is not a gamble, and
+    // the second is already being penalised by Expert_ChargeTurn for spending the turn.
     TableEntry BATTLE_EFFECT_HIGH_CRITICAL
-    TableEntry BATTLE_EFFECT_STATUS_CONFUSE
-    TableEntry BATTLE_EFFECT_CALL_RANDOM_MOVE
-    TableEntry BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL
-    TableEntry BATTLE_EFFECT_COUNTER
-    TableEntry BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER
-    TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
-    TableEntry BATTLE_EFFECT_INFATUATE
-    TableEntry BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL
-    TableEntry BATTLE_EFFECT_RAISE_ALL_STATS_HIT
-    TableEntry BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP
-    TableEntry BATTLE_EFFECT_MIRROR_COAT
-    TableEntry BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT
-    TableEntry BATTLE_EFFECT_DOUBLE_POWER_IF_HIT
-    TableEntry BATTLE_EFFECT_CONFUSE_ALL
-    TableEntry BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED
-    TableEntry BATTLE_EFFECT_METAL_BURST
-    TableEntry BATTLE_EFFECT_DOUBLE_POWER_IF_MOVING_SECOND
-    TableEntry BATTLE_EFFECT_USE_MOVE_FIRST
-    TableEntry BATTLE_EFFECT_HIT_FIRST_IF_TARGET_ATTACKING
+    TableEntry BATTLE_EFFECT_HIGH_CRITICAL_BURN_HIT
+    TableEntry BATTLE_EFFECT_HIGH_CRITICAL_POISON_HIT
     TableEntry TABLE_END
 
 BatonPass_Main:

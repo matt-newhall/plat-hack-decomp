@@ -220,6 +220,7 @@ static void AICmd_IfDefenderCanKOAfterHalfHPCost(BattleSystem *battleSys, Battle
 static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3438,6 +3439,29 @@ static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *ba
                 return;
             }
         }
+    }
+}
+
+/**
+ * @brief Check that a flag is absent from the AI's behaviour mask.
+ *
+ * The mask is consumed as the flags are walked, so it has to be shifted back up by the number
+ * of flags already run before it can be read whole. Only flags at or above the one currently
+ * running survive that, which is all this is used for: one routine asking whether a later one
+ * is going to get a turn on the same move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int flag = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if (((AI_CONTEXT.thinkingMask << AI_CONTEXT.thinkingBitShift) & flag) == FALSE) {
+        AIScript_Iter(battleCtx, jump);
     }
 }
 
