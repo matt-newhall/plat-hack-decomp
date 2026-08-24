@@ -2004,12 +2004,6 @@ Expert_Memento_End:
     PopOrEnd
 
 
-
-
-
-
-
-
 Expert_BindingMove:
     // Trapping locks the target in and chips it every turn it stays there, so it competes with
     // the best damaging move rather than sitting under it.
@@ -2464,8 +2458,6 @@ Expert_SpeedDownOnHit_End:
     PopOrEnd
 
 
-
-
 Expert_Haze:
     SumPositiveStatStages AI_BATTLER_DEFENDER
     IfLoadedEqualTo 0, Expert_Haze_End
@@ -2566,7 +2558,6 @@ Expert_OHKOMove:
     // Coin flip to tie HDM
     IfRandomLessThan 128, ScorePlus5
     GoTo ScorePlus6
-
 
 
 Expert_StatusBurn:
@@ -3001,9 +2992,6 @@ Expert_Protect_End:
     PopOrEnd
 
 
-
-
-
 Expert_BatonPass:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, Expert_BatonPass_End
@@ -3036,10 +3024,6 @@ Expert_Pursuit_End:
     PopOrEnd
 
 
-
-
-
-
 Expert_ChargeTurn:
     // Sky Attack, Skull Bash and Meteor Beam spend a turn charging in the open, dealing nothing
     // and inviting a free hit. A Power Herb resolves them the same turn instead, which is worth
@@ -3055,8 +3039,6 @@ Expert_ChargeTurn:
 Expert_ChargeTurn_ScorePlus9:
     AddToMoveScore 9
     PopOrEnd
-
-
 
 
 Expert_FocusPunch:
@@ -3172,13 +3154,6 @@ Expert_BrickBreak_ScreenIsUp:
     GoTo ScorePlus7
 
 
-
-
-
-
-
-
-
 Expert_Fling:
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo HOLD_EFFECT_SOMETIMES_FLINCH, Expert_Fling_Flinch
@@ -3197,9 +3172,6 @@ Expert_Fling_Flinch:
 
 Expert_Fling_End:
     PopOrEnd
-
-
-
 
 
 Expert_Defog:
@@ -3231,8 +3203,6 @@ Expert_Defog_CheckOurHazards:
 Expert_Defog_ScorePlus4:
     AddToMoveScore 4
     PopOrEnd
-
-
 
 
 EvalAttack_Main:
@@ -3651,13 +3621,6 @@ TagStrategy_TryPrioritizingQuadEffective:
 TagStrategy_CheckSpecialScoring:
     // Handle each of these moves with their own routine
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_SkillSwap
-    LoadTypeFrom LOAD_MOVE_TYPE
-    IfMoveEqualTo MOVE_RAIN_DANCE, TagStrategy_RainDance
-    IfMoveEqualTo MOVE_SUNNY_DAY, TagStrategy_SunnyDay
-    IfMoveEqualTo MOVE_HAIL, TagStrategy_Hail
-    IfMoveEqualTo MOVE_SANDSTORM, TagStrategy_Sandstorm
-    IfMoveEqualTo MOVE_GRAVITY, TagStrategy_Gravity
-    IfMoveEqualTo MOVE_TRICK_ROOM, TagStrategy_TrickRoom
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_GLOBAL_TARGET, TagStrategy_Redirect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER, TagStrategy_Redirect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, TagStrategy_Protect
@@ -3665,289 +3628,7 @@ TagStrategy_CheckSpecialScoring:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, TagStrategy_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, TagStrategy_Endure
     LoadTypeFrom LOAD_MOVE_TYPE
-    IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckElectricMove
-    IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckFireMove
-    IfLoadedEqualTo TYPE_WATER, TagStrategy_CheckWaterMove
     IfLoadedEqualTo TYPE_GROUND, TagStrategy_CheckGroundMove
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_HELPING_HAND, TagStrategy_PartnerKnowsHelpingHand
-    PopOrEnd 
-
-TagStrategy_RainDance:
-    // If the move is Rain Dance, apply modifiers for each of the attacker and partner which meet the
-    // following conditions:
-    //  - The battler has Hydration and is currently statused -> score +2
-    //  - The battler has Dry Skin -> score +2
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_HYDRATION, TagStrategy_RainDance_SelfHasHydration
-    IfLoadedEqualTo ABILITY_DRY_SKIN, TagStrategy_RainDance_SelfScorePlus2
-    GoTo TagStrategy_RainDance_CheckPartner
-
-TagStrategy_RainDance_SelfHasHydration:
-    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, TagStrategy_RainDance_CheckPartner
-
-TagStrategy_RainDance_SelfScorePlus2:
-    AddToMoveScore 2
-    GoTo TagStrategy_RainDance_CheckPartner
-
-TagStrategy_RainDance_CheckPartner:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_HYDRATION
-    IfLoadedEqualTo AI_HAVE, TagStrategy_RainDance_PartnerHasHydration
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_DRY_SKIN
-    IfLoadedEqualTo AI_HAVE, TagStrategy_RainDance_PartnerScorePlus2
-    GoTo TagStrategy_RainDance_End
-
-TagStrategy_RainDance_PartnerHasHydration:
-    IfNotStatus AI_BATTLER_ATTACKER_PARTNER, MON_CONDITION_ANY, TagStrategy_RainDance_End
-
-TagStrategy_RainDance_PartnerScorePlus2:
-    AddToMoveScore 2
-    GoTo TagStrategy_RainDance_End
-
-TagStrategy_RainDance_End:
-    PopOrEnd 
-
-TagStrategy_SunnyDay:
-    // If the move is Sunny Day, apply modifiers for each of the attacker and partner which meet the
-    // following conditions:
-    //  - The battler has Leaf Guard, is not currently statused, and is at 30% HP or higher -> score +2
-    //  - The battler has Flower Gift -> score +2
-    //  - The battler has Dry Skin -> score -2
-    //  - The battler has Solar Power and is at 50% HP or higher -> score +1
-    //  - The battler has Solar Power, is at less than 50% HP -> 50% chance of score -2
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_LEAF_GUARD, TagStrategy_SunnyDay_SelfHasLeafGuard
-    IfLoadedEqualTo ABILITY_FLOWER_GIFT, TagStrategy_SunnyDay_SelfScorePlus2
-    IfLoadedEqualTo ABILITY_DRY_SKIN, TagStrategy_SunnyDay_SelfScoreMinus2
-    IfLoadedEqualTo ABILITY_SOLAR_POWER, TagStrategy_SunnyDay_SelfHasSolarPower
-    GoTo TagStrategy_SunnyDay_CheckPartner
-
-TagStrategy_SunnyDay_SelfHasLeafGuard:
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, TagStrategy_SunnyDay_CheckPartner
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 30, TagStrategy_SunnyDay_CheckPartner
-
-TagStrategy_SunnyDay_SelfScorePlus2:
-    AddToMoveScore 2
-    GoTo TagStrategy_SunnyDay_CheckPartner
-
-TagStrategy_SunnyDay_SelfScoreMinus2:
-    AddToMoveScore -2
-    GoTo TagStrategy_SunnyDay_CheckPartner
-
-TagStrategy_SunnyDay_SelfHasSolarPower:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, TagStrategy_SunnyDay_SelfTryScoreMinus2
-    AddToMoveScore 1
-
-TagStrategy_SunnyDay_SelfTryScoreMinus2:
-    IfRandomLessThan 128, TagStrategy_SunnyDay_CheckPartner
-    AddToMoveScore -2
-
-TagStrategy_SunnyDay_CheckPartner:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEAF_GUARD
-    IfLoadedEqualTo AI_HAVE, TagStrategy_SunnyDay_PartnerHasLeafGuard
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_FLOWER_GIFT
-    IfLoadedEqualTo AI_HAVE, TagStrategy_SunnyDay_PartnerScorePlus2
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_DRY_SKIN
-    IfLoadedEqualTo AI_HAVE, TagStrategy_SunnyDay_PartnerScoreMinus2
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SOLAR_POWER
-    IfLoadedEqualTo AI_HAVE, TagStrategy_SunnyDay_PartnerHasSolarPower
-    GoTo TagStrategy_SunnyDay_End
-
-TagStrategy_SunnyDay_PartnerHasLeafGuard:
-    IfStatus AI_BATTLER_ATTACKER_PARTNER, MON_CONDITION_ANY, TagStrategy_SunnyDay_End
-    IfHPPercentLessThan AI_BATTLER_ATTACKER_PARTNER, 30, TagStrategy_SunnyDay_End
-
-TagStrategy_SunnyDay_PartnerScorePlus2:
-    AddToMoveScore 2
-    GoTo TagStrategy_SunnyDay_End
-
-TagStrategy_SunnyDay_PartnerScoreMinus2:
-    AddToMoveScore -2
-    GoTo TagStrategy_SunnyDay_End
-
-TagStrategy_SunnyDay_PartnerHasSolarPower:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_SunnyDay_PartnerTryScoreMinus2
-    AddToMoveScore 1
-
-TagStrategy_SunnyDay_PartnerTryScoreMinus2:
-    IfRandomLessThan 128, TagStrategy_SunnyDay_End
-    AddToMoveScore -2
-
-TagStrategy_SunnyDay_End:
-    PopOrEnd 
-
-TagStrategy_Hail:
-    // If the move is Hail, apply modifiers for each of the attacker and partner which meet the
-    // following conditions:
-    //  - The battler has Ice Body -> score +2
-    //  - The battler has Snow Cloak -> score +2
-    //  - The battler knows Blizzard -> score +2
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_ICE_BODY, TagStrategy_Hail_SelfScorePlus2
-    IfLoadedEqualTo ABILITY_SNOW_CLOAK, TagStrategy_Hail_SelfScorePlus2
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_BLIZZARD, TagStrategy_Hail_SelfScorePlus2
-    GoTo TagStrategy_Hail_CheckPartner
-
-TagStrategy_Hail_SelfScorePlus2:
-    AddToMoveScore 2
-
-TagStrategy_Hail_CheckPartner:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_ICE_BODY
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Hail_PartnerScorePlus2
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SNOW_CLOAK
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Hail_PartnerScorePlus2
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_BLIZZARD, TagStrategy_Hail_PartnerScorePlus2
-    GoTo TagStrategy_Hail_End
-
-TagStrategy_Hail_PartnerScorePlus2:
-    AddToMoveScore 2
-
-TagStrategy_Hail_End:
-    PopOrEnd 
-
-TagStrategy_Sandstorm:
-    // If the move is Sandstorm, apply modifiers for each of the attacker and partner which meet the
-    // following conditions:
-    //  - The battler has Sand Veil -> score +2
-    //  - The battler has a Rock typing -> score +2
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_SAND_VEIL, TagStrategy_Sandstorm_SelfScorePlus2
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_ROCK, TagStrategy_Sandstorm_SelfScorePlus2
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_ROCK, TagStrategy_Sandstorm_SelfScorePlus2
-    GoTo TagStrategy_Sandstorm_CheckPartner
-
-TagStrategy_Sandstorm_SelfScorePlus2:
-    AddToMoveScore 2
-    GoTo TagStrategy_Sandstorm_CheckPartner
-
-TagStrategy_Sandstorm_CheckPartner:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SAND_VEIL
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Sandstorm_PartnerScorePlus2
-    LoadTypeFrom LOAD_ATTACKER_PARTNER_TYPE_1
-    IfLoadedEqualTo TYPE_ROCK, TagStrategy_Sandstorm_PartnerScorePlus2
-    LoadTypeFrom LOAD_ATTACKER_PARTNER_TYPE_2
-    IfLoadedEqualTo TYPE_ROCK, TagStrategy_Sandstorm_PartnerScorePlus2
-    GoTo TagStrategy_Sandstorm_End
-
-TagStrategy_Sandstorm_PartnerScorePlus2:
-    AddToMoveScore 2
-
-TagStrategy_Sandstorm_End:
-    PopOrEnd 
-
-TagStrategy_Gravity:
-    // If Gravity is currently active, score -30
-    IfFieldConditionsMask FIELD_CONDITION_GRAVITY, TagStrategy_PartnerScoreMinus30
-
-    // Apply the following score modifiers:
-    //  - For each allied battler which has Levitate, a Flying typing, or is under the effect of
-    //    Magnet Rise -> score -5
-    //  - For each enemy battler which has Levitate, a Flying typing, or is under the effect of
-    //    Magnet Rise -> 75% chance of score +3
-    CheckBattlerAbility AI_BATTLER_ATTACKER, ABILITY_LEVITATE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_SelfScoreMinus5
-    FlagBattlerIsType AI_BATTLER_ATTACKER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_SelfScoreMinus5
-    IfMoveEffect AI_BATTLER_ATTACKER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_Gravity_SelfScoreMinus5
-    GoTo TagStrategy_Gravity_CheckPartner
-
-TagStrategy_Gravity_SelfScoreMinus5:
-    AddToMoveScore -5
-    GoTo TagStrategy_Gravity_CheckPartner
-
-TagStrategy_Gravity_CheckPartner:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_PartnerScoreMinus5
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_PartnerScoreMinus5
-    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_Gravity_PartnerScoreMinus5
-    GoTo TagStrategy_Gravity_CheckTarget
-
-TagStrategy_Gravity_PartnerScoreMinus5:
-    AddToMoveScore -5
-    GoTo TagStrategy_Gravity_CheckTarget
-
-TagStrategy_Gravity_CheckTarget:
-    CheckBattlerAbility AI_BATTLER_DEFENDER, ABILITY_LEVITATE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_TargetTryScorePlus3
-    FlagBattlerIsType AI_BATTLER_DEFENDER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_TargetTryScorePlus3
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_Gravity_TargetTryScorePlus3
-    GoTo TagStrategy_Gravity_CheckTargetPartner
-
-TagStrategy_Gravity_TargetTryScorePlus3:
-    IfRandomLessThan 64, TagStrategy_Gravity_CheckTargetPartner
-    AddToMoveScore 3
-    GoTo TagStrategy_Gravity_CheckTargetPartner
-
-TagStrategy_Gravity_CheckTargetPartner:
-    CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_LEVITATE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_TargetPartnerTryScorePlus3
-    FlagBattlerIsType AI_BATTLER_DEFENDER_PARTNER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, TagStrategy_Gravity_TargetPartnerTryScorePlus3
-    IfMoveEffect AI_BATTLER_DEFENDER_PARTNER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_Gravity_TargetPartnerTryScorePlus3
-    GoTo TagStrategy_Gravity_End
-
-TagStrategy_Gravity_TargetPartnerTryScorePlus3:
-    IfRandomLessThan 64, TagStrategy_Gravity_End
-    AddToMoveScore 3
-    GoTo TagStrategy_Gravity_End
-
-TagStrategy_Gravity_End:
-    PopOrEnd 
-
-TagStrategy_TrickRoom:
-    // If the battle has been reduced to either side having only one active Pokemon, score -30
-    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, ScoreMinus30
-    IfHPPercentEqualTo AI_BATTLER_DEFENDER_PARTNER, 0, ScoreMinus30
-    IfHPPercentEqualTo AI_BATTLER_DEFENDER, 0, ScoreMinus30
-
-    // Branch according to the attacker's Speed-ordering in battle
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, TagStrategy_TrickRoom_SelfMovesFirst
-    IfLoadedEqualTo 1, TagStrategy_TrickRoom_SelfMovesSecond
-    IfLoadedEqualTo 2, TagStrategy_TrickRoom_SelfMovesThird
-    IfLoadedEqualTo 3, TagStrategy_TrickRoom_SelfMovesLast
-    GoTo TagStrategy_TrickRoom_End
-
-TagStrategy_TrickRoom_SelfMovesFirst:
-    // If our partner moves second, score -30
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 1, ScoreMinus30
-    IfLoadedEqualTo 0, ScoreMinus30
-    GoTo TagStrategy_TrickRoom_ScoreMinus5
-
-TagStrategy_TrickRoom_SelfMovesSecond:
-    // If our partner moves before us, score -30
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo 0, ScoreMinus30
-    GoTo TagStrategy_TrickRoom_ScoreMinus5
-
-TagStrategy_TrickRoom_SelfMovesThird:
-    // If our partner does not move last in turn-order, score -5
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedNotEqualTo 3, TagStrategy_TrickRoom_ScoreMinus5
-
-    // 75% chance of score +5, 25% chance of score -5
-    IfRandomLessThan 64, TagStrategy_TrickRoom_ScoreMinus5
-    AddToMoveScore 5
-    GoTo TagStrategy_TrickRoom_End
-
-TagStrategy_TrickRoom_SelfMovesLast:
-    // If our partner does not move third in turn-order, score -5
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedNotEqualTo 2, TagStrategy_TrickRoom_ScoreMinus5
-
-    // 75% chance of score +5, 25% chance of score -5
-    IfRandomLessThan 64, TagStrategy_TrickRoom_ScoreMinus5
-    AddToMoveScore 5
-    GoTo TagStrategy_TrickRoom_End
-
-TagStrategy_TrickRoom_ScoreMinus5:
-    AddToMoveScore -5
-
-TagStrategy_TrickRoom_End:
     PopOrEnd 
 
 TagStrategy_Redirect:
@@ -3991,31 +3672,6 @@ TagStrategy_Protect:
 TagStrategy_Protect_End:
     PopOrEnd
 
-TagStrategy_PartnerKnowsHelpingHand:
-    // If our partner knows Helping Hand, then damaging moves (aside from flat-damage moves)
-    // get score +1
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, TagStrategy_PartnerHelpingHand_End
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_PartnerHelpingHand_End
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_20_DAMAGE_FLAT, TagStrategy_PartnerHelpingHand_End
-    FlagMoveDamageScore USE_MAX_DAMAGE
-    IfLoadedNotEqualTo AI_NO_COMPARISON_MADE, ScorePlus1
-
-TagStrategy_PartnerHelpingHand_End:
-    PopOrEnd 
-
-TagStrategy_Unused_1:
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, TagStrategy_Unused_2
-    PopOrEnd 
-
-TagStrategy_Unused_2:
-    FlagMoveDamageScore USE_MAX_DAMAGE
-    IfLoadedEqualTo AI_NO_COMPARISON_MADE, ScoreMinus5
-    AddToMoveScore 1
-    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, ScorePlus2
-    PopOrEnd 
-
 TagStrategy_SkillSwap:
     // If the move is Skill Swap and:
     //  - The attacker has Truant, Slow Start, Stall, or Klutz, score +5
@@ -4034,103 +3690,6 @@ TagStrategy_SkillSwap:
     IfLoadedEqualTo ABILITY_SOLID_ROCK, ScorePlus2
     IfLoadedEqualTo ABILITY_FILTER, ScorePlus2
     IfLoadedEqualTo ABILITY_FLOWER_GIFT, ScorePlus2
-    PopOrEnd 
-
-TagStrategy_CheckElectricMove:
-    // If the move is Discharge, handle it similarly to Earthquake. Otherwise, apply all of the
-    // following which are met:
-    //  - The target's partner would redirect the move with Lightning Rod, score -1; additional
-    //    score -8 if the target's partner is also a Ground type
-    //  - The attacker's partner has Lightning Rod, score -10
-    //
-    // Stalwart ignores redirection entirely, so neither penalty applies to its user.
-    IfMoveEqualTo MOVE_DISCHARGE, TagStrategy_SpreadElectricMove
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_STALWART, TagStrategy_CheckElectric_End
-    CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_LIGHTNING_ROD
-    IfLoadedEqualTo AI_HAVE, TagStrategy_TargetProtectedByLightningRod
-    GoTo TagStrategy_PartnerHasLightningRod
-
-TagStrategy_TargetProtectedByLightningRod:
-    AddToMoveScore -1
-    FlagBattlerIsType AI_BATTLER_DEFENDER_PARTNER, TYPE_GROUND
-    IfLoadedEqualTo AI_NOT_HAVE, TagStrategy_PartnerHasLightningRod
-    AddToMoveScore -8
-
-TagStrategy_PartnerHasLightningRod:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LIGHTNING_ROD
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    IfMoveEqualTo MOVE_DISCHARGE, TagStrategy_SpreadElectricMove
-    GoTo TagStrategy_CheckElectric_End
-
-TagStrategy_SpreadElectricMove:
-    // If our partner has Volt Absorb or Motor Drive, score +3
-    //
-    // If our partner otherwise has a Water or Flying typing, score -10
-    //
-    // If our partner otherwise has a Ground typing, score +3
-    //
-    // Else, score -3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_MOTOR_DRIVE
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_VOLT_ABSORB
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_WATER
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-
-    // BUG: This should be before the checks for all other types; in its present position, the
-    // vanilla trainer AI will never use Discharge if their partner is, e.g., Swampert or Gliscor
-    // (which should be treated as Immune to the move, but are not).
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_GROUND
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    AddToMoveScore -3
-
-TagStrategy_CheckElectric_End:
-    PopOrEnd 
-
-TagStrategy_CheckWaterMove:
-    // If the move is Surf, handle it similarly to Earthquake. Otherwise, apply all of the
-    // following which are met:
-    //  - The target's partner would redirect the move with Storm Drain, score -1
-    //  - The attacker's partner has Storm Drain, score -10
-    //
-    // Stalwart ignores redirection entirely, so neither penalty applies to its user.
-    IfMoveEqualTo MOVE_SURF, TagStrategy_SpreadWaterMove
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_STALWART, TagStrategy_CheckWater_End
-    CheckBattlerAbility AI_BATTLER_DEFENDER_PARTNER, ABILITY_STORM_DRAIN
-    IfLoadedEqualTo AI_NOT_HAVE, TagStrategy_CheckPartnerStormDrain
-    AddToMoveScore -1
-
-TagStrategy_CheckPartnerStormDrain:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_STORM_DRAIN
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-
-    // This line should never result in a branch
-    IfMoveEqualTo MOVE_SURF, TagStrategy_SpreadWaterMove
-    GoTo TagStrategy_CheckWater_End
-
-TagStrategy_SpreadWaterMove:
-    // If our partner has Dry Skin or Water Absorb, score +3
-    //
-    // If our partner otherwise has a Ground or Fire typing, score -10
-    //
-    // Else, score -3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_DRY_SKIN
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_WATER_ABSORB
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-
-    // BUG: This should also include a similar check for the Rock type
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_GROUND
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    AddToMoveScore -3
-
-TagStrategy_CheckWater_End:
     PopOrEnd 
 
 TagStrategy_CheckGroundMove:
@@ -4194,146 +3753,15 @@ TagStrategy_SpreadGroundMove_PartnerSafe:
 TagStrategy_CheckGround_End:
     PopOrEnd 
 
-TagStrategy_CheckFireMove:
-    // If the AI's Flash Fire has been activated, score additional +1 on top of all further modifiers
-    //
-    // If the move is Lava Plume, then:
-    //  - If our partner has Dry Skin or Flash Fire, score +3
-    //  - If our partner has a Grass, Steel, Ice, or Bug typing, score -10
-    //  - Otherwise, score -3
-    IfActivatedFlashFire AI_BATTLER_ATTACKER, TagStrategy_FlashFireScorePlus1
-    GoTo TagStrategy_CheckLavaPlume
-
-TagStrategy_FlashFireScorePlus1:
-    AddToMoveScore 1
-
-TagStrategy_CheckLavaPlume:
-    IfMoveEqualTo MOVE_LAVA_PLUME, TagStrategy_SpreadFireMove
-    GoTo TagStrategy_CheckFire_End
-
-TagStrategy_SpreadFireMove:
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_DRY_SKIN
-    IfLoadedEqualTo AI_HAVE, ScoreMinus3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_FLASH_FIRE
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_GRASS
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_STEEL
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ICE
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_BUG
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    AddToMoveScore -3
-
-TagStrategy_CheckFire_End:
-    PopOrEnd 
-
 TagStrategy_Partner:
     IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, TagStrategy_PartnerScoreMinus30
     FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_PartnerStatusMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_1, TagStrategy_PartnerWeaknessPolicy
-    LoadTypeFrom LOAD_MOVE_TYPE
-    IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckPartnerFireAbsorption
-    IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckPartnerElectricAbsorption
-    IfLoadedEqualTo TYPE_WATER, TagStrategy_CheckPartnerWaterAbsorption
     IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerFling
 
 TagStrategy_ScoreMinus30:
     GoTo ScoreMinus30
-
-TagStrategy_CheckPartnerFireAbsorption:
-    // If our partner has Flash Fire and has not yet activated Flash Fire, score +3
-    //
-    // Otherwise, score -30
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_FLASH_FIRE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerFlashFireActive
-    GoTo TagStrategy_ScoreMinus30
-
-TagStrategy_CheckPartnerFlashFireActive:
-    IfActivatedFlashFire AI_BATTLER_ATTACKER_PARTNER, TagStrategy_ScoreMinus30
-    GoTo ScorePlus3
-
-TagStrategy_CheckPartnerElectricAbsorption:
-    // If our partner has Motor Drive:
-    //  - 62.5% chance of no score change
-    //  - If our partner is at +6 speed, score -30
-    //  - Else, score +3
-    //
-    // If our partner has Volt Absorb:
-    //  - If our partner is at 100% HP, score -10
-    //  - If our partner's HP >90%, no score change
-    //  - If our partner's HP >75%, 25% chance of score +3, 75% chance of no change
-    //  - If our partner's HP >50%, 50% chance of score +3, 50% chance of no change
-    //  - Else, 75% chance of score +3, 25% chance of no change
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_MOTOR_DRIVE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerMotorDrive
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_VOLT_ABSORB
-    IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerVoltAbsorb
-    GoTo TagStrategy_ScoreMinus30
-
-TagStrategy_CheckPartnerMotorDrive:
-    IfRandomLessThan 160, TagStrategy_CheckElectricAbsorption_End
-    IfStatStageEqualTo AI_BATTLER_ATTACKER_PARTNER, BATTLE_STAT_SPEED, 12, TagStrategy_ScoreMinus30
-    GoTo ScorePlus3
-
-TagStrategy_CheckPartnerVoltAbsorb:
-    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 100, ScoreMinus10
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 90, TagStrategy_CheckElectricAbsorption_End
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 75, TagStrategy_PartnerVoltAbsorb_75PercentHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_PartnerVoltAbsorb_50PercentHP
-    GoTo TagStrategy_PartnerVoltAbsorb_LessThan50PercentHP
-
-TagStrategy_PartnerVoltAbsorb_75PercentHP:
-    IfRandomLessThan 64, ScorePlus3
-    GoTo TagStrategy_CheckElectricAbsorption_End
-
-TagStrategy_PartnerVoltAbsorb_50PercentHP:
-    IfRandomLessThan 128, ScorePlus3
-    GoTo TagStrategy_CheckElectricAbsorption_End
-
-TagStrategy_PartnerVoltAbsorb_LessThan50PercentHP:
-    IfRandomLessThan 192, ScorePlus3
-    GoTo TagStrategy_CheckElectricAbsorption_End
-
-TagStrategy_CheckElectricAbsorption_End:
-    PopOrEnd 
-
-TagStrategy_CheckPartnerWaterAbsorption:
-    // If our partner has Water Absorb or Dry Skin:
-    //  - If our partner is at 100% HP, score -10
-    //  - If our partner's HP >90%, no score change
-    //  - If our partner's HP >75%, 25% chance of score +3, 75% chance of no change
-    //  - If our partner's HP >50%, 50% chance of score +3, 50% chance of no change
-    //  - Else, 75% chance of score +3, 25% chance of no change
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_WATER_ABSORB
-    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerWaterAbsorb
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_DRY_SKIN
-    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerWaterAbsorb
-    GoTo TagStrategy_ScoreMinus30
-
-TagStrategy_PartnerWaterAbsorb:
-    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 100, ScoreMinus10
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 90, TagStrategy_CheckWaterAbsorption_End
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 75, TagStrategy_PartnerWaterAbsorb_75PercentHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_PartnerWaterAbsorb_50PercentHP
-    GoTo TagStrategy_PartnerWaterAbsorb_LessThan50PercentHP
-
-TagStrategy_PartnerWaterAbsorb_75PercentHP:
-    IfRandomLessThan 64, ScorePlus3
-    GoTo TagStrategy_CheckWaterAbsorption_End
-
-TagStrategy_PartnerWaterAbsorb_50PercentHP:
-    IfRandomLessThan 128, ScorePlus3
-    GoTo TagStrategy_CheckWaterAbsorption_End
-
-TagStrategy_PartnerWaterAbsorb_LessThan50PercentHP:
-    IfRandomLessThan 192, ScorePlus3
-    GoTo TagStrategy_CheckWaterAbsorption_End
-
-TagStrategy_CheckWaterAbsorption_End:
-    PopOrEnd 
 
 TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_PartnerSkillSwap
@@ -4416,7 +3844,6 @@ TagStrategy_PartnerWillOWisp:
     //
     // Otherwise, score -30
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_FLASH_FIRE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerFireAbsorption
 
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_GUTS
     IfLoadedNotEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
@@ -4445,10 +3872,8 @@ TagStrategy_PartnerThunderWave:
     IfLoadedEqualTo TYPE_GROUND, TagStrategy_PartnerScoreMinus30
 
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_MOTOR_DRIVE
-    IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerElectricAbsorption
 
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_VOLT_ABSORB
-    IfLoadedEqualTo AI_HAVE, TagStrategy_CheckPartnerElectricAbsorption
 
     GoTo TagStrategy_PartnerScoreMinus30
 
