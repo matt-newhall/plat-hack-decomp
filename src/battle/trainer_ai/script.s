@@ -2369,25 +2369,16 @@ Expert_PowerUpPunch_End:
     PopOrEnd
 
 Expert_BypassAccuracyMove:
-    // If the target is at +5 Evasion or higher, or the attacker is at -5 Accuracy or lower, 60.9%
-    // chance of score +2, 39.1% chance of score +1.
-    //
-    // If the target is at +3 Evasion or higher, or the attacker is at -3 Accuracy or lower, score +1.
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 10, Expert_BypassAccuracyMove_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 2, Expert_BypassAccuracyMove_ScorePlus1
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_BypassAccuracyMove_TryScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 4, Expert_BypassAccuracyMove_TryScorePlus1
-    GoTo Expert_BypassAccuracyMove_End
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 6, Expert_BypassAccuracyMove_TryScorePlus6
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 6, Expert_BypassAccuracyMove_TryScorePlus6
+    PopOrEnd
 
-Expert_BypassAccuracyMove_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_BypassAccuracyMove_TryScorePlus1:
-    IfRandomLessThan 100, Expert_BypassAccuracyMove_End
-    AddToMoveScore 1
+Expert_BypassAccuracyMove_TryScorePlus6:
+    IfRandomGreaterThan 170, Expert_BypassAccuracyMove_End
+    AddToMoveScore 6
 
 Expert_BypassAccuracyMove_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_FellStinger:
     IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 11, Expert_FellStinger_End
@@ -2873,6 +2864,7 @@ Expert_SlowMove_CheckSurvives:
 
 Expert_SlowMove_Continue:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_BypassAccuracyMove
     PopOrEnd
 
 
