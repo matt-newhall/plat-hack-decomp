@@ -1745,6 +1745,10 @@ ScorePlus10:
     AddToMoveScore 10
     PopOrEnd 
 
+ScorePlus11:
+    AddToMoveScore 11
+    PopOrEnd 
+
 Expert_Main:
     // This flag will never target its partner.
     IfTargetIsPartner Terminate
@@ -3673,24 +3677,23 @@ TagStrategy_Protect_End:
     PopOrEnd
 
 TagStrategy_SkillSwap:
-    // If the move is Skill Swap and:
-    //  - The attacker has Truant, Slow Start, Stall, or Klutz, score +5
-    //  - The target has Shadow Tag, Pure Power, Huge Power, Mold Breaker, Solid Rock, Filter, or
-    //    Flower Gift, score +2
+    // Huge Power and Pure Power are worth more than the turn costs: the swap doubles the AI's own
+    // Attack and strips the threat off the other side in the same motion.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_TRUANT, ScorePlus5
-    IfLoadedEqualTo ABILITY_SLOW_START, ScorePlus5
-    IfLoadedEqualTo ABILITY_STALL, ScorePlus5
-    IfLoadedEqualTo ABILITY_KLUTZ, ScorePlus5
+    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_SHADOW_TAG, ScorePlus2
-    IfLoadedEqualTo ABILITY_PURE_POWER, ScorePlus2
-    IfLoadedEqualTo ABILITY_HUGE_POWER, ScorePlus2
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, ScorePlus2
-    IfLoadedEqualTo ABILITY_SOLID_ROCK, ScorePlus2
-    IfLoadedEqualTo ABILITY_FILTER, ScorePlus2
-    IfLoadedEqualTo ABILITY_FLOWER_GIFT, ScorePlus2
-    PopOrEnd 
+    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
+    IfLoadedEqualTo ABILITY_HUGE_POWER, ScorePlus11
+    IfLoadedEqualTo ABILITY_PURE_POWER, ScorePlus11
+    GoTo ScoreMinus20
+
+TagStrategy_SkillSwapAlwaysFailsOn:
+    // subscript_exchange_abilities refuses the trade outright if either side holds one of these,
+    // so the move is a spent turn no matter how good the swap would have been.
+    TableEntry ABILITY_WONDER_GUARD
+    TableEntry ABILITY_MULTITYPE
+    TableEntry ABILITY_NEUTRALIZING_GAS
+    TableEntry TABLE_END
 
 TagStrategy_CheckGroundMove:
     // If the move is Earthquake or Magnitude, check spread. Otherwise, apply all of the
@@ -3778,59 +3781,17 @@ TagStrategy_PartnerStatusMove:
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerSkillSwap:
-    // If our partner has Truant or Slow Start, score +10.
-    //
-    // If we can give Levitate to an Electric-type partner, score +1; additional +1 if our partner
-    // is mono-Electric.
-    //
-    // If we can give an Accuracy-increasing ability and our partner has an inaccurate move, score +3.
-    //
-    // Otherwise, score -30.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_TRUANT, ScorePlus10
-    IfLoadedEqualTo ABILITY_SLOW_START, ScorePlus10
-
+    // Truant and Slow Start are the only abilities worth a turn to move: taking one off the
+    // partner costs the AI's own mon far less than it costs whatever is carrying it. The partner
+    // is read through AI_BATTLER_ATTACKER_PARTNER rather than the defender slot, so that its
+    // ability is looked up as one of the AI's own rather than as an opponent's.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_LEVITATE, TagStrategy_PartnerSkillSwap_GiveAccuracyIncrease
-
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_LEVITATE, TagStrategy_PartnerScoreMinus30
-
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedNotEqualTo TYPE_ELECTRIC, TagStrategy_PartnerSkillSwap_GiveAccuracyIncrease
-    AddToMoveScore 1
-
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedNotEqualTo TYPE_ELECTRIC, TagStrategy_PartnerSkillSwap_GiveAccuracyIncrease
-    AddToMoveScore 1
-
-    PopOrEnd 
-
-TagStrategy_PartnerSkillSwap_GiveAccuracyIncrease:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_COMPOUND_EYES, TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove
-    IfLoadedEqualTo ABILITY_NO_GUARD, TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove
-    GoTo TagStrategy_PartnerScoreMinus30
-
-TagStrategy_PartnerSkillSwap_PartnerHasInaccurateMove:
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_FIRE_BLAST, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_THUNDER, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_CROSS_CHOP, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_HYDRO_PUMP, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_DYNAMIC_PUNCH, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_BLIZZARD, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_ZAP_CANNON, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_MEGAHORN, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_FOCUS_BLAST, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_GUNK_SHOT, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_MAGMA_STORM, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_POWER_WHIP, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_SEED_FLARE, TagStrategy_PartnerSkillSwap_ScorePlus3
-    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_HEAD_SMASH, TagStrategy_PartnerSkillSwap_ScorePlus3
-    GoTo TagStrategy_PartnerScoreMinus30
-
-TagStrategy_PartnerSkillSwap_ScorePlus3:
-    GoTo ScorePlus3
+    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
+    IfLoadedEqualTo ABILITY_TRUANT, ScorePlus9
+    IfLoadedEqualTo ABILITY_SLOW_START, ScorePlus9
+    GoTo ScoreMinus20
 
 TagStrategy_PartnerWillOWisp:
     // If our partner has Flash Fire, handle it identically to the earlier Fire Absorption routine
