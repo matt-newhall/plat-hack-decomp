@@ -1976,6 +1976,7 @@ static void BattleControllerPlayer_FightCommand(BattleSystem *battleSys, BattleC
 
     battleCtx->moveCur = battleCtx->moveTemp;
     battleCtx->command = BATTLE_CONTROL_BEFORE_MOVE;
+    battleCtx->spreadHitMask = 0;
     battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveTemp, randomizeTarget, 0);
 
     BattleController_EmitClearMessageBox(battleSys);
@@ -4384,6 +4385,11 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
 
+        // Record the target just resolved before moving on to the next one; the damage
+        // calculation needs to know how wide the move is, not how much of the field it has
+        // already cleared.
+        battleCtx->spreadHitMask |= FlagIndex(battleCtx->defender);
+
         int maxBattlers = BattleSystem_GetMaxBattlers(battleSys); // unused, but must stay to match
         BattlerData *battlerData = BattleSystem_GetBattlerData(battleSys, battleCtx->attacker);
         u8 battlerType = BattlerData_GetBattlerType(battlerData);
@@ -4409,6 +4415,7 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         && (battleCtx->battleStatusMask & SYSCTL_CHECK_LOOP_ONLY_ONCE) == FALSE
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
+        battleCtx->spreadHitMask |= FlagIndex(battleCtx->defender);
         int maxBattlers = BattleSystem_GetMaxBattlers(battleSys); // unused, but must stay to match.
 
         do {

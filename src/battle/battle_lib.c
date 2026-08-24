@@ -1880,6 +1880,10 @@ BOOL BattleSystem_SheerForceBoostsMove(BattleContext *battleCtx, int attacker, u
  * Bond keys on this, which is why Rock Slide strikes twice in a single battle but not in a
  * double battle with both opponents up.
  *
+ * Battlers already struck by the move in progress are the exception. A spread move resolves one
+ * target at a time, so counting only the living would report a narrowing move as each target it
+ * kills drops out, and the multi-target damage penalty would come off part-way through.
+ *
  * @param battleSys
  * @param battleCtx
  * @param attacker
@@ -1899,8 +1903,14 @@ int BattleSystem_MoveTargetCount(BattleSystem *battleSys, BattleContext *battleC
 
     for (int battler = 0; battler < maxBattlers; battler++) {
         if ((battleCtx->battlersSwitchingMask & FlagIndex(battler))
-            || battleCtx->battleMons[battler].curHP == 0
             || battler == attacker) {
+            continue;
+        }
+
+        // A battler already struck by this move stays counted even if that hit killed it, so the
+        // tally does not shrink part-way through the move.
+        if (battleCtx->battleMons[battler].curHP == 0
+            && (battleCtx->spreadHitMask & FlagIndex(battler)) == FALSE) {
             continue;
         }
 
@@ -2363,6 +2373,7 @@ void BattleContext_Init(BattleContext *battleCtx)
     battleCtx->multiHitCounter = 0;
     battleCtx->multiHitNumHits = 0;
     battleCtx->battlerCounter = 0;
+    battleCtx->spreadHitMask = 0;
     battleCtx->multiHitLoop = 0;
     battleCtx->afterMoveMessageType = 0;
     battleCtx->multiHitCheckFlags = 0;
@@ -8957,13 +8968,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if ((battleType & BATTLE_TYPE_DOUBLES)
-        && MOVE_DATA(move).range == RANGE_ADJACENT_OPPONENTS
-        && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
-        damage = damage * 3 / 4;
-    }
-    if ((battleType & BATTLE_TYPE_DOUBLES)
-        && MOVE_DATA(move).range == RANGE_ALL_ADJACENT
-        && BattleSystem_CountAliveBattlers(battleSys, battleCtx, FALSE, defender) >= 2) {
+        && BattleSystem_MoveTargetCount(battleSys, battleCtx, attacker, move) >= 2) {
         damage = damage * 3 / 4;
     }
 

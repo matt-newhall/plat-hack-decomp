@@ -248,6 +248,7 @@ struct BattleContext {
     u8 multiHitNumHits;
     u8 battlerCounter;
     u8 savedBattlerCounter;
+    u32 spreadHitMask;
     u8 beatUpCounter;
 
     BOOL moveIsStolen;
