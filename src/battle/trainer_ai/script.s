@@ -1812,7 +1812,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Explosion
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Memento
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HELD_ITEMS, Expert_Trick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
@@ -1909,6 +1909,12 @@ Expert_DrainMove_End:
     PopOrEnd 
 
 Expert_Explosion:
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo 0, Expert_Explosion_Score
+    CountAlivePartyBattlers AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo 0, Expert_Explosion_End
+
+Expert_Explosion_Score:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 10, ScorePlus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Explosion_TryScorePlus8
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Explosion_CoinFlipScorePlus7
@@ -1921,6 +1927,20 @@ Expert_Explosion_TryScorePlus8:
 
 Expert_Explosion_CoinFlipScorePlus7:
     IfRandomLessThan 128, ScorePlus7
+
+Expert_Explosion_End:
+    PopOrEnd
+
+Expert_Memento:
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, Expert_Memento_End
+    AddToMoveScore 6
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 10, ScorePlus10
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Explosion_TryScorePlus8
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Explosion_CoinFlipScorePlus7
+    IfRandomLessThan 13, ScorePlus7
+
+Expert_Memento_End:
     PopOrEnd
 
 Expert_MirrorMove:
