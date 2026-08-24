@@ -190,6 +190,8 @@ static void AICmd_IfAnyPartyMemberIsWounded(BattleSystem *battleSys, BattleConte
 static void AICmd_IfAnyPartyMemberUsedPP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadFlingPower(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfPartnerDeclaredMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCanUseLastResort(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2116,6 +2118,43 @@ static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battle
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     AI_CONTEXT.calcTemp = Battler_ItemFlingEffect(battleCtx, battler);
+}
+
+/**
+ * @brief Check whether the attacker's partner has already locked in a move of a given class this
+ * turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfPartnerDeclaredMoveClass(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int class = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    int partner = BattleSystem_GetPartner(battleSys, AI_CONTEXT.attacker);
+    u16 move = battleCtx->declaredMove[partner];
+
+    if (move != MOVE_NONE && MOVE_DATA(move).class == class) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Load the effect of the move the attacker's partner has locked in this turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int partner = BattleSystem_GetPartner(battleSys, AI_CONTEXT.attacker);
+    u16 move = battleCtx->declaredMove[partner];
+
+    AI_CONTEXT.calcTemp = move == MOVE_NONE ? -1 : MOVE_DATA(move).effect;
 }
 
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx)

@@ -137,6 +137,8 @@ ScriptCommand(AICMD_IFSHOULDRECOVER,                  AICmd_IfShouldRecover)
 ScriptCommand(AICMD_IFMOVESFIRST,                     AICmd_IfMovesFirst)
 ScriptCommand(AICMD_IFDOESNOTMOVEFIRST,               AICmd_IfDoesNotMoveFirst)
 ScriptCommand(AICMD_LOADFLINGEFFECT,                   AICmd_LoadFlingEffect)
+ScriptCommand(AICMD_IFPARTNERDECLAREDMOVECLASS,       AICmd_IfPartnerDeclaredMoveClass)
+ScriptCommand(AICMD_LOADPARTNERDECLAREDMOVEEFFECT,    AICmd_LoadPartnerDeclaredMoveEffect)
 
 // clang-format on
 

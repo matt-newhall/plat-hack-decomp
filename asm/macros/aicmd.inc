@@ -534,6 +534,16 @@
     .long \battler
     .endm
 
+    .macro LoadPartnerDeclaredMoveEffect
+    .long AICMD_LOADPARTNERDECLAREDMOVEEFFECT
+    .endm
+
+    .macro IfPartnerDeclaredMoveClass class:req, jump:req
+    .long AICMD_IFPARTNERDECLAREDMOVECLASS
+    .long \class
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro LoadCurrentMovePP
     .long 91
     .endm

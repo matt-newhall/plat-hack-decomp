@@ -281,6 +281,10 @@ static void BattleControllerPlayer_InitCommandSelection(BattleSystem *battleSys,
         battleCtx->battleMons[i].moveEffectsTemp = battleCtx->battleMons[i].moveEffectsMask;
         battleCtx->battleMons[i].newlySwitched = FALSE;
         battleCtx->recordedCommandFlags[i] = 0;
+
+        // Cleared every turn so that a battler which has not chosen yet reads as undecided rather
+        // than as whatever it did last turn.
+        battleCtx->declaredMove[i] = MOVE_NONE;
     }
 
     BattleSystem_SetCommandSelectionFlags(battleSys, 0);
@@ -519,6 +523,7 @@ static void BattleControllerPlayer_CommandSelectionInput(BattleSystem *battleSys
                     battleCtx->battlerActions[i][2] = battleCtx->ioBuffer[i][0];
                     battleCtx->moveSlot[i] = battleCtx->ioBuffer[i][0] - 1;
                     battleCtx->moveSelected[i] = battleCtx->battleMons[i].moves[battleCtx->moveSlot[i]];
+                    battleCtx->declaredMove[i] = battleCtx->moveSelected[i];
                     battleCtx->curCommandState[i] = COMMAND_SELECTION_TARGET_SELECT_INIT;
                     battleCtx->recordedCommandFlags[i] |= 0x2;
                 }

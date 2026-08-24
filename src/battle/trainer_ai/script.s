@@ -3658,10 +3658,12 @@ TagStrategy_CheckSpecialScoring:
     IfMoveEqualTo MOVE_SANDSTORM, TagStrategy_Sandstorm
     IfMoveEqualTo MOVE_GRAVITY, TagStrategy_Gravity
     IfMoveEqualTo MOVE_TRICK_ROOM, TagStrategy_TrickRoom
-    IfMoveEqualTo MOVE_FOLLOW_ME, TagStrategy_FollowMe
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_GLOBAL_TARGET, TagStrategy_Redirect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER, TagStrategy_Redirect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, TagStrategy_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, TagStrategy_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, TagStrategy_Protect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, TagStrategy_Endure
     LoadTypeFrom LOAD_MOVE_TYPE
     IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckElectricMove
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckFireMove
@@ -3948,77 +3950,35 @@ TagStrategy_TrickRoom_ScoreMinus5:
 TagStrategy_TrickRoom_End:
     PopOrEnd 
 
-TagStrategy_FollowMe:
-    // If the move is Follow Me, apply a score modifier according to the following conditional tree:
-    //  - If the attacker's HP > 90%, and:
-    //    - If the partner's HP > 90%, 75% chance of score -1
-    //    - If the partner's HP is between 50% and 90%, 75% chance of score +1
-    //    - If the partner's HP is between 30% and 50%, 75% chance of score +2
-    //    - If the partner's HP is < 30%, 75% chance of score +3
-    //  - If the attacker's HP is between 50% and 90%, and:
-    //    - If the partner's HP > 90%, 75% chance of score -2
-    //    - If the partner's HP is between 50% and 90%, 75% chance of score -1
-    //    - If the partner's HP is between 30% and 50%, 75% chance of score +1
-    //    - If the partner's HP is < 30%, 75% chance of score +2
-    //  - If the attacker's HP is between 30% and 50%, and:
-    //    - If the partner's HP > 90%, 75% chance of score -2
-    //    - If the partner's HP is between 50% and 90%, 75% chance of score -2
-    //    - If the partner's HP is between 30% and 50%, 75% chance of score +1
-    //    - If the partner's HP is < 30%, 75% chance of score +2
-    //  - If the attacker's HP < 30%, 75% chance of score -5
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, TagStrategy_FollowMe_SelfHighHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, TagStrategy_FollowMe_SelfMediumHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, TagStrategy_FollowMe_SelfLowHP
-    IfRandomLessThan 64, TagStrategy_FollowMe_End
-    GoTo ScoreMinus5
+TagStrategy_Redirect:
+    LoadPartnerDeclaredMoveEffect
+    IfLoadedInTable TagStrategy_RedirectIsWastedOn, ScoreMinus30
+    GoTo ScorePlus6
 
-TagStrategy_FollowMe_SelfHighHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 90, TagStrategy_FollowMe_TryScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_FollowMe_TryScorePlus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 30, TagStrategy_FollowMe_TryScorePlus2
-    GoTo TagStrategy_FollowMe_TryScorePlus3
+TagStrategy_RedirectIsWastedOn:
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER
+    TableEntry BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT
+    TableEntry BATTLE_EFFECT_PROTECT
+    TableEntry BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT
+    TableEntry BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT
+    TableEntry BATTLE_EFFECT_SURVIVE_WITH_1_HP
+    TableEntry TABLE_END
 
-TagStrategy_FollowMe_SelfMediumHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 90, TagStrategy_FollowMe_TryScoreMinus2
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_FollowMe_TryScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 30, TagStrategy_FollowMe_TryScorePlus1
-    GoTo TagStrategy_FollowMe_TryScorePlus2
+TagStrategy_RedirectEffects:
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER
+    TableEntry TABLE_END
 
-TagStrategy_FollowMe_SelfLowHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 90, TagStrategy_FollowMe_TryScoreMinus2
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_FollowMe_TryScoreMinus2
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 30, TagStrategy_FollowMe_TryScorePlus1
-    GoTo TagStrategy_FollowMe_TryScorePlus2
-
-TagStrategy_FollowMe_TryScoreMinus1:
-    IfRandomLessThan 64, TagStrategy_FollowMe_End
-    AddToMoveScore -1
-    GoTo TagStrategy_FollowMe_End
-
-TagStrategy_FollowMe_TryScoreMinus2:
-    IfRandomLessThan 64, TagStrategy_FollowMe_End
-    AddToMoveScore -2
-    GoTo TagStrategy_FollowMe_End
-
-TagStrategy_FollowMe_TryScorePlus1:
-    IfRandomLessThan 64, TagStrategy_FollowMe_End
-    AddToMoveScore 1
-    GoTo TagStrategy_FollowMe_End
-
-TagStrategy_FollowMe_TryScorePlus2:
-    IfRandomLessThan 64, TagStrategy_FollowMe_End
-    AddToMoveScore 2
-    GoTo TagStrategy_FollowMe_End
-
-TagStrategy_FollowMe_TryScorePlus3:
-    IfRandomLessThan 64, TagStrategy_FollowMe_End
-    AddToMoveScore 3
-    GoTo TagStrategy_FollowMe_End
-
-TagStrategy_FollowMe_End:
-    PopOrEnd 
+TagStrategy_Endure:
+    LoadPartnerDeclaredMoveEffect
+    IfLoadedInTable TagStrategy_RedirectEffects, ScoreMinus30
+    PopOrEnd
 
 TagStrategy_Protect:
+    LoadPartnerDeclaredMoveEffect
+    IfLoadedInTable TagStrategy_RedirectEffects, ScoreMinus30
+
     // Power of Alchemy hands the AI its partner's ability the moment the partner faints, so a
     // partner carrying one of the doubled-Attack abilities is worth stalling a turn to inherit.
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -4504,24 +4464,9 @@ TagStrategy_PartnerPoisonStatus:
     GoTo ScorePlus5
 
 TagStrategy_PartnerUsingHelpingHand:
-    // If we do not have a partner, score -30
-    //
-    // If our partner has more than 50% HP or would move first in the turn, 75% chance of score +2,
-    // 25% chance of score -1
-    //
-    // Else, no score changes
-    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 0, ScoreMinus30
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 50, TagStrategy_PartnerUsingHelpingHand_TryScorePlus2
-    LoadBattlerSpeedRank AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedLessThan 1, TagStrategy_PartnerUsingHelpingHand_TryScorePlus2
-    GoTo TagStrategy_PartnerUsingHelpingHand_End
-
-TagStrategy_PartnerUsingHelpingHand_TryScorePlus2:
-    IfRandomLessThan 64, ScoreMinus1
-    AddToMoveScore 2
-
-TagStrategy_PartnerUsingHelpingHand_End:
-    PopOrEnd 
+    // Nothing to boost if the partner is not attacking with its own turn.
+    IfPartnerDeclaredMoveClass CLASS_STATUS, ScoreMinus30
+    GoTo ScorePlus6
 
 TagStrategy_PartnerSwagger:
     // If our partner is holding neither a Persim Berry nor a Lum Berry, score -30
