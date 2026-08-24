@@ -145,7 +145,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_UP, Basic_CheckHighStatStage_Accuracy
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Basic_CheckHighStatStage_Evasion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN, Basic_CheckLowStatStage_Attack
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Basic_CheckPartingShot
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Basic_CheckLowStatStage_Attack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN, Basic_CheckLowStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN, Basic_CheckLowStatStage_Speed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN, Basic_CheckLowStatStage_SpAttack
@@ -443,12 +443,6 @@ Basic_CheckHighStatStage_Evasion_NoSimple:
     //   - If reducing Speed -> -10 if the target has Speed Boost
     //   - If reducing Accuracy or Evasion -> -10 if either battler has No Guard
     //   - If reducing Accuracy -> -10 if the target has Keen Eye
-Basic_CheckPartingShot:
-    // Parting Shot is a sound move, so Soundproof blanks it entirely.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_SOUNDPROOF, ScoreMinus10
-    GoTo Basic_CheckLowStatStage_Attack
-
 Basic_CheckLowStatStage_Attack:
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 0, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
