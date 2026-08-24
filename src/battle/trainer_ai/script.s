@@ -2351,22 +2351,46 @@ Expert_BypassAccuracyMove_End:
     PopOrEnd 
 
 Expert_SpeedDownOnHit:
-    // If the target is immune to or would resist the move, do not apply any further modifiers.
-    //
-    // Treat the moves whose Speed drop is guaranteed as Speed-reducing status moves. Bubble and
-    // BubbleBeam are deliberately absent - their drop is only a 10% chance.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_SpeedDownOnHit_End
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_SpeedDownOnHit_End
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_SpeedDownOnHit_End
-    IfMoveEqualTo MOVE_ICY_WIND, Expert_StatusSpeedDown
-    IfMoveEqualTo MOVE_ROCK_TOMB, Expert_StatusSpeedDown
-    IfMoveEqualTo MOVE_MUD_SHOT, Expert_StatusSpeedDown
-    IfMoveEqualTo MOVE_BULLDOZE, Expert_StatusSpeedDown
-    IfMoveEqualTo MOVE_ELECTROWEB, Expert_StatusSpeedDown
-    PopOrEnd 
+    // Only the moves whose drop is guaranteed are judged on it
+    IfMoveEqualTo MOVE_ICY_WIND, Expert_SpeedDownOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_ROCK_TOMB, Expert_SpeedDownOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_MUD_SHOT, Expert_SpeedDownOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_BULLDOZE, Expert_SpeedDownOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_ELECTROWEB, Expert_SpeedDownOnHit_CheckBestDamage
+    PopOrEnd
+
+Expert_SpeedDownOnHit_CheckBestDamage:
+    // A move EvalAttack already picked as the best hit has been paid for once; it does not also
+    // get paid for the drop.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_SpeedDownOnHit_End
+
+    // Otherwise the drop is what buys the turn, and it buys the most when it takes the speed
+    // lead off a target which cannot shrug the drop off.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_SpeedDownOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedDownOnHit_ScorePlus5
+    AddToMoveScore 6
+    GoTo Expert_SpeedDownOnHit_CheckDoubles
+
+Expert_SpeedDownOnHit_ScorePlus5:
+    AddToMoveScore 5
+
+Expert_SpeedDownOnHit_CheckDoubles:
+    // Icy Wind and Electroweb hit both opposing slots, so the drop lands twice.
+    LoadBattleType 
+    IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_SpeedDownOnHit_End
+    IfMoveEqualTo MOVE_ICY_WIND, Expert_SpeedDownOnHit_ScorePlus1
+    IfMoveEqualTo MOVE_ELECTROWEB, Expert_SpeedDownOnHit_ScorePlus1
+    PopOrEnd
+
+Expert_SpeedDownOnHit_ScorePlus1:
+    AddToMoveScore 1
 
 Expert_SpeedDownOnHit_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_StatusSpeedDown:
     // If the attacker is slower than its target, 72.7% chance of score +2.
