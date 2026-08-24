@@ -220,7 +220,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Basic_CheckStatStageImbalance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, ScoreMinus10
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Basic_CheckTeleport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Basic_CheckHighStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Basic_CheckFirstTurnInBattle
@@ -843,6 +843,12 @@ Basic_CheckMemento_CheckStatStages:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedEqualTo 0, ScoreMinus10
     PopOrEnd 
+
+Basic_CheckTeleport:
+    // Outside a wild battle Teleport is a switch, so it fails outright with nothing to switch to.
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, ScoreMinus20
+    PopOrEnd
 
 Basic_CheckBatonPass:
     // If the attacker is on its last Pokemon, there is nothing to pass to.
@@ -1795,6 +1801,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_IF_HIT, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DRAGON_TAIL, Expert_SlowMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_StatusMoveBonus
@@ -1841,6 +1848,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HELD_ITEMS, Expert_Trick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Expert_PartingShot
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_SwitchHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
@@ -2865,6 +2873,7 @@ Expert_SlowMove_CheckSurvives:
 
 Expert_SlowMove_Continue:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FLEE_FROM_WILD_BATTLE, Expert_Teleport
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_BypassAccuracyMove
     PopOrEnd
 
@@ -3375,10 +3384,34 @@ Expert_PartingShot_CheckAbility:
     IfLoadedEqualTo ABILITY_CONTRARY, Expert_PartingShot_ScoreMinus2
     IfLoadedEqualTo ABILITY_DEFIANT, Expert_PartingShot_ScoreMinus2
     IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_PartingShot_ScoreMinus2
-    PopOrEnd
+    GoTo Expert_PivotRegenerator
 
 Expert_PartingShot_ScoreMinus2:
     AddToMoveScore -2
+    GoTo Expert_PivotRegenerator
+
+Expert_SwitchHit:
+    IfAttackerCanKO Expert_SwitchHit_End
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, Expert_SwitchHit_End
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_REGENERATOR, Expert_SwitchHit_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_SwitchHit_End
+    AddToMoveScore 6
+
+Expert_SwitchHit_End:
+    PopOrEnd
+
+Expert_Teleport:
+    AddToMoveScore 6
+
+Expert_PivotRegenerator:
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_REGENERATOR, Expert_PivotRegenerator_End
+    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 75, Expert_PivotRegenerator_End
+    AddToMoveScore 2
+
+Expert_PivotRegenerator_End:
     PopOrEnd
 
 Expert_Trick:
