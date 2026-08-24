@@ -1766,6 +1766,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SPEED_HIT, Expert_SpeedDownOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SP_ATK_HIT, Expert_AttackDropOnHit
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BOOST_ATTACK_ON_KO, Expert_FellStinger
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_VitalThrow
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
@@ -2351,6 +2352,19 @@ Expert_BypassAccuracyMove_TryScorePlus1:
 
 Expert_BypassAccuracyMove_End:
     PopOrEnd 
+
+Expert_FellStinger:
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 11, Expert_FellStinger_End
+    IfCurrentMoveDoesNotKill ROLL_FOR_DAMAGE, Expert_FellStinger_End
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_FellStinger_ScorePlus6
+    AddToMoveScore 9
+    PopOrEnd
+
+Expert_FellStinger_ScorePlus6:
+    AddToMoveScore 6
+
+Expert_FellStinger_End:
+    PopOrEnd
 
 Expert_AttackDropOnHit:
     // Only the moves whose drop is guaranteed are scored
