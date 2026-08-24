@@ -125,7 +125,7 @@ ScriptCommand(AICMD_IFDEFENDERCANNOTKOINHITS,        AICmd_IfDefenderCannotKOInH
 ScriptCommand(AICMD_IFDEFENDERCANKOAFTERSHELLSMASH,  AICmd_IfDefenderCanKOAfterShellSmash)
 ScriptCommand(AICMD_IFDEFENDERCANKOAFTERBELLYDRUM,   AICmd_IfDefenderCanKOAfterBellyDrum)
 ScriptCommand(AICMD_IFBATTLERINCAPACITATED,          AICmd_IfBattlerIncapacitated)
-ScriptCommand(AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS, AICmd_IfBattlerHasDamagingMoveOfClass)
+ScriptCommand(AICMD_IFBATTLERHASMOVEOFCLASS, AICmd_IfBattlerHasMoveOfClass)
 ScriptCommand(AICMD_IFBATTLERSSHAREMOVE,             AICmd_IfBattlersShareMove)
 ScriptCommand(AICMD_IFANYOPPONENTOUTSPEEDSSIDE,      AICmd_IfAnyOpponentOutspeedsSide)
 ScriptCommand(AICMD_IFPARALYSISFLIPSSPEED,           AICmd_IfParalysisFlipsSpeed)

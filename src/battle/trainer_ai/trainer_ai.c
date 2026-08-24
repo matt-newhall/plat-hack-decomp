@@ -214,7 +214,7 @@ static void AICmd_IfDefenderCannotKOInHits(BattleSystem *battleSys, BattleContex
 static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDefenderCanKOAfterBellyDrum(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3299,7 +3299,7 @@ static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext 
 }
 
 /**
- * @brief Check whether a battler knows a damaging move of a given class.
+ * @brief Check whether a battler knows a move of a given class.
  *
  * @param battleSys
  * @param battleCtx
@@ -3328,7 +3328,7 @@ static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext
     }
 }
 
-static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx)
+static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
 

@@ -1227,8 +1227,9 @@ Basic_CheckMetalBurst:
     LoadHeldItemEffect AI_BATTLER_ATTACKER
     IfLoadedEqualTo HOLD_EFFECT_PRIORITY_DOWN, Basic_CheckMetalBurst_Terminate
 
-    // If the attacker is faster than the target, score -10.
-    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus10
+    // If the attacker moves first there is nothing to reflect and the move simply fails.
+    IfSpeedCompareEqualTo COMPARE_SPEED_FASTER, ScoreMinus20
+    IfSpeedCompareEqualTo COMPARE_SPEED_TIE, ScoreMinus20
 
 Basic_CheckMetalBurst_Terminate:
     PopOrEnd 
@@ -1795,7 +1796,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_Counter
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_CounterMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Expert_Encore
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AVERAGE_HP, Expert_PainSplit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_LockOn
@@ -1826,7 +1827,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_BellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Expert_PsychUp
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_MirrorCoat
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_CounterMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Expert_Recovery
@@ -2232,13 +2233,13 @@ Expert_SetupDefensive_ScorePlus2Again:
     GoTo Expert_Setup_CheckSlowAndFragile
 
 Expert_SetupSplitPhysical:
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupOffensive
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupDefensive
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupOffensive
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupDefensive
     GoTo Expert_SetupOffensive
 
 Expert_SetupSplitSpecial:
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupOffensive
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupDefensive
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupOffensive
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupDefensive
     GoTo Expert_SetupOffensive
 
 Expert_SetupSpecialSweeper:
@@ -2417,11 +2418,11 @@ Expert_AttackDropOnHit_CheckBestDamage:
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AttackDropOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit_CheckPhysical
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_AttackDropOnHit_ScorePlus6
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_AttackDropOnHit_ScorePlus6
     GoTo Expert_AttackDropOnHit_ScorePlus5
 
 Expert_AttackDropOnHit_CheckPhysical:
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_AttackDropOnHit_ScorePlus6
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_AttackDropOnHit_ScorePlus6
     GoTo Expert_AttackDropOnHit_ScorePlus5
 
 Expert_AttackDropOnHit_ScorePlus6:
@@ -2697,11 +2698,11 @@ Expert_Recovery:
 Expert_Screen:
     AddToMoveScore 6
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen_CheckPhysical
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_Screen_Bonus
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_Screen_Bonus
     PopOrEnd
 
 Expert_Screen_CheckPhysical:
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_Screen_Bonus
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_Screen_Bonus
     PopOrEnd
 
 Expert_Screen_Bonus:
@@ -2752,7 +2753,7 @@ Expert_OHKOMove:
 Expert_StatusBurn:
     AddToMoveScore 6
     IfRandomGreaterThan 94, Expert_StatusBurn_End
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusBurn_ScorePlus1
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusBurn_ScorePlus1
     GoTo Expert_StatusBurn_CheckHex
 
 Expert_StatusBurn_ScorePlus1:
@@ -2808,8 +2809,8 @@ Expert_StatusPoison_CheckPayoff:
     GoTo Expert_StatusPoison_End
 
 Expert_StatusPoison_CheckTargetIsHarmless:
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_End
-    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_End
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_End
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_End
     AddToMoveScore 2
 
 Expert_StatusPoison_End:
@@ -2907,87 +2908,80 @@ Expert_Substitute_ScoreMinus8:
     AddToMoveScore -8
     PopOrEnd
 
-Expert_Counter:
-    // If the opponent is asleep, confused, or infatuated, score -1 and terminate.
-    //
-    // If the attacker's HP <= 30%, 96.1% chance of additional score -1.
-    //
-    // If the attacker's HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
-    //
-    // If the attacker knows specifically Mirror Coat, 60.9% chance of score +4.
-    //
-    // If the opponent's last-used move was a Status move:
-    // - If the opponent is Taunted, 60.9% chance of additional score +1.
-    // - If the opponent does NOT have a type which is considered a Physical type, 49% chance of score +4.
-    //
-    // If the opponent's last-used move was a Damaging move:
-    // - If the opponent is Taunted, 60.9% chance of additional score +1.
-    // - If the last-used move was a Special move, score -1.
-    // - If the last-used move was a Physical move, 60.9% chance of score +1.
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_Counter_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_Counter_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_Counter_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Counter_CheckAboveHalfHP
-    IfRandomLessThan 10, Expert_Counter_CheckAboveHalfHP
+Expert_CounterMove:
+    AddToMoveScore 6
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_CounterMove_CheckSpecialOnly
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_CounterMove_WrongSplit
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_CounterMove_RightSplit
+    GoTo Expert_CounterMove_WrongSplit
+
+Expert_CounterMove_CheckSpecialOnly:
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_CounterMove_WrongSplit
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_CounterMove_RightSplit
+
+Expert_CounterMove_WrongSplit:
+    IfDefenderCanKO Expert_CounterMove_CheckSurvivesNoBonus
+    GoTo Expert_CounterMove_CheckSpeed
+
+Expert_CounterMove_RightSplit:
+    IfDefenderCanKO Expert_CounterMove_CheckSurvives
+    IfRandomLessThan 205, Expert_CounterMove_ScorePlus2
+    GoTo Expert_CounterMove_CheckSpeed
+
+Expert_CounterMove_CheckSurvivesNoBonus:
+    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STURDY, Expert_CounterMove_CheckSpeed
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Expert_CounterMove_CheckSpeed
+    GoTo ScoreMinus20
+
+Expert_CounterMove_CheckSurvives:
+    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STURDY, Expert_CounterMove_ScorePlus2
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Expert_CounterMove_ScorePlus2
+    GoTo ScoreMinus20
+
+Expert_CounterMove_ScorePlus2:
+    AddToMoveScore 2
+
+Expert_CounterMove_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_CounterMove_CheckStatusMoves
+    IfRandomGreaterThan 63, Expert_CounterMove_CheckStatusMoves
     AddToMoveScore -1
 
-Expert_Counter_CheckAboveHalfHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Counter_CheckLastUsedMove
-    IfRandomLessThan 100, Expert_Counter_CheckLastUsedMove
+Expert_CounterMove_CheckStatusMoves:
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_STATUS, Expert_CounterMove_TryScoreMinus1
+    PopOrEnd
+
+Expert_CounterMove_TryScoreMinus1:
+    IfRandomGreaterThan 63, Expert_CounterMove_End
     AddToMoveScore -1
 
-Expert_Counter_CheckLastUsedMove:
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_MIRROR_COAT, Expert_Counter_TryScorePlus4
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
-    IfLoadedEqualTo 0, Expert_Counter_TryScorePlus1
-    IfTargetIsNotTaunted Expert_Counter_CheckPhysicalMove
-    IfRandomLessThan 100, Expert_Counter_CheckPhysicalMove
+Expert_CounterMove_End:
+    PopOrEnd
+
+Expert_MetalBurst:
+    AddToMoveScore 6
+    IfDefenderCanKO Expert_MetalBurst_CheckSurvives
+    IfRandomGreaterThan 204, Expert_CounterMove_CheckStatusMoves
     AddToMoveScore 1
+    GoTo Expert_CounterMove_CheckStatusMoves
 
-Expert_Counter_CheckPhysicalMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_PHYSICAL, Expert_Counter_ScoreMinus1
-    IfRandomLessThan 100, Expert_Counter_End2
-    AddToMoveScore 1
-    GoTo Expert_Counter_End2
+Expert_MetalBurst_CheckSurvives:
+    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STURDY, Expert_MetalBurst_ScorePlus2
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_ENDURE, Expert_MetalBurst_ScorePlus2
+    GoTo ScoreMinus20
 
-Expert_Counter_TryScorePlus1:
-    IfTargetIsNotTaunted Expert_Counter_CheckOpponentTypes
-    IfRandomLessThan 100, Expert_Counter_CheckOpponentTypes
-    AddToMoveScore 1
+Expert_MetalBurst_ScorePlus2:
+    AddToMoveScore 2
+    GoTo Expert_CounterMove_CheckStatusMoves
 
-Expert_Counter_CheckOpponentTypes:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedInTable Expert_Counter_PhysicalTypes, Expert_Counter_End2
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedInTable Expert_Counter_PhysicalTypes, Expert_Counter_End2
-    IfRandomLessThan 50, Expert_Counter_End2
-
-Expert_Counter_TryScorePlus4:
-    IfRandomLessThan 100, Expert_Counter_End
-    AddToMoveScore 4
-
-Expert_Counter_End:
-    PopOrEnd 
-
-Expert_Counter_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Counter_End2:
-    PopOrEnd 
-
-Expert_Counter_PhysicalTypes:
-    TableEntry TYPE_NORMAL
-    TableEntry TYPE_FIGHTING
-    TableEntry TYPE_FLYING
-    TableEntry TYPE_POISON
-    TableEntry TYPE_GROUND
-    TableEntry TYPE_ROCK
-    TableEntry TYPE_BUG
-    TableEntry TYPE_GHOST
-    TableEntry TYPE_STEEL
-    TableEntry TABLE_END
 
 Expert_AcidSpray:
     IfMoveNotEqualTo MOVE_ACID_SPRAY, Expert_AcidSpray_End
@@ -3348,86 +3342,6 @@ Expert_PsychUp_ScoreMinus2:
 Expert_PsychUp_End:
     PopOrEnd 
 
-Expert_MirrorCoat:
-    // If the opponent is asleep, confused, or infatuated, score -1 and terminate.
-    //
-    // If the attacker's HP <= 30%, 96.1% chance of additional score -1.
-    //
-    // If the attacker's HP <= 50%, 60.9% chance of additional score -1. (This stacks with the above condition.)
-    //
-    // If the attacker knows specifically Counter, 60.9% chance of score +4.
-    //
-    // If the opponent's last-used move was a Status move:
-    // - If the opponent is Taunted, 60.9% chance of additional score +1.
-    // - If the opponent does NOT have a type which is considered a Special type, 49% chance of score +4.
-    //
-    // If the opponent's last-used move was a Damaging move:
-    // - If the opponent is Taunted, 60.9% chance of additional score +1.
-    // - If the last-used move was a Physical move, score -1.
-    // - If the last-used move was a Special move, 60.9% chance of score +1.
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_MirrorCoat_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_MirrorCoat_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_MirrorCoat_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_MirrorCoat_CheckAboveHalfHP
-    IfRandomLessThan 10, Expert_MirrorCoat_CheckAboveHalfHP
-    AddToMoveScore -1
-
-Expert_MirrorCoat_CheckAboveHalfHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_MirrorCoat_CheckLastUsedMove
-    IfRandomLessThan 100, Expert_MirrorCoat_CheckLastUsedMove
-    AddToMoveScore -1
-
-Expert_MirrorCoat_CheckLastUsedMove:
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_COUNTER, Expert_MirrorCoat_TryScorePlus4
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
-    IfLoadedEqualTo 0, Expert_MirrorCoat_TryScorePlus1
-    IfTargetIsNotTaunted Expert_MirrorCoat_CheckSpecialMove
-    IfRandomLessThan 100, Expert_MirrorCoat_CheckSpecialMove
-    AddToMoveScore 1
-
-Expert_MirrorCoat_CheckSpecialMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_SPECIAL, Expert_MirrorCoat_ScoreMinus1
-    IfRandomLessThan 100, Expert_MirrorCoat_End2
-    AddToMoveScore 1
-    GoTo Expert_MirrorCoat_End2
-
-Expert_MirrorCoat_TryScorePlus1:
-    IfTargetIsNotTaunted Expert_MirrorCoat_CheckOpponentTypes
-    IfRandomLessThan 100, Expert_MirrorCoat_CheckOpponentTypes
-    AddToMoveScore 1
-
-Expert_MirrorCoat_CheckOpponentTypes:
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedInTable Expert_MirrorCoat_SpecialTypes, Expert_MirrorCoat_End2
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedInTable Expert_MirrorCoat_SpecialTypes, Expert_MirrorCoat_End2
-    IfRandomLessThan 50, Expert_MirrorCoat_End2
-
-Expert_MirrorCoat_TryScorePlus4:
-    IfRandomLessThan 100, Expert_MirrorCoat_End
-    AddToMoveScore 4
-
-Expert_MirrorCoat_End:
-    PopOrEnd 
-
-Expert_MirrorCoat_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_MirrorCoat_End2:
-    PopOrEnd 
-
-Expert_MirrorCoat_SpecialTypes:
-    TableEntry TYPE_FIRE
-    TableEntry TYPE_WATER
-    TableEntry TYPE_GRASS
-    TableEntry TYPE_ELECTRIC
-    TableEntry TYPE_PSYCHIC
-    TableEntry TYPE_ICE
-    TableEntry TYPE_DRAGON
-    TableEntry TYPE_DARK
-    TableEntry TABLE_END
 
 Expert_ChargeTurn:
     // Sky Attack, Skull Bash and Meteor Beam spend a turn charging in the open, dealing nothing
@@ -3560,61 +3474,6 @@ Expert_Endeavor_End:
 
 
 
-Expert_MetalBurst:
-    // If the opponent is asleep, infatuated, or confused or they know any of the following move
-    // effects, score -1 and terminate:
-    // - Avalanche / Revenge
-    // - Focus Punch
-    // - Vital Throw
-    //
-    // If the attacker's HP <= 30%, 96% chance of additional score -1.
-    //
-    // If the attacker's HP <= 50%, 60.9% chance of additional score -1.
-    //
-    // If the attacker's HP > 50%, 25% chance of additional score +1.
-    //
-    // If the opponent's last-used move was not a Status move and they are not Taunted, 60.9% chance
-    // of additional score +1.
-    //
-    // If the opponent is not Taunted, 60.9% chance of score +1.
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_MetalBurst_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_ATTRACT, Expert_MetalBurst_ScoreMinus1
-    IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_MetalBurst_ScoreMinus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_DOUBLE_POWER_IF_HIT, Expert_MetalBurst_ScoreMinus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_MetalBurst_ScoreMinus1
-    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_MetalBurst_ScoreMinus1
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_MetalBurst_MediumHPTryScoreMinus1
-    IfRandomLessThan 10, Expert_MetalBurst_MediumHPTryScoreMinus1
-    AddToMoveScore -1
-
-Expert_MetalBurst_MediumHPTryScoreMinus1:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_MetalBurst_HighHPTryScorePlus1
-    IfRandomLessThan 100, Expert_MetalBurst_HighHPTryScorePlus1
-    AddToMoveScore -1
-
-Expert_MetalBurst_HighHPTryScorePlus1:
-    IfRandomLessThan 192, Expert_MetalBurst_CheckLastUsedMove
-    AddToMoveScore 1
-
-Expert_MetalBurst_CheckLastUsedMove:
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadPowerOfLoadedMove 
-    IfLoadedEqualTo 0, Expert_MetalBurst_TryScorePlus1
-    IfTargetIsNotTaunted Expert_MetalBurst_TryScorePlus1
-    IfRandomLessThan 100, Expert_MetalBurst_TryScorePlus1
-    AddToMoveScore 1
-
-Expert_MetalBurst_TryScorePlus1:
-    IfTargetIsNotTaunted Expert_MetalBurst_End
-    IfRandomLessThan 100, Expert_MetalBurst_End
-    AddToMoveScore 1
-    GoTo Expert_MetalBurst_End
-
-Expert_MetalBurst_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_MetalBurst_End:
-    PopOrEnd 
 
 Expert_Fling:
     // If the opponent resists or is immune to the move and the attacker is holding an item other than

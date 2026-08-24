@@ -725,8 +725,8 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfBattlerHasDamagingMoveOfClass battler:req, class:req, jump:req
-    .long AICMD_IFBATTLERHASDAMAGINGMOVEOFCLASS
+    .macro IfBattlerHasMoveOfClass battler:req, class:req, jump:req
+    .long AICMD_IFBATTLERHASMOVEOFCLASS
     .long \battler
     .long \class
     .long (\jump-.) / 4 - 1
