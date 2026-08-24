@@ -47,6 +47,7 @@
 
 #define CHECK_DISABLE 0
 #define CHECK_ENCORE  1
+#define CHECK_WISH    2
 
 #define CHECK_HIGHER_THAN_TARGET 0
 #define CHECK_LOWER_THAN_TARGET  1

@@ -1720,6 +1720,18 @@ int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler);
 int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler);
 
 /**
+ * @brief As BattleAI_PostKOSwitchIn, but also reports how hard the chosen switch-in would be
+ * hit by the opposing battler's best move.
+ *
+ * @param battleSys
+ * @param battler
+ * @param incomingDamage    Out-param for the opponent's best damage roll against the pick.
+ * @param maxHP             Out-param for the pick's maximum HP.
+ * @return The party slot to switch in.
+ */
+int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *maxHP);
+
+/**
  * @brief Get the switched-to slot determined by the AI for a given battler.
  *
  * @param battleSys

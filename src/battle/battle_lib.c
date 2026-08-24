@@ -10358,7 +10358,7 @@ BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler)
     return FALSE;
 }
 
-static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective)
+static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective, int *pickedIncomingDamage, int *pickedMaxHP)
 {
     int i, j;
     u8 defender;
@@ -10443,6 +10443,14 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
     picked = 6;
     firstNotDead = 6;
 
+    if (pickedIncomingDamage != NULL) {
+        *pickedIncomingDamage = 0;
+    }
+
+    if (pickedMaxHP != NULL) {
+        *pickedMaxHP = 0;
+    }
+
     savedBattlerMon = battleCtx->battleMons[battler];
 
     for (i = 0; i < partySize; i++) {
@@ -10483,6 +10491,14 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                 if (score > maxScore) {
                     maxScore = score;
                     picked = i;
+
+                    if (pickedIncomingDamage != NULL) {
+                        *pickedIncomingDamage = trainerMaxDamageToAI;
+                    }
+
+                    if (pickedMaxHP != NULL) {
+                        *pickedMaxHP = BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL);
+                    }
                 }
                 continue;
             }
@@ -10888,6 +10904,14 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
             if (score > maxScore) {
                 maxScore = score;
                 picked = i;
+
+                if (pickedIncomingDamage != NULL) {
+                    *pickedIncomingDamage = trainerMaxDamageToAI;
+                }
+
+                if (pickedMaxHP != NULL) {
+                    *pickedMaxHP = BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL);
+                }
             }
 
             if (score == 7) {
@@ -10917,12 +10941,17 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
-    return PostKOSwitchIn(battleSys, battler, FALSE);
+    return PostKOSwitchIn(battleSys, battler, FALSE, NULL, NULL);
 }
 
 int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler)
 {
-    return PostKOSwitchIn(battleSys, battler, TRUE);
+    return PostKOSwitchIn(battleSys, battler, TRUE, NULL, NULL);
+}
+
+int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *maxHP)
+{
+    return PostKOSwitchIn(battleSys, battler, FALSE, incomingDamage, maxHP);
 }
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)

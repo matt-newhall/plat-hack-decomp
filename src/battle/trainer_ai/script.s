@@ -282,7 +282,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Basic_CheckImprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFORM, Basic_CheckTransform
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STICKY_WEB, Basic_CheckStickyWeb
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_CheckWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Basic_CheckSteelBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Basic_CheckEndure
     PopOrEnd
@@ -537,6 +537,12 @@ Basic_CheckLifeDew:
     IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 100, ScoreMinus20
 
 Basic_CheckLifeDew_Terminate:
+    PopOrEnd
+
+Basic_CheckWish:
+    // Wish heals a turn later, so the user's own HP is not the question - it may well be passing
+    // the heal to a switch-in. The only hard failure is a Wish already pending on this slot.
+    IfBattlerUnderEffect AI_BATTLER_ATTACKER, CHECK_WISH, ScoreMinus10
     PopOrEnd
 
 Basic_CheckCanRecoverHP:
@@ -1850,6 +1856,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Expert_PartingShot
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_SwitchHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Expert_SteelBeam
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Expert_Wish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
@@ -2585,43 +2592,19 @@ Expert_Bide_End:
     PopOrEnd 
 
 Expert_ForceSwitch:
-    // If the target has been in battle for longer than more than 3 turns, 75% chance of score +2.
-    //
-    // If the target's side of the field has Spikes, Stealth Rock, or Toxic Spikes set, 50% chance of
-    // score +2.
-    //
-    // If the target has a stat stage of +3 or higher in any of the following stats, 50% chance of
-    // score +2:
-    // - Attack
-    // - Defense
-    // - SpAttack
-    // - SpDefense
-    // - Evasion
-    //
-    // Otherwise, score -3.
-    LoadBattlerTurnCount AI_BATTLER_DEFENDER
-    IfLoadedGreaterThan 3, Expert_ForceSwitch_75PercentScorePlus2
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_ForceSwitch_50PercentScorePlus2
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_ForceSwitch_50PercentScorePlus2
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 8, Expert_ForceSwitch_50PercentScorePlus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_ForceSwitch_50PercentScorePlus2
-    AddToMoveScore -3
-    GoTo Expert_ForceSwitch_End
+    AddToMoveScore 6
+    IfDefenderCanKO Expert_ForceSwitch_End
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_ForceSwitch_TryScorePlus1
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_ForceSwitch_TryScorePlus1
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_ForceSwitch_TryScorePlus1
+    PopOrEnd
 
-Expert_ForceSwitch_75PercentScorePlus2:
-    IfRandomLessThan 64, Expert_ForceSwitch_50PercentScorePlus2
-    AddToMoveScore 2
-
-Expert_ForceSwitch_50PercentScorePlus2:
-    IfRandomLessThan 128, Expert_ForceSwitch_End
-    AddToMoveScore 2
+Expert_ForceSwitch_TryScorePlus1:
+    IfRandomGreaterThan 84, Expert_ForceSwitch_End
+    AddToMoveScore 1
 
 Expert_ForceSwitch_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_Conversion:
     // If the attacker's HP is <= 90%, additional score -2.
@@ -3361,6 +3344,14 @@ Expert_PartingShot_CheckAbility:
 Expert_PartingShot_ScoreMinus2:
     AddToMoveScore -2
     GoTo Expert_PivotRegenerator
+
+Expert_Wish:
+    AddToMoveScore 6
+    IfRandomGreaterThan 84, Expert_Wish_End
+    AddToMoveScore -1
+
+Expert_Wish_End:
+    PopOrEnd
 
 Expert_SteelBeam:
     IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_SteelBeam_End

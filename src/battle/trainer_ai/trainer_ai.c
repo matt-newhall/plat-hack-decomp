@@ -245,6 +245,7 @@ static int TrainerAI_HitCountMultiplier(BattleSystem *battleSys, BattleContext *
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
 static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_WishPassSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, BOOL wantSuperEffective);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -1906,6 +1907,12 @@ static void AICmd_IfBattlerUnderEffect(BattleSystem *battleSys, BattleContext *b
 
     case CHECK_ENCORE:
         if (battleCtx->battleMons[battler].moveEffectsData.encoredTurns) {
+            AIScript_Iter(battleCtx, jump);
+        }
+        break;
+
+    case CHECK_WISH:
+        if (battleCtx->fieldConditions.wishTurns[battler]) {
             AIScript_Iter(battleCtx, jump);
         }
         break;
@@ -4403,6 +4410,43 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
 }
 
 /**
+ * @brief Check whether the AI should hand a pending Wish to a switch-in.
+ *
+ * A Wish set on this slot heals whoever occupies it when the count runs out, so switching on
+ * the turn it lands passes the heal along. That is only worth doing if the incoming Pokemon
+ * can take the hit it is switching into.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler   The AI's battler.
+ * @return TRUE if the AI has a switch to make, FALSE otherwise.
+ */
+static BOOL AI_WishPassSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    if (battleCtx->fieldConditions.wishTurns[battler] == 0) {
+        return FALSE;
+    }
+
+    int incomingDamage, maxHP;
+    int slot = BattleAI_PostKOSwitchInDamage(battleSys, battler, &incomingDamage, &maxHP);
+
+    if (slot >= MAX_PARTY_SIZE || maxHP == 0) {
+        return FALSE;
+    }
+
+    if (incomingDamage * 2 >= maxHP) {
+        return FALSE;
+    }
+
+    if (BattleSystem_RandNext(battleSys) % 4 == 0) {
+        return FALSE;
+    }
+
+    battleCtx->aiSwitchedPartySlot[battler] = slot;
+    return TRUE;
+}
+
+/**
  * @brief Check if Perish Song is about to knock a battler out. If so, treat the next switch
  * as post-KO switch AI.
  *
@@ -5093,6 +5137,10 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
 
     if (alivePartyMons) {
         if (AI_PerishSongKO(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (AI_WishPassSwitch(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
