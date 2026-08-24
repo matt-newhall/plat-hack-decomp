@@ -1240,40 +1240,7 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED) {
-        AI_CONTEXT.calcTemp = ABILITY_NONE;
-    } else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
-        // If we already know an opponent's ability, load that ability
-        if (AI_CONTEXT.battlerAbilities[battler]) {
-            AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
-        } else {
-            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            u8 knownAbility = Battler_Ability(battleCtx, battler);
-            if (knownAbility == ABILITY_SHADOW_TAG
-                || knownAbility == ABILITY_MAGNET_PULL
-                || knownAbility == ABILITY_ARENA_TRAP) {
-                AI_CONTEXT.calcTemp = knownAbility;
-            } else {
-                // Try to guess the opponent's ability (flip a coin)
-                int ability1 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_1);
-                int ability2 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_2);
-
-                if (ability1 && ability2) {
-                    if (BattleSystem_RandNext(battleSys) & 1) {
-                        AI_CONTEXT.calcTemp = ability1;
-                    } else {
-                        AI_CONTEXT.calcTemp = ability2;
-                    }
-                } else if (ability1) {
-                    AI_CONTEXT.calcTemp = ability1;
-                } else {
-                    AI_CONTEXT.calcTemp = ability2;
-                }
-            }
-        }
-    } else {
-        AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
-    }
+    AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
 }
 
 static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1283,50 +1250,11 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
     int inBattler = AIScript_Read(battleCtx);
     int expected = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int tmpAbility;
+    int ability = Battler_Ability(battleCtx, battler);
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED) {
-        tmpAbility = ABILITY_NONE;
-    } else if (inBattler == AI_BATTLER_DEFENDER || inBattler == AI_BATTLER_DEFENDER_PARTNER) {
-        // If we already know an opponent's ability, load that ability
-        if (AI_CONTEXT.battlerAbilities[battler]) {
-            tmpAbility = AI_CONTEXT.battlerAbilities[battler];
-            AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
-        } else {
-            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            u8 knownAbility = Battler_Ability(battleCtx, battler);
-            if (knownAbility == ABILITY_SHADOW_TAG
-                || knownAbility == ABILITY_MAGNET_PULL
-                || knownAbility == ABILITY_ARENA_TRAP) {
-                tmpAbility = knownAbility;
-            } else {
-                // Try to guess the opponent's ability (flip a coin)
-                int ability1 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_1);
-                int ability2 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_2);
-
-                if (ability1 && ability2) {
-                    // If the opponent has two abilities, but neither are the expected one,
-                    // prefer ability 1 for the final check
-                    if (ability1 != expected && ability2 != expected) {
-                        tmpAbility = ability1;
-                        // Otherwise, pretend that we don't know about it
-                    } else {
-                        tmpAbility = ABILITY_NONE;
-                    }
-                } else if (ability1) {
-                    tmpAbility = ability1;
-                } else {
-                    tmpAbility = ability2;
-                }
-            }
-        }
-    } else {
-        tmpAbility = Battler_Ability(battleCtx, battler);
-    }
-
-    if (tmpAbility == ABILITY_NONE) {
+    if (ability == ABILITY_NONE) {
         AI_CONTEXT.calcTemp = AI_UNKNOWN;
-    } else if (tmpAbility == expected) {
+    } else if (ability == expected) {
         AI_CONTEXT.calcTemp = AI_HAVE;
     } else {
         AI_CONTEXT.calcTemp = AI_NOT_HAVE;
