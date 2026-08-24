@@ -139,6 +139,7 @@ ScriptCommand(AICMD_IFDOESNOTMOVEFIRST,               AICmd_IfDoesNotMoveFirst)
 ScriptCommand(AICMD_LOADFLINGEFFECT,                   AICmd_LoadFlingEffect)
 ScriptCommand(AICMD_IFPARTNERDECLAREDMOVECLASS,       AICmd_IfPartnerDeclaredMoveClass)
 ScriptCommand(AICMD_LOADPARTNERDECLAREDMOVEEFFECT,    AICmd_LoadPartnerDeclaredMoveEffect)
+ScriptCommand(AICMD_IFPARTNERMOVESFIRST,              AICmd_IfPartnerMovesFirst)
 
 // clang-format on
 

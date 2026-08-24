@@ -4146,16 +4146,25 @@ TagStrategy_SpreadGroundMove:
     // which keeps the partner out of it is settled first.
     IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, TagStrategy_SpreadGroundMove_PartnerSafe
 
-    // Staying off the ground by type, by item or by Magnet Rise holds regardless of who is
-    // attacking.
+    IfFieldConditionsMask FIELD_CONDITION_GRAVITY, TagStrategy_SpreadGroundMove_PartnerHit
+
+    LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo HOLD_EFFECT_SPEED_DOWN_GROUNDED, TagStrategy_SpreadGroundMove_PartnerHit
+    IfLoadedEqualTo HOLD_EFFECT_LEVITATE_POP_ON_HIT, TagStrategy_SpreadGroundMove_PartnerSafe
+
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
     IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
     IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_SpreadGroundMove_PartnerSafe
-    LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedEqualTo HOLD_EFFECT_LEVITATE_POP_ON_HIT, TagStrategy_SpreadGroundMove_PartnerSafe
 
-    // The ability-granted immunities do not: Mold Breaker ignores them and the partner is caught
-    // in the blast like anything else.
+    // A Magnet Rise the partner has only declared this turn counts as well, but it has to resolve
+    // before the move does to be off the ground in time.
+    LoadPartnerDeclaredMoveEffect
+    IfLoadedNotEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, TagStrategy_SpreadGroundMove_CheckAbilities
+    IfPartnerMovesFirst TagStrategy_SpreadGroundMove_PartnerSafe
+
+TagStrategy_SpreadGroundMove_CheckAbilities:
+    // The ability-granted immunities do not hold: Mold Breaker ignores them and the partner is
+    // caught in the blast like anything else.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, TagStrategy_SpreadGroundMove_PartnerHit
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE

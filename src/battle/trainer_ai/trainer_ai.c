@@ -192,6 +192,7 @@ static void AICmd_LoadFlingPower(BattleSystem *battleSys, BattleContext *battleC
 static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfPartnerDeclaredMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfPartnerMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCanUseLastResort(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2155,6 +2156,30 @@ static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleC
     u16 move = battleCtx->declaredMove[partner];
 
     AI_CONTEXT.calcTemp = move == MOVE_NONE ? -1 : MOVE_DATA(move).effect;
+}
+
+/**
+ * @brief Check whether the attacker's partner will act before the attacker does.
+ *
+ * Pairs with the declared-move commands: knowing what the partner intends is only half of it,
+ * since a move which sets something up for the attacker has to resolve first to be worth
+ * anything.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfPartnerMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int partner = BattleSystem_GetPartner(battleSys, attacker);
+
+    if (battleCtx->battleMons[partner].curHP
+        && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, partner, attacker, TRUE) == COMPARE_SPEED_FASTER) {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx)

@@ -538,6 +538,11 @@
     .long AICMD_LOADPARTNERDECLAREDMOVEEFFECT
     .endm
 
+    .macro IfPartnerMovesFirst jump:req
+    .long AICMD_IFPARTNERMOVESFIRST
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfPartnerDeclaredMoveClass class:req, jump:req
     .long AICMD_IFPARTNERDECLAREDMOVECLASS
     .long \class
