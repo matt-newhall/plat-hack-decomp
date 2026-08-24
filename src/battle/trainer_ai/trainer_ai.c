@@ -1638,51 +1638,16 @@ static void AICmd_IfMoveKnown(BattleSystem *battleSys, BattleContext *battleCtx)
     int move = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
+    }
 
-        if (i < LEARNED_MOVES_MAX) {
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[battler].moves[i] == move) {
             AIScript_Iter(battleCtx, jump);
+            return;
         }
-        break;
-
-    case AI_BATTLER_ATTACKER_PARTNER:
-        if (battleCtx->battleMons[battler].curHP == 0) {
-            break;
-        }
-
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
-
-        if (i < LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i] == move) {
-                break;
-            }
-        }
-
-        if (i < LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
     }
 }
 
@@ -1694,52 +1659,18 @@ static void AICmd_IfMoveNotKnown(BattleSystem *battleSys, BattleContext *battleC
     int move = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_ATTACKER_PARTNER:
-        if (battleCtx->battleMons[battler].curHP == 0) {
-            break;
-        }
-
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i] == move) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
     }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[battler].moves[i] == move) {
+            return;
+        }
+    }
+
+    AIScript_Iter(battleCtx, jump);
 }
 
 static void AICmd_IfMoveEffectKnown(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1750,37 +1681,18 @@ static void AICmd_IfMoveEffectKnown(BattleSystem *battleSys, BattleContext *batt
     int effect = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i]
-                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect == effect) {
-                break;
-            }
-        }
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
+    }
 
-        if (i < LEARNED_MOVES_MAX) {
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && MOVE_DATA(move).effect == effect) {
             AIScript_Iter(battleCtx, jump);
+            return;
         }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i]
-                && MOVE_DATA(AI_CONTEXT.battlerMoves[battler][i]).effect == effect) {
-                break;
-            }
-        }
-
-        if (i < LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
     }
 }
 
@@ -1792,38 +1704,20 @@ static void AICmd_IfMoveEffectNotKnown(BattleSystem *battleSys, BattleContext *b
     int effect = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i]
-                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect == effect) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i]
-                && MOVE_DATA(AI_CONTEXT.battlerMoves[battler][i]).effect == effect) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
     }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && MOVE_DATA(move).effect == effect) {
+            return;
+        }
+    }
+
+    AIScript_Iter(battleCtx, jump);
 }
 
 static void AICmd_IfBattlerUnderEffect(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1917,11 +1811,7 @@ static void AICmd_LoadHeldItemEffect(BattleSystem *battleSys, BattleContext *bat
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (AI_CONTEXT.attacker != battler) {
-        AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, AI_CONTEXT.battlerHeldItems[battler], ITEM_PARAM_HOLD_EFFECT);
-    } else {
-        AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT);
-    }
+    AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT);
 }
 
 static void AICmd_IfHeldItemEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1932,15 +1822,8 @@ static void AICmd_IfHeldItemEqualTo(BattleSystem *battleSys, BattleContext *batt
     int expected = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    u16 heldItem;
 
-    if ((battler & 1) == (AI_CONTEXT.attacker & 1)) {
-        heldItem = battleCtx->battleMons[battler].heldItem;
-    } else {
-        heldItem = AI_CONTEXT.battlerHeldItems[battler];
-    }
-
-    if (heldItem == expected) {
+    if (battleCtx->battleMons[battler].heldItem == expected) {
         AIScript_Iter(battleCtx, jump);
     }
 }
