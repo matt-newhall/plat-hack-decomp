@@ -3445,12 +3445,24 @@ static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *
     }
 }
 
+/**
+ * @brief Check whether the current move moves ahead of the ordinary priority bracket.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
 static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
     int jump = AIScript_Read(battleCtx);
 
-    if (MOVE_DATA(AI_CONTEXT.move).priority > 0) {
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+
+    if (MOVE_DATA(AI_CONTEXT.move).priority > 0
+        || (Battler_Ability(battleCtx, attacker) == ABILITY_GALE_WINGS
+            && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
+            && mon->curHP == mon->maxHP)) {
         AIScript_Iter(battleCtx, jump);
     }
 }
