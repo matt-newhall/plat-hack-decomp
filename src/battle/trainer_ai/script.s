@@ -1760,6 +1760,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_DOWN_2, Expert_StatusEvasionDown
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_StatusPoison
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BURN, Expert_StatusBurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_StatusParalyze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_StatusMoveBonus
@@ -2763,6 +2764,28 @@ Expert_OHKOMove:
     GoTo ScorePlus6
 
 
+
+Expert_StatusBurn:
+    AddToMoveScore 6
+    IfRandomGreaterThan 94, Expert_StatusBurn_End
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusBurn_ScorePlus1
+    GoTo Expert_StatusBurn_CheckHex
+
+Expert_StatusBurn_ScorePlus1:
+    AddToMoveScore 1
+
+Expert_StatusBurn_CheckHex:
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusBurn_ScorePlus1AndEnd
+    LoadBattleType 
+    IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_StatusBurn_End
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_HEX, Expert_StatusBurn_ScorePlus1AndEnd
+    PopOrEnd
+
+Expert_StatusBurn_ScorePlus1AndEnd:
+    AddToMoveScore 1
+
+Expert_StatusBurn_End:
+    PopOrEnd
 
 Expert_StatusPoison:
     AddToMoveScore 6
