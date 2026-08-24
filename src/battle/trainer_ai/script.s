@@ -1832,7 +1832,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Expert_SpitUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
@@ -3318,15 +3317,6 @@ Expert_ChargeTurn_ScorePlus9:
     PopOrEnd
 
 
-Expert_SpitUp:
-    // If the attacker's Stockpile count is 2 or higher, 68.75% chance of score +2.
-    LoadStockpileCount AI_BATTLER_ATTACKER
-    IfLoadedLessThan 2, Expert_SpitUp_End
-    IfRandomLessThan 80, Expert_SpitUp_End
-    AddToMoveScore 2
-
-Expert_SpitUp_End:
-    PopOrEnd 
 
 
 Expert_FocusPunch:
