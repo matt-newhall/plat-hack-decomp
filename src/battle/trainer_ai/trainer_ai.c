@@ -220,6 +220,7 @@ static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleCont
 static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3249,6 +3250,30 @@ static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext 
  * @param battleSys
  * @param battleCtx
  */
+/**
+ * @brief Check whether a battler knows any sound-based move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && BattleSystem_IsSoundMove(move)) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
 static void AICmd_IfBattlerHasDamagingMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);

@@ -2882,72 +2882,33 @@ Expert_VitalThrow_End:
     PopOrEnd 
 
 Expert_Substitute:
-    // If the attacker knows specifically Focus Punch, 62.5% chance of additional score +1.
-    //
-    // If the attacker's HP <= 90%, roll for a 60.9% chance of additional score -1 a number of times
-    // corresponding to the attacker's HP:
-    // - > 70%: roll once
-    // - > 50%: roll twice
-    // - <= 50%: roll thrice
-    // These rolls are cumulative; e.g., an attacker at 53% HP can receive additional score -2.
-    //
-    // If the attacker is faster than its opponent, consider the move that the opponent last used:
-    // - If it was a Status move that induces a non-volatile status condition and the opponent is
-    // currently Asleep, Poisoned, Paralyzed, Burned, or Frozen, 60.9% chance of score +1.
-    // - If it was a Status move that induces Confusion and the opponent is currently Confused, 60.9%
-    // chance of score +1.
-    // - If it was Leech Seed and the opponent is currently Seeded, 60.9% chance of score +1.
-    //
-    // Otherwise, no further score modifications.
-    IfMoveNotKnown AI_BATTLER_ATTACKER, MOVE_FOCUS_PUNCH, Expert_Substitute_CheckUserHP
-    IfRandomLessThan 96, Expert_Substitute_CheckUserHP
-    AddToMoveScore 1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_INFILTRATOR, ScoreMinus20
 
-Expert_Substitute_CheckUserHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 90, Expert_Substitute_CheckTargetLastMove
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_Substitute_TryScoreMinus1_FinalRound
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Substitute_TryScoreMinus1_SecondRound
-    IfRandomLessThan 100, Expert_Substitute_TryScoreMinus1_SecondRound
+    AddToMoveScore 6
+    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_SLEEP, Expert_Substitute_CheckSeeded
+    AddToMoveScore 2
+
+Expert_Substitute_CheckSeeded:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Substitute_TryScoreMinus1
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Substitute_ScorePlus2
+    GoTo Expert_Substitute_TryScoreMinus1
+
+Expert_Substitute_ScorePlus2:
+    AddToMoveScore 2
+
+Expert_Substitute_TryScoreMinus1:
+    IfRandomLessThan 128, Expert_Substitute_CheckSound
     AddToMoveScore -1
 
-Expert_Substitute_TryScoreMinus1_SecondRound:
-    IfRandomLessThan 100, Expert_Substitute_TryScoreMinus1_FinalRound
-    AddToMoveScore -1
+Expert_Substitute_CheckSound:
+    IfBattlerKnowsSoundMove AI_BATTLER_DEFENDER, Expert_Substitute_ScoreMinus8
+    PopOrEnd
 
-Expert_Substitute_TryScoreMinus1_FinalRound:
-    IfRandomLessThan 100, Expert_Substitute_CheckTargetLastMove
-    AddToMoveScore -1
-
-Expert_Substitute_CheckTargetLastMove:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Substitute_End
-    LoadBattlerPreviousMove AI_BATTLER_DEFENDER
-    LoadEffectOfLoadedMove 
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_SLEEP, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_BURN, Expert_Substitute_CheckTargetStatus
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Expert_Substitute_CheckTargetConfused
-    IfLoadedEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_Substitute_CheckTargetSeeded
-    GoTo Expert_Substitute_End
-
-Expert_Substitute_CheckTargetStatus:
-    IfNotStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_Substitute_TryScorePlus1
-    GoTo Expert_Substitute_End
-
-Expert_Substitute_CheckTargetConfused:
-    IfNotVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_CONFUSION, Expert_Substitute_TryScorePlus1
-    GoTo Expert_Substitute_End
-
-Expert_Substitute_CheckTargetSeeded:
-    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Substitute_End
-
-Expert_Substitute_TryScorePlus1:
-    IfRandomLessThan 100, Expert_Substitute_End
-    AddToMoveScore 1
-
-Expert_Substitute_End:
-    PopOrEnd 
+Expert_Substitute_ScoreMinus8:
+    AddToMoveScore -8
+    PopOrEnd
 
 Expert_Counter:
     // If the opponent is asleep, confused, or infatuated, score -1 and terminate.

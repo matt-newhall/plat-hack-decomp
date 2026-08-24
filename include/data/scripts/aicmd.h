@@ -131,6 +131,7 @@ ScriptCommand(AICMD_IFANYOPPONENTOUTSPEEDSSIDE,      AICmd_IfAnyOpponentOutspeed
 ScriptCommand(AICMD_IFPARALYSISFLIPSSPEED,           AICmd_IfParalysisFlipsSpeed)
 ScriptCommand(AICMD_IFATTACKERCANKO,                  AICmd_IfAttackerCanKO)
 ScriptCommand(AICMD_IFRESIDUALDAMAGEKOSATTACKER,      AICmd_IfResidualDamageKOsAttacker)
+ScriptCommand(AICMD_IFBATTLERKNOWSSOUNDMOVE,          AICmd_IfBattlerKnowsSoundMove)
 
 // clang-format on
 

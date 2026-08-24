@@ -693,6 +693,12 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfBattlerKnowsSoundMove battler:req, jump:req
+    .long AICMD_IFBATTLERKNOWSSOUNDMOVE
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfResidualDamageKOsAttacker jump:req
     .long AICMD_IFRESIDUALDAMAGEKOSATTACKER
     .long (\jump-.) / 4 - 1
