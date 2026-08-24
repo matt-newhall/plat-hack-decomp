@@ -156,7 +156,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Basic_CheckCanForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckLifeDew
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Basic_CheckAuroraVeil
@@ -251,6 +251,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Basic_CheckQuiverDance
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHELL_SMASH, Basic_CheckShellSmash
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Basic_CheckGravityActive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_SPEED, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NATURAL_GIFT, Basic_CheckNaturalGift
@@ -526,10 +527,23 @@ Basic_CheckCanForceSwitch:
 Basic_CheckCanForceSwitch_Terminate:
     PopOrEnd 
 
+Basic_CheckLifeDew:
+    // Life Dew heals both slots, so it is only wasted when there is nothing left to heal on
+    // either of them.
+    LoadBattleType 
+    IfLoadedNotMask BATTLE_TYPE_DOUBLES, Basic_CheckCanRecoverHP
+    IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, Basic_CheckCanRecoverHP
+    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Basic_CheckLifeDew_Terminate
+    IfHPPercentEqualTo AI_BATTLER_ATTACKER_PARTNER, 100, ScoreMinus20
+
+Basic_CheckLifeDew_Terminate:
+    PopOrEnd
+
 Basic_CheckCanRecoverHP:
-    // If at 100% HP, score -8.
-    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Basic_CheckCanRecoverHP_Terminate
-    AddToMoveScore -8
+    // Healing is wasted at full HP and mostly wasted just below it.
+    IfHPPercentEqualTo AI_BATTLER_ATTACKER, 100, ScoreMinus20
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 85, Basic_CheckCanRecoverHP_Terminate
+    AddToMoveScore -6
 
 Basic_CheckCanRecoverHP_Terminate:
     PopOrEnd 
@@ -1741,7 +1755,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Expert_ForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONVERSION, Expert_Conversion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Recovery
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_Screen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Expert_AuroraVeil
@@ -1818,7 +1832,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPIT_UP, Expert_SpitUp
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_Recovery
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Memento
@@ -2659,59 +2673,25 @@ Expert_Conversion_End:
     PopOrEnd 
 
 Expert_Synthesis:
-    // Treat Synthesis-type effects like any other recovery move, but additional score -2 if the
-    // weather is Hail, Rain, or Sand. Mega Sol always heals as though in sun, so it takes no
-    // penalty regardless of the weather.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_Recovery
-    LoadCurrentWeather
+    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_Synthesis_InSun
+    LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_HAILING, Expert_Synthesis_ScoreMinus2
     IfLoadedEqualTo AI_WEATHER_RAINING, Expert_Synthesis_ScoreMinus2
     IfLoadedEqualTo AI_WEATHER_SANDSTORM, Expert_Synthesis_ScoreMinus2
+    IfLoadedNotEqualTo AI_WEATHER_SUNNY, Expert_Recovery
+
+Expert_Synthesis_InSun:
+    IfShouldRecover 67, ScorePlus7
     GoTo Expert_Recovery
 
 Expert_Synthesis_ScoreMinus2:
     AddToMoveScore -2
+    GoTo Expert_Recovery
 
 Expert_Recovery:
-    // If the attacker is at full HP, score -3 and terminate.
-    //
-    // If the attacker is faster than its opponent, score -8 and terminate.
-    //
-    // If the attacker is at 70% HP or more, ~88.3% chance of score -3 and terminate.
-    //
-    // If the opponent does not know Snatch, ~92.2% chance of score +2.
-    // If the opponent does know Snatch, ~56.2% chance of score +2.
-    IfHPPercentEqualTo AI_BATTLER_ATTACKER, 100, Expert_Recovery_ScoreMinus3AndEnd
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Recovery_CheckHP
-    AddToMoveScore -8
-    GoTo Expert_Recovery_End
-
-Expert_Recovery_Unused:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Recovery_CheckForSnatch
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 80, Expert_Recovery_ScoreMinus3AndEnd
-    IfRandomLessThan 70, Expert_Recovery_CheckForSnatch
-
-Expert_Recovery_ScoreMinus3AndEnd:
-    AddToMoveScore -3
-    GoTo Expert_Recovery_End
-
-Expert_Recovery_CheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_Recovery_CheckForSnatch
-    IfRandomLessThan 30, Expert_Recovery_CheckForSnatch
-    AddToMoveScore -3
-    GoTo Expert_Recovery_End
-
-Expert_Recovery_CheckForSnatch:
-    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Recovery_TryScorePlus2
-    IfRandomLessThan 100, Expert_Recovery_End
-
-Expert_Recovery_TryScorePlus2:
-    IfRandomLessThan 20, Expert_Recovery_End
-    AddToMoveScore 2
-
-Expert_Recovery_End:
-    PopOrEnd 
+    IfShouldRecover 50, ScorePlus7
+    GoTo ScorePlus5
 
 
 Expert_Screen:
@@ -2741,51 +2721,26 @@ Expert_AuroraVeil:
     GoTo Expert_Screen_Bonus
 
 Expert_Rest:
-    // If the attacker is faster than its target:
-    // - If the attacker is at full HP, 60.9% chance of score -8 and terminate.
-    // - If the attacker's HP is > 50%, score -3 and terminate.
-    // - If the attacker's HP is >= 40%, 72.7% chance of score -3 and terminate.
-    //
-    // If the attacker is slower than its target:
-    // - If the attacker's HP > 70%, score -3 and terminate.
-    // - If the attacker's HP >= 60%, 80.5% chance of score -3 and terminate.
-    //
-    // If the opponent does not know Snatch, 96.1% chance of score +3.
-    //
-    // If the opponent knows Snatch, 77.3% chance of score +3.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Rest_SlowerCheckHP
-    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, Expert_Rest_FasterCheckHP
-    AddToMoveScore -8
-    GoTo Expert_Rest_End
+    IfShouldRecover 100, Expert_Rest_CheckSleepIsCheap
+    GoTo ScorePlus5
 
-Expert_Rest_FasterCheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_Rest_CheckForSnatch
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Rest_FasterScoreMinus3
-    IfRandomLessThan 70, Expert_Rest_CheckForSnatch
+Expert_Rest_CheckSleepIsCheap:
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedInTable Expert_Rest_SleepCuringItems, ScorePlus8
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SLEEP_TALK, ScorePlus8
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_SNORE, ScorePlus8
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_SHED_SKIN, ScorePlus8
+    IfLoadedEqualTo ABILITY_EARLY_BIRD, ScorePlus8
+    IfLoadedNotEqualTo ABILITY_HYDRATION, ScorePlus7
+    LoadCurrentWeather 
+    IfLoadedEqualTo AI_WEATHER_RAINING, ScorePlus8
+    GoTo ScorePlus7
 
-Expert_Rest_FasterScoreMinus3:
-    AddToMoveScore -3
-    GoTo Expert_Rest_End
-
-Expert_Rest_SlowerCheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 60, Expert_Rest_CheckForSnatch
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_Rest_SlowerScoreMinus3
-    IfRandomLessThan 50, Expert_Rest_CheckForSnatch
-
-Expert_Rest_SlowerScoreMinus3:
-    AddToMoveScore -3
-    GoTo Expert_Rest_End
-
-Expert_Rest_CheckForSnatch:
-    IfMoveEffectNotKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_Rest_TryScorePlus3
-    IfRandomLessThan 50, Expert_Rest_End
-
-Expert_Rest_TryScorePlus3:
-    IfRandomLessThan 10, Expert_Rest_End
-    AddToMoveScore 3
-
-Expert_Rest_End:
-    PopOrEnd 
+Expert_Rest_SleepCuringItems:
+    TableEntry HOLD_EFFECT_SLP_RESTORE
+    TableEntry HOLD_EFFECT_STATUS_RESTORE
+    TableEntry TABLE_END
 
 Expert_OHKOMove:
     // Coin flip to tie HDM

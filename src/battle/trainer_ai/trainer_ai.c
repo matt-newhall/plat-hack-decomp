@@ -221,6 +221,7 @@ static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *
 static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfShouldRecover(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2918,6 +2919,59 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
  * @param battleSys
  * @param battleCtx
  */
+/**
+ * @brief The AI's "should I heal this turn" test.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfShouldRecover(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int percent = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+
+    if (mon->status & MON_CONDITION_TOXIC) {
+        return;
+    }
+
+    int healed = BattleSystem_Divide(mon->maxHP * percent, 100);
+
+    if (healed > mon->maxHP - mon->curHP) {
+        healed = mon->maxHP - mon->curHP;
+    }
+
+    s32 maxDamage = AI_MaxIncomingDamage(battleSys, battleCtx);
+
+    if (maxDamage >= healed) {
+        return;
+    }
+
+    int hpPercent = mon->curHP * 100 / mon->maxHP;
+    BOOL recover = FALSE;
+
+    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) == COMPARE_SPEED_SLOWER) {
+        if (hpPercent < 50) {
+            recover = TRUE;
+        } else if (hpPercent < 70) {
+            recover = BattleSystem_RandNext(battleSys) % 256 < 192;
+        }
+    } else if (maxDamage >= mon->curHP) {
+        recover = maxDamage < mon->curHP + healed;
+    } else if (hpPercent < 40) {
+        recover = TRUE;
+    } else if (hpPercent < 66) {
+        recover = BattleSystem_RandNext(battleSys) % 256 < 128;
+    }
+
+    if (recover) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
 static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
