@@ -3318,41 +3318,22 @@ Expert_BatonPass_End:
     PopOrEnd 
 
 Expert_Pursuit:
-    // If it is the attacker's first turn in battle, 50% chance of additional score +1.
-    //
-    // If it is NOT the attacker's first turn in battle and the opponent has a Ghost or Psychic
-    // typing, 50% chance of additional score +1.
-    //
-    // If the opponent knows a move which attacks and then switches out, 50% chance of additional
-    // score +1 - Pursuit is what punishes that switch.
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo FALSE, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_PSYCHIC, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_Pursuit_TryScorePlus1
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_PSYCHIC, Expert_Pursuit_TryScorePlus1
-    GoTo Expert_Pursuit_CheckSwitchMove
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_Pursuit_ScorePlus10
+    IfHPPercentLessThan AI_BATTLER_DEFENDER, 20, Expert_Pursuit_ScorePlus10
+    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 39, Expert_Pursuit_CheckSpeed
+    IfRandomLessThan 128, Expert_Pursuit_CheckSpeed
+    AddToMoveScore 8
+    GoTo Expert_Pursuit_CheckSpeed
 
-Expert_Pursuit_TryScorePlus1:
-    IfRandomLessThan 128, Expert_Pursuit_CheckSwitchMove
-    AddToMoveScore 1
+Expert_Pursuit_ScorePlus10:
+    AddToMoveScore 10
 
-Expert_Pursuit_CheckSwitchMove:
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_U_TURN, Expert_Pursuit_SwitchMoveKnown
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_VOLT_SWITCH, Expert_Pursuit_SwitchMoveKnown
-    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_FLIP_TURN, Expert_Pursuit_SwitchMoveKnown
-    GoTo Expert_Pursuit_End
-
-Expert_Pursuit_SwitchMoveKnown:
-    IfRandomLessThan 128, Expert_Pursuit_End
-    AddToMoveScore 1
+Expert_Pursuit_CheckSpeed:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Pursuit_End
+    AddToMoveScore 3
 
 Expert_Pursuit_End:
-    PopOrEnd 
+    PopOrEnd
 
 
 
