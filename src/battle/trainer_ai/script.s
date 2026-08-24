@@ -4345,6 +4345,7 @@ TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
     IfMoveEqualTo MOVE_TRICK, TagStrategy_PartnerTrick
     IfMoveEqualTo MOVE_ROLE_PLAY, TagStrategy_PartnerRolePlay
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, TagStrategy_PartnerPsychUp
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
     GoTo TagStrategy_PartnerScoreMinus30
 
@@ -4566,6 +4567,11 @@ TagStrategy_PartnerRolePlay:
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_TOUGH_CLAWS
     IfLoadedEqualTo AI_HAVE, ScorePlus9
     GoTo ScoreMinus20
+
+TagStrategy_PartnerPsychUp:
+    SumPositiveStatStages AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedGreaterThan 1, ScorePlus9
+    PopOrEnd
 
 TagStrategy_PartnerScoreMinus30:
     AddToMoveScore -30
