@@ -145,7 +145,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_UP, Basic_CheckHighStatStage_Accuracy
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Basic_CheckHighStatStage_Evasion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN, Basic_CheckLowStatStage_Attack
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Basic_CheckLowStatStage_Attack
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Basic_CheckPartingShot
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN, Basic_CheckLowStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN, Basic_CheckLowStatStage_Speed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN, Basic_CheckLowStatStage_SpAttack
@@ -443,6 +443,12 @@ Basic_CheckHighStatStage_Evasion_NoSimple:
     //   - If reducing Speed -> -10 if the target has Speed Boost
     //   - If reducing Accuracy or Evasion -> -10 if either battler has No Guard
     //   - If reducing Accuracy -> -10 if the target has Keen Eye
+Basic_CheckPartingShot:
+    // Parting Shot is a sound move, so Soundproof blanks it entirely.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_SOUNDPROOF, ScoreMinus10
+    GoTo Basic_CheckLowStatStage_Attack
+
 Basic_CheckLowStatStage_Attack:
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 0, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -1840,6 +1846,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Memento
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HELD_ITEMS, Expert_Trick
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Expert_PartingShot
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
@@ -3344,6 +3351,41 @@ Expert_FocusPunch_ScorePlus1:
 
 Expert_FocusPunch_End:
     PopOrEnd 
+
+Expert_PartingShot:
+    AddToMoveScore 6
+    IfDefenderCanKO Expert_PartingShot_CheckSpeed
+    GoTo Expert_PartingShot_CheckAttacker
+
+Expert_PartingShot_CheckSpeed:
+    IfDoesNotMoveFirst Expert_PartingShot_CheckAttacker
+    AddToMoveScore 7
+
+Expert_PartingShot_CheckAttacker:
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_PartingShot_TryScorePlus1
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_PartingShot_TryScorePlus1
+    GoTo Expert_PartingShot_CheckParty
+
+Expert_PartingShot_TryScorePlus1:
+    IfRandomGreaterThan 84, Expert_PartingShot_CheckParty
+    AddToMoveScore 1
+
+Expert_PartingShot_CheckParty:
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo 0, Expert_PartingShot_CheckAbility
+    IfRandomGreaterThan 170, Expert_PartingShot_CheckAbility
+    AddToMoveScore -1
+
+Expert_PartingShot_CheckAbility:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_PartingShot_ScoreMinus2
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_PartingShot_ScoreMinus2
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_PartingShot_ScoreMinus2
+    PopOrEnd
+
+Expert_PartingShot_ScoreMinus2:
+    AddToMoveScore -2
+    PopOrEnd
 
 Expert_Trick:
     LoadHeldItemEffect AI_BATTLER_ATTACKER
