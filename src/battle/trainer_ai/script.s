@@ -3510,244 +3510,25 @@ Expert_FocusPunch_End:
     PopOrEnd 
 
 Expert_Trick:
-    // If the attacker is holding a Disruptive item:
-    // - If the opponent is holding a bad item to trade with, score -3.
-    // - Otherwise, score +5.
-    //
-    // If the attacker is holding an item that poisons its bearer:
-    // - If the opponent is holding a bad item to trade with, score -3.
-    // - If the opponent does not meet any of the following criteria, score +5:
-    //   - Has a non-volatile status condition.
-    //   - Is protected by Safeguard.
-    //   - Has a Steel or Poison typing.
-    //   - Has the ability Immunity, Magic Guard, or Poison Heal.
-    // - If the attacker meets any of the following criteria, score -3:
-    //   - Has a non-volatile status condition.
-    //   - Is protected by Safeguard.
-    //   - Has a Steel or Poison typing.
-    //   - Has the ability Immunity, Magic Guard, Poison Heal, or Klutz.
-    // - Otherwise, score +5.
-    //
-    // If the attacker is holding an item that burns its bearer:
-    // - If the opponent is holding a bad item to trade with, score -3.
-    // - If the opponent does not meet any of the following criteria, score +5:
-    //   - Has a non-volatile status condition.
-    //   - Is protected by Safeguard.
-    //   - Has a Fire typing.
-    //   - Has the ability Water Veil or Magic Guard.
-    // - If the attacker meets any of the following criteria, score -3:
-    //   - Has a non-volatile status condition.
-    //   - Is protected by Safeguard.
-    //   - Has a Fire typing.
-    //   - Has the ability Water Veil, Magic Guard, or Klutz.
-    // - Otherwise, score +5.
-    //
-    // If the attacker is holding Black Sludge:
-    // - If the opponent is holding a bad item to trade with, score -3.
-    // - If the opponent does not meet any of the following criteria, score +5:
-    //   - Has a Poison typing.
-    //   - Has the ability Magic Guard.
-    // - If the attacker meets any of the following criteria, score -3:
-    //   - Has a Poison typing.
-    //   - Has the ability Magic Guard or Klutz.
-    // - Otherwise, score +5.
-    //
-    // If the attacker is holding a Flavor Berry:
-    // - If the opponent is holding a bad item to trade with or a flavor berry, score -3.
-    // - Otherwise, 80.5% chance of score +2.
     LoadHeldItemEffect AI_BATTLER_ATTACKER
-    IfLoadedInTable Expert_Trick_DisruptiveItems, Expert_Trick_CheckOpponentItem
-    IfLoadedInTable Expert_Trick_PoisoningItems, Expert_Trick_CheckOpponentForPoison
-    IfLoadedInTable Expert_Trick_BurningItems, Expert_Trick_CheckOpponentForBurn
-    IfLoadedInTable Expert_Trick_BlackSludge, Expert_Trick_CheckOpponentForSludge
-    IfLoadedInTable Expert_Trick_FlavorBerries, Expert_Trick_CheckOpponentForFlavorBerry
+    IfLoadedInTable Expert_Trick_StatusItems, Expert_Trick_CoinFlipScorePlus7
+    IfLoadedInTable Expert_Trick_DisruptiveItems, ScorePlus7
+    GoTo ScorePlus5
 
-Expert_Trick_ScoreMinus3:
-    AddToMoveScore -3
-    GoTo Expert_Trick_End
+Expert_Trick_CoinFlipScorePlus7:
+    IfRandomLessThan 128, ScorePlus6
+    GoTo ScorePlus7
 
-Expert_Trick_CheckOpponentItem:
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Trick_BadOpponentItems, Expert_Trick_ScoreMinus3
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckOpponentForPoison:
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Trick_BadOpponentItems, Expert_Trick_ScoreMinus3
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_Trick_CheckAttackerForPoison
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Expert_Trick_CheckAttackerForPoison
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_STEEL, Expert_Trick_CheckAttackerForPoison
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_CheckAttackerForPoison
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_STEEL, Expert_Trick_CheckAttackerForPoison
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_CheckAttackerForPoison
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_IMMUNITY, Expert_Trick_CheckAttackerForPoison
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_CheckAttackerForPoison
-    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_Trick_CheckAttackerForPoison
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckAttackerForPoison:
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_Trick_ScoreMinus3
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SAFEGUARD, Expert_Trick_ScoreMinus3
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_STEEL, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_ScoreMinus3
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_STEEL, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_ScoreMinus3
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_IMMUNITY, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_POISON_HEAL, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_KLUTZ, Expert_Trick_ScoreMinus3
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckOpponentForBurn:
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Trick_BadOpponentItems, Expert_Trick_ScoreMinus3
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_WATER_VEIL, Expert_Trick_CheckAttackerForBurn
-    IfLoadedEqualTo ABILITY_WATER_BUBBLE, Expert_Trick_CheckAttackerForBurn
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_CheckAttackerForBurn
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_Trick_CheckAttackerForBurn
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Expert_Trick_CheckAttackerForBurn
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, Expert_Trick_CheckAttackerForBurn
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, Expert_Trick_CheckAttackerForBurn
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckAttackerForBurn:
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_WATER_VEIL, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_WATER_BUBBLE, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_KLUTZ, ScoreMinus5
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_Trick_ScoreMinus3
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SAFEGUARD, Expert_Trick_ScoreMinus3
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, Expert_Trick_ScoreMinus3
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, Expert_Trick_ScoreMinus3
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckOpponentForSludge:
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Trick_BadOpponentItems, Expert_Trick_ScoreMinus3
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_CheckAttackerForSludge
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_CheckAttackerForSludge
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_CheckAttackerForPoison
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckAttackerForSludge:
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_ScoreMinus3
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_POISON, Expert_Trick_ScoreMinus3
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_Trick_ScoreMinus3
-    IfLoadedEqualTo ABILITY_KLUTZ, Expert_Trick_ScoreMinus3
-    AddToMoveScore 5
-    GoTo Expert_Trick_End
-
-Expert_Trick_CheckOpponentForFlavorBerry:
-    LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedInTable Expert_Trick_BadOpponentItemsAndFlavorBerries, Expert_Trick_ScoreMinus3
-    IfRandomLessThan 50, Expert_Trick_End
-    AddToMoveScore 2
-
-Expert_Trick_End:
-    PopOrEnd 
-
-Expert_Trick_FlavorBerries:
-    TableEntry HOLD_EFFECT_HP_RESTORE_SPICY
-    TableEntry HOLD_EFFECT_HP_RESTORE_DRY
-    TableEntry HOLD_EFFECT_HP_RESTORE_SWEET
-    TableEntry HOLD_EFFECT_HP_RESTORE_BITTER
-    TableEntry HOLD_EFFECT_HP_RESTORE_SOUR
+Expert_Trick_StatusItems:
+    TableEntry HOLD_EFFECT_PSN_USER
+    TableEntry HOLD_EFFECT_BRN_USER
+    TableEntry HOLD_EFFECT_HP_RESTORE_PSN_TYPE
     TableEntry TABLE_END
 
 Expert_Trick_DisruptiveItems:
-    // BUG: This list does not include Macho Brace.
-    TableEntry HOLD_EFFECT_CHOICE_ATK
-    TableEntry HOLD_EFFECT_CHOICE_SPATK
-    TableEntry HOLD_EFFECT_CHOICE_SPEED
     TableEntry HOLD_EFFECT_SPEED_DOWN_GROUNDED
     TableEntry HOLD_EFFECT_PRIORITY_DOWN
     TableEntry HOLD_EFFECT_DMG_USER_CONTACT_XFR
-    TableEntry HOLD_EFFECT_LVLUP_ATK_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_DEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPATK_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_DEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPDEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPEED_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_HP_EV_UP
-    TableEntry TABLE_END
-
-Expert_Trick_PoisoningItems:
-    TableEntry HOLD_EFFECT_PSN_USER
-    TableEntry TABLE_END
-
-Expert_Trick_BurningItems:
-    TableEntry HOLD_EFFECT_BRN_USER
-    TableEntry TABLE_END
-
-Expert_Trick_BlackSludge:
-    TableEntry HOLD_EFFECT_HP_RESTORE_PSN_TYPE
-    TableEntry TABLE_END
-
-Expert_Trick_BadOpponentItemsAndFlavorBerries:
-    TableEntry HOLD_EFFECT_HP_RESTORE_SPICY
-    TableEntry HOLD_EFFECT_HP_RESTORE_DRY
-    TableEntry HOLD_EFFECT_HP_RESTORE_SWEET
-    TableEntry HOLD_EFFECT_HP_RESTORE_BITTER
-    TableEntry HOLD_EFFECT_HP_RESTORE_SOUR
-    TableEntry HOLD_EFFECT_EVS_UP_SPEED_DOWN
-    TableEntry HOLD_EFFECT_CHOICE_ATK
-    TableEntry HOLD_EFFECT_CHOICE_SPATK
-    TableEntry HOLD_EFFECT_CHOICE_SPEED
-    TableEntry HOLD_EFFECT_SPEED_DOWN_GROUNDED
-    TableEntry HOLD_EFFECT_PRIORITY_DOWN
-    TableEntry HOLD_EFFECT_DMG_USER_CONTACT_XFR
-    TableEntry HOLD_EFFECT_LVLUP_ATK_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_DEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPATK_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPDEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPEED_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_HP_EV_UP
-    TableEntry HOLD_EFFECT_PSN_USER
-    TableEntry HOLD_EFFECT_BRN_USER
-    TableEntry HOLD_EFFECT_HP_RESTORE_PSN_TYPE
-    TableEntry TABLE_END
-
-Expert_Trick_BadOpponentItems:
-    TableEntry HOLD_EFFECT_EVS_UP_SPEED_DOWN
-    TableEntry HOLD_EFFECT_CHOICE_ATK
-    TableEntry HOLD_EFFECT_CHOICE_SPATK
-    TableEntry HOLD_EFFECT_CHOICE_SPEED
-    TableEntry HOLD_EFFECT_SPEED_DOWN_GROUNDED
-    TableEntry HOLD_EFFECT_PRIORITY_DOWN
-    TableEntry HOLD_EFFECT_DMG_USER_CONTACT_XFR
-    TableEntry HOLD_EFFECT_LVLUP_ATK_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_DEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPATK_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPDEF_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_SPEED_EV_UP
-    TableEntry HOLD_EFFECT_LVLUP_HP_EV_UP
-    TableEntry HOLD_EFFECT_PSN_USER
-    TableEntry HOLD_EFFECT_BRN_USER
-    TableEntry HOLD_EFFECT_HP_RESTORE_PSN_TYPE
     TableEntry TABLE_END
 
 Expert_BrickBreak:
