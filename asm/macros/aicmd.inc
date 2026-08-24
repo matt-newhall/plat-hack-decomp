@@ -529,6 +529,11 @@
     .long \battler
     .endm
 
+    .macro LoadFlingEffect battler:req
+    .long AICMD_LOADFLINGEFFECT
+    .long \battler
+    .endm
+
     .macro LoadCurrentMovePP
     .long 91
     .endm

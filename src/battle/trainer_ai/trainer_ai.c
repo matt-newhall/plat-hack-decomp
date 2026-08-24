@@ -189,6 +189,7 @@ static void AICmd_LoadSpikesLayers(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfAnyPartyMemberIsWounded(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyPartyMemberUsedPP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadFlingPower(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCanUseLastResort(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2099,6 +2100,22 @@ static void AICmd_LoadFlingPower(BattleSystem *battleSys, BattleContext *battleC
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     AI_CONTEXT.calcTemp = Battler_ItemFlingPower(battleCtx, battler);
+}
+
+/**
+ * @brief Load the effect a battler's held item would apply to the target if it were flung.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    AI_CONTEXT.calcTemp = Battler_ItemFlingEffect(battleCtx, battler);
 }
 
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx)

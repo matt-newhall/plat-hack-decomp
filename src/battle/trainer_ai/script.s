@@ -3659,6 +3659,9 @@ TagStrategy_CheckSpecialScoring:
     IfMoveEqualTo MOVE_GRAVITY, TagStrategy_Gravity
     IfMoveEqualTo MOVE_TRICK_ROOM, TagStrategy_TrickRoom
     IfMoveEqualTo MOVE_FOLLOW_ME, TagStrategy_FollowMe
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT, TagStrategy_Protect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, TagStrategy_Protect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, TagStrategy_Protect
     LoadTypeFrom LOAD_MOVE_TYPE
     IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckElectricMove
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckFireMove
@@ -4015,6 +4018,19 @@ TagStrategy_FollowMe_TryScorePlus3:
 TagStrategy_FollowMe_End:
     PopOrEnd 
 
+TagStrategy_Protect:
+    // Power of Alchemy hands the AI its partner's ability the moment the partner faints, so a
+    // partner carrying one of the doubled-Attack abilities is worth stalling a turn to inherit.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_POWER_OF_ALCHEMY, TagStrategy_Protect_End
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_HUGE_POWER
+    IfLoadedEqualTo AI_HAVE, ScorePlus8
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_PURE_POWER
+    IfLoadedEqualTo AI_HAVE, ScorePlus8
+
+TagStrategy_Protect_End:
+    PopOrEnd
+
 TagStrategy_PartnerKnowsHelpingHand:
     // If our partner knows Helping Hand, then damaging moves (aside from flat-damage moves)
     // get score +1
@@ -4162,22 +4178,34 @@ TagStrategy_CheckGroundMove:
     // following which are met:
     IfMoveEqualTo MOVE_EARTHQUAKE, TagStrategy_SpreadGroundMove
     IfMoveEqualTo MOVE_MAGNITUDE, TagStrategy_SpreadGroundMove
+    IfMoveEqualTo MOVE_BULLDOZE, TagStrategy_SpreadGroundMove
     GoTo TagStrategy_CheckGround_End
 
 TagStrategy_SpreadGroundMove:
-    // If our partner has Earth Eater or Levitate, score +3
-    //
-    // If our partner is weak to Ground, score -10
-    //
-    // Else, score -3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_EARTH_EATER
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, ScorePlus3
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
-    IfLoadedEqualTo AI_HAVE, ScorePlus3
+    // The penalty below is only ever about what the blast does to the partner, so everything
+    // which keeps the partner out of it is settled first.
+    IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, TagStrategy_SpreadGroundMove_PartnerSafe
 
+    // Staying off the ground by type, by item or by Magnet Rise holds regardless of who is
+    // attacking.
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
+    IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
+    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_SpreadGroundMove_PartnerSafe
+    LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo HOLD_EFFECT_LEVITATE_POP_ON_HIT, TagStrategy_SpreadGroundMove_PartnerSafe
+
+    // The ability-granted immunities do not: Mold Breaker ignores them and the partner is caught
+    // in the blast like anything else.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, TagStrategy_SpreadGroundMove_PartnerHit
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE
+    IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_EARTH_EATER
+    IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_TELEPATHY
+    IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
+
+TagStrategy_SpreadGroundMove_PartnerHit:
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
@@ -4189,6 +4217,10 @@ TagStrategy_SpreadGroundMove:
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_POISON
     IfLoadedEqualTo AI_HAVE, ScoreMinus10
     AddToMoveScore -3
+    PopOrEnd
+
+TagStrategy_SpreadGroundMove_PartnerSafe:
+    AddToMoveScore 2
 
 TagStrategy_CheckGround_End:
     PopOrEnd 
@@ -4232,11 +4264,12 @@ TagStrategy_Partner:
     IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, TagStrategy_PartnerScoreMinus30
     FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_PartnerStatusMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_1, TagStrategy_PartnerWeaknessPolicy
     LoadTypeFrom LOAD_MOVE_TYPE
     IfLoadedEqualTo TYPE_FIRE, TagStrategy_CheckPartnerFireAbsorption
     IfLoadedEqualTo TYPE_ELECTRIC, TagStrategy_CheckPartnerElectricAbsorption
     IfLoadedEqualTo TYPE_WATER, TagStrategy_CheckPartnerWaterAbsorption
-    IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerTrick
+    IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerFling
 
 TagStrategy_ScoreMinus30:
     GoTo ScoreMinus30
@@ -4342,6 +4375,7 @@ TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_HELPING_HAND, TagStrategy_PartnerUsingHelpingHand
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
     IfMoveEqualTo MOVE_TRICK, TagStrategy_PartnerTrick
+    IfMoveEqualTo MOVE_ROLE_PLAY, TagStrategy_PartnerRolePlay
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
     GoTo TagStrategy_PartnerScoreMinus30
 
@@ -4532,6 +4566,52 @@ TagStrategy_PartnerGastroAcid_ScorePlus5:
 
 TagStrategy_PartnerGastroAcid_End:
     PopOrEnd 
+
+TagStrategy_PartnerWeaknessPolicy:
+    // Turning a weak priority move on the partner is how a Weakness Policy gets switched on
+    // deliberately. Extreme Speed is left out: it is the one move here better spent on the other
+    // side of the field.
+    IfMoveEqualTo MOVE_EXTREME_SPEED, TagStrategy_PartnerScoreMinus30
+    LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedNotEqualTo HOLD_EFFECT_SHARPLY_BOOST_OFFENSES, TagStrategy_PartnerScoreMinus30
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, TagStrategy_PartnerScorePlus12
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerFling:
+    // Flinging a Salac Berry at the partner hands it the Speed boost. If the partner is holding a
+    // Weakness Policy as well, the same throw can switch that on in the bargain.
+    LoadFlingEffect AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo FLING_EFFECT_SPEED_UP, TagStrategy_PartnerFling_End
+    LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedNotEqualTo HOLD_EFFECT_SHARPLY_BOOST_OFFENSES, TagStrategy_PartnerFling_ScorePlus9
+    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, TagStrategy_PartnerScorePlus12
+    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, TagStrategy_PartnerScorePlus12
+
+TagStrategy_PartnerFling_ScorePlus9:
+    AddToMoveScore 9
+
+TagStrategy_PartnerFling_End:
+    PopOrEnd
+
+TagStrategy_PartnerScorePlus12:
+    AddToMoveScore 12
+    PopOrEnd
+
+TagStrategy_PartnerRolePlay:
+    // Role Play copies the partner's ability onto the AI, which is only worth a turn for an
+    // ability the AI has no version of already.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_HUGE_POWER, ScoreMinus20
+    IfLoadedEqualTo ABILITY_PURE_POWER, ScoreMinus20
+    IfLoadedEqualTo ABILITY_TOUGH_CLAWS, ScoreMinus20
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_HUGE_POWER
+    IfLoadedEqualTo AI_HAVE, ScorePlus9
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_PURE_POWER
+    IfLoadedEqualTo AI_HAVE, ScorePlus9
+    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_TOUGH_CLAWS
+    IfLoadedEqualTo AI_HAVE, ScorePlus9
+    GoTo ScoreMinus20
 
 TagStrategy_PartnerScoreMinus30:
     AddToMoveScore -30

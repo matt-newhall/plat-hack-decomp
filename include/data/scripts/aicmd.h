@@ -136,6 +136,7 @@ ScriptCommand(AICMD_IFBATTLERKNOWSSOUNDMOVE,          AICmd_IfBattlerKnowsSoundM
 ScriptCommand(AICMD_IFSHOULDRECOVER,                  AICmd_IfShouldRecover)
 ScriptCommand(AICMD_IFMOVESFIRST,                     AICmd_IfMovesFirst)
 ScriptCommand(AICMD_IFDOESNOTMOVEFIRST,               AICmd_IfDoesNotMoveFirst)
+ScriptCommand(AICMD_LOADFLINGEFFECT,                   AICmd_LoadFlingEffect)
 
 // clang-format on
 
