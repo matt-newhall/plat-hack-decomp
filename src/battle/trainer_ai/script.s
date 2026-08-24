@@ -1849,6 +1849,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HELD_ITEMS, Expert_Trick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_LOWER_ATKS, Expert_PartingShot
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HIT, Expert_SwitchHit
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Expert_SteelBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
@@ -3389,6 +3390,15 @@ Expert_PartingShot_CheckAbility:
 Expert_PartingShot_ScoreMinus2:
     AddToMoveScore -2
     GoTo Expert_PivotRegenerator
+
+Expert_SteelBeam:
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_SteelBeam_End
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MAGIC_GUARD, Expert_SteelBeam_End
+    AddToMoveScore -3
+
+Expert_SteelBeam_End:
+    PopOrEnd
 
 Expert_SwitchHit:
     IfAttackerCanKO Expert_SwitchHit_End
