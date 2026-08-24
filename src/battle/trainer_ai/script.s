@@ -290,11 +290,18 @@ Basic_CheckCannotSleep:
     // If the target cannot be put to sleep for any reason, score -10.
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, ScoreMinus10
+    IfFieldConditionsMask FIELD_CONDITION_UPROAR, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_INSOMNIA, ScoreMinus10
     IfLoadedEqualTo ABILITY_VITAL_SPIRIT, ScoreMinus10
     IfLoadedEqualTo ABILITY_SWEET_VEIL, ScoreMinus10
-    PopOrEnd 
+
+    // Yawn does nothing to a target which is already drowsy.
+    IfCurrentMoveEffectNotEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Basic_CheckCannotSleep_Terminate
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, ScoreMinus10
+
+Basic_CheckCannotSleep_Terminate:
+    PopOrEnd
 
 Basic_CheckCannotExplode:
     // If the target is immune, score -10.
@@ -1714,6 +1721,7 @@ Expert_Main:
 
     // Evaluate moves which match a known effect according to this jump table.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Expert_StatusSleep
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Expert_StatusSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECOVER_HALF_DAMAGE_DEALT, Expert_DrainMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, Expert_Explosion
@@ -1882,18 +1890,39 @@ Expert_StatusMoveBonus:
     PopOrEnd
 
 Expert_StatusSleep:
-    // If the attacker knows a move which requires the target to be asleep (Dream Eater or Nightmare
-    // effects), 50% chance of score +1.
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_StatusSleep_TryScorePlus1
-    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_NIGHTMARE, Expert_StatusSleep_TryScorePlus1
-    GoTo Expert_StatusSleep_End
+    AddToMoveScore 6
+    IfRandomGreaterThan 63, Expert_StatusSleep_End
+    IfAttackerCanKO Expert_StatusSleep_End
+    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, Expert_StatusSleep_End
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SAFEGUARD, Expert_StatusSleep_End
+    IfFieldConditionsMask FIELD_CONDITION_UPROAR, Expert_StatusSleep_End
+    IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_StatusSleep_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_INSOMNIA, Expert_StatusSleep_End
+    IfLoadedEqualTo ABILITY_VITAL_SPIRIT, Expert_StatusSleep_End
+    IfLoadedEqualTo ABILITY_SWEET_VEIL, Expert_StatusSleep_End
+    AddToMoveScore 1
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_RECOVER_DAMAGE_SLEEP, Expert_StatusSleep_CheckTargetCanAct
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_STATUS_NIGHTMARE, Expert_StatusSleep_CheckTargetCanAct
+    GoTo Expert_StatusSleep_CheckHex
 
-Expert_StatusSleep_TryScorePlus1:
-    IfRandomLessThan 128, Expert_StatusSleep_End
+Expert_StatusSleep_CheckTargetCanAct:
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_SNORE, Expert_StatusSleep_CheckHex
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_SLEEP_TALK, Expert_StatusSleep_CheckHex
+    AddToMoveScore 1
+
+Expert_StatusSleep_CheckHex:
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusSleep_ScorePlus1
+    LoadBattleType 
+    IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_StatusSleep_End
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_HEX, Expert_StatusSleep_ScorePlus1
+    PopOrEnd
+
+Expert_StatusSleep_ScorePlus1:
     AddToMoveScore 1
 
 Expert_StatusSleep_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_DrainMove:
     // If the target is immune to or resists the move, ~80.5% chance of score -3.
