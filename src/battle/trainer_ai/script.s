@@ -1844,7 +1844,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_BellyDrum
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, Expert_PsychUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_CounterMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, Expert_ChargeTurn
@@ -3171,43 +3170,6 @@ Expert_Pursuit_End:
 
 
 
-Expert_PsychUp:
-    // If the opponent has any of Attack, Defense, SpAttack, SpDefense, or Evasion at +3 stages or
-    // higher:
-    // - If the attacker's Evasion stat is at +0 stages or lower, score +2.
-    // - If the attacker has any of Attack, Defense, SpAttack, or SpDefense at +0 stages or lower,
-    // score +1.
-    // - Otherwise, 80.4% chance of score -2.
-    //
-    // Otherwise, score -2.
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 8, Expert_PsychUp_CheckUserStatStages
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_PsychUp_CheckUserStatStages
-    GoTo Expert_PsychUp_ScoreMinus2
-
-Expert_PsychUp_CheckUserStatStages:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_PsychUp_ScorePlus1
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_PsychUp_ScorePlus2
-    IfRandomLessThan 50, Expert_PsychUp_End
-    GoTo Expert_PsychUp_ScoreMinus2
-
-Expert_PsychUp_ScorePlus2:
-    AddToMoveScore 1
-
-Expert_PsychUp_ScorePlus1:
-    AddToMoveScore 1
-    PopOrEnd 
-
-Expert_PsychUp_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_PsychUp_End:
-    PopOrEnd 
 
 
 Expert_ChargeTurn:
