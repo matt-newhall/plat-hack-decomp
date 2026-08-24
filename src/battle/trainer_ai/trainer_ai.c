@@ -216,7 +216,7 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
 static void AICmd_IfDefenderCanKOInHits(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDefenderCannotKOInHits(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, BattleContext *battleCtx);
-static void AICmd_IfDefenderCanKOAfterBellyDrum(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOAfterHalfHPCost(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3280,13 +3280,15 @@ static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, Battle
 }
 
 /**
- * @brief Check whether the target could knock the attacker out of the HP which Belly Drum
- * is about to leave it on, counting a pinch berry which the cost would trigger.
+ * @brief Check whether the target could knock the attacker out of the HP left by a move which
+ * costs half of maximum HP, counting a pinch berry which the cost would trigger.
+ *
+ * Belly Drum and a Ghost-type Curse both charge exactly that.
  *
  * @param battleSys
  * @param battleCtx
  */
-static void AICmd_IfDefenderCanKOAfterBellyDrum(BattleSystem *battleSys, BattleContext *battleCtx)
+static void AICmd_IfDefenderCanKOAfterHalfHPCost(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
     int jump = AIScript_Read(battleCtx);

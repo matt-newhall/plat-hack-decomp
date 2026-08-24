@@ -2329,7 +2329,7 @@ Expert_BellyDrum:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_UNAWARE, ScoreMinus20
     IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_BellyDrum_ScorePlus9
-    IfDefenderCanKOAfterBellyDrum Expert_BellyDrum_ScorePlus4
+    IfDefenderCanKOAfterHalfHPCost Expert_BellyDrum_ScorePlus4
     AddToMoveScore 8
     PopOrEnd
 
@@ -2367,14 +2367,16 @@ Expert_FocusEnergy_ScorePlus7:
     PopOrEnd
 
 Expert_Curse:
-    // A Ghost-type Curse is not a setup move at all, and is left to Basic for now.
     LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_Curse_End
+    IfLoadedEqualTo TYPE_GHOST, Expert_Curse_Ghost
     LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_Curse_End
+    IfLoadedEqualTo TYPE_GHOST, Expert_Curse_Ghost
     GoTo Expert_Setup
 
-Expert_Curse_End:
+Expert_Curse_Ghost:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 91, ScoreMinus20
+    IfDefenderCanKOAfterHalfHPCost ScoreMinus20
+    AddToMoveScore 6
     PopOrEnd
 
 Expert_PowerUpPunch:

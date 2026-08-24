@@ -677,8 +677,8 @@
     .long (\jump-.) / 4 - 1
     .endm
 
-    .macro IfDefenderCanKOAfterBellyDrum jump:req
-    .long AICMD_IFDEFENDERCANKOAFTERBELLYDRUM
+    .macro IfDefenderCanKOAfterHalfHPCost jump:req
+    .long AICMD_IFDEFENDERCANKOAFTERHALFHPCOST
     .long (\jump-.) / 4 - 1
     .endm
 
