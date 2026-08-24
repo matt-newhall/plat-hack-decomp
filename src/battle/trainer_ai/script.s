@@ -3368,16 +3368,14 @@ Expert_Trick_DisruptiveItems:
     TableEntry TABLE_END
 
 Expert_BrickBreak:
-    // If the opponent's side of the field is under the effect of Reflect or Light Screen, score +1.
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScorePlus1
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_ScorePlus1
-    GoTo Expert_BrickBreak_End
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScreenIsUp
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_ScreenIsUp
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_AURORA_VEIL, Expert_BrickBreak_ScreenIsUp
+    PopOrEnd
 
-Expert_BrickBreak_ScorePlus1:
-    AddToMoveScore 1
-
-Expert_BrickBreak_End:
-    PopOrEnd 
+Expert_BrickBreak_ScreenIsUp:
+    IfRandomLessThan 205, ScorePlus8
+    GoTo ScorePlus7
 
 Expert_Endeavor:
     // If the opponent's HP < 70%, score -1 and terminate.
