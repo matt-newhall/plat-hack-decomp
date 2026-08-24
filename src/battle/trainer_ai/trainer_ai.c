@@ -53,6 +53,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP,
     BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP,
     BATTLE_EFFECT_HALVE_HP,
+    BATTLE_EFFECT_AVERAGE_HP,
     0xFFFF
 };
 
@@ -3932,6 +3933,16 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         }
 
         break;
+
+    case MOVE_PAIN_SPLIT: {
+        int average = (battleCtx->battleMons[attacker].curHP + battleCtx->battleMons[AI_CONTEXT.defender].curHP) / 2;
+
+        if (battleCtx->battleMons[AI_CONTEXT.defender].curHP <= average) {
+            return 0;
+        }
+
+        return battleCtx->battleMons[AI_CONTEXT.defender].curHP - average;
+    }
 
     case MOVE_LOW_KICK:
     case MOVE_GRASS_KNOT: {

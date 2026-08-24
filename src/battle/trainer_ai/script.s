@@ -1814,7 +1814,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Expert_CounterMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Expert_Encore
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AVERAGE_HP, Expert_PainSplit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_LockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_SleepTalk
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
@@ -3046,32 +3045,6 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_TRICK_ROOM
     TableEntry TABLE_END
 
-Expert_PainSplit:
-    // If the opponent's HP < 80%, score -1.
-    //
-    // If the attacker is slower than its opponent:
-    // - If the attacker's HP > 60%, score -1.
-    // - Otherwise, score +1.
-    //
-    // If the attacker's HP > 40%, score -1.
-    //
-    // Otherwise, score -1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 80, Expert_PainSplit_ScoreMinus1
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_PainSplit_CheckUserHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_PainSplit_ScoreMinus1
-    AddToMoveScore 1
-    GoTo Expert_PainSplit_End
-
-Expert_PainSplit_CheckUserHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_PainSplit_ScoreMinus1
-    AddToMoveScore 1
-    GoTo Expert_PainSplit_End
-
-Expert_PainSplit_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_PainSplit_End:
-    PopOrEnd 
 
 Expert_LockOn:
     AddToMoveScore 6
