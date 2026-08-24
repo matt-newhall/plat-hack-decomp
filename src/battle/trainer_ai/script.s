@@ -1909,49 +1909,19 @@ Expert_DrainMove_End:
     PopOrEnd 
 
 Expert_Explosion:
-    // If the target's Evasion is at +1 stage or higher, additional score -1 to all further modifiers.
-    //
-    // If the target's Evasion is at +3 stages or higher, 50% chance of additional score -1 to all further modifiers.
-    //
-    // Apply an additional modifier according to the user's current HP (as a percentage):
-    //
-    // | User HP (%)   | Additional Qualifier | Modifier                 |
-    // | ------------: | -------------------- | ------------------------ |
-    // |        >= 80% | Faster than target   | 80.5% chance of score -3 |
-    // |        >= 80% | Slower than target   | 80.5% chance of score -1 |
-    // |         > 50% | N/A                  | 80.5% chance of score -1 |
-    // | <= 50%, > 30% | N/A                  | 50% chance of score +1   |
-    // |        <= 30% | N/A                  | 80.5% chance of score +1 |
-    //
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 7, Expert_Explosion_CheckUserHighHP
-    AddToMoveScore -1
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 10, Expert_Explosion_CheckUserHighHP
-    IfRandomLessThan 128, Expert_Explosion_CheckUserHighHP
-    AddToMoveScore -1
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 10, ScorePlus10
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Explosion_TryScorePlus8
+    IfHPPercentLessThan AI_BATTLER_ATTACKER, 66, Expert_Explosion_CoinFlipScorePlus7
+    IfRandomLessThan 13, ScorePlus7
+    PopOrEnd
 
-Expert_Explosion_CheckUserHighHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 80, Expert_Explosion_CheckUserMediumHP
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Explosion_CheckUserMediumHP
-    IfRandomLessThan 50, Expert_Explosion_End
-    GoTo ScoreMinus3
+Expert_Explosion_TryScorePlus8:
+    IfRandomLessThan 179, ScorePlus8
+    PopOrEnd
 
-Expert_Explosion_CheckUserMediumHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Explosion_TryScoreMinus1
-    IfRandomLessThan 128, Expert_Explosion_CheckUserLowHP
-    AddToMoveScore 1
-
-Expert_Explosion_CheckUserLowHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Explosion_End
-    IfRandomLessThan 50, Expert_Explosion_End
-    AddToMoveScore 1
-    GoTo Expert_Explosion_End
-
-Expert_Explosion_TryScoreMinus1:
-    IfRandomLessThan 50, Expert_Explosion_End
-    AddToMoveScore -1
-
-Expert_Explosion_End:
-    PopOrEnd 
+Expert_Explosion_CoinFlipScorePlus7:
+    IfRandomLessThan 128, ScorePlus7
+    PopOrEnd
 
 Expert_MirrorMove:
     // If the attacker is faster than its target and the last-used move by that target is in the below
