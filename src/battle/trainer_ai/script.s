@@ -1792,7 +1792,9 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SP_ATK_HIT, Expert_AttackDropOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BOOST_ATTACK_ON_KO, Expert_FellStinger
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_VitalThrow
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_SlowMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_POWER_IF_HIT, Expert_SlowMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DRAGON_TAIL, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Expert_StatusMoveBonus
@@ -1836,7 +1838,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Memento
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_SlowMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_HELD_ITEMS, Expert_Trick
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_ABILITY, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL, Expert_StatusMoveBonus
@@ -2858,25 +2860,21 @@ Expert_StatusParalyzeHit:
 Expert_StatusParalyzeHit_End:
     PopOrEnd 
 
-Expert_VitalThrow:
-    // If the attacker is slower than its target, no change.
-    //
-    // If the attacker's HP > 60%, no change.
-    //
-    // If the attacker's HP < 40%, 80.5% chance of score -1.
-    //
-    // Otherwise, 23.9% chance of score -1.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_VitalThrow_End
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_VitalThrow_End
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 40, Expert_VitalThrow_TryScoreMinus1
-    IfRandomLessThan 180, Expert_VitalThrow_End
+Expert_SlowMove:
+    IfDefenderCanKO Expert_SlowMove_CheckSurvives
+    GoTo Expert_SlowMove_Continue
 
-Expert_VitalThrow_TryScoreMinus1:
-    IfRandomLessThan 50, Expert_VitalThrow_End
-    AddToMoveScore -1
+Expert_SlowMove_CheckSurvives:
+    IfHPPercentNotEqualTo AI_BATTLER_ATTACKER, 100, ScoreMinus20
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_STURDY, Expert_SlowMove_Continue
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo HOLD_EFFECT_ENDURE, ScoreMinus20
 
-Expert_VitalThrow_End:
-    PopOrEnd 
+Expert_SlowMove_Continue:
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_FocusPunch
+    PopOrEnd
+
 
 Expert_Substitute:
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 51, ScoreMinus20
