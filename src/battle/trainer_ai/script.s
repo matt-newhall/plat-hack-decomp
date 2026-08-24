@@ -2568,50 +2568,13 @@ Expert_StatusEvasionDown_End:
     PopOrEnd 
 
 Expert_Haze:
-    // If any of the attacker's stat stages are at +3 or higher, or any of the target's stat stages
-    // are at -3 or lower, 80.4% chance of additional score -3.
-    //
-    // If any of the attacker's stat stages are at -3 or lower, or any of the target's stat stages
-    // are at +3 or higher, 80.4% chance of additional score +3.
-    //
-    // Otherwise, score -1.
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 8, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 4, Expert_Haze_TryScoreMinus3
-    IfStatStageLessThan AI_BATTLER_DEFENDER, BATTLE_STAT_ACCURACY, 4, Expert_Haze_TryScoreMinus3
-    GoTo Expert_Haze_CheckToEncourage
-
-Expert_Haze_TryScoreMinus3:
-    IfRandomLessThan 50, Expert_Haze_CheckToEncourage
-    AddToMoveScore -3
-
-Expert_Haze_CheckToEncourage:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 8, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 8, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 8, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_SP_DEFENSE, 8, Expert_Haze_TryScorePlus3
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 4, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 4, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 4, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 4, Expert_Haze_TryScorePlus3
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ACCURACY, 4, Expert_Haze_TryScorePlus3
-    IfRandomLessThan 50, Expert_Haze_End
-    AddToMoveScore -1
-    GoTo Expert_Haze_End
-
-Expert_Haze_TryScorePlus3:
-    IfRandomLessThan 50, Expert_Haze_End
-    AddToMoveScore 3
+    SumPositiveStatStages AI_BATTLER_DEFENDER
+    IfLoadedEqualTo 0, Expert_Haze_End
+    IfLoadedEqualTo 1, ScorePlus6
+    GoTo ScorePlus7
 
 Expert_Haze_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_Bide:
     // If the attacker's HP is <= 90%, score -2.
@@ -4619,7 +4582,7 @@ TagStrategy_SpreadGroundMove:
     // Else, score -3
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_EARTH_EATER
     IfLoadedEqualTo AI_HAVE, ScorePlus3
-    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, Expert_Haze_TryScorePlus3
+    IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, ScorePlus3
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_LEVITATE
     IfLoadedEqualTo AI_HAVE, ScorePlus3
     FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FLYING
