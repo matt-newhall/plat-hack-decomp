@@ -845,9 +845,9 @@ Basic_CheckMemento_CheckStatStages:
     PopOrEnd 
 
 Basic_CheckBatonPass:
-    // If the attacker is on its last Pokemon, score -10.
+    // If the attacker is on its last Pokemon, there is nothing to pass to.
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, ScoreMinus10
+    IfLoadedEqualTo 0, ScoreMinus20
     PopOrEnd 
 
 Basic_CheckRainDance:
@@ -3229,59 +3229,17 @@ Expert_Endure_End:
     PopOrEnd 
 
 Expert_BatonPass:
-    // If any of the attacker's stat stages are at +3 or higher, 68.75% chance of score +2 if either
-    // of the following is true:
-    // - The attacker is slower than its target and has HP <= 70%
-    // - The attacker is faster than its target and has HP <= 60%
-    // If neither are true, score +0.
-    //
-    // If any of the attacker's stat stages are at +2, score -2 if either of the following is true:
-    // - The attacker is slower than its target and has HP <= 70%
-    // - The attacker is faster than its target and has HP <= 60%
-    // If neither are true, score +0.
-    //
-    // Otherwise, score -2.
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 8, Expert_BatonPass_HighStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, Expert_BatonPass_HighStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 8, Expert_BatonPass_HighStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, Expert_BatonPass_HighStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 8, Expert_BatonPass_HighStatStage_CheckSpeedAndHP
-    GoTo Expert_BatonPass_CheckMediumStatStage
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, Expert_BatonPass_End
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, Expert_BatonPass_ScorePlus14
+    SumPositiveStatStages AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, Expert_BatonPass_End
 
-Expert_BatonPass_HighStatStage_CheckSpeedAndHP:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_BatonPass_HighStatStage_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_BatonPass_End
-    GoTo Expert_BatonPass_HighStatStage_TryScorePlus2
-
-Expert_BatonPass_HighStatStage_SlowerCheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 70, Expert_BatonPass_End
-
-Expert_BatonPass_HighStatStage_TryScorePlus2:
-    IfRandomLessThan 80, Expert_BatonPass_End
-    AddToMoveScore 2
-    GoTo Expert_BatonPass_End
-
-Expert_BatonPass_CheckMediumStatStage:
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
-    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_EVASION, 7, Expert_BatonPass_MediumStatStage_CheckSpeedAndHP
-    GoTo Expert_BatonPass_ScoreMinus2
-
-Expert_BatonPass_MediumStatStage_CheckSpeedAndHP:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_BatonPass_MediumStatStage_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 60, Expert_BatonPass_ScoreMinus2
-    GoTo Expert_BatonPass_End
-
-Expert_BatonPass_MediumStatStage_SlowerCheckHP:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_BatonPass_End
-
-Expert_BatonPass_ScoreMinus2:
-    AddToMoveScore -2
+Expert_BatonPass_ScorePlus14:
+    AddToMoveScore 14
 
 Expert_BatonPass_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_Pursuit:
     IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_Pursuit_ScorePlus10
