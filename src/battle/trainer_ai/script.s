@@ -1833,7 +1833,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_LAST_MOVE_PP, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Expert_Endure
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALL_FAINT_3_TURNS, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_BatonPass
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_BEFORE_SWITCH, Expert_Pursuit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_Synthesis
@@ -3135,23 +3136,6 @@ Expert_Protect_End:
 
 
 
-Expert_Endure:
-    // If the attacker's HP < 4%, score -1.
-    //
-    // If the attacker's HP < 35%, 72.7% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 4, Expert_Endure_ScoreMinus1
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 35, Expert_Endure_TryScorePlus1
-
-Expert_Endure_ScoreMinus1:
-    AddToMoveScore -1
-    GoTo Expert_Endure_End
-
-Expert_Endure_TryScorePlus1:
-    IfRandomLessThan 70, Expert_Endure_End
-    AddToMoveScore 1
-
-Expert_Endure_End:
-    PopOrEnd 
 
 Expert_BatonPass:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
