@@ -1802,6 +1802,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SPEED_HIT, Expert_SpeedDownOnHit
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING, Expert_RapidSpin
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_UP, Expert_SpeedBoostOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SP_ATK_HIT, Expert_AttackDropOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BOOST_ATTACK_ON_KO, Expert_FellStinger
@@ -2455,6 +2457,37 @@ Expert_AttackDropOnHit_ScorePlus1:
     AddToMoveScore 1
 
 Expert_AttackDropOnHit_End:
+    PopOrEnd
+
+Expert_RapidSpin:
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_RapidSpin_ClearsHazards
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_RapidSpin_ClearsHazards
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_RapidSpin_ClearsHazards
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_RapidSpin_ClearsHazards
+    GoTo Expert_SpeedBoostOnHit
+
+Expert_RapidSpin_ClearsHazards:
+    IfRandomLessThan 128, Expert_RapidSpin_ScorePlus6
+    AddToMoveScore 7
+    GoTo Expert_SpeedBoostOnHit
+
+Expert_RapidSpin_ScorePlus6:
+    AddToMoveScore 6
+
+Expert_SpeedBoostOnHit:
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_SpeedBoostOnHit_End
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_SpeedBoostOnHit_End
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedBoostOnHit_ScorePlus5
+    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedBoostOnHit_ScorePlus5
+    AddToMoveScore 6
+    PopOrEnd
+
+Expert_SpeedBoostOnHit_ScorePlus5:
+    AddToMoveScore 5
+
+Expert_SpeedBoostOnHit_End:
     PopOrEnd
 
 Expert_SpeedDownOnHit:
