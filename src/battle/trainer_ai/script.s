@@ -3424,69 +3424,23 @@ Expert_Endeavor_End:
 
 
 Expert_Fling:
-    // If the opponent resists or is immune to the move and the attacker is holding an item other than
-    // any of the following, score -1:
-    // - King's Rock
-    // - Razor Fang
-    // - Poison Barb
-    // - Toxic Orb
-    // - Flame Orb
-    // - Light Ball
-    //
-    // If the attacker's item would grant Fling < 30 base power, score -2.
-    //
-    // If the attacker's item would grant Fling > 90 base power, 75% chance of score +1, and:
-    // - If the opponent is weak to the move, additional score +4.
-    // - Otherwise, 50% chance of additional score +1.
-    //
-    // If the attacker's item would grant Fling > 60 base power, 75% chance of score +1.
-    //
-    // Otherwise, 50% chance of score -1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Fling_CheckAttackerItem
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Fling_CheckAttackerItem
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Fling_CheckAttackerItem
-    LoadFlingPower AI_BATTLER_ATTACKER
-    IfLoadedLessThan 30, Expert_Fling_ScoreMinus2
-    IfLoadedGreaterThan 90, Expert_Fling_CheckWeakness
-    IfLoadedGreaterThan 60, Expert_Fling_TryScorePlus1
-    IfRandomLessThan 128, Expert_Fling_End
-    AddToMoveScore -1
-    GoTo Expert_Fling_End
-
-Expert_Fling_ScoreMinus2:
-    AddToMoveScore -2
-    GoTo Expert_Fling_End
-
-Expert_Fling_CheckWeakness:
-    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, Expert_Fling_ScorePlus4
-    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, Expert_Fling_ScorePlus4
-    IfRandomLessThan 128, Expert_Fling_TryScorePlus1
-    AddToMoveScore 1
-    GoTo Expert_Fling_TryScorePlus1
-
-Expert_Fling_ScorePlus4:
-    AddToMoveScore 4
-
-Expert_Fling_TryScorePlus1:
-    IfRandomLessThan 64, Expert_Fling_End
-    AddToMoveScore 1
-    GoTo Expert_Fling_End
-
-Expert_Fling_CheckAttackerItem:
     LoadHeldItemEffect AI_BATTLER_ATTACKER
-    IfLoadedInTable Expert_Fling_DesirableFlingEffects, Expert_Fling_End
-    AddToMoveScore -1
+    IfLoadedEqualTo HOLD_EFFECT_SOMETIMES_FLINCH, Expert_Fling_Flinch
+    IfLoadedEqualTo HOLD_EFFECT_PIKA_SPATK_UP, Expert_StatusParalyze
+    IfLoadedEqualTo HOLD_EFFECT_BRN_USER, Expert_StatusBurn
+    IfLoadedEqualTo HOLD_EFFECT_PSN_USER, Expert_StatusPoison
+    IfLoadedEqualTo HOLD_EFFECT_STRENGTHEN_POISON, Expert_StatusPoison
+    PopOrEnd
+
+Expert_Fling_Flinch:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Fling_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_SHIELD_DUST, Expert_Fling_End
+    IfLoadedEqualTo ABILITY_INNER_FOCUS, Expert_Fling_End
+    AddToMoveScore 9
 
 Expert_Fling_End:
-    PopOrEnd 
-
-Expert_Fling_DesirableFlingEffects:
-    TableEntry HOLD_EFFECT_SOMETIMES_FLINCH
-    TableEntry HOLD_EFFECT_STRENGTHEN_POISON
-    TableEntry HOLD_EFFECT_PSN_USER
-    TableEntry HOLD_EFFECT_BRN_USER
-    TableEntry HOLD_EFFECT_PIKA_SPATK_UP
-    TableEntry TABLE_END
+    PopOrEnd
 
 Expert_HealBlock:
     // If the opponent knows a move with any of the following effects, 90.2% chance of score +1:
