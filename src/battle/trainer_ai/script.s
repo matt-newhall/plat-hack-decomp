@@ -1726,7 +1726,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_StatusPoison
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_LightScreen
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_Screen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_AURORA_VEIL, Expert_AuroraVeil
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REST, Expert_Rest
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, Expert_OHKOMove
@@ -1748,7 +1748,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ACC_DOWN_2, Expert_StatusEvasionDown
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Reflect
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_StatusParalyze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
@@ -2597,66 +2597,32 @@ Expert_Recovery_TryScorePlus2:
 Expert_Recovery_End:
     PopOrEnd 
 
-Expert_LightScreen:
-    // If the attacker's HP is < 50%, score -2.
-    //
-    // If the attacker's HP is >= 90%, 50% of additional score +1.
-    //
-    // If the opponent's last-used move was a Special move, 75% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_LightScreen_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_LightScreen_CheckLastUsedMove
-    IfRandomLessThan 128, Expert_LightScreen_CheckLastUsedMove
+
+Expert_Screen:
+    AddToMoveScore 6
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen_CheckPhysical
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_Screen_Bonus
+    PopOrEnd
+
+Expert_Screen_CheckPhysical:
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_Screen_Bonus
+    PopOrEnd
+
+Expert_Screen_Bonus:
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo HOLD_EFFECT_EXTEND_SCREENS, Expert_Screen_TryScorePlus1
     AddToMoveScore 1
 
-Expert_LightScreen_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_SPECIAL, Expert_LightScreen_End
-    IfRandomLessThan 64, Expert_LightScreen_End
+Expert_Screen_TryScorePlus1:
+    IfRandomLessThan 128, Expert_Screen_End
     AddToMoveScore 1
-    GoTo Expert_LightScreen_End
 
-Expert_LightScreen_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_LightScreen_End:
-    PopOrEnd 
-
-Expert_LightScreen_PreSplitSpecialTypes:
-    TableEntry TYPE_FIRE
-    TableEntry TYPE_WATER
-    TableEntry TYPE_GRASS
-    TableEntry TYPE_ELECTRIC
-    TableEntry TYPE_PSYCHIC
-    TableEntry TYPE_ICE
-    TableEntry TYPE_DRAGON
-    TableEntry TYPE_DARK
-    TableEntry TABLE_END
+Expert_Screen_End:
+    PopOrEnd
 
 Expert_AuroraVeil:
-    // If not currently hailing, score -10 (move will fail).
-    //
-    // If the attacker's HP is < 50%, score -2.
-    //
-    // If the attacker's HP is >= 90%, 50% of additional score +1.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MEGA_SOL, Expert_AuroraVeil_ScoreMinus10
-    LoadCurrentWeather
-    IfLoadedNotEqualTo AI_WEATHER_HAILING, Expert_AuroraVeil_ScoreMinus10
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_AuroraVeil_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_AuroraVeil_End
-    IfRandomLessThan 128, Expert_AuroraVeil_End
-    AddToMoveScore 1
-    GoTo Expert_AuroraVeil_End
-
-Expert_AuroraVeil_ScoreMinus10:
-    AddToMoveScore -10
-    GoTo Expert_AuroraVeil_End
-
-Expert_AuroraVeil_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_AuroraVeil_End:
-    PopOrEnd
+    AddToMoveScore 6
+    GoTo Expert_Screen_Bonus
 
 Expert_Rest:
     // If the attacker is faster than its target:
@@ -2711,41 +2677,6 @@ Expert_OHKOMove:
     GoTo ScorePlus6
 
 
-Expert_Reflect:
-    // If the attacker's HP is < 50%, score -2.
-    //
-    // If the attacker's HP is >= 90%, 50% of additional score +1.
-    //
-    // If the opponent's last-used move was a Physical move, 75% chance of score +1.
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 50, Expert_Reflect_ScoreMinus2
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 90, Expert_Reflect_CheckLastUsedMove
-    IfRandomLessThan 128, Expert_Reflect_CheckLastUsedMove
-    AddToMoveScore 1
-
-Expert_Reflect_CheckLastUsedMove:
-    LoadDefenderLastUsedMoveClass 
-    IfLoadedNotEqualTo CLASS_PHYSICAL, Expert_Reflect_End
-    IfRandomLessThan 64, Expert_Reflect_End
-    AddToMoveScore 1
-    GoTo Expert_Reflect_End
-
-Expert_Reflect_ScoreMinus2:
-    AddToMoveScore -2
-
-Expert_Reflect_End:
-    PopOrEnd 
-
-Expert_Reflect_PreSplitPhysicalTypes:
-    TableEntry TYPE_NORMAL
-    TableEntry TYPE_FIGHTING
-    TableEntry TYPE_FLYING
-    TableEntry TYPE_POISON
-    TableEntry TYPE_GROUND
-    TableEntry TYPE_ROCK
-    TableEntry TYPE_BUG
-    TableEntry TYPE_GHOST
-    TableEntry TYPE_STEEL
-    TableEntry TABLE_END
 
 Expert_StatusPoison:
     AddToMoveScore 6
