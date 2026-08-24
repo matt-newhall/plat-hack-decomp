@@ -124,7 +124,10 @@ Basic_NoImmunityAbility:
 
 Basic_CheckSoundproof:
     // Check for immunity to sound-based moves. This defers to the same sound-move list that
-    // the battle engine itself uses, so the two cannot drift apart.
+    // the battle engine itself uses, so the two cannot drift apart. Heal Bell and Howl are
+    // sound moves which never touch the target, so the target's ability cannot stop them.
+    IfMoveEqualTo MOVE_HEAL_BELL, Basic_ScoreMoveEffect
+    IfMoveEqualTo MOVE_HOWL, Basic_ScoreMoveEffect
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo ABILITY_SOUNDPROOF, Basic_ScoreMoveEffect
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -3072,13 +3075,9 @@ Expert_SleepTalk:
 
 
 Expert_HealBell:
-    // If neither the attacker nor any of its party members have a non-volatile status condition,
-    // score -5.
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_HealBell_End
-    IfPartyMemberStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, Expert_HealBell_End
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScorePlus6
+    IfPartyMemberStatus AI_BATTLER_ATTACKER, MON_CONDITION_ANY, ScorePlus6
     AddToMoveScore -5
-
-Expert_HealBell_End:
     PopOrEnd 
 
 
