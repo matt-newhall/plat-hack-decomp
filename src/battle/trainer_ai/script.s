@@ -3402,69 +3402,34 @@ Expert_WorrySeed_End:
 
 
 Expert_Defog:
-    // If the opponent's side of the field is under the effect of Light Screen or Reflect:
-    // - If the attacker's HP < 30% and there are no remaining party members:
-    //   - 80.5% chance of additional score -2.
-    //   - If the opponent's HP > 70%, score -2.
-    // - Start at score +1.
-    // - If the opponent has at least one remaining party member and their side of the field is
-    // under the effect of Spikes, Stealth Rock, or Toxic Spikes, 50% chance of score -1.
-    // - Proceed to the final if-block below.
-    //
-    // If the opponent's side of the field is under the effect of Spikes, Stealth Rock, or Toxic
-    // Spikes, additional score -2.
-    //
-    // If all of the following conditions are met, score -2:
-    // - The attacker's HP >= 70%
-    // - The opponent's Evasion stat is at -2 stage or greater
-    // - The opponent's HP <= 70%
-    // Otherwise:
-    // - 80.5% chance of additional score -2.
-    // - If the opponent's HP <= 70% score -2.
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_Defog_ScreenScrubbing
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_Defog_ScreenScrubbing
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_ScoreMinus2AndEnd
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScoreMinus2AndEnd
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScoreMinus2AndEnd
-    GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
+    AddToMoveScore 6
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ClearsOurHazards
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_ClearsOurHazards
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ClearsOurHazards
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_ClearsOurHazards
+    GoTo Expert_Defog_CheckScreens
 
-Expert_Defog_ScreenScrubbing:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 30, Expert_Defog_ScreenScrubbingCheckHazards
-    CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_Defog_TryScoreMinus2
+Expert_Defog_ClearsOurHazards:
+    AddToMoveScore -8
 
-Expert_Defog_ScreenScrubbingCheckHazards:
-    AddToMoveScore 1
-    CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedEqualTo 0, Expert_Defog_End
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_SPIKES, Expert_Defog_TryScoreMinus1
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_TryScoreMinus1
-    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_TryScoreMinus1
-    GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
+Expert_Defog_CheckScreens:
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_Defog_ScorePlus2
+    IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_Defog_ScorePlus2
+    GoTo Expert_Defog_CheckOurHazards
 
-Expert_Defog_ScoreMinus2AndEnd:
-    AddToMoveScore -2
-    GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
+Expert_Defog_ScorePlus2:
+    AddToMoveScore 2
 
-Expert_Defog_TryScoreMinus1:
-    IfRandomLessThan 128, Expert_Defog_CheckUserHPAndOpponentEvasion
-    AddToMoveScore -1
-    GoTo Expert_Defog_CheckUserHPAndOpponentEvasion
+Expert_Defog_CheckOurHazards:
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScorePlus4
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_ScorePlus4
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScorePlus4
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_ScorePlus4
+    PopOrEnd
 
-Expert_Defog_CheckUserHPAndOpponentEvasion:
-    IfHPPercentLessThan AI_BATTLER_ATTACKER, 70, Expert_Defog_TryScoreMinus2
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 3, Expert_Defog_CheckOpponentHP
-
-Expert_Defog_TryScoreMinus2:
-    IfRandomLessThan 50, Expert_Defog_CheckOpponentHP
-    AddToMoveScore -2
-
-Expert_Defog_CheckOpponentHP:
-    IfHPPercentGreaterThan AI_BATTLER_DEFENDER, 70, Expert_Defog_End
-    AddToMoveScore -2
-
-Expert_Defog_End:
-    PopOrEnd 
+Expert_Defog_ScorePlus4:
+    AddToMoveScore 4
+    PopOrEnd
 
 
 
