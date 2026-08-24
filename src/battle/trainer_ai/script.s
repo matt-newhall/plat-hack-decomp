@@ -3127,12 +3127,20 @@ Expert_PainSplit_End:
     PopOrEnd 
 
 Expert_LockOn:
-    // 50% chance of score +2.
-    IfRandomLessThan 128, Expert_LockOn_End
-    AddToMoveScore 2
+    AddToMoveScore 6
+    IfMoveEffectKnown AI_BATTLER_ATTACKER, BATTLE_EFFECT_ONE_HIT_KO, Expert_LockOn_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ZAP_CANNON, Expert_LockOn_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DYNAMIC_PUNCH, Expert_LockOn_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DARK_VOID, Expert_LockOn_TryScorePlus1
+    AddToMoveScore -2
+    PopOrEnd
+
+Expert_LockOn_TryScorePlus1:
+    IfRandomGreaterThan 170, Expert_LockOn_End
+    AddToMoveScore 1
 
 Expert_LockOn_End:
-    PopOrEnd 
+    PopOrEnd
 
 Expert_SleepTalk:
     // If the attacker is asleep, score +10.
