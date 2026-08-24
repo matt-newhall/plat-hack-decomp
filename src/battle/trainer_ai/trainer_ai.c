@@ -242,7 +242,7 @@ static BOOL AI_MoveHasDamageEstimate(BattleContext *battleCtx, u16 move);
 static int TrainerAI_HitCountMultiplier(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int ability, u16 heldItem);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
-static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
+static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, BOOL wantSuperEffective);
 static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
@@ -4338,27 +4338,36 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
 }
 
 /**
- * @brief Check if Perish Song is active on a battler and the battler should
- * faint at the end of the turn. If so, treat the next switch as post-KO switch
- * AI.
+ * @brief Check if Perish Song is about to knock a battler out. If so, treat the next switch
+ * as post-KO switch AI.
  *
- * This routine is bugged; it functionally does nothing. The Perish Song turn
- * count decrements at the end of the turn, so the AI never sees that it WILL
- * die to Perish Song.
+ * A count of zero means the battler faints at the end of this turn, so that switch is forced.
+ * Leaving it that late is also the most readable thing the AI can do, so half the time it goes
+ * a turn early instead.
  *
+ * @param battleSys
  * @param battleCtx
  * @param battler   The AI's battler.
  * @return TRUE if the AI has a switch to make, FALSE otherwise.
  */
-static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
+static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_PERISH_SONG)
-        && battleCtx->battleMons[battler].moveEffectsData.perishSongTurns == 0) {
-        battleCtx->aiSwitchedPartySlot[battler] = 6;
-        return TRUE;
+    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_PERISH_SONG) == FALSE) {
+        return FALSE;
     }
 
-    return FALSE;
+    int turns = battleCtx->battleMons[battler].moveEffectsData.perishSongTurns;
+
+    if (turns > 1) {
+        return FALSE;
+    }
+
+    if (turns == 1 && BattleSystem_RandNext(battleSys) % 2) {
+        return FALSE;
+    }
+
+    battleCtx->aiSwitchedPartySlot[battler] = 6;
+    return TRUE;
 }
 
 /**
@@ -5018,7 +5027,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
     }
 
     if (alivePartyMons) {
-        if (AI_PerishSongKO(battleCtx, battler)) {
+        if (AI_PerishSongKO(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
