@@ -1764,6 +1764,8 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SPEED_HIT, Expert_SpeedDownOnHit
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SP_ATK_HIT, Expert_AttackDropOnHit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, Expert_ChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_NEG_1_BYPASS_ACCURACY, Expert_VitalThrow
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SUBSTITUTE, Expert_Substitute
@@ -2349,6 +2351,50 @@ Expert_BypassAccuracyMove_TryScorePlus1:
 
 Expert_BypassAccuracyMove_End:
     PopOrEnd 
+
+Expert_AttackDropOnHit:
+    // Only the moves whose drop is guaranteed are scored
+    IfMoveEqualTo MOVE_LUNGE, Expert_AttackDropOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_SNARL, Expert_AttackDropOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_STRUGGLE_BUG, Expert_AttackDropOnHit_CheckBestDamage
+    PopOrEnd
+
+Expert_AttackDropOnHit_CheckBestDamage:
+    // Ignore if already HDM
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_AttackDropOnHit_End
+
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AttackDropOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit_CheckPhysical
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_AttackDropOnHit_ScorePlus6
+    GoTo Expert_AttackDropOnHit_ScorePlus5
+
+Expert_AttackDropOnHit_CheckPhysical:
+    IfBattlerHasDamagingMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_AttackDropOnHit_ScorePlus6
+    GoTo Expert_AttackDropOnHit_ScorePlus5
+
+Expert_AttackDropOnHit_ScorePlus6:
+    AddToMoveScore 6
+    GoTo Expert_AttackDropOnHit_CheckDoubles
+
+Expert_AttackDropOnHit_ScorePlus5:
+    AddToMoveScore 5
+
+Expert_AttackDropOnHit_CheckDoubles:
+    LoadBattleType 
+    IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_AttackDropOnHit_End
+    IfMoveEqualTo MOVE_SNARL, Expert_AttackDropOnHit_ScorePlus1
+    IfMoveEqualTo MOVE_STRUGGLE_BUG, Expert_AttackDropOnHit_ScorePlus1
+    PopOrEnd
+
+Expert_AttackDropOnHit_ScorePlus1:
+    AddToMoveScore 1
+
+Expert_AttackDropOnHit_End:
+    PopOrEnd
 
 Expert_SpeedDownOnHit:
     // Only the moves whose drop is guaranteed are judged on it
