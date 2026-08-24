@@ -3769,12 +3769,10 @@ TagStrategy_ScoreMinus30:
 TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_PartnerSkillSwap
     IfMoveEqualTo MOVE_WILL_O_WISP, TagStrategy_PartnerWillOWisp
-    IfMoveEqualTo MOVE_THUNDER_WAVE, TagStrategy_PartnerThunderWave
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, TagStrategy_PartnerPoisonStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, TagStrategy_PartnerPoisonStatus
     IfMoveEqualTo MOVE_HELPING_HAND, TagStrategy_PartnerUsingHelpingHand
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
-    IfMoveEqualTo MOVE_TRICK, TagStrategy_PartnerTrick
     IfMoveEqualTo MOVE_ROLE_PLAY, TagStrategy_PartnerRolePlay
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, TagStrategy_PartnerPsychUp
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
@@ -3794,70 +3792,26 @@ TagStrategy_PartnerSkillSwap:
     GoTo ScoreMinus20
 
 TagStrategy_PartnerWillOWisp:
-    // If our partner has Flash Fire, handle it identically to the earlier Fire Absorption routine
-    //
-    // If our partner meets all of the following conditions, score +5:
-    //  - Has the Guts ability
-    //  - Is not currently statused
-    //  - Does not have a Fire typing
-    //  - Is not holding a Flame Orb or Toxic Orb
-    //  - Is at 81% HP or greater
-    //
-    // Otherwise, score -30
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_FLASH_FIRE
+    // A Fire-type partner cannot be burned at all, so the turn buys nothing.
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
+    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
+    GoTo TagStrategy_PartnerGutsStatus
 
+TagStrategy_PartnerGutsStatus:
+    // Guts turns the status into an Attack boost, which is worth spending the AI's turn to hand
+    // over. A partner already carrying a status has nothing left to gain from a second one.
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_GUTS
     IfLoadedNotEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
-
     IfStatus AI_BATTLER_ATTACKER_PARTNER, MON_CONDITION_ANY, TagStrategy_PartnerScoreMinus30
-
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_FIRE, TagStrategy_PartnerScoreMinus30
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_FIRE, TagStrategy_PartnerScoreMinus30
-
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_FLAME_ORB, TagStrategy_PartnerScoreMinus30
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_TOXIC_ORB, TagStrategy_PartnerScoreMinus30
-
-    IfHPPercentLessThan AI_BATTLER_ATTACKER_PARTNER, 81, TagStrategy_PartnerScoreMinus30
-
-    GoTo ScorePlus5
-
-TagStrategy_PartnerThunderWave:
-    // If our partner has a Ground typing or has an ability other than Motor Drive or Volt Absorb, score -30
-    //
-    // Otherwise, handle the move identically to other Electric moves
-    LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GROUND, TagStrategy_PartnerScoreMinus30
-    LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GROUND, TagStrategy_PartnerScoreMinus30
-
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_MOTOR_DRIVE
-
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_VOLT_ABSORB
-
-    GoTo TagStrategy_PartnerScoreMinus30
+    GoTo ScorePlus9
 
 TagStrategy_PartnerPoisonStatus:
-    // If our partner meets all of the following conditions, score +5:
-    //  - Has the Poison Heal ability
-    //  - Is not currently statused
-    //  - Is not holding a Toxic Orb
-    //  - Is at 81% HP or greater
-    //
-    // Otherwise, score -30
-    //
-    // BUG: This routine should also consider if the partner has a Poison or Steel typing.
-    CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_POISON_HEAL
-    IfLoadedNotEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
-
-    IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, TagStrategy_PartnerScoreMinus30
-
-    IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_TOXIC_ORB, TagStrategy_PartnerScoreMinus30
-
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER_PARTNER, 91, TagStrategy_PartnerScoreMinus30
-
-    GoTo ScorePlus5
+    // Poison and Steel types cannot be poisoned at all.
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_POISON
+    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
+    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_STEEL
+    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerScoreMinus30
+    GoTo TagStrategy_PartnerGutsStatus
 
 TagStrategy_PartnerUsingHelpingHand:
     // Nothing to boost if the partner is not attacking with its own turn.
@@ -3865,26 +3819,12 @@ TagStrategy_PartnerUsingHelpingHand:
     GoTo ScorePlus6
 
 TagStrategy_PartnerSwagger:
-    // If our partner is holding neither a Persim Berry nor a Lum Berry, score -30
-    //
-    // If our partner is at less than +2 Attack, score +3
-    //
-    // Otherwise, no score changes
-    //
-    // Curiously, this does not consider if our partner's ability is Own Tempo.
-    IfHeldItemEqualTo AI_BATTLER_DEFENDER, ITEM_PERSIM_BERRY, TagStrategy_PartnerSwagger_TryScorePlus3
-    IfHeldItemEqualTo AI_BATTLER_DEFENDER, ITEM_LUM_BERRY, TagStrategy_PartnerSwagger_TryScorePlus3
+    // Swagger hands the partner +2 Attack along with the confusion, and a Persim or Lum Berry
+    // throws the confusion straight back out. Once the berry has been eaten it is gone from the
+    // partner's held item, so this stops applying rather than being offered a second time.
+    IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_PERSIM_BERRY, ScorePlus9
+    IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_LUM_BERRY, ScorePlus9
     GoTo TagStrategy_PartnerScoreMinus30
-
-TagStrategy_PartnerSwagger_TryScorePlus3:
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 7, TagStrategy_PartnerSwagger_End
-    AddToMoveScore 3
-
-TagStrategy_PartnerSwagger_End:
-    PopOrEnd 
-
-TagStrategy_PartnerTrick:
-    PopOrEnd 
 
 TagStrategy_PartnerGastroAcid:
     // If our partner's ability is already suppressed, score -30
@@ -3895,15 +3835,15 @@ TagStrategy_PartnerGastroAcid:
     IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_ABILITY_SUPPRESSED, TagStrategy_PartnerScoreMinus30
 
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_TRUANT
-    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerGastroAcid_ScorePlus5
+    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerGastroAcid_ScorePlus13
 
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SLOW_START
-    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerGastroAcid_ScorePlus5
+    IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerGastroAcid_ScorePlus13
 
     GoTo TagStrategy_PartnerGastroAcid_End
 
-TagStrategy_PartnerGastroAcid_ScorePlus5:
-    AddToMoveScore 5
+TagStrategy_PartnerGastroAcid_ScorePlus13:
+    AddToMoveScore 13
 
 TagStrategy_PartnerGastroAcid_End:
     PopOrEnd 
