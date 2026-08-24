@@ -693,6 +693,16 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfMovesFirst jump:req
+    .long AICMD_IFMOVESFIRST
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDoesNotMoveFirst jump:req
+    .long AICMD_IFDOESNOTMOVEFIRST
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro IfShouldRecover percent:req, jump:req
     .long AICMD_IFSHOULDRECOVER
     .long \percent

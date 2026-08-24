@@ -222,6 +222,8 @@ static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battle
 static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfShouldRecover(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDoesNotMoveFirst(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -2920,6 +2922,57 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
  * @param battleCtx
  */
 /**
+ * @brief Check whether the attacker gets to act before its target this turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if the attacker acts first; a speed tie counts as acting first.
+ */
+static BOOL AI_MovesBeforeTarget(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+    int ability = Battler_Ability(battleCtx, attacker);
+    int priority = MOVE_DATA(AI_CONTEXT.move).priority;
+
+    if (ability == ABILITY_PRANKSTER && MOVE_DATA(AI_CONTEXT.move).class == CLASS_STATUS) {
+        priority++;
+    }
+
+    if (ability == ABILITY_GALE_WINGS
+        && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
+        && mon->curHP == mon->maxHP) {
+        priority++;
+    }
+
+    if (priority != 0) {
+        return priority > 0;
+    }
+
+    return BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) != COMPARE_SPEED_SLOWER;
+}
+
+static void AICmd_IfMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MovesBeforeTarget(battleSys, battleCtx)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfDoesNotMoveFirst(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MovesBeforeTarget(battleSys, battleCtx) == FALSE) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
  * @brief The AI's "should I heal this turn" test.
  *
  * @param battleSys
@@ -2953,7 +3006,7 @@ static void AICmd_IfShouldRecover(BattleSystem *battleSys, BattleContext *battle
     int hpPercent = mon->curHP * 100 / mon->maxHP;
     BOOL recover = FALSE;
 
-    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) == COMPARE_SPEED_SLOWER) {
+    if (AI_MovesBeforeTarget(battleSys, battleCtx) == FALSE) {
         if (hpPercent < 50) {
             recover = TRUE;
         } else if (hpPercent < 70) {

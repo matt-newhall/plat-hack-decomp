@@ -2151,7 +2151,7 @@ Expert_FakeOut_End:
 Expert_DestinyBond:
     // Destiny Bond only cashes in if the AI is going down anyway, and it has to move first for
     // the tag to be on the board when it does.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_DestinyBond_WhenSlower
+    IfDoesNotMoveFirst Expert_DestinyBond_WhenSlower
     IfDefenderCanKO Expert_DestinyBond_WhenDying
     GoTo ScorePlus6
 
@@ -2250,7 +2250,7 @@ Expert_SetupSpecialSweeper:
     IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupSpecialSweeper_ScorePlus3
     IfDefenderCanKOInHits 3, Expert_SetupSpecialSweeper_CheckSpAttackStage
     AddToMoveScore 1
-    IfSpeedCompareNotEqualTo COMPARE_SPEED_FASTER, Expert_SetupSpecialSweeper_CheckSpAttackStage
+    IfDoesNotMoveFirst Expert_SetupSpecialSweeper_CheckSpAttackStage
     AddToMoveScore 1
     GoTo Expert_SetupSpecialSweeper_CheckSpAttackStage
 
@@ -2267,7 +2267,7 @@ Expert_SetupSpecialSweeper_ScoreMinus1:
 Expert_Setup_CheckSlowAndFragile:
     // Boosting is a losing trade against something which both moves first and only needs two
     // turns to finish the job.
-    IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_Setup_End
+    IfMovesFirst Expert_Setup_End
     IfDefenderCanKOInHits 2, ScoreMinus5
 
 Expert_Setup_End:
@@ -2297,7 +2297,7 @@ Expert_ShellSmash_ScorePlus3:
 Expert_ShellSmash_CheckKO:
     // Moving first means taking the next hit through the drops, unless a White Herb undoes
     // them first.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_ShellSmash_CheckKOAtCurrentStats
+    IfDoesNotMoveFirst Expert_ShellSmash_CheckKOAtCurrentStats
     IfDefenderCanKOAfterShellSmash ScoreMinus2
     GoTo ScorePlus2
 
@@ -2878,7 +2878,7 @@ Expert_Substitute:
     AddToMoveScore 2
 
 Expert_Substitute_CheckSeeded:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Substitute_TryScoreMinus1
+    IfDoesNotMoveFirst Expert_Substitute_TryScoreMinus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Substitute_ScorePlus2
     GoTo Expert_Substitute_TryScoreMinus1
 
@@ -2986,7 +2986,7 @@ Expert_Taunt:
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TRICK_ROOM, ScorePlus9
 
 Expert_Taunt_CheckDefog:
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, ScorePlus5
+    IfDoesNotMoveFirst ScorePlus5
     IfNotSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_AURORA_VEIL, ScorePlus5
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_DEFOG, ScorePlus9
     GoTo ScorePlus5
@@ -3000,7 +3000,7 @@ Expert_Encore:
 
     // Moving first is what makes Encore worth it, but only against a move worth locking the
     // target into. Anything else and the turn is better spent elsewhere.
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Encore_WhenSlower
+    IfDoesNotMoveFirst Expert_Encore_WhenSlower
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
     LoadEffectOfLoadedMove 
     IfLoadedinTable Expert_Encore_EncouragedMoveEffects, ScorePlus7

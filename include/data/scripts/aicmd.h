@@ -133,6 +133,8 @@ ScriptCommand(AICMD_IFATTACKERCANKO,                  AICmd_IfAttackerCanKO)
 ScriptCommand(AICMD_IFRESIDUALDAMAGEKOSATTACKER,      AICmd_IfResidualDamageKOsAttacker)
 ScriptCommand(AICMD_IFBATTLERKNOWSSOUNDMOVE,          AICmd_IfBattlerKnowsSoundMove)
 ScriptCommand(AICMD_IFSHOULDRECOVER,                  AICmd_IfShouldRecover)
+ScriptCommand(AICMD_IFMOVESFIRST,                     AICmd_IfMovesFirst)
+ScriptCommand(AICMD_IFDOESNOTMOVEFIRST,               AICmd_IfDoesNotMoveFirst)
 
 // clang-format on
 
