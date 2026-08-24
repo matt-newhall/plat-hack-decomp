@@ -54,6 +54,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP,
     BATTLE_EFFECT_HALVE_HP,
     BATTLE_EFFECT_AVERAGE_HP,
+    BATTLE_EFFECT_SET_HP_EQUAL_TO_USER,
     0xFFFF
 };
 
@@ -3934,6 +3935,16 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             damage = 1;
         }
 
+        break;
+
+    case MOVE_ENDEAVOR:
+        // Endeavor drops the target to the attacker's current HP, so it does nothing at all
+        // against a target which is already at or below it.
+        if (battleCtx->battleMons[AI_CONTEXT.defender].curHP <= battleCtx->battleMons[attacker].curHP) {
+            return 0;
+        }
+
+        damage = battleCtx->battleMons[AI_CONTEXT.defender].curHP - battleCtx->battleMons[attacker].curHP;
         break;
 
     case MOVE_PAIN_SPLIT: {

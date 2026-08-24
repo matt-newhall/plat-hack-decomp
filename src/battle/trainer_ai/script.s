@@ -243,7 +243,6 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECYCLE, Basic_CheckCanRecycle
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HELD_ITEM, Basic_CheckCanRemoveItem
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Basic_CheckCanRefreshStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
@@ -1865,7 +1864,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECYCLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_SCREENS, Expert_BrickBreak
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Expert_Endeavor
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
@@ -3359,32 +3357,6 @@ Expert_BrickBreak_ScreenIsUp:
     IfRandomLessThan 205, ScorePlus8
     GoTo ScorePlus7
 
-Expert_Endeavor:
-    // If the opponent's HP < 70%, score -1 and terminate.
-    //
-    // If the attacker is slower than its opponent:
-    // - If the attacker's HP > 50%, score -1.
-    // - Otherwise, score +1.
-    //
-    // If the attacker is faster than its opponent:
-    // - If the attacker's HP > 40%, score -1.
-    // - Otherwise, score +1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 70, Expert_Endeavor_ScoreMinus1
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_Endeavor_SlowerCheckHP
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 40, Expert_Endeavor_ScoreMinus1
-    AddToMoveScore 1
-    GoTo Expert_Endeavor_End
-
-Expert_Endeavor_SlowerCheckHP:
-    IfHPPercentGreaterThan AI_BATTLER_ATTACKER, 50, Expert_Endeavor_ScoreMinus1
-    AddToMoveScore 1
-    GoTo Expert_Endeavor_End
-
-Expert_Endeavor_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Endeavor_End:
-    PopOrEnd 
 
 
 
