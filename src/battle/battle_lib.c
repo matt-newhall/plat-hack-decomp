@@ -7089,7 +7089,7 @@ static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
 
     return (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
                 && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
-                && itemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+                && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
                 && MON_IS_NOT_TYPE(battler, TYPE_FLYING))
         || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
         || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY);
