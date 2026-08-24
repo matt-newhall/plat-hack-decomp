@@ -766,9 +766,18 @@ Basic_CheckSpikes:
     PopOrEnd 
 
 Basic_CheckForesight:
-    // If the target is already under the effect, score -10.
+    // The move has nothing to do unless the target is a Ghost-type, whose Normal and Fighting
+    // immunities it lifts, or has actually raised its Evasion for the move to see through.
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_FORESIGHT, ScoreMinus10
-    PopOrEnd 
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, Basic_CheckForesight_Terminate
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, Basic_CheckForesight_Terminate
+    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 6, Basic_CheckForesight_Terminate
+    AddToMoveScore -10
+
+Basic_CheckForesight_Terminate:
+    PopOrEnd
 
 Basic_CheckPerishSong:
     // If the target is already under the effect, score -10.
@@ -1741,6 +1750,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_2, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CRIT_UP_2, Expert_FocusEnergy
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRANSFORM, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_2, Expert_StatusMoveBonus
@@ -1775,7 +1785,10 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_HURT_ON_CONTACT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SPIKES, Expert_Spikes
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORESIGHT, Expert_Foresight
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORESIGHT, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_LAST_MOVE_PP, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Expert_Endure
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PASS_STATS_AND_STATUS, Expert_BatonPass
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_BEFORE_SWITCH, Expert_Pursuit
@@ -1806,7 +1819,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_SCREENS, Expert_BrickBreak
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_HP_EQUAL_TO_USER, Expert_Endeavor
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_Refresh
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusMoveBonus
@@ -1820,7 +1833,6 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EAT_BERRY, Expert_Pluck
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus
@@ -3161,30 +3173,6 @@ Expert_Protect_End:
 
 
 
-Expert_Foresight:
-    // If the attacker has a Ghost typing, 47.3% chance of score +2.
-    // BUG: This should instead check the opponent's typing.
-    //
-    // If the target's Evasion stat stage is at +3 or higher, 68.75% chance of score +2.
-    //
-    // Otherwise, score -2.
-    LoadTypeFrom LOAD_ATTACKER_TYPE_1
-    IfLoadedEqualTo TYPE_GHOST, Expert_Foresight_FirstRoll
-    LoadTypeFrom LOAD_ATTACKER_TYPE_2
-    IfLoadedEqualTo TYPE_GHOST, Expert_Foresight_FirstRoll
-    IfStatStageGreaterThan AI_BATTLER_DEFENDER, BATTLE_STAT_EVASION, 8, Expert_Foresight_SecondRoll
-    AddToMoveScore -2
-    GoTo Expert_Foresight_End
-
-Expert_Foresight_FirstRoll:
-    IfRandomLessThan 80, Expert_Foresight_End
-
-Expert_Foresight_SecondRoll:
-    IfRandomLessThan 80, Expert_Foresight_End
-    AddToMoveScore 2
-
-Expert_Foresight_End:
-    PopOrEnd 
 
 Expert_Endure:
     // If the attacker's HP < 4%, score -1.
@@ -3762,44 +3750,10 @@ Expert_Endeavor_ScoreMinus1:
 Expert_Endeavor_End:
     PopOrEnd 
 
-Expert_Refresh:
-    // If the opponent's HP < 50%, score -1.
-    IfHPPercentLessThan AI_BATTLER_DEFENDER, 50, Expert_Refresh_ScoreMinus1
-    GoTo Expert_Refresh_End
-
-Expert_Refresh_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Refresh_End:
-    PopOrEnd 
 
 
 
 
-Expert_Pluck:
-    // If the opponent resists or is immune to the move, score -1.
-    //
-    // If it is the attacker's first turn in battle, 75% chance of additional score +1.
-    //
-    // 50% chance of score +1.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, Expert_Pluck_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, Expert_Pluck_ScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, Expert_Pluck_ScoreMinus1
-    LoadIsFirstTurnInBattle AI_BATTLER_ATTACKER
-    IfLoadedEqualTo FALSE, Expert_Pluck_TryScorePlus1
-    IfRandomLessThan 64, Expert_Pluck_TryScorePlus1
-    AddToMoveScore 1
-
-Expert_Pluck_TryScorePlus1:
-    IfRandomLessThan 128, Expert_Pluck_End
-    AddToMoveScore 1
-    GoTo Expert_Pluck_End
-
-Expert_Pluck_ScoreMinus1:
-    AddToMoveScore -1
-
-Expert_Pluck_End:
-    PopOrEnd 
 
 
 Expert_MetalBurst:
