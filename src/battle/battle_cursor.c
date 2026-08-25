@@ -213,12 +213,14 @@ typedef struct UnkStruct_ov16_02268A14_t {
     UnkStruct_02012B20 *unk_5B8;
     ManagedSprite *unk_5BC[6];
     ManagedSprite *unk_5D4[6];
+    ManagedSprite *ballsTheirsRow2[6];
     ManagedSprite *moveSelectSprites[4];
     ManagedSprite *unk_5FC[4];
     ManagedSprite *unk_60C[4];
     SysTask *unk_61C[4];
     UnkStruct_ov16_02268FCC unk_62C[6];
     SysTask *unk_664;
+    u8 ballsTheirsRow2Used;
     u8 unk_668;
     u8 unk_669;
     u8 unk_66A;
@@ -311,7 +313,7 @@ static void ov16_0226B088(UnkStruct_ov16_02268A14 *param0, int param1);
 static void ov16_0226B0DC(UnkStruct_ov16_02268A14 *param0, int param1);
 static int ov16_0226A934(u8 param0);
 static void ov16_02268F00(UnkStruct_ov16_02268A14 *param0);
-void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[]);
+void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[], u8 param3[]);
 void ov16_022691BC(UnkStruct_ov16_02268A14 *param0);
 void ov16_02269218(UnkStruct_ov16_02268A14 *param0);
 static void ov16_0226BC50(SysTask *param0, void *param1);
@@ -1056,6 +1058,11 @@ void BattleSystem_HideMegaButton(UnkStruct_ov16_02268A14 *param0)
     SpriteManager_UnloadAnimObjById(spriteMan, MEGA_BUTTON_CELL_RESOURCE);
 }
 
+#define BALL_HUD_THEIRS_X(i)    (246 + -12 * (i))
+#define BALL_HUD_THEIRS_Y       9
+#define BALL_HUD_THEIRS_ROW_1_Y 6
+#define BALL_HUD_THEIRS_ROW_2_Y 16
+
 static const SpriteTemplate Unk_ov16_02270414 = {
     0xC,
     0xD,
@@ -1594,7 +1601,10 @@ void ov16_02268D40(NARC *param0, UnkStruct_ov16_02268A14 *param1)
         ManagedSprite_SetAffineOverwriteMode(param1->unk_5BC[i], AFFINE_OVERWRITE_MODE_NORMAL);
 
         param1->unk_5D4[i] = SpriteSystem_NewSprite(v1, v2, &Unk_ov16_02270448);
-        Sprite_SetPositionXYWithSubscreenOffset(param1->unk_5D4[i]->sprite, 246 + -12 * i, 9, (192 + 80) << FX32_SHIFT);
+        Sprite_SetPositionXYWithSubscreenOffset(param1->unk_5D4[i]->sprite, BALL_HUD_THEIRS_X(i), BALL_HUD_THEIRS_Y, (192 + 80) << FX32_SHIFT);
+
+        param1->ballsTheirsRow2[i] = SpriteSystem_NewSprite(v1, v2, &Unk_ov16_02270448);
+        Sprite_SetPositionXYWithSubscreenOffset(param1->ballsTheirsRow2[i]->sprite, BALL_HUD_THEIRS_X(i), BALL_HUD_THEIRS_ROW_2_Y, (192 + 80) << FX32_SHIFT);
     }
 
     ov16_02269218(param1);
@@ -1636,6 +1646,9 @@ static void ov16_02268F00(UnkStruct_ov16_02268A14 *param0)
 
         Sprite_DeleteAndFreeResources(param0->unk_5D4[i]);
         param0->unk_5D4[i] = NULL;
+
+        Sprite_DeleteAndFreeResources(param0->ballsTheirsRow2[i]);
+        param0->ballsTheirsRow2[i] = NULL;
     }
 
     SysTask_Done(param0->unk_08);
@@ -1740,9 +1753,20 @@ void ov16_0226914C(UnkStruct_ov16_02268A14 *param0, const u8 *param1)
     }
 }
 
-void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[])
+void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[], u8 param3[])
 {
     int i, v1;
+
+    param0->ballsTheirsRow2Used = 0;
+
+    for (i = 0; i < 6; i++) {
+        if (param3[i] != STOCK_STATUS_NO_MON) {
+            param0->ballsTheirsRow2Used = 1;
+            break;
+        }
+    }
+
+    int theirsRow1Y = param0->ballsTheirsRow2Used ? BALL_HUD_THEIRS_ROW_1_Y : BALL_HUD_THEIRS_Y;
 
     for (i = 0; i < 6; i++) {
         v1 = ov16_0226A934(param1[i]);
@@ -1754,6 +1778,12 @@ void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[])
 
         Sprite_SetAnim(param0->unk_5D4[i]->sprite, v1);
         Sprite_TickFrame(param0->unk_5D4[i]->sprite);
+        Sprite_SetPositionXYWithSubscreenOffset(param0->unk_5D4[i]->sprite, BALL_HUD_THEIRS_X(i), theirsRow1Y, (192 + 80) << FX32_SHIFT);
+
+        v1 = ov16_0226A934(param3[i]);
+
+        Sprite_SetAnim(param0->ballsTheirsRow2[i]->sprite, v1);
+        Sprite_TickFrame(param0->ballsTheirsRow2[i]->sprite);
     }
 }
 
@@ -1771,6 +1801,12 @@ void ov16_022691BC(UnkStruct_ov16_02268A14 *param0)
         for (i = 0; i < 6; i++) {
             Sprite_SetDrawFlag2(param0->unk_5D4[i]->sprite, 1);
         }
+
+        if (param0->ballsTheirsRow2Used) {
+            for (i = 0; i < 6; i++) {
+                Sprite_SetDrawFlag2(param0->ballsTheirsRow2[i]->sprite, 1);
+            }
+        }
     }
 }
 
@@ -1783,6 +1819,7 @@ void ov16_02269218(UnkStruct_ov16_02268A14 *param0)
     for (i = 0; i < 6; i++) {
         Sprite_SetDrawFlag2(param0->unk_5BC[i]->sprite, 0);
         Sprite_SetDrawFlag2(param0->unk_5D4[i]->sprite, 0);
+        Sprite_SetDrawFlag2(param0->ballsTheirsRow2[i]->sprite, 0);
     }
 }
 

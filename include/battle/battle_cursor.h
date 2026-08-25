@@ -38,7 +38,7 @@ void BattleSystem_RefreshMegaButton(UnkStruct_ov16_02268A14 *param0, BOOL armed)
 void BattleSystem_HideMegaButton(UnkStruct_ov16_02268A14 *param0);
 void ov16_02268D40(NARC *param0, UnkStruct_ov16_02268A14 *param1);
 void ov16_0226914C(UnkStruct_ov16_02268A14 *param0, const u8 *param1);
-void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[]);
+void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[], u8 param3[]);
 void ov16_022691BC(UnkStruct_ov16_02268A14 *param0);
 void ov16_02269218(UnkStruct_ov16_02268A14 *param0);
 int BattleSystem_MenuInput(UnkStruct_ov16_02268A14 *param0);

@@ -569,6 +569,40 @@ void BattleController_EmitSlideHealthbarOut(BattleSystem *battleSys, int battler
 }
 
 /**
+ * @brief Fill one row of the command selection screen's Poke Ball display from
+ * a single battler's party.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param[out] ballStatus Row of MAX_PARTY_SIZE entries to populate.
+ * @param battler         The battler whose party backs this row.
+ */
+static void BallStatusRow_Fill(BattleSystem *battleSys, BattleContext *battleCtx, u8 ballStatus[], int battler)
+{
+    Party *party = BattleSystem_GetParty(battleSys, battler);
+    int cnt = 0;
+
+    for (int i = 0; i < Party_GetCurrentCount(party) && cnt < MAX_PARTY_SIZE; i++) {
+        Pokemon *pokemon = Party_GetPokemonBySlotIndex(party, battleCtx->partyOrder[battler][i]);
+        int monSpeciesOrEgg = Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL);
+
+        if (monSpeciesOrEgg && monSpeciesOrEgg != SPECIES_EGG) {
+            if (Pokemon_GetValue(pokemon, MON_DATA_HP, NULL)) {
+                if (Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL)) {
+                    ballStatus[cnt] = STOCK_STATUS_HAS_STATUS_CONDITION;
+                } else {
+                    ballStatus[cnt] = STOCK_STATUS_MON_ALIVE;
+                }
+            } else {
+                ballStatus[cnt] = STOCK_STATUS_MON_FAINTED;
+            }
+
+            cnt++;
+        }
+    }
+}
+
+/**
  * @brief Emits a message to set the lower menu to the command selection screen
  *
  * @param battleSys
@@ -621,12 +655,12 @@ void BattleController_EmitSetCommandSelection(BattleSystem *battleSys, BattleCon
         if (monSpeciesOrEgg && monSpeciesOrEgg != SPECIES_EGG) {
             if (Pokemon_GetValue(pokemon, MON_DATA_HP, NULL)) {
                 if (Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL)) {
-                    message.ballStatus[PARTY_GAUGE_OURS][cnt] = STOCK_STATUS_HAS_STATUS_CONDITION;
+                    message.ballStatus[BALL_STATUS_ROW_OURS][cnt] = STOCK_STATUS_HAS_STATUS_CONDITION;
                 } else {
-                    message.ballStatus[PARTY_GAUGE_OURS][cnt] = STOCK_STATUS_MON_ALIVE;
+                    message.ballStatus[BALL_STATUS_ROW_OURS][cnt] = STOCK_STATUS_MON_ALIVE;
                 }
             } else {
-                message.ballStatus[PARTY_GAUGE_OURS][cnt] = STOCK_STATUS_MON_FAINTED;
+                message.ballStatus[BALL_STATUS_ROW_OURS][cnt] = STOCK_STATUS_MON_FAINTED;
             }
 
             if (battleType & (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_PAL_PARK)) {
@@ -649,27 +683,7 @@ void BattleController_EmitSetCommandSelection(BattleSystem *battleSys, BattleCon
             battlerType = BattleSystem_GetBattlerOfType(battleSys, BATTLER_TYPE_ENEMY_SIDE_SLOT_1);
         }
 
-        party = BattleSystem_GetParty(battleSys, battlerType);
-        cnt = 0;
-
-        for (i = 0; i < Party_GetCurrentCount(party); i++) {
-            pokemon = Party_GetPokemonBySlotIndex(party, battleCtx->partyOrder[battlerType][i]);
-            monSpeciesOrEgg = Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL);
-
-            if (monSpeciesOrEgg && monSpeciesOrEgg != SPECIES_EGG) {
-                if (Pokemon_GetValue(pokemon, MON_DATA_HP, NULL)) {
-                    if (Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL)) {
-                        message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_HAS_STATUS_CONDITION;
-                    } else {
-                        message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_MON_ALIVE;
-                    }
-                } else {
-                    message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_MON_FAINTED;
-                }
-
-                cnt++;
-            }
-        }
+        BallStatusRow_Fill(battleSys, battleCtx, message.ballStatus[BALL_STATUS_ROW_THEIRS_1], battlerType);
 
         if (BattleSystem_GetBattlerSide(battleSys, battler)) {
             battlerType = BattleSystem_GetBattlerOfType(battleSys, BATTLER_TYPE_PLAYER_SIDE_SLOT_2);
@@ -677,50 +691,10 @@ void BattleController_EmitSetCommandSelection(BattleSystem *battleSys, BattleCon
             battlerType = BattleSystem_GetBattlerOfType(battleSys, BATTLER_TYPE_ENEMY_SIDE_SLOT_2);
         }
 
-        party = BattleSystem_GetParty(battleSys, battlerType);
-        cnt = 3;
-
-        for (i = 0; i < Party_GetCurrentCount(party); i++) {
-            pokemon = Party_GetPokemonBySlotIndex(party, battleCtx->partyOrder[battlerType][i]);
-            monSpeciesOrEgg = Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL);
-
-            if (monSpeciesOrEgg && monSpeciesOrEgg != SPECIES_EGG) {
-                if (Pokemon_GetValue(pokemon, MON_DATA_HP, NULL)) {
-                    if (Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL)) {
-                        message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_HAS_STATUS_CONDITION;
-                    } else {
-                        message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_MON_ALIVE;
-                    }
-                } else {
-                    message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_MON_FAINTED;
-                }
-
-                cnt++;
-            }
-        }
+        BallStatusRow_Fill(battleSys, battleCtx, message.ballStatus[BALL_STATUS_ROW_THEIRS_2], battlerType);
     } else {
         battlerType = BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_LEFT);
-        party = BattleSystem_GetParty(battleSys, battlerType);
-        cnt = 0;
-
-        for (i = 0; i < Party_GetCurrentCount(party); i++) {
-            pokemon = Party_GetPokemonBySlotIndex(party, battleCtx->partyOrder[battlerType][i]);
-            monSpeciesOrEgg = Pokemon_GetValue(pokemon, MON_DATA_SPECIES_OR_EGG, NULL);
-
-            if (monSpeciesOrEgg && monSpeciesOrEgg != SPECIES_EGG) {
-                if (Pokemon_GetValue(pokemon, MON_DATA_HP, NULL)) {
-                    if (Pokemon_GetValue(pokemon, MON_DATA_STATUS, NULL)) {
-                        message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_HAS_STATUS_CONDITION;
-                    } else {
-                        message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_MON_ALIVE;
-                    }
-                } else {
-                    message.ballStatus[PARTY_GAUGE_THEIRS][cnt] = STOCK_STATUS_MON_FAINTED;
-                }
-
-                cnt++;
-            }
-        }
+        BallStatusRow_Fill(battleSys, battleCtx, message.ballStatus[BALL_STATUS_ROW_THEIRS_1], battlerType);
     }
 
     for (i = 0; i < LEARNED_MOVES_MAX; i++) {
@@ -2117,9 +2091,11 @@ void BattleController_SetMoveAnimation(BattleSystem *battleSys, BattleContext *b
     }
 }
 
-static inline void PartyGaugeData_Fill(BattleContext *battleCtx, PartyGaugeData *partyGauge, Party *party, int battler, int slot)
+static inline void PartyGaugeData_Fill(BattleContext *battleCtx, PartyGaugeData *partyGauge, Party *party, int battler)
 {
-    for (int i = 0; i < Party_GetCurrentCount(party); i++) {
+    int slot = 0;
+
+    for (int i = 0; i < Party_GetCurrentCount(party) && slot < MAX_PARTY_SIZE; i++) {
         Pokemon *mon = Party_GetPokemonBySlotIndex(party, battleCtx->partyOrder[battler][i]);
         int species = Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL);
 
@@ -2139,42 +2115,39 @@ static inline void PartyGaugeData_Fill(BattleContext *battleCtx, PartyGaugeData 
     }
 }
 
+/**
+ * @brief Resolve the battler whose party backs a given battler's party gauge.
+ *
+ * @param battleSys
+ * @param battler
+ * @return The battler owning the party to display.
+ */
+static int PartyGaugeData_OwnerBattler(BattleSystem *battleSys, int battler)
+{
+    u32 battleType = BattleSystem_GetBattleType(battleSys);
+
+    if (battleType & BATTLE_TYPE_2vs2) {
+        return battler;
+    }
+
+    if ((battleType & BATTLE_TYPE_TAG) && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM) {
+        return battler;
+    }
+
+    if (battleType & BATTLE_TYPE_DOUBLES) {
+        return battler & 1;
+    }
+
+    return battler;
+}
+
 static void PartyGaugeData_New(BattleSystem *battleSys, BattleContext *battleCtx, PartyGaugeData *partyGauge, int command, int battler)
 {
     MI_CpuClearFast(partyGauge, sizeof(PartyGaugeData));
-    u32 battleType = BattleSystem_GetBattleType(battleSys);
     partyGauge->command = command;
 
-    // must make declarations here to match
-    int battler1, battler2;
-    Party *party;
+    int owner = PartyGaugeData_OwnerBattler(battleSys, battler);
+    Party *party = BattleSystem_GetParty(battleSys, owner);
 
-    if ((battleType & (BATTLE_TYPE_LINK | BATTLE_TYPE_2vs2)) == (BATTLE_TYPE_LINK | BATTLE_TYPE_2vs2) // 2vs2 link battle
-        || ((battleType & BATTLE_TYPE_TAG) && BattleSystem_GetBattlerSide(battleSys, battler)) // either of the two opponents on the enemy side
-        || ((battleType == BATTLE_TYPE_TRAINER_WITH_AI_PARTNER) && BattleSystem_GetBattlerSide(battleSys, battler)) // either of the two opponents on the enemy side
-        || battleType == BATTLE_TYPE_FRONTIER_WITH_AI_PARTNER) { // frontier, AI partner
-        if (BattleSystem_GetBattlerType(battleSys, battler) == BATTLER_PLAYER_2
-            || BattleSystem_GetBattlerType(battleSys, battler) == BATTLER_ENEMY_2) {
-            battler1 = battler;
-            battler2 = BattleSystem_GetPartner(battleSys, battler);
-        } else {
-            battler1 = BattleSystem_GetPartner(battleSys, battler);
-            battler2 = battler;
-        }
-
-        party = BattleSystem_GetParty(battleSys, battler1);
-        PartyGaugeData_Fill(battleCtx, partyGauge, party, battler1, 0);
-
-        party = BattleSystem_GetParty(battleSys, battler2);
-        PartyGaugeData_Fill(battleCtx, partyGauge, party, battler2, 3);
-    } else {
-        if ((battleType & BATTLE_TYPE_DOUBLES) && (battleType & BATTLE_TYPE_2vs2) == FALSE) {
-            battler = battler & 1;
-        } else {
-            battler = battler;
-        }
-
-        party = BattleSystem_GetParty(battleSys, battler);
-        PartyGaugeData_Fill(battleCtx, partyGauge, party, battler, 0);
-    }
+    PartyGaugeData_Fill(battleCtx, partyGauge, party, owner);
 }

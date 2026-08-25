@@ -10,6 +10,7 @@
 #include "struct_defs/trainer.h"
 
 #include "battle/battle_context.h"
+#include "battle/party_gauge.h"
 #include "battle/pokemon_sprite_data.h"
 #include "battle/struct_ov16_02268520.h"
 #include "battle/struct_ov16_02268A14_decl.h"
@@ -73,7 +74,7 @@ struct BattleSystem {
     Trainer trainers[MAX_BATTLERS];
     UnkStruct_ov16_02268520 unk_17C[2];
     UnkStruct_ov16_02268A14 *unk_198;
-    PartyGauge *partyGauges[2];
+    PartyGauge *partyGauges[PARTY_GAUGE_COUNT][PARTY_GAUGE_SLOTS_PER_SIDE];
     FontSpecialCharsContext *specialCharsHP;
     FontSpecialCharsContext *specialCharsLevel;
     UnkStruct_020157E4 *unk_1AC;

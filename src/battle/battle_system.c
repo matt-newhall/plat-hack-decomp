@@ -192,14 +192,14 @@ UnkStruct_ov16_02268A14 *ov16_0223E02C(BattleSystem *battleSys)
     return battleSys->unk_198;
 }
 
-PartyGauge *BattleSystem_GetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide)
+PartyGauge *BattleSystem_GetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide, int slot)
 {
-    return battleSys->partyGauges[partyGaugeSide];
+    return battleSys->partyGauges[partyGaugeSide][slot];
 }
 
-void BattleSystem_SetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide, PartyGauge *partyGauge)
+void BattleSystem_SetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide, int slot, PartyGauge *partyGauge)
 {
-    battleSys->partyGauges[partyGaugeSide] = partyGauge;
+    battleSys->partyGauges[partyGaugeSide][slot] = partyGauge;
 }
 
 FontSpecialCharsContext *BattleSystem_GetSpecialCharsHP(BattleSystem *battleSys)
@@ -416,6 +416,32 @@ int BattleSystem_GetPartner(BattleSystem *battleSys, int battler)
     }
 
     return i;
+}
+
+/**
+ * @brief Check whether a battler's side is fielded by two distinct trainers,
+ * each drawing from a party of their own.
+ *
+ * @param battleSys
+ * @param battler
+ * @return TRUE if the side has two separate parties, else FALSE.
+ */
+BOOL BattleSystem_SideHasTwoParties(BattleSystem *battleSys, int battler)
+{
+    if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) == FALSE) {
+        return FALSE;
+    }
+
+    int partner = BattleSystem_GetPartner(battleSys, battler);
+
+    if (partner == battler || partner >= BattleSystem_GetMaxBattlers(battleSys)) {
+        return FALSE;
+    }
+
+    Party *partnerParty = BattleSystem_GetParty(battleSys, partner);
+
+    return BattleSystem_GetParty(battleSys, battler) != partnerParty
+        && Party_GetCurrentCount(partnerParty) > 0;
 }
 
 int BattleSystem_GetEnemyInSlot(BattleSystem *battleSys, int attacker, int slot)

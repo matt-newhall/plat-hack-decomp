@@ -9302,6 +9302,24 @@ static BOOL BtlCmd_TryEscape(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @brief Resolve the second battler which also needs a start-of-battle party
+ * gauge of its own.
+ *
+ * @param battleSys
+ * @param inBattler The battler operand read from the script.
+ * @param battler   The battler which that operand resolved to.
+ * @return The partner battler needing a gauge of its own, or -1 if there is none.
+ */
+static int BattleStartPartyGauge_Partner(BattleSystem *battleSys, int inBattler, int battler)
+{
+    if (inBattler != BTLSCR_ENEMY || BattleSystem_SideHasTwoParties(battleSys, battler) == FALSE) {
+        return -1;
+    }
+
+    return BattleSystem_GetPartner(battleSys, battler);
+}
+
+/**
  * @brief Show the start-of-battle party gauge.
  *
  * Inputs:
@@ -9318,6 +9336,12 @@ static BOOL BtlCmd_ShowBattleStartPartyGauge(BattleSystem *battleSys, BattleCont
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     BattleController_EmitShowBattleStartPartyGauge(battleSys, battler);
+
+    int partner = BattleStartPartyGauge_Partner(battleSys, inBattler, battler);
+
+    if (partner != -1) {
+        BattleController_EmitShowBattleStartPartyGauge(battleSys, partner);
+    }
 
     return FALSE;
 }
@@ -9339,6 +9363,12 @@ static BOOL BtlCmd_HideBattleStartPartyGauge(BattleSystem *battleSys, BattleCont
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     BattleController_EmitHideBattleStartPartyGauge(battleSys, battler);
+
+    int partner = BattleStartPartyGauge_Partner(battleSys, inBattler, battler);
+
+    if (partner != -1) {
+        BattleController_EmitHideBattleStartPartyGauge(battleSys, partner);
+    }
 
     return FALSE;
 }
