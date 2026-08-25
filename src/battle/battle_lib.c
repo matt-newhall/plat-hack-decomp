@@ -7112,7 +7112,11 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
         return FALSE;
     }
 
-    if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+    // Magma Storm only ever holds the player's side, matching the chip damage it deals.
+    if (NO_CLOUD_NINE
+        && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM)
+        && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US
+        && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
         return TRUE;
     }
 
