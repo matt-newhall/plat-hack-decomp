@@ -421,6 +421,7 @@ void *PokemonSpriteManager_New(enum HeapID heapID)
     NNS_G2dSetupSoftwareSpriteCamera();
 
     monSpriteMan->excludeIdentity = FALSE;
+    monSpriteMan->hideShadows = 0;
 
     NNSG2dCharacterData *charData;
     u8 *rawCharData;
