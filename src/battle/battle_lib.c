@@ -10363,7 +10363,7 @@ BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler)
     return FALSE;
 }
 
-static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective, int *pickedIncomingDamage, int *pickedMaxHP)
+static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective, int *pickedIncomingDamage, int *pickedMaxHP, BOOL *anyCandidateSurvives)
 {
     int i, j;
     u8 defender;
@@ -10454,6 +10454,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
 
     if (pickedMaxHP != NULL) {
         *pickedMaxHP = 0;
+    }
+
+    if (anyCandidateSurvives != NULL) {
+        *anyCandidateSurvives = FALSE;
     }
 
     savedBattlerMon = battleCtx->battleMons[battler];
@@ -10888,6 +10892,19 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
             lhs = (u64)aiMaxDamageToTrainer * (u64)battlerPokemonCurHP;
             rhs = (u64)trainerMaxDamageToAI * (u64)defenderPokemonCurHP;
 
+            // A candidate is worth coming in on if it either outspeeds and lives a hit, or
+            // moves second and lives two. Recorded for every candidate scanned, not just the one
+            // finally picked, so a caller can ask whether the bench holds an answer at all.
+            if (anyCandidateSurvives != NULL && *anyCandidateSurvives == FALSE) {
+                if (battlerFirst) {
+                    if (isTrainerKOAI == 0) {
+                        *anyCandidateSurvives = TRUE;
+                    }
+                } else if (trainerMaxDamageToAI * 2 < battlerPokemonCurHP) {
+                    *anyCandidateSurvives = TRUE;
+                }
+            }
+
             if (isAIKOTrainer && battlerFirst) {
                 score = isPursuitKO ? 7 : 5;
             } else if (isAIKOTrainer && isPursuitKO && isTrainerKOAI == 0) {
@@ -10946,17 +10963,26 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
-    return PostKOSwitchIn(battleSys, battler, FALSE, NULL, NULL);
+    return PostKOSwitchIn(battleSys, battler, FALSE, NULL, NULL, NULL);
 }
 
 int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler)
 {
-    return PostKOSwitchIn(battleSys, battler, TRUE, NULL, NULL);
+    return PostKOSwitchIn(battleSys, battler, TRUE, NULL, NULL, NULL);
 }
 
 int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *maxHP)
 {
-    return PostKOSwitchIn(battleSys, battler, FALSE, incomingDamage, maxHP);
+    return PostKOSwitchIn(battleSys, battler, FALSE, incomingDamage, maxHP, NULL);
+}
+
+BOOL BattleAI_PostKOSwitchInHasSurvivor(BattleSystem *battleSys, int battler)
+{
+    BOOL anyCandidateSurvives = FALSE;
+
+    PostKOSwitchIn(battleSys, battler, FALSE, NULL, NULL, &anyCandidateSurvives);
+
+    return anyCandidateSurvives;
 }
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)

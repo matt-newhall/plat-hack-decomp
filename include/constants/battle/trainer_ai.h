@@ -36,6 +36,8 @@
 #define AI_NOT_HIGHEST_DAMAGE     1
 #define AI_MOVE_IS_HIGHEST_DAMAGE 2
 
+#define AI_ACTION_NOT_EVALUATED 0xFF
+
 #define AI_NOT_HAVE 0
 #define AI_HAVE     1
 #define AI_UNKNOWN  2

@@ -6,6 +6,7 @@
 
 #include "constants/battle.h"
 #include "constants/battle/battle_script.h"
+#include "constants/battle/trainer_ai.h"
 #include "constants/game_options.h"
 #include "constants/heap.h"
 #include "constants/items.h"
@@ -285,6 +286,8 @@ static void BattleControllerPlayer_InitCommandSelection(BattleSystem *battleSys,
         // Cleared every turn so that a battler which has not chosen yet reads as undecided rather
         // than as whatever it did last turn.
         battleCtx->declaredMove[i] = MOVE_NONE;
+        battleCtx->aiCachedAction[i] = AI_ACTION_NOT_EVALUATED;
+        battleCtx->aiCachedBestScore[i] = 0;
     }
 
     BattleSystem_SetCommandSelectionFlags(battleSys, 0);

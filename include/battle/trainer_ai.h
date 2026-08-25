@@ -24,6 +24,7 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
  * @return          AI execution routine result
  */
 u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler);
+u8 TrainerAI_Evaluate(BattleSystem *battleSys, u8 battler);
 
 /**
  * @brief Pick the command for a battler to execute.

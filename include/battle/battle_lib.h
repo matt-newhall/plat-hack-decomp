@@ -1730,6 +1730,7 @@ int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler);
  * @return The party slot to switch in.
  */
 int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *maxHP);
+BOOL BattleAI_PostKOSwitchInHasSurvivor(BattleSystem *battleSys, int battler);
 
 /**
  * @brief Get the switched-to slot determined by the AI for a given battler.

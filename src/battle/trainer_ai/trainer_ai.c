@@ -257,7 +257,7 @@ static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, i
 static BOOL AI_WishPassSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, BOOL wantSuperEffective);
-static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_NoEffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
@@ -316,7 +316,19 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
     }
 }
 
-u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler)
+/**
+ * @brief Score every move for a battler and cache the resulting action.
+ *
+ * The switch decision is made a step earlier in command selection than the move choice, but it
+ * needs to know what the moves are worth. Running the evaluation once and holding onto the answer
+ * is what lets both questions be settled against the same damage rolls and the same dice - a
+ * second pass would re-roll everything and score differently.
+ *
+ * @param battleSys
+ * @param battler
+ * @return The action the battler would take if it attacks.
+ */
+u8 TrainerAI_Evaluate(BattleSystem *battleSys, u8 battler)
 {
     u8 result;
     BattleContext *battleCtx = battleSys->battleCtx;
@@ -328,13 +340,30 @@ u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler)
         TrainerAI_Init(battleSys, battleCtx, AI_CONTEXT.attacker, AI_INIT_SCORE_ALL_MOVES);
     }
 
+    // Escaping and the Safari routines never reach the scoring, so start from a value which
+    // reads as "there is something worth doing here".
+    battleCtx->aiCachedBestScore[battler] = 127;
+
     if ((battleSys->battleType & BATTLE_TYPE_DOUBLES) == FALSE) {
         result = TrainerAI_MainSingles(battleSys, battleCtx);
     } else {
         result = TrainerAI_MainDoubles(battleSys, battleCtx);
     }
 
+    battleCtx->aiCachedAction[battler] = result;
+
     return result;
+}
+
+u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler)
+{
+    BattleContext *battleCtx = battleSys->battleCtx;
+
+    if (battleCtx->aiCachedAction[battler] != AI_ACTION_NOT_EVALUATED) {
+        return battleCtx->aiCachedAction[battler];
+    }
+
+    return TrainerAI_Evaluate(battleSys, battler);
 }
 
 /**
@@ -397,6 +426,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         }
 
         action = maxScoreMoveSlots[BattleSystem_RandNext(battleSys) % numMaxScoreMoves];
+        battleCtx->aiCachedBestScore[AI_CONTEXT.attacker] = maxScoreMoves[0];
     }
 
     AI_CONTEXT.selectedTarget[AI_CONTEXT.attacker] = AI_CONTEXT.defender;
@@ -513,6 +543,8 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             battlerCount = 1;
         }
     }
+
+    battleCtx->aiCachedBestScore[AI_CONTEXT.attacker] = maxScore;
 
     // Pick a random target from among the maximum-scored targets
     AI_CONTEXT.selectedTarget[AI_CONTEXT.attacker] = battlerTemp[(BattleSystem_RandNext(battleSys) % battlerCount)];
@@ -4541,97 +4573,37 @@ static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *bat
  * @param battler   The AI's battler.
  * @return TRUE if the AI has a switch to make, FALSE otherwise.
  */
-static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+/**
+ * @brief Check whether the battler has nothing worth doing and should potentially switch.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler should switch out.
+ */
+static BOOL AI_NoEffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i;
-    int pass;
-    u8 defender1, defender2;
-    u8 aiSlot1, aiSlot2;
-    u16 move;
-    int type;
-    u32 effectiveness;
-    int start, end;
-    int numMoves;
-    Pokemon *mon;
-
-    // "Player" consts here refer to the AI's perspective.
-    if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        defender1 = BATTLER_PLAYER_1;
-        defender2 = BATTLER_PLAYER_2;
-    } else {
-        defender1 = BATTLER_PLAYER_1;
-        defender2 = BATTLER_PLAYER_1;
-    }
-
-    // Check all of this mon's attacking moves for immunities. If any of our moves can deal damage to
-    // either of the opponents' battlers, do not switch.
-    numMoves = 0;
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-        move = battleCtx->battleMons[battler].moves[i];
-        type = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
-
-        if (move && MOVE_DATA(move).power) {
-            numMoves++;
-
-            effectiveness = 0;
-            if (battleCtx->battleMons[defender1].curHP) {
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender1, 0, &effectiveness);
-            }
-
-            if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                return FALSE;
-            }
-
-            effectiveness = 0;
-            if (battleCtx->battleMons[defender2].curHP) {
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender2, 0, &effectiveness);
-            }
-
-            if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                return FALSE;
-            }
-        }
-    }
-
-    // If we have more than 1 attacking move, do not switch.
-    if (numMoves < 2) {
+    // Anything at or above the 100 baseline is worth a turn, so there is nothing to run from.
+    if (battleCtx->aiCachedBestScore[battler] >= 100) {
         return FALSE;
     }
 
-    aiSlot1 = battler;
-    if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_TAG) || (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_2vs2)) {
-        aiSlot2 = aiSlot1;
-    } else {
-        aiSlot2 = BattleSystem_GetPartner(battleSys, battler);
+    // Below half HP the switch is likely to cost the mon on the way out; it is committed now.
+    if (battleCtx->battleMons[battler].curHP * 2 < battleCtx->battleMons[battler].maxHP) {
+        return FALSE;
     }
 
-    start = 0;
-    end = BattleSystem_GetPartyCount(battleSys, battler);
-
-    // The first pass takes a bench Pokemon with a super-effective move against either
-    // opponent; the second settles for a normally-effective one. Either way it is a
-    // single 50% roll per Pokemon.
-    for (pass = 0; pass < 2; pass++) {
-        for (i = start; i < end; i++) {
-            mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
-
-            if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) != 0
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-                && i != battleCtx->selectedPartySlot[aiSlot1]
-                && i != battleCtx->selectedPartySlot[aiSlot2]
-                && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
-                && i != battleCtx->aiSwitchedPartySlot[aiSlot2]
-                && (AI_PartyMonThreatensSlot(battleSys, battleCtx, mon, defender1, pass == 0)
-                    || AI_PartyMonThreatensSlot(battleSys, battleCtx, mon, defender2, pass == 0))
-                && (BattleSystem_RandNext(battleSys) & 1)) {
-                battleCtx->aiSwitchedPartySlot[battler] = i;
-                return TRUE;
-            }
-        }
+    // Only worth leaving if the bench holds something that can actually take the matchup on.
+    if (BattleAI_PostKOSwitchInHasSurvivor(battleSys, battler) == FALSE) {
+        return FALSE;
     }
 
-    return FALSE;
+    if (BattleSystem_RandNext(battleSys) & 1) {
+        return FALSE;
+    }
+
+    battleCtx->aiSwitchedPartySlot[battler] = 6;
+    return TRUE;
 }
 
 /**
@@ -5090,7 +5062,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (AI_OnlyIneffectiveMoves(battleSys, battleCtx, battler)) {
+        if (AI_NoEffectiveMoves(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
@@ -5131,6 +5103,10 @@ int TrainerAI_PickCommand(BattleSystem *battleSys, int battler)
     battleType = BattleSystem_GetBattleType(battleSys);
 
     if ((battleType & BATTLE_TYPE_TRAINER) || BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_PLAYER) {
+        if (battleCtx->aiCachedAction[battler] == AI_ACTION_NOT_EVALUATED) {
+            TrainerAI_Evaluate(battleSys, battler);
+        }
+
         if (TrainerAI_ShouldSwitch(battleSys, battleCtx, battler)) {
             // If this is a switch which should use the post-KO switch logic, then do so.
             // If there is no valid battler, pick the first one in party order.
