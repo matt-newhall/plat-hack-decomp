@@ -3814,9 +3814,20 @@ TagStrategy_PartnerPoisonStatus:
     GoTo TagStrategy_PartnerGutsStatus
 
 TagStrategy_PartnerUsingHelpingHand:
+    // Named out in full even though the Status check below already rules them out - all three
+    // are Status moves - so that the rule reads as a rule rather than as a side effect of one.
+    LoadPartnerDeclaredMoveEffect
+    IfLoadedInTable TagStrategy_NeverDoubleUpOn, ScoreMinus30
+
     // Nothing to boost if the partner is not attacking with its own turn.
     IfPartnerDeclaredMoveClass CLASS_STATUS, ScoreMinus30
     GoTo ScorePlus6
+
+TagStrategy_NeverDoubleUpOn:
+    TableEntry BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
+    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER
+    TableEntry TABLE_END
 
 TagStrategy_PartnerSwagger:
     // Swagger hands the partner +2 Attack along with the confusion, and a Persim or Lum Berry
@@ -3895,9 +3906,11 @@ TagStrategy_PartnerRolePlay:
     GoTo ScoreMinus20
 
 TagStrategy_PartnerPsychUp:
+    // Taking the partner's boosts is only worth the AI's own turn once the partner has stacked
+    // up something worth having; a single stage is not.
     SumPositiveStatStages AI_BATTLER_ATTACKER_PARTNER
     IfLoadedGreaterThan 1, ScorePlus9
-    PopOrEnd
+    GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerScoreMinus30:
     AddToMoveScore -30

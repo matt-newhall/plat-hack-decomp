@@ -67,6 +67,7 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum BattleSideEffectType type, u32 effect);
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus);
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry);
+static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler);
 static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
 static BOOL MoveIsOnDamagingTurn(BattleContext *battleCtx, int move);
 static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonParam paramID);
@@ -3918,33 +3919,17 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
         return TRUE;
     }
 
-    if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP))) {
-        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE && itemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
-            if (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
-                && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
-                && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
-                && MON_IS_NOT_TYPE(battler, TYPE_FLYING)) {
-                if (msgOut == NULL) {
-                    return TRUE;
-                }
-
-                msgOut->tags = TAG_NICKNAME_ABILITY;
-                msgOut->id = BattleStrings_Text_PokemonPreventsEscapeWithAbility_Ally; // "{0} prevents escape with {1}!"
-                msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
-                msgOut->params[1] = ABILITY_ARENA_TRAP;
-                return TRUE;
-            }
-        } else {
-            if (msgOut == NULL) {
-                return TRUE;
-            }
-
-            msgOut->tags = TAG_NICKNAME_ABILITY;
-            msgOut->id = BattleStrings_Text_PokemonPreventsEscapeWithAbility_Ally; // "{0} prevents escape with {1}!"
-            msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
-            msgOut->params[1] = ABILITY_ARENA_TRAP;
+    if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP))
+        && BattlerIsGrounded(battleCtx, battler)) {
+        if (msgOut == NULL) {
             return TRUE;
         }
+
+        msgOut->tags = TAG_NICKNAME_ABILITY;
+        msgOut->id = BattleStrings_Text_PokemonPreventsEscapeWithAbility_Ally; // "{0} prevents escape with {1}!"
+        msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
+        msgOut->params[1] = ABILITY_ARENA_TRAP;
+        return TRUE;
     }
 
     if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGNET_PULL))
