@@ -3046,8 +3046,10 @@ Expert_ChargeTurn_ScorePlus9:
 
 
 Expert_FocusPunch:
-    AddToMoveScore 6
-    PopOrEnd
+    // A Substitute soaks the hit that would otherwise break the focus, so the two moves are
+    // worth more together than apart.
+    IfVolatileStatus AI_BATTLER_ATTACKER, VOLATILE_CONDITION_SUBSTITUTE, ScorePlus9
+    GoTo ScorePlus6
 
 Expert_PartingShot:
     AddToMoveScore 6
