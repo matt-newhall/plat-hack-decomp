@@ -4401,14 +4401,14 @@ static BOOL AI_WishPassSwitch(BattleSystem *battleSys, BattleContext *battleCtx,
         return FALSE;
     }
 
-    int incomingDamage, maxHP;
-    int slot = BattleAI_PostKOSwitchInDamage(battleSys, battler, &incomingDamage, &maxHP);
+    int incomingDamage, curHP;
+    int slot = BattleAI_PostKOSwitchInDamage(battleSys, battler, &incomingDamage, &curHP);
 
-    if (slot >= MAX_PARTY_SIZE || maxHP == 0) {
+    if (slot >= MAX_PARTY_SIZE || curHP == 0) {
         return FALSE;
     }
 
-    if (incomingDamage * 2 >= maxHP) {
+    if (incomingDamage >= curHP) {
         return FALSE;
     }
 

@@ -10363,7 +10363,7 @@ BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler)
     return FALSE;
 }
 
-static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective, int *pickedIncomingDamage, int *pickedMaxHP, BOOL *anyCandidateSurvives)
+static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective, int *pickedIncomingDamage, int *pickedCurHP, BOOL *anyCandidateSurvives)
 {
     int i, j;
     u8 defender;
@@ -10452,8 +10452,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
         *pickedIncomingDamage = 0;
     }
 
-    if (pickedMaxHP != NULL) {
-        *pickedMaxHP = 0;
+    if (pickedCurHP != NULL) {
+        *pickedCurHP = 0;
     }
 
     if (anyCandidateSurvives != NULL) {
@@ -10505,8 +10505,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         *pickedIncomingDamage = trainerMaxDamageToAI;
                     }
 
-                    if (pickedMaxHP != NULL) {
-                        *pickedMaxHP = BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL);
+                    if (pickedCurHP != NULL) {
+                        *pickedCurHP = battlerPokemonCurHP;
                     }
                 }
                 continue;
@@ -10931,8 +10931,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                     *pickedIncomingDamage = trainerMaxDamageToAI;
                 }
 
-                if (pickedMaxHP != NULL) {
-                    *pickedMaxHP = BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL);
+                if (pickedCurHP != NULL) {
+                    *pickedCurHP = battlerPokemonCurHP;
                 }
             }
 
@@ -10971,9 +10971,9 @@ int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler)
     return PostKOSwitchIn(battleSys, battler, TRUE, NULL, NULL, NULL);
 }
 
-int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *maxHP)
+int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *curHP)
 {
-    return PostKOSwitchIn(battleSys, battler, FALSE, incomingDamage, maxHP, NULL);
+    return PostKOSwitchIn(battleSys, battler, FALSE, incomingDamage, curHP, NULL);
 }
 
 BOOL BattleAI_PostKOSwitchInHasSurvivor(BattleSystem *battleSys, int battler)

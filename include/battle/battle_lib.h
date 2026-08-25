@@ -1729,7 +1729,7 @@ int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler);
  * @param maxHP             Out-param for the pick's maximum HP.
  * @return The party slot to switch in.
  */
-int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *maxHP);
+int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *curHP);
 BOOL BattleAI_PostKOSwitchInHasSurvivor(BattleSystem *battleSys, int battler);
 
 /**
