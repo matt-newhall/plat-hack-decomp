@@ -3032,6 +3032,7 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
     } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
         && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
         && moveType == TYPE_GROUND) {
         *moveStatusMask |= MOVE_STATUS_AIR_BALLOON;
@@ -3147,6 +3148,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
     } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        && !(battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN)
         && moveType == TYPE_GROUND) {
         *moveStatusMask |= MOVE_STATUS_AIR_BALLOON;
     } else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
