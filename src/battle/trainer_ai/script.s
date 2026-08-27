@@ -194,7 +194,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Basic_CheckCannotEncore
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, Basic_CheckAttackerAsleep
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, Basic_CheckSnoreAwake
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Basic_CheckLockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Basic_CheckAttackerAsleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Basic_CheckMeanLook
@@ -737,6 +737,17 @@ Basic_CheckAttackerAsleep:
     // If the attacker is not currently asleep, score -8.
     IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_SLEEP, ScoreMinus8
     PopOrEnd 
+
+Basic_CheckSnoreAwake:
+    // Snore is as dead as Sleep Talk while awake, but it carries a damage estimate, so
+    // EvalAttack hands back up to 8 of whatever comes off here. Twice the penalty lands it on
+    // the same score Sleep Talk sits at.
+    IfNotStatus AI_BATTLER_ATTACKER, MON_CONDITION_SLEEP, Basic_CheckSnoreAwake_Penalty
+    PopOrEnd
+
+Basic_CheckSnoreAwake_Penalty:
+    AddToMoveScore -16
+    PopOrEnd
 
 Basic_CheckLockOn:
     // If the target is already Locked On, or either battler has No Guard, score -10.
@@ -1816,6 +1827,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Expert_Encore
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS, Expert_LockOn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_LEARNED_MOVE_SLEEP, Expert_SleepTalk
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DAMAGE_WHILE_ASLEEP, Expert_SleepTalk
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Expert_DestinyBond
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CURE_PARTY_STATUS, Expert_HealBell
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ESCAPE, Expert_StatusMoveBonus
@@ -1862,7 +1874,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_APPLY_MAGIC_COAT, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RECYCLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_SCREENS, Expert_BrickBreak
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWITCH_ABILITIES, Expert_SkillSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
@@ -1889,7 +1901,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TOXIC_SPIKES, Expert_ToxicSpikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWAP_STAT_CHANGES, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HP_EVERY_TURN, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, Expert_MagnetRise
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_REMOVE_HAZARDS_SCREENS_EVA_DOWN, Expert_Defog
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TRICK_ROOM, Expert_TrickRoom
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2_OPPOSITE_GENDER, Expert_StatusMoveBonus
@@ -1910,6 +1922,24 @@ Expert_Main:
 
     // All other moves have no additional logic.
     PopOrEnd 
+
+Expert_MagnetRise:
+    // difficult to work out if we can 'know' the partner is going to use it, but if the Pokemon
+    // has it and the partner has EQ/magnitude/bulldoze, we take this as intent to use the move.
+    AddToMoveScore 6
+    LoadBattleType 
+    IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_MagnetRise_End
+    IfPartnerMovesFirst Expert_MagnetRise_End
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_EARTHQUAKE, Expert_MagnetRise_ScorePlus3
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_MAGNITUDE, Expert_MagnetRise_ScorePlus3
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_BULLDOZE, Expert_MagnetRise_ScorePlus3
+
+Expert_MagnetRise_End:
+    PopOrEnd
+
+Expert_MagnetRise_ScorePlus3:
+    AddToMoveScore 3
+    PopOrEnd
 
 Expert_StatusMoveBonus:
     // Status moves which get no judgement of their own beyond whatever Basic already applied.
@@ -2805,6 +2835,8 @@ Expert_AcidSpray_End:
 Expert_Taunt:
     // Taunt earns its turn when it shuts a specific threat out: a Trick Room the target is still
     // able to set, or a Defog which would strip the AI's own Aurora Veil before it moves again.
+    // A target which is already taunted can set neither, so leave Basic's veto to stand.
+    IfTargetIsTaunted Terminate
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_Taunt_CheckDefog
     IfMoveKnown AI_BATTLER_DEFENDER, MOVE_TRICK_ROOM, ScorePlus9
 
@@ -2930,8 +2962,14 @@ Expert_LockOn_End:
 
 Expert_SleepTalk:
     // Basic already handles the awake case, where the move does nothing at all. Asleep, Sleep
-    // Talk is the only move which resolves, so it needs to clear the moves it is competing with.
-    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_SLEEP, ScorePlus6
+    // Talk and Snore are the only moves which resolve, so they are scored to the 127 ceiling
+    // rather than merely above the rest. Penalising the dead moves instead would drag the best
+    // score under 100, which is the threshold AI_NoEffectiveMoves reads as a reason to switch.
+    IfStatus AI_BATTLER_ATTACKER, MON_CONDITION_SLEEP, Expert_SleepTalk_Score
+    PopOrEnd
+
+Expert_SleepTalk_Score:
+    AddToMoveScore 27
     PopOrEnd
 
 
@@ -3148,6 +3186,39 @@ Expert_Trick_DisruptiveItems:
     TableEntry HOLD_EFFECT_PRIORITY_DOWN
     TableEntry HOLD_EFFECT_DMG_USER_CONTACT_XFR
     TableEntry TABLE_END
+
+Expert_SkillSwap:
+    // Doubles force AI_FLAG_TAG_STRATEGY on, and TagStrategy_SkillSwap rates the trade there for
+    // trainers which never reach Expert at all, so only singles takes this route; running both
+    // would land the same ability judgement twice.
+    IfTrainerAIFlagNotSet AI_FLAG_TAG_STRATEGY, Expert_SkillSwap_ScoreAbilityTrade
+    PopOrEnd
+
+Expert_SkillSwap_ScoreAbilityTrade:
+    // No blanket status bonus: the swap is worth a turn only for what the two abilities are, so
+    // every route out of here is a judgement on the trade rather than on the move.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedInTable SkillSwapAlwaysFailsOn, ScoreMinus20
+
+    // Handing over doubled Attack is the mirror of the bonus below, and the check sits ahead of it
+    // so a swap between two carriers reads as the wasted turn it is rather than as a prize.
+    IfLoadedEqualTo ABILITY_HUGE_POWER, ScoreMinus20
+    IfLoadedEqualTo ABILITY_PURE_POWER, ScoreMinus20
+
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedInTable SkillSwapAlwaysFailsOn, ScoreMinus20
+
+    // Huge Power and Pure Power are worth more than the turn costs: the swap doubles the AI's own
+    // Attack and strips the threat off the other side in the same motion. Deliberately set below
+    // a kill from behind - best-damage +6 plus the +3 slower-kill bonus is 109 - so an available
+    // knockout is still taken first.
+    IfLoadedEqualTo ABILITY_HUGE_POWER, ScorePlus8
+    IfLoadedEqualTo ABILITY_PURE_POWER, ScorePlus8
+
+    // Every other pairing is left at its base score, bar a 30% roll which lets the swap compete
+    // with attacking often enough to stay unpredictable without being the default line.
+    IfRandomLessThan 77, ScorePlus6
+    PopOrEnd
 
 Expert_BrickBreak:
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScreenIsUp
@@ -3531,100 +3602,11 @@ BatonPass_Terminate:
 TagStrategy_Main:
     IfTargetIsPartner TagStrategy_Partner
 
-    // If the move does not deal damage, skip ahead
-    FlagMoveDamageScore USE_MAX_DAMAGE
-    IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_CheckSpecialScoring
-
-    // Flat-damage move effects have a special handler; this includes OHKO moves
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, TagStrategy_ScoreMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, TagStrategy_ScoreMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_ScoreMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_ScoreMove
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_20_DAMAGE_FLAT, TagStrategy_ScoreMove
-
-    // If the move is not-very-effective, try to reduce its score
-    IfMoveEffectivenessEquals TYPE_MULTI_HALF_DAMAGE, TagStrategy_TryScoreMinus1
-    IfMoveEffectivenessEquals TYPE_MULTI_QUARTER_DAMAGE, TagStrategy_TryScoreMinus2
-
-    // All other moves
-    GoTo TagStrategy_ScoreMove
-
-TagStrategy_TryScoreMinus1:
-    // If the maximum roll would kill, do not reduce the score
-    IfCurrentMoveKills USE_MAX_DAMAGE, TagStrategy_ScoreMove
-
-    // If the target is on their last Pokemon, do not reduce the score
-    IfHPPercentEqualTo AI_BATTLER_DEFENDER_PARTNER, 0, TagStrategy_ScoreMove
-
-    // 75% of the time, reduce score by 1
-    IfRandomLessThan 64, TagStrategy_ScoreMove
-    AddToMoveScore -1
-    GoTo TagStrategy_ScoreMove
-
-TagStrategy_TryScoreMinus2:
-    // If the maximum roll would kill, do not reduce the score
-    IfCurrentMoveKills USE_MAX_DAMAGE, TagStrategy_ScoreMove
-
-    // If the target is on their last Pokemon, do not reduce the score
-    IfHPPercentEqualTo AI_BATTLER_DEFENDER_PARTNER, 0, TagStrategy_ScoreMove
-
-    // 75% of the time, reduce score by 2
-    IfRandomLessThan 64, TagStrategy_ScoreMove
-    AddToMoveScore -2
-    GoTo TagStrategy_ScoreMove
-
-TagStrategy_ScoreMove:
-    // If this is not a highest-damage move for the attacking side, handle the move "normally"
-    CheckIfHighestDamageWithPartner USE_MAX_DAMAGE
-    IfLoadedNotEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, TagStrategy_CheckBeforeScoring
-
-    // Handle Explosion and Self-Destruct like "normal" moves
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, TagStrategy_CheckSpecialScoring
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, TagStrategy_CheckSpecialScoring
-
-    // Sometimes prioritize using priority +1 moves
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_1, TagStrategy_TryScorePlus1
-
-    // 50% of the time, increase score by 1
-    IfRandomLessThan 128, TagStrategy_CheckBeforeScoring
-    AddToMoveScore 1
-
-    // Proceed to "normal" handling
-    GoTo TagStrategy_CheckSpecialScoring
-
-TagStrategy_TryScorePlus1:
-    // ~80.5% of the time, increase score by 1
-    IfRandomLessThan 50, TagStrategy_CheckBeforeScoring
-    AddToMoveScore 1
-    GoTo TagStrategy_CheckSpecialScoring
-
-TagStrategy_CheckBeforeScoring:
-    // Flat-damage move effects have a special handler; this includes OHKO moves
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ONE_HIT_KO, TagStrategy_CheckSpecialScoring
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_40_DAMAGE_FLAT, TagStrategy_CheckSpecialScoring
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, TagStrategy_CheckSpecialScoring
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, TagStrategy_CheckSpecialScoring
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_20_DAMAGE_FLAT, TagStrategy_CheckSpecialScoring
-
-    // If the move is super-effective, try to increase its score
-    IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, TagStrategy_TryPrioritizingDoubleEffective
-    IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, TagStrategy_TryPrioritizingQuadEffective
-
-    GoTo TagStrategy_CheckSpecialScoring
-
-TagStrategy_TryPrioritizingDoubleEffective:
-    // ~61% of the time, score +1
-    IfRandomLessThan 100, TagStrategy_CheckSpecialScoring
-    AddToMoveScore 1
-    GoTo TagStrategy_CheckSpecialScoring
-
-TagStrategy_TryPrioritizingQuadEffective:
-    // 75% of the time, score +1
-    IfRandomLessThan 64, TagStrategy_CheckSpecialScoring
-    AddToMoveScore 1
     GoTo TagStrategy_CheckSpecialScoring
 
 TagStrategy_CheckSpecialScoring:
+    IfMoveEqualTo MOVE_HELPING_HAND, ScoreMinus30
+
     // Handle each of these moves with their own routine
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_SkillSwap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_GLOBAL_TARGET, TagStrategy_Redirect
@@ -3639,10 +3621,13 @@ TagStrategy_CheckSpecialScoring:
 
 TagStrategy_Redirect:
     LoadPartnerDeclaredMoveEffect
-    IfLoadedInTable TagStrategy_RedirectIsWastedOn, ScoreMinus30
+    IfLoadedInTable TagStrategy_WastedIfPartnerDeclares, ScoreMinus30
     GoTo ScorePlus6
 
-TagStrategy_RedirectIsWastedOn:
+TagStrategy_WastedIfPartnerDeclares:
+    // A partner which has declared any of these has already spent the pair's turn on not
+    // attacking. Redirecting, shielding or enduring alongside it spends the other half on the
+    // same nothing, so all three handlers below share the list.
     TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
     TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER
     TableEntry BATTLE_EFFECT_BOOST_ALLY_POWER_BY_50_PERCENT
@@ -3652,19 +3637,14 @@ TagStrategy_RedirectIsWastedOn:
     TableEntry BATTLE_EFFECT_SURVIVE_WITH_1_HP
     TableEntry TABLE_END
 
-TagStrategy_RedirectEffects:
-    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET
-    TableEntry BATTLE_EFFECT_MAKE_GLOBAL_TARGET_POWDER
-    TableEntry TABLE_END
-
 TagStrategy_Endure:
     LoadPartnerDeclaredMoveEffect
-    IfLoadedInTable TagStrategy_RedirectEffects, ScoreMinus30
+    IfLoadedInTable TagStrategy_WastedIfPartnerDeclares, ScoreMinus30
     PopOrEnd
 
 TagStrategy_Protect:
     LoadPartnerDeclaredMoveEffect
-    IfLoadedInTable TagStrategy_RedirectEffects, ScoreMinus30
+    IfLoadedInTable TagStrategy_WastedIfPartnerDeclares, ScoreMinus30
 
     // Power of Alchemy hands the AI its partner's ability the moment the partner faints, so a
     // partner carrying one of the doubled-Attack abilities is worth stalling a turn to inherit.
@@ -3679,17 +3659,11 @@ TagStrategy_Protect_End:
     PopOrEnd
 
 TagStrategy_SkillSwap:
-    // Huge Power and Pure Power are worth more than the turn costs: the swap doubles the AI's own
-    // Attack and strips the threat off the other side in the same motion.
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
-    IfLoadedEqualTo ABILITY_HUGE_POWER, ScorePlus11
-    IfLoadedEqualTo ABILITY_PURE_POWER, ScorePlus11
-    GoTo ScoreMinus20
+    // The trade is judged the same way in doubles as in singles, so both routes share one body
+    // rather than keeping two copies which drift apart.
+    GoTo Expert_SkillSwap_ScoreAbilityTrade
 
-TagStrategy_SkillSwapAlwaysFailsOn:
+SkillSwapAlwaysFailsOn:
     // subscript_exchange_abilities refuses the trade outright if either side holds one of these,
     // so the move is a spent turn no matter how good the swap would have been.
     TableEntry ABILITY_WONDER_GUARD
@@ -3720,10 +3694,12 @@ TagStrategy_SpreadGroundMove:
     IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
     IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_MAGNET_RISE, TagStrategy_SpreadGroundMove_PartnerSafe
 
-    // A Magnet Rise the partner has only declared this turn counts as well, but it has to resolve
-    // before the move does to be off the ground in time.
-    LoadPartnerDeclaredMoveEffect
-    IfLoadedNotEqualTo BATTLE_EFFECT_GIVE_GROUND_IMMUNITY, TagStrategy_SpreadGroundMove_CheckAbilities
+    // read magnet rise for more details - if the partner is slower and they have magnet
+    // rise, we assume they are going to use it and continue to use spread ground move
+    IfMoveKnown AI_BATTLER_ATTACKER_PARTNER, MOVE_MAGNET_RISE, TagStrategy_SpreadGroundMove_PartnerMayRise
+    GoTo TagStrategy_SpreadGroundMove_CheckAbilities
+
+TagStrategy_SpreadGroundMove_PartnerMayRise:
     IfPartnerMovesFirst TagStrategy_SpreadGroundMove_PartnerSafe
 
 TagStrategy_SpreadGroundMove_CheckAbilities:
@@ -3760,10 +3736,13 @@ TagStrategy_CheckGround_End:
 
 TagStrategy_Partner:
     IfBattlerFainted AI_BATTLER_ATTACKER_PARTNER, TagStrategy_PartnerScoreMinus30
+
+    // Fling is technically 1 power so we need this handler
+    IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerFling
+
     FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_PartnerStatusMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PRIORITY_1, TagStrategy_PartnerWeaknessPolicy
-    IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerFling
 
 TagStrategy_ScoreMinus30:
     GoTo ScoreMinus30
@@ -3786,12 +3765,18 @@ TagStrategy_PartnerSkillSwap:
     // is read through AI_BATTLER_ATTACKER_PARTNER rather than the defender slot, so that its
     // ability is looked up as one of the AI's own rather than as an opponent's.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
+    IfLoadedInTable SkillSwapAlwaysFailsOn, ScoreMinus20
     LoadBattlerAbility AI_BATTLER_ATTACKER_PARTNER
-    IfLoadedInTable TagStrategy_SkillSwapAlwaysFailsOn, ScoreMinus20
-    IfLoadedEqualTo ABILITY_TRUANT, ScorePlus9
-    IfLoadedEqualTo ABILITY_SLOW_START, ScorePlus9
+    IfLoadedInTable SkillSwapAlwaysFailsOn, ScoreMinus20
+    IfLoadedEqualTo ABILITY_TRUANT, TagStrategy_PartnerSkillSwap_Score
+    IfLoadedEqualTo ABILITY_SLOW_START, TagStrategy_PartnerSkillSwap_Score
     GoTo ScoreMinus20
+
+TagStrategy_PartnerSkillSwap_Score:
+    // Set above what a KOing attack can reach - best-damage +8 plus the +6 kill bonus tops out
+    // at 114 - so taking Truant/Slow Start off the partner outranks simply hitting something.
+    AddToMoveScore 15
+    PopOrEnd
 
 TagStrategy_PartnerWillOWisp:
     // A Fire-type partner cannot be burned at all, so the turn buys nothing.
@@ -3840,11 +3825,11 @@ TagStrategy_PartnerSwagger:
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerGastroAcid:
-    // If our partner's ability is already suppressed, score -30
-    //
-    // If our partner has Truant or Slow Start, score +5
-    //
-    // Otherwise, no score changes
+    // Suppressing the partner's ability is only worth a turn when the ability is the liability.
+    // Truant and Slow Start earn +13; everything else falls to the -30 default, including an
+    // ability which has already been suppressed. Leaving those at the base score is not neutral:
+    // an ally target competes whenever its best score reaches 100, so an unchanged Gastro Acid
+    // can win a tie against a real move.
     IfMoveEffect AI_BATTLER_ATTACKER_PARTNER, MOVE_EFFECT_ABILITY_SUPPRESSED, TagStrategy_PartnerScoreMinus30
 
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_TRUANT
@@ -3853,13 +3838,11 @@ TagStrategy_PartnerGastroAcid:
     CheckBattlerAbility AI_BATTLER_ATTACKER_PARTNER, ABILITY_SLOW_START
     IfLoadedEqualTo AI_HAVE, TagStrategy_PartnerGastroAcid_ScorePlus13
 
-    GoTo TagStrategy_PartnerGastroAcid_End
+    GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerGastroAcid_ScorePlus13:
     AddToMoveScore 13
-
-TagStrategy_PartnerGastroAcid_End:
-    PopOrEnd 
+    PopOrEnd
 
 TagStrategy_PartnerWeaknessPolicy:
     // Turning a weak priority move on the partner is how a Weakness Policy gets switched on
@@ -3876,7 +3859,7 @@ TagStrategy_PartnerFling:
     // Flinging a Salac Berry at the partner hands it the Speed boost. If the partner is holding a
     // Weakness Policy as well, the same throw can switch that on in the bargain.
     LoadFlingEffect AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo FLING_EFFECT_SPEED_UP, TagStrategy_PartnerFling_End
+    IfLoadedNotEqualTo FLING_EFFECT_SPEED_UP, TagStrategy_PartnerScoreMinus30
     LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
     IfLoadedNotEqualTo HOLD_EFFECT_SHARPLY_BOOST_OFFENSES, TagStrategy_PartnerFling_ScorePlus9
     IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, TagStrategy_PartnerScorePlus12
@@ -3884,8 +3867,6 @@ TagStrategy_PartnerFling:
 
 TagStrategy_PartnerFling_ScorePlus9:
     AddToMoveScore 9
-
-TagStrategy_PartnerFling_End:
     PopOrEnd
 
 TagStrategy_PartnerScorePlus12:

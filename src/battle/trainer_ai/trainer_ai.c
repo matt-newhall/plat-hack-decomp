@@ -307,7 +307,13 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
     if (battleSys->battleType & BATTLE_TYPE_ROAMER) {
         AI_CONTEXT.thinkingMask = AI_FLAG_ROAMING_POKEMON;
     } else {
-        AI_CONTEXT.thinkingMask = battleSys->trainers[battler].header.aiMask;
+        int trainerSlot = battler;
+
+        if (battleSys->trainerIDs[battler] == 0 && (battleSys->battleType & BATTLE_TYPE_DOUBLES)) {
+            trainerSlot = battler & 1;
+        }
+
+        AI_CONTEXT.thinkingMask = battleSys->trainers[trainerSlot].header.aiMask;
     }
 
     // force double-battle strategies, if applicable
@@ -442,7 +448,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
  */
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int battler, battlerCount, thinkingMask;
+    int battler, battlerCount;
     s16 maxScoreForBattler[MAX_BATTLERS];
     u8 battlerTemp[MAX_BATTLERS];
     s8 actionForBattler[MAX_BATTLERS];
@@ -467,11 +473,9 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
 
         AI_CONTEXT.thinkingBitShift = 0;
         AI_CONTEXT.moveSlot = 0;
-        thinkingMask = AI_CONTEXT.thinkingMask;
 
-        // Evaluate moves according with the current battler as the target
-        while (thinkingMask) {
-            if (thinkingMask & AI_FLAG_BASIC) {
+        while (AI_CONTEXT.thinkingMask) {
+            if (AI_CONTEXT.thinkingMask & AI_FLAG_BASIC) {
                 if ((AI_CONTEXT.stateFlags & AI_STATUS_FLAG_CONTINUE) == FALSE) {
                     AI_CONTEXT.evalStep = AI_EVAL_STEP_INIT;
                 }
@@ -479,7 +483,7 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
                 TrainerAI_EvalMoves(battleSys, battleCtx);
             }
 
-            thinkingMask >>= 1;
+            AI_CONTEXT.thinkingMask >>= 1;
             AI_CONTEXT.thinkingBitShift++;
             AI_CONTEXT.moveSlot = 0;
         }
@@ -2000,6 +2004,7 @@ static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleC
 
     AI_CONTEXT.calcTemp = move == MOVE_NONE ? -1 : MOVE_DATA(move).effect;
 }
+
 
 /**
  * @brief Check whether the attacker's partner will act before the attacker does.
