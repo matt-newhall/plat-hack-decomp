@@ -32,7 +32,7 @@ TurnbackCavePillar1Room1_ReadBook:
     PlaySE SEQ_SE_PL_SYUWA
     FadeScreenOut
     WaitFadeScreen
-    Warp MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_3, 0, 25, 16, DIR_SOUTH
+    Warp MAP_HEADER_TURNBACK_CAVE_PILLAR_1_ROOM_5, 0, 10, 12, DIR_SOUTH
     FadeScreenIn
     WaitFadeScreen
     End
