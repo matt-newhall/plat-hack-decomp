@@ -1840,7 +1840,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PROTECT_LOWER_SPEED_CONTACT, Expert_Protect
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_SPIKES, Expert_Spikes
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORESIGHT, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Expert_Powder
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_MOVE_FOR_BATTLE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DECREASE_LAST_MOVE_PP, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Expert_StatusMoveBonus
@@ -1940,6 +1940,14 @@ Expert_MagnetRise_End:
 Expert_MagnetRise_ScorePlus3:
     AddToMoveScore 3
     PopOrEnd
+
+Expert_Powder:
+    IfBattlerKnowsMoveOfType AI_BATTLER_DEFENDER, TYPE_FIRE, Expert_Powder_TargetKnowsFireMove
+    GoTo Expert_StatusMoveBonus
+
+Expert_Powder_TargetKnowsFireMove:
+    IfRandomLessThan 128, Expert_StatusMoveBonus
+    AddToMoveScore 1
 
 Expert_StatusMoveBonus:
     // Status moves which get no judgement of their own beyond whatever Basic already applied.

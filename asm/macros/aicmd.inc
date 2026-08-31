@@ -768,6 +768,13 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfBattlerKnowsMoveOfType battler:req, type:req, jump:req
+    .long AICMD_IFBATTLERKNOWSMOVEOFTYPE
+    .long \battler
+    .long \type
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry:req

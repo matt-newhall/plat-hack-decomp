@@ -223,6 +223,7 @@ static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, Battle
 static void AICmd_IfDefenderCanKOAfterHalfHPCost(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerKnowsMoveOfType(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3337,6 +3338,41 @@ static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext
         u16 move = battleCtx->battleMons[battler].moves[i];
 
         if (move != MOVE_NONE && MOVE_DATA(move).class == class) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
+/**
+ * @brief Check whether a battler knows any move of a given type.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlerKnowsMoveOfType(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int type = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move == MOVE_NONE) {
+            continue;
+        }
+
+        int moveType = MOVE_DATA(move).type;
+
+        if (move == MOVE_NATURAL_GIFT || move == MOVE_JUDGMENT || move == MOVE_HIDDEN_POWER || move == MOVE_WEATHER_BALL) {
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+        }
+
+        if (moveType == type) {
             AIScript_Iter(battleCtx, jump);
             return;
         }

@@ -140,6 +140,7 @@ ScriptCommand(AICMD_LOADFLINGEFFECT,                   AICmd_LoadFlingEffect)
 ScriptCommand(AICMD_IFPARTNERDECLAREDMOVECLASS,       AICmd_IfPartnerDeclaredMoveClass)
 ScriptCommand(AICMD_LOADPARTNERDECLAREDMOVEEFFECT,    AICmd_LoadPartnerDeclaredMoveEffect)
 ScriptCommand(AICMD_IFPARTNERMOVESFIRST,              AICmd_IfPartnerMovesFirst)
+ScriptCommand(AICMD_IFBATTLERKNOWSMOVEOFTYPE,          AICmd_IfBattlerKnowsMoveOfType)
 
 // clang-format on
 
