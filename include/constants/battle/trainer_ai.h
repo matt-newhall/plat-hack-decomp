@@ -36,6 +36,8 @@
 #define AI_NOT_HIGHEST_DAMAGE     1
 #define AI_MOVE_IS_HIGHEST_DAMAGE 2
 
+#define AI_ACTION_NOT_EVALUATED 0xFF
+
 #define AI_NOT_HAVE 0
 #define AI_HAVE     1
 #define AI_UNKNOWN  2
@@ -47,6 +49,7 @@
 
 #define CHECK_DISABLE 0
 #define CHECK_ENCORE  1
+#define CHECK_WISH    2
 
 #define CHECK_HIGHER_THAN_TARGET 0
 #define CHECK_LOWER_THAN_TARGET  1

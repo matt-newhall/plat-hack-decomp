@@ -128,7 +128,7 @@ typedef struct CommandSetMessage {
     u8 command;
     u8 partySlot;
     u8 expPercents[MAX_PARTY_SIZE];
-    u8 ballStatus[PARTY_GAUGE_COUNT][MAX_PARTY_SIZE];
+    u8 ballStatus[BALL_STATUS_ROW_COUNT][MAX_PARTY_SIZE];
     u16 moves[LEARNED_MOVES_MAX];
     u8 curPP[LEARNED_MOVES_MAX];
     u8 maxPP[LEARNED_MOVES_MAX];

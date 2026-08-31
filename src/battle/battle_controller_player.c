@@ -6,6 +6,7 @@
 
 #include "constants/battle.h"
 #include "constants/battle/battle_script.h"
+#include "constants/battle/trainer_ai.h"
 #include "constants/game_options.h"
 #include "constants/heap.h"
 #include "constants/items.h"
@@ -281,6 +282,12 @@ static void BattleControllerPlayer_InitCommandSelection(BattleSystem *battleSys,
         battleCtx->battleMons[i].moveEffectsTemp = battleCtx->battleMons[i].moveEffectsMask;
         battleCtx->battleMons[i].newlySwitched = FALSE;
         battleCtx->recordedCommandFlags[i] = 0;
+
+        // Cleared every turn so that a battler which has not chosen yet reads as undecided rather
+        // than as whatever it did last turn.
+        battleCtx->declaredMove[i] = MOVE_NONE;
+        battleCtx->aiCachedAction[i] = AI_ACTION_NOT_EVALUATED;
+        battleCtx->aiCachedBestScore[i] = 0;
     }
 
     BattleSystem_SetCommandSelectionFlags(battleSys, 0);
@@ -519,6 +526,7 @@ static void BattleControllerPlayer_CommandSelectionInput(BattleSystem *battleSys
                     battleCtx->battlerActions[i][2] = battleCtx->ioBuffer[i][0];
                     battleCtx->moveSlot[i] = battleCtx->ioBuffer[i][0] - 1;
                     battleCtx->moveSelected[i] = battleCtx->battleMons[i].moves[battleCtx->moveSlot[i]];
+                    battleCtx->declaredMove[i] = battleCtx->moveSelected[i];
                     battleCtx->curCommandState[i] = COMMAND_SELECTION_TARGET_SELECT_INIT;
                     battleCtx->recordedCommandFlags[i] |= 0x2;
                 }
@@ -1976,6 +1984,7 @@ static void BattleControllerPlayer_FightCommand(BattleSystem *battleSys, BattleC
 
     battleCtx->moveCur = battleCtx->moveTemp;
     battleCtx->command = BATTLE_CONTROL_BEFORE_MOVE;
+    battleCtx->spreadHitMask = 0;
     battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveTemp, randomizeTarget, 0);
 
     BattleController_EmitClearMessageBox(battleSys);
@@ -4384,6 +4393,11 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
 
+        // Record the target just resolved before moving on to the next one; the damage
+        // calculation needs to know how wide the move is, not how much of the field it has
+        // already cleared.
+        battleCtx->spreadHitMask |= FlagIndex(battleCtx->defender);
+
         int maxBattlers = BattleSystem_GetMaxBattlers(battleSys); // unused, but must stay to match
         BattlerData *battlerData = BattleSystem_GetBattlerData(battleSys, battleCtx->attacker);
         u8 battlerType = BattlerData_GetBattlerType(battlerData);
@@ -4409,6 +4423,7 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         && (battleCtx->battleStatusMask & SYSCTL_CHECK_LOOP_ONLY_ONCE) == FALSE
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
+        battleCtx->spreadHitMask |= FlagIndex(battleCtx->defender);
         int maxBattlers = BattleSystem_GetMaxBattlers(battleSys); // unused, but must stay to match.
 
         do {

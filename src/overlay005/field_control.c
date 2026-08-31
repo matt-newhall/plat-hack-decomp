@@ -343,7 +343,12 @@ BOOL FieldInput_Process(const FieldInput *input, FieldSystem *fieldSystem)
 
     if (input->dummy2 && FieldSystem_IsInValidLocation(fieldSystem) == TRUE
         && Bag_GetItemQuantity(SaveData_GetBag(fieldSystem->saveData), ITEM_MINI_PC, HEAP_ID_FIELD2) > 0) {
-        FieldSystem_TriggerPortablePC(fieldSystem);
+        if (VarsFlags_CheckFlag(SaveData_GetVarsFlags(fieldSystem->saveData), FLAG_PORTA_PC_DISABLED) == TRUE) {
+            FieldSystem_PrintPortablePCDisabled(fieldSystem);
+        } else {
+            FieldSystem_TriggerPortablePC(fieldSystem);
+        }
+
         return TRUE;
     }
 

@@ -91,8 +91,8 @@ SpriteSystem *BattleSystem_GetSpriteSystem(BattleSystem *battleSys);
 SpriteManager *BattleSystem_GetSpriteManager(BattleSystem *battleSys);
 UnkStruct_ov16_02268520 *ov16_0223E020(BattleSystem *battleSys, int param1);
 UnkStruct_ov16_02268A14 *ov16_0223E02C(BattleSystem *battleSys);
-PartyGauge *BattleSystem_GetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide);
-void BattleSystem_SetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide, PartyGauge *partyGauge);
+PartyGauge *BattleSystem_GetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide, int slot);
+void BattleSystem_SetPartyGauge(BattleSystem *battleSys, enum PartyGaugeSide partyGaugeSide, int slot, PartyGauge *partyGauge);
 FontSpecialCharsContext *BattleSystem_GetSpecialCharsHP(BattleSystem *battleSys);
 FontSpecialCharsContext *BattleSystem_GetSpecialCharsLevel(BattleSystem *battleSys);
 MessageLoader *BattleSystem_GetMessageLoader(BattleSystem *battleSys);
@@ -157,6 +157,7 @@ enum BattleTerrain BattleSystem_GetTerrain(BattleSystem *battleSys);
 enum BattleBackground BattleSystem_GetBackground(BattleSystem *battleSys);
 int BattleSystem_GetMapHeader(BattleSystem *battleSys);
 int BattleSystem_GetPartner(BattleSystem *battleSys, int battler);
+BOOL BattleSystem_SideHasTwoParties(BattleSystem *battleSys, int battler);
 
 /**
  * @brief Get the battler who is an enemy of the input attacker and occupies

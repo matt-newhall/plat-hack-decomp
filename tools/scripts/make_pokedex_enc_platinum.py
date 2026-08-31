@@ -328,19 +328,11 @@ for file in args.src_files:
         map_num = map_data['map_number']
 
         if (map_type == 'dungeon'):
-            for i, slot in enumerate(enc_data['land_encounters']):
+            for slot in enc_data['land_encounters']:
                 species = slot['species']
                 dungeon_morning[Species[species].value].add(map_num)
-
-                if ((i == 2) or (i == 3)):
-                    species = enc_data['day'][i - 2]
-                    dungeon_day[Species[species].value].add(map_num)
-
-                    species = enc_data['night'][i - 2]
-                    dungeon_night[Species[species].value].add(map_num)
-                else:
-                    dungeon_day[Species[species].value].add(map_num)
-                    dungeon_night[Species[species].value].add(map_num)
+                dungeon_day[Species[species].value].add(map_num)
+                dungeon_night[Species[species].value].add(map_num)
 
             for slot in enc_data['surf_encounters']:
                 species = slot['species']
@@ -381,19 +373,11 @@ for file in args.src_files:
                     dungeon_special_natdex[Species[species].value].add(map_num)
 
         if (map_type == 'field'):
-            for i, slot in enumerate(enc_data['land_encounters']):
+            for slot in enc_data['land_encounters']:
                 species = slot['species']
                 field_morning[Species[species].value].add(map_num)
-
-                if ((i == 2) or (i == 3)):
-                    species = enc_data['day'][i - 2]
-                    field_day[Species[species].value].add(map_num)
-
-                    species = enc_data['night'][i - 2]
-                    field_night[Species[species].value].add(map_num)
-                else:
-                    field_day[Species[species].value].add(map_num)
-                    field_night[Species[species].value].add(map_num)
+                field_day[Species[species].value].add(map_num)
+                field_night[Species[species].value].add(map_num)
 
             for slot in enc_data['surf_encounters']:
                 species = slot['species']

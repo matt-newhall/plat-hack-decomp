@@ -43,6 +43,7 @@
 #include "string_gf.h"
 #include "trainer_data.h"
 #include "trainer_info.h"
+#include "unk_0208C098.h"
 #include "unk_020366A0.h"
 #include "unk_0208C098.h"
 
@@ -66,6 +67,7 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum BattleSideEffectType type, u32 effect);
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus);
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry);
+static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler);
 static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
 static BOOL MoveIsOnDamagingTurn(BattleContext *battleCtx, int move);
 static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonParam paramID);
@@ -1879,6 +1881,10 @@ BOOL BattleSystem_SheerForceBoostsMove(BattleContext *battleCtx, int attacker, u
  * Bond keys on this, which is why Rock Slide strikes twice in a single battle but not in a
  * double battle with both opponents up.
  *
+ * Battlers already struck by the move in progress are the exception. A spread move resolves one
+ * target at a time, so counting only the living would report a narrowing move as each target it
+ * kills drops out, and the multi-target damage penalty would come off part-way through.
+ *
  * @param battleSys
  * @param battleCtx
  * @param attacker
@@ -1898,8 +1904,14 @@ int BattleSystem_MoveTargetCount(BattleSystem *battleSys, BattleContext *battleC
 
     for (int battler = 0; battler < maxBattlers; battler++) {
         if ((battleCtx->battlersSwitchingMask & FlagIndex(battler))
-            || battleCtx->battleMons[battler].curHP == 0
             || battler == attacker) {
+            continue;
+        }
+
+        // A battler already struck by this move stays counted even if that hit killed it, so the
+        // tally does not shrink part-way through the move.
+        if (battleCtx->battleMons[battler].curHP == 0
+            && (battleCtx->spreadHitMask & FlagIndex(battler)) == FALSE) {
             continue;
         }
 
@@ -2362,6 +2374,7 @@ void BattleContext_Init(BattleContext *battleCtx)
     battleCtx->multiHitCounter = 0;
     battleCtx->multiHitNumHits = 0;
     battleCtx->battlerCounter = 0;
+    battleCtx->spreadHitMask = 0;
     battleCtx->multiHitLoop = 0;
     battleCtx->afterMoveMessageType = 0;
     battleCtx->multiHitCheckFlags = 0;
@@ -3019,6 +3032,7 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
     } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
         && (battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN) == FALSE
         && moveType == TYPE_GROUND) {
         *moveStatusMask |= MOVE_STATUS_AIR_BALLOON;
@@ -3134,6 +3148,8 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
         && defenderItemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
         *moveStatusMask |= MOVE_STATUS_LEVITATED;
     } else if (defenderItemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+        && !(battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY)
+        && !(battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_INGRAIN)
         && moveType == TYPE_GROUND) {
         *moveStatusMask |= MOVE_STATUS_AIR_BALLOON;
     } else if (battleCtx->battleMons[defender].moveEffectsData.magnetRiseTurns
@@ -3906,33 +3922,17 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
         return TRUE;
     }
 
-    if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP))) {
-        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) == FALSE && itemEffect != HOLD_EFFECT_SPEED_DOWN_GROUNDED) {
-            if (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
-                && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
-                && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
-                && MON_IS_NOT_TYPE(battler, TYPE_FLYING)) {
-                if (msgOut == NULL) {
-                    return TRUE;
-                }
-
-                msgOut->tags = TAG_NICKNAME_ABILITY;
-                msgOut->id = BattleStrings_Text_PokemonPreventsEscapeWithAbility_Ally; // "{0} prevents escape with {1}!"
-                msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
-                msgOut->params[1] = ABILITY_ARENA_TRAP;
-                return TRUE;
-            }
-        } else {
-            if (msgOut == NULL) {
-                return TRUE;
-            }
-
-            msgOut->tags = TAG_NICKNAME_ABILITY;
-            msgOut->id = BattleStrings_Text_PokemonPreventsEscapeWithAbility_Ally; // "{0} prevents escape with {1}!"
-            msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
-            msgOut->params[1] = ABILITY_ARENA_TRAP;
+    if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP))
+        && BattlerIsGrounded(battleCtx, battler)) {
+        if (msgOut == NULL) {
             return TRUE;
         }
+
+        msgOut->tags = TAG_NICKNAME_ABILITY;
+        msgOut->id = BattleStrings_Text_PokemonPreventsEscapeWithAbility_Ally; // "{0} prevents escape with {1}!"
+        msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, tmp);
+        msgOut->params[1] = ABILITY_ARENA_TRAP;
+        return TRUE;
     }
 
     if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_MAGNET_PULL))
@@ -7077,7 +7077,7 @@ static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
 
     return (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
                 && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
-                && itemEffect == HOLD_EFFECT_LEVITATE_POP_ON_HIT
+                && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
                 && MON_IS_NOT_TYPE(battler, TYPE_FLYING))
         || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
         || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY);
@@ -7100,7 +7100,11 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
         return FALSE;
     }
 
-    if (NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM) && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+    // Magma Storm only ever holds the player's side, matching the chip damage it deals.
+    if (NO_CLOUD_NINE
+        && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM)
+        && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_US
+        && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
         return TRUE;
     }
 
@@ -8956,13 +8960,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if ((battleType & BATTLE_TYPE_DOUBLES)
-        && MOVE_DATA(move).range == RANGE_ADJACENT_OPPONENTS
-        && BattleSystem_CountAliveBattlers(battleSys, battleCtx, TRUE, defender) == 2) {
-        damage = damage * 3 / 4;
-    }
-    if ((battleType & BATTLE_TYPE_DOUBLES)
-        && MOVE_DATA(move).range == RANGE_ALL_ADJACENT
-        && BattleSystem_CountAliveBattlers(battleSys, battleCtx, FALSE, defender) >= 2) {
+        && BattleSystem_MoveTargetCount(battleSys, battleCtx, attacker, move) >= 2) {
         damage = damage * 3 / 4;
     }
 
@@ -10131,15 +10129,31 @@ static u16 BattleAI_CalcWeightBasedPower(int weight)
     return 120;
 }
 
-static u16 BattleAI_CalcFlailPower(int curHP, int maxHP)
+#include "data/battle/hp_pixels_to_flail_power.h"
+
+u16 BattleAI_CalcFlailPower(int curHP, int maxHP)
 {
-    int pixels = ((u64)curHP * 64 + maxHP - 1) / maxHP;
-    if (pixels <= 1)  return 200;
-    if (pixels <= 5)  return 150;
-    if (pixels <= 12) return 100;
-    if (pixels <= 21) return 80;
-    if (pixels <= 42) return 40;
-    return 20;
+    int i, pixels = App_PixelCount(curHP, maxHP, 64);
+
+    for (i = 0; i < NELEMS(sHPPixelsToFlailPower); i++) {
+        if (pixels <= sHPPixelsToFlailPower[i][0]) {
+            break;
+        }
+    }
+
+    return sHPPixelsToFlailPower[i][1];
+}
+
+static u16 BattleAI_CalcTrumpCardPower(int ppCur, BOOL pressure)
+{
+    int ppCost = pressure ? 2 : 1;
+    ppCur = ppCur > ppCost ? ppCur - ppCost : 0;
+
+    if (ppCur == 0) return 200;
+    if (ppCur == 1) return 80;
+    if (ppCur == 2) return 60;
+    if (ppCur == 3) return 50;
+    return 40;
 }
 
 static const ItemEffectTypePair sTypeResistBerries[] = {
@@ -10341,7 +10355,7 @@ BOOL BattleAI_WaitingOnOpposingSwitch(BattleSystem *battleSys, int battler)
     return FALSE;
 }
 
-static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective)
+static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSuperEffective, int *pickedIncomingDamage, int *pickedCurHP, BOOL *anyCandidateSurvives)
 {
     int i, j;
     u8 defender;
@@ -10426,6 +10440,18 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
     picked = 6;
     firstNotDead = 6;
 
+    if (pickedIncomingDamage != NULL) {
+        *pickedIncomingDamage = 0;
+    }
+
+    if (pickedCurHP != NULL) {
+        *pickedCurHP = 0;
+    }
+
+    if (anyCandidateSurvives != NULL) {
+        *anyCandidateSurvives = FALSE;
+    }
+
     savedBattlerMon = battleCtx->battleMons[battler];
 
     for (i = 0; i < partySize; i++) {
@@ -10466,6 +10492,14 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                 if (score > maxScore) {
                     maxScore = score;
                     picked = i;
+
+                    if (pickedIncomingDamage != NULL) {
+                        *pickedIncomingDamage = trainerMaxDamageToAI;
+                    }
+
+                    if (pickedCurHP != NULL) {
+                        *pickedCurHP = battlerPokemonCurHP;
+                    }
                 }
                 continue;
             }
@@ -10520,6 +10554,9 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         if (inPower < 1) inPower = 1;
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP) {
                         inPower = BattleAI_CalcFlailPower(defenderPokemonCurHP, BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL));
+                    } else if (moveEffect == BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP) {
+                        inPower = BattleAI_CalcTrumpCardPower(Pokemon_GetValue(defenderPokemon, MON_DATA_MOVE1_PP + j, NULL),
+                            Battler_Ability(battleCtx, battler) == ABILITY_PRESSURE);
                     } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF) {
                         if ((u32)battlerPokemonCurHP * 2 <= BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL)) {
                             inPower = MOVE_DATA(moveDefender).power * 2;
@@ -10552,13 +10589,23 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         inPower = Battler_ItemFlingPower(battleCtx, defender);
                     }
 
+                    BOOL fixedDamage = TRUE;
+
                     if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
                         damageToTarget = 20;
                     } else if (moveEffect == BATTLE_EFFECT_40_DAMAGE_FLAT) {
                         damageToTarget = 40;
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, defender, BATTLEMON_LEVEL, NULL);
+                    } else if (moveEffect == BATTLE_EFFECT_HALVE_HP) {
+                        damageToTarget = battlerPokemonCurHP / 2;
+
+                        if (damageToTarget == 0) {
+                            damageToTarget = 1;
+                        }
                     } else {
+                        fixedDamage = FALSE;
+
                         int defenderAbility = Battler_Ability(battleCtx, defender);
                         int criticalMul = 1;
 
@@ -10584,6 +10631,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         }
                     }
 
+                    if (fixedDamage) {
+                        battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
+                    }
+
                     moveStatus = 0;
                     damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
@@ -10593,6 +10644,11 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         battler,
                         damageToTarget,
                         &moveStatus);
+                    battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
+
+                    if (moveStatus & MOVE_STATUS_IMMUNE) {
+                        damageToTarget = 0;
+                    }
 
                     damageToTarget = BattleAI_ApplyTypeResistBerry(battleCtx, moveDefender, defender, battler, damageToTarget);
                     damageToTarget *= hitMultiplier;
@@ -10696,6 +10752,9 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         if (inPower < 1) inPower = 1;
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP) {
                         inPower = BattleAI_CalcFlailPower(battlerPokemonCurHP, BattleMon_Get(battleCtx, battler, BATTLEMON_MAX_HP, NULL));
+                    } else if (moveEffect == BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP) {
+                        inPower = BattleAI_CalcTrumpCardPower(Pokemon_GetValue(battlerPokemon, MON_DATA_MOVE1_PP + j, NULL),
+                            Battler_Ability(battleCtx, defender) == ABILITY_PRESSURE);
                     } else if (moveEffect == BATTLE_EFFECT_DOUBLE_POWER_WHEN_BELOW_HALF) {
                         if ((u32)defenderPokemonCurHP * 2 <= BattleMon_Get(battleCtx, defender, BATTLEMON_MAX_HP, NULL)) {
                             inPower = MOVE_DATA(moveBattler).power * 2;
@@ -10728,13 +10787,25 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         inPower = Battler_ItemFlingPower(battleCtx, battler);
                     }
 
+                    // Fixed-damage moves bypass the damage formula entirely, so the type chart
+                    // must only decide immunity for them, never scale the result.
+                    BOOL fixedDamage = TRUE;
+
                     if (moveEffect == BATTLE_EFFECT_20_DAMAGE_FLAT) {
                         damageToTarget = 20;
                     } else if (moveEffect == BATTLE_EFFECT_40_DAMAGE_FLAT) {
                         damageToTarget = 40;
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, battler, BATTLEMON_LEVEL, NULL);
+                    } else if (moveEffect == BATTLE_EFFECT_HALVE_HP) {
+                        damageToTarget = defenderPokemonCurHP / 2;
+
+                        if (damageToTarget == 0) {
+                            damageToTarget = 1;
+                        }
                     } else {
+                        fixedDamage = FALSE;
+
                         int battlerAbility = Battler_Ability(battleCtx, battler);
                         int criticalMul = 1;
 
@@ -10760,6 +10831,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         }
                     }
 
+                    if (fixedDamage) {
+                        battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
+                    }
+
                     moveStatus = 0;
                     damageToTarget = BattleSystem_ApplyTypeChart(battleSys,
                         battleCtx,
@@ -10769,6 +10844,11 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         defender,
                         damageToTarget,
                         &moveStatus);
+                    battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
+
+                    if (moveStatus & MOVE_STATUS_IMMUNE) {
+                        damageToTarget = 0;
+                    }
 
                     if (moveStatus & MOVE_STATUS_SUPER_EFFECTIVE) {
                         hasSuperEffective = TRUE;
@@ -10804,6 +10884,19 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
             lhs = (u64)aiMaxDamageToTrainer * (u64)battlerPokemonCurHP;
             rhs = (u64)trainerMaxDamageToAI * (u64)defenderPokemonCurHP;
 
+            // A candidate is worth coming in on if it either outspeeds and lives a hit, or
+            // moves second and lives two. Recorded for every candidate scanned, not just the one
+            // finally picked, so a caller can ask whether the bench holds an answer at all.
+            if (anyCandidateSurvives != NULL && *anyCandidateSurvives == FALSE) {
+                if (battlerFirst) {
+                    if (isTrainerKOAI == 0) {
+                        *anyCandidateSurvives = TRUE;
+                    }
+                } else if (trainerMaxDamageToAI * 2 < battlerPokemonCurHP) {
+                    *anyCandidateSurvives = TRUE;
+                }
+            }
+
             if (isAIKOTrainer && battlerFirst) {
                 score = isPursuitKO ? 7 : 5;
             } else if (isAIKOTrainer && isPursuitKO && isTrainerKOAI == 0) {
@@ -10825,6 +10918,14 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
             if (score > maxScore) {
                 maxScore = score;
                 picked = i;
+
+                if (pickedIncomingDamage != NULL) {
+                    *pickedIncomingDamage = trainerMaxDamageToAI;
+                }
+
+                if (pickedCurHP != NULL) {
+                    *pickedCurHP = battlerPokemonCurHP;
+                }
             }
 
             if (score == 7) {
@@ -10854,12 +10955,26 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
 
 int BattleAI_PostKOSwitchIn(BattleSystem *battleSys, int battler)
 {
-    return PostKOSwitchIn(battleSys, battler, FALSE);
+    return PostKOSwitchIn(battleSys, battler, FALSE, NULL, NULL, NULL);
 }
 
 int BattleAI_PostKOSwitchInSuperEffective(BattleSystem *battleSys, int battler)
 {
-    return PostKOSwitchIn(battleSys, battler, TRUE);
+    return PostKOSwitchIn(battleSys, battler, TRUE, NULL, NULL, NULL);
+}
+
+int BattleAI_PostKOSwitchInDamage(BattleSystem *battleSys, int battler, int *incomingDamage, int *curHP)
+{
+    return PostKOSwitchIn(battleSys, battler, FALSE, incomingDamage, curHP, NULL);
+}
+
+BOOL BattleAI_PostKOSwitchInHasSurvivor(BattleSystem *battleSys, int battler)
+{
+    BOOL anyCandidateSurvives = FALSE;
+
+    PostKOSwitchIn(battleSys, battler, FALSE, NULL, NULL, &anyCandidateSurvives);
+
+    return anyCandidateSurvives;
 }
 
 int BattleAI_SwitchedSlot(BattleSystem *battleSys, int battler)

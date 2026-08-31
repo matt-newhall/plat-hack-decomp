@@ -722,7 +722,7 @@ typedef struct CommandSetData {
     u8 state;
     s8 unused_0B;
     int input;
-    u8 ballStatus[PARTY_GAUGE_COUNT][MAX_PARTY_SIZE];
+    u8 ballStatus[BALL_STATUS_ROW_COUNT][MAX_PARTY_SIZE];
     u8 expPercents[MAX_PARTY_SIZE];
     u8 unused_22;
     u8 partySlot;
@@ -756,14 +756,14 @@ void BattleDisplay_InitTaskSetCommandSelection(BattleSystem *battleSys, BattlerD
     commandSetData->ballStatusBattler = message->ballStatusBattler;
     commandSetData->switchingOrCanPickCommandMask = message->switchingOrCanPickCommandMask;
 
-    for (i = 0; i < PARTY_GAUGE_COUNT; i++) {
+    for (i = 0; i < BALL_STATUS_ROW_COUNT; i++) {
         for (int j = 0; j < MAX_PARTY_SIZE; j++) {
             commandSetData->ballStatus[i][j] = message->ballStatus[i][j];
         }
     }
 
     for (i = 0; i < MAX_PARTY_SIZE; i++) {
-        if (message->ballStatus[0][i] == STOCK_STATUS_MON_FAINTED) {
+        if (message->ballStatus[BALL_STATUS_ROW_OURS][i] == STOCK_STATUS_MON_FAINTED) {
             commandSetData->expPercents[i] = 0;
         } else {
             commandSetData->expPercents[i] = message->expPercents[i];
@@ -1507,7 +1507,63 @@ typedef struct PartyGaugeTask {
     u8 state;
     u8 status[MAX_PARTY_SIZE];
     u8 midBattle;
+    u8 gaugeSlot;
 } PartyGaugeTask;
+
+/**
+ * @brief Resolve which of a side's party gauge slots a battler owns.
+ *
+ * A side normally shows a single gauge in slot 0. When it is fielded by two
+ * distinct trainers, the second trainer takes slot 1 so that the two gauges
+ * do not overwrite one another.
+ *
+ * @param battlerType
+ * @return The gauge slot for this battler.
+ */
+static u8 PartyGauge_SlotForBattlerType(u8 battlerType)
+{
+    if (battlerType == BATTLER_TYPE_PLAYER_SIDE_SLOT_2 || battlerType == BATTLER_TYPE_ENEMY_SIDE_SLOT_2) {
+        return 1;
+    }
+
+    return 0;
+}
+
+/**
+ * @brief Resolve the vertical position a battler's party gauge sits at.
+ *
+ * The two enemy slots take a high and a low line, which keeps a gauge clear of
+ * its own health bar mid-battle and keeps a stacked pair clear of each other at
+ * the start of the battle. Anything showing a single gauge takes the middle.
+ *
+ * @param battlerType
+ * @return The gauge position for this battler.
+ */
+static enum PartyGaugePosition PartyGauge_PositionForBattlerType(u8 battlerType)
+{
+    switch (battlerType) {
+    case BATTLER_TYPE_ENEMY_SIDE_SLOT_1:
+        return PARTY_GAUGE_POSITION_HIGH;
+    case BATTLER_TYPE_ENEMY_SIDE_SLOT_2:
+        return PARTY_GAUGE_POSITION_LOW;
+    default:
+        return PARTY_GAUGE_POSITION_MIDDLE;
+    }
+}
+
+/**
+ * @brief Check whether a battler's side is fielded by two distinct trainers,
+ * and so shows a stacked pair of party gauges at the start of the battle.
+ *
+ * @param battleSys
+ * @param battler
+ * @return TRUE if the side shows two stacked gauges, else FALSE.
+ */
+static BOOL PartyGauge_SideIsStacked(BattleSystem *battleSys, int battler)
+{
+    return BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM
+        && BattleSystem_SideHasTwoParties(battleSys, battler);
+}
 
 void BattleDisplay_InitTaskShowBattleStartPartyGauge(BattleSystem *battleSys, BattlerData *battlerData, PartyGaugeData *partyGauge)
 {
@@ -1518,6 +1574,7 @@ void BattleDisplay_InitTaskShowBattleStartPartyGauge(BattleSystem *battleSys, Ba
     task->command = partyGauge->command;
     task->battler = battlerData->battler;
     task->battlerType = battlerData->battlerType;
+    task->gaugeSlot = PartyGauge_SlotForBattlerType(battlerData->battlerType);
 
     for (int i = 0; i < MAX_PARTY_SIZE; i++) {
         task->status[i] = partyGauge->status[i];
@@ -1536,6 +1593,7 @@ void BattleDisplay_InitTaskHideBattleStartPartyGauge(BattleSystem *battleSys, Ba
     task->command = partyGauge->command;
     task->battler = battlerData->battler;
     task->battlerType = battlerData->battlerType;
+    task->gaugeSlot = PartyGauge_SlotForBattlerType(battlerData->battlerType);
     task->midBattle = FALSE;
 
     SysTask_Start(Task_HidePartyGauge, task, 0);
@@ -1550,6 +1608,7 @@ void BattleDisplay_InitTaskShowPartyGauge(BattleSystem *battleSys, BattlerData *
     task->command = partyGauge->command;
     task->battler = battlerData->battler;
     task->battlerType = battlerData->battlerType;
+    task->gaugeSlot = PartyGauge_SlotForBattlerType(battlerData->battlerType);
 
     for (int i = 0; i < MAX_PARTY_SIZE; i++) {
         task->status[i] = partyGauge->status[i];
@@ -1568,6 +1627,7 @@ void BattleDisplay_InitTaskHidePartyGauge(BattleSystem *battleSys, BattlerData *
     task->command = partyGauge->command;
     task->battler = battlerData->battler;
     task->battlerType = battlerData->battlerType;
+    task->gaugeSlot = PartyGauge_SlotForBattlerType(battlerData->battlerType);
     task->midBattle = TRUE;
 
     SysTask_Start(Task_HidePartyGauge, task, 0);
@@ -3392,7 +3452,7 @@ static void Task_PlayerSetCommandSelection(SysTask *task, void *data)
         }
 
         ov16_0226914C(v2, commandSetData->expPercents);
-        ov16_02269168(v2, commandSetData->ballStatus[0], commandSetData->ballStatus[1]);
+        ov16_02269168(v2, commandSetData->ballStatus[BALL_STATUS_ROW_OURS], commandSetData->ballStatus[BALL_STATUS_ROW_THEIRS_1], commandSetData->ballStatus[BALL_STATUS_ROW_THEIRS_2]);
         ov16_022691BC(v2);
         NARC_dtor(bgNarc);
         NARC_dtor(objNarc);
@@ -5628,30 +5688,21 @@ static void Task_ShowPartyGauge(SysTask *task, void *data)
 
         if (gaugeTask->midBattle == FALSE) {
             showType = SHOW_PARTY_GAUGE_BATTLE_START;
-            gaugePosition = PARTY_GAUGE_POSITION_MIDDLE;
+            gaugePosition = PartyGauge_SideIsStacked(gaugeTask->battleSys, gaugeTask->battler)
+                ? PartyGauge_PositionForBattlerType(gaugeTask->battlerType)
+                : PARTY_GAUGE_POSITION_MIDDLE;
         } else {
             showType = SHOW_PARTY_GAUGE_MID_BATTLE;
-
-            switch (gaugeTask->battlerType) {
-            case 3:
-                gaugePosition = PARTY_GAUGE_POSITION_HIGH;
-                break;
-            case 5:
-                gaugePosition = PARTY_GAUGE_POSITION_LOW;
-                break;
-            default:
-                gaugePosition = PARTY_GAUGE_POSITION_MIDDLE;
-                break;
-            }
+            gaugePosition = PartyGauge_PositionForBattlerType(gaugeTask->battlerType);
         }
 
         PartyGauge *gauge = PartyGauge_Show(gaugeTask->status, side, showType, gaugePosition, BattleSystem_GetSpriteSystem(gaugeTask->battleSys), BattleSystem_GetSpriteManager(gaugeTask->battleSys));
-        BattleSystem_SetPartyGauge(gaugeTask->battleSys, side, gauge);
+        BattleSystem_SetPartyGauge(gaugeTask->battleSys, side, gaugeTask->gaugeSlot, gauge);
     }
         gaugeTask->state++;
         break;
     case 1:
-        if (PartyGauge_ShowIsDone(BattleSystem_GetPartyGauge(gaugeTask->battleSys, side)) == TRUE) {
+        if (PartyGauge_ShowIsDone(BattleSystem_GetPartyGauge(gaugeTask->battleSys, side, gaugeTask->gaugeSlot)) == TRUE) {
             gaugeTask->state++;
         }
         break;
@@ -5676,7 +5727,7 @@ static void Task_HidePartyGauge(SysTask *task, void *data)
         side = PARTY_GAUGE_THEIRS;
     }
 
-    PartyGauge *gauge = BattleSystem_GetPartyGauge(gaugeTask->battleSys, side);
+    PartyGauge *gauge = BattleSystem_GetPartyGauge(gaugeTask->battleSys, side, gaugeTask->gaugeSlot);
 
     switch (gaugeTask->state) {
     case 0:
@@ -5694,7 +5745,7 @@ static void Task_HidePartyGauge(SysTask *task, void *data)
     case 1:
         if (PartyGauge_HideIsDone(gauge) == TRUE) {
             PartyGauge_Free(gauge);
-            BattleSystem_SetPartyGauge(gaugeTask->battleSys, side, NULL);
+            BattleSystem_SetPartyGauge(gaugeTask->battleSys, side, gaugeTask->gaugeSlot, NULL);
             gaugeTask->state++;
         }
         break;

@@ -529,6 +529,26 @@
     .long \battler
     .endm
 
+    .macro LoadFlingEffect battler:req
+    .long AICMD_LOADFLINGEFFECT
+    .long \battler
+    .endm
+
+    .macro LoadPartnerDeclaredMoveEffect
+    .long AICMD_LOADPARTNERDECLAREDMOVEEFFECT
+    .endm
+
+    .macro IfPartnerMovesFirst jump:req
+    .long AICMD_IFPARTNERMOVESFIRST
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfPartnerDeclaredMoveClass class:req, jump:req
+    .long AICMD_IFPARTNERDECLAREDMOVECLASS
+    .long \class
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro LoadCurrentMovePP
     .long 91
     .endm
@@ -657,6 +677,101 @@
 
     .macro IfDefenderCanKO jump:req
     .long AICMD_IFDEFENDERCANKO
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCanKOInHits hits:req, jump:req
+    .long AICMD_IFDEFENDERCANKOINHITS
+    .long \hits
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCannotKOInHits hits:req, jump:req
+    .long AICMD_IFDEFENDERCANNOTKOINHITS
+    .long \hits
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCanKOAfterShellSmash jump:req
+    .long AICMD_IFDEFENDERCANKOAFTERSHELLSMASH
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDefenderCanKOAfterHalfHPCost jump:req
+    .long AICMD_IFDEFENDERCANKOAFTERHALFHPCOST
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerIncapacitated battler:req, jump:req
+    .long AICMD_IFBATTLERINCAPACITATED
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfTrainerAIFlagNotSet flag:req, jump:req
+    .long AICMD_IFTRAINERAIFLAGNOTSET
+    .long \flag
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlersShareMove jump:req
+    .long AICMD_IFBATTLERSSHAREMOVE
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfMovesFirst jump:req
+    .long AICMD_IFMOVESFIRST
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfDoesNotMoveFirst jump:req
+    .long AICMD_IFDOESNOTMOVEFIRST
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfShouldRecover percent:req, jump:req
+    .long AICMD_IFSHOULDRECOVER
+    .long \percent
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerKnowsSoundMove battler:req, jump:req
+    .long AICMD_IFBATTLERKNOWSSOUNDMOVE
+    .long \battler
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfResidualDamageKOsAttacker jump:req
+    .long AICMD_IFRESIDUALDAMAGEKOSATTACKER
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfAttackerCanKO jump:req
+    .long AICMD_IFATTACKERCANKO
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfParalysisFlipsSpeed jump:req
+    .long AICMD_IFPARALYSISFLIPSSPEED
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfAnyOpponentOutspeedsSide jump:req
+    .long AICMD_IFANYOPPONENTOUTSPEEDSSIDE
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerHasMoveOfClass battler:req, class:req, jump:req
+    .long AICMD_IFBATTLERHASMOVEOFCLASS
+    .long \battler
+    .long \class
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfBattlerKnowsMoveOfType battler:req, type:req, jump:req
+    .long AICMD_IFBATTLERKNOWSMOVEOFTYPE
+    .long \battler
+    .long \type
     .long (\jump-.) / 4 - 1
     .endm
 

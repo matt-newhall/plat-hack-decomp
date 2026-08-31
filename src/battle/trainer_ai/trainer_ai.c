@@ -50,6 +50,11 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_PSYWAVE, // Magnitude; Psywave itself uses RANDOM_DAMAGE_1_TO_150_LEVEL
     BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_STAT_UP,
     BATTLE_EFFECT_SPIT_UP,
+    BATTLE_EFFECT_HIGHER_POWER_WHEN_LOW_PP,
+    BATTLE_EFFECT_INCREASE_POWER_WITH_LESS_HP,
+    BATTLE_EFFECT_HALVE_HP,
+    BATTLE_EFFECT_AVERAGE_HP,
+    BATTLE_EFFECT_SET_HP_EQUAL_TO_USER,
     0xFFFF
 };
 
@@ -71,6 +76,8 @@ static const u16 sExcludedFromBestDamageMoveEffects[] = {
     BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH, // Sky Attack
     BATTLE_EFFECT_CHARGE_TURN_DEF_UP, // Skull Bash
     BATTLE_EFFECT_CHARGE_TURN_SP_ATK_UP, // Meteor Beam
+
+    BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT,
     0xFFFF
 };
 
@@ -182,6 +189,10 @@ static void AICmd_LoadSpikesLayers(BattleSystem *battleSys, BattleContext *battl
 static void AICmd_IfAnyPartyMemberIsWounded(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyPartyMemberUsedPP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadFlingPower(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfPartnerDeclaredMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfPartnerMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCanUseLastResort(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadCurrentMoveClass(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -206,6 +217,23 @@ static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *ba
 static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOInHits(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCannotKOInHits(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDefenderCanKOAfterHalfHPCost(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerKnowsMoveOfType(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfShouldRecover(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfDoesNotMoveFirst(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCtx);
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -226,10 +254,11 @@ static BOOL AI_MoveHasDamageEstimate(BattleContext *battleCtx, u16 move);
 static int TrainerAI_HitCountMultiplier(BattleSystem *battleSys, BattleContext *battleCtx, u16 move, int attacker, int ability, u16 heldItem);
 static void TrainerAI_GetStats(BattleContext *battleCtx, int battler, int *buf1, int *buf2, int stat);
 
-static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler);
+static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_WishPassSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_CannotDamageWonderGuard(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *battleCtx, Pokemon *mon, int defender, BOOL wantSuperEffective);
-static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+static BOOL AI_NoEffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, BOOL alwaysSwitch);
 static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, BattleContext *battleCtx, int battler, u32 checkEffectiveness, u8 rand);
@@ -279,7 +308,13 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
     if (battleSys->battleType & BATTLE_TYPE_ROAMER) {
         AI_CONTEXT.thinkingMask = AI_FLAG_ROAMING_POKEMON;
     } else {
-        AI_CONTEXT.thinkingMask = battleSys->trainers[battler].header.aiMask;
+        int trainerSlot = battler;
+
+        if (battleSys->trainerIDs[battler] == 0 && (battleSys->battleType & BATTLE_TYPE_DOUBLES)) {
+            trainerSlot = battler & 1;
+        }
+
+        AI_CONTEXT.thinkingMask = battleSys->trainers[trainerSlot].header.aiMask;
     }
 
     // force double-battle strategies, if applicable
@@ -288,7 +323,19 @@ void TrainerAI_Init(BattleSystem *battleSys, BattleContext *battleCtx, u8 battle
     }
 }
 
-u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler)
+/**
+ * @brief Score every move for a battler and cache the resulting action.
+ *
+ * The switch decision is made a step earlier in command selection than the move choice, but it
+ * needs to know what the moves are worth. Running the evaluation once and holding onto the answer
+ * is what lets both questions be settled against the same damage rolls and the same dice - a
+ * second pass would re-roll everything and score differently.
+ *
+ * @param battleSys
+ * @param battler
+ * @return The action the battler would take if it attacks.
+ */
+u8 TrainerAI_Evaluate(BattleSystem *battleSys, u8 battler)
 {
     u8 result;
     BattleContext *battleCtx = battleSys->battleCtx;
@@ -300,13 +347,30 @@ u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler)
         TrainerAI_Init(battleSys, battleCtx, AI_CONTEXT.attacker, AI_INIT_SCORE_ALL_MOVES);
     }
 
+    // Escaping and the Safari routines never reach the scoring, so start from a value which
+    // reads as "there is something worth doing here".
+    battleCtx->aiCachedBestScore[battler] = 127;
+
     if ((battleSys->battleType & BATTLE_TYPE_DOUBLES) == FALSE) {
         result = TrainerAI_MainSingles(battleSys, battleCtx);
     } else {
         result = TrainerAI_MainDoubles(battleSys, battleCtx);
     }
 
+    battleCtx->aiCachedAction[battler] = result;
+
     return result;
+}
+
+u8 TrainerAI_Main(BattleSystem *battleSys, u8 battler)
+{
+    BattleContext *battleCtx = battleSys->battleCtx;
+
+    if (battleCtx->aiCachedAction[battler] != AI_ACTION_NOT_EVALUATED) {
+        return battleCtx->aiCachedAction[battler];
+    }
+
+    return TrainerAI_Evaluate(battleSys, battler);
 }
 
 /**
@@ -369,6 +433,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
         }
 
         action = maxScoreMoveSlots[BattleSystem_RandNext(battleSys) % numMaxScoreMoves];
+        battleCtx->aiCachedBestScore[AI_CONTEXT.attacker] = maxScoreMoves[0];
     }
 
     AI_CONTEXT.selectedTarget[AI_CONTEXT.attacker] = AI_CONTEXT.defender;
@@ -384,7 +449,7 @@ static u8 TrainerAI_MainSingles(BattleSystem *battleSys, BattleContext *battleCt
  */
 static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int battler, battlerCount, thinkingMask;
+    int battler, battlerCount;
     s16 maxScoreForBattler[MAX_BATTLERS];
     u8 battlerTemp[MAX_BATTLERS];
     s8 actionForBattler[MAX_BATTLERS];
@@ -409,11 +474,9 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
 
         AI_CONTEXT.thinkingBitShift = 0;
         AI_CONTEXT.moveSlot = 0;
-        thinkingMask = AI_CONTEXT.thinkingMask;
 
-        // Evaluate moves according with the current battler as the target
-        while (thinkingMask) {
-            if (thinkingMask & AI_FLAG_BASIC) {
+        while (AI_CONTEXT.thinkingMask) {
+            if (AI_CONTEXT.thinkingMask & AI_FLAG_BASIC) {
                 if ((AI_CONTEXT.stateFlags & AI_STATUS_FLAG_CONTINUE) == FALSE) {
                     AI_CONTEXT.evalStep = AI_EVAL_STEP_INIT;
                 }
@@ -421,7 +484,7 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
                 TrainerAI_EvalMoves(battleSys, battleCtx);
             }
 
-            thinkingMask >>= 1;
+            AI_CONTEXT.thinkingMask >>= 1;
             AI_CONTEXT.thinkingBitShift++;
             AI_CONTEXT.moveSlot = 0;
         }
@@ -485,6 +548,8 @@ static u8 TrainerAI_MainDoubles(BattleSystem *battleSys, BattleContext *battleCt
             battlerCount = 1;
         }
     }
+
+    battleCtx->aiCachedBestScore[AI_CONTEXT.attacker] = maxScore;
 
     // Pick a random target from among the maximum-scored targets
     AI_CONTEXT.selectedTarget[AI_CONTEXT.attacker] = battlerTemp[(BattleSystem_RandNext(battleSys) % battlerCount)];
@@ -1212,40 +1277,7 @@ static void AICmd_LoadBattlerAbility(BattleSystem *battleSys, BattleContext *bat
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED) {
-        AI_CONTEXT.calcTemp = ABILITY_NONE;
-    } else if (AI_CONTEXT.attacker != battler && inBattler != AI_BATTLER_ATTACKER_PARTNER) {
-        // If we already know an opponent's ability, load that ability
-        if (AI_CONTEXT.battlerAbilities[battler]) {
-            AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
-        } else {
-            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            u8 knownAbility = Battler_Ability(battleCtx, battler);
-            if (knownAbility == ABILITY_SHADOW_TAG
-                || knownAbility == ABILITY_MAGNET_PULL
-                || knownAbility == ABILITY_ARENA_TRAP) {
-                AI_CONTEXT.calcTemp = knownAbility;
-            } else {
-                // Try to guess the opponent's ability (flip a coin)
-                int ability1 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_1);
-                int ability2 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_2);
-
-                if (ability1 && ability2) {
-                    if (BattleSystem_RandNext(battleSys) & 1) {
-                        AI_CONTEXT.calcTemp = ability1;
-                    } else {
-                        AI_CONTEXT.calcTemp = ability2;
-                    }
-                } else if (ability1) {
-                    AI_CONTEXT.calcTemp = ability1;
-                } else {
-                    AI_CONTEXT.calcTemp = ability2;
-                }
-            }
-        }
-    } else {
-        AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
-    }
+    AI_CONTEXT.calcTemp = Battler_Ability(battleCtx, battler);
 }
 
 static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1255,50 +1287,11 @@ static void AICmd_CheckBattlerAbility(BattleSystem *battleSys, BattleContext *ba
     int inBattler = AIScript_Read(battleCtx);
     int expected = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int tmpAbility;
+    int ability = Battler_Ability(battleCtx, battler);
 
-    if (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_ABILITY_SUPPRESSED) {
-        tmpAbility = ABILITY_NONE;
-    } else if (inBattler == AI_BATTLER_DEFENDER || inBattler == AI_BATTLER_DEFENDER_PARTNER) {
-        // If we already know an opponent's ability, load that ability
-        if (AI_CONTEXT.battlerAbilities[battler]) {
-            tmpAbility = AI_CONTEXT.battlerAbilities[battler];
-            AI_CONTEXT.calcTemp = AI_CONTEXT.battlerAbilities[battler];
-        } else {
-            // If the opponent has an ability that traps us, we should already know about it (because it self-announces)
-            u8 knownAbility = Battler_Ability(battleCtx, battler);
-            if (knownAbility == ABILITY_SHADOW_TAG
-                || knownAbility == ABILITY_MAGNET_PULL
-                || knownAbility == ABILITY_ARENA_TRAP) {
-                tmpAbility = knownAbility;
-            } else {
-                // Try to guess the opponent's ability (flip a coin)
-                int ability1 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_1);
-                int ability2 = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battler].species, SPECIES_DATA_ABILITY_2);
-
-                if (ability1 && ability2) {
-                    // If the opponent has two abilities, but neither are the expected one,
-                    // prefer ability 1 for the final check
-                    if (ability1 != expected && ability2 != expected) {
-                        tmpAbility = ability1;
-                        // Otherwise, pretend that we don't know about it
-                    } else {
-                        tmpAbility = ABILITY_NONE;
-                    }
-                } else if (ability1) {
-                    tmpAbility = ability1;
-                } else {
-                    tmpAbility = ability2;
-                }
-            }
-        }
-    } else {
-        tmpAbility = Battler_Ability(battleCtx, battler);
-    }
-
-    if (tmpAbility == ABILITY_NONE) {
+    if (ability == ABILITY_NONE) {
         AI_CONTEXT.calcTemp = AI_UNKNOWN;
-    } else if (tmpAbility == expected) {
+    } else if (ability == expected) {
         AI_CONTEXT.calcTemp = AI_HAVE;
     } else {
         AI_CONTEXT.calcTemp = AI_NOT_HAVE;
@@ -1682,51 +1675,16 @@ static void AICmd_IfMoveKnown(BattleSystem *battleSys, BattleContext *battleCtx)
     int move = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
+    }
 
-        if (i < LEARNED_MOVES_MAX) {
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[battler].moves[i] == move) {
             AIScript_Iter(battleCtx, jump);
+            return;
         }
-        break;
-
-    case AI_BATTLER_ATTACKER_PARTNER:
-        if (battleCtx->battleMons[battler].curHP == 0) {
-            break;
-        }
-
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
-
-        if (i < LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i] == move) {
-                break;
-            }
-        }
-
-        if (i < LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
     }
 }
 
@@ -1738,52 +1696,18 @@ static void AICmd_IfMoveNotKnown(BattleSystem *battleSys, BattleContext *battleC
     int move = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_ATTACKER_PARTNER:
-        if (battleCtx->battleMons[battler].curHP == 0) {
-            break;
-        }
-
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i] == move) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i] == move) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
     }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (battleCtx->battleMons[battler].moves[i] == move) {
+            return;
+        }
+    }
+
+    AIScript_Iter(battleCtx, jump);
 }
 
 static void AICmd_IfMoveEffectKnown(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1794,37 +1718,18 @@ static void AICmd_IfMoveEffectKnown(BattleSystem *battleSys, BattleContext *batt
     int effect = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i]
-                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect == effect) {
-                break;
-            }
-        }
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
+    }
 
-        if (i < LEARNED_MOVES_MAX) {
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && MOVE_DATA(move).effect == effect) {
             AIScript_Iter(battleCtx, jump);
+            return;
         }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i]
-                && MOVE_DATA(AI_CONTEXT.battlerMoves[battler][i]).effect == effect) {
-                break;
-            }
-        }
-
-        if (i < LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
     }
 }
 
@@ -1836,38 +1741,20 @@ static void AICmd_IfMoveEffectNotKnown(BattleSystem *battleSys, BattleContext *b
     int effect = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    int i;
 
-    switch (inBattler) {
-    case AI_BATTLER_ATTACKER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (battleCtx->battleMons[battler].moves[i]
-                && MOVE_DATA(battleCtx->battleMons[battler].moves[i]).effect == effect) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    case AI_BATTLER_DEFENDER:
-        for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-            if (AI_CONTEXT.battlerMoves[battler][i]
-                && MOVE_DATA(AI_CONTEXT.battlerMoves[battler][i]).effect == effect) {
-                break;
-            }
-        }
-
-        if (i == LEARNED_MOVES_MAX) {
-            AIScript_Iter(battleCtx, jump);
-        }
-        break;
-
-    default:
-        break;
+    if (battleCtx->battleMons[battler].curHP == 0) {
+        return;
     }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && MOVE_DATA(move).effect == effect) {
+            return;
+        }
+    }
+
+    AIScript_Iter(battleCtx, jump);
 }
 
 static void AICmd_IfBattlerUnderEffect(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1888,6 +1775,12 @@ static void AICmd_IfBattlerUnderEffect(BattleSystem *battleSys, BattleContext *b
 
     case CHECK_ENCORE:
         if (battleCtx->battleMons[battler].moveEffectsData.encoredTurns) {
+            AIScript_Iter(battleCtx, jump);
+        }
+        break;
+
+    case CHECK_WISH:
+        if (battleCtx->fieldConditions.wishTurns[battler]) {
             AIScript_Iter(battleCtx, jump);
         }
         break;
@@ -1955,11 +1848,7 @@ static void AICmd_LoadHeldItemEffect(BattleSystem *battleSys, BattleContext *bat
     int inBattler = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
-    if (AI_CONTEXT.attacker != battler) {
-        AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, AI_CONTEXT.battlerHeldItems[battler], ITEM_PARAM_HOLD_EFFECT);
-    } else {
-        AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT);
-    }
+    AI_CONTEXT.calcTemp = BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_HOLD_EFFECT);
 }
 
 static void AICmd_IfHeldItemEqualTo(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -1970,15 +1859,8 @@ static void AICmd_IfHeldItemEqualTo(BattleSystem *battleSys, BattleContext *batt
     int expected = AIScript_Read(battleCtx);
     int jump = AIScript_Read(battleCtx);
     u8 battler = AIScript_Battler(battleCtx, inBattler);
-    u16 heldItem;
 
-    if ((battler & 1) == (AI_CONTEXT.attacker & 1)) {
-        heldItem = battleCtx->battleMons[battler].heldItem;
-    } else {
-        heldItem = AI_CONTEXT.battlerHeldItems[battler];
-    }
-
-    if (heldItem == expected) {
+    if (battleCtx->battleMons[battler].heldItem == expected) {
         AIScript_Iter(battleCtx, jump);
     }
 }
@@ -2069,6 +1951,84 @@ static void AICmd_LoadFlingPower(BattleSystem *battleSys, BattleContext *battleC
     u8 battler = AIScript_Battler(battleCtx, inBattler);
 
     AI_CONTEXT.calcTemp = Battler_ItemFlingPower(battleCtx, battler);
+}
+
+/**
+ * @brief Load the effect a battler's held item would apply to the target if it were flung.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_LoadFlingEffect(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    AI_CONTEXT.calcTemp = Battler_ItemFlingEffect(battleCtx, battler);
+}
+
+/**
+ * @brief Check whether the attacker's partner has already locked in a move of a given class this
+ * turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfPartnerDeclaredMoveClass(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int class = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    int partner = BattleSystem_GetPartner(battleSys, AI_CONTEXT.attacker);
+    u16 move = battleCtx->declaredMove[partner];
+
+    if (move != MOVE_NONE && MOVE_DATA(move).class == class) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Load the effect of the move the attacker's partner has locked in this turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_LoadPartnerDeclaredMoveEffect(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int partner = BattleSystem_GetPartner(battleSys, AI_CONTEXT.attacker);
+    u16 move = battleCtx->declaredMove[partner];
+
+    AI_CONTEXT.calcTemp = move == MOVE_NONE ? -1 : MOVE_DATA(move).effect;
+}
+
+
+/**
+ * @brief Check whether the attacker's partner will act before the attacker does.
+ *
+ * Pairs with the declared-move commands: knowing what the partner intends is only half of it,
+ * since a move which sets something up for the attacker has to resolve first to be worth
+ * anything.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfPartnerMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int partner = BattleSystem_GetPartner(battleSys, attacker);
+
+    if (battleCtx->battleMons[partner].curHP
+        && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, partner, attacker, TRUE) == COMPARE_SPEED_FASTER) {
+        AIScript_Iter(battleCtx, jump);
+    }
 }
 
 static void AICmd_LoadCurrentMovePP(BattleSystem *battleSys, BattleContext *battleCtx)
@@ -2833,18 +2793,16 @@ static void AICmd_FlagBestDamageMove(BattleSystem *battleSys, BattleContext *bat
 }
 
 /**
- * @brief Check whether the target's best move would knock the attacker out.
+ * @brief Compute the damage which the target's best move would deal to the attacker.
  *
  * Uses this turn's damage rolls rather than maximum damage.
  *
  * @param battleSys
  * @param battleCtx
+ * @return The largest damage roll coming back at the attacker.
  */
-static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+static s32 AI_MaxIncomingDamage(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    AIScript_Iter(battleCtx, 1);
-    int jump = AIScript_Read(battleCtx);
-
     int attacker = AI_CONTEXT.attacker;
     int defender = AI_CONTEXT.defender;
 
@@ -2871,17 +2829,695 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
 
     AI_CONTEXT.defender = defender;
 
-    if (maxDamage >= battleCtx->battleMons[attacker].curHP) {
+    return maxDamage;
+}
+
+/**
+ * @brief Check whether the target's best move would knock the attacker out.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) >= battleCtx->battleMons[AI_CONTEXT.attacker].curHP) {
         AIScript_Iter(battleCtx, jump);
     }
 }
 
+/**
+ * @brief Check whether the target's best move would knock the attacker out within a given
+ * number of hits, assuming it keeps picking that move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+/**
+ * @brief Check whether the attacker's best move would knock the target out.
+ *
+ * Uses this turn's damage rolls rather than maximum damage.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+/**
+ * @brief Check whether the attacker gets to act before its target this turn.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if the attacker acts first; a speed tie counts as acting first.
+ */
+static BOOL AI_MovesBeforeTarget(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+    int ability = Battler_Ability(battleCtx, attacker);
+    int priority = MOVE_DATA(AI_CONTEXT.move).priority;
+
+    if (ability == ABILITY_PRANKSTER && MOVE_DATA(AI_CONTEXT.move).class == CLASS_STATUS) {
+        priority++;
+    }
+
+    if (ability == ABILITY_GALE_WINGS
+        && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
+        && mon->curHP == mon->maxHP) {
+        priority++;
+    }
+
+    if (priority != 0) {
+        return priority > 0;
+    }
+
+    return BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) != COMPARE_SPEED_SLOWER;
+}
+
+static void AICmd_IfMovesFirst(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MovesBeforeTarget(battleSys, battleCtx)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfDoesNotMoveFirst(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MovesBeforeTarget(battleSys, battleCtx) == FALSE) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief The AI's "should I heal this turn" test.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfShouldRecover(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int percent = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+
+    if (mon->status & MON_CONDITION_TOXIC) {
+        return;
+    }
+
+    int healed = BattleSystem_Divide(mon->maxHP * percent, 100);
+
+    if (healed > mon->maxHP - mon->curHP) {
+        healed = mon->maxHP - mon->curHP;
+    }
+
+    s32 maxDamage = AI_MaxIncomingDamage(battleSys, battleCtx);
+
+    if (maxDamage >= healed) {
+        return;
+    }
+
+    int hpPercent = mon->curHP * 100 / mon->maxHP;
+    BOOL recover = FALSE;
+
+    if (AI_MovesBeforeTarget(battleSys, battleCtx) == FALSE) {
+        if (hpPercent < 50) {
+            recover = TRUE;
+        } else if (hpPercent < 70) {
+            recover = BattleSystem_RandNext(battleSys) % 256 < 192;
+        }
+    } else if (maxDamage >= mon->curHP) {
+        recover = maxDamage < mon->curHP + healed;
+    } else if (hpPercent < 40) {
+        recover = TRUE;
+    } else if (hpPercent < 66) {
+        recover = BattleSystem_RandNext(battleSys) % 256 < 128;
+    }
+
+    if (recover) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfAttackerCanKO(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+
+    u8 ivs[STAT_MAX];
+    for (int i = 0; i < STAT_MAX; i++) {
+        ivs[i] = BattleMon_Get(battleCtx, attacker, BATTLEMON_HP_IV + i, NULL);
+    }
+
+    s32 damageVals[LEARNED_MOVES_MAX];
+    s32 maxDamage = TrainerAI_CalcAllDamage(battleSys,
+        battleCtx,
+        attacker,
+        battleCtx->battleMons[attacker].moves,
+        damageVals,
+        battleCtx->battleMons[attacker].heldItem,
+        ivs,
+        Battler_Ability(battleCtx, attacker),
+        battleCtx->battleMons[attacker].moveEffectsData.embargoTurns,
+        TRUE);
+
+    if (maxDamage >= battleCtx->battleMons[AI_CONTEXT.defender].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Estimate the HP a battler will lose to end-of-turn effects, net of the healing it
+ * gets back over the same window.
+ *
+ * The order mirrors the turn-end sequence in BattleControllerPlayer_CheckMonConditions, so
+ * that a battler which is about to be finished off by chip damage can be spotted before the
+ * AI commits a turn to stalling.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @return Net HP lost at the end of this turn; negative if the battler nets healing.
+ */
+static int AI_ResidualDamage(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    BattleMon *mon = &battleCtx->battleMons[battler];
+    int ability = Battler_Ability(battleCtx, battler);
+    int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
+    int type1 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL);
+    int type2 = BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL);
+    int damage = 0;
+
+    if (NO_CLOUD_NINE && (mon->moveEffectsMask & MOVE_EFFECT_NO_WEATHER_DAMAGE) == FALSE) {
+        if (WEATHER_IS_SAND
+            && type1 != TYPE_ROCK && type2 != TYPE_ROCK
+            && type1 != TYPE_STEEL && type2 != TYPE_STEEL
+            && type1 != TYPE_GROUND && type2 != TYPE_GROUND
+            && ability != ABILITY_SAND_VEIL
+            && ability != ABILITY_SAND_FORCE
+            && ability != ABILITY_SAND_RUSH
+            && ability != ABILITY_OVERCOAT
+            && itemEffect != HOLD_EFFECT_OVERCOAT) {
+            damage += BattleSystem_Divide(mon->maxHP, 16);
+        }
+
+        if (WEATHER_IS_HAIL) {
+            if (ability == ABILITY_ICE_BODY) {
+                damage -= BattleSystem_Divide(mon->maxHP, 16);
+            } else if (type1 != TYPE_ICE
+                && type2 != TYPE_ICE
+                && ability != ABILITY_OVERCOAT
+                && ability != ABILITY_SNOW_CLOAK
+                && itemEffect != HOLD_EFFECT_OVERCOAT) {
+                damage += BattleSystem_Divide(mon->maxHP, 16);
+            }
+        }
+
+        if (WEATHER_IS_RAIN && ability == ABILITY_RAIN_DISH) {
+            damage -= BattleSystem_Divide(mon->maxHP, 16);
+        }
+
+        if (WEATHER_IS_SUN && (ability == ABILITY_DRY_SKIN || ability == ABILITY_SOLAR_POWER)) {
+            damage += BattleSystem_Divide(mon->maxHP, 8);
+        } else if (WEATHER_IS_RAIN && ability == ABILITY_DRY_SKIN) {
+            damage -= BattleSystem_Divide(mon->maxHP, 8);
+        }
+    }
+
+    if (itemEffect == HOLD_EFFECT_HP_RESTORE_GRADUAL) {
+        damage -= BattleSystem_Divide(mon->maxHP, 16);
+    }
+
+    if (mon->moveEffectsMask & MOVE_EFFECT_INGRAIN) {
+        damage -= BattleSystem_Divide(mon->maxHP, 16);
+    }
+
+    if (mon->moveEffectsMask & MOVE_EFFECT_AQUA_RING) {
+        damage -= BattleSystem_Divide(mon->maxHP, 16);
+    }
+
+    // Magic Guard stops every source below, and only those.
+    if (ability == ABILITY_MAGIC_GUARD) {
+        return damage;
+    }
+
+    if ((mon->moveEffectsMask & MOVE_EFFECT_LEECH_SEED)
+        && battleCtx->battleMons[mon->moveEffectsMask & MOVE_EFFECT_LEECH_SEED_RECIPIENT].curHP) {
+        damage += BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    if (mon->status & MON_CONDITION_POISON) {
+        damage += ability == ABILITY_POISON_HEAL
+            ? -BattleSystem_Divide(mon->maxHP, 8)
+            : BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    if (mon->status & MON_CONDITION_TOXIC) {
+        if (ability == ABILITY_POISON_HEAL) {
+            damage -= BattleSystem_Divide(mon->maxHP, 8);
+        } else {
+            // The counter is incremented before it is applied, so the next tick is one stage
+            // above the stage on the board now.
+            int stage = (mon->status & MON_CONDITION_TOXIC_COUNTER) >> 8;
+
+            if (stage < (MON_CONDITION_TOXIC_COUNTER >> 8)) {
+                stage++;
+            }
+
+            damage += BattleSystem_Divide(mon->maxHP, 16) * stage;
+        }
+    }
+
+    if (mon->status & MON_CONDITION_BURN) {
+        damage += BattleSystem_Divide(mon->maxHP, ability == ABILITY_HEATPROOF ? 32 : 16);
+    }
+
+    if ((mon->statusVolatile & VOLATILE_CONDITION_NIGHTMARE) && (mon->status & MON_CONDITION_SLEEP)) {
+        damage += BattleSystem_Divide(mon->maxHP, 4);
+    }
+
+    if (mon->statusVolatile & VOLATILE_CONDITION_CURSE) {
+        damage += BattleSystem_Divide(mon->maxHP, 4);
+    }
+
+    // The bind counter is decremented before the tick, so the last turn of a bind deals nothing.
+    if ((mon->statusVolatile & VOLATILE_CONDITION_BIND)
+        && (mon->statusVolatile - (1 << VOLATILE_CONDITION_BIND_SHIFT)) & VOLATILE_CONDITION_BIND) {
+        damage += BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    if ((mon->status & MON_CONDITION_SLEEP)
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE_FLAG, battler, ABILITY_BAD_DREAMS)) {
+        damage += BattleSystem_Divide(mon->maxHP, 8);
+    }
+
+    return damage;
+}
+
+/**
+ * @brief Check whether end-of-turn chip damage alone would knock the attacker out.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfResidualDamageKOsAttacker(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+
+    if (AI_ResidualDamage(battleSys, battleCtx, attacker) >= battleCtx->battleMons[attacker].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+static void AICmd_IfDefenderCanKOInHits(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int hits = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) * hits >= battleCtx->battleMons[AI_CONTEXT.attacker].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Inverse of AICmd_IfDefenderCanKOInHits.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCannotKOInHits(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int hits = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) * hits < battleCtx->battleMons[AI_CONTEXT.attacker].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether the target could knock the attacker out through the defensive drops
+ * which Shell Smash is about to apply.
+ *
+ * A White Herb restores the drops as soon as they land, so the attacker's current stages
+ * stand in that case.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKOAfterShellSmash(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+    s8 def = mon->statBoosts[BATTLE_STAT_DEFENSE];
+    s8 spDef = mon->statBoosts[BATTLE_STAT_SP_DEFENSE];
+
+    if (Battler_HeldItemEffect(battleCtx, attacker) != HOLD_EFFECT_STATDOWN_RESTORE) {
+        if (mon->statBoosts[BATTLE_STAT_DEFENSE] > 0) {
+            mon->statBoosts[BATTLE_STAT_DEFENSE]--;
+        }
+
+        if (mon->statBoosts[BATTLE_STAT_SP_DEFENSE] > 0) {
+            mon->statBoosts[BATTLE_STAT_SP_DEFENSE]--;
+        }
+    }
+
+    s32 maxDamage = AI_MaxIncomingDamage(battleSys, battleCtx);
+
+    mon->statBoosts[BATTLE_STAT_DEFENSE] = def;
+    mon->statBoosts[BATTLE_STAT_SP_DEFENSE] = spDef;
+
+    if (maxDamage >= mon->curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether the target could knock the attacker out of the HP left by a move which
+ * costs half of maximum HP, counting a pinch berry which the cost would trigger.
+ *
+ * Belly Drum and a Ghost-type Curse both charge exactly that.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfDefenderCanKOAfterHalfHPCost(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+    int hp = mon->curHP - mon->maxHP / 2;
+
+    if (hp <= mon->maxHP / 2 && Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_HP_PCT_RESTORE) {
+        hp += BattleSystem_Divide(mon->maxHP * Battler_HeldItemPower(battleCtx, attacker, ITEM_POWER_CHECK_ALL), 100);
+    }
+
+    if (AI_MaxIncomingDamage(battleSys, battleCtx) >= hp) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether a battler will be unable to act this turn.
+ *
+ * Covers sleep, a freeze which none of the battler's own moves would thaw, the recharge turn
+ * owed after a move like Hyper Beam, and a Truant loaf.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler cannot move this turn.
+ */
+static BOOL AI_BattlerIsIncapacitated(BattleContext *battleCtx, int battler)
+{
+    if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) {
+        return TRUE;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_RECHARGING) {
+        return TRUE;
+    }
+
+    if (Battler_CheckTruant(battleCtx, battler)) {
+        return TRUE;
+    }
+
+    if ((battleCtx->battleMons[battler].status & MON_CONDITION_FREEZE) == FALSE) {
+        return FALSE;
+    }
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move == MOVE_NONE) {
+            continue;
+        }
+
+        if (move == MOVE_SCALD
+            || MOVE_DATA(move).effect == BATTLE_EFFECT_THAW_AND_BURN_HIT
+            || MOVE_DATA(move).effect == BATTLE_EFFECT_RECOIL_BURN_HIT) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
+static void AICmd_IfBattlerIncapacitated(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    if (AI_BattlerIsIncapacitated(battleCtx, battler)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether a battler knows a move of a given class.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+/**
+ * @brief Check whether a battler knows any sound-based move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlerKnowsSoundMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && BattleSystem_IsSoundMove(move)) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
+static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int class = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move != MOVE_NONE && MOVE_DATA(move).class == class) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
+/**
+ * @brief Check whether a battler knows any move of a given type.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlerKnowsMoveOfType(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int inBattler = AIScript_Read(battleCtx);
+    int type = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+    u8 battler = AIScript_Battler(battleCtx, inBattler);
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        u16 move = battleCtx->battleMons[battler].moves[i];
+
+        if (move == MOVE_NONE) {
+            continue;
+        }
+
+        int moveType = MOVE_DATA(move).type;
+
+        if (move == MOVE_NATURAL_GIFT || move == MOVE_JUDGMENT || move == MOVE_HIDDEN_POWER || move == MOVE_WEATHER_BALL) {
+            moveType = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
+        }
+
+        if (moveType == type) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
+/**
+ * @brief Check whether the attacker and its target have any move in common.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    u16 *attackerMoves = battleCtx->battleMons[AI_CONTEXT.attacker].moves;
+    u16 *defenderMoves = battleCtx->battleMons[AI_CONTEXT.defender].moves;
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (attackerMoves[i] == MOVE_NONE) {
+            continue;
+        }
+
+        for (int j = 0; j < LEARNED_MOVES_MAX; j++) {
+            if (attackerMoves[i] == defenderMoves[j]) {
+                AIScript_Iter(battleCtx, jump);
+                return;
+            }
+        }
+    }
+}
+
+/**
+ * @brief Check that a flag is absent from the AI's behaviour mask.
+ *
+ * The mask is consumed as the flags are walked, so it has to be shifted back up by the number
+ * of flags already run before it can be read whole. Only flags at or above the one currently
+ * running survive that, which is all this is used for: one routine asking whether a later one
+ * is going to get a turn on the same move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+
+    int flag = AIScript_Read(battleCtx);
+    int jump = AIScript_Read(battleCtx);
+
+    if (((AI_CONTEXT.thinkingMask << AI_CONTEXT.thinkingBitShift) & flag) == FALSE) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether any battler on the opposing side outspeeds the attacker or its partner.
+ *
+ * Speed-control moves are only worth the turn while something on the other side is still
+ * moving first, which in a double battle means measuring both of the AI's slots.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int partner = attacker ^ 2;
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    for (int opponent = 0; opponent < maxBattlers; opponent++) {
+        if ((opponent & 1) == (attacker & 1) || battleCtx->battleMons[opponent].curHP == 0) {
+            continue;
+        }
+
+        if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, opponent, attacker, TRUE) == COMPARE_SPEED_FASTER) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+
+        if (partner < maxBattlers
+            && battleCtx->battleMons[partner].curHP
+            && BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, opponent, partner, TRUE) == COMPARE_SPEED_FASTER) {
+            AIScript_Iter(battleCtx, jump);
+            return;
+        }
+    }
+}
+
+/**
+ * @brief Check whether paralyzing the target would take the speed lead off it.
+ *
+ * Asks the engine for the comparison with the status applied rather than assuming a fixed
+ * divisor, so the answer tracks whatever the paralysis modifier and Quick Feet actually do.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfParalysisFlipsSpeed(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    int attacker = AI_CONTEXT.attacker;
+    int defender = AI_CONTEXT.defender;
+
+    if (BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, defender, attacker, TRUE) != COMPARE_SPEED_FASTER) {
+        return;
+    }
+
+    u32 status = battleCtx->battleMons[defender].status;
+    battleCtx->battleMons[defender].status |= MON_CONDITION_PARALYSIS;
+
+    int compare = BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, defender, attacker, TRUE);
+
+    battleCtx->battleMons[defender].status = status;
+
+    if (compare != COMPARE_SPEED_FASTER) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Check whether the current move moves ahead of the ordinary priority bracket.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
 static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     AIScript_Iter(battleCtx, 1);
     int jump = AIScript_Read(battleCtx);
 
-    if (MOVE_DATA(AI_CONTEXT.move).priority > 0) {
+    int attacker = AI_CONTEXT.attacker;
+    BattleMon *mon = &battleCtx->battleMons[attacker];
+
+    if (MOVE_DATA(AI_CONTEXT.move).priority > 0
+        || (Battler_Ability(battleCtx, attacker) == ABILITY_GALE_WINGS
+            && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
+            && mon->curHP == mon->maxHP)) {
         AIScript_Iter(battleCtx, jump);
     }
 }
@@ -3094,6 +3730,7 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 }
 
 #include "data/battle/weight_to_power.h"
+#include "data/battle/pp_scaled_power.h"
 
 /**
  * @brief Damage calculation routine visible to the AI.
@@ -3282,6 +3919,35 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         damage = 20;
         break;
 
+    case MOVE_SUPER_FANG:
+        damage = battleCtx->battleMons[AI_CONTEXT.defender].curHP / 2;
+
+        if (damage == 0) {
+            damage = 1;
+        }
+
+        break;
+
+    case MOVE_ENDEAVOR:
+        // Endeavor drops the target to the attacker's current HP, so it does nothing at all
+        // against a target which is already at or below it.
+        if (battleCtx->battleMons[AI_CONTEXT.defender].curHP <= battleCtx->battleMons[attacker].curHP) {
+            return 0;
+        }
+
+        damage = battleCtx->battleMons[AI_CONTEXT.defender].curHP - battleCtx->battleMons[attacker].curHP;
+        break;
+
+    case MOVE_PAIN_SPLIT: {
+        int average = (battleCtx->battleMons[attacker].curHP + battleCtx->battleMons[AI_CONTEXT.defender].curHP) / 2;
+
+        if (battleCtx->battleMons[AI_CONTEXT.defender].curHP <= average) {
+            return 0;
+        }
+
+        return battleCtx->battleMons[AI_CONTEXT.defender].curHP - average;
+    }
+
     case MOVE_LOW_KICK:
     case MOVE_GRASS_KNOT: {
         int i;
@@ -3325,6 +3991,13 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     // execution time, so scoring never sees it. Mirror each of those commands here.
     case MOVE_DREAM_EATER:
         if ((battleCtx->battleMons[AI_CONTEXT.defender].status & MON_CONDITION_SLEEP) == FALSE) {
+            return 0;
+        }
+
+        break;
+
+    case MOVE_SNORE:
+        if ((battleCtx->battleMons[attacker].status & MON_CONDITION_SLEEP) == FALSE) {
             return 0;
         }
 
@@ -3436,6 +4109,26 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             power *= 2;
         }
 
+        break;
+    }
+
+    case MOVE_FLAIL:
+    case MOVE_REVERSAL:
+        power = BattleAI_CalcFlailPower(battleCtx->battleMons[attacker].curHP, battleCtx->battleMons[attacker].maxHP);
+        break;
+
+    case MOVE_TRUMP_CARD: {
+        int slot = Battler_SlotForMove(&battleCtx->battleMons[attacker], move);
+        int ppCur = slot < LEARNED_MOVES_MAX ? battleCtx->battleMons[attacker].ppCur[slot] : 0;
+        int ppCost = Battler_Ability(battleCtx, AI_CONTEXT.defender) == ABILITY_PRESSURE ? 2 : 1;
+
+        ppCur = ppCur > ppCost ? ppCur - ppCost : 0;
+
+        if (ppCur > 4) {
+            ppCur = 4;
+        }
+
+        power = sCurrentPPScaledPower[ppCur];
         break;
     }
 
@@ -3732,27 +4425,73 @@ static int TrainerAI_MoveType(BattleSystem *battleSys, BattleContext *battleCtx,
 }
 
 /**
- * @brief Check if Perish Song is active on a battler and the battler should
- * faint at the end of the turn. If so, treat the next switch as post-KO switch
- * AI.
+ * @brief Check whether the AI should hand a pending Wish to a switch-in.
  *
- * This routine is bugged; it functionally does nothing. The Perish Song turn
- * count decrements at the end of the turn, so the AI never sees that it WILL
- * die to Perish Song.
+ * A Wish set on this slot heals whoever occupies it when the count runs out, so switching on
+ * the turn it lands passes the heal along. That is only worth doing if the incoming Pokemon
+ * can take the hit it is switching into.
  *
+ * @param battleSys
  * @param battleCtx
  * @param battler   The AI's battler.
  * @return TRUE if the AI has a switch to make, FALSE otherwise.
  */
-static BOOL AI_PerishSongKO(BattleContext *battleCtx, int battler)
+static BOOL AI_WishPassSwitch(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_PERISH_SONG)
-        && battleCtx->battleMons[battler].moveEffectsData.perishSongTurns == 0) {
-        battleCtx->aiSwitchedPartySlot[battler] = 6;
-        return TRUE;
+    if (battleCtx->fieldConditions.wishTurns[battler] == 0) {
+        return FALSE;
     }
 
-    return FALSE;
+    int incomingDamage, curHP;
+    int slot = BattleAI_PostKOSwitchInDamage(battleSys, battler, &incomingDamage, &curHP);
+
+    if (slot >= MAX_PARTY_SIZE || curHP == 0) {
+        return FALSE;
+    }
+
+    if (incomingDamage >= curHP) {
+        return FALSE;
+    }
+
+    if (BattleSystem_RandNext(battleSys) % 4 == 0) {
+        return FALSE;
+    }
+
+    battleCtx->aiSwitchedPartySlot[battler] = slot;
+    return TRUE;
+}
+
+/**
+ * @brief Check if Perish Song is about to knock a battler out. If so, treat the next switch
+ * as post-KO switch AI.
+ *
+ * A count of zero means the battler faints at the end of this turn, so that switch is forced.
+ * Leaving it that late is also the most readable thing the AI can do, so half the time it goes
+ * a turn early instead.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler   The AI's battler.
+ * @return TRUE if the AI has a switch to make, FALSE otherwise.
+ */
+static BOOL AI_PerishSongKO(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+{
+    if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_PERISH_SONG) == FALSE) {
+        return FALSE;
+    }
+
+    int turns = battleCtx->battleMons[battler].moveEffectsData.perishSongTurns;
+
+    if (turns > 1) {
+        return FALSE;
+    }
+
+    if (turns == 1 && BattleSystem_RandNext(battleSys) % 2) {
+        return FALSE;
+    }
+
+    battleCtx->aiSwitchedPartySlot[battler] = 6;
+    return TRUE;
 }
 
 /**
@@ -3875,97 +4614,37 @@ static BOOL AI_PartyMonThreatensSlot(BattleSystem *battleSys, BattleContext *bat
  * @param battler   The AI's battler.
  * @return TRUE if the AI has a switch to make, FALSE otherwise.
  */
-static BOOL AI_OnlyIneffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+/**
+ * @brief Check whether the battler has nothing worth doing and should potentially switch.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler should switch out.
+ */
+static BOOL AI_NoEffectiveMoves(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
-    int i;
-    int pass;
-    u8 defender1, defender2;
-    u8 aiSlot1, aiSlot2;
-    u16 move;
-    int type;
-    u32 effectiveness;
-    int start, end;
-    int numMoves;
-    Pokemon *mon;
-
-    // "Player" consts here refer to the AI's perspective.
-    if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-        defender1 = BATTLER_PLAYER_1;
-        defender2 = BATTLER_PLAYER_2;
-    } else {
-        defender1 = BATTLER_PLAYER_1;
-        defender2 = BATTLER_PLAYER_1;
-    }
-
-    // Check all of this mon's attacking moves for immunities. If any of our moves can deal damage to
-    // either of the opponents' battlers, do not switch.
-    numMoves = 0;
-    for (i = 0; i < LEARNED_MOVES_MAX; i++) {
-        move = battleCtx->battleMons[battler].moves[i];
-        type = TrainerAI_MoveType(battleSys, battleCtx, battler, move);
-
-        if (move && MOVE_DATA(move).power) {
-            numMoves++;
-
-            effectiveness = 0;
-            if (battleCtx->battleMons[defender1].curHP) {
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender1, 0, &effectiveness);
-            }
-
-            if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                return FALSE;
-            }
-
-            effectiveness = 0;
-            if (battleCtx->battleMons[defender2].curHP) {
-                BattleSystem_ApplyTypeChart(battleSys, battleCtx, move, type, battler, defender2, 0, &effectiveness);
-            }
-
-            if ((effectiveness & MOVE_STATUS_INEFFECTIVE) == FALSE) {
-                return FALSE;
-            }
-        }
-    }
-
-    // If we have more than 1 attacking move, do not switch.
-    if (numMoves < 2) {
+    // Anything at or above the 100 baseline is worth a turn, so there is nothing to run from.
+    if (battleCtx->aiCachedBestScore[battler] >= 100) {
         return FALSE;
     }
 
-    aiSlot1 = battler;
-    if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_TAG) || (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_2vs2)) {
-        aiSlot2 = aiSlot1;
-    } else {
-        aiSlot2 = BattleSystem_GetPartner(battleSys, battler);
+    // Below half HP the switch is likely to cost the mon on the way out; it is committed now.
+    if (battleCtx->battleMons[battler].curHP * 2 < battleCtx->battleMons[battler].maxHP) {
+        return FALSE;
     }
 
-    start = 0;
-    end = BattleSystem_GetPartyCount(battleSys, battler);
-
-    // The first pass takes a bench Pokemon with a super-effective move against either
-    // opponent; the second settles for a normally-effective one. Either way it is a
-    // single 50% roll per Pokemon.
-    for (pass = 0; pass < 2; pass++) {
-        for (i = start; i < end; i++) {
-            mon = BattleSystem_GetPartyPokemon(battleSys, battler, i);
-
-            if (Pokemon_GetValue(mon, MON_DATA_HP, NULL) != 0
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_NONE
-                && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG
-                && i != battleCtx->selectedPartySlot[aiSlot1]
-                && i != battleCtx->selectedPartySlot[aiSlot2]
-                && i != battleCtx->aiSwitchedPartySlot[aiSlot1]
-                && i != battleCtx->aiSwitchedPartySlot[aiSlot2]
-                && (AI_PartyMonThreatensSlot(battleSys, battleCtx, mon, defender1, pass == 0)
-                    || AI_PartyMonThreatensSlot(battleSys, battleCtx, mon, defender2, pass == 0))
-                && (BattleSystem_RandNext(battleSys) & 1)) {
-                battleCtx->aiSwitchedPartySlot[battler] = i;
-                return TRUE;
-            }
-        }
+    // Only worth leaving if the bench holds something that can actually take the matchup on.
+    if (BattleAI_PostKOSwitchInHasSurvivor(battleSys, battler) == FALSE) {
+        return FALSE;
     }
 
-    return FALSE;
+    if (BattleSystem_RandNext(battleSys) & 1) {
+        return FALSE;
+    }
+
+    battleCtx->aiSwitchedPartySlot[battler] = 6;
+    return TRUE;
 }
 
 /**
@@ -4373,16 +5052,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
     int start, end;
     Pokemon *mon;
 
-    // Don't try to make illegal switches
-    // This definition is naive: the AI does not consider itself immune to Magnet Pull from an ally,
-    // Shadow Tag if it also has Shadow Tag, Arena Trap if it is a Flying-type, or always able to switch
-    // if it is holding a Shed Shell.
-    if (MON_IS_NOT_TYPE(battler, TYPE_GHOST) && ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_TRAPPED)
-        || (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
-        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_SHADOW_TAG)
-        || BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP)
-        || (BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALL_BATTLERS_EXCEPT_ME, battler, ABILITY_MAGNET_PULL)
-            && MON_HAS_TYPE(battler, TYPE_STEEL)))) {
+    if (Battler_IsTrapped(battleSys, battleCtx, battler)) {
         return FALSE;
     }
 
@@ -4412,7 +5082,11 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
     }
 
     if (alivePartyMons) {
-        if (AI_PerishSongKO(battleCtx, battler)) {
+        if (AI_PerishSongKO(battleSys, battleCtx, battler)) {
+            return TRUE;
+        }
+
+        if (AI_WishPassSwitch(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
@@ -4420,7 +5094,7 @@ static BOOL TrainerAI_ShouldSwitch(BattleSystem *battleSys, BattleContext *battl
             return TRUE;
         }
 
-        if (AI_OnlyIneffectiveMoves(battleSys, battleCtx, battler)) {
+        if (AI_NoEffectiveMoves(battleSys, battleCtx, battler)) {
             return TRUE;
         }
 
@@ -4461,6 +5135,10 @@ int TrainerAI_PickCommand(BattleSystem *battleSys, int battler)
     battleType = BattleSystem_GetBattleType(battleSys);
 
     if ((battleType & BATTLE_TYPE_TRAINER) || BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_PLAYER) {
+        if (battleCtx->aiCachedAction[battler] == AI_ACTION_NOT_EVALUATED) {
+            TrainerAI_Evaluate(battleSys, battler);
+        }
+
         if (TrainerAI_ShouldSwitch(battleSys, battleCtx, battler)) {
             // If this is a switch which should use the post-KO switch logic, then do so.
             // If there is no valid battler, pick the first one in party order.

@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_PICHU",
-        "SPECIES_ROSELIA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_STARAVIA",
@@ -75,24 +75,24 @@
     "rate_form4": 0,
     "unown_table": 0,
     "ruby": [
-        "SPECIES_PIKACHU",
-        "SPECIES_PICHU"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "sapphire": [
-        "SPECIES_PIKACHU",
-        "SPECIES_PICHU"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "emerald": [
-        "SPECIES_PIKACHU",
-        "SPECIES_PICHU"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "firered": [
-        "SPECIES_PIKACHU",
-        "SPECIES_PICHU"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "leafgreen": [
-        "SPECIES_PIKACHU",
-        "SPECIES_PICHU"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "surf_rate": 0,
     "surf_encounters": [

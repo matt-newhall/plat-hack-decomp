@@ -1210,6 +1210,16 @@ BOOL FieldSystem_TriggerPortablePC(FieldSystem *fieldSystem)
     return TRUE;
 }
 
+BOOL FieldSystem_PrintPortablePCDisabled(FieldSystem *fieldSystem)
+{
+    ItemFieldUseContext *usageContext = Heap_Alloc(HEAP_ID_FIELD2, sizeof(ItemFieldUseContext));
+    memset(usageContext, 0, sizeof(ItemFieldUseContext));
+    usageContext->fieldSystem = fieldSystem;
+    PrintRegisteredKeyItemError(usageContext, ITEM_USE_CANNOT_USE_GENERIC);
+    Heap_Free(usageContext);
+    return TRUE;
+}
+
 static void PrintRegisteredKeyItemError(ItemFieldUseContext *usageContext, u32 error)
 {
     UnkStruct_02068EFC *v0 = Heap_Alloc(HEAP_ID_FIELD2, sizeof(UnkStruct_02068EFC));

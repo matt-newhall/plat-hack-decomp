@@ -7,6 +7,7 @@
     ScriptEntryEnd
 
 PokemonLeagueElevatorToAaronRoom_OnTransition:
+    SetFlag FLAG_PORTA_PC_DISABLED
     SetVar VAR_MAP_LOCAL_0, 0
     InitPersistedMapFeaturesForPlatformLift
     CheckPlatformLiftNotUsedWhenEnteredMap VAR_MAP_LOCAL_1

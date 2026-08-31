@@ -5,7 +5,6 @@
 
     ScriptEntry IronIsland_OnTransition
     ScriptEntry IronIsland_Sailor
-    ScriptEntry IronIsland_Riley
     ScriptEntryEnd
 
 IronIsland_OnTransition:
@@ -87,43 +86,4 @@ IronIsland_Movement_PlayerWalkToShipSouth:
 IronIsland_Movement_PlayerWalkToShipWest:
     WalkNormalWest
     Delay15
-    EndMovement
-
-IronIsland_Riley:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    BufferPlayerName 0
-    Message IronIsland_Text_ImRileyHeresAGift
-    SetVar VAR_0x8004, ITEM_HM04
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
-    CheckBadgeAcquired BADGE_ID_MINE, VAR_RESULT
-    GoToIfEq VAR_RESULT, FALSE, IronIsland_YouNeedMineBadge
-    GoTo IronIsland_YouCanJoinMeInside
-    End
-
-IronIsland_YouCanJoinMeInside:
-    Message IronIsland_Text_YouCanJoinMeInside
-    GoTo IronIsland_RileyEnterIronIsland
-    End
-
-IronIsland_YouNeedMineBadge:
-    Message IronIsland_Text_YouNeedMineBadge
-    GoTo IronIsland_RileyEnterIronIsland
-    End
-
-IronIsland_RileyEnterIronIsland:
-    CloseMessage
-    ApplyMovement LOCALID_RILEY, IronIsland_Movement_RileyWalkOnSpotNorth
-    WaitMovement
-    PlaySE SEQ_SE_DP_KAIDAN2
-    RemoveObject LOCALID_RILEY
-    WaitSE SEQ_SE_DP_KAIDAN2
-    ReleaseAll
-    End
-
-    .balign 4, 0
-IronIsland_Movement_RileyWalkOnSpotNorth:
-    WalkOnSpotNormalNorth
     EndMovement

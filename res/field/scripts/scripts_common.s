@@ -93,6 +93,7 @@ CommonScript_PokecenterNurse:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    ClearFlag FLAG_PORTA_PC_DISABLED
     GoToIfGe VAR_RESULT, TRAINER_CARD_LEVEL_GOLD, CommonScript_PokecenterNurse_GoldCard
     SetVar VAR_0x8004, CommonStrings_Text_PokecenterGreeting_Day
     GetTimeOfDay VAR_RESULT
@@ -1433,6 +1434,7 @@ CommonScript_PlayerHouseBlackOutRecover:
     WaitMovement
     FadeScreenIn
     WaitFadeScreen
+    ClearFlag FLAG_PORTA_PC_DISABLED
     BufferPlayerName 0
     Message CommonStrings_Text_YouHadQuiteTheExperienceOutThere
     FadeScreenOut
@@ -1462,6 +1464,7 @@ CommonScript_PokecenterBlackOutRecover:
     LockAll
     FadeScreenIn
     WaitFadeScreen
+    ClearFlag FLAG_PORTA_PC_DISABLED
     SetPlayerState PLAYER_TRANSITION_HEALING
     ChangePlayerState
     ApplyMovement LOCALID_PLAYER, CommonScript_PokecenterNurse_PlayerGivePokemonMovement

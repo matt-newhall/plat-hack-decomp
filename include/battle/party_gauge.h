@@ -19,6 +19,15 @@ enum PartyGaugeSide {
     PARTY_GAUGE_COUNT
 };
 
+#define PARTY_GAUGE_SLOTS_PER_SIDE 2
+
+enum BallStatusRow {
+    BALL_STATUS_ROW_OURS,
+    BALL_STATUS_ROW_THEIRS_1,
+    BALL_STATUS_ROW_THEIRS_2,
+    BALL_STATUS_ROW_COUNT
+};
+
 enum ShowPartyGaugeType {
     SHOW_PARTY_GAUGE_BATTLE_START,
     SHOW_PARTY_GAUGE_MID_BATTLE,
@@ -69,8 +78,10 @@ void PartyGauge_FreeGraphics(SpriteManager *spriteMan);
  * @param showType      How the gauge should be displayed, whether at the start of a battle (a slow
  *                      inward scroll) or mid-battle after a KO (a faster inward scroll).
  *
- * @param pos           Vertical position of the gauge; only applicable for double battles, so that
- *                      the gauge does not overlap the HP bar.
+ * @param pos           Vertical position of the gauge. Only the two enemy slots take a position
+ *                      other than the middle: mid-battle so that the gauge does not overlap the
+ *                      HP bar, and at the start of a multi battle so that the two trainers' gauges
+ *                      do not overlap each other.
  * @param renderer
  * @param gfxHandler
  * @return              Pointer to the constructed PartyGauge struct, for tracking its progress

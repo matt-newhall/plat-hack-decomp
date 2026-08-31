@@ -5120,14 +5120,7 @@ static BOOL BtlCmd_TrySleepTalk(BattleSystem *battleSys, BattleContext *battleCt
     return FALSE;
 }
 
-static const u8 sHPPixelsToFlailPower[][2] = {
-    { 1, 200 },
-    { 5, 150 },
-    { 12, 100 },
-    { 21, 80 },
-    { 42, 40 },
-    { 64, 20 },
-};
+#include "data/battle/hp_pixels_to_flail_power.h"
 
 /**
  * @brief Calculate the power for Flail-type moves according to the attacker's
@@ -6809,6 +6802,7 @@ static BOOL BtlCmd_MagicCoat(BattleSystem *battleSys, BattleContext *battleCtx)
     } else if (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT) {
         battleCtx->savedBattlerCounter = battleCtx->battlerCounter;
         battleCtx->battlerCounter = 0;
+        battleCtx->spreadHitMask = 0;
         battleCtx->commandNext = BATTLE_CONTROL_LOOP_SPREAD_MOVES;
     } else {
         target = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveCur, TRUE, RANGE_SINGLE_TARGET);
@@ -7759,13 +7753,7 @@ static BOOL BtlCmd_TryRegeneratorOnSwitch(BattleSystem *battleSys, BattleContext
 };
 
 
-static const u8 sCurrentPPScaledPower[] = {
-    200,
-    80,
-    60,
-    50,
-    40,
-};
+#include "data/battle/pp_scaled_power.h"
 
 /**
  * @brief Calculates the base power of Trump Card.
@@ -9314,6 +9302,24 @@ static BOOL BtlCmd_TryEscape(BattleSystem *battleSys, BattleContext *battleCtx)
 }
 
 /**
+ * @brief Resolve the second battler which also needs a start-of-battle party
+ * gauge of its own.
+ *
+ * @param battleSys
+ * @param inBattler The battler operand read from the script.
+ * @param battler   The battler which that operand resolved to.
+ * @return The partner battler needing a gauge of its own, or -1 if there is none.
+ */
+static int BattleStartPartyGauge_Partner(BattleSystem *battleSys, int inBattler, int battler)
+{
+    if (inBattler != BTLSCR_ENEMY || BattleSystem_SideHasTwoParties(battleSys, battler) == FALSE) {
+        return -1;
+    }
+
+    return BattleSystem_GetPartner(battleSys, battler);
+}
+
+/**
  * @brief Show the start-of-battle party gauge.
  *
  * Inputs:
@@ -9330,6 +9336,12 @@ static BOOL BtlCmd_ShowBattleStartPartyGauge(BattleSystem *battleSys, BattleCont
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     BattleController_EmitShowBattleStartPartyGauge(battleSys, battler);
+
+    int partner = BattleStartPartyGauge_Partner(battleSys, inBattler, battler);
+
+    if (partner != -1) {
+        BattleController_EmitShowBattleStartPartyGauge(battleSys, partner);
+    }
 
     return FALSE;
 }
@@ -9351,6 +9363,12 @@ static BOOL BtlCmd_HideBattleStartPartyGauge(BattleSystem *battleSys, BattleCont
 
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     BattleController_EmitHideBattleStartPartyGauge(battleSys, battler);
+
+    int partner = BattleStartPartyGauge_Partner(battleSys, inBattler, battler);
+
+    if (partner != -1) {
+        BattleController_EmitHideBattleStartPartyGauge(battleSys, partner);
+    }
 
     return FALSE;
 }

@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_SHELLOS",
-        "SPECIES_SHELLOS"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_BUIZEL",
@@ -75,24 +75,24 @@
     "rate_form4": 0,
     "unown_table": 0,
     "ruby": [
-        "SPECIES_BUIZEL",
-        "SPECIES_SHELLOS"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "sapphire": [
-        "SPECIES_BUIZEL",
-        "SPECIES_SHELLOS"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "emerald": [
-        "SPECIES_BUIZEL",
-        "SPECIES_SHELLOS"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "firered": [
-        "SPECIES_BUIZEL",
-        "SPECIES_SHELLOS"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "leafgreen": [
-        "SPECIES_BUIZEL",
-        "SPECIES_SHELLOS"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "surf_rate": 10,
     "surf_encounters": [

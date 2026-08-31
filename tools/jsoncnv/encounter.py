@@ -60,8 +60,10 @@ packables = bytearray([])
 packables.extend(u32(data['land_rate']))
 packables.extend(convert_land(data['land_encounters']))
 
-for enc_type, i in itertools.product(['swarms', 'day', 'night'], range(2)):
-    packables.extend(as_species(data[enc_type][i]))
+timed_slots = [data['land_encounters'][i]['species'] for i in (2, 3)]
+
+for name in [*data['swarms'][:2], *timed_slots, *timed_slots]:
+    packables.extend(as_species(name))
 
 for i in range(4):
     packables.extend(as_species(data['radar'][i]))
