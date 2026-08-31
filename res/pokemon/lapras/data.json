@@ -8,7 +8,7 @@
         "special_defense": 95
     },
     "types": [ "TYPE_WATER", "TYPE_DRAGON" ],
-    "catch_rate": 45,
+    "catch_rate": 3,
     "base_exp_reward": 219,
     "ev_yields": {
         "hp": 2,
