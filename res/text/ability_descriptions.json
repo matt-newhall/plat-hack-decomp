@@ -1271,6 +1271,13 @@
         "Guards itself with aura,\n",
         "halving contact damage."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00182",
+      "en_US": [
+        "Chance to disable moves\n",
+        "from attackers."
+      ]
     }
   ]
 }

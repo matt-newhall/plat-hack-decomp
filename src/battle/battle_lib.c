@@ -5773,6 +5773,31 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             result = TRUE;
         }
         break;
+
+    case ABILITY_CURSED_BODY:
+        u16 moveToDisable = battleCtx->moveTemp;
+        int disableSlot = Battler_SlotForMove(&ATTACKING_MON, moveToDisable);
+
+        if (ATTACKING_MON.curHP
+            && moveToDisable != MOVE_NONE
+            && moveToDisable != MOVE_STRUGGLE
+            && ATTACKING_MON.moveEffectsData.disabledMove == MOVE_NONE
+            && disableSlot != LEARNED_MOVES_MAX
+            && ATTACKING_MON.ppCur[disableSlot]
+            && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+            && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
+            && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+            && BattleSystem_RandNext(battleSys) % 10 < 3) {
+            battleCtx->msgMoveTemp = moveToDisable;
+            ATTACKING_MON.moveEffectsData.disabledMove = moveToDisable;
+            ATTACKING_MON.moveEffectsData.disabledTurns = CURSED_BODY_DISABLE_TURNS;
+
+            *subscript = subscript_cursed_body;
+            result = TRUE;
+        }
+        break;
     }
 
     return result;
