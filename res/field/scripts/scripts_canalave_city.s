@@ -181,6 +181,14 @@ CanalaveCity_PostRivalBattle:
     GoToIfEq VAR_RESULT, FALSE, CanalaveCity_BlackOut
     BufferRivalName 0
     Message CanalaveCity_Text_TrainAtIronIsland
+    WaitButton
+    SetVar VAR_0x8004, ITEM_HM04
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    BufferRivalName 0
+    BufferPlayerName 1
+    Message CanalaveCity_Text_RivalFollowup
+    WaitButton
     CloseMessage
     ApplyMovement LOCALID_RIVAL_BRIDGE, CanalaveCity_Movement_RivalBridgeLeave
     WaitMovement

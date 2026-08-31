@@ -28,8 +28,17 @@
         "Anyway, you should go to Iron Island\n",
         "and toughen up some more.\r",
         "Yeah, train at Iron Island! That’s what\n",
-        "I did before going to the Gym!\r"
+        "I did before going to the Gym!\r",
+        "I found this HM there while I was\n",
+        "training, take it!"
       ]
+    },
+    {
+        "id": "CanalaveCity_Text_RivalFollowup",
+        "en_US": [
+            "{STRVAR_1 3, 0, 0}: Anyway, {STRVAR_1 3, 1, 0},\n",
+            "be seeing you!"
+        ]
     },
     {
       "id": "CanalaveCity_Text_ComeToLibrary",
