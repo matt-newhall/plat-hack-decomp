@@ -1282,6 +1282,14 @@
             "en_US": "Chilan Berries"
         },
         {
+            "id": "MenuEntries_Text_Julien_WideLens",
+            "en_US": "Wide Lens"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_Charti",
+            "en_US": "Charti Berries"
+        },
+        {
             "id": "MenuEntries_Text_Nature_Adamant",
             "en_US": "Adamant (+Atk, -SpAtk)"
         },

@@ -1,27 +1,174 @@
 {
   "key": 40576,
-  "messages": [
-    {
-      "id": "Route206_Text_IHeardThereWereTwoCavesOnRoute206",
-      "en_US": [
-        "This is odd... I heard there were two\n",
-        "caves on Route 206.\r",
-        "But I can only find one entrance."
-      ]
-    },
-    {
-      "id": "Route206_Text_Rt206EternaCity",
-      "en_US": [
-        "Rt. 206\n",
-        "Eterna City"
-      ]
-    },
-    {
-      "id": "Route206_Text_Rt206OreburghCity",
-      "en_US": [
-        "Rt. 206\n",
-        "Oreburgh City"
-      ]
-    }
-  ]
+    "messages": [
+        {
+            "id": "Route206_Text_IHeardThereWereTwoCavesOnRoute206",
+            "en_US": [
+                "This is odd... I heard there were two\n",
+                "caves on Route 206.\r",
+                "But I can only find one entrance."
+            ]
+        },
+        {
+            "id": "Route206_Text_Rt206EternaCity",
+            "en_US": [
+                "Rt. 206\n",
+                "Eterna City"
+            ]
+        },
+        {
+            "id": "Route206_Text_Rt206OreburghCity",
+            "en_US": [
+                "Rt. 206\n",
+                "Oreburgh City"
+            ]
+        },
+        {
+            "id": "Route206_Text_ExplainPromotion",
+            "en_US": [
+                "Ah ha. Bonjour, Champ.\n",
+                "Just who I have been waiting for!\r",
+                "Route 206 is our newest promotional\n",
+                "area.\r",
+                "If you defeat all the trainers here,\n",
+                "I will give you either a Wide Lens\f",
+                "or 5 Charti Berries.\r",
+                "But wait, I have more bonne nouvelle.\n",
+                "The SBC has its first Sinnoh Recruit!\r",
+                "He’s a bit... erm how should I put this?\n",
+                "He lacks the certain... je ne sais\f",
+                "quoi that the SBC expects.\r",
+                "I will have to show him the way before\n",
+                "we present him to Lady Jacinthe.\r",
+                "But, this means we can do all new \n",
+                "types of promotion.\r",
+                "In fact there is one up at Wayward\n",
+                "Cave just east and north of here,\f",
+                "under the Cycling Road.\r",
+                "Be sure to give it a challenge\n",
+                "and remember to come see me once\f",
+                "you have beaten all the trainers here.\f",
+                "Good luck, Champ."
+            ]
+        },
+        {
+            "id": "Route206_Text_PromotionalRouteCongrats",
+            "en_US": [
+                "Chapeau! It seems that you have\n",
+                "defeated every trainer on Route 206!\f",
+                "Here is your reward as promised.\r",
+                "Would you like the Wide Lens or\n",
+                "5 Charti Berries?"
+            ]
+        },
+        {
+            "id": "Route206_Text_WatchOutForMorePromotions",
+            "en_US": [
+                "Don’t forget to try out the new\n",
+                "promotion if you haven’t alredy.\r",
+                "We’ll be moving on to Route 209\n",
+                "next."
+            ]
+        },
+        {
+            "id": "Route206_Text_JulienTrainerCount",
+            "en_US": [
+                "There are {STRVAR_1 0, 0, 0} Trainers left to\n",
+                "face on Route 206.\r",
+                "Come see me when you’ve defeated them.\n",
+                "Good luck, Champ!"
+            ]
+        },
+        {
+            "id": "Route206_Text_JulienTrainerCountSingular",
+            "en_US": [
+                "There is {STRVAR_1 0, 0, 0} Trainer left to\n",
+                "face on Route 206.\r",
+                "Come see me when you’ve defeated them.\n",
+                "Good luck, Champ!"
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyIntroduction",
+            "en_US": [
+                "’Sup, Chump?\n",
+                "The name’s Roy.\r",
+                "I’m the newest member of the Society\n",
+                "of Battle Cono... Connas...\f",
+                "The Battle Society!\r",
+                "Not enough people were battling, so\n",
+                "we turned this boring cave into a\f",
+                "Skirmish Zone.\r",
+                "What’s a Skirmish Zone you ask?\n",
+                "Julien didn’t trust me to explain\f",
+                "the rules so there’s a pamphlet.\r"
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyWannaChallenge",
+            "en_US": [
+                "So, wanna challenge the Skirmish Zone?"
+            ]
+        },
+        {
+            "id": "Route206_Text_KnockEmDead",
+            "en_US": [
+                "Knock ’em dead, Chump."
+            ]
+        },
+        {
+            "id": "Route206_Text_AlreadyChallengedZone",
+            "en_US": [
+                "You’ve already challenged this zone.\n",
+                "What are you trying to pull?"
+            ]
+        },
+        {
+            "id": "Route206_Text_ChallengeComplete",
+            "en_US": [
+                "That’s your Skirmish Zone challenge\n",
+                "over, Chump.\r",
+                "Let’s count up your BP.\r"
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyGiveBP",
+            "en_US": [
+                "Your total winnings come to {STRVAR_1 0, 0, 0}BP\n",
+                "Don’t spend it all in one place y’hear."
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyNoBP",
+            "en_US": [
+                "Wow. You earned no BP.\n",
+                "You gotta try harder, Chump."
+            ]
+        },
+        {
+            "id": "Route206_Text_SkirmishZoneRules",
+            "en_US": [
+                "1. You may only challenge each Skimish\n",
+                "Zone once. Once you exit the zone,\f",
+                "defeat the boss, or white out, your\f",
+                "challenge is over.\r",
+                "2. Each trainer you defeat in a zone\n",
+                "grants 2BP, and the boss grants 10BP.\f",
+                "Whiting out forfeits all BP for the zone,\f",
+                "but you may leave at any time and keep\f",
+                "the BP you have accumulated.\f",
+                "3.There will be 5 zones across the\n",
+                "region, each granting 30BP, for a\f",
+                "total of 150BP.r",
+                "BP can be spent at any Pokémart.\n",
+                "Choose how you spend it wisely.\r",
+                "4. While in a Skirmish Zone, you will be \n",
+                "unable to access the PC to change your\f",
+                "party. The Pokévial will still be usable.\r",
+                "5. Once you defeat the next Gym Leader,\n",
+                "the Skirmish Zone will be closed and the\f",
+                "area will return to it’s natural state."
+            ]
+        }
+    ]
 }
