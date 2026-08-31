@@ -2,6 +2,8 @@
 
 #include "constants/battle.h"
 #include "constants/pokemon.h"
+#include "generated/abilities.h"
+#include "generated/natures.h"
 #include "generated/trainer_message_types.h"
 
 #include "struct_defs/trainer.h"
@@ -21,6 +23,8 @@
 #include "string_gf.h"
 
 static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID heapID);
+static u32 TrainerData_ApplyNature(u32 personality, u16 nature);
+static void TrainerData_ApplyAbility(Pokemon *mon, u16 ability);
 
 void Trainer_Encounter(FieldBattleDTO *dto, const SaveData *saveData, enum HeapID heapID)
 {
@@ -210,12 +214,13 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
                 rnd = LCRNG_Next();
             }
 
-            rnd = (rnd << 8) + genderMod;
+            rnd = TrainerData_ApplyNature((rnd << 8) + genderMod, trmon[i].nature);
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
+            TrainerData_ApplyAbility(mon, trmon[i].ability);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -235,7 +240,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
                 rnd = LCRNG_Next();
             }
 
-            rnd = (rnd << 8) + genderMod;
+            rnd = TrainerData_ApplyNature((rnd << 8) + genderMod, trmon[i].nature);
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
@@ -246,6 +251,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
 
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
+            TrainerData_ApplyAbility(mon, trmon[i].ability);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -265,13 +271,14 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
                 rnd = LCRNG_Next();
             }
 
-            rnd = (rnd << 8) + genderMod;
+            rnd = TrainerData_ApplyNature((rnd << 8) + genderMod, trmon[i].nature);
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
+            TrainerData_ApplyAbility(mon, trmon[i].ability);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -291,7 +298,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
                 rnd = LCRNG_Next();
             }
 
-            rnd = (rnd << 8) + genderMod;
+            rnd = TrainerData_ApplyNature((rnd << 8) + genderMod, trmon[i].nature);
             ivs = trmon[i].ivScale * MAX_IVS_SINGLE_STAT / MAX_IV_SCALE;
 
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
@@ -303,6 +310,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
 
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
+            TrainerData_ApplyAbility(mon, trmon[i].ability);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -313,4 +321,41 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
     Heap_Free(buf);
     Heap_Free(mon);
     LCRNG_SetSeed(oldSeed);
+}
+
+/**
+ * @brief Nudge a personality value so that it rolls a specific nature.
+ *
+ * @param personality The personality value to adjust.
+ * @param nature      The nature to force, or TRAINER_MON_NATURE_NONE to leave the value alone.
+ * @return The adjusted personality value.
+ */
+static u32 TrainerData_ApplyNature(u32 personality, u16 nature)
+{
+    u32 steps;
+
+    if (nature == TRAINER_MON_NATURE_NONE) {
+        return personality;
+    }
+
+    steps = (21 * (nature + NATURE_COUNT - personality % NATURE_COUNT)) % NATURE_COUNT;
+
+    return personality <= 0xFFFFFFFF - (steps << 8)
+        ? personality + (steps << 8)
+        : personality - ((NATURE_COUNT - steps) << 8);
+}
+
+/**
+ * @brief Overwrite a trainer mon's ability, if the trainer data specifies one.
+ *
+ * @param mon     The Pokemon to modify.
+ * @param ability The ability to force, or ABILITY_NONE to keep the one derived from the species.
+ */
+static void TrainerData_ApplyAbility(Pokemon *mon, u16 ability)
+{
+    u8 value = (u8)ability;
+
+    if (ability != ABILITY_NONE) {
+        Pokemon_SetValue(mon, MON_DATA_ABILITY, &value);
+    }
 }
