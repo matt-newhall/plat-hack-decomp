@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_STARLY",
-        "SPECIES_BIDOOF"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_WURMPLE",

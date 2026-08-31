@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_MAGNETON",
-        "SPECIES_STEELIX"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_GRAVELER",

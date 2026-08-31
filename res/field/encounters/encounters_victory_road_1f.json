@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_GRAVELER",
-        "SPECIES_RHYHORN"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_GRAVELER",

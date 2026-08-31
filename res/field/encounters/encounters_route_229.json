@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_PINSIR",
-        "SPECIES_PINSIR"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_PIDGEY",

@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_ZUBAT",
-        "SPECIES_PSYDUCK"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_ZUBAT",

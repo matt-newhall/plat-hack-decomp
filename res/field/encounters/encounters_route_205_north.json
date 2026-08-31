@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_BIDOOF",
-        "SPECIES_BUDEW"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_WURMPLE",

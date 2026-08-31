@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_DUNSPARCE",
-        "SPECIES_DUNSPARCE"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_BUDEW",

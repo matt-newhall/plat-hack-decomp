@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_MEDITITE",
-        "SPECIES_GRAVELER"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_MEDITITE",

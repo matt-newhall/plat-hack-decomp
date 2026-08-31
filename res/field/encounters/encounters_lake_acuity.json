@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_SNOVER",
-        "SPECIES_BIBAREL"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_SNOVER",

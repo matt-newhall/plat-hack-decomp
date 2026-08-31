@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_SPOINK",
-        "SPECIES_SPOINK"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_GRAVELER",

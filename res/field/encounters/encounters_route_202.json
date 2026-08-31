@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_ZIGZAGOON",
-        "SPECIES_ZIGZAGOON"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_STARLY",

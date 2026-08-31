@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_UNOWN",
-        "SPECIES_UNOWN"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_UNOWN",

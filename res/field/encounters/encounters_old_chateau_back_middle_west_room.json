@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_GASTLY",
-        "SPECIES_GASTLY"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_GASTLY",

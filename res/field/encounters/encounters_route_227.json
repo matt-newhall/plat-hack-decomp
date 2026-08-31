@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_SPINDA",
-        "SPECIES_SPINDA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_FEAROW",

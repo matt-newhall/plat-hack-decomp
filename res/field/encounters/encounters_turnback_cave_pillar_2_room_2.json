@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_HAUNTER",
-        "SPECIES_BRONZOR"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_HAUNTER",

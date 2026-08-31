@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_LARVITAR",
-        "SPECIES_LARVITAR"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_GLIGAR",

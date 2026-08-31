@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_PICHU",
-        "SPECIES_ROSELIA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_STARAVIA",

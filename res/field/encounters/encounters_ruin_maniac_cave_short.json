@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_GEODUDE",
-        "SPECIES_GEODUDE"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_GEODUDE",

@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_CORSOLA",
-        "SPECIES_CORSOLA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_BELLSPROUT",

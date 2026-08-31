@@ -51,8 +51,8 @@
         }
     ],
     "swarms": [
-        "SPECIES_SNUBBULL",
-        "SPECIES_SNUBBULL"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "day": [
         "SPECIES_STARAVIA",
