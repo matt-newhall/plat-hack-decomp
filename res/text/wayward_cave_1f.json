@@ -1,94 +1,49 @@
 {
   "key": 42051,
-  "messages": [
-    {
-      "id": "WaywardCave1F_Text_ImMiraPleaseTakeMeToTheExit",
-      "en_US": [
-        "I’m Mira...\r",
-        "I was catching Pokémon, and then\n",
-        "I got lost...\r",
-        "I’m so scared...\r",
-        "Please!\n",
-        "Please take me to the exit!\r"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_PlayerDecidedToGoWithMira",
-      "en_US": [
-        "{STRVAR_1 3, 0, 0} decided to go with\n",
-        "Mira!"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_IllKeepYourPokemonHealthyAllTheTime",
-      "en_US": [
-        "Mira: I’ll keep your Pokémon healthy\n",
-        "all the time!"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_MyNameIsMiraILikeYourName",
-      "en_US": [
-        "Trainer, your name is {STRVAR_1 3, 0, 0}?\r",
-        "My name is Mira.\n",
-        "I like your name!\r"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_OhPlayerIWaitedALongTime",
-      "en_US": [
-        "Mira: Oh! {STRVAR_1 3, 0, 0}...\n",
-        "I waited... A long time...\r"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_OhTheresTheExitThankYou",
-      "en_US": [
-        "Mira: Oh! There’s the exit!\r",
-        "I want to get tougher so I\n",
-        "won’t be such a scaredy-cat.\r",
-        "{STRVAR_1 3, 0, 0}, bye-bye!\n",
-        "Thank you!\r"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_Dummy6",
-      "garbage": 29
-    },
-    {
-      "id": "WaywardCave1F_Text_Dummy7",
-      "garbage": 29
-    },
-    {
-      "id": "WaywardCave1F_Text_Dummy8",
-      "garbage": 26
-    },
-    {
-      "id": "WaywardCave1F_Text_ILikeHelpfulPokemonMovesLikeGrowlAndMinimize",
-      "en_US": [
-        "Mira: I like helpful Pokémon moves\n",
-        "like Growl and Minimize.\r",
-        "Those kinds of moves are my\n",
-        "favorites."
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_ThisCaveItsSoEasyToGetConfused",
-      "en_US": [
-        "Mira: This cave...\n",
-        "It’s so easy to get confused.\r",
-        "Do you know where we are?"
-      ]
-    },
-    {
-      "id": "WaywardCave1F_Text_PlayerDidYouGetToBeSoGoodBecauseYoureAlwaysWithPokemon",
-      "en_US": [
-        "Mira: {STRVAR_1 3, 0, 0}, did you get to be\n",
-        "so good because you’re always with\f",
-        "your Pokémon?\r",
-        "Yes! That has to be it!\n",
-        "Mira will try like you!"
-      ]
-    }
-  ]
+    "messages": [
+
+        {
+            "id": "WaywardCave1F_Text_MiraBattle",
+            "en_US": [
+                "Mira: Hey I’m Mira.\n",
+                "Mira was lost in this cave, but then\f",
+                "some weird guy saw how strong Mira is.\r",
+                "He said if Mira acts as boss of this\n",
+                "zone he’ll show Mira the exit.\r",
+                "Mira’s meant to remind you that once\n",
+                "you battle Mira, your challenge is over.\r",
+                "Are you ready?"
+            ]
+        },
+        {
+            "id": "WaywardCave1F_Text_Congrats",
+            "en_US": [
+                "Wow, you’re super strong!\n",
+                "Mira is shocked.\r",
+                "Well done on beating the Skirmish\n",
+                "Zone.\r",
+                "You need to return to the exit now."
+            ]
+        },
+        {
+            "id": "WaywardCave1F_Text_Dummy6",
+            "garbage": 29
+        },
+        {
+            "id": "WaywardCave1F_Text_Dummy7",
+            "garbage": 29
+        },
+        {
+            "id": "WaywardCave1F_Text_Dummy8",
+            "garbage": 26
+        },
+        {
+            "id": "WaywardCave1F_RoySureYouWannaLeave",
+            "en_US": [
+                "You giving up, Chump?\n",
+                "Remember you can’t re-enter once\f",
+                "you leave."
+            ]
+        }
+    ]
 }

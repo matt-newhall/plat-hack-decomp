@@ -12,11 +12,127 @@
     ScriptEntry Route206_JulienTrainerCount
     ScriptEntry Route206_JulienApproachesPlayer
     ScriptEntry Route206_RoySkirmishZone
+    ScriptEntry Route206_StartBPCount
     ScriptEntryEnd
 
 Route206_OnTransition:
     SetFlag FLAG_FIRST_ARRIVAL_CYCLING_ROAD_UNUSED
     End
+
+Route206_StartBPCount:
+    LockAll
+    Message Route206_Text_ChallengeComplete
+    SetVar VAR_ROY_BP_COUNTER 0
+    SetVar VAR_PROMOTIONAL_TRAINERS_COUNTED 0
+    GoTo Route206_RoyCountTrainers
+
+Route206_RoyCountTrainers:
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 0, Route206_CheckCamperDiego
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 1, Route206_CheckPicnickerTori
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 2, Route206_CheckLassCassidy
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 3, Route206_CheckYoungsterWayne
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 4, Route206_CheckHikerReginald
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 5, Route206_CheckCollectorTerry
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 6, Route206_CheckPicnickerAna
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 7, Route206_CheckCamperParker
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 8, Route206_CheckRuinManiacGerald
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 9, Route206_CheckHikerLorenzo
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 10, Route206_CheckMiraWaywardCave
+    GoToIfEq VAR_ROY_BP_COUNTER, 0, Route206_NoBP
+    BufferNumber 0, VAR_ROY_BP_COUNTER
+    Message Route206_Text_RoyGiveBP
+    ScrCmd_298 VAR_ROY_BP_COUNTER
+    PlayFanfare SEQ_PL_POINTGET3
+    WaitFanfare
+    WaitButton
+    CloseMessage
+    SetVar VAR_EXITING_SKIRMISH_ZONE_SUCCESS 0
+    ReleaseAll
+    End
+
+Route206_NoBP:
+    Message Route206_Text_RoyNoBP
+    WaitButton
+    CloseMessage
+    SetVar VAR_EXITING_SKIRMISH_ZONE_SUCCESS 0
+    ReleaseAll
+    End
+
+Route206_SkirmishTrainerDefeated:
+    AddVar VAR_ROY_BP_COUNTER 2
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_SkirmishBossDefeated:
+    AddVar VAR_ROY_BP_COUNTER 10
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckCamperDiego:
+    CheckTrainerFlag TRAINER_CAMPER_DIEGO
+    GoToIfDefeated TRAINER_CAMPER_DIEGO, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckPicnickerTori:
+    CheckTrainerFlag TRAINER_PICNICKER_TORI
+    GoToIfDefeated TRAINER_PICNICKER_TORI, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckLassCassidy:
+    CheckTrainerFlag TRAINER_LASS_CASSIDY
+    GoToIfDefeated TRAINER_LASS_CASSIDY, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckYoungsterWayne:
+    CheckTrainerFlag TRAINER_YOUNGSTER_WAYNE
+    GoToIfDefeated TRAINER_YOUNGSTER_WAYNE, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckHikerReginald:
+    CheckTrainerFlag TRAINER_HIKER_REGINALD
+    GoToIfDefeated TRAINER_HIKER_REGINALD, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckCollectorTerry:
+    CheckTrainerFlag TRAINER_COLLECTOR_TERRY
+    GoToIfDefeated TRAINER_COLLECTOR_TERRY, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckPicnickerAna:
+    CheckTrainerFlag TRAINER_PICNICKER_ANA
+    GoToIfDefeated TRAINER_PICNICKER_ANA, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckCamperParker:
+    CheckTrainerFlag TRAINER_CAMPER_PARKER
+    GoToIfDefeated TRAINER_CAMPER_PARKER, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckRuinManiacGerald:
+    CheckTrainerFlag TRAINER_RUIN_MANIAC_GERALD
+    GoToIfDefeated TRAINER_RUIN_MANIAC_GERALD, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckHikerLorenzo:
+    CheckTrainerFlag TRAINER_HIKER_LORENZO
+    GoToIfDefeated TRAINER_HIKER_LORENZO, Route206_SkirmishTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
+Route206_CheckMiraWaywardCave:
+    GoToIfSet FLAG_SKIRMISH_MIRA_DEFEATED, Route206_SkirmishBossDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo Route206_RoyCountTrainers
+
 
 Route206_OnResume:
     CallIfSet FLAG_ON_CYCLING_ROAD, Route206_ForceBicycling
@@ -95,19 +211,19 @@ Route206_JulienTrainerCount:
     FacePlayer
     GoToIfSet FLAG_ROUTE_206_PROMOTIONAL_ITEM_RECIEVED, Route206_PromotionalItemRecieved
     SetVar VAR_JULIEN_TRAINERS_REMAINING 9
-    SetVar VAR_JULIEN_TRAINERS_COUNTED 0
+    SetVar VAR_PROMOTIONAL_TRAINERS_COUNTED 0
     GoTo Route206_CountTrainers
 
 Route206_CountTrainers:
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 0, Route206_CheckCyclistAxel
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 1, Route206_CheckCyclistMegan
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 2, Route206_CheckCyclistJames
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 3, Route206_CheckCyclistNicole
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 4, Route206_CheckCyclistJohn
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 5, Route206_CheckCyclistKayla
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 6, Route206_CheckCyclistRyan
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 7, Route206_CheckCyclistRachel
-    GoToIfEq VAR_JULIEN_TRAINERS_COUNTED, 8, Route206_CheckHikerTheodore
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 0, Route206_CheckCyclistAxel
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 1, Route206_CheckCyclistMegan
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 2, Route206_CheckCyclistJames
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 3, Route206_CheckCyclistNicole
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 4, Route206_CheckCyclistJohn
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 5, Route206_CheckCyclistKayla
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 6, Route206_CheckCyclistRyan
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 7, Route206_CheckCyclistRachel
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 8, Route206_CheckHikerTheodore
     GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 1, Route206_JulienTrainerCountSingular
     GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 0, Route206_WonPromotional
     BufferNumber 0, VAR_JULIEN_TRAINERS_REMAINING
@@ -127,7 +243,7 @@ Route206_JulienTrainerCountSingular:
 
 Route206_PromotionalTrainerDefeated:
     SubVar VAR_JULIEN_TRAINERS_REMAINING 1
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_WonPromotional:
@@ -167,55 +283,55 @@ Route206_PromotionalItemRecieved:
 Route206_CheckCyclistAxel:
     CheckTrainerFlag TRAINER_CYCLIST_AXEL
     GoToIfDefeated TRAINER_CYCLIST_AXEL, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistMegan:
     CheckTrainerFlag TRAINER_CYCLIST_MEGAN
     GoToIfDefeated TRAINER_CYCLIST_MEGAN, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistJames:
     CheckTrainerFlag TRAINER_CYCLIST_JAMES
     GoToIfDefeated TRAINER_CYCLIST_JAMES, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistNicole:
     CheckTrainerFlag TRAINER_CYCLIST_NICOLE
     GoToIfDefeated TRAINER_CYCLIST_NICOLE, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistJohn:
     CheckTrainerFlag TRAINER_CYCLIST_JOHN
     GoToIfDefeated TRAINER_CYCLIST_JOHN, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistKayla:
     CheckTrainerFlag TRAINER_CYCLIST_KAYLA
     GoToIfDefeated TRAINER_CYCLIST_KAYLA, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistRyan:
     CheckTrainerFlag TRAINER_CYCLIST_RYAN
     GoToIfDefeated TRAINER_CYCLIST_RYAN, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckCyclistRachel:
     CheckTrainerFlag TRAINER_CYCLIST_RACHEL
     GoToIfDefeated TRAINER_CYCLIST_RACHEL, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_CheckHikerTheodore:
     CheckTrainerFlag TRAINER_HIKER_THEODORE
     GoToIfDefeated TRAINER_HIKER_THEODORE, Route206_PromotionalTrainerDefeated
-    AddVar VAR_JULIEN_TRAINERS_COUNTED 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo Route206_CountTrainers
 
 Route206_RoySkirmishZone:
@@ -391,7 +507,7 @@ Route206_ChallengeZoneX309:
     ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
     WaitMovement
     SetFlag FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED
-    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 53, DIR_NORTH
+    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 52, DIR_NORTH
     ReleaseAll
     End
 
@@ -403,7 +519,7 @@ Route206_ChallengeZoneX311:
     ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
     WaitMovement
     SetFlag FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED
-    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 53, DIR_NORTH
+    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 52, DIR_NORTH
     ReleaseAll
     End
 
@@ -415,7 +531,7 @@ Route206_ChallengeZoneY609:
     ApplyMovement LOCALID_PLAYER, Route206_Movement_PlayerMoveUp
     WaitMovement
     SetFlag FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED
-    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 53, DIR_NORTH
+    Warp MAP_HEADER_WAYWARD_CAVE_1F, 0, 41, 52, DIR_NORTH
     ReleaseAll
     End
 

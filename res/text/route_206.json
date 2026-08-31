@@ -124,6 +124,28 @@
             ]
         },
         {
+            "id": "Route206_Text_ChallengeComplete",
+            "en_US": [
+                "That’s your Skirmish Zone challenge\n",
+                "over, Chump.\r",
+                "Let’s count up your BP.\r"
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyGiveBP",
+            "en_US": [
+                "Your total winnings come to {STRVAR_1 0, 0, 0}BP\n",
+                "Don’t spend it all in one place y’hear."
+            ]
+        },
+        {
+            "id": "Route206_Text_RoyNoBP",
+            "en_US": [
+                "Wow. You earned no BP.\n",
+                "You gotta try harder, Chump."
+            ]
+        },
+        {
             "id": "Route206_Text_SkirmishZoneRules",
             "en_US": [
                 "1. You may only challenge each Skimish\n",

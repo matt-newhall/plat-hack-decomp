@@ -24,5 +24,13 @@
             "ball_seal": 0
         }
     ],
-    "messages": []
+    "messages": [
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Oh, no!\n",
+                "You’re too much for me!\r"
+            ]
+        }
+    ]
 }
