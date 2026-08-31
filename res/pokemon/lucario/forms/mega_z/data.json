@@ -34,7 +34,7 @@
         "EGG_GROUP_HUMAN_LIKE"
     ],
     "abilities": [
-        "ABILITY_REGENERATOR",
+        "ABILITY_AURA_GUARD",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,

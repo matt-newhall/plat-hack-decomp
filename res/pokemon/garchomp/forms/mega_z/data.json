@@ -34,7 +34,7 @@
         "EGG_GROUP_DRAGON"
     ],
     "abilities": [
-        "ABILITY_DRAGONIZE",
+        "ABILITY_LEVITATE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,

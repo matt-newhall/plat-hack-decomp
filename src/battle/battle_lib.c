@@ -4224,6 +4224,26 @@ static u16 sJawMoves[] = {
     MOVE_THUNDER_FANG
 };
 
+static u16 sSlicingMoves[] = {
+    MOVE_AERIAL_ACE,
+    MOVE_AIR_CUTTER,
+    MOVE_AIR_SLASH,
+    MOVE_CROSS_POISON,
+    MOVE_CRUSH_CLAW,
+    MOVE_CUT,
+    MOVE_DRAGON_CLAW,
+    MOVE_FURY_CUTTER,
+    MOVE_LEAF_BLADE,
+    MOVE_METAL_CLAW,
+    MOVE_NIGHT_SLASH,
+    MOVE_PSYCHO_CUT,
+    MOVE_RAZOR_LEAF,
+    MOVE_SHADOW_CLAW,
+    MOVE_SLASH,
+    MOVE_SOLAR_BLADE,
+    MOVE_X_SCISSOR
+};
+
 int BattleSystem_TriggerImmunityAbility(BattleContext *battleCtx, int attacker, int defender)
 {
     int subscript = NULL, moveType;
@@ -8795,6 +8815,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
+    for (i = 0; i < NELEMS(sSlicingMoves); i++) {
+        if (sSlicingMoves[i] == move && attackerParams.ability == ABILITY_SHARPNESS) {
+            movePower = movePower * 15 / 10;
+            break;
+        }
+    }
+
     if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
         if (attackerParams.ability == ABILITY_TOUGH_CLAWS) {
             movePower = movePower * 13 / 10;
@@ -9029,6 +9056,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             damage *= 2;
         }
 
+        if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
+            damage /= 2;
+        }
+    }
+
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_AURA_GUARD)) {
         if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
             damage /= 2;
         }

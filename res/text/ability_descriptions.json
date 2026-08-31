@@ -1257,6 +1257,20 @@
         "Raises a stat sharply and\n",
         "lowers another each turn."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00180",
+      "en_US": [
+        "Boosts the power of\n",
+        "slicing moves."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00181",
+      "en_US": [
+        "Guards itself with aura,\n",
+        "halving contact damage."
+      ]
     }
   ]
 }
