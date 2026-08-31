@@ -75,4 +75,13 @@ BOOL BerryPatch_IsEmpty(const ItemUseContext *usageContext);
 BOOL sub_02069238(FieldSystem *fieldSystem);
 BOOL FieldSystem_TriggerPortablePC(FieldSystem *fieldSystem);
 
+/**
+ * @brief Prints the generic key item error message in the field, used when the
+ * Porta-PC is opened while FLAG_PORTA_PC_DISABLED is set.
+ *
+ * @param fieldSystem
+ * @return Always TRUE.
+ */
+BOOL FieldSystem_PrintPortablePCDisabled(FieldSystem *fieldSystem);
+
 #endif // POKEPLATINUM_ITEM_USE_FUNCTIONS_H

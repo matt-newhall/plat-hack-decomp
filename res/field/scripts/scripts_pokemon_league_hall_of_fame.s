@@ -9,6 +9,7 @@
 
 PokemonLeagueHallOfFame_OnFrame:
     LockAll
+    ClearFlag FLAG_PORTA_PC_DISABLED
     ApplyMovement LOCALID_PLAYER, PokemonLeague_HallOfFame_Movement_WalkUp
     WaitMovement
     ApplyMovement LOCALID_PROF_ROWAN, PokemonLeague_HallOfFame_Movement_TurnAroundInPlace
