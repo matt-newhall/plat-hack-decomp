@@ -7,7 +7,7 @@
         "special_attack": 45,
         "special_defense": 90
     },
-    "types": [ "TYPE_ROCK", "TYPE_ROCK" ],
+    "types": [ "TYPE_ROCK", "TYPE_ELECTRIC" ],
     "catch_rate": 255,
     "base_exp_reward": 108,
     "ev_yields": {
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_MINERAL", "EGG_GROUP_MINERAL" ],
-    "abilities": [ "ABILITY_STURDY", "ABILITY_MAGNET_PULL" ],
+    "abilities": [ "ABILITY_GALVANIZE", "ABILITY_MAGNET_PULL" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GRAY",
     "flip_sprite": false,

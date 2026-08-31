@@ -9,7 +9,7 @@
     },
     "types": [
         "TYPE_ICE",
-        "TYPE_ICE"
+        "TYPE_ROCK"
     ],
     "catch_rate": 75,
     "base_exp_reward": 187,
