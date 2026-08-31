@@ -75,24 +75,24 @@
     "rate_form4": 0,
     "unown_table": 0,
     "ruby": [
-        "SPECIES_BUDEW",
-        "SPECIES_BUDEW"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "sapphire": [
-        "SPECIES_LOTAD",
-        "SPECIES_LOTAD"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "emerald": [
-        "SPECIES_BUDEW",
-        "SPECIES_BUDEW"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "firered": [
-        "SPECIES_BUDEW",
-        "SPECIES_BUDEW"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "leafgreen": [
-        "SPECIES_BUDEW",
-        "SPECIES_BUDEW"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "surf_rate": 10,
     "surf_encounters": [

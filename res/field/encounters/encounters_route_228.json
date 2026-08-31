@@ -75,24 +75,24 @@
     "rate_form4": 0,
     "unown_table": 0,
     "ruby": [
-        "SPECIES_DIGLETT",
-        "SPECIES_CACNEA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "sapphire": [
-        "SPECIES_DIGLETT",
-        "SPECIES_CACNEA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "emerald": [
-        "SPECIES_DIGLETT",
-        "SPECIES_CACNEA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "firered": [
-        "SPECIES_DIGLETT",
-        "SPECIES_CACNEA"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "leafgreen": [
-        "SPECIES_SANDSLASH",
-        "SPECIES_SANDSLASH"
+        "SPECIES_NONE",
+        "SPECIES_NONE"
     ],
     "surf_rate": 10,
     "surf_encounters": [
