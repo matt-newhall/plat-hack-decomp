@@ -2848,6 +2848,28 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
     }
 }
 
+static u16 sTriageMoves[] = {
+    MOVE_ABSORB,
+    MOVE_DRAIN_PUNCH,
+    MOVE_DRAINING_KISS,
+    MOVE_DREAM_EATER,
+    MOVE_GIGA_DRAIN,
+    MOVE_HEAL_ORDER,
+    MOVE_LEECH_LIFE,
+    MOVE_MEGA_DRAIN,
+    MOVE_MOONLIGHT,
+    MOVE_MORNING_SUN,
+    MOVE_PARABOLIC_CHARGE,
+    MOVE_RECOVER,
+    MOVE_REST,
+    MOVE_ROOST,
+    MOVE_SLACK_OFF,
+    MOVE_SOFTBOILED,
+    MOVE_SWALLOW,
+    MOVE_SYNTHESIS,
+    MOVE_WISH
+};
+
 /**
  * @brief Check whether the target's best move would knock the attacker out within a given
  * number of hits, assuming it keeps picking that move.
@@ -2885,6 +2907,15 @@ static BOOL AI_MovesBeforeTarget(BattleSystem *battleSys, BattleContext *battleC
         && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
         && mon->curHP == mon->maxHP) {
         priority++;
+    }
+
+    if (ability == ABILITY_TRIAGE) {
+        for (int i = 0; i < NELEMS(sTriageMoves); i++) {
+            if (sTriageMoves[i] == AI_CONTEXT.move) {
+                priority += 3;
+                break;
+            }
+        }
     }
 
     if (priority != 0) {

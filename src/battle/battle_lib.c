@@ -1251,6 +1251,28 @@ void BattleSystem_RollQuickDraw(BattleSystem *battleSys, BattleContext *battleCt
     }
 }
 
+static u16 sTriageMoves[] = {
+    MOVE_ABSORB,
+    MOVE_DRAIN_PUNCH,
+    MOVE_DRAINING_KISS,
+    MOVE_DREAM_EATER,
+    MOVE_GIGA_DRAIN,
+    MOVE_HEAL_ORDER,
+    MOVE_LEECH_LIFE,
+    MOVE_MEGA_DRAIN,
+    MOVE_MOONLIGHT,
+    MOVE_MORNING_SUN,
+    MOVE_PARABOLIC_CHARGE,
+    MOVE_RECOVER,
+    MOVE_REST,
+    MOVE_ROOST,
+    MOVE_SLACK_OFF,
+    MOVE_SOFTBOILED,
+    MOVE_SWALLOW,
+    MOVE_SYNTHESIS,
+    MOVE_WISH
+};
+
 u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler1, int battler2, BOOL ignoreQuickClaw)
 {
     u8 result = COMPARE_SPEED_FASTER;
@@ -1496,6 +1518,24 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
 
             if (MOVE_DATA(battler2Move).type == TYPE_FLYING && battler2CurHP == battler2MaxHP) {
                 battler2Priority += 1;
+            }
+        }
+
+        if (Battler_Ability(battleCtx, battler1) == ABILITY_TRIAGE) {
+            for (i = 0; i < NELEMS(sTriageMoves); i++) {
+                if (sTriageMoves[i] == battler1Move) {
+                    battler1Priority += 3;
+                    break;
+                }
+            }
+        }
+
+        if (Battler_Ability(battleCtx, battler2) == ABILITY_TRIAGE) {
+            for (i = 0; i < NELEMS(sTriageMoves); i++) {
+                if (sTriageMoves[i] == battler2Move) {
+                    battler2Priority += 3;
+                    break;
+                }
             }
         }
 

@@ -1278,6 +1278,13 @@
         "Chance to disable moves\n",
         "from attackers."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00183",
+      "en_US": [
+        "Increases the priority\n",
+        "of healing moves."
+      ]
     }
   ]
 }
