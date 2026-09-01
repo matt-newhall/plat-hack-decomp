@@ -8452,6 +8452,64 @@ static BOOL SpeciesCanEvolve(u16 species)
     return canEvolve;
 }
 
+#define MODIFIER_ONE  4096
+#define MODIFIER_0_5  2048
+#define MODIFIER_0_75 3072
+#define MODIFIER_1_2  4915
+#define MODIFIER_1_25 5120
+#define MODIFIER_1_3  5325
+#define MODIFIER_1_5  6144
+#define MODIFIER_2    8192
+
+/**
+ * @brief Divide a value by a fixed-point divisor, rounding to the nearest
+ * integer with ties rounding down.
+ *
+ * @param value
+ * @param divisor
+ * @return The rounded quotient.
+ */
+static u32 PokeRound(u32 value, u32 divisor)
+{
+    u32 quotient = value / divisor;
+
+    if ((value % divisor) * 2 > divisor) {
+        quotient++;
+    }
+
+    return quotient;
+}
+
+/**
+ * @brief Fold a modifier into a running chain of modifiers.
+ *
+ * To match modern games the closest, we need to express modifiers as factors
+ * expresssed as 4096ths (annoyingly). This mirrors the rounding used in modern
+ * games closest, and avoids truncation errors.
+ *
+ * @param chained   The chain so far; pass MODIFIER_ONE to start a new chain.
+ * @param modifier  The modifier to fold in.
+ * @return The combined modifier.
+ */
+static u32 ChainModifier(u32 chained, u32 modifier)
+{
+    return (chained * modifier + MODIFIER_0_5) >> 12;
+}
+
+/**
+ * @brief Apply a chained modifier to a move's base power.
+ *
+ * @param movePower
+ * @param chained
+ * @return The modified base power, which is never less than 1.
+ */
+static u16 ApplyPowerModifier(u16 movePower, u32 chained)
+{
+    u32 result = PokeRound(movePower * chained, MODIFIER_ONE);
+
+    return result == 0 ? 1 : result;
+}
+
 int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     BattleContext *battleCtx,
     int move,
@@ -8479,6 +8537,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     s8 spDefenseStage;
     u8 attackerLevel;
     u16 movePower;
+    u32 powerMod;
     u16 itemTmp;
     u32 battleType;
     DamageCalcParams attackerParams;
@@ -8530,6 +8589,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         movePower = inPower;
     }
 
+    powerMod = MODIFIER_ONE;
+
     if (MOVE_DATA(move).effect == BATTLE_EFFECT_DOUBLE_POWER_WITH_NO_ITEM
         && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
         movePower = movePower * 2;
@@ -8539,22 +8600,22 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         moveType = MOVE_DATA(move).type;
     } else if (attackerParams.ability == ABILITY_NORMALIZE && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_NORMAL;
-        movePower = movePower * 12 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     } else if (attackerParams.ability == ABILITY_AERILATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_FLYING;
-        movePower = movePower * 12 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     } else if (attackerParams.ability == ABILITY_REFRIGERATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_ICE;
-        movePower = movePower * 12 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     } else if (attackerParams.ability == ABILITY_PIXILATE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_FAIRY;
-        movePower = movePower * 12 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     } else if (attackerParams.ability == ABILITY_DRAGONIZE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_DRAGON;
-        movePower = movePower * 12 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     } else if (attackerParams.ability == ABILITY_GALVANIZE && MOVE_DATA(move).type == TYPE_NORMAL && move != MOVE_JUDGMENT && move != MOVE_HIDDEN_POWER && move != MOVE_WEATHER_BALL && move != MOVE_NATURAL_GIFT) {
         moveType = TYPE_ELECTRIC;
-        movePower = movePower * 12 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     } else if (inType == TYPE_NORMAL) {
         moveType = MOVE_DATA(move).type;
     } else {
@@ -8562,20 +8623,20 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     GF_ASSERT(battleCtx->powerMul >= 10);
-    movePower = movePower * battleCtx->powerMul / 10;
+    powerMod = ChainModifier(powerMod, battleCtx->powerMul * MODIFIER_ONE / 10);
 
     if (attackerParams.ability == ABILITY_TECHNICIAN
         && (!(move == MOVE_STRUGGLE && inPower == 40))
-        && movePower <= 60) {
-        movePower = movePower * 15 / 10;
+        && ApplyPowerModifier(movePower, powerMod) <= 60) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
 
     if ((battleCtx->battleMons[attacker].moveEffectsMask & MOVE_EFFECT_CHARGE) && moveType == TYPE_ELECTRIC) {
-        movePower *= 2;
+        powerMod = ChainModifier(powerMod, MODIFIER_2);
     }
 
     if (battleCtx->turnFlags[attacker].helpingHand && (!(move == MOVE_STRUGGLE && inPower == 40))) {
-        movePower = movePower * 15 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
 
     moveClass = MOVE_DATA(move).class;
@@ -8602,7 +8663,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if (move != MOVE_STRUGGLE
             && attackerParams.heldItemEffect == sTypeBoostingItems[i].itemEffect
             && moveType == sTypeBoostingItems[i].type) {
-            movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+            powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
             break;
         }
     }
@@ -8617,7 +8678,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         && (battleType & BATTLE_TYPE_FRONTIER) == FALSE
         && (attackerParams.species == SPECIES_LATIOS || attackerParams.species == SPECIES_LATIAS)
         && ((moveType == TYPE_DRAGON) || (moveType == TYPE_PSYCHIC))) {
-        movePower = movePower * 120 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_CLAMPERL_SPATK
         && attackerParams.species == SPECIES_CLAMPERL) {
@@ -8651,31 +8712,31 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (attackerParams.heldItemEffect == HOLD_EFFECT_DIALGA_BOOST
         && (moveType == TYPE_DRAGON || moveType == TYPE_STEEL)
         && attackerParams.species == SPECIES_DIALGA) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_PALKIA_BOOST
         && (moveType == TYPE_DRAGON || moveType == TYPE_WATER)
         && attackerParams.species == SPECIES_PALKIA) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_GIRATINA_BOOST
         && (moveType == TYPE_DRAGON || moveType == TYPE_GHOST)
         && (BattleMon_Get(battleCtx, attacker, BATTLEMON_VOLATILE_STATUS, NULL) & VOLATILE_CONDITION_TRANSFORM) == FALSE
         && attackerParams.species == SPECIES_GIRATINA) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_POWER_UP_PHYS
         && moveClass == CLASS_PHYSICAL) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_POWER_UP_SPEC
         && moveClass == CLASS_SPECIAL) {
-        movePower = movePower * (100 + attackerParams.heldItemPower) / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE
         && (moveType == TYPE_FIRE || moveType == TYPE_ICE)) {
-        movePower /= 2;
+        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
 
     if (attackerParams.ability == ABILITY_HUSTLE && (!(move == MOVE_STRUGGLE && inPower == 40))) {
@@ -8705,45 +8766,45 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if (moveType == TYPE_ELECTRIC
         && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_MUD_SPORT)) {
-        movePower /= 2;
+        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
     if (moveType == TYPE_FIRE
         && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_WATER_SPORT)) {
-        movePower /= 2;
+        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
 
     if (moveType == TYPE_GRASS
         && attackerParams.ability == ABILITY_OVERGROW
         && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
-        movePower = movePower * 150 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
     if (moveType == TYPE_FIRE
         && attackerParams.ability == ABILITY_BLAZE
         && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
-        movePower = movePower * 150 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
     if (moveType == TYPE_WATER
         && attackerParams.ability == ABILITY_TORRENT
         && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
-        movePower = movePower * 150 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
     if (moveType == TYPE_BUG
         && attackerParams.ability == ABILITY_SWARM
         && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
-        movePower = movePower * 150 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
 
     if (moveType == TYPE_FIRE
         && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_HEATPROOF) == TRUE) {
-        movePower /= 2;
+        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
     if (moveType == TYPE_FIRE
         && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_DRY_SKIN) == TRUE) {
-        movePower = movePower * 125 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_25);
     }
 
     if (move == MOVE_KNOCK_OFF && Battler_CanRemoveItem(battleCtx, defender)) {
-        movePower = movePower * 150 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
 
     if (attackerParams.ability == ABILITY_SIMPLE) {
@@ -8802,73 +8863,73 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         && attackerParams.gender != GENDER_NONE
         && defenderParams.gender != GENDER_NONE
         && (!(move == MOVE_STRUGGLE && inPower == 40))) {
-        movePower = movePower * 125 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_25);
     }
     if (attackerParams.ability == ABILITY_RIVALRY
         && attackerParams.gender != defenderParams.gender
         && attackerParams.gender != GENDER_NONE
         && defenderParams.gender != GENDER_NONE
         && (!(move == MOVE_STRUGGLE && inPower == 40))) {
-        movePower = movePower * 75 / 100;
+        powerMod = ChainModifier(powerMod, MODIFIER_0_75);
     }
 
     if (attackerParams.ability == ABILITY_STAKEOUT
         && battleCtx->battlerActions[defender][BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END
         && battleCtx->battleMons[defender].newlySwitched == TRUE) {
-        movePower *= 2;
+        powerMod = ChainModifier(powerMod, MODIFIER_2);
     }
 
     if (battleType & BATTLE_TYPE_DOUBLES) {
         int powerSpotCount  = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_OUR_SIDE, attacker, ABILITY_POWER_SPOT);
 
         if (powerSpotCount == 2 || (powerSpotCount == 1 && attackerParams.ability != ABILITY_POWER_SPOT)) {
-            movePower = movePower * 13 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_3);
         }
     }
 
     for (i = 0; i < NELEMS(sPunchingMoves); i++) {
         if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST) {
-            movePower = movePower * 12 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_2);
             break;
         }
     }
 
     for (i = 0; i < NELEMS(sAuraAndPulseMoves); i++) {
         if (sAuraAndPulseMoves[i] == move && attackerParams.ability == ABILITY_MEGA_LAUNCHER) {
-            movePower = movePower * 15 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_5);
             break;
         }
     }
 
     for (i = 0; i < NELEMS(sSoundMoves); i++) {
         if (sSoundMoves[i] == move && attackerParams.ability == ABILITY_PUNK_ROCK) {
-            movePower = movePower * 13 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_3);
             break;
         }
     }
 
     for (i = 0; i < NELEMS(sJawMoves); i++) {
         if (sJawMoves[i] == move && attackerParams.ability == ABILITY_STRONG_JAW) {
-            movePower = movePower * 15 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_5);
             break;
         }
     }
 
     for (i = 0; i < NELEMS(sSlicingMoves); i++) {
         if (sSlicingMoves[i] == move && attackerParams.ability == ABILITY_SHARPNESS) {
-            movePower = movePower * 15 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_5);
             break;
         }
     }
 
     if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
         if (attackerParams.ability == ABILITY_TOUGH_CLAWS) {
-            movePower = movePower * 13 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_3);
         }
     }
 
     if (BattleSystem_SheerForceBoostsMove(battleCtx, attacker, move)) {
-        movePower = movePower * 13 / 10;
+        powerMod = ChainModifier(powerMod, MODIFIER_1_3);
     }
 
     BOOL megaSol = Battler_Ability(battleCtx, attacker) == ABILITY_MEGA_SOL;
@@ -8881,7 +8942,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         if ((fieldConditions & FIELD_CONDITION_SANDSTORM)
             && attackerParams.ability == ABILITY_SAND_FORCE
             && (moveType == TYPE_ROCK || moveType == TYPE_GROUND || moveType == TYPE_STEEL)) {
-            movePower = movePower * 13 / 10;
+            powerMod = ChainModifier(powerMod, MODIFIER_1_3);
         }
 
         if (megaSol == FALSE
@@ -8908,6 +8969,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
             spDefenseStat = spDefenseStat * 15 / 10;
         }
     }
+
+    movePower = ApplyPowerModifier(movePower, powerMod);
 
     if (MOVE_DATA(move).effect == BATTLE_EFFECT_HALVE_DEFENSE) {
         defenseStat = defenseStat / 2;
