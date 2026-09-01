@@ -923,6 +923,14 @@ BOOL Move_FailsInHighGravity(BattleSystem *battleSys, BattleContext *battleCtx, 
 BOOL Move_HealBlocked(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 
 /**
+ * @brief Check if a given move has its priority raised by Triage.
+ *
+ * @param move  The move to be executed
+ * @return TRUE if the move is a healing move which Triage boosts; FALSE otherwise
+ */
+BOOL Move_TriageBoosted(int move);
+
+/**
  * @brief Update buffers for the attacking Pokemon related to Last Resort.
  *
  * @param battleSys
