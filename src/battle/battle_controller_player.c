@@ -2493,6 +2493,14 @@ static int BattleControllerPlayer_CheckTypeChart(BattleSystem *battleSys, Battle
             battleCtx->damage,
             &battleCtx->moveStatusFlags);
 
+        battleCtx->damage = BattleSystem_ApplyFinalDamageModifiers(battleSys,
+            battleCtx,
+            battleCtx->moveCur,
+            battleCtx->moveType,
+            battleCtx->attacker,
+            battleCtx->defender,
+            battleCtx->damage);
+
         if (battleCtx->moveStatusFlags & MOVE_STATUS_INEFFECTIVE) {
             battleCtx->moveFailFlags[battleCtx->attacker].noEffect = TRUE;
         }

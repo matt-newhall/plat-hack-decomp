@@ -7302,6 +7302,14 @@ static BOOL BtlCmd_ApplyTypeEffectiveness(BattleSystem *battleSys, BattleContext
         battleCtx->damage,
         &battleCtx->moveStatusFlags);
 
+    battleCtx->damage = BattleSystem_ApplyFinalDamageModifiers(battleSys,
+        battleCtx,
+        battleCtx->moveCur,
+        battleCtx->moveType,
+        battleCtx->attacker,
+        battleCtx->defender,
+        battleCtx->damage);
+
     return FALSE;
 }
 

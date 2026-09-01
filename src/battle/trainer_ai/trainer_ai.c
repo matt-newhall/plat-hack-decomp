@@ -4201,6 +4201,13 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.defender,
         damage,
         &effectivenessFlags);
+    damage = BattleSystem_ApplyFinalDamageModifiers(battleSys,
+        battleCtx,
+        move,
+        type,
+        attacker,
+        AI_CONTEXT.defender,
+        damage);
     battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
 
     if (effectivenessFlags & MOVE_STATUS_IMMUNE) {

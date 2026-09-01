@@ -560,6 +560,21 @@ u16 BattleAI_CalcFlailPower(int curHP, int maxHP);
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask);
 
 /**
+ * @brief Apply the damage modifiers which belong after type effectiveness in
+ * the modifier order: the attacker's burn, then the "other" slot.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param move
+ * @param inType            If this is non-zero, then it will be regarded as the move's type
+ * @param attacker
+ * @param defender
+ * @param damage            Damage after the type chart has been applied
+ * @return Damage value after applying the burn and "other" multipliers
+ */
+int BattleSystem_ApplyFinalDamageModifiers(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage);
+
+/**
  * @brief Calculate the effectiveness mask of the given move.
  *
  * @param battleCtx
