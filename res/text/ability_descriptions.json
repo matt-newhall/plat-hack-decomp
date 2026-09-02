@@ -1306,6 +1306,13 @@
         "Lowers the accuracy of\n",
         "opposing status moves"
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00187",
+      "en_US": [
+        "Prevents effects caused\n",
+        "by making contact."
+      ]
     }
   ]
 }

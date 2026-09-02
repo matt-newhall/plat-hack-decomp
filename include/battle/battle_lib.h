@@ -866,6 +866,7 @@ BOOL Battler_CheckTruant(BattleContext *battleCtx, int battler);
  * @return TRUE if any of the battler's opponents has used Imprison and also
  * knows the requested move; FALSE otherwise.
  */
+BOOL Move_MakesContact(BattleContext *battleCtx, int attacker, int move);
 BOOL Move_Imprisoned(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 
 /**

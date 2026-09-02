@@ -4044,6 +4044,24 @@ BOOL Battler_CheckTruant(BattleContext *battleCtx, int battler)
     return result;
 }
 
+/**
+ * @brief Check whether a move makes contact with its target.
+ *
+ * Long Reach removes contact from its holder's moves so we need to check this.
+ * Conversely, Protective Pads doesn't remove the 'contact' from a move, so we
+ * don't cover it here.
+ *
+ * @param battleCtx
+ * @param attacker
+ * @param move
+ * @return TRUE if the move makes contact.
+ */
+BOOL Move_MakesContact(BattleContext *battleCtx, int attacker, int move)
+{
+    return (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
+        && Battler_Ability(battleCtx, attacker) != ABILITY_LONG_REACH;
+}
+
 BOOL Move_Imprisoned(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move)
 {
     // must declare C89-style to match
@@ -5561,7 +5579,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
@@ -5620,7 +5638,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
             battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 8);
             battleCtx->msgBattlerTemp = battleCtx->attacker;
 
@@ -5642,7 +5660,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             int rand = BattleSystem_RandNext(battleSys) % 30;
 
@@ -5671,7 +5689,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
             battleCtx->sideEffectMon = battleCtx->attacker;
@@ -5691,7 +5709,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
             battleCtx->sideEffectMon = battleCtx->attacker;
@@ -5711,7 +5729,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && DEFENDING_MON.curHP
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
@@ -5731,7 +5749,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && ATTACKING_MON.curHP
             && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
             battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, 4);
             battleCtx->msgBattlerTemp = battleCtx->attacker;
 
@@ -5770,7 +5788,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
 
     case ABILITY_GOOEY:
         if (ATTACKING_MON.curHP
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
@@ -5838,7 +5856,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
             && (!(ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_PERISH_SONG))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
             *subscript= subscript_perish_body;
             result = TRUE;
         }
@@ -5916,7 +5934,7 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
             battleCtx->sideEffectMon = battleCtx->defender;
@@ -7039,7 +7057,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
             *subscript = subscript_transfer_sticky_barb;
             result = TRUE;
         }
@@ -7054,7 +7072,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
-            && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+            && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
             battleCtx->hpCalcTemp = BattleSystem_Divide(ATTACKING_MON.maxHP * -1, itemPower);
             *subscript = subscript_rocky_helmet_recoil;
             result = TRUE;
@@ -9022,7 +9040,7 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
-    if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
+    if (Move_MakesContact(battleCtx, attacker, move)) {
         if (attackerParams.ability == ABILITY_TOUGH_CLAWS) {
             powerMod = ChainModifier(powerMod, MODIFIER_1_3);
         }
@@ -9299,13 +9317,13 @@ int BattleSystem_ApplyFinalDamageModifiers(BattleSystem *battleSys, BattleContex
             damage *= 2;
         }
 
-        if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
+        if (Move_MakesContact(battleCtx, attacker, move)) {
             damage /= 2;
         }
     }
 
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_AURA_GUARD)) {
-        if (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) {
+        if (Move_MakesContact(battleCtx, attacker, move)) {
             damage /= 2;
         }
     }
@@ -9836,7 +9854,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
         && ATTACKING_MON.heldItem == ITEM_NONE
         && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
             || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
-        && (CURRENT_MOVE_DATA.flags & MOVE_FLAG_MAKES_CONTACT)) {
+        && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
         *subscript = subscript_transfer_sticky_barb;
         result = TRUE;
     }
