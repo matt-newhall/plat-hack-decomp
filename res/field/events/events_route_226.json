@@ -75,11 +75,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_CARBOS",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "id": "LOCALID_ITEM_BEEDRILLITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_226_CARBOS",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_226_BEEDRILLITE",
             "script": 7207,
             "initial_dir": 0,
             "data": [],

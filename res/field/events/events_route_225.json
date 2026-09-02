@@ -144,11 +144,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_DAWN_STONE",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "id": "LOCALID_ITEM_MANECTITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_225_DAWN_STONE",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_225_MANECTITE",
             "script": 7203,
             "initial_dir": 0,
             "data": [],

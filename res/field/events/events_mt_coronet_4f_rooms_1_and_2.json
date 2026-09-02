@@ -220,6 +220,21 @@
             "x": 61,
             "z": 2,
             "y": 0
+        },
+        {
+            "id": "LOCALID_ITEM_ALAKAZITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_4F_ROOMS_1_AND_2_ALAKAZITE",
+            "script": 7330,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 61,
+            "z": 2,
+            "y": 0
         }
     ],
     "warp_events": [

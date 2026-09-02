@@ -11,11 +11,11 @@
     ],
     "object_events": [
         {
-            "id": "LOCALID_ITEM_NEVERMELTICE",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "id": "LOCALID_ITEM_GLALITITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_ICEBERG_RUINS_NEVERMELTICE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_ICEBERG_RUINS_GLALITITE",
             "script": 7323,
             "initial_dir": 0,
             "data": [],

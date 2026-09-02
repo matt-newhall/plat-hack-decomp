@@ -17,6 +17,36 @@
             "x": 10,
             "z": 15,
             "y": 0
+        },
+        {
+            "id": "LOCALID_ITEM_GALLADITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_6F_GARDEVOIRITE",
+            "script": 7329,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 5,
+            "z": 6,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_ITEM_GARDEVOIRITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_6F_GALLADITE",
+            "script": 7328,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 9,
+            "z": 6,
+            "y": 0
         }
     ],
     "warp_events": [
