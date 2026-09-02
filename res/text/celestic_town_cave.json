@@ -153,15 +153,25 @@
         "of countless people and Pokémon.\r",
         "This is a wonderful world.\n",
         "What need is there to change it?\r",
-        "Oh, yes. I’ve been growing something\n",
-        "useful. You should take these.\r"
+        "Oh, yes. I found something useful.\n",
+        "You should take this.\r",
+        "It belonged to my granddaughter,\n",
+        "but she has no need of it now."
       ]
     },
     {
-      "id": "CelesticTownCave_Text_SurfAcrossWater",
+      "id": "CelesticTownCave_Text_MegaEvolution",
       "en_US": [
+        "The stone set into it is a Key Stone.\n",
+        "An old, old thing.\r",
+        "Give a Pokémon the stone that\n",
+        "answers it, and hold them dear,\f",
+        "and the two of you may reach a shape\f",
+        "beyond their own. Mega Evolution.\r",
+        "The stones only listen. It is the\n",
+        "trust between you that they hear.\r",
         "You’ve been a great help.\n",
-        "That’s my thanks for it.\r"
+        "That’s my thanks for it."
       ]
     },
     {

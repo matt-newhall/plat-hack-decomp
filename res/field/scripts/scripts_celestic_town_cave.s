@@ -126,17 +126,16 @@ CelesticTownCave_DefeatedCyrus:
     CallIfEq VAR_0x8004, 10, CelesticTownCave_PlayerElderFaceEachOtherX10
     CallIfEq VAR_0x8004, 11, CelesticTownCave_PlayerElderFaceEachOtherX11
     Message CelesticTownCave_Text_YouShouldTakeThis
-    SetVar VAR_0x8004, ITEM_JABOCA_BERRY
-    SetVar VAR_0x8005, 2
-    Common_GiveItemQuantity
-    SetVar VAR_0x8004, ITEM_ROWAP_BERRY
-    SetVar VAR_0x8005, 2
+    WaitButton
+    SetVar VAR_0x8004, ITEM_MEGA_RING
+    SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     SetFlag FLAG_HIDE_CELESTIC_TOWN_ELDER
     ClearFlag FLAG_HIDE_CELESTIC_TOWN_NORTH_HOUSE_ELDER
     SetFlag FLAG_HIDE_MT_CORONET_1F_NORTH_ROOM_1_GRUNTS_M
     SetFlag FLAG_DUMMY_2445
-    Message CelesticTownCave_Text_SurfAcrossWater
+    Message CelesticTownCave_Text_MegaEvolution
+    WaitButton
     CloseMessage
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     CallIfEq VAR_0x8004, 9, CelesticTownCave_ElderLeaveX9
