@@ -197,6 +197,56 @@
         "Here, take this TM.\n",
         "You more than earned it!"
       ]
+    },
+    {
+      "id": "Route210South_Text_FalknerMegaStoneFirst",
+      "en_US": [
+        "Falkner: One thing more.\n",
+        "Hold out your hand.\r",
+        "A Mega Stone. My Pidgeot carries\n",
+        "its twin whenever we take to the sky.\r",
+        "It sleeps until a Trainer answers it\n",
+        "with a stone of their own...\r",
+        "and a bond deep enough to carry\n",
+        "through both. Go and earn that."
+      ]
+    },
+    {
+      "id": "Route210South_Text_WhitneyMegaStoneFirst",
+      "en_US": [
+        "Whitney: Oh, wait, don’t go yet!\n",
+        "I have something for you too!\r",
+        "It’s a Mega Stone! The one my\n",
+        "Lopunny used just now.\r",
+        "When the two of us really trust\n",
+        "each other, it does amazing things!\r",
+        "You need the stone that answers\n",
+        "it, though. Go and find one!"
+      ]
+    },
+    {
+      "id": "Route210South_Text_FalknerMegaStoneSecond",
+      "en_US": [
+        "Falkner: Then I will not be outdone.\r",
+        "Take mine as well. A Mega Stone,\n",
+        "the twin of my Pidgeot’s.\r",
+        "We woke ours long ago, but only\n",
+        "after years of flying as one.\r",
+        "Find the stone that answers it, then\n",
+        "see how deep your own bond runs."
+      ]
+    },
+    {
+      "id": "Route210South_Text_WhitneyMegaStoneSecond",
+      "en_US": [
+        "Whitney: Ooh, me too, me too!\r",
+        "My Lopunny has one of those, and\n",
+        "we use it all the time!\r",
+        "But it only listens when the two of\n",
+        "us really, really trust each other.\r",
+        "Get yourself the stone that goes\n",
+        "with it, okay? Then come show me!"
+      ]
     }
   ]
 }
