@@ -3931,6 +3931,19 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
     side = BattleSystem_GetBattlerSide(battleSys, battler);
     maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
 
+    if (NO_CLOUD_NINE
+        && (battleCtx->fieldConditionsMask & FIELD_CONDITION_MAGMA_STORM_PERM)
+        && side == BATTLER_US
+        && !(MON_HAS_TYPE(battler, TYPE_FIRE))) {
+        if (msgOut == NULL) {
+            return TRUE;
+        }
+
+        msgOut->tags = TAG_NONE;
+        msgOut->id = BattleStrings_Text_CantEscape2;
+        return TRUE;
+    }
+
     if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_EXCEPT_ME, battler, ABILITY_SHADOW_TAG))
         && Battler_Ability(battleCtx, battler) != ABILITY_SHADOW_TAG) {
         if (msgOut == NULL) {
