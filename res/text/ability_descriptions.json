@@ -1299,6 +1299,13 @@
         "Boosts move power if\n",
         "moving after the target."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00186",
+      "en_US": [
+        "Lowers the accuracy of\n",
+        "opposing status moves"
+      ]
     }
   ]
 }

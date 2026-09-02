@@ -3147,6 +3147,12 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
         hitRate = 50;
     }
 
+    if (moveClass == CLASS_STATUS
+        && hitRate > 50
+        && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WONDER_SKIN) == TRUE) {
+        hitRate = 50;
+    }
+
     hitRate *= HitRateByStage[sumStages].numerator;
     hitRate /= HitRateByStage[sumStages].denominator;
 
