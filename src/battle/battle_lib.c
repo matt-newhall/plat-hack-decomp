@@ -9665,8 +9665,8 @@ int BattleSystem_SideToBattler(BattleSystem *battleSys, BattleContext *battleCtx
 #define TURN_START_PRIORITY_NO_MOVE 9
 
 /**
- * @brief Record each battler's raw Speed and the base priority of the move it chose
- * for the turn, and clear the record of who fainted before acting.
+ * @brief Record each battler's Speed and the base priority of the move it chose for
+ * the turn, and clear the record of who fainted before acting.
  *
  * @param battleSys
  * @param battleCtx
@@ -9680,10 +9680,16 @@ void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *
 
     for (i = 0; i < maxBattlers; i++) {
         int stage = battleCtx->battleMons[i].statBoosts[BATTLE_STAT_SPEED];
+        int side = BattleSystem_GetBattlerSide(battleSys, i);
         u16 move;
 
         battleCtx->turnStartSpeed[i] = battleCtx->battleMons[i].speed
             * sStatStageBoosts[stage].numerator / sStatStageBoosts[stage].denominator;
+
+        if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND)
+            || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && side == BATTLER_THEM)) {
+            battleCtx->turnStartSpeed[i] *= 2;
+        }
 
         if (battleCtx->battlerActions[i][BATTLE_ACTION_SELECTED_COMMAND] != PLAYER_INPUT_FIGHT) {
             battleCtx->turnStartPriority[i] = TURN_START_PRIORITY_NO_MOVE;
