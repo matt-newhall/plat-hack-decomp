@@ -8508,6 +8508,50 @@ static BOOL SpeciesCanEvolve(u16 species)
     return canEvolve;
 }
 
+/**
+ * @brief Check whether Analytic boosts the move which is about to be used.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @return TRUE if the boost applies.
+ */
+static BOOL AnalyticBoostApplies(BattleSystem *battleSys, BattleContext *battleCtx, int attacker)
+{
+    int i;
+    int maxBattlers;
+
+    if (battleCtx->waitingBattlers != 1) {
+        return FALSE;
+    }
+
+    maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    for (i = 0; i < maxBattlers; i++) {
+        if (i == attacker || (battleCtx->faintedBeforeActing & FlagIndex(i)) == FALSE) {
+            continue;
+        }
+
+        if (battleCtx->turnStartPriority[i] != battleCtx->turnStartPriority[attacker]) {
+            if (battleCtx->turnStartPriority[i] < battleCtx->turnStartPriority[attacker]) {
+                return FALSE;
+            }
+
+            continue;
+        }
+
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TRICK_ROOM) {
+            if (battleCtx->turnStartSpeed[i] >= battleCtx->turnStartSpeed[attacker]) {
+                return FALSE;
+            }
+        } else if (battleCtx->turnStartSpeed[i] <= battleCtx->turnStartSpeed[attacker]) {
+            return FALSE;
+        }
+    }
+
+    return TRUE;
+}
+
 #define MODIFIER_ONE  4096
 #define MODIFIER_0_5  2048
 #define MODIFIER_0_75 3072
@@ -8985,6 +9029,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if (BattleSystem_SheerForceBoostsMove(battleCtx, attacker, move)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_3);
+    }
+
+    if (attackerParams.ability == ABILITY_ANALYTIC && AnalyticBoostApplies(battleSys, battleCtx, attacker)) {
         powerMod = ChainModifier(powerMod, MODIFIER_1_3);
     }
 
@@ -9612,6 +9660,44 @@ int BattleSystem_SideToBattler(BattleSystem *battleSys, BattleContext *battleCtx
     }
 
     return battler;
+}
+
+#define TURN_START_PRIORITY_NO_MOVE 9
+
+/**
+ * @brief Record each battler's raw Speed and the base priority of the move it chose
+ * for the turn, and clear the record of who fainted before acting.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int i;
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    battleCtx->faintedBeforeActing = 0;
+
+    for (i = 0; i < maxBattlers; i++) {
+        int stage = battleCtx->battleMons[i].statBoosts[BATTLE_STAT_SPEED];
+        u16 move;
+
+        battleCtx->turnStartSpeed[i] = battleCtx->battleMons[i].speed
+            * sStatStageBoosts[stage].numerator / sStatStageBoosts[stage].denominator;
+
+        if (battleCtx->battlerActions[i][BATTLE_ACTION_SELECTED_COMMAND] != PLAYER_INPUT_FIGHT) {
+            battleCtx->turnStartPriority[i] = TURN_START_PRIORITY_NO_MOVE;
+            continue;
+        }
+
+        if (battleCtx->turnFlags[i].struggling) {
+            move = MOVE_STRUGGLE;
+        } else {
+            move = BattleMon_Get(battleCtx, i, BATTLEMON_MOVE_1 + battleCtx->moveSlot[i], NULL);
+        }
+
+        battleCtx->turnStartPriority[i] = MOVE_DATA(move).priority;
+    }
 }
 
 void BattleSystem_SortMonActionOrder(BattleSystem *battleSys, BattleContext *battleCtx)

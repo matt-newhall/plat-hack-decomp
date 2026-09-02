@@ -268,6 +268,10 @@ struct BattleContext {
     u8 monSpeedOrder[MAX_BATTLERS];
     u32 monSpeedValues[MAX_BATTLERS];
 
+    u32 turnStartSpeed[MAX_BATTLERS];
+    s8 turnStartPriority[MAX_BATTLERS];
+    u8 faintedBeforeActing;
+
     u8 ioQueue[MAX_LINK_BATTLERS][MAX_BATTLERS][BATTLE_IO_QUEUE_SIZE];
     u8 ioBuffer[MAX_BATTLERS][BATTLE_IO_BUFFER_SIZE];
     int battleScript[BATTLE_SCRIPT_SIZE_MAX];

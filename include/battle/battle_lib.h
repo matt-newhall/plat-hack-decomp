@@ -1593,6 +1593,7 @@ int BattleSystem_SideToBattler(BattleSystem *battleSys, BattleContext *battleCtx
  * @param battleSys
  * @param battleCtx
  */
+void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *battleCtx);
 void BattleSystem_SortMonActionOrder(BattleSystem *battleSys, BattleContext *battleCtx);
 
 /**

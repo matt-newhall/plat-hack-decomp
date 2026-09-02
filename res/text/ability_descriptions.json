@@ -1292,6 +1292,13 @@
         "Halves the damage taken\n",
         "from special moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00185",
+      "en_US": [
+        "Boosts move power if\n",
+        "moving after the target."
+      ]
     }
   ]
 }

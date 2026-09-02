@@ -3739,6 +3739,26 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 #include "data/battle/pp_scaled_power.h"
 
 /**
+ * @brief Check whether Analytic should be assumed to boost the move being scored.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param move
+ * @return TRUE if the attacker is expected to move last.
+ */
+static BOOL TrainerAI_ExpectsAnalyticBoost(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move)
+{
+    int priority = MOVE_DATA(move).priority;
+
+    if (priority != 0) {
+        return priority < 0;
+    }
+
+    return BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) == COMPARE_SPEED_SLOWER;
+}
+
+/**
  * @brief Damage calculation routine visible to the AI.
  *
  * @param battleSys
@@ -4194,6 +4214,10 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
             damage = damage * 3 / 2;
         } else if (criticalMul == 3) {
             damage = damage * 9 / 4;
+        }
+
+        if (ability == ABILITY_ANALYTIC && TrainerAI_ExpectsAnalyticBoost(battleSys, battleCtx, attacker, move)) {
+            damage = damage * 13 / 10;
         }
     } else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;

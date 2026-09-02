@@ -789,6 +789,8 @@ static void BattleControllerPlayer_CalcTurnOrder(BattleSystem *battleSys, Battle
         }
     }
 
+    BattleSystem_RecordTurnStartSpeeds(battleSys, battleCtx);
+
     battleCtx->megaEvolutionResolved = FALSE;
     battleCtx->command = BATTLE_CONTROL_CHECK_PRE_MOVE_ACTIONS;
 }
@@ -5074,6 +5076,12 @@ static BOOL BattleControllerPlayer_AnyFainted(BattleContext *battleCtx, int next
 
         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
         battleCtx->commandNext = nextCmd;
+
+        if (battleCtx->battlerActions[battleCtx->faintedMon][BATTLE_ACTION_PICK_COMMAND] != BATTLE_CONTROL_MOVE_END
+            && battleCtx->faintedMon != battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]) {
+            battleCtx->faintedBeforeActing |= FlagIndex(battleCtx->faintedMon);
+        }
+
         battleCtx->battlerActions[battleCtx->faintedMon][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
 
         return TRUE;
