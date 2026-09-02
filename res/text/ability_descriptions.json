@@ -1285,6 +1285,13 @@
         "Increases the priority\n",
         "of healing moves."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00184",
+      "en_US": [
+        "Halves the damage taken\n",
+        "from special moves."
+      ]
     }
   ]
 }

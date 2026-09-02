@@ -9274,6 +9274,11 @@ int BattleSystem_ApplyFinalDamageModifiers(BattleSystem *battleSys, BattleContex
         damage /= 2;
     }
 
+    if (MOVE_DATA(move).class == CLASS_SPECIAL
+        && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_ICE_SCALES)) {
+        damage /= 2;
+    }
+
     battleType = BattleSystem_GetBattleType(battleSys);
 
     if (battleType & BATTLE_TYPE_DOUBLES) {
