@@ -342,6 +342,7 @@ static BOOL BtlCmd_SetupEjectPack(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
@@ -2911,6 +2912,26 @@ static inline BOOL StatStageChangeIsInverted(BattleContext *battleCtx)
 }
 
 /**
+ * @brief Check whether Simple should double an incoming stat stage change.
+ *
+ * Mold Breaker and its variants suppress the doubling when the change comes from an
+ * attacker, but not when the battler changes its own stats or is moved by its own item.
+ *
+ * @param battleCtx
+ * @return TRUE if the change should be doubled.
+ */
+static inline BOOL SimpleDoublesStatStageChange(BattleContext *battleCtx)
+{
+    int battler = battleCtx->sideEffectMon;
+
+    if (battleCtx->attacker == battler || battleCtx->sideEffectType == SIDE_EFFECT_TYPE_HELD_ITEM) {
+        return Battler_Ability(battleCtx, battler) == ABILITY_SIMPLE;
+    }
+
+    return Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battler, ABILITY_SIMPLE);
+}
+
+/**
  * @brief Try to change the stat stage for a target battler.
  *
  * This handles all of the logic related to whether or not a stat stage change
@@ -2976,6 +2997,10 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         battleCtx->scriptTemp = stageChange > 0 ? BATTLE_ANIMATION_STAT_BOOST : BATTLE_ANIMATION_STAT_DROP;
     }
 
+    if (SimpleDoublesStatStageChange(battleCtx)) {
+        stageChange *= 2;
+    }
+
     if (stageChange > 0) {
         if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == MAX_STAT_STAGE) {
             battleCtx->battleStatusMask |= SYSCTL_FAIL_STAT_STAGE_CHANGE;
@@ -2998,7 +3023,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 int msgId;
                 if (stageChange == 1) {
                     msgId = BattleStrings_Text_PokemonsStatRose_Ally;
-                } else if (stageChange == 3) {
+                } else if (stageChange >= 3) {
                     msgId = BattleStrings_Text_PokemonsStatDrasticallyRose_Ally;
                 } else {
                     msgId = BattleStrings_Text_PokemonsStatSharplyRose_Ally;
@@ -3116,7 +3141,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         int msgId;
         if (stageChange == -1) {
             msgId = BattleStrings_Text_PokemonsStatFell_Ally;
-        } else if (stageChange == -3) {
+        } else if (stageChange <= -3) {
             msgId = BattleStrings_Text_PokemonsStatSeverelyFell_Ally;
         } else {
             msgId = BattleStrings_Text_PokemonsStatHarshlyFell_Ally;
@@ -13787,6 +13812,34 @@ static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleC
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     if (Battler_Ability(battleCtx, battler) == ABILITY_CONTRARY) {
         BattleScript_Iter(battleCtx, jumpIfContrary);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Jump if the given battler has Simple.
+ *
+ * For scripts which apply a stat stage change directly instead of going through
+ * BtlCmd_ChangeStatStage, and so have to double the change themselves.
+ *
+ * Inputs:
+ * 1. The battler to check.
+ * 2. The distance to jump if that battler has Simple.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    int jumpIfSimple = BattleScript_Read(battleCtx);
+
+    int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
+    if (Battler_Ability(battleCtx, battler) == ABILITY_SIMPLE) {
+        BattleScript_Iter(battleCtx, jumpIfSimple);
     }
 
     return FALSE;

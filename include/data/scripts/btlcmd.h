@@ -261,6 +261,7 @@ ScriptCommand(BTLCMD_CHECKMEGASTONELOCKED,                BtlCmd_CheckMegaStoneL
 ScriptCommand(BTLCMD_TRYMEGAEVOLVEATTACKER,               BtlCmd_TryMegaEvolveAttacker)
 ScriptCommand(BTLCMD_CHECKCONTRARY,                       BtlCmd_CheckContrary)
 ScriptCommand(BTLCMD_PLAYENTRYANIMATION,                  BtlCmd_PlayEntryAnimation)
+ScriptCommand(BTLCMD_CHECKSIMPLE,                         BtlCmd_CheckSimple)
 
 // clang-format on
 

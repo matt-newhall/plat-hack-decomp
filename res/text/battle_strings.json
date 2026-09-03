@@ -9431,6 +9431,27 @@
         "the foe’s {STRVAR_1 1, 1, 0}\f",
         "and found its {STRVAR_1 8, 2, 0}!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemHarshlyLoweredPokemonsStat_Ally",
+      "en_US": [
+        "The {STRVAR_1 8, 1, 0} harshly lowered\n",
+        "{STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemHarshlyLoweredPokemonsStat_Wild",
+      "en_US": [
+        "The {STRVAR_1 8, 1, 0} harshly lowered\n",
+        "the wild {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_TheItemHarshlyLoweredPokemonsStat_Foe",
+      "en_US": [
+        "The {STRVAR_1 8, 1, 0} harshly lowered\n",
+        "the foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
+      ]
     }
   ]
 }

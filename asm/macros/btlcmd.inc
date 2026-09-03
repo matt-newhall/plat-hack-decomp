@@ -1392,6 +1392,12 @@
     .long (\jump_if_contrary-.) / 4 - 1
     .endm
 
+    .macro CheckSimple battler:req, jump_if_simple:req
+    .long BTLCMD_CHECKSIMPLE
+    .long \battler
+    .long (\jump_if_simple-.) / 4 - 1
+    .endm
+
     .macro PlayEntryAnimation battler:req
     .long BTLCMD_PLAYENTRYANIMATION
     .long \battler
