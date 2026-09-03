@@ -6270,7 +6270,7 @@
         "stopped evolving!\r"
       ]
     },
-    {           
+    {
       "id": "BattleStrings_Text_EllipsesEllipses",
       "en_US": "... ...?\r"
     },
@@ -9375,6 +9375,61 @@
       "en_US": [
         "The foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 1, 0}\n",
         "severely fell!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_AllyAlly",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} frisked {STRVAR_1 1, 1, 0}\n",
+        "and found its {STRVAR_1 8, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_AllyWild",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} frisked the wild\n",
+        "{STRVAR_1 1, 1, 0} and found\f",
+        "its {STRVAR_1 8, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_AllyFoe",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} frisked the foe’s\n",
+        "{STRVAR_1 1, 1, 0} and found\f",
+        "its {STRVAR_1 8, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_WildAlly",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} frisked\n",
+        "{STRVAR_1 1, 1, 0} and found\f",
+        "its {STRVAR_1 8, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_WildWild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} frisked\n",
+        "the wild {STRVAR_1 1, 1, 0}\f",
+        "and found its {STRVAR_1 8, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_FoeAlly",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} frisked\n",
+        "{STRVAR_1 1, 1, 0} and found\f",
+        "its {STRVAR_1 8, 2, 0}!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_FoeFoe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} frisked\n",
+        "the foe’s {STRVAR_1 1, 1, 0}\f",
+        "and found its {STRVAR_1 8, 2, 0}!"
       ]
     }
   ]

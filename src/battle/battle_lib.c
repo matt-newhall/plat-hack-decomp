@@ -123,7 +123,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].forewarnAnnounced = FALSE;
     battleCtx->battleMons[battler].slowStartAnnounced = FALSE;
     battleCtx->battleMons[battler].slowStartFinished = FALSE;
-    battleCtx->battleMons[battler].friskAnnounced = FALSE;
+    battleCtx->battleMons[battler].frisksAnnounced = FALSE;
     battleCtx->battleMons[battler].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
     battleCtx->battleMons[battler].newlySwitched = FALSE;
@@ -5180,35 +5180,27 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     continue;
                 }
 
-                if (battleCtx->battleMons[battler].friskAnnounced == FALSE
-                    && battleCtx->battleMons[battler].curHP
+                if (battleCtx->battleMons[battler].curHP
                     && Battler_Ability(battleCtx, battler) == ABILITY_FRISK) {
-                    battleCtx->battleMons[battler].friskAnnounced = TRUE;
+                    int enemies[] = {
+                        BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_RIGHT),
+                        BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_LEFT),
+                    };
+                    int numEnemies = (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) ? NELEMS(enemies) : 1;
 
-                    if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
-                        int enemies[] = {
-                            BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_RIGHT),
-                            BattleSystem_GetEnemyInSlot(battleSys, battler, ENEMY_IN_SLOT_LEFT),
-                        };
+                    while (battleCtx->battleMons[battler].frisksAnnounced < numEnemies) {
+                        int enemy = enemies[battleCtx->battleMons[battler].frisksAnnounced];
+                        battleCtx->battleMons[battler].frisksAnnounced++;
 
-                        if (battleCtx->battleMons[enemies[0]].curHP
-                            && battleCtx->battleMons[enemies[0]].heldItem
-                            && battleCtx->battleMons[enemies[1]].curHP
-                            && battleCtx->battleMons[enemies[1]].heldItem) {
-                            battleCtx->msgItemTemp = battleCtx->battleMons[enemies[BattleSystem_RandNext(battleSys) & 1]].heldItem;
+                        if (battleCtx->battleMons[enemy].curHP && battleCtx->battleMons[enemy].heldItem) {
+                            battleCtx->msgBuffer.id = BattleStrings_Text_PokemonFriskedPokemonAndFoundItsItem_AllyAlly; // "{0} frisked {1} and found its {2}!"
+                            battleCtx->msgBuffer.tags = TAG_NICKNAME_NICKNAME_ITEM;
+                            battleCtx->msgBuffer.params[0] = BattleSystem_NicknameTag(battleCtx, battler);
+                            battleCtx->msgBuffer.params[1] = BattleSystem_NicknameTag(battleCtx, enemy);
+                            battleCtx->msgBuffer.params[2] = battleCtx->battleMons[enemy].heldItem;
                             result = SWITCH_IN_CHECK_RESULT_BREAK;
-                        } else if (battleCtx->battleMons[enemies[0]].curHP
-                            && battleCtx->battleMons[enemies[0]].heldItem) {
-                            battleCtx->msgItemTemp = battleCtx->battleMons[enemies[0]].heldItem;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
-                        } else if (battleCtx->battleMons[enemies[1]].curHP
-                            && battleCtx->battleMons[enemies[1]].heldItem) {
-                            battleCtx->msgItemTemp = battleCtx->battleMons[enemies[1]].heldItem;
-                            result = SWITCH_IN_CHECK_RESULT_BREAK;
+                            break;
                         }
-                    } else if (battleCtx->battleMons[battler ^ 1].curHP && battleCtx->battleMons[battler ^ 1].heldItem) {
-                        battleCtx->msgItemTemp = battleCtx->battleMons[battler ^ 1].heldItem;
-                        result = SWITCH_IN_CHECK_RESULT_BREAK;
                     }
                 }
 

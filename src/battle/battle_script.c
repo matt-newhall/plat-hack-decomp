@@ -5550,7 +5550,7 @@ static BOOL BtlCmd_Transform(BattleSystem *battleSys, BattleContext *battleCtx)
     ATTACKING_MON.downloadAnnounced = FALSE;
     ATTACKING_MON.anticipationAnnounced = FALSE;
     ATTACKING_MON.forewarnAnnounced = FALSE;
-    ATTACKING_MON.friskAnnounced = FALSE;
+    ATTACKING_MON.frisksAnnounced = FALSE;
     ATTACKING_MON.moldBreakerAnnounced = FALSE;
     ATTACKING_MON.pressureAnnounced = FALSE;
     ATTACKING_MON.windRiderTailwindBoosted = FALSE;
@@ -7691,7 +7691,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->defender].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].forewarnAnnounced = FALSE;
-    battleCtx->battleMons[battleCtx->defender].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->defender].frisksAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].pressureAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].windRiderTailwindBoosted = FALSE;
@@ -7704,7 +7704,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->attacker].downloadAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].anticipationAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].forewarnAnnounced = FALSE;
-    battleCtx->battleMons[battleCtx->attacker].friskAnnounced = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].frisksAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->defender].windRiderTailwindBoosted = FALSE;
