@@ -25,7 +25,23 @@
             "player_facing_dir": "BG_EVENT_DIR_NORTH"
         }
     ],
-    "object_events": [],
+    "object_events": [
+        {
+            "id": "LOCALID_ITEM_GLALITITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_ICEBERG_RUINS_GLALITITE",
+            "script": 7323,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 3,
+            "z": 3,
+            "y": 0
+        }
+    ],
     "warp_events": [
         {
             "x": 7,
