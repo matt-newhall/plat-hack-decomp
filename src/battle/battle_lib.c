@@ -2443,6 +2443,7 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
 
     // Forcefully end the battler's turn after the replacement
     battleCtx->battlerActions[battler][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
+    battleCtx->turnFlags[battler].roosting = FALSE;
 
     if ((battleCtx->battleStatusMask & SYSCTL_BATON_PASS) == FALSE) {
         // Clear any Mean Look or Lock On effects from other active battlers
@@ -3115,6 +3116,26 @@ static u8 ResolveMoveType(BattleContext *battleCtx, int move, int inType, int at
     return MOVE_DATA(move).type;
 }
 
+/**
+ * @brief Check whether a battler counts as a given type right now.
+ *
+ * Shit override for Roost stripping the Flying type
+ *
+ * @param battleCtx
+ * @param battler
+ * @param type
+ * @return TRUE if the battler currently has the given type.
+ */
+static BOOL BattlerHasType(BattleContext *battleCtx, int battler, int type)
+{
+    if (type == TYPE_FLYING && battleCtx->turnFlags[battler].roosting) {
+        return FALSE;
+    }
+
+    return BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_1, NULL) == type
+        || BattleMon_Get(battleCtx, battler, BATTLEMON_TYPE_2, NULL) == type;
+}
+
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask)
 {
     int chartEntry;
@@ -3140,7 +3161,7 @@ int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCt
     moveType = ResolveMoveType(battleCtx, move, inType, attacker);
     movePower = MOVE_DATA(move).power;
 
-    if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && MON_HAS_TYPE(attacker, moveType)) {
+    if ((battleCtx->battleStatusMask & SYSCTL_IGNORE_TYPE_CHECKS) == FALSE && BattlerHasType(battleCtx, attacker, moveType)) {
         if (Battler_Ability(battleCtx, attacker) == ABILITY_ADAPTABILITY) {
             damage *= 2;
         } else {
@@ -7211,7 +7232,7 @@ static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
     return (Battler_Ability(battleCtx, battler) != ABILITY_LEVITATE
                 && battleCtx->battleMons[battler].moveEffectsData.magnetRiseTurns == 0
                 && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
-                && MON_IS_NOT_TYPE(battler, TYPE_FLYING))
+                && BattlerHasType(battleCtx, battler, TYPE_FLYING) == FALSE)
         || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
         || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY);
 }
