@@ -35,6 +35,7 @@
 
 static void PartyMenu_SelectSwitch(PartyMenuApplication *application, int *partyMenuState);
 static void PartyMenu_SelectSummary(PartyMenuApplication *application, int *partyMenuState);
+static void PartyMenu_SelectNickname(PartyMenuApplication *application, int *partyMenuState);
 static void PartyMenu_SelectFieldMove(PartyMenuApplication *application, int *partyMenuState);
 static void sub_02083E8C(PartyMenuApplication *application, u8 param1);
 static void sub_02083FDC(PartyMenuApplication *application, u8 param1, u8 param2);
@@ -83,7 +84,7 @@ static const PartyMenuAction sPartyMenuActions[32] = {
     PartyMenu_SelectMailTake,
     PartyMenu_SelectBallSeal,
     0xFFFFFFFE,
-    0xFFFFFFFE,
+    PartyMenu_SelectNickname,
     sub_020844B0, // select pokemon?
     sub_020845E8, // select pokemon?
     sub_020846CC, // cancel?
@@ -821,6 +822,23 @@ static void sub_020846FC(PartyMenuApplication *application, int *partyMenuState)
 static void PartyMenu_SelectSummary(PartyMenuApplication *application, int *partyMenuState)
 {
     application->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_SUMMARY;
+
+    Menu_Free(application->contextMenu, NULL);
+    StringList_Free(application->contextMenuChoices);
+
+    *partyMenuState = PARTY_MENU_STATE_32;
+}
+
+/**
+ * @brief Exits the party menu so the caller can open the naming screen for the
+ * currently selected party member.
+ *
+ * @param application
+ * @param partyMenuState
+ */
+static void PartyMenu_SelectNickname(PartyMenuApplication *application, int *partyMenuState)
+{
+    application->partyMenu->menuSelectionResult = PARTY_MENU_EXIT_CODE_NICKNAME;
 
     Menu_Free(application->contextMenu, NULL);
     StringList_Free(application->contextMenuChoices);

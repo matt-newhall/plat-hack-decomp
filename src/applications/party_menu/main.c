@@ -64,6 +64,7 @@
 #include "text.h"
 #include "touch_pad.h"
 #include "touch_screen.h"
+#include "trainer_info.h"
 #include "tv_segment.h"
 #include "unk_0206B9D8.h"
 #include "unk_0208C098.h"
@@ -1813,7 +1814,7 @@ static void sub_0207FFC8(PartyMenuApplication *application)
     u8 v1;
 
     Window_EraseMessageBox(&application->windows[32], 1);
-    v0 = Heap_Alloc(HEAP_ID_PARTY_MENU, 8);
+    v0 = Heap_Alloc(HEAP_ID_PARTY_MENU, 12);
 
     switch (application->partyMenu->mode) {
     case PARTY_MENU_MODE_FIELD:
@@ -1864,6 +1865,22 @@ static BOOL IsSummonOnlyFieldMove(u16 move)
     }
 }
 
+/**
+ * @brief Checks whether the party member in the given slot was caught by another
+ * trainer, in which case it cannot be renamed.
+ *
+ * @param application
+ * @param slot
+ * @return TRUE if the party member is an outsider.
+ */
+static BOOL IsOutsiderPartyMon(PartyMenuApplication *application, u8 slot)
+{
+    Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, slot);
+    TrainerInfo *trainerInfo = SaveData_GetTrainerInfo(application->partyMenu->fieldSystem->saveData);
+
+    return Pokemon_GetValue(mon, MON_DATA_OT_ID, NULL) != TrainerInfo_ID(trainerInfo);
+}
+
 static u8 GetContextMenuEntriesForPartyMon(PartyMenuApplication *application, u8 *menuEntriesBuffer)
 {
     Pokemon *mon = Party_GetPokemonBySlotIndex(application->partyMenu->party, application->currPartySlot);
@@ -1902,6 +1919,11 @@ static u8 GetContextMenuEntriesForPartyMon(PartyMenuApplication *application, u8
             }
 
             count++;
+
+            if (IsOutsiderPartyMon(application, application->currPartySlot) == FALSE) {
+                menuEntriesBuffer[count] = PARTY_MENU_STR_NICKNAME;
+                count++;
+            }
         } else {
             menuEntriesBuffer[count] = 0;
             count++;

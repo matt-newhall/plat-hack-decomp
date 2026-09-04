@@ -6,6 +6,7 @@
 #include "constants/field_base_tiles.h"
 #include "constants/heap.h"
 #include "constants/start_menu.h"
+#include "generated/game_records.h"
 #include "generated/genders.h"
 #include "generated/journal_location_events.h"
 #include "generated/pokemon_data_params.h"
@@ -17,6 +18,7 @@
 #include "struct_defs/struct_02097728.h"
 
 #include "applications/bag/application.h"
+#include "applications/naming_screen.h"
 #include "applications/party_menu/defs.h"
 #include "applications/party_menu/main.h"
 #include "applications/poffin_case/main.h"
@@ -178,6 +180,7 @@ static BOOL StartMenu_SelectSave(FieldTask *fieldTask);
 static void StartMenu_SaveWait(FieldTask *fieldTask);
 static void StartMenu_Save(FieldTask *fieldTask);
 static BOOL StartMenu_ExitSummary(FieldTask *fieldTask);
+static BOOL StartMenu_ExitNamingScreen(FieldTask *fieldTask);
 static void StartMenu_ShowBerryTag(FieldTask *fieldTask, u16 berryItemID);
 static BOOL StartMenu_ExitBerryTag(FieldTask *fieldTask);
 static void StartMenu_EvolveInit(FieldTask *fieldTask);
@@ -1127,6 +1130,26 @@ BOOL StartMenu_ExitPartyMenu(FieldTask *fieldTask)
         menu->taskData = FieldSystem_OpenBag(fieldSystem, &menu->itemUseCtx);
         StartMenu_SetCallback(menu, StartMenu_ExitBag);
         break;
+    case PARTY_MENU_EXIT_CODE_NICKNAME:
+        Pokemon *renamedMon = Party_GetPokemonBySlotIndex(SaveData_GetParty(fieldSystem->saveData), partyMenu->selectedMonSlot);
+        NamingScreenArgs *namingScreenArgs = NamingScreenArgs_Init(
+            HEAP_ID_FIELD2,
+            NAMING_SCREEN_TYPE_POKEMON,
+            Pokemon_GetValue(renamedMon, MON_DATA_SPECIES, NULL),
+            MON_NAME_LEN,
+            SaveData_GetOptions(fieldSystem->saveData));
+
+        namingScreenArgs->monGender = Pokemon_GetValue(renamedMon, MON_DATA_GENDER, NULL);
+        namingScreenArgs->monForm = Pokemon_GetValue(renamedMon, MON_DATA_FORM, NULL);
+
+        u32 *renamedSlot = Heap_Alloc(HEAP_ID_FIELD2, sizeof(u32));
+        *renamedSlot = partyMenu->selectedMonSlot;
+        menu->additionalTaskContext = renamedSlot;
+
+        FieldSystem_StartChildProcess(fieldSystem, &gNamingScreenAppTemplate, namingScreenArgs);
+        menu->taskData = namingScreenArgs;
+        StartMenu_SetCallback(menu, StartMenu_ExitNamingScreen);
+        break;
     default:
         if (partyMenu->mode == PARTY_MENU_MODE_USE_ITEM || partyMenu->mode == PARTY_MENU_MODE_TEACH_MOVE || partyMenu->mode == PARTY_MENU_MODE_TEACH_MOVE_DONE || partyMenu->mode == PARTY_MENU_MODE_USE_EVO_ITEM || partyMenu->mode == PARTY_MENU_MODE_LEVEL_MOVE_DONE) {
             menu->taskData = FieldSystem_OpenBag(fieldSystem, &menu->itemUseCtx);
@@ -1522,6 +1545,36 @@ static BOOL StartMenu_ExitSummary(FieldTask *fieldTask)
     }
 
     Heap_Free(summary);
+
+    return FALSE;
+}
+
+/**
+ * @brief Applies the nickname entered on the naming screen, then returns to the
+ * party menu on the Pokemon that was renamed.
+ *
+ * @param fieldTask
+ * @return Always FALSE.
+ */
+static BOOL StartMenu_ExitNamingScreen(FieldTask *fieldTask)
+{
+    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(fieldTask);
+    StartMenu *menu = FieldTask_GetEnv(fieldTask);
+    NamingScreenArgs *namingScreenArgs = menu->taskData;
+    u32 slot = *(u32 *)menu->additionalTaskContext;
+
+    if (namingScreenArgs->returnCode == NAMING_SCREEN_CODE_OK) {
+        Pokemon *mon = Party_GetPokemonBySlotIndex(SaveData_GetParty(fieldSystem->saveData), slot);
+        Pokemon_SetValue(mon, MON_DATA_NICKNAME_STRING_AND_FLAG, namingScreenArgs->textInputStr);
+        GameRecords_IncrementRecordValue(SaveData_GetGameRecords(fieldSystem->saveData), RECORD_POKEMON_NICKNAMED);
+    }
+
+    NamingScreenArgs_Free(namingScreenArgs);
+    Heap_Free(menu->additionalTaskContext);
+    menu->additionalTaskContext = NULL;
+
+    menu->taskData = FieldSystem_OpenPartyMenu(fieldSystem, &menu->fieldMoveContext, slot);
+    StartMenu_SetCallback(menu, StartMenu_ExitPartyMenu);
 
     return FALSE;
 }
