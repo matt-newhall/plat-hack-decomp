@@ -86,6 +86,10 @@ AmitySquare_SetGiftManPosition3:
     End
 
 AmitySquare_Trigger_WestGate:
+AmitySquare_Trigger_EastGate:
+    End
+
+AmitySquare_Trigger_WestGate_Unused:
     LockAll
     SetVar VAR_0x8001, 1
     ApplyMovement LOCALID_PLAYER, AmitySquare_Movement_PlayerWalkOnSpotWest
@@ -93,7 +97,7 @@ AmitySquare_Trigger_WestGate:
     GoTo AmitySquare_CheckHasNationalDex
     End
 
-AmitySquare_Trigger_EastGate:
+AmitySquare_Trigger_EastGate_Unused:
     LockAll
     SetVar VAR_0x8001, 2
     ApplyMovement LOCALID_PLAYER, AmitySquare_Movement_PlayerWalkOnSpotEast
@@ -549,7 +553,7 @@ AmitySquare_Receptionist:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    BufferPartyMonNickname 0, VAR_FOLLOWER_MON_PARTY_ID
+    BufferPartyMonNickname 0, 0
     GetRandom VAR_RESULT, 6
     CallIfEq VAR_RESULT, 0, AmitySquare_YourPokemonLooksQuitePleasedFollowingYouAround
     CallIfEq VAR_RESULT, 1, AmitySquare_OkTheOwnerOfAmitySquare
