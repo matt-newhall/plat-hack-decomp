@@ -1398,6 +1398,11 @@
     .long (\jump_if_simple-.) / 4 - 1
     .endm
 
+    .macro MarkEntryAbilitiesAnnounced battler:req
+    .long BTLCMD_MARKENTRYABILITIESANNOUNCED
+    .long \battler
+    .endm
+
     .macro PlayEntryAnimation battler:req
     .long BTLCMD_PLAYENTRYANIMATION
     .long \battler

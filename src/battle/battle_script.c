@@ -343,6 +343,7 @@ static BOOL BtlCmd_CheckMegaStoneLocked(BattleSystem *battleSys, BattleContext *
 static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_MarkEntryAbilitiesAnnounced(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
@@ -10143,7 +10144,8 @@ static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *bat
         || faintedAbility == ABILITY_FLOWER_GIFT
         || faintedAbility == ABILITY_FORECAST
         || faintedAbility == ABILITY_TRACE
-        || faintedAbility == ABILITY_POWER_OF_ALCHEMY) {
+        || faintedAbility == ABILITY_POWER_OF_ALCHEMY
+        || faintedAbility == ABILITY_IMPOSTER) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
@@ -13841,6 +13843,41 @@ static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx
     if (Battler_Ability(battleCtx, battler) == ABILITY_SIMPLE) {
         BattleScript_Iter(battleCtx, jumpIfSimple);
     }
+
+    return FALSE;
+}
+
+/**
+ * @brief Mark every switch-in ability effect as already announced for a battler.
+ *
+ * Inputs:
+ * 1. The battler to mark.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_MarkEntryAbilitiesAnnounced(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+
+    BattleMon *mon = &battleCtx->battleMons[BattleScript_Battler(battleSys, battleCtx, inBattler)];
+
+    mon->weatherAbilityAnnounced = TRUE;
+    mon->intimidateAnnounced = TRUE;
+    mon->costarAnnounced = TRUE;
+    mon->unnerveAnnounced = TRUE;
+    mon->cloudNineAnnounced = TRUE;
+    mon->downloadAnnounced = TRUE;
+    mon->anticipationAnnounced = TRUE;
+    mon->forewarnAnnounced = TRUE;
+    mon->frisksAnnounced = 2;
+    mon->moldBreakerAnnounced = TRUE;
+    mon->pressureAnnounced = TRUE;
+    mon->neutralizingGasAnnounced = TRUE;
+    mon->windRiderTailwindBoosted = TRUE;
+    mon->slowStartAnnounced = TRUE;
 
     return FALSE;
 }

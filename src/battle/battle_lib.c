@@ -124,6 +124,7 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].slowStartAnnounced = FALSE;
     battleCtx->battleMons[battler].slowStartFinished = FALSE;
     battleCtx->battleMons[battler].frisksAnnounced = FALSE;
+    battleCtx->battleMons[battler].imposterAnnounced = FALSE;
     battleCtx->battleMons[battler].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battler].pressureAnnounced = FALSE;
     battleCtx->battleMons[battler].newlySwitched = FALSE;
@@ -4601,6 +4602,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_MOLD_BREAKER,
     SWITCH_IN_CHECK_STATE_PRESSURE,
     SWITCH_IN_CHECK_STATE_UNNERVE,
+    SWITCH_IN_CHECK_STATE_IMPOSTER,
     SWITCH_IN_CHECK_STATE_WIND_RIDER,
     SWITCH_IN_CHECK_STATE_ROOM_SERVICE,
     SWITCH_IN_CHECK_STATE_AIR_BALLOON,
@@ -5295,6 +5297,36 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     subscript = subscript_unnerve;
                     result = TRUE;
                     break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
+            break;
+
+        case SWITCH_IN_CHECK_STATE_IMPOSTER:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                if (battleCtx->skillSwapPending &&
+                    battler != battlerSkillSwapper) {
+                    continue;
+                }
+
+                // can only try when initially switching in
+                if (battleCtx->battleMons[battler].imposterAnnounced == FALSE
+                    && battleCtx->battleMons[battler].curHP
+                    && Battler_Ability(battleCtx, battler) == ABILITY_IMPOSTER) {
+                    battleCtx->battleMons[battler].imposterAnnounced = TRUE;
+
+                    if (battleCtx->battleMons[battler ^ 1].curHP) {
+                        battleCtx->attacker = battler;
+                        battleCtx->defender = battler ^ 1;
+                        battleCtx->msgBattlerTemp = battler;
+                        subscript = subscript_imposter;
+                        result = SWITCH_IN_CHECK_RESULT_BREAK;
+                        break;
+                    }
                 }
             }
 
@@ -10240,6 +10272,7 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         && battleCtx->battleMons[defender1].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
         && battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
+        && battleCtx->battleMons[defender1].ability != ABILITY_IMPOSTER
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
@@ -10247,7 +10280,8 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         && battleCtx->battleMons[defender2].ability != ABILITY_FLOWER_GIFT
         && battleCtx->battleMons[defender2].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE
-        && battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS) {
+        && battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS
+        && battleCtx->battleMons[defender2].ability != ABILITY_IMPOSTER) {
         // Both targets are eligible; choose randomly
         if (BattleSystem_RandNext(battleSys) & 1) {
             trace = defender2;
@@ -10260,7 +10294,8 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         && battleCtx->battleMons[defender1].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender1].curHP
         && battleCtx->battleMons[defender1].ability != ABILITY_MULTITYPE
-        && battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS) {
+        && battleCtx->battleMons[defender1].ability != ABILITY_NEUTRALIZING_GAS
+        && battleCtx->battleMons[defender1].ability != ABILITY_IMPOSTER) {
         trace = defender1;
     } else if (battleCtx->battleMons[defender2].ability != ABILITY_FORECAST
         && battleCtx->battleMons[defender2].ability != ABILITY_TRACE
@@ -10268,7 +10303,8 @@ static int ChooseTraceTarget(BattleSystem *battleSys, BattleContext *battleCtx, 
         && battleCtx->battleMons[defender2].ability != ABILITY_POWER_OF_ALCHEMY
         && battleCtx->battleMons[defender2].curHP
         && battleCtx->battleMons[defender2].ability != ABILITY_MULTITYPE
-        && battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS) {
+        && battleCtx->battleMons[defender2].ability != ABILITY_NEUTRALIZING_GAS
+        && battleCtx->battleMons[defender2].ability != ABILITY_IMPOSTER) {
         trace = defender2;
     }
 

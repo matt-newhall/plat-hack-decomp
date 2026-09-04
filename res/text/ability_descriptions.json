@@ -1313,6 +1313,13 @@
         "Prevents effects caused\n",
         "by making contact."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00188",
+      "en_US": [
+        "Transforms into the foe\n",
+        "upon entering battle."
+      ]
     }
   ]
 }

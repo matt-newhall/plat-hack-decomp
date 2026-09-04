@@ -348,5 +348,6 @@ subscript_files = files(
     'subscript_overworld_inverse.s',
     'subscript_mega_evolution.s',
     'subscript_moody.s',
-    'subscript_cursed_body.s'
+    'subscript_cursed_body.s',
+    'subscript_imposter.s'
 )
