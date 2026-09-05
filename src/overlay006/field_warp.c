@@ -279,9 +279,6 @@ static void CreateJournalEntryForTeleport(FieldSystem *fieldSystem, FieldWarp *f
     if (fieldWarp->warpType != FIELD_WARP_TYPE_TELEPORT) {
         return;
     }
-
-    void *journalEntryLocationEvent = JournalEntry_CreateEventUsedMove(FIELD_MOVE_TELEPORT, fieldSystem->location->mapId, HEAP_ID_FIELD1);
-    JournalEntry_SaveData(fieldSystem->journalEntry, journalEntryLocationEvent, JOURNAL_LOCATION);
 }
 
 static enum FieldWarpStateResult StartFadeIn(FieldTask *task, FieldSystem *fieldSystem, FieldWarp *fieldWarp)
