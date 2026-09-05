@@ -7,14 +7,13 @@
     ScriptEntry VeilstoneCityPrizeExchange_Receptionist
     ScriptEntry VeilstoneCityPrizeExchange_Guitarist
     ScriptEntry VeilstoneCityPrizeExchange_OldMan
-    ScriptEntry VeilstoneCityPrizeExchange_AceTrainer
     ScriptEntryEnd
 
 VeilstoneCityPrizeExchange_Receptionist:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    SetVar VAR_MAP_LOCAL_1, 19
+    SetVar VAR_MAP_LOCAL_1, 6
     Message VeilstoneCityPrizeExchange_Text_ExchangeCoinsForPrizes
     ShowCoins 21, 1
     SetVar VAR_0x8005, 0
@@ -167,20 +166,5 @@ VeilstoneCityPrizeExchange_OldMan:
     NPCMessage VeilstoneCityPrizeExchange_Text_IHaveNoCoins
     End
 
-VeilstoneCityPrizeExchange_AceTrainer:
-    PlaySE SEQ_SE_CONFIRM
-    LockAll
-    FacePlayer
-    Message VeilstoneCityPrizeExchange_Text_BlockPrizes
-    WaitButton
-    CloseMessage
-    ApplyMovement LOCALID_ACE_TRAINER_M, VeilstoneCityPrizeExchange_Movement_AceTrainerFaceNorth
-    WaitMovement
-    ReleaseAll
-    End
-
-VeilstoneCityPrizeExchange_Movement_AceTrainerFaceNorth:
-    FaceNorth
-    EndMovement
 
     .balign 4, 0
