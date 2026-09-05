@@ -173,12 +173,11 @@ Route209_RefuseGoodRod:
     End
 
 Route209_AcceptGoodRod:
-    BufferItemName 0, VAR_0x8004
     Message Route209_Text_TakeThisGoodRod
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
-    SetFlag FLAG_GOOD_ROD_OBTAINED
-    GoTo Route209_AskExplainHowToFish
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
 
 Route209_ArrowSignpostHearthomeCity:
     ShowArrowSign Route209_Text_SignRt209HearthomeCity

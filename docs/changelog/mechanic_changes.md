@@ -15,10 +15,7 @@ Here is the list of bonus/later generation mechanics implemented in Pokemon Temp
 - Attract disregards gender, and works on genderless Pokemon.
 - Added Magma Storm, Trick Room, enemy Tailwind and Sun Overworld Weather Conditions.
 - Destiny Bond will not fail if successfully executed on the previous turn.
-- 3 abilities are now unavailable: Frisk, Simple, Pickup.
-  - Frisk was too annoying to implement.
-  - Simple was too annoying to implement.
-  - Pickup has been removed for being too overpowered for a Nuzlocke with the latest similar item tables.
+- Pickup has been removed for being too overpowered for a Nuzlocke with the latest similar item tables.
 - The following abilities' overworld effects act the same way they did as of generation VIII:
   - Intimidate and Keen Eye still decrease random wild encounter rate by 50%.
   - Sand Veil and Snow Cloak still decrease random wild encounter rate when in overworld Sandstorm and Hail weather respectively by 50%.

@@ -651,7 +651,7 @@
     },
     {
       "id": "pl_msg_00000610_00162",
-      "en_US": "Punk Rock"
+      "en_US": "Reverberate"
     },
     {
       "id": "pl_msg_00000610_00163",
@@ -720,6 +720,42 @@
     {
       "id": "pl_msg_00000610_00179",
       "en_US": "Moody"
+    },
+    {
+      "id": "pl_msg_00000610_00180",
+      "en_US": "Sharpness"
+    },
+    {
+      "id": "pl_msg_00000610_00181",
+      "en_US": "Aura Guard"
+    },
+    {
+      "id": "pl_msg_00000610_00182",
+      "en_US": "Cursed Body"
+    },
+    {
+      "id": "pl_msg_00000610_00183",
+      "en_US": "Triage"
+    },
+    {
+      "id": "pl_msg_00000610_00184",
+      "en_US": "Ice Scales"
+    },
+    {
+      "id": "pl_msg_00000610_00185",
+      "en_US": "Analytic"
+    },
+    {
+      "id": "pl_msg_00000610_00186",
+      "en_US": "Wonder Skin"
+    },
+    {
+      "id": "pl_msg_00000610_00187",
+      "en_US": "Long Reach"
+    },
+    {
+      "id": "pl_msg_00000610_00188",
+      "en_US": "Imposter"
     }
   ]
 }

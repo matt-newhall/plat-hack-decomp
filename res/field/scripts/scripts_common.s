@@ -962,7 +962,6 @@ _0C93:
     AddListMenuEntry MenuEntries_Text_PC_ChangeNature, 5
     AddListMenuEntry 24, 6
     AddListMenuEntry 25, 7
-    AddListMenuEntry MenuEntries_Text_PC_ChangeNickname, 8
     AddListMenuEntry 64, 9
     ShowListMenu
     SetVar VAR_0x8008, VAR_0x8006
@@ -974,7 +973,6 @@ _0C93:
     GoToIfEq VAR_0x8008, 5, _PCChangeNatureHandler
     GoToIfEq VAR_0x8008, 6, PreDamageHandler
     GoToIfEq VAR_0x8008, 7, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 8, _PCRenameHandler
     GoTo _0F70
 
 _0CDD:
@@ -982,7 +980,6 @@ _0CDD:
     AddListMenuEntry MenuEntries_Text_PC_ChangeNature, 4
     AddListMenuEntry 24, 5
     AddListMenuEntry 25, 6
-    AddListMenuEntry MenuEntries_Text_PC_ChangeNickname, 7
     AddListMenuEntry 64, 8
     ShowListMenu
     SetVar VAR_0x8008, VAR_0x8006
@@ -993,7 +990,6 @@ _0CDD:
     GoToIfEq VAR_0x8008, 4, _PCChangeNatureHandler
     GoToIfEq VAR_0x8008, 5, PreDamageHandler
     GoToIfEq VAR_0x8008, 6, VolatileStatus_Submenu
-    GoToIfEq VAR_0x8008, 7, _PCRenameHandler
     GoTo _0F70
 
 _0D16:
@@ -1153,26 +1149,6 @@ PreDamageHandler:
     OpenPartyMenuForSetHP
     ReturnToField
     Call _0F80
-    GoTo _0C1C
-
-_PCRenameHandler:
-    CloseMessage
-    Call _0F94
-    SelectMoveTutorPokemon
-    GetSelectedPartySlot VAR_0x8008
-    ReturnToField
-    Call _0F80
-    GoToIfEq VAR_0x8008, 0xFF, _0C1C
-    GetPartyMonSpecies VAR_0x8008, VAR_RESULT
-    GoToIfEq VAR_RESULT, SPECIES_NONE, _PCRename_Egg
-    CheckIsPartyMonOutsider VAR_0x8008, VAR_RESULT
-    GoToIfEq VAR_RESULT, TRUE, _PCRename_Outsider
-    SetVar VAR_RESULT, 0
-    Call _0F94
-    OpenPokemonNamingScreen VAR_0x8008, VAR_RESULT
-    Call _0F80
-    GoToIfEq VAR_RESULT, 1, _0C1C
-    IncrementGameRecord RECORD_POKEMON_NICKNAMED
     GoTo _0C1C
 
 _PCMaximiseIVHandler:
@@ -1338,18 +1314,6 @@ _PCChangeNature_Failed:
 
 _PCChangeNature_NoHeartScales:
     Message CommonStrings_Text_PCChangeNatureNoHeartScales
-    WaitButton
-    CloseMessage
-    GoTo _0C1C
-
-_PCRename_Egg:
-    Message CommonStrings_Text_PCCannotRenameEgg
-    WaitButton
-    CloseMessage
-    GoTo _0C1C
-
-_PCRename_Outsider:
-    Message CommonStrings_Text_PCCannotRenameOutsider
     WaitButton
     CloseMessage
     GoTo _0C1C

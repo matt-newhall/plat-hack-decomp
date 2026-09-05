@@ -560,6 +560,21 @@ u16 BattleAI_CalcFlailPower(int curHP, int maxHP);
 int BattleSystem_ApplyTypeChart(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage, u32 *moveStatusMask);
 
 /**
+ * @brief Apply the damage modifiers which belong after type effectiveness in
+ * the modifier order: the attacker's burn, then the "other" slot.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param move
+ * @param inType            If this is non-zero, then it will be regarded as the move's type
+ * @param attacker
+ * @param defender
+ * @param damage            Damage after the type chart has been applied
+ * @return Damage value after applying the burn and "other" multipliers
+ */
+int BattleSystem_ApplyFinalDamageModifiers(BattleSystem *battleSys, BattleContext *battleCtx, int move, int inType, int attacker, int defender, int damage);
+
+/**
  * @brief Calculate the effectiveness mask of the given move.
  *
  * @param battleCtx
@@ -851,6 +866,7 @@ BOOL Battler_CheckTruant(BattleContext *battleCtx, int battler);
  * @return TRUE if any of the battler's opponents has used Imprison and also
  * knows the requested move; FALSE otherwise.
  */
+BOOL Move_MakesContact(BattleContext *battleCtx, int attacker, int move);
 BOOL Move_Imprisoned(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
 
 /**
@@ -906,6 +922,14 @@ BOOL Move_FailsInHighGravity(BattleSystem *battleSys, BattleContext *battleCtx, 
  * fail due to such afflicition; FALSE otherwise
  */
 BOOL Move_HealBlocked(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move);
+
+/**
+ * @brief Check if a given move has its priority raised by Triage.
+ *
+ * @param move  The move to be executed
+ * @return TRUE if the move is a healing move which Triage boosts; FALSE otherwise
+ */
+BOOL Move_TriageBoosted(int move);
 
 /**
  * @brief Update buffers for the attacking Pokemon related to Last Resort.
@@ -1570,6 +1594,7 @@ int BattleSystem_SideToBattler(BattleSystem *battleSys, BattleContext *battleCtx
  * @param battleSys
  * @param battleCtx
  */
+void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *battleCtx);
 void BattleSystem_SortMonActionOrder(BattleSystem *battleSys, BattleContext *battleCtx);
 
 /**

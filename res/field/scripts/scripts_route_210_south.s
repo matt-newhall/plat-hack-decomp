@@ -440,6 +440,8 @@ Route210South_ExhibitionVictory:
     Message Route210South_Text_CommentatorVictoryComment
     WaitButton
     CloseMessage
+    CallIfEq VAR_0x8006, 0, Route210South_ExhibitionOtherLeaderRejoinWhitney
+    CallIfEq VAR_0x8006, 1, Route210South_ExhibitionOtherLeaderRejoinFalkner
     ApplyMovement LOCALID_FALKNER, Route210South_Movement_LeaderLeaveSouth
     ApplyMovement LOCALID_WHITNEY, Route210South_Movement_LeaderLeaveSouth
     ApplyMovement LOCALID_COMMENTATOR, Route210South_Movement_LeaderLeaveSouth
@@ -481,6 +483,12 @@ Route210South_ExhibitionRewardFalkner:
     SetVar VAR_0x8004, ITEM_TM08
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
+    Message Route210South_Text_FalknerMegaStoneFirst
+    Call Route210South_ExhibitionGivePidgeotite
+    ApplyMovement LOCALID_WHITNEY, Route210South_Movement_OtherLeaderApproach
+    WaitMovement
+    Message Route210South_Text_WhitneyMegaStoneSecond
+    Call Route210South_ExhibitionGiveLopunnite
     Return
 
 Route210South_ExhibitionRewardWhitney:
@@ -492,6 +500,38 @@ Route210South_ExhibitionRewardWhitney:
     SetVar VAR_0x8004, ITEM_TM42
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
+    Message Route210South_Text_WhitneyMegaStoneFirst
+    Call Route210South_ExhibitionGiveLopunnite
+    ApplyMovement LOCALID_FALKNER, Route210South_Movement_OtherLeaderApproach
+    WaitMovement
+    Message Route210South_Text_FalknerMegaStoneSecond
+    Call Route210South_ExhibitionGivePidgeotite
+    Return
+
+Route210South_ExhibitionGivePidgeotite:
+    WaitButton
+    CloseMessage
+    SetVar VAR_0x8004, ITEM_PIDGEOTITE
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    Return
+
+Route210South_ExhibitionGiveLopunnite:
+    WaitButton
+    CloseMessage
+    SetVar VAR_0x8004, ITEM_LOPUNNITE
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    Return
+
+Route210South_ExhibitionOtherLeaderRejoinWhitney:
+    ApplyMovement LOCALID_WHITNEY, Route210South_Movement_OtherLeaderRejoin
+    WaitMovement
+    Return
+
+Route210South_ExhibitionOtherLeaderRejoinFalkner:
+    ApplyMovement LOCALID_FALKNER, Route210South_Movement_OtherLeaderRejoin
+    WaitMovement
     Return
 
 Route210South_Commentator:
@@ -577,6 +617,19 @@ Route210South_Movement_SpectatorFaceSouth:
     .balign 4, 0
 Route210South_Movement_LeaderWalkUp:
     WalkNormalEast 3
+    EndMovement
+
+    .balign 4, 0
+Route210South_Movement_OtherLeaderApproach:
+    WalkNormalSouth
+    WalkNormalEast 3
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
+Route210South_Movement_OtherLeaderRejoin:
+    WalkNormalWest 2
+    WalkNormalSouth
     EndMovement
 
     .balign 4, 0

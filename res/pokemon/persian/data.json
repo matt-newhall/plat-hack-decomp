@@ -7,7 +7,7 @@
         "special_attack": 65,
         "special_defense": 65
     },
-    "types": [ "TYPE_NORMAL", "TYPE_NORMAL" ],
+    "types": [ "TYPE_NORMAL", "TYPE_DARK" ],
     "catch_rate": 90,
     "base_exp_reward": 148,
     "ev_yields": {
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_FIELD", "EGG_GROUP_FIELD" ],
-    "abilities": [ "ABILITY_LIMBER", "ABILITY_TECHNICIAN" ],
+    "abilities": [ "ABILITY_DEFIANT", "ABILITY_TECHNICIAN" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_YELLOW",
     "flip_sprite": false,

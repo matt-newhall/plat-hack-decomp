@@ -91,7 +91,7 @@ typedef struct BattleMon {
     u32 forewarnAnnounced : 1;
     u32 slowStartAnnounced : 1;
     u32 slowStartFinished : 1;
-    u32 friskAnnounced : 1;
+    u32 frisksAnnounced : 2;
     u32 moldBreakerAnnounced : 1;
     u32 pressureAnnounced : 1;
     u32 unnerveAnnounced : 1;
@@ -100,6 +100,7 @@ typedef struct BattleMon {
     u32 neutralizingGasAnnounced : 1;
     u32 airBalloonAnnounced : 1;
     u32 cloudNineAnnounced : 1;
+    u32 imposterAnnounced : 1;
 
     u8 ppCur[LEARNED_MOVES_MAX];
     u8 ppUps[LEARNED_MOVES_MAX];

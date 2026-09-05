@@ -14,9 +14,6 @@ Route218GateToJubilifeCity_Fisherman:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    SetVar VAR_0x8004, ITEM_OLD_ROD
-    BufferItemName 0, VAR_0x8004
-    GoToIfSet FLAG_OLD_ROD_OBTAINED, Route218GateToJubilifeCity_DidYouNeedTips
     Message Route218GateToJubilifeCity_Text_OldRodGoodRight
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_YES, Route218GateToJubilifeCity_AcceptOldRod
@@ -53,11 +50,10 @@ Route218GateToJubilifeCity_RefuseOldRod:
     End
 
 Route218GateToJubilifeCity_AcceptOldRod:
-    BufferItemName 0, VAR_0x8004
     Message Route218GateToJubilifeCity_Text_HereYouGo
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
-    SetFlag FLAG_OLD_ROD_OBTAINED
-    GoTo Route218GateToJubilifeCity_DidYouNeedTips
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
 
     .balign 4, 0

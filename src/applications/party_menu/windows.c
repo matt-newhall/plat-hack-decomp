@@ -744,7 +744,7 @@ void PartyMenu_LoadContextMenuStrings(PartyMenuApplication *application)
     LoadMenuString(PartyMenu_Text_MailTake, PARTY_MENU_STR_MAIL_TAKE);
     LoadMenuString(PartyMenu_Text_MailStore, PARTY_MENU_STR_MAIL_STORE);
     LoadMenuString(PartyMenu_Text_ContextCancel, PARTY_MENU_STR_CANCEL);
-    LoadMenuString(PartyMenu_Text_Separator, PARTY_MENU_STR_SEPARATOR);
+    LoadMenuString(PartyMenu_Text_Nickname, PARTY_MENU_STR_NICKNAME);
     LoadMenuString(PartyMenu_Text_Enter, PARTY_MENU_STR_ENTER);
     LoadMenuString(PartyMenu_Text_NoEntry, PARTY_MENU_STR_NO_ENTRY);
     LoadMenuString(PartyMenu_Text_Enter, PARTY_MENU_STR_ENTER_2);

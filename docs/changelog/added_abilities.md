@@ -58,3 +58,6 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Contrary
 - Sheer Force
 - Moody
+- Sharpness
+- Aura Guard
+- Cursed Body

@@ -611,6 +611,9 @@ PalParkLobby_BattleWon:
     Message PalParkLobby_Text_CounterpartWins_Line1
     WaitButton
     CloseMessage
+    CallIfEq VAR_0x8007, 0, PalParkLobby_GiveCounterpartMegaStone
+    CallIfEq VAR_0x8007, 1, PalParkLobby_GiveBarryMegaStone
+    CallIfEq VAR_0x8007, 2, PalParkLobby_GivePaulMegaStone
     FadeScreenOut
     WaitFadeScreen
     PlaySE SEQ_SE_DP_KAIDAN2
@@ -625,6 +628,25 @@ PalParkLobby_BattleWon:
     WaitFadeScreen
     ReleaseAll
     End
+
+PalParkLobby_GiveCounterpartMegaStone:
+    SetVar VAR_0x8004, ITEM_DRAGONINITE
+    GoTo PalParkLobby_GiveMegaStone
+
+PalParkLobby_GiveBarryMegaStone:
+    SetVar VAR_0x8004, ITEM_SALAMENCITE
+    GoTo PalParkLobby_GiveMegaStone
+
+PalParkLobby_GivePaulMegaStone:
+    SetVar VAR_0x8004, ITEM_METAGROSSITE
+    GoTo PalParkLobby_GiveMegaStone
+
+PalParkLobby_GiveMegaStone:
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
+    WaitButton
+    CloseMessage
+    Return
 
     .balign 4, 0
 PalParkLobby_Movement_PaulNoticePlayer:

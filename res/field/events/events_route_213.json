@@ -486,8 +486,8 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_MAX_REVIVE",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "id": "LOCALID_ITEM_SHARPEDONITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_OBTAINED_ROUTE_213_MAX_REVIVE",
@@ -496,8 +496,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 686,
-            "z": 851,
+            "x": 723,
+            "z": 852,
             "y": 0
         },
         {

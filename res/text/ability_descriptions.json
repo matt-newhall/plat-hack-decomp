@@ -1257,6 +1257,69 @@
         "Raises a stat sharply and\n",
         "lowers another each turn."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00180",
+      "en_US": [
+        "Boosts the power of\n",
+        "slicing moves."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00181",
+      "en_US": [
+        "Guards itself with aura,\n",
+        "halving contact damage."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00182",
+      "en_US": [
+        "Chance to disable moves\n",
+        "from attackers."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00183",
+      "en_US": [
+        "Increases the priority\n",
+        "of healing moves."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00184",
+      "en_US": [
+        "Halves the damage taken\n",
+        "from special moves."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00185",
+      "en_US": [
+        "Boosts move power if\n",
+        "moving after the target."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00186",
+      "en_US": [
+        "Lowers the accuracy of\n",
+        "opposing status moves"
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00187",
+      "en_US": [
+        "Prevents effects caused\n",
+        "by making contact."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00188",
+      "en_US": [
+        "Transforms into the foe\n",
+        "upon entering battle."
+      ]
     }
   ]
 }

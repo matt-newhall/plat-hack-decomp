@@ -789,6 +789,8 @@ static void BattleControllerPlayer_CalcTurnOrder(BattleSystem *battleSys, Battle
         }
     }
 
+    BattleSystem_RecordTurnStartSpeeds(battleSys, battleCtx);
+
     battleCtx->megaEvolutionResolved = FALSE;
     battleCtx->command = BATTLE_CONTROL_CHECK_PRE_MOVE_ACTIONS;
 }
@@ -2493,6 +2495,14 @@ static int BattleControllerPlayer_CheckTypeChart(BattleSystem *battleSys, Battle
             battleCtx->damage,
             &battleCtx->moveStatusFlags);
 
+        battleCtx->damage = BattleSystem_ApplyFinalDamageModifiers(battleSys,
+            battleCtx,
+            battleCtx->moveCur,
+            battleCtx->moveType,
+            battleCtx->attacker,
+            battleCtx->defender,
+            battleCtx->damage);
+
         if (battleCtx->moveStatusFlags & MOVE_STATUS_INEFFECTIVE) {
             battleCtx->moveFailFlags[battleCtx->attacker].noEffect = TRUE;
         }
@@ -3085,12 +3095,6 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     s8 accStages = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ACCURACY] - 6;
     s8 evaStages = 6 - battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_EVASION];
 
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_SIMPLE) {
-        accStages *= 2;
-    }
-    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_SIMPLE) == TRUE) {
-        evaStages *= 2;
-    }
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_UNAWARE) == TRUE) {
         accStages = 0;
     }
@@ -3134,6 +3138,12 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     if ((Battler_Ability(battleCtx, attacker) == ABILITY_MEGA_SOL || (NO_CLOUD_NINE && WEATHER_IS_SUN)) && 
         (MOVE_DATA(move).effect == BATTLE_EFFECT_THUNDER
         || MOVE_DATA(move).effect == BATTLE_EFFECT_HURRICANE)) {
+        hitRate = 50;
+    }
+
+    if (moveClass == CLASS_STATUS
+        && hitRate > 50
+        && Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_WONDER_SKIN) == TRUE) {
         hitRate = 50;
     }
 
@@ -3247,7 +3257,7 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
         battleCtx->moveStatusFlags |= MOVE_STATUS_PROTECTED;
 
         if (battleCtx->turnFlags[defender].spikyShielding
-            && (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
+            && Move_MakesContact(battleCtx, attacker, move)
             && !(Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_IGNORE_CONTACT)
             && battleCtx->battleMons[attacker].curHP
             && Battler_Ability(battleCtx, attacker) != ABILITY_MAGIC_GUARD) {
@@ -3259,7 +3269,7 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
         if (battleCtx->turnFlags[defender].silkTrapping
             && battleCtx->battleMons[attacker].curHP
             && !(Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_IGNORE_CONTACT)) {
-            battleCtx->hpCalcTemp = (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT) ? 1 : 0;
+            battleCtx->hpCalcTemp = Move_MakesContact(battleCtx, attacker, move) ? 1 : 0;
         }
 
         return 0;
@@ -5066,6 +5076,12 @@ static BOOL BattleControllerPlayer_AnyFainted(BattleContext *battleCtx, int next
 
         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
         battleCtx->commandNext = nextCmd;
+
+        if (battleCtx->battlerActions[battleCtx->faintedMon][BATTLE_ACTION_PICK_COMMAND] != BATTLE_CONTROL_MOVE_END
+            && battleCtx->faintedMon != battleCtx->battlerActionOrder[battleCtx->turnOrderCounter]) {
+            battleCtx->faintedBeforeActing |= FlagIndex(battleCtx->faintedMon);
+        }
+
         battleCtx->battlerActions[battleCtx->faintedMon][BATTLE_ACTION_PICK_COMMAND] = BATTLE_CONTROL_MOVE_END;
 
         return TRUE;

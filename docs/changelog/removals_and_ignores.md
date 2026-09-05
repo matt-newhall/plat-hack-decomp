@@ -102,18 +102,6 @@ The effects of Dire Hit are once again unaffected by Haze. *Removed Dire Hit/mad
 
 Wild Pokémon cannot remove held items of the player's Pokémon. *Rom hack mechanic is such that items are always removed*
 
-**Roost**
-
-If a Flying-type Pokémon successfully uses Roost, it will now lose its Flying type until the end of the turn *Only relevant for mono-Flying Pokemon, of which there are none*
-
-If a Pokémon is ungrounded only due to its Flying type, successfully using Roost will make it grounded until the end of the turn. *No practical gen IV effects, e.g. Rototiller, Terrain, etc*
-
-**Spit Up, Stockpile**
-
-For each Stockpile that successfully changed a defensive stat, that stat will drop by two stages if the Pokémon has Simple at the time of using Swallow. *Removed Simple*
-
-The Stockpile removal is now shown as a stat change. *Visual change only*
-
 **Switcheroo, Trick, Covet, Thief**
 
 No longer switch a Trainer's Pokémon's items permanently; however, items switched in wild battles are permanently switched. *Rom hack mechanic is such that items are always removed*

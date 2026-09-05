@@ -7,7 +7,7 @@
         "special_attack": 50,
         "special_defense": 60
     },
-    "types": [ "TYPE_NORMAL", "TYPE_FLYING" ],
+    "types": [ "TYPE_FIGHTING", "TYPE_FLYING" ],
     "catch_rate": 45,
     "base_exp_reward": 172,
     "ev_yields": {

@@ -43,11 +43,11 @@
     ],
     "object_events": [
         {
-            "id": "LOCALID_ITEM_NUGGET",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "id": "LOCALID_ITEM_CHARIZARDITE_X",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_VICTORY_ROAD_1F_ROOM_2_NUGGET",
+            "hidden_flag": "FLAG_OBTAINED_VICTORY_ROAD_1F_ROOM_2_CHARIZARDITE_X",
             "script": 7193,
             "initial_dir": 0,
             "data": [],

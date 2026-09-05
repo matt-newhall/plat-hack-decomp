@@ -2887,6 +2887,10 @@ static BOOL AI_MovesBeforeTarget(BattleSystem *battleSys, BattleContext *battleC
         priority++;
     }
 
+    if (ability == ABILITY_TRIAGE && Move_TriageBoosted(AI_CONTEXT.move)) {
+        priority += 3;
+    }
+
     if (priority != 0) {
         return priority > 0;
     }
@@ -3517,7 +3521,9 @@ static void AICmd_IfCurrentMoveHasPriority(BattleSystem *battleSys, BattleContex
     if (MOVE_DATA(AI_CONTEXT.move).priority > 0
         || (Battler_Ability(battleCtx, attacker) == ABILITY_GALE_WINGS
             && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
-            && mon->curHP == mon->maxHP)) {
+            && mon->curHP == mon->maxHP)
+        || (Battler_Ability(battleCtx, attacker) == ABILITY_TRIAGE
+            && Move_TriageBoosted(AI_CONTEXT.move))) {
         AIScript_Iter(battleCtx, jump);
     }
 }
@@ -3731,6 +3737,26 @@ static s32 TrainerAI_CalcAllDamage(BattleSystem *battleSys, BattleContext *battl
 
 #include "data/battle/weight_to_power.h"
 #include "data/battle/pp_scaled_power.h"
+
+/**
+ * @brief Check whether Analytic should be assumed to boost the move being scored.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param move
+ * @return TRUE if the attacker is expected to move last.
+ */
+static BOOL TrainerAI_ExpectsAnalyticBoost(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move)
+{
+    int priority = MOVE_DATA(move).priority;
+
+    if (priority != 0) {
+        return priority < 0;
+    }
+
+    return BattleSystem_CompareBattlerSpeed(battleSys, battleCtx, attacker, AI_CONTEXT.defender, TRUE) == COMPARE_SPEED_SLOWER;
+}
 
 /**
  * @brief Damage calculation routine visible to the AI.
@@ -4189,6 +4215,10 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         } else if (criticalMul == 3) {
             damage = damage * 9 / 4;
         }
+
+        if (ability == ABILITY_ANALYTIC && TrainerAI_ExpectsAnalyticBoost(battleSys, battleCtx, attacker, move)) {
+            damage = damage * 13 / 10;
+        }
     } else {
         battleCtx->battleStatusMask |= SYSCTL_IGNORE_TYPE_CHECKS;
     }
@@ -4201,6 +4231,13 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         AI_CONTEXT.defender,
         damage,
         &effectivenessFlags);
+    damage = BattleSystem_ApplyFinalDamageModifiers(battleSys,
+        battleCtx,
+        move,
+        type,
+        attacker,
+        AI_CONTEXT.defender,
+        damage);
     battleCtx->battleStatusMask &= ~SYSCTL_IGNORE_TYPE_CHECKS;
 
     if (effectivenessFlags & MOVE_STATUS_IMMUNE) {

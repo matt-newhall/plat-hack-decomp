@@ -7,7 +7,7 @@
         "special_attack": 100,
         "special_defense": 82
     },
-    "types": [ "TYPE_BUG", "TYPE_FLYING" ],
+    "types": [ "TYPE_BUG", "TYPE_WATER" ],
     "catch_rate": 75,
     "base_exp_reward": 128,
     "ev_yields": {
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_WATER_1", "EGG_GROUP_BUG" ],
-    "abilities": [ "ABILITY_INTIMIDATE", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_INTIMIDATE", "ABILITY_UNNERVE" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLUE",
     "flip_sprite": false,

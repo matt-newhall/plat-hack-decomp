@@ -304,17 +304,10 @@ FightArea_Fisherman:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    BufferItemName 0, ITEM_SUPER_ROD
-    GoToIfSet FLAG_SUPER_ROD_OBTAINED, FightArea_AdviceForFishing
     Message FightArea_Text_SuperRoodReallyGood
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_NO, FightArea_DontYouLikeToFish
     Message FightArea_Text_TakeThisSuperRod
-    SetVar VAR_0x8004, ITEM_SUPER_ROD
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
-    SetFlag FLAG_SUPER_ROD_OBTAINED
-    Message FightArea_Text_TryLuckAtFishing
     WaitButton
     CloseMessage
     ReleaseAll

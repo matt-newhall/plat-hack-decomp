@@ -335,11 +335,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_FULL_RESTORE",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
+            "id": "LOCALID_ITEM_FERALIGITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_B1F_FULL_RESTORE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_B1F_FERALIGITE",
             "script": 7154,
             "initial_dir": 0,
             "data": [],
