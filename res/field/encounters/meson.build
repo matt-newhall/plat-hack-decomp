@@ -193,6 +193,7 @@ pl_enc_data_srcs = files(
     'encounters_oreburgh_city.json',
     'encounters_snowpoint_city.json',
     'encounters_survival_area.json',
+    'encounters_fight_area.json',
 )
 
 pl_enc_tbl_narc = custom_target('pl_enc_data.narc',
