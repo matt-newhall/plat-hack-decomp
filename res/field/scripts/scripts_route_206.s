@@ -356,12 +356,13 @@ Route206_SkirmishZoneMenu:
     CloseMessage
     ReleaseAll
     End
-   
+
  Route206_ChallengeSkirmishZone:
     GoToIfSet FLAG_WAYWARD_CAVE_SKIMISH_ZONE_ENTERED, Route206_AlreadyChallengedZone
     Message Route206_Text_KnockEmDead
     WaitButton
     CloseMessage
+    SetFlag FLAG_PORTA_PC_DISABLED
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 309, Route206_ChallengeZoneX309
     GoToIfEq VAR_0x8004, 311, Route206_ChallengeZoneX311

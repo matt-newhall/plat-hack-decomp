@@ -33,6 +33,7 @@ WaywardCave1F_BattleMira:
     WaitButton
     CloseMessage
     SetFlag FLAG_SKIRMISH_MIRA_DEFEATED
+    ClearFlag FLAG_PORTA_PC_DISABLED
     SetVar VAR_EXITING_SKIRMISH_ZONE_SUCCESS 1
     FadeScreenOut
     WaitFadeScreen
@@ -43,6 +44,7 @@ WaywardCave1F_BattleMira:
     End
 
 WaywardCave_BlackOutMiraBattle:
+    ClearFlag FLAG_PORTA_PC_DISABLED
     BlackOutFromBattle
     ReleaseAll
     End
@@ -56,6 +58,7 @@ WaywardCave1F_Roy:
 
 WaywardCave1F_GiveUp:
     SetVar VAR_EXITING_SKIRMISH_ZONE_SUCCESS 1
+    ClearFlag FLAG_PORTA_PC_DISABLED
     FadeScreenOut
     WaitFadeScreen
     Warp MAP_HEADER_ROUTE_206, 0, 310, 609, DIR_NORTH
