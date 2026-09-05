@@ -25,14 +25,6 @@ _002E:
     End
 
 RotomsRoom_InitFlags:
-    SetFlag FLAG_ROTOM_ROOM_HIDE_MICROWAVE_OVEN
-    SetFlag FLAG_ROTOM_ROOM_HIDE_WASHING_MACHINE
-    SetFlag FLAG_ROTOM_ROOM_HIDE_REFRIGERATOR
-    SetFlag FLAG_ROTOM_ROOM_HIDE_ROTARY_FAN
-    SetFlag FLAG_ROTOM_ROOM_HIDE_LAWN_MOWER
-    CheckDistributionEvent DISTRIBUTION_EVENT_ROTOM, VAR_MAP_LOCAL_0
-    GoToIfEq VAR_MAP_LOCAL_0, FALSE, _00A5
-    GetRotomFormsInSave VAR_MAP_LOCAL_0, VAR_MAP_LOCAL_1, VAR_MAP_LOCAL_2, VAR_MAP_LOCAL_3, VAR_MAP_LOCAL_4
     CallIfEq VAR_MAP_LOCAL_0, FALSE, RotomsRoom_InitShowMicrowaveOven
     CallIfEq VAR_MAP_LOCAL_1, FALSE, RotomsRoom_InitShowWashingMachine
     CallIfEq VAR_MAP_LOCAL_2, FALSE, RotomsRoom_InitShowRefrigerator
@@ -107,8 +99,6 @@ RotomsRoom_CheckAppliance:
     CheckPartyHasSpecies VAR_RESULT, SPECIES_ROTOM
     GoToIfEq VAR_RESULT, FALSE, RotomsRoom_ItsAnAppliance
     CheckItem ITEM_SECRET_KEY, 1, VAR_RESULT
-    GoToIfEq VAR_RESULT, FALSE, RotomsRoom_ItsAnAppliance
-    CheckDistributionEvent DISTRIBUTION_EVENT_ROTOM, VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, RotomsRoom_ItsAnAppliance
     CallIfEq LOCALID_ROTOM_FORM, ROTOM_FORM_HEAT, RotomsRoom_ItsAMicrowaveOvenRotomWantsToGoIntoTheMotor
     CallIfEq LOCALID_ROTOM_FORM, ROTOM_FORM_FROST, RotomsRoom_ItsARefrigeratorRotomWantsToGoIntoTheMotor
