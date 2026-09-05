@@ -204,7 +204,7 @@
     ScriptEntry VisibleItems_Route225_FullRestore
     ScriptEntry VisibleItems_Route225_PPUp
     ScriptEntry VisibleItems_Route225_LaxIncense
-    ScriptEntry VisibleItems_Route225_DubiousDisc
+    ScriptEntry VisibleItems_Route225_HeartScale
     ScriptEntry VisibleItems_Route225_Manectite
     ScriptEntry VisibleItems_Route225_ShedShell
     ScriptEntry VisibleItems_Route226_TM53
@@ -267,7 +267,7 @@
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding2F_XSpeed
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding3F_XSpecial
     ScriptEntry VisibleItems_TeamGalacticEternaBuilding4F_BlueShard
-    ScriptEntry VisibleItems_TeamGalacticEternaBuilding4F_Upgrade
+    ScriptEntry VisibleItems_TeamGalacticEternaBuilding4F_SecretKey
     ScriptEntry VisibleItems_OldChateauDiningArea_Eviolite
     ScriptEntry VisibleItems_OldChateauDiningArea_BigPearl
     ScriptEntry VisibleItems_Route209_Ether
@@ -299,12 +299,12 @@
     ScriptEntry VisibleItems_Route217_BrightPowder
     ScriptEntry VisibleItems_GalacticHQ3F_GreenShard
     ScriptEntry VisibleItems_GalacticHQLaboratory_FullRestore
-    ScriptEntry VisibleItems_GalacticHQ1F_DubiousDisc
+    ScriptEntry VisibleItems_GalacticHQ1F_Ether
     ScriptEntry VisibleItems_GalacticHQ2F_GreenShard
     ScriptEntry VisibleItems_Route222_QuickBall
     ScriptEntry VisibleItems_Route222_PPUp
     ScriptEntry VisibleItems_Route223_HeartScale
-    ScriptEntry VisibleItems_Route224_Upgrade
+    ScriptEntry VisibleItems_Route224_MaxElixir
     ScriptEntry VisibleItems_Route224_RepeatBall
     ScriptEntry VisibleItems_Route224_PPMax
     ScriptEntry VisibleItems_Route224_UltraBall
@@ -1551,8 +1551,8 @@ VisibleItems_Route225_LaxIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route225_DubiousDisc:
-    SetVar VAR_0x8008, ITEM_DUBIOUS_DISC
+VisibleItems_Route225_HeartScale:
+    SetVar VAR_0x8008, ITEM_HEART_SCALE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1929,8 +1929,8 @@ VisibleItems_TeamGalacticEternaBuilding4F_BlueShard:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_TeamGalacticEternaBuilding4F_Upgrade:
-    SetVar VAR_0x8008, ITEM_UPGRADE
+VisibleItems_TeamGalacticEternaBuilding4F_SecretKey:
+    SetVar VAR_0x8008, ITEM_SECRET_KEY
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2121,8 +2121,8 @@ VisibleItems_GalacticHQLaboratory_FullRestore:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_GalacticHQ1F_DubiousDisc:
-    SetVar VAR_0x8008, ITEM_DUBIOUS_DISC
+VisibleItems_GalacticHQ1F_Ether:
+    SetVar VAR_0x8008, ITEM_ETHER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2151,8 +2151,8 @@ VisibleItems_Route223_HeartScale:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route224_Upgrade:
-    SetVar VAR_0x8008, ITEM_UPGRADE
+VisibleItems_Route224_MaxElixir:
+    SetVar VAR_0x8008, ITEM_MAX_ELIXIR
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

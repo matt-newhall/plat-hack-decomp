@@ -173,11 +173,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_DUBIOUS_DISC",
+            "id": "LOCALID_ITEM_ETHER",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_GALACTIC_HQ_1F_DUBIOUS_DISC",
+            "hidden_flag": "FLAG_OBTAINED_GALACTIC_HQ_1F_ETHER",
             "script": 7297,
             "initial_dir": 0,
             "data": [],

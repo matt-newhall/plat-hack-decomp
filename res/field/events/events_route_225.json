@@ -129,11 +129,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_DUBIOUS_DISC",
+            "id": "LOCALID_ITEM_HEART_SCALE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_225_DUBIOUS_DISC",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_225_HEART_SCALE",
             "script": 7202,
             "initial_dir": 0,
             "data": [],

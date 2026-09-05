@@ -20,7 +20,7 @@ EternaCitySouthHouse_ProfOak:
     ApplyMovement LOCALID_PROF_OAK, EternaCitySouthHouse_Movement_EmoteExclamationMark
     WaitMovement
     Message EternaCitySouthHouse_Text_AnAcquaintanceFromKantoHasSentSomethingQuiteInteresting
-    SetVar VAR_0x8004, ITEM_UPGRADE
+    SetVar VAR_0x8004, ITEM_OVAL_STONE
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, EternaCitySouthHouse_BagIsFull
     Common_GiveItemQuantity
