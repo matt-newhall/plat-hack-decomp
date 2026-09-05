@@ -454,10 +454,22 @@ Basic_CheckLowStatStage_Evasion:
     IfLoadedEqualTo ABILITY_NO_GUARD, ScoreMinus10
 
 Basic_CheckClearBodyEffect:
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
+    // Mold Breaker suppresses all three of these when the drop comes from its user's move.
+    // Contrary does not waste the drop, it inverts it, so the move hands the target a boost.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckClearBodyEffect_Terminate
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
-    PopOrEnd 
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
+
+Basic_CheckClearBodyEffect_Terminate:
+    PopOrEnd
 
 Basic_CheckStatStageImbalance:
     // The name is a little esoteric; an "imbalance" is regarded as the attacker
@@ -970,13 +982,19 @@ Basic_CheckCanRefreshStatus:
     PopOrEnd 
 
 Basic_CheckTickle:
-    // If the target's ability is Clear Body or White Smoke and the attacker's ability is not
-    // Mold Breaker, score -10.
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
+    // If the target's ability is Clear Body, White Smoke or Contrary and the attacker's ability
+    // is not Mold Breaker, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckTickle_CheckStatStages
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
 
 Basic_CheckTickle_CheckStatStages:
     // If the target's Attack is at -6, score -10.
@@ -1458,14 +1476,20 @@ Basic_CheckTrickRoom:
     PopOrEnd 
 
 Basic_CheckCaptivate:
-    // If the target's ability is any of Oblivious, Clear Body, or White Smoke and the attacker's
-    // ability is not Mold Breaker, score -10.
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
+    // If the target's ability is any of Oblivious, Clear Body, White Smoke or Contrary and the
+    // attacker's ability is not Mold Breaker, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckGender
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus10
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
 
 Basic_CheckCaptivate_CheckGender:
     // If the target and the attacker share gender or the target has no gender, score -10.
@@ -1809,6 +1833,10 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STICKY_WEB, Expert_StickyWeb
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAKE_SHARED_MOVES_UNUSEABLE, Expert_Imprison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_SP_DEF_2_HIT, Expert_AcidSpray
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_ContrarySelfDrop
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_ContrarySelfDrop
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_ContrarySelfDrop
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_HIT, Expert_ContrarySelfDrop
 
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STAT_REDUCTION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CALL_RANDOM_MOVE, Expert_StatusMoveBonus
@@ -2294,13 +2322,31 @@ Expert_AttackDropOnHit_CheckBestDamage:
     FlagBestDamageMove
     IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_AttackDropOnHit_End
 
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
+
+    // Contrary, Defiant and Competitive do not waste the drop, they turn it into a boost for
+    // the target, so the move is worse than an attack which earns no drop bonus at all.
+    // Only Contrary is suppressed by Mold Breaker.
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_AttackDropOnHit_ScoreMinus5
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_AttackDropOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AttackDropOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
+    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_CheckClass
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_AttackDropOnHit_ScoreMinus5
+
+Expert_AttackDropOnHit_CheckClass:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit_CheckPhysical
     IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_AttackDropOnHit_ScorePlus6
     GoTo Expert_AttackDropOnHit_ScorePlus5
+
+Expert_AttackDropOnHit_ScoreMinus5:
+    AddToMoveScore -5
+    PopOrEnd
 
 Expert_AttackDropOnHit_CheckPhysical:
     IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_AttackDropOnHit_ScorePlus6
@@ -2374,13 +2420,31 @@ Expert_SpeedDownOnHit_CheckBestDamage:
 
     // Otherwise the drop is what buys the turn, and it buys the most when it takes the speed
     // lead off a target which cannot shrug the drop off.
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
+
+    // Contrary, Defiant and Competitive do not waste the drop, they turn it into a boost for
+    // the target, so the move is worse than an attack which earns no drop bonus at all.
+    // Only Contrary is suppressed by Mold Breaker.
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_SpeedDownOnHit_ScoreMinus5
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_SpeedDownOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_SpeedDownOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
+    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_CheckSpeed
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_SpeedDownOnHit_ScoreMinus5
+
+Expert_SpeedDownOnHit_CheckSpeed:
     IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedDownOnHit_ScorePlus5
     AddToMoveScore 6
     GoTo Expert_SpeedDownOnHit_CheckDoubles
+
+Expert_SpeedDownOnHit_ScoreMinus5:
+    AddToMoveScore -5
+    PopOrEnd
 
 Expert_SpeedDownOnHit_ScorePlus5:
     AddToMoveScore 5
@@ -2397,6 +2461,43 @@ Expert_SpeedDownOnHit_ScorePlus1:
     AddToMoveScore 1
 
 Expert_SpeedDownOnHit_End:
+    PopOrEnd
+
+Expert_ContrarySelfDrop:
+    // These moves pay for their damage by lowering the user's own stats, so Contrary turns the
+    // drawback into a free boost and the move buys an attack and a setup turn in one slot.
+    // Only pay for it while the stats it would raise still have room to move.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_ContrarySelfDrop_End
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_ContrarySelfDrop_SpAttack
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_ContrarySelfDrop_AttackDefense
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_ContrarySelfDrop_DefenseSpDefense
+    GoTo Expert_ContrarySelfDrop_Speed
+
+Expert_ContrarySelfDrop_SpAttack:
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, Expert_ContrarySelfDrop_ScorePlus2
+    PopOrEnd
+
+Expert_ContrarySelfDrop_AttackDefense:
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Expert_ContrarySelfDrop_ScorePlus2
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
+    PopOrEnd
+
+Expert_ContrarySelfDrop_DefenseSpDefense:
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
+    PopOrEnd
+
+Expert_ContrarySelfDrop_Speed:
+    // Under Trick Room the extra Speed is a liability rather than a reward.
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_ContrarySelfDrop_End
+    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Expert_ContrarySelfDrop_ScorePlus2
+    PopOrEnd
+
+Expert_ContrarySelfDrop_ScorePlus2:
+    AddToMoveScore 2
+
+Expert_ContrarySelfDrop_End:
     PopOrEnd
 
 
@@ -2735,6 +2836,26 @@ Expert_MetalBurst_ScorePlus2:
 
 Expert_AcidSpray:
     IfMoveNotEqualTo MOVE_ACID_SPRAY, Expert_AcidSpray_End
+
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AcidSpray_End
+
+    // Mold Breaker suppresses all three of the abilities below, leaving the drop to land as
+    // normal.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_AcidSpray_ScorePlus6
+
+    // Clear Body and White Smoke blank the drop, so the move earns nothing beyond its damage.
+    // Contrary inverts it into a +2 Sp. Def boost for the target, which is the opposite of what
+    // the bonus is paying for.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AcidSpray_End
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AcidSpray_End
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
+
+Expert_AcidSpray_ScorePlus6:
     AddToMoveScore 6
 
 Expert_AcidSpray_End:
