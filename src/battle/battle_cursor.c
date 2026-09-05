@@ -85,6 +85,8 @@ typedef struct {
     u8 unk_03;
 } UnkStruct_ov16_022702F4;
 
+typedef const u8 (*MenuButtonLayout)[2];
+
 typedef struct {
     u16 unk_00;
     u16 unk_02;
@@ -202,7 +204,7 @@ typedef struct UnkStruct_ov16_02268A14_t {
     SysTask *unk_10;
     UnkStruct_ov16_02268A14_sub1 unk_14;
     UnkStruct_ov16_02268A14_sub2 unk_1A;
-    u16 *unk_3C[7];
+    u16 *unk_3C[8];
     u16 *unk_58;
     u16 *unk_5C;
     u16 *unk_60;
@@ -323,6 +325,8 @@ static void ov16_0226B1C4(UnkStruct_ov16_02268A14 *param0, int param1, int param
 static void ov16_0226B1E8(UnkStruct_ov16_02268A14 *param0);
 static void ov16_0226B390(SysTask *param0, void *param1);
 static void ov16_0226B4E0(SysTask *param0, void *param1);
+static void MegaButtonPressTask(SysTask *param0, void *param1);
+static void BattleSystem_ShowMegaButton(UnkStruct_ov16_02268A14 *param0, NARC *objNarc, BOOL armed);
 static void ov16_0226B780(SysTask *param0, void *param1);
 static void ov16_0226B264(UnkStruct_ov16_02268A14 *param0, int param1, u8 *param2, int param3);
 static void ov16_0226B20C(UnkStruct_ov16_02268A14 *param0, u8 *param1, int param2);
@@ -351,6 +355,7 @@ static int BattleSystem_Cursor_Moves(UnkStruct_ov16_02268A14 *param0, BOOL curso
 static int BattleSystem_Cursor_Battler(UnkStruct_ov16_02268A14 *param0, BOOL cursorHidden);
 static int BattleSystem_Cursor_YesNo(UnkStruct_ov16_02268A14 *param0, BOOL cursorHidden);
 static u32 BattleSystem_MoveCursor(MenuCursor *cursor, int width, int height, const u8 *layout);
+static MenuButtonLayout MoveMenuButtonLayout(const UnkStruct_ov16_02268A14 *param0);
 static void ov16_0226C0A0(UnkStruct_ov16_02268A14 *param0, int param1);
 static void ov16_0226C378(UnkStruct_ov16_02268A14 *param0, int param1);
 static void ov16_0226C9B8(UnkStruct_ov16_02268A14 *param0, int param1);
@@ -560,14 +565,63 @@ __attribute__((aligned(4))) static const u8 sMoveMenuButtonLayout[3][2] = {
     { 0x0, 0x0 }
 };
 
+#define BAR_TILE_HFLIP 0x400
+#define BAR_TILE_EMPTY 0x2FF
+
+#define BAR_ROW_FIRST 0x13
+#define BAR_ROW_PRESS 0x12
+
+#define CANCEL_BUTTON_COL_LEFT  0x1
+#define CANCEL_BUTTON_COL_RIGHT 0x17
+#define MEGA_BUTTON_COL_LEFT    0x19
+#define MEGA_BUTTON_COL_RIGHT   0x1E
+
+#define CANCEL_BUTTON_LABEL_X 100
+#define BAR_LABEL_Y           178
+
+#define MEGA_BUTTON_X 224
+#define MEGA_BUTTON_Y 176
+
+#define MOVE_MENU_TILEMAP      3
+#define MOVE_MENU_MEGA_TILEMAP 7
+
+#define BAR_BUTTON_PLTT_SLOT 4
+
+#define MEGA_BUTTON_CHAR_RESOURCE 0x4E60
+#define MEGA_BUTTON_PLTT_RESOURCE 0x4E61
+#define MEGA_BUTTON_CELL_RESOURCE 0x4E62
+
+__attribute__((aligned(4))) static const u16 sBarRowTiles[] = {
+    0x3D,
+    0x5D,
+    0x7D,
+    0x7D,
+    0x9D
+};
+
 static const TouchScreenRect sMoveMenuMegaTouchRects[] = {
-    { 0x98, 0xC0, 0x8, 0xF8 },
+    { 0x98, 0xC0, 0x8, 0xBF },
     { 0x18, 0x50, 0x0, 0x80 },
     { 0x18, 0x50, 0x80, 0xFF },
     { 0x58, 0x90, 0x0, 0x80 },
     { 0x58, 0x90, 0x80, 0xFF },
-    { 0x0, 0x18, 0xD8, 0xFF },
+    { 0x98, 0xC0, 0xC8, 0xF7 },
     { 0xFF, 0x0, 0x0, 0x0 }
+};
+
+__attribute__((aligned(4))) static const u8 sMoveMenuMegaButtonLayout[3][2] = {
+    { 0x1, 0x2 },
+    { 0x3, 0x4 },
+    { 0x0, 0x5 }
+};
+
+__attribute__((aligned(4))) static const UnkStruct_ov16_022702F4 sMoveMenuMegaPressRects[] = {
+    { 0x2, 0x9, 0x0, 0xF },
+    { 0x2, 0x9, 0x10, 0x1F },
+    { 0xA, 0x11, 0x0, 0xF },
+    { 0xA, 0x11, 0x10, 0x1F },
+    { BAR_ROW_PRESS, 0x17, CANCEL_BUTTON_COL_LEFT, CANCEL_BUTTON_COL_RIGHT },
+    { BAR_ROW_PRESS, 0x17, MEGA_BUTTON_COL_LEFT, MEGA_BUTTON_COL_RIGHT }
 };
 
 static const int sMoveMenuMegaTouchResults[NELEMS(sMoveMenuMegaTouchRects) - 1] = {
@@ -580,12 +634,12 @@ static const int sMoveMenuMegaTouchResults[NELEMS(sMoveMenuMegaTouchRects) - 1] 
 };
 
 __attribute__((aligned(4))) static const u8 sMoveMenuMegaTouchPalettes[NELEMS(sMoveMenuMegaTouchRects) - 1] = {
-    0x4,
+    BAR_BUTTON_PLTT_SLOT,
     0x8,
     0x9,
     0xA,
     0xB,
-    0x4
+    BAR_BUTTON_PLTT_SLOT
 };
 
 static const TouchScreenRect Unk_ov16_0227024C[] = {
@@ -902,13 +956,13 @@ static const UnkStruct_ov16_02270670 Unk_ov16_02270670[] = {
         ov16_02269E94,
         ov16_0226A634,
     },
-    // MENU_MOVE_SELECT_MEGA: as MENU_MOVE_SELECT above, sharing its background tilemap.
-    // The Mega Evolution button is drawn over it as a sprite, so only the touch regions
-    // differ. Appended last so that no existing menu index moves.
+    // MENU_MOVE_SELECT_MEGA: as MENU_MOVE_SELECT above, but drawn from the tilemap whose
+    // bottom bar is split into a Mega Evolution button and a narrower Cancel button.
+    // Appended last so that no existing menu index moves.
     {
         0x1C,
         0xF2,
-        { 0x3, 0xFFFF, 0x0, 0xFFFF },
+        { MOVE_MENU_MEGA_TILEMAP, 0xFFFF, 0x0, 0xFFFF },
         { 0x2, 0x1, 0x3, 0x0 },
         sMoveMenuMegaTouchRects,
         sMoveMenuMegaTouchResults,
@@ -920,52 +974,54 @@ static const UnkStruct_ov16_02270670 Unk_ov16_02270670[] = {
     },
 };
 
-#define MEGA_BUTTON_X 240
-#define MEGA_BUTTON_Y 12
-
-#define MEGA_BUTTON_CHAR_RESOURCE 0x4E60
-#define MEGA_BUTTON_PLTT_RESOURCE 0x4E61
-#define MEGA_BUTTON_CELL_RESOURCE 0x4E62
-
-static const SpriteTemplate sMegaButtonSpriteTemplate = {
-    MEGA_BUTTON_X,
-    MEGA_BUTTON_Y,
-    0x0,
-    0x0,
-    0x64,
-    0x0,
-    NNS_G2D_VRAM_TYPE_2DSUB,
-    { MEGA_BUTTON_CHAR_RESOURCE, MEGA_BUTTON_PLTT_RESOURCE, MEGA_BUTTON_CELL_RESOURCE, MEGA_BUTTON_CELL_RESOURCE, 0xFFFFFFFF, 0xFFFFFFFF },
-    0x1,
-    0x0,
-};
-
-void BattleSystem_HideMegaButton(UnkStruct_ov16_02268A14 *param0);
-
-static void BattleSystem_ShowMegaButton(UnkStruct_ov16_02268A14 *param0, NARC *objNarc, BOOL armed)
+/**
+ * @brief Stamp one 9-sliced button across a single row of the move menu's bottom bar.
+ *
+ * @param tilemap  Tilemap buffer to draw into.
+ * @param row      Destination row.
+ * @param baseTile Left cap tile for this row; the shoulder and fill tiles follow it.
+ * @param left     Leftmost column of the button.
+ * @param right    Rightmost column of the button.
+ * @param pltt     Palette slot to draw the button in.
+ */
+static void StampBarButton(u16 *tilemap, int row, u16 baseTile, int left, int right, int pltt)
 {
-    SpriteSystem *spriteSys = BattleSystem_GetSpriteSystem(param0->battleSys);
-    SpriteManager *spriteMan = BattleSystem_GetSpriteManager(param0->battleSys);
+    u16 *dest = &tilemap[row * 32];
+    int col;
 
-    if (param0->megaButton != NULL) {
-        return;
+    dest[left] = baseTile | (pltt << 12);
+    dest[left + 1] = (baseTile + 1) | (pltt << 12);
+
+    for (col = left + 2; col < right - 1; col++) {
+        dest[col] = (baseTile + 2) | (pltt << 12);
     }
 
-    SpriteSystem_LoadCharResObjFromOpenNarc(spriteSys, spriteMan, objNarc,
-        armed ? interface_mega_icon_NCGR_lz : interface_mega_icon_dim_NCGR_lz,
-        TRUE, NNS_G2D_VRAM_TYPE_2DSUB, MEGA_BUTTON_CHAR_RESOURCE);
-    SpriteSystem_LoadPaletteBufferFromOpenNarc(BattleSystem_GetPaletteData(param0->battleSys), 3, spriteSys, spriteMan, objNarc,
-        armed ? interface_mega_icon_NCLR : interface_mega_icon_dim_NCLR,
-        FALSE, 1, NNS_G2D_VRAM_TYPE_2DSUB, MEGA_BUTTON_PLTT_RESOURCE);
-    SpriteSystem_LoadCellResObjFromOpenNarc(spriteSys, spriteMan, objNarc,
-        interface_mega_icon_cell_NCER_lz,
-        TRUE, MEGA_BUTTON_CELL_RESOURCE);
-    SpriteSystem_LoadAnimResObjFromOpenNarc(spriteSys, spriteMan, objNarc,
-        misc_single_frame_anim_NANR_lz_6,
-        TRUE, MEGA_BUTTON_CELL_RESOURCE);
+    dest[right - 1] = (baseTile + 1) | BAR_TILE_HFLIP | (pltt << 12);
+    dest[right] = baseTile | BAR_TILE_HFLIP | (pltt << 12);
+}
 
-    param0->megaButton = SpriteSystem_NewSprite(spriteSys, spriteMan, &sMegaButtonSpriteTemplate);
-    Sprite_SetPositionXYWithSubscreenOffset(param0->megaButton->sprite, MEGA_BUTTON_X, MEGA_BUTTON_Y, (192 + 80) << FX32_SHIFT);
+/**
+ * @brief Build the move menu tilemap used when Mega Evolution is on offer.
+ *
+ * @param dest Tilemap buffer to build into.
+ * @param src  The standard move menu tilemap.
+ */
+static void BuildMegaMenuTilemap(u16 *dest, const u16 *src)
+{
+    int i, col;
+
+    MI_CpuCopy32(src, dest, 0x800);
+
+    for (i = 0; i < NELEMS(sBarRowTiles); i++) {
+        int row = BAR_ROW_FIRST + i;
+
+        for (col = CANCEL_BUTTON_COL_LEFT; col <= MEGA_BUTTON_COL_RIGHT; col++) {
+            dest[row * 32 + col] = BAR_TILE_EMPTY;
+        }
+
+        StampBarButton(dest, row, sBarRowTiles[i], CANCEL_BUTTON_COL_LEFT, CANCEL_BUTTON_COL_RIGHT, BAR_BUTTON_PLTT_SLOT);
+        StampBarButton(dest, row, sBarRowTiles[i], MEGA_BUTTON_COL_LEFT, MEGA_BUTTON_COL_RIGHT, BAR_BUTTON_PLTT_SLOT);
+    }
 }
 
 #define MEGA_HUD_CHAR_RESOURCE 0x4E63
@@ -1025,6 +1081,52 @@ static void BattleSystem_ShowMegaHudIcon(UnkStruct_ov16_02268A14 *param0, Pokemo
     ManagedSprite_SetPositionXYWithSubscreenOffset(param0->megaIcon, x, y, (192 + 80) << FX32_SHIFT);
 
     NARC_dtor(narc);
+}
+
+static const SpriteTemplate sMegaButtonSpriteTemplate = {
+    MEGA_BUTTON_X,
+    MEGA_BUTTON_Y,
+    0x0,
+    0x0,
+    0x64,
+    0x0,
+    NNS_G2D_VRAM_TYPE_2DSUB,
+    { MEGA_BUTTON_CHAR_RESOURCE, MEGA_BUTTON_PLTT_RESOURCE, MEGA_BUTTON_CELL_RESOURCE, MEGA_BUTTON_CELL_RESOURCE, 0xFFFFFFFF, 0xFFFFFFFF },
+    0x1,
+    0x0,
+};
+
+/**
+ * @brief Draw the Mega Evolution symbol on its button, lit when armed and dimmed when not.
+ *
+ * @param param0
+ * @param objNarc
+ * @param armed
+ */
+static void BattleSystem_ShowMegaButton(UnkStruct_ov16_02268A14 *param0, NARC *objNarc, BOOL armed)
+{
+    SpriteSystem *spriteSys = BattleSystem_GetSpriteSystem(param0->battleSys);
+    SpriteManager *spriteMan = BattleSystem_GetSpriteManager(param0->battleSys);
+
+    if (param0->megaButton != NULL) {
+        return;
+    }
+
+    SpriteSystem_LoadCharResObjFromOpenNarc(spriteSys, spriteMan, objNarc,
+        armed ? interface_mega_icon_NCGR_lz : interface_mega_icon_dim_NCGR_lz,
+        TRUE, NNS_G2D_VRAM_TYPE_2DSUB, MEGA_BUTTON_CHAR_RESOURCE);
+    SpriteSystem_LoadPaletteBufferFromOpenNarc(BattleSystem_GetPaletteData(param0->battleSys), 3, spriteSys, spriteMan, objNarc,
+        armed ? interface_mega_icon_NCLR : interface_mega_icon_dim_NCLR,
+        FALSE, 1, NNS_G2D_VRAM_TYPE_2DSUB, MEGA_BUTTON_PLTT_RESOURCE);
+    SpriteSystem_LoadCellResObjFromOpenNarc(spriteSys, spriteMan, objNarc,
+        interface_mega_icon_cell_NCER_lz,
+        TRUE, MEGA_BUTTON_CELL_RESOURCE);
+    SpriteSystem_LoadAnimResObjFromOpenNarc(spriteSys, spriteMan, objNarc,
+        misc_single_frame_anim_NANR_lz_6,
+        TRUE, MEGA_BUTTON_CELL_RESOURCE);
+
+    param0->megaButton = SpriteSystem_NewSprite(spriteSys, spriteMan, &sMegaButtonSpriteTemplate);
+    Sprite_SetPositionXYWithSubscreenOffset(param0->megaButton->sprite, MEGA_BUTTON_X, MEGA_BUTTON_Y, (192 + 80) << FX32_SHIFT);
 }
 
 void BattleSystem_RefreshMegaButton(UnkStruct_ov16_02268A14 *param0, BOOL armed)
@@ -1316,7 +1418,7 @@ void *ov16_022687C8(NARC *param0, NARC *param1, BattleSystem *battleSys, int par
         GF_ASSERT(0);
     }
 
-    v0->unk_4C8 = sub_02012744(13, HEAP_ID_BATTLE);
+    v0->unk_4C8 = sub_02012744(NELEMS(v0->unk_4CC), HEAP_ID_BATTLE);
     v0->unk_678 = SysTask_Start(ov16_0226BCE4, v0, 1310);
 
     {
@@ -1325,7 +1427,7 @@ void *ov16_022687C8(NARC *param0, NARC *param1, BattleSystem *battleSys, int par
         int i;
         int v6;
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < NELEMS(Unk_ov16_02270264); i++) {
             v0->unk_3C[i] = Heap_Alloc(HEAP_ID_BATTLE, 0x800);
 
             if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_FRONTIER) && (Unk_ov16_02270264[i] == 49)) {
@@ -1339,6 +1441,9 @@ void *ov16_022687C8(NARC *param0, NARC *param1, BattleSystem *battleSys, int par
             MI_CpuCopy32(v3->rawData, v0->unk_3C[i], 0x800);
             Heap_Free(v4);
         }
+
+        v0->unk_3C[MOVE_MENU_MEGA_TILEMAP] = Heap_Alloc(HEAP_ID_BATTLE, 0x800);
+        BuildMegaMenuTilemap(v0->unk_3C[MOVE_MENU_MEGA_TILEMAP], v0->unk_3C[MOVE_MENU_TILEMAP]);
     }
 
     {
@@ -1428,7 +1533,7 @@ void ov16_02268A14(UnkStruct_ov16_02268A14 *param0)
     sub_020127BC(param0->unk_4C8);
     SysTask_Done(param0->unk_678);
 
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < NELEMS(param0->unk_3C); i++) {
         Heap_Free(param0->unk_3C[i]);
     }
 
@@ -1558,13 +1663,6 @@ void ov16_02268C04(NARC *param0, NARC *param1, UnkStruct_ov16_02268A14 *param2, 
 
     BattleSystem_HideMegaButton(param2);
     BattleSystem_HideMegaHudIcon(param2);
-
-    if (param3 == MENU_MOVE_SELECT_MEGA) {
-        BattleSystem_ShowMegaButton(param2, param1,
-            (BattleSystem_GetBattleContext(param2->battleSys)->megaEvolveArmed
-                & FlagIndex(BattleSystem_GetBattlerOfType(param2->battleSys, param2->unk_66A)))
-                != 0);
-    }
 
     G2S_SetBlendAlpha(GX_BLEND_PLANEMASK_BG1, GX_BLEND_BGALL, 8, 12);
     ov16_0226B1E8(param2);
@@ -2173,10 +2271,17 @@ static void ov16_022699AC(UnkStruct_ov16_02268A14 *param0, int param1, int param
 
     {
         String *v5;
+        BOOL megaMenu = param0->unk_66B == MENU_MOVE_SELECT_MEGA;
 
         v5 = MessageLoader_GetNewString(messageLoader, 929);
-        ov16_0226A98C(param0, &param0->unk_4CC[4], v5, FONT_SUBSCREEN, TEXT_COLOR(10, 11, 12), 2, 20023, 128, 178, 1, NULL);
+        ov16_0226A98C(param0, &param0->unk_4CC[4], v5, FONT_SUBSCREEN, TEXT_COLOR(10, 11, 12), 2, 20023, megaMenu ? CANCEL_BUTTON_LABEL_X : 128, BAR_LABEL_Y, 1, NULL);
         String_Free(v5);
+
+        if (megaMenu) {
+            int battler = BattleSystem_GetBattlerOfType(param0->battleSys, param0->unk_66A);
+
+            BattleSystem_RefreshMegaButton(param0, (BattleSystem_GetBattleContext(param0->battleSys)->megaEvolveArmed & FlagIndex(battler)) != 0);
+        }
     }
 
     {
@@ -2518,14 +2623,25 @@ static int ov16_0226A3F4(UnkStruct_ov16_02268A14 *param0, int param1, int param2
     const UnkStruct_ov16_0226A3F4 *v3[2];
     const s16 *v4;
     const UnkStruct_ov16_022702F4 *v5;
+    BOOL megaMenu = param0->unk_66B == MENU_MOVE_SELECT_MEGA;
+    const UnkStruct_ov16_022702F4 *pressRects = megaMenu ? sMoveMenuMegaPressRects : Unk_ov16_02270378;
+    int tilemap = megaMenu ? MOVE_MENU_MEGA_TILEMAP : MOVE_MENU_TILEMAP;
 
     if (param1 == 0xffffffff) {
         return param1;
     }
 
-    // Mega Evolution is a toggle rather than a choice of move, so hand it straight back:
-    // the move menu stays open, and none of the move-selection handling below applies.
+    if (param0->unk_0C != NULL) {
+        return 0xffffffff;
+    }
+
     if (param1 == PLAYER_INPUT_MOVE_MEGA) {
+        ov16_0226B2BC(MegaButtonPressTask, param0);
+
+        param0->unk_67C.unk_04_val3.unk_00 = Unk_ov16_022703F4[0];
+        param0->unk_67C.unk_04_val3.unk_04 = &sMoveMenuMegaPressRects[NELEMS(sMoveMenuMegaPressRects) - 1];
+        param0->unk_67C.unk_04_val3.unk_0C = MOVE_MENU_MEGA_TILEMAP;
+
         return param1;
     }
 
@@ -2548,11 +2664,11 @@ static int ov16_0226A3F4(UnkStruct_ov16_02268A14 *param0, int param1, int param2
     case 3:
     case 4:
         v4 = Unk_ov16_022703F4[param1 - 1];
-        v5 = &Unk_ov16_02270378[param1 - 1];
+        v5 = &pressRects[param1 - 1];
         break;
     case 0xff:
         v4 = Unk_ov16_022703F4[NELEMS(Unk_ov16_022703F4) - 1];
-        v5 = &Unk_ov16_02270378[NELEMS(Unk_ov16_022703F4) - 1];
+        v5 = &pressRects[NELEMS(Unk_ov16_022703F4) - 1];
         break;
     }
 
@@ -2561,7 +2677,7 @@ static int ov16_0226A3F4(UnkStruct_ov16_02268A14 *param0, int param1, int param2
 
     param0->unk_67C.unk_04_val3.unk_00 = v4;
     param0->unk_67C.unk_04_val3.unk_04 = v5;
-    param0->unk_67C.unk_04_val3.unk_0C = 3;
+    param0->unk_67C.unk_04_val3.unk_0C = tilemap;
     param0->unk_67C.unk_04_val3.unk_08 = param1;
     param0->unk_67C.unk_04_val3.unk_10 = 1;
 
@@ -2939,7 +3055,7 @@ static void ov16_0226AAC0(UnkStruct_ov16_02268A14 *param0)
 {
     int i;
 
-    for (i = 0; i < 13; i++) {
+    for (i = 0; i < NELEMS(param0->unk_4CC); i++) {
         if (param0->unk_4CC[i].unk_00 != NULL) {
             sub_02012870(param0->unk_4CC[i].unk_00);
             CharTransfer_ClearRange(&param0->unk_4CC[i].unk_04);
@@ -3527,6 +3643,54 @@ static void ov16_0226B390(SysTask *param0, void *param1)
             ov16_0226B2F0(v0);
             return;
         }
+        break;
+    }
+}
+
+/**
+ * @brief Press the Mega Evolution button and let it back up again.
+ *
+ * The move and Cancel buttons stay down because choosing one dismisses the menu. Arming
+ * Mega Evolution only toggles a flag, so the button is returned to its neutral tiles and
+ * the menu is left standing.
+ *
+ * @param param0
+ * @param param1
+ */
+static void MegaButtonPressTask(SysTask *param0, void *param1)
+{
+    UnkStruct_ov16_02268A14 *v0 = param1;
+
+    switch (v0->unk_67C.unk_00) {
+    case 0:
+        ov16_0226B31C(v0, v0->unk_67C.unk_04_val3.unk_00, v0->unk_67C.unk_04_val3.unk_04, v0->unk_67C.unk_04_val3.unk_0C, 2);
+
+        if (v0->megaButton != NULL) {
+            ManagedSprite_OffsetPositionXY(v0->megaButton, 0, -2);
+        }
+
+        v0->unk_67C.unk_00++;
+        break;
+    case 1:
+        v0->unk_67C.unk_02++;
+
+        if (v0->unk_67C.unk_02 <= 0) {
+            break;
+        }
+
+        v0->unk_67C.unk_02 = 0;
+        v0->unk_67C.unk_00++;
+    case 2:
+        ov16_0226B31C(v0, v0->unk_67C.unk_04_val3.unk_00, v0->unk_67C.unk_04_val3.unk_04, v0->unk_67C.unk_04_val3.unk_0C, 0);
+
+        if (v0->megaButton != NULL) {
+            ManagedSprite_OffsetPositionXY(v0->megaButton, 0, 2);
+        }
+
+        v0->unk_67C.unk_00++;
+        break;
+    default:
+        ov16_0226B2F0(v0);
         break;
     }
 }
@@ -4217,7 +4381,7 @@ static int BattleSystem_Cursor_Moves(UnkStruct_ov16_02268A14 *param0, BOOL curso
     UnkStruct_ov16_0226C378 *v7 = ov16_02263B0C(BattleSystem_GetBattlerData(param0->battleSys, BattleSystem_GetBattlerOfType(param0->battleSys, param0->unk_66A)));
     cursor = &param0->cursor;
     v2 = &Unk_ov16_02270670[param0->unk_66B];
-    const u8 (*layout)[2] = sMoveMenuButtonLayout;
+    MenuButtonLayout layout = MoveMenuButtonLayout(param0);
     v6 = &param0->unk_1A.val2;
 
     if (cursorHidden == TRUE) {
@@ -4263,9 +4427,21 @@ static int BattleSystem_Cursor_Moves(UnkStruct_ov16_02268A14 *param0, BOOL curso
     return 0xffffffff;
 }
 
+/**
+ * @brief Get the cursor grid for whichever move menu is on screen.
+ *
+ * @param param0
+ * @return The button layout to navigate.
+ */
+static MenuButtonLayout MoveMenuButtonLayout(const UnkStruct_ov16_02268A14 *param0)
+{
+    return param0->unk_66B == MENU_MOVE_SELECT_MEGA ? sMoveMenuMegaButtonLayout : sMoveMenuButtonLayout;
+}
+
 static void ov16_0226C378(UnkStruct_ov16_02268A14 *param0, int param1)
 {
     UnkStruct_ov16_0226C378 *v0;
+    MenuButtonLayout layout = MoveMenuButtonLayout(param0);
     int v1, j, i;
 
     if (param1 == 0) {
@@ -4277,7 +4453,7 @@ static void ov16_0226C378(UnkStruct_ov16_02268A14 *param0, int param1)
 
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 2; j++) {
-            if (param1 == sMoveMenuButtonLayout[i][j]) {
+            if (param1 == layout[i][j]) {
                 v0->unk_02 = j;
                 v0->unk_03 = i;
                 return;
