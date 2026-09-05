@@ -9,10 +9,12 @@
         { "species": "SPECIES_LEDYBA",    "weight": 10 },
         { "species": "SPECIES_SILCOON",   "weight": 7 },
         { "species": "SPECIES_CASCOON",   "weight": 7 },
+        { "species": "SPECIES_PINECO",    "weight": 7 },
         { "species": "SPECIES_CHERUBI",   "weight": 5 },
         { "species": "SPECIES_AIPOM",     "weight": 5 },
         { "species": "SPECIES_SCYTHER",   "weight": 3 },
         { "species": "SPECIES_HERACROSS", "weight": 3 },
+        { "species": "SPECIES_PINSIR",    "weight": 3 },
         { "species": "SPECIES_MUNCHLAX",  "weight": 1 }
     ]
 }
