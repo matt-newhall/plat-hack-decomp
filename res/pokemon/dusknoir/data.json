@@ -7,7 +7,7 @@
         "special_attack": 65,
         "special_defense": 135
     },
-    "types": [ "TYPE_GHOST", "TYPE_GHOST" ],
+    "types": [ "TYPE_GHOST", "TYPE_FIGHTING" ],
     "catch_rate": 45,
     "base_exp_reward": 210,
     "ev_yields": {
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_FAST",
     "egg_groups": [ "EGG_GROUP_AMORPHOUS", "EGG_GROUP_AMORPHOUS" ],
-    "abilities": [ "ABILITY_PRESSURE", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_IRON_FIST", "ABILITY_INFILTRATOR" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLACK",
     "flip_sprite": false,
