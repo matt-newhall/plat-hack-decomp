@@ -2,6 +2,22 @@
     "land_rate": 30,
     "land_encounters": [
         {
+            "level": 2,
+            "species": "SPECIES_STARLY"
+        },
+        {
+            "level": 2,
+            "species": "SPECIES_BIDOOF"
+        },
+        {
+            "level": 3,
+            "species": "SPECIES_STARLY"
+        },
+        {
+            "level": 3,
+            "species": "SPECIES_KRICKETOT"
+        },
+        {
             "level": 3,
             "species": "SPECIES_STARLY"
         },
@@ -11,43 +27,27 @@
         },
         {
             "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "species": "SPECIES_STARLY"
         },
         {
             "level": 3,
-            "species": "SPECIES_RATTATA"
+            "species": "SPECIES_BIDOOF"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SENTRET"
+            "level": 2,
+            "species": "SPECIES_STARLY"
         },
         {
-            "level": 3,
-            "species": "SPECIES_PIDGEY"
+            "level": 2,
+            "species": "SPECIES_BIDOOF"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 2,
+            "species": "SPECIES_STARLY"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_DODUO"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 2,
+            "species": "SPECIES_BIDOOF"
         }
     ],
     "swarms": [
