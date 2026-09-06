@@ -58,7 +58,7 @@
     ScriptEntry VisibleItems_AmitySquare_SpookyPlate
     ScriptEntry VisibleItems_Route212North_TM11
     ScriptEntry VisibleItems_Route212North_RoseIncense
-    ScriptEntry VisibleItems_Route212North_Elixir
+    ScriptEntry VisibleItems_Route212North_AbilityCapsule
     ScriptEntry VisibleItems_PokemonMansionOffice_TM87
     ScriptEntry VisibleItems_PokemonMansionMaidsRoom_LuxuryBall
     ScriptEntry VisibleItems_Route212South_FullHeal
@@ -81,7 +81,7 @@
     ScriptEntry VisibleItems_Route213_TM40
     ScriptEntry VisibleItems_Route213_YellowShard
     ScriptEntry VisibleItems_Route213_Sharpedonite
-    ScriptEntry VisibleItems_Route213_WaterStone
+    ScriptEntry VisibleItems_Route213_TM85
     ScriptEntry VisibleItems_Route213_PPUp
     ScriptEntry VisibleItems_Route213_HeartScale
     ScriptEntry VisibleItems_Route204South_ParlyzHeal
@@ -124,8 +124,8 @@
     ScriptEntry VisibleItems_Route210North_TM30
     ScriptEntry VisibleItems_FuegoIronworksBuilding_TM35
     ScriptEntry VisibleItems_FuegoIronworksBuilding_RockIncense
-    ScriptEntry VisibleItems_FuegoIronworksBuilding_WaterStone
-    ScriptEntry VisibleItems_FuegoIronworksBuilding_FireStone
+    ScriptEntry VisibleItems_FuegoIronworksBuilding_Stick
+    ScriptEntry VisibleItems_FuegoIronworksBuilding_Everstone
     ScriptEntry VisibleItems_Route219_Antidote
     ScriptEntry VisibleItems_Route220_SplashPlate
     ScriptEntry VisibleItems_Route205South_MuscleBand
@@ -677,8 +677,8 @@ VisibleItems_Route212North_RoseIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route212North_Elixir:
-    SetVar VAR_0x8008, ITEM_ELIXIR
+VisibleItems_Route212North_AbilityCapsule:
+    SetVar VAR_0x8008, ITEM_ABILITY_CAPSULE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -815,8 +815,8 @@ VisibleItems_Route213_Sharpedonite:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route213_WaterStone:
-    SetVar VAR_0x8008, ITEM_WATER_STONE
+VisibleItems_Route213_TM85:
+    SetVar VAR_0x8008, ITEM_TM85
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1073,14 +1073,14 @@ VisibleItems_FuegoIronworksBuilding_RockIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_FuegoIronworksBuilding_WaterStone:
-    SetVar VAR_0x8008, ITEM_WATER_STONE
+VisibleItems_FuegoIronworksBuilding_Stick:
+    SetVar VAR_0x8008, ITEM_STICK
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_FuegoIronworksBuilding_FireStone:
-    SetVar VAR_0x8008, ITEM_FIRE_STONE
+VisibleItems_FuegoIronworksBuilding_Everstone:
+    SetVar VAR_0x8008, ITEM_EVERSTONE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

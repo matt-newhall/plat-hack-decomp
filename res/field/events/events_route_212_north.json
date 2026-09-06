@@ -316,11 +316,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_ELIXIR",
+            "id": "LOCALID_ITEM_ABILITY_CAPSULE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_NORTH_ELIXIR",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_NORTH_ABILITY_CAPSULE",
             "script": 7056,
             "initial_dir": 0,
             "data": [],

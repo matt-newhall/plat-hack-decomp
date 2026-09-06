@@ -83,6 +83,9 @@ const u16 PastoriaMartSpecialties[] = {
     ITEM_NEST_BALL,
     ITEM_DUSK_BALL,
     ITEM_QUICK_BALL,
+    ITEM_FIRE_STONE,
+    ITEM_WATER_STONE,
+    ITEM_THUNDERSTONE,
     SHOP_ITEM_END
 };
 
@@ -132,6 +135,7 @@ const u16 VeilstoneDeptStoreStock_2F_MID[] = {
     ITEM_LEAF_STONE,
     ITEM_SUN_STONE,
     ITEM_MOON_STONE,
+    ITEM_DUSK_STONE,
     SHOP_ITEM_END
 };
 
@@ -157,7 +161,6 @@ const u16 VeilstoneDeptStoreStock_3F_DOWN[] = {
 };
 
 const u16 CelesticMartSpecialties[] = {
-    ITEM_DUSK_STONE,
     ITEM_DAWN_STONE,
     ITEM_SHINY_STONE,
     ITEM_DRAGON_SCALE,
