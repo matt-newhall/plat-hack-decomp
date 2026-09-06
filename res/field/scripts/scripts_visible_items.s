@@ -201,7 +201,7 @@
     ScriptEntry VisibleItems_Route224_DestinyKnot
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_Leftovers
     ScriptEntry VisibleItems_Route225_RazorFang
-    ScriptEntry VisibleItems_Route225_FullRestore
+    ScriptEntry VisibleItems_Route225_ClawFossil
     ScriptEntry VisibleItems_Route225_PPUp
     ScriptEntry VisibleItems_Route225_LaxIncense
     ScriptEntry VisibleItems_Route225_HeartScale
@@ -305,7 +305,7 @@
     ScriptEntry VisibleItems_Route222_PPUp
     ScriptEntry VisibleItems_Route223_HeartScale
     ScriptEntry VisibleItems_Route224_MaxElixir
-    ScriptEntry VisibleItems_Route224_RepeatBall
+    ScriptEntry VisibleItems_Route224_Starminite
     ScriptEntry VisibleItems_Route224_PPMax
     ScriptEntry VisibleItems_Route224_UltraBall
     ScriptEntry VisibleItems_Route225_GreenShard
@@ -337,6 +337,8 @@
     ScriptEntry VisibleItems_MtCoronet1F_Kangaskhanite
     ScriptEntry VisibleItems_MtCoronetOutsideNorth_Mawilite
     ScriptEntry VisibleItems_Route222_Gyaradosite
+    ScriptEntry VisibleItems_Route225_RootFossil
+    ScriptEntry VisibleItems_TrophyGarden_Chimechite
     ScriptEntryEnd
 
 VisibleItems_Route202_Potion:
@@ -1533,8 +1535,8 @@ VisibleItems_Route225_RazorFang:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route225_FullRestore:
-    SetVar VAR_0x8008, ITEM_FULL_RESTORE
+VisibleItems_Route225_ClawFossil:
+    SetVar VAR_0x8008, ITEM_CLAW_FOSSIL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2157,8 +2159,8 @@ VisibleItems_Route224_MaxElixir:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route224_RepeatBall:
-    SetVar VAR_0x8008, ITEM_REPEAT_BALL
+VisibleItems_Route224_Starminite:
+    SetVar VAR_0x8008, ITEM_STARMINITE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2351,6 +2353,18 @@ VisibleItems_MtCoronetOutsideNorth_Mawilite:
 
 VisibleItems_Route222_Gyaradosite:
     SetVar VAR_0x8008, ITEM_GYARADOSITE
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_Route225_RootFossil:
+    SetVar VAR_0x8008, ITEM_ROOT_FOSSIL
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_TrophyGarden_Chimechite:
+    SetVar VAR_0x8008, ITEM_CHIMECHITE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
