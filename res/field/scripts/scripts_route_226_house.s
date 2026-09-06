@@ -42,9 +42,11 @@ Route226House_TryTrade:
     GoToIfEq VAR_RESULT, PARTY_SLOT_NONE, Route226House_ThisIsATragedy
     InitNPCTrade NPC_TRADE_FOPPA_MAGIKARP
     SetVar VAR_0x8004, VAR_RESULT
-    GetPartyMonSpecies VAR_0x8004, VAR_0x8005
-    GetNPCTradeRequestedSpecies VAR_RESULT
-    GoToIfNe VAR_0x8005, VAR_RESULT, Route226House_ThatIsNoFinneon
+    GetPartyMonType VAR_0x8005, VAR_0x8006, VAR_0x8004
+    GoToIfEq VAR_0x8005, TYPE_POISON, Route226House_DoTrade
+    GoToIfNe VAR_0x8006, TYPE_POISON, Route226House_ThatIsNoFinneon
+
+Route226House_DoTrade:
     StartNPCTrade VAR_0x8004
     FinishNPCTrade
     SetFlag FLAG_TRADED_FOR_FOPPA_MAGIKARP

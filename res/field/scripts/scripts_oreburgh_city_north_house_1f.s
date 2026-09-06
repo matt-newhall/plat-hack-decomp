@@ -27,9 +27,11 @@ OreburghCityNorthHouse1F_TryTrade:
     GoToIfEq VAR_RESULT, 0xFF, OreburghCityNorthHouse1F_IfYouChangeYourMindIllBeRightHereWaiting
     InitNPCTrade NPC_TRADE_KAZZA_ABRA
     SetVar VAR_0x8004, VAR_RESULT
-    GetPartyMonSpecies VAR_0x8004, VAR_0x8005
-    GetNPCTradeRequestedSpecies VAR_RESULT
-    GoToIfNe VAR_0x8005, VAR_RESULT, OreburghCityNorthHouse1F_WhatIAskedForWasAMachop
+    GetPartyMonType VAR_0x8005, VAR_0x8006, VAR_0x8004
+    GoToIfEq VAR_0x8005, TYPE_DARK, OreburghCityNorthHouse1F_DoTrade
+    GoToIfNe VAR_0x8006, TYPE_DARK, OreburghCityNorthHouse1F_WhatIAskedForWasAMachop
+
+OreburghCityNorthHouse1F_DoTrade:
     StartNPCTrade VAR_0x8004
     FinishNPCTrade
     SetFlag FLAG_TRADED_FOR_KAZZA_ABRA

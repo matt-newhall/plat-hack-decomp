@@ -44,9 +44,11 @@ SnowpointCityWestHouse_TryTrade:
     GoToIfEq VAR_RESULT, PARTY_SLOT_NONE, SnowpointCityWestHouse_OKIfYouDontWant
     InitNPCTrade NPC_TRADE_GASPAR_HAUNTER
     SetVar VAR_0x8004, VAR_RESULT
-    GetPartyMonSpecies VAR_0x8004, VAR_0x8005
-    GetNPCTradeRequestedSpecies VAR_RESULT
-    GoToIfNe VAR_0x8005, VAR_RESULT, SnowpointCityWestHouse_IAskedForMedicham
+    GetPartyMonType VAR_0x8005, VAR_0x8006, VAR_0x8004
+    GoToIfEq VAR_0x8005, TYPE_STEEL, SnowpointCityWestHouse_DoTrade
+    GoToIfNe VAR_0x8006, TYPE_STEEL, SnowpointCityWestHouse_IAskedForMedicham
+
+SnowpointCityWestHouse_DoTrade:
     StartNPCTrade VAR_0x8004
     FinishNPCTrade
     SetFlag FLAG_TRADED_FOR_GASPAR_HAUNTER

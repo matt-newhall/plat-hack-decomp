@@ -23,6 +23,7 @@
 #include "generated/npc_trades.h"
 #include "generated/object_events_gfx.h"
 #include "generated/player_transitions.h"
+#include "generated/pokemon_types.h"
 #include "generated/poketch_apps.h"
 #include "generated/roaming_slots.h"
 #include "generated/save_types.h"
