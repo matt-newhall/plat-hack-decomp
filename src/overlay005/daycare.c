@@ -687,6 +687,16 @@ void Egg_CreateEgg(Pokemon *egg, u16 species, u8 param2, TrainerInfo *trainerInf
 
     Pokemon_InitWith(egg, species, 1, INIT_IVS_RANDOM, FALSE, 0, OTID_NOT_SET, 0);
 
+    u8 slots[6] = { 0, 1, 2, 3, 4, 5 };
+    u32 iv31 = 31;
+    for (int i = 0; i < 3; i++) {
+        int j = i + (LCRNG_Next() % (6 - i));
+        u8 tmp = slots[i];
+        slots[i] = slots[j];
+        slots[j] = tmp;
+        Pokemon_SetValue(egg, MON_DATA_HP_IV + slots[i], &iv31);
+    }
+
     metLvl = 0;
     ball = ITEM_POKE_BALL;
 

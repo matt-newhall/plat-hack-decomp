@@ -10,6 +10,7 @@
 
 #include "heap.h"
 #include "inlines.h"
+#include "math_util.h"
 #include "pokemon.h"
 #include "save_player.h"
 #include "savedata.h"
@@ -219,6 +220,19 @@ void RoamingPokemon_ActivateSlot(SaveData *saveData, const u8 slot)
 
     Pokemon_Init(roamerMonData);
     Pokemon_InitWith(roamerMonData, species, level, INIT_IVS_RANDOM, FALSE, 0, OTID_SET, TrainerInfo_ID_LowHalf(trainer));
+
+    u8 slots[6] = { 0, 1, 2, 3, 4, 5 };
+    u32 iv31 = 31;
+    for (int i = 0; i < 3; i++) {
+        int j = i + (LCRNG_Next() % (6 - i));
+        u8 tmp = slots[i];
+        slots[i] = slots[j];
+        slots[j] = tmp;
+        Pokemon_SetValue(roamerMonData, MON_DATA_HP_IV + slots[i], &iv31);
+    }
+
+    Pokemon_CalcStats(roamerMonData);
+
     Roamer_SetData(newRoamer, ROAMER_DATA_STATUS, 0);
     Roamer_SetData(newRoamer, ROAMER_DATA_ACTIVE, 1);
     Roamer_SetData(newRoamer, ROAMER_DATA_IVS, Pokemon_GetValue(roamerMonData, MON_DATA_COMBINED_IVS, NULL));
