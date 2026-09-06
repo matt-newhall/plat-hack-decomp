@@ -8,11 +8,15 @@
     ScriptEntry VictoryRoad_LeagueCheck
     ScriptEntry VictoryRoad_LeagueCheckTrigger
     ScriptEntry VictoryRoad_PaulTrigger
+    ScriptEntry VictoryRoad_CounterpartTrigger
     ScriptEntryEnd
 
 VictoryRoad_OnTransition:
     SetFlag FLAG_FIRST_ARRIVAL_VICTORY_ROAD
     SetFlag FLAG_HIDE_VICTORY_ROAD_1F_PAUL
+    GetPlayerGender VAR_MAP_LOCAL_0
+    CallIfEq VAR_MAP_LOCAL_0, GENDER_MALE, VictoryRoad_SetCounterpartGraphicsDawn
+    CallIfEq VAR_MAP_LOCAL_0, GENDER_FEMALE, VictoryRoad_SetCounterpartGraphicsLucas
     GoToIfEq VAR_VICTORY_ROAD_LEAGUECHECK_STATE, 1, VictoryRoad_LeagueCheckMovedAside
 VictoryRoad_OnTransitionCollector:
     GoToIfUnset FLAG_GAME_COMPLETED, VictoryRoad_DontHideCollector
@@ -26,6 +30,14 @@ VictoryRoad_LeagueCheckMovedAside:
     SetObjectEventPos LOCALID_LEAGUECHECK, 40, 16
     SetObjectEventDir LOCALID_LEAGUECHECK, DIR_WEST
     GoTo VictoryRoad_OnTransitionCollector
+
+VictoryRoad_SetCounterpartGraphicsDawn:
+    SetVar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_PLAYER_F
+    Return
+
+VictoryRoad_SetCounterpartGraphicsLucas:
+    SetVar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_PLAYER_M
+    Return
 
 VictoryRoad_Collector:
     PlaySE SEQ_SE_CONFIRM
@@ -155,8 +167,112 @@ VictoryRoad_PaulBlackOut:
 VictoryRoad_PaulIgnore:
     End
 
+VictoryRoad_CounterpartTrigger:
+    GoToIfSet FLAG_DEFEATED_VICTORY_ROAD_COUNTERPART, VictoryRoad_CounterpartIgnore
+    LockAll
+    ClearFlag FLAG_HIDE_VICTORY_ROAD_COUNTERPART
+    AddObject LOCALID_COUNTERPART
+    ApplyMovement LOCALID_PLAYER, VictoryRoad_Movement_Exclaim
+    WaitMovement
+    Common_SetCounterpartBGM
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 14, VictoryRoad_PlayerX14
+    CallIfEq VAR_0x8004, 16, VictoryRoad_PlayerX16
+    ApplyMovement LOCALID_COUNTERPART, VictoryRoad_Movement_Counterpart8North
+    WaitMovement
+    GetPlayerGender VAR_0x8000
+    CallIfEq VAR_0x8000, GENDER_MALE, VictoryRoad_DawnPreBattle
+    CallIfEq VAR_0x8000, GENDER_FEMALE, VictoryRoad_LucasPreBattle
+    End
+
+VictoryRoad_PlayerX14:
+    ApplyMovement LOCALID_COUNTERPART, VictoryRoad_Movement_CounterpartLeft
+    Return
+
+VictoryRoad_PlayerX16:
+    ApplyMovement LOCALID_COUNTERPART, VictoryRoad_Movement_CounterpartRight
+    Return
+
+VictoryRoad_DawnPreBattle:
+    Message VictoryRoad1F_Text_DawnPreBattle
+    WaitButton
+    CloseMessage
+    GetPlayerStarterSpecies VAR_0x800C
+    GoToIfEq VAR_0x800C, SPECIES_TURTWIG, VictoryRoad_DawnBattleTurtwig
+    GoToIfEq VAR_0x800C, SPECIES_CHIMCHAR, VictoryRoad_DawnBattleChimchar
+    GoTo VictoryRoad_DawnBattlePiplup
+
+VictoryRoad_DawnBattleTurtwig:
+    StartTrainerBattle TRAINER_DAWN_VICTORY_ROAD_TURTWIG, TRAINER_NONE
+    GoTo VictoryRoad_DawnBattleResult
+
+VictoryRoad_DawnBattleChimchar:
+    StartTrainerBattle TRAINER_DAWN_VICTORY_ROAD_CHIMCHAR, TRAINER_NONE
+    GoTo VictoryRoad_DawnBattleResult
+
+VictoryRoad_DawnBattlePiplup:
+    StartTrainerBattle TRAINER_DAWN_VICTORY_ROAD_PIPLUP, TRAINER_NONE
+    GoTo VictoryRoad_DawnBattleResult
+
+VictoryRoad_DawnBattleResult:
+    CheckWonBattle VAR_0x800C
+    GoToIfEq VAR_0x800C, FALSE, VictoryRoad_CounterpartBlackOut
+    Message VictoryRoad_Text_DawnDefeat
+    WaitButton
+    CloseMessage
+    GoTo VictoryRoad_CounterpartLeave
+
+VictoryRoad_LucasPreBattle:
+    Message VictoryRoad1F_Text_LucasPreBattle
+    WaitButton
+    CloseMessage
+    GetPlayerStarterSpecies VAR_0x800C
+    GoToIfEq VAR_0x800C, SPECIES_TURTWIG, VictoryRoad_LucasBattleTurtwig
+    GoToIfEq VAR_0x800C, SPECIES_CHIMCHAR, VictoryRoad_LucasBattleChimchar
+    GoTo VictoryRoad_LucasBattlePiplup
+
+VictoryRoad_LucasBattleTurtwig:
+    StartTrainerBattle TRAINER_LUCAS_VICTORY_ROAD_TURTWIG, TRAINER_NONE
+    GoTo VictoryRoad_LucasBattleResult
+
+VictoryRoad_LucasBattleChimchar:
+    StartTrainerBattle TRAINER_LUCAS_VICTORY_ROAD_CHIMCHAR, TRAINER_NONE
+    GoTo VictoryRoad_LucasBattleResult
+
+VictoryRoad_LucasBattlePiplup:
+    StartTrainerBattle TRAINER_LUCAS_VICTORY_ROAD_PIPLUP, TRAINER_NONE
+    GoTo VictoryRoad_LucasBattleResult
+
+VictoryRoad_LucasBattleResult:
+    CheckWonBattle VAR_0x800C
+    GoToIfEq VAR_0x800C, FALSE, VictoryRoad_CounterpartBlackOut
+    Message VictoryRoad_Text_LucasDefeat
+    WaitButton
+    CloseMessage
+    GoTo VictoryRoad_CounterpartLeave
+
+VictoryRoad_CounterpartLeave:
+    ApplyMovement LOCALID_COUNTERPART, VictoryRoad_Movement_CounterpartLeave
+    WaitMovement
+    SetFlag FLAG_HIDE_VICTORY_ROAD_COUNTERPART
+    RemoveObject LOCALID_COUNTERPART
+    Common_FadeToDefaultMusic
+    SetFlag FLAG_DEFEATED_VICTORY_ROAD_COUNTERPART
+    ReleaseAll
+    End
+
+VictoryRoad_CounterpartBlackOut:
+    SetFlag FLAG_HIDE_VICTORY_ROAD_COUNTERPART
+    BlackOutFromBattle
+    ReleaseAll
+    End
+
+VictoryRoad_CounterpartIgnore:
+    End
+
     .balign 4, 0
 VictoryRoad_Movement_Exclaim:
+    WalkOnSpotNormalSouth
     EmoteExclamationMark
     EndMovement
 
@@ -203,6 +319,26 @@ VictoryRoad_Movement_PaulWalkWest:
     .balign 4, 0
 VictoryRoad_Movement_PaulWalkEast:
     WalkNormalEast 4
+    EndMovement
+
+    .balign 4, 0
+VictoryRoad_Movement_CounterpartLeft:
+    WalkNormalWest
+    EndMovement
+
+    .balign 4, 0
+VictoryRoad_Movement_CounterpartRight:
+    WalkNormalEast
+    EndMovement
+
+    .balign 4, 0
+VictoryRoad_Movement_Counterpart8North:
+    WalkNormalNorth 8
+    EndMovement
+
+    .balign 4, 0
+VictoryRoad_Movement_CounterpartLeave:
+    WalkNormalSouth 8
     EndMovement
 
     .balign 4, 0
