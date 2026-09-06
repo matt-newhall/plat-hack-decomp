@@ -400,6 +400,21 @@
             "x": 73,
             "z": 33,
             "y": 0
+        },
+        {
+            "id": "LOCALID_JULIEN",
+            "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_FUEGO_IRONWORKS_INTERVIEWERS",
+            "script": 13,
+            "initial_dir": 2,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 85,
+            "z": 35,
+            "y": 0
         }
     ],
     "warp_events": [

@@ -1,147 +1,191 @@
 {
   "key": 1026,
-  "messages": [
-    {
-      "id": "EternaForest_Text_PleaseMayIGoThroughWithYou",
-      "en_US": [
-        "Hello, my name’s Cheryl.\n",
-        "And you are...?\r",
-        "OK, so your name is {STRVAR_1 3, 0, 0}.\n",
-        "I’m sincerely glad to meet you.\r",
-        "{STRVAR_1 3, 0, 0}, may I ask a big favor\n",
-        "of you?\r",
-        "I want to get through this forest,\n",
-        "but I’m afraid of doing it alone.\r",
-        "I’ve heard that there is a sinister\n",
-        "group of people called Team Galactic\f",
-        "about.\r",
-        "I think there’d be safety in numbers.\n",
-        "Please, may I go through with you?\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_PlayerDecidedToGoWithCheryl",
-      "en_US": [
-        "{STRVAR_1 3, 0, 0} decided to go with\n",
-        "Cheryl!"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_IllKeepYourPokemonInPerfectHealth",
-      "en_US": [
-        "Cheryl: I’ll keep your Pokémon\n",
-        "in perfect health."
-      ]
-    },
-    {
-      "id": "EternaForest_Text_LetsGetThroughThisForestTogether",
-      "en_US": [
-        "Cheryl: Oh, hi, {STRVAR_1 3, 0, 0}!\n",
-        "I’ve been waiting like I said.\r",
-        "Let’s get through this forest\n",
-        "together.\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_IllWaitHereForYouThen",
-      "en_US": [
-        "Cheryl: Oh? Are you going back?\n",
-        "I’ll wait here for you, then.\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_OhTheresTheExitThankYouSoMuchPlayer",
-      "en_US": [
-        "Cheryl: Oh! There’s the exit!\n",
-        "I’m so relieved... We finally got here.\r",
-        "I would’ve never been able to get\n",
-        "through this by myself.\r",
-        "Thank you so much, {STRVAR_1 3, 0, 0}!\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_ThisIsMyTokenOfAppreciation",
-      "en_US": [
-        "This is my token of appreciation.\n",
-        "Please accept it!\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_ImSureWellMeetAgainSomewhere",
-      "en_US": [
-        "I’m sure we’ll meet again somewhere!\n",
-        "Bye for now!\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_ThereIsAnOldChateauAhead",
-      "en_US": [
-        "Cheryl: There is an Old Chateau ahead.\r",
-        "No one lives there now.\n",
-        "They say it’s haunted."
-      ]
-    },
-    {
-      "id": "EternaForest_Text_ImSearchingForBugPokemonSoICanWinAtTheEternaGym",
-      "en_US": [
-        "I’m searching for bug Pokémon so I can\n",
-        "win at the Eterna Gym.\r",
-        "Bug Pokémon are great, you know?\n",
-        "They grow really fast!"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_TheRockIsCoveredInMoss",
-      "en_US": [
-        "The rock is covered in moss.\n",
-        "It feels pleasantly cool."
-      ]
-    },
-    {
-      "id": "EternaForest_Text_HiyaWereYouIngriguedByTheRumorsGoingAroundToo",
-      "en_US": [
-        "Gardenia: Hiya! Were you intrigued\n",
-        "by the rumors going around, too?\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_YouKnowPeopleveBeenTalkingAboutTheGhostPokemonOfTheOldChateau",
-      "en_US": [
-        "You know, people’ve been talking about\n",
-        "the ghost Pokémon of the Old Chateau.\r",
-        "I’ve been hearing rumors about\n",
-        "sinister shadows, too.\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_IShouldCheckItOutMyselfButGoingInThereIs",
-      "en_US": [
-        "I should check it out myself, but\n",
-        "going in there is...\r",
-        "...Well, you know, being that I’m\n",
-        "a Gym Leader, I’m always busy.\r",
-        "So, since I’m so busy, I can’t go in.\n",
-        "It’s not because I’m s-scared!\r",
-        "S-so, good luck with your\n",
-        "investigation!\r"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_TheEternaForestWhereTimeFlowsEternally",
-      "en_US": [
-        "The Eterna Forest\n",
-        "Where Time Flows Eternally"
-      ]
-    },
-    {
-      "id": "EternaForest_Text_TrainerTipsInForestsAndCavesThereAreManyItemsOnTheGround",
-      "en_US": [
-        "Trainer Tips!\r",
-        "In forests and caves, there are many\n",
-        "items on the ground that cannot be\f",
-        "seen in the murky darkness.\r",
-        "Take the time to search carefully!"
-      ]
-    }
-  ]
+    "messages": [
+        {
+            "id": "EternaForest_Text_PleaseMayIGoThroughWithYou",
+            "en_US": [
+                "Hello, my name’s Cheryl.\n",
+                "And you are...?\r",
+                "OK, so your name is {STRVAR_1 3, 0, 0}.\n",
+                "I’m sincerely glad to meet you.\r",
+                "{STRVAR_1 3, 0, 0}, may I ask a big favor\n",
+                "of you?\r",
+                "I want to get through this forest,\n",
+                "but I’m afraid of doing it alone.\r",
+                "I’ve heard that there is a sinister\n",
+                "group of people called Team Galactic\f",
+                "about.\r",
+                "I think there’d be safety in numbers.\n",
+                "Please, may I go through with you?\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_PlayerDecidedToGoWithCheryl",
+            "en_US": [
+                "{STRVAR_1 3, 0, 0} decided to go with\n",
+                "Cheryl!"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_IllKeepYourPokemonInPerfectHealth",
+            "en_US": [
+                "Cheryl: I’ll keep your Pokémon\n",
+                "in perfect health."
+            ]
+        },
+        {
+            "id": "EternaForest_Text_LetsGetThroughThisForestTogether",
+            "en_US": [
+                "Cheryl: Oh, hi, {STRVAR_1 3, 0, 0}!\n",
+                "I’ve been waiting like I said.\r",
+                "Let’s get through this forest\n",
+                "together.\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_IllWaitHereForYouThen",
+            "en_US": [
+                "Cheryl: Oh? Are you going back?\n",
+                "I’ll wait here for you, then.\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_OhTheresTheExitThankYouSoMuchPlayer",
+            "en_US": [
+                "Cheryl: Oh! There’s the exit!\n",
+                "I’m so relieved... We finally got here.\r",
+                "I would’ve never been able to get\n",
+                "through this by myself.\r",
+                "Thank you so much, {STRVAR_1 3, 0, 0}!\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_ThisIsMyTokenOfAppreciation",
+            "en_US": [
+                "This is my token of appreciation.\n",
+                "Please accept it!\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_ImSureWellMeetAgainSomewhere",
+            "en_US": [
+                "I’m sure we’ll meet again somewhere!\n",
+                "Bye for now!\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_ThereIsAnOldChateauAhead",
+            "en_US": [
+                "Cheryl: There is an Old Chateau ahead.\r",
+                "No one lives there now.\n",
+                "They say it’s haunted."
+            ]
+        },
+        {
+            "id": "EternaForest_Text_ImSearchingForBugPokemonSoICanWinAtTheEternaGym",
+            "en_US": [
+                "I’m searching for bug Pokémon so I can\n",
+                "win at the Eterna Gym.\r",
+                "Bug Pokémon are great, you know?\n",
+                "They grow really fast!"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_TheRockIsCoveredInMoss",
+            "en_US": [
+                "The rock is covered in moss.\n",
+                "It feels pleasantly cool."
+            ]
+        },
+        {
+            "id": "EternaForest_Text_HiyaWereYouIngriguedByTheRumorsGoingAroundToo",
+            "en_US": [
+                "Gardenia: Hiya! Were you intrigued\n",
+                "by the rumors going around, too?\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_YouKnowPeopleveBeenTalkingAboutTheGhostPokemonOfTheOldChateau",
+            "en_US": [
+                "You know, people’ve been talking about\n",
+                "the ghost Pokémon of the Old Chateau.\r",
+                "I’ve been hearing rumors about\n",
+                "sinister shadows, too.\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_IShouldCheckItOutMyselfButGoingInThereIs",
+            "en_US": [
+                "I should check it out myself, but\n",
+                "going in there is...\r",
+                "...Well, you know, being that I’m\n",
+                "a Gym Leader, I’m always busy.\r",
+                "So, since I’m so busy, I can’t go in.\n",
+                "It’s not because I’m s-scared!\r",
+                "S-so, good luck with your\n",
+                "investigation!\r"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_TheEternaForestWhereTimeFlowsEternally",
+            "en_US": [
+                "The Eterna Forest\n",
+                "Where Time Flows Eternally"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_TrainerTipsInForestsAndCavesThereAreManyItemsOnTheGround",
+            "en_US": [
+                "Trainer Tips!\r",
+                "In forests and caves, there are many\n",
+                "items on the ground that cannot be\f",
+                "seen in the murky darkness.\r",
+                "Take the time to search carefully!"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_PromotionalRouteCongrats",
+            "en_US": [
+                "Chapeau! It seems that you have\n",
+                "beaten every trainer in Eterna Forest!\f",
+                "Here is your reward as promised.\r",
+                "Would you like the Big Root or\n",
+                "5 Rindo Berries?"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_WatchOutForMorePromotions",
+            "en_US": [
+                "I have an idea for a new type of\n",
+                "promotion, but I’ll need to recruit\f",
+                "someone to help out.\r",
+                "I’m going scout around Route 206 next.\n",
+                "See you there, Champ."
+            ]
+        },
+        {
+            "id": "EternaForest_Text_JulienTrainerCount",
+            "en_US": [
+                "Bonjour, Champ.\n",
+                "Eterna Forest is our next promotional\f",
+                "area. This time the rewards are either\f",
+                "a Big Root, or 5 Rindo Berries.\r",
+                "There are {STRVAR_1 0, 0, 0} Trainers left to\n",
+                "face.\r",
+                "Come see me when you’ve defeated them.\n"
+            ]
+        },
+        {
+            "id": "EternaForest_Text_JulienTrainerCountSingular",
+            "en_US": [
+                "Bonjour, Champ.\n",
+                "Eterna Forest is our next promotional\f",
+                "area. This time the rewards are either\f",
+                "a Big Root, or 5 Rindo Berries.\r",
+                "There is {STRVAR_1 0, 0, 0} Trainer left to\n",
+                "face.\r",
+                "Come see me when you’ve defeated them.\n"
+            ]
+        }
+    ]
 }
