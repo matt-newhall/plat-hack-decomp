@@ -1,4 +1,5 @@
 #include "macros/scrcmd.inc"
+#include "res/text/bank/special_met_location_names.h"
 #include "res/text/bank/trainers_school.h"
 
 
@@ -187,12 +188,99 @@ _0269:
 
 _0274:
     Message 13
-    SetVar VAR_0x8004, ITEM_POTION
-    SetVar VAR_0x8005, 1
-    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, _02B3
-    Common_GiveItemQuantity
+    ShowYesNoMenu VAR_RESULT
+    GoToIfEq VAR_RESULT, MENU_NO, TrainersSchool_RefusedEgg
+    GetPartyCount VAR_RESULT
+    GoToIfGe VAR_RESULT, 6, TrainersSchool_PartyIsFull
+    PlayFanfare SEQ_FANFA4
+    WaitFanfare
+    GetRandom VAR_RESULT, 14
+    CallIfEq VAR_RESULT, 0, TrainersSchool_GiveEgg0
+    CallIfEq VAR_RESULT, 1, TrainersSchool_GiveEgg1
+    CallIfEq VAR_RESULT, 2, TrainersSchool_GiveEgg2
+    CallIfEq VAR_RESULT, 3, TrainersSchool_GiveEgg3
+    CallIfEq VAR_RESULT, 4, TrainersSchool_GiveEgg4
+    CallIfEq VAR_RESULT, 5, TrainersSchool_GiveEgg5
+    CallIfEq VAR_RESULT, 6, TrainersSchool_GiveEgg6
+    CallIfEq VAR_RESULT, 7, TrainersSchool_GiveEgg7
+    CallIfEq VAR_RESULT, 8, TrainersSchool_GiveEgg8
+    CallIfEq VAR_RESULT, 9, TrainersSchool_GiveEgg9
+    CallIfEq VAR_RESULT, 10, TrainersSchool_GiveEgg10
+    CallIfEq VAR_RESULT, 11, TrainersSchool_GiveEgg11
+    CallIfEq VAR_RESULT, 12, TrainersSchool_GiveEgg12
+    CallIfEq VAR_RESULT, 13, TrainersSchool_GiveEgg13
     SetFlag FLAG_UNK_0x0112
     GoTo _02A8
+    End
+
+TrainersSchool_GiveEgg0:
+    GiveEgg SPECIES_CLEFFA, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg1:
+    GiveEgg SPECIES_IGGLYBUFF, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg2:
+    GiveEgg SPECIES_PICHU, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg3:
+    GiveEgg SPECIES_MANTYKE, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg4:
+    GiveEgg SPECIES_AZURILL, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg5:
+    GiveEgg SPECIES_SMOOCHUM, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg6:
+    GiveEgg SPECIES_ELEKID, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg7:
+    GiveEgg SPECIES_MAGBY, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg8:
+    GiveEgg SPECIES_BONSLY, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg9:
+    GiveEgg SPECIES_MIME_JR, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg10:
+    GiveEgg SPECIES_CHINGLING, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg11:
+    GiveEgg SPECIES_TYROGUE, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg12:
+    GiveEgg SPECIES_TOGEPI, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_GiveEgg13:
+    GiveEgg SPECIES_BUDEW, SPECIAL_METLOC_NAME_TRAVELING_MAN
+    Return
+
+TrainersSchool_RefusedEgg:
+    Message 28
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+TrainersSchool_PartyIsFull:
+    Message 29
+    WaitButton
+    CloseMessage
+    ReleaseAll
     End
 
 _02A8:
