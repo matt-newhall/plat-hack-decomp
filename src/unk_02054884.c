@@ -58,6 +58,8 @@ BOOL Pokemon_GiveMonFromScript(enum HeapID heapID, SaveData *saveData, u16 speci
         Pokemon_SetValue(mon, MON_DATA_HP_IV + slots[i], &iv31);
     }
 
+    Pokemon_CalcStats(mon);
+
     result = Party_AddPokemon(party, mon);
 
     if (result) {
