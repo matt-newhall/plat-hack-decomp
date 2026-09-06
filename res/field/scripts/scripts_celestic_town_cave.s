@@ -11,6 +11,7 @@
 CelesticTownCave_Painting:
     PlaySE SEQ_SE_CONFIRM
     LockAll
+    SetFlag FLAG_HIDE_ROUTE_210_RIVALS
     GoToIfSet FLAG_HALL_OF_FAME_ENTERED, CelesticTownCave_PaintingCynthia
     GoTo CelesticTownCave_ExaminePainting
     End

@@ -27,6 +27,7 @@ EternaForest_ResetFollowerCherylState:
 EternaForest_TriggerStartFollowingCheryl:
     LockAll
     SetPlayerBike FALSE
+    SetFlag FLAG_HIDE_ROUTE_205_RIVALS
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 28, EternaForest_CherylNoticeAndWalkToPlayerX28
     GoToIfEq VAR_0x8004, 29, EternaForest_CherylNoticeAndWalkToPlayerX29

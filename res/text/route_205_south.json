@@ -94,6 +94,32 @@
         "It’s very convenient!\n",
         "It’s a Trainer’s best friend!"
       ]
+    },
+    {
+      "id": "Route205South_Text_CounterpartBattling",
+      "en_US": [
+        "Pachirisu! We need to slow him down.\n",
+        "Use Nuzzle!"
+      ]
+    },
+    {
+      "id": "Route205South_Text_CounterpartMon",
+      "en_US": [
+        "Kukkuuh!"
+      ]
+    },
+    {
+      "id": "Route205South_Text_RivalBattling",
+        "en_US": [
+            "Let’s shift it up a gear, Aipom!\n",
+            "Quick Attack!"
+        ]
+    },
+    {
+      "id": "Route205South_Text_RivalMon",
+      "en_US": [
+        "Ooaoohh!"
+      ]
     }
   ]
 }

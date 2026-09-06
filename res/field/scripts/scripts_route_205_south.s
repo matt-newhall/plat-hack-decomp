@@ -13,6 +13,10 @@
     ScriptEntry Route205South_ArrowSignpostFloaromaTown
     ScriptEntry Route205South_ArrowSignpostEternaForest
     ScriptEntry Route205South_TrainerTipsSignpost
+    ScriptEntry Route205South_CounterPartTrainer
+    ScriptEntry Route205South_CounterPartMon
+    ScriptEntry Route205South_RivalTrainer
+    ScriptEntry Route205South_RivalMon
     ScriptEntryEnd
 
 Route205South_OnTransition:
@@ -179,6 +183,39 @@ Route205South_HelpHelpTrainerPleaseIWantToSeeMyPapa:
     CloseMessage
     ReleaseAll
     End
+
+Route205South_CounterPartTrainer:
+    PlaySE SEQ_SE_CONFIRM
+    Message Route205South_Text_CounterpartBattling
+    WaitButton
+    CloseMessage
+    End
+
+Route205South_CounterPartMon:
+    PlaySE SEQ_SE_CONFIRM
+    PlayCry SPECIES_PACHIRISU
+    Message Route205South_Text_CounterpartMon
+    WaitCry
+    WaitButton
+    CloseMessage
+    End
+
+Route205South_RivalTrainer:
+    PlaySE SEQ_SE_CONFIRM
+    Message Route205South_Text_RivalBattling
+    WaitButton
+    CloseMessage
+    End
+
+Route205South_RivalMon:
+    PlaySE SEQ_SE_CONFIRM
+    PlayCry SPECIES_AIPOM
+    Message Route205South_Text_RivalMon
+    WaitCry
+    WaitButton
+    CloseMessage
+    End
+
 
     .balign 4, 0
 Route205South_Movement_PlayerWalkOnSpotSouth:

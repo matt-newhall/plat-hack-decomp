@@ -14,6 +14,10 @@
     ScriptEntry Route212North_PolicemanCaleb
     ScriptEntry Route212North_OnTransition
     ScriptEntry Route212North_PolicemanBlockSouth
+    ScriptEntry Route212North_CounterPartTrainer
+    ScriptEntry Route212North_CounterPartMon
+    ScriptEntry Route212North_PaulTrainer
+    ScriptEntry Route212North_PaulMon
     ScriptEntryEnd
 
 Route212North_OnTransition:
@@ -92,6 +96,39 @@ Route212North_PolicemanBlockSouth:
     ApplyMovement LOCALID_PLAYER, Route212North_Movement_PlayerMoveBack
 	WaitMovement
 	ReleaseAll
+
+Route212North_CounterPartTrainer:
+    PlaySE SEQ_SE_CONFIRM
+    Message Route212North_Text_CounterpartBattling
+    WaitButton
+    CloseMessage
+    End
+
+Route212North_CounterPartMon:
+    PlaySE SEQ_SE_CONFIRM
+    PlayCry SPECIES_DRAGONAIR
+    Message Route212North_Text_CounterpartMon
+    WaitCry
+    WaitButton
+    CloseMessage
+    End
+
+Route212North_PaulTrainer:
+    PlaySE SEQ_SE_CONFIRM
+    Message Route212North_Text_PaulBattling
+    WaitButton
+    CloseMessage
+    End
+
+Route212North_PaulMon:
+    PlaySE SEQ_SE_CONFIRM
+    PlayCry SPECIES_MAGMAR
+    Message Route212North_Text_PaulMon
+    WaitCry
+    WaitButton
+    CloseMessage
+    End
+
 
 Route212North_Ignore:
     End
