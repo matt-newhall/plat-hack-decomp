@@ -124,7 +124,7 @@
     ScriptEntry VisibleItems_Route210North_TM30
     ScriptEntry VisibleItems_FuegoIronworksBuilding_TM35
     ScriptEntry VisibleItems_FuegoIronworksBuilding_RockIncense
-    ScriptEntry VisibleItems_FuegoIronworksBuilding_Stick
+    ScriptEntry VisibleItems_FuegoIronworksBuilding_Nugget
     ScriptEntry VisibleItems_FuegoIronworksBuilding_Everstone
     ScriptEntry VisibleItems_Route219_Antidote
     ScriptEntry VisibleItems_Route220_SplashPlate
@@ -1073,8 +1073,8 @@ VisibleItems_FuegoIronworksBuilding_RockIncense:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_FuegoIronworksBuilding_Stick:
-    SetVar VAR_0x8008, ITEM_STICK
+VisibleItems_FuegoIronworksBuilding_Nugget:
+    SetVar VAR_0x8008, ITEM_NUGGET
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
