@@ -4674,6 +4674,11 @@ static BOOL ScrCmd_SetPosition(ScriptContext *ctx)
 
     MapObject *mapObject = MapObjMan_LocalMapObjByIndex(ctx->fieldSystem->mapObjMan, localID);
 
+    if (mapObject == NULL) {
+        GF_ASSERT(FALSE);
+        return FALSE;
+    }
+
     MapObject_SetPosDirFromCoords(mapObject, x, y, z, dir);
     MapObject_RecalculateObjectHeight(mapObject);
 
