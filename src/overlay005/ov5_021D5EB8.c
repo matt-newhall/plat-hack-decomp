@@ -3807,6 +3807,7 @@ static void ov5_021D97E8(SysTask *param0, void *param1)
 
         G2_SetBG2Offset(0, 32);
         ov5_021D64E4(v2[1], 16);
+        GXLayers_EngineAToggleLayers(GX_PLANEMASK_BG2, 1);
 
         v2[2] = 10 + (MTRNG_Next() % 20);
         v2[3] = 5 + (MTRNG_Next() % 3);
