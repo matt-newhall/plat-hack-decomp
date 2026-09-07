@@ -133,11 +133,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_ELECTIRIZER",
+            "id": "LOCALID_ITEM_MAX_ELIXIR",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_VALLEY_WINDWORKS_OUTSIDE_ELECTIRIZER",
+            "hidden_flag": "FLAG_OBTAINED_VALLEY_WINDWORKS_OUTSIDE_MAX_ELIXIR",
             "script": 7318,
             "initial_dir": 0,
             "data": [],

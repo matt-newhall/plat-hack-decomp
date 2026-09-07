@@ -359,11 +359,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_BIG_ROOT",
+            "id": "LOCALID_ITEM_DESTINY_KNOT",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_214_BIG_ROOT",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_214_DESTINY_KNOT",
             "script": 7112,
             "initial_dir": 0,
             "data": [],
@@ -464,11 +464,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_MAGMARIZER",
+            "id": "LOCALID_ITEM_WEAKNESS_POLICY",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_214_MAGMARIZER",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_214_WEAKNESS_POLICY",
             "script": 7317,
             "initial_dir": 0,
             "data": [],
