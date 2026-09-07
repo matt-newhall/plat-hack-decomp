@@ -20,14 +20,14 @@
     },
     "held_items": {
         "common": "ITEM_NONE",
-        "rare": "ITEM_MAGMARIZER"
+        "rare": "ITEM_NONE"
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_25",
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_HUMAN_LIKE", "EGG_GROUP_HUMAN_LIKE" ],
-    "abilities": [ "ABILITY_FLAME_BODY", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_MEGA_LAUNCHER", "ABILITY_FLASH_FIRE" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_RED",
     "flip_sprite": true,

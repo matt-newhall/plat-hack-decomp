@@ -8,13 +8,7 @@
 
 typedef struct NPCTradeMon {
     u32 species;
-    u32 hpIV;
-    u32 atkIV;
-    u32 defIV;
-    u32 speedIV;
-    u32 spAtkIV;
-    u32 spDefIV;
-    u32 unused1;
+    u32 abilitySlot;
     u32 otID;
     u32 cool;
     u32 beauty;

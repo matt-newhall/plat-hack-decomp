@@ -126,7 +126,7 @@ subscript_files = files(
     'subscript_teleport.s',
     'subscript_future_sight_start.s',
     'subscript_stockpile.s',
-    'subscript_swallow.s',
+    'subscript_stockpile_release.s',
     'subscript_print_message_and_play_animation.s',
     'subscript_torment_start.s',
     'subscript_flatter.s',

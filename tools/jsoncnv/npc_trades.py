@@ -13,13 +13,7 @@ ANSI_CLEAR = "\033[0m"
 def parse_npc_trade(data) -> bytes:
     return b"".join([
         u32(from_species(data["species"])),
-        u32(data["hpIV"]),
-        u32(data["atkIV"]),
-        u32(data["defIV"]),
-        u32(data["speedIV"]),
-        u32(data["spAtkIV"]),
-        u32(data["spDefIV"]),
-        u32(data["unused1"]),
+        u32(data["abilitySlot"]),
         u32(data["otID"]),
         u32(data["cool"]),
         u32(data["beauty"]),

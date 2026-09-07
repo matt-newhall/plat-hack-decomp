@@ -232,6 +232,21 @@
             "x": 42,
             "z": 41,
             "y": 0
+        },
+        {
+            "id": "LOCALID_COUNTERPART",
+            "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+            "movement_type": "MOVEMENT_TYPE_LOOK_NORTH",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_HIDE_VICTORY_ROAD_COUNTERPART",
+            "script": 0,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 15,
+            "z": 73,
+            "y": 0
         }
     ],
     "warp_events": [
@@ -332,6 +347,16 @@
             "y": 0,
             "width": 1,
             "length": 3,
+            "var": "0",
+            "value": 0
+        },
+        {
+            "script": 6,
+            "x": 14,
+            "z": 64,
+            "y": 0,
+            "width": 3,
+            "length": 1,
             "var": "0",
             "value": 0
         }

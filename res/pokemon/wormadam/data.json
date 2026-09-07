@@ -20,14 +20,14 @@
     },
     "held_items": {
         "common": "ITEM_NONE",
-        "rare": "ITEM_SILVERPOWDER"
+        "rare": "ITEM_NONE"
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_ONLY",
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_BUG", "EGG_GROUP_BUG" ],
-    "abilities": [ "ABILITY_ANTICIPATION", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_LEAF_GUARD", "ABILITY_OVERCOAT" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GRAY",
     "flip_sprite": false,

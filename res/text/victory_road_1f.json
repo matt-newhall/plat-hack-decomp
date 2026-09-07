@@ -120,6 +120,30 @@
         "The Pokémon League lies just ahead.\n",
         "Give it everything you have!"
       ]
+    },
+    {
+      "id": "VictoryRoad1F_Text_LucasPreBattle",
+      "en_US": [
+        "Lucas: Pre-Battle."
+      ]
+    },
+    {
+      "id": "VictoryRoad1F_Text_DawnPreBattle",
+      "en_US": [
+        "Dawn: Pre-Battle."
+      ]
+    },
+    {
+      "id": "VictoryRoad_Text_LucasDefeat",
+      "en_US": [
+        "Lucas: Defeat."
+      ]
+    },
+    {
+      "id": "VictoryRoad_Text_DawnDefeat",
+      "en_US": [
+        "Dawn: Defeat."
+      ]
     }
   ]
 }

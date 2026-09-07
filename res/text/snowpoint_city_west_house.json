@@ -19,25 +19,29 @@
       "id": "SnowpointCityWestHouse_Text_AskTradeMedichamForHaunter",
       "en_US": [
         "By any chance, do you have a Pokémon\n",
-        "called MEDICHAM?\r",
+        "that is Steel-type?\r",
         "If you do, would you like to trade\n",
-        "your MEDICHAM for my HAUNTER?"
+        "your Steel-type for my Spheal?"
       ]
     },
     {
       "id": "SnowpointCityWestHouse_Text_IMadeItPreventEvolving",
       "en_US": [
-        "Haha! Did my HAUNTER turn into\n",
-        "something else? Just kidding!\r",
-        "I made it hold something that\n",
-        "prevents it from evolving.\r",
-        "Please treat my HAUNTER nicely!\n",
-        "I’ll be good to your MEDICHAM, too!"
+        "I love trading! I used to play\n",
+        "pranks on other people by giving\f",
+        "them Pokémon that would evolve\f",
+        "when traded, but they held\f",
+        "an Everstone to prevent it!\r",
+        "I’m past that now though. Please\n",
+        "treat my Spheal nicely!"
       ]
     },
     {
       "id": "SnowpointCityWestHouse_Text_IAskedForMedicham",
-      "en_US": "What I asked for was a MEDICHAM...?"
+      "en_US": [
+        "What I asked for was\n",
+        "a Steel-type...?"
+      ]
     },
     {
       "id": "SnowpointCityWestHouse_Text_OKIfYouDontWant",

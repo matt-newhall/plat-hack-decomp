@@ -20,14 +20,14 @@
     },
     "held_items": {
         "common": "ITEM_NONE",
-        "rare": "ITEM_ELECTIRIZER"
+        "rare": "ITEM_NONE"
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_25",
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_HUMAN_LIKE", "EGG_GROUP_HUMAN_LIKE" ],
-    "abilities": [ "ABILITY_MOTOR_DRIVE", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_MOTOR_DRIVE", "ABILITY_ELECTROMORPHOSIS" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_YELLOW",
     "flip_sprite": false,

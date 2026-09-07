@@ -19,15 +19,15 @@
         "special_defense": 0
     },
     "held_items": {
-        "common": "ITEM_LEFTOVERS",
-        "rare": "ITEM_LEFTOVERS"
+        "common": "ITEM_NONE",
+        "rare": "ITEM_NONE"
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_12_5",
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_SLOW",
     "egg_groups": [ "EGG_GROUP_UNDISCOVERED", "EGG_GROUP_UNDISCOVERED" ],
-    "abilities": [ "ABILITY_PICKUP", "ABILITY_THICK_FAT" ],
+    "abilities": [ "ABILITY_GLUTTONY", "ABILITY_THICK_FAT" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLACK",
     "flip_sprite": false,

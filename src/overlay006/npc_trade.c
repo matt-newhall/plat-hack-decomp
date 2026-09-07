@@ -11,6 +11,7 @@
 #include "graphics.h"
 #include "heap.h"
 #include "map_header.h"
+#include "math_util.h"
 #include "message.h"
 #include "party.h"
 #include "pokemon.h"
@@ -124,18 +125,25 @@ static void NPCTrade_CreateMon(Pokemon *mon, NPCTradeMon *npcTradeMon, u32 level
 
     u8 hasNickname = TRUE;
     Pokemon_SetValue(mon, MON_DATA_HAS_NICKNAME, &hasNickname);
-    Pokemon_SetValue(mon, MON_DATA_HP_IV, &npcTradeMon->hpIV);
-    Pokemon_SetValue(mon, MON_DATA_ATK_IV, &npcTradeMon->atkIV);
-    Pokemon_SetValue(mon, MON_DATA_DEF_IV, &npcTradeMon->defIV);
-    Pokemon_SetValue(mon, MON_DATA_SPEED_IV, &npcTradeMon->speedIV);
-    Pokemon_SetValue(mon, MON_DATA_SPATK_IV, &npcTradeMon->spAtkIV);
-    Pokemon_SetValue(mon, MON_DATA_SPDEF_IV, &npcTradeMon->spDefIV);
+
+    u8 slots[6] = { 0, 1, 2, 3, 4, 5 };
+    u32 iv31 = 31;
+    for (int i = 0; i < 3; i++) {
+        int j = i + (LCRNG_Next() % (6 - i));
+        u8 tmp = slots[i];
+        slots[i] = slots[j];
+        slots[j] = tmp;
+        Pokemon_SetValue(mon, MON_DATA_HP_IV + slots[i], &iv31);
+    }
+
     Pokemon_SetValue(mon, MON_DATA_COOL, &npcTradeMon->cool);
     Pokemon_SetValue(mon, MON_DATA_BEAUTY, &npcTradeMon->beauty);
     Pokemon_SetValue(mon, MON_DATA_CUTE, &npcTradeMon->cute);
     Pokemon_SetValue(mon, MON_DATA_SMART, &npcTradeMon->smart);
     Pokemon_SetValue(mon, MON_DATA_TOUGH, &npcTradeMon->tough);
     Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &npcTradeMon->heldItem);
+    Pokemon_SetValue(mon, MON_DATA_ABILITY_SLOT, &npcTradeMon->abilitySlot);
+    Pokemon_CalcAbility(mon);
 
     string = NPCTrade_GetOTName(heapID, npcTradeID);
     Pokemon_SetValue(mon, MON_DATA_OT_NAME_STRING, string);

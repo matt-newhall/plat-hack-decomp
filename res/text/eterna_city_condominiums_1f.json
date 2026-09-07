@@ -78,25 +78,29 @@
     {
       "id": "EternaCityCondominiums1F_Text_DoYouGotThatPokemonNamedBuizelWannTradeItForMyChatot",
       "en_US": [
-        "Excuse me, but do you got that\n",
-        "Pokémon named BUIZEL?\r",
-        "Wanna trade it for my CHATOT?"
+        "Excuse me, but do you have any\n",
+        "Pokémon that are Grass-type?\r",
+        "Wanna trade it for my Gligar?"
       ]
     },
     {
       "id": "EternaCityCondominiums1F_Text_YesSoAwesomeABuizel",
       "en_US": [
-        "Yes! So awesome! A BUIZEL!\n",
+        "Yes! So awesome! A Grass-type!\n",
         "I so promise I’ll be good to it!\r",
-        "Oh yeah, CHATOT can learn some human\n",
-        "speech pretty quickly.\r",
-        "Try out its move Chatter.\n",
-        "You’ll totally see what I mean."
+        "Oh yeah, this Gligar isn’t like\n",
+        "the BEST Gligars.\r",
+        "You can’t drop its offense, but I’ve\n",
+        "heard there are others that can heal\f",
+        "themselves while they are poisoned!"
       ]
     },
     {
       "id": "EternaCityCondominiums1F_Text_WhatITotallyWantIsABuizel",
-      "en_US": "What I totally want is a BUIZEL..."
+      "en_US": [
+        "What I totally want is\n",
+        "a Grass-type..."
+      ]
     },
     {
       "id": "EternaCityCondominiums1F_Text_OhOKTotallyGotIt",
@@ -109,14 +113,7 @@
     },
     {
       "id": "EternaCityCondominiums1F_Text_DidThatChatotITradedYouTotallyLearnThatChatterMove",
-      "en_US": [
-        "Did that CHATOT I traded you totally\n",
-        "learn that Chatter move?\r",
-        "It will mimic your speech if you use\n",
-        "that move outside of battle.\r",
-        "It’ll forget any speech you taught it\n",
-        "if you stick it in a PC Box, though."
-      ]
+      "en_US": "Hope Gligar is treating you well!"
     },
     {
       "id": "EternaCityCondominiums1F_Text_HiImTheBuildingSuperintented",

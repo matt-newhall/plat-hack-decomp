@@ -112,9 +112,11 @@ EternaCityCondominiums1F_TryTrade:
     GoToIfEq VAR_RESULT, 0xFF, EternaCityCondominiums1F_OhOKTotallyGotIt
     InitNPCTrade NPC_TRADE_CHARAP_CHATOT
     SetVar VAR_0x8004, VAR_RESULT
-    GetPartyMonSpecies VAR_0x8004, VAR_0x8005
-    GetNPCTradeRequestedSpecies VAR_RESULT
-    GoToIfNe VAR_0x8005, VAR_RESULT, EternaCityCondominiums1F_WhatITotallyWantIsABuizel
+    GetPartyMonType VAR_0x8005, VAR_0x8006, VAR_0x8004
+    GoToIfEq VAR_0x8005, TYPE_GRASS, EternaCityCondominiums1F_DoTrade
+    GoToIfNe VAR_0x8006, TYPE_GRASS, EternaCityCondominiums1F_WhatITotallyWantIsABuizel
+
+EternaCityCondominiums1F_DoTrade:
     StartNPCTrade VAR_0x8004
     FinishNPCTrade
     SetFlag FLAG_TRADED_FOR_CHARAP_CHATOT

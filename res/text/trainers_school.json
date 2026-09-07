@@ -120,19 +120,20 @@
         "Whew! You’re really good!\r",
         "We’ve been studying every day, but\n",
         "we were no match for you at all!\r",
-        "You’d be able to use this Potion\n",
-        "properly. Here you go!\r"
+        "I was walking around with my partner\n",
+        "Happiny and it found this instead\f",
+        "of its normal Oval Stone.\r",
+        "My mom says I can’t keep it, so\n",
+        "would you mind taking it, please?"
       ]
     },
     {
       "id": "pl_msg_00000049_00014",
       "en_US": [
-        "When a Potion is used, it restores the\n",
-        "HP, the health, of a Pokémon.\r",
-        "Being a good Trainer isn’t only about\n",
-        "ordering your Pokémon around.\r",
-        "A superior Trainer knows how to use\n",
-        "items to the full advantage!"
+        "Keep that Egg with you in your\n",
+        "party of Pokémon.\r",
+        "A Pokémon will hatch from it while you\n",
+        "are traveling!\r"
       ]
     },
     {
@@ -260,6 +261,25 @@
         "A Trainer’s mission is to defeat the\n",
         "strong Trainers who await challengers\f",
         "in Pokémon Gyms."
+      ]
+    },
+    {
+      "id": "pl_msg_00000049_00028",
+      "en_US": [
+        "Oh, okay...\r",
+        "I’ll be waiting here in case you\n",
+        "change your mind."
+      ]
+    },
+    {
+      "id": "pl_msg_00000049_00029",
+      "en_US": [
+        "Oh?\n",
+        "You have six Pokémon with you already.\f",
+        "You don’t have room for this Egg.\r",
+        "I’ll give you this Egg when you’ve made\n",
+        "room for it.\r",
+        "I’ll be waiting right here."
       ]
     }
   ]

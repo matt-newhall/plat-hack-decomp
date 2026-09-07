@@ -42,10 +42,10 @@
       "en_US": [
         "Hey, konnichiwa!\n",
         "Bonjour and all the rest!\r",
-        "Have you a Pokémon named FINNEON?\n",
-        "C’est un Pokémon fish-style?\r",
+        "Have you a Pokémon of the\n",
+        "Poison-type?\r",
         "If you will be so kind, trade it will\n",
-        "you for my precious MAGIKARP?"
+        "you for my precious Swablu?"
       ]
     },
     {
@@ -53,7 +53,7 @@
       "en_US": [
         "Danke schon, arigato, gracias,\n",
         "and what-have-you!\r",
-        "That MAGIKARP, it accompanied me from\n",
+        "That Swablu, it accompanied me from\n",
         "the country of my birth.\r",
         "Be good to it, I beseech you!"
       ]
@@ -61,8 +61,8 @@
     {
       "id": "Route226House_Text_ThatIsNoFinneon",
       "en_US": [
-        "Oh, non, non! That is no FINNEON!\n",
-        "What I want is a FINNEON!\f",
+        "Oh, non, non! That is no Poison-type!\n",
+        "What I want is a poisonous Pokémon!\f",
         "You have made the Meister melancholy!"
       ]
     },

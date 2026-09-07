@@ -20,14 +20,14 @@
     },
     "held_items": {
         "common": "ITEM_NONE",
-        "rare": "ITEM_CHERI_BERRY"
+        "rare": "ITEM_NONE"
     },
     "gender_ratio": "GENDER_RATIO_FEMALE_75",
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_FAST",
     "egg_groups": [ "EGG_GROUP_FIELD", "EGG_GROUP_FIELD" ],
-    "abilities": [ "ABILITY_THICK_FAT", "ABILITY_OWN_TEMPO" ],
+    "abilities": [ "ABILITY_THICK_FAT", "ABILITY_DEFIANT" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GRAY",
     "flip_sprite": false,

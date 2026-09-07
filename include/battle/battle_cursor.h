@@ -21,9 +21,7 @@ void ov16_02268B8C(UnkStruct_ov16_02268A14 *param0);
 void ov16_02268C04(NARC *param0, NARC *param1, UnkStruct_ov16_02268A14 *param2, int param3, int param4, void *param5);
 
 /**
- * @brief Redraw the Mega Evolution button in its armed or idle state.
- *
- * Does nothing unless the move menu offering the button is the one on screen.
+ * @brief Redraw the Mega Evolution symbol on its button, lit or dimmed.
  *
  * @param param0
  * @param armed
@@ -31,7 +29,7 @@ void ov16_02268C04(NARC *param0, NARC *param1, UnkStruct_ov16_02268A14 *param2, 
 void BattleSystem_RefreshMegaButton(UnkStruct_ov16_02268A14 *param0, BOOL armed);
 
 /**
- * @brief Remove the Mega Evolution button and free its sprite resources.
+ * @brief Remove the Mega Evolution symbol and free its sprite resources.
  *
  * @param param0
  */

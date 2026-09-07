@@ -1752,10 +1752,10 @@ static u8 PartyMenu_HandleInput(PartyMenuApplication *application)
             if (application->hideCancel == FALSE) {
                 return PARTY_MENU_INPUT_CANCEL;
             }
-        } else if (application->partyMenu->mode == PARTY_MENU_MODE_SELECT_NO_PROMPT || application->partyMenu->mode == PARTY_MENU_MODE_NPC_TRADE) {
+        } else if (application->partyMenu->mode == PARTY_MENU_MODE_SELECT_NO_PROMPT) {
             Sound_PlayEffect(SEQ_SE_CONFIRM);
             return PARTY_MENU_INPUT_CONFIRM;
-        } else if (application->partyMenu->mode == PARTY_MENU_MODE_FEED_POFFIN || application->partyMenu->mode == PARTY_MENU_MODE_MAILBOX) {
+        } else if (application->partyMenu->mode == PARTY_MENU_MODE_FEED_POFFIN || application->partyMenu->mode == PARTY_MENU_MODE_MAILBOX || application->partyMenu->mode == PARTY_MENU_MODE_NPC_TRADE) {
             if (application->partyMembers[application->currPartySlot].isEgg == FALSE) {
                 Sound_PlayEffect(SEQ_SE_CONFIRM);
                 return PARTY_MENU_INPUT_CONFIRM;
