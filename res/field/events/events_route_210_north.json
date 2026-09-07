@@ -284,11 +284,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_WAVE_INCENSE",
+            "id": "LOCALID_ITEM_BIG_MUSHROOM",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_210_NORTH_WAVE_INCENSE",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_210_NORTH_BIG_MUSHROOM",
             "script": 7118,
             "initial_dir": 0,
             "data": [],

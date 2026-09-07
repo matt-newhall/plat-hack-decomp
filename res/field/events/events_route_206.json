@@ -234,11 +234,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_POISON_BARB",
+            "id": "LOCALID_ITEM_HEART_SCALE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_206_POISON_BARB",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_206_HEART_SCALE",
             "script": 7030,
             "initial_dir": 0,
             "data": [],

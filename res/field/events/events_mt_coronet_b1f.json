@@ -290,11 +290,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_SOFT_SAND",
+            "id": "LOCALID_ITEM_LAGGING_TAIL",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_B1F_SOFT_SAND",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_B1F_LAGGING_TAIL",
             "script": 7151,
             "initial_dir": 0,
             "data": [],

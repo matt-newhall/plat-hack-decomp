@@ -25,9 +25,9 @@ Route221House_CheckPartyMonLevel:
     GoTo Route221House_ShowThisLevelPokemon
 
 Route221House_CorrectPartyMonLevel:
-    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 0, Route221House_SetRewardBlackBelt
-    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 1, Route221House_SetRewardExpertBelt
-    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 2, Route221House_SetRewardFocusSash
+    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 0, Route221House_SetRewardGreenShard
+    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 1, Route221House_SetRewardBlueShard
+    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 2, Route221House_SetRewardRedShard
     BufferPartyMonSpecies 1, VAR_0x8003
     BufferItemName 2, VAR_0x8004
     Message Route221House_Text_PokemonIsCorrectLevel
@@ -47,16 +47,16 @@ Route221House_ExpertMEnd:
     ReleaseAll
     End
 
-Route221House_SetRewardBlackBelt:
-    SetVar VAR_0x8004, ITEM_BLACK_BELT
+Route221House_SetRewardGreenShard:
+    SetVar VAR_0x8004, ITEM_GREEN_SHARD
     Return
 
-Route221House_SetRewardExpertBelt:
-    SetVar VAR_0x8004, ITEM_EXPERT_BELT
+Route221House_SetRewardBlueShard:
+    SetVar VAR_0x8004, ITEM_BLUE_SHARD
     Return
 
-Route221House_SetRewardFocusSash:
-    SetVar VAR_0x8004, ITEM_FOCUS_SASH
+Route221House_SetRewardRedShard:
+    SetVar VAR_0x8004, ITEM_RED_SHARD
     Return
 
 Route221House_NoRoomInBag:
@@ -68,9 +68,9 @@ Route221House_NoRoomInBag:
     End
 
 Route221House_TryGiveReward:
-    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 0, Route221House_SetRewardBlackBelt
-    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 1, Route221House_SetRewardExpertBelt
-    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 2, Route221House_SetRewardFocusSash
+    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 0, Route221House_SetRewardGreenShard
+    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 1, Route221House_SetRewardBlueShard
+    CallIfEq VAR_ROUTE_221_HOUSE_REWARD_INDEX, 2, Route221House_SetRewardRedShard
     BufferItemName 2, VAR_0x8004
     Message Route221House_Text_ThankWithItem
     SetVar VAR_0x8005, 1

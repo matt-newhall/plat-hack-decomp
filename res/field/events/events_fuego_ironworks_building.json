@@ -49,11 +49,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_ROCK_INCENSE",
+            "id": "LOCALID_ITEM_ZAP_PLATE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_FUEGO_IRONWORKS_BUILDING_ROCK_INCENSE",
+            "hidden_flag": "FLAG_OBTAINED_FUEGO_IRONWORKS_BUILDING_ZAP_PLATE",
             "script": 7121,
             "initial_dir": 0,
             "data": [],

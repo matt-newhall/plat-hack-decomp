@@ -42,11 +42,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_ODD_INCENSE",
+            "id": "LOCALID_ITEM_ESCAPE_ROPE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_SOLACEON_RUINS_ROOM_7_ODD_INCENSE",
+            "hidden_flag": "FLAG_OBTAINED_SOLACEON_RUINS_ROOM_7_ESCAPE_ROPE",
             "script": 7096,
             "initial_dir": 0,
             "data": [],

@@ -119,11 +119,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_CALCIUM",
+            "id": "LOCALID_ITEM_RED_SHARD",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_STARK_MOUNTAIN_ROOM_2_CALCIUM",
+            "hidden_flag": "FLAG_OBTAINED_STARK_MOUNTAIN_ROOM_2_RED_SHARD",
             "script": 7223,
             "initial_dir": 0,
             "data": [],
