@@ -9,7 +9,7 @@
     ScriptEntry VisibleItems_OreburghGateB1F_TM31
     ScriptEntry VisibleItems_OreburghGateB1F_TM70
     ScriptEntry VisibleItems_OreburghGateB1F_EarthPlate
-    ScriptEntry VisibleItems_OreburghMineB2F_EscapeRope
+    ScriptEntry VisibleItems_OreburghMineB2F_StonePlate
     ScriptEntry VisibleItems_OreburghMineB2F_Aggronite
     ScriptEntry VisibleItems_Route204South_TM06
     ScriptEntry VisibleItems_Route204South_HeartScale
@@ -37,7 +37,7 @@
     ScriptEntry VisibleItems_Route206_Ether
     ScriptEntry VisibleItems_Route206_BurnHeal
     ScriptEntry VisibleItems_WaywardCave1F_TM32
-    ScriptEntry VisibleItems_WaywardCave1F_Revive
+    ScriptEntry VisibleItems_WaywardCave1F_FlamePlate
     ScriptEntry VisibleItems_WaywardCave1F_EscapeRope
     ScriptEntry VisibleItems_MtCoronet4FRooms1And2_AdamantOrb
     ScriptEntry VisibleItems_WaywardCave1F_TM26
@@ -52,10 +52,10 @@
     ScriptEntry VisibleItems_MtCoronet1FSouth_DawnStone
     ScriptEntry VisibleItems_Route208_HeartScale
     ScriptEntry VisibleItems_Route208_GreatBall
-    ScriptEntry VisibleItems_Route208_Ether
+    ScriptEntry VisibleItems_Route208_EarthPlate
     ScriptEntry VisibleItems_AmitySquare_TM45
     ScriptEntry VisibleItems_AmitySquare_TM43
-    ScriptEntry VisibleItems_AmitySquare_SpookyPlate
+    ScriptEntry VisibleItems_AmitySquare_PixiePlate
     ScriptEntry VisibleItems_Route212North_TM11
     ScriptEntry VisibleItems_Route212North_GreatBall
     ScriptEntry VisibleItems_Route212North_AbilityCapsule
@@ -95,7 +95,7 @@
     ScriptEntry VisibleItems_Route209_TM19
     ScriptEntry VisibleItems_Route209LostTower2F_OvalStone
     ScriptEntry VisibleItems_FullmoonIslandForest_LunarWing
-    ScriptEntry VisibleItems_Route209LostTower3F_Revive
+    ScriptEntry VisibleItems_Route209LostTower3F_SpookyPlate
     ScriptEntry VisibleItems_Route209LostTower4F_TM27
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_MindPlate
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_EscapeRope
@@ -127,7 +127,7 @@
     ScriptEntry VisibleItems_FuegoIronworksBuilding_Nugget
     ScriptEntry VisibleItems_FuegoIronworksBuilding_Everstone
     ScriptEntry VisibleItems_Route219_Antidote
-    ScriptEntry VisibleItems_Route220_SplashPlate
+    ScriptEntry VisibleItems_Route220_Pearl
     ScriptEntry VisibleItems_Route205South_MuscleBand
     ScriptEntry VisibleItems_Route220_AirBalloon
     ScriptEntry VisibleItems_Route220_Slowbronite
@@ -339,6 +339,8 @@
     ScriptEntry VisibleItems_Route222_Gyaradosite
     ScriptEntry VisibleItems_Route225_RootFossil
     ScriptEntry VisibleItems_TrophyGarden_Chimechite
+    ScriptEntry VisibleItems_SendoffSpring_DracoPlate
+    ScriptEntry VisibleItems_Route211East_SkyPlate
     ScriptEntryEnd
 
 VisibleItems_Route202_Potion:
@@ -383,8 +385,8 @@ VisibleItems_OreburghGateB1F_EarthPlate:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_OreburghMineB2F_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_OreburghMineB2F_StonePlate:
+    SetVar VAR_0x8008, ITEM_STONE_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -551,8 +553,8 @@ VisibleItems_WaywardCave1F_TM32:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_WaywardCave1F_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+VisibleItems_WaywardCave1F_FlamePlate:
+    SetVar VAR_0x8008, ITEM_FLAME_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -641,8 +643,8 @@ VisibleItems_Route208_GreatBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route208_Ether:
-    SetVar VAR_0x8008, ITEM_ETHER
+VisibleItems_Route208_EarthPlate:
+    SetVar VAR_0x8008, ITEM_EARTH_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -659,8 +661,8 @@ VisibleItems_AmitySquare_TM43:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_AmitySquare_SpookyPlate:
-    SetVar VAR_0x8008, ITEM_SPOOKY_PLATE
+VisibleItems_AmitySquare_PixiePlate:
+    SetVar VAR_0x8008, ITEM_PIXIE_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -899,8 +901,8 @@ VisibleItems_FullmoonIslandForest_LunarWing:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route209LostTower3F_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+VisibleItems_Route209LostTower3F_SpookyPlate:
+    SetVar VAR_0x8008, ITEM_SPOOKY_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1091,8 +1093,8 @@ VisibleItems_Route219_Antidote:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route220_SplashPlate:
-    SetVar VAR_0x8008, ITEM_SPLASH_PLATE
+VisibleItems_Route220_Pearl:
+    SetVar VAR_0x8008, ITEM_PEARL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2365,6 +2367,18 @@ VisibleItems_Route225_RootFossil:
 
 VisibleItems_TrophyGarden_Chimechite:
     SetVar VAR_0x8008, ITEM_CHIMECHITE
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_SendoffSpring_DracoPlate:
+    SetVar VAR_0x8008, ITEM_DRACO_PLATE
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_Route211East_SkyPlate:
+    SetVar VAR_0x8008, ITEM_SKY_PLATE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
