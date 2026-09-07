@@ -33,6 +33,11 @@ typedef struct BerryPatch {
     u8 isGrowing;
 } BerryPatch;
 
+typedef struct BerryPatchInit {
+    u16 berryItemID;
+    u16 yield;
+} BerryPatchInit;
+
 typedef struct BerryGrowthData {
     u8 stageDuration;
     u8 moistureDrainRate;
@@ -40,7 +45,7 @@ typedef struct BerryGrowthData {
 } BerryGrowthData;
 
 void BerryPatches_Clear(BerryPatch *patches);
-void BerryPatches_Init(BerryPatch *patches, enum HeapID heapID, const u16 *initPatches, int initSize);
+void BerryPatches_Init(BerryPatch *patches, const BerryPatchInit *initPatches, int initSize);
 BerryGrowthData *BerryGrowthData_Init(enum HeapID heapID);
 enum BerryGrowthStage BerryPatches_GetPatchGrowthStage(const BerryPatch *patches, int patchID);
 int BerryPatches_GetPatchBerryID(const BerryPatch *patches, int patchID);
@@ -54,6 +59,5 @@ enum MulchType BerryPatches_GetPatchMulchType(const BerryPatch *patches, int pat
 void BerryPatches_SetPatchMulchType(BerryPatch *patches, int patchID, enum MulchType mulchType);
 int BerryPatches_GetPatchYield(const BerryPatch *patches, int patchID);
 int BerryPatches_HarvestPatch(BerryPatch *patches, int patchID);
-void BerryPatches_ElapseMinutes(BerryPatch *patches, const BerryGrowthData *growthData, int minutesPassed);
 
 #endif // POKEPLATINUM_BERRY_PATCHES_H

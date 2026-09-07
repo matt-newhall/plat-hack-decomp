@@ -405,57 +405,6 @@
             "y": 0
         },
         {
-            "id": "LOCALID_BERRY_SOIL_2",
-            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
-            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "0",
-            "script": 2800,
-            "initial_dir": 0,
-            "data": [
-                64
-            ],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 657,
-            "z": 808,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_BERRY_SOIL_3",
-            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
-            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "0",
-            "script": 2800,
-            "initial_dir": 0,
-            "data": [
-                65
-            ],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 658,
-            "z": 808,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_BERRY_SOIL_4",
-            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
-            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "0",
-            "script": 2800,
-            "initial_dir": 0,
-            "data": [
-                63
-            ],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 659,
-            "z": 808,
-            "y": 0
-        },
-        {
             "id": "LOCALID_ITEM_TM40",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",

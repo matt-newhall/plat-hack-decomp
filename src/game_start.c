@@ -168,7 +168,7 @@ static void InitializeNewSave(enum HeapID heapID, SaveData *saveData, BOOL setTr
     TrainerInfo_SetAppearance(trainerInfo, Appearance_CalculateFromTrainerInfo(rnd, TrainerInfo_Gender(trainerInfo), 0));
 
     berryPatches = MiscSaveBlock_GetBerryPatches(saveData);
-    BerryPatches_Init(berryPatches, heapID, (const u16 *)sBerryInitTable, NELEMS(sBerryInitTable));
+    BerryPatches_Init(berryPatches, sBerryInitTable, NELEMS(sBerryInitTable));
 }
 
 static void TryLoadingSave(int unused, SaveData *saveData)

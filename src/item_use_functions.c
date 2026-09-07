@@ -581,18 +581,8 @@ static enum ItemUseCheckResult CanUseBerry(const ItemUseContext *usageContext)
 
 static void UseBerryFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
 {
-    FieldSystem *fieldSystem;
-    StartMenu *v1;
-    MapObject *v2;
-
-    fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
-    v1 = FieldTask_GetEnv(usageContext->fieldTask);
-
-    if (additionalContext->berryPatchFlags & BERRY_PATCH_FLAG_EMPTY) {
-        sub_02068540(usageContext, additionalContext, 2801);
-    } else {
-        UseHealingItemFromMenu(usageContext, additionalContext);
-    }
+    // berries can never be planted
+    UseHealingItemFromMenu(usageContext, additionalContext);
 }
 
 BOOL BerryPatch_IsEmpty(const ItemUseContext *usageContext)
