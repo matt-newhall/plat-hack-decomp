@@ -210,11 +210,11 @@ const u16 PokemonLeagueMartSpecialties[] = {
 };
 
 const u16 VeilstoneDeptStoreStock_B1F_DOWN_LEFT[] = {
-    ITEM_FIGY_BERRY,
-    ITEM_WIKI_BERRY,
-    ITEM_MAGO_BERRY,
-    ITEM_AGUAV_BERRY,
-    ITEM_IAPAPA_BERRY,
+    ITEM_RAZZ_BERRY,
+    ITEM_BLUK_BERRY,
+    ITEM_NANAB_BERRY,
+    ITEM_WEPEAR_BERRY,
+    ITEM_PINAP_BERRY,
     SHOP_ITEM_END
 };
 
