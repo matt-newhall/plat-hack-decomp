@@ -1,29 +1,29 @@
 {
     "front": {
         "y_offset": {
-            "female": 6,
-            "male": 6
+            "female": 1,
+            "male": 1
         },
-        "addl_y_offset": 9,
-        "animation": 3,
+        "addl_y_offset": -3,
+        "animation": 14,
         "cry_delay": 0,
         "start_delay": 0,
         "frames": [
             {
+                "sprite_frame": 1,
+                "frame_delay": 9,
+                "x_shift": 0,
+                "y_shift": 0
+            },
+            {
                 "sprite_frame": 0,
-                "frame_delay": 13,
+                "frame_delay": 12,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
                 "sprite_frame": 1,
-                "frame_delay": 15,
-                "x_shift": 0,
-                "y_shift": 0
-            },
-            {
-                "sprite_frame": -1,
-                "frame_delay": 0,
+                "frame_delay": 9,
                 "x_shift": 0,
                 "y_shift": 0
             },
@@ -143,7 +143,7 @@
         ]
     },
     "shadow": {
-        "x_offset": 0,
-        "size": "SHADOW_SIZE_SMALL"
+        "x_offset": -3,
+        "size": "SHADOW_SIZE_LARGE"
     }
 }
