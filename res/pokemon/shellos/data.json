@@ -79,7 +79,8 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_EARTH_POWER"
+            "MOVE_EARTH_POWER",
+            "MOVE_MEMENTO"
         ],
         "egg_moves": [
             "MOVE_COUNTER",

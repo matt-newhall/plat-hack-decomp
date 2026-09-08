@@ -107,12 +107,11 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_HELPING_HAND",
-            "MOVE_VACUUM_WAVE",
-            "MOVE_GUNK_SHOT",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

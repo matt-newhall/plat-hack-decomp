@@ -96,10 +96,8 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_PSYWAVE",

@@ -174,9 +174,11 @@
             "MOVE_SPITE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": []

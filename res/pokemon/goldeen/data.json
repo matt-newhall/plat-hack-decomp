@@ -83,7 +83,10 @@
             "MOVE_SNORE",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_PSYBEAM",

@@ -98,18 +98,15 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_ANCIENT_POWER",
-            "MOVE_SYNTHESIS",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_EARTH_POWER",
             "MOVE_SEED_BOMB",
             "MOVE_LAST_RESORT",
-            "MOVE_TRICK",
-            "MOVE_SUCKER_PUNCH",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW"
         ]
     },
     "evolutions": [  ],

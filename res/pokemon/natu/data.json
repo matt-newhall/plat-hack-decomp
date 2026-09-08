@@ -96,11 +96,11 @@
             "MOVE_AIR_CUTTER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TWISTER",
-            "MOVE_TRICK",
             "MOVE_HEAT_WAVE",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_PECK",
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_HAZE",

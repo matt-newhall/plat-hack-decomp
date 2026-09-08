@@ -91,10 +91,10 @@
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
             "MOVE_SNORE",
-            "MOVE_OUTRAGE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_MAGNET_RISE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

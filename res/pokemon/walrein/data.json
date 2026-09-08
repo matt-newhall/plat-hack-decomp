@@ -92,11 +92,11 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_IRON_HEAD",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_SIGNAL_BEAM"
+            "MOVE_SIGNAL_BEAM",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

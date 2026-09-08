@@ -86,15 +86,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_SUPERPOWER",
             "MOVE_OMINOUS_WIND",
             "MOVE_SPITE",
             "MOVE_AIR_CUTTER",
-            "MOVE_TWISTER",
             "MOVE_HEAT_WAVE",
-            "MOVE_SUCKER_PUNCH",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_PECK"
         ]
     },
     "evolutions": [  ],

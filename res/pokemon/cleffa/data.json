@@ -84,15 +84,12 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_ENDEAVOR",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_TRICK",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_PRESENT",

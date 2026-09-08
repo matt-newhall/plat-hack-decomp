@@ -77,11 +77,10 @@
             "TM90"
         ],
         "by_tutor": [
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_SYNTHESIS",
-            "MOVE_SEED_BOMB"
+            "MOVE_SEED_BOMB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_NUZZLE"
         ]
     },
     "evolutions": [  ],

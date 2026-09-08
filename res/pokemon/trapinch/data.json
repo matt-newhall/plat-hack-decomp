@@ -80,7 +80,8 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
-            "MOVE_EARTH_POWER"
+            "MOVE_EARTH_POWER",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_FOCUS_ENERGY",

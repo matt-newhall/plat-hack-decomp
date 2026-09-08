@@ -94,11 +94,13 @@
             "HM06"
         ],
         "by_tutor": [
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_IRON_DEFENSE",
-            "MOVE_MAGNET_RISE"
+            "MOVE_MAGNET_RISE",
+            "MOVE_ACID_SPRAY",
+            "MOVE_RAPID_SPIN",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [  ],

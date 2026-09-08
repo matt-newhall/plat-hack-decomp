@@ -106,11 +106,11 @@
             "MOVE_FURY_CUTTER",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_OUTRAGE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_TWISTER",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

@@ -88,8 +88,9 @@
             "MOVE_GASTRO_ACID",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_GUNK_SHOT",
-            "MOVE_SEED_BOMB"
+            "MOVE_SEED_BOMB",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_PURSUIT",

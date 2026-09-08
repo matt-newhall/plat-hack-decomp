@@ -101,8 +101,8 @@
             "MOVE_ENDEAVOR",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

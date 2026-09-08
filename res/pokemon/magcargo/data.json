@@ -91,12 +91,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_HEAT_WAVE"
+            "MOVE_HEAT_WAVE",
+            "MOVE_MEMENTO",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

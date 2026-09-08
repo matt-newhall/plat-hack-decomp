@@ -84,10 +84,10 @@
             "MOVE_DIVE",
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_SIGNAL_BEAM"
+            "MOVE_SIGNAL_BEAM",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_ACID_SPRAY",

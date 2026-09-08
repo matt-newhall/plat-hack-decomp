@@ -88,8 +88,6 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
-            "MOVE_ROLLOUT",
-            "MOVE_SUPERPOWER",
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_SPITE",
@@ -98,7 +96,7 @@
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_ENDEAVOR",

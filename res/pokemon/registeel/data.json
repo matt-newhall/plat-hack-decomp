@@ -96,15 +96,15 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
-            "MOVE_SUPERPOWER",
             "MOVE_ICE_PUNCH",
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_MAGNET_RISE"
+            "MOVE_MAGNET_RISE",
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

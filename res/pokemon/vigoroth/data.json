@@ -100,9 +100,8 @@
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
             "MOVE_ICE_PUNCH",
-            "MOVE_GUNK_SHOT",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_UPROAR"
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

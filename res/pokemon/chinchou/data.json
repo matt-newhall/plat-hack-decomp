@@ -86,8 +86,7 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_BOUNCE",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_BOUNCE"
         ],
         "egg_moves": [
             "MOVE_FLAIL",

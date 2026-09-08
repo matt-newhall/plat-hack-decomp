@@ -92,7 +92,9 @@
             "MOVE_ICY_WIND",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_SIGNAL_BEAM"
+            "MOVE_SIGNAL_BEAM",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [  ],

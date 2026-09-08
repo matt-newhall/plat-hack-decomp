@@ -91,12 +91,12 @@
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_SPIKE_CANNON"
         ]
     },
     "evolutions": [  ],

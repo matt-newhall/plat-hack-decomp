@@ -87,7 +87,11 @@
             "MOVE_ENDEAVOR",
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_PECK",
+            "MOVE_LIFE_DEW",
+            "MOVE_LUNGE",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [  ],

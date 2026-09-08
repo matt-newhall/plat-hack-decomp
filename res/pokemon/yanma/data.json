@@ -90,7 +90,8 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_WHIRLWIND",

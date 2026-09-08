@@ -85,7 +85,6 @@
             "TM90"
         ],
         "by_tutor": [
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
             "MOVE_OMINOUS_WIND",
@@ -93,7 +92,8 @@
             "MOVE_AIR_CUTTER",
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_PSYBEAM",

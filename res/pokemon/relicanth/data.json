@@ -95,7 +95,8 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_BOUNCE"
+            "MOVE_BOUNCE",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_MAGNITUDE",

@@ -101,13 +101,12 @@
             "HM06"
         ],
         "by_tutor": [
-            "MOVE_ROLLOUT",
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TRICK"
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

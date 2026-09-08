@@ -78,7 +78,9 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_DRILL_RUN",

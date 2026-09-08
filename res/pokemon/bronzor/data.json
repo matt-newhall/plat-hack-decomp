@@ -91,11 +91,10 @@
             "TM92"
         ],
         "by_tutor": [
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_TRICK"
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

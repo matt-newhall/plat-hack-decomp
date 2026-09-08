@@ -187,8 +187,11 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW"
         ]
     },
     "evolutions": []

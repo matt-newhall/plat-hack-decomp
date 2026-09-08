@@ -87,7 +87,6 @@
             "MOVE_ICY_WIND",
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
-            "MOVE_SYNTHESIS",
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [

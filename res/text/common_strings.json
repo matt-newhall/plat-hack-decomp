@@ -854,8 +854,9 @@
     {
       "id": "pl_msg_00000213_00129",
       "en_US": [
-        "Check the move you want taught to\n",
-        "see what Shards are needed."
+        "A plaque showing how much each\n",
+        "move costs in Shards.\r",
+        "The prices are scrubbed out."
       ]
     },
     {

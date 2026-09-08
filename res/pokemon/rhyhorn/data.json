@@ -94,15 +94,15 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
-            "MOVE_SUPERPOWER",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_UPROAR"
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_CRUNCH",

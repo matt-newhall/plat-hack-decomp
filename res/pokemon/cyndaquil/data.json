@@ -76,10 +76,11 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_FURY_SWIPES",

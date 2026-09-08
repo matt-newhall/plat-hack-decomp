@@ -85,7 +85,6 @@
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_BOUNCE"
         ],

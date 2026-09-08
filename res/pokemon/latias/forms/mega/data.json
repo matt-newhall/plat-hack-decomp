@@ -161,14 +161,10 @@
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_OUTRAGE",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TWISTER",
             "MOVE_LAST_RESORT",
-            "MOVE_TRICK",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": []

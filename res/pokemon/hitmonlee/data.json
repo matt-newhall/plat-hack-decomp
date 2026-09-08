@@ -87,14 +87,15 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_SUPERPOWER",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_VACUUM_WAVE",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_RAPID_SPIN",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [  ],

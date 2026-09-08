@@ -98,7 +98,8 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TRICK"
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_SILK_TRAP",

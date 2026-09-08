@@ -83,12 +83,11 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_SUPERPOWER",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_LAST_RESORT",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

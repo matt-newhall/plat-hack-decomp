@@ -89,8 +89,8 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TRICK",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_ENCORE",

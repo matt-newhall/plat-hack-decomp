@@ -98,14 +98,16 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_LAST_RESORT"
+            "MOVE_LAST_RESORT",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_ELECTROWEB",

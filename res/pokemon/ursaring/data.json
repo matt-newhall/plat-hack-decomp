@@ -97,17 +97,15 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
-            "MOVE_SUPERPOWER",
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
-            "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
             "MOVE_LAST_RESORT",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

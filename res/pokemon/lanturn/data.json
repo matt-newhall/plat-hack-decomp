@@ -93,8 +93,7 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_BOUNCE",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_BOUNCE"
         ]
     },
     "evolutions": [  ],

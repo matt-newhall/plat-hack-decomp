@@ -163,10 +163,10 @@
             "MOVE_THUNDER_PUNCH",
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
-            "MOVE_OUTRAGE",
-            "MOVE_SYNTHESIS",
             "MOVE_SEED_BOMB",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": []

@@ -80,7 +80,12 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_IRON_DEFENSE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_POISON_JAB",
+            "MOVE_SPIKE_CANNON",
+            "MOVE_LIFE_DEW",
+            "MOVE_RAPID_SPIN",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [  ],

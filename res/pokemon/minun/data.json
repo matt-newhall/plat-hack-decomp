@@ -82,15 +82,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
             "MOVE_MAGNET_RISE",
             "MOVE_LAST_RESORT",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_SUBSTITUTE",

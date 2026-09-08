@@ -79,7 +79,10 @@
             "MOVE_ENDEAVOR",
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_PECK",
+            "MOVE_LIFE_DEW",
+            "MOVE_LUNGE"
         ],
         "egg_moves": [
             "MOVE_QUICK_ATTACK",

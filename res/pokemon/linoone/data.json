@@ -97,14 +97,11 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
             "MOVE_LAST_RESORT",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

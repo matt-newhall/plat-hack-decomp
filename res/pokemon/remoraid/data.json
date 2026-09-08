@@ -86,10 +86,10 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
             "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_AURORA_BEAM",

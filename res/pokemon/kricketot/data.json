@@ -42,8 +42,7 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
-            "MOVE_ENDEAVOR",
-            "MOVE_UPROAR"
+            "MOVE_ENDEAVOR"
         ]
     },
     "evolutions": [

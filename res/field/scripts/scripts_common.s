@@ -1865,33 +1865,26 @@ _1624:
 _1636:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    SetVar VAR_0x8004, TUTOR_LOCATION_ROUTE_212
     GoTo _1672
     End
 
 _164A:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    SetVar VAR_0x8004, TUTOR_LOCATION_SURVIVAL_AREA
     GoTo _1672
     End
 
 _165E:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    SetVar VAR_0x8004, TUTOR_LOCATION_SNOWPOINT_CITY
     GoTo _1672
     End
 
 _1672:
     Message pl_msg_00000213_00129
-    ShowMoveTutorMoveSelectionMenu 0xFF, VAR_0x8004, VAR_RESULT
-    SetVar VAR_0x8003, VAR_RESULT
-    GoToIfEq VAR_0x8003, -2, _16A4
-    ShowShardCost 21, 1, VAR_0x8003, VAR_RESULT
-    WaitABPress
-    CloseShardCostWindow
-    GoTo _16A4
+    WaitButton
+    CloseMessage
+    ReleaseAll
     End
 
 _16A4:

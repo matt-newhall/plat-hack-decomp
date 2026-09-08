@@ -105,14 +105,15 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
             "MOVE_ICE_PUNCH",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

@@ -85,11 +85,10 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_SUPERPOWER",
             "MOVE_SNORE",
-            "MOVE_SYNTHESIS",
             "MOVE_EARTH_POWER",
-            "MOVE_SEED_BOMB"
+            "MOVE_SEED_BOMB",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

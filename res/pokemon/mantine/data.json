@@ -95,12 +95,11 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
-            "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
             "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_TWISTER",

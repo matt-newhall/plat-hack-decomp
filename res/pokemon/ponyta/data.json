@@ -77,7 +77,8 @@
             "MOVE_SNORE",
             "MOVE_BOUNCE",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_FLAME_WHEEL",

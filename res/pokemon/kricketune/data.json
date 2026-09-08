@@ -86,7 +86,8 @@
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
             "MOVE_KNOCK_OFF",
-            "MOVE_UPROAR"
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

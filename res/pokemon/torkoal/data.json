@@ -89,11 +89,12 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_HEAT_WAVE"
+            "MOVE_HEAT_WAVE",
+            "MOVE_ACID_SPRAY",
+            "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [
             "MOVE_ERUPTION",

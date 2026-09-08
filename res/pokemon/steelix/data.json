@@ -101,14 +101,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_IRON_HEAD",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_TWISTER",
-            "MOVE_MAGNET_RISE"
+            "MOVE_MAGNET_RISE",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

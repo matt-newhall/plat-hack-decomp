@@ -98,10 +98,7 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_OUTRAGE",
-            "MOVE_TWISTER",
-            "MOVE_BOUNCE",
-            "MOVE_UPROAR"
+            "MOVE_BOUNCE"
         ]
     },
     "evolutions": [  ],

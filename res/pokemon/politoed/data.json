@@ -85,8 +85,9 @@
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_BOUNCE"
+            "MOVE_BOUNCE",
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

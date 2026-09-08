@@ -87,9 +87,11 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
-            "MOVE_SYNTHESIS",
             "MOVE_SEED_BOMB",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW"
         ],
         "egg_moves": [
             "MOVE_SPIKES",

@@ -107,11 +107,10 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_AIR_CUTTER",
-            "MOVE_OUTRAGE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_TWISTER",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ]

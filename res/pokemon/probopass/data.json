@@ -94,7 +94,6 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
             "MOVE_ICE_PUNCH",
@@ -103,7 +102,8 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_MAGNET_RISE"
+            "MOVE_MAGNET_RISE",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

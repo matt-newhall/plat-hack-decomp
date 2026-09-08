@@ -94,10 +94,9 @@
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TWISTER",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

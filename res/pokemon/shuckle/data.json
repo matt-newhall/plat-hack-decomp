@@ -80,12 +80,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_GASTRO_ACID",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_ANCIENT_POWER",
-            "MOVE_EARTH_POWER"
+            "MOVE_EARTH_POWER",
+            "MOVE_INFESTATION",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW"
         ],
         "egg_moves": [
             "MOVE_SWEET_SCENT",

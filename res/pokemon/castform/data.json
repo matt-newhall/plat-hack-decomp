@@ -86,7 +86,9 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY",
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_VOLT_SWITCH",

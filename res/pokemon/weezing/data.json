@@ -89,10 +89,10 @@
             "TM90"
         ],
         "by_tutor": [
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_UPROAR"
+            "MOVE_MEMENTO",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

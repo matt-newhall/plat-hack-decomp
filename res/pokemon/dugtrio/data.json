@@ -90,7 +90,8 @@
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
             "MOVE_EARTH_POWER",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_MEMENTO",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

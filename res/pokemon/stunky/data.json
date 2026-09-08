@@ -89,8 +89,9 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_MEMENTO",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_PURSUIT",

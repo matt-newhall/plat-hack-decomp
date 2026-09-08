@@ -102,13 +102,13 @@
             "MOVE_FURY_CUTTER",
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
-            "MOVE_OUTRAGE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_TWISTER",
             "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

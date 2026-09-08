@@ -86,10 +86,10 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
-            "MOVE_TWISTER",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [  ],

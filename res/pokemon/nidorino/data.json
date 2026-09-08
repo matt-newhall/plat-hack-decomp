@@ -86,8 +86,9 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": [

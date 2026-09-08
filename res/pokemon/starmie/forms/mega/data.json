@@ -109,12 +109,10 @@
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_TWISTER",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_RAPID_SPIN"
         ]
     },
     "evolutions": []

@@ -95,11 +95,9 @@
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_HELPING_HAND",
             "MOVE_ENDEAVOR",
-            "MOVE_OUTRAGE",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

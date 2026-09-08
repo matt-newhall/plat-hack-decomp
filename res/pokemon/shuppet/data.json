@@ -94,9 +94,9 @@
             "MOVE_ICY_WIND",
             "MOVE_OMINOUS_WIND",
             "MOVE_SPITE",
-            "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_DISABLE",

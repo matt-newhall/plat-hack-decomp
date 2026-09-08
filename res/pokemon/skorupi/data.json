@@ -93,7 +93,11 @@
             "MOVE_FURY_CUTTER",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW"
         ],
         "egg_moves": [
             "MOVE_FAINT_ATTACK",

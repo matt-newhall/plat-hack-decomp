@@ -105,7 +105,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_BOUNCE",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_POISON_JAB"
         ]
     },
     "evolutions": [  ],

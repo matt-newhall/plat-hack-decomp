@@ -101,10 +101,10 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_UPROAR"
+            "MOVE_SHADOW_PUNCH",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

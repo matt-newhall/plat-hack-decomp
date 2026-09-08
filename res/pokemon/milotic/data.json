@@ -88,8 +88,9 @@
             "MOVE_IRON_HEAD",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_TWISTER",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW"
         ]
     },
     "evolutions": [  ],

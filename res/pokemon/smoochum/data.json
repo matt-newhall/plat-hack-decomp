@@ -93,11 +93,9 @@
             "MOVE_ICY_WIND",
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TRICK",
-            "MOVE_UPROAR"
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_MEDITATE",

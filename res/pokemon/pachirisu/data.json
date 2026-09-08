@@ -80,16 +80,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_GUNK_SHOT",
             "MOVE_SEED_BOMB",
             "MOVE_MAGNET_RISE",
             "MOVE_LAST_RESORT",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_FROST_BREATH",

@@ -80,7 +80,9 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_IRON_DEFENSE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_LIFE_DEW",
+            "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [
             "MOVE_BUBBLE_BEAM",

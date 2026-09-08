@@ -164,14 +164,16 @@
             "MOVE_DIVE",
             "MOVE_MUD_SLAP",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_ICE_PUNCH",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_OUTRAGE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_IRON_DEFENSE",
+            "MOVE_BRICK_BREAK",
+            "MOVE_LIFE_DEW",
+            "MOVE_RAPID_SPIN",
+            "MOVE_DRILL_RUN"
         ]
     },
     "evolutions": []

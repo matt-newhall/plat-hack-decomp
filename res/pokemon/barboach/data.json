@@ -84,7 +84,8 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_EARTH_POWER",
-            "MOVE_BOUNCE"
+            "MOVE_BOUNCE",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_THRASH",

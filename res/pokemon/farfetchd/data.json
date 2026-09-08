@@ -90,12 +90,14 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
-            "MOVE_TWISTER",
             "MOVE_LAST_RESORT",
             "MOVE_HEAT_WAVE",
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
             "MOVE_STEEL_WING",

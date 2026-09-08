@@ -102,9 +102,11 @@
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_SYNTHESIS",
             "MOVE_SEED_BOMB",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_BRICK_BREAK",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

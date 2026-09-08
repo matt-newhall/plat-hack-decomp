@@ -85,7 +85,11 @@
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LIFE_DEW",
+            "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [
             "MOVE_AURORA_BEAM",

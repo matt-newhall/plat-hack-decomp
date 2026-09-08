@@ -87,14 +87,13 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_FIRE_PUNCH",
-            "MOVE_SUPERPOWER",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_BRICK_BREAK",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_DUAL_WINGBEAT",

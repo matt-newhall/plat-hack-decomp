@@ -91,12 +91,13 @@
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_POISON_JAB",
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_FLAIL",

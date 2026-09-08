@@ -98,7 +98,7 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

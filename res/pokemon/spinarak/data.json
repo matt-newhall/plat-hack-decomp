@@ -79,7 +79,10 @@
         "by_tutor": [
             "MOVE_SIGNAL_BEAM",
             "MOVE_BOUNCE",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_POISON_JAB",
+            "MOVE_INFESTATION",
+            "MOVE_ACID_SPRAY",
+            "MOVE_LUNGE"
         ],
         "egg_moves": [
             "MOVE_PSYBEAM",

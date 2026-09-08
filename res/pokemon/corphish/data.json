@@ -92,13 +92,13 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
-            "MOVE_SUPERPOWER",
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_KNOCK_OFF"
+            "MOVE_KNOCK_OFF",
+            "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
             "MOVE_FREEZE_DRY",

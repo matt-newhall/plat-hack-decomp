@@ -102,9 +102,8 @@
             "MOVE_ICY_WIND",
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
-            "MOVE_OUTRAGE",
-            "MOVE_SYNTHESIS",
-            "MOVE_SEED_BOMB"
+            "MOVE_SEED_BOMB",
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

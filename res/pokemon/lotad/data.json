@@ -82,10 +82,9 @@
         "by_tutor": [
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_SYNTHESIS",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_SEED_BOMB",
-            "MOVE_UPROAR"
+            "MOVE_ACID_SPRAY"
         ],
         "egg_moves": [
             "MOVE_SYNTHESIS",

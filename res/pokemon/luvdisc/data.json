@@ -81,7 +81,9 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_ACID_SPRAY",
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_SPLASH",
