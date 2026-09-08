@@ -1609,6 +1609,7 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_RANGER_MALE, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_VETERAN, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_FLOOR_BOOK, &Unk_ov5_021FB000 },
     { 0xffff, NULL }
 };
 
@@ -6255,6 +6256,7 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_RANGER_MALE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_VETERAN, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_FLOOR_BOOK, 0x2, 0x0, 0x0, 0x0, 0x0 },
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
@@ -6396,6 +6398,14 @@ const UnkStruct_ov5_021EC700 Unk_ov5_021FB51C[] = {
             0x0,
             0x0,
             (FX32_ONE * 6) - (FX32_ONE * 6),
+        },
+    },
+    {
+        OBJ_EVENT_GFX_FLOOR_BOOK,
+        {
+            0x0,
+            -(FX32_ONE * 13),
+            0x0,
         },
     },
     {
