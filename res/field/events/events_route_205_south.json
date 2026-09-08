@@ -177,11 +177,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_HEAL_BALL",
+            "id": "LOCALID_ITEM_BRIGHTPOWDER",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_UNK_003",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_205_SOUTH_HEAL_BALL",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_205_SOUTH_BRIGHTPOWDER",
             "script": 7016,
             "initial_dir": 0,
             "data": [],

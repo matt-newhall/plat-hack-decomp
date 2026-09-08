@@ -280,11 +280,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_BURN_HEAL",
+            "id": "LOCALID_ITEM_METRONOME",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_206_BURN_HEAL",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_206_METRONOME",
             "script": 7033,
             "initial_dir": 0,
             "data": [],

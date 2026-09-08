@@ -268,18 +268,18 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_IRON",
+            "id": "LOCALID_ITEM_HEAVY_DUTY_BOOTS",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_217_IRON",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_217_HEAVY_DUTY_BOOTS",
             "script": 7162,
             "initial_dir": 0,
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 392,
-            "z": 330,
+            "x": 301,
+            "z": 335,
             "y": 0
         },
         {
@@ -373,11 +373,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_RARE_CANDY",
+            "id": "LOCALID_ITEM_FOCUS_BAND",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_217_RARE_CANDY",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_217_FOCUS_BAND",
             "script": 7294,
             "initial_dir": 0,
             "data": [],

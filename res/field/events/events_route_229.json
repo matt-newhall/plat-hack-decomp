@@ -148,11 +148,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_PROTEIN",
+            "id": "LOCALID_ITEM_CLEAR_AMULET",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_229_PROTEIN",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_229_CLEAR_AMULET",
             "script": 7230,
             "initial_dir": 0,
             "data": [],

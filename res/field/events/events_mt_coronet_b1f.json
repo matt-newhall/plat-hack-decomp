@@ -305,11 +305,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_LIGHT_CLAY",
+            "id": "LOCALID_ITEM_MAX_REVIVE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_B1F_LIGHT_CLAY",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_B1F_MAX_REVIVE",
             "script": 7152,
             "initial_dir": 0,
             "data": [],
