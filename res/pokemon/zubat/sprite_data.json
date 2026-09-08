@@ -1,59 +1,59 @@
 {
     "front": {
         "y_offset": {
-            "female": 31,
-            "male": 31
+            "female": 16,
+            "male": 16
         },
-        "addl_y_offset": 16,
-        "animation": 2,
+        "addl_y_offset": 20,
+        "animation": 8,
         "cry_delay": 0,
         "start_delay": 0,
         "frames": [
             {
-                "sprite_frame": 0,
-                "frame_delay": 1,
-                "x_shift": 0,
-                "y_shift": 0
-            },
-            {
                 "sprite_frame": 1,
-                "frame_delay": 1,
+                "frame_delay": 2,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
                 "sprite_frame": 0,
-                "frame_delay": 1,
+                "frame_delay": 2,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
                 "sprite_frame": 1,
-                "frame_delay": 1,
+                "frame_delay": 2,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
                 "sprite_frame": 0,
-                "frame_delay": 1,
+                "frame_delay": 2,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
                 "sprite_frame": 1,
-                "frame_delay": 1,
+                "frame_delay": 2,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
-                "sprite_frame": 0,
-                "frame_delay": 1,
+                "sprite_frame": -1,
+                "frame_delay": 0,
                 "x_shift": 0,
                 "y_shift": 0
             },
             {
-                "sprite_frame": 1,
-                "frame_delay": 1,
+                "sprite_frame": -1,
+                "frame_delay": 0,
+                "x_shift": 0,
+                "y_shift": 0
+            },
+            {
+                "sprite_frame": -1,
+                "frame_delay": 0,
                 "x_shift": 0,
                 "y_shift": 0
             },
