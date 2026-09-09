@@ -40,8 +40,7 @@ CelesticTownNorthHouse_Elder:
     LockAll
     FacePlayer
     GoToIfSet FLAG_GAME_COMPLETED, CelesticTownNorthHouse_IDidSomeResearch
-    Message CelesticTownNorthHouse_CelesticOldestTown
-    GoTo CelesticTownNorthHouse_ElderEnd
+    GoTo CelesticTownNorthHouse_CelesticOldestTown
     End
 
 CelesticTownNorthHouse_IDidSomeResearch:
