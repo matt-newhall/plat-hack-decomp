@@ -490,6 +490,19 @@ s8 Pokemon_MegaFormShadowXOffset(u16 monSpecies, u8 monForm);
 s8 Pokemon_MegaFormSpriteLift(u16 monSpecies, u8 monForm);
 
 /**
+ * @brief Get the vertical shift applied to a Mega Evolved form's back sprite.
+ *
+ * Mega back sprites are drawn lower within their 80x80 cell than the base
+ * species' artwork, so they need lifting on top of the base species' entry in
+ * height.narc. Negative values raise the sprite.
+ *
+ * @param monSpecies
+ * @param monForm
+ * @return Pixels to add to the back sprite's Y-offset, or 0 if this is not a Mega Evolved form.
+ */
+s8 Pokemon_MegaFormBackYShift(u16 monSpecies, u8 monForm);
+
+/**
  * @brief Revert a Mega Evolved Pokemon to its base form, recalculating its
  * ability and stats.
  *
@@ -508,7 +521,7 @@ BOOL Pokemon_TryRevertMegaForm(Pokemon *mon);
  * @param face
  * @return Y-offset applied to the sprite-face on display
  */
-u8 Pokemon_SpriteYOffset(Pokemon *mon, u8 face);
+s8 Pokemon_SpriteYOffset(Pokemon *mon, u8 face);
 
 /**
  * @brief Load the Y-offset applied to a Pokemon's DP sprite-face on display.
@@ -517,7 +530,7 @@ u8 Pokemon_SpriteYOffset(Pokemon *mon, u8 face);
  * @param face
  * @return Y-offset applied to the DP sprite-face on display
  */
-u8 Pokemon_DPSpriteYOffset(Pokemon *mon, u8 face);
+s8 Pokemon_DPSpriteYOffset(Pokemon *mon, u8 face);
 
 /**
  * @brief Load the Y-offset applied to a Pokemon's sprite-face on display.
@@ -527,7 +540,7 @@ u8 Pokemon_DPSpriteYOffset(Pokemon *mon, u8 face);
  * @param preferDP  If TRUE, prefer Diamond/Pearl sprites, where possible
  * @return Y-offset applied to the sprite-face on display
  */
-u8 BoxPokemon_SpriteYOffset(BoxPokemon *boxMon, u8 face, BOOL preferDP);
+s8 BoxPokemon_SpriteYOffset(BoxPokemon *boxMon, u8 face, BOOL preferDP);
 
 /**
  * @brief Load the Y-offset applied to a Pokemon's sprite-face on display.
@@ -539,7 +552,7 @@ u8 BoxPokemon_SpriteYOffset(BoxPokemon *boxMon, u8 face, BOOL preferDP);
  * @param personality   The Pokemon's personality value
  * @return Y-offset applied to the sprite-face on display
  */
-u8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 personality);
+s8 LoadPokemonSpriteYOffset(u16 species, u8 gender, u8 face, u8 form, u32 personality);
 void SpriteSystem_SetTrainerFrontSpriteTemplate(PokemonSpriteTemplate *spriteTemplate, u16 param1);
 ManagedSprite *SpriteSystem_NewManagedSpriteTrainer(SpriteSystem *spriteSys, SpriteManager *spriteMan, PaletteData *paletteData, int x, int y, enum TrainerClass trainerClass, int face, int battlerType, enum HeapID heapID);
 void SpriteSystem_SetTrainerClassGraphicsIndex(enum TrainerClass trainerClass, int face, TrainerClassGraphicIndex *trainerClassGraphicIndex);

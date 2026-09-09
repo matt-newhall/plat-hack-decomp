@@ -240,7 +240,7 @@ void BattleDisplay_InitTaskSetEncounter(BattleSystem *battleSys, BattlerData *ba
     SpriteAnimFrame animFrames[MAX_ANIMATION_FRAMES];
     MonEncounterData *monEncounterData;
     int battleType = BattleSystem_GetBattleType(battleSys);
-    u8 yOffset;
+    s8 yOffset;
     s8 height;
     s8 shadowXOffset;
     u8 shadowSize;
@@ -337,7 +337,7 @@ typedef struct MonShowData {
     u8 battlerType;
     u8 state;
     u8 face;
-    u8 yOffset;
+    s8 yOffset;
     u16 species;
     enum PokemonCryMod cryMod;
     u8 selectedPartySlot;
@@ -463,7 +463,7 @@ typedef struct MonReturnData {
     u8 battler;
     u8 battlerType;
     u8 state;
-    u8 yOffset;
+    s8 yOffset;
     u8 unused;
     u16 capturedBall;
     int isSubstitute;
@@ -5234,6 +5234,11 @@ static void Task_PlayFaintingSequence(SysTask *task, void *data)
     case 8:
         height = LoadPokemonSpriteYOffset(faintingSequenceData->species, faintingSequenceData->gender, faintingSequenceData->face, faintingSequenceData->form, faintingSequenceData->personality);
         height = MON_SPRITE_FRAME_HEIGHT - height;
+
+        if (height > MON_SPRITE_FRAME_HEIGHT) {
+            height = MON_SPRITE_FRAME_HEIGHT;
+        }
+
         PokemonSprite_SetPartialDraw(faintingSequenceData->monSprite, 0, 0, MON_SPRITE_FRAME_WIDTH, height);
         faintingSequenceData->state++;
         break;

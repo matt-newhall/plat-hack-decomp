@@ -89,7 +89,7 @@ typedef struct MonShowMessage {
 
 typedef struct MonReturnMessage {
     u8 command;
-    u8 yOffset;
+    s8 yOffset;
     u16 capturedBall;
     int isSubstitute;
     u16 battleMonSpecies[MAX_BATTLERS];
