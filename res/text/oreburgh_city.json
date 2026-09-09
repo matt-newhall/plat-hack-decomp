@@ -38,15 +38,15 @@
       "en_US": [
         "{STRVAR_1 3, 0, 0}: Whoops! {STRVAR_1 3, 1, 0}!\n",
         "You got the Gym Badge, huh?\r",
-        "Eterna City is the next place with\n",
+        "Hearthome City is the next place with\n",
         "a Gym that gives away Badges, right?\r"
       ]
     },
     {
       "id": "OreburghCity_Text_IWentToRoute207ButYouCantGoThereWithoutABicycle",
       "en_US": [
-        "So, yeah, I went to Route 207, but\n",
-        "you can’t go there without a Bicycle.\r",
+        "So, yeah, I ran into Mt. Coronet, but\n",
+        "that place is a maze in there!\r",
         "I made my team battle and toughened\n",
         "them up, so it wasn’t a waste.\r"
       ]
@@ -54,8 +54,8 @@
     {
       "id": "OreburghCity_Text_NextStopTheEternaGymBadge",
       "en_US": [
-        "So, I’m going back to Jubilife City.\n",
-        "Next stop, the Eterna Gym Badge!\r",
+        "So, I’m going back to Mt. Coronet.\n",
+        "Next stop, the Hearthome Gym Badge!\r",
         "Ten seconds before I dash!\r",
         "Nine...\r",
         "Bah! Who’s got time to count?!\r"

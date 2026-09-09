@@ -2261,10 +2261,10 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
     if (TrainerInfo_BadgeCount(trInfo) >= 2) {
         maxLevel = 30;
     }
-    if (TrainerInfo_BadgeCount(trInfo) >= 4) {
+    if (TrainerInfo_BadgeCount(trInfo) >= 5) {
         maxLevel = 50;
     }
-    if (TrainerInfo_BadgeCount(trInfo) >= 6) {
+    if (TrainerInfo_BadgeCount(trInfo) >= 7) {
         maxLevel = 70;
     }
 
