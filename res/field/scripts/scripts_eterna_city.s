@@ -979,24 +979,24 @@ EternaCity_GiveTogepiEgg:
     Message EternaCity_Text_KeepThatEggWithYouInYourPartyOfPokemon
     CloseMessage
     GetRandom VAR_RESULT, 18
-    GoToIfEq VAR_RESULT, 0, EternaCity_GiveEgg0
-    GoToIfEq VAR_RESULT, 1, EternaCity_GiveEgg1
-    GoToIfEq VAR_RESULT, 2, EternaCity_GiveEgg2
-    GoToIfEq VAR_RESULT, 3, EternaCity_GiveEgg3
-    GoToIfEq VAR_RESULT, 4, EternaCity_GiveEgg4
-    GoToIfEq VAR_RESULT, 5, EternaCity_GiveEgg5
-    GoToIfEq VAR_RESULT, 6, EternaCity_GiveEgg6
-    GoToIfEq VAR_RESULT, 7, EternaCity_GiveEgg7
-    GoToIfEq VAR_RESULT, 8, EternaCity_GiveEgg8
-    GoToIfEq VAR_RESULT, 9, EternaCity_GiveEgg9
-    GoToIfEq VAR_RESULT, 10, EternaCity_GiveEgg10
-    GoToIfEq VAR_RESULT, 11, EternaCity_GiveEgg11
-    GoToIfEq VAR_RESULT, 12, EternaCity_GiveEgg12
-    GoToIfEq VAR_RESULT, 13, EternaCity_GiveEgg13
-    GoToIfEq VAR_RESULT, 14, EternaCity_GiveEgg14
-    GoToIfEq VAR_RESULT, 15, EternaCity_GiveEgg15
-    GoToIfEq VAR_RESULT, 16, EternaCity_GiveEgg16
-    GoToIfEq VAR_RESULT, 17, EternaCity_GiveEgg17
+    CallIfEq VAR_RESULT, 0, EternaCity_GiveEgg0
+    CallIfEq VAR_RESULT, 1, EternaCity_GiveEgg1
+    CallIfEq VAR_RESULT, 2, EternaCity_GiveEgg2
+    CallIfEq VAR_RESULT, 3, EternaCity_GiveEgg3
+    CallIfEq VAR_RESULT, 4, EternaCity_GiveEgg4
+    CallIfEq VAR_RESULT, 5, EternaCity_GiveEgg5
+    CallIfEq VAR_RESULT, 6, EternaCity_GiveEgg6
+    CallIfEq VAR_RESULT, 7, EternaCity_GiveEgg7
+    CallIfEq VAR_RESULT, 8, EternaCity_GiveEgg8
+    CallIfEq VAR_RESULT, 9, EternaCity_GiveEgg9
+    CallIfEq VAR_RESULT, 10, EternaCity_GiveEgg10
+    CallIfEq VAR_RESULT, 11, EternaCity_GiveEgg11
+    CallIfEq VAR_RESULT, 12, EternaCity_GiveEgg12
+    CallIfEq VAR_RESULT, 13, EternaCity_GiveEgg13
+    CallIfEq VAR_RESULT, 14, EternaCity_GiveEgg14
+    CallIfEq VAR_RESULT, 15, EternaCity_GiveEgg15
+    CallIfEq VAR_RESULT, 16, EternaCity_GiveEgg16
+    CallIfEq VAR_RESULT, 17, EternaCity_GiveEgg17
     SetVar VAR_ETERNA_CITY_STATE, 5
     Return
 
