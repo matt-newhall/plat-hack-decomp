@@ -525,14 +525,14 @@ FightArea_PalmerFarewell:
     LockAll
     ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
     WaitMovement
-    BufferRivalName 0
-    BufferPlayerName 1
     Message FightArea_Text_PalmerFarewell
     WaitButton
     CloseMessage
     SetVar VAR_0x8004, ITEM_ASSAULT_VEST
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
+    BufferRivalName 0
+    BufferPlayerName 1
     Message FightArea_Text_PalmerAssaultVest
     WaitButton
     CloseMessage
