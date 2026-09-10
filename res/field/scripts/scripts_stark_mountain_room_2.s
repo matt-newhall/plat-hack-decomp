@@ -17,6 +17,7 @@ StarkMountainRoom2_OnTransition:
 
 StarkMountainRoom2_ResetFollowerBuckState:
     SetVar VAR_STARK_MOUNTAIN_ROOM_2_FOLLOWER_BUCK_STATE, 0
+    ClearHasPartner
     End
 
 StarkMountainRoom2_TriggerBuckStartFollowing:
