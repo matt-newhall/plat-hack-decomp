@@ -367,36 +367,6 @@
             "y": 1
         },
         {
-            "id": "LOCALID_CLOWN_1",
-            "graphics_id": "OBJ_EVENT_GFX_CLOWN",
-            "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_JUBILIFE_CITY_CLOWNS_1_AND_2",
-            "script": 14,
-            "initial_dir": 1,
-            "data": [],
-            "movement_range_x": 1,
-            "movement_range_z": 0,
-            "x": 183,
-            "z": 769,
-            "y": 1
-        },
-        {
-            "id": "LOCALID_CLOWN_2",
-            "graphics_id": "OBJ_EVENT_GFX_CLOWN",
-            "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_JUBILIFE_CITY_CLOWNS_1_AND_2",
-            "script": 15,
-            "initial_dir": 1,
-            "data": [],
-            "movement_range_x": 1,
-            "movement_range_z": 0,
-            "x": 143,
-            "z": 754,
-            "y": 1
-        },
-        {
             "id": "LOCALID_ACE_TRAINER_M_3",
             "graphics_id": "OBJ_EVENT_GFX_ACE_TRAINER_M",
             "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH_AND_EAST",
@@ -410,21 +380,6 @@
             "x": 154,
             "z": 778,
             "y": 1
-        },
-        {
-            "id": "LOCALID_CLOWN_3",
-            "graphics_id": "OBJ_EVENT_GFX_CLOWN",
-            "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH_AND_EAST",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_JUBILIFE_CITY_CLOWN_3",
-            "script": 16,
-            "initial_dir": 1,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 164,
-            "z": 752,
-            "y": 0
         },
         {
             "id": "LOCALID_KID_WITH_NDS_1",
@@ -656,4 +611,3 @@
         }
     ]
 }
-

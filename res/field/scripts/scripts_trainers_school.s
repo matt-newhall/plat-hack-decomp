@@ -18,6 +18,7 @@
     ScriptEntryEnd
 
 _0032:
+    GoToIfSet FLAG_UNK_0x01F4, TrainersSchool_RivalAlreadyLeft
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
@@ -69,17 +70,20 @@ _00D8:
 _00F2:
     PlaySE SEQ_SE_DP_KAIDAN2
     RemoveObject 1
+    SetFlag FLAG_UNK_0x01F4
     WaitSE SEQ_SE_DP_KAIDAN2
     SetVar VAR_POKETCH_CAMPAIGN_STATE, 1
     SetFlag FLAG_TALKED_TO_TRAINERS_SCHOOL_RIVAL
     SetVar VAR_JUBILIFE_CITY_STATE, 3
     ClearFlag FLAG_HIDE_JUBILIFE_CITY_POKETCH_CO_PRESIDENT
-    ClearFlag FLAG_HIDE_JUBILIFE_CITY_CLOWNS_1_AND_2
     SetFlag FLAG_HIDE_JUBILIFE_CITY_LOOKER
     ClearFlag FLAG_HIDE_JUBILIFE_GALACTIC_GRUNTS
     ClearFlag FLAG_HIDE_JUBILIFE_ROWAN
     ClearFlag FLAG_HIDE_JUBILIFE_CITY_COUNTERPART
     ReleaseAll
+    End
+
+TrainersSchool_RivalAlreadyLeft:
     End
 
     .balign 4, 0
