@@ -589,7 +589,7 @@
         },
         {
             "id": "LOCALID_VENT_ROUTE_212_NORTH_1",
-            "clone_id": 19,
+            "clone_id": 17,
             "graphics_id": "OBJ_EVENT_GFX_VENT",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -605,7 +605,7 @@
         },
         {
             "id": "LOCALID_VENT_ROUTE_212_NORTH_2",
-            "clone_id": 20,
+            "clone_id": 18,
             "graphics_id": "OBJ_EVENT_GFX_VENT",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -621,7 +621,7 @@
         },
         {
             "id": "LOCALID_VENT_ROUTE_212_NORTH_3",
-            "clone_id": 21,
+            "clone_id": 19,
             "graphics_id": "OBJ_EVENT_GFX_VENT",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
