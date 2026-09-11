@@ -263,6 +263,7 @@ ScriptCommand(BTLCMD_CHECKCONTRARY,                       BtlCmd_CheckContrary)
 ScriptCommand(BTLCMD_PLAYENTRYANIMATION,                  BtlCmd_PlayEntryAnimation)
 ScriptCommand(BTLCMD_CHECKSIMPLE,                         BtlCmd_CheckSimple)
 ScriptCommand(BTLCMD_MARKENTRYABILITIESANNOUNCED,         BtlCmd_MarkEntryAbilitiesAnnounced)
+ScriptCommand(BTLCMD_GOTOIFSTATSTAGECHANGEUNBLOCKED,      BtlCmd_GoToIfStatStageChangeUnblocked)
 
 // clang-format on
 

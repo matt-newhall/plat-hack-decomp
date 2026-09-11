@@ -1408,6 +1408,11 @@
     .long \battler
     .endm
 
+    .macro GoToIfStatStageChangeUnblocked jump_if_unblocked:req
+    .long BTLCMD_GOTOIFSTATSTAGECHANGEUNBLOCKED
+    .long (\jump_if_unblocked-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

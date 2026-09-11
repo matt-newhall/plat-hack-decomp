@@ -2,7 +2,6 @@
 
 
 _000:
-    ShowAbilityPopupAutoForEffectHolder
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DISOBEDIENCE, _147
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_MOVE_EFFECT, _055
     CheckSleepAbilityImmunity BTLSCR_SIDE_EFFECT_MON, _202
@@ -63,6 +62,7 @@ _130:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_CONDITIONS_EFFECT_MON, SIDE_CONDITION_SAFEGUARD, _319
 
 _147:
+    ShowAbilityPopupAutoForEffectHolder
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_ASLEEP
     Wait
     Random 2, 2

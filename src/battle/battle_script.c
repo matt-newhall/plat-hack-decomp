@@ -344,6 +344,7 @@ static BOOL BtlCmd_TryMegaEvolveAttacker(BattleSystem *battleSys, BattleContext 
 static BOOL BtlCmd_CheckContrary(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_MarkEntryAbilitiesAnnounced(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_GoToIfStatStageChangeUnblocked(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
@@ -2933,6 +2934,45 @@ static inline BOOL SimpleDoublesStatStageChange(BattleContext *battleCtx)
 }
 
 /**
+ * @brief Decode the pending stat stage side effect into a stat and a signed
+ * number of stages.
+ *
+ * @param battleCtx
+ * @param statOffset  Out; offset of the affected stat from BATTLE_STAT_ATTACK.
+ * @param stageChange Out; signed number of stages the stat would move by.
+ */
+static void DecodeStatStageChange(BattleContext *battleCtx, int *statOffset, int *stageChange)
+{
+    if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES) {
+        *statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES;
+        *stageChange = 3;
+    } else if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_3_STAGES) {
+        *statOffset = BATTLE_STAT_SP_ATTACK - BATTLE_STAT_ATTACK;
+        *stageChange = 3;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
+        *statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES;
+        *stageChange = -2;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_UP_2_STAGES) {
+        *statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_2_STAGES;
+        *stageChange = 2;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_1_STAGE) {
+        *statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_1_STAGE;
+        *stageChange = -1;
+    } else {
+        *statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE;
+        *stageChange = 1;
+    }
+
+    if (StatStageChangeIsInverted(battleCtx)) {
+        *stageChange = -*stageChange;
+    }
+
+    if (SimpleDoublesStatStageChange(battleCtx)) {
+        *stageChange *= 2;
+    }
+}
+
+/**
  * @brief Try to change the stat stage for a target battler.
  *
  * This handles all of the logic related to whether or not a stat stage change
@@ -2967,40 +3007,8 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
 
     battleCtx->battleStatusMask &= ~SYSCTL_FAIL_STAT_STAGE_CHANGE;
 
-    if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES) {
-        statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES;
-        stageChange = 3;
-        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
-    } else if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_3_STAGES) {
-        statOffset = BATTLE_STAT_SP_ATTACK - BATTLE_STAT_ATTACK;
-        stageChange = 3;
-        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
-    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES) {
-        statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_2_STAGES;
-        stageChange = -2;
-        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_DROP;
-    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_UP_2_STAGES) {
-        statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_2_STAGES;
-        stageChange = 2;
-        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
-    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_1_STAGE) {
-        statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_1_STAGE;
-        stageChange = -1;
-        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_DROP;
-    } else {
-        statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_1_STAGE;
-        stageChange = 1;
-        battleCtx->scriptTemp = BATTLE_ANIMATION_STAT_BOOST;
-    }
-
-    if (StatStageChangeIsInverted(battleCtx)) {
-        stageChange = -stageChange;
-        battleCtx->scriptTemp = stageChange > 0 ? BATTLE_ANIMATION_STAT_BOOST : BATTLE_ANIMATION_STAT_DROP;
-    }
-
-    if (SimpleDoublesStatStageChange(battleCtx)) {
-        stageChange *= 2;
-    }
+    DecodeStatStageChange(battleCtx, &statOffset, &stageChange);
+    battleCtx->scriptTemp = stageChange > 0 ? BATTLE_ANIMATION_STAT_BOOST : BATTLE_ANIMATION_STAT_DROP;
 
     if (stageChange > 0) {
         if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] == MAX_STAT_STAGE) {
@@ -13857,6 +13865,39 @@ static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx
  * @param battleCtx
  * @return FALSE
  */
+/**
+ * @brief Jump if the pending stat stage change would actually move the stat.
+ *
+ * Abilities which change a stat announce themselves before handing off to
+ * BATTLE_SUBSCRIPT_UPDATE_STAT_STAGE, which fails silently for an ability
+ * source once the stat is capped. Guarding the announcement with this keeps the
+ * pop-up from appearing for a change that cannot happen.
+ *
+ * Inputs:
+ * 1. How far ahead to jump if the change would land.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_GoToIfStatStageChangeUnblocked(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jump = BattleScript_Read(battleCtx);
+
+    int statOffset;
+    int stageChange;
+    DecodeStatStageChange(battleCtx, &statOffset, &stageChange);
+
+    int stage = battleCtx->battleMons[battleCtx->sideEffectMon].statBoosts[BATTLE_STAT_ATTACK + statOffset];
+
+    if (stageChange > 0 ? stage < MAX_STAT_STAGE : stage > MIN_STAT_STAGE) {
+        BattleScript_Iter(battleCtx, jump);
+    }
+
+    return FALSE;
+}
+
 static BOOL BtlCmd_MarkEntryAbilitiesAnnounced(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
