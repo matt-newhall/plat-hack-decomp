@@ -4494,6 +4494,8 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
     BOOL result = FALSE;
     int subscript;
 
+    battleCtx->sideEffectFlags = 0;
+
     switch (Battler_Ability(battleCtx, battler)) {
     case ABILITY_SPEED_BOOST:
         if (battleCtx->battleMons[battler].curHP
@@ -4656,6 +4658,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
     int battlerSkillSwapper = BATTLER_NONE;
     subscript = NULL;
     result = SWITCH_IN_CHECK_RESULT_CONTINUE;
+    battleCtx->sideEffectFlags = 0;
 
 
     if (battleCtx->skillSwapPending) {
@@ -5595,6 +5598,8 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
         return result;
     }
 
+    battleCtx->sideEffectFlags = 0;
+
     switch (Battler_Ability(battleCtx, battleCtx->defender)) {
     case ABILITY_STATIC:
         if (ATTACKING_MON.curHP
@@ -5928,6 +5933,8 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
     if (Battler_SubstituteWasHit(battleCtx, battleCtx->defender) == TRUE) {
         return result;
     }
+
+    battleCtx->sideEffectFlags = 0;
 
     switch (Battler_Ability(battleCtx, battleCtx->attacker)) {
     case ABILITY_STENCH:
