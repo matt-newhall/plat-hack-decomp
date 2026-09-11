@@ -12,7 +12,12 @@
 
 VeilstoneCityGalacticWarehouse_OnTransition:
     CallIfLt VAR_VEILSTONE_CITY_GALACTIC_WAREHOUSE_STATE, 2, VeilstoneCityGalacticWarehouse_SetLookerPosition
+    CallIfEq VAR_VEILSTONE_CITY_GALACTIC_WAREHOUSE_STATE, 3, VeilstoneCityGalacticWarehouse_HideLooker
     End
+
+VeilstoneCityGalacticWarehouse_HideLooker:
+    SetFlag FLAG_HIDE_VEILSTONE_CITY_GALACTIC_WAREHOUSE_LOOKER
+    Return
 
 VeilstoneCityGalacticWarehouse_SetLookerPosition:
     SetObjectEventPos LOCALID_LOOKER, 8, 10
