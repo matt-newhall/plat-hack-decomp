@@ -5737,6 +5737,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
         case AFTER_MOVE_HIT_STATE_ANGER_SHELL:
             if (DEFENDER_SELF_TURN_FLAGS.angerShellActivated == TRUE) {
+                battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
                 battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->msgBattlerTemp = battleCtx->defender;
 

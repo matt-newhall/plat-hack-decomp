@@ -5360,6 +5360,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 if (battleCtx->battleMons[battler].windRiderTailwindBoosted == FALSE) {
                     battleCtx->battleMons[battler].windRiderTailwindBoosted = TRUE;
+                    battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
                     battleCtx->sideEffectMon = battler;
                     subscript = subscript_wind_rider;
                     result = TRUE;
@@ -5836,6 +5837,7 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
         if (DEFENDING_MON.curHP
             && (CURRENT_MOVE_DATA.class == CLASS_PHYSICAL)
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
+            battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
             battleCtx->sideEffectMon = battleCtx->defender;
 
             *subscript = subscript_weak_armor;
