@@ -16,7 +16,11 @@
 #include "follower_mon_gfx.h"
 #include "heap.h"
 #include "location.h"
+#include "constants/field/dynamic_map_features.h"
+#include "follower_mon_params.h"
+#include "map_header.h"
 #include "map_header_data.h"
+#include "persisted_map_features_init.h"
 #include "map_object.h"
 #include "script_manager.h"
 #include "map_object_move.h"
@@ -72,6 +76,22 @@ static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *
         (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL),
         *gender == GENDER_FEMALE,
         (BOOL)Pokemon_IsShiny(lead));
+}
+
+static BOOL FollowerMon_IsAllowedOnMap(FieldSystem *fieldSystem, u16 species)
+{
+    if (PersistedMapFeatures_IsCurrentDynamicMap(fieldSystem, DYNAMIC_MAP_FEATURES_DISTORTION_WORLD) == TRUE) {
+        return FALSE;
+    }
+
+    switch (MapHeader_GetFollowMode(fieldSystem->location->mapId)) {
+    case MAP_FOLLOW_MODE_PREVENT:
+        return FALSE;
+    case MAP_FOLLOW_MODE_HEIGHT_RESTRICT:
+        return FollowerMon_IsLargeSpecies(species) == FALSE;
+    }
+
+    return TRUE;
 }
 
 static void FollowerMon_StorePosition(FieldSystem *fieldSystem, MapObject *follower, u16 species, u8 gender)
@@ -160,6 +180,10 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         return;
     }
 
+    if (FollowerMon_IsAllowedOnMap(fieldSystem, species) == FALSE) {
+        return;
+    }
+
     if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
         return;
     }
@@ -208,6 +232,10 @@ void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
     gfxID = FollowerMon_GetLeadGfxID(fieldSystem, &species, &gender);
 
     if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
+        return;
+    }
+
+    if (FollowerMon_IsAllowedOnMap(fieldSystem, species) == FALSE) {
         return;
     }
 

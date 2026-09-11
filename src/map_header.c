@@ -140,6 +140,12 @@ u32 MapHeader_GetMapType(u32 headerID)
     return sMapHeaders[headerID].mapType;
 }
 
+u8 MapHeader_GetFollowMode(u32 headerID)
+{
+    headerID = MapHeader_IDBoundsCheck(headerID);
+    return sMapHeaders[headerID].followMode;
+}
+
 BOOL MapHeader_IsTeleportAllowed(u32 headerID)
 {
     if (MapHeader_IsFlyAllowed(headerID) == FALSE) {
