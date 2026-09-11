@@ -79,8 +79,11 @@ OreburghCity_TheGymLeadersWaitingForYou:
 OreburghCity_TriggerRival:
     LockAll
     ClearFlag FLAG_HIDE_OREBURGH_CITY_RIVAL
-    SetObjectEventMovementType LOCALID_RIVAL, MOVEMENT_TYPE_LOOK_WEST
-    SetObjectEventDir LOCALID_RIVAL, DIR_WEST
+    SetObjectEventMovementType LOCALID_RIVAL, MOVEMENT_TYPE_LOOK_EAST
+    SetObjectEventDir LOCALID_RIVAL, DIR_EAST
+    SetObjectEventPos LOCALID_RIVAL, 258, 749
+    PlaySE SEQ_SE_DP_KAIDAN2
+    AddObject LOCALID_RIVAL
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8005, 748, OreburghCity_RivalRunIntoPlayerZ748
     GoToIfEq VAR_0x8005, 749, OreburghCity_RivalRunIntoPlayerZ749
@@ -89,37 +92,29 @@ OreburghCity_TriggerRival:
     End
 
 OreburghCity_RivalRunIntoPlayerZ748:
-    SetObjectEventPos LOCALID_RIVAL, 271, 748
-    AddObject LOCALID_RIVAL
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRival
-    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayer
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ748
+    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ748
     WaitMovement
     GoTo OreburghCity_NextStopTheEternaGymBadge
     End
 
 OreburghCity_RivalRunIntoPlayerZ749:
-    SetObjectEventPos LOCALID_RIVAL, 271, 749
-    AddObject LOCALID_RIVAL
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRival
-    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayer
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ749
+    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ749
     WaitMovement
     GoTo OreburghCity_NextStopTheEternaGymBadge
     End
 
 OreburghCity_RivalRunIntoPlayerZ750:
-    SetObjectEventPos LOCALID_RIVAL, 271, 750
-    AddObject LOCALID_RIVAL
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRival
-    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayer
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ750
+    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ750
     WaitMovement
     GoTo OreburghCity_NextStopTheEternaGymBadge
     End
 
 OreburghCity_RivalRunIntoPlayerZ751:
-    SetObjectEventPos LOCALID_RIVAL, 271, 751
-    AddObject LOCALID_RIVAL
-    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRival
-    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayer
+    ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ751
+    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ751
     WaitMovement
     GoTo OreburghCity_NextStopTheEternaGymBadge
     End
@@ -133,10 +128,10 @@ OreburghCity_NextStopTheEternaGymBadge:
     BufferPlayerName 1
     Message OreburghCity_Text_EternaCityIsTheNextPlaceWithAGymThatGivesAwayBadgesRight
     CloseMessage
-    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalWalkOnSpotEast
+    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalWalkOnSpotWest
     WaitMovement
     Message OreburghCity_Text_IWentToRoute207ButYouCantGoThereWithoutABicycle
-    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalWalkOnSpotWest
+    ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalWalkOnSpotEast
     WaitMovement
     Message OreburghCity_Text_NextStopTheEternaGymBadge
     CloseMessage
@@ -176,7 +171,6 @@ OreburghCity_RivalLeaveZ751:
     End
 
 OreburghCity_RemoveRival:
-    PlaySE SEQ_SE_DP_KAIDAN2
     RemoveObject LOCALID_RIVAL
     Common_FadeToDefaultMusic2
     SetVar VAR_OREBURGH_STATE, 3
@@ -184,73 +178,113 @@ OreburghCity_RemoveRival:
     End
 
     .balign 4, 0
-OreburghCity_Movement_PlayerGetPushedByRival:
-    Delay4 7
+OreburghCity_Movement_PlayerGetPushedByRivalZ748:
+    Delay4 3
     LockDir
-    WalkFastWest
+    WalkFastEast
     UnlockDir
-    FaceEast
+    FaceWest
     EndMovement
 
     .balign 4, 0
-OreburghCity_Movement_RivalRunIntoPlayer:
-    WalkFastWest 9
+OreburghCity_Movement_PlayerGetPushedByRivalZ749:
+    Delay4 2
+    LockDir
+    WalkFastEast
+    UnlockDir
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_PlayerGetPushedByRivalZ750:
+    Delay4 3
+    LockDir
+    WalkFastEast
+    UnlockDir
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_PlayerGetPushedByRivalZ751:
+    Delay4 4
+    LockDir
+    WalkFastEast
+    UnlockDir
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_RivalRunIntoPlayerZ748:
+    WalkFastEast 3
+    WalkFastNorth
+    WalkFastEast
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_RivalRunIntoPlayerZ749:
+    WalkFastEast 4
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_RivalRunIntoPlayerZ750:
+    WalkFastEast 3
+    WalkFastSouth
+    WalkFastEast
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_RivalRunIntoPlayerZ751:
+    WalkFastEast 3
+    WalkFastSouth 2
+    WalkFastEast
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_RivalLeaveZ748:
     WalkFastSouth
-    WalkFastWest 4
-    WalkOnSpotFastWest
+    WalkFastEast 10
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_RivalLeaveZ749:
     WalkFastSouth
-    WalkFastWest 3
-    WalkFastNorth
-    WalkFastWest
-    WalkOnSpotFastWest
+    WalkFastEast 10
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_RivalLeaveZ750:
     WalkFastNorth
-    WalkFastWest 4
-    WalkOnSpotFastWest
+    WalkFastEast 10
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_RivalLeaveZ751:
     WalkFastNorth
-    WalkFastWest 3
-    WalkFastNorth
-    WalkFastWest
-    WalkOnSpotFastWest
+    WalkFastEast 10
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_PlayerWatchRivalLeaveZ748:
     WalkOnSpotNormalSouth
-    WalkOnSpotNormalWest
+    WalkOnSpotNormalEast
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_PlayerWatchRivalLeaveZ749:
     WalkOnSpotNormalSouth
-    WalkOnSpotNormalWest
+    WalkOnSpotNormalEast
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_PlayerWatchRivalLeaveZ750:
     WalkOnSpotNormalNorth
-    WalkOnSpotNormalWest
+    WalkOnSpotNormalEast
     EndMovement
 
     .balign 4, 0
 OreburghCity_Movement_PlayerWatchRivalLeaveZ751:
     WalkOnSpotNormalNorth
-    WalkOnSpotNormalWest
+    WalkOnSpotNormalEast
     EndMovement
 
     .balign 4, 0

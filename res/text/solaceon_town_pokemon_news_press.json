@@ -30,7 +30,7 @@
         "I want you to bring me one.\r",
         "You must bring it today, or we’re not\n",
         "gonna be able to run our main article.\r",
-        "I’ll pay you with a Heart Scale and some\n",
+        "I’ll pay you with a Big Pearl and some\n",
         "Poké Balls for it."
       ]
     },
@@ -87,7 +87,7 @@
         "caught the {STRVAR_1 0, 0, 0} we need?\r",
         "We’re counting on you to come through\n",
         "for us!\r",
-        "I’ll pay you a Heart Scale and some\n",
+        "I’ll pay you a Big Pearl and some\n",
         "Poké Balls for it, OK?\r",
         "Bring us the {STRVAR_1 0, 0, 0} before\n",
         "the date rolls over!"

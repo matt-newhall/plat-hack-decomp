@@ -20,6 +20,7 @@ CanalaveGym_Byron:
     GoToIfBadgeAcquired BADGE_ID_MINE, CanalaveGym_ByronAfterBadge
     CreateJournalEvent LOCATION_EVENT_GYM_WAS_TOO_TOUGH, 35, 0, 0, 0
     Message CanalaveGym_Text_ByronIntro
+    WaitButton
     CloseMessage
     StartTrainerBattle TRAINER_LEADER_BYRON
     CheckWonBattle VAR_RESULT

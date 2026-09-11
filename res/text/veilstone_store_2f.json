@@ -22,8 +22,9 @@
     {
       "id": "VeilstoneStore2F_Text_CareForAProtein",
       "en_US": [
-        "Would you care for a Protein?\n",
-        "It’s a drink that boosts Attack."
+        "Would you care for a Leaf Stone?\n",
+        "It’s a special stone that can\f",
+        "cause certain Pokémon to evolve."
       ]
     },
     {
@@ -57,17 +58,20 @@
     {
       "id": "VeilstoneStore2F_Text_GivingHPUpToKricketot",
       "en_US": [
-        "I’m going to give an HP Up to\n",
-        "my KRICKETOT.\r",
-        "This is going to raise its HP, huh?"
+        "I’m going to give a Leaf Stone\n",
+        "to my Tangela.\r",
+        "I wonder what kind of Pokémon it\n",
+        "will turn into!"
       ]
     },
     {
       "id": "VeilstoneStore2F_Text_GettingTheCarbos",
       "en_US": [
-        "I’m getting the Carbos!\n",
-        "I should get a Protein instead, maybe.\f",
-        "But Iron’s not bad, either."
+        "My partner is an Eevee...\r",
+        "Maybe I could get a Fire Stone to\n",
+        "evolve it into a Flareon?\r",
+        "Oh! But if I use a Moon Stone,\n",
+        "it will evolve into an Espeon..."
       ]
     },
     {
