@@ -5682,8 +5682,8 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
             && ATTACKING_MON.status == MON_CONDITION_NONE
             && BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_TYPE_1, NULL) != TYPE_GRASS
             && BattleMon_Get(battleCtx, battleCtx->attacker, BATTLEMON_TYPE_2, NULL) != TYPE_GRASS
-            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_OVERCOAT) == FALSE
-            && Battler_HeldItemEffect(battleCtx, battleCtx->defender) != HOLD_EFFECT_OVERCOAT
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_OVERCOAT
+            && Battler_HeldItemEffect(battleCtx, battleCtx->attacker) != HOLD_EFFECT_OVERCOAT
             && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
             && (battleCtx->battleStatusMask & SYSCTL_FIRST_OF_MULTI_TURN) == FALSE
             && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
