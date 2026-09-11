@@ -515,6 +515,7 @@ Overlay overlay5
 	Object main.nef.p/src_overlay005_honey_tree.c.o
 	Object main.nef.p/src_overlay005_ov5_021F007C.c.o
 	Object main.nef.p/src_overlay005_field_effect_renderer.c.o
+	Object main.nef.p/src_overlay005_follower_ball_effect.c.o
 	Object main.nef.p/src_overlay005_resource_heap.c.o
 	Object main.nef.p/src_overlay005_secret_base_props.c.o
 	Object main.nef.p/src_overlay005_fishing.c.o

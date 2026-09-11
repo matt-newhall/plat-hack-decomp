@@ -7,6 +7,9 @@
 #include "generated/movement_actions.h"
 
 #include "field/field_system.h"
+#include "overlay005/follower_ball_effect.h"
+#include "overlay005/ov5_021EB1A0.h"
+#include "billboard.h"
 #include "generated/genders.h"
 #include "generated/movement_types.h"
 #include "generated/object_events_gfx.h"
@@ -31,12 +34,15 @@
 #define FOLLOWER_LOCAL_ID LOCALID_FOLLOWER
 
 #define FOLLOWER_RECALL_TURN_DELAY   11
-#define FOLLOWER_RECALL_VANISH_DELAY 14
+#define FOLLOWER_RECALL_SHRINK_FRAMES 6
+#define FOLLOWER_RECALL_BALL_FRAMES   10
+#define FOLLOWER_RECALL_MIN_SCALE     (FX32_ONE / 4)
 
 enum FollowerRecallState {
     FOLLOWER_RECALL_STATE_TURN = 0,
     FOLLOWER_RECALL_STATE_HOLD,
-    FOLLOWER_RECALL_STATE_VANISH
+    FOLLOWER_RECALL_STATE_SHRINK,
+    FOLLOWER_RECALL_STATE_BALL
 };
 
 static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *gender)
@@ -180,6 +186,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     }
 
     FollowerMon_StorePosition(fieldSystem, follower, species, gender);
+    FollowerBallEffect_Start(follower);
 }
 
 void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
@@ -404,6 +411,51 @@ static MapObject *FollowerMon_GetObject(FieldSystem *fieldSystem)
     return NULL;
 }
 
+static void FollowerMon_ShrinkIntoBall(MapObject *follower, int frame)
+{
+    Billboard *billboard = ov5_021EB1A0(follower);
+    VecFx32 scale;
+    fx32 progress;
+
+    if (billboard == NULL) {
+        return;
+    }
+
+    if (frame > FOLLOWER_RECALL_SHRINK_FRAMES) {
+        frame = FOLLOWER_RECALL_SHRINK_FRAMES;
+    }
+
+    progress = (FX32_ONE - FOLLOWER_RECALL_MIN_SCALE) * frame / FOLLOWER_RECALL_SHRINK_FRAMES;
+    scale.x = FX32_ONE - progress;
+    scale.y = scale.x;
+    scale.z = scale.x;
+
+    Billboard_SetScale(billboard, &scale);
+
+}
+
+static void FollowerMon_FadeBall(MapObject *follower, int frame)
+{
+    Billboard *billboard = ov5_021EB1A0(follower);
+    NNSG3dResMdl *model;
+    int alpha;
+
+    if (billboard == NULL) {
+        return;
+    }
+
+    alpha = 31 - ((31 * frame) / FOLLOWER_RECALL_BALL_FRAMES);
+
+    if (alpha < 0) {
+        alpha = 0;
+    }
+
+    model = Billboard_GetModel(billboard);
+
+    NNS_G3dMdlUseMdlAlpha(model);
+    NNS_G3dMdlSetMdlAlphaAll(model, alpha);
+}
+
 BOOL FollowerMon_StartRecall(FieldSystem *fieldSystem)
 {
     if (FollowerMon_GetObject(fieldSystem) == NULL) {
@@ -444,19 +496,34 @@ BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
         }
 
         Sound_PlayEffect(SEQ_SE_DP_BOWA2);
-        sub_02061AD4(follower, OBJ_EVENT_GFX_POKEBALL);
 
         fieldSystem->followMon.recallTimer = 0;
-        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_VANISH;
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_SHRINK;
         break;
 
-    case FOLLOWER_RECALL_STATE_VANISH:
+    case FOLLOWER_RECALL_STATE_SHRINK:
         fieldSystem->followMon.recallTimer++;
+        FollowerMon_ShrinkIntoBall(follower, fieldSystem->followMon.recallTimer);
 
-        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_VANISH_DELAY) {
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_SHRINK_FRAMES) {
             break;
         }
 
+        sub_02061AD4(follower, OBJ_EVENT_GFX_POKEBALL);
+
+        fieldSystem->followMon.recallTimer = 0;
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_BALL;
+        break;
+
+    case FOLLOWER_RECALL_STATE_BALL:
+        fieldSystem->followMon.recallTimer++;
+        FollowerMon_FadeBall(follower, fieldSystem->followMon.recallTimer);
+
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_BALL_FRAMES) {
+            break;
+        }
+
+        FollowerMon_FadeBall(follower, 0);
         FollowerMon_Despawn(fieldSystem);
         return TRUE;
     }
