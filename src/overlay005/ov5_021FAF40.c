@@ -32,6 +32,8 @@
 #include "overlay005/struct_ov5_021FB97C.h"
 
 #include "berry_patch_graphics.h"
+#include "field/field_system.h"
+#include "follower_mon_params.h"
 
 static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FB0F0 = {
     ov5_021EBA0C,
@@ -105,6 +107,41 @@ static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FAFD8 = {
     ov5_021EB354
 };
 
+#define FOLLOWER_BOUNCE_HEIGHT     (FX32_ONE * 2)
+#define FOLLOWER_BOUNCE_PHASE_FAST 4
+#define FOLLOWER_BOUNCE_PHASE_SLOW 8
+
+/**
+ * @brief Places the follower's billboard, lifting it on alternating stretches of
+ * its walk animation so that it bobs.
+ *
+ * @param mapObj
+ * @param billboard
+ */
+static void FollowerMon_SetBillboardPos(MapObject *mapObj, Billboard *billboard)
+{
+    FieldSystem *fieldSystem = MapObject_FieldSystem(mapObj);
+    VecFx32 pos;
+    u32 frame, phase;
+
+    ov5_021ECDA0(mapObj, &pos);
+    pos.z += (FX32_ONE * 6);
+
+    frame = Billboard_GetAnimFrameNum(billboard) / FX32_ONE;
+    phase = FOLLOWER_BOUNCE_PHASE_FAST;
+
+    if (fieldSystem != NULL
+        && FollowerMon_GetBounceSpeed(fieldSystem->followMon.species) == FOLLOWER_BOUNCE_SLOW) {
+        phase = FOLLOWER_BOUNCE_PHASE_SLOW;
+    }
+
+    if ((frame & phase) != 0) {
+        pos.y += FOLLOWER_BOUNCE_HEIGHT;
+    }
+
+    Billboard_SetPos(billboard, &pos);
+}
+
 static void FollowerMon_AnimCallback(MapObject *mapObj)
 {
     Billboard *billboard;
@@ -127,7 +164,7 @@ static void FollowerMon_AnimCallback(MapObject *mapObj)
 
     Billboard_AdvanceAnim(billboard, FX32_ONE);
 
-    ov5_021EDEB4(mapObj, billboard);
+    FollowerMon_SetBillboardPos(mapObj, billboard);
 
     draw = 1;
     if (MapObject_CheckStatusFlag(mapObj, MAP_OBJ_STATUS_HIDE)) {

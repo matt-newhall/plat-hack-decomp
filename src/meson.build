@@ -253,6 +253,7 @@ pokeplatinum_c = files(
     'system_vars.c',
     'follower_mon.c',
     'follower_mon_gfx.c',
+    'follower_mon_params.c',
     'applications/town_map/context.c',
     'unk_0206B9D8.c',
     'great_marsh_lookout.c',
