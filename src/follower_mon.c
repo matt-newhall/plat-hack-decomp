@@ -31,7 +31,7 @@
 #define FOLLOWER_LOCAL_ID LOCALID_FOLLOWER
 
 #define FOLLOWER_RECALL_TURN_DELAY   11
-#define FOLLOWER_RECALL_VANISH_DELAY 8
+#define FOLLOWER_RECALL_VANISH_DELAY 14
 
 enum FollowerRecallState {
     FOLLOWER_RECALL_STATE_TURN = 0,
@@ -444,7 +444,7 @@ BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
         }
 
         Sound_PlayEffect(SEQ_SE_DP_BOWA2);
-        MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_HIDE);
+        sub_02061AD4(follower, OBJ_EVENT_GFX_POKEBALL);
 
         fieldSystem->followMon.recallTimer = 0;
         fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_VANISH;

@@ -132,6 +132,18 @@ static enum ItemUseCheckResult CanUseVsSeeker(const ItemUseContext *usageContext
 static enum ItemUseCheckResult CanUseFishingRod(const ItemUseContext *usageContext);
 static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageContext);
 static enum ItemUseCheckResult CanUseAzureFlute(const ItemUseContext *usageContext);
+static void MountBicycle(FieldSystem *fieldSystem)
+{
+    FieldBGM_SetOverride(fieldSystem, SEQ_BICYCLE);
+    FieldBGM_TryFadeOut(fieldSystem, SEQ_BICYCLE, 1);
+    MapObject_SetPauseMovementOff(Player_MapObject(fieldSystem->playerAvatar));
+
+    PlayerAvatar_SetTransitionState(fieldSystem->playerAvatar, PLAYER_TRANSITION_CYCLING);
+    PlayerAvatar_RequestChangeState(fieldSystem->playerAvatar);
+
+    RadarChain_Clear(fieldSystem->chain);
+}
+
 static BOOL MountOrUnmountBicycle(FieldTask *task);
 static BOOL ExitPcToField(FieldTask *task);
 static BOOL PrintRegisteredKeyItemUseMessage(FieldTask *task);
@@ -451,20 +463,17 @@ static BOOL MountOrUnmountBicycle(FieldTask *task)
 
             FieldBGM_SetOverride(fieldSystem, SEQ_NONE);
             FieldBGM_TryFadeOut(fieldSystem, FieldBGM_GetEffective(fieldSystem, fieldSystem->location->mapId), 1);
+            (*state) = 2;
         } else {
-            FollowerMon_Despawn(fieldSystem);
+            if (FollowerMon_StartRecall(fieldSystem) == TRUE) {
+                (*state) = 4;
+            } else {
+                (*state) = 2;
+            }
 
-            FieldBGM_SetOverride(fieldSystem, SEQ_BICYCLE);
-            FieldBGM_TryFadeOut(fieldSystem, SEQ_BICYCLE, 1);
-            MapObject_SetPauseMovementOff(Player_MapObject(fieldSystem->playerAvatar));
-
-            PlayerAvatar_SetTransitionState(fieldSystem->playerAvatar, PLAYER_TRANSITION_CYCLING);
-            PlayerAvatar_RequestChangeState(fieldSystem->playerAvatar);
-
-            RadarChain_Clear(fieldSystem->chain);
+            MountBicycle(fieldSystem);
         }
 
-        (*state)++;
         break;
     case 2:
         (*state)++;
@@ -472,6 +481,12 @@ static BOOL MountOrUnmountBicycle(FieldTask *task)
     case 3:
         MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
         return TRUE;
+    case 4:
+        if (FollowerMon_UpdateRecall(fieldSystem) == TRUE) {
+            (*state) = 2;
+        }
+
+        break;
     }
 
     return FALSE;
