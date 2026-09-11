@@ -265,10 +265,19 @@ BOOL ScrCmd_SendOutFollowingPoke(ScriptContext *ctx)
     return FALSE;
 }
 
+static BOOL ScrCmd_SendBackFollowingPoke_WaitRecall(ScriptContext *ctx)
+{
+    return FollowerMon_UpdateRecall(ctx->fieldSystem);
+}
+
 BOOL ScrCmd_SendBackFollowingPoke(ScriptContext *ctx)
 {
-    FollowerMon_Despawn(ctx->fieldSystem);
-    return FALSE;
+    if (FollowerMon_StartRecall(ctx->fieldSystem) == FALSE) {
+        return FALSE;
+    }
+
+    ScriptContext_Pause(ctx, ScrCmd_SendBackFollowingPoke_WaitRecall);
+    return TRUE;
 }
 
 BOOL ScrCmd_CheckHasFollower(ScriptContext *ctx)

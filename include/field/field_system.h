@@ -73,6 +73,8 @@ typedef struct FollowMon {
     s16 x;
     s16 z;
     u8  dir;
+    u8  recallState;
+    u8  recallTimer;
 } FollowMon;
 
 typedef struct FieldSystem_t {

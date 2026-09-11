@@ -21,6 +21,7 @@
 #include "player_avatar.h"
 #include "pokemon.h"
 #include "savedata.h"
+#include "sound_playback.h"
 #include "system_flags.h"
 #include "terrain_collision_manager.h"
 #include "unk_020655F4.h"
@@ -28,6 +29,15 @@
 // i initially had this on 0xFD but that was an ID collision with
 // some dynamic objects like Veilstone Gym tires
 #define FOLLOWER_LOCAL_ID LOCALID_FOLLOWER
+
+#define FOLLOWER_RECALL_TURN_DELAY   11
+#define FOLLOWER_RECALL_VANISH_DELAY 8
+
+enum FollowerRecallState {
+    FOLLOWER_RECALL_STATE_TURN = 0,
+    FOLLOWER_RECALL_STATE_HOLD,
+    FOLLOWER_RECALL_STATE_VANISH
+};
 
 static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *gender)
 {
@@ -381,6 +391,77 @@ MapObjectAnimCmd *FollowerMon_BuildTrailingAnim(FieldSystem *fieldSystem, const 
     result[out].count = 0;
 
     return result;
+}
+
+static MapObject *FollowerMon_GetObject(FieldSystem *fieldSystem)
+{
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower != NULL && MapObject_GetLocalID(follower) == FOLLOWER_LOCAL_ID) {
+        return follower;
+    }
+
+    return NULL;
+}
+
+BOOL FollowerMon_StartRecall(FieldSystem *fieldSystem)
+{
+    if (FollowerMon_GetObject(fieldSystem) == NULL) {
+        return FALSE;
+    }
+
+    fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_TURN;
+    fieldSystem->followMon.recallTimer = 0;
+
+    return TRUE;
+}
+
+BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
+{
+    MapObject *follower = FollowerMon_GetObject(fieldSystem);
+    int dir;
+
+    if (follower == NULL) {
+        return TRUE;
+    }
+
+    switch (fieldSystem->followMon.recallState) {
+    case FOLLOWER_RECALL_STATE_TURN:
+        dir = sub_02064488(MapObject_GetX(follower),
+            MapObject_GetZ(follower),
+            Player_GetXPos(fieldSystem->playerAvatar),
+            Player_GetZPos(fieldSystem->playerAvatar));
+
+        ov5_021ECDFC(follower, dir);
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_HOLD;
+        break;
+
+    case FOLLOWER_RECALL_STATE_HOLD:
+        fieldSystem->followMon.recallTimer++;
+
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_TURN_DELAY) {
+            break;
+        }
+
+        Sound_PlayEffect(SEQ_SE_DP_BOWA2);
+        MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_HIDE);
+
+        fieldSystem->followMon.recallTimer = 0;
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_VANISH;
+        break;
+
+    case FOLLOWER_RECALL_STATE_VANISH:
+        fieldSystem->followMon.recallTimer++;
+
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_VANISH_DELAY) {
+            break;
+        }
+
+        FollowerMon_Despawn(fieldSystem);
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 void FollowerMon_Despawn(FieldSystem *fieldSystem)
