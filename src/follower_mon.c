@@ -37,6 +37,9 @@
 // some dynamic objects like Veilstone Gym tires
 #define FOLLOWER_LOCAL_ID LOCALID_FOLLOWER
 
+static BOOL FollowerMon_IsDelayAction(u16 action);
+static BOOL FollowerMon_IsStationaryAction(u16 action, int dir);
+
 #define FOLLOWER_RECALL_TURN_DELAY   11
 #define FOLLOWER_RECALL_SHRINK_FRAMES 6
 #define FOLLOWER_RECALL_BALL_FRAMES   10
@@ -557,6 +560,22 @@ BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
     }
 
     return FALSE;
+}
+
+BOOL FollowerMon_IsFollowerObject(const MapObject *mapObj)
+{
+    return MapObject_GetLocalID(mapObj) == FOLLOWER_LOCAL_ID;
+}
+
+BOOL FollowerMon_IsWalkingAction(u16 action)
+{
+    int dir = MovementAction_GetDirFromAction(action);
+
+    if (dir == DIR_NONE || FollowerMon_IsDelayAction(action) == TRUE) {
+        return FALSE;
+    }
+
+    return FollowerMon_IsStationaryAction(action, dir) == FALSE;
 }
 
 void FollowerMon_Despawn(FieldSystem *fieldSystem)

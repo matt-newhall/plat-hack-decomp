@@ -12,6 +12,7 @@
 #include "overlay005/field_effect_manager.h"
 #include "overlay005/ov5_021F3D00.h"
 
+#include "follower_mon.h"
 #include "map_object.h"
 #include "map_object_move.h"
 #include "map_tile_behavior.h"
@@ -213,6 +214,10 @@ static u32 sub_02069D50(MapObject *mapObj)
     case 0x5b:
         v0 = 0x13;
         break;
+    }
+
+    if (FollowerMon_IsFollowerObject(mapObj) == TRUE && FollowerMon_IsWalkingAction(v0) == FALSE) {
+        v0 = MOVEMENT_ACTION_WALK_FAST_NORTH;
     }
 
     return v0;
