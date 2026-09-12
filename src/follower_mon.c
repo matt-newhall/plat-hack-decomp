@@ -94,6 +94,10 @@ static BOOL FollowerMon_IsAllowedOnMap(FieldSystem *fieldSystem, u16 species)
         return FollowerMon_IsLargeSpecies(species) == FALSE;
     }
 
+    if (MapHeader_IsBuilding(fieldSystem->location->mapId) == TRUE) {
+        return FollowerMon_IsLargeSpecies(species) == FALSE;
+    }
+
     return TRUE;
 }
 
