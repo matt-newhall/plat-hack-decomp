@@ -30,6 +30,16 @@ BOOL FollowerMon_IsFollowerObject(const MapObject *mapObj);
 BOOL FollowerMon_IsWalkingAction(u16 action);
 
 /**
+ * @brief Picks the action the follower should use for one trailing step.
+ *
+ * @param playerAction Action the player is currently running
+ * @param stepDir Direction of the follower's next step
+ * @param lastJumpAction Multi-tile jump the follower has already reacted to
+ * @return The action for the caller to turn towards stepDir
+ */
+u16 FollowerMon_ResolveStepAction(u16 playerAction, int stepDir, u16 *lastJumpAction);
+
+/**
  * @brief Begins the return-to-ball sequence for the follower.
  *
  * @param fieldSystem

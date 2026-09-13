@@ -140,6 +140,9 @@ static MapObject *FollowerMon_Spawn(FieldSystem *fieldSystem, u16 gfxID, int x, 
     }
 
     MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_PERSISTENT);
+    fieldSystem->followMon.mapId = fieldSystem->location->mapId;
+    MapObject_SetMovementRangeX(follower, -1);
+    MapObject_SetMovementRangeZ(follower, -1);
     MapObject_RecalculateObjectHeight(follower);
 
     return follower;
@@ -169,6 +172,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     u8  gender;
     u16 gfxID;
     MapObject *follower;
+    BOOL respawnForMap;
     int x, z, dir;
 
     if (SystemFlag_CheckHasPartner(SaveData_GetVarsFlags(fieldSystem->saveData)) == TRUE) {
@@ -191,7 +195,14 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         return;
     }
 
-    if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
+    follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+    respawnForMap = follower != NULL
+        && FollowerMon_IsFollowerObject(follower) == TRUE
+        && fieldSystem->followMon.mapId != fieldSystem->location->mapId;
+
+    if (respawnForMap == TRUE) {
+        MapObject_SetFlagAndDeleteObject(follower);
+    } else if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
         return;
     }
 
@@ -217,7 +228,10 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     }
 
     FollowerMon_StorePosition(fieldSystem, follower, species, gender);
-    FollowerBallEffect_Start(follower);
+
+    if (respawnForMap == FALSE) {
+        FollowerBallEffect_Start(follower);
+    }
 }
 
 void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
@@ -402,16 +416,10 @@ MapObjectAnimCmd *FollowerMon_BuildTrailingAnim(FieldSystem *fieldSystem, const 
         for (int step = 0; step < count; step++) {
             int pnx = px + MapObject_GetDxFromDir(dir);
             int pnz = pz + MapObject_GetDzFromDir(dir);
-            int fStepDir;
+            int fStepDir = FollowerMon_DirFromDelta(px - fx, pz - fz);
 
-            if (pnx == fx && pnz == fz) {
+            if (fStepDir == DIR_NONE) {
                 fStepDir = dir;
-            } else {
-                fStepDir = FollowerMon_DirFromDelta(px - fx, pz - fz);
-
-                if (fStepDir == DIR_NONE) {
-                    fStepDir = dir;
-                }
             }
 
             FollowerMon_PushAnim(result, &out, MovementAction_TurnActionTowardsDir(fStepDir, action), 1);
@@ -580,6 +588,42 @@ BOOL FollowerMon_IsWalkingAction(u16 action)
     }
 
     return FollowerMon_IsStationaryAction(action, dir) == FALSE;
+}
+
+static BOOL FollowerMon_IsMultiTileJump(u16 action)
+{
+    switch (action) {
+    case MOVEMENT_ACTION_JUMP_FAR_NORTH:
+    case MOVEMENT_ACTION_JUMP_FAR_SOUTH:
+    case MOVEMENT_ACTION_JUMP_FAR_WEST:
+    case MOVEMENT_ACTION_JUMP_FAR_EAST:
+    case MOVEMENT_ACTION_JUMP_FARTHER_WEST:
+    case MOVEMENT_ACTION_JUMP_FARTHER_EAST:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_NORTH:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_SOUTH:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_WEST:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_EAST:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+u16 FollowerMon_ResolveStepAction(u16 playerAction, int stepDir, u16 *lastJumpAction)
+{
+    if (FollowerMon_IsMultiTileJump(playerAction) == FALSE) {
+        *lastJumpAction = MOVEMENT_ACTION_NONE;
+        return playerAction;
+    }
+
+    BOOL jumpJustStarted = *lastJumpAction != playerAction;
+    *lastJumpAction = playerAction;
+
+    if (jumpJustStarted == TRUE && MovementAction_GetDirFromAction(playerAction) == stepDir) {
+        return playerAction;
+    }
+
+    return MOVEMENT_ACTION_WALK_FAST_NORTH;
 }
 
 void FollowerMon_Despawn(FieldSystem *fieldSystem)
