@@ -756,7 +756,8 @@
       "id": "JubilifeCity_Text_RowanExplainGifts",
       "en_US": [
         "Rowan: The Candy Bag holds an endless\n",
-        "supply of treats to raise a Pokémon’s level.\r",
+        "supply of treats to raise a Pokémon’s\f",
+        "level.\r",
         "And the Infinite Repel wards off weaker\n",
         "Pokémon. It never runs out.\r",
         "Use them well! I expect great things\n",

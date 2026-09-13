@@ -255,6 +255,15 @@
         "of selling this place as she’s\f",
         "moving to Unova soon."
       ]
+    },
+    {
+      "id": "ResortArea_Text_DarachNeedTwoMons",
+      "en_US": [
+        "Darach: A duel of this sort calls\n",
+        "for two Pokémon fit to battle.\r",
+        "Do return once your team has\n",
+        "recovered. I shall be waiting."
+      ]
     }
   ]
 }
