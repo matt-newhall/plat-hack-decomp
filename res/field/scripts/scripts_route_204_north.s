@@ -352,19 +352,19 @@ Route204North_JulienLeaveX170:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX170
     WaitMovement
     ReleaseAll
-    EndMovement
+    End
 
 Route204North_JulienLeaveX171:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX171
     WaitMovement
     ReleaseAll
-    EndMovement
+    End
 
 Route204North_JulienLeaveX172:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX172
     WaitMovement
     ReleaseAll
-    EndMovement
+    End
 
     .balign 4, 0
 Route204North_Movement_JulienLeaveX170:
