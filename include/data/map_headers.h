@@ -2733,6 +2733,7 @@ static const MapHeader sMapHeaders[] = {
         .weather = OVERWORLD_WEATHER_HEAVY_RAIN,
         .cameraType = CAMERA_TYPE_PASTORIA_GYM,
         .mapType = 0x4,
+        .followMode = MAP_FOLLOW_MODE_PREVENT,
         .battleBG = BACKGROUND_INDOORS_1,
         .isBikeAllowed = FALSE,
         .isRunningAllowed = FALSE,
