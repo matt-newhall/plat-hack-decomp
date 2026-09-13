@@ -83,7 +83,7 @@ void sub_02069BE0(MapObject *mapObj)
     sub_02069CA8(mapObj, v0);
     sub_02062A0C(mapObj, 0x0);
     sub_02062D10(mapObj);
-    sub_02062D80(mapObj, 0);
+    sub_02062D80(mapObj, FollowerMon_IsFollowerObject(mapObj));
 }
 
 void sub_02069C0C(MapObject *mapObj)
@@ -94,7 +94,7 @@ void sub_02069C0C(MapObject *mapObj)
         return;
     }
 
-    sub_02062D80(mapObj, 0);
+    sub_02062D80(mapObj, FollowerMon_IsFollowerObject(mapObj));
 
     while (Unk_020EF8D4[v0->unk_00](mapObj, v0) == 1) {
         (void)0;

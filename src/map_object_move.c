@@ -22,6 +22,7 @@
 #include "overlay005/ov5_021F3A50.h"
 #include "overlay005/struct_ov5_021ECD10.h"
 
+#include "follower_mon.h"
 #include "map_object.h"
 #include "map_tile_behavior.h"
 #include "terrain_collision_manager.h"
@@ -621,6 +622,11 @@ u32 sub_02063EBC(const MapObject *mapObj, int dir)
 
 int sub_02063F00(const MapObject *mapObj, int x, int y, int z)
 {
+    return MapObject_IsTileOccupied(mapObj, x, y, z, FALSE);
+}
+
+int MapObject_IsTileOccupied(const MapObject *mapObj, int x, int y, int z, BOOL ignoreFollower)
+{
     int maxObjects, objX, objZ;
     const MapObjectManager *mapObjMan = MapObject_MapObjectManager(mapObj);
     const MapObject *v4 = MapObjectMan_GetMapObjectConst(mapObjMan);
@@ -630,7 +636,8 @@ int sub_02063F00(const MapObject *mapObj, int x, int y, int z)
     do {
         if (v4 != mapObj
             && MapObject_CheckStatus(v4, MAP_OBJ_STATUS_0)
-            && !MapObject_CheckStatus(v4, MAP_OBJ_STATUS_18)) {
+            && !MapObject_CheckStatus(v4, MAP_OBJ_STATUS_18)
+            && !(ignoreFollower == TRUE && FollowerMon_IsFollowerObject(v4) == TRUE)) {
             objX = MapObject_GetX(v4);
             objZ = MapObject_GetZ(v4);
 
