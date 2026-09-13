@@ -63,6 +63,7 @@ CelesticTownCave_EnterCyrus:
     End
 
 CelesticTownCave_ElderEnterX9:
+    FollowPokePlaceAtSide DIR_WEST
     ApplyMovement LOCALID_ELDER, CelesticTownCave_Movement_ElderEnterX9
     WaitMovement
     ApplyMovement LOCALID_PLAYER, CelesticTownCave_Movement_PlayerWalkOnSpotEast
@@ -70,6 +71,7 @@ CelesticTownCave_ElderEnterX9:
     Return
 
 CelesticTownCave_ElderEnterX10:
+    FollowPokePlaceAtSide DIR_EAST
     ApplyMovement LOCALID_ELDER, CelesticTownCave_Movement_ElderEnterX10
     WaitMovement
     ApplyMovement LOCALID_PLAYER, CelesticTownCave_Movement_PlayerWalkOnSpotWest
@@ -87,6 +89,7 @@ CelesticTownCave_DontBattleNow:
 
 CelesticTownCave_CyrusPushPlayerX9:
     ApplyMovement LOCALID_ELDER, CelesticTownCave_Movement_ElderWatchCyrusPushPlayerX9
+    ApplyMovement LOCALID_FOLLOWER, CelesticTownCave_Movement_FollowPokeGetPushedX9
     ApplyMovement LOCALID_PLAYER, CelesticTownCave_Movement_PlayerGetPushedX9
     ApplyMovement LOCALID_CYRUS, CelesticTownCave_Movement_CyrusPushPlayerX9
     WaitMovement
@@ -94,6 +97,7 @@ CelesticTownCave_CyrusPushPlayerX9:
 
 CelesticTownCave_CyrusPushPlayerX10:
     ApplyMovement LOCALID_ELDER, CelesticTownCave_Movement_ElderWatchCyrusPushPlayerX10
+    ApplyMovement LOCALID_FOLLOWER, CelesticTownCave_Movement_FollowPokeGetPushedX10
     ApplyMovement LOCALID_PLAYER, CelesticTownCave_Movement_PlayerGetPushedX10
     ApplyMovement LOCALID_CYRUS, CelesticTownCave_Movement_CyrusPushPlayerX10
     WaitMovement
@@ -265,6 +269,20 @@ CelesticTownCave_Movement_PlayerWalkOnSpotEast:
     .balign 4, 0
 CelesticTownCave_Movement_PlayerWalkOnSpotWest:
     WalkOnSpotNormalWest
+    EndMovement
+
+    .balign 4, 0
+CelesticTownCave_Movement_FollowPokeGetPushedX9:
+    Delay8
+    WalkFastWest
+    FaceEast
+    EndMovement
+
+    .balign 4, 0
+CelesticTownCave_Movement_FollowPokeGetPushedX10:
+    Delay8
+    WalkFastEast
+    FaceWest
     EndMovement
 
     .balign 4, 0

@@ -253,7 +253,7 @@ Route213_Movement_PolicemanLookWest:
 
     .balign 4, 0
 Route213_Movement_LookerEnterEast:
-    WalkFastEast 10
+    WalkFastEast 9
     WalkFastNorth 2
     WalkOnSpotFastEast
     EndMovement
@@ -262,21 +262,21 @@ Route213_Movement_LookerEnterEast:
 Route213_Movement_LookerEnterWest:
     WalkFastEast 10
     WalkFastNorth 2
-    WalkFastEast 2
+    WalkFastEast
     EndMovement
 
     .balign 4, 0
 Route213_Movement_LookerEnterSouth:
     WalkFastEast 10
     WalkFastNorth 3
-    WalkFastEast
+    WalkOnSpotFastEast
     EndMovement
 
     .balign 4, 0
 Route213_Movement_LookerEnterNorth:
     WalkFastEast 10
     WalkFastNorth
-    WalkFastEast
+    WalkOnSpotFastEast
     EndMovement
 
     .balign 4, 0
@@ -348,13 +348,13 @@ Route213_Movement_PlayerWatchGruntMEastLeave:
     .balign 4, 0
 Route213_Movement_PlayerWatchLookerEnterNorthWestEast:
     Delay4 10
-    WalkOnSpotNormalWest
+    WalkNormalWest
     EndMovement
 
     .balign 4, 0
 Route213_Movement_PlayerWatchLookerEnterSouth:
     Delay4 11
-    WalkOnSpotNormalWest
+    WalkNormalWest
     EndMovement
 
     .balign 4, 0

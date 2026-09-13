@@ -84,6 +84,8 @@ OreburghCity_TriggerRival:
     SetObjectEventPos LOCALID_RIVAL, 258, 749
     PlaySE SEQ_SE_DP_KAIDAN2
     AddObject LOCALID_RIVAL
+    FollowPokePlaceAtSide DIR_EAST
+    WaitMovement
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8005, 748, OreburghCity_RivalRunIntoPlayerZ748
     GoToIfEq VAR_0x8005, 749, OreburghCity_RivalRunIntoPlayerZ749
@@ -92,6 +94,7 @@ OreburghCity_TriggerRival:
     End
 
 OreburghCity_RivalRunIntoPlayerZ748:
+    ApplyMovement LOCALID_FOLLOWER, OreburghCity_Movement_FollowPokeGetPushedByRivalZ748
     ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ748
     ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ748
     WaitMovement
@@ -99,6 +102,7 @@ OreburghCity_RivalRunIntoPlayerZ748:
     End
 
 OreburghCity_RivalRunIntoPlayerZ749:
+    ApplyMovement LOCALID_FOLLOWER, OreburghCity_Movement_FollowPokeGetPushedByRivalZ749
     ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ749
     ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ749
     WaitMovement
@@ -106,6 +110,7 @@ OreburghCity_RivalRunIntoPlayerZ749:
     End
 
 OreburghCity_RivalRunIntoPlayerZ750:
+    ApplyMovement LOCALID_FOLLOWER, OreburghCity_Movement_FollowPokeGetPushedByRivalZ750
     ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ750
     ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ750
     WaitMovement
@@ -113,6 +118,7 @@ OreburghCity_RivalRunIntoPlayerZ750:
     End
 
 OreburghCity_RivalRunIntoPlayerZ751:
+    ApplyMovement LOCALID_FOLLOWER, OreburghCity_Movement_FollowPokeGetPushedByRivalZ751
     ApplyMovement LOCALID_PLAYER, OreburghCity_Movement_PlayerGetPushedByRivalZ751
     ApplyMovement LOCALID_RIVAL, OreburghCity_Movement_RivalRunIntoPlayerZ751
     WaitMovement
@@ -178,11 +184,25 @@ OreburghCity_RemoveRival:
     End
 
     .balign 4, 0
+OreburghCity_Movement_FollowPokeGetPushedByRivalZ748:
+    Delay4 3
+    WalkFastEast
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
 OreburghCity_Movement_PlayerGetPushedByRivalZ748:
     Delay4 3
     LockDir
     WalkFastEast
     UnlockDir
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_FollowPokeGetPushedByRivalZ749:
+    Delay4 2
+    WalkFastEast
     FaceWest
     EndMovement
 
@@ -196,11 +216,25 @@ OreburghCity_Movement_PlayerGetPushedByRivalZ749:
     EndMovement
 
     .balign 4, 0
+OreburghCity_Movement_FollowPokeGetPushedByRivalZ750:
+    Delay4 3
+    WalkFastEast
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
 OreburghCity_Movement_PlayerGetPushedByRivalZ750:
     Delay4 3
     LockDir
     WalkFastEast
     UnlockDir
+    FaceWest
+    EndMovement
+
+    .balign 4, 0
+OreburghCity_Movement_FollowPokeGetPushedByRivalZ751:
+    Delay4 4
+    WalkFastEast
     FaceWest
     EndMovement
 

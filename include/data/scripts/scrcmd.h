@@ -864,6 +864,8 @@ ScriptCommand(SCRCMD_MAXIMIZEPARTYMONIV,                                   ScrCm
 ScriptCommand(SCRCMD_GETPARTYMONIV,                                        ScrCmd_GetPartyMonIV)
 ScriptCommand(SCRCMD_BUFFERPOKEMONSTATNAME,                                ScrCmd_BufferPokemonStatName)
 ScriptCommand(SCRCMD_SETPARTYMONNATURE,                                    ScrCmd_SetPartyMonNature)
+ScriptCommand(SCRCMD_FOLLOWPOKEPLACEBEHINDPLAYER,                          ScrCmd_FollowPokePlaceBehindPlayer)
+ScriptCommand(SCRCMD_FOLLOWPOKEPLACEATSIDE,                                ScrCmd_FollowPokePlaceAtSide)
 
 // clang-format on
 

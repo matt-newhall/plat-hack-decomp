@@ -32,6 +32,7 @@ FullmoonIsland_ThatsTheLunarWing:
     GoTo FullmoonIsland_TakeShipToCanalave
 
 FullmoonIsland_TakeShipToCanalave:
+    SendBackFollowingPoke
     Call FullmoonIsland_SailorEnterShip
     CallIfEq VAR_0x8004, DIR_SOUTH, FullmoonIsland_PlayerWalkToShipSouth
     CallIfEq VAR_0x8004, DIR_EAST, FullmoonIsland_PlayerWalkToShipEast

@@ -23,6 +23,7 @@ StarkMountainRoom2_ResetFollowerBuckState:
 StarkMountainRoom2_TriggerBuckStartFollowing:
     LockAll
     SetPlayerBike FALSE
+    SendBackFollowingPoke
     CallIfUnset FLAG_TALKED_TO_STARK_MOUNTAIN_ROOM_2_BUCK, StarkMountainRoom2_BuckEnterStartFollowing
     CallIfSet FLAG_TALKED_TO_STARK_MOUNTAIN_ROOM_2_BUCK, StarkMountainRoom2_BuckStartFollowing
     BufferPlayerName 0

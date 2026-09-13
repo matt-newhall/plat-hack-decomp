@@ -500,12 +500,15 @@ ValorLakefront_Collector:
 
 ValorLakefront_TriggerBlockSunyshore:
     LockAll
+    FollowPokePlaceAtSide DIR_WEST
+    WaitMovement
     ApplyMovement LOCALID_COLLECTOR, ValorLakefront_Movement_CollectorExclamationMark
     WaitMovement
     GetPlayerMapPos VAR_0x8000, VAR_0x8001
     CallIfEq VAR_0x8001, 789, ValorLakefront_CollectorBlockPlayerX789
     CallIfEq VAR_0x8001, 790, ValorLakefront_CollectorBlockPlayerX790
     CallIfEq VAR_0x8001, 791, ValorLakefront_CollectorBlockPlayerX791
+    ApplyMovement LOCALID_FOLLOWER, ValorLakefront_Movement_FollowPokeGetPushedWest
     ApplyMovement LOCALID_COLLECTOR, ValorLakefront_Movement_CollectorWalkWest
     ApplyMovement LOCALID_PLAYER, ValorLakefront_Movement_PlayerGetPushedWest
     WaitMovement
@@ -592,6 +595,12 @@ ValorLakefront_Movement_CollectorWalkBackX791:
     .balign 4, 0
 ValorLakefront_Movement_CollectorWalkWest:
     WalkNormalWest
+    EndMovement
+
+    .balign 4, 0
+ValorLakefront_Movement_FollowPokeGetPushedWest:
+    WalkNormalWest
+    FaceEast
     EndMovement
 
     .balign 4, 0

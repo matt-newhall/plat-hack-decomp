@@ -58,6 +58,7 @@ CelesticTown_GruntMLeaveElderEnterNorth:
     ApplyMovement LOCALID_PLAYER, CelesticTown_Movement_PlayerWatchGruntMLeaveNorth
     WaitMovement
     Call CelesticTown_RemoveGruntMAddElder
+    FollowPokePlaceAtSide DIR_WEST
     ApplyMovement LOCALID_ELDER, CelesticTown_Movement_ElderEnterNorth
     ApplyMovement LOCALID_PLAYER, CelesticTown_Movement_PlayerWatchElderEnterNorth
     WaitMovement
@@ -68,6 +69,7 @@ CelesticTown_GruntMLeaveElderEnterWest:
     ApplyMovement LOCALID_PLAYER, CelesticTown_Movement_PlayerWatchGruntMLeaveWest
     WaitMovement
     Call CelesticTown_RemoveGruntMAddElder
+    FollowPokePlaceAtSide DIR_EAST
     ApplyMovement LOCALID_ELDER, CelesticTown_Movement_ElderEnterWest
     WaitMovement
     GoTo CelesticTown_GiveOldCharm
@@ -77,6 +79,7 @@ CelesticTown_GruntMLeaveElderEnterEast:
     ApplyMovement LOCALID_PLAYER, CelesticTown_Movement_PlayerWatchGruntMLeaveEast
     WaitMovement
     Call CelesticTown_RemoveGruntMAddElder
+    FollowPokePlaceAtSide DIR_WEST
     ApplyMovement LOCALID_ELDER, CelesticTown_Movement_ElderEnterEast
     WaitMovement
     GoTo CelesticTown_GiveOldCharm

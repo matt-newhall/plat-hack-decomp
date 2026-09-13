@@ -75,6 +75,7 @@ typedef struct FollowMon {
     u8  dir;
     u8  recallState;
     u8  recallTimer;
+    u8  scriptDrivesMovement;
 } FollowMon;
 
 typedef struct FieldSystem_t {

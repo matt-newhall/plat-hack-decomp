@@ -192,22 +192,22 @@ EternaCity_CynthiaGiveCut:
     End
 
 EternaCity_CynthiaLeaveAfterCutZ522:
-    GoToIfEq VAR_0x8004, 304, EternaCity_CynthiaLeaveAfterCutX304
-    GoToIfEq VAR_0x8004, 305, EternaCity_CynthiaLeaveAfterCutX305
-    GoToIfEq VAR_0x8004, 306, EternaCity_CynthiaLeaveAfterCutX306
+    GoToIfEq VAR_0x8004, 305, EternaCity_CynthiaLeaveAfterCutX304
+    GoToIfEq VAR_0x8004, 306, EternaCity_CynthiaLeaveAfterCutX305
+    GoToIfEq VAR_0x8004, 307, EternaCity_CynthiaLeaveAfterCutX306
     End
 
 EternaCity_EnterCynthiaForGiveCutZ522:
     ApplyMovement LOCALID_CYNTHIA, EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayerZ522
     WaitMovement
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerWalkOnSpotSouth
+    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerWalkEastToFaceCynthiaSouth
     WaitMovement
     Return
 
 EternaCity_EnterCynthiaForGiveCutNotZ522:
     ApplyMovement LOCALID_CYNTHIA, EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayerNotZ522
     WaitMovement
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerWalkOnSpotEast
+    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerWalkEastToCynthia
     WaitMovement
     Return
 
@@ -273,7 +273,7 @@ EternaCity_CynthiaGiveCutEnd:
 EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayerZ522:
     WalkNormalWest 4
     EmoteExclamationMark
-    WalkNormalWest 5
+    WalkNormalWest 4
     WalkNormalNorth
     EndMovement
 
@@ -281,7 +281,7 @@ EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayerZ522:
 EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayerNotZ522:
     WalkNormalWest 4
     EmoteExclamationMark
-    WalkNormalWest 4
+    WalkNormalWest 3
     EndMovement
 
     .balign 4, 0
@@ -338,13 +338,14 @@ EternaCity_Movement_CynthiaLeaveAfterCutZ525:
     EndMovement
 
     .balign 4, 0
-EternaCity_Movement_PlayerWalkOnSpotSouth:
+EternaCity_Movement_PlayerWalkEastToFaceCynthiaSouth:
+    WalkNormalEast
     WalkOnSpotNormalSouth
     EndMovement
 
     .balign 4, 0
-EternaCity_Movement_PlayerWalkOnSpotEast:
-    WalkOnSpotNormalEast
+EternaCity_Movement_PlayerWalkEastToCynthia:
+    WalkNormalEast
     EndMovement
 
     .balign 4, 0
@@ -631,6 +632,8 @@ EternaCity_RivalRunIntoPlayerZ525:
 
 EternaCity_YouCameToSeeThePokemonStatueRight:
     PlaySE SEQ_SE_DP_WALL_HIT2
+    PlaySE SEQ_SE_DP_DANSA
+    FollowPokePlaceBehindPlayer
     Message EternaCity_Text_BigThud
     CloseMessage
     Common_SetRivalBGM
@@ -675,6 +678,7 @@ EternaCity_WalkToStatueZ525:
     End
 
 EternaCity_Cyrus:
+    FollowPokePlaceAtSide DIR_SOUTH
     BufferRivalName 0
     Message EternaCity_Text_WhatThe
     CloseMessage
@@ -695,6 +699,7 @@ EternaCity_Cyrus:
     CloseMessage
     ApplyMovement LOCALID_CYRUS, EternaCity_Movement_CyrusLeave
     ApplyMovement LOCALID_RIVAL, EternaCity_Movement_RivalWatchCyrusLeave
+    ApplyMovement LOCALID_FOLLOWER, EternaCity_Movement_FollowPokeMoveAside
     ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerMoveAsideAndWatchCyrusLeave
     WaitMovement
     RemoveObject LOCALID_CYRUS
@@ -895,6 +900,12 @@ EternaCity_Movement_CyrusWalkToPlayer:
     EndMovement
 
     .balign 4, 0
+EternaCity_Movement_FollowPokeMoveAside:
+    WalkNormalSouth
+    WalkOnSpotNormalEast
+    EndMovement
+
+    .balign 4, 0
 EternaCity_Movement_CyrusLeave:
     Delay8 2
     WalkNormalWest 14
@@ -958,7 +969,7 @@ EternaCity_ShowCynthia:
 EternaCity_CynthiaTryGiveEgg:
     ApplyMovement LOCALID_CYNTHIA, EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayer
     WaitMovement
-    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerWalkOnSpotWestToFaceCynthia
+    ApplyMovement LOCALID_PLAYER, EternaCity_Movement_PlayerWalkWestToFaceCynthia
     WaitMovement
     Message EternaCity_Text_IWantedYouToHaveThisPokemonEggWillYouAcceptIt
     ShowYesNoMenu VAR_RESULT
@@ -1093,18 +1104,17 @@ EternaCity_Movement_CynthiaNoticeAndWalkUpToPlayer:
     EmoteExclamationMark
     WalkNormalNorth 5
     WalkNormalEast 2
-    WalkNormalEast
     EndMovement
 
     .balign 4, 0
 EternaCity_Movement_CynthiaLeaveAfterEgg:
-    WalkNormalWest 3
+    WalkNormalWest 2
     WalkNormalSouth 9
     EndMovement
 
     .balign 4, 0
-EternaCity_Movement_PlayerWalkOnSpotWestToFaceCynthia:
-    WalkOnSpotNormalWest
+EternaCity_Movement_PlayerWalkWestToFaceCynthia:
+    WalkNormalWest
     EndMovement
 
 EternaCity_Cynthia:

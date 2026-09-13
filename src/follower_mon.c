@@ -140,7 +140,6 @@ static MapObject *FollowerMon_Spawn(FieldSystem *fieldSystem, u16 gfxID, int x, 
     }
 
     MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_PERSISTENT);
-    fieldSystem->followMon.mapId = fieldSystem->location->mapId;
     MapObject_SetMovementRangeX(follower, -1);
     MapObject_SetMovementRangeZ(follower, -1);
     MapObject_RecalculateObjectHeight(follower);
@@ -172,7 +171,6 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     u8  gender;
     u16 gfxID;
     MapObject *follower;
-    BOOL respawnForMap;
     int x, z, dir;
 
     if (SystemFlag_CheckHasPartner(SaveData_GetVarsFlags(fieldSystem->saveData)) == TRUE) {
@@ -195,14 +193,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         return;
     }
 
-    follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
-    respawnForMap = follower != NULL
-        && FollowerMon_IsFollowerObject(follower) == TRUE
-        && fieldSystem->followMon.mapId != fieldSystem->location->mapId;
-
-    if (respawnForMap == TRUE) {
-        MapObject_SetFlagAndDeleteObject(follower);
-    } else if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
+    if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
         return;
     }
 
@@ -228,10 +219,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     }
 
     FollowerMon_StorePosition(fieldSystem, follower, species, gender);
-
-    if (respawnForMap == FALSE) {
-        FollowerBallEffect_Start(follower);
-    }
+    FollowerBallEffect_Start(follower);
 }
 
 void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)

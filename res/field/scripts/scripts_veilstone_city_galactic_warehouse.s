@@ -229,9 +229,9 @@ VeilstoneCityGalacticWarehouse_Movement_PlayerWatchLookerEnterGalacticHQ:
 
     .balign 4, 0
 VeilstoneCityGalacticWarehouse_Movement_LookerWalkToPlayerX8:
-    WalkNormalNorth 2
-    WalkNormalEast
     WalkNormalNorth
+    WalkNormalEast
+    WalkNormalNorth 2
     WalkOnSpotNormalWest
     EndMovement
 

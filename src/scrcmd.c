@@ -335,6 +335,8 @@ static BOOL ScrCmd_ShowListMenuRememberCursor(ScriptContext *ctx);
 static BOOL ScrCmd_ShowMenuMultiColumn(ScriptContext *ctx);
 static BOOL ScrCmd_ApplyMovement(ScriptContext *ctx);
 static BOOL ScrCmd_WaitMovement(ScriptContext *ctx);
+static BOOL ScrCmd_FollowPokePlaceBehindPlayer(ScriptContext *ctx);
+static BOOL ScrCmd_FollowPokePlaceAtSide(ScriptContext *ctx);
 static BOOL ScrCmd_LockAll(ScriptContext *ctx);
 static BOOL sub_020410CC(ScriptContext *ctx);
 static BOOL ScrCmd_ReleaseAll(ScriptContext *ctx);
@@ -2055,8 +2057,15 @@ static BOOL ScrCmd_ApplyMovement(ScriptContext *ctx)
     (*movementCount)++;
     sub_02040F28(ctx->fieldSystem, task, NULL);
 
-    // when the player is forcibly moved, force follower to walk behind still
-    if (localID == LOCALID_PLAYER) {
+    if (localID == LOCALID_FOLLOWER) {
+        ctx->fieldSystem->followMon.scriptDrivesMovement = TRUE;
+    }
+
+    // when the player is forcibly moved, force follower to walk behind still,
+    // unless the script has just handed the follower a movement of its own
+    if (localID == LOCALID_PLAYER && ctx->fieldSystem->followMon.scriptDrivesMovement == TRUE) {
+        ctx->fieldSystem->followMon.scriptDrivesMovement = FALSE;
+    } else if (localID == LOCALID_PLAYER) {
         MapObjectAnimCmd *followerCmds = FollowerMon_BuildTrailingAnim(
             ctx->fieldSystem, (const MapObjectAnimCmd *)(ctx->scriptPtr + movementOffset));
 
@@ -2140,6 +2149,206 @@ static MapObject *GetLocalMapObjByIndex(FieldSystem *fieldSystem, int localID)
     }
 
     return object;
+}
+
+
+#define FOLLOW_POKE_PLACE_RADIUS    4
+#define FOLLOW_POKE_PLACE_SPAN      (FOLLOW_POKE_PLACE_RADIUS * 2 + 1)
+#define FOLLOW_POKE_PLACE_CELLS     (FOLLOW_POKE_PLACE_SPAN * FOLLOW_POKE_PLACE_SPAN)
+#define FOLLOW_POKE_PLACE_MAX_STEPS 6
+
+#define FOLLOW_POKE_CELL_UNVISITED -2
+#define FOLLOW_POKE_CELL_START     -1
+
+/**
+ * @brief Finds the shortest walk from the follower to a tile near the player.
+ *
+ * @param follower
+ * @param y Elevation to test at
+ * @param targetX
+ * @param targetZ
+ * @param[out] steps Directions to walk, in order
+ * @return Number of steps written, or 0 if the tile cannot be reached
+ */
+static int FollowPoke_FindRoute(const MapObject *follower, int y, int targetX, int targetZ, int *steps)
+{
+    s8 cameFrom[FOLLOW_POKE_PLACE_CELLS];
+    u8 queue[FOLLOW_POKE_PLACE_CELLS];
+    int originX = MapObject_GetX(follower) - FOLLOW_POKE_PLACE_RADIUS;
+    int originZ = MapObject_GetZ(follower) - FOLLOW_POKE_PLACE_RADIUS;
+    int windowX = targetX - originX;
+    int windowZ = targetZ - originZ;
+    int head = 0;
+    int tail = 0;
+    int targetCell, cell, length, i;
+
+    if (windowX < 0 || windowX >= FOLLOW_POKE_PLACE_SPAN
+        || windowZ < 0 || windowZ >= FOLLOW_POKE_PLACE_SPAN) {
+        return 0;
+    }
+
+    for (i = 0; i < FOLLOW_POKE_PLACE_CELLS; i++) {
+        cameFrom[i] = FOLLOW_POKE_CELL_UNVISITED;
+    }
+
+    targetCell = windowZ * FOLLOW_POKE_PLACE_SPAN + windowX;
+    cell = FOLLOW_POKE_PLACE_RADIUS * FOLLOW_POKE_PLACE_SPAN + FOLLOW_POKE_PLACE_RADIUS;
+
+    cameFrom[cell] = FOLLOW_POKE_CELL_START;
+    queue[tail++] = cell;
+
+    while (head < tail) {
+        cell = queue[head++];
+
+        if (cell == targetCell) {
+            break;
+        }
+
+        for (int dir = 0; dir < MAX_DIR; dir++) {
+            int nextX = (cell % FOLLOW_POKE_PLACE_SPAN) + MapObject_GetDxFromDir(dir);
+            int nextZ = (cell / FOLLOW_POKE_PLACE_SPAN) + MapObject_GetDzFromDir(dir);
+            int nextCell;
+
+            if (nextX < 0 || nextX >= FOLLOW_POKE_PLACE_SPAN
+                || nextZ < 0 || nextZ >= FOLLOW_POKE_PLACE_SPAN) {
+                continue;
+            }
+
+            nextCell = nextZ * FOLLOW_POKE_PLACE_SPAN + nextX;
+
+            if (cameFrom[nextCell] != FOLLOW_POKE_CELL_UNVISITED) {
+                continue;
+            }
+
+            if (sub_02063E94(follower, originX + nextX, y, originZ + nextZ, dir) != 0) {
+                continue;
+            }
+
+            cameFrom[nextCell] = dir;
+            queue[tail++] = nextCell;
+        }
+    }
+
+    if (cameFrom[targetCell] == FOLLOW_POKE_CELL_UNVISITED) {
+        return 0;
+    }
+
+    length = 0;
+    cell = targetCell;
+
+    while (cameFrom[cell] != FOLLOW_POKE_CELL_START) {
+        int dir = cameFrom[cell];
+
+        if (length >= FOLLOW_POKE_PLACE_MAX_STEPS) {
+            return 0;
+        }
+
+        steps[length++] = dir;
+        cell -= MapObject_GetDzFromDir(dir) * FOLLOW_POKE_PLACE_SPAN + MapObject_GetDxFromDir(dir);
+    }
+
+    for (i = 0; i < length / 2; i++) {
+        int swap = steps[i];
+        steps[i] = steps[length - 1 - i];
+        steps[length - 1 - i] = swap;
+    }
+
+    return length;
+}
+
+/**
+ * @brief Walks the following Pokemon onto the tile beside the player in a direction.
+ *
+ * @param ctx
+ * @param sideDir Which side of the player to stand on
+ * @param facingDir Direction to end up facing, or MAX_DIR to copy the player
+ * @return FALSE, the command never yields
+ */
+static BOOL FollowPoke_PlaceBesidePlayer(ScriptContext *ctx, int sideDir, int facingDir)
+{
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
+        fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower == NULL || FollowerMon_IsFollowerObject(follower) == FALSE) {
+        return FALSE;
+    }
+
+    int playerDir = PlayerAvatar_GetDir(fieldSystem->playerAvatar);
+    int y = MapObject_GetY(Player_MapObject(fieldSystem->playerAvatar));
+    int targetX = Player_GetXPos(fieldSystem->playerAvatar) + MapObject_GetDxFromDir(sideDir);
+    int targetZ = Player_GetZPos(fieldSystem->playerAvatar) + MapObject_GetDzFromDir(sideDir);
+    int steps[FOLLOW_POKE_PLACE_MAX_STEPS];
+    int stepCount;
+
+    if (facingDir >= MAX_DIR) {
+        facingDir = playerDir;
+    }
+
+    if (targetX == MapObject_GetX(follower) && targetZ == MapObject_GetZ(follower)) {
+        return FALSE;
+    }
+
+    stepCount = FollowPoke_FindRoute(follower, y, targetX, targetZ, steps);
+
+    if (stepCount == 0) {
+        return FALSE;
+    }
+
+    MapObjectAnimCmd *cmds = Heap_Alloc(HEAP_ID_FIELD1, sizeof(MapObjectAnimCmd) * (stepCount + 2));
+
+    if (cmds == NULL) {
+        return FALSE;
+    }
+
+    for (int i = 0; i < stepCount; i++) {
+        cmds[i].movementAction = MovementAction_TurnActionTowardsDir(steps[i], MOVEMENT_ACTION_WALK_FAST_NORTH);
+        cmds[i].count = 1;
+    }
+
+    cmds[stepCount].movementAction = MovementAction_TurnActionTowardsDir(facingDir, MOVEMENT_ACTION_FACE_NORTH);
+    cmds[stepCount].count = 1;
+    cmds[stepCount + 1].movementAction = MOVEMENT_ACTION_END;
+    cmds[stepCount + 1].count = 0;
+
+    SysTask *task = MapObject_StartAnimation(follower, cmds);
+    u8 *movementCount = FieldSystem_GetScriptMemberPtr(fieldSystem, SCRIPT_MANAGER_MOVEMENT_COUNT);
+    (*movementCount)++;
+    sub_02040F28(fieldSystem, task, cmds);
+
+    return FALSE;
+}
+
+/**
+ * @brief Walks the following Pokemon onto the tile directly behind the player.
+ *
+ * Place the command before any movement that turns the player, or "behind" points
+ * somewhere else.
+ *
+ * @param ctx
+ * @return FALSE, the command never yields
+ */
+static BOOL ScrCmd_FollowPokePlaceBehindPlayer(ScriptContext *ctx)
+{
+    int playerDir = PlayerAvatar_GetDir(ctx->fieldSystem->playerAvatar);
+    return FollowPoke_PlaceBesidePlayer(ctx, Direction_GetOpposite(playerDir), playerDir);
+}
+
+/**
+ * @brief Walks the following Pokemon onto the tile on a named side of the player.
+ *
+ * For scenes where behind the player is not the safe tile, or where the follower has
+ * to be moved twice because NPCs arrive from different directions.
+ *
+ * @param ctx Reads the direction to stand on
+ * @return FALSE, the command never yields
+ */
+static BOOL ScrCmd_FollowPokePlaceAtSide(ScriptContext *ctx)
+{
+    int sideDir = ScriptContext_GetVar(ctx);
+    int facingDir = ScriptContext_GetVar(ctx);
+
+    return FollowPoke_PlaceBesidePlayer(ctx, sideDir, facingDir);
 }
 
 static BOOL ScrCmd_WaitMovement(ScriptContext *ctx)

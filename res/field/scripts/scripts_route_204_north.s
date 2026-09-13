@@ -156,6 +156,9 @@ Route204North_ArrowSignpostFloaromaTown:
 
 Route204North_RivalTrigger:
     LockAll
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 170, Route204North_FollowPokeStandEast
+    CallIfNe VAR_0x8004, 170, Route204North_FollowPokeStandWest
     ClearFlag FLAG_HIDE_ROUTE_204_RIVAL
     AddObject LOCALID_RIVAL
     ApplyMovement LOCALID_RIVAL, Route204North_Movement_RivalNoticePlayer
@@ -242,6 +245,14 @@ Route204North_RemoveRival:
     SetVar VAR_ROUTE_204_RIVAL_STATE, 1
     GoTo Route204North_JulienApproachPlayer
     End
+
+Route204North_FollowPokeStandEast:
+    FollowPokePlaceAtSide DIR_EAST
+    Return
+
+Route204North_FollowPokeStandWest:
+    FollowPokePlaceAtSide DIR_WEST
+    Return
 
 Route204North_BlackOutRivalBattle:
     SetFlag FLAG_HIDE_ROUTE_204_RIVAL
@@ -404,7 +415,7 @@ Route204North_Movement_JulienFaceWest:
 
     .balign 4, 0
 Route204North_Movement_RivalLeaveX170:
-    WalkFastEast 1
+    WalkFastEast 2
     WalkFastNorth 4
     WalkFastEast 10
     EndMovement
@@ -418,7 +429,7 @@ Route204North_Movement_RivalLeaveX171:
 
     .balign 4, 0
 Route204North_Movement_RivalLeaveX172:
-    WalkFastWest 1
+    WalkFastWest 2
     WalkFastNorth 4
     WalkFastEast 10
     EndMovement

@@ -455,6 +455,8 @@ ResortArea_DarachUnfought:
     Message ResortArea_Text_DarachTalk
     WaitButton
     CloseMessage
+    CheckHasTwoAliveMons VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, ResortArea_DarachNeedTwoMons
     StartTrainerBattle TRAINER_CASTLE_VALET_DARACH_RESORT_AREA
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, ResortArea_BlackOut
@@ -468,6 +470,13 @@ ResortArea_DarachUnfought:
     ClearFlag FLAG_HIDE_ROUTE_229_BLOCK_DESERT
     SetBlackOutWarpId 18
     GetTrainerCardLevel VAR_RESULT
+    ReleaseAll
+    End
+
+ResortArea_DarachNeedTwoMons:
+    Message ResortArea_Text_DarachNeedTwoMons
+    WaitButton
+    CloseMessage
     ReleaseAll
     End
 

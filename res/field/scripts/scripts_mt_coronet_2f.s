@@ -69,19 +69,19 @@ MtCoronet2F_YourBagItIsFull:
 
 MtCoronet2F_LookerWalkToPlayerZ24:
     ApplyMovement LOCALID_LOOKER, MtCoronet2F_Movement_LookerWalkToPlayerZ24
-    ApplyMovement LOCALID_PLAYER, MtCoronet2F_Movement_PlayerFaceLooker
+    ApplyMovement LOCALID_PLAYER, MtCoronet2F_Movement_PlayerWalkEastFaceLookerSouth
     WaitMovement
     Return
 
 MtCoronet2F_LookerWalkToPlayerZ25:
     ApplyMovement LOCALID_LOOKER, MtCoronet2F_Movement_LookerWalkToPlayerZ25
-    ApplyMovement LOCALID_PLAYER, MtCoronet2F_Movement_PlayerFaceLooker
+    ApplyMovement LOCALID_PLAYER, MtCoronet2F_Movement_PlayerWalkEastToLooker
     WaitMovement
     Return
 
 MtCoronet2F_LookerWalkToPlayerZ26:
     ApplyMovement LOCALID_LOOKER, MtCoronet2F_Movement_LookerWalkToPlayerZ26
-    ApplyMovement LOCALID_PLAYER, MtCoronet2F_Movement_PlayerFaceLooker
+    ApplyMovement LOCALID_PLAYER, MtCoronet2F_Movement_PlayerWalkEastToLooker
     WaitMovement
     Return
 
@@ -96,18 +96,17 @@ MtCoronet2F_Movement_LookerNoticePlayer:
     .balign 4, 0
 MtCoronet2F_Movement_LookerWalkToPlayerZ24:
     WalkFastWest 4
-    WalkFastNorth
-    WalkOnSpotFastWest
+    WalkOnSpotFastNorth
     EndMovement
 
     .balign 4, 0
 MtCoronet2F_Movement_LookerWalkToPlayerZ25:
-    WalkFastWest 4
+    WalkFastWest 3
     EndMovement
 
     .balign 4, 0
 MtCoronet2F_Movement_LookerWalkToPlayerZ26:
-    WalkFastWest 4
+    WalkFastWest 3
     WalkFastSouth
     WalkOnSpotFastWest
     EndMovement
@@ -123,9 +122,16 @@ MtCoronet2F_Movement_LookerWalkOnSpotWest:
     EndMovement
 
     .balign 4, 0
-MtCoronet2F_Movement_PlayerFaceLooker:
+MtCoronet2F_Movement_PlayerWalkEastToLooker:
     Delay8 4
-    WalkOnSpotNormalEast
+    WalkNormalEast
+    EndMovement
+
+    .balign 4, 0
+MtCoronet2F_Movement_PlayerWalkEastFaceLookerSouth:
+    Delay8 4
+    WalkNormalEast
+    WalkOnSpotNormalSouth
     EndMovement
 
 MtCoronet2F_Looker:

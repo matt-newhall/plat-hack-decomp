@@ -28,6 +28,7 @@ SolaceonRuinsRoom7_Fantina:
     GoTo SolaceonRuinsRoom7_FantinaXNot6
 
 SolaceonRuinsRoom7_FantinaX6:
+    FollowPokePlaceAtSide DIR_EAST
     ApplyMovement LOCALID_FANTINA, SolaceonRuinsRoom7_Movement_FantinaWalkAroundPlayer
     WaitMovement
     PlayFanfare SEQ_SE_DP_KAIDAN2

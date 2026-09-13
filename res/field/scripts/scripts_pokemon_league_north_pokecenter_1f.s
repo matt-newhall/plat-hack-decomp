@@ -110,6 +110,8 @@ PokemonLeagueNorthPokecenter1F_RivalTrigger:
     ClearFlag FLAG_HIDE_POKEMON_LEAGUE_NORTH_POKECENTER_1F_RIVAL
     AddObject LOCALID_RIVAL
     Common_SetRivalBGM
+    PlaySE SEQ_SE_DP_DANSA
+    FollowPokePlaceAtSide DIR_EAST, DIR_SOUTH
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 10, PokemonLeagueNorthPokecenter1F_RivalEnterWest
     GoToIfEq VAR_0x8004, 11, PokemonLeagueNorthPokecenter1F_RivalEnterNorth

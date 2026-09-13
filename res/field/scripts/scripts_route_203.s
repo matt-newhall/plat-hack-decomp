@@ -74,6 +74,10 @@ Route203_PaulTrigger:
     WaitMovement
     Common_SetRivalBGM
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 215, Route203_FollowPokeStandEast
+    CallIfEq VAR_0x8004, 216, Route203_FollowPokeStandWest
+    CallIfEq VAR_0x8004, 217, Route203_FollowPokeStandWest
+    CallIfEq VAR_0x8004, 218, Route203_FollowPokeStandNorth
     GoToIfEq VAR_0x8004, 215, Route203_PaulApproachX215
     GoToIfEq VAR_0x8004, 216, Route203_PaulApproachX216
     GoToIfEq VAR_0x8004, 217, Route203_PaulApproachX217
@@ -161,6 +165,18 @@ Route203_PaulRemove:
     SetVar VAR_ROUTE_203_PAUL_STATE, 1
     ReleaseAll
     End
+
+Route203_FollowPokeStandEast:
+    FollowPokePlaceAtSide DIR_EAST, DIR_SOUTH
+    Return
+
+Route203_FollowPokeStandWest:
+    FollowPokePlaceAtSide DIR_WEST, DIR_SOUTH
+    Return
+
+Route203_FollowPokeStandNorth:
+    FollowPokePlaceAtSide DIR_NORTH, DIR_SOUTH
+    Return
 
 Route203_BlackOutPaulBattle:
     SetFlag FLAG_HIDE_ROUTE_204_RIVAL

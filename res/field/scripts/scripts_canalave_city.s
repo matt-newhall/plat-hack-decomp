@@ -566,6 +566,7 @@ CanalaveCity_DontTakeShip:
 CanalaveCity_SailorEldritchEnterShip:
     Message CanalaveCity_Text_AnchorsAweigh
     CloseMessage
+    SendBackFollowingPoke
     ApplyMovement LOCALID_SAILOR_ELDRITCH, CanalaveCity_Movement_SailorEldritchFaceEast
     WaitMovement
     PlaySE SEQ_SE_DP_KAIDAN2

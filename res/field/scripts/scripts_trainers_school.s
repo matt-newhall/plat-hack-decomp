@@ -39,6 +39,7 @@ _0032:
     BufferRivalName 1
     Message 3
     CloseMessage
+    FollowPokePlaceBehindPlayer
     GetPlayerDir VAR_RESULT
     SetVar VAR_0x8008, VAR_RESULT
     GoToIfEq VAR_0x8008, 0, _00A4

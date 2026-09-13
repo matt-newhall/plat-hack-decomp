@@ -26,6 +26,7 @@ IronIsland_Sailor:
 IronIsland_TakeShipToCanalave:
     Message IronIsland_Text_AnchorsAweigh
     CloseMessage
+    SendBackFollowingPoke
     Call IronIsland_SailorEnterShip
     CallIfEq VAR_0x8004, DIR_SOUTH, IronIsland_PlayerEnterShipSouth
     CallIfEq VAR_0x8004, DIR_WEST, IronIsland_PlayerEnterShipWest

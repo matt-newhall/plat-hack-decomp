@@ -5039,6 +5039,16 @@
     .short SCRCMD_FOLLOWPOKEFACEPLAYER
     .endm
 
+    .macro FollowPokePlaceBehindPlayer
+    .short SCRCMD_FOLLOWPOKEPLACEBEHINDPLAYER
+    .endm
+
+    .macro FollowPokePlaceAtSide dir, facing=MAX_DIR
+    .short SCRCMD_FOLLOWPOKEPLACEATSIDE
+    .short \dir
+    .short \facing
+    .endm
+
     .macro GetFollowerPartySlot destVarID
     .short SCRCMD_GETFOLLOWERPARTYSLOT
     .short \destVarID

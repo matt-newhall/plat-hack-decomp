@@ -213,6 +213,7 @@ LakeVerity_Mars:
     RemoveObject LOCALID_GALACTIC_GRUNT_2
     RemoveObject LOCALID_GALACTIC_GRUNT_4
     SetFlag FLAG_ALT_MUSIC_LAKE_VERITY
+    FollowPokePlaceAtSide DIR_SOUTH, DIR_NORTH
     ApplyMovement LOCALID_COUNTERPART, LakeVerity_Movement_CounterpartFaceSouth
     ApplyMovement LOCALID_PLAYER, LakeVerity_Movement_PlayerFaceWest
     WaitMovement

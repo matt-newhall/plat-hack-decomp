@@ -49,7 +49,7 @@ VistaLighthouse_VolknerWalkToDoorNorth:
     GoTo VistaLighthouse_VolknerLeave
 
 VistaLighthouse_VolknerWalkToDoorWest:
-    ApplyMovement LOCALID_VOLKNER, VistaLighthouse_Movement_VolknerWalkToDoorWestEast
+    ApplyMovement LOCALID_VOLKNER, VistaLighthouse_Movement_VolknerWalkToDoorWestMirrored
     ApplyMovement LOCALID_PLAYER, VistaLighthouse_Movement_PlayerWatchVolknerWalkToDoorWest
     WaitMovement
     GoTo VistaLighthouse_VolknerLeave
@@ -91,6 +91,15 @@ VistaLighthouse_Movement_VolknerWalkToDoorWestEast:
     EndMovement
 
     .balign 4, 0
+VistaLighthouse_Movement_VolknerWalkToDoorWestMirrored:
+    WalkNormalSouth
+    WalkNormalWest 3
+    WalkNormalSouth 5
+    WalkNormalEast 3
+    WalkOnSpotNormalNorth
+    EndMovement
+
+    .balign 4, 0
 VistaLighthouse_Movement_VolknerLeave:
     WalkNormalNorth
     SetInvisible
@@ -105,7 +114,7 @@ VistaLighthouse_Movement_PlayerWatchVolknerWalkToDoorNorth:
     .balign 4, 0
 VistaLighthouse_Movement_PlayerWatchVolknerWalkToDoorWest:
     Delay8
-    WalkOnSpotNormalSouth
+    WalkOnSpotNormalWest
     Delay8
-    WalkOnSpotNormalEast
+    WalkOnSpotNormalSouth
     EndMovement

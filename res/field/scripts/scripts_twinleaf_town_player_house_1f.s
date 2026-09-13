@@ -287,6 +287,7 @@ TwinleafTownPlayerHouse1F_RivalsMomEnters:
     Message TwinleafTownPlayerHouse1F_Text_GoEnjoyYourAdventure
     CloseMessage
     PlaySE SEQ_SE_DP_DOOR_OPEN
+    FollowPokePlaceBehindPlayer
     ClearFlag FLAG_HIDE_TWINLEAF_TOWN_PLAYER_HOUSE_1F_RIVAL_MOM
     AddObject LOCALID_RIVAL_MOM
     WaitSE SEQ_SE_DP_DOOR_OPEN

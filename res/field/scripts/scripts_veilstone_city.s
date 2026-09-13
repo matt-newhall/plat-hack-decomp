@@ -1112,6 +1112,7 @@ VeilstoneCity_GruntMStorageKeyLeaveNorth:
     ApplyMovement LOCALID_PLAYER, VeilstoneCity_Movement_PlayerWatchGruntMStorageKeyLeaveNorth
     ApplyMovement LOCALID_GRUNT_M_STORAGE_KEY, VeilstoneCity_Movement_GruntMStorageKeyLeaveNorthSouthEast
     WaitMovement
+    FollowPokePlaceAtSide DIR_WEST, DIR_EAST
     Common_SetLookerBGM
     ApplyMovement LOCALID_LOOKER, VeilstoneCity_Movement_LookerEnterNorth
     WaitMovement
@@ -1131,6 +1132,7 @@ VeilstoneCity_GruntMStorageKeyLeaveEast:
     ApplyMovement LOCALID_PLAYER, VeilstoneCity_Movement_PlayerWatchGruntMStorageKeyLeaveEast
     ApplyMovement LOCALID_GRUNT_M_STORAGE_KEY, VeilstoneCity_Movement_GruntMStorageKeyLeaveNorthSouthEast
     WaitMovement
+    FollowPokePlaceAtSide DIR_WEST, DIR_EAST
     Common_SetLookerBGM
     ApplyMovement LOCALID_LOOKER, VeilstoneCity_Movement_LookerEnterEast
     WaitMovement
@@ -1141,6 +1143,7 @@ VeilstoneCity_GruntMStorageKeyLeaveWest:
     ApplyMovement LOCALID_PLAYER, VeilstoneCity_Movement_PlayerWatchGruntMStorageKeyLeaveWest
     ApplyMovement LOCALID_GRUNT_M_STORAGE_KEY, VeilstoneCity_Movement_GruntMStorageKeyLeaveWest
     WaitMovement
+    FollowPokePlaceAtSide DIR_WEST, DIR_EAST
     Common_SetLookerBGM
     ApplyMovement LOCALID_LOOKER, VeilstoneCity_Movement_LookerEnterWest
     WaitMovement

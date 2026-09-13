@@ -382,6 +382,7 @@ PastoriaCity_TriggerRivalBattle:
     ApplyMovement LOCALID_RIVAL, PastoriaCity_Movement_RivalWalkToPlayerForBattle
     ApplyMovement LOCALID_PLAYER, PastoriaCity_Movement_PlayerFaceRivalForBattle
     WaitMovement
+    FollowPokePlaceBehindPlayer
     BufferRivalName 0
     BufferPlayerName 1
     Message PastoriaCity_Text_IllTestYou
@@ -619,9 +620,11 @@ PastoriaCity_Movement_PlayerWatchCrasherWakeLeave:
 
 PastoriaCity_TriggerBomb:
     LockAll
+    FollowPokePlaceAtSide DIR_SOUTH
     Call PastoriaCity_Explosion
     ApplyMovement LOCALID_CRASHER_WAKE, PastoriaCity_Movement_CrasherWakeWatchGruntMExitGreatMarsh
     ApplyMovement LOCALID_RIVAL, PastoriaCity_Movement_RivalWatchGruntMExitGreatMarsh
+    ApplyMovement LOCALID_FOLLOWER, PastoriaCity_Movement_FollowPokeDodgeGruntM
     ApplyMovement LOCALID_PLAYER, PastoriaCity_Movement_PlayerWatchGruntMExitGreatMarsh
     ApplyMovement LOCALID_GRUNT_M, PastoriaCity_Movement_GruntMExitGreatMarsh
     WaitMovement
@@ -693,6 +696,8 @@ PastoriaCity_GoAfterThatGoon:
     ApplyMovement LOCALID_PLAYER, PastoriaCity_Movement_PlayerWatchCrasherWakeEnterGreatMarsh
     WaitMovement
     RemoveObject LOCALID_CRASHER_WAKE
+    FollowPokePlaceAtSide DIR_EAST
+    WaitMovement
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     CallIfEq VAR_0x8004, 609, PastoriaCity_RivalWalkToGreatMarsh
     CallIfEq VAR_0x8004, 611, PastoriaCity_RivalWalkToGreatMarshX611
@@ -719,6 +724,12 @@ PastoriaCity_RivalWalkToGreatMarshX611:
     Return
 
     .balign 4, 0
+PastoriaCity_Movement_FollowPokeDodgeGruntM:
+    WalkFastEast 2
+    FaceSouth
+    EndMovement
+
+    .balign 4, 0
 PastoriaCity_Movement_PlayerWatchCrasherWakeEnterGreatMarsh:
     Delay8
     FaceNorth
@@ -728,6 +739,7 @@ PastoriaCity_CrasherWake:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    FollowPokePlaceAtSide DIR_EAST
     Call PastoriaCity_Explosion
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     CallIfEq VAR_0x8004, 611, PastoriaCity_GruntMExitGreatMarshX611

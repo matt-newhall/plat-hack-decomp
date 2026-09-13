@@ -37,7 +37,7 @@ Route207_TriggerCounterpart:
     Common_SetCounterpartBGM
     ApplyMovement LOCALID_COUNTERPART, Route207_Movement_CounterpartWalkToPlayer
     WaitMovement
-    ApplyMovement LOCALID_PLAYER, Route207_Movement_PlayerFaceCounterpart
+    ApplyMovement LOCALID_PLAYER, Route207_Movement_PlayerWalkWestToCounterpart
     WaitMovement
     GoTo Route207_Counterpart
     End
@@ -107,8 +107,8 @@ Route207_CounterpartLeave:
     End
 
     .balign 4, 0
-Route207_Movement_PlayerFaceCounterpart:
-    WalkOnSpotNormalWest
+Route207_Movement_PlayerWalkWestToCounterpart:
+    WalkNormalWest
     EndMovement
 
 Route207_UnusedMovement:
@@ -129,7 +129,7 @@ Route207_Movement_CounterpartNoticePlayer:
 
     .balign 4, 0
 Route207_Movement_CounterpartWalkToPlayer:
-    WalkNormalEast 5
+    WalkNormalEast 4
     EndMovement
 
     .balign 4, 0

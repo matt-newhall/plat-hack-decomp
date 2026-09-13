@@ -37,12 +37,17 @@ TeamGalacticEternaBuilding4F_Jupiter:
     RemoveObject LOCALID_JUPITER
     FadeScreenIn
     WaitFadeScreen
-    WaitTime 15, VAR_RESULT
     GetPlayerDir VAR_0x8004
+    CallIfEq VAR_0x8004, DIR_NORTH, TeamGalacticEternaBuilding4F_FollowPokeStandEast
+    WaitTime 15, VAR_RESULT
     GoToIfEq VAR_0x8004, DIR_NORTH, TeamGalacticEternaBuilding4F_PokefanMWalkToPlayerNorth
     GoToIfEq VAR_0x8004, DIR_WEST, TeamGalacticEternaBuilding4F_PokefanMWalkToPlayerWest
     GoToIfEq VAR_0x8004, DIR_EAST, TeamGalacticEternaBuilding4F_PokefanMWalkToPlayerEast
     End
+
+TeamGalacticEternaBuilding4F_FollowPokeStandEast:
+    FollowPokePlaceAtSide DIR_EAST
+    Return
 
 TeamGalacticEternaBuilding4F_PokefanMWalkToPlayerNorth:
     ApplyMovement LOCALID_POKEFAN_M, TeamGalacticEternaBuilding4F_Movement_PokefanMWalkToPlayerNorth

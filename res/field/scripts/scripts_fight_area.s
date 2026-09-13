@@ -370,6 +370,7 @@ FightArea_YoudRatherFly:
 FightArea_SailToSnowpointCity:
     Message FightArea_Text_AnchorsAweigh
     CloseMessage
+    SendBackFollowingPoke
     Call FightArea_SailorEnterShip
     CallIfEq VAR_0x8004, DIR_SOUTH, FightArea_PlayerEnterShipSouth
     CallIfEq VAR_0x8004, DIR_EAST, FightArea_PlayerEnterShipEast
