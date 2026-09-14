@@ -37,8 +37,11 @@ Route227_TriggerWakeRival:
     BufferPlayerName 0
     Message Route227_Text_BetterBeFullyPrepared
     CloseMessage
+    ApplyMovement LOCALID_PLAYER, Route227_Movement_PlayerDodgeWest
+    WaitMovement
+    FollowPokePlaceAtSide DIR_SOUTH, DIR_NORTH
     ApplyMovement LOCALID_CRASHER_WAKE, Route227_Movement_WakeLeave
-    ApplyMovement LOCALID_PLAYER, Route227_Movement_PlayerWalkWestWatchWakeLeave
+    ApplyMovement LOCALID_PLAYER, Route227_Movement_PlayerWatchWakeLeave
     ApplyMovement LOCALID_RIVAL, Route227_Movement_RivalWatchWakeLeave
     WaitMovement
     RemoveObject LOCALID_CRASHER_WAKE
@@ -92,8 +95,12 @@ Route227_UnusedMovement:
     EndMovement
 
     .balign 4, 0
-Route227_Movement_PlayerWalkWestWatchWakeLeave:
+Route227_Movement_PlayerDodgeWest:
     WalkNormalWest
+    EndMovement
+
+    .balign 4, 0
+Route227_Movement_PlayerWatchWakeLeave:
     WalkOnSpotNormalEast
     Delay4
     WalkOnSpotNormalSouth
