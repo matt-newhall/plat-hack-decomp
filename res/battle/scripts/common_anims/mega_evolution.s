@@ -13,25 +13,22 @@
     .equ MEGA_OFFSET_X_ENEMY_SLOT_2,  1455 // correct enough?
     .equ MEGA_OFFSET_Y_ENEMY_SLOT_2,  5400 // correct enough?
 
-// Energy draw-in. Currently Solar Beam's charge, which is light streaming inward.
-// Self-Destruct's gather is the other candidate — swap all three lines together:
-//     .equ MEGA_CHARGE_PARTICLES, psycho_boost_spa
-//     .equ MEGA_CHARGE_EMITTER,   4
-//     .equ MEGA_CHARGE_SOUND,     SEQ_SE_DP_W376
+// Mega charge up
     .equ MEGA_CHARGE_PARTICLES, solar_beam_spa
     .equ MEGA_CHARGE_EMITTER,   19
     .equ MEGA_CHARGE_SOUND,     SEQ_SE_DP_SHUSHU
 
-// Frames of gather before the shell starts. The gather lives in its own particle
-// system, so it keeps resolving underneath the shell rather than being waited out.
+// Glow before shell appears
     .equ MEGA_CHARGE_GLOW_AT,     20
     .equ MEGA_CHARGE_FRAMES,      45
     .equ MEGA_CHARGE_AFTER_GLOW,  MEGA_CHARGE_FRAMES - MEGA_CHARGE_GLOW_AT
 
+// Post shell break
     .equ MEGA_FLARE_PARTICLES, seed_flare_spa
     .equ MEGA_FLARE_EMITTER_A, 1
     .equ MEGA_FLARE_EMITTER_B, 2
 
+// Shell frames
     .equ MEGA_FLARE_START_DELAY, 45
     .equ MEGA_SHELL_FRAMES,      75
     .equ MEGA_FLARE_LEAD,        MEGA_SHELL_FRAMES - MEGA_FLARE_START_DELAY
@@ -47,8 +44,6 @@
     .equ MEGA_SHAKE_INTERVAL, 1
     .equ MEGA_SHAKE_CYCLES,   8
 
-// Both particle systems load from a single sprite-manager preamble, the way move
-// animations that use more than one do it.
     .macro LoadMegaParticleResources
     InitPokemonSpriteManager
     LoadPokemonSpriteDummyResources 0
@@ -103,7 +98,7 @@ L_0:
     LoadCellResObj 0, 32
     LoadAnimResObj 0, 32
     AddSpriteWithFunc 0, 33, 32, 32, 32, 32, 0, 0, 73, MEGA_SHELL_FRAMES
-    PlayPannedSoundEffect SEQ_SE_DP_W360, BATTLE_SOUND_PAN_LEFT
+    PlayPannedSoundEffect SEQ_SE_DP_W076, BATTLE_SOUND_PAN_LEFT
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 1
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 2
     MegaEvolutionEmitter MEGA_BURST_SYSTEM, 3
@@ -114,7 +109,7 @@ L_0:
     MegaEvolutionEmitter MEGA_FLARE_SYSTEM, MEGA_FLARE_EMITTER_B
     Delay MEGA_FLARE_START_DELAY
 
-    PlayPannedSoundEffect SEQ_SE_DP_W360C, BATTLE_SOUND_PAN_LEFT
+    PlayMovingSoundEffectAtkDef SEQ_SE_DP_W434, BATTLE_SOUND_PAN_LEFT, BATTLE_SOUND_PAN_RIGHT, 4, 2
     Func_Shake MEGA_SHAKE_EXTENT_X, 0, MEGA_SHAKE_INTERVAL, MEGA_SHAKE_CYCLES, MEGA_SHAKE_TARGET
     Delay MEGA_BREAK_TAIL_FRAMES
     UnloadParticleSystem MEGA_FLARE_SYSTEM
