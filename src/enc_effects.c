@@ -80,6 +80,7 @@ enum EncEffectsPairID {
     ENCEFF_LEADER_MORTY,
     ENCEFF_LEADER_PRYCE,
     ENCEFF_LEADER_CLAIRE,
+    ENCEFF_SBC_LEADER,
 
     ENCEFF_MAX,
 };
@@ -132,7 +133,8 @@ static const EncEffectsPair sEncEffectsTable[ENCEFF_MAX] = {
     [ENCEFF_LEADER_JASMINE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
     [ENCEFF_LEADER_MORTY] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
     [ENCEFF_LEADER_PRYCE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
-    [ENCEFF_LEADER_CLAIRE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER }
+    [ENCEFF_LEADER_CLAIRE] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_HGSS_GYM_LEADER },
+    [ENCEFF_SBC_LEADER] = { ENCEFF_CUTIN_USE_LOCAL, SEQ_BATTLE_GYM_LEADER }
 };
 
 static u32 EncEffects_GetEffectPair(const FieldBattleDTO *dto);
@@ -345,6 +347,9 @@ static u32 EncEffects_TrainerClassEffect(u32 trainerClass)
         break;
     case TRAINER_CLASS_LEADER_CLAIRE:
         result = ENCEFF_LEADER_CLAIRE;
+        break;
+    case TRAINER_CLASS_SBC_LEADER:
+        result = ENCEFF_SBC_LEADER;
         break;
     default:
         break;

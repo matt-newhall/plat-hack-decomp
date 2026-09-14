@@ -11,6 +11,7 @@
     ScriptEntry Route224_ProfOak
     ScriptEntry Route224_TriggerMarley
     ScriptEntry Route224_Marley
+    ScriptEntry Route224_Jacinthe
     ScriptEntryEnd
 
 Route224_OnTransition:
@@ -462,6 +463,21 @@ Route224_ThankYouToo:
     Message Route224_Text_ThankYouToo
     WaitButton
     CloseMessage
+    ReleaseAll
+    End
+
+Route224_Jacinthe:
+    LockAll
+    FacePlayer
+    StartTrainerBattle TRAINER_SBC_LEADER_JACINTHE
+    CheckWonBattle VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, Route224_JacintheBlackOut
+    SetFlag FLAG_UNLOCK_POKEMON_LEAGUE
+    ReleaseAll
+    End
+
+Route224_JacintheBlackOut:
+    BlackOutFromBattle
     ReleaseAll
     End
 

@@ -402,6 +402,21 @@
             "x": 907,
             "z": 493,
             "y": 0
+        },
+        {
+            "id": "LOCALID_SBC_LEADER_JACINTHE",
+            "graphics_id": "OBJ_EVENT_GFX_JACINTHE",
+            "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "0",
+            "script": 7,
+            "initial_dir": 3,
+            "data": [],
+            "movement_range_x": 1,
+            "movement_range_z": 1,
+            "x": 882,
+            "z": 553,
+            "y": 0
         }
     ],
     "warp_events": [

@@ -1647,6 +1647,7 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_RANGER_MALE, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_VETERAN, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_FLOOR_BOOK, &Unk_ov5_021FB000 },
+    { OBJ_EVENT_GFX_JACINTHE, &Unk_ov5_021FAFD8 },
     { 0xffff, NULL }
 };
 
@@ -3182,6 +3183,7 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, 0x619 },  // mmodel_00001591
     { OBJ_EVENT_GFX_RANGER_MALE, 0x61A },  // mmodel_00001592
     { OBJ_EVENT_GFX_VETERAN, 0x61B },  // mmodel_00001593
+    { OBJ_EVENT_GFX_JACINTHE, 0x61C },  // mmodel_00001594
     { 0xffff, 0x0 }
 };
 
@@ -4934,6 +4936,7 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_RANGER_MALE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_VETERAN, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_JACINTHE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -6294,6 +6297,7 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_RANGER_MALE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_VETERAN, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_FLOOR_BOOK, 0x2, 0x0, 0x0, 0x0, 0x0 },
+    { OBJ_EVENT_GFX_JACINTHE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
