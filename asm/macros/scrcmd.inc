@@ -5475,6 +5475,12 @@
     CallCommonScript 0x809
     .endm
 
+    .macro Common_IncreaseLevelCap level, isGymLeader
+    SetVar VAR_0x8004, \level
+    SetVar VAR_0x8005, \isGymLeader
+    CallCommonScript 0x816
+    .endm
+
     .text
     .globl _start
 _start:

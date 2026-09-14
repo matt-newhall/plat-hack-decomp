@@ -81,6 +81,7 @@
     ScriptEntry CommonScript_RocketMansionAriana @ 0x813
     ScriptEntry CommonScript_RocketMansionBacklot @ 0x814
     ScriptEntry CommonScript_RocketMansionButler @ 0x815
+    ScriptEntry CommonScript_IncreaseLevelCap @ 0x816
     ScriptEntryEnd
 
 CommonScript_EmptyScript1:
@@ -2608,3 +2609,19 @@ CommonScript_RocketMansion_Movement_ButlerLeave:
     EndMovement
 
     .balign 4, 0
+
+CommonScript_IncreaseLevelCap:
+    GoToIfSet FLAG_LEVEL_CAP_ALL_BOSSES, CommonScript_IncreaseLevelCap_Apply
+    GoToIfUnset FLAG_LEVEL_CAP_GYM_LEADERS, CommonScript_IncreaseLevelCap_Skip
+    GoToIfEq VAR_0x8005, TRUE, CommonScript_IncreaseLevelCap_Apply
+CommonScript_IncreaseLevelCap_Skip:
+    ReturnCommonScript
+
+CommonScript_IncreaseLevelCap_Apply:
+    SetLevelCap VAR_0x8004
+    BufferNumber 0, VAR_0x8004
+    PlaySE SEQ_SE_DP_PINPON
+    Message CommonStrings_Text_LevelCapIncreased
+    WaitButton
+    CloseMessage
+    ReturnCommonScript

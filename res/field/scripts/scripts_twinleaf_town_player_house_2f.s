@@ -49,25 +49,25 @@ TwinleafTownPlayerHouse2F_SelectLevelCap:
 
 TwinleafTownPlayerHouse2F_LevelCapAdvanced:
     SetFlag FLAG_LEVEL_CAP_ALL_BOSSES
-    SetLevelCap 14
     Message TwinleafTownPlayerHouse2F_Text_LevelCapEnabledAllBosses
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 14, TRUE
     Return
 
 TwinleafTownPlayerHouse2F_LevelCapStandard:
     SetFlag FLAG_LEVEL_CAP_GYM_LEADERS
-    SetLevelCap 14
     Message TwinleafTownPlayerHouse2F_Text_LevelCapEnabledGymLeaders
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 14, TRUE
     Return
 
 TwinleafTownPlayerHouse2F_LevelCapNone:
-    SetLevelCap 100
     Message TwinleafTownPlayerHouse2F_Text_LevelCapDisabled
     WaitButton
     CloseMessage
+    SetLevelCap 100
     Return
 
 TwinleafTownPlayerHouse2F_Wii:

@@ -1151,6 +1151,10 @@
         "The PC could not read that Pokémon’s\n",
         "data. No Heart Scales were used."
       ]
+    },
+    {
+      "id": "CommonStrings_Text_LevelCapIncreased",
+      "en_US": "Level cap increased to {STRVAR_1 52, 0, 0}."
     }
   ]
 }
