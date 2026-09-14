@@ -459,6 +459,14 @@ Basic_CheckClearBodyEffect:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
 
+    // Defiant and Competitive do not waste the drop, they answer it with a +2 boost, so the
+    // move is worse than doing nothing at all. Neither blocks the drop, so unlike the three
+    // below they are not suppressed by Mold Breaker. The penalty has to clear the flat +6
+    // Expert_StatusMoveBonus hands every status move afterwards.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus20
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus20
+
     // Mold Breaker suppresses all three of these when the drop comes from its user's move.
     // Contrary does not waste the drop, it inverts it, so the move hands the target a boost.
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -813,6 +821,19 @@ Basic_CheckAlreadyUnderSafeguard:
     PopOrEnd 
 
 Basic_CheckMemento:
+    // Memento spends the user's life on the drop, so an ability which turns that drop into a
+    // boost is the worst outcome available: the target ends the turn stronger and the user is
+    // gone. None of the three blocks the drop, so Mold Breaker does not suppress them.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus30
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus30
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus30
+
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
     // If the target's ability blocks the stat drop and the attacker does not have Mold Breaker,
     // score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -2841,6 +2862,12 @@ Expert_AcidSpray:
     // not suppressed by Mold Breaker.
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AcidSpray_End
+
+    // Defiant and Competitive answer the drop with a +2 boost rather than blanking it, so they
+    // are not suppressed by Mold Breaker and have to be checked ahead of it.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
 
     // Mold Breaker suppresses all three of the abilities below, leaving the drop to land as
     // normal.
