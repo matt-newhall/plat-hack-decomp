@@ -1978,8 +1978,10 @@ Expert_Explosion_End:
 Expert_Memento:
     // Memento keeps its own copy of the ladder rather than sharing Explosion's: it is not on the
     // Risky list, so its rolls must not fall into the gamble above.
+    // Fainting with nothing to bring in behind the drops throws the battle rather than setting
+    // one up, so the move is ruled out rather than merely left unrewarded.
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_Memento_End
+    IfLoadedEqualTo 0, ScoreMinus20
     AddToMoveScore 6
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 10, ScorePlus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Memento_TryScorePlus8
@@ -2468,17 +2470,18 @@ Expert_AttackDropOnHit_CheckBestDamage:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
 
+    // Mold Breaker suppresses every ability below, leaving the drop to land as normal.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_AttackDropOnHit_CheckClass
+
     // Contrary, Defiant and Competitive do not waste the drop, they turn it into a boost for
     // the target, so the move is worse than an attack which earns no drop bonus at all.
-    // Only Contrary is suppressed by Mold Breaker.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_DEFIANT, Expert_AttackDropOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_AttackDropOnHit_ScoreMinus5
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AttackDropOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
-    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_CheckClass
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_AttackDropOnHit_ScoreMinus5
 
 Expert_AttackDropOnHit_CheckClass:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit_CheckPhysical
@@ -2989,24 +2992,19 @@ Expert_AcidSpray:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AcidSpray_End
 
-    // Defiant and Competitive answer the drop with a +2 boost rather than blanking it, so they
-    // are not suppressed by Mold Breaker and have to be checked ahead of it.
-    LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
-    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
-
-    // Mold Breaker suppresses all three of the abilities below, leaving the drop to land as
-    // normal.
+    // Mold Breaker suppresses every ability below, leaving the drop to land as normal.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_AcidSpray_ScorePlus6
 
     // Clear Body and White Smoke blank the drop, so the move earns nothing beyond its damage.
-    // Contrary inverts it into a +2 Sp. Def boost for the target, which is the opposite of what
-    // the bonus is paying for.
+    // Contrary, Defiant and Competitive answer it with a boost instead, which is the opposite of
+    // what the bonus is paying for.
     LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AcidSpray_End
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AcidSpray_End
-    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
 
 Expert_AcidSpray_ScorePlus6:
     AddToMoveScore 6
@@ -3506,8 +3504,19 @@ EvalAttack_ScoreBestDamage_Plus6:
     AddToMoveScore 6
 
 EvalAttack_CheckKill:
+    // A self-KO buys the knockout with the AI's own Pokemon, and Rollout only reaches one several
+    // turns into a lock-in it cannot break out of. Neither is taking the KO in the sense this
+    // bonus pays for, so both are left to whatever their own routines make of them.
+    LoadCurrentMoveEffect
+    IfLoadedInTable EvalAttack_ExcludedFromKillBonus, EvalAttack_CheckLastDitchPriority
     IfCurrentMoveKills ROLL_FOR_DAMAGE, EvalAttack_ApplyKillBonuses
     GoTo EvalAttack_CheckLastDitchPriority
+
+EvalAttack_ExcludedFromKillBonus:
+    TableEntry BATTLE_EFFECT_HALVE_DEFENSE
+    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
+    TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO
+    TableEntry TABLE_END
 
 EvalAttack_ApplyKillBonuses:
     // Taking the KO first is worth far more than taking it second, so the bonus depends on
