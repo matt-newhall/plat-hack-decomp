@@ -3675,6 +3675,7 @@ Risky_Main:
     // Expert_Explosion, which is the only place that knows whether it passed on the self-KO.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHATTER, Risky_CoinFlipScorePlus1
