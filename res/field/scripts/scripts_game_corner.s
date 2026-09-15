@@ -195,7 +195,7 @@ GameCorner_CoinsClerk_Cancel:
     End
 
 GameCorner_CoinsClerk_CheckIfCanGiveTM64:
-    SetVar VAR_0x8004, ITEM_TM64
+    SetVar VAR_0x8004, ITEM_BIG_PEARL
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, GameCorner_CoinsClerk_SaveTM64
     GoTo GameCorner_CoinsClerk_TenStraightBonusRounds

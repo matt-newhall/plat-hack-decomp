@@ -56,14 +56,13 @@
       "id": "OreburghGym_Text_RoarkExplainStealthRock",
       "en_US": [
         "That {STRVAR_1 8, 0, 0} contains\n",
-        "the move Stealth Rock.\r",
-        "It’s a move that inflicts damage on\n",
-        "foes that switch into battle.\r",
+        "the move Rock Slide.\r",
+        "It’s a powerful that move hits both\n",
+        "foes and can cause them to flinch.\r",
         "Incidentally, a TM will teach its move\n",
         "to a Pokémon instantly.\r",
-        "But a TM will break when you use it,\n",
-        "so make certain you want a Pokémon\f",
-        "to learn that move."
+        "Thanks to recent developments in TM\n",
+        "technology, you can reuse these now!"
       ]
     },
     {

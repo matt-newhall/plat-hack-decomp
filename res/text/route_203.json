@@ -78,6 +78,15 @@
             "It seems eager to find more rocks\f",
             "to break."
         ]
+    },
+    {
+        "id": "Route203_Text_HariyamaOffersDisk",
+        "en_US": [
+            "Hmm... What’s this?\r",
+            "(HARIYAMA has a shining disk in\n",
+            "its hand.)\r",
+            "(It looks like it’s giving it to you!)"
+        ]
     }
   ]
 }

@@ -237,7 +237,8 @@
       "en_US": [
         "You beat me epic nice\n",
         "Ok here is Lapras, it can\f",
-        "carry you across water and the sea."
+        "carry you across water and the sea.\r",
+        "Please also take this."
       ]
     },
     {
@@ -263,6 +264,13 @@
         "for two Pokémon fit to battle.\r",
         "Do return once your team has\n",
         "recovered. I shall be waiting."
+      ]
+    },
+    {
+      "id": "ResortArea_Text_DarachGiveHM03",
+      "en_US": [
+        "Darach: This Hidden Machine holds\n",
+        "the move Surf. Do take it as well."
       ]
     }
   ]

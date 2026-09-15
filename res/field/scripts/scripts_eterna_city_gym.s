@@ -87,11 +87,11 @@ EternaGym_Gardenia:
     End
 
 EternaGym_GardeniaTryGiveTM86Again:
-    SetVar VAR_0x8004, ITEM_TM86
+    SetVar VAR_0x8004, ITEM_TM05
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, EternaGym_GardeniaGiveTM86BagFullAgain
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_GARDENIA_TM86
+    SetFlag FLAG_OBTAINED_GARDENIA_TM05
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message EternaGym_Text_GardeniaExplainGrassKnot
@@ -107,7 +107,7 @@ EternaGym_GardeniaGiveTM86BagFullAgain:
     End
 
 EternaGym_Gardenia_AlreadyHaveForestbadge:
-    GoToIfUnset FLAG_OBTAINED_GARDENIA_TM86, EternaGym_GardeniaTryGiveTM86Again
+    GoToIfUnset FLAG_OBTAINED_GARDENIA_TM05, EternaGym_GardeniaTryGiveTM86Again
     Message EternaGym_Text_GardeniaGymBeaten
     WaitButton
     CloseMessage
@@ -115,11 +115,11 @@ EternaGym_Gardenia_AlreadyHaveForestbadge:
     End
 
 EternaGym_GardeniaGiveTM86:
-    SetVar VAR_0x8004, ITEM_TM86
+    SetVar VAR_0x8004, ITEM_TM05
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, EternaGym_GardeniaGiveTM86BagFull
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_GARDENIA_TM86
+    SetFlag FLAG_OBTAINED_GARDENIA_TM05
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message EternaGym_Text_GardeniaExplainGrassKnot

@@ -32,11 +32,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM45",
+            "id": "LOCALID_ITEM_TM34",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_AMITY_SQUARE_TM45",
+            "hidden_flag": "FLAG_OBTAINED_AMITY_SQUARE_TM34",
             "script": 7051,
             "initial_dir": 0,
             "data": [],
@@ -47,11 +47,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM43",
+            "id": "LOCALID_ITEM_TM86",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_AMITY_SQUARE_TM43",
+            "hidden_flag": "FLAG_OBTAINED_AMITY_SQUARE_TM86",
             "script": 7052,
             "initial_dir": 0,
             "data": [],

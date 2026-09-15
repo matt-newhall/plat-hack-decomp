@@ -40,10 +40,31 @@ Route203_HariyamaWaitSmash:
     Message Route203_Text_HariyamaLearnedRockSmash
     WaitButton
     CloseMessage
+    GoTo Route203_HariyamaGiveHM06
+
+Route203_HariyamaGiveHM06:
+    Message Route203_Text_HariyamaOffersDisk
+    WaitButton
+    CloseMessage
+    SetVar VAR_0x8004, ITEM_HM06
+    SetVar VAR_0x8005, 1
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route203_HariyamaBagIsFull
+    Common_GiveItemQuantity
+    SetFlag FLAG_RECEIVED_HM06
+    Message Route203_Text_HariyamaFlavour
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+Route203_HariyamaBagIsFull:
+    Common_MessageBagIsFull
+    CloseMessage
     ReleaseAll
     End
 
 Route203_HariyamaFlavour:
+    GoToIfUnset FLAG_RECEIVED_HM06, Route203_HariyamaGiveHM06
     Message Route203_Text_HariyamaFlavour
     WaitButton
     CloseMessage

@@ -19,13 +19,13 @@ Route204North_AceTrainerF:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_RECEIVED_ROUTE_204_NORTH_TM78, Route204North_CaptivateOnlyWorksAgainstTheOppositeGender
+    GoToIfSet FLAG_RECEIVED_ROUTE_204_NORTH_TM63, Route204North_CaptivateOnlyWorksAgainstTheOppositeGender
     Message Route204North_Text_IdLikeYouToHaveThisTM
-    SetVar VAR_0x8004, ITEM_TM78
+    SetVar VAR_0x8004, ITEM_TM63
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route204North_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_ROUTE_204_NORTH_TM78
+    SetFlag FLAG_RECEIVED_ROUTE_204_NORTH_TM63
     GoTo Route204North_CaptivateOnlyWorksAgainstTheOppositeGender
 
 Route204North_CaptivateOnlyWorksAgainstTheOppositeGender:

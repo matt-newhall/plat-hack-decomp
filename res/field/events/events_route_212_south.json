@@ -396,11 +396,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM84",
+            "id": "LOCALID_ITEM_TM74",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM84",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM74",
             "script": 7060,
             "initial_dir": 0,
             "data": [],
@@ -411,11 +411,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM62",
+            "id": "LOCALID_ITEM_TM84",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM62",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM84",
             "script": 7061,
             "initial_dir": 0,
             "data": [],
@@ -456,11 +456,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM06",
+            "id": "LOCALID_ITEM_TM77",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM06",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM77",
             "script": 7064,
             "initial_dir": 0,
             "data": [],

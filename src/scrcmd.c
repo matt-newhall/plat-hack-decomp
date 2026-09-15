@@ -6957,24 +6957,6 @@ static BOOL ScrCmd_Unused_2CE(ScriptContext *ctx)
 static BOOL ScrCmd_PokeMartFrontier(ScriptContext *ctx)
 {
     u8 martID = ScriptContext_ReadByte(ctx);
-    static const u16 BattleFrontierRightExchangeServiceCorner[] = {
-        ITEM_TM06,
-        ITEM_TM73,
-        ITEM_TM61,
-        ITEM_TM45,
-        ITEM_TM40,
-        ITEM_TM31,
-        ITEM_TM08,
-        ITEM_TM04,
-        ITEM_TM81,
-        ITEM_TM30,
-        ITEM_TM53,
-        ITEM_TM36,
-        ITEM_TM59,
-        ITEM_TM71,
-        ITEM_TM26,
-        SHOP_ITEM_END,
-    };
     static const u16 BattleFrontierLeftExchangeServiceCorner[] = {
         ITEM_PROTEIN,
         ITEM_CALCIUM,
@@ -7005,7 +6987,7 @@ static BOOL ScrCmd_PokeMartFrontier(ScriptContext *ctx)
         SHOP_ITEM_END,
     };
     static const u16 *BattleFrontierExchangeServiceCorners[] = {
-        BattleFrontierRightExchangeServiceCorner,
+        BattleFrontierLeftExchangeServiceCorner,
         BattleFrontierLeftExchangeServiceCorner,
     };
 

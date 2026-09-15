@@ -981,13 +981,13 @@ VeilstoneCity_Roughneck2:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_RECEIVED_VEILSTONE_CITY_TM63, VeilstoneCity_EmbargoMakesItemsUnusable
+    GoToIfSet FLAG_RECEIVED_VEILSTONE_CITY_TM36, VeilstoneCity_EmbargoMakesItemsUnusable
     Message VeilstoneCity_Text_VeilstoneIsTheCityOfStone
-    SetVar VAR_0x8004, ITEM_TM63
+    SetVar VAR_0x8004, ITEM_TM36
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, VeilstoneCity_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_VEILSTONE_CITY_TM63
+    SetFlag FLAG_RECEIVED_VEILSTONE_CITY_TM36
     GoTo VeilstoneCity_EmbargoMakesItemsUnusable
 
 VeilstoneCity_EmbargoMakesItemsUnusable:

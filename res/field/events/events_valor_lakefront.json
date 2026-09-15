@@ -80,11 +80,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM85",
+            "id": "LOCALID_ITEM_TM79",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_VALOR_LAKEFRONT_TM85",
+            "hidden_flag": "FLAG_OBTAINED_VALOR_LAKEFRONT_TM79",
             "script": 7083,
             "initial_dir": 0,
             "data": [],

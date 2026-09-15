@@ -25,7 +25,7 @@ BOOL ScrCmd_GetGameCornerPrizeData(ScriptContext *ctx)
         { ITEM_TM33, 100 },
         { ITEM_TM16, 100 },
         { ITEM_TM44, 100 },
-        { ITEM_TM68, 100 }
+        { ITEM_TM82, 100 }
     };
 
     *item = sGameCornerPrizeData[index].item;

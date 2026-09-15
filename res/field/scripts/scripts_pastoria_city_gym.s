@@ -74,11 +74,11 @@ PastoriaGym_Wake:
     End
 
 PastoriaGym_WakeTryGiveTm55:
-    SetVar VAR_0x8004, ITEM_TM55
+    SetVar VAR_0x8004, ITEM_TM85
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, PastoriaGym_WakeCannotGiveTm55
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_WAKE_TM55
+    SetFlag FLAG_OBTAINED_WAKE_TM85
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message PastoriaGym_Text_WakeExplainTM55
@@ -94,7 +94,7 @@ PastoriaGym_WakeCannotGiveTm55:
     End
 
 PastoriaGym_WakeAlreadyHaveFenBadge:
-    GoToIfUnset FLAG_OBTAINED_WAKE_TM55, PastoriaGym_WakeTryGiveTm55
+    GoToIfUnset FLAG_OBTAINED_WAKE_TM85, PastoriaGym_WakeTryGiveTm55
     Message PastoriaGym_Text_WakeAfterbadge
     WaitButton
     CloseMessage

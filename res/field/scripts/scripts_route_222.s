@@ -32,13 +32,13 @@ Route222_RichBoy:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_RECEIVED_ROUTE_222_TM56, Route222_ExplainFling
+    GoToIfSet FLAG_RECEIVED_ROUTE_222_TM37, Route222_ExplainFling
     Message Route222_Text_IGiveTMFling
-    SetVar VAR_0x8004, ITEM_TM56
+    SetVar VAR_0x8004, ITEM_TM37
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route222_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_ROUTE_222_TM56
+    SetFlag FLAG_RECEIVED_ROUTE_222_TM37
     GoTo Route222_ExplainFling
 
 Route222_ExplainFling:

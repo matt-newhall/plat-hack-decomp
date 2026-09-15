@@ -40,11 +40,11 @@ OreburghGym_Roark:
     End
 
 OreburghGym_RoarkGiveTM76:
-    SetVar VAR_0x8004, ITEM_TM76
+    SetVar VAR_0x8004, ITEM_TM80
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, OreburghGym_RoarkGiveTM76BagFull
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_ROARK_TM76
+    SetFlag FLAG_OBTAINED_ROARK_TM80
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message OreburghGym_Text_RoarkExplainStealthRock
@@ -60,7 +60,7 @@ OreburghGym_RoarkGiveTM76BagFull:
     End
 
 OreburghGym_AlreadyHaveCoalBadge:
-    GoToIfUnset FLAG_OBTAINED_ROARK_TM76, OreburghGym_RoarkGiveTM76
+    GoToIfUnset FLAG_OBTAINED_ROARK_TM80, OreburghGym_RoarkGiveTM76
     Message OreburghGym_Text_RoarkGymBeaten
     WaitButton
     CloseMessage
