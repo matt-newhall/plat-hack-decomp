@@ -2638,25 +2638,25 @@
     {
       "id": "pl_msg_00000391_00330",
       "en_US": [
-        "The foe is hit with a pulsing blast\n",
-        "of water. It may also confuse the\n",
-        "target."
+        "The user explodes to inflict damage on\n",
+        "all Pokémon in battle. The user faints\n",
+        "upon using this move."
       ]
     },
     {
       "id": "pl_msg_00000391_00331",
       "en_US": [
-        "The user quietly focuses its mind and\n",
-        "calms its spirit to raise its Sp. Atk\n",
-        "and Sp. Def stats."
+        "The user attacks by letting out a\n",
+        "charming cry that causes emotional\n",
+        "damage. This attack never misses."
       ]
     },
     {
       "id": "pl_msg_00000391_00332",
       "en_US": [
-        "The foe is scared off, to be replaced\n",
-        "by another Pokémon in its party.\n",
-        "In the wild, the battle ends."
+        "The user attacks suddenly as if leaping\n",
+        "out from tall grass. The user’s\n",
+        "footwork boosts its Speed stat."
       ]
     },
     {
@@ -2670,17 +2670,17 @@
     {
       "id": "pl_msg_00000391_00334",
       "en_US": [
-        "Summons a hailstorm that lasts for\n",
-        "five turns. The hailstorm damages\n",
-        "all types except Ice."
+        "The user yells as if it is ranting\n",
+        "about something, making the target’s\n",
+        "Sp. Atk stat decrease."
       ]
     },
     {
       "id": "pl_msg_00000391_00335",
       "en_US": [
-        "The user tenses its muscles to bulk up\n",
-        "its body, boosting both its Attack and\n",
-        "Defense stats."
+        "The user nimbly strikes. This attack\n",
+        "does massive damage if the user isn’t\n",
+        "holding an item."
       ]
     },
     {
@@ -2702,17 +2702,17 @@
     {
       "id": "pl_msg_00000391_00338",
       "en_US": [
-        "The user intensifies the sun for\n",
-        "five turns, powering up Fire-type\n",
-        "moves."
+        "The user spits fluid that works to melt\n",
+        "the target. This harshly reduces the\n",
+        "target’s Sp. Def stat."
       ]
     },
     {
       "id": "pl_msg_00000391_00339",
       "en_US": [
-        "The foe is taunted into a rage that\n",
-        "allows it to use only attack moves for\n",
-        "two to four turns."
+        "The user makes the foe see a mirage. It\n",
+        "inflicts damage matching the user’s\n",
+        "level."
       ]
     },
     {
@@ -2750,17 +2750,17 @@
     {
       "id": "pl_msg_00000391_00344",
       "en_US": [
-        "It enables the user to evade all\n",
-        "attacks. Its chance of failing rises\n",
-        "if it is used in succession."
+        "A two-turn attack. The user gathers\n",
+        "light, then strikes with a blade on the\n",
+        "second turn."
       ]
     },
     {
       "id": "pl_msg_00000391_00345",
       "en_US": [
-        "The user summons a heavy rain that\n",
-        "falls for five turns, powering up\n",
-        "Water-type moves."
+        "The user attacks by wrapping its\n",
+        "opponent in a fierce wind. This may\n",
+        "also confuse the target."
       ]
     },
     {
@@ -2774,17 +2774,17 @@
     {
       "id": "pl_msg_00000391_00347",
       "en_US": [
-        "The user creates a protective field\n",
-        "that prevents status problems like\n",
-        "poison, paralysis, burn, and sleep."
+        "The user slams the target with its\n",
+        "body. Damage increases the heavier the\n",
+        "user is than the target."
       ]
     },
     {
       "id": "pl_msg_00000391_00348",
       "en_US": [
-        "The user attacks by letting out a\n",
-        "charming cry that causes emotional\n",
-        "damage. This attack never misses."
+        "The user attacks with a draining kiss\n",
+        "that steals HP from targets to restore\n",
+        "the user’s own HP."
       ]
     },
     {
@@ -2822,17 +2822,17 @@
     {
       "id": "pl_msg_00000391_00353",
       "en_US": [
-        "The user sets off an earthquake\n",
-        "that hits all the Pokémon in the\n",
-        "battle."
+        "The user materializes an odd psychic\n",
+        "wave to attack the target. This attack\n",
+        "does physical damage."
       ]
     },
     {
       "id": "pl_msg_00000391_00354",
       "en_US": [
-        "A full-power attack that grows more\n",
-        "powerful the more the user likes its\n",
-        "Trainer."
+        "The user slams the target with its\n",
+        "wings. The target is hit twice in a\n",
+        "row."
       ]
     },
     {
@@ -2862,17 +2862,17 @@
     {
       "id": "pl_msg_00000391_00358",
       "en_US": [
-        "The user attacks with tough fists,\n",
-        "etc. It can also break any barrier\n",
-        "such as Light Screen and Reflect."
+        "The user infests the target, attacking\n",
+        "it for four to five turns. The target\n",
+        "cannot flee."
       ]
     },
     {
       "id": "pl_msg_00000391_00359",
       "en_US": [
-        "The user begins moving so quickly\n",
-        "that it creates illusory copies to\n",
-        "raise its evasiveness."
+        "The user cloaks itself with flame and\n",
+        "attacks. It raises the user’s Speed\n",
+        "stat."
       ]
     },
     {
@@ -2910,9 +2910,9 @@
     {
       "id": "pl_msg_00000391_00364",
       "en_US": [
-        "A five-turn sandstorm is summoned\n",
-        "to hurt all combatants except the\n",
-        "Rock, Ground, and Steel types."
+        "The user scatters mysterious water\n",
+        "around and restores the HP of itself\n",
+        "and its allies."
       ]
     },
     {
@@ -2958,9 +2958,9 @@
     {
       "id": "pl_msg_00000391_00370",
       "en_US": [
-        "An attack move with effects that\n",
-        "vary depending on the user’s\n",
-        "environment."
+        "In a hailstorm, this move reduces\n",
+        "damage from physical and special moves\n",
+        "for five turns."
       ]
     },
     {
@@ -2974,17 +2974,17 @@
     {
       "id": "pl_msg_00000391_00372",
       "en_US": [
-        "If it is the opposite gender of the\n",
-        "user, the foe becomes infatuated\n",
-        "and less likely to attack."
+        "The user borrows the power of the\n",
+        "moon. This may also lower the\n",
+        "Sp. Atk stat of the target."
       ]
     },
     {
       "id": "pl_msg_00000391_00373",
       "en_US": [
-        "The user attacks and steals the foe’s\n",
-        "held item simultaneously. It can’t\n",
-        "steal if the user holds an item."
+        "This relentless attack does massive\n",
+        "damage to a target affected by status\n",
+        "problems."
       ]
     },
     {
@@ -3005,9 +3005,9 @@
     {
       "id": "pl_msg_00000391_00376",
       "en_US": [
-        "The user steals the effects of any\n",
-        "healing or status-changing move the\n",
-        "foe attempts to use."
+        "The user chills the target. This may\n",
+        "leave it frozen. It is super effective\n",
+        "on Water types."
       ]
     },
     {
@@ -3021,9 +3021,9 @@
     {
       "id": "pl_msg_00000391_00378",
       "en_US": [
-        "The user lands and rests its body.\n",
-        "It restores the user’s HP by up to\n",
-        "half of its max HP."
+        "If the foe knows any move also known\n",
+        "by the user, the foe is prevented\n",
+        "from using it."
       ]
     },
     {
@@ -3061,17 +3061,17 @@
     {
       "id": "pl_msg_00000391_00383",
       "en_US": [
-        "The user flings its held item at the\n",
-        "foe to attack. Its power and effects\n",
-        "depend on the item."
+        "The user shrouds itself in electricity\n",
+        "and smashes into its target. It also\n",
+        "damages the user."
       ]
     },
     {
       "id": "pl_msg_00000391_00384",
       "en_US": [
-        "The user attacks with an electric\n",
-        "charge. The user may use any remaining\n",
-        "electricity to raise its Sp. Atk stat."
+        "The user electrifies itself and charges\n",
+        "at the foe. It also damages the user\n",
+        "considerably."
       ]
     },
     {
@@ -3213,9 +3213,9 @@
     {
       "id": "pl_msg_00000391_00402",
       "en_US": [
-        "A frenetic dance to uplift the fighting\n",
-        "spirit. It sharply raises the user’s\n",
-        "Attack stat."
+        "After making its attack, the user\n",
+        "rushes back to switch places with a\n",
+        "party Pokémon in waiting."
       ]
     },
     {
@@ -3229,17 +3229,17 @@
     {
       "id": "pl_msg_00000391_00404",
       "en_US": [
-        "The user hypnotizes itself into\n",
-        "copying any stat change made\n",
-        "by the foe."
+        "The user drenches the target in\n",
+        "poisonous liquid. This move’s power\n",
+        "doubles if the target is poisoned."
       ]
     },
     {
       "id": "pl_msg_00000391_00405",
       "en_US": [
-        "If it is the opposite gender of the\n",
-        "user, the foe is charmed into sharply\n",
-        "lowering its Sp. Atk stat."
+        "The user attacks by slamming its body\n",
+        "into the target, using the user’s\n",
+        "Defense stat."
       ]
     },
     {
@@ -3293,9 +3293,9 @@
     {
       "id": "pl_msg_00000391_00412",
       "en_US": [
-        "An attack that works only on a\n",
-        "sleeping foe. It absorbs half the\n",
-        "damage caused to heal the user’s HP."
+        "The user slams the foe with water at\n",
+        "full-force. It may lower the target’s\n",
+        "Defense stat."
       ]
     },
     {
@@ -3333,9 +3333,9 @@
     {
       "id": "pl_msg_00000391_00417",
       "en_US": [
-        "The user makes a copy of itself using\n",
-        "some of its HP. The copy serves as\n",
-        "the user’s decoy."
+        "The user stomps down on the ground and\n",
+        "attacks everything in the area. Hit\n",
+        "Pokémon’s Speed stat is reduced."
       ]
     },
     {
@@ -3349,9 +3349,9 @@
     {
       "id": "pl_msg_00000391_00419",
       "en_US": [
-        "The user creates a bizarre space in\n",
-        "which slower Pokémon get to move\n",
-        "first for five turns."
+        "The target is hit away and switched. In\n",
+        "the wild, a battle against a single\n",
+        "Pokémon ends."
       ]
     },
     {
