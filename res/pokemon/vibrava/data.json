@@ -8,7 +8,7 @@
         "special_defense": 50
     },
     "types": [ "TYPE_BUG", "TYPE_DRAGON" ],
-    "catch_rate": 120,
+    "catch_rate": 45,
     "base_exp_reward": 126,
     "ev_yields": {
         "hp": 0,
