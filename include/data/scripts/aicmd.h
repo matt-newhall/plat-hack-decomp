@@ -141,6 +141,8 @@ ScriptCommand(AICMD_IFPARTNERDECLAREDMOVECLASS,       AICmd_IfPartnerDeclaredMov
 ScriptCommand(AICMD_LOADPARTNERDECLAREDMOVEEFFECT,    AICmd_LoadPartnerDeclaredMoveEffect)
 ScriptCommand(AICMD_IFPARTNERMOVESFIRST,              AICmd_IfPartnerMovesFirst)
 ScriptCommand(AICMD_IFBATTLERKNOWSMOVEOFTYPE,          AICmd_IfBattlerKnowsMoveOfType)
+ScriptCommand(AICMD_LOADBATTLERATTEMPTEDMOVE,         AICmd_LoadBattlerAttemptedMove)
+ScriptCommand(AICMD_IFMOVEEFFECTIVENESSAGAINST,       AICmd_IfMoveEffectivenessAgainst)
 
 // clang-format on
 

@@ -775,6 +775,18 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro LoadBattlerAttemptedMove battler:req
+    .long AICMD_LOADBATTLERATTEMPTEDMOVE
+    .long \battler
+    .endm
+
+    .macro IfMoveEffectivenessAgainst battler:req, effectiveness:req, jump:req
+    .long AICMD_IFMOVEEFFECTIVENESSAGAINST
+    .long \battler
+    .long \effectiveness
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .equ TABLE_END, 0xFFFFFFFF
 
     .macro TableEntry entry:req

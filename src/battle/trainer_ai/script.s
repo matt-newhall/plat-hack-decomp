@@ -308,22 +308,23 @@ Basic_CheckCannotSleep_Terminate:
     PopOrEnd
 
 Basic_CheckCannotExplode:
-    // If the target is immune, score -10.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    // The move does nothing at all in these cases, so the penalty has to outweigh every bonus
+    // Expert can hand the same move back: a self-KO which cannot even hit is never worth a turn.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus30
 
-    // If the target has Damp and we do not have Mold Breaker, score -10.
+    // If the target has Damp and we do not have Mold Breaker, the move fails outright.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckLastMon
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_DAMP, ScoreMinus10
+    IfLoadedEqualTo ABILITY_DAMP, ScoreMinus30
 
 Basic_CheckLastMon:
-    // If we are on our last Pokemon and the target is not also on their last Pokemon,
-    // score -10.
+    // Fainting the last Pokemon while the target still has some in reserve loses the battle on
+    // the spot, so it is ruled out as hard as a move which simply fails.
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo 0, Basic_Explode_Terminate
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo 0, ScoreMinus10
+    IfLoadedNotEqualTo 0, ScoreMinus30
 
     // If the target is also on their last Pokemon, score -1 instead of -10.
     GoTo ScoreMinus1
@@ -1891,8 +1892,10 @@ Expert_MagnetRise_ScorePlus3:
     PopOrEnd
 
 Expert_Powder:
+    // The move does nothing at all to a target with no Fire move to punish, so it is left at
+    // the base score rather than being paid for as a status move.
     IfBattlerKnowsMoveOfType AI_BATTLER_DEFENDER, TYPE_FIRE, Expert_Powder_TargetKnowsFireMove
-    GoTo Expert_StatusMoveBonus
+    PopOrEnd
 
 Expert_Powder_TargetKnowsFireMove:
     IfRandomLessThan 128, Expert_StatusMoveBonus
@@ -2008,8 +2011,9 @@ Expert_Rollout:
 
 Expert_SuckerPunch:
     // A repeated Sucker Punch is the easiest thing in the game to play around, so back off from
-    // using it twice running whether or not the first one landed.
-    LoadBattlerPreviousMove AI_BATTLER_ATTACKER
+    // using it twice running whether or not the first one landed, or was blocked before it
+    // could land.
+    LoadBattlerAttemptedMove AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo MOVE_SUCKER_PUNCH, Expert_SuckerPunch_End
     IfRandomLessThan 128, Expert_SuckerPunch_End
     AddToMoveScore -20
@@ -2137,30 +2141,80 @@ Expert_Setup_Classify:
 Expert_SetupOffensive:
     // +6 puts setup level with the bonus EvalAttack hands the best damaging move 80% of the
     // time, so it competes with attacking rather than being crowded out by it. A target which
-    // cannot act this turn is a free one.
+    // cannot act this turn is a free one; short of that, a target which needs more than three
+    // turns to finish the AI is leaving the turn free anyway, and moving first buys another.
     AddToMoveScore 6
     IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupOffensive_ScorePlus3
-    GoTo Expert_Setup_CheckSlowAndFragile
+    IfDefenderCanKOInHits 3, Expert_SetupOffensive_CheckStages
+    AddToMoveScore 1
+    IfDoesNotMoveFirst Expert_SetupOffensive_CheckStages
+    AddToMoveScore 1
+    GoTo Expert_SetupOffensive_CheckStages
 
 Expert_SetupOffensive_ScorePlus3:
     AddToMoveScore 3
-    GoTo Expert_Setup_CheckSlowAndFragile
+    GoTo Expert_SetupOffensive_CheckStages
 
 Expert_SetupDefensive:
     AddToMoveScore 6
-    IfRandomLessThan 13, Expert_Setup_CheckSlowAndFragile
-    IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupDefensive_ScorePlus2
-    GoTo Expert_SetupDefensive_CheckBothDefenses
+    IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupDefensive_TryScorePlus2
+    GoTo Expert_SetupDefensive_CheckPayoffMoves
 
-Expert_SetupDefensive_ScorePlus2:
+Expert_SetupDefensive_TryScorePlus2:
+    IfRandomLessThan 13, Expert_SetupDefensive_CheckPayoffMoves
     AddToMoveScore 2
 
-Expert_SetupDefensive_CheckBothDefenses:
-    // A move covering both defenses is worth more while neither of them is invested in yet.
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_SetupDefensive_CheckDefenseStages
-    IfCurrentMoveEffectNotEqualTo BATTLE_EFFECT_STOCKPILE, Expert_Setup_CheckSlowAndFragile
+Expert_SetupDefensive_CheckPayoffMoves:
+    // Stored Power and Body Press spend the boost back as damage, so the turn is not purely
+    // defensive when the AI is carrying one.
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_STORED_POWER, Expert_SetupDefensive_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_BODY_PRESS, Expert_SetupDefensive_TryScorePlus1
+    GoTo Expert_SetupDefensive_CheckDefense
 
-Expert_SetupDefensive_CheckDefenseStages:
+Expert_SetupDefensive_TryScorePlus1:
+    IfRandomLessThan 128, Expert_SetupDefensive_CheckDefense
+    AddToMoveScore 1
+
+Expert_SetupDefensive_CheckDefense:
+    // The boost is worth most against a target which can only attack down the half being
+    // raised, and least once that half is already at +2.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupDefensive_DefenseEffects, Expert_SetupDefensive_CheckSpDefense
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupDefensive_CheckDefenseStage
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupDefensive_PhysicalOnlyTarget
+    GoTo Expert_SetupDefensive_CheckDefenseStage
+
+Expert_SetupDefensive_PhysicalOnlyTarget:
+    AddToMoveScore 1
+
+Expert_SetupDefensive_CheckDefenseStage:
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_SetupDefensive_DefenseSaturated
+    GoTo Expert_SetupDefensive_CheckSpDefense
+
+Expert_SetupDefensive_DefenseSaturated:
+    AddToMoveScore -1
+
+Expert_SetupDefensive_CheckSpDefense:
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupDefensive_SpDefenseEffects, Expert_SetupDefensive_CheckBothDefenses
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupDefensive_CheckSpDefenseStage
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupDefensive_SpecialOnlyTarget
+    GoTo Expert_SetupDefensive_CheckSpDefenseStage
+
+Expert_SetupDefensive_SpecialOnlyTarget:
+    AddToMoveScore 1
+
+Expert_SetupDefensive_CheckSpDefenseStage:
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_SetupDefensive_SpDefenseSaturated
+    GoTo Expert_SetupDefensive_CheckBothDefenses
+
+Expert_SetupDefensive_SpDefenseSaturated:
+    AddToMoveScore -1
+
+Expert_SetupDefensive_CheckBothDefenses:
+    // A move covering both defenses is worth more while either of them is still uninvested.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupDefensive_BothDefenseEffects, Expert_Setup_CheckSlowAndFragile
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, Expert_SetupDefensive_ScorePlus2Again
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, Expert_SetupDefensive_ScorePlus2Again
     GoTo Expert_Setup_CheckSlowAndFragile
@@ -2168,6 +2222,32 @@ Expert_SetupDefensive_CheckDefenseStages:
 Expert_SetupDefensive_ScorePlus2Again:
     AddToMoveScore 2
     GoTo Expert_Setup_CheckSlowAndFragile
+
+Expert_SetupDefensive_DefenseEffects:
+    TableEntry BATTLE_EFFECT_DEF_UP
+    TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_STOCKPILE
+    TableEntry BATTLE_EFFECT_ATK_DEF_UP
+    TableEntry BATTLE_EFFECT_CURSE
+    TableEntry BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry TABLE_END
+
+Expert_SetupDefensive_SpDefenseEffects:
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_STOCKPILE
+    TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry TABLE_END
+
+Expert_SetupDefensive_BothDefenseEffects:
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_STOCKPILE
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry TABLE_END
 
 Expert_SetupSplitPhysical:
     IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupOffensive
@@ -2200,9 +2280,49 @@ Expert_SetupSpecialSweeper_CheckSpAttackStage:
 Expert_SetupSpecialSweeper_ScoreMinus1:
     AddToMoveScore -1
 
+Expert_SetupOffensive_CheckStages:
+    // A stat already sitting at +2 has most of its damage banked, so another boost of it buys
+    // less than the turn costs. A move raising both offences is charged for each half.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupOffensive_AttackEffects, Expert_SetupOffensive_CheckSpAttack
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_SetupOffensive_AttackSaturated
+    GoTo Expert_SetupOffensive_CheckSpAttack
+
+Expert_SetupOffensive_AttackSaturated:
+    AddToMoveScore -1
+
+Expert_SetupOffensive_CheckSpAttack:
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupOffensive_SpAttackEffects, Expert_Setup_CheckSlowAndFragile
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_SetupOffensive_SpAttackSaturated
+    GoTo Expert_Setup_CheckSlowAndFragile
+
+Expert_SetupOffensive_SpAttackSaturated:
+    AddToMoveScore -1
+    GoTo Expert_Setup_CheckSlowAndFragile
+
+Expert_SetupOffensive_AttackEffects:
+    TableEntry BATTLE_EFFECT_ATK_UP
+    TableEntry BATTLE_EFFECT_ATK_UP_2
+    TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_UP
+    TableEntry BATTLE_EFFECT_ATK_DEF_UP
+    TableEntry BATTLE_EFFECT_CURSE
+    TableEntry BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF
+    TableEntry TABLE_END
+
+Expert_SetupOffensive_SpAttackEffects:
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_UP
+    TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
+    TableEntry TABLE_END
+
 Expert_Setup_CheckSlowAndFragile:
     // Boosting is a losing trade against something which both moves first and only needs two
-    // turns to finish the job.
+    // turns to finish the job - unless the boost came attached to an attack, which loses the AI
+    // nothing for having been used.
+    LoadCurrentMoveEffect
+    IfLoadedInTable Expert_ContrarySelfDropEffects, Expert_Setup_End
     IfMovesFirst Expert_Setup_End
     IfDefenderCanKOInHits 2, ScoreMinus5
 
@@ -2394,19 +2514,19 @@ Expert_AttackDropOnHit_End:
     PopOrEnd
 
 Expert_RapidSpin:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_RapidSpin_ClearsHazards
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_RapidSpin_ClearsHazards
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_RapidSpin_ClearsHazards
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_RapidSpin_ClearsHazards
+    // A move EvalAttack already picked as the best hit has been paid for once and is not paid
+    // for again, for the clear or for the Speed. Sweeping the AI's own side settles the score on
+    // its own; with nothing to clear the spin is worth what its Speed boost is worth.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_RapidSpin_End
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, ScorePlus7
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, ScorePlus7
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, ScorePlus7
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, ScorePlus7
     GoTo Expert_SpeedBoostOnHit
 
-Expert_RapidSpin_ClearsHazards:
-    IfRandomLessThan 128, Expert_RapidSpin_ScorePlus6
-    AddToMoveScore 7
-    GoTo Expert_SpeedBoostOnHit
-
-Expert_RapidSpin_ScorePlus6:
-    AddToMoveScore 6
+Expert_RapidSpin_End:
+    PopOrEnd
 
 Expert_SpeedBoostOnHit:
     FlagBestDamageMove
@@ -2446,26 +2566,25 @@ Expert_SpeedDownOnHit_CheckBestDamage:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
 
-    // Contrary, Defiant and Competitive do not waste the drop, they turn it into a boost for
-    // the target, so the move is worse than an attack which earns no drop bonus at all.
-    // Only Contrary is suppressed by Mold Breaker.
+    // Contrary, Defiant and Competitive turn the drop into a boost for the target, so the drop
+    // is worth no more than it is against a target which simply ignores it.
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_DEFIANT, Expert_SpeedDownOnHit_ScoreMinus5
-    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_SpeedDownOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_SpeedDownOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
-    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_CheckSpeed
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_SpeedDownOnHit_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_SpeedDownOnHit_CheckMoldBreaker
+    GoTo Expert_SpeedDownOnHit_CheckSpeed
+
+Expert_SpeedDownOnHit_CheckMoldBreaker:
+    // Mold Breaker suppresses the ability, so the drop lands as it would on any other target.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_SpeedDownOnHit_ScoreMinus5
+    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_SpeedDownOnHit_ScorePlus5
 
 Expert_SpeedDownOnHit_CheckSpeed:
     IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedDownOnHit_ScorePlus5
     AddToMoveScore 6
     GoTo Expert_SpeedDownOnHit_CheckDoubles
-
-Expert_SpeedDownOnHit_ScoreMinus5:
-    AddToMoveScore -5
-    PopOrEnd
 
 Expert_SpeedDownOnHit_ScorePlus5:
     AddToMoveScore 5
@@ -2486,40 +2605,39 @@ Expert_SpeedDownOnHit_End:
 
 Expert_ContrarySelfDrop:
     // These moves pay for their damage by lowering the user's own stats, so Contrary turns the
-    // drawback into a free boost and the move buys an attack and a setup turn in one slot.
-    // Only pay for it while the stats it would raise still have room to move.
+    // drawback into a free boost and the move buys an attack and a setup turn in one slot. It
+    // is scored as the setup move it imitates: Overheat reads as Nasty Plot, Superpower as Bulk
+    // Up, Close Combat as Cosmic Power.
+    //
+    // A hit which is already the best damage available, or which kills outright, is doing its
+    // job as an attack and is left to the ordinary damage scoring.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_ContrarySelfDrop_End
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_ContrarySelfDrop_SpAttack
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_ContrarySelfDrop_AttackDefense
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_ContrarySelfDrop_DefenseSpDefense
-    GoTo Expert_ContrarySelfDrop_Speed
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_ContrarySelfDrop_End
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_ContrarySelfDrop_End
 
-Expert_ContrarySelfDrop_SpAttack:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
+    // The guards on Expert_Setup are entered past deliberately. Unaware reading through the
+    // boost, or a target which can knock the AI out, both cost a pure setup move its whole
+    // turn; these moves still land their damage either way.
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_SetupSpecialSweeper
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_SetupSplitPhysical
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_SetupDefensive
 
-Expert_ContrarySelfDrop_AttackDefense:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Expert_ContrarySelfDrop_ScorePlus2
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
-
-Expert_ContrarySelfDrop_DefenseSpDefense:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
-
-Expert_ContrarySelfDrop_Speed:
-    // Under Trick Room the extra Speed is a liability rather than a reward.
+    // Under Trick Room the extra Speed is a liability rather than a reward, and there is nothing
+    // to buy when the AI is already the faster of the two.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_ContrarySelfDrop_End
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
-
-Expert_ContrarySelfDrop_ScorePlus2:
-    AddToMoveScore 2
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_SetupSpeed
 
 Expert_ContrarySelfDrop_End:
     PopOrEnd
+
+Expert_ContrarySelfDropEffects:
+    TableEntry BATTLE_EFFECT_USER_SP_ATK_DOWN_2
+    TableEntry BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry BATTLE_EFFECT_SPEED_DOWN_HIT
+    TableEntry TABLE_END
 
 
 Expert_Haze:
@@ -2678,13 +2796,21 @@ Expert_StatusPoison_CheckRain:
     IfLoadedEqualTo AI_WEATHER_RAINING, Expert_StatusPoison_End
 
 Expert_StatusPoison_CheckPayoff:
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusPoison_CheckTargetIsHarmless
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_VENOSHOCK, Expert_StatusPoison_CheckTargetIsHarmless
-    GoTo Expert_StatusPoison_End
+    // A target with nothing but status moves has no way to outrace the chip damage, so the
+    // poison is worth a little more than it is against something which can hit back.
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_CheckFollowUp
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_CheckFollowUp
+    AddToMoveScore 1
 
-Expert_StatusPoison_CheckTargetIsHarmless:
-    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_End
-    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_End
+Expert_StatusPoison_CheckFollowUp:
+    // Hex and Venoshock double off the status, so landing it sets up the next turn as well as
+    // starting the chip. Poison is worth the turn either way.
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusPoison_ScorePlus2
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_VENOSHOCK, Expert_StatusPoison_ScorePlus2
+    AddToMoveScore 1
+    PopOrEnd
+
+Expert_StatusPoison_ScorePlus2:
     AddToMoveScore 2
 
 Expert_StatusPoison_End:
@@ -2909,13 +3035,13 @@ Expert_Encore:
     LoadIsFirstTurnInBattle AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo FALSE, ScoreMinus20
 
-    // Moving first is what makes Encore worth it, but only against a move worth locking the
-    // target into. Anything else and the turn is better spent elsewhere.
-    IfDoesNotMoveFirst Expert_Encore_WhenSlower
+    // There has to be a move worth locking the target into; anything else and the turn is
+    // better spent elsewhere. Past that, moving first is what makes Encore worth the most.
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
     LoadEffectOfLoadedMove 
-    IfLoadedinTable Expert_Encore_EncouragedMoveEffects, ScorePlus7
-    PopOrEnd
+    IfLoadedNotInTable Expert_Encore_EncouragedMoveEffects, ScoreMinus10
+    IfDoesNotMoveFirst Expert_Encore_WhenSlower
+    GoTo ScorePlus7
 
 Expert_Encore_WhenSlower:
     IfRandomLessThan 128, ScorePlus5
@@ -3151,8 +3277,10 @@ Expert_PartingShot:
     GoTo Expert_PartingShot_CheckAttacker
 
 Expert_PartingShot_CheckSpeed:
+    // Getting out ahead of a hit which would have KO'd is what the move is for, but it is worth
+    // a few points on top of the base rather than a score of its own.
     IfDoesNotMoveFirst Expert_PartingShot_CheckAttacker
-    AddToMoveScore 7
+    AddToMoveScore 3
 
 Expert_PartingShot_CheckAttacker:
     IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_PartingShot_TryScorePlus1
@@ -3170,14 +3298,27 @@ Expert_PartingShot_CheckParty:
     AddToMoveScore -1
 
 Expert_PartingShot_CheckAbility:
+    // Half the move is the drop, so a target which blanks it or turns it into a boost leaves
+    // only the pivot behind. A Clear Amulet blanks it the same way Clear Body does, but is an
+    // item and so is not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_PartingShot_ScoreMinus5
+
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_CONTRARY, Expert_PartingShot_ScoreMinus2
-    IfLoadedEqualTo ABILITY_DEFIANT, Expert_PartingShot_ScoreMinus2
-    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_PartingShot_ScoreMinus2
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_PartingShot_CheckMoldBreaker
     GoTo Expert_PivotRegenerator
 
-Expert_PartingShot_ScoreMinus2:
-    AddToMoveScore -2
+Expert_PartingShot_CheckMoldBreaker:
+    // Mold Breaker suppresses the ability, so the drops land as they would on anything else.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_PivotRegenerator
+
+Expert_PartingShot_ScoreMinus5:
+    AddToMoveScore -5
     GoTo Expert_PivotRegenerator
 
 Expert_Wish:
@@ -3277,9 +3418,15 @@ Expert_SkillSwap_ScoreAbilityTrade:
     PopOrEnd
 
 Expert_BrickBreak:
+    // A move EvalAttack already picked as the best hit has been paid for once; breaking the
+    // screen is a reason to reach for this attack over another, not a bonus on top of it.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_BrickBreak_End
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScreenIsUp
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_ScreenIsUp
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_AURORA_VEIL, Expert_BrickBreak_ScreenIsUp
+
+Expert_BrickBreak_End:
     PopOrEnd
 
 Expert_BrickBreak_ScreenIsUp:
@@ -3327,14 +3474,14 @@ Expert_Defog_ScorePlus2:
     AddToMoveScore 2
 
 Expert_Defog_CheckOurHazards:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScorePlus4
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_ScorePlus4
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScorePlus4
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_ScorePlus4
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScorePlus3
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_ScorePlus3
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScorePlus3
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_ScorePlus3
     PopOrEnd
 
-Expert_Defog_ScorePlus4:
-    AddToMoveScore 4
+Expert_Defog_ScorePlus3:
+    AddToMoveScore 3
     PopOrEnd
 
 
@@ -3771,16 +3918,11 @@ TagStrategy_SpreadGroundMove_CheckAbilities:
     IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
 
 TagStrategy_SpreadGroundMove_PartnerHit:
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ELECTRIC
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_STEEL
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_POISON
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    // The blast is judged against the partner's full typing rather than against a list of the
+    // types Ground beats, so a partner which halves it straight back - Scizor, Roserade,
+    // Forretress - is only charged the ordinary friendly-fire penalty.
+    IfMoveEffectivenessAgainst AI_BATTLER_ATTACKER_PARTNER, TYPE_MULTI_DOUBLE_DAMAGE, ScoreMinus10
+    IfMoveEffectivenessAgainst AI_BATTLER_ATTACKER_PARTNER, TYPE_MULTI_QUADRUPLE_DAMAGE, ScoreMinus10
     AddToMoveScore -3
     PopOrEnd
 
