@@ -84,8 +84,7 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
-            "MOVE_SPITE",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SPITE"
         ],
         "egg_moves": [
             "MOVE_ASTONISH",

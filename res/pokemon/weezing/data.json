@@ -91,8 +91,7 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": [  ],

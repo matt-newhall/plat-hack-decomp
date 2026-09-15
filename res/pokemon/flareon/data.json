@@ -86,8 +86,7 @@
             "MOVE_SNORE",
             "MOVE_LAST_RESORT",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": [  ],

@@ -94,8 +94,7 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_SEED_BOMB",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SEED_BOMB"
         ]
     },
     "evolutions": [  ],

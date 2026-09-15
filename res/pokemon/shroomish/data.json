@@ -78,8 +78,7 @@
         ],
         "by_tutor": [
             "MOVE_SNORE",
-            "MOVE_SEED_BOMB",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
             "MOVE_FAKE_TEARS",

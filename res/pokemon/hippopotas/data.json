@@ -77,8 +77,7 @@
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
-            "MOVE_EARTH_POWER",
-            "MOVE_ACID_SPRAY"
+            "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
             "MOVE_STOCKPILE",

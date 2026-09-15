@@ -94,8 +94,7 @@
             "MOVE_FURY_CUTTER",
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
-            "MOVE_AIR_CUTTER",
-            "MOVE_ACID_SPRAY"
+            "MOVE_AIR_CUTTER"
         ],
         "egg_moves": [
             "MOVE_HEADBUTT",

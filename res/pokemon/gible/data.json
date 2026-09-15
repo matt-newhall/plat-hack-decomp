@@ -89,8 +89,7 @@
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_EARTH_POWER",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ],
         "egg_moves": [
             "MOVE_DRAGON_BREATH",

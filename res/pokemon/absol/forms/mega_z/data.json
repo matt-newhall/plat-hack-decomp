@@ -179,8 +179,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": []

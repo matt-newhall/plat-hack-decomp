@@ -110,9 +110,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_IRON_DEFENSE",
             "MOVE_LAST_RESORT",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY",
-            "MOVE_LIFE_DEW"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": [  ],

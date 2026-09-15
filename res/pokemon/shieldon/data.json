@@ -95,8 +95,7 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_MAGNET_RISE",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MAGNET_RISE"
         ],
         "egg_moves": [
             "MOVE_HEADBUTT",

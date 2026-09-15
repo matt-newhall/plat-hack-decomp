@@ -75,8 +75,7 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_SEED_BOMB",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
             "MOVE_LEECH_SEED",

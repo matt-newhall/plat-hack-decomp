@@ -81,7 +81,6 @@
             "MOVE_SNORE",
             "MOVE_IRON_DEFENSE",
             "MOVE_SWIFT",
-            "MOVE_LIFE_DEW",
             "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [

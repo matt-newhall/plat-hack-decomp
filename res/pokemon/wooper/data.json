@@ -88,8 +88,7 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_EARTH_POWER",
-            "MOVE_ACID_SPRAY"
+            "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
             "MOVE_BODY_SLAM",

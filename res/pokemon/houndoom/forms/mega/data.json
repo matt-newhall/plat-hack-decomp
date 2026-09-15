@@ -157,8 +157,7 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": []

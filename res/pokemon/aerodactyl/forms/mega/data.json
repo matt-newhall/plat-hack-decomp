@@ -164,7 +164,6 @@
             "MOVE_EARTH_POWER",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY",
             "MOVE_DRILL_RUN"
         ]
     },

@@ -170,8 +170,7 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_BOUNCE",
-            "MOVE_SWIFT",
-            "MOVE_POISON_JAB"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": []

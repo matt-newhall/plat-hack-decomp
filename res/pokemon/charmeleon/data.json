@@ -91,8 +91,7 @@
             "MOVE_SNORE",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [

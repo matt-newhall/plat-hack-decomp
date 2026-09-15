@@ -93,8 +93,7 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SIGNAL_BEAM"
         ]
     },
     "evolutions": [

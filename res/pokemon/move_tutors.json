@@ -40,14 +40,6 @@
         "location": "TUTOR_LOCATION_ROUTE_212"
     },
     {
-        "move": "MOVE_POISON_JAB",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_ROUTE_212"
-    },
-    {
         "move": "MOVE_SNORE",
         "redCost": 0,
         "blueCost": 0,
@@ -97,14 +89,6 @@
     },
     {
         "move": "MOVE_MEMENTO",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_ROUTE_212"
-    },
-    {
-        "move": "MOVE_INFESTATION",
         "redCost": 0,
         "blueCost": 0,
         "yellowCost": 0,
@@ -168,23 +152,7 @@
         "location": "TUTOR_LOCATION_SNOWPOINT_CITY"
     },
     {
-        "move": "MOVE_ACID_SPRAY",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_SNOWPOINT_CITY"
-    },
-    {
         "move": "MOVE_DRILL_PECK",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_SNOWPOINT_CITY"
-    },
-    {
-        "move": "MOVE_LIFE_DEW",
         "redCost": 0,
         "blueCost": 0,
         "yellowCost": 0,

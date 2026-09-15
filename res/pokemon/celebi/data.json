@@ -104,9 +104,7 @@
             "MOVE_EARTH_POWER",
             "MOVE_SEED_BOMB",
             "MOVE_LAST_RESORT",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY",
-            "MOVE_LIFE_DEW"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": [  ],

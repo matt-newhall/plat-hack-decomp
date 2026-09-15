@@ -101,8 +101,7 @@
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_EARTH_POWER",
-            "MOVE_ACID_SPRAY"
+            "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
             "MOVE_CRUNCH",

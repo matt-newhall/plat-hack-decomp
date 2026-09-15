@@ -92,8 +92,7 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_SPITE",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ],
         "egg_moves": [
             "MOVE_DESTINY_BOND",

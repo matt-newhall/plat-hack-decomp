@@ -138,8 +138,7 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_KNOCK_OFF",
-            "MOVE_ACID_SPRAY"
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": []

@@ -96,8 +96,7 @@
             "MOVE_SPITE",
             "MOVE_SEED_BOMB",
             "MOVE_SWIFT",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [

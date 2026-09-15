@@ -96,9 +96,7 @@
             "MOVE_ICE_PUNCH",
             "MOVE_GASTRO_ACID",
             "MOVE_SNORE",
-            "MOVE_SEED_BOMB",
-            "MOVE_POISON_JAB",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SEED_BOMB"
         ]
     },
     "evolutions": [  ],

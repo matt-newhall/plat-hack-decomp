@@ -178,8 +178,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_IRON_DEFENSE",
             "MOVE_SWIFT",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": []

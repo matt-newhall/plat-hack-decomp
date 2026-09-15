@@ -83,8 +83,7 @@
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
             "MOVE_HEAT_WAVE",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ],
         "egg_moves": [
             "MOVE_ACID_ARMOR",

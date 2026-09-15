@@ -96,9 +96,7 @@
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
             "MOVE_SWIFT",
-            "MOVE_POISON_JAB",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": [  ],

@@ -124,8 +124,7 @@
             "MOVE_SPITE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

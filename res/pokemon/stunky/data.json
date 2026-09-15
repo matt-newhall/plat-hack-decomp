@@ -90,8 +90,7 @@
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ],
         "egg_moves": [
             "MOVE_PURSUIT",

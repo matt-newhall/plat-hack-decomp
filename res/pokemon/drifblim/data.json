@@ -104,8 +104,7 @@
             "MOVE_AIR_CUTTER",
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": [  ],

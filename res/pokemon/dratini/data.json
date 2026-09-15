@@ -88,8 +88,7 @@
             "MOVE_ICY_WIND",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ],
         "egg_moves": [
             "MOVE_LIGHT_SCREEN",

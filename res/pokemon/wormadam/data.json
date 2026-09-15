@@ -87,9 +87,7 @@
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_SEED_BOMB",
-            "MOVE_INFESTATION",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SEED_BOMB"
         ]
     },
     "evolutions": [  ],

@@ -84,8 +84,6 @@
             "MOVE_SNORE",
             "MOVE_SEED_BOMB",
             "MOVE_KNOCK_OFF",
-            "MOVE_INFESTATION",
-            "MOVE_ACID_SPRAY",
             "MOVE_LUNGE"
         ]
     },

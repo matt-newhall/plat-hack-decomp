@@ -80,8 +80,7 @@
             "MOVE_AIR_CUTTER",
             "MOVE_ENDEAVOR",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ],
         "egg_moves": [
             "MOVE_PURSUIT",

@@ -85,7 +85,6 @@
             "MOVE_AIR_CUTTER",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY",
             "MOVE_DRILL_RUN"
         ]
     },

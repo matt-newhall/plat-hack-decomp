@@ -82,7 +82,6 @@
             "MOVE_SNORE",
             "MOVE_BOUNCE",
             "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY",
             "MOVE_NUZZLE"
         ],
         "egg_moves": [

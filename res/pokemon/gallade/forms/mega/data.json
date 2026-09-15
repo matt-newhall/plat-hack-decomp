@@ -189,10 +189,7 @@
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
             "MOVE_BRICK_BREAK",
-            "MOVE_POISON_JAB",
             "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY",
-            "MOVE_LIFE_DEW",
             "MOVE_NUZZLE",
             "MOVE_DAZZLING_GLEAM"
         ]

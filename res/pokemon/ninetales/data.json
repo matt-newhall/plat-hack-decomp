@@ -82,8 +82,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": [  ],

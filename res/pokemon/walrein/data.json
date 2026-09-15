@@ -95,8 +95,7 @@
             "MOVE_IRON_HEAD",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SIGNAL_BEAM"
         ]
     },
     "evolutions": [  ],

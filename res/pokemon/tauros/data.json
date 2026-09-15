@@ -96,8 +96,7 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_ENDEAVOR",
-            "MOVE_ZEN_HEADBUTT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "evolutions": [  ],

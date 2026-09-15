@@ -168,8 +168,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": []

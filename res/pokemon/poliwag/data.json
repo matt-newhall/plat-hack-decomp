@@ -79,8 +79,7 @@
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_SNORE",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SNORE"
         ],
         "egg_moves": [
             "MOVE_MIST",

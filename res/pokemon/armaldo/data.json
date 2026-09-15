@@ -99,7 +99,6 @@
             "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY",
             "MOVE_RAPID_SPIN"
         ]
     },

@@ -164,9 +164,6 @@
             "MOVE_MAGNET_RISE",
             "MOVE_SWIFT",
             "MOVE_BRICK_BREAK",
-            "MOVE_POISON_JAB",
-            "MOVE_ACID_SPRAY",
-            "MOVE_LIFE_DEW",
             "MOVE_DRILL_RUN"
         ]
     },

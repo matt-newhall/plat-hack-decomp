@@ -87,8 +87,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ],
         "egg_moves": [
             "MOVE_DISABLE",

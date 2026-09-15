@@ -109,7 +109,6 @@
             "MOVE_LAST_RESORT",
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY",
             "MOVE_DAZZLING_GLEAM"
         ]
     },

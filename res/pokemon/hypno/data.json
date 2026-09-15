@@ -105,8 +105,7 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

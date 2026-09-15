@@ -104,8 +104,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
-            "MOVE_SWIFT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": [  ],

@@ -117,7 +117,6 @@
             "MOVE_BRICK_BREAK",
             "MOVE_SHADOW_PUNCH",
             "MOVE_MEMENTO",
-            "MOVE_ACID_SPRAY",
             "MOVE_DRILL_RUN"
         ]
     },

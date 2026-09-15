@@ -105,8 +105,7 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_ZEN_HEADBUTT",
-            "MOVE_ACID_SPRAY"
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "evolutions": [  ],

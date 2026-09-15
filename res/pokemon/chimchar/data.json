@@ -96,8 +96,7 @@
             "MOVE_ENDEAVOR",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
             "MOVE_FIRE_PUNCH",

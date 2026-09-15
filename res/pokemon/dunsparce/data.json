@@ -105,8 +105,6 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_POISON_JAB",
-            "MOVE_ACID_SPRAY",
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [

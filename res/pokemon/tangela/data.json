@@ -91,8 +91,7 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_SEED_BOMB",
-            "MOVE_KNOCK_OFF",
-            "MOVE_ACID_SPRAY"
+            "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
             "MOVE_FLAIL",

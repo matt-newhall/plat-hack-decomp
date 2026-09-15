@@ -81,8 +81,7 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_EARTH_POWER",
-            "MOVE_BRICK_BREAK",
-            "MOVE_ACID_SPRAY"
+            "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
             "MOVE_SELFDESTRUCT",
