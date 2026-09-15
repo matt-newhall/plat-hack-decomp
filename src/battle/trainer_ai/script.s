@@ -1870,6 +1870,11 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Expert_StatusMoveBonus
 
+    // Present has power 1, so the damage scoring skips it entirely and it would otherwise be
+    // judged as a 0-damage move. Its power is random and one roll in five heals the target, so
+    // there is nothing worth estimating; it is paid a flat middling attack score instead.
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL, ScorePlus6
+
     // All other moves have no additional logic.
     PopOrEnd 
 
@@ -2535,10 +2540,17 @@ Expert_SpeedBoostOnHit:
     FlagBestDamageMove
     IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_SpeedBoostOnHit_End
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_SpeedBoostOnHit_End
+
+    // Contrary inverts the boost into a Speed drop, so the move is worse than an attack which
+    // earns no Speed bonus at all.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedBoostOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedBoostOnHit_ScoreMinus5
     IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedBoostOnHit_ScorePlus5
     AddToMoveScore 6
+    PopOrEnd
+
+Expert_SpeedBoostOnHit_ScoreMinus5:
+    AddToMoveScore -5
     PopOrEnd
 
 Expert_SpeedBoostOnHit_ScorePlus5:
