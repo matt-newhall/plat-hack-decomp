@@ -42,7 +42,6 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_40_DAMAGE_FLAT,
     BATTLE_EFFECT_LEVEL_DAMAGE_FLAT,
     BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL,
-    BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP,
     BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP,
     BATTLE_EFFECT_20_DAMAGE_FLAT,
     BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT,
@@ -3972,11 +3971,6 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     case MOVE_PSYWAVE:
         // thinking E(X) is roughly half level here
         damage = battleCtx->battleMons[attacker].level / 2;
-        break;
-
-    case MOVE_RETURN:
-        power = battleCtx->battleMons[attacker].friendship * 10 / 25;
-        type = TYPE_NORMAL;
         break;
 
     case MOVE_MAGNITUDE:

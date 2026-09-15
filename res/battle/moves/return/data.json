@@ -2,11 +2,11 @@
     "name": "Return",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_NORMAL",
-    "power": 1,
+    "power": 102,
     "accuracy": 100,
     "pp": 20,
     "effect": {
-        "type": "BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP",
+        "type": "BATTLE_EFFECT_HIT",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
