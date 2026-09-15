@@ -3093,6 +3093,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_WEATHER_SANDSTORM
     TableEntry BATTLE_EFFECT_SURVIVE_WITH_1_HP
     TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
+    TableEntry BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION
     TableEntry BATTLE_EFFECT_INFATUATE
     TableEntry BATTLE_EFFECT_PREVENT_STATUS
     TableEntry BATTLE_EFFECT_WEATHER_RAIN
@@ -3974,6 +3975,7 @@ TagStrategy_PartnerStatusMove:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, TagStrategy_PartnerPoisonStatus
     IfMoveEqualTo MOVE_HELPING_HAND, TagStrategy_PartnerUsingHelpingHand
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
+    IfMoveEqualTo MOVE_FLATTER, TagStrategy_PartnerSwagger
     IfMoveEqualTo MOVE_ROLE_PLAY, TagStrategy_PartnerRolePlay
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, TagStrategy_PartnerPsychUp
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
@@ -4037,7 +4039,7 @@ TagStrategy_NeverDoubleUpOn:
     TableEntry TABLE_END
 
 TagStrategy_PartnerSwagger:
-    // Swagger hands the partner +2 Attack along with the confusion, and a Persim or Lum Berry
+    // Swagger/Flatter hands the partner +2 Attack along with the confusion, and a Persim or Lum Berry
     // throws the confusion straight back out. Once the berry has been eaten it is gone from the
     // partner's held item, so this stops applying rather than being offered a second time.
     IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_PERSIM_BERRY, ScorePlus9
