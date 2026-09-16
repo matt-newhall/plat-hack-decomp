@@ -1003,10 +1003,14 @@
     },
     {
       "id": "pl_msg_00000548_00250",
-      "en_US": "    switchblade"
+      "en_US": "    Shadow Stitch"
     },
     {
       "id": "pl_msg_00000548_00251",
+      "en_US": "    switchblade"
+    },
+    {
+      "id": "pl_msg_00000548_00252",
       "en_US": "    Team Galactic Hideout Discord"
     }
   ]
