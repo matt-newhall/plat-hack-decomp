@@ -38,7 +38,10 @@
             [ 1, "MOVE_GUST" ],
             [ 13, "MOVE_BUG_BITE" ]
         ],
-        "by_tm": [  ],
+        "by_tm": [
+            "TM27",
+            "TM82"
+        ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
             "MOVE_OMINOUS_WIND",
