@@ -353,5 +353,6 @@ subscript_files = files(
     'subscript_terrain_start.s',
     'subscript_terrain_end.s',
     'subscript_grassy_terrain_heal.s',
-    'subscript_psychic_terrain_protected.s'
+    'subscript_psychic_terrain_protected.s',
+    'subscript_overworld_thunderstorm.s'
 )
