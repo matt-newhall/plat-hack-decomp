@@ -2046,6 +2046,20 @@ BOOL BattleController_RecvCommMessage(BattleSystem *battleSys, void *data)
 }
 
 /**
+ * @brief The animation Secret Power borrows while each terrain is active, in
+ * place of the map-terrain animation the battle animation system picks.
+ */
+static const struct {
+    u32 fieldCondition;
+    u16 move;
+} sTerrainSecretPowerAnimation[] = {
+    { FIELD_CONDITION_ELECTRIC_TERRAIN, MOVE_THUNDER_SHOCK },
+    { FIELD_CONDITION_GRASSY_TERRAIN, MOVE_VINE_WHIP },
+    { FIELD_CONDITION_MISTY_TERRAIN, MOVE_DISARMING_VOICE },
+    { FIELD_CONDITION_PSYCHIC_TERRAIN, MOVE_CONFUSION },
+};
+
+/**
  * @brief Initializes MoveAnimation structs, output to the animation parameter
  *
  * @param battleSys
@@ -2068,6 +2082,15 @@ void BattleController_SetMoveAnimation(BattleSystem *battleSys, BattleContext *b
     animation->unk_4C = param3;
     animation->unk_50 = param4;
     animation->terrain = BattleSystem_GetTerrain(battleSys);
+
+    if (battleCtx != NULL && move == MOVE_SECRET_POWER) {
+        for (i = 0; i < NELEMS(sTerrainSecretPowerAnimation); i++) {
+            if (battleCtx->fieldConditionsMask & sTerrainSecretPowerAnimation[i].fieldCondition) {
+                animation->move = sTerrainSecretPowerAnimation[i].move;
+                break;
+            }
+        }
+    }
 
     if (battleCtx != NULL) {
         animation->damage = battleCtx->damage;

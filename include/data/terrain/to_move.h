@@ -17,4 +17,14 @@ static const u16 sTerrainMove[] = {
     [TERRAIN_BRIDGE]      = MOVE_AIR_SLASH,
     [TERRAIN_SPECIAL]     = MOVE_TRI_ATTACK,
 };
+
+static const struct {
+    u32 fieldCondition;
+    u16 move;
+} sFieldTerrainMove[] = {
+    { FIELD_CONDITION_ELECTRIC_TERRAIN, MOVE_THUNDERBOLT },
+    { FIELD_CONDITION_GRASSY_TERRAIN,   MOVE_ENERGY_BALL },
+    { FIELD_CONDITION_MISTY_TERRAIN,    MOVE_MOONBLAST   },
+    { FIELD_CONDITION_PSYCHIC_TERRAIN,  MOVE_PSYCHIC     },
+};
 // clang-format on

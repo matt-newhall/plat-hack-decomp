@@ -8635,6 +8635,9 @@ static BOOL BtlCmd_TryCamouflage(BattleSystem *battleSys, BattleContext *battleC
 /**
  * @brief Get the move which corresponding to this battle's terrain.
  *
+ * An active Electric/Grassy/Misty/Psychic Terrain takes precedence over the
+ * battle's map terrain.
+ *
  * Side effects:
  * - battleCtx->msgMoveTemp will be set to the terrain's corresponding move.
  *
@@ -8645,6 +8648,13 @@ static BOOL BtlCmd_TryCamouflage(BattleSystem *battleSys, BattleContext *battleC
 static BOOL BtlCmd_GetTerrainMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+
+    for (int i = 0; i < NELEMS(sFieldTerrainMove); i++) {
+        if (battleCtx->fieldConditionsMask & sFieldTerrainMove[i].fieldCondition) {
+            battleCtx->msgMoveTemp = sFieldTerrainMove[i].move;
+            return FALSE;
+        }
+    }
 
     int terrain = BattleSystem_GetTerrain(battleSys);
     if (terrain > TERRAIN_SPECIAL) {
@@ -8661,6 +8671,9 @@ static BOOL BtlCmd_GetTerrainMove(BattleSystem *battleSys, BattleContext *battle
 /**
  * @brief Get the secondary effect corresponding to this battle's terrain.
  *
+ * An active Electric/Grassy/Misty/Psychic Terrain takes precedence over the
+ * battle's map terrain.
+ *
  * Side effects:
  * - battleCtx->sideEffectIndirectFlags will be set to the terrain's
  * corresponding secondary effect flags.
@@ -8672,6 +8685,13 @@ static BOOL BtlCmd_GetTerrainMove(BattleSystem *battleSys, BattleContext *battle
 static BOOL BtlCmd_GetTerrainSecondaryEffect(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+
+    for (int i = 0; i < NELEMS(sFieldTerrainSideEffect); i++) {
+        if (battleCtx->fieldConditionsMask & sFieldTerrainSideEffect[i].fieldCondition) {
+            battleCtx->sideEffectIndirectFlags = sFieldTerrainSideEffect[i].sideEffect;
+            return FALSE;
+        }
+    }
 
     int terrain = BattleSystem_GetTerrain(battleSys);
     if (terrain > TERRAIN_SPECIAL) {
