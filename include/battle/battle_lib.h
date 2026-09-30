@@ -1299,12 +1299,61 @@ BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terr
 /**
  * @brief Replace the active terrain.
  *
+ * A permanent terrain from the map cannot be replaced by a timed one.
+ *
  * @param battleCtx
  * @param terrain   The FIELD_CONDITION_*_TERRAIN flag to set.
  * @param permanent TRUE for a terrain that never ends, e.g. from map weather;
  *                  FALSE for one that lasts TERRAIN_DURATION turns.
+ * @return TRUE if the terrain was set, FALSE if a permanent terrain blocked it.
  */
-void BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent);
+BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent);
+
+/**
+ * @brief Get the terrain a terrain-setting move creates.
+ *
+ * @param move
+ * @return The move's FIELD_CONDITION_*_TERRAIN flag, or 0 if it sets none.
+ */
+u32 Move_Terrain(int move);
+
+/**
+ * @brief Check if a terrain-setting move would fail: its terrain is already
+ * active, or a permanent terrain from the map is in place.
+ *
+ * @param battleCtx
+ * @param move
+ * @return TRUE if the move would fail, FALSE if it would set its terrain.
+ */
+BOOL BattleContext_TerrainMoveFails(BattleContext *battleCtx, int move);
+
+/**
+ * @brief Check if Psychic Terrain stops a priority move reaching a grounded
+ * opponent. Moves aimed at the user, its side, the field or the foe's side
+ * are exempt.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param defender
+ * @param move
+ * @return TRUE if the move is blocked, FALSE if not.
+ */
+BOOL BattleSystem_PsychicTerrainBlocksMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int move);
+
+/**
+ * @brief Check if the active terrain will stop a move doing anything: sleep
+ * and Rest under Electric or Misty Terrain, status and confusion under Misty
+ * Terrain, and priority moves under Psychic Terrain.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param defender
+ * @param move
+ * @return TRUE if the move is blocked, FALSE if not.
+ */
+BOOL BattleSystem_MoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int move);
 
 /**
  * @brief Try to Pluck the given battler's berry.

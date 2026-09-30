@@ -3035,16 +3035,7 @@ static BOOL BattleControllerPlayer_TriggerPranksterImmunity(BattleSystem *battle
  */
 static BOOL BattleControllerPlayer_CheckPsychicTerrain(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int range = MOVE_DATA(battleCtx->moveTemp).range;
-
-    if (Battler_IsAffectedByTerrain(battleCtx, battleCtx->defender, FIELD_CONDITION_PSYCHIC_TERRAIN) == FALSE
-        || BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) == BattleSystem_GetBattlerSide(battleSys, battleCtx->defender)
-        || Battler_MovePriority(battleCtx, battleCtx->attacker, battleCtx->moveTemp) <= 0
-        || range == RANGE_USER
-        || range == RANGE_USER_SIDE
-        || range == RANGE_FIELD
-        || range == RANGE_OPPONENT_SIDE
-        || range == RANGE_ALL) {
+    if (BattleSystem_PsychicTerrainBlocksMove(battleSys, battleCtx, battleCtx->attacker, battleCtx->defender, battleCtx->moveTemp) == FALSE) {
         return FALSE;
     }
 

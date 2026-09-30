@@ -7254,8 +7254,12 @@ BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terr
     return (battleCtx->fieldConditionsMask & terrain) && Battler_IsGrounded(battleCtx, battler);
 }
 
-void BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent)
+BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent)
 {
+    if (permanent == FALSE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM)) {
+        return FALSE;
+    }
+
     battleCtx->fieldConditionsMask &= ~(FIELD_CONDITION_TERRAIN | FIELD_CONDITION_TERRAIN_PERM);
     battleCtx->fieldConditionsMask |= terrain;
 
@@ -7264,6 +7268,73 @@ void BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL perman
     }
 
     battleCtx->fieldConditions.terrainTurns = permanent ? 0 : TERRAIN_DURATION;
+
+    return TRUE;
+}
+
+static const struct {
+    u16 move;
+    u32 terrain;
+} sTerrainMoves[] = {
+    { MOVE_GRASSY_TERRAIN, FIELD_CONDITION_GRASSY_TERRAIN },
+    { MOVE_MISTY_TERRAIN, FIELD_CONDITION_MISTY_TERRAIN },
+    { MOVE_PSYCHIC_TERRAIN, FIELD_CONDITION_PSYCHIC_TERRAIN },
+    { MOVE_ELECTRIC_TERRAIN, FIELD_CONDITION_ELECTRIC_TERRAIN },
+};
+
+u32 Move_Terrain(int move)
+{
+    for (int i = 0; i < NELEMS(sTerrainMoves); i++) {
+        if (sTerrainMoves[i].move == move) {
+            return sTerrainMoves[i].terrain;
+        }
+    }
+
+    return 0;
+}
+
+BOOL BattleContext_TerrainMoveFails(BattleContext *battleCtx, int move)
+{
+    u32 terrain = Move_Terrain(move);
+
+    return terrain == 0 || (battleCtx->fieldConditionsMask & (terrain | FIELD_CONDITION_TERRAIN_PERM));
+}
+
+BOOL BattleSystem_PsychicTerrainBlocksMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int move)
+{
+    int range = MOVE_DATA(move).range;
+
+    return Battler_IsAffectedByTerrain(battleCtx, defender, FIELD_CONDITION_PSYCHIC_TERRAIN)
+        && BattleSystem_GetBattlerSide(battleSys, attacker) != BattleSystem_GetBattlerSide(battleSys, defender)
+        && Battler_MovePriority(battleCtx, attacker, move) > 0
+        && range != RANGE_USER
+        && range != RANGE_USER_SIDE
+        && range != RANGE_FIELD
+        && range != RANGE_OPPONENT_SIDE
+        && range != RANGE_ALL;
+}
+
+BOOL BattleSystem_MoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int move)
+{
+    switch (MOVE_DATA(move).effect) {
+    case BATTLE_EFFECT_REST:
+        return Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_ELECTRIC_TERRAIN | FIELD_CONDITION_MISTY_TERRAIN);
+
+    case BATTLE_EFFECT_STATUS_SLEEP:
+    case BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN:
+        return Battler_IsAffectedByTerrain(battleCtx, defender, FIELD_CONDITION_ELECTRIC_TERRAIN | FIELD_CONDITION_MISTY_TERRAIN);
+
+    case BATTLE_EFFECT_STATUS_POISON:
+    case BATTLE_EFFECT_STATUS_BADLY_POISON:
+    case BATTLE_EFFECT_STATUS_PARALYZE:
+    case BATTLE_EFFECT_STATUS_BURN:
+    case BATTLE_EFFECT_STATUS_CONFUSE:
+    case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
+    case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
+        return Battler_IsAffectedByTerrain(battleCtx, defender, FIELD_CONDITION_MISTY_TERRAIN);
+    }
+
+    return BattleSystem_PsychicTerrainBlocksMove(battleSys, battleCtx, attacker, defender, move);
 }
 
 static inline int CountAbilityTheirSide(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int ability)
