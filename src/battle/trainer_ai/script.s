@@ -1843,7 +1843,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Expert_TerrainMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus
@@ -1920,6 +1920,17 @@ Expert_StatusMoveBonus:
     // +6 puts them level with the bonus EvalAttack hands the best damaging move 80% of the time,
     // so they compete with attacking rather than being crowded out by it.
     AddToMoveScore 6
+    PopOrEnd
+
+Expert_TerrainMove:
+    // A terrain move that would fail keeps only the Basic penalty. Otherwise +9 if the
+    // attacker holds a Terrain Extender, which stretches the terrain to 8 turns, else +8.
+    IfTerrainMoveFails Expert_TerrainMove_End
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_EXTEND_TERRAIN, ScorePlus9
+    GoTo ScorePlus8
+
+Expert_TerrainMove_End:
     PopOrEnd
 
 Expert_StatusSleep:
