@@ -10596,6 +10596,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Electric Terrain!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01503",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Ice Spinner!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01504",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Ice Spinner!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01505",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Ice Spinner!"
+      ]
     }
   ]
 }

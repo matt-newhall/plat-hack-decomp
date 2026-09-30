@@ -162,6 +162,7 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_SET_POWDER_FLAG]                  = subscript_set_powder_flag,
     [MOVE_SUBSCRIPT_PTR_ATTACK_THEN_CHECK_KO]             = subscript_attack_then_check_ko,
     [MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES]               = subscript_update_stat_stage,
-    [MOVE_SUBSCRIPT_PTR_TERRAIN_START]                    = subscript_terrain_start
+    [MOVE_SUBSCRIPT_PTR_TERRAIN_START]                    = subscript_terrain_start,
+    [MOVE_SUBSCRIPT_PTR_REMOVE_TERRAIN]                   = subscript_terrain_end
 };
 // clang-format on

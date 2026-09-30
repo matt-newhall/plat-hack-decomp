@@ -2020,6 +2020,10 @@
     {
       "id": "pl_msg_00000647_00504",
       "en_US": "ElectricTerrain"
+    },
+    {
+      "id": "pl_msg_00000647_00505",
+      "en_US": "Ice Spinner"
     }
   ]
 }

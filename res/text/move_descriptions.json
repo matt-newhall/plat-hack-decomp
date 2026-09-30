@@ -4949,6 +4949,16 @@
         "grounded Pokémon can’t\n",
         "fall asleep."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00505",
+      "en_US": [
+        "The user twirls on\n",
+        "icy feet to slam into\n",
+        "the target. The spin\n",
+        "also destroys any\n",
+        "terrain."
+      ]
     }
   ]
 }
