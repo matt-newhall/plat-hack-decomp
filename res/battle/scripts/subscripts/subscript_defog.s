@@ -15,6 +15,7 @@ _000:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_CONDITIONS_DEFENDER, SIDE_CONDITION_STICKY_WEB, _041
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_CONDITIONS_ATTACKER, SIDE_CONDITION_STICKY_WEB, _041
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_DEEP_FOG, _041
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_TERRAIN, _041
     GoTo _043
 
 _041:
@@ -121,8 +122,39 @@ _164:
     UpdateVar OPCODE_FLAG_OFF, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_DEEP_FOG
     // {0} blew away the deep fog with {1}!
     PrintMessage BattleStrings_Text_PokemonBlewAwayTheDeepFogWithMove_Ally, TAG_NICKNAME_MOVE, BTLSCR_ATTACKER, BTLSCR_ATTACKER
-    Wait 
+    Wait
     WaitButtonABTime 30
 
 _181:
-    End 
+    CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_TERRAIN, _end
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_ELECTRIC_TERRAIN, _electric_terrain
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_GRASSY_TERRAIN, _grassy_terrain
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
+    // The weirdness disappeared from the battlefield!
+    PrintMessage BattleStrings_Text_PsychicTerrainEnded, TAG_NONE
+    GoTo _clear_terrain
+
+_electric_terrain:
+    // The electricity disappeared from the battlefield.
+    PrintMessage BattleStrings_Text_ElectricTerrainEnded, TAG_NONE
+    GoTo _clear_terrain
+
+_grassy_terrain:
+    // The grass disappeared from the battlefield.
+    PrintMessage BattleStrings_Text_GrassyTerrainEnded, TAG_NONE
+    GoTo _clear_terrain
+
+_misty_terrain:
+    // The mist disappeared from the battlefield.
+    PrintMessage BattleStrings_Text_MistyTerrainEnded, TAG_NONE
+
+_clear_terrain:
+    Wait
+    WaitButtonABTime 30
+    UpdateVar OPCODE_FLAG_OFF, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_TERRAIN
+    UpdateVar OPCODE_FLAG_OFF, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_TERRAIN_PERM
+    SetTerrainBackground
+    Wait
+
+_end:
+    End
