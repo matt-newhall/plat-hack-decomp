@@ -7214,6 +7214,7 @@ BOOL Battler_IsGrounded(BattleContext *battleCtx, int battler)
                 && itemEffect != HOLD_EFFECT_LEVITATE_POP_ON_HIT
                 && BattlerHasType(battleCtx, battler, TYPE_FLYING) == FALSE)
         || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
+        || (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
         || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY);
 }
 
