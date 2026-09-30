@@ -1320,6 +1320,20 @@
         "Transforms into the foe\n",
         "upon entering battle."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00189",
+      "en_US": [
+        "Boosts Defense on\n",
+        "Grassy Terrain."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00190",
+      "en_US": [
+        "Doubles Speed on\n",
+        "Electric Terrain."
+      ]
     }
   ]
 }

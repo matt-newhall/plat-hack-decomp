@@ -756,6 +756,14 @@
     {
       "id": "pl_msg_00000610_00188",
       "en_US": "Imposter"
+    },
+    {
+      "id": "pl_msg_00000610_00189",
+      "en_US": "Grass Pelt"
+    },
+    {
+      "id": "pl_msg_00000610_00190",
+      "en_US": "Surge Surfer"
     }
   ]
 }

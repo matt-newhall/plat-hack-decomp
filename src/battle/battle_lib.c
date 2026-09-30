@@ -1287,6 +1287,16 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_ELECTRIC_TERRAIN) {
+        if (battler1Ability == ABILITY_SURGE_SURFER) {
+            battler1Speed *= 2;
+        }
+
+        if (battler2Ability == ABILITY_SURGE_SURFER) {
+            battler2Speed *= 2;
+        }
+    }
+
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
         if (BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler1].heldItem, ITEM_PARAM_HOLD_EFFECT) == sSpeedHalvingItemEffects[i]) {
             if (!(battleCtx->battleMons[battler1].moveEffectsMask & MOVE_EFFECT_EMBARGO)
@@ -8909,6 +8919,11 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         defenseStat = defenseStat * 150 / 100;
     }
 
+    if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_GRASS_PELT) == TRUE
+        && (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRASSY_TERRAIN)) {
+        defenseStat = defenseStat * 150 / 100;
+    }
+
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_FUR_COAT) && (!(move == MOVE_STRUGGLE && inPower == 40))) {
         defenseStat = defenseStat * 2;
     }
@@ -10612,6 +10627,10 @@ static u32 BattleAI_CalcEffectiveSpeed(BattleSystem *battleSys, BattleContext *b
             || (ability == ABILITY_SAND_RUSH && WEATHER_IS_SAND)) {
             speed *= 2;
         }
+    }
+
+    if (ability == ABILITY_SURGE_SURFER && (battleCtx->fieldConditionsMask & FIELD_CONDITION_ELECTRIC_TERRAIN)) {
+        speed *= 2;
     }
 
     for (i = 0; i < NELEMS(sSpeedHalvingItemEffects); i++) {
