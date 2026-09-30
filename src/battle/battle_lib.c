@@ -69,6 +69,7 @@ static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, 
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry);
 static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
 static BOOL MoveIsOnDamagingTurn(BattleContext *battleCtx, int move);
+static u32 Ability_SurgeTerrain(int ability);
 static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonParam paramID);
 static BOOL Battler_CanRemoveItem(BattleContext *battleCtx, int battler);
 static void BattleAI_ClearKnownMoves(BattleContext *battleCtx, u8 battler);
@@ -4870,6 +4871,21 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                             result = SWITCH_IN_CHECK_RESULT_BREAK;
                         }
                         break;
+
+                    case ABILITY_ELECTRIC_SURGE:
+                    case ABILITY_GRASSY_SURGE:
+                    case ABILITY_MISTY_SURGE:
+                    case ABILITY_PSYCHIC_SURGE: {
+                        u32 terrain = Ability_SurgeTerrain(Battler_Ability(battleCtx, battler));
+                        battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
+
+                        if ((battleCtx->fieldConditionsMask & terrain) == FALSE
+                            && BattleContext_SetTerrain(battleCtx, terrain, FALSE)) {
+                            subscript = subscript_terrain_surge;
+                            result = SWITCH_IN_CHECK_RESULT_BREAK;
+                        }
+                        break;
+                    }
                     }
                 }
 
@@ -7292,6 +7308,28 @@ static const struct {
     { MOVE_PSYCHIC_TERRAIN, FIELD_CONDITION_PSYCHIC_TERRAIN },
     { MOVE_ELECTRIC_TERRAIN, FIELD_CONDITION_ELECTRIC_TERRAIN },
 };
+
+/**
+ * @brief Get the terrain a Surge ability sets on entry.
+ *
+ * @param ability
+ * @return The ability's FIELD_CONDITION_*_TERRAIN flag, or 0 if it sets none.
+ */
+static u32 Ability_SurgeTerrain(int ability)
+{
+    switch (ability) {
+    case ABILITY_ELECTRIC_SURGE:
+        return FIELD_CONDITION_ELECTRIC_TERRAIN;
+    case ABILITY_GRASSY_SURGE:
+        return FIELD_CONDITION_GRASSY_TERRAIN;
+    case ABILITY_MISTY_SURGE:
+        return FIELD_CONDITION_MISTY_TERRAIN;
+    case ABILITY_PSYCHIC_SURGE:
+        return FIELD_CONDITION_PSYCHIC_TERRAIN;
+    }
+
+    return 0;
+}
 
 u32 Move_Terrain(int move)
 {

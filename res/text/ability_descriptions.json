@@ -1334,6 +1334,34 @@
         "Doubles Speed on\n",
         "Electric Terrain."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00191",
+      "en_US": [
+        "Sets Electric Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00192",
+      "en_US": [
+        "Sets Grassy Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00193",
+      "en_US": [
+        "Sets Misty Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00194",
+      "en_US": [
+        "Sets Psychic Terrain\n",
+        "upon entering battle."
+      ]
     }
   ]
 }
