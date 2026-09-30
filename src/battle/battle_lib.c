@@ -67,7 +67,6 @@ void BattleSystem_GetTypeEffectivenessForAnticipation(BattleSystem *battleSys, B
 static int MapSideEffectToSubscript(BattleContext *battleCtx, enum BattleSideEffectType type, u32 effect);
 static int ApplyTypeMultiplier(BattleContext *battleCtx, int attacker, int mul, int damage, BOOL update, u32 *moveStatus);
 static BOOL NoImmunityOverrides(BattleContext *battleCtx, int itemEffect, int chartEntry);
-static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler);
 static void UpdateMoveStatusForTypeMul(int mul, u32 *moveStatusMask);
 static BOOL MoveIsOnDamagingTurn(BattleContext *battleCtx, int move);
 static u8 Battler_MonType(BattleContext *battleCtx, int battler, enum BattleMonParam paramID);
@@ -1459,46 +1458,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
             }
         }
 
-        battler1Priority = MOVE_DATA(battler1Move).priority;
-        battler2Priority = MOVE_DATA(battler2Move).priority;
-
-        if (Battler_Ability(battleCtx, battler1) == ABILITY_GALE_WINGS) {
-            int battler1CurHP = BattleMon_Get(battleCtx, battler1, BATTLEMON_CUR_HP, NULL);
-            int battler1MaxHP = BattleMon_Get(battleCtx, battler1, BATTLEMON_MAX_HP, NULL);
-
-            if (MOVE_DATA(battler1Move).type == TYPE_FLYING && battler1CurHP == battler1MaxHP) {
-                battler1Priority += 1;
-            }
-        }
-
-        if (Battler_Ability(battleCtx, battler2) == ABILITY_GALE_WINGS) {
-            int battler2CurHP = BattleMon_Get(battleCtx, battler2, BATTLEMON_CUR_HP, NULL);
-            int battler2MaxHP = BattleMon_Get(battleCtx, battler2, BATTLEMON_MAX_HP, NULL);
-
-            if (MOVE_DATA(battler2Move).type == TYPE_FLYING && battler2CurHP == battler2MaxHP) {
-                battler2Priority += 1;
-            }
-        }
-
-        if (Battler_Ability(battleCtx, battler1) == ABILITY_TRIAGE && Move_TriageBoosted(battler1Move)) {
-            battler1Priority += 3;
-        }
-
-        if (Battler_Ability(battleCtx, battler2) == ABILITY_TRIAGE && Move_TriageBoosted(battler2Move)) {
-            battler2Priority += 3;
-        }
-
-        if (Battler_Ability(battleCtx, battler1) == ABILITY_PRANKSTER) {
-            if (MOVE_DATA(battler1Move).class == CLASS_STATUS) {
-                battler1Priority += 1;
-            }
-        }
-
-        if (Battler_Ability(battleCtx, battler2) == ABILITY_PRANKSTER) {
-            if (MOVE_DATA(battler2Move).class == CLASS_STATUS) {
-                battler2Priority += 1;
-            }
-        }
+        battler1Priority = Battler_MovePriority(battleCtx, battler1, battler1Move);
+        battler2Priority = Battler_MovePriority(battleCtx, battler2, battler2Move);
     }
 
     if (battler1Priority == battler2Priority) {
@@ -3960,7 +3921,7 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
     }
 
     if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_ARENA_TRAP))
-        && BattlerIsGrounded(battleCtx, battler)) {
+        && Battler_IsGrounded(battleCtx, battler)) {
         if (msgOut == NULL) {
             return TRUE;
         }
@@ -4785,6 +4746,12 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 case OVERWORLD_WEATHER_INVERSE:
                 case OVERWORLD_WEATHER_INVERSE_MIST:
                     subscript = subscript_overworld_inverse;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_GRASSY_TERRAIN_MIST:
+                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_GRASSY_TERRAIN, TRUE);
+                    subscript = subscript_terrain_start;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
@@ -7238,7 +7205,7 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler)
     return BattleSystem_GetItemData(battleCtx, battleCtx->battleMons[battler].heldItem, ITEM_PARAM_FLING_POWER);
 }
 
-static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
+BOOL Battler_IsGrounded(BattleContext *battleCtx, int battler)
 {
     int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
 
@@ -7248,6 +7215,44 @@ static inline BOOL BattlerIsGrounded(BattleContext *battleCtx, int battler)
                 && BattlerHasType(battleCtx, battler, TYPE_FLYING) == FALSE)
         || itemEffect == HOLD_EFFECT_SPEED_DOWN_GROUNDED
         || (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY);
+}
+
+int Battler_MovePriority(BattleContext *battleCtx, int battler, int move)
+{
+    int priority = MOVE_DATA(move).priority;
+    int ability = Battler_Ability(battleCtx, battler);
+    BattleMon *mon = &battleCtx->battleMons[battler];
+
+    if (ability == ABILITY_GALE_WINGS && MOVE_DATA(move).type == TYPE_FLYING && mon->curHP == mon->maxHP) {
+        priority += 1;
+    }
+
+    if (ability == ABILITY_TRIAGE && Move_TriageBoosted(move)) {
+        priority += 3;
+    }
+
+    if (ability == ABILITY_PRANKSTER && MOVE_DATA(move).class == CLASS_STATUS) {
+        priority += 1;
+    }
+
+    return priority;
+}
+
+BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terrain)
+{
+    return (battleCtx->fieldConditionsMask & terrain) && Battler_IsGrounded(battleCtx, battler);
+}
+
+void BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent)
+{
+    battleCtx->fieldConditionsMask &= ~(FIELD_CONDITION_TERRAIN | FIELD_CONDITION_TERRAIN_PERM);
+    battleCtx->fieldConditionsMask |= terrain;
+
+    if (permanent) {
+        battleCtx->fieldConditionsMask |= FIELD_CONDITION_TERRAIN_PERM;
+    }
+
+    battleCtx->fieldConditions.terrainTurns = permanent ? 0 : TERRAIN_DURATION;
 }
 
 static inline int CountAbilityTheirSide(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int ability)
@@ -7285,7 +7290,7 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
         result = TRUE;
     }
 
-    if (BattlerIsGrounded(battleCtx, battler) && CountAbilityTheirSide(battleSys, battleCtx, battler, ABILITY_ARENA_TRAP)) {
+    if (Battler_IsGrounded(battleCtx, battler) && CountAbilityTheirSide(battleSys, battleCtx, battler, ABILITY_ARENA_TRAP)) {
         result = TRUE;
     }
 
@@ -8922,6 +8927,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
     if (moveType == TYPE_FIRE
         && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_WATER_SPORT)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
+    }
+
+    if ((moveType == TYPE_ELECTRIC && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_ELECTRIC_TERRAIN))
+        || (moveType == TYPE_GRASS && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_GRASSY_TERRAIN))
+        || (moveType == TYPE_PSYCHIC && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_PSYCHIC_TERRAIN))) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_3);
+    }
+
+    if ((moveType == TYPE_DRAGON && Battler_IsAffectedByTerrain(battleCtx, defender, FIELD_CONDITION_MISTY_TERRAIN))
+        || ((move == MOVE_EARTHQUAKE || move == MOVE_MAGNITUDE || move == MOVE_BULLDOZE)
+            && Battler_IsAffectedByTerrain(battleCtx, defender, FIELD_CONDITION_GRASSY_TERRAIN))) {
         powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
 

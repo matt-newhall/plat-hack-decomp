@@ -346,3 +346,7 @@ subscript_overworld_inverse
 subscript_moody
 subscript_cursed_body
 subscript_imposter
+subscript_terrain_start
+subscript_terrain_end
+subscript_grassy_terrain_heal
+subscript_psychic_terrain_protected

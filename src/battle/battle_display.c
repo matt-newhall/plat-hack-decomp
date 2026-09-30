@@ -1850,6 +1850,77 @@ void BattleDisplay_InitTaskPlayEntryAnimation(BattleSystem *battleSys, BattlerDa
     SysTask_Start(Task_PlayEntryAnimation, entryAnimData, 0);
 }
 
+#define TERRAIN_BG_FADE_PALETTES (0xFFFF & ~((1 << 10) | (1 << 11)))
+#define TERRAIN_BG_FADE_WAIT     1
+
+typedef struct TerrainBackgroundData {
+    BattleSystem *battleSys;
+    u32 terrain;
+    u8 command;
+    u8 battler;
+    u8 state;
+    u8 padding_0B;
+} TerrainBackgroundData;
+
+enum TerrainBackgroundState {
+    TERRAIN_BG_STATE_FADE_OUT = 0,
+    TERRAIN_BG_STATE_SWAP,
+    TERRAIN_BG_STATE_FADE_IN,
+    TERRAIN_BG_STATE_DONE,
+};
+
+/**
+ * @brief Fade the battle BG to white, swap in the new backdrop, and fade back.
+ *
+ * The message box and font palettes (rows 10 and 11) are left out of the fade
+ * so the text window stays readable.
+ *
+ * @param task
+ * @param data The task's TerrainBackgroundData.
+ */
+static void Task_SetTerrainBackground(SysTask *task, void *data)
+{
+    TerrainBackgroundData *bgData = data;
+    PaletteData *paletteData = BattleSystem_GetPaletteData(bgData->battleSys);
+
+    if (PaletteData_GetSelectedBuffersMask(paletteData) & PLTTBUF_MAIN_BG_F) {
+        return;
+    }
+
+    switch (bgData->state) {
+    case TERRAIN_BG_STATE_FADE_OUT:
+        PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F, TERRAIN_BG_FADE_PALETTES, TERRAIN_BG_FADE_WAIT, 0, 16, BATTLE_COLOR_WHITE);
+        bgData->state++;
+        break;
+    case TERRAIN_BG_STATE_SWAP:
+        BattleSystem_LoadTerrainBackground(bgData->battleSys, bgData->terrain);
+        bgData->state++;
+        break;
+    case TERRAIN_BG_STATE_FADE_IN:
+        PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F, TERRAIN_BG_FADE_PALETTES, TERRAIN_BG_FADE_WAIT, 16, 0, BATTLE_COLOR_WHITE);
+        bgData->state++;
+        break;
+    default:
+        BattleController_EmitClearCommand(bgData->battleSys, bgData->battler, bgData->command);
+        Heap_Free(data);
+        SysTask_Done(task);
+        break;
+    }
+}
+
+void BattleDisplay_InitTaskSetTerrainBackground(BattleSystem *battleSys, BattlerData *battlerData, TerrainBackgroundMessage *message)
+{
+    TerrainBackgroundData *bgData = Heap_Alloc(HEAP_ID_BATTLE, sizeof(TerrainBackgroundData));
+
+    bgData->battleSys = battleSys;
+    bgData->terrain = message->terrain;
+    bgData->command = message->command;
+    bgData->battler = battlerData->battler;
+    bgData->state = TERRAIN_BG_STATE_FADE_OUT;
+
+    SysTask_Start(Task_SetTerrainBackground, bgData, 0);
+}
+
 void BattleDisplay_FlyMoveHitSoundEffect(BattleSystem *battleSys, BattlerData *battlerData, MoveHitSoundMessage *message)
 {
     int pan;

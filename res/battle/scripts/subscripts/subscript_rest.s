@@ -13,6 +13,8 @@ _000:
 _015:
     CompareMonDataToValue OPCODE_FLAG_SET, BTLSCR_ATTACKER, BATTLEMON_STATUS, MON_CONDITION_SLEEP, _107
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_UPROAR, _115
+    CheckTerrainProtection BTLSCR_ATTACKER, FIELD_CONDITION_ELECTRIC_TERRAIN, _electric_terrain
+    CheckTerrainProtection BTLSCR_ATTACKER, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     CheckIgnoreWeather _027
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_SUNNY, _027
     CheckAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_LEAF_GUARD, _170
@@ -78,6 +80,18 @@ _129:
     WaitButtonABTime 30
     // But {0} can’t sleep in an uproar!
     PrintMessage BattleStrings_Text_ButPokemonCantSleepInAnUproar_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
+    GoTo _143
+
+_electric_terrain:
+    WaitButtonABTime 30
+    // {0} surrounds itself with electrified terrain!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithElectrifiedTerrain_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
+    GoTo _143
+
+_misty_terrain:
+    WaitButtonABTime 30
+    // {0} surrounds itself with a protective mist!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
     GoTo _143
 
 _137:

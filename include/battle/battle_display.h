@@ -119,6 +119,16 @@ void BattleDisplay_PrintEscapeMessage(BattleSystem *battleSys, BattlerData *batt
 void BattleDisplay_PrintForfeitMessage(BattleSystem *battleSys, BattlerData *battlerData);
 void BattleDisplay_RefreshSprite(BattleSystem *battleSys, BattlerData *battlerData, MoveAnimation *moveAnim);
 void BattleDisplay_InitTaskPlayEntryAnimation(BattleSystem *battleSys, BattlerData *battlerData, MonEntryAnimMessage *message);
+
+/**
+ * @brief Start the task that fades the battle BG to a terrain's backdrop, or
+ * back to the battle's own BG. The command is cleared once the fade finishes.
+ *
+ * @param battleSys
+ * @param battlerData
+ * @param message     The terrain to show; 0 for the battle's own BG.
+ */
+void BattleDisplay_InitTaskSetTerrainBackground(BattleSystem *battleSys, BattlerData *battlerData, TerrainBackgroundMessage *message);
 void BattleDisplay_FlyMoveHitSoundEffect(BattleSystem *battleSys, BattlerData *battlerData, MoveHitSoundMessage *message);
 void BattleDisplay_PlayMusic(BattleSystem *battleSys, BattlerData *battlerData, MusicPlayMessage *message);
 void BattlerData_SetTaskFuncs(BattleSystem *battleSys, BattlerData *battlerData);

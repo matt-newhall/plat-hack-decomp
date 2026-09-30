@@ -349,3 +349,15 @@ interface/mega_icon.NCLR
 interface/mega_icon_cell.NCER.lz
 interface/mega_icon_dim.NCGR.lz
 interface/mega_icon_dim.NCLR
+terrain/electric_terrain/all.NCLR
+terrain/electric_terrain/player.NCGR.lz
+terrain/electric_terrain/enemy.NCGR.lz
+terrain/grassy_terrain/all.NCLR
+terrain/grassy_terrain/player.NCGR.lz
+terrain/grassy_terrain/enemy.NCGR.lz
+terrain/misty_terrain/all.NCLR
+terrain/misty_terrain/player.NCGR.lz
+terrain/misty_terrain/enemy.NCGR.lz
+terrain/psychic_terrain/all.NCLR
+terrain/psychic_terrain/player.NCGR.lz
+terrain/psychic_terrain/enemy.NCGR.lz

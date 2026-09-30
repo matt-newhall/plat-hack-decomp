@@ -25,6 +25,7 @@ _049:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _101
 
 _070:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _072
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _075
 
@@ -43,6 +44,7 @@ _075:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_CONDITIONS_EFFECT_MON, SIDE_CONDITION_SAFEGUARD, _167
 
 _076:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_CONFUSED
     Wait 
     Random 3, 2
@@ -86,6 +88,13 @@ _141:
     ShowAbilityPopupAuto BTLSCR_SIDE_EFFECT_MON
     // {0}’s {1} prevents confusion!
     PrintMessage BattleStrings_Text_PokemonsAbilityPreventsConfusion_Ally, TAG_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON
+    GoTo _178
+
+_misty_terrain:
+    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _185
+    WaitButtonABTime 30
+    // {0} surrounds itself with a protective mist!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _178
 
 _167:

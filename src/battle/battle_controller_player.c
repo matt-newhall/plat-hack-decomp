@@ -978,6 +978,7 @@ enum FieldCondCheckState {
     FIELD_COND_CHECK_STATE_DEEP_FOG,
     FIELD_COND_CHECK_STATE_GRAVITY,
     FIELD_COND_CHECK_STATE_MAGMA_STORM,
+    FIELD_COND_CHECK_STATE_TERRAIN,
 
     FIELD_COND_CHECK_END
 };
@@ -1336,6 +1337,17 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
             battleCtx->fieldConditionCheckState++;
             break;
 
+        case FIELD_COND_CHECK_STATE_TERRAIN:
+            if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN)
+                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM) == FALSE
+                && --battleCtx->fieldConditions.terrainTurns == 0) {
+                PrepareSubroutineSequence(battleCtx, subscript_terrain_end);
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
         case FIELD_COND_CHECK_END:
             state = STATE_DONE;
             break;
@@ -1355,7 +1367,8 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
 enum MonCondCheckState {
     MON_COND_CHECK_START = 0,
 
-    MON_COND_CHECK_STATE_INGRAIN = MON_COND_CHECK_START,
+    MON_COND_CHECK_STATE_GRASSY_TERRAIN = MON_COND_CHECK_START,
+    MON_COND_CHECK_STATE_INGRAIN,
     MON_COND_CHECK_STATE_AQUA_RING,
     MON_COND_CHECK_STATE_ABILITY,
     MON_COND_CHECK_STATE_USE_ITEM,
@@ -1406,6 +1419,21 @@ static void BattleControllerPlayer_CheckMonConditions(BattleSystem *battleSys, B
         }
 
         switch (battleCtx->monConditionCheckState) {
+        case MON_COND_CHECK_STATE_GRASSY_TERRAIN:
+            if (Battler_IsAffectedByTerrain(battleCtx, battler, FIELD_CONDITION_GRASSY_TERRAIN)
+                && battleCtx->battleMons[battler].curHP
+                && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
+                && battleCtx->battleMons[battler].moveEffectsData.healBlockTurns == 0) {
+                battleCtx->msgBattlerTemp = battler;
+                battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+
+                PrepareSubroutineSequence(battleCtx, subscript_grassy_terrain_heal);
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+
         case MON_COND_CHECK_STATE_INGRAIN:
             if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
                 && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
@@ -2995,6 +3023,41 @@ static BOOL BattleControllerPlayer_TriggerPranksterImmunity(BattleSystem *battle
 }
 
 /**
+ * @brief Block an opponent's priority move against a grounded target in
+ * Psychic Terrain.
+ *
+ * Moves aimed at the user, its own side, the whole field or the foe's side
+ * are not blocked, and neither are moves from an ally.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if the move was blocked and the protection message queued.
+ */
+static BOOL BattleControllerPlayer_CheckPsychicTerrain(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    int range = MOVE_DATA(battleCtx->moveTemp).range;
+
+    if (Battler_IsAffectedByTerrain(battleCtx, battleCtx->defender, FIELD_CONDITION_PSYCHIC_TERRAIN) == FALSE
+        || BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) == BattleSystem_GetBattlerSide(battleSys, battleCtx->defender)
+        || Battler_MovePriority(battleCtx, battleCtx->attacker, battleCtx->moveTemp) <= 0
+        || range == RANGE_USER
+        || range == RANGE_USER_SIDE
+        || range == RANGE_FIELD
+        || range == RANGE_OPPONENT_SIDE
+        || range == RANGE_ALL) {
+        return FALSE;
+    }
+
+    battleCtx->moveFailFlags[battleCtx->attacker].noEffect = TRUE;
+    battleCtx->moveStatusFlags |= MOVE_STATUS_NO_MORE_WORK;
+    LOAD_SUBSEQ(subscript_psychic_terrain_protected);
+    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+    battleCtx->commandNext = BATTLE_CONTROL_LOOP_FAINTED;
+
+    return TRUE;
+}
+
+/**
  * @brief Load the Quick Claw effect subroutine sequence.
  *
  * Activation checks are all handled within the loaded subroutine sequence.
@@ -3537,6 +3600,7 @@ enum TryMoveState {
     TRY_MOVE_STATE_CHECK_MOVE_HIT_OVERRIDES,
     TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES,
     TRY_MOVE_STATE_PRANKSTER_IMMUNITY,
+    TRY_MOVE_STATE_PSYCHIC_TERRAIN,
     TRY_MOVE_STATE_CHECK_TYPE_CHART,
     TRY_MOVE_CHOICE_MULTI_TURN_CONFLICT,
 
@@ -3592,6 +3656,15 @@ static void BattleControllerPlayer_TryMove(BattleSystem *battleSys, BattleContex
     case TRY_MOVE_STATE_PRANKSTER_IMMUNITY:
         if (battleCtx->defender != BATTLER_NONE
             && BattleControllerPlayer_TriggerPranksterImmunity(battleSys, battleCtx) == 1) {
+            return;
+        }
+
+        battleCtx->tryMoveCheckState++;
+
+    case TRY_MOVE_STATE_PSYCHIC_TERRAIN:
+        if (battleCtx->defender != BATTLER_NONE
+            && BattleControllerPlayer_CheckPsychicTerrain(battleSys, battleCtx) == TRUE) {
+            battleCtx->tryMoveCheckState = TRY_MOVE_STATE_CHECK_MOVE_HITS;
             return;
         }
 

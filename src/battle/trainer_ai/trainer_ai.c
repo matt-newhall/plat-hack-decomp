@@ -2916,23 +2916,7 @@ static void AICmd_IfDefenderCanKO(BattleSystem *battleSys, BattleContext *battle
 static BOOL AI_MovesBeforeTarget(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int attacker = AI_CONTEXT.attacker;
-    BattleMon *mon = &battleCtx->battleMons[attacker];
-    int ability = Battler_Ability(battleCtx, attacker);
-    int priority = MOVE_DATA(AI_CONTEXT.move).priority;
-
-    if (ability == ABILITY_PRANKSTER && MOVE_DATA(AI_CONTEXT.move).class == CLASS_STATUS) {
-        priority++;
-    }
-
-    if (ability == ABILITY_GALE_WINGS
-        && MOVE_DATA(AI_CONTEXT.move).type == TYPE_FLYING
-        && mon->curHP == mon->maxHP) {
-        priority++;
-    }
-
-    if (ability == ABILITY_TRIAGE && Move_TriageBoosted(AI_CONTEXT.move)) {
-        priority += 3;
-    }
+    int priority = Battler_MovePriority(battleCtx, attacker, AI_CONTEXT.move);
 
     if (priority != 0) {
         return priority > 0;

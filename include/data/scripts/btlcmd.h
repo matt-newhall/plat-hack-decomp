@@ -264,6 +264,8 @@ ScriptCommand(BTLCMD_PLAYENTRYANIMATION,                  BtlCmd_PlayEntryAnimat
 ScriptCommand(BTLCMD_CHECKSIMPLE,                         BtlCmd_CheckSimple)
 ScriptCommand(BTLCMD_MARKENTRYABILITIESANNOUNCED,         BtlCmd_MarkEntryAbilitiesAnnounced)
 ScriptCommand(BTLCMD_GOTOIFSTATSTAGECHANGEUNBLOCKED,      BtlCmd_GoToIfStatStageChangeUnblocked)
+ScriptCommand(BTLCMD_SETTERRAINBACKGROUND,                BtlCmd_SetTerrainBackground)
+ScriptCommand(BTLCMD_CHECKTERRAINPROTECTION,              BtlCmd_CheckTerrainProtection)
 
 // clang-format on
 

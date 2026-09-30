@@ -12,5 +12,7 @@ void ov16_02268674(UnkStruct_ov16_02268520 *param0);
 void ov16_022686BC(UnkStruct_ov16_02268520 *param0, int param1);
 void ov16_022686CC(UnkStruct_ov16_02268520 *param0, BattleSystem *battleSys, u16 param2, int param3);
 void ov16_02268700(UnkStruct_ov16_02268520 *param0);
+u16 BattleTerrain_GetPlatformTilesMember(int terrain, BOOL enemySide);
+u16 BattleTerrain_GetPlatformPaletteMember(int terrain, int timeOffset);
 
 #endif // POKEPLATINUM_OV16_02268520_H

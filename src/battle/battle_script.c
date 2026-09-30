@@ -346,6 +346,8 @@ static BOOL BtlCmd_CheckSimple(BattleSystem *battleSys, BattleContext *battleCtx
 static BOOL BtlCmd_MarkEntryAbilitiesAnnounced(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_GoToIfStatStageChangeUnblocked(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SetTerrainBackground(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -13892,6 +13894,50 @@ static BOOL BtlCmd_GoToIfStatStageChangeUnblocked(BattleSystem *battleSys, Battl
     int stage = battleCtx->battleMons[battleCtx->sideEffectMon].statBoosts[BATTLE_STAT_ATTACK + statOffset];
 
     if (stageChange > 0 ? stage < MAX_STAT_STAGE : stage > MIN_STAT_STAGE) {
+        BattleScript_Iter(battleCtx, jump);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Fade the battle BG to the active terrain's backdrop, or back to the
+ * battle's own BG if no terrain is active.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_SetTerrainBackground(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    BattleController_EmitSetTerrainBackground(battleSys, BATTLER_US, battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN);
+
+    return FALSE;
+}
+
+/**
+ * @brief Jump if one of the given terrains is active and the battler is on the
+ * ground, so the terrain shields it.
+ *
+ * Inputs:
+ * 1. The battler to check.
+ * 2. Mask of FIELD_CONDITION_*_TERRAIN flags that protect against the effect.
+ * 3. How far ahead to jump if the battler is protected.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler = BattleScript_Read(battleCtx);
+    u32 terrain = BattleScript_Read(battleCtx);
+    int jump = BattleScript_Read(battleCtx);
+
+    if (Battler_IsAffectedByTerrain(battleCtx, BattleScript_Battler(battleSys, battleCtx, inBattler), terrain)) {
         BattleScript_Iter(battleCtx, jump);
     }
 

@@ -349,5 +349,9 @@ subscript_files = files(
     'subscript_mega_evolution.s',
     'subscript_moody.s',
     'subscript_cursed_body.s',
-    'subscript_imposter.s'
+    'subscript_imposter.s',
+    'subscript_terrain_start.s',
+    'subscript_terrain_end.s',
+    'subscript_grassy_terrain_heal.s',
+    'subscript_psychic_terrain_protected.s'
 )

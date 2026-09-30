@@ -1265,6 +1265,48 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler);
 BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
 /**
+ * @brief Check if a battler is on the ground, and so affected by terrain,
+ * Spikes and Arena Trap.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler is grounded, FALSE if not.
+ */
+BOOL Battler_IsGrounded(BattleContext *battleCtx, int battler);
+
+/**
+ * @brief Get the priority a battler's move acts at, after Gale Wings, Triage
+ * and Prankster.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param move
+ * @return The move's effective priority bracket.
+ */
+int Battler_MovePriority(BattleContext *battleCtx, int battler, int move);
+
+/**
+ * @brief Check if one of the given terrains is active and the battler is
+ * grounded, so the terrain applies to it.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param terrain   Mask of FIELD_CONDITION_*_TERRAIN flags to test for.
+ * @return TRUE if any of the terrains applies to the battler, FALSE if not.
+ */
+BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terrain);
+
+/**
+ * @brief Replace the active terrain.
+ *
+ * @param battleCtx
+ * @param terrain   The FIELD_CONDITION_*_TERRAIN flag to set.
+ * @param permanent TRUE for a terrain that never ends, e.g. from map weather;
+ *                  FALSE for one that lasts TERRAIN_DURATION turns.
+ */
+void BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent);
+
+/**
  * @brief Try to Pluck the given battler's berry.
  *
  * This routine will determine what subsequence should be run as the stolen

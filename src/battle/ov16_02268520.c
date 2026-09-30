@@ -253,3 +253,35 @@ void ov16_02268700(UnkStruct_ov16_02268520 *param0)
     ov16_02268674(param0);
     MI_CpuClearFast(param0, sizeof(UnkStruct_ov16_02268520));
 }
+
+/**
+ * @brief Get the pl_batt_obj member holding a terrain's platform tiles.
+ *
+ * @param terrain   The battle terrain; out-of-range values fall back to the first entry.
+ * @param enemySide TRUE for the enemy's platform, FALSE for the player's.
+ * @return The NARC member index of the platform's character data.
+ */
+u16 BattleTerrain_GetPlatformTilesMember(int terrain, BOOL enemySide)
+{
+    if (terrain >= TERRAIN_MAX) {
+        terrain = 0;
+    }
+
+    return enemySide ? sTerrainSpriteSource_EnemySide[terrain] : sTerrainSpriteSource_PlayerSide[terrain];
+}
+
+/**
+ * @brief Get the pl_batt_obj member holding a terrain's platform palette.
+ *
+ * @param terrain    The battle terrain; out-of-range values fall back to the first entry.
+ * @param timeOffset The time-of-day column from BattleSystem_GetBackgroundTimeOffset.
+ * @return The NARC member index of the platform's palette.
+ */
+u16 BattleTerrain_GetPlatformPaletteMember(int terrain, int timeOffset)
+{
+    if (terrain >= TERRAIN_MAX) {
+        terrain = 0;
+    }
+
+    return sTerrainPaletteSource[terrain][timeOffset];
+}

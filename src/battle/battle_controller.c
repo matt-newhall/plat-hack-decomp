@@ -1603,6 +1603,23 @@ void BattleController_EmitPlayEntryAnimation(BattleSystem *battleSys, int battle
 }
 
 /**
+ * @brief Emits a message to fade the battle BG to a terrain's backdrop.
+ *
+ * @param battleSys
+ * @param battler
+ * @param terrain   One FIELD_CONDITION_*_TERRAIN flag, or 0 for the battle's own BG.
+ */
+void BattleController_EmitSetTerrainBackground(BattleSystem *battleSys, int battler, u32 terrain)
+{
+    TerrainBackgroundMessage message;
+
+    message.command = BATTLE_COMMAND_SET_TERRAIN_BACKGROUND;
+    message.terrain = terrain;
+
+    SendMessage(battleSys, COMM_RECIPIENT_CLIENT, battler, &message, sizeof(TerrainBackgroundMessage));
+}
+
+/**
  * @brief Emits a message to update the BG layer
  *
  * @param battleSys

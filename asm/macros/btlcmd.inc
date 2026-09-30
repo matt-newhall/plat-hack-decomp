@@ -1413,6 +1413,17 @@
     .long (\jump_if_unblocked-.) / 4 - 1
     .endm
 
+    .macro SetTerrainBackground
+    .long BTLCMD_SETTERRAINBACKGROUND
+    .endm
+
+    .macro CheckTerrainProtection battler:req, terrain:req, jump_if_protected:req
+    .long BTLCMD_CHECKTERRAINPROTECTION
+    .long \battler
+    .long \terrain
+    .long (\jump_if_protected-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

@@ -228,6 +228,7 @@ void ov16_0223EF2C(BattleSystem *battleSys, int param1, int param2);
 void BattleSystem_EnqueuePokemonHistory(BattleSystem *battleSys, Pokemon *mon);
 void BattleSystem_InitCaptureAttempt(BattleSystem *battleSys, Pokemon *mon);
 void ov16_0223EF8C(BattleSystem *battleSys);
+void BattleSystem_LoadTerrainBackground(BattleSystem *battleSys, u32 terrain);
 u8 *ov16_0223F1E8(BattleSystem *battleSys);
 u16 *ov16_0223F1F0(BattleSystem *battleSys);
 int BattleSystem_GetVisistedContestHall(BattleSystem *battleSys);

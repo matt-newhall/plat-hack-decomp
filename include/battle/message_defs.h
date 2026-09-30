@@ -352,6 +352,12 @@ typedef struct MonEntryAnimMessage {
     enum PokemonCryMod cryModulation;
 } MonEntryAnimMessage;
 
+typedef struct TerrainBackgroundMessage {
+    u8 command;
+    u8 padding_01[3];
+    u32 terrain;
+} TerrainBackgroundMessage;
+
 typedef struct RecordIncrementMessage {
     u8 command;
     u8 battlerType;

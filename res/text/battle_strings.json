@@ -9452,6 +9452,144 @@
         "The {STRVAR_1 8, 1, 0} harshly lowered\n",
         "the foe’s {STRVAR_1 1, 0, 0}’s {STRVAR_1 13, 2, 0}!"
       ]
+    },
+    {
+      "id": "BattleStrings_Text_ElectricTerrainStarted",
+      "en_US": [
+        "An electric current ran\n",
+        "across the battlefield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_GrassyTerrainStarted",
+      "en_US": [
+        "Grass grew to cover\n",
+        "the battlefield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_MistyTerrainStarted",
+      "en_US": [
+        "Mist swirled about\n",
+        "the battlefield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PsychicTerrainStarted",
+      "en_US": [
+        "The battlefield got weird!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_ElectricTerrainEnded",
+      "en_US": [
+        "The electricity disappeared\n",
+        "from the battlefield."
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_GrassyTerrainEnded",
+      "en_US": [
+        "The grass disappeared\n",
+        "from the battlefield."
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_MistyTerrainEnded",
+      "en_US": [
+        "The mist disappeared\n",
+        "from the battlefield."
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PsychicTerrainEnded",
+      "en_US": [
+        "The weirdness disappeared\n",
+        "from the battlefield!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonSurroundsItselfWithElectrifiedTerrain_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} surrounds itself\n",
+        "with electrified terrain!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonSurroundsItselfWithElectrifiedTerrain_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} surrounds\n",
+        "itself with electrified terrain!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonSurroundsItselfWithElectrifiedTerrain_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} surrounds\n",
+        "itself with electrified terrain!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} surrounds itself\n",
+        "with a protective mist!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} surrounds\n",
+        "itself with a protective mist!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} surrounds\n",
+        "itself with a protective mist!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonIsProtectedByThePsychicTerrain_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} is protected\n",
+        "by the Psychic Terrain!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonIsProtectedByThePsychicTerrain_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} is protected\n",
+        "by the Psychic Terrain!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonIsProtectedByThePsychicTerrain_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} is protected\n",
+        "by the Psychic Terrain!"
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsHPWasRestored_Ally",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0}’s HP was restored."
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsHPWasRestored_Wild",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0}’s HP\n",
+        "was restored."
+      ]
+    },
+    {
+      "id": "BattleStrings_Text_PokemonsHPWasRestored_Foe",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0}’s HP\n",
+        "was restored."
+      ]
     }
   ]
 }

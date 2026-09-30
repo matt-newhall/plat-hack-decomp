@@ -754,7 +754,8 @@ static UnkStruct_ov5_021D69B8 Unk_ov5_02201D78[31] = {
     // OVERWORLD_WEATHER_INVERSE_MIST (added): looks like Eterna Forest
     { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
     { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
-    { 0xffff, 0xA, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3A8 },
+    // OVERWORLD_WEATHER_GRASSY_TERRAIN_MIST (added): looks like Eterna Forest
+    { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
     { 0xffff, 0xA, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3C4 },
     { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3E0 },
     { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB40C },

@@ -26,6 +26,7 @@ typedef struct FieldConditions {
     s32 futureSightDamage[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
     s32 wishHealing[MAX_BATTLERS];
+    u8 terrainTurns;
 } FieldConditions;
 
 typedef struct SideConditions {
