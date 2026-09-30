@@ -756,7 +756,8 @@ static UnkStruct_ov5_021D69B8 Unk_ov5_02201D78[31] = {
     { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
     // OVERWORLD_WEATHER_GRASSY_TERRAIN_MIST (added): looks like Eterna Forest
     { 0xffff, 0x9, sizeof(UnkStruct_ov5_021DB144), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB144 },
-    { 0xffff, 0xA, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3C4 },
+    // OVERWORLD_WEATHER_ELECTRIC_TERRAIN (added): renders clear
+    { 0xffff, 0xffff, sizeof(u32), NULL, NULL, 0x0, 0x0, NULL, ov5_021D7604 },
     { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB3E0 },
     { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB40C },
     { 0xffff, 0xffff, sizeof(UnkStruct_ov5_021D84D4), NULL, NULL, 0x0, 0x0, NULL, ov5_021DB438 },

@@ -4702,8 +4702,13 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 switch (BattleSystem_GetFieldWeather(battleSys)) {
                 case OVERWORLD_WEATHER_RAINING:
                 case OVERWORLD_WEATHER_HEAVY_RAIN:
-                case OVERWORLD_WEATHER_THUNDERSTORM:
                     subscript = subscript_overworld_rain;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_THUNDERSTORM:
+                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_ELECTRIC_TERRAIN, TRUE);
+                    subscript = subscript_overworld_thunderstorm;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
@@ -4761,6 +4766,12 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
 
                 case OVERWORLD_WEATHER_GRASSY_TERRAIN_MIST:
                     BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_GRASSY_TERRAIN, TRUE);
+                    subscript = subscript_terrain_start;
+                    result = SWITCH_IN_CHECK_RESULT_BREAK;
+                    break;
+
+                case OVERWORLD_WEATHER_ELECTRIC_TERRAIN:
+                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_ELECTRIC_TERRAIN, TRUE);
                     subscript = subscript_terrain_start;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
