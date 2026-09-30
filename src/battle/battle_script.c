@@ -348,6 +348,7 @@ static BOOL BtlCmd_GoToIfStatStageChangeUnblocked(BattleSystem *battleSys, Battl
 static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SetTerrainBackground(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -13960,6 +13961,47 @@ static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext
     if (Battler_IsAffectedByTerrain(battleCtx, BattleScript_Battler(battleSys, battleCtx, inBattler), terrain)) {
         BattleScript_Iter(battleCtx, jump);
     }
+
+    return FALSE;
+}
+
+static const struct {
+    u16 move;
+    u32 terrain;
+} sTerrainMoves[] = {
+    { MOVE_GRASSY_TERRAIN, FIELD_CONDITION_GRASSY_TERRAIN },
+    { MOVE_MISTY_TERRAIN, FIELD_CONDITION_MISTY_TERRAIN },
+    { MOVE_PSYCHIC_TERRAIN, FIELD_CONDITION_PSYCHIC_TERRAIN },
+    { MOVE_ELECTRIC_TERRAIN, FIELD_CONDITION_ELECTRIC_TERRAIN },
+};
+
+/**
+ * @brief Set the terrain the current move creates, for TERRAIN_DURATION turns.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    u32 terrain = 0;
+
+    for (int i = 0; i < NELEMS(sTerrainMoves); i++) {
+        if (sTerrainMoves[i].move == battleCtx->moveCur) {
+            terrain = sTerrainMoves[i].terrain;
+            break;
+        }
+    }
+
+    if (terrain == 0 || (battleCtx->fieldConditionsMask & terrain)) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+        return FALSE;
+    }
+
+    BattleContext_SetTerrain(battleCtx, terrain, FALSE);
 
     return FALSE;
 }

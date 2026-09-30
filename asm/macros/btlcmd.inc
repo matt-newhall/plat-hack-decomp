@@ -1424,6 +1424,11 @@
     .long (\jump_if_protected-.) / 4 - 1
     .endm
 
+    .macro TrySetTerrain jump_if_fail:req
+    .long BTLCMD_TRYSETTERRAIN
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

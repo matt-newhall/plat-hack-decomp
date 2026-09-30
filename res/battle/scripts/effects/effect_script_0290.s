@@ -1,0 +1,11 @@
+#include "macros/btlcmd.inc"
+
+
+_000:
+    TrySetTerrain _fail
+    UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_FLAGS_INDIRECT, MOVE_SIDE_EFFECT_ON_HIT|MOVE_SUBSCRIPT_PTR_TERRAIN_START
+    End
+
+_fail:
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
+    End

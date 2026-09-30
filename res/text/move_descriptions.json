@@ -4909,6 +4909,46 @@
         "fails if no other move\n",
         "has been used yet."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00501",
+      "en_US": [
+        "Grass covers the field\n",
+        "for five turns. Boosts\n",
+        "Grass moves and heals\n",
+        "grounded Pokémon a\n",
+        "little each turn."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00502",
+      "en_US": [
+        "Mist shields grounded\n",
+        "Pokémon from status\n",
+        "conditions for five\n",
+        "turns and halves\n",
+        "Dragon-type damage."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00503",
+      "en_US": [
+        "Makes the ground weird\n",
+        "for five turns. Boosts\n",
+        "Psychic moves and\n",
+        "blocks priority moves\n",
+        "on grounded Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00504",
+      "en_US": [
+        "Electrifies the ground\n",
+        "for five turns. Boosts\n",
+        "Electric moves, and\n",
+        "grounded Pokémon can’t\n",
+        "fall asleep."
+      ]
     }
   ]
 }

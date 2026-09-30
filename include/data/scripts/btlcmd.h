@@ -266,6 +266,7 @@ ScriptCommand(BTLCMD_MARKENTRYABILITIESANNOUNCED,         BtlCmd_MarkEntryAbilit
 ScriptCommand(BTLCMD_GOTOIFSTATSTAGECHANGEUNBLOCKED,      BtlCmd_GoToIfStatStageChangeUnblocked)
 ScriptCommand(BTLCMD_SETTERRAINBACKGROUND,                BtlCmd_SetTerrainBackground)
 ScriptCommand(BTLCMD_CHECKTERRAINPROTECTION,              BtlCmd_CheckTerrainProtection)
+ScriptCommand(BTLCMD_TRYSETTERRAIN,                       BtlCmd_TrySetTerrain)
 
 // clang-format on
 

@@ -2004,6 +2004,22 @@
     {
       "id": "pl_msg_00000647_00500",
       "en_US": "Copycat"
+    },
+    {
+      "id": "pl_msg_00000647_00501",
+      "en_US": "Grassy Terrain"
+    },
+    {
+      "id": "pl_msg_00000647_00502",
+      "en_US": "Misty Terrain"
+    },
+    {
+      "id": "pl_msg_00000647_00503",
+      "en_US": "Psychic Terrain"
+    },
+    {
+      "id": "pl_msg_00000647_00504",
+      "en_US": "ElectricTerrain"
     }
   ]
 }
