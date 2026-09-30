@@ -8942,6 +8942,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
 
+    if (move == MOVE_MISTY_EXPLOSION && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_MISTY_TERRAIN)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
+    }
+
     if (moveType == TYPE_GRASS
         && attackerParams.ability == ABILITY_OVERGROW
         && attackerParams.curHP <= (attackerParams.maxHP / 3)) {
