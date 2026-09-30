@@ -4159,6 +4159,46 @@
         "Evolve in battle, if its Trainer\n",
         "also has a Mega Ring."
       ]
+    },
+    {
+      "id": "pl_msg_00000391_00521",
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "It extends the duration of terrain\n",
+        "caused by its holder’s move or Ability."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00522",
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "It boosts Defense on Electric\n",
+        "Terrain. It can only be used once."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00523",
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "It boosts Defense on Grassy\n",
+        "Terrain. It can only be used once."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00524",
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "It boosts Sp. Def on Misty\n",
+        "Terrain. It can only be used once."
+      ]
+    },
+    {
+      "id": "pl_msg_00000391_00525",
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "It boosts Sp. Def on Psychic\n",
+        "Terrain. It can only be used once."
+      ]
     }
   ]
 }

@@ -3151,6 +3151,36 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = chimechite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_TERRAIN_EXTENDER] = {
+        .dataID = 0x217,
+        .iconID = terrain_extender_NCGR,
+        .paletteID = terrain_extender_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_ELECTRIC_SEED] = {
+        .dataID = 0x218,
+        .iconID = electric_seed_NCGR,
+        .paletteID = electric_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_GRASSY_SEED] = {
+        .dataID = 0x219,
+        .iconID = grassy_seed_NCGR,
+        .paletteID = grassy_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_MISTY_SEED] = {
+        .dataID = 0x21A,
+        .iconID = misty_seed_NCGR,
+        .paletteID = misty_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_PSYCHIC_SEED] = {
+        .dataID = 0x21B,
+        .iconID = psychic_seed_NCGR,
+        .paletteID = psychic_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

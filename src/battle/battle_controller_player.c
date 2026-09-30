@@ -4110,6 +4110,7 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_ROOM_SERVICE,
+    AFTER_MOVE_EFFECT_TERRAIN_SEED,
     AFTER_MOVE_EFFECT_THROAT_SPRAY,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
@@ -4264,6 +4265,34 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
                     battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
                     battleCtx->msgTemp = BATTLE_STAT_SPEED;
                     LOAD_SUBSEQ(subscript_held_item_lower_speed_in_trick_room);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+            }
+
+            battleCtx->afterMoveEffectState++;
+            battleCtx->afterMoveEffectTemp = 0;
+        } else {
+            battleCtx->afterMoveEffectState++;
+        }
+
+    case AFTER_MOVE_EFFECT_TERRAIN_SEED:
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN) {
+            int battler, stat;
+
+            while (battleCtx->afterMoveEffectTemp < BattleSystem_GetMaxBattlers(battleSys)) {
+                battler = battleCtx->monSpeedOrder[battleCtx->afterMoveEffectTemp];
+                battleCtx->afterMoveEffectTemp++;
+
+                if ((battleCtx->battlersSwitchingMask & FlagIndex(battler)) == FALSE
+                    && Battler_TerrainSeedActivates(battleCtx, battler, &stat)) {
+                    battleCtx->sideEffectMon = battler;
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+                    battleCtx->msgTemp = stat;
+                    LOAD_SUBSEQ(subscript_held_item_terrain_seed);
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 

@@ -2084,6 +2084,26 @@
     {
       "id": "pl_msg_00000393_00520",
       "en_US": "a {COLOR 255}Chimechite{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00521",
+      "en_US": "a {COLOR 255}Terrain Extender{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00522",
+      "en_US": "an {COLOR 255}Electric Seed{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00523",
+      "en_US": "a {COLOR 255}Grassy Seed{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00524",
+      "en_US": "a {COLOR 255}Misty Seed{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00525",
+      "en_US": "a {COLOR 255}Psychic Seed{COLOR 0}"
     }
   ]
 }

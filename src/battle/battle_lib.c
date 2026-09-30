@@ -4579,6 +4579,7 @@ enum SwitchInCheckState {
     SWITCH_IN_CHECK_STATE_IMPOSTER,
     SWITCH_IN_CHECK_STATE_WIND_RIDER,
     SWITCH_IN_CHECK_STATE_ROOM_SERVICE,
+    SWITCH_IN_CHECK_STATE_TERRAIN_SEED,
     SWITCH_IN_CHECK_STATE_AIR_BALLOON,
     SWITCH_IN_CHECK_STATE_FORM_CHANGE,
     SWITCH_IN_CHECK_STATE_AMULET_COIN,
@@ -4708,7 +4709,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     break;
 
                 case OVERWORLD_WEATHER_THUNDERSTORM:
-                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_ELECTRIC_TERRAIN, TRUE);
+                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_ELECTRIC_TERRAIN, TRUE, BATTLER_NONE);
                     subscript = subscript_overworld_thunderstorm;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
@@ -4766,13 +4767,13 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     break;
 
                 case OVERWORLD_WEATHER_GRASSY_TERRAIN_MIST:
-                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_GRASSY_TERRAIN, TRUE);
+                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_GRASSY_TERRAIN, TRUE, BATTLER_NONE);
                     subscript = subscript_terrain_start;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
 
                 case OVERWORLD_WEATHER_ELECTRIC_TERRAIN:
-                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_ELECTRIC_TERRAIN, TRUE);
+                    BattleContext_SetTerrain(battleCtx, FIELD_CONDITION_ELECTRIC_TERRAIN, TRUE, BATTLER_NONE);
                     subscript = subscript_terrain_start;
                     result = SWITCH_IN_CHECK_RESULT_BREAK;
                     break;
@@ -4880,7 +4881,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                         battleCtx->battleMons[battler].weatherAbilityAnnounced = TRUE;
 
                         if ((battleCtx->fieldConditionsMask & terrain) == FALSE
-                            && BattleContext_SetTerrain(battleCtx, terrain, FALSE)) {
+                            && BattleContext_SetTerrain(battleCtx, terrain, FALSE, battler)) {
                             subscript = subscript_terrain_surge;
                             result = SWITCH_IN_CHECK_RESULT_BREAK;
                         }
@@ -5389,6 +5390,27 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
                     battleCtx->msgTemp = BATTLE_STAT_SPEED;
                     subscript = subscript_held_item_lower_speed_in_trick_room;
+                    result = TRUE;
+                    break;
+                }
+            }
+
+            if (battler == BATTLER_NONE) {
+                battleCtx->switchInCheckState++;
+            }
+            iterIndex = (battlerSkillSwapper != BATTLER_NONE) ? -1 : 0;
+            break;
+
+        case SWITCH_IN_CHECK_STATE_TERRAIN_SEED:
+            while ((battler = GetNextBattlerInOrder(battleCtx, maxBattlers, &iterIndex, battlerSkillSwapper)) != BATTLER_NONE) {
+                int stat;
+
+                if (Battler_TerrainSeedActivates(battleCtx, battler, &stat)) {
+                    battleCtx->sideEffectMon = battler;
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+                    battleCtx->msgTemp = stat;
+                    subscript = subscript_held_item_terrain_seed;
                     result = TRUE;
                     break;
                 }
@@ -7281,7 +7303,7 @@ BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terr
     return (battleCtx->fieldConditionsMask & terrain) && Battler_IsGrounded(battleCtx, battler);
 }
 
-BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent)
+BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent, int setter)
 {
     if (permanent == FALSE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM)) {
         return FALSE;
@@ -7295,6 +7317,12 @@ BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL perman
     }
 
     battleCtx->fieldConditions.terrainTurns = permanent ? 0 : TERRAIN_DURATION;
+
+    if (permanent == FALSE
+        && setter != BATTLER_NONE
+        && Battler_HeldItemEffect(battleCtx, setter) == HOLD_EFFECT_EXTEND_TERRAIN) {
+        battleCtx->fieldConditions.terrainTurns += Battler_HeldItemPower(battleCtx, setter, ITEM_POWER_CHECK_ALL);
+    }
 
     return TRUE;
 }
@@ -7340,6 +7368,44 @@ u32 Move_Terrain(int move)
     }
 
     return 0;
+}
+
+static const struct {
+    u16 item;
+    u32 terrain;
+    u8 stat;
+} sTerrainSeeds[] = {
+    { ITEM_ELECTRIC_SEED, FIELD_CONDITION_ELECTRIC_TERRAIN, BATTLE_STAT_DEFENSE },
+    { ITEM_GRASSY_SEED, FIELD_CONDITION_GRASSY_TERRAIN, BATTLE_STAT_DEFENSE },
+    { ITEM_MISTY_SEED, FIELD_CONDITION_MISTY_TERRAIN, BATTLE_STAT_SP_DEFENSE },
+    { ITEM_PSYCHIC_SEED, FIELD_CONDITION_PSYCHIC_TERRAIN, BATTLE_STAT_SP_DEFENSE },
+};
+
+BOOL Battler_TerrainSeedActivates(BattleContext *battleCtx, int battler, int *stat)
+{
+    if (battleCtx->battleMons[battler].curHP == 0
+        || Battler_HeldItemEffect(battleCtx, battler) != HOLD_EFFECT_TERRAIN_SEED) {
+        return FALSE;
+    }
+
+    u16 item = Battler_HeldItem(battleCtx, battler);
+
+    for (int i = 0; i < NELEMS(sTerrainSeeds); i++) {
+        if (sTerrainSeeds[i].item != item || (battleCtx->fieldConditionsMask & sTerrainSeeds[i].terrain) == FALSE) {
+            continue;
+        }
+
+        int stage = battleCtx->battleMons[battler].statBoosts[sTerrainSeeds[i].stat];
+
+        if (Battler_Ability(battleCtx, battler) == ABILITY_CONTRARY ? stage == MIN_STAT_STAGE : stage == MAX_STAT_STAGE) {
+            return FALSE;
+        }
+
+        *stat = sTerrainSeeds[i].stat;
+        return TRUE;
+    }
+
+    return FALSE;
 }
 
 BOOL BattleContext_TerrainMoveFails(BattleContext *battleCtx, int move)

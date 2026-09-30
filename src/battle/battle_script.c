@@ -13978,7 +13978,7 @@ static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleC
     int jumpOnFail = BattleScript_Read(battleCtx);
 
     if (BattleContext_TerrainMoveFails(battleCtx, battleCtx->moveCur)
-        || BattleContext_SetTerrain(battleCtx, Move_Terrain(battleCtx->moveCur), FALSE) == FALSE) {
+        || BattleContext_SetTerrain(battleCtx, Move_Terrain(battleCtx->moveCur), FALSE, battleCtx->attacker) == FALSE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
 

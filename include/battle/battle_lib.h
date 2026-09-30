@@ -1305,9 +1305,11 @@ BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terr
  * @param terrain   The FIELD_CONDITION_*_TERRAIN flag to set.
  * @param permanent TRUE for a terrain that never ends, e.g. from map weather;
  *                  FALSE for one that lasts TERRAIN_DURATION turns.
+ * @param setter    The battler whose move or Ability set the terrain, so its
+ *                  Terrain Extender can lengthen it; BATTLER_NONE if none.
  * @return TRUE if the terrain was set, FALSE if a permanent terrain blocked it.
  */
-BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent);
+BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent, int setter);
 
 /**
  * @brief Get the terrain a terrain-setting move creates.
@@ -1326,6 +1328,17 @@ u32 Move_Terrain(int move);
  * @return TRUE if the move would fail, FALSE if it would set its terrain.
  */
 BOOL BattleContext_TerrainMoveFails(BattleContext *battleCtx, int move);
+
+/**
+ * @brief Check if a battler's held terrain Seed should be used now: its terrain
+ * is active and the stat it raises (or lowers, under Contrary) can still move.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param[out] stat The BATTLE_STAT_* the Seed changes, set when it activates.
+ * @return TRUE if the Seed activates, FALSE if not.
+ */
+BOOL Battler_TerrainSeedActivates(BattleContext *battleCtx, int battler, int *stat);
 
 /**
  * @brief Check if Psychic Terrain stops a priority move reaching a grounded

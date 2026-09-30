@@ -2084,6 +2084,26 @@
     {
       "id": "pl_msg_00000392_00520",
       "en_US": "Chimechite"
+    },
+    {
+      "id": "pl_msg_00000392_00521",
+      "en_US": "Terrain Extender"
+    },
+    {
+      "id": "pl_msg_00000392_00522",
+      "en_US": "Electric Seed"
+    },
+    {
+      "id": "pl_msg_00000392_00523",
+      "en_US": "Grassy Seed"
+    },
+    {
+      "id": "pl_msg_00000392_00524",
+      "en_US": "Misty Seed"
+    },
+    {
+      "id": "pl_msg_00000392_00525",
+      "en_US": "Psychic Seed"
     }
   ]
 }
