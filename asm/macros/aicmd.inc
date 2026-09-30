@@ -666,6 +666,16 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfMoveBlockedByTerrain jump:req
+    .long AICMD_IFMOVEBLOCKEDBYTERRAIN
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfTerrainMoveFails jump:req
+    .long AICMD_IFTERRAINMOVEFAILS
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro FlagBestDamageMove
     .long AICMD_FLAGBESTDAMAGEMOVE
     .endm

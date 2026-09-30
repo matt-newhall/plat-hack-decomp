@@ -225,6 +225,8 @@ static void AICmd_IfBattlerHasMoveOfClass(BattleSystem *battleSys, BattleContext
 static void AICmd_IfBattlerKnowsMoveOfType(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_LoadBattlerAttemptedMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfMoveEffectivenessAgainst(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfMoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfTerrainMoveFails(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3576,6 +3578,40 @@ static void AICmd_IfCurrentMoveIsWind(BattleSystem *battleSys, BattleContext *ba
 }
 
 /**
+ * @brief Jump if the active terrain will stop the current move doing anything
+ * to the target, e.g. sleep in Electric Terrain or priority in Psychic Terrain.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfMoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (BattleSystem_MoveBlockedByTerrain(battleSys, battleCtx, AI_CONTEXT.attacker, AI_CONTEXT.defender, AI_CONTEXT.move)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Jump if the current terrain-setting move would fail, because its
+ * terrain is already up or a permanent terrain from the map is in place.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfTerrainMoveFails(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (BattleContext_TerrainMoveFails(battleCtx, AI_CONTEXT.move)) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
  * @brief Push an address for the AI script onto the cursor stack.
  *
  * @param battleSys
@@ -3820,6 +3856,11 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     // suppresses items under Klutz and Embargo everywhere else.
     if (ability == ABILITY_KLUTZ || embargoTurns != 0) {
         heldItem = ITEM_NONE;
+    }
+
+    if (attacker == AI_CONTEXT.attacker
+        && BattleSystem_MoveBlockedByTerrain(battleSys, battleCtx, attacker, AI_CONTEXT.defender, move)) {
+        return 0;
     }
 
     switch (move) {

@@ -136,6 +136,9 @@ Basic_CheckSoundproof:
     IfCurrentMoveIsSound ScoreMinus10
 
 Basic_ScoreMoveEffect:
+    // If the active terrain will stop this move doing anything, e.g. sleep in Electric Terrain,
+    // status in Misty Terrain or priority into a grounded foe in Psychic Terrain, score -30.
+    IfMoveBlockedByTerrain ScoreMinus30
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Basic_CheckPowder
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Basic_CheckCannotExplode
@@ -286,6 +289,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_CheckWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Basic_CheckSteelBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Basic_CheckEndure
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Basic_CheckTerrainMove
     PopOrEnd
 
 Basic_CheckCannotSleep:
@@ -1091,6 +1095,12 @@ Basic_CheckShellSmash:
 Basic_CheckShellSmash_End:
     PopOrEnd
 
+Basic_CheckTerrainMove:
+    // If this terrain is already up, or a permanent terrain from the map is in place, the move
+    // fails, so score -10.
+    IfTerrainMoveFails ScoreMinus10
+    PopOrEnd
+
 Basic_CheckGravityActive:
     // If Gravity is already active, score -10.
     IfFieldConditionsMask FIELD_CONDITION_GRAVITY, ScoreMinus10
@@ -1833,6 +1843,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus

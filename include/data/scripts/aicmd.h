@@ -143,6 +143,8 @@ ScriptCommand(AICMD_IFPARTNERMOVESFIRST,              AICmd_IfPartnerMovesFirst)
 ScriptCommand(AICMD_IFBATTLERKNOWSMOVEOFTYPE,          AICmd_IfBattlerKnowsMoveOfType)
 ScriptCommand(AICMD_LOADBATTLERATTEMPTEDMOVE,         AICmd_LoadBattlerAttemptedMove)
 ScriptCommand(AICMD_IFMOVEEFFECTIVENESSAGAINST,       AICmd_IfMoveEffectivenessAgainst)
+ScriptCommand(AICMD_IFMOVEBLOCKEDBYTERRAIN,           AICmd_IfMoveBlockedByTerrain)
+ScriptCommand(AICMD_IFTERRAINMOVEFAILS,               AICmd_IfTerrainMoveFails)
 
 // clang-format on
 
