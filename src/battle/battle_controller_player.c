@@ -4098,6 +4098,41 @@ static inline int CalcCurrentMoveType(BattleContext *battleCtx)
     return CURRENT_MOVE_DATA.type;
 }
 
+/**
+ * @brief Get the subscript for a move effect which must wait until the user has
+ * survived the target's contact punishment.
+ *
+ * Rapid Spin and Dragon Tail fail if the user faints to Rough Skin, Iron Barbs
+ * or Rocky Helmet, so they resolve after those instead of as regular on-hit
+ * side effects. A Life Orb faint comes later still and does not stop them.
+ *
+ * @param battleCtx
+ * @return The subscript to run, or 0 if there is none.
+ */
+static int BattleControllerPlayer_DeferredOnHitSubscript(BattleContext *battleCtx)
+{
+    if (ATTACKING_MON.curHP == 0
+        || battleCtx->defender == BATTLER_NONE
+        || (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS)) {
+        return 0;
+    }
+
+    switch (CURRENT_MOVE_DATA.effect) {
+    case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+        if (BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
+            return 0;
+        }
+
+        return subscript_rapid_spin;
+
+    case BATTLE_EFFECT_DRAGON_TAIL:
+        return subscript_force_target_to_switch_or_flee;
+
+    default:
+        return 0;
+    }
+}
+
 enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_START = 0,
 
@@ -4106,7 +4141,6 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_TRIGGER_SWITCH_IN_EFFECTS,
     AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN,
     AFTER_MOVE_EFFECT_TAILWIND,
-    AFTER_MOVE_EFFECT_KNOCK_OFF,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_ROOM_SERVICE,
@@ -4116,6 +4150,8 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
     AFTER_MOVE_EFFECT_ANGER_SHELL,
     AFTER_MOVE_EFFECT_HELD_ITEM_STATUS,
+    AFTER_MOVE_EFFECT_KNOCK_OFF,
+    AFTER_MOVE_EFFECT_DEFERRED_ON_HIT,
 
     AFTER_MOVE_EFFECT_END
 };
@@ -4314,11 +4350,10 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
         }
 
     case AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT: {
-        BOOL isReentry = battleCtx->afterMoveEffectState == AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT;
         battleCtx->afterMoveEffectState++;
 
         int itemSeq;
-        if (!isReentry && BattleSystem_TriggerHeldItemOnHit(battleSys, battleCtx, &itemSeq) == TRUE) {
+        if (BattleSystem_TriggerHeldItemOnHit(battleSys, battleCtx, &itemSeq) == TRUE) {
             LOAD_SUBSEQ(itemSeq);
             battleCtx->commandNext = battleCtx->command;
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -4409,6 +4444,23 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
 
             return;
         }
+
+    case AFTER_MOVE_EFFECT_DEFERRED_ON_HIT: {
+        battleCtx->afterMoveEffectState++;
+
+        int deferredSeq = BattleControllerPlayer_DeferredOnHitSubscript(battleCtx);
+        if (deferredSeq) {
+            battleCtx->sideEffectMon = battleCtx->attacker;
+            battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
+            battleCtx->sideEffectFlags = MOVE_SIDE_EFFECT_ON_HIT;
+
+            LOAD_SUBSEQ(deferredSeq);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            return;
+        }
+    }
 
     default:
         break;
@@ -5427,6 +5479,7 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_STATE_EJECT_ITEMS,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
+    AFTER_MOVE_HIT_STATE_ICE_SPINNER,
     AFTER_MOVE_HIT_STATE_UPROAR,
     AFTER_MOVE_HIT_STATE_ANGER_SHELL,
     AFTER_MOVE_HIT_STATE_SWITCH_HIT,
@@ -5440,6 +5493,8 @@ enum AfterMoveHitState {
  * This handles:
  * - granting Shell Bell HP restoration
  * - deducting HP due to Life Orb
+ * - Ice Spinner removing terrain, once the user has survived Life Orb and was
+ *   not forced out by Red Card
  *
  * @param battleSys
  * @param battleCtx
@@ -5600,6 +5655,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
                         battleCtx->switchedPartySlot[battleCtx->attacker] = i;
                         battleCtx->afterMoveHitCheckTemp = 1;
+                        battleCtx->battleStatusMask2 |= SYSCTL_RED_CARD_SWITCHED;
                         LOAD_SUBSEQ(subscript_red_card_force_switch);
                         battleCtx->commandNext = battleCtx->command;
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -5607,6 +5663,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                     }
                 } else if ((battleCtx->attacker & 1) == BATTLE_SIDE_PLAYER) {
                     battleCtx->afterMoveHitCheckTemp = 1;
+                    battleCtx->battleStatusMask2 |= SYSCTL_RED_CARD_SWITCHED;
                     LOAD_SUBSEQ(subscript_red_card_force_switch);
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -5801,6 +5858,24 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                 battleCtx->msgBattlerTemp = battleCtx->attacker;
 
                 LOAD_SUBSEQ(subscript_lose_hp_from_item);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_ICE_SPINNER:
+            if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_REMOVE_TERRAIN_HIT
+                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+                && (battleCtx->battleStatusMask2 & SYSCTL_RED_CARD_SWITCHED) == FALSE
+                && battleCtx->attacker != BATTLER_NONE
+                && ATTACKING_MON.curHP
+                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN)
+                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM) == FALSE) {
+                LOAD_SUBSEQ(subscript_terrain_end);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 

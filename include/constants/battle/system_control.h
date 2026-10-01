@@ -62,6 +62,7 @@
 #define SYSCTL_EJECT_PACK_WON          (1 << 16)
 #define SYSCTL_EJECT_BUTTON_WON        (1 << 17)
 #define SYSCTL_PARENTAL_BOND_ACTIVE    (1 << 18)
+#define SYSCTL_RED_CARD_SWITCHED       (1 << 19)
 #define SYSCTL_FORM_CHANGE             (1 << 26)
 #define SYSCTL_RECALC_MON_STATS        (1 << 27)
 
@@ -79,7 +80,8 @@
     | SYSCTL_EJECT_PACK_PENDING_MASK              \
     | SYSCTL_EJECT_PACK_WON                      \
     | SYSCTL_EJECT_BUTTON_WON                    \
-    | SYSCTL_PARENTAL_BOND_ACTIVE))
+    | SYSCTL_PARENTAL_BOND_ACTIVE                \
+    | SYSCTL_RED_CARD_SWITCHED))
 
 #define SYSCTL_LINK_WAITING_SHIFT 24
 #define SYSCTL_PAYOUT_EXP_SHIFT   28
