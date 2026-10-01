@@ -716,13 +716,13 @@ static SpeciesLearnsetSized proc_lvlearnset(datafile_t *df) {
         datanode_t level = dp_arrelem(entry, 0);
         datanode_t move  = dp_arrelem(entry, 1);
 
-        result.data.entries[result.size].move  = (u16)(dp_u16(dp_lookup(move, "Move")) & maxbit(9));
-        result.data.entries[result.size].level = (u16)(dp_u8(level) & maxbit(7));
+        result.data.entries[result.size].move  = dp_u16(dp_lookup(move, "Move"));
+        result.data.entries[result.size].level = dp_u8(level);
         result.size++;
     }
 
-    result.data.entries[result.size].move  = (u16)UINT16_MAX & maxbit(9);
-    result.data.entries[result.size].level = (u16)UINT16_MAX & maxbit(7);
+    result.data.entries[result.size].move  = LEARNSET_SENTINEL_ENTRY;
+    result.data.entries[result.size].level = LEARNSET_SENTINEL_ENTRY;
     result.size++;
 
     result.size *= sizeof(SpeciesLearnsetEntry);
