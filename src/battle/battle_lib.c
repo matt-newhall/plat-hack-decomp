@@ -4298,6 +4298,7 @@ static u16 sSlicingMoves[] = {
     MOVE_LEAF_BLADE,
     MOVE_METAL_CLAW,
     MOVE_NIGHT_SLASH,
+    MOVE_PSYBLADE,
     MOVE_PSYCHO_CUT,
     MOVE_RAZOR_LEAF,
     MOVE_SHADOW_CLAW,
@@ -9161,7 +9162,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if ((move == MOVE_MISTY_EXPLOSION && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_MISTY_TERRAIN))
-        || (move == MOVE_EXPANDING_FORCE && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_PSYCHIC_TERRAIN))) {
+        || (move == MOVE_EXPANDING_FORCE && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_PSYCHIC_TERRAIN))
+        || (move == MOVE_PSYBLADE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_ELECTRIC_TERRAIN))) {
         powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
 

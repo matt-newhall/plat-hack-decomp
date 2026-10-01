@@ -4989,6 +4989,16 @@
         "fails if there is\n",
         "no terrain."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00509",
+      "en_US": [
+        "The user rends the\n",
+        "target with an\n",
+        "ethereal blade. Its\n",
+        "power rises on\n",
+        "Electric Terrain."
+      ]
     }
   ]
 }
