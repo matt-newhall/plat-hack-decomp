@@ -5351,9 +5351,14 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
 
 static const u16 sProtectSuccessRate[] = {
     0xFFFF, // 100.0%
-    0x7FFF, // ~50.0%
-    0x3FFF, // ~25.0%
-    0x1FFF, // ~12.5%
+    0x5555, // ~1/3
+    0x1C71, // ~1/9
+    0x097B, // ~1/27
+    0x0329, // ~1/81
+    0x010D, // ~1/243
+    0x0059, // ~1/729
+    0x001D, // ~1/2187
+    0x0009, // ~1/6561
 };
 
 /**
