@@ -35,6 +35,13 @@ Here is the list of bonus/later generation mechanics implemented in Pokemon Temp
 - The steel type has lost its resistances to both Dark and Ghost-type moves.
 - Sound-based moves can hit through Substitute.
 - Hidden Power always has 60BP.
+- Consecutive uses of Protect, Detect, Endure, Spiky Shield and Silk Trap succeed with a 1/3 chance per previous success, down from 1/2.
+- Experience uses the formula from Gen V+: Pokemon below the defeated Pokemon's level gain more, and those above it gain less.
+  - The trainer battle bonus (1.5x) is kept. The Gen VII past-evolution-level and affection bonuses are not added.
+  - Base experience yields are updated to their latest values
+- Catching a Pokemon awards experience as if it had been defeated.
+- Added critical captures with slightly different thresholds. M in the critical capture formula scales with National Dex species caught:
+  - 0-10: 0, 11-25: 0.5, 26-50: 1, 51-100: 1.5, 101-200: 2, 201+: 2.5.
 
 ## Generation IV Bugs Status
 
