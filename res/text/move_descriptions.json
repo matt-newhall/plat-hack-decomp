@@ -4979,6 +4979,16 @@
         "strikes all foes\n",
         "on Psychic Terrain."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00508",
+      "en_US": [
+        "The user attacks\n",
+        "while destroying the\n",
+        "terrain. This move\n",
+        "fails if there is\n",
+        "no terrain."
+      ]
     }
   ]
 }

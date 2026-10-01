@@ -1371,7 +1371,8 @@ BOOL BattleSystem_PsychicTerrainBlocksMove(BattleSystem *battleSys, BattleContex
 /**
  * @brief Check if the active terrain will stop a move doing anything: sleep
  * and Rest under Electric or Misty Terrain, status and confusion under Misty
- * Terrain, and priority moves under Psychic Terrain.
+ * Terrain, and priority moves under Psychic Terrain. Steel Roller also counts
+ * as blocked when there is no terrain for it to destroy.
  *
  * @param battleSys
  * @param battleCtx

@@ -7460,6 +7460,9 @@ BOOL BattleSystem_MoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *b
     case BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION:
     case BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION:
         return Battler_IsAffectedByTerrain(battleCtx, defender, FIELD_CONDITION_MISTY_TERRAIN);
+
+    case BATTLE_EFFECT_REMOVE_TERRAIN_HIT_NEEDS_TERRAIN:
+        return (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN) == FALSE;
     }
 
     return BattleSystem_PsychicTerrainBlocksMove(battleSys, battleCtx, attacker, defender, move);
