@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_DRAGON", "TYPE_DRAGON" ],
     "catch_rate": 45,
-    "base_exp_reward": 144,
+    "base_exp_reward": 147,
     "ev_yields": {
         "hp": 0,
         "attack": 2,

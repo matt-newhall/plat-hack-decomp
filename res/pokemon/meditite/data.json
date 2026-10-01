@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_FIGHTING", "TYPE_PSYCHIC" ],
     "catch_rate": 180,
-    "base_exp_reward": 91,
+    "base_exp_reward": 56,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

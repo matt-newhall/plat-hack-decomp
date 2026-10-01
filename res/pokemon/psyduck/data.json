@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_PSYCHIC" ],
     "catch_rate": 190,
-    "base_exp_reward": 80,
+    "base_exp_reward": 64,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

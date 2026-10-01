@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_DRAGON" ],
     "catch_rate": 45,
-    "base_exp_reward": 207,
+    "base_exp_reward": 243,
     "ev_yields": {
         "hp": 0,
         "attack": 1,

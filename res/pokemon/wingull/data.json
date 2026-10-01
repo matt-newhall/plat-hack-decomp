@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_FLYING" ],
     "catch_rate": 190,
-    "base_exp_reward": 64,
+    "base_exp_reward": 54,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

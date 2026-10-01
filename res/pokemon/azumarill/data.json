@@ -9,7 +9,7 @@
     },
 "types": [ "TYPE_WATER", "TYPE_FAIRY" ],
     "catch_rate": 75,
-    "base_exp_reward": 153,
+    "base_exp_reward": 189,
     "ev_yields": {
         "hp": 3,
         "attack": 0,

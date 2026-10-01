@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_POISON" ],
     "catch_rate": 60,
-    "base_exp_reward": 205,
+    "base_exp_reward": 180,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

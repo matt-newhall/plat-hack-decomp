@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_BUG", "TYPE_STEEL" ],
     "catch_rate": 25,
-    "base_exp_reward": 200,
+    "base_exp_reward": 175,
     "ev_yields": {
         "hp": 0,
         "attack": 2,

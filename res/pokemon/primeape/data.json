@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_FIGHTING", "TYPE_FIGHTING" ],
     "catch_rate": 75,
-    "base_exp_reward": 149,
+    "base_exp_reward": 159,
     "ev_yields": {
         "hp": 0,
         "attack": 2,

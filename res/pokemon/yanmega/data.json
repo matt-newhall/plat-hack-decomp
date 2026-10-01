@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_BUG", "TYPE_FLYING" ],
     "catch_rate": 30,
-    "base_exp_reward": 198,
+    "base_exp_reward": 180,
     "ev_yields": {
         "hp": 0,
         "attack": 2,

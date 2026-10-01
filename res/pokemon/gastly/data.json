@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_GHOST", "TYPE_POISON" ],
     "catch_rate": 190,
-    "base_exp_reward": 95,
+    "base_exp_reward": 62,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

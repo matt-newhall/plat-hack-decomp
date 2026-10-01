@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_GHOST", "TYPE_NORMAL" ],
     "catch_rate": 45,
-    "base_exp_reward": 179,
+    "base_exp_reward": 159,
     "ev_yields": {
         "hp": 0,
         "attack": 2,

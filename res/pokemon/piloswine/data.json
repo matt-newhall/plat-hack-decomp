@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_ICE", "TYPE_GROUND" ],
     "catch_rate": 75,
-    "base_exp_reward": 160,
+    "base_exp_reward": 158,
     "ev_yields": {
         "hp": 1,
         "attack": 1,

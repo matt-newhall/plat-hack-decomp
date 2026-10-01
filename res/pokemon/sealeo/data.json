@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_ICE", "TYPE_WATER" ],
     "catch_rate": 120,
-    "base_exp_reward": 128,
+    "base_exp_reward": 144,
     "ev_yields": {
         "hp": 2,
         "attack": 0,

@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_BUG", "TYPE_BUG" ],
     "catch_rate": 190,
-    "base_exp_reward": 60,
+    "base_exp_reward": 58,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

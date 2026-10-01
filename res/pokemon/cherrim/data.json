@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_GRASS", "TYPE_FAIRY" ],
     "catch_rate": 75,
-    "base_exp_reward": 133,
+    "base_exp_reward": 158,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

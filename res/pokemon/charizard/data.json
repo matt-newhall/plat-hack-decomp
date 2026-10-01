@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_FIRE", "TYPE_FLYING" ],
     "catch_rate": 45,
-    "base_exp_reward": 209,
+    "base_exp_reward": 240,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

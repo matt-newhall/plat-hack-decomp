@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_DARK", "TYPE_FIRE" ],
     "catch_rate": 45,
-    "base_exp_reward": 204,
+    "base_exp_reward": 175,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_STEEL" ],
     "catch_rate": 60,
-    "base_exp_reward": 206,
+    "base_exp_reward": 166,
     "ev_yields": {
         "hp": 0,
         "attack": 2,

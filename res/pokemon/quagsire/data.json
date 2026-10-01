@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_GROUND" ],
     "catch_rate": 90,
-    "base_exp_reward": 137,
+    "base_exp_reward": 151,
     "ev_yields": {
         "hp": 2,
         "attack": 0,

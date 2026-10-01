@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_DARK", "TYPE_FLYING" ],
     "catch_rate": 30,
-    "base_exp_reward": 107,
+    "base_exp_reward": 81,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

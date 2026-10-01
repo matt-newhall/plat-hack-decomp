@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_FIRE", "TYPE_WATER" ],
     "catch_rate": 75,
-    "base_exp_reward": 154,
+    "base_exp_reward": 151,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

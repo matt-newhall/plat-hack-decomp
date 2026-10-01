@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_NORMAL", "TYPE_FAIRY" ],
     "catch_rate": 150,
-    "base_exp_reward": 33,
+    "base_exp_reward": 38,
     "ev_yields": {
         "hp": 1,
         "attack": 0,

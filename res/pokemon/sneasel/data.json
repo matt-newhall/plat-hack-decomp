@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_DARK", "TYPE_ICE" ],
     "catch_rate": 60,
-    "base_exp_reward": 132,
+    "base_exp_reward": 86,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

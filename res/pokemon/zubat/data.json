@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_POISON", "TYPE_FLYING" ],
     "catch_rate": 255,
-    "base_exp_reward": 54,
+    "base_exp_reward": 49,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

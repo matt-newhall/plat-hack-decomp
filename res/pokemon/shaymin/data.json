@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_GRASS", "TYPE_GRASS" ],
     "catch_rate": 45,
-    "base_exp_reward": 64,
+    "base_exp_reward": 270,
     "ev_yields": {
         "hp": 3,
         "attack": 0,

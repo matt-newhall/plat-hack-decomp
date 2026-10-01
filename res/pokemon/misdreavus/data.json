@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_GHOST", "TYPE_PSYCHIC" ],
     "catch_rate": 45,
-    "base_exp_reward": 147,
+    "base_exp_reward": 87,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

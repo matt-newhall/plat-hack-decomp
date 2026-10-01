@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_POISON", "TYPE_POISON" ],
     "catch_rate": 225,
-    "base_exp_reward": 75,
+    "base_exp_reward": 60,
     "ev_yields": {
         "hp": 1,
         "attack": 0,

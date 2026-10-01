@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_PSYCHIC", "TYPE_FLYING" ],
     "catch_rate": 255,
-    "base_exp_reward": 58,
+    "base_exp_reward": 52,
     "ev_yields": {
         "hp": 1,
         "attack": 0,

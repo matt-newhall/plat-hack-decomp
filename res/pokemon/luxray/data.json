@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_ELECTRIC", "TYPE_ELECTRIC" ],
     "catch_rate": 45,
-    "base_exp_reward": 194,
+    "base_exp_reward": 235,
     "ev_yields": {
         "hp": 0,
         "attack": 3,

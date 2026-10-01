@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_NORMAL", "TYPE_NORMAL" ],
     "catch_rate": 75,
-    "base_exp_reward": 183,
+    "base_exp_reward": 158,
     "ev_yields": {
         "hp": 0,
         "attack": 0,

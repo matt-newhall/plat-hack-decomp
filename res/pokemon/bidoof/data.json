@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_NORMAL", "TYPE_NORMAL" ],
     "catch_rate": 255,
-    "base_exp_reward": 58,
+    "base_exp_reward": 50,
     "ev_yields": {
         "hp": 1,
         "attack": 0,
@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_EMBARGO" ],
-            [ 9, "MOVE_SNARL" ],
+            [ 9, "MOVE_PSYBLADE" ],
             [ 13, "MOVE_ROLLOUT" ],
             [ 17, "MOVE_HEADBUTT" ],
             [ 21, "MOVE_HYPER_FANG" ],

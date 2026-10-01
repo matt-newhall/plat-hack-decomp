@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_FIRE", "TYPE_GROUND" ],
     "catch_rate": 255,
-    "base_exp_reward": 88,
+    "base_exp_reward": 61,
     "ev_yields": {
         "hp": 0,
         "attack": 0,
