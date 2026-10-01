@@ -1286,6 +1286,20 @@ BOOL Battler_IsGrounded(BattleContext *battleCtx, int battler);
 int Battler_MovePriority(BattleContext *battleCtx, int battler, int move);
 
 /**
+ * @brief Get the range a battler's move resolves with, which differs from its
+ * listed range for Expanding Force on Psychic Terrain (it hits both foes).
+ *
+ * Target selection still uses the listed range, so the player picks a single
+ * target as usual.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param move
+ * @return The move's effective range.
+ */
+int Battler_MoveRange(BattleContext *battleCtx, int battler, int move);
+
+/**
  * @brief Check if one of the given terrains is active and the battler is
  * grounded, so the terrain applies to it.
  *

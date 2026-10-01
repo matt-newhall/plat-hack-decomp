@@ -4969,6 +4969,16 @@
         "goes first on\n",
         "Grassy Terrain."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00507",
+      "en_US": [
+        "The user attacks\n",
+        "with psychic power.\n",
+        "It hits harder and\n",
+        "strikes all foes\n",
+        "on Psychic Terrain."
+      ]
     }
   ]
 }

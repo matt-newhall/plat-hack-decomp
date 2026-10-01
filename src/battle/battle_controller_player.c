@@ -2393,7 +2393,7 @@ static BOOL BattleControllerPlayer_DecrementPP(BattleSystem *battleSys, BattleCo
         if (battleCtx->moveTemp == MOVE_IMPRISON || battleCtx->moveTemp == MOVE_SNATCH) {
             ppCost += BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->attacker, ABILITY_PRESSURE);
         } else {
-            switch (battleCtx->aiContext.moveTable[battleCtx->moveTemp].range) {
+            switch (Battler_MoveRange(battleCtx, battleCtx->attacker, battleCtx->moveTemp)) {
             case RANGE_ALL_ADJACENT:
             case RANGE_FIELD:
             case RANGE_ADJACENT_OPPONENTS:
@@ -4543,7 +4543,9 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
 
     BattleControllerPlayer_UpdateFlagsWhenHit(battleSys, battleCtx);
 
-    if (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS
+    int range = Battler_MoveRange(battleCtx, battleCtx->attacker, battleCtx->moveCur);
+
+    if (range == RANGE_ADJACENT_OPPONENTS
         && (battleCtx->battleStatusMask & SYSCTL_CHECK_LOOP_ONLY_ONCE) == FALSE
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
@@ -4574,7 +4576,7 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         } while (battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys));
 
         BattleController_EmitClearMessageBox(battleSys);
-    } else if (CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT
+    } else if (range == RANGE_ALL_ADJACENT
         && (battleCtx->battleStatusMask & SYSCTL_CHECK_LOOP_ONLY_ONCE) == FALSE
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;

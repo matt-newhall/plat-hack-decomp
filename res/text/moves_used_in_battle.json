@@ -10638,6 +10638,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Grassy Glide!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01509",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Expanding Force!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01510",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Expanding Force!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01511",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Expanding Force!"
+      ]
     }
   ]
 }

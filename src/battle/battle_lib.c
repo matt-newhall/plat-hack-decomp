@@ -1854,7 +1854,7 @@ BOOL BattleSystem_SheerForceBoostsMove(BattleContext *battleCtx, int attacker, u
  */
 int BattleSystem_MoveTargetCount(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move)
 {
-    int range = MOVE_DATA(move).range;
+    int range = Battler_MoveRange(battleCtx, attacker, move);
     if (range != RANGE_ADJACENT_OPPONENTS && range != RANGE_ALL_ADJACENT) {
         return 1;
     }
@@ -1910,7 +1910,7 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
 
     int range;
     if (move) {
-        range = MOVE_DATA(move).range;
+        range = Battler_MoveRange(battleCtx, attacker, move);
     } else {
         range = inRange;
     }
@@ -5521,8 +5521,8 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                     && (battleCtx->battleStatusMask2 & SYSCTL_UTURN_ACTIVE) == FALSE
                     && BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur) == FALSE) {
 
-                    BOOL isSpreadMove = (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS
-                        || CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT);
+                    int range = Battler_MoveRange(battleCtx, battleCtx->attacker, battleCtx->moveCur);
+                    BOOL isSpreadMove = (range == RANGE_ADJACENT_OPPONENTS || range == RANGE_ALL_ADJACENT);
                     int attackerSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
 
                     for (int checkI = 0; checkI < maxBattlers; checkI++) {
@@ -7300,6 +7300,15 @@ int Battler_MovePriority(BattleContext *battleCtx, int battler, int move)
     }
 
     return priority;
+}
+
+int Battler_MoveRange(BattleContext *battleCtx, int battler, int move)
+{
+    if (move == MOVE_EXPANDING_FORCE && Battler_IsAffectedByTerrain(battleCtx, battler, FIELD_CONDITION_PSYCHIC_TERRAIN)) {
+        return RANGE_ADJACENT_OPPONENTS;
+    }
+
+    return MOVE_DATA(move).range;
 }
 
 BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terrain)
@@ -9148,7 +9157,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         powerMod = ChainModifier(powerMod, MODIFIER_0_5);
     }
 
-    if (move == MOVE_MISTY_EXPLOSION && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_MISTY_TERRAIN)) {
+    if ((move == MOVE_MISTY_EXPLOSION && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_MISTY_TERRAIN))
+        || (move == MOVE_EXPANDING_FORCE && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_PSYCHIC_TERRAIN))) {
         powerMod = ChainModifier(powerMod, MODIFIER_1_5);
     }
 
