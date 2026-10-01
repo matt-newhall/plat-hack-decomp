@@ -568,7 +568,7 @@ static SpeciesData proc_personal(datafile_t *df) {
             enum_u8(".egg_groups[1]", EggGroup),
         },
 
-        .baseExpReward  = u8(".base_exp_reward"),
+        .baseExpReward  = u16(".base_exp_reward"),
         .baseFriendship = u8(".base_friendship"),
         .bodyColor      = (u8)(enum_u8(".body_color", PokemonColor) & maxbit(7)),
         .catchRate      = u8(".catch_rate"),

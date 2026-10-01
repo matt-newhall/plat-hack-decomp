@@ -40,7 +40,7 @@ typedef struct SpeciesData {
     SpeciesBaseStats baseStats;
     u8 types[MAX_TYPES];
     u8 catchRate;
-    u8 baseExpReward;
+    u8 padding_09;
     SpeciesEVYields evYields;
     SpeciesWildHeldItems wildHeldItems;
     u8 genderRatio;
@@ -52,7 +52,7 @@ typedef struct SpeciesData {
     u8 safariFleeRate;
     u8 bodyColor : 7;
     u8 flipSprite : 1;
-    // u16 padding;
+    u16 baseExpReward;
 
     u32 tmLearnsetMasks[4]; // Bitflags for whether this pokemon can learn a TM
 } SpeciesData;

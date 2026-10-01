@@ -2308,28 +2308,14 @@ static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx
             }
         }
 
-        u16 exp = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, SPECIES_DATA_BASE_EXP_REWARD);
-        exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 7;
+        u32 exp = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, SPECIES_DATA_BASE_EXP_REWARD);
+        exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 5;
 
         if (totalMonsWithExpShare) {
             battleCtx->gainedExp = (exp / 2) / totalMonsGainingExp;
-
-            if (battleCtx->gainedExp == 0) {
-                battleCtx->gainedExp = 1;
-            }
-
             battleCtx->sharedExp = (exp / 2) / totalMonsWithExpShare;
-
-            if (battleCtx->sharedExp == 0) {
-                battleCtx->sharedExp = 1;
-            }
         } else {
             battleCtx->gainedExp = exp / totalMonsGainingExp;
-
-            if (battleCtx->gainedExp == 0) {
-                battleCtx->gainedExp = 1;
-            }
-
             battleCtx->sharedExp = 0;
         }
     } else {
@@ -10908,6 +10894,49 @@ typedef struct PokemonStats {
  * @param task
  * @param inData
  */
+/**
+ * @brief Raise a value to the power of 2.5, rounded down.
+ *
+ * Computed as sqrt(x^5) on the hardware square-root unit, which stays exact
+ * in integer maths for every level-derived input (at most 210).
+ *
+ * @param x The value to raise.
+ * @return floor(x^2.5)
+ */
+static u32 PowTwoPointFive(u32 x)
+{
+    u64 squared = (u64)x * x;
+
+    CP_SetSqrt64(squared * squared * x);
+    CP_WaitSqrt();
+
+    return CP_GetSqrtResult32();
+}
+
+/**
+ * @brief Scale a recipient's experience share by the level gap, per the
+ * Gen V formula.
+ *
+ * exp * ((2L + 10) / (L + Lp + 10))^2.5 + 1, where L is the defeated
+ * Pokemon's level and Lp is the recipient's level. Recipients below the
+ * defeated Pokemon's level earn more, and those above it earn less.
+ *
+ * @param exp            The recipient's unscaled share of experience.
+ * @param defeatedLevel  Level of the defeated Pokemon.
+ * @param recipientLevel Level of the Pokemon receiving the experience.
+ * @return The scaled experience, always at least 1.
+ */
+static u32 ScaleExpByLevel(u32 exp, int defeatedLevel, int recipientLevel)
+{
+    u32 numerator = PowTwoPointFive(2 * defeatedLevel + 10);
+    u32 denominator = PowTwoPointFive(defeatedLevel + recipientLevel + 10);
+
+    CP_SetDiv64_32((u64)exp * numerator, denominator);
+    CP_WaitDiv();
+
+    return CP_GetDivResult32() + 1;
+}
+
 static void BattleScript_GetExpTask(SysTask *task, void *inData)
 {
     // must declare C89-style to match
@@ -10972,6 +11001,8 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
             if (itemEffect == HOLD_EFFECT_EXP_SHARE) {
                 totalExp += data->battleCtx->sharedExp;
             }
+
+            totalExp = ScaleExpByLevel(totalExp, data->battleCtx->battleMons[data->battleCtx->faintedMon].level, Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL));
 
             if (itemEffect == HOLD_EFFECT_EXP_UP) {
                 totalExp = totalExp * 150 / 100;
