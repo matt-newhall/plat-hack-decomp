@@ -7295,6 +7295,10 @@ int Battler_MovePriority(BattleContext *battleCtx, int battler, int move)
         priority += 1;
     }
 
+    if (move == MOVE_GRASSY_GLIDE && Battler_IsAffectedByTerrain(battleCtx, battler, FIELD_CONDITION_GRASSY_TERRAIN)) {
+        priority += 1;
+    }
+
     return priority;
 }
 
@@ -9941,7 +9945,7 @@ void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *
             move = BattleMon_Get(battleCtx, i, BATTLEMON_MOVE_1 + battleCtx->moveSlot[i], NULL);
         }
 
-        battleCtx->turnStartPriority[i] = MOVE_DATA(move).priority;
+        battleCtx->turnStartPriority[i] = Battler_MovePriority(battleCtx, i, move);
     }
 }
 

@@ -1275,8 +1275,8 @@ BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int ba
 BOOL Battler_IsGrounded(BattleContext *battleCtx, int battler);
 
 /**
- * @brief Get the priority a battler's move acts at, after Gale Wings, Triage
- * and Prankster.
+ * @brief Get the priority a battler's move acts at, after Gale Wings, Triage,
+ * Prankster and Grassy Glide on Grassy Terrain.
  *
  * @param battleCtx
  * @param battler

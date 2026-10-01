@@ -4959,6 +4959,16 @@
         "also destroys any\n",
         "terrain."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00506",
+      "en_US": [
+        "Gliding on the\n",
+        "ground, the user\n",
+        "attacks. It always\n",
+        "goes first on\n",
+        "Grassy Terrain."
+      ]
     }
   ]
 }
