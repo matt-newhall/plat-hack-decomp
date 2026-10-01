@@ -382,6 +382,8 @@ static void BattleScript_FreePartyLevelUpIcon(BattleSystem *battleSys, BattleScr
 static void BattleScript_UpdateFriendship(BattleSystem *battleSys, BattleContext *battleCtx, int faintingBattler);
 static void BattleAI_SetAbility(BattleContext *battleCtx, u8 battler, u8 ability);
 static void BattleAI_SetHeldItem(BattleContext *battleCtx, u8 battler, u16 item);
+static BOOL BattleScript_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx);
+static void BattleScript_StartGetExpTask(BattleSystem *battleSys, BattleContext *battleCtx, BattleScriptTaskData *parentTaskData);
 static void BattleScript_GetExpTask(SysTask *task, void *inData);
 static void BattleScript_CatchMonTask(SysTask *task, void *inData);
 
@@ -2281,48 +2283,66 @@ static BOOL BtlCmd_CalcCrit(BattleSystem *battleSys, BattleContext *battleCtx)
  */
 static BOOL BtlCmd_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int jump;
-    u32 battleType = BattleSystem_GetBattleType(battleSys);
-    BattlerData *battlerData = BattleSystem_GetBattlerData(battleSys, battleCtx->faintedMon);
-
     BattleScript_Iter(battleCtx, 1);
-    jump = BattleScript_Read(battleCtx);
+    int jump = BattleScript_Read(battleCtx);
 
-    if ((battlerData->battlerType & BATTLER_TYPE_SOLO_ENEMY) && (battleType & BATTLE_TYPE_NO_EXPERIENCE) == FALSE) {
-        int i;
-        int totalMonsGainingExp = 0;
-        int totalMonsWithExpShare = 0;
-
-        for (i = 0; i < Party_GetCurrentCount(BattleSystem_GetParty(battleSys, BATTLER_US)); i++) {
-            Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, BATTLER_US, i);
-
-            if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) && Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
-                if (battleCtx->sideGetExpMask[(battleCtx->faintedMon >> 1) & 1] & FlagIndex(i)) {
-                    totalMonsGainingExp++;
-                }
-
-                u16 item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
-                if (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_EXP_SHARE) {
-                    totalMonsWithExpShare++;
-                }
-            }
-        }
-
-        u32 exp = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, SPECIES_DATA_BASE_EXP_REWARD);
-        exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 5;
-
-        if (totalMonsWithExpShare) {
-            battleCtx->gainedExp = (exp / 2) / totalMonsGainingExp;
-            battleCtx->sharedExp = (exp / 2) / totalMonsWithExpShare;
-        } else {
-            battleCtx->gainedExp = exp / totalMonsGainingExp;
-            battleCtx->sharedExp = 0;
-        }
-    } else {
+    if (BattleScript_CalcExpGain(battleSys, battleCtx) == FALSE) {
         BattleScript_Iter(battleCtx, jump);
     }
 
     return FALSE;
+}
+
+/**
+ * @brief Calculate the experience owed for defeating or catching
+ * battleCtx->faintedMon, storing the per-recipient shares in
+ * battleCtx->gainedExp and battleCtx->sharedExp.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if experience is to be given; FALSE if the battler is an ally
+ * or the battle type forbids experience gain.
+ */
+static BOOL BattleScript_CalcExpGain(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    u32 battleType = BattleSystem_GetBattleType(battleSys);
+    BattlerData *battlerData = BattleSystem_GetBattlerData(battleSys, battleCtx->faintedMon);
+
+    if ((battlerData->battlerType & BATTLER_TYPE_SOLO_ENEMY) == FALSE || (battleType & BATTLE_TYPE_NO_EXPERIENCE)) {
+        return FALSE;
+    }
+
+    int i;
+    int totalMonsGainingExp = 0;
+    int totalMonsWithExpShare = 0;
+
+    for (i = 0; i < Party_GetCurrentCount(BattleSystem_GetParty(battleSys, BATTLER_US)); i++) {
+        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, BATTLER_US, i);
+
+        if (Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL) && Pokemon_GetValue(mon, MON_DATA_HP, NULL)) {
+            if (battleCtx->sideGetExpMask[(battleCtx->faintedMon >> 1) & 1] & FlagIndex(i)) {
+                totalMonsGainingExp++;
+            }
+
+            u16 item = Pokemon_GetValue(mon, MON_DATA_HELD_ITEM, NULL);
+            if (BattleSystem_GetItemData(battleCtx, item, ITEM_PARAM_HOLD_EFFECT) == HOLD_EFFECT_EXP_SHARE) {
+                totalMonsWithExpShare++;
+            }
+        }
+    }
+
+    u32 exp = SpeciesData_GetSpeciesValue(battleCtx->battleMons[battleCtx->faintedMon].species, SPECIES_DATA_BASE_EXP_REWARD);
+    exp = (exp * battleCtx->battleMons[battleCtx->faintedMon].level) / 5;
+
+    if (totalMonsWithExpShare) {
+        battleCtx->gainedExp = (exp / 2) / totalMonsGainingExp;
+        battleCtx->sharedExp = (exp / 2) / totalMonsWithExpShare;
+    } else {
+        battleCtx->gainedExp = exp / totalMonsGainingExp;
+        battleCtx->sharedExp = 0;
+    }
+
+    return TRUE;
 }
 
 enum GetExpTaskState {
@@ -2396,16 +2416,28 @@ enum GetExpTaskDataIndex {
 static BOOL BtlCmd_StartGetExpTask(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);
+    BattleScript_StartGetExpTask(battleSys, battleCtx, NULL);
 
+    return FALSE;
+}
+
+/**
+ * @brief Start the experience point allocation state machine.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param parentTaskData The task to hand battleCtx->taskData back to, or NULL.
+ */
+static void BattleScript_StartGetExpTask(BattleSystem *battleSys, BattleContext *battleCtx, BattleScriptTaskData *parentTaskData)
+{
     battleCtx->taskData = Heap_Alloc(HEAP_ID_BATTLE, sizeof(BattleScriptTaskData));
     battleCtx->taskData->battleSys = battleSys;
     battleCtx->taskData->battleCtx = battleCtx;
     battleCtx->taskData->seqNum = SEQ_GET_EXP_START;
     battleCtx->taskData->tmpData[GET_EXP_PARTY_SLOT] = 0;
+    battleCtx->taskData->parentTaskData = parentTaskData;
 
     SysTask_Start(BattleScript_GetExpTask, battleCtx->taskData, NULL);
-
-    return FALSE;
 }
 
 /**
@@ -11469,7 +11501,7 @@ static void BattleScript_GetExpTask(SysTask *task, void *inData)
         break;
 
     case SEQ_GET_EXP_DONE:
-        data->battleCtx->taskData = NULL;
+        data->battleCtx->taskData = data->parentTaskData;
         Heap_Free(inData);
         SysTask_Done(task);
         break;
@@ -11623,6 +11655,9 @@ enum CatchMonTaskState {
     SEQ_CATCH_MON_PRINT_POKEMON_BROKE_FREE,
     SEQ_CATCH_MON_DONE_POKEMON_BROKE_FREE,
     SEQ_CATCH_MON_DONE,
+    SEQ_CATCH_MON_GIVE_EXP,
+    SEQ_CATCH_MON_WAIT_EXP,
+    SEQ_CATCH_MON_REGISTER_CAUGHT_MON,
 };
 
 enum CatchMonTaskDataIndex {
@@ -11788,34 +11823,53 @@ static void BattleScript_CatchMonTask(SysTask *task, void *inData)
     case SEQ_CATCH_MON_SET_CAUGHT_SPECIES:
         if (ov12_022368D0(data->ballRotation, 7) == FALSE) {
             if (--data->tmpData[CATCH_MON_DELAY] == 0) {
-                BattleSystem_SetCaughtBattlerIndex(data->battleSys, battler);
-                mon = BattleSystem_GetPartyPokemon(data->battleSys, battler, data->battleCtx->selectedPartySlot[battler]);
-
-                if (BattleSystem_GetBattleType(data->battleSys) & (BATTLE_TYPE_PAL_PARK | BATTLE_TYPE_CATCH_TUTORIAL)) {
-                    mon = BattleSystem_GetPartyPokemon(data->battleSys, battler, data->battleCtx->selectedPartySlot[battler]);
-                    BattleSystem_SetPokemonCatchData(data->battleSys, data->battleCtx, mon);
-                    sub_02015738(ov16_0223E220(data->battleSys), 1);
-                    PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F | PLTTBUF_SUB_BG_F | PLTTBUF_MAIN_OBJ_F | PLTTBUF_SUB_OBJ_F, 0xFFFF, 1, 0, 16, 0);
-                    PokemonSpriteManager_StartFadeAll(monSpriteMan, 0, 16, 0, 0);
-                    data->seqNum = SEQ_CATCH_MON_DONE;
-                } else if (BattleSystem_HasCaughtSpecies(data->battleSys, Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL))) {
-                    sub_02015738(ov16_0223E220(data->battleSys), 1);
-                    PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F | PLTTBUF_MAIN_OBJ_F, 0xFFFF, 1, 0, 16, 0);
-                    PokemonSpriteManager_StartFadeAll(monSpriteMan, 0, 16, 0, 0);
-                    data->seqNum = SEQ_CATCH_MON_UNK_16;
-                } else {
-                    BattleMessage msg;
-
-                    msg.id = BattleStrings_Text_PokemonsDataWasAddedToThePokedex;
-                    msg.tags = TAG_NICKNAME | 0x80;
-                    msg.params[0] = battler;
-                    data->tmpData[CATCH_MON_MSG_INDEX] = BattleMessage_Print(data->battleSys, msgLoader, &msg, BattleSystem_GetTextSpeed(data->battleSys));
-                    data->tmpData[CATCH_MON_DELAY] = 30;
-                    data->seqNum = SEQ_CATCH_MON_FADE_FOR_POKEDEX;
-
-                    BattleSystem_TryIncrementTrainerScoreCaughtSpecies(data->battleSys);
-                }
+                data->seqNum = SEQ_CATCH_MON_GIVE_EXP;
             }
+        }
+        break;
+    case SEQ_CATCH_MON_GIVE_EXP:
+        data->battleCtx->faintedMon = battler;
+
+        if ((BattleSystem_GetBattleType(data->battleSys) & (BATTLE_TYPE_PAL_PARK | BATTLE_TYPE_CATCH_TUTORIAL)) == FALSE
+            && BattleScript_CalcExpGain(data->battleSys, data->battleCtx)) {
+            BattleScript_StartGetExpTask(data->battleSys, data->battleCtx, data);
+            data->seqNum = SEQ_CATCH_MON_WAIT_EXP;
+        } else {
+            data->seqNum = SEQ_CATCH_MON_REGISTER_CAUGHT_MON;
+        }
+        break;
+    case SEQ_CATCH_MON_WAIT_EXP:
+        if (data->battleCtx->taskData == data) {
+            data->seqNum = SEQ_CATCH_MON_REGISTER_CAUGHT_MON;
+        }
+        break;
+    case SEQ_CATCH_MON_REGISTER_CAUGHT_MON:
+        BattleSystem_SetCaughtBattlerIndex(data->battleSys, battler);
+        mon = BattleSystem_GetPartyPokemon(data->battleSys, battler, data->battleCtx->selectedPartySlot[battler]);
+
+        if (BattleSystem_GetBattleType(data->battleSys) & (BATTLE_TYPE_PAL_PARK | BATTLE_TYPE_CATCH_TUTORIAL)) {
+            mon = BattleSystem_GetPartyPokemon(data->battleSys, battler, data->battleCtx->selectedPartySlot[battler]);
+            BattleSystem_SetPokemonCatchData(data->battleSys, data->battleCtx, mon);
+            sub_02015738(ov16_0223E220(data->battleSys), 1);
+            PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F | PLTTBUF_SUB_BG_F | PLTTBUF_MAIN_OBJ_F | PLTTBUF_SUB_OBJ_F, 0xFFFF, 1, 0, 16, 0);
+            PokemonSpriteManager_StartFadeAll(monSpriteMan, 0, 16, 0, 0);
+            data->seqNum = SEQ_CATCH_MON_DONE;
+        } else if (BattleSystem_HasCaughtSpecies(data->battleSys, Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL))) {
+            sub_02015738(ov16_0223E220(data->battleSys), 1);
+            PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F | PLTTBUF_MAIN_OBJ_F, 0xFFFF, 1, 0, 16, 0);
+            PokemonSpriteManager_StartFadeAll(monSpriteMan, 0, 16, 0, 0);
+            data->seqNum = SEQ_CATCH_MON_UNK_16;
+        } else {
+            BattleMessage msg;
+
+            msg.id = BattleStrings_Text_PokemonsDataWasAddedToThePokedex;
+            msg.tags = TAG_NICKNAME | 0x80;
+            msg.params[0] = battler;
+            data->tmpData[CATCH_MON_MSG_INDEX] = BattleMessage_Print(data->battleSys, msgLoader, &msg, BattleSystem_GetTextSpeed(data->battleSys));
+            data->tmpData[CATCH_MON_DELAY] = 30;
+            data->seqNum = SEQ_CATCH_MON_FADE_FOR_POKEDEX;
+
+            BattleSystem_TryIncrementTrainerScoreCaughtSpecies(data->battleSys);
         }
         break;
     case SEQ_CATCH_MON_FADE_FOR_POKEDEX:
