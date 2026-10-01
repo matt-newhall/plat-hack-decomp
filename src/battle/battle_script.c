@@ -376,7 +376,9 @@ static int BattleMessage_TrainerNameTag(BattleSystem *battleSys, BattleContext *
 
 static u32 BattleScript_CalcPrizeMoney(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 static void BattleScript_CalcEffortValues(Party *party, int slot, int species, int form);
-static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *battleCtx);
+static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *battleCtx, BOOL *outCritical);
+static BOOL BattleScript_RollCriticalCapture(BattleSystem *battleSys, u32 catchRate);
+static void BattleScript_RollCatchThrow(BattleScriptTaskData *data);
 static void BattleScript_LoadPartyLevelUpIcon(BattleSystem *battleSys, BattleScriptTaskData *data, Pokemon *mon);
 static void BattleScript_FreePartyLevelUpIcon(BattleSystem *battleSys, BattleScriptTaskData *data);
 static void BattleScript_UpdateFriendship(BattleSystem *battleSys, BattleContext *battleCtx, int faintingBattler);
@@ -11664,8 +11666,27 @@ enum CatchMonTaskDataIndex {
     CATCH_MON_MSG_INDEX = 0,
     CATCH_MON_DELAY,
     CATCH_MON_TOTAL_SHAKES,
-    CATCH_MON_REMAINING_SHAKES
+    CATCH_MON_REMAINING_SHAKES,
+    CATCH_MON_CRITICAL
 };
+
+/**
+ * @brief Decide if critical capture now to play the unique sound + shake
+ *
+ * @param data The catch task's data, with ballRotation already created.
+ */
+static void BattleScript_RollCatchThrow(BattleScriptTaskData *data)
+{
+    BOOL critical = FALSE;
+
+    if ((BattleSystem_GetBattleType(data->battleSys) & BATTLE_TYPE_TRAINER) == FALSE) {
+        data->tmpData[CATCH_MON_TOTAL_SHAKES] = BattleScript_CalcCatchShakes(data->battleSys, data->battleCtx, &critical);
+    }
+
+    data->tmpData[CATCH_MON_CRITICAL] = critical;
+    BallRotation_SetCriticalCapture(data->ballRotation, critical);
+    Sound_PlayEffect(critical ? SEQ_SE_DP_KIRAN : SEQ_SE_DP_NAGERU);
+}
 
 static void BattleScript_CatchMonTask(SysTask *task, void *inData)
 {
@@ -11711,7 +11732,7 @@ static void BattleScript_CatchMonTask(SysTask *task, void *inData)
             data->ballRotation = ov12_02237728(&ballThrow);
             data->seqNum = SEQ_CATCH_MON_CHECK_BATTLE_TYPE;
 
-            Sound_PlayEffect(SEQ_SE_DP_NAGERU);
+            BattleScript_RollCatchThrow(data);
             data->battleSys->ballsThrown++;
             ov12_022368C8(data->ballRotation, 0);
         } else {
@@ -11722,7 +11743,7 @@ static void BattleScript_CatchMonTask(SysTask *task, void *inData)
                 battlerData->ballRotation = NULL;
                 data->seqNum = SEQ_CATCH_MON_CHECK_BATTLE_TYPE;
 
-                Sound_PlayEffect(SEQ_SE_DP_NAGERU);
+                BattleScript_RollCatchThrow(data);
                 data->battleSys->ballsThrown++;
                 ov12_022368C8(data->ballRotation, 0);
             }
@@ -11748,10 +11769,11 @@ static void BattleScript_CatchMonTask(SysTask *task, void *inData)
     case SEQ_CATCH_MON_CALC_SHAKES:
         if (--data->tmpData[CATCH_MON_DELAY] == 0) {
             BattleController_EmitOpenCaptureBall(data->battleSys, battler, data->ball);
-            data->tmpData[CATCH_MON_TOTAL_SHAKES] = BattleScript_CalcCatchShakes(data->battleSys, data->battleCtx);
 
             if (data->tmpData[CATCH_MON_TOTAL_SHAKES] < BALL_3_SHAKES_SUCCESS) {
                 data->tmpData[CATCH_MON_REMAINING_SHAKES] = data->tmpData[CATCH_MON_TOTAL_SHAKES];
+            } else if (data->tmpData[CATCH_MON_CRITICAL]) {
+                data->tmpData[CATCH_MON_REMAINING_SHAKES] = 1;
             } else {
                 data->tmpData[CATCH_MON_REMAINING_SHAKES] = 3;
             }
@@ -12235,11 +12257,14 @@ static const struct Fraction sSafariCatchRate[] = {
  *
  * @param battleSys
  * @param battleCtx
+ * @param outCritical TRUE if critical capture
  * @return The number of times that a Poke Ball will shake during a capture
  * attempt. 4 shakes is defined as a successful capture.
  */
-static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *battleCtx)
+static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *battleCtx, BOOL *outCritical)
 {
+    *outCritical = FALSE;
+
     if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_ALWAYS_CATCH) {
         return BALL_3_SHAKES_SUCCESS;
     }
@@ -12323,7 +12348,16 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
     int shakes;
     if (catchRate >= 255) {
         shakes = BALL_3_SHAKES_SUCCESS;
+    } else if (battleCtx->msgItemTemp == ITEM_MASTER_BALL) {
+        shakes = BALL_3_SHAKES_SUCCESS;
     } else {
+        int shakeChecks = BALL_3_SHAKES_SUCCESS;
+        *outCritical = BattleScript_RollCriticalCapture(battleSys, catchRate);
+
+        if (*outCritical) {
+            shakeChecks = 1;
+        }
+
         u32 sqrtRate = (0xFF << 16) / catchRate;
         CP_SetSqrt32(sqrtRate);
         CP_WaitSqrt();
@@ -12335,18 +12369,51 @@ static int BattleScript_CalcCatchShakes(BattleSystem *battleSys, BattleContext *
         catchRate = CP_GetSqrtResult32();
         catchRate = (0xFFFF << 4) / catchRate;
 
-        for (shakes = 0; shakes < BALL_3_SHAKES_SUCCESS; shakes++) {
+        for (shakes = 0; shakes < shakeChecks; shakes++) {
             if (BattleSystem_RandNext(battleSys) >= catchRate) {
                 break;
             }
         }
 
-        if (battleCtx->msgItemTemp == ITEM_MASTER_BALL) {
+        if (*outCritical && shakes == shakeChecks) {
             shakes = BALL_3_SHAKES_SUCCESS;
         }
     }
 
     return shakes;
+}
+
+static const u16 sCriticalCaptureMultipliers[][2] = {
+    { 201, 5 },
+    { 101, 4 },
+    { 51, 3 },
+    { 26, 2 },
+    { 11, 1 },
+};
+
+/**
+ * @brief Roll for a critical capture.
+ *
+ * @param battleSys
+ * @param catchRate The modified catch rate, after ball and status bonuses.
+ * @return TRUE if the throw is a critical capture.
+ */
+static BOOL BattleScript_RollCriticalCapture(BattleSystem *battleSys, u32 catchRate)
+{
+    u16 caught = Pokedex_CountCaught_National(BattleSystem_GetPokedex(battleSys));
+    u32 doubledMultiplier = 0;
+    int i;
+
+    for (i = 0; i < NELEMS(sCriticalCaptureMultipliers); i++) {
+        if (caught >= sCriticalCaptureMultipliers[i][0]) {
+            doubledMultiplier = sCriticalCaptureMultipliers[i][1];
+            break;
+        }
+    }
+
+    u32 chance = (catchRate > 255 ? 255 : catchRate) * doubledMultiplier / 12;
+
+    return (BattleSystem_RandNext(battleSys) & 0xFF) < chance;
 }
 
 /**
