@@ -11415,6 +11415,48 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Acupressure!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01620",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Thief!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01621",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Thief!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01622",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Thief!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01623",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Covet!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01624",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Covet!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01625",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Covet!"
+      ]
     }
   ]
 }

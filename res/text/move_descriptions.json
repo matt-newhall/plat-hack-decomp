@@ -5330,6 +5330,24 @@
         "boosting one of its\n",
         "stats."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00544",
+      "en_US": [
+        "The user sneaks up\n",
+        "on the foe and\n",
+        "strikes it with a\n",
+        "quick, sly attack."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00545",
+      "en_US": [
+        "The user endearingly\n",
+        "approaches the foe,\n",
+        "then attacks it\n",
+        "with a sudden tackle."
+      ]
     }
   ]
 }
