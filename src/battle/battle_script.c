@@ -4172,6 +4172,10 @@ static BOOL BtlCmd_PrintBufferedTrainerMessage(BattleSystem *battleSys, BattleCo
 /**
  * @brief Try to execute the Conversion effect.
  *
+ * The user's type becomes the type of the move in its first move slot, even if
+ * that move cannot currently be selected. Fails if the user already has that
+ * type, or has Multitype.
+ *
  * Inputs:
  * 1. The jump-distance if the process fails for whatever reason.
  *
@@ -4181,46 +4185,20 @@ static BOOL BtlCmd_PrintBufferedTrainerMessage(BattleSystem *battleSys, BattleCo
  */
 static BOOL BtlCmd_TryConversion(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int numMoves, i, moveType; // must declare these here to match
-
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE) {
+    int moveType = MOVE_DATA(ATTACKING_MON.moves[0]).type;
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE
+        || MON_HAS_TYPE(battleCtx->attacker, moveType)) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
 
-    for (numMoves = 0; numMoves < LEARNED_MOVES_MAX; numMoves++) {
-        if (ATTACKING_MON.moves[numMoves] == MOVE_NONE) {
-            break;
-        }
-    }
-
-    // First, check if there are any non-Conversion moves which have a type different from the
-    // source Pokemon's types - Conversion was replaced
-    for (i = 0; i < numMoves; i++) {
-        moveType = MOVE_DATA(ATTACKING_MON.moves[i]).type;
-
-        if (MON_IS_NOT_TYPE(battleCtx->attacker, moveType)) {
-            break;
-        }
-    }
-
-    if (i == numMoves) { // no such moves
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else {
-        do {
-            // Get a random non-Conversion move - Conversion was replaced
-            i = BattleSystem_RandNext(battleSys) % numMoves;
-
-            moveType = MOVE_DATA(ATTACKING_MON.moves[i]).type;
-        } while (MON_HAS_TYPE(battleCtx->attacker, moveType));
-
-        ATTACKING_MON.type1 = moveType;
-        ATTACKING_MON.type2 = moveType;
-        battleCtx->msgTemp = moveType;
-    }
+    ATTACKING_MON.type1 = moveType;
+    ATTACKING_MON.type2 = moveType;
+    battleCtx->msgTemp = moveType;
 
     return FALSE;
 }
