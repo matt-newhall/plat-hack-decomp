@@ -2757,8 +2757,7 @@ BOOL BattleSystem_CanUseMove(BattleSystem *battleSys, BattleContext *battleCtx, 
         msgOut->tags = TAG_NICKNAME_MOVE_MOVE;
         msgOut->id = BattleStrings_Text_PokemonCantUseMoveBecauseOfMove_Ally; // "{0} can't use {2} because of {1}!"
         msgOut->params[0] = BattleSystem_NicknameTag(battleCtx, battler);
-        // got rid of Heal Block
-        msgOut->params[1] = MOVE_NONE;
+        msgOut->params[1] = MOVE_HEAL_BLOCK;
         msgOut->params[2] = battleCtx->battleMons[battler].moves[moveSlot];
         result = FALSE;
     } else if (BattleSystem_CheckInvalidMoves(battleSys, battleCtx, battler, 0, CHECK_INVALID_CHOICE_ITEM) & FlagIndex(moveSlot)) {
@@ -3768,6 +3767,7 @@ BOOL Move_IsInvoker(u16 move)
         || move == MOVE_ASSIST
         || move == MOVE_COPYCAT
         || move == MOVE_ME_FIRST
+        || move == MOVE_MIRROR_MOVE
         || move == MOVE_METRONOME) {
         return TRUE;
     }
@@ -4178,6 +4178,8 @@ static const u16 sMovesAffectedByHealBlock[] = {
     MOVE_HEAL_ORDER,
     MOVE_SLACK_OFF,
     MOVE_ROOST,
+    MOVE_LUNAR_DANCE,
+    MOVE_HEALING_WISH,
     MOVE_WISH,
     MOVE_LIFE_DEW,
 };
@@ -9816,6 +9818,7 @@ static const u16 sCannotMetronomeMoves[] = {
     FORBIDDEN_BY_MIMIC_DELIM,
     MOVE_SLEEP_TALK,
     MOVE_ASSIST,
+    MOVE_MIRROR_MOVE,
     MOVE_COUNTER,
     MOVE_MIRROR_COAT,
     MOVE_PROTECT,
@@ -9895,6 +9898,7 @@ static const u16 sCannotEncoreMoves[] = {
     MOVE_TRANSFORM,
     MOVE_MIMIC,
     MOVE_SKETCH,
+    MOVE_MIRROR_MOVE,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
     MOVE_COPYCAT,

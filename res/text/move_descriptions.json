@@ -5367,6 +5367,84 @@
         "It weakens Fire-type\n",
         "moves for five turns."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00548",
+      "en_US": [
+        "The user counters\n",
+        "the foe by mimicking\n",
+        "the move last used\n",
+        "by the foe."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00549",
+      "en_US": [
+        "The user changes its\n",
+        "type to make itself\n",
+        "resistant to the type\n",
+        "of the attack it\n",
+        "last took."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00550",
+      "en_US": [
+        "Two turns after this\n",
+        "move is used, the foe\n",
+        "is attacked with a\n",
+        "hunk of psychic\n",
+        "energy."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00551",
+      "en_US": [
+        "The user’s type is\n",
+        "changed depending on\n",
+        "its environment, such\n",
+        "as at water’s edge, in\n",
+        "grass, or in a cave."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00552",
+      "en_US": [
+        "Two turns after this\n",
+        "move is used, the\n",
+        "user blasts the foe\n",
+        "with a concentrated\n",
+        "bundle of light."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00553",
+      "en_US": [
+        "The user faints. In\n",
+        "return, the Pokémon\n",
+        "taking its place will\n",
+        "have its HP restored\n",
+        "and status cured."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00554",
+      "en_US": [
+        "The user prevents\n",
+        "the foe from using\n",
+        "any HP-recovery\n",
+        "moves for five turns.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00555",
+      "en_US": [
+        "The user faints. In\n",
+        "return, the Pokémon\n",
+        "taking its place will\n",
+        "have its status and\n",
+        "HP fully restored."
+      ]
     }
   ]
 }

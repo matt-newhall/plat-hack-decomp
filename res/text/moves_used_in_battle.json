@@ -11499,6 +11499,174 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Water Sport!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01644",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Mirror Move!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01645",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Mirror Move!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01646",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Mirror Move!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01647",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Conversion 2!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01648",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Conversion 2!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01649",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Conversion 2!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01650",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Future Sight!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01651",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Future Sight!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01652",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Future Sight!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01653",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Camouflage!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01654",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Camouflage!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01655",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Camouflage!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01656",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Doom Desire!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01657",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Doom Desire!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01658",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Doom Desire!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01659",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Healing Wish!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01660",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Healing Wish!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01661",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Healing Wish!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01662",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Heal Block!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01663",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Heal Block!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01664",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Heal Block!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01665",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Lunar Dance!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01666",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Lunar Dance!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01667",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Lunar Dance!"
+      ]
     }
   ]
 }

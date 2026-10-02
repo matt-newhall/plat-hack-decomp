@@ -2192,6 +2192,38 @@
     {
       "id": "pl_msg_00000648_00547",
       "en_US": "WATER SPORT"
+    },
+    {
+      "id": "pl_msg_00000648_00548",
+      "en_US": "MIRROR MOVE"
+    },
+    {
+      "id": "pl_msg_00000648_00549",
+      "en_US": "CONVERSION 2"
+    },
+    {
+      "id": "pl_msg_00000648_00550",
+      "en_US": "FUTURE SIGHT"
+    },
+    {
+      "id": "pl_msg_00000648_00551",
+      "en_US": "CAMOUFLAGE"
+    },
+    {
+      "id": "pl_msg_00000648_00552",
+      "en_US": "DOOM DESIRE"
+    },
+    {
+      "id": "pl_msg_00000648_00553",
+      "en_US": "HEALING WISH"
+    },
+    {
+      "id": "pl_msg_00000648_00554",
+      "en_US": "HEAL BLOCK"
+    },
+    {
+      "id": "pl_msg_00000648_00555",
+      "en_US": "LUNAR DANCE"
     }
   ]
 }
