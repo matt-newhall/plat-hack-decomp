@@ -1433,6 +1433,11 @@
     .long BTLCMD_RECORDPAYDAYUSE
     .endm
 
+    .macro TrySetSport jump_if_fail:req
+    .long BTLCMD_TRYSETSPORT
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

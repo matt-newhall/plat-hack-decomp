@@ -5348,6 +5348,25 @@
         "then attacks it\n",
         "with a sudden tackle."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00546",
+      "en_US": [
+        "The user kicks up\n",
+        "mud on the battlefield.\n",
+        "It weakens Electric-\n",
+        "type moves for\n",
+        "five turns."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00547",
+      "en_US": [
+        "The user soaks the\n",
+        "battlefield with water.\n",
+        "It weakens Fire-type\n",
+        "moves for five turns."
+      ]
     }
   ]
 }

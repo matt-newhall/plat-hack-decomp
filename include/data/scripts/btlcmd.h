@@ -268,6 +268,7 @@ ScriptCommand(BTLCMD_SETTERRAINBACKGROUND,                BtlCmd_SetTerrainBackg
 ScriptCommand(BTLCMD_CHECKTERRAINPROTECTION,              BtlCmd_CheckTerrainProtection)
 ScriptCommand(BTLCMD_TRYSETTERRAIN,                       BtlCmd_TrySetTerrain)
 ScriptCommand(BTLCMD_RECORDPAYDAYUSE,                     BtlCmd_RecordPayDayUse)
+ScriptCommand(BTLCMD_TRYSETSPORT,                          BtlCmd_TrySetSport)
 
 // clang-format on
 

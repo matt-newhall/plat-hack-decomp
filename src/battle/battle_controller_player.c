@@ -988,6 +988,8 @@ enum FieldCondCheckState {
     FIELD_COND_CHECK_STATE_SUNNY,
     FIELD_COND_CHECK_STATE_HAILING,
     FIELD_COND_CHECK_STATE_DEEP_FOG,
+    FIELD_COND_CHECK_STATE_WATER_SPORT,
+    FIELD_COND_CHECK_STATE_MUD_SPORT,
     FIELD_COND_CHECK_STATE_GRAVITY,
     FIELD_COND_CHECK_STATE_MAGMA_STORM,
     FIELD_COND_CHECK_STATE_TERRAIN,
@@ -1319,6 +1321,26 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
                 PrepareSubroutineSequence(battleCtx, subscript_weather_continues);
 
                 battleCtx->scriptTemp = BATTLE_ANIMATION_WEATHER_FOG;
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_WATER_SPORT:
+            if (battleCtx->fieldConditions.waterSportTurns && --battleCtx->fieldConditions.waterSportTurns == 0) {
+                PrepareSubroutineSequence(battleCtx, subscript_sport_end);
+                battleCtx->scriptTemp = TYPE_FIRE;
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_MUD_SPORT:
+            if (battleCtx->fieldConditions.mudSportTurns && --battleCtx->fieldConditions.mudSportTurns == 0) {
+                PrepareSubroutineSequence(battleCtx, subscript_sport_end);
+                battleCtx->scriptTemp = TYPE_ELECTRIC;
                 state = STATE_BREAK_OUT;
             }
 

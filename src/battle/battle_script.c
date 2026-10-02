@@ -350,6 +350,7 @@ static BOOL BtlCmd_SetTerrainBackground(BattleSystem *battleSys, BattleContext *
 static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RecordPayDayUse(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TrySetSport(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -14161,6 +14162,34 @@ static BOOL BtlCmd_RecordPayDayUse(BattleSystem *battleSys, BattleContext *battl
 
     if (*uses < 0xFF) {
         (*uses)++;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Try to start Mud Sport or Water Sport, depending on the current move.
+ *
+ * Inputs:
+ * 1. The jump-distance if the Sport is already active.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TrySetSport(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpOnFail = BattleScript_Read(battleCtx);
+
+    u8 *turns = CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_HALVE_ELECTRIC_DAMAGE
+        ? &battleCtx->fieldConditions.mudSportTurns
+        : &battleCtx->fieldConditions.waterSportTurns;
+
+    if (*turns) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+    } else {
+        *turns = 5;
     }
 
     return FALSE;

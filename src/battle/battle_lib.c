@@ -8863,6 +8863,7 @@ static BOOL AnalyticBoostApplies(BattleSystem *battleSys, BattleContext *battleC
 }
 
 #define MODIFIER_ONE  4096
+#define MODIFIER_0_33 1352
 #define MODIFIER_0_5  2048
 #define MODIFIER_0_75 3072
 #define MODIFIER_1_2  4915
@@ -9179,13 +9180,9 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         spAttackStat = spAttackStat * 150 / 100;
     }
 
-    if (moveType == TYPE_ELECTRIC
-        && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_MUD_SPORT)) {
-        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
-    }
-    if (moveType == TYPE_FIRE
-        && BattleSystem_AnyBattlersWithMoveEffect(battleSys, battleCtx, MOVE_EFFECT_WATER_SPORT)) {
-        powerMod = ChainModifier(powerMod, MODIFIER_0_5);
+    if ((moveType == TYPE_ELECTRIC && battleCtx->fieldConditions.mudSportTurns)
+        || (moveType == TYPE_FIRE && battleCtx->fieldConditions.waterSportTurns)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_0_33);
     }
 
     if ((moveType == TYPE_ELECTRIC && Battler_IsAffectedByTerrain(battleCtx, attacker, FIELD_CONDITION_ELECTRIC_TERRAIN))

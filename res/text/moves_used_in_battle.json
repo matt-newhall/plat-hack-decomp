@@ -11457,6 +11457,48 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Covet!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01638",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Mud Sport!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01639",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Mud Sport!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01640",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Mud Sport!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01641",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Water Sport!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01642",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Water Sport!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01643",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Water Sport!"
+      ]
     }
   ]
 }
