@@ -10,11 +10,29 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_ZIGZAGOON",
             "form": 0,
             "level": 5,
             "item": null,
-            "moves": null,
+            "moves": [
+                "MOVE_TACKLE",
+                "MOVE_SAND_ATTACK",
+                "MOVE_TAIL_WHIP"
+            ],
+            "iv_scale": 0,
+            "ball_seal": 0
+        },
+        {
+            "species": "SPECIES_NATU",
+            "form": 0,
+            "level": 6,
+            "item": null,
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_NIGHT_SHADE",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_ATTRACT"
+            ],
             "iv_scale": 0,
             "ball_seal": 0
         }
