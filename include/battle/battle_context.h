@@ -202,7 +202,7 @@ struct BattleContext {
     int scriptTemp;
 
     u32 battlerStatusFlags[MAX_BATTLERS];
-    u32 payDayCount;
+    u8 payDayUses[MAX_BATTLERS][MAX_PARTY_SIZE];
     int totalTurns;
     int totalFainted[MAX_BATTLERS];
     int totalDamage[MAX_BATTLERS];

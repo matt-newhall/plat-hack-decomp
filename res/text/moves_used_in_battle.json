@@ -11100,6 +11100,90 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Frustration!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01575",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Pay Day!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01576",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Pay Day!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01577",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Pay Day!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01578",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Bide!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01579",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Bide!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01580",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Bide!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01581",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Sketch!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01582",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Sketch!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01583",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Sketch!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01584",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Worry Seed!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01585",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Worry Seed!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01586",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Worry Seed!"
+      ]
     }
   ]
 }

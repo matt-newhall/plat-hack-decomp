@@ -2116,6 +2116,22 @@
     {
       "id": "pl_msg_00000648_00528",
       "en_US": "FRUSTRATION"
+    },
+    {
+      "id": "pl_msg_00000648_00529",
+      "en_US": "PAY DAY"
+    },
+    {
+      "id": "pl_msg_00000648_00530",
+      "en_US": "BIDE"
+    },
+    {
+      "id": "pl_msg_00000648_00531",
+      "en_US": "SKETCH"
+    },
+    {
+      "id": "pl_msg_00000648_00532",
+      "en_US": "WORRY SEED"
     }
   ]
 }

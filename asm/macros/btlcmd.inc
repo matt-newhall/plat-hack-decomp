@@ -1429,6 +1429,10 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro RecordPayDayUse
+    .long BTLCMD_RECORDPAYDAYUSE
+    .endm
+
     .text
     .globl _start
 _start:

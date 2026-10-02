@@ -1235,6 +1235,29 @@ void BattleSystem_RollQuickDraw(BattleSystem *battleSys, BattleContext *battleCt
     }
 }
 
+/**
+ * @brief Get the move a battler will use this turn, for priority purposes.
+ *
+ * A battler storing energy with Bide keeps Bide's priority on its later turns,
+ * even if Bide was called through another move such as Metronome.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return The move whose priority applies to the battler this turn.
+ */
+static u16 Battler_PriorityMove(BattleContext *battleCtx, int battler)
+{
+    if (battleCtx->turnFlags[battler].struggling) {
+        return MOVE_STRUGGLE;
+    }
+
+    if (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_BIDE) {
+        return MOVE_BIDE;
+    }
+
+    return BattleMon_Get(battleCtx, battler, BATTLEMON_MOVE_1 + battleCtx->moveSlot[battler], NULL);
+}
+
 u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *battleCtx, int battler1, int battler2, BOOL ignoreQuickClaw)
 {
     u8 result = COMPARE_SPEED_FASTER;
@@ -1246,7 +1269,6 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     u8 battler1QuickClaw = 0, battler2QuickClaw = 0;
     u8 battler1LaggingTail = 0, battler2LaggingTail = 0;
     int battler1Action, battler2Action;
-    int battler1MoveSlot, battler2MoveSlot;
     int battler1Ability, battler2Ability;
     int battler1SpeedStage, battler2SpeedStage;
     int i;
@@ -1450,23 +1472,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
     if (ignoreQuickClaw == FALSE) {
         battler1Action = battleCtx->battlerActions[battler1][BATTLE_ACTION_SELECTED_COMMAND];
         battler2Action = battleCtx->battlerActions[battler2][BATTLE_ACTION_SELECTED_COMMAND];
-        battler1MoveSlot = battleCtx->moveSlot[battler1];
-        battler2MoveSlot = battleCtx->moveSlot[battler2];
 
         if (battler1Action == PLAYER_INPUT_FIGHT) {
-            if (battleCtx->turnFlags[battler1].struggling) {
-                battler1Move = MOVE_STRUGGLE;
-            } else {
-                battler1Move = BattleMon_Get(battleCtx, battler1, BATTLEMON_MOVE_1 + battler1MoveSlot, NULL);
-            }
+            battler1Move = Battler_PriorityMove(battleCtx, battler1);
         }
 
         if (battler2Action == PLAYER_INPUT_FIGHT) {
-            if (battleCtx->turnFlags[battler2].struggling) {
-                battler2Move = MOVE_STRUGGLE;
-            } else {
-                battler2Move = BattleMon_Get(battleCtx, battler2, BATTLEMON_MOVE_1 + battler2MoveSlot, NULL);
-            }
+            battler2Move = Battler_PriorityMove(battleCtx, battler2);
         }
 
         battler1Priority = Battler_MovePriority(battleCtx, battler1, battler1Move);
@@ -1627,6 +1639,25 @@ static BOOL ParentalBondDefersSideEffect(BattleContext *battleCtx)
     return subscript == MOVE_SUBSCRIPT_PTR_STRUGGLE || subscript == MOVE_SUBSCRIPT_PTR_STEEL_BEAM;
 }
 
+/**
+ * @brief Check if a side effect only applies on the first strike of a Parental
+ * Bond move.
+ *
+ * Pay Day only scatters coins on the first strike.
+ *
+ * @param battleCtx
+ * @return TRUE if the pending side effect must be dropped; FALSE otherwise.
+ */
+static BOOL ParentalBondSkipsSideEffect(BattleContext *battleCtx)
+{
+    if ((battleCtx->battleStatusMask2 & SYSCTL_PARENTAL_BOND_ACTIVE) == FALSE
+        || battleCtx->multiHitCounter > 1) {
+        return FALSE;
+    }
+
+    return (battleCtx->sideEffectIndirectFlags & MOVE_SIDE_EFFECT_SUBSCRIPT_POINTER) == MOVE_SUBSCRIPT_PTR_PAY_DAY;
+}
+
 BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext *battleCtx, int *effect)
 {
     BOOL result = FALSE;
@@ -1634,6 +1665,11 @@ BOOL BattleSystem_TriggerSecondaryEffect(BattleSystem *battleSys, BattleContext 
     BOOL sheerForce = BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur);
 
     if (ParentalBondDefersSideEffect(battleCtx)) {
+        return FALSE;
+    }
+
+    if (ParentalBondSkipsSideEffect(battleCtx)) {
+        battleCtx->sideEffectIndirectFlags = 0;
         return FALSE;
     }
 
@@ -2172,7 +2208,7 @@ void BattleMon_CopyToParty(BattleSystem *battleSys, BattleContext *battleCtx, in
 void Battler_LockMoveChoice(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     battleCtx->battleMons[battler].statusVolatile |= VOLATILE_CONDITION_MOVE_LOCKED;
-    battleCtx->moveLockedInto[battler] = battleCtx->moveCur;
+    battleCtx->moveLockedInto[battler] = (battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_BIDE) ? MOVE_BIDE : battleCtx->moveCur;
 }
 
 void Battler_UnlockMoveChoice(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
@@ -9777,6 +9813,7 @@ BOOL BattleSystem_MoveAlwaysCrits(BattleSystem *battleSys, BattleContext *battle
 static const u16 sCannotMetronomeMoves[] = {
     MOVE_METRONOME,
     MOVE_STRUGGLE,
+    MOVE_SKETCH,
     MOVE_MIMIC,
     MOVE_CHATTER,
     FORBIDDEN_BY_MIMIC_DELIM,
@@ -9860,6 +9897,7 @@ BOOL Move_CanBeMetronomed(BattleSystem *battleSys, BattleContext *battleCtx, int
 static const u16 sCannotEncoreMoves[] = {
     MOVE_TRANSFORM,
     MOVE_MIMIC,
+    MOVE_SKETCH,
     MOVE_ENCORE,
     MOVE_STRUGGLE,
     MOVE_COPYCAT,
@@ -9958,12 +9996,7 @@ void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *
             continue;
         }
 
-        if (battleCtx->turnFlags[i].struggling) {
-            move = MOVE_STRUGGLE;
-        } else {
-            move = BattleMon_Get(battleCtx, i, BATTLEMON_MOVE_1 + battleCtx->moveSlot[i], NULL);
-        }
-
+        move = Battler_PriorityMove(battleCtx, i);
         battleCtx->turnStartPriority[i] = Battler_MovePriority(battleCtx, i, move);
     }
 }

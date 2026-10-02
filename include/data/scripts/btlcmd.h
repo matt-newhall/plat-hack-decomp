@@ -267,6 +267,7 @@ ScriptCommand(BTLCMD_GOTOIFSTATSTAGECHANGEUNBLOCKED,      BtlCmd_GoToIfStatStage
 ScriptCommand(BTLCMD_SETTERRAINBACKGROUND,                BtlCmd_SetTerrainBackground)
 ScriptCommand(BTLCMD_CHECKTERRAINPROTECTION,              BtlCmd_CheckTerrainProtection)
 ScriptCommand(BTLCMD_TRYSETTERRAIN,                       BtlCmd_TrySetTerrain)
+ScriptCommand(BTLCMD_RECORDPAYDAYUSE,                     BtlCmd_RecordPayDayUse)
 
 // clang-format on
 

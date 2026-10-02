@@ -349,6 +349,7 @@ static BOOL BtlCmd_PlayEntryAnimation(BattleSystem *battleSys, BattleContext *ba
 static BOOL BtlCmd_SetTerrainBackground(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_RecordPayDayUse(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -4387,6 +4388,9 @@ static BOOL BtlCmd_CompareMonDataToVar(BattleSystem *battleSys, BattleContext *b
 /**
  * @brief Gives the money accrued from Pay Day to the player.
  *
+ * Each use pays out 5 times the user's level at the end of the battle, so
+ * levelling up after using Pay Day raises the payout.
+ *
  * @param battleSys
  * @param battleCtx
  * @return FALSE
@@ -4395,7 +4399,18 @@ static BOOL BtlCmd_AddPayDayMoney(BattleSystem *battleSys, BattleContext *battle
 {
     BattleScript_Iter(battleCtx, 1);
 
-    battleCtx->msgTemp = battleCtx->payDayCount * battleCtx->prizeMoneyMul;
+    u32 total = 0;
+
+    for (int battler = 0; battler < MAX_BATTLERS; battler++) {
+        for (int slot = 0; slot < MAX_PARTY_SIZE; slot++) {
+            if (battleCtx->payDayUses[battler][slot]) {
+                Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler, slot);
+                total += battleCtx->payDayUses[battler][slot] * 5 * Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+            }
+        }
+    }
+
+    battleCtx->msgTemp = total * battleCtx->prizeMoneyMul;
     if (battleCtx->msgTemp > PAYDAY_MAX) {
         battleCtx->msgTemp = PAYDAY_MAX;
     }
@@ -5089,18 +5104,26 @@ static BOOL BtlCmd_TrySketch(BattleSystem *battleSys, BattleContext *battleCtx)
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    // Don't allow Sketch while Transformed or against any of Struggle, Chatter, or Sketch itself
+    // Don't allow Sketch while Transformed or against any of Struggle, Chatter, Dark Void, or Sketch itself
     if ((ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_TRANSFORM)
         || battleCtx->moveSketched[battleCtx->defender] == MOVE_STRUGGLE
+        || battleCtx->moveSketched[battleCtx->defender] == MOVE_SKETCH
         || battleCtx->moveSketched[battleCtx->defender] == MOVE_CHATTER
+        || battleCtx->moveSketched[battleCtx->defender] == MOVE_DARK_VOID
         || battleCtx->moveSketched[battleCtx->defender] == MOVE_NONE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
         int i;
         for (i = 0; i < LEARNED_MOVES_MAX; i++) {
             // Don't allow Sketching a move that we already know
-            if (ATTACKING_MON.moves[i] == battleCtx->moveSketched[battleCtx->defender]) {
+            if (ATTACKING_MON.moves[i] != MOVE_SKETCH
+                && ATTACKING_MON.moves[i] == battleCtx->moveSketched[battleCtx->defender]) {
                 break;
+            }
+
+            // Replace the first instance of Sketch only (there should only be one)
+            if (ATTACKING_MON.moves[i] == MOVE_SKETCH && moveSlot == -1) {
+                moveSlot = i;
             }
         }
 
@@ -10816,8 +10839,6 @@ static void *BattleScript_VarAddress(BattleSystem *battleSys, BattleContext *bat
         return &battleCtx->storedDamage[battleCtx->attacker];
     case BTLVAR_MSG_TEMP:
         return &battleCtx->msgTemp;
-    case BTLVAR_PAY_DAY_COUNT:
-        return &battleCtx->payDayCount;
     case BTLVAR_CURRENT_MOVE:
         return &battleCtx->moveCur;
     case BTLVAR_TOTAL_TURNS:
@@ -14137,6 +14158,27 @@ static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleC
     if (BattleContext_TerrainMoveFails(battleCtx, battleCtx->moveCur)
         || BattleContext_SetTerrain(battleCtx, Move_Terrain(battleCtx->moveCur), FALSE, battleCtx->attacker) == FALSE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Record a Pay Day use by the attacker, to be paid out at the end of
+ * the battle based on the user's level at that point.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_RecordPayDayUse(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    u8 *uses = &battleCtx->payDayUses[battleCtx->attacker][battleCtx->selectedPartySlot[battleCtx->attacker]];
+
+    if (*uses < 0xFF) {
+        (*uses)++;
     }
 
     return FALSE;
