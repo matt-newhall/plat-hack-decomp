@@ -19,15 +19,15 @@
     },
     {
       "id": "pl_msg_00000648_00004",
-      "en_US": "FOUL PLAY"
+      "en_US": "COMET PUNCH"
     },
     {
       "id": "pl_msg_00000648_00005",
-      "en_US": "DUAL WINGBEAT"
+      "en_US": "MEGA PUNCH"
     },
     {
       "id": "pl_msg_00000648_00006",
-      "en_US": "LIQUIDATION"
+      "en_US": "PAY DAY"
     },
     {
       "id": "pl_msg_00000648_00007",
@@ -51,11 +51,11 @@
     },
     {
       "id": "pl_msg_00000648_00012",
-      "en_US": "BOOMBURST"
+      "en_US": "GUILLOTINE"
     },
     {
       "id": "pl_msg_00000648_00013",
-      "en_US": "METEOR BEAM"
+      "en_US": "RAZOR WIND"
     },
     {
       "id": "pl_msg_00000648_00014",
@@ -83,11 +83,11 @@
     },
     {
       "id": "pl_msg_00000648_00020",
-      "en_US": "FLIP TURN"
+      "en_US": "BIND"
     },
     {
       "id": "pl_msg_00000648_00021",
-      "en_US": "SCALD"
+      "en_US": "SLAM"
     },
     {
       "id": "pl_msg_00000648_00022",
@@ -103,7 +103,7 @@
     },
     {
       "id": "pl_msg_00000648_00025",
-      "en_US": "SOLAR BLADE"
+      "en_US": "MEGA KICK"
     },
     {
       "id": "pl_msg_00000648_00026",
@@ -131,7 +131,7 @@
     },
     {
       "id": "pl_msg_00000648_00032",
-      "en_US": "FLAME CHARGE"
+      "en_US": "HORN DRILL"
     },
     {
       "id": "pl_msg_00000648_00033",
@@ -363,7 +363,7 @@
     },
     {
       "id": "pl_msg_00000648_00090",
-      "en_US": "SLUDGE WAVE"
+      "en_US": "FISSURE"
     },
     {
       "id": "pl_msg_00000648_00091",
@@ -399,7 +399,7 @@
     },
     {
       "id": "pl_msg_00000648_00099",
-      "en_US": "POWDER"
+      "en_US": "RAGE"
     },
     {
       "id": "pl_msg_00000648_00100",
@@ -451,7 +451,7 @@
     },
     {
       "id": "pl_msg_00000648_00112",
-      "en_US": "SILK TRAP"
+      "en_US": "BARRIER"
     },
     {
       "id": "pl_msg_00000648_00113",
@@ -471,7 +471,7 @@
     },
     {
       "id": "pl_msg_00000648_00117",
-      "en_US": "ELECTROWEB"
+      "en_US": "BIDE"
     },
     {
       "id": "pl_msg_00000648_00118",
@@ -479,7 +479,7 @@
     },
     {
       "id": "pl_msg_00000648_00119",
-      "en_US": "STORED POWER"
+      "en_US": "MIRROR MOVE"
     },
     {
       "id": "pl_msg_00000648_00120",
@@ -495,7 +495,7 @@
     },
     {
       "id": "pl_msg_00000648_00123",
-      "en_US": "DRAINING KISS"
+      "en_US": "SMOG"
     },
     {
       "id": "pl_msg_00000648_00124",
@@ -523,7 +523,7 @@
     },
     {
       "id": "pl_msg_00000648_00130",
-      "en_US": "FIRST IMPRESSION"
+      "en_US": "SKULL BASH"
     },
     {
       "id": "pl_msg_00000648_00131",
@@ -531,7 +531,7 @@
     },
     {
       "id": "pl_msg_00000648_00132",
-      "en_US": "PARABOLICCHARGE"
+      "en_US": "CONSTRICT"
     },
     {
       "id": "pl_msg_00000648_00133",
@@ -539,7 +539,7 @@
     },
     {
       "id": "pl_msg_00000648_00134",
-      "en_US": "BABY-DOLL EYES"
+      "en_US": "KINESIS"
     },
     {
       "id": "pl_msg_00000648_00135",
@@ -643,7 +643,7 @@
     },
     {
       "id": "pl_msg_00000648_00160",
-      "en_US": "HURRICANE"
+      "en_US": "CONVERSION"
     },
     {
       "id": "pl_msg_00000648_00161",
@@ -667,7 +667,7 @@
     },
     {
       "id": "pl_msg_00000648_00166",
-      "en_US": "RAGE POWDER"
+      "en_US": "SKETCH"
     },
     {
       "id": "pl_msg_00000648_00167",
@@ -675,15 +675,15 @@
     },
     {
       "id": "pl_msg_00000648_00168",
-      "en_US": "HEX"
+      "en_US": "THIEF"
     },
     {
       "id": "pl_msg_00000648_00169",
-      "en_US": "STICKY WEB"
+      "en_US": "SPIDER WEB"
     },
     {
       "id": "pl_msg_00000648_00170",
-      "en_US": "ZING ZAP"
+      "en_US": "MIND READER"
     },
     {
       "id": "pl_msg_00000648_00171",
@@ -707,7 +707,7 @@
     },
     {
       "id": "pl_msg_00000648_00176",
-      "en_US": "HEAVY SLAM"
+      "en_US": "CONVERSION 2"
     },
     {
       "id": "pl_msg_00000648_00177",
@@ -775,7 +775,7 @@
     },
     {
       "id": "pl_msg_00000648_00193",
-      "en_US": "DRILL RUN"
+      "en_US": "FORESIGHT"
     },
     {
       "id": "pl_msg_00000648_00194",
@@ -827,7 +827,7 @@
     },
     {
       "id": "pl_msg_00000648_00206",
-      "en_US": "ACROBATICS"
+      "en_US": "FALSE SWIPE"
     },
     {
       "id": "pl_msg_00000648_00207",
@@ -835,7 +835,7 @@
     },
     {
       "id": "pl_msg_00000648_00208",
-      "en_US": "INFESTATION"
+      "en_US": "MILK DRINK"
     },
     {
       "id": "pl_msg_00000648_00209",
@@ -875,7 +875,7 @@
     },
     {
       "id": "pl_msg_00000648_00218",
-      "en_US": "DISARMING VOICE"
+      "en_US": "FRUSTRATION"
     },
     {
       "id": "pl_msg_00000648_00219",
@@ -995,7 +995,7 @@
     },
     {
       "id": "pl_msg_00000648_00248",
-      "en_US": "VOLT SWITCH"
+      "en_US": "FUTURE SIGHT"
     },
     {
       "id": "pl_msg_00000648_00249",
@@ -1003,7 +1003,7 @@
     },
     {
       "id": "pl_msg_00000648_00250",
-      "en_US": "DUAL CHOP"
+      "en_US": "WHIRLPOOL"
     },
     {
       "id": "pl_msg_00000648_00251",
@@ -1099,7 +1099,7 @@
     },
     {
       "id": "pl_msg_00000648_00274",
-      "en_US": "PSYSHOCK"
+      "en_US": "ASSIST"
     },
     {
       "id": "pl_msg_00000648_00275",
@@ -1147,15 +1147,15 @@
     },
     {
       "id": "pl_msg_00000648_00286",
-      "en_US": "STRUGGLE BUG"
+      "en_US": "IMPRISON"
     },
     {
       "id": "pl_msg_00000648_00287",
-      "en_US": "BODY PRESS"
+      "en_US": "REFRESH"
     },
     {
       "id": "pl_msg_00000648_00288",
-      "en_US": "BULLDOZE"
+      "en_US": "GRUDGE"
     },
     {
       "id": "pl_msg_00000648_00289",
@@ -1175,7 +1175,7 @@
     },
     {
       "id": "pl_msg_00000648_00293",
-      "en_US": "DIRE CLAW"
+      "en_US": "CAMOUFLAGE"
     },
     {
       "id": "pl_msg_00000648_00294",
@@ -1203,7 +1203,7 @@
     },
     {
       "id": "pl_msg_00000648_00300",
-      "en_US": "FREEZE-DRY"
+      "en_US": "MUD SPORT"
     },
     {
       "id": "pl_msg_00000648_00301",
@@ -1319,7 +1319,7 @@
     },
     {
       "id": "pl_msg_00000648_00329",
-      "en_US": "TRIPLE AXEL"
+      "en_US": "SHEER COLD"
     },
     {
       "id": "pl_msg_00000648_00330",
@@ -1343,7 +1343,7 @@
     },
     {
       "id": "pl_msg_00000648_00335",
-      "en_US": "SNARL"
+      "en_US": "BLOCK"
     },
     {
       "id": "pl_msg_00000648_00336",
@@ -1375,7 +1375,7 @@
     },
     {
       "id": "pl_msg_00000648_00343",
-      "en_US": "FROST BREATH"
+      "en_US": "COVET"
     },
     {
       "id": "pl_msg_00000648_00344",
@@ -1387,7 +1387,7 @@
     },
     {
       "id": "pl_msg_00000648_00346",
-      "en_US": "ACID SPRAY"
+      "en_US": "WATER SPORT"
     },
     {
       "id": "pl_msg_00000648_00347",
@@ -1415,7 +1415,7 @@
     },
     {
       "id": "pl_msg_00000648_00353",
-      "en_US": "PARTING SHOT"
+      "en_US": "DOOM DESIRE"
     },
     {
       "id": "pl_msg_00000648_00354",
@@ -1431,7 +1431,7 @@
     },
     {
       "id": "pl_msg_00000648_00357",
-      "en_US": "WILD CHARGE"
+      "en_US": "MIRACLE EYE"
     },
     {
       "id": "pl_msg_00000648_00358",
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "pl_msg_00000648_00361",
-      "en_US": "VENOSHOCK"
+      "en_US": "HEALING WISH"
     },
     {
       "id": "pl_msg_00000648_00362",
@@ -1471,7 +1471,7 @@
     },
     {
       "id": "pl_msg_00000648_00367",
-      "en_US": "LIFE DEW"
+      "en_US": "ACUPRESSURE"
     },
     {
       "id": "pl_msg_00000648_00368",
@@ -1495,7 +1495,7 @@
     },
     {
       "id": "pl_msg_00000648_00373",
-      "en_US": "POWER-UP PUNCH"
+      "en_US": "EMBARGO"
     },
     {
       "id": "pl_msg_00000648_00374",
@@ -1511,15 +1511,15 @@
     },
     {
       "id": "pl_msg_00000648_00377",
-      "en_US": "PLAY ROUGH"
+      "en_US": "HEAL BLOCK"
     },
     {
       "id": "pl_msg_00000648_00378",
-      "en_US": "STEEL BEAM"
+      "en_US": "WRING OUT"
     },
     {
       "id": "pl_msg_00000648_00379",
-      "en_US": "MOONBLAST"
+      "en_US": "POWER TRICK"
     },
     {
       "id": "pl_msg_00000648_00380",
@@ -1527,23 +1527,23 @@
     },
     {
       "id": "pl_msg_00000648_00381",
-      "en_US": "NUZZLE"
+      "en_US": "LUCKY CHANT"
     },
     {
       "id": "pl_msg_00000648_00382",
-      "en_US": "QUIVER DANCE"
+      "en_US": "ME FIRST"
     },
     {
       "id": "pl_msg_00000648_00383",
-      "en_US": "SHELL SMASH"
+      "en_US": "COPYCAT"
     },
     {
       "id": "pl_msg_00000648_00384",
-      "en_US": "SPIKY SHIELD"
+      "en_US": "POWER SWAP"
     },
     {
       "id": "pl_msg_00000648_00385",
-      "en_US": "AURORA VEIL"
+      "en_US": "GUARD SWAP"
     },
     {
       "id": "pl_msg_00000648_00386",
@@ -1555,7 +1555,7 @@
     },
     {
       "id": "pl_msg_00000648_00388",
-      "en_US": "ACCELEROCK"
+      "en_US": "WORRY SEED"
     },
     {
       "id": "pl_msg_00000648_00389",
@@ -1663,7 +1663,7 @@
     },
     {
       "id": "pl_msg_00000648_00415",
-      "en_US": "DRAGON TAIL"
+      "en_US": "SWITCHEROO"
     },
     {
       "id": "pl_msg_00000648_00416",
@@ -1847,11 +1847,11 @@
     },
     {
       "id": "pl_msg_00000648_00461",
-      "en_US": "TAIL SLAP"
+      "en_US": "LUNAR DANCE"
     },
     {
       "id": "pl_msg_00000648_00462",
-      "en_US": "LUNGE"
+      "en_US": "CRUSH GRIP"
     },
     {
       "id": "pl_msg_00000648_00463",
@@ -1955,11 +1955,11 @@
     },
     {
       "id": "pl_msg_00000648_00488",
-      "en_US": "SLAM"
+      "en_US": "SCALD"
     },
     {
       "id": "pl_msg_00000648_00489",
-      "en_US": "COMET PUNCH"
+      "en_US": "FOUL PLAY"
     },
     {
       "id": "pl_msg_00000648_00490",
@@ -1971,39 +1971,39 @@
     },
     {
       "id": "pl_msg_00000648_00492",
-      "en_US": "REFRESH"
+      "en_US": "BODY PRESS"
     },
     {
       "id": "pl_msg_00000648_00493",
-      "en_US": "FALSE SWIPE"
+      "en_US": "ACROBATICS"
     },
     {
       "id": "pl_msg_00000648_00494",
-      "en_US": "SHEER COLD"
+      "en_US": "TRIPLE AXEL"
     },
     {
       "id": "pl_msg_00000648_00495",
-      "en_US": "EMBARGO"
+      "en_US": "POWER-UP PUNCH"
     },
     {
       "id": "pl_msg_00000648_00496",
-      "en_US": "ME FIRST"
+      "en_US": "QUIVER DANCE"
     },
     {
       "id": "pl_msg_00000648_00497",
-      "en_US": "IMPRISON"
+      "en_US": "STRUGGLE BUG"
     },
     {
       "id": "pl_msg_00000648_00498",
-      "en_US": "SKULL BASH"
+      "en_US": "FIRST IMPRESSION"
     },
     {
       "id": "pl_msg_00000648_00499",
-      "en_US": "ASSIST"
+      "en_US": "PSYSHOCK"
     },
     {
       "id": "pl_msg_00000648_00500",
-      "en_US": "COPYCAT"
+      "en_US": "SHELL SMASH"
     },
     {
       "id": "pl_msg_00000648_00501",
@@ -2043,187 +2043,187 @@
     },
     {
       "id": "pl_msg_00000648_00510",
-      "en_US": "MEGA PUNCH"
+      "en_US": "DUAL WINGBEAT"
     },
     {
       "id": "pl_msg_00000648_00511",
-      "en_US": "GUILLOTINE"
+      "en_US": "BOOMBURST"
     },
     {
       "id": "pl_msg_00000648_00512",
-      "en_US": "BIND"
+      "en_US": "FLIP TURN"
     },
     {
       "id": "pl_msg_00000648_00513",
-      "en_US": "MEGA KICK"
+      "en_US": "SOLAR BLADE"
     },
     {
       "id": "pl_msg_00000648_00514",
-      "en_US": "HORN DRILL"
+      "en_US": "FLAME CHARGE"
     },
     {
       "id": "pl_msg_00000648_00515",
-      "en_US": "FISSURE"
+      "en_US": "SLUDGE WAVE"
     },
     {
       "id": "pl_msg_00000648_00516",
-      "en_US": "SMOG"
+      "en_US": "DRAINING KISS"
     },
     {
       "id": "pl_msg_00000648_00517",
-      "en_US": "CONSTRICT"
+      "en_US": "PARABOLICCHARGE"
     },
     {
       "id": "pl_msg_00000648_00518",
-      "en_US": "WHIRLPOOL"
+      "en_US": "DUAL CHOP"
     },
     {
       "id": "pl_msg_00000648_00519",
-      "en_US": "BARRIER"
+      "en_US": "SILK TRAP"
     },
     {
       "id": "pl_msg_00000648_00520",
-      "en_US": "KINESIS"
+      "en_US": "BABY-DOLL EYES"
     },
     {
       "id": "pl_msg_00000648_00521",
-      "en_US": "SPIDER WEB"
+      "en_US": "STICKY WEB"
     },
     {
       "id": "pl_msg_00000648_00522",
-      "en_US": "MIND READER"
+      "en_US": "ZING ZAP"
     },
     {
       "id": "pl_msg_00000648_00523",
-      "en_US": "FORESIGHT"
+      "en_US": "DRILL RUN"
     },
     {
       "id": "pl_msg_00000648_00524",
-      "en_US": "MILK DRINK"
+      "en_US": "INFESTATION"
     },
     {
       "id": "pl_msg_00000648_00525",
-      "en_US": "BLOCK"
+      "en_US": "SNARL"
     },
     {
       "id": "pl_msg_00000648_00526",
-      "en_US": "SWITCHEROO"
+      "en_US": "DRAGON TAIL"
     },
     {
       "id": "pl_msg_00000648_00527",
-      "en_US": "RAZOR WIND"
+      "en_US": "METEOR BEAM"
     },
     {
       "id": "pl_msg_00000648_00528",
-      "en_US": "FRUSTRATION"
+      "en_US": "DISARMING VOICE"
     },
     {
       "id": "pl_msg_00000648_00529",
-      "en_US": "PAY DAY"
+      "en_US": "LIQUIDATION"
     },
     {
       "id": "pl_msg_00000648_00530",
-      "en_US": "BIDE"
+      "en_US": "ELECTROWEB"
     },
     {
       "id": "pl_msg_00000648_00531",
-      "en_US": "SKETCH"
+      "en_US": "RAGE POWDER"
     },
     {
       "id": "pl_msg_00000648_00532",
-      "en_US": "WORRY SEED"
+      "en_US": "ACCELEROCK"
     },
     {
       "id": "pl_msg_00000648_00533",
-      "en_US": "CONVERSION"
+      "en_US": "HURRICANE"
     },
     {
       "id": "pl_msg_00000648_00534",
-      "en_US": "GRUDGE"
+      "en_US": "BULLDOZE"
     },
     {
       "id": "pl_msg_00000648_00535",
-      "en_US": "POWER TRICK"
+      "en_US": "MOONBLAST"
     },
     {
       "id": "pl_msg_00000648_00536",
-      "en_US": "POWER SWAP"
+      "en_US": "SPIKY SHIELD"
     },
     {
       "id": "pl_msg_00000648_00537",
-      "en_US": "GUARD SWAP"
+      "en_US": "AURORA VEIL"
     },
     {
       "id": "pl_msg_00000648_00538",
-      "en_US": "RAGE"
+      "en_US": "POWDER"
     },
     {
       "id": "pl_msg_00000648_00539",
-      "en_US": "MIRACLE EYE"
+      "en_US": "WILD CHARGE"
     },
     {
       "id": "pl_msg_00000648_00540",
-      "en_US": "WRING OUT"
+      "en_US": "STEEL BEAM"
     },
     {
       "id": "pl_msg_00000648_00541",
-      "en_US": "LUCKY CHANT"
+      "en_US": "NUZZLE"
     },
     {
       "id": "pl_msg_00000648_00542",
-      "en_US": "CRUSH GRIP"
+      "en_US": "LUNGE"
     },
     {
       "id": "pl_msg_00000648_00543",
-      "en_US": "ACUPRESSURE"
+      "en_US": "LIFE DEW"
     },
     {
       "id": "pl_msg_00000648_00544",
-      "en_US": "THIEF"
+      "en_US": "HEX"
     },
     {
       "id": "pl_msg_00000648_00545",
-      "en_US": "COVET"
+      "en_US": "FROST BREATH"
     },
     {
       "id": "pl_msg_00000648_00546",
-      "en_US": "MUD SPORT"
+      "en_US": "FREEZE-DRY"
     },
     {
       "id": "pl_msg_00000648_00547",
-      "en_US": "WATER SPORT"
+      "en_US": "ACID SPRAY"
     },
     {
       "id": "pl_msg_00000648_00548",
-      "en_US": "MIRROR MOVE"
+      "en_US": "STORED POWER"
     },
     {
       "id": "pl_msg_00000648_00549",
-      "en_US": "CONVERSION 2"
+      "en_US": "HEAVY SLAM"
     },
     {
       "id": "pl_msg_00000648_00550",
-      "en_US": "FUTURE SIGHT"
+      "en_US": "VOLT SWITCH"
     },
     {
       "id": "pl_msg_00000648_00551",
-      "en_US": "CAMOUFLAGE"
+      "en_US": "DIRE CLAW"
     },
     {
       "id": "pl_msg_00000648_00552",
-      "en_US": "DOOM DESIRE"
+      "en_US": "PARTING SHOT"
     },
     {
       "id": "pl_msg_00000648_00553",
-      "en_US": "HEALING WISH"
+      "en_US": "VENOSHOCK"
     },
     {
       "id": "pl_msg_00000648_00554",
-      "en_US": "HEAL BLOCK"
+      "en_US": "PLAY ROUGH"
     },
     {
       "id": "pl_msg_00000648_00555",
-      "en_US": "LUNAR DANCE"
+      "en_US": "TAIL SLAP"
     }
   ]
 }

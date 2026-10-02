@@ -40,31 +40,29 @@
     {
       "id": "pl_msg_00000646_00004",
       "en_US": [
-        "The user uses the\n",
-        "target’s power.\n",
-        "Damage increases the\n",
-        "greater the target’s\n",
-        "Attack stat."
+        "The foe is hit with\n",
+        "a flurry of punches\n",
+        "that strike two to\n",
+        "five times in a row.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00005",
       "en_US": [
-        "The user slams the\n",
-        "target with its\n",
-        "wings. The target\n",
-        "is hit twice in a\n",
-        "row."
+        "The foe is slugged\n",
+        "by a punch thrown\n",
+        "with muscle-packed\n",
+        "power.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00006",
       "en_US": [
-        "The user slams the\n",
-        "foe with water at\n",
-        "full-force. It may\n",
-        "lower the target’s\n",
-        "Defense stat."
+        "Numerous coins are\n",
+        "hurled at the foe to\n",
+        "inflict damage.\n",
+        "Money is earned\n",
+        "after battle."
       ]
     },
     {
@@ -116,21 +114,21 @@
     {
       "id": "pl_msg_00000646_00012",
       "en_US": [
-        "The user attacks\n",
-        "everything around it\n",
-        "with the destructive\n",
-        "power of a terrible,\n",
-        "explosive sound."
+        "A vicious, tearing\n",
+        "attack with pincers.\n",
+        "The foe will faint\n",
+        "instantly if this\n",
+        "attack hits."
       ]
     },
     {
       "id": "pl_msg_00000646_00013",
       "en_US": [
-        "The user gathers\n",
-        "space power, raising\n",
-        "Sp. Atk on the first\n",
-        "turn, then hits the\n",
-        "foe on the next turn."
+        "A two-turn attack.\n",
+        "Blades of wind hit the\n",
+        "foe on the second\n",
+        "turn. It has a high\n",
+        "critical-hit ratio."
       ]
     },
     {
@@ -194,21 +192,20 @@
     {
       "id": "pl_msg_00000646_00020",
       "en_US": [
-        "After attacking, the\n",
-        "user rushes back\n",
-        "to switch places\n",
-        "with a party\n",
-        "Pokémon in waiting."
+        "A long body or\n",
+        "tentacles are used\n",
+        "to bind and squeeze\n",
+        "the foe for four to\n",
+        "five turns."
       ]
     },
     {
       "id": "pl_msg_00000646_00021",
       "en_US": [
-        "The user shoots\n",
-        "boiling hot water at\n",
-        "its target. It\n",
-        "may also leave the\n",
-        "target with a burn."
+        "The foe is slammed\n",
+        "with a long tail,\n",
+        "vines, etc., to inflict\n",
+        "damage.\n"
       ]
     },
     {
@@ -241,11 +238,10 @@
     {
       "id": "pl_msg_00000646_00025",
       "en_US": [
-        "A two-turn attack.\n",
-        "The user gathers\n",
-        "light, then strikes\n",
-        "with a blade on the\n",
-        "second turn."
+        "The foe is attacked\n",
+        "by a kick launched\n",
+        "with muscle-packed\n",
+        "power.\n"
       ]
     },
     {
@@ -307,11 +303,11 @@
     {
       "id": "pl_msg_00000646_00032",
       "en_US": [
-        "The user cloaks\n",
-        "itself with flame\n",
-        "and attacks.\n",
-        "It raises the\n",
-        "user’s Speed stat."
+        "The foe is stabbed\n",
+        "with a horn rotating\n",
+        "like a drill.\n",
+        "The foe instantly\n",
+        "faints if it hits."
       ]
     },
     {
@@ -874,11 +870,11 @@
     {
       "id": "pl_msg_00000646_00090",
       "en_US": [
-        "It swamps the area\n",
-        "around the user\n",
-        "with a giant sludge\n",
-        "wave. It may also\n",
-        "poison those hit."
+        "The user opens up a\n",
+        "fissure in the ground\n",
+        "and drops the foe in.\n",
+        "The target instantly\n",
+        "faints if it hits."
       ]
     },
     {
@@ -964,11 +960,10 @@
     {
       "id": "pl_msg_00000646_00099",
       "en_US": [
-        "The user covers the\n",
-        "target in a powder\n",
-        "that explodes and\n",
-        "deals damage if Fire-\n",
-        "type moves are used."
+        "While this move is in\n",
+        "use, it gains attack\n",
+        "power each time the\n",
+        "user is hit in battle.\n"
       ]
     },
     {
@@ -1087,11 +1082,10 @@
     {
       "id": "pl_msg_00000646_00112",
       "en_US": [
-        "Protects the user\n",
-        "from attacks, and\n",
-        "also slows down any\n",
-        "attacker who makes\n",
-        "direct contact."
+        "The user throws up a\n",
+        "sturdy wall that\n",
+        "sharply raises its\n",
+        "Defense stat.\n"
       ]
     },
     {
@@ -1137,11 +1131,11 @@
     {
       "id": "pl_msg_00000646_00117",
       "en_US": [
-        "The user captures\n",
-        "opposing Pokémon\n",
-        "using an electric\n",
-        "net. This lowers\n",
-        "their Speed stat."
+        "The user endures\n",
+        "attacks for two\n",
+        "turns, then strikes\n",
+        "back to cause double\n",
+        "the damage taken."
       ]
     },
     {
@@ -1157,11 +1151,10 @@
     {
       "id": "pl_msg_00000646_00119",
       "en_US": [
-        "The user attacks the\n",
-        "target with stored\n",
-        "power. Damage\n",
-        "increases as the\n",
-        "user’s stats rise."
+        "The user counters\n",
+        "the foe by mimicking\n",
+        "the move last used\n",
+        "by the foe."
       ]
     },
     {
@@ -1196,11 +1189,11 @@
     {
       "id": "pl_msg_00000646_00123",
       "en_US": [
-        "The user attacks with\n",
-        "a draining kiss\n",
-        "that steals HP from\n",
-        "targets to restore\n",
-        "the user’s own HP."
+        "The foe is attacked\n",
+        "with a discharge of\n",
+        "filthy gases.\n",
+        "It may also poison\n",
+        "the target."
       ]
     },
     {
@@ -1263,11 +1256,11 @@
     {
       "id": "pl_msg_00000646_00130",
       "en_US": [
-        "Although this move\n",
-        "has great power, it\n",
-        "only works the first\n",
-        "turn the user is\n",
-        "in battle."
+        "The user tucks in its\n",
+        "head to raise its\n",
+        "Defense in the first\n",
+        "turn, then rams the\n",
+        "foe on the next turn."
       ]
     },
     {
@@ -1283,11 +1276,11 @@
     {
       "id": "pl_msg_00000646_00132",
       "en_US": [
-        "The user attacks\n",
-        "everything around it.\n",
-        "The user’s HP is\n",
-        "restored by half\n",
-        "of the damage dealt."
+        "The foe is attacked\n",
+        "with long, creeping\n",
+        "tentacles or vines.\n",
+        "It may also lower the\n",
+        "target’s Speed."
       ]
     },
     {
@@ -1303,11 +1296,11 @@
     {
       "id": "pl_msg_00000646_00134",
       "en_US": [
-        "The user stares at\n",
-        "the target with\n",
-        "baby-doll eyes, which\n",
-        "drops its Attack stat.\n",
-        "This move goes first."
+        "The user distracts\n",
+        "the foe by bending a\n",
+        "spoon.\n",
+        "It may lower the\n",
+        "target’s accuracy."
       ]
     },
     {
@@ -1557,11 +1550,10 @@
     {
       "id": "pl_msg_00000646_00160",
       "en_US": [
-        "The user attacks by\n",
-        "wrapping its opponent\n",
-        "in a fierce wind.\n",
-        "This may also confuse\n",
-        "the target."
+        "The user changes its\n",
+        "type to become the\n",
+        "same type as one of\n",
+        "its moves.\n"
       ]
     },
     {
@@ -1617,11 +1609,11 @@
     {
       "id": "pl_msg_00000646_00166",
       "en_US": [
-        "The user scatters a\n",
-        "cloud of power to\n",
-        "draw attention to\n",
-        "itself. Opponents\n",
-        "aim only at the user."
+        "It enables the user\n",
+        "to learn a move used\n",
+        "by the foe.\n",
+        "Once used, the move\n",
+        "Sketch disappears."
       ]
     },
     {
@@ -1637,31 +1629,29 @@
     {
       "id": "pl_msg_00000646_00168",
       "en_US": [
-        "This relentless\n",
-        "attack does massive\n",
-        "damage to a\n",
-        "target affected\n",
-        "by status problems."
+        "The user sneaks up\n",
+        "on the foe and\n",
+        "strikes it with a\n",
+        "quick, sly attack."
       ]
     },
     {
       "id": "pl_msg_00000646_00169",
       "en_US": [
-        "The user weaves a\n",
-        "sticky web around the\n",
-        "opposing team,\n",
-        "lowering their Speed\n",
-        "upon switching in.\n"
+        "The user ensnares\n",
+        "the foe with a thin,\n",
+        "gooey silk so it can’t\n",
+        "flee from battle.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00170",
       "en_US": [
-        "A strong electric\n",
-        "blast crashes down\n",
-        "on the target.\n",
-        "This may also make\n",
-        "the target flinch."
+        "The user senses the\n",
+        "foe’s movements\n",
+        "with its mind to\n",
+        "ensure its next\n",
+        "attack does not miss."
       ]
     },
     {
@@ -1715,11 +1705,11 @@
     {
       "id": "pl_msg_00000646_00176",
       "en_US": [
-        "The user slams the\n",
-        "target with its body.\n",
-        "Damage increases the\n",
-        "the heavier the user\n",
-        "is than the target."
+        "The user changes its\n",
+        "type to make itself\n",
+        "resistant to the type\n",
+        "of the attack it\n",
+        "last took."
       ]
     },
     {
@@ -1882,11 +1872,11 @@
     {
       "id": "pl_msg_00000646_00193",
       "en_US": [
-        "The user crashes into\n",
-        "its target while\n",
-        "rotating its body\n",
-        "like a drill. Critical \n",
-        "hits land more easily."
+        "Enables the user to\n",
+        "hit a Ghost type with\n",
+        "any type of move. It\n",
+        "also enables the user\n",
+        "to hit an evasive foe."
       ]
     },
     {
@@ -2010,11 +2000,11 @@
     {
       "id": "pl_msg_00000646_00206",
       "en_US": [
-        "The user nimbly\n",
-        "strikes. This attack\n",
-        "does massive damage\n",
-        "if the user isn’t\n",
-        "holding an item."
+        "A restrained attack\n",
+        "that prevents the\n",
+        "foe from fainting.\n",
+        "The target is left\n",
+        "with at least 1 HP."
       ]
     },
     {
@@ -2030,11 +2020,11 @@
     {
       "id": "pl_msg_00000646_00208",
       "en_US": [
-        "The user infests\n",
-        "the target, attacking\n",
-        "it for four to\n",
-        "five turns. The\n",
-        "target cannot flee."
+        "The user restores its\n",
+        "own HP by up to half\n",
+        "of its maximum HP.\n",
+        "It may also be used\n",
+        "to heal an ally’s HP."
       ]
     },
     {
@@ -2126,11 +2116,10 @@
     {
       "id": "pl_msg_00000646_00218",
       "en_US": [
-        "The user attacks by\n",
-        "letting out a charming\n",
-        "cry that causes\n",
-        "emotional damage. This\n",
-        "attack never misses."
+        "A full-power attack\n",
+        "in which the user\n",
+        "strikes the foe\n",
+        "with all its might."
       ]
     },
     {
@@ -2423,11 +2412,11 @@
     {
       "id": "pl_msg_00000646_00248",
       "en_US": [
-        "After making its\n",
-        "attack, the user\n",
-        "rushes back to switch\n",
-        "places with a party\n",
-        "Pokémon in waiting."
+        "Two turns after this\n",
+        "move is used, the foe\n",
+        "is attacked with a\n",
+        "hunk of psychic\n",
+        "energy."
       ]
     },
     {
@@ -2443,11 +2432,11 @@
     {
       "id": "pl_msg_00000646_00250",
       "en_US": [
-        "The user attacks its\n",
-        "target by hitting\n",
-        "it with brutal strikes.\n",
-        "The target is hit\n",
-        "twice in a row."
+        "The user traps the\n",
+        "foe inside a fast,\n",
+        "vicious whirlpool that\n",
+        "lasts for four to\n",
+        "five turns."
       ]
     },
     {
@@ -2677,11 +2666,11 @@
     {
       "id": "pl_msg_00000646_00274",
       "en_US": [
-        "The user materializes\n",
-        "an odd psychic wave\n",
-        "to attack the target.\n",
-        "This attack does\n",
-        "physical damage."
+        "The user hurriedly\n",
+        "and randomly uses a\n",
+        "move among those\n",
+        "known by other\n",
+        "Pokémon in the party."
       ]
     },
     {
@@ -2795,31 +2784,30 @@
     {
       "id": "pl_msg_00000646_00286",
       "en_US": [
-        "Resisting, the user\n",
-        "attacks the opposing\n",
-        "Pokémon. The targets’\n",
-        "Sp. Atk stat is\n",
-        "reduced."
+        "If the foe knows any\n",
+        "move also known by\n",
+        "the user, the foe\n",
+        "is prevented\n",
+        "from using it."
       ]
     },
     {
       "id": "pl_msg_00000646_00287",
       "en_US": [
-        "The user attacks\n",
-        "by slamming its\n",
-        "body into the\n",
-        "target, using the\n",
-        "user’s Defense stat."
+        "The user rests\n",
+        "to cure itself of a\n",
+        "poisoning, burn, or\n",
+        "paralysis.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00288",
       "en_US": [
-        "The user stomps down\n",
-        "on the ground and\n",
-        "attacks everything in\n",
-        "the area. Hit Pokémon’s\n",
-        "Speed stat is reduced."
+        "If the user faints,\n",
+        "the user’s grudge\n",
+        "fully depletes the PP\n",
+        "of the foe’s move\n",
+        "that knocked it out."
       ]
     },
     {
@@ -2865,11 +2853,11 @@
     {
       "id": "pl_msg_00000646_00293",
       "en_US": [
-        "The user strikes\n",
-        "with ruinous claws,\n",
-        "aiming to land a\n",
-        "critical hit. This may\n",
-        "also inflict status."
+        "The user’s type is\n",
+        "changed depending on\n",
+        "its environment, such\n",
+        "as at water’s edge, in\n",
+        "grass, or in a cave."
       ]
     },
     {
@@ -2934,11 +2922,11 @@
     {
       "id": "pl_msg_00000646_00300",
       "en_US": [
-        "The user chills the\n",
-        "target. This may\n",
-        "leave from frozen,\n",
-        "and is super effective\n",
-        "on Water types."
+        "The user kicks up\n",
+        "mud on the battlefield.\n",
+        "It weakens Electric-\n",
+        "type moves for\n",
+        "five turns."
       ]
     },
     {
@@ -3216,11 +3204,11 @@
     {
       "id": "pl_msg_00000646_00329",
       "en_US": [
-        "A consecutive\n",
-        "three-kick attack\n",
-        "that becomes more\n",
-        "powerful with each\n",
-        "successful hit."
+        "The foe is attacked\n",
+        "with a blast of\n",
+        "absolute-zero cold.\n",
+        "The foe instantly\n",
+        "faints if it hits."
       ]
     },
     {
@@ -3276,11 +3264,10 @@
     {
       "id": "pl_msg_00000646_00335",
       "en_US": [
-        "The user yells as if\n",
-        "it is ranting about\n",
-        "something, making\n",
-        "the target’s Sp. Atk\n",
-        "stat decrease."
+        "The user blocks the\n",
+        "foe’s way with arms\n",
+        "spread wide to\n",
+        "prevent escape.\n"
       ]
     },
     {
@@ -3354,11 +3341,10 @@
     {
       "id": "pl_msg_00000646_00343",
       "en_US": [
-        "The user blows a\n",
-        "cold breath on the\n",
-        "target. This attack\n",
-        "always results in a\n",
-        "critical hit."
+        "The user endearingly\n",
+        "approaches the foe,\n",
+        "then attacks it\n",
+        "with a sudden tackle."
       ]
     },
     {
@@ -3384,11 +3370,10 @@
     {
       "id": "pl_msg_00000646_00346",
       "en_US": [
-        "The user spits fluid\n",
-        "that works to melt\n",
-        "the target. This\n",
-        "harshly reduces the\n",
-        "target’s Sp. Def stat."
+        "The user soaks the\n",
+        "battlefield with water.\n",
+        "It weakens Fire-type\n",
+        "moves for five turns."
       ]
     },
     {
@@ -3453,11 +3438,11 @@
     {
       "id": "pl_msg_00000646_00353",
       "en_US": [
-        "With a parting threat,\n",
-        "the user lowers the\n",
-        "target’s offensive\n",
-        "stats, and switches\n",
-        "with a party Pokémon."
+        "Two turns after this\n",
+        "move is used, the\n",
+        "user blasts the foe\n",
+        "with a concentrated\n",
+        "bundle of light."
       ]
     },
     {
@@ -3493,11 +3478,11 @@
     {
       "id": "pl_msg_00000646_00357",
       "en_US": [
-        "The user shrouds\n",
-        "itself in electricity\n",
-        "and smashes into its\n",
-        "target. It also\n",
-        "damages the user."
+        "Enables the user to\n",
+        "hit a Dark type with\n",
+        "any type of move. It\n",
+        "also enables the user\n",
+        "to hit an evasive foe."
       ]
     },
     {
@@ -3533,11 +3518,11 @@
     {
       "id": "pl_msg_00000646_00361",
       "en_US": [
-        "The user drenches the\n",
-        "target in poisonous\n",
-        "liquid. This move’s\n",
-        "power doubles if the\n",
-        "target is poisoned."
+        "The user faints. In\n",
+        "return, the Pokémon\n",
+        "taking its place will\n",
+        "have its HP restored\n",
+        "and status cured."
       ]
     },
     {
@@ -3593,11 +3578,11 @@
     {
       "id": "pl_msg_00000646_00367",
       "en_US": [
-        "The user scatters\n",
-        "mysterious water\n",
-        "around and restores\n",
-        "the HP of itself\n",
-        "and its allies."
+        "The user applies\n",
+        "pressure to stress\n",
+        "points, sharply\n",
+        "boosting one of its\n",
+        "stats."
       ]
     },
     {
@@ -3652,11 +3637,11 @@
     {
       "id": "pl_msg_00000646_00373",
       "en_US": [
-        "Striking the opponent\n",
-        "makes the user’s\n",
-        "fists harder. Hitting\n",
-        "a target raises the\n",
-        "Attack stat."
+        "It prevents the foe\n",
+        "from using its held\n",
+        "item. Its Trainer is\n",
+        "also prevented from\n",
+        "using items on it."
       ]
     },
     {
@@ -3691,31 +3676,30 @@
     {
       "id": "pl_msg_00000646_00377",
       "en_US": [
-        "The user plays rough\n",
-        "with the target and\n",
-        "attacks it. This may\n",
-        "also lower the\n",
-        "target’s Attack stat."
+        "The user prevents\n",
+        "the foe from using\n",
+        "any HP-recovery\n",
+        "moves for five turns.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00378",
       "en_US": [
-        "The user fires a\n",
-        "beam of steel that\n",
-        "it collected from its\n",
-        "entire body. This also\n",
-        "damages the user."
+        "The user powerfully\n",
+        "wrings the foe.\n",
+        "The more HP the foe\n",
+        "has, the greater this\n",
+        "attack’s power."
       ]
     },
     {
       "id": "pl_msg_00000646_00379",
       "en_US": [
-        "The user borrows\n",
-        "the power of the\n",
-        "moon. This may also\n",
-        "lower the target’s\n",
-        "Sp. Atk stat."
+        "The user employs its\n",
+        "psychic power to\n",
+        "switch its Attack\n",
+        "with its Defense\n",
+        "stat."
       ]
     },
     {
@@ -3731,51 +3715,51 @@
     {
       "id": "pl_msg_00000646_00381",
       "en_US": [
-        "The user attacks by\n",
-        "nuzzling targets\n",
-        "with its electrified\n",
-        "cheeks. This leaves\n",
-        "targets paralyzed."
+        "The user chants an\n",
+        "incantation toward\n",
+        "the sky, preventing\n",
+        "the foe from landing\n",
+        "critical hits."
       ]
     },
     {
       "id": "pl_msg_00000646_00382",
       "en_US": [
-        "The user performs\n",
-        "a beautiful, mystic\n",
-        "dance. It boosts\n",
-        "the user’s Sp. Atk,\n",
-        "Sp. Def, and Speed."
+        "The user tries to cut\n",
+        "ahead of the foe to\n",
+        "steal and use the\n",
+        "foe’s intended move\n",
+        "with greater power."
       ]
     },
     {
       "id": "pl_msg_00000646_00383",
       "en_US": [
-        "The user breaks its\n",
-        "shell, lowering its\n",
-        "defensive stats but\n",
-        "sharply raising its\n",
-        "Speed and offenses."
+        "The user mimics the\n",
+        "move used immediately\n",
+        "before it. The move\n",
+        "fails if no other move\n",
+        "has been used yet."
       ]
     },
     {
       "id": "pl_msg_00000646_00384",
       "en_US": [
-        "Protects the user\n",
-        "from attacks, and\n",
-        "also damages any\n",
-        "attacker who makes\n",
-        "direct contact."
+        "The user employs its\n",
+        "psychic power to\n",
+        "switch changes to\n",
+        "its Attack and\n",
+        "Sp. Atk with the foe."
       ]
     },
     {
       "id": "pl_msg_00000646_00385",
       "en_US": [
-        "In a hailstorm, this\n",
-        "move reduces damage\n",
-        "from physical and\n",
-        "special moves for\n",
-        "five turns."
+        "The user employs its\n",
+        "psychic power to\n",
+        "switch changes to\n",
+        "its Defense and\n",
+        "Sp. Def with the foe."
       ]
     },
     {
@@ -3800,10 +3784,11 @@
     {
       "id": "pl_msg_00000646_00388",
       "en_US": [
-        "The user smashes into\n",
-        "the target at high\n",
-        "speed. This move\n",
-        "always goes first.\n"
+        "A seed that causes\n",
+        "worry is planted on\n",
+        "the foe. It prevents\n",
+        "sleep by making its\n",
+        "ability Insomnia."
       ]
     },
     {
@@ -4062,11 +4047,10 @@
     {
       "id": "pl_msg_00000646_00415",
       "en_US": [
-        "The target is hit\n",
-        "away and switched. In\n",
-        "the wild, a battle\n",
-        "against a single\n",
-        "Pokémon ends."
+        "The user trades held\n",
+        "items with the foe\n",
+        "faster than the eye\n",
+        "can follow.\n"
       ]
     },
     {
@@ -4518,21 +4502,21 @@
     {
       "id": "pl_msg_00000646_00461",
       "en_US": [
-        "The user attacks by\n",
-        "striking the target\n",
-        "with its hard tail. It\n",
-        "hits the target two\n",
-        "to five times in a row."
+        "The user faints. In\n",
+        "return, the Pokémon\n",
+        "taking its place will\n",
+        "have its status and\n",
+        "HP fully restored."
       ]
     },
     {
       "id": "pl_msg_00000646_00462",
       "en_US": [
-        "The user lunges at\n",
-        "the target, attacking\n",
-        "with full force. This\n",
-        "also lowers the\n",
-        "target’s Attack stat."
+        "The foe is crushed\n",
+        "with great force.\n",
+        "The attack is more\n",
+        "powerful the more HP\n",
+        "the foe has left."
       ]
     },
     {
@@ -4786,19 +4770,21 @@
     {
       "id": "pl_msg_00000646_00488",
       "en_US": [
-        "The foe is slammed\n",
-        "with a long tail,\n",
-        "vines, etc., to inflict\n",
-        "damage.\n"
+        "The user shoots\n",
+        "boiling hot water at\n",
+        "its target. It\n",
+        "may also leave the\n",
+        "target with a burn."
       ]
     },
     {
       "id": "pl_msg_00000646_00489",
       "en_US": [
-        "The foe is hit with\n",
-        "a flurry of punches\n",
-        "that strike two to\n",
-        "five times in a row.\n"
+        "The user uses the\n",
+        "target’s power.\n",
+        "Damage increases the\n",
+        "greater the target’s\n",
+        "Attack stat."
       ]
     },
     {
@@ -4824,90 +4810,91 @@
     {
       "id": "pl_msg_00000646_00492",
       "en_US": [
-        "The user rests\n",
-        "to cure itself of a\n",
-        "poisoning, burn, or\n",
-        "paralysis.\n"
+        "The user attacks\n",
+        "by slamming its\n",
+        "body into the\n",
+        "target, using the\n",
+        "user’s Defense stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00493",
       "en_US": [
-        "A restrained attack\n",
-        "that prevents the\n",
-        "foe from fainting.\n",
-        "The target is left\n",
-        "with at least 1 HP."
+        "The user nimbly\n",
+        "strikes. This attack\n",
+        "does massive damage\n",
+        "if the user isn’t\n",
+        "holding an item."
       ]
     },
     {
       "id": "pl_msg_00000646_00494",
       "en_US": [
-        "The foe is attacked\n",
-        "with a blast of\n",
-        "absolute-zero cold.\n",
-        "The foe instantly\n",
-        "faints if it hits."
+        "A consecutive\n",
+        "three-kick attack\n",
+        "that becomes more\n",
+        "powerful with each\n",
+        "successful hit."
       ]
     },
     {
       "id": "pl_msg_00000646_00495",
       "en_US": [
-        "It prevents the foe\n",
-        "from using its held\n",
-        "item. Its Trainer is\n",
-        "also prevented from\n",
-        "using items on it."
+        "Striking the opponent\n",
+        "makes the user’s\n",
+        "fists harder. Hitting\n",
+        "a target raises the\n",
+        "Attack stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00496",
       "en_US": [
-        "The user tries to cut\n",
-        "ahead of the foe to\n",
-        "steal and use the\n",
-        "foe’s intended move\n",
-        "with greater power."
+        "The user performs\n",
+        "a beautiful, mystic\n",
+        "dance. It boosts\n",
+        "the user’s Sp. Atk,\n",
+        "Sp. Def, and Speed."
       ]
     },
     {
       "id": "pl_msg_00000646_00497",
       "en_US": [
-        "If the foe knows any\n",
-        "move also known by\n",
-        "the user, the foe\n",
-        "is prevented\n",
-        "from using it."
+        "Resisting, the user\n",
+        "attacks the opposing\n",
+        "Pokémon. The targets’\n",
+        "Sp. Atk stat is\n",
+        "reduced."
       ]
     },
     {
       "id": "pl_msg_00000646_00498",
       "en_US": [
-        "The user tucks in its\n",
-        "head to raise its\n",
-        "Defense in the first\n",
-        "turn, then rams the\n",
-        "foe on the next turn."
+        "Although this move\n",
+        "has great power, it\n",
+        "only works the first\n",
+        "turn the user is\n",
+        "in battle."
       ]
     },
     {
       "id": "pl_msg_00000646_00499",
       "en_US": [
-        "The user hurriedly\n",
-        "and randomly uses a\n",
-        "move among those\n",
-        "known by other\n",
-        "Pokémon in the party."
+        "The user materializes\n",
+        "an odd psychic wave\n",
+        "to attack the target.\n",
+        "This attack does\n",
+        "physical damage."
       ]
     },
     {
       "id": "pl_msg_00000646_00500",
       "en_US": [
-        "The user mimics the\n",
-        "move used immediately\n",
-        "before it. The move\n",
-        "fails if no other move\n",
-        "has been used yet."
+        "The user breaks its\n",
+        "shell, lowering its\n",
+        "defensive stats but\n",
+        "sharply raising its\n",
+        "Speed and offenses."
       ]
     },
     {
@@ -5003,447 +4990,460 @@
     {
       "id": "pl_msg_00000646_00510",
       "en_US": [
-        "The foe is slugged\n",
-        "by a punch thrown\n",
-        "with muscle-packed\n",
-        "power.\n"
+        "The user slams the\n",
+        "target with its\n",
+        "wings. The target\n",
+        "is hit twice in a\n",
+        "row."
       ]
     },
     {
       "id": "pl_msg_00000646_00511",
       "en_US": [
-        "A vicious, tearing\n",
-        "attack with pincers.\n",
-        "The foe will faint\n",
-        "instantly if this\n",
-        "attack hits."
+        "The user attacks\n",
+        "everything around it\n",
+        "with the destructive\n",
+        "power of a terrible,\n",
+        "explosive sound."
       ]
     },
     {
       "id": "pl_msg_00000646_00512",
       "en_US": [
-        "A long body or\n",
-        "tentacles are used\n",
-        "to bind and squeeze\n",
-        "the foe for four to\n",
-        "five turns."
+        "After attacking, the\n",
+        "user rushes back\n",
+        "to switch places\n",
+        "with a party\n",
+        "Pokémon in waiting."
       ]
     },
     {
       "id": "pl_msg_00000646_00513",
       "en_US": [
-        "The foe is attacked\n",
-        "by a kick launched\n",
-        "with muscle-packed\n",
-        "power.\n"
+        "A two-turn attack.\n",
+        "The user gathers\n",
+        "light, then strikes\n",
+        "with a blade on the\n",
+        "second turn."
       ]
     },
     {
       "id": "pl_msg_00000646_00514",
       "en_US": [
-        "The foe is stabbed\n",
-        "with a horn rotating\n",
-        "like a drill.\n",
-        "The foe instantly\n",
-        "faints if it hits."
+        "The user cloaks\n",
+        "itself with flame\n",
+        "and attacks.\n",
+        "It raises the\n",
+        "user’s Speed stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00515",
       "en_US": [
-        "The user opens up a\n",
-        "fissure in the ground\n",
-        "and drops the foe in.\n",
-        "The target instantly\n",
-        "faints if it hits."
+        "It swamps the area\n",
+        "around the user\n",
+        "with a giant sludge\n",
+        "wave. It may also\n",
+        "poison those hit."
       ]
     },
     {
       "id": "pl_msg_00000646_00516",
       "en_US": [
-        "The foe is attacked\n",
-        "with a discharge of\n",
-        "filthy gases.\n",
-        "It may also poison\n",
-        "the target."
+        "The user attacks with\n",
+        "a draining kiss\n",
+        "that steals HP from\n",
+        "targets to restore\n",
+        "the user’s own HP."
       ]
     },
     {
       "id": "pl_msg_00000646_00517",
       "en_US": [
-        "The foe is attacked\n",
-        "with long, creeping\n",
-        "tentacles or vines.\n",
-        "It may also lower the\n",
-        "target’s Speed."
+        "The user attacks\n",
+        "everything around it.\n",
+        "The user’s HP is\n",
+        "restored by half\n",
+        "of the damage dealt."
       ]
     },
     {
       "id": "pl_msg_00000646_00518",
       "en_US": [
-        "The user traps the\n",
-        "foe inside a fast,\n",
-        "vicious whirlpool that\n",
-        "lasts for four to\n",
-        "five turns."
+        "The user attacks its\n",
+        "target by hitting\n",
+        "it with brutal strikes.\n",
+        "The target is hit\n",
+        "twice in a row."
       ]
     },
     {
       "id": "pl_msg_00000646_00519",
       "en_US": [
-        "The user throws up a\n",
-        "sturdy wall that\n",
-        "sharply raises its\n",
-        "Defense stat.\n"
+        "Protects the user\n",
+        "from attacks, and\n",
+        "also slows down any\n",
+        "attacker who makes\n",
+        "direct contact."
       ]
     },
     {
       "id": "pl_msg_00000646_00520",
       "en_US": [
-        "The user distracts\n",
-        "the foe by bending a\n",
-        "spoon.\n",
-        "It may lower the\n",
-        "target’s accuracy."
+        "The user stares at\n",
+        "the target with\n",
+        "baby-doll eyes, which\n",
+        "drops its Attack stat.\n",
+        "This move goes first."
       ]
     },
     {
       "id": "pl_msg_00000646_00521",
       "en_US": [
-        "The user ensnares\n",
-        "the foe with a thin,\n",
-        "gooey silk so it can’t\n",
-        "flee from battle.\n"
+        "The user weaves a\n",
+        "sticky web around the\n",
+        "opposing team,\n",
+        "lowering their Speed\n",
+        "upon switching in.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00522",
       "en_US": [
-        "The user senses the\n",
-        "foe’s movements\n",
-        "with its mind to\n",
-        "ensure its next\n",
-        "attack does not miss."
+        "A strong electric\n",
+        "blast crashes down\n",
+        "on the target.\n",
+        "This may also make\n",
+        "the target flinch."
       ]
     },
     {
       "id": "pl_msg_00000646_00523",
       "en_US": [
-        "Enables the user to\n",
-        "hit a Ghost type with\n",
-        "any type of move. It\n",
-        "also enables the user\n",
-        "to hit an evasive foe."
+        "The user crashes into\n",
+        "its target while\n",
+        "rotating its body\n",
+        "like a drill. Critical \n",
+        "hits land more easily."
       ]
     },
     {
       "id": "pl_msg_00000646_00524",
       "en_US": [
-        "The user restores its\n",
-        "own HP by up to half\n",
-        "of its maximum HP.\n",
-        "It may also be used\n",
-        "to heal an ally’s HP."
+        "The user infests\n",
+        "the target, attacking\n",
+        "it for four to\n",
+        "five turns. The\n",
+        "target cannot flee."
       ]
     },
     {
       "id": "pl_msg_00000646_00525",
       "en_US": [
-        "The user blocks the\n",
-        "foe’s way with arms\n",
-        "spread wide to\n",
-        "prevent escape.\n"
+        "The user yells as if\n",
+        "it is ranting about\n",
+        "something, making\n",
+        "the target’s Sp. Atk\n",
+        "stat decrease."
       ]
     },
     {
       "id": "pl_msg_00000646_00526",
       "en_US": [
-        "The user trades held\n",
-        "items with the foe\n",
-        "faster than the eye\n",
-        "can follow.\n"
+        "The target is hit\n",
+        "away and switched. In\n",
+        "the wild, a battle\n",
+        "against a single\n",
+        "Pokémon ends."
       ]
     },
     {
       "id": "pl_msg_00000646_00527",
       "en_US": [
-        "A two-turn attack.\n",
-        "Blades of wind hit the\n",
-        "foe on the second\n",
-        "turn. It has a high\n",
-        "critical-hit ratio."
+        "The user gathers\n",
+        "space power, raising\n",
+        "Sp. Atk on the first\n",
+        "turn, then hits the\n",
+        "foe on the next turn."
       ]
     },
     {
       "id": "pl_msg_00000646_00528",
       "en_US": [
-        "A full-power attack\n",
-        "in which the user\n",
-        "strikes the foe\n",
-        "with all its might."
+        "The user attacks by\n",
+        "letting out a charming\n",
+        "cry that causes\n",
+        "emotional damage. This\n",
+        "attack never misses."
       ]
     },
     {
       "id": "pl_msg_00000646_00529",
       "en_US": [
-        "Numerous coins are\n",
-        "hurled at the foe to\n",
-        "inflict damage.\n",
-        "Money is earned\n",
-        "after battle."
+        "The user slams the\n",
+        "foe with water at\n",
+        "full-force. It may\n",
+        "lower the target’s\n",
+        "Defense stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00530",
       "en_US": [
-        "The user endures\n",
-        "attacks for two\n",
-        "turns, then strikes\n",
-        "back to cause double\n",
-        "the damage taken."
+        "The user captures\n",
+        "opposing Pokémon\n",
+        "using an electric\n",
+        "net. This lowers\n",
+        "their Speed stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00531",
       "en_US": [
-        "It enables the user\n",
-        "to learn a move used\n",
-        "by the foe.\n",
-        "Once used, the move\n",
-        "Sketch disappears."
+        "The user scatters a\n",
+        "cloud of power to\n",
+        "draw attention to\n",
+        "itself. Opponents\n",
+        "aim only at the user."
       ]
     },
     {
       "id": "pl_msg_00000646_00532",
       "en_US": [
-        "A seed that causes\n",
-        "worry is planted on\n",
-        "the foe. It prevents\n",
-        "sleep by making its\n",
-        "ability Insomnia."
+        "The user smashes into\n",
+        "the target at high\n",
+        "speed. This move\n",
+        "always goes first.\n"
       ]
     },
     {
       "id": "pl_msg_00000646_00533",
       "en_US": [
-        "The user changes its\n",
-        "type to become the\n",
-        "same type as one of\n",
-        "its moves.\n"
+        "The user attacks by\n",
+        "wrapping its opponent\n",
+        "in a fierce wind.\n",
+        "This may also confuse\n",
+        "the target."
       ]
     },
     {
       "id": "pl_msg_00000646_00534",
       "en_US": [
-        "If the user faints,\n",
-        "the user’s grudge\n",
-        "fully depletes the PP\n",
-        "of the foe’s move\n",
-        "that knocked it out."
+        "The user stomps down\n",
+        "on the ground and\n",
+        "attacks everything in\n",
+        "the area. Hit Pokémon’s\n",
+        "Speed stat is reduced."
       ]
     },
     {
       "id": "pl_msg_00000646_00535",
       "en_US": [
-        "The user employs its\n",
-        "psychic power to\n",
-        "switch its Attack\n",
-        "with its Defense\n",
-        "stat."
+        "The user borrows\n",
+        "the power of the\n",
+        "moon. This may also\n",
+        "lower the target’s\n",
+        "Sp. Atk stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00536",
       "en_US": [
-        "The user employs its\n",
-        "psychic power to\n",
-        "switch changes to\n",
-        "its Attack and\n",
-        "Sp. Atk with the foe."
+        "Protects the user\n",
+        "from attacks, and\n",
+        "also damages any\n",
+        "attacker who makes\n",
+        "direct contact."
       ]
     },
     {
       "id": "pl_msg_00000646_00537",
       "en_US": [
-        "The user employs its\n",
-        "psychic power to\n",
-        "switch changes to\n",
-        "its Defense and\n",
-        "Sp. Def with the foe."
+        "In a hailstorm, this\n",
+        "move reduces damage\n",
+        "from physical and\n",
+        "special moves for\n",
+        "five turns."
       ]
     },
     {
       "id": "pl_msg_00000646_00538",
       "en_US": [
-        "While this move is in\n",
-        "use, it gains attack\n",
-        "power each time the\n",
-        "user is hit in battle.\n"
+        "The user covers the\n",
+        "target in a powder\n",
+        "that explodes and\n",
+        "deals damage if Fire-\n",
+        "type moves are used."
       ]
     },
     {
       "id": "pl_msg_00000646_00539",
       "en_US": [
-        "Enables the user to\n",
-        "hit a Dark type with\n",
-        "any type of move. It\n",
-        "also enables the user\n",
-        "to hit an evasive foe."
+        "The user shrouds\n",
+        "itself in electricity\n",
+        "and smashes into its\n",
+        "target. It also\n",
+        "damages the user."
       ]
     },
     {
       "id": "pl_msg_00000646_00540",
       "en_US": [
-        "The user powerfully\n",
-        "wrings the foe.\n",
-        "The more HP the foe\n",
-        "has, the greater this\n",
-        "attack’s power."
+        "The user fires a\n",
+        "beam of steel that\n",
+        "it collected from its\n",
+        "entire body. This also\n",
+        "damages the user."
       ]
     },
     {
       "id": "pl_msg_00000646_00541",
       "en_US": [
-        "The user chants an\n",
-        "incantation toward\n",
-        "the sky, preventing\n",
-        "the foe from landing\n",
-        "critical hits."
+        "The user attacks by\n",
+        "nuzzling targets\n",
+        "with its electrified\n",
+        "cheeks. This leaves\n",
+        "targets paralyzed."
       ]
     },
     {
       "id": "pl_msg_00000646_00542",
       "en_US": [
-        "The foe is crushed\n",
-        "with great force.\n",
-        "The attack is more\n",
-        "powerful the more HP\n",
-        "the foe has left."
+        "The user lunges at\n",
+        "the target, attacking\n",
+        "with full force. This\n",
+        "also lowers the\n",
+        "target’s Attack stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00543",
       "en_US": [
-        "The user applies\n",
-        "pressure to stress\n",
-        "points, sharply\n",
-        "boosting one of its\n",
-        "stats."
+        "The user scatters\n",
+        "mysterious water\n",
+        "around and restores\n",
+        "the HP of itself\n",
+        "and its allies."
       ]
     },
     {
       "id": "pl_msg_00000646_00544",
       "en_US": [
-        "The user sneaks up\n",
-        "on the foe and\n",
-        "strikes it with a\n",
-        "quick, sly attack."
+        "This relentless\n",
+        "attack does massive\n",
+        "damage to a\n",
+        "target affected\n",
+        "by status problems."
       ]
     },
     {
       "id": "pl_msg_00000646_00545",
       "en_US": [
-        "The user endearingly\n",
-        "approaches the foe,\n",
-        "then attacks it\n",
-        "with a sudden tackle."
+        "The user blows a\n",
+        "cold breath on the\n",
+        "target. This attack\n",
+        "always results in a\n",
+        "critical hit."
       ]
     },
     {
       "id": "pl_msg_00000646_00546",
       "en_US": [
-        "The user kicks up\n",
-        "mud on the battlefield.\n",
-        "It weakens Electric-\n",
-        "type moves for\n",
-        "five turns."
+        "The user chills the\n",
+        "target. This may\n",
+        "leave from frozen,\n",
+        "and is super effective\n",
+        "on Water types."
       ]
     },
     {
       "id": "pl_msg_00000646_00547",
       "en_US": [
-        "The user soaks the\n",
-        "battlefield with water.\n",
-        "It weakens Fire-type\n",
-        "moves for five turns."
+        "The user spits fluid\n",
+        "that works to melt\n",
+        "the target. This\n",
+        "harshly reduces the\n",
+        "target’s Sp. Def stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00548",
       "en_US": [
-        "The user counters\n",
-        "the foe by mimicking\n",
-        "the move last used\n",
-        "by the foe."
+        "The user attacks the\n",
+        "target with stored\n",
+        "power. Damage\n",
+        "increases as the\n",
+        "user’s stats rise."
       ]
     },
     {
       "id": "pl_msg_00000646_00549",
       "en_US": [
-        "The user changes its\n",
-        "type to make itself\n",
-        "resistant to the type\n",
-        "of the attack it\n",
-        "last took."
+        "The user slams the\n",
+        "target with its body.\n",
+        "Damage increases the\n",
+        "the heavier the user\n",
+        "is than the target."
       ]
     },
     {
       "id": "pl_msg_00000646_00550",
       "en_US": [
-        "Two turns after this\n",
-        "move is used, the foe\n",
-        "is attacked with a\n",
-        "hunk of psychic\n",
-        "energy."
+        "After making its\n",
+        "attack, the user\n",
+        "rushes back to switch\n",
+        "places with a party\n",
+        "Pokémon in waiting."
       ]
     },
     {
       "id": "pl_msg_00000646_00551",
       "en_US": [
-        "The user’s type is\n",
-        "changed depending on\n",
-        "its environment, such\n",
-        "as at water’s edge, in\n",
-        "grass, or in a cave."
+        "The user strikes\n",
+        "with ruinous claws,\n",
+        "aiming to land a\n",
+        "critical hit. This may\n",
+        "also inflict status."
       ]
     },
     {
       "id": "pl_msg_00000646_00552",
       "en_US": [
-        "Two turns after this\n",
-        "move is used, the\n",
-        "user blasts the foe\n",
-        "with a concentrated\n",
-        "bundle of light."
+        "With a parting threat,\n",
+        "the user lowers the\n",
+        "target’s offensive\n",
+        "stats, and switches\n",
+        "with a party Pokémon."
       ]
     },
     {
       "id": "pl_msg_00000646_00553",
       "en_US": [
-        "The user faints. In\n",
-        "return, the Pokémon\n",
-        "taking its place will\n",
-        "have its HP restored\n",
-        "and status cured."
+        "The user drenches the\n",
+        "target in poisonous\n",
+        "liquid. This move’s\n",
+        "power doubles if the\n",
+        "target is poisoned."
       ]
     },
     {
       "id": "pl_msg_00000646_00554",
       "en_US": [
-        "The user prevents\n",
-        "the foe from using\n",
-        "any HP-recovery\n",
-        "moves for five turns.\n"
+        "The user plays rough\n",
+        "with the target and\n",
+        "attacks it. This may\n",
+        "also lower the\n",
+        "target’s Attack stat."
       ]
     },
     {
       "id": "pl_msg_00000646_00555",
       "en_US": [
-        "The user faints. In\n",
-        "return, the Pokémon\n",
-        "taking its place will\n",
-        "have its status and\n",
-        "HP fully restored."
+        "The user attacks by\n",
+        "striking the target\n",
+        "with its hard tail. It\n",
+        "hits the target two\n",
+        "to five times in a row."
       ]
     }
   ]

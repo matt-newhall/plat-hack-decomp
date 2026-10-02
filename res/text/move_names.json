@@ -19,15 +19,15 @@
     },
     {
       "id": "pl_msg_00000647_00004",
-      "en_US": "Foul Play"
+      "en_US": "Comet Punch"
     },
     {
       "id": "pl_msg_00000647_00005",
-      "en_US": "Dual Wingbeat"
+      "en_US": "Mega Punch"
     },
     {
       "id": "pl_msg_00000647_00006",
-      "en_US": "Liquidation"
+      "en_US": "Pay Day"
     },
     {
       "id": "pl_msg_00000647_00007",
@@ -51,11 +51,11 @@
     },
     {
       "id": "pl_msg_00000647_00012",
-      "en_US": "Boomburst"
+      "en_US": "Guillotine"
     },
     {
       "id": "pl_msg_00000647_00013",
-      "en_US": "Meteor Beam"
+      "en_US": "Razor Wind"
     },
     {
       "id": "pl_msg_00000647_00014",
@@ -83,11 +83,11 @@
     },
     {
       "id": "pl_msg_00000647_00020",
-      "en_US": "Flip Turn"
+      "en_US": "Bind"
     },
     {
       "id": "pl_msg_00000647_00021",
-      "en_US": "Scald"
+      "en_US": "Slam"
     },
     {
       "id": "pl_msg_00000647_00022",
@@ -103,7 +103,7 @@
     },
     {
       "id": "pl_msg_00000647_00025",
-      "en_US": "Solar Blade"
+      "en_US": "Mega Kick"
     },
     {
       "id": "pl_msg_00000647_00026",
@@ -131,7 +131,7 @@
     },
     {
       "id": "pl_msg_00000647_00032",
-      "en_US": "Flame Charge"
+      "en_US": "Horn Drill"
     },
     {
       "id": "pl_msg_00000647_00033",
@@ -363,7 +363,7 @@
     },
     {
       "id": "pl_msg_00000647_00090",
-      "en_US": "Sludge Wave"
+      "en_US": "Fissure"
     },
     {
       "id": "pl_msg_00000647_00091",
@@ -399,7 +399,7 @@
     },
     {
       "id": "pl_msg_00000647_00099",
-      "en_US": "Powder"
+      "en_US": "Rage"
     },
     {
       "id": "pl_msg_00000647_00100",
@@ -451,7 +451,7 @@
     },
     {
       "id": "pl_msg_00000647_00112",
-      "en_US": "Silk Trap"
+      "en_US": "Barrier"
     },
     {
       "id": "pl_msg_00000647_00113",
@@ -471,7 +471,7 @@
     },
     {
       "id": "pl_msg_00000647_00117",
-      "en_US": "Electroweb"
+      "en_US": "Bide"
     },
     {
       "id": "pl_msg_00000647_00118",
@@ -479,7 +479,7 @@
     },
     {
       "id": "pl_msg_00000647_00119",
-      "en_US": "Stored Power"
+      "en_US": "Mirror Move"
     },
     {
       "id": "pl_msg_00000647_00120",
@@ -495,7 +495,7 @@
     },
     {
       "id": "pl_msg_00000647_00123",
-      "en_US": "Draining Kiss"
+      "en_US": "Smog"
     },
     {
       "id": "pl_msg_00000647_00124",
@@ -523,7 +523,7 @@
     },
     {
       "id": "pl_msg_00000647_00130",
-      "en_US": "FirstImpression"
+      "en_US": "Skull Bash"
     },
     {
       "id": "pl_msg_00000647_00131",
@@ -531,7 +531,7 @@
     },
     {
       "id": "pl_msg_00000647_00132",
-      "en_US": "ParabolicCharge"
+      "en_US": "Constrict"
     },
     {
       "id": "pl_msg_00000647_00133",
@@ -539,7 +539,7 @@
     },
     {
       "id": "pl_msg_00000647_00134",
-      "en_US": "Baby-Doll Eyes"
+      "en_US": "Kinesis"
     },
     {
       "id": "pl_msg_00000647_00135",
@@ -643,7 +643,7 @@
     },
     {
       "id": "pl_msg_00000647_00160",
-      "en_US": "Hurricane"
+      "en_US": "Conversion"
     },
     {
       "id": "pl_msg_00000647_00161",
@@ -667,7 +667,7 @@
     },
     {
       "id": "pl_msg_00000647_00166",
-      "en_US": "Rage Powder"
+      "en_US": "Sketch"
     },
     {
       "id": "pl_msg_00000647_00167",
@@ -675,15 +675,15 @@
     },
     {
       "id": "pl_msg_00000647_00168",
-      "en_US": "Hex"
+      "en_US": "Thief"
     },
     {
       "id": "pl_msg_00000647_00169",
-      "en_US": "Sticky Web"
+      "en_US": "Spider Web"
     },
     {
       "id": "pl_msg_00000647_00170",
-      "en_US": "Zing Zap"
+      "en_US": "Mind Reader"
     },
     {
       "id": "pl_msg_00000647_00171",
@@ -707,7 +707,7 @@
     },
     {
       "id": "pl_msg_00000647_00176",
-      "en_US": "Heavy Slam"
+      "en_US": "Conversion 2"
     },
     {
       "id": "pl_msg_00000647_00177",
@@ -775,7 +775,7 @@
     },
     {
       "id": "pl_msg_00000647_00193",
-      "en_US": "Drill Run"
+      "en_US": "Foresight"
     },
     {
       "id": "pl_msg_00000647_00194",
@@ -827,7 +827,7 @@
     },
     {
       "id": "pl_msg_00000647_00206",
-      "en_US": "Acrobatics"
+      "en_US": "False Swipe"
     },
     {
       "id": "pl_msg_00000647_00207",
@@ -835,7 +835,7 @@
     },
     {
       "id": "pl_msg_00000647_00208",
-      "en_US": "Infestation"
+      "en_US": "Milk Drink"
     },
     {
       "id": "pl_msg_00000647_00209",
@@ -875,7 +875,7 @@
     },
     {
       "id": "pl_msg_00000647_00218",
-      "en_US": "Disarming Voice"
+      "en_US": "Frustration"
     },
     {
       "id": "pl_msg_00000647_00219",
@@ -995,7 +995,7 @@
     },
     {
       "id": "pl_msg_00000647_00248",
-      "en_US": "Volt Switch"
+      "en_US": "Future Sight"
     },
     {
       "id": "pl_msg_00000647_00249",
@@ -1003,7 +1003,7 @@
     },
     {
       "id": "pl_msg_00000647_00250",
-      "en_US": "Dual Chop"
+      "en_US": "Whirlpool"
     },
     {
       "id": "pl_msg_00000647_00251",
@@ -1099,7 +1099,7 @@
     },
     {
       "id": "pl_msg_00000647_00274",
-      "en_US": "Psyshock"
+      "en_US": "Assist"
     },
     {
       "id": "pl_msg_00000647_00275",
@@ -1147,15 +1147,15 @@
     },
     {
       "id": "pl_msg_00000647_00286",
-      "en_US": "Struggle Bug"
+      "en_US": "Imprison"
     },
     {
       "id": "pl_msg_00000647_00287",
-      "en_US": "Body Press"
+      "en_US": "Refresh"
     },
     {
       "id": "pl_msg_00000647_00288",
-      "en_US": "Bulldoze"
+      "en_US": "Grudge"
     },
     {
       "id": "pl_msg_00000647_00289",
@@ -1175,7 +1175,7 @@
     },
     {
       "id": "pl_msg_00000647_00293",
-      "en_US": "Dire Claw"
+      "en_US": "Camouflage"
     },
     {
       "id": "pl_msg_00000647_00294",
@@ -1203,7 +1203,7 @@
     },
     {
       "id": "pl_msg_00000647_00300",
-      "en_US": "Freeze-Dry"
+      "en_US": "Mud Sport"
     },
     {
       "id": "pl_msg_00000647_00301",
@@ -1319,7 +1319,7 @@
     },
     {
       "id": "pl_msg_00000647_00329",
-      "en_US": "Triple Axel"
+      "en_US": "Sheer Cold"
     },
     {
       "id": "pl_msg_00000647_00330",
@@ -1343,7 +1343,7 @@
     },
     {
       "id": "pl_msg_00000647_00335",
-      "en_US": "Snarl"
+      "en_US": "Block"
     },
     {
       "id": "pl_msg_00000647_00336",
@@ -1375,7 +1375,7 @@
     },
     {
       "id": "pl_msg_00000647_00343",
-      "en_US": "Frost Breath"
+      "en_US": "Covet"
     },
     {
       "id": "pl_msg_00000647_00344",
@@ -1387,7 +1387,7 @@
     },
     {
       "id": "pl_msg_00000647_00346",
-      "en_US": "Acid Spray"
+      "en_US": "Water Sport"
     },
     {
       "id": "pl_msg_00000647_00347",
@@ -1415,7 +1415,7 @@
     },
     {
       "id": "pl_msg_00000647_00353",
-      "en_US": "Parting Shot"
+      "en_US": "Doom Desire"
     },
     {
       "id": "pl_msg_00000647_00354",
@@ -1431,7 +1431,7 @@
     },
     {
       "id": "pl_msg_00000647_00357",
-      "en_US": "Wild Charge"
+      "en_US": "Miracle Eye"
     },
     {
       "id": "pl_msg_00000647_00358",
@@ -1447,7 +1447,7 @@
     },
     {
       "id": "pl_msg_00000647_00361",
-      "en_US": "Venoshock"
+      "en_US": "Healing Wish"
     },
     {
       "id": "pl_msg_00000647_00362",
@@ -1471,7 +1471,7 @@
     },
     {
       "id": "pl_msg_00000647_00367",
-      "en_US": "Life Dew"
+      "en_US": "Acupressure"
     },
     {
       "id": "pl_msg_00000647_00368",
@@ -1495,7 +1495,7 @@
     },
     {
       "id": "pl_msg_00000647_00373",
-      "en_US": "PowerUp Punch"
+      "en_US": "Embargo"
     },
     {
       "id": "pl_msg_00000647_00374",
@@ -1511,15 +1511,15 @@
     },
     {
       "id": "pl_msg_00000647_00377",
-      "en_US": "Play Rough"
+      "en_US": "Heal Block"
     },
     {
       "id": "pl_msg_00000647_00378",
-      "en_US": "Steel Beam"
+      "en_US": "Wring Out"
     },
     {
       "id": "pl_msg_00000647_00379",
-      "en_US": "Moonblast"
+      "en_US": "Power Trick"
     },
     {
       "id": "pl_msg_00000647_00380",
@@ -1527,23 +1527,23 @@
     },
     {
       "id": "pl_msg_00000647_00381",
-      "en_US": "Nuzzle"
+      "en_US": "Lucky Chant"
     },
     {
       "id": "pl_msg_00000647_00382",
-      "en_US": "Quiver Dance"
+      "en_US": "Me First"
     },
     {
       "id": "pl_msg_00000647_00383",
-      "en_US": "Shell Smash"
+      "en_US": "Copycat"
     },
     {
       "id": "pl_msg_00000647_00384",
-      "en_US": "Spiky Shield"
+      "en_US": "Power Swap"
     },
     {
       "id": "pl_msg_00000647_00385",
-      "en_US": "Aurora Veil"
+      "en_US": "Guard Swap"
     },
     {
       "id": "pl_msg_00000647_00386",
@@ -1555,7 +1555,7 @@
     },
     {
       "id": "pl_msg_00000647_00388",
-      "en_US": "Accelerock"
+      "en_US": "Worry Seed"
     },
     {
       "id": "pl_msg_00000647_00389",
@@ -1663,7 +1663,7 @@
     },
     {
       "id": "pl_msg_00000647_00415",
-      "en_US": "Dragon Tail"
+      "en_US": "Switcheroo"
     },
     {
       "id": "pl_msg_00000647_00416",
@@ -1847,11 +1847,11 @@
     },
     {
       "id": "pl_msg_00000647_00461",
-      "en_US": "Tail Slap"
+      "en_US": "Lunar Dance"
     },
     {
       "id": "pl_msg_00000647_00462",
-      "en_US": "Lunge"
+      "en_US": "Crush Grip"
     },
     {
       "id": "pl_msg_00000647_00463",
@@ -1955,11 +1955,11 @@
     },
     {
       "id": "pl_msg_00000647_00488",
-      "en_US": "Slam"
+      "en_US": "Scald"
     },
     {
       "id": "pl_msg_00000647_00489",
-      "en_US": "Comet Punch"
+      "en_US": "Foul Play"
     },
     {
       "id": "pl_msg_00000647_00490",
@@ -1971,39 +1971,39 @@
     },
     {
       "id": "pl_msg_00000647_00492",
-      "en_US": "Refresh"
+      "en_US": "Body Press"
     },
     {
       "id": "pl_msg_00000647_00493",
-      "en_US": "False Swipe"
+      "en_US": "Acrobatics"
     },
     {
       "id": "pl_msg_00000647_00494",
-      "en_US": "Sheer Cold"
+      "en_US": "Triple Axel"
     },
     {
       "id": "pl_msg_00000647_00495",
-      "en_US": "Embargo"
+      "en_US": "PowerUp Punch"
     },
     {
       "id": "pl_msg_00000647_00496",
-      "en_US": "Me First"
+      "en_US": "Quiver Dance"
     },
     {
       "id": "pl_msg_00000647_00497",
-      "en_US": "Imprison"
+      "en_US": "Struggle Bug"
     },
     {
       "id": "pl_msg_00000647_00498",
-      "en_US": "Skull Bash"
+      "en_US": "FirstImpression"
     },
     {
       "id": "pl_msg_00000647_00499",
-      "en_US": "Assist"
+      "en_US": "Psyshock"
     },
     {
       "id": "pl_msg_00000647_00500",
-      "en_US": "Copycat"
+      "en_US": "Shell Smash"
     },
     {
       "id": "pl_msg_00000647_00501",
@@ -2043,187 +2043,187 @@
     },
     {
       "id": "pl_msg_00000647_00510",
-      "en_US": "Mega Punch"
+      "en_US": "Dual Wingbeat"
     },
     {
       "id": "pl_msg_00000647_00511",
-      "en_US": "Guillotine"
+      "en_US": "Boomburst"
     },
     {
       "id": "pl_msg_00000647_00512",
-      "en_US": "Bind"
+      "en_US": "Flip Turn"
     },
     {
       "id": "pl_msg_00000647_00513",
-      "en_US": "Mega Kick"
+      "en_US": "Solar Blade"
     },
     {
       "id": "pl_msg_00000647_00514",
-      "en_US": "Horn Drill"
+      "en_US": "Flame Charge"
     },
     {
       "id": "pl_msg_00000647_00515",
-      "en_US": "Fissure"
+      "en_US": "Sludge Wave"
     },
     {
       "id": "pl_msg_00000647_00516",
-      "en_US": "Smog"
+      "en_US": "Draining Kiss"
     },
     {
       "id": "pl_msg_00000647_00517",
-      "en_US": "Constrict"
+      "en_US": "ParabolicCharge"
     },
     {
       "id": "pl_msg_00000647_00518",
-      "en_US": "Whirlpool"
+      "en_US": "Dual Chop"
     },
     {
       "id": "pl_msg_00000647_00519",
-      "en_US": "Barrier"
+      "en_US": "Silk Trap"
     },
     {
       "id": "pl_msg_00000647_00520",
-      "en_US": "Kinesis"
+      "en_US": "Baby-Doll Eyes"
     },
     {
       "id": "pl_msg_00000647_00521",
-      "en_US": "Spider Web"
+      "en_US": "Sticky Web"
     },
     {
       "id": "pl_msg_00000647_00522",
-      "en_US": "Mind Reader"
+      "en_US": "Zing Zap"
     },
     {
       "id": "pl_msg_00000647_00523",
-      "en_US": "Foresight"
+      "en_US": "Drill Run"
     },
     {
       "id": "pl_msg_00000647_00524",
-      "en_US": "Milk Drink"
+      "en_US": "Infestation"
     },
     {
       "id": "pl_msg_00000647_00525",
-      "en_US": "Block"
+      "en_US": "Snarl"
     },
     {
       "id": "pl_msg_00000647_00526",
-      "en_US": "Switcheroo"
+      "en_US": "Dragon Tail"
     },
     {
       "id": "pl_msg_00000647_00527",
-      "en_US": "Razor Wind"
+      "en_US": "Meteor Beam"
     },
     {
       "id": "pl_msg_00000647_00528",
-      "en_US": "Frustration"
+      "en_US": "Disarming Voice"
     },
     {
       "id": "pl_msg_00000647_00529",
-      "en_US": "Pay Day"
+      "en_US": "Liquidation"
     },
     {
       "id": "pl_msg_00000647_00530",
-      "en_US": "Bide"
+      "en_US": "Electroweb"
     },
     {
       "id": "pl_msg_00000647_00531",
-      "en_US": "Sketch"
+      "en_US": "Rage Powder"
     },
     {
       "id": "pl_msg_00000647_00532",
-      "en_US": "Worry Seed"
+      "en_US": "Accelerock"
     },
     {
       "id": "pl_msg_00000647_00533",
-      "en_US": "Conversion"
+      "en_US": "Hurricane"
     },
     {
       "id": "pl_msg_00000647_00534",
-      "en_US": "Grudge"
+      "en_US": "Bulldoze"
     },
     {
       "id": "pl_msg_00000647_00535",
-      "en_US": "Power Trick"
+      "en_US": "Moonblast"
     },
     {
       "id": "pl_msg_00000647_00536",
-      "en_US": "Power Swap"
+      "en_US": "Spiky Shield"
     },
     {
       "id": "pl_msg_00000647_00537",
-      "en_US": "Guard Swap"
+      "en_US": "Aurora Veil"
     },
     {
       "id": "pl_msg_00000647_00538",
-      "en_US": "Rage"
+      "en_US": "Powder"
     },
     {
       "id": "pl_msg_00000647_00539",
-      "en_US": "Miracle Eye"
+      "en_US": "Wild Charge"
     },
     {
       "id": "pl_msg_00000647_00540",
-      "en_US": "Wring Out"
+      "en_US": "Steel Beam"
     },
     {
       "id": "pl_msg_00000647_00541",
-      "en_US": "Lucky Chant"
+      "en_US": "Nuzzle"
     },
     {
       "id": "pl_msg_00000647_00542",
-      "en_US": "Crush Grip"
+      "en_US": "Lunge"
     },
     {
       "id": "pl_msg_00000647_00543",
-      "en_US": "Acupressure"
+      "en_US": "Life Dew"
     },
     {
       "id": "pl_msg_00000647_00544",
-      "en_US": "Thief"
+      "en_US": "Hex"
     },
     {
       "id": "pl_msg_00000647_00545",
-      "en_US": "Covet"
+      "en_US": "Frost Breath"
     },
     {
       "id": "pl_msg_00000647_00546",
-      "en_US": "Mud Sport"
+      "en_US": "Freeze-Dry"
     },
     {
       "id": "pl_msg_00000647_00547",
-      "en_US": "Water Sport"
+      "en_US": "Acid Spray"
     },
     {
       "id": "pl_msg_00000647_00548",
-      "en_US": "Mirror Move"
+      "en_US": "Stored Power"
     },
     {
       "id": "pl_msg_00000647_00549",
-      "en_US": "Conversion 2"
+      "en_US": "Heavy Slam"
     },
     {
       "id": "pl_msg_00000647_00550",
-      "en_US": "Future Sight"
+      "en_US": "Volt Switch"
     },
     {
       "id": "pl_msg_00000647_00551",
-      "en_US": "Camouflage"
+      "en_US": "Dire Claw"
     },
     {
       "id": "pl_msg_00000647_00552",
-      "en_US": "Doom Desire"
+      "en_US": "Parting Shot"
     },
     {
       "id": "pl_msg_00000647_00553",
-      "en_US": "Healing Wish"
+      "en_US": "Venoshock"
     },
     {
       "id": "pl_msg_00000647_00554",
-      "en_US": "Heal Block"
+      "en_US": "Play Rough"
     },
     {
       "id": "pl_msg_00000647_00555",
-      "en_US": "Lunar Dance"
+      "en_US": "Tail Slap"
     }
   ]
 }

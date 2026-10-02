@@ -2,6 +2,6 @@
 
 
 _000:
-    // {0} whipped up a whirlwind!
-    BufferMessage BattleStrings_Text_PokemonWhippedUpAWhirlwind_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
-    GoToEffectScript 
+    // {0} is overflowing with space power!
+    BufferMessage BattleStrings_Text_PokemonOverflowingWithSpacePower_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
+    GoToEffectScript
