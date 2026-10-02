@@ -11394,6 +11394,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Crush Grip!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01617",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Acupressure!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01618",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Acupressure!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01619",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Acupressure!"
+      ]
     }
   ]
 }

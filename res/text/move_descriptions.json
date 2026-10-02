@@ -5320,6 +5320,16 @@
         "powerful the more HP\n",
         "the foe has left."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00543",
+      "en_US": [
+        "The user applies\n",
+        "pressure to stress\n",
+        "points, sharply\n",
+        "boosting one of its\n",
+        "stats."
+      ]
     }
   ]
 }
