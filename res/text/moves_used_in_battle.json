@@ -11205,6 +11205,90 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Conversion!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01590",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Grudge!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01591",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Grudge!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01592",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Grudge!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01593",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Power Trick!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01594",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Power Trick!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01595",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Power Trick!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01596",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Power Swap!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01597",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Power Swap!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01598",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Power Swap!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01599",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Guard Swap!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01600",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Guard Swap!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01601",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Guard Swap!"
+      ]
     }
   ]
 }

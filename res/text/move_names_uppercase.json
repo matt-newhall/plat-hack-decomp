@@ -2136,6 +2136,22 @@
     {
       "id": "pl_msg_00000648_00533",
       "en_US": "CONVERSION"
+    },
+    {
+      "id": "pl_msg_00000648_00534",
+      "en_US": "GRUDGE"
+    },
+    {
+      "id": "pl_msg_00000648_00535",
+      "en_US": "POWER TRICK"
+    },
+    {
+      "id": "pl_msg_00000648_00536",
+      "en_US": "POWER SWAP"
+    },
+    {
+      "id": "pl_msg_00000648_00537",
+      "en_US": "GUARD SWAP"
     }
   ]
 }

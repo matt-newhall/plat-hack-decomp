@@ -5231,6 +5231,46 @@
         "same type as one of\n",
         "its moves.\n"
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00534",
+      "en_US": [
+        "If the user faints,\n",
+        "the user’s grudge\n",
+        "fully depletes the PP\n",
+        "of the foe’s move\n",
+        "that knocked it out."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00535",
+      "en_US": [
+        "The user employs its\n",
+        "psychic power to\n",
+        "switch its Attack\n",
+        "with its Defense\n",
+        "stat."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00536",
+      "en_US": [
+        "The user employs its\n",
+        "psychic power to\n",
+        "switch changes to\n",
+        "its Attack and\n",
+        "Sp. Atk with the foe."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00537",
+      "en_US": [
+        "The user employs its\n",
+        "psychic power to\n",
+        "switch changes to\n",
+        "its Defense and\n",
+        "Sp. Def with the foe."
+      ]
     }
   ]
 }
