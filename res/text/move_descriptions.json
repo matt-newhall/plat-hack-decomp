@@ -340,7 +340,7 @@
         "A long body or vines\n",
         "are used to wrap and\n",
         "squeeze the foe for\n",
-        "two to five turns.\n"
+        "four to five turns.\n"
       ]
     },
     {
@@ -809,7 +809,7 @@
         "The foe becomes\n",
         "trapped within a\n",
         "fierce vortex of fire\n",
-        "that rages for two\n",
+        "that rages for four\n",
         "to five turns."
       ]
     },
@@ -1248,7 +1248,7 @@
         "and squeezed by\n",
         "the user’s very thick\n",
         "and sturdy shell for\n",
-        "two to five turns."
+        "four to five turns."
       ]
     },
     {
@@ -3210,7 +3210,7 @@
         "The user traps the\n",
         "foe inside a harshly\n",
         "raging sandstorm for\n",
-        "two to five turns.\n"
+        "four to five turns.\n"
       ]
     },
     {
@@ -4541,7 +4541,7 @@
         "The foe becomes\n",
         "trapped within a\n",
         "maelstrom of fire\n",
-        "that rages for two\n",
+        "that rages for four\n",
         "to five turns."
       ]
     },
@@ -4998,6 +4998,189 @@
         "ethereal blade. Its\n",
         "power rises on\n",
         "Electric Terrain."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00510",
+      "en_US": [
+        "The foe is slugged\n",
+        "by a punch thrown\n",
+        "with muscle-packed\n",
+        "power.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00511",
+      "en_US": [
+        "A vicious, tearing\n",
+        "attack with pincers.\n",
+        "The foe will faint\n",
+        "instantly if this\n",
+        "attack hits."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00512",
+      "en_US": [
+        "A long body or\n",
+        "tentacles are used\n",
+        "to bind and squeeze\n",
+        "the foe for four to\n",
+        "five turns."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00513",
+      "en_US": [
+        "The foe is attacked\n",
+        "by a kick launched\n",
+        "with muscle-packed\n",
+        "power.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00514",
+      "en_US": [
+        "The foe is stabbed\n",
+        "with a horn rotating\n",
+        "like a drill.\n",
+        "The foe instantly\n",
+        "faints if it hits."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00515",
+      "en_US": [
+        "The user opens up a\n",
+        "fissure in the ground\n",
+        "and drops the foe in.\n",
+        "The target instantly\n",
+        "faints if it hits."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00516",
+      "en_US": [
+        "The foe is attacked\n",
+        "with a discharge of\n",
+        "filthy gases.\n",
+        "It may also poison\n",
+        "the target."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00517",
+      "en_US": [
+        "The foe is attacked\n",
+        "with long, creeping\n",
+        "tentacles or vines.\n",
+        "It may also lower the\n",
+        "target’s Speed."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00518",
+      "en_US": [
+        "The user traps the\n",
+        "foe inside a fast,\n",
+        "vicious whirlpool that\n",
+        "lasts for four to\n",
+        "five turns."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00519",
+      "en_US": [
+        "The user throws up a\n",
+        "sturdy wall that\n",
+        "sharply raises its\n",
+        "Defense stat.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00520",
+      "en_US": [
+        "The user distracts\n",
+        "the foe by bending a\n",
+        "spoon.\n",
+        "It may lower the\n",
+        "target’s accuracy."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00521",
+      "en_US": [
+        "The user ensnares\n",
+        "the foe with a thin,\n",
+        "gooey silk so it can’t\n",
+        "flee from battle.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00522",
+      "en_US": [
+        "The user senses the\n",
+        "foe’s movements\n",
+        "with its mind to\n",
+        "ensure its next\n",
+        "attack does not miss."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00523",
+      "en_US": [
+        "Enables the user to\n",
+        "hit a Ghost type with\n",
+        "any type of move. It\n",
+        "also enables the user\n",
+        "to hit an evasive foe."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00524",
+      "en_US": [
+        "The user restores its\n",
+        "own HP by up to half\n",
+        "of its maximum HP.\n",
+        "It may also be used\n",
+        "to heal an ally’s HP."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00525",
+      "en_US": [
+        "The user blocks the\n",
+        "foe’s way with arms\n",
+        "spread wide to\n",
+        "prevent escape.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00526",
+      "en_US": [
+        "The user trades held\n",
+        "items with the foe\n",
+        "faster than the eye\n",
+        "can follow.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00527",
+      "en_US": [
+        "A two-turn attack.\n",
+        "Blades of wind hit the\n",
+        "foe on the second\n",
+        "turn. It has a high\n",
+        "critical-hit ratio."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00528",
+      "en_US": [
+        "A full-power attack\n",
+        "in which the user\n",
+        "strikes the foe\n",
+        "with all its might."
       ]
     }
   ]

@@ -4133,6 +4133,7 @@ BOOL Move_FailsInHighGravity(BattleSystem *battleSys, BattleContext *battleCtx, 
 static const u16 sMovesAffectedByHealBlock[] = {
     MOVE_RECOVER,
     MOVE_SOFTBOILED,
+    MOVE_MILK_DRINK,
     MOVE_REST,
     MOVE_MORNING_SUN,
     MOVE_SYNTHESIS,
@@ -4173,6 +4174,7 @@ static const u16 sTriageBoostedMoves[] = {
     MOVE_LEECH_LIFE,
     MOVE_MEGA_DRAIN,
     MOVE_MOONLIGHT,
+    MOVE_MILK_DRINK,
     MOVE_MORNING_SUN,
     MOVE_PARABOLIC_CHARGE,
     MOVE_RECOVER,
@@ -8697,7 +8699,8 @@ static const u16 sPunchingMoves[] = {
     MOVE_BULLET_PUNCH,
     MOVE_SKY_UPPERCUT,
     MOVE_COMET_PUNCH,
-    MOVE_POWER_UP_PUNCH
+    MOVE_POWER_UP_PUNCH,
+    MOVE_MEGA_PUNCH
 };
 
 static const u16 sAuraAndPulseMoves[] = {
@@ -9792,6 +9795,7 @@ static const u16 sCannotMetronomeMoves[] = {
     MOVE_SNATCH,
     MOVE_HELPING_HAND,
     MOVE_TRICK,
+    MOVE_SWITCHEROO,
     MOVE_FOCUS_PUNCH,
     MOVE_FEINT,
     MOVE_COPYCAT,

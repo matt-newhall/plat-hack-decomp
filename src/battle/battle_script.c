@@ -4543,10 +4543,10 @@ static BOOL BtlCmd_TryOHKOMove(BattleSystem *battleSys, BattleContext *battleCtx
 
     if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE) {
         battleCtx->moveStatusFlags |= MOVE_STATUS_STURDY;
-    } else if (MON_HAS_TYPE(battleCtx->defender, TYPE_ICE)) {
+    } else if (battleCtx->moveCur == MOVE_SHEER_COLD && MON_HAS_TYPE(battleCtx->defender, TYPE_ICE)) {
         battleCtx->moveStatusFlags |= MOVE_STATUS_INEFFECTIVE;
     } else {
-        u16 baseAccuracy = MON_HAS_TYPE(battleCtx->attacker, TYPE_ICE) ? CURRENT_MOVE_DATA.accuracy : 20;
+        u16 baseAccuracy = (battleCtx->moveCur != MOVE_SHEER_COLD || MON_HAS_TYPE(battleCtx->attacker, TYPE_ICE)) ? CURRENT_MOVE_DATA.accuracy : 20;
 
         if ((ATTACKING_MON.moveEffectsMask & MOVE_EFFECT_LOCK_ON) == FALSE
             && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NO_GUARD

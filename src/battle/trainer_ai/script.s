@@ -601,6 +601,15 @@ Basic_CheckAuroraVeil_CheckReflect:
 Basic_CheckOHKOWouldFail:
     // If the OHKO move would always fail for any reason, score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+
+    // Ice-types are immune to Sheer Cold, regardless of Mold Breaker.
+    IfMoveNotEqualTo MOVE_SHEER_COLD, Basic_CheckOHKOWouldFail_Sturdy
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ICE, ScoreMinus10
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_ICE, ScoreMinus10
+
+Basic_CheckOHKOWouldFail_Sturdy:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckOHKOWouldFail_Levels
     LoadBattlerAbility AI_BATTLER_DEFENDER

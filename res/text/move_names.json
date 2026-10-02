@@ -2040,6 +2040,82 @@
     {
       "id": "pl_msg_00000647_00509",
       "en_US": "Psyblade"
+    },
+    {
+      "id": "pl_msg_00000647_00510",
+      "en_US": "Mega Punch"
+    },
+    {
+      "id": "pl_msg_00000647_00511",
+      "en_US": "Guillotine"
+    },
+    {
+      "id": "pl_msg_00000647_00512",
+      "en_US": "Bind"
+    },
+    {
+      "id": "pl_msg_00000647_00513",
+      "en_US": "Mega Kick"
+    },
+    {
+      "id": "pl_msg_00000647_00514",
+      "en_US": "Horn Drill"
+    },
+    {
+      "id": "pl_msg_00000647_00515",
+      "en_US": "Fissure"
+    },
+    {
+      "id": "pl_msg_00000647_00516",
+      "en_US": "Smog"
+    },
+    {
+      "id": "pl_msg_00000647_00517",
+      "en_US": "Constrict"
+    },
+    {
+      "id": "pl_msg_00000647_00518",
+      "en_US": "Whirlpool"
+    },
+    {
+      "id": "pl_msg_00000647_00519",
+      "en_US": "Barrier"
+    },
+    {
+      "id": "pl_msg_00000647_00520",
+      "en_US": "Kinesis"
+    },
+    {
+      "id": "pl_msg_00000647_00521",
+      "en_US": "Spider Web"
+    },
+    {
+      "id": "pl_msg_00000647_00522",
+      "en_US": "Mind Reader"
+    },
+    {
+      "id": "pl_msg_00000647_00523",
+      "en_US": "Foresight"
+    },
+    {
+      "id": "pl_msg_00000647_00524",
+      "en_US": "Milk Drink"
+    },
+    {
+      "id": "pl_msg_00000647_00525",
+      "en_US": "Block"
+    },
+    {
+      "id": "pl_msg_00000647_00526",
+      "en_US": "Switcheroo"
+    },
+    {
+      "id": "pl_msg_00000647_00527",
+      "en_US": "Razor Wind"
+    },
+    {
+      "id": "pl_msg_00000647_00528",
+      "en_US": "Frustration"
     }
   ]
 }

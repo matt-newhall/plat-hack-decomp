@@ -2040,6 +2040,82 @@
     {
       "id": "pl_msg_00000648_00509",
       "en_US": "PSYBLADE"
+    },
+    {
+      "id": "pl_msg_00000648_00510",
+      "en_US": "MEGA PUNCH"
+    },
+    {
+      "id": "pl_msg_00000648_00511",
+      "en_US": "GUILLOTINE"
+    },
+    {
+      "id": "pl_msg_00000648_00512",
+      "en_US": "BIND"
+    },
+    {
+      "id": "pl_msg_00000648_00513",
+      "en_US": "MEGA KICK"
+    },
+    {
+      "id": "pl_msg_00000648_00514",
+      "en_US": "HORN DRILL"
+    },
+    {
+      "id": "pl_msg_00000648_00515",
+      "en_US": "FISSURE"
+    },
+    {
+      "id": "pl_msg_00000648_00516",
+      "en_US": "SMOG"
+    },
+    {
+      "id": "pl_msg_00000648_00517",
+      "en_US": "CONSTRICT"
+    },
+    {
+      "id": "pl_msg_00000648_00518",
+      "en_US": "WHIRLPOOL"
+    },
+    {
+      "id": "pl_msg_00000648_00519",
+      "en_US": "BARRIER"
+    },
+    {
+      "id": "pl_msg_00000648_00520",
+      "en_US": "KINESIS"
+    },
+    {
+      "id": "pl_msg_00000648_00521",
+      "en_US": "SPIDER WEB"
+    },
+    {
+      "id": "pl_msg_00000648_00522",
+      "en_US": "MIND READER"
+    },
+    {
+      "id": "pl_msg_00000648_00523",
+      "en_US": "FORESIGHT"
+    },
+    {
+      "id": "pl_msg_00000648_00524",
+      "en_US": "MILK DRINK"
+    },
+    {
+      "id": "pl_msg_00000648_00525",
+      "en_US": "BLOCK"
+    },
+    {
+      "id": "pl_msg_00000648_00526",
+      "en_US": "SWITCHEROO"
+    },
+    {
+      "id": "pl_msg_00000648_00527",
+      "en_US": "RAZOR WIND"
+    },
+    {
+      "id": "pl_msg_00000648_00528",
+      "en_US": "FRUSTRATION"
     }
   ]
 }
