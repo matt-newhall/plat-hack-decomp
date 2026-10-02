@@ -5271,6 +5271,55 @@
         "its Defense and\n",
         "Sp. Def with the foe."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00538",
+      "en_US": [
+        "While this move is in\n",
+        "use, it gains attack\n",
+        "power each time the\n",
+        "user is hit in battle.\n"
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00539",
+      "en_US": [
+        "Enables the user to\n",
+        "hit a Dark type with\n",
+        "any type of move. It\n",
+        "also enables the user\n",
+        "to hit an evasive foe."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00540",
+      "en_US": [
+        "The user powerfully\n",
+        "wrings the foe.\n",
+        "The more HP the foe\n",
+        "has, the greater this\n",
+        "attack’s power."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00541",
+      "en_US": [
+        "The user chants an\n",
+        "incantation toward\n",
+        "the sky, preventing\n",
+        "the foe from landing\n",
+        "critical hits."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00542",
+      "en_US": [
+        "The foe is crushed\n",
+        "with great force.\n",
+        "The attack is more\n",
+        "powerful the more HP\n",
+        "the foe has left."
+      ]
     }
   ]
 }

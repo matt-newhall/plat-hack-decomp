@@ -11289,6 +11289,111 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Guard Swap!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01602",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Rage!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01603",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Rage!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01604",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Rage!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01605",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Miracle Eye!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01606",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Miracle Eye!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01607",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Miracle Eye!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01608",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Wring Out!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01609",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Wring Out!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01610",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Wring Out!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01611",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Lucky Chant!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01612",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Lucky Chant!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01613",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Lucky Chant!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01614",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Crush Grip!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01615",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Crush Grip!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01616",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Crush Grip!"
+      ]
     }
   ]
 }

@@ -1,12 +1,12 @@
 {
-    "name": "Mega Kick",
+    "name": "Crush Grip",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_NORMAL",
-    "power": 120,
-    "accuracy": 75,
+    "power": 1,
+    "accuracy": 100,
     "pp": 5,
     "effect": {
-        "type": "BATTLE_EFFECT_HIT",
+        "type": "BATTLE_EFFECT_INCREASE_POWER_WITH_MORE_HP",
         "chance": 0
     },
     "range": "RANGE_SINGLE_TARGET",
@@ -14,11 +14,10 @@
     "flags": [
         "MOVE_FLAG_MAKES_CONTACT",
         "MOVE_FLAG_CAN_PROTECT",
-        "MOVE_FLAG_CAN_MIRROR_MOVE",
-        "MOVE_FLAG_HIDES_SHADOWS"
+        "MOVE_FLAG_CAN_MIRROR_MOVE"
     ],
     "contest": {
-        "effect": "CONTEST_EFFECT_FINAL_PERFORMANCE_ADVANTAGE",
-        "type": "CONTEST_TYPE_COOL"
+        "effect": "CONTEST_EFFECT_DOUBLE_FINAL_ACT",
+        "type": "CONTEST_TYPE_TOUGH"
     }
 }

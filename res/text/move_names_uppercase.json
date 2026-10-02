@@ -2152,6 +2152,26 @@
     {
       "id": "pl_msg_00000648_00537",
       "en_US": "GUARD SWAP"
+    },
+    {
+      "id": "pl_msg_00000648_00538",
+      "en_US": "RAGE"
+    },
+    {
+      "id": "pl_msg_00000648_00539",
+      "en_US": "MIRACLE EYE"
+    },
+    {
+      "id": "pl_msg_00000648_00540",
+      "en_US": "WRING OUT"
+    },
+    {
+      "id": "pl_msg_00000648_00541",
+      "en_US": "LUCKY CHANT"
+    },
+    {
+      "id": "pl_msg_00000648_00542",
+      "en_US": "CRUSH GRIP"
     }
   ]
 }
