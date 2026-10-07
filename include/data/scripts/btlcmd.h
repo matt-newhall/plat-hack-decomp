@@ -271,6 +271,8 @@ ScriptCommand(BTLCMD_RECORDPAYDAYUSE,                     BtlCmd_RecordPayDayUse
 ScriptCommand(BTLCMD_TRYSETSPORT,                          BtlCmd_TrySetSport)
 ScriptCommand(BTLCMD_SETHEALINGWISHPENDING,               BtlCmd_SetHealingWishPending)
 ScriptCommand(BTLCMD_TRYPENDINGHEALINGWISH,               BtlCmd_TryPendingHealingWish)
+ScriptCommand(BTLCMD_PREPAREFUTURESIGHT,                  BtlCmd_PrepareFutureSight)
+ScriptCommand(BTLCMD_FINISHFUTURESIGHT,                   BtlCmd_FinishFutureSight)
 
 // clang-format on
 

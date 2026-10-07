@@ -1914,9 +1914,15 @@ static void BattleControllerPlayer_CheckSideConditions(BattleSystem *battleSys, 
 
             battleCtx->sideConditionCheckTemp++;
             if (battleCtx->fieldConditions.futureSightTurns[battler]
-                && --battleCtx->fieldConditions.futureSightTurns[battler] == FALSE
-                && battleCtx->battleMons[battler].curHP) {
+                && --battleCtx->fieldConditions.futureSightTurns[battler] == FALSE) {
+                int user = battleCtx->fieldConditions.futureSightAttacker[battler];
                 battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
+
+                if (battleCtx->battleMons[battler].curHP == 0
+                    || (BattleSystem_GetBattlerSide(battleSys, battler) == BattleSystem_GetBattlerSide(battleSys, user)
+                        && battleCtx->selectedPartySlot[battler] == battleCtx->fieldConditions.futureSightPartySlot[battler])) {
+                    continue;
+                }
 
                 battleCtx->msgBuffer.id = 475;
                 battleCtx->msgBuffer.tags = TAG_NICKNAME_MOVE;
@@ -1926,7 +1932,6 @@ static void BattleControllerPlayer_CheckSideConditions(BattleSystem *battleSys, 
                 battleCtx->msgBattlerTemp = battler;
                 battleCtx->msgAttacker = battleCtx->fieldConditions.futureSightAttacker[battler];
                 battleCtx->msgMoveTemp = battleCtx->fieldConditions.futureSightMove[battler];
-                battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler];
 
                 PrepareSubroutineSequence(battleCtx, subscript_future_sight_damage);
                 return;

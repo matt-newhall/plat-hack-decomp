@@ -1448,6 +1448,14 @@
     .long (\jump_if_none-.) / 4 - 1
     .endm
 
+    .macro PrepareFutureSight
+    .long BTLCMD_PREPAREFUTURESIGHT
+    .endm
+
+    .macro FinishFutureSight
+    .long BTLCMD_FINISHFUTURESIGHT
+    .endm
+
     .text
     .globl _start
 _start:

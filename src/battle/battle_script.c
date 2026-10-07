@@ -354,6 +354,8 @@ static BOOL BtlCmd_RecordPayDayUse(BattleSystem *battleSys, BattleContext *battl
 static BOOL BtlCmd_TrySetSport(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_SetHealingWishPending(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TryPendingHealingWish(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_PrepareFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_FinishFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -6344,25 +6346,7 @@ static BOOL BtlCmd_TryFutureSight(BattleSystem *battleSys, BattleContext *battle
         battleCtx->fieldConditions.futureSightTurns[battleCtx->defender] = 3;
         battleCtx->fieldConditions.futureSightMove[battleCtx->defender] = battleCtx->moveCur;
         battleCtx->fieldConditions.futureSightAttacker[battleCtx->defender] = battleCtx->attacker;
-
-        // Calculate the damage at the time of Future Sight setup.
-        // Do not check for type effectiveness nor crits.
-        int damage = BattleSystem_CalcMoveDamage(battleSys,
-                         battleCtx,
-                         battleCtx->moveCur,
-                         battleCtx->sideConditionsMask[side],
-                         battleCtx->fieldConditionsMask,
-                         0,
-                         0,
-                         battleCtx->attacker,
-                         battleCtx->defender,
-                         1)
-            * -1;
-        battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] = BattleSystem_CalcDamageVariance(battleSys, battleCtx, damage);
-
-        if (ATTACKER_TURN_FLAGS.helpingHand) {
-            battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] = battleCtx->fieldConditions.futureSightDamage[battleCtx->defender] * 15 / 10;
-        }
+        battleCtx->fieldConditions.futureSightPartySlot[battleCtx->defender] = battleCtx->selectedPartySlot[battleCtx->attacker];
     } else {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
@@ -14249,6 +14233,91 @@ static BOOL BtlCmd_SetHealingWishPending(BattleSystem *battleSys, BattleContext 
  * @param battleCtx
  * @return FALSE
  */
+/**
+ * @brief Set up a pending Future Sight or Doom Desire to hit its target slot.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_PrepareFutureSight(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int target = battleCtx->msgBattlerTemp;
+    int user = battleCtx->msgAttacker;
+    int partySlot = battleCtx->fieldConditions.futureSightPartySlot[target];
+
+    battleCtx->attacker = user;
+    battleCtx->defender = target;
+    battleCtx->moveCur = battleCtx->msgMoveTemp;
+    battleCtx->moveType = 0;
+    battleCtx->movePower = 0;
+    battleCtx->criticalBoosts = 0;
+    battleCtx->moveStatusFlags = 0;
+    battleCtx->battleStatusMask &= ~(SYSCTL_IGNORE_TYPE_CHECKS | SYSCTL_IGNORE_IMMUNITIES | SYSCTL_NONSTANDARD_ACC_CHECK);
+    battleCtx->futureSightStandIn = FALSE;
+
+    if (battleCtx->selectedPartySlot[user] != partySlot || battleCtx->battleMons[user].curHP == 0) {
+        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, user, partySlot);
+        BattleMon *standIn = &battleCtx->battleMons[user];
+
+        battleCtx->futureSightSavedMon = *standIn;
+        battleCtx->futureSightStandIn = TRUE;
+
+        standIn->species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+        standIn->formNum = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
+        standIn->level = Pokemon_GetValue(mon, MON_DATA_LEVEL, NULL);
+        standIn->attack = Pokemon_GetValue(mon, MON_DATA_ATK, NULL);
+        standIn->defense = Pokemon_GetValue(mon, MON_DATA_DEF, NULL);
+        standIn->speed = Pokemon_GetValue(mon, MON_DATA_SPEED, NULL);
+        standIn->spAttack = Pokemon_GetValue(mon, MON_DATA_SP_ATK, NULL);
+        standIn->spDefense = Pokemon_GetValue(mon, MON_DATA_SP_DEF, NULL);
+        standIn->type1 = Pokemon_GetValue(mon, MON_DATA_TYPE_1, NULL);
+        standIn->type2 = Pokemon_GetValue(mon, MON_DATA_TYPE_2, NULL);
+        standIn->ability = ABILITY_NONE;
+        standIn->heldItem = ITEM_NONE;
+        standIn->status = MON_CONDITION_NONE;
+        standIn->statusVolatile = 0;
+        standIn->moveEffectsMask = 0;
+
+        for (int i = 0; i < NUM_BOOSTABLE_STATS; i++) {
+            standIn->statBoosts[i] = DEFAULT_STAT_STAGE;
+        }
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Finish calculating a Future Sight or Doom Desire hit.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_FinishFutureSight(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    BOOL sturdy = Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STURDY) == TRUE
+        && DEFENDING_MON.curHP == DEFENDING_MON.maxHP;
+
+    if ((DEFENDER_TURN_FLAGS.enduring || sturdy) && DEFENDING_MON.curHP + battleCtx->damage <= 0) {
+        battleCtx->damage = (DEFENDING_MON.curHP - 1) * -1;
+        battleCtx->moveStatusFlags |= MOVE_STATUS_ENDURED;
+    }
+
+    battleCtx->hpCalcTemp = battleCtx->damage;
+
+    if (battleCtx->futureSightStandIn) {
+        battleCtx->battleMons[battleCtx->attacker] = battleCtx->futureSightSavedMon;
+        battleCtx->futureSightStandIn = FALSE;
+    }
+
+    return FALSE;
+}
+
 static BOOL BtlCmd_TryPendingHealingWish(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     BattleScript_Iter(battleCtx, 1);

@@ -24,6 +24,7 @@ typedef struct FieldConditions {
     u16 futureSightMove[MAX_BATTLERS];
     int futureSightAttacker[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
+    u8 futureSightPartySlot[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
     s32 wishHealing[MAX_BATTLERS];
     u8 terrainTurns;
@@ -207,6 +208,8 @@ struct BattleContext {
     u8 payDayUses[MAX_BATTLERS][MAX_PARTY_SIZE];
     u8 healingWishPending;
     u8 lunarDancePending;
+    BattleMon futureSightSavedMon;
+    BOOL futureSightStandIn;
     int totalTurns;
     int totalFainted[MAX_BATTLERS];
     int totalDamage[MAX_BATTLERS];
