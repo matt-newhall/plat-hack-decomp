@@ -205,6 +205,8 @@ struct BattleContext {
 
     u32 battlerStatusFlags[MAX_BATTLERS];
     u8 payDayUses[MAX_BATTLERS][MAX_PARTY_SIZE];
+    u8 healingWishPending;
+    u8 lunarDancePending;
     int totalTurns;
     int totalFainted[MAX_BATTLERS];
     int totalDamage[MAX_BATTLERS];

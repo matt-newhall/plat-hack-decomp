@@ -269,6 +269,8 @@ ScriptCommand(BTLCMD_CHECKTERRAINPROTECTION,              BtlCmd_CheckTerrainPro
 ScriptCommand(BTLCMD_TRYSETTERRAIN,                       BtlCmd_TrySetTerrain)
 ScriptCommand(BTLCMD_RECORDPAYDAYUSE,                     BtlCmd_RecordPayDayUse)
 ScriptCommand(BTLCMD_TRYSETSPORT,                          BtlCmd_TrySetSport)
+ScriptCommand(BTLCMD_SETHEALINGWISHPENDING,               BtlCmd_SetHealingWishPending)
+ScriptCommand(BTLCMD_TRYPENDINGHEALINGWISH,               BtlCmd_TryPendingHealingWish)
 
 // clang-format on
 

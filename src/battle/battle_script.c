@@ -352,6 +352,8 @@ static BOOL BtlCmd_CheckTerrainProtection(BattleSystem *battleSys, BattleContext
 static BOOL BtlCmd_TrySetTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_RecordPayDayUse(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_TrySetSport(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_SetHealingWishPending(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryPendingHealingWish(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -14224,6 +14226,75 @@ static BOOL BtlCmd_TrySetSport(BattleSystem *battleSys, BattleContext *battleCtx
         BattleScript_Iter(battleCtx, jumpOnFail);
     } else {
         *turns = 5;
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Leave a Healing Wish or Lunar Dance pending on the attacker's slot.
+ *
+ * Inputs:
+ * 1. TRUE for Lunar Dance, FALSE for Healing Wish.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_SetHealingWishPending(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int isLunarDance = BattleScript_Read(battleCtx);
+
+    if (isLunarDance) {
+        battleCtx->lunarDancePending |= FlagIndex(battleCtx->attacker);
+    } else {
+        battleCtx->healingWishPending |= FlagIndex(battleCtx->attacker);
+    }
+
+    return FALSE;
+}
+
+/**
+ * @brief Check whether the Pokemon just switched in can benefit from a
+ * Lunar Dance or Healing Wish pending on its slot.
+ *
+ * Inputs:
+ * 1. The jump-distance if neither effect applies.
+ *
+ * Side effects:
+ * - battleCtx->msgBattlerTemp is set to the switched-in battler.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryPendingHealingWish(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpIfNone = BattleScript_Read(battleCtx);
+
+    int battler = battleCtx->switchedMon;
+    BattleMon *mon = &battleCtx->battleMons[battler];
+    BOOL needsHealing = mon->curHP < mon->maxHP || mon->status != MON_CONDITION_NONE;
+    BOOL needsPP = FALSE;
+
+    for (int i = 0; i < LEARNED_MOVES_MAX; i++) {
+        if (mon->moves[i] && mon->ppCur[i] < MoveTable_CalcMaxPP(mon->moves[i], mon->ppUps[i])) {
+            needsPP = TRUE;
+        }
+    }
+
+    battleCtx->msgBattlerTemp = battler;
+
+    if ((battleCtx->lunarDancePending & FlagIndex(battler)) && (needsHealing || needsPP)) {
+        battleCtx->lunarDancePending &= ~FlagIndex(battler);
+        battleCtx->scriptTemp = TRUE;
+    } else if ((battleCtx->healingWishPending & FlagIndex(battler)) && needsHealing) {
+        battleCtx->healingWishPending &= ~FlagIndex(battler);
+        battleCtx->scriptTemp = FALSE;
+    } else {
+        BattleScript_Iter(battleCtx, jumpIfNone);
     }
 
     return FALSE;

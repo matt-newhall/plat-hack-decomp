@@ -1438,6 +1438,16 @@
     .long (\jump_if_fail-.) / 4 - 1
     .endm
 
+    .macro SetHealingWishPending isLunarDance:req
+    .long BTLCMD_SETHEALINGWISHPENDING
+    .long \isLunarDance
+    .endm
+
+    .macro TryPendingHealingWish jump_if_none:req
+    .long BTLCMD_TRYPENDINGHEALINGWISH
+    .long (\jump_if_none-.) / 4 - 1
+    .endm
+
     .text
     .globl _start
 _start:

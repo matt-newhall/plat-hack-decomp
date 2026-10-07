@@ -2,6 +2,44 @@
 
 
 _000:
+    TryPendingHealingWish _hazards
+    CompareVarToValue OPCODE_EQU, BTLVAR_SCRIPT_TEMP, TRUE, _lunar_dance
+    // The healing wish came true!
+    PrintMessage BattleStrings_Text_TheHealingWishCameTrue, TAG_NONE
+    Wait 
+    WaitButtonABTime 30
+    GoTo _restore
+
+_lunar_dance:
+    // It became cloaked in mystical moonlight!
+    PrintMessage BattleStrings_Text_ItBecameCloakedInAMysticalMoonlight, TAG_NONE
+    Wait 
+    WaitButtonABTime 30
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_TEMP, BATTLEMON_MAX_PP_1, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_SET, BTLSCR_MSG_TEMP, BATTLEMON_CUR_PP_1, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_TEMP, BATTLEMON_MAX_PP_2, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_SET, BTLSCR_MSG_TEMP, BATTLEMON_CUR_PP_2, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_TEMP, BATTLEMON_MAX_PP_3, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_SET, BTLSCR_MSG_TEMP, BATTLEMON_CUR_PP_3, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_TEMP, BATTLEMON_MAX_PP_4, BTLVAR_CALC_TEMP
+    UpdateMonDataFromVar OPCODE_SET, BTLSCR_MSG_TEMP, BATTLEMON_CUR_PP_4, BTLVAR_CALC_TEMP
+
+_restore:
+    UpdateMonData OPCODE_SET, BTLSCR_MSG_TEMP, BATTLEMON_STATUS, MON_CONDITION_NONE
+    SetHealthbarStatus BTLSCR_MSG_TEMP, BATTLE_ANIMATION_NONE
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_MSG_TEMP, BATTLEMON_MAX_HP, BTLVAR_HP_CALC_TEMP
+    CompareMonDataToVar OPCODE_EQU, BTLSCR_MSG_TEMP, BATTLEMON_CUR_HP, BTLVAR_HP_CALC_TEMP, _000
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
+    PlayBattleAnimation BTLSCR_MSG_TEMP, BATTLE_ANIMATION_RESTORE_HP
+    Wait 
+    Call BATTLE_SUBSCRIPT_UPDATE_HP
+    // {0} regained health!
+    PrintMessage BattleStrings_Text_PokemonRegainedHealth_Ally, TAG_NICKNAME, BTLSCR_MSG_TEMP
+    Wait 
+    WaitButtonABTime 30
+    GoTo _000
+
+_hazards:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_GRAVITY, _037
     CheckItemHoldEffect CHECK_HAVE, BTLSCR_SWITCHED_MON, HOLD_EFFECT_SPEED_DOWN_GROUNDED, _037
     CompareVarToValue OPCODE_EQU, BTLVAR_MSG_TEMP, MOVE_ROAR, _010
