@@ -16,6 +16,7 @@
 #include "generated/abilities.h"
 #include "generated/game_records.h"
 #include "generated/genders.h"
+#include "generated/map_headers.h"
 
 #include "struct_decls/battle_system.h"
 #include "struct_defs/battle_system.h"
@@ -8620,8 +8621,55 @@ static BOOL BtlCmd_GetItemEffectParam(BattleSystem *battleSys, BattleContext *ba
 #include "data/terrain/to_type.h"
 
 /**
- * @brief Try to change the battler's type to one according to the battle
- * terrain.
+ * @brief Get the type Camouflage turns the user into.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return The type for Camouflage to apply.
+ */
+static int BattleScript_CamouflageType(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_ELECTRIC_TERRAIN) {
+        return TYPE_ELECTRIC;
+    }
+
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRASSY_TERRAIN) {
+        return TYPE_GRASS;
+    }
+
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_MISTY_TERRAIN) {
+        return TYPE_FAIRY;
+    }
+
+    if (battleCtx->fieldConditionsMask & FIELD_CONDITION_PSYCHIC_TERRAIN) {
+        return TYPE_PSYCHIC;
+    }
+
+    switch (BattleSystem_GetMapHeader(battleSys)) {
+    case MAP_HEADER_STARK_MOUNTAIN_OUTSIDE:
+    case MAP_HEADER_STARK_MOUNTAIN_ROOM_1:
+    case MAP_HEADER_STARK_MOUNTAIN_ROOM_2:
+    case MAP_HEADER_STARK_MOUNTAIN_ROOM_3:
+        return TYPE_FIRE;
+
+    case MAP_HEADER_SPEAR_PILLAR:
+    case MAP_HEADER_SPEAR_PILLAR_DISTORTED:
+    case MAP_HEADER_SPEAR_PILLAR_DIALGA:
+    case MAP_HEADER_SPEAR_PILLAR_PALKIA:
+        return TYPE_FLYING;
+    }
+
+    int terrain = BattleSystem_GetTerrain(battleSys);
+    if (terrain > TERRAIN_SPECIAL) {
+        terrain = TERRAIN_SPECIAL;
+    }
+
+    return sTerrainCamouflageType[terrain];
+}
+
+/**
+ * @brief Try to change the battler's type according to the field terrain,
+ * battle location or battle background terrain.
  *
  * Inputs:
  * 1. The distance to jump ahead if the user is already of the terrain's
@@ -8641,12 +8689,7 @@ static BOOL BtlCmd_TryCamouflage(BattleSystem *battleSys, BattleContext *battleC
         return FALSE;
     }
 
-    int terrain = BattleSystem_GetTerrain(battleSys);
-    if (terrain > TERRAIN_SPECIAL) {
-        terrain = TERRAIN_SPECIAL;
-    }
-
-    int type = sTerrainCamouflageType[terrain];
+    int type = BattleScript_CamouflageType(battleSys, battleCtx);
     if (MON_IS_NOT_TYPE(battleCtx->attacker, type)) {
         ATTACKING_MON.type1 = type;
         ATTACKING_MON.type2 = type;
