@@ -357,5 +357,6 @@ subscript_files = files(
     'subscript_overworld_thunderstorm.s',
     'subscript_terrain_surge.s',
     'subscript_held_item_terrain_seed.s',
-    'subscript_sport_end.s'
+    'subscript_sport_end.s',
+    'subscript_healer.s'
 )

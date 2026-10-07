@@ -1390,6 +1390,13 @@
         "Raises Speed when hit\n",
         "by Bug, Dark or Ghost."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00199",
+      "en_US": [
+        "May heal an ally’s\n",
+        "status conditions."
+      ]
     }
   ]
 }

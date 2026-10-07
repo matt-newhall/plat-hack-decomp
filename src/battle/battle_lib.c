@@ -4523,6 +4523,27 @@ static int PickMoodyStat(BattleSystem *battleSys, BattleContext *battleCtx, int 
     return eligible[BattleSystem_RandNext(battleSys) % count];
 }
 
+/**
+ * @brief Get the message condition for a battler's non-volatile status.
+ *
+ * @param status    The battler's status mask
+ * @return The MSGCOND value naming the status in battle messages
+ */
+static int StatusMsgCondition(u32 status)
+{
+    if (status & MON_CONDITION_SLEEP) {
+        return MSGCOND_SLEEP;
+    } else if (status & MON_CONDITION_ANY_POISON) {
+        return MSGCOND_POISON;
+    } else if (status & MON_CONDITION_BURN) {
+        return MSGCOND_BURN;
+    } else if (status & MON_CONDITION_PARALYSIS) {
+        return MSGCOND_PARALYSIS;
+    }
+
+    return MSGCOND_FREEZE;
+}
+
 BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     BOOL result = FALSE;
@@ -4570,21 +4591,27 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
         if ((battleCtx->battleMons[battler].status & MON_CONDITION_ANY)
             && battleCtx->battleMons[battler].curHP
             && BattleSystem_RandNext(battleSys) % 3 == 0) {
-            if (battleCtx->battleMons[battler].status & MON_CONDITION_SLEEP) {
-                battleCtx->msgTemp = MSGCOND_SLEEP;
-            } else if (battleCtx->battleMons[battler].status & MON_CONDITION_ANY_POISON) {
-                battleCtx->msgTemp = MSGCOND_POISON;
-            } else if (battleCtx->battleMons[battler].status & MON_CONDITION_BURN) {
-                battleCtx->msgTemp = MSGCOND_BURN;
-            } else if (battleCtx->battleMons[battler].status & MON_CONDITION_PARALYSIS) {
-                battleCtx->msgTemp = MSGCOND_PARALYSIS;
-            } else {
-                battleCtx->msgTemp = MSGCOND_FREEZE;
-            }
-
+            battleCtx->msgTemp = StatusMsgCondition(battleCtx->battleMons[battler].status);
             battleCtx->msgBattlerTemp = battler;
             subscript = subscript_ability_restore_status;
             result = TRUE;
+        }
+        break;
+
+    case ABILITY_HEALER:
+        if (BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES) {
+            int partner = BattleSystem_GetPartner(battleSys, battler);
+
+            if (battleCtx->battleMons[battler].curHP
+                && battleCtx->battleMons[partner].curHP
+                && (battleCtx->battleMons[partner].status & MON_CONDITION_ANY)
+                && BattleSystem_RandNext(battleSys) % 10 < 3) {
+                battleCtx->msgTemp = StatusMsgCondition(battleCtx->battleMons[partner].status);
+                battleCtx->sideEffectMon = battler;
+                battleCtx->msgBattlerTemp = partner;
+                subscript = subscript_healer;
+                result = TRUE;
+            }
         }
         break;
     }
