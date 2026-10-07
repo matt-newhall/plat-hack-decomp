@@ -4182,6 +4182,14 @@ static const u16 sMovesAffectedByHealBlock[] = {
     MOVE_HEALING_WISH,
     MOVE_WISH,
     MOVE_LIFE_DEW,
+    MOVE_ABSORB,
+    MOVE_MEGA_DRAIN,
+    MOVE_GIGA_DRAIN,
+    MOVE_DRAIN_PUNCH,
+    MOVE_LEECH_LIFE,
+    MOVE_DRAINING_KISS,
+    MOVE_DREAM_EATER,
+    MOVE_PARABOLIC_CHARGE,
 };
 
 BOOL Move_HealBlocked(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move)
@@ -6262,6 +6270,28 @@ BOOL BattleSystem_SynchronizeStatus(BattleSystem *battleSys, BattleContext *batt
     return FALSE;
 }
 
+/**
+ * @brief Check whether a hold effect restores the holder's HP.
+ *
+ * @param itemEffect
+ * @return TRUE if the hold effect restores HP.
+ */
+static BOOL ItemEffect_RestoresHP(int itemEffect)
+{
+    switch (itemEffect) {
+    case HOLD_EFFECT_HP_RESTORE:
+    case HOLD_EFFECT_HP_PCT_RESTORE:
+    case HOLD_EFFECT_HP_RESTORE_SPICY:
+    case HOLD_EFFECT_HP_RESTORE_DRY:
+    case HOLD_EFFECT_HP_RESTORE_SWEET:
+    case HOLD_EFFECT_HP_RESTORE_BITTER:
+    case HOLD_EFFECT_HP_RESTORE_SOUR:
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
 {
     BOOL result = FALSE;
@@ -6278,6 +6308,10 @@ BOOL BattleSystem_TriggerHeldItem(BattleSystem *battleSys, BattleContext *battle
         || itemEffect == HOLD_EFFECT_SWAGGER_SELF
         || itemEffect == HOLD_EFFECT_LOWER_SPEED_IN_TRICK_ROOM
         || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
+        return FALSE;
+    }
+
+    if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns && ItemEffect_RestoresHP(itemEffect)) {
         return FALSE;
     }
 
@@ -6660,10 +6694,12 @@ BOOL BattleSystem_TriggerLeftovers(BattleSystem *battleSys, BattleContext *battl
     int itemEffect = Battler_HeldItemEffect(battleCtx, battler);
     int itemPower = Battler_HeldItemPower(battleCtx, battler, ITEM_POWER_CHECK_ALL);
 
-    if (battleCtx->battleMons[battler].curHP && !(battleCtx->battleMons[battler].moveEffectsData.healBlockTurns)) {
+    BOOL healBlocked = battleCtx->battleMons[battler].moveEffectsData.healBlockTurns != 0;
+
+    if (battleCtx->battleMons[battler].curHP) {
         switch (itemEffect) {
         case HOLD_EFFECT_HP_RESTORE_GRADUAL:
-            if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP)) {
+            if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP) && healBlocked == FALSE) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
                 subscript = subscript_restore_a_little_hp;
                 result = TRUE;
@@ -6672,7 +6708,7 @@ BOOL BattleSystem_TriggerLeftovers(BattleSystem *battleSys, BattleContext *battl
 
         case HOLD_EFFECT_HP_RESTORE_PSN_TYPE:
             if (MON_HAS_TYPE(battler, TYPE_POISON)) {
-                if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP)) {
+                if (battleCtx->battleMons[battler].curHP < (battleCtx->battleMons[battler].maxHP) && healBlocked == FALSE) {
                     battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
                     subscript = subscript_restore_a_little_hp;
                     result = TRUE;
@@ -6712,6 +6748,10 @@ BOOL BattleSystem_TriggerHeldItemOnStatus(BattleSystem *battleSys, BattleContext
         || itemEffect == HOLD_EFFECT_HEAL_INFATUATION
         || itemEffect == HOLD_EFFECT_SWAGGER_SELF
         || Battler_HeldItem(battleCtx, battler) == ITEM_BERRY_JUICE)) {
+        return FALSE;
+    }
+
+    if (battleCtx->battleMons[battler].moveEffectsData.healBlockTurns && ItemEffect_RestoresHP(itemEffect)) {
         return FALSE;
     }
 
@@ -7851,6 +7891,11 @@ BOOL BattleSystem_PluckBerry(BattleSystem *battleSys, BattleContext *battleCtx, 
         result = FALSE;
     }
 
+    if (ATTACKING_MON.moveEffectsData.healBlockTurns
+        && (nextSeq == subscript_held_item_hp_restore || nextSeq == subscript_held_item_dislike_flavor)) {
+        nextSeq = 0;
+    }
+
     if (result == TRUE) {
             battleCtx->scriptTemp = nextSeq;
 
@@ -8157,6 +8202,11 @@ BOOL BattleSystem_FlingItem(BattleSystem *battleSys, BattleContext *battleCtx, i
     }
 
         battleCtx->msgItemTemp = battleCtx->battleMons[battler].heldItem;
+
+        if (DEFENDING_MON.moveEffectsData.healBlockTurns
+            && (battleCtx->flingScript == subscript_held_item_hp_restore || battleCtx->flingScript == subscript_held_item_dislike_flavor)) {
+            battleCtx->flingScript = 0;
+        }
 
         if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_NONE && battleCtx->flingScript) {
             ATTACKER_SELF_TURN_FLAGS.statusFlags |= SELF_TURN_FLAG_PLUCK_BERRY;

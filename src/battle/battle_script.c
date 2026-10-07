@@ -5870,7 +5870,8 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
             && battleCtx->battleMons[battler].curHP
             && (battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_NO_WEATHER_DAMAGE) == FALSE) {
             if (Battler_Ability(battleCtx, battler) == ABILITY_ICE_BODY) {
-                if (battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP) {
+                if (battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+                    && battleCtx->battleMons[battler].moveEffectsData.healBlockTurns == 0) {
                     battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
                 }
             } else if (type1 != TYPE_ICE
@@ -5886,12 +5887,14 @@ static BOOL BtlCmd_EndOfTurnWeatherEffect(BattleSystem *battleSys, BattleContext
         if (WEATHER_IS_RAIN) {
             if (battleCtx->battleMons[battler].curHP
                 && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+                && battleCtx->battleMons[battler].moveEffectsData.healBlockTurns == 0
                 && Battler_Ability(battleCtx, battler) == ABILITY_RAIN_DISH) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
             }
 
             if (battleCtx->battleMons[battler].curHP
                 && battleCtx->battleMons[battler].curHP < battleCtx->battleMons[battler].maxHP
+                && battleCtx->battleMons[battler].moveEffectsData.healBlockTurns == 0
                 && Battler_Ability(battleCtx, battler) == ABILITY_DRY_SKIN) {
                 battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 8);
             }
