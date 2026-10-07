@@ -356,6 +356,7 @@ static BOOL BtlCmd_SetHealingWishPending(BattleSystem *battleSys, BattleContext 
 static BOOL BtlCmd_TryPendingHealingWish(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_PrepareFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_FinishFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_ShowAbilityPopupPair(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -13558,8 +13559,10 @@ static BOOL BtlCmd_CheckIsPranksterDarkImmune(BattleSystem *battleSys, BattleCon
     return FALSE;
 }
 
-static BOOL s_abilityPopupAnimDone = TRUE;
-static BOOL s_abilityPopupDismissAnimDone = TRUE;
+#define ABILITY_POPUP_SLOTS 2
+
+static BOOL s_abilityPopupAnimDone[ABILITY_POPUP_SLOTS] = { TRUE, TRUE };
+static BOOL s_abilityPopupDismissAnimDone[ABILITY_POPUP_SLOTS] = { TRUE, TRUE };
 static u8 s_popupAutoPhase = 0;
 static u16 s_popupAutoTimer = 0;
 
@@ -13585,6 +13588,9 @@ typedef struct AbilityPopupAnim {
 #define POPUP_Y_ENEMY_SINGLE    1
 #define POPUP_Y_PLAYER_DOUBLE   8
 #define POPUP_Y_ENEMY_DOUBLE    1
+
+#define ABILITY_POPUP_WINDOW(slot)    (1 + (slot))
+#define ABILITY_POPUP_BASE_TILE(slot) (139 + (slot) * 13 * 5)
 
 static void SysTask_AnimateAbilityPopup(SysTask *task, void *data)
 {
@@ -13668,10 +13674,10 @@ static void ShowAbilityPopupWindow(Window *popup, BattleContext *battleCtx, int 
     Window_LoadTiles(popup);
 }
 
-static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx, int battler)
+static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int slot)
 {
     BgConfig *bgConfig = BattleSystem_GetBgConfig(battleSys);
-    Window *popup = BattleSystem_GetWindow(battleSys, 1);
+    Window *popup = BattleSystem_GetWindow(battleSys, ABILITY_POPUP_WINDOW(slot));
 
     PaletteData *pd = BattleSystem_GetPaletteData(battleSys);
     BOOL isEnemy = BattleSystem_GetBattlerSide(battleSys, battler) == BATTLE_SIDE_ENEMY;
@@ -13687,7 +13693,7 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
         Window_Remove(popup);
     }
 
-    Window_Add(bgConfig, popup, 1, xPos, yPos, 13, 5, 12, 139);
+    Window_Add(bgConfig, popup, 1, xPos, yPos, 13, 5, 12, ABILITY_POPUP_BASE_TILE(slot));
     ShowAbilityPopupWindow(popup, battleCtx, battler, isEnemy);
     NNSG2dPaletteData *paletteData;
     void *nclrBuffer = Graphics_GetPlttData(
@@ -13705,23 +13711,23 @@ static void DoShowAbilityPopup(BattleSystem *battleSys, BattleContext *battleCtx
     AbilityPopupAnim *anim = Heap_Alloc(HEAP_ID_BATTLE, sizeof(AbilityPopupAnim));
     anim->bgConfig     = bgConfig;
     anim->popup        = popup;
-    anim->animDoneFlag = &s_abilityPopupAnimDone;
+    anim->animDoneFlag = &s_abilityPopupAnimDone[slot];
     anim->currentX     = isEnemy ? 32 : -13;
     anim->targetX      = (s16)xPos;
     anim->yPos         = yPos;
     anim->height       = 5;
-    anim->baseTile     = 139;
+    anim->baseTile     = ABILITY_POPUP_BASE_TILE(slot);
     anim->dismiss      = FALSE;
 
-    s_abilityPopupAnimDone = FALSE;
+    s_abilityPopupAnimDone[slot] = FALSE;
     SysTask_Start(SysTask_AnimateAbilityPopup, anim, 0);
 }
 
-static void DoHideAbilityPopup(BattleSystem *battleSys)
+static void DoHideAbilityPopup(BattleSystem *battleSys, int slot)
 {
-    Window *popup = BattleSystem_GetWindow(battleSys, 1);
+    Window *popup = BattleSystem_GetWindow(battleSys, ABILITY_POPUP_WINDOW(slot));
     if (!Window_IsInUse(popup)) {
-        s_abilityPopupDismissAnimDone = TRUE;
+        s_abilityPopupDismissAnimDone[slot] = TRUE;
         return;
     }
     BgConfig *bgConfig = BattleSystem_GetBgConfig(battleSys);
@@ -13730,15 +13736,15 @@ static void DoHideAbilityPopup(BattleSystem *battleSys)
     AbilityPopupAnim *anim = Heap_Alloc(HEAP_ID_BATTLE, sizeof(AbilityPopupAnim));
     anim->bgConfig     = bgConfig;
     anim->popup        = popup;
-    anim->animDoneFlag = &s_abilityPopupDismissAnimDone;
+    anim->animDoneFlag = &s_abilityPopupDismissAnimDone[slot];
     anim->currentX     = (s16)popup->tilemapLeft;
     anim->targetX      = isEnemy ? 32 : -13;
     anim->yPos         = popup->tilemapTop;
     anim->height       = popup->height;
-    anim->baseTile     = 139;
+    anim->baseTile     = ABILITY_POPUP_BASE_TILE(slot);
     anim->dismiss      = TRUE;
 
-    s_abilityPopupDismissAnimDone = FALSE;
+    s_abilityPopupDismissAnimDone[slot] = FALSE;
     SysTask_Start(SysTask_AnimateAbilityPopup, anim, 0);
 }
 
@@ -13746,7 +13752,7 @@ static BOOL PopupAutoTick(BattleSystem *battleSys, BattleContext *battleCtx, int
 {
     switch (s_popupAutoPhase) {
     case 1:
-        if (!s_abilityPopupAnimDone) {
+        if (!s_abilityPopupAnimDone[0] || !s_abilityPopupAnimDone[1]) {
             BattleScript_Iter(battleCtx, -rewindWords);
             battleCtx->battleProgressFlag = TRUE;
             return FALSE;
@@ -13762,13 +13768,14 @@ static BOOL PopupAutoTick(BattleSystem *battleSys, BattleContext *battleCtx, int
             battleCtx->battleProgressFlag = TRUE;
             return FALSE;
         }
-        DoHideAbilityPopup(battleSys);
+        DoHideAbilityPopup(battleSys, 0);
+        DoHideAbilityPopup(battleSys, 1);
         s_popupAutoPhase = 3;
         BattleScript_Iter(battleCtx, -rewindWords);
         battleCtx->battleProgressFlag = TRUE;
         return FALSE;
     case 3:
-        if (!s_abilityPopupDismissAnimDone) {
+        if (!s_abilityPopupDismissAnimDone[0] || !s_abilityPopupDismissAnimDone[1]) {
             BattleScript_Iter(battleCtx, -rewindWords);
             battleCtx->battleProgressFlag = TRUE;
             return FALSE;
@@ -13785,7 +13792,7 @@ static BOOL BtlCmd_ShowAbilityPopupAuto(BattleSystem *battleSys, BattleContext *
     BattleScript_Iter(battleCtx, 1);
     int inBattler = BattleScript_Read(battleCtx);
     if (PopupAutoTick(battleSys, battleCtx, 2)) {
-        DoShowAbilityPopup(battleSys, battleCtx, BattleScript_Battler(battleSys, battleCtx, inBattler));
+        DoShowAbilityPopup(battleSys, battleCtx, BattleScript_Battler(battleSys, battleCtx, inBattler), 0);
         s_popupAutoPhase = 1;
         BattleScript_Iter(battleCtx, -2);
         battleCtx->battleProgressFlag = TRUE;
@@ -13801,7 +13808,7 @@ static BOOL BtlCmd_ShowAbilityPopupAutoSaved(BattleSystem *battleSys, BattleCont
     if (PopupAutoTick(battleSys, battleCtx, 2)) {
         int savedAbility = battleCtx->battleMons[battler].ability;
         battleCtx->battleMons[battler].ability = battleCtx->scriptTemp;
-        DoShowAbilityPopup(battleSys, battleCtx, battler);
+        DoShowAbilityPopup(battleSys, battleCtx, battler, 0);
         battleCtx->battleMons[battler].ability = savedAbility;
         s_popupAutoPhase = 1;
         BattleScript_Iter(battleCtx, -2);
@@ -13819,9 +13826,32 @@ static BOOL BtlCmd_ShowAbilityPopupAutoForEffectHolder(BattleSystem *battleSys, 
         return FALSE;
     }
     if (PopupAutoTick(battleSys, battleCtx, 1)) {
-        DoShowAbilityPopup(battleSys, battleCtx, battleCtx->msgBattlerTemp);
+        DoShowAbilityPopup(battleSys, battleCtx, battleCtx->msgBattlerTemp, 0);
         s_popupAutoPhase = 1;
         BattleScript_Iter(battleCtx, -1);
+        battleCtx->battleProgressFlag = TRUE;
+    }
+    return FALSE;
+}
+
+/**
+ * @brief Show the ability popups of two battlers at the same time, then hide
+ * them together.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_ShowAbilityPopupPair(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int inBattler1 = BattleScript_Read(battleCtx);
+    int inBattler2 = BattleScript_Read(battleCtx);
+    if (PopupAutoTick(battleSys, battleCtx, 3)) {
+        DoShowAbilityPopup(battleSys, battleCtx, BattleScript_Battler(battleSys, battleCtx, inBattler1), 0);
+        DoShowAbilityPopup(battleSys, battleCtx, BattleScript_Battler(battleSys, battleCtx, inBattler2), 1);
+        s_popupAutoPhase = 1;
+        BattleScript_Iter(battleCtx, -3);
         battleCtx->battleProgressFlag = TRUE;
     }
     return FALSE;

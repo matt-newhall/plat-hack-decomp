@@ -14,6 +14,10 @@ _000:
 
 _052:
     Call BATTLE_SUBSCRIPT_ATTACK_MESSAGE_AND_ANIMATION
+    IfSameSide BTLSCR_ATTACKER, BTLSCR_DEFENDER, _swap
+    ShowAbilityPopupPair BTLSCR_ATTACKER, BTLSCR_DEFENDER
+
+_swap:
     UpdateVarFromVar OPCODE_SET, BTLVAR_SCRIPT_TEMP, BTLVAR_TOTAL_TURNS
     UpdateVar OPCODE_BITWISE_AND, BTLVAR_SCRIPT_TEMP, 1
     UpdateMonDataFromVar OPCODE_SET, BTLSCR_ATTACKER, BATTLEMON_TRUANT, BTLVAR_SCRIPT_TEMP
@@ -41,6 +45,10 @@ _148:
     SwapAbilities
     // {0} swapped abilities with its target!
     PrintMessage BattleStrings_Text_PokemonSwappedAbilitiesWithItsTarget_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
+    IfSameSide BTLSCR_ATTACKER, BTLSCR_DEFENDER, _wait
+    ShowAbilityPopupPair BTLSCR_ATTACKER, BTLSCR_DEFENDER
+
+_wait:
     Wait 
     WaitButtonABTime 30
     End 

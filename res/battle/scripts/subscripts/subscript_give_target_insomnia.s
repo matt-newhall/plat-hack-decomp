@@ -10,6 +10,7 @@ _000:
     Call BATTLE_SUBSCRIPT_ATTACK_MESSAGE_AND_ANIMATION
     ShowAbilityPopupAuto BTLSCR_DEFENDER
     UpdateMonData OPCODE_SET, BTLSCR_DEFENDER, BATTLEMON_ABILITY, ABILITY_INSOMNIA
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
     // {0} acquired {1}!
     PrintMessage BattleStrings_Text_PokemonAcquiredAbility_Ally, TAG_NICKNAME_ABILITY, BTLSCR_DEFENDER, BTLSCR_DEFENDER
     Wait 

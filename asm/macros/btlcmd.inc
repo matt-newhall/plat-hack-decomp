@@ -1372,6 +1372,12 @@
     .long BTLCMD_SHOWABILITYPOPUPAUTOFOREFFECTHOLDER
     .endm
 
+    .macro ShowAbilityPopupPair battler_1, battler_2
+    .long BTLCMD_SHOWABILITYPOPUPPAIR
+    .long \battler_1
+    .long \battler_2
+    .endm
+
     .macro SetupEjectPack
     .long BTLCMD_SETUPEJECTPACK
     .endm
