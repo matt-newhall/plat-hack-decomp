@@ -796,6 +796,16 @@ u8 Battler_Ability(BattleContext *battleCtx, int battler);
 BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defender, int ability);
 
 /**
+ * @brief Get a battler's weight for a weight-based move.
+ *
+ * @param battleCtx
+ * @param attacker  The battler using the weight-based move
+ * @param battler   The battler whose weight is needed
+ * @return The battler's weight, in tenths of a kilogram
+ */
+int Battler_Weight(BattleContext *battleCtx, int attacker, int battler);
+
+/**
  * @brief Check if a battler still has room for a stat stage to be raised.
  *
  * Contrary inverts the change, so a Contrary holder has room to "raise" a stat

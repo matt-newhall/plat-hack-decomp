@@ -4041,11 +4041,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     case MOVE_GRASS_KNOT: {
         int i;
 
-        int monWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
-
-        if (Battler_IgnorableAbility(battleCtx, attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
-            monWeight /= 2;
-        }
+        int monWeight = Battler_Weight(battleCtx, attacker, AI_CONTEXT.defender);
 
         for (i = 0; sWeightToPower[i][0] != 0xFFFF; i++) {
             if (sWeightToPower[i][0] >= monWeight) {
@@ -4222,16 +4218,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     }
 
     case MOVE_HEAVY_SLAM: {
-        int atkWeight = battleCtx->battleMons[attacker].weight;
-        int defWeight = battleCtx->battleMons[AI_CONTEXT.defender].weight;
-
-        if (Battler_Ability(battleCtx, attacker) == ABILITY_LIGHT_METAL) {
-            atkWeight /= 2;
-        }
-
-        if (Battler_IgnorableAbility(battleCtx, attacker, AI_CONTEXT.defender, ABILITY_LIGHT_METAL)) {
-            defWeight /= 2;
-        }
+        int atkWeight = Battler_Weight(battleCtx, attacker, attacker);
+        int defWeight = Battler_Weight(battleCtx, attacker, AI_CONTEXT.defender);
 
         if (atkWeight >= defWeight * 5) {
             power = 120;

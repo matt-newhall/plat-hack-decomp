@@ -7114,11 +7114,7 @@ static BOOL BtlCmd_CalcWeightBasedPower(BattleSystem *battleSys, BattleContext *
     BattleScript_Iter(battleCtx, 1);
 
     int i = 0;
-    int monWeight = DEFENDING_MON.weight;
-
-    if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_LIGHT_METAL)) {
-        monWeight /= 2;
-    }
+    int monWeight = Battler_Weight(battleCtx, battleCtx->attacker, battleCtx->defender);
 
     for (; sWeightToPower[i][0] != 0xFFFF; i++) {
         if (sWeightToPower[i][0] >= monWeight) {
@@ -7147,16 +7143,8 @@ static BOOL BtlCmd_CalcHeavySlamPower(BattleSystem *battleSys, BattleContext *ba
 {
     BattleScript_Iter(battleCtx, 1);
 
-    int atkWeight = ATTACKING_MON.weight;
-    int defWeight = DEFENDING_MON.weight;
-
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_LIGHT_METAL) {
-        atkWeight /= 2;
-    }
-
-    if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_LIGHT_METAL)) {
-        defWeight /= 2;
-    }
+    int atkWeight = Battler_Weight(battleCtx, battleCtx->attacker, battleCtx->attacker);
+    int defWeight = Battler_Weight(battleCtx, battleCtx->attacker, battleCtx->defender);
 
     if (atkWeight >= defWeight * 5) {
         battleCtx->movePower = 120;

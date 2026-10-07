@@ -3852,6 +3852,22 @@ BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defend
     return result;
 }
 
+int Battler_Weight(BattleContext *battleCtx, int attacker, int battler)
+{
+    int weight = battleCtx->battleMons[battler].weight;
+    int ability = Battler_Ability(battleCtx, battler);
+
+    if (ability != ABILITY_HEAVY_METAL && ability != ABILITY_LIGHT_METAL) {
+        return weight;
+    }
+
+    if (battler != attacker && !Battler_IgnorableAbility(battleCtx, attacker, battler, ability)) {
+        return weight;
+    }
+
+    return ability == ABILITY_HEAVY_METAL ? weight * 2 : weight / 2;
+}
+
 BOOL Battler_CanRaiseStatStage(BattleContext *battleCtx, int battler, int stat)
 {
     if (Battler_Ability(battleCtx, battler) == ABILITY_CONTRARY) {
@@ -11239,20 +11255,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                             inPower = MOVE_DATA(moveDefender).power * 2;
                         }
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT) {
-                        int defWeight = battleCtx->battleMons[battler].weight;
-                        if (Battler_IgnorableAbility(battleCtx, defender, battler, ABILITY_LIGHT_METAL)) {
-                            defWeight /= 2;
-                        }
-                        inPower = BattleAI_CalcWeightBasedPower(defWeight);
+                        inPower = BattleAI_CalcWeightBasedPower(Battler_Weight(battleCtx, defender, battler));
                     } else if (moveEffect == BATTLE_EFFECT_HEAVY_SLAM) {
-                        int atkWeight = battleCtx->battleMons[defender].weight;
-                        int defWeight = battleCtx->battleMons[battler].weight;
-                        if (Battler_Ability(battleCtx, defender) == ABILITY_LIGHT_METAL) {
-                            atkWeight /= 2;
-                        }
-                        if (Battler_IgnorableAbility(battleCtx, defender, battler, ABILITY_LIGHT_METAL)) {
-                            defWeight /= 2;
-                        }
+                        int atkWeight = Battler_Weight(battleCtx, defender, defender);
+                        int defWeight = Battler_Weight(battleCtx, defender, battler);
                         if (atkWeight >= defWeight * 5)      inPower = 120;
                         else if (atkWeight >= defWeight * 4) inPower = 100;
                         else if (atkWeight >= defWeight * 3) inPower = 80;
@@ -11440,20 +11446,10 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                             inPower = MOVE_DATA(moveBattler).power * 2;
                         }
                     } else if (moveEffect == BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT) {
-                        int defWeight = battleCtx->battleMons[defender].weight;
-                        if (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIGHT_METAL)) {
-                            defWeight /= 2;
-                        }
-                        inPower = BattleAI_CalcWeightBasedPower(defWeight);
+                        inPower = BattleAI_CalcWeightBasedPower(Battler_Weight(battleCtx, battler, defender));
                     } else if (moveEffect == BATTLE_EFFECT_HEAVY_SLAM) {
-                        int atkWeight = battleCtx->battleMons[battler].weight;
-                        int defWeight = battleCtx->battleMons[defender].weight;
-                        if (Battler_Ability(battleCtx, battler) == ABILITY_LIGHT_METAL) {
-                            atkWeight /= 2;
-                        }
-                        if (Battler_IgnorableAbility(battleCtx, battler, defender, ABILITY_LIGHT_METAL)) {
-                            defWeight /= 2;
-                        }
+                        int atkWeight = Battler_Weight(battleCtx, battler, battler);
+                        int defWeight = Battler_Weight(battleCtx, battler, defender);
                         if (atkWeight >= defWeight * 5)      inPower = 120;
                         else if (atkWeight >= defWeight * 4) inPower = 100;
                         else if (atkWeight >= defWeight * 3) inPower = 80;

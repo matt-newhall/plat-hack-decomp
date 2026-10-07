@@ -1362,6 +1362,13 @@
         "Sets Psychic Terrain\n",
         "upon entering battle."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00195",
+      "en_US": [
+        "Doubles the Pokémon’s\n",
+        "weight."
+      ]
     }
   ]
 }
