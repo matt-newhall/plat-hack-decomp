@@ -1943,6 +1943,7 @@ void BattleSystem_TryParentalBond(BattleSystem *battleSys, BattleContext *battle
 int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, u16 move, BOOL randomize, int inRange)
 {
     int defender = BATTLER_NONE;
+    BOOL redirectable = MOVE_DATA(move).effect != BATTLE_EFFECT_HIT_IN_3_TURNS;
 
     int range;
     if (move) {
@@ -1991,16 +1992,8 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
         if (battleCtx->battlerCounter != maxBattlers) {
             battleCtx->battlerCounter++;
         }
-    } else if (range == RANGE_USER_OR_ALLY && randomize == TRUE) { // e.g., Acupressure
-        if ((BattleSystem_GetBattleType(battleSys) & BATTLE_TYPE_DOUBLES)
-            && BattleSystem_RandNext(battleSys) % 2 == 0) {
-            defender = BattleSystem_GetPartner(battleSys, attacker);
-            if (battleCtx->battleMons[defender].curHP == 0) {
-                defender = attacker;
-            }
-        } else {
-            defender = attacker;
-        }
+    } else if (range == RANGE_USER_OR_ALLY && randomize == TRUE && battleCtx->moveSelected[attacker] != move) { // e.g., Acupressure
+        defender = attacker;
     } else if (range == RANGE_SINGLE_TARGET_ME_FIRST && randomize == TRUE) { // e.g., Me First
         defender = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
     } else if (range == RANGE_OPPONENT_SIDE) { // e.g., Spikes, Stealth Rock
@@ -2034,12 +2027,14 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
         opponents[1] = BattleSystem_GetEnemyInSlot(battleSys, attacker, ENEMY_IN_SLOT_LEFT);
 
         if (battleType & BATTLE_TYPE_DOUBLES) {
-            if (battleCtx->sideConditions[enemySide].followMe
+            if (redirectable
+                && battleCtx->sideConditions[enemySide].followMe
                 && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
                 && battleCtx->battleMons[battleCtx->sideConditions[enemySide].followMeUser].curHP) {
                 // If Follow Me is active and the user is still alive, re-point all targets toward them
                 defender = battleCtx->sideConditions[enemySide].followMeUser;
-            } else if (battleCtx->sideConditions[enemySide].ragePowder
+            } else if (redirectable
+                && battleCtx->sideConditions[enemySide].ragePowder
                 && RAGE_POWDER_MON(enemySide).curHP
                 && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
                 && !IS_RAGE_POWDER_IMMUNE(attacker)) {
@@ -2060,12 +2055,14 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
         int target = battleCtx->battlerActions[attacker][BATTLE_ACTION_CHOOSE_TARGET];
         int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
 
-        if (battleCtx->sideConditions[enemySide].followMe
+        if (redirectable
+            && battleCtx->sideConditions[enemySide].followMe
             && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
             && battleCtx->battleMons[battleCtx->sideConditions[enemySide].followMeUser].curHP) {
             // If Follow Me is active and the user is still alive, re-point all targets toward them
             defender = battleCtx->sideConditions[enemySide].followMeUser;
-        } else if (battleCtx->sideConditions[enemySide].ragePowder
+        } else if (redirectable
+            && battleCtx->sideConditions[enemySide].ragePowder
             && RAGE_POWDER_MON(enemySide).curHP
             && Battler_Ability(battleCtx, attacker) != ABILITY_STALWART
             && !IS_RAGE_POWDER_IMMUNE(attacker)) {
