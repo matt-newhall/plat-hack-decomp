@@ -1383,6 +1383,13 @@
         "Powers up special\n",
         "moves when burned."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00198",
+      "en_US": [
+        "Raises Speed when hit\n",
+        "by Bug, Dark or Ghost."
+      ]
     }
   ]
 }

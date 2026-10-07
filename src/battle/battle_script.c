@@ -3205,6 +3205,10 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 battleCtx->battleStatusMask2 |= SYSCTL_DEFIANT_PENDING;
             } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->sideEffectMon, ABILITY_COMPETITIVE) == TRUE) {
                 battleCtx->battleStatusMask2 |= SYSCTL_COMPETITIVE_PENDING;
+            } else if (Battler_Ability(battleCtx, battleCtx->sideEffectMon) == ABILITY_RATTLED
+                && battleCtx->sideEffectType == SIDE_EFFECT_TYPE_ABILITY
+                && Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INTIMIDATE) {
+                battleCtx->battleStatusMask2 |= SYSCTL_RATTLED_PENDING;
             }
         }
     }

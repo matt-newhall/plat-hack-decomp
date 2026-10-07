@@ -5969,6 +5969,23 @@ BOOL BattleSystem_TriggerDefenderAbilityOnHit(BattleSystem *battleSys, BattleCon
         }
         break;
 
+    case ABILITY_RATTLED:
+        u8 rattledType = battleCtx->moveType ? battleCtx->moveType : CURRENT_MOVE_DATA.type;
+
+        if (DEFENDING_MON.curHP
+            && (rattledType == TYPE_BUG || rattledType == TYPE_DARK || rattledType == TYPE_GHOST)
+            && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_NORMALIZE
+            && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))) {
+            battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
+            battleCtx->sideEffectMon = battleCtx->defender;
+            battleCtx->sideEffectParam = MOVE_SUBSCRIPT_PTR_SPEED_UP_1_STAGE;
+
+            *subscript = subscript_ability_stat_boost;
+            result = TRUE;
+        }
+        break;
+
     case ABILITY_PERISH_BODY:
         if (ATTACKING_MON.curHP
             && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
