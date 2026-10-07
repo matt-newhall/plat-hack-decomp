@@ -3707,6 +3707,9 @@ static BOOL BtlCmd_CallFromVar(BattleSystem *battleSys, BattleContext *battleCtx
 /**
  * @brief Set the move to be copied by Mirror Move.
  *
+ * Mirror Move copies the move most recently used by its target, regardless of
+ * who that move targeted. The copied move aims at the same target where it can.
+ *
  * @param battleSys
  * @param battleCtx
  * @return FALSE
@@ -3714,32 +3717,20 @@ static BOOL BtlCmd_CallFromVar(BattleSystem *battleSys, BattleContext *battleCtx
 static BOOL BtlCmd_SetMirrorMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     int move = MOVE_NONE;
-    int battleType = BattleSystem_GetBattleType(battleSys);
+    int target = battleCtx->defender;
 
     BattleScript_Iter(battleCtx, 1);
 
-    if (battleCtx->moveCopied[battleCtx->attacker]) {
-        move = battleCtx->moveCopied[battleCtx->attacker];
-    } else if (battleType & BATTLE_TYPE_DOUBLES) {
-        // In double battles, choose randomly.
-        move = battleCtx->moveCopiedHit[battleCtx->attacker][0]
-            + battleCtx->moveCopiedHit[battleCtx->attacker][1]
-            + battleCtx->moveCopiedHit[battleCtx->attacker][2]
-            + battleCtx->moveCopiedHit[battleCtx->attacker][3];
-
-        if (move) {
-            do {
-                move = battleCtx->moveCopiedHit[battleCtx->attacker][BattleSystem_RandNext(battleSys) % 4];
-            } while (move == MOVE_NONE);
-        }
+    if (target != BATTLER_NONE && target != battleCtx->attacker) {
+        move = battleCtx->movePrevByBattler[target];
     }
 
-    // Mirror Move shares a legality table with Encore
-    if (move && Move_CanBeEncored(battleCtx, move) == TRUE) {
+    if (move && (MOVE_DATA(move).flags & MOVE_FLAG_CAN_MIRROR_MOVE)) {
         battleCtx->battleStatusMask &= ~SYSCTL_SKIP_ATTACK_MESSAGE;
         battleCtx->battleStatusMask &= ~SYSCTL_PLAYED_MOVE_ANIMATION;
         battleCtx->moveCur = move;
-        battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, move, TRUE, RANGE_SINGLE_TARGET);
+        ATTACKER_ACTION[BATTLE_ACTION_CHOOSE_TARGET] = target;
+        battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, move, FALSE, RANGE_SINGLE_TARGET);
 
         if (battleCtx->defender == BATTLER_NONE) {
             battleCtx->commandNext = BATTLE_CONTROL_UPDATE_MOVE_BUFFERS;
