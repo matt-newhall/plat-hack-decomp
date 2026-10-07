@@ -7,7 +7,6 @@
 #include "constants/battle/trainer_ai.h"
 #include "generated/abilities.h"
 #include "generated/ai_flags.h"
-#include "generated/genders.h"
 #include "generated/pokemon_types.h"
 #include "macros/aicmd.inc"
 
@@ -1523,29 +1522,12 @@ Basic_CheckCaptivate:
     // If the target's ability is any of Oblivious, Clear Body, White Smoke or Contrary and the
     // attacker's ability is not Mold Breaker, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckGender
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckStatStage
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus10
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
     IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
-
-Basic_CheckCaptivate_CheckGender:
-    // If the target and the attacker share gender or the target has no gender, score -10.
-    LoadGender AI_BATTLER_ATTACKER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCaptivate_CheckMale
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCaptivate_CheckFemale
-    GoTo ScoreMinus10
-
-Basic_CheckCaptivate_CheckMale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCaptivate_CheckStatStage
-    GoTo ScoreMinus10
-
-Basic_CheckCaptivate_CheckFemale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCaptivate_CheckStatStage
-    GoTo ScoreMinus10
 
 Basic_CheckCaptivate_CheckStatStage:
     // If the target is already at -6, score -10.
