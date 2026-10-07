@@ -5393,33 +5393,13 @@ static void BattleControllerPlayer_UpdateFlagsWhenHit(BattleSystem *battleSys, B
                 battleCtx->moveHitBattler[battleCtx->defender] = BATTLER_NONE;
                 battleCtx->moveHitType[battleCtx->defender] = TYPE_NORMAL;
             }
-
-            if ((battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED)
-                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
-                switch (CURRENT_MOVE_DATA.range) {
-                case RANGE_USER:
-                case RANGE_USER_SIDE:
-                case RANGE_FIELD:
-                case RANGE_OPPONENT_SIDE:
-                case RANGE_ALLY:
-                case RANGE_USER_OR_ALLY:
-                    battleCtx->conversion2Move[battleCtx->defender] = MOVE_NONE;
-                    battleCtx->conversion2Battler[battleCtx->defender] = BATTLER_NONE;
-                    battleCtx->conversion2Type[battleCtx->defender] = TYPE_NORMAL;
-                    break;
-
-                default:
-                    battleCtx->conversion2Move[battleCtx->defender] = battleCtx->moveCur;
-                    battleCtx->conversion2Battler[battleCtx->defender] = battleCtx->attacker;
-                    battleCtx->conversion2Type[battleCtx->defender] = moveType;
-                    break;
-                }
-            } else {
-                battleCtx->conversion2Move[battleCtx->defender] = MOVE_NONE;
-                battleCtx->conversion2Battler[battleCtx->defender] = BATTLER_NONE;
-                battleCtx->conversion2Type[battleCtx->defender] = TYPE_NORMAL;
-            }
         }
+    }
+
+    if ((battleCtx->battleStatusMask & SYSCTL_REUSE_LAST_MOVE) == FALSE
+        && (battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN)) {
+        battleCtx->conversion2Move[battleCtx->attacker] = battleCtx->moveCur;
+        battleCtx->conversion2Type[battleCtx->attacker] = moveType;
     }
 }
 

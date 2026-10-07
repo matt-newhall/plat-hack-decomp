@@ -9,7 +9,7 @@
         "type": "BATTLE_EFFECT_CONVERSION2",
         "chance": 0
     },
-    "range": "RANGE_USER",
+    "range": "RANGE_SINGLE_TARGET",
     "priority": 0,
     "flags": [],
     "contest": {

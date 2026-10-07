@@ -4977,9 +4977,11 @@ static BOOL BtlCmd_TryEncore(BattleSystem *battleSys, BattleContext *battleCtx)
 /**
  * @brief Tries to execute the Conversion 2 effect.
  *
- * Conversion 2 considers the type of the move that the user was last hit by,
- * then picks a random type which would resist that move and assigns the user
- * to be that type.
+ * Conversion 2 considers the type of the move most recently used by its
+ * target, as that move was actually typed when used, then picks a random type
+ * which resists or is immune to it (using inverse matchups in an Inverse
+ * Battle) and is not one of the user's current types. Fails if the target has
+ * not used a move, last used Struggle, or no such type exists.
  *
  * Inputs:
  * 1. The distance to jump if the effect fails to execute.
@@ -4993,63 +4995,38 @@ static BOOL BtlCmd_TryConversion2(BattleSystem *battleSys, BattleContext *battle
     BattleScript_Iter(battleCtx, 1);
     int jumpOnFail = BattleScript_Read(battleCtx);
 
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE) {
+    int target = battleCtx->defender;
+
+    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_MULTITYPE
+        || target == BATTLER_NONE
+        || battleCtx->conversion2Move[target] == MOVE_NONE
+        || battleCtx->conversion2Move[target] == MOVE_STRUGGLE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
     }
 
-    if (battleCtx->conversion2Move[battleCtx->attacker]
-        && battleCtx->conversion2Battler[battleCtx->attacker] != BATTLER_NONE) {
-        // Fail to execute if the source move's owner is locked into the first turn of a multi-turn move
-        if (Move_IsMultiTurn(battleCtx, battleCtx->conversion2Move[battleCtx->attacker])
-            && (battleCtx->battleMons[battleCtx->conversion2Battler[battleCtx->attacker]].statusVolatile & VOLATILE_CONDITION_MOVE_LOCKED)) {
-            BattleScript_Iter(battleCtx, jumpOnFail);
-            return FALSE;
-        }
+    int moveType = battleCtx->conversion2Type[target];
+    BOOL inverse = (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) != FALSE;
+    u8 candidates[NUM_POKEMON_TYPES];
+    int numCandidates = 0;
 
-        u8 atkType, defType, typeMulti;
-        int i, moveType = battleCtx->conversion2Type[battleCtx->attacker];
-        for (i = 0; i < 1000; i++) {
-            // Get a random entry from the type matchup table
-            BattleSystem_TypeMatchup(battleSys, 0xFFFF, &atkType, &defType, &typeMulti);
-
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) {
-                typeMulti = BattleSystem_InvertTypeMul(typeMulti);
-            }
-
-            // Check if the accessed entry has an attacking type which matches the source move
-            // and a defending type which results in a favorable matchup
-            if (atkType == moveType
-                && typeMulti <= TYPE_MULTI_NOT_VERY_EFF
-                && MON_IS_NOT_TYPE(battleCtx->attacker, defType)) {
-                ATTACKING_MON.type1 = defType;
-                ATTACKING_MON.type2 = defType;
-                battleCtx->msgTemp = defType;
-                return FALSE;
-            }
-        }
-
-        // Fallback to a linear search through the table for the first entry which matches the criteria
-        i = 0;
-        while (BattleSystem_TypeMatchup(battleSys, i, &atkType, &defType, &typeMulti) == TRUE) {
-            if (battleCtx->fieldConditionsMask & FIELD_CONDITION_INVERSE_PERM) {
-                typeMulti = BattleSystem_InvertTypeMul(typeMulti);
-            }
-
-            if (atkType == moveType
-                && typeMulti <= TYPE_MULTI_NOT_VERY_EFF
-                && MON_IS_NOT_TYPE(battleCtx->attacker, defType)) {
-                ATTACKING_MON.type1 = defType;
-                ATTACKING_MON.type2 = defType;
-                battleCtx->msgTemp = defType;
-                return FALSE;
-            }
-
-            i++;
+    for (int type = 0; type < NUM_POKEMON_TYPES; type++) {
+        if (MON_IS_NOT_TYPE(battleCtx->attacker, type)
+            && BattleSystem_TypeMatchupMultiplier(moveType, type, type, inverse) < 40) {
+            candidates[numCandidates++] = type;
         }
     }
 
-    BattleScript_Iter(battleCtx, jumpOnFail);
+    if (numCandidates == 0) {
+        BattleScript_Iter(battleCtx, jumpOnFail);
+        return FALSE;
+    }
+
+    int type = candidates[BattleSystem_RandNext(battleSys) % numCandidates];
+    ATTACKING_MON.type1 = type;
+    ATTACKING_MON.type2 = type;
+    battleCtx->msgTemp = type;
+
     return FALSE;
 }
 
