@@ -12,8 +12,10 @@ Here is the list of bonus/later generation mechanics implemented in Pokemon Temp
 - Explosion & Selfdestruct still halve the target's Defense.
 - Switcheroo/Trick swap items permanently.
 - Knock Off knocks items off permanently, in both wild and trainer battles.
-- Attract disregards gender, and works on genderless Pokemon.
-- Added Magma Storm, Trick Room, enemy Tailwind and Sun Overworld Weather Conditions.
+- Captivate, Attract and Cute Charm disregard gender, and work on genderless Pokemon.
+- Camouflage now changes type to Fire at Stark Mountain, and Flying at Spear Pillar.
+- Added Magma Storm, Trick Room, enemy Aurora Veil, enemy Tailwind, some terrain and Sun Overworld Weather Conditions.
+- Defog does NOT remove overworld terrain.
 - Destiny Bond will not fail if successfully executed on the previous turn.
 - Pickup has been removed for being too overpowered for a Nuzlocke with the latest similar item tables.
 - The following abilities' overworld effects act the same way they did as of generation VIII:
@@ -42,6 +44,7 @@ Here is the list of bonus/later generation mechanics implemented in Pokemon Temp
 - Catching a Pokemon awards experience as if it had been defeated.
 - Added critical captures with slightly different thresholds. M in the critical capture formula scales with National Dex species caught:
   - 0-10: 0, 11-25: 0.5, 26-50: 1, 51-100: 1.5, 101-200: 2, 201+: 2.5.
+- Capture rates and TM compatibility update to their latest values, with some ROM hack-specific modifications.
 
 ## Generation IV Bugs Status
 
@@ -84,15 +87,3 @@ https://bulbapedia.bulbagarden.net/wiki/List_of_battle_glitches_in_Generation_IV
 **Battle Tower overflow** 👁️
 
 https://bulbapedia.bulbagarden.net/wiki/List_of_battle_glitches_in_Generation_IV#Battle_Tower_overflow
-
-## Updated Moves/Abilities
-
-### Done
-
-- Explosion & Selfdestruct still halve the target's Defense.
-- Switcheroo/Trick swap items permanently.
-- Knock Off knocks items off permanently, in both wild and trainer battles.
-- Attract disregards gender, and works on genderless Pokemon.
-
-### Planned
-
