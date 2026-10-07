@@ -9395,6 +9395,18 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         powerMod = ChainModifier(powerMod, MODIFIER_1_3);
     }
 
+    if (attackerParams.ability == ABILITY_TOXIC_BOOST
+        && moveClass == CLASS_PHYSICAL
+        && (attackerParams.statusMask & MON_CONDITION_ANY_POISON)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
+    }
+
+    if (attackerParams.ability == ABILITY_FLARE_BOOST
+        && moveClass == CLASS_SPECIAL
+        && (attackerParams.statusMask & MON_CONDITION_BURN)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_5);
+    }
+
     BOOL megaSol = Battler_Ability(battleCtx, attacker) == ABILITY_MEGA_SOL;
 
     if (NO_CLOUD_NINE) {

@@ -784,6 +784,14 @@
     {
       "id": "pl_msg_00000610_00195",
       "en_US": "Heavy Metal"
+    },
+    {
+      "id": "pl_msg_00000610_00196",
+      "en_US": "Toxic Boost"
+    },
+    {
+      "id": "pl_msg_00000610_00197",
+      "en_US": "Flare Boost"
     }
   ]
 }

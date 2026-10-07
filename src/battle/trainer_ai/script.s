@@ -1289,6 +1289,7 @@ Basic_FlingPoison_AttackerChecks:
     IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus5
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus5
     IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
+    IfLoadedEqualTo ABILITY_TOXIC_BOOST, ScoreMinus5
     AddToMoveScore 3
     PopOrEnd 
 
@@ -1318,6 +1319,7 @@ Basic_FlingBurn_AttackerChecks:
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus5
     IfLoadedEqualTo ABILITY_WATER_BUBBLE, ScoreMinus5
     IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
+    IfLoadedEqualTo ABILITY_FLARE_BOOST, ScoreMinus5
     AddToMoveScore 3
     PopOrEnd 
 
