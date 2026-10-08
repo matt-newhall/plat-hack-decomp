@@ -5508,6 +5508,16 @@
         "also lowers the foe’s\n",
         "Sp. Atk stat."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00563",
+      "en_US": [
+        "The user bites the\n",
+        "target with psychic\n",
+        "capabilities. This can\n",
+        "also destroy Light\n",
+        "Screen and Reflect."
+      ]
     }
   ]
 }

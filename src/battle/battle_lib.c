@@ -4345,6 +4345,7 @@ static u16 sJawMoves[] = {
     MOVE_HYPER_FANG,
     MOVE_ICE_FANG,
     MOVE_POISON_FANG,
+    MOVE_PSYCHIC_FANGS,
     MOVE_THUNDER_FANG
 };
 
