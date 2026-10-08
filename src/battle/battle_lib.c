@@ -4614,6 +4614,24 @@ BOOL BattleSystem_TriggerTurnEndAbility(BattleSystem *battleSys, BattleContext *
             }
         }
         break;
+
+    case ABILITY_HARVEST: {
+        int partySlot = battleCtx->selectedPartySlot[battler];
+        u16 berry = battleCtx->recycleItem[battler][partySlot];
+
+        if (battleCtx->battleMons[battler].curHP
+            && battleCtx->battleMons[battler].heldItem == ITEM_NONE
+            && Item_IsBerry(berry)
+            && ((NO_CLOUD_NINE && (battleCtx->fieldConditionsMask & FIELD_CONDITION_SUNNY))
+                || BattleSystem_RandNext(battleSys) % 2 == 0)) {
+            battleCtx->recycleItem[battler][partySlot] = ITEM_NONE;
+            battleCtx->msgItemTemp = berry;
+            battleCtx->msgBattlerTemp = battler;
+            subscript = subscript_harvest;
+            result = TRUE;
+        }
+        break;
+    }
     }
 
     if (result == TRUE) {

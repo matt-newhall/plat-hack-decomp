@@ -73,3 +73,10 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Grassy Surge
 - Misty Surge
 - Psychic Surge
+- Heavy Metal
+- Toxic Boost
+- Flare Boost
+- Rattled
+- Healer
+- Moxie
+- Harvest

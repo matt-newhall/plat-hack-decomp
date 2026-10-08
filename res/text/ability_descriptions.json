@@ -1404,6 +1404,13 @@
         "Boosts Attack after\n",
         "knocking out any Pokémon."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00201",
+      "en_US": [
+        "May create another\n",
+        "Berry after one is used."
+      ]
     }
   ]
 }
