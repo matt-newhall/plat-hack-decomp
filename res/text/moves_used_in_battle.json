@@ -11667,6 +11667,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Tail Slap!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01668",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "High Horsepower!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01669",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "High Horsepower!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01670",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "High Horsepower!"
+      ]
     }
   ]
 }
