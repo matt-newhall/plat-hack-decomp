@@ -1397,6 +1397,13 @@
         "May heal an ally’s\n",
         "status conditions."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00200",
+      "en_US": [
+        "Boosts Attack after\n",
+        "knocking out any Pokémon."
+      ]
     }
   ]
 }
