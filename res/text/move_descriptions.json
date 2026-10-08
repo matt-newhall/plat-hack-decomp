@@ -5490,6 +5490,15 @@
         "fairy wind and strikes\n",
         "the target with it."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00561",
+      "en_US": [
+        "The user drops large\n",
+        "icicles onto the foe.\n",
+        "This may also make\n",
+        "the target flinch."
+      ]
     }
   ]
 }
