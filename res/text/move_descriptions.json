@@ -5462,6 +5462,16 @@
         "attack foes. This also\n",
         "lowers their Attack."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00558",
+      "en_US": [
+        "The user slams the\n",
+        "foe with its flaming\n",
+        "body. The heavier the\n",
+        "user, the greater the\n",
+        "move’s power."
+      ]
     }
   ]
 }

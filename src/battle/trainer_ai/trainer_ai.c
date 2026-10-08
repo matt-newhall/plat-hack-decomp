@@ -4217,7 +4217,8 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
     }
 
-    case MOVE_HEAVY_SLAM: {
+    case MOVE_HEAVY_SLAM:
+    case MOVE_HEAT_CRASH: {
         int atkWeight = Battler_Weight(battleCtx, attacker, attacker);
         int defWeight = Battler_Weight(battleCtx, attacker, AI_CONTEXT.defender);
 

@@ -2232,6 +2232,10 @@
     {
       "id": "pl_msg_00000648_00557",
       "en_US": "BREAKING SWIPE"
+    },
+    {
+      "id": "pl_msg_00000648_00558",
+      "en_US": "HEAT CRASH"
     }
   ]
 }
