@@ -2236,6 +2236,10 @@
     {
       "id": "pl_msg_00000648_00558",
       "en_US": "HEAT CRASH"
+    },
+    {
+      "id": "pl_msg_00000648_00559",
+      "en_US": "EERIE IMPULSE"
     }
   ]
 }
