@@ -5499,6 +5499,15 @@
         "This may also make\n",
         "the target flinch."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00562",
+      "en_US": [
+        "The user breathes a\n",
+        "special, hot fire. This\n",
+        "also lowers the foe’s\n",
+        "Sp. Atk stat."
+      ]
     }
   ]
 }
