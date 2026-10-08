@@ -11751,6 +11751,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Eerie Impulse!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01680",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Fairy Wind!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01681",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Fairy Wind!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01682",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Fairy Wind!"
+      ]
     }
   ]
 }

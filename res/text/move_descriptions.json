@@ -5482,6 +5482,14 @@
         "lowers the foe’s\n",
         "Sp. Atk stat."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00560",
+      "en_US": [
+        "The user stirs up a\n",
+        "fairy wind and strikes\n",
+        "the target with it."
+      ]
     }
   ]
 }
