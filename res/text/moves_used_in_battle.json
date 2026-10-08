@@ -11688,6 +11688,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "High Horsepower!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01671",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Breaking Swipe!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01672",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Breaking Swipe!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01673",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Breaking Swipe!"
+      ]
     }
   ]
 }

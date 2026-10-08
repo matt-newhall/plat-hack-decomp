@@ -5453,6 +5453,15 @@
         "attacks the target\n",
         "using its entire body."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00557",
+      "en_US": [
+        "The user swings its\n",
+        "tough tail wildly to\n",
+        "attack foes. This also\n",
+        "lowers their Attack."
+      ]
     }
   ]
 }
