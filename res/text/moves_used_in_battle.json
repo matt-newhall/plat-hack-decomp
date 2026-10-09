@@ -12024,6 +12024,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Scale Shot!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01719",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Pollen Puff!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01720",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Pollen Puff!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01721",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Pollen Puff!"
+      ]
     }
   ]
 }

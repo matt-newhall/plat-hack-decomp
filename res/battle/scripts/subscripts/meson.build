@@ -363,5 +363,6 @@ subscript_files = files(
     'subscript_final_gambit.s',
     'subscript_strength_sap.s',
     'subscript_poltergeist.s',
-    'subscript_scale_shot.s'
+    'subscript_scale_shot.s',
+    'subscript_pollen_puff_heal.s'
 )

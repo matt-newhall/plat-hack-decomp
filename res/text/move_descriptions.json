@@ -5604,6 +5604,16 @@
         "raises the user’s Speed\n",
         "but lowers its Defense."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00573",
+      "en_US": [
+        "The user attacks with\n",
+        "an exploding pollen\n",
+        "puff. On an ally, it\n",
+        "restores half its HP\n",
+        "instead."
+      ]
     }
   ]
 }

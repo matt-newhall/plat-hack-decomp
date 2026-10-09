@@ -3999,6 +3999,7 @@ TagStrategy_Partner:
 
     // Fling is technically 1 power so we need this handler
     IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerFling
+    IfMoveEqualTo MOVE_POLLEN_PUFF, TagStrategy_PartnerPollenPuff
 
     FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_PartnerStatusMove
@@ -4006,6 +4007,10 @@ TagStrategy_Partner:
 
 TagStrategy_ScoreMinus30:
     GoTo ScoreMinus30
+
+TagStrategy_PartnerPollenPuff:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER_PARTNER, 90, ScorePlus6
+    GoTo ScorePlus5
 
 TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_PartnerSkillSwap
