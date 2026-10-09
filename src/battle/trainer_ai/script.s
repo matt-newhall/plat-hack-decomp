@@ -1747,6 +1747,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_2, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen
@@ -2476,6 +2477,8 @@ Expert_AttackDropOnHit:
     IfMoveEqualTo MOVE_LUNGE, Expert_AttackDropOnHit_CheckBestDamage
     IfMoveEqualTo MOVE_SNARL, Expert_AttackDropOnHit_CheckBestDamage
     IfMoveEqualTo MOVE_STRUGGLE_BUG, Expert_AttackDropOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_MYSTICAL_FIRE, Expert_AttackDropOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_BREAKING_SWIPE, Expert_AttackDropOnHit_CheckBestDamage
     PopOrEnd
 
 Expert_AttackDropOnHit_CheckBestDamage:
@@ -2526,6 +2529,7 @@ Expert_AttackDropOnHit_CheckDoubles:
     IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_AttackDropOnHit_End
     IfMoveEqualTo MOVE_SNARL, Expert_AttackDropOnHit_ScorePlus1
     IfMoveEqualTo MOVE_STRUGGLE_BUG, Expert_AttackDropOnHit_ScorePlus1
+    IfMoveEqualTo MOVE_BREAKING_SWIPE, Expert_AttackDropOnHit_ScorePlus1
     PopOrEnd
 
 Expert_AttackDropOnHit_ScorePlus1:
