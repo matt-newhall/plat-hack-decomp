@@ -1378,6 +1378,10 @@
     .long \battler_2
     .endm
 
+    .macro CalcStrengthSapHeal
+    .long BTLCMD_CALCSTRENGTHSAPHEAL
+    .endm
+
     .macro SetupEjectPack
     .long BTLCMD_SETUPEJECTPACK
     .endm

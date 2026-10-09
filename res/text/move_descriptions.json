@@ -5576,6 +5576,16 @@
         "changes don’t affect\n",
         "this attack’s damage."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00570",
+      "en_US": [
+        "The user restores HP\n",
+        "equal to the foe’s\n",
+        "Attack stat, then\n",
+        "lowers the foe’s\n",
+        "Attack stat."
+      ]
     }
   ]
 }

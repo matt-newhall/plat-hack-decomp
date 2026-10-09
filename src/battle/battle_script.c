@@ -357,6 +357,7 @@ static BOOL BtlCmd_TryPendingHealingWish(BattleSystem *battleSys, BattleContext 
 static BOOL BtlCmd_PrepareFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_FinishFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_ShowAbilityPopupPair(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_CalcStrengthSapHeal(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -13849,6 +13850,28 @@ static BOOL BtlCmd_ShowAbilityPopupPair(BattleSystem *battleSys, BattleContext *
         BattleScript_Iter(battleCtx, -3);
         battleCtx->battleProgressFlag = TRUE;
     }
+    return FALSE;
+}
+
+/**
+ * @brief Calculate Strength Sap's healing from defender's current Attack stat
+ * (inc. current stat stages).
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_CalcStrengthSapHeal(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+
+    int stage = DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK] - DEFAULT_STAT_STAGE;
+    int heal = stage >= 0
+        ? DEFENDING_MON.attack * (2 + stage) / 2
+        : DEFENDING_MON.attack * 2 / (2 - stage);
+
+    battleCtx->hpCalcTemp = -(heal > 0 ? heal : 1);
+
     return FALSE;
 }
 

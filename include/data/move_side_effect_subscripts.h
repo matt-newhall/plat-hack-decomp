@@ -165,6 +165,7 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_TERRAIN_START]                    = subscript_terrain_start,
     [MOVE_SUBSCRIPT_PTR_REMOVE_TERRAIN]                   = subscript_terrain_end,
     [MOVE_SUBSCRIPT_PTR_FINAL_GAMBIT]                     = subscript_final_gambit,
-    [MOVE_SUBSCRIPT_PTR_DEF_UP_3_STAGES]                  = subscript_update_stat_stage
+    [MOVE_SUBSCRIPT_PTR_DEF_UP_3_STAGES]                  = subscript_update_stat_stage,
+    [MOVE_SUBSCRIPT_PTR_STRENGTH_SAP]                     = subscript_strength_sap
 };
 // clang-format on

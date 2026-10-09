@@ -274,6 +274,7 @@ ScriptCommand(BTLCMD_TRYPENDINGHEALINGWISH,               BtlCmd_TryPendingHeali
 ScriptCommand(BTLCMD_PREPAREFUTURESIGHT,                  BtlCmd_PrepareFutureSight)
 ScriptCommand(BTLCMD_FINISHFUTURESIGHT,                   BtlCmd_FinishFutureSight)
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPPAIR,                 BtlCmd_ShowAbilityPopupPair)
+ScriptCommand(BTLCMD_CALCSTRENGTHSAPHEAL,                 BtlCmd_CalcStrengthSapHeal)
 
 // clang-format on
 
