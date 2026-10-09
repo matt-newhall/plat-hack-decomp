@@ -1016,15 +1016,32 @@ BOOL BattleSystem_IsWindMove(u16 move);
 BOOL BattleSystem_IsPunchingMove(u16 move);
 
 /**
- * @brief Get the type the current move hits as, after Normalize and the -ate
- * abilities, and after any type its own effect script decided (Weather Ball,
- * Hidden Power, etc.).
+ * @brief Check whether an ability changes a move's type.
+ *
+ * Handles Normalize and the -ate abilities, but ignroes Judgment, Natural Gift,
+ * Weather Ball and Hidden Power.
+ *
+ * @param battleCtx
+ * @param ability The attacker's ability
+ * @param move
+ * @param outType Out; the converted type, only written when the ability applies
+ * @return TRUE if the ability changes the move's type.
+ */
+BOOL Move_TryConvertType(BattleContext *battleCtx, int ability, u16 move, int *outType);
+
+/**
+ * @brief Get the type a battler's move hits as.
+ *
+ * An ability conversion (see Move_TryConvertType) wins; otherwise this is the type
+ * the current move's effect script decided (Weather Ball, Hidden Power, etc.), or
+ * the move's own type.
  *
  * @param battleCtx
  * @param attacker
- * @return The current move's effective type.
+ * @param move
+ * @return The move's effective type.
  */
-int BattleSystem_CurrentMoveType(BattleContext *battleCtx, int attacker);
+int Battler_MoveType(BattleContext *battleCtx, int attacker, u16 move);
 
 /**
  * @brief Trigger an end-of-turn ability for the battler.
