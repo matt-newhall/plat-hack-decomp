@@ -11835,6 +11835,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Psychic Fangs!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01692",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Horn Leech!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01693",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Horn Leech!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01694",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Horn Leech!"
+      ]
     }
   ]
 }

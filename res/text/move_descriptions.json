@@ -5518,6 +5518,16 @@
         "also destroy Light\n",
         "Screen and Reflect."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00564",
+      "en_US": [
+        "The user drains the\n",
+        "target’s energy with\n",
+        "its horns. The user’s\n",
+        "HP is restored by half\n",
+        "the damage dealt."
+      ]
     }
   ]
 }
