@@ -2108,6 +2108,22 @@
     {
       "id": "pl_msg_00000393_00526",
       "en_US": "a {COLOR 255}Punching Glove{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00527",
+      "en_US": "an {COLOR 255}Absorb Bulb{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00528",
+      "en_US": "a {COLOR 255}Cell Battery{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00529",
+      "en_US": "a {COLOR 255}Luminous Moss{COLOR 0}"
+    },
+    {
+      "id": "pl_msg_00000393_00530",
+      "en_US": "a {COLOR 255}Snowball{COLOR 0}"
     }
   ]
 }

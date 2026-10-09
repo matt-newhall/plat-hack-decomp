@@ -7298,6 +7298,61 @@ BOOL Battler_MovedThisTurn(BattleContext *battleCtx, int battler)
     return battleCtx->battlerActions[battler][BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END;
 }
 
+int BattleSystem_CurrentMoveType(BattleContext *battleCtx, int attacker)
+{
+    int move = battleCtx->moveCur;
+    BOOL fixedType = move == MOVE_JUDGMENT || move == MOVE_NATURAL_GIFT || move == MOVE_WEATHER_BALL || move == MOVE_HIDDEN_POWER;
+
+    if (fixedType == FALSE) {
+        int ateType = TYPE_NORMAL;
+
+        switch (Battler_Ability(battleCtx, attacker)) {
+        case ABILITY_NORMALIZE:
+            return TYPE_NORMAL;
+
+        case ABILITY_AERILATE:
+            ateType = TYPE_FLYING;
+            break;
+
+        case ABILITY_REFRIGERATE:
+            ateType = TYPE_ICE;
+            break;
+
+        case ABILITY_PIXILATE:
+            ateType = TYPE_FAIRY;
+            break;
+
+        case ABILITY_DRAGONIZE:
+            ateType = TYPE_DRAGON;
+            break;
+
+        case ABILITY_GALVANIZE:
+            ateType = TYPE_ELECTRIC;
+            break;
+
+        default:
+            break;
+        }
+
+        if (ateType != TYPE_NORMAL && MOVE_DATA(move).type == TYPE_NORMAL) {
+            return ateType;
+        }
+    }
+
+    return battleCtx->moveType ? battleCtx->moveType : MOVE_DATA(move).type;
+}
+
+static const struct {
+    u16 holdEffect;
+    u8 type;
+    u8 stat;
+} sTypeHitStatItems[] = {
+    { HOLD_EFFECT_SP_ATK_UP_ON_WATER_HIT, TYPE_WATER, BATTLE_STAT_SP_ATTACK },
+    { HOLD_EFFECT_ATK_UP_ON_ELECTRIC_HIT, TYPE_ELECTRIC, BATTLE_STAT_ATTACK },
+    { HOLD_EFFECT_SP_DEF_UP_ON_WATER_HIT, TYPE_WATER, BATTLE_STAT_SP_DEFENSE },
+    { HOLD_EFFECT_ATK_UP_ON_ICE_HIT, TYPE_ICE, BATTLE_STAT_ATTACK },
+};
+
 BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *battleCtx, int *subscript)
 {
     BOOL result = FALSE;
@@ -7396,6 +7451,26 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
             battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
             *subscript = subscript_held_item_sharply_boost_offenses;
             result = TRUE;
+        }
+        break;
+
+    case HOLD_EFFECT_SP_ATK_UP_ON_WATER_HIT:
+    case HOLD_EFFECT_ATK_UP_ON_ELECTRIC_HIT:
+    case HOLD_EFFECT_SP_DEF_UP_ON_WATER_HIT:
+    case HOLD_EFFECT_ATK_UP_ON_ICE_HIT:
+        for (int i = 0; i < NELEMS(sTypeHitStatItems); i++) {
+            if (sTypeHitStatItems[i].holdEffect == itemEffect
+                && DEFENDING_MON.curHP
+                && BattleSystem_CurrentMoveType(battleCtx, battleCtx->attacker) == sTypeHitStatItems[i].type
+                && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
+                    || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
+                && Battler_CanRaiseStatStage(battleCtx, battleCtx->defender, sTypeHitStatItems[i].stat)) {
+                battleCtx->msgTemp = sTypeHitStatItems[i].stat;
+                battleCtx->msgBattlerTemp = battleCtx->defender;
+                battleCtx->msgItemTemp = battleCtx->battleMons[battleCtx->defender].heldItem;
+                *subscript = subscript_held_item_raise_stat;
+                result = TRUE;
+            }
         }
         break;
 

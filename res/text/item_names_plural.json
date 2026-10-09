@@ -2108,6 +2108,22 @@
     {
       "id": "pl_msg_00000394_00526",
       "en_US": "Punching Gloves"
+    },
+    {
+      "id": "pl_msg_00000394_00527",
+      "en_US": "Absorb Bulbs"
+    },
+    {
+      "id": "pl_msg_00000394_00528",
+      "en_US": "Cell Batteries"
+    },
+    {
+      "id": "pl_msg_00000394_00529",
+      "en_US": "Luminous Moss"
+    },
+    {
+      "id": "pl_msg_00000394_00530",
+      "en_US": "Snowballs"
     }
   ]
 }

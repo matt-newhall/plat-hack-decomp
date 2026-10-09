@@ -1016,6 +1016,17 @@ BOOL BattleSystem_IsWindMove(u16 move);
 BOOL BattleSystem_IsPunchingMove(u16 move);
 
 /**
+ * @brief Get the type the current move hits as, after Normalize and the -ate
+ * abilities, and after any type its own effect script decided (Weather Ball,
+ * Hidden Power, etc.).
+ *
+ * @param battleCtx
+ * @param attacker
+ * @return The current move's effective type.
+ */
+int BattleSystem_CurrentMoveType(BattleContext *battleCtx, int attacker);
+
+/**
  * @brief Trigger an end-of-turn ability for the battler.
  *
  * If an end-of-turn ability is triggered, then the respective subscript will

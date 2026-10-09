@@ -3187,6 +3187,30 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = punching_glove_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_ABSORB_BULB] = {
+        .dataID = 0x21D,
+        .iconID = absorb_bulb_NCGR,
+        .paletteID = absorb_bulb_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_CELL_BATTERY] = {
+        .dataID = 0x21E,
+        .iconID = cell_battery_NCGR,
+        .paletteID = cell_battery_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_LUMINOUS_MOSS] = {
+        .dataID = 0x21F,
+        .iconID = luminous_moss_NCGR,
+        .paletteID = luminous_moss_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_SNOWBALL] = {
+        .dataID = 0x220,
+        .iconID = snowball_NCGR,
+        .paletteID = snowball_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
