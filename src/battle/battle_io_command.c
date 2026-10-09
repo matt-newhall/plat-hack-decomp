@@ -592,9 +592,7 @@ static void BtlIOCmd_UpdatePartyMon(BattleSystem *battleSys, BattlerData *battle
         }
     }
 
-    if ((message->knockedOffItemsMask & FlagIndex(message->partySlot)) == FALSE) {
-        Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, (u8 *)&message->heldItem);
-    }
+    Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, (u8 *)&message->heldItem);
 
     Pokemon_SetValue(mon, MON_DATA_HP, (u8 *)&message->curHP);
     Pokemon_SetValue(mon, MON_DATA_STATUS, (u8 *)&message->status);

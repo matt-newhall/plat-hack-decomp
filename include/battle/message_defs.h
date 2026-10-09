@@ -303,7 +303,6 @@ typedef struct UpdatePartyMonMessage {
     u8 mimickedMoveSlot : 4;
     s16 curHP;
     u32 status;
-    u32 knockedOffItemsMask;
     u16 heldItem;
     u16 moves[LEARNED_MOVES_MAX];
     u8 ppCur[LEARNED_MOVES_MAX];
