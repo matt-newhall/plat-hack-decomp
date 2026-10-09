@@ -5586,6 +5586,15 @@
         "lowers the foe’s\n",
         "Attack stat."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00571",
+      "en_US": [
+        "The user attacks the\n",
+        "target by controlling\n",
+        "its item. It fails if\n",
+        "the target has no item."
+      ]
     }
   ]
 }

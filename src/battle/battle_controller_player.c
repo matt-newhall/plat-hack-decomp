@@ -3782,7 +3782,12 @@ static void BattleControllerPlayer_CheckMoveFailure(BattleSystem *battleSys, Bat
 
 static void BattleControllerPlayer_UseMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    LOAD_SUBSEQ(subscript_use_move);
+    if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_POLTERGEIST) {
+        LOAD_SUBSEQ(subscript_poltergeist);
+    } else {
+        LOAD_SUBSEQ(subscript_use_move);
+    }
+
     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
     battleCtx->commandNext = BATTLE_CONTROL_UPDATE_HP;
 }

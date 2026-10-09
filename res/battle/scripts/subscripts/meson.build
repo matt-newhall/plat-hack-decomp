@@ -361,5 +361,6 @@ subscript_files = files(
     'subscript_healer.s',
     'subscript_harvest.s',
     'subscript_final_gambit.s',
-    'subscript_strength_sap.s'
+    'subscript_strength_sap.s',
+    'subscript_poltergeist.s'
 )

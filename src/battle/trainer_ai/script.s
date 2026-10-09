@@ -163,6 +163,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Basic_CheckCanForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STRENGTH_SAP, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POLTERGEIST, Basic_CheckPoltergeist
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckLifeDew
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
@@ -546,6 +547,11 @@ Basic_CheckCanRecoverHP:
 
 Basic_CheckCanRecoverHP_Terminate:
     PopOrEnd 
+
+Basic_CheckPoltergeist:
+    LoadHeldItem AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ITEM_NONE, ScoreMinus10
+    PopOrEnd
 
 Basic_CheckCannotPoison:
     // If the target is immune to the usual effects of Poison for any reason, score -10.

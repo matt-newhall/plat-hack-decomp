@@ -4016,6 +4016,12 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         damage = battleCtx->battleMons[attacker].curHP;
         break;
 
+    case MOVE_POLTERGEIST:
+        if (battleCtx->battleMons[AI_CONTEXT.defender].heldItem == ITEM_NONE) {
+            return 0;
+        }
+        break;
+
     case MOVE_PSYWAVE:
         // thinking E(X) is roughly half level here
         damage = battleCtx->battleMons[attacker].level / 2;
