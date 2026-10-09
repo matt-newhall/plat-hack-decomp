@@ -162,7 +162,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Basic_CheckCanForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STRENGTH_SAP, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STRENGTH_SAP, Basic_CheckStrengthSap
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POLTERGEIST, Basic_CheckPoltergeist
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckLifeDew
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
@@ -547,6 +547,13 @@ Basic_CheckCanRecoverHP:
 
 Basic_CheckCanRecoverHP_Terminate:
     PopOrEnd 
+
+Basic_CheckStrengthSap:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo ABILITY_LIQUID_OOZE, Basic_CheckCanRecoverHP
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    GoTo Basic_CheckCanRecoverHP
 
 Basic_CheckPoltergeist:
     LoadHeldItem AI_BATTLER_DEFENDER
