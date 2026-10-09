@@ -5595,6 +5595,7 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
     AFTER_MOVE_HIT_STATE_ICE_SPINNER,
+    AFTER_MOVE_HIT_STATE_SCALE_SHOT,
     AFTER_MOVE_HIT_STATE_UPROAR,
     AFTER_MOVE_HIT_STATE_ANGER_SHELL,
     AFTER_MOVE_HIT_STATE_SWITCH_HIT,
@@ -5999,6 +6000,22 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                 && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN)
                 && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM) == FALSE) {
                 LOAD_SUBSEQ(subscript_terrain_end);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_SCALE_SHOT:
+            if (battleCtx->moveCur == MOVE_SCALE_SHOT
+                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+                && (battleCtx->battleStatusMask2 & SYSCTL_RED_CARD_SWITCHED) == FALSE
+                && battleCtx->attacker != BATTLER_NONE
+                && ATTACKING_MON.curHP) {
+                LOAD_SUBSEQ(subscript_scale_shot);
                 battleCtx->commandNext = battleCtx->command;
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 

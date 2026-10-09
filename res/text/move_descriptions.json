@@ -5595,6 +5595,15 @@
         "its item. It fails if\n",
         "the target has no item."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00572",
+      "en_US": [
+        "The user shoots scales\n",
+        "two to five times. It\n",
+        "raises the user’s Speed\n",
+        "but lowers its Defense."
+      ]
     }
   ]
 }

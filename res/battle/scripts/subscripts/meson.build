@@ -362,5 +362,6 @@ subscript_files = files(
     'subscript_harvest.s',
     'subscript_final_gambit.s',
     'subscript_strength_sap.s',
-    'subscript_poltergeist.s'
+    'subscript_poltergeist.s',
+    'subscript_scale_shot.s'
 )
