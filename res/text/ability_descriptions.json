@@ -1411,6 +1411,13 @@
         "May create another\n",
         "Berry after one is used."
       ]
+    },
+    {
+      "id": "pl_msg_00000612_00202",
+      "en_US": [
+        "Steals an item when hit\n",
+        "by another Pokémon."
+      ]
     }
   ]
 }

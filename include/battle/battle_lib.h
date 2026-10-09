@@ -744,6 +744,24 @@ BOOL Move_IsGhostCurse(BattleContext *battleCtx, u16 move, int battler);
  */
 BOOL BattleSystem_CanStealItem(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
+enum TakeItemResult {
+    TAKE_ITEM_ALLOWED = 0,
+    TAKE_ITEM_FAILED,
+    TAKE_ITEM_STICKY_HOLD,
+};
+
+/**
+ * @brief Determine if one battler can take another battler's held item.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param thief     The battler taking the item
+ * @param victim    The battler losing the item
+ * @return TAKE_ITEM_ALLOWED, TAKE_ITEM_FAILED, or TAKE_ITEM_STICKY_HOLD if the
+ * victim holds an item but its Sticky Hold keeps it.
+ */
+enum TakeItemResult Battler_CanTakeItem(BattleSystem *battleSys, BattleContext *battleCtx, int thief, int victim);
+
 /**
  * @brief Check if a battler is *not* holding Mail.
  *

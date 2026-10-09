@@ -808,6 +808,10 @@
     {
       "id": "pl_msg_00000610_00201",
       "en_US": "Harvest"
+    },
+    {
+      "id": "pl_msg_00000610_00202",
+      "en_US": "Pickpocket"
     }
   ]
 }

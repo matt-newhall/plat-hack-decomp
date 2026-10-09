@@ -3793,6 +3793,52 @@ BOOL BattleSystem_CanStealItem(BattleSystem *battleSys, BattleContext *battleCtx
     return result;
 }
 
+/**
+ * @brief Check whether an item is one of Arceus's type Plates.
+ *
+ * @param item
+ * @return TRUE if the item is a Plate.
+ */
+static BOOL Item_IsPlate(u16 item)
+{
+    return item >= ITEM_FLAME_PLATE && item <= ITEM_IRON_PLATE;
+}
+
+enum TakeItemResult Battler_CanTakeItem(BattleSystem *battleSys, BattleContext *battleCtx, int thief, int victim)
+{
+    BattleMon *thiefMon = &battleCtx->battleMons[thief];
+    BattleMon *victimMon = &battleCtx->battleMons[victim];
+
+    if (victimMon->heldItem == ITEM_GRISEOUS_ORB
+        && (victimMon->species == SPECIES_GIRATINA || thiefMon->species == SPECIES_GIRATINA)) {
+        return TAKE_ITEM_FAILED;
+    }
+
+    if (Item_IsPlate(victimMon->heldItem)
+        && (victimMon->species == SPECIES_ARCEUS || thiefMon->species == SPECIES_ARCEUS)) {
+        return TAKE_ITEM_FAILED;
+    }
+
+    if (victimMon->moveEffectsData.custapBerry || victimMon->moveEffectsData.quickClaw) {
+        return TAKE_ITEM_FAILED;
+    }
+
+    if (Pokemon_IsMegaStoneFor(victimMon->species, victimMon->heldItem)
+        || Pokemon_IsMegaStoneFor(thiefMon->species, victimMon->heldItem)) {
+        return TAKE_ITEM_FAILED;
+    }
+
+    if (victimMon->heldItem && Battler_IgnorableAbility(battleCtx, thief, victim, ABILITY_STICKY_HOLD) == TRUE) {
+        return TAKE_ITEM_STICKY_HOLD;
+    }
+
+    if (thiefMon->heldItem || BattleSystem_CanStealItem(battleSys, battleCtx, victim) == FALSE) {
+        return TAKE_ITEM_FAILED;
+    }
+
+    return TAKE_ITEM_ALLOWED;
+}
+
 BOOL BattleSystem_NotHoldingMail(BattleContext *battleCtx, int battler)
 {
     return Item_IsMail(battleCtx->battleMons[battler].heldItem) == FALSE;

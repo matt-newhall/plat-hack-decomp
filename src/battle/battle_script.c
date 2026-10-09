@@ -5310,45 +5310,24 @@ static BOOL BtlCmd_TryStealItem(BattleSystem *battleSys, BattleContext *battleCt
     int jumpStickyHold = BattleScript_Read(battleCtx);
 
     u32 battleType = BattleSystem_GetBattleType(battleSys);
-    int attackingSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
 
     if (BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
         // AI trainers are unable to steal items outside of the Battle Frontier. PvP trainers can steal items.
         BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (DEFENDING_MON.heldItem == ITEM_GRISEOUS_ORB && (DEFENDING_MON.species == SPECIES_GIRATINA || ATTACKING_MON.species == SPECIES_GIRATINA)) {
-        // The defender is holding a Griseous Orb and either the attacker or defender is Giratina.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (((DEFENDING_MON.heldItem == ITEM_FLAME_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_SPLASH_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_ZAP_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_MEADOW_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_ICICLE_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_FIST_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_TOXIC_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_EARTH_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_SKY_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_MIND_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_INSECT_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_STONE_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_SPOOKY_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_DRACO_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_DREAD_PLATE)
-                || (DEFENDING_MON.heldItem == ITEM_IRON_PLATE))
-                && (DEFENDING_MON.species == SPECIES_ARCEUS || ATTACKING_MON.species == SPECIES_ARCEUS)) {
-        // The defender is holding a Plate and either the attacker or defender is Arceus.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (DEFENDING_MON.moveEffectsData.custapBerry || DEFENDING_MON.moveEffectsData.quickClaw) {
-        // The defender activated a Custap Berry or a Quick Claw this turn.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (Pokemon_IsMegaStoneFor(DEFENDING_MON.species, DEFENDING_MON.heldItem)) {
-        // The defender is holding its own Mega Stone, which cannot be taken.
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if (DEFENDING_MON.heldItem && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE) {
-        // The defender has a held item, but has the ability Sticky Hold.
+        return FALSE;
+    }
+
+    switch (Battler_CanTakeItem(battleSys, battleCtx, battleCtx->attacker, battleCtx->defender)) {
+    case TAKE_ITEM_STICKY_HOLD:
         BattleScript_Iter(battleCtx, jumpStickyHold);
-    } else if (ATTACKING_MON.heldItem || BattleSystem_CanStealItem(battleSys, battleCtx, battleCtx->defender) == FALSE) {
-        // The attacker has an item, or the defender's item cannot be stolen.
+        break;
+
+    case TAKE_ITEM_FAILED:
         BattleScript_Iter(battleCtx, jumpOnFail);
+        break;
+
+    default:
+        break;
     }
 
     return FALSE;

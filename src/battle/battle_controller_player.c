@@ -5585,6 +5585,46 @@ static BOOL BattleControllerPlayer_ToggleSemiInvulnMons(BattleSystem *battleSys,
     return result;
 }
 
+/**
+ * @brief Find the battler whose Pickpocket steals the attacker's item after the
+ * current move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param sheerForce Whether the attacker's Sheer Force boosted the move
+ * @return The stealing battler, or BATTLER_NONE if Pickpocket does not activate.
+ */
+static int BattleControllerPlayer_PickpocketThief(BattleSystem *battleSys, BattleContext *battleCtx, BOOL sheerForce)
+{
+    int attacker = battleCtx->attacker;
+
+    if (attacker == BATTLER_NONE
+        || sheerForce
+        || (battleCtx->battleStatusMask2 & (SYSCTL_RED_CARD_SWITCHED | SYSCTL_UTURN_ACTIVE))
+        || Move_MakesContact(battleCtx, attacker, battleCtx->moveCur) == FALSE) {
+        return BATTLER_NONE;
+    }
+
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    for (int i = 0; i < maxBattlers; i++) {
+        int battler = battleCtx->monSpeedOrder[i];
+        SelfTurnFlags *flags = &battleCtx->selfTurnFlags[battler];
+
+        if (battler != attacker
+            && battleCtx->battleMons[battler].curHP
+            && Battler_Ability(battleCtx, battler) == ABILITY_PICKPOCKET
+            && Battler_SubstituteWasHit(battleCtx, battler) == FALSE
+            && ((flags->physicalDamageTaken && flags->physicalDamageLastAttacker == attacker)
+                || (flags->specialDamageTaken && flags->specialDamageLastAttacker == attacker))
+            && Battler_CanTakeItem(battleSys, battleCtx, battler, attacker) == TAKE_ITEM_ALLOWED) {
+            return battler;
+        }
+    }
+
+    return BATTLER_NONE;
+}
+
 enum AfterMoveHitState {
     AFTER_MOVE_HIT_START = 0,
 
@@ -5594,6 +5634,7 @@ enum AfterMoveHitState {
     AFTER_MOVE_HIT_STATE_EJECT_ITEMS,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
+    AFTER_MOVE_HIT_STATE_PICKPOCKET,
     AFTER_MOVE_HIT_STATE_ICE_SPINNER,
     AFTER_MOVE_HIT_STATE_SCALE_SHOT,
     AFTER_MOVE_HIT_STATE_UPROAR,
@@ -5990,6 +6031,23 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
             battleCtx->afterMoveHitCheckState++;
             break;
+
+        case AFTER_MOVE_HIT_STATE_PICKPOCKET: {
+            int thief = BattleControllerPlayer_PickpocketThief(battleSys, battleCtx, sheerForce);
+
+            if (thief != BATTLER_NONE) {
+                battleCtx->msgBattlerTemp = thief;
+
+                LOAD_SUBSEQ(subscript_pickpocket);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+        }
 
         case AFTER_MOVE_HIT_STATE_ICE_SPINNER:
             if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_REMOVE_TERRAIN_HIT
