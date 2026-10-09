@@ -3181,6 +3181,12 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = psychic_seed_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_PUNCHING_GLOVE] = {
+        .dataID = 0x21C,
+        .iconID = punching_glove_NCGR,
+        .paletteID = punching_glove_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {

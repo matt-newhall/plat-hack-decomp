@@ -90,7 +90,7 @@
     ScriptEntry VisibleItems_EternaForest_Ether
     ScriptEntry VisibleItems_Route209_MentalHerb
     ScriptEntry VisibleItems_Route209_HyperPotion
-    ScriptEntry VisibleItems_Route209_Revive
+    ScriptEntry VisibleItems_Route209_PunchingGlove
     ScriptEntry VisibleItems_Route209_TM47
     ScriptEntry VisibleItems_Route209_TM19
     ScriptEntry VisibleItems_Route209LostTower2F_OvalStone
@@ -871,8 +871,8 @@ VisibleItems_Route209_HyperPotion:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route209_Revive:
-    SetVar VAR_0x8008, ITEM_REVIVE
+VisibleItems_Route209_PunchingGlove:
+    SetVar VAR_0x8008, ITEM_PUNCHING_GLOVE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

@@ -4199,6 +4199,14 @@
         "It boosts Sp. Def on Psychic\n",
         "Terrain. It can only be used once."
       ]
+    },
+    {
+      "id": "pl_msg_00000391_00526",
+      "en_US": [
+        "An item to be held by a Pokémon.\n",
+        "This glove boosts the power of punching\n",
+        "moves and prevents direct contact."
+      ]
     }
   ]
 }

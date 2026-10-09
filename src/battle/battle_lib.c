@@ -4073,7 +4073,8 @@ BOOL Battler_CheckTruant(BattleContext *battleCtx, int battler)
 /**
  * @brief Check whether a move makes contact with its target.
  *
- * Long Reach removes contact from its holder's moves so we need to check this.
+ * Long Reach removes contact from its holder's moves, and a Punching Glove
+ * removes it from its holder's punching moves, so we need to check both.
  * Conversely, Protective Pads doesn't remove the 'contact' from a move, so we
  * don't cover it here.
  *
@@ -4085,7 +4086,8 @@ BOOL Battler_CheckTruant(BattleContext *battleCtx, int battler)
 BOOL Move_MakesContact(BattleContext *battleCtx, int attacker, int move)
 {
     return (MOVE_DATA(move).flags & MOVE_FLAG_MAKES_CONTACT)
-        && Battler_Ability(battleCtx, attacker) != ABILITY_LONG_REACH;
+        && Battler_Ability(battleCtx, attacker) != ABILITY_LONG_REACH
+        && !(Battler_HeldItemEffect(battleCtx, attacker) == HOLD_EFFECT_POWER_UP_PUNCHES && BattleSystem_IsPunchingMove(move));
 }
 
 BOOL Move_Imprisoned(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int move)
@@ -8876,6 +8878,14 @@ static const u16 sPunchingMoves[] = {
     MOVE_MEGA_PUNCH
 };
 
+BOOL BattleSystem_IsPunchingMove(u16 move) {
+    for (int i = 0; i < NELEMS(sPunchingMoves); i++) {
+        if (sPunchingMoves[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static const u16 sAuraAndPulseMoves[] = {
     MOVE_WATER_PULSE,
     MOVE_AURA_SPHERE,
@@ -9288,6 +9298,10 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
     }
 
+    if (attackerParams.heldItemEffect == HOLD_EFFECT_POWER_UP_PUNCHES && BattleSystem_IsPunchingMove(move)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_ONE * (100 + attackerParams.heldItemPower) / 100);
+    }
+
     if (Battler_IgnorableAbility(battleCtx, attacker, defender, ABILITY_THICK_FAT) == TRUE
         && (moveType == TYPE_FIRE || moveType == TYPE_ICE)) {
         powerMod = ChainModifier(powerMod, MODIFIER_0_5);
@@ -9425,11 +9439,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         }
     }
 
-    for (i = 0; i < NELEMS(sPunchingMoves); i++) {
-        if (sPunchingMoves[i] == move && attackerParams.ability == ABILITY_IRON_FIST) {
-            powerMod = ChainModifier(powerMod, MODIFIER_1_2);
-            break;
-        }
+    if (attackerParams.ability == ABILITY_IRON_FIST && BattleSystem_IsPunchingMove(move)) {
+        powerMod = ChainModifier(powerMod, MODIFIER_1_2);
     }
 
     for (i = 0; i < NELEMS(sAuraAndPulseMoves); i++) {

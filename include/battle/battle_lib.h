@@ -990,6 +990,14 @@ BOOL BattleSystem_IsSoundMove(u16 move);
 BOOL BattleSystem_IsWindMove(u16 move);
 
 /**
+ * @brief Checks if selected move is a punching move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a punching move.
+ */
+BOOL BattleSystem_IsPunchingMove(u16 move);
+
+/**
  * @brief Trigger an end-of-turn ability for the battler.
  *
  * If an end-of-turn ability is triggered, then the respective subscript will

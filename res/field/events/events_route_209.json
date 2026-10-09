@@ -315,11 +315,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_CALCIUM",
+            "id": "LOCALID_ITEM_PUNCHING_GLOVE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_209_CALCIUM",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_209_PUNCHING_GLOVE",
             "script": 7088,
             "initial_dir": 0,
             "data": [],
