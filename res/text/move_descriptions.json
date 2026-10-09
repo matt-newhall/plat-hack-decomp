@@ -5556,6 +5556,16 @@
         "drastically raising\n",
         "its Defense stat."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00568",
+      "en_US": [
+        "Driven by frustration,\n",
+        "the user attacks. If\n",
+        "its last move failed,\n",
+        "this move’s power is\n",
+        "doubled."
+      ]
     }
   ]
 }

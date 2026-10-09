@@ -2501,6 +2501,7 @@ void BattleSystem_UpdateAfterSwitch(BattleSystem *battleSys, BattleContext *batt
     battleCtx->moveHitBattler[battler] = BATTLER_NONE;
     battleCtx->moveHitType[battler] = MOVE_NONE;
     battleCtx->movePrevByBattler[battler] = MOVE_NONE;
+    battleCtx->moveFailedTurn[battler] = 0;
     battleCtx->moveCopied[battler] = MOVE_NONE;
     battleCtx->moveCopiedHit[battler][0] = MOVE_NONE;
     battleCtx->moveCopiedHit[battler][1] = MOVE_NONE;
@@ -2579,6 +2580,7 @@ void BattleSystem_CleanupFaintedMon(BattleSystem *battleSys, BattleContext *batt
     battleCtx->moveHitBattler[battler] = BATTLER_NONE;
     battleCtx->moveHitType[battler] = MOVE_NONE;
     battleCtx->movePrevByBattler[battler] = MOVE_NONE;
+    battleCtx->moveFailedTurn[battler] = 0;
     battleCtx->moveCopied[battler] = MOVE_NONE;
     battleCtx->moveCopiedHit[battler][0] = MOVE_NONE;
     battleCtx->moveCopiedHit[battler][1] = MOVE_NONE;
@@ -9136,6 +9138,12 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
 
     if (MOVE_DATA(move).effect == BATTLE_EFFECT_DOUBLE_POWER_WITH_NO_ITEM
         && battleCtx->battleMons[attacker].heldItem == ITEM_NONE) {
+        movePower = movePower * 2;
+    }
+
+    if (MOVE_DATA(move).effect == BATTLE_EFFECT_DOUBLE_POWER_IF_LAST_MOVE_FAILED
+        && battleCtx->moveFailedTurn[attacker] != 0
+        && battleCtx->moveFailedTurn[attacker] == battleCtx->totalTurns) {
         movePower = movePower * 2;
     }
 

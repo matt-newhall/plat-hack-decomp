@@ -67,7 +67,8 @@ typedef struct TurnFlags {
     u32 spikyShielding : 1;
     u32 silkTrapping : 1;
     u32 powdered : 1;
-    u32 padding00_0B : 19;
+    u32 recharging : 1;
+    u32 padding00_0C : 18;
 
     int physicalDamageTakenFrom[MAX_BATTLERS];
     int physicalDamageLastAttacker;
@@ -258,6 +259,8 @@ struct BattleContext {
     u8 battlerCounter;
     u8 savedBattlerCounter;
     u32 spreadHitMask;
+    u8 moveTargetsResolved;
+    u8 moveTargetsAffected;
     u8 beatUpCounter;
 
     BOOL moveIsStolen;
@@ -296,6 +299,7 @@ struct BattleContext {
     u16 moveHitBattler[MAX_BATTLERS];
     u16 moveHitType[MAX_BATTLERS];
     u16 movePrevByBattler[MAX_BATTLERS];
+    u16 moveFailedTurn[MAX_BATTLERS];
     u16 moveCopied[MAX_BATTLERS];
     u16 moveCopiedHit[MAX_BATTLERS][MAX_BATTLERS];
     u16 moveSketched[MAX_BATTLERS];

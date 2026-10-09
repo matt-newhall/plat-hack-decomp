@@ -2054,6 +2054,8 @@ static void BattleControllerPlayer_FightCommand(BattleSystem *battleSys, BattleC
     battleCtx->moveCur = battleCtx->moveTemp;
     battleCtx->command = BATTLE_CONTROL_BEFORE_MOVE;
     battleCtx->spreadHitMask = 0;
+    battleCtx->moveTargetsResolved = 0;
+    battleCtx->moveTargetsAffected = 0;
     battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveTemp, randomizeTarget, 0);
 
     BattleController_EmitClearMessageBox(battleSys);
@@ -2727,6 +2729,7 @@ static BOOL BattleControllerPlayer_CheckStatusDisruption(BattleSystem *battleSys
         case CHECK_STATUS_STATE_RECHARGING:
             if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_RECHARGING) {
                 ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RECHARGING;
+                ATTACKER_TURN_FLAGS.recharging = TRUE;
 
                 LOAD_SUBSEQ(subscript_recharging);
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -4633,6 +4636,12 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
 
     BattleControllerPlayer_UpdateFlagsWhenHit(battleSys, battleCtx);
 
+    battleCtx->moveTargetsResolved++;
+
+    if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
+        battleCtx->moveTargetsAffected++;
+    }
+
     int range = Battler_MoveRange(battleCtx, battleCtx->attacker, battleCtx->moveCur);
 
     if (range == RANGE_ADJACENT_OPPONENTS
@@ -4761,6 +4770,31 @@ static void BattleControllerPlayer_LeftoverState37(BattleSystem *battleSys, Batt
     return;
 }
 
+/**
+ * @brief Check whether the attacker's action this turn counts as a failed move
+ * for Stomping Tantrum.
+ *
+ * @param battleCtx
+ * @return TRUE if the move counts as failed, FALSE otherwise
+ */
+static BOOL BattleControllerPlayer_MoveFailedThisTurn(BattleContext *battleCtx)
+{
+    if (ATTACKER_TURN_FLAGS.recharging) {
+        return FALSE;
+    }
+
+    if ((battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN) == FALSE) {
+        return TRUE;
+    }
+
+    if (battleCtx->moveTargetsResolved > 1) {
+        return battleCtx->moveTargetsAffected == 0;
+    }
+
+    return (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS)
+        && (battleCtx->moveStatusFlags & MOVE_STATUS_PROTECTED) == FALSE;
+}
+
 static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     u8 itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
@@ -4804,6 +4838,8 @@ static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, Ba
     if (battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN) {
         battleCtx->moveSketched[battleCtx->attacker] = Move_IsInvoker(battleCtx->moveTemp) ? battleCtx->moveCur : battleCtx->moveTemp;
     }
+
+    battleCtx->moveFailedTurn[battleCtx->attacker] = BattleControllerPlayer_MoveFailedThisTurn(battleCtx) ? battleCtx->totalTurns + 1 : 0;
 
     BattleControllerPlayer_UpdateFlagsWhenHit(battleSys, battleCtx);
     BattleSystem_VerifyMetronomeCount(battleSys, battleCtx);
