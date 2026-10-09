@@ -1155,6 +1155,10 @@
     {
       "id": "CommonStrings_Text_LevelCapIncreased",
       "en_US": "Level cap increased to {STRVAR_1 52, 0, 0}."
+    },
+    {
+      "id": "CommonStrings_Text_PlayerUsedTheEscapeRope",
+      "en_US": "{STRVAR_1 3, 0, 0} used the Escape Rope."
     }
   ]
 }

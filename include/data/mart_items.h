@@ -27,7 +27,6 @@ const PokeMartCommonItem PokeMartCommonItems[] = {
     { ITEM_BURN_HEAL, 0x2 },
     { ITEM_ICE_HEAL, 0x2 },
     { ITEM_FULL_HEAL, 0x4 },
-    { ITEM_ESCAPE_ROPE, 0x2 },
     { ITEM_REPEL, 0x2 },
     { ITEM_SUPER_REPEL, 0x3 },
     { ITEM_MAX_REPEL, 0x4 }
@@ -108,7 +107,6 @@ const u16 VeilstoneDeptStoreStock_1F_LEFT[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
     ITEM_ULTRA_BALL,
-    ITEM_ESCAPE_ROPE,
     ITEM_POKE_DOLL,
     ITEM_REPEL,
     ITEM_SUPER_REPEL,

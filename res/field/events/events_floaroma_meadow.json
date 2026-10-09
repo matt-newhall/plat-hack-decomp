@@ -166,11 +166,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_LEAF_STONE",
+            "id": "LOCALID_ITEM_GRASSY_SEED",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_FLOAROMA_MEADOW_LEAF_STONE",
+            "hidden_flag": "FLAG_OBTAINED_FLOAROMA_MEADOW_GRASSY_SEED",
             "script": 7234,
             "initial_dir": 0,
             "data": [],

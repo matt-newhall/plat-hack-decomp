@@ -954,6 +954,9 @@ JubilifeCity_RowanGiveGifts:
     SetVar VAR_0x8004, ITEM_INFINITE_REPEL
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
+    SetVar VAR_0x8004, ITEM_ESCAPE_ROPE
+    SetVar VAR_0x8005, 1
+    Common_GiveItemQuantity
     Message JubilifeCity_Text_RowanExplainGifts
     CloseMessage
     Return

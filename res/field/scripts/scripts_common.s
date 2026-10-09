@@ -82,6 +82,7 @@
     ScriptEntry CommonScript_RocketMansionBacklot @ 0x814
     ScriptEntry CommonScript_RocketMansionButler @ 0x815
     ScriptEntry CommonScript_IncreaseLevelCap @ 0x816
+    ScriptEntry CommonScript_UseEscapeRope @ 0x817
     ScriptEntryEnd
 
 CommonScript_EmptyScript1:
@@ -2625,3 +2626,13 @@ CommonScript_IncreaseLevelCap_Apply:
     WaitButton
     CloseMessage
     ReturnCommonScript
+
+CommonScript_UseEscapeRope:
+    LockAll
+    BufferPlayerName 0
+    Message CommonStrings_Text_PlayerUsedTheEscapeRope
+    WaitButton
+    CloseMessage
+    UseEscapeRope
+    ReleaseAll
+    End

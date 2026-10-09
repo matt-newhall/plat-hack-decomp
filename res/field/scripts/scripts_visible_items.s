@@ -38,7 +38,7 @@
     ScriptEntry VisibleItems_Route206_Metronome
     ScriptEntry VisibleItems_WaywardCave1F_TM73
     ScriptEntry VisibleItems_WaywardCave1F_FlamePlate
-    ScriptEntry VisibleItems_WaywardCave1F_EscapeRope
+    ScriptEntry VisibleItems_WaywardCave1F_Stardust
     ScriptEntry VisibleItems_MtCoronet4FRooms1And2_AdamantOrb
     ScriptEntry VisibleItems_WaywardCave1F_TM40
     ScriptEntry VisibleItems_MtCoronet4FRooms1And2_LustrousOrb
@@ -98,8 +98,8 @@
     ScriptEntry VisibleItems_Route209LostTower3F_SpookyPlate
     ScriptEntry VisibleItems_Route209LostTower4F_Nugget
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_MindPlate
-    ScriptEntry VisibleItems_SolaceonRuinsRoom7_EscapeRope
-    ScriptEntry VisibleItems_SolaceonRuinsRoom7_Nugget
+    ScriptEntry VisibleItems_SolaceonRuinsRoom7_PsychicSeed
+    ScriptEntry VisibleItems_SolaceonRuinsRoom7_MistySeed
     ScriptEntry VisibleItems_SolaceonRuinsRoom7_HM05
     ScriptEntry VisibleItems_Route210South_GreatBall
     ScriptEntry VisibleItems_Route210South_LuckyPunch
@@ -138,7 +138,7 @@
     ScriptEntry VisibleItems_Route218_HyperPotion
     ScriptEntry VisibleItems_CanalaveCity_TM89
     ScriptEntry VisibleItems_IronIslandB1FLeftRoom_PowerHerb
-    ScriptEntry VisibleItems_IronIslandB1FRightRoom_EscapeRope
+    ScriptEntry VisibleItems_IronIslandB1FRightRoom_Thunderstone
     ScriptEntry VisibleItems_IronIslandB1FRightRoom_Nugget
     ScriptEntry VisibleItems_IronIslandB2FRightRoom_Elixir
     ScriptEntry VisibleItems_IronIslandB2FRightRoom_TM23
@@ -151,7 +151,7 @@
     ScriptEntry VisibleItems_FloaromaMeadow_MeadowPlate
     ScriptEntry VisibleItems_Route211East_TM29
     ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_TM59
-    ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_EscapeRope
+    ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_ElectricSeed
     ScriptEntry VisibleItems_MtCoronet1FNorthRoom1_StarPiece
     ScriptEntry VisibleItems_MtCoronetB1F_LaggingTail
     ScriptEntry VisibleItems_MtCoronetB1F_MaxRevive
@@ -175,7 +175,7 @@
     ScriptEntry VisibleItems_MtCoronet2F_MaxRevive
     ScriptEntry VisibleItems_MtCoronet2F_TM91
     ScriptEntry VisibleItems_MtCoronet2F_HyperPotion
-    ScriptEntry VisibleItems_MtCoronet2F_EscapeRope
+    ScriptEntry VisibleItems_MtCoronet2F_Stardust
     ScriptEntry VisibleItems_MtCoronet1FNorthRoom_TM02
     ScriptEntry VisibleItems_Route222_Leftovers
     ScriptEntry VisibleItems_Route222_FullRestore
@@ -215,7 +215,7 @@
     ScriptEntry VisibleItems_StarkMountainOutside_BurnHeal
     ScriptEntry VisibleItems_StarkMountainOutside_RedCard
     ScriptEntry VisibleItems_StarkMountainRoom1_FullHeal
-    ScriptEntry VisibleItems_StarkMountainRoom1_EscapeRope
+    ScriptEntry VisibleItems_StarkMountainRoom1_RareBone
     ScriptEntry VisibleItems_StarkMountainRoom1_Swampertite
     ScriptEntry VisibleItems_StarkMountainRoom1_FullRestore
     ScriptEntry VisibleItems_StarkMountainRoom2_TM50
@@ -236,7 +236,7 @@
     ScriptEntry VisibleItems_Route229_Venusaurite
     ScriptEntry VisibleItems_ResortArea_Nugget
     ScriptEntry VisibleItems_Route230_ThroatSpray
-    ScriptEntry VisibleItems_FloaromaMeadow_LeafStone
+    ScriptEntry VisibleItems_FloaromaMeadow_GrassySeed
     ScriptEntry VisibleItems_OreburghMineB1F_PokeBall
     ScriptEntry VisibleItems_VeilstoneCityGalacticWarehouse_HM02
     ScriptEntry VisibleItems_GalacticHQB2F_GalacticKey
@@ -300,7 +300,7 @@
     ScriptEntry VisibleItems_GalacticHQ3F_GreenShard
     ScriptEntry VisibleItems_GalacticHQLaboratory_FullRestore
     ScriptEntry VisibleItems_GalacticHQ1F_Ether
-    ScriptEntry VisibleItems_GalacticHQ2F_GreenShard
+    ScriptEntry VisibleItems_GalacticHQ2F_TerrainExtender
     ScriptEntry VisibleItems_Route222_QuickBall
     ScriptEntry VisibleItems_Route222_PPUp
     ScriptEntry VisibleItems_Route223_HeartScale
@@ -559,8 +559,8 @@ VisibleItems_WaywardCave1F_FlamePlate:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_WaywardCave1F_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_WaywardCave1F_Stardust:
+    SetVar VAR_0x8008, ITEM_STARDUST
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -919,14 +919,14 @@ VisibleItems_SolaceonRuinsRoom7_MindPlate:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_SolaceonRuinsRoom7_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_SolaceonRuinsRoom7_PsychicSeed:
+    SetVar VAR_0x8008, ITEM_PSYCHIC_SEED
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_SolaceonRuinsRoom7_Nugget:
-    SetVar VAR_0x8008, ITEM_NUGGET
+VisibleItems_SolaceonRuinsRoom7_MistySeed:
+    SetVar VAR_0x8008, ITEM_MISTY_SEED
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1159,8 +1159,8 @@ VisibleItems_IronIslandB1FLeftRoom_PowerHerb:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_IronIslandB1FRightRoom_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_IronIslandB1FRightRoom_Thunderstone:
+    SetVar VAR_0x8008, ITEM_THUNDERSTONE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1237,8 +1237,8 @@ VisibleItems_MtCoronet1FNorthRoom1_TM59:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_MtCoronet1FNorthRoom1_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_MtCoronet1FNorthRoom1_ElectricSeed:
+    SetVar VAR_0x8008, ITEM_ELECTRIC_SEED
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1381,8 +1381,8 @@ VisibleItems_MtCoronet2F_HyperPotion:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_MtCoronet2F_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_MtCoronet2F_Stardust:
+    SetVar VAR_0x8008, ITEM_STARDUST
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1621,8 +1621,8 @@ VisibleItems_StarkMountainRoom1_FullHeal:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_StarkMountainRoom1_EscapeRope:
-    SetVar VAR_0x8008, ITEM_ESCAPE_ROPE
+VisibleItems_StarkMountainRoom1_RareBone:
+    SetVar VAR_0x8008, ITEM_RARE_BONE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1747,8 +1747,8 @@ VisibleItems_Route230_ThroatSpray:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_FloaromaMeadow_LeafStone:
-    SetVar VAR_0x8008, ITEM_LEAF_STONE
+VisibleItems_FloaromaMeadow_GrassySeed:
+    SetVar VAR_0x8008, ITEM_GRASSY_SEED
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2131,8 +2131,8 @@ VisibleItems_GalacticHQ1F_Ether:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_GalacticHQ2F_GreenShard:
-    SetVar VAR_0x8008, ITEM_GREEN_SHARD
+VisibleItems_GalacticHQ2F_TerrainExtender:
+    SetVar VAR_0x8008, ITEM_TERRAIN_EXTENDER
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

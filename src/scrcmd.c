@@ -70,6 +70,7 @@
 #include "overlay005/size_contest.h"
 #include "overlay005/vs_seeker.h"
 #include "overlay006/elevator_animation.h"
+#include "overlay006/field_warp.h"
 #include "overlay006/great_marsh_tram.h"
 #include "overlay006/healing_machine_animation.h"
 #include "overlay006/hm_cut_in.h"
@@ -337,6 +338,7 @@ static BOOL ScrCmd_ApplyMovement(ScriptContext *ctx);
 static BOOL ScrCmd_WaitMovement(ScriptContext *ctx);
 static BOOL ScrCmd_FollowPokePlaceBehindPlayer(ScriptContext *ctx);
 static BOOL ScrCmd_FollowPokePlaceAtSide(ScriptContext *ctx);
+static BOOL ScrCmd_UseEscapeRope(ScriptContext *ctx);
 static BOOL ScrCmd_LockAll(ScriptContext *ctx);
 static BOOL sub_020410CC(ScriptContext *ctx);
 static BOOL ScrCmd_ReleaseAll(ScriptContext *ctx);
@@ -2349,6 +2351,22 @@ static BOOL ScrCmd_FollowPokePlaceAtSide(ScriptContext *ctx)
     int facingDir = ScriptContext_GetVar(ctx);
 
     return FollowPoke_PlaceBesidePlayer(ctx, sideDir, facingDir);
+}
+
+/**
+ * @brief Spins the player out of the current cave to its exit, as the Escape Rope does.
+ *
+ * The script resumes on the destination map once the warp has finished.
+ *
+ * @param ctx
+ * @return TRUE, the script yields until the warp is done
+ */
+static BOOL ScrCmd_UseEscapeRope(ScriptContext *ctx)
+{
+    FieldWarp *fieldWarp = FieldWarp_InitEscapeRope(ctx->fieldSystem, HEAP_ID_FIELD2);
+
+    FieldTask_InitCall(ctx->task, FieldWarp_EscapeRopeFadeOut, fieldWarp);
+    return TRUE;
 }
 
 static BOOL ScrCmd_WaitMovement(ScriptContext *ctx)

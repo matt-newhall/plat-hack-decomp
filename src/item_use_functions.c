@@ -113,6 +113,7 @@ static BOOL UseExplorerKitInField(ItemFieldUseContext *usageContext);
 static BOOL UsePokeRadarInField(ItemFieldUseContext *usageContext);
 static BOOL UseSprayDuckInField(ItemFieldUseContext *usageContext);
 static BOOL UseVsSeekerInField(ItemFieldUseContext *usageContext);
+static BOOL UseEscapeRopeInField(ItemFieldUseContext *usageContext);
 static BOOL UseAzureFluteInField(ItemFieldUseContext *usageContext);
 static BOOL UseVsRecorderInField(ItemFieldUseContext *usageContext);
 static BOOL UseGracideaInField(ItemFieldUseContext *usageContext);
@@ -149,7 +150,6 @@ static BOOL ExitPcToField(FieldTask *task);
 static BOOL PrintRegisteredKeyItemUseMessage(FieldTask *task);
 static void RegisteredItem_CreateGoToAppTask(ItemFieldUseContext *usageContext, void *param1);
 static BOOL RegisteredItem_GoToApp(FieldTask *task);
-static BOOL WarpWithEscapeRope(FieldTask *task);
 static BOOL sub_020685AC(FieldTask *task);
 static void PrintRegisteredKeyItemError(ItemFieldUseContext *usageContext, u32 param1);
 static BOOL UseHealingKeyItemInField(ItemFieldUseContext *usageContext);
@@ -179,7 +179,7 @@ static const ItemUseFuncDat sItemUseFuncs[] = {
     [ITEM_USE_FUNC_SUPER_ROD]    = { UseSuperRodFromMenu,    UseSuperRodInField,    CanUseFishingRod  },
     [ITEM_USE_FUNC_BAG_MESSAGE]  = { NULL,                   UseBagMessageItem,     NULL              },
     [ITEM_USE_FUNC_EVO_STONE]    = { UseEvoStoneFromMenu,    NULL,                  NULL              },
-    [ITEM_USE_FUNC_ESCAPE_ROPE]  = { UseEscapeRopeFromMenu,  NULL,                  CanUseEscapeRope  },
+    [ITEM_USE_FUNC_ESCAPE_ROPE]  = { UseEscapeRopeFromMenu,  UseEscapeRopeInField,  CanUseEscapeRope  },
     [ITEM_USE_FUNC_AZURE_FLUTE]  = { UseAzureFluteFromMenu,  UseAzureFluteInField,  CanUseAzureFlute  },
     [ITEM_USE_FUNC_VS_RECORDER]  = { UseVsRecorderFromMenu,  UseVsRecorderInField,  NULL              },
     [ITEM_USE_FUNC_GRACIDEA]     = { UseGracideaFromMenu,    UseGracideaInField,    NULL              },
@@ -1020,16 +1020,19 @@ static BOOL ExitPcToField(FieldTask *task)
 
 static void UseEscapeRopeFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
 {
-    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
-    StartMenu *menu = FieldTask_GetEnv(usageContext->fieldTask);
+    sub_02068540(usageContext, additionalContext, SCRIPT_ID(COMMON_SCRIPTS, 71));
+}
 
-    FieldSystem_StartFieldMap(fieldSystem);
-
-    menu->callback = WarpWithEscapeRope;
-    menu->taskData = NULL;
-    menu->state = START_MENU_STATE_NEW_TASK;
-
-    Bag_TryRemoveItem(SaveData_GetBag(fieldSystem->saveData), usageContext->item, 1, HEAP_ID_FIELD2);
+/**
+ * @brief Warp out of the current cave with the registered Escape Rope.
+ *
+ * @param usageContext
+ * @return FALSE, as the warp task owns everything it needs.
+ */
+static BOOL UseEscapeRopeInField(ItemFieldUseContext *usageContext)
+{
+    sub_02068584(usageContext, SCRIPT_ID(COMMON_SCRIPTS, 71));
+    return FALSE;
 }
 
 static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageContext)
@@ -1043,15 +1046,6 @@ static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageConte
     }
 
     return ITEM_USE_CANNOT_USE_GENERIC;
-}
-
-static BOOL WarpWithEscapeRope(FieldTask *task)
-{
-    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);
-    FieldWarp *fieldWarp = FieldWarp_InitEscapeRope(fieldSystem, HEAP_ID_FIELD2);
-
-    FieldTask_InitJump(task, FieldWarp_EscapeRopeFadeOut, fieldWarp);
-    return FALSE;
 }
 
 static void UseAzureFluteFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)

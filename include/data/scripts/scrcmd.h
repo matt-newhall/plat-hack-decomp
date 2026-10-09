@@ -866,6 +866,7 @@ ScriptCommand(SCRCMD_BUFFERPOKEMONSTATNAME,                                ScrCm
 ScriptCommand(SCRCMD_SETPARTYMONNATURE,                                    ScrCmd_SetPartyMonNature)
 ScriptCommand(SCRCMD_FOLLOWPOKEPLACEBEHINDPLAYER,                          ScrCmd_FollowPokePlaceBehindPlayer)
 ScriptCommand(SCRCMD_FOLLOWPOKEPLACEATSIDE,                                ScrCmd_FollowPokePlaceAtSide)
+ScriptCommand(SCRCMD_USEESCAPEROPE,                                        ScrCmd_UseEscapeRope)
 
 // clang-format on
 

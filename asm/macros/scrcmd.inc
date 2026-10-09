@@ -5049,6 +5049,10 @@
     .short \facing
     .endm
 
+    .macro UseEscapeRope
+    .short SCRCMD_USEESCAPEROPE
+    .endm
+
     .macro GetFollowerPartySlot destVarID
     .short SCRCMD_GETFOLLOWERPARTYSLOT
     .short \destVarID

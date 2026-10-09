@@ -223,11 +223,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_ESCAPE_ROPE",
+            "id": "LOCALID_ITEM_ELECTRIC_SEED",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_1F_NORTH_ROOM_1_ESCAPE_ROPE",
+            "hidden_flag": "FLAG_OBTAINED_MT_CORONET_1F_NORTH_ROOM_1_ELECTRIC_SEED",
             "script": 7149,
             "initial_dir": 0,
             "data": [],
