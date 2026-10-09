@@ -3058,6 +3058,10 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                 BattleScript_Iter(battleCtx, jumpNoChange);
             }
         } else {
+            if (stageChange > MAX_STAT_STAGE - mon->statBoosts[BATTLE_STAT_ATTACK + statOffset]) {
+                stageChange = MAX_STAT_STAGE - mon->statBoosts[BATTLE_STAT_ATTACK + statOffset];
+            }
+
             if (battleCtx->sideEffectType == SIDE_EFFECT_TYPE_HELD_ITEM) {
                 battleCtx->msgBuffer.id = BattleStrings_Text_TheItemRaisedPokemonsStat_Ally; // "The {0} raised {1}'s {2}!"
                 battleCtx->msgBuffer.tags = TAG_NICKNAME_ITEM_STAT;
@@ -3078,10 +3082,6 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
             }
 
             mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
-
-            if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] > MAX_STAT_STAGE) {
-                mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] = MAX_STAT_STAGE;
-            }
         }
     } else {
         if ((battleCtx->sideEffectFlags & MOVE_SIDE_EFFECT_CANNOT_PREVENT) == FALSE) {
@@ -3183,6 +3183,10 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
             }
         }
 
+        if (stageChange < MIN_STAT_STAGE - mon->statBoosts[BATTLE_STAT_ATTACK + statOffset]) {
+            stageChange = MIN_STAT_STAGE - mon->statBoosts[BATTLE_STAT_ATTACK + statOffset];
+        }
+
         int msgId;
         if (stageChange == -1) {
             msgId = BattleStrings_Text_PokemonsStatFell_Ally;
@@ -3195,10 +3199,6 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
         SetupNicknameStatMsg(battleCtx, msgId, statOffset);
 
         mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] += stageChange;
-
-        if (mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] < MIN_STAT_STAGE) {
-            mon->statBoosts[BATTLE_STAT_ATTACK + statOffset] = MIN_STAT_STAGE;
-        }
 
         if (Battler_HeldItemEffect(battleCtx, battleCtx->sideEffectMon) == HOLD_EFFECT_EJECT_PACK) {
             battleCtx->battleStatusMask2 |= (SYSCTL_EJECT_PACK_PENDING_0 << battleCtx->sideEffectMon);
