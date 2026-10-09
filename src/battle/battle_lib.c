@@ -7317,7 +7317,7 @@ BOOL BattleSystem_TriggerHeldItemOnHit(BattleSystem *battleSys, BattleContext *b
     int unnerveCount = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->defender, ABILITY_UNNERVE);
 
     if (unnerveCount > 0
-        && !(itemEffect == HOLD_EFFECT_RECOIL_PHYSICAL
+        && (itemEffect == HOLD_EFFECT_RECOIL_PHYSICAL
         || itemEffect == HOLD_EFFECT_RECOIL_SPECIAL
         || itemEffect == HOLD_EFFECT_HP_RESTORE_SE)) {
         return FALSE;
