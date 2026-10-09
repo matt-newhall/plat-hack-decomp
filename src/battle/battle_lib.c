@@ -2070,7 +2070,7 @@ int BattleSystem_Defender(BattleSystem *battleSys, BattleContext *battleCtx, int
             defender = RAGE_POWDER_USER(enemySide);
         } else if (battleCtx->battleMons[target].curHP) {
             defender = target;
-        } else {
+        } else if (BattleSystem_GetBattlerSide(battleSys, target) != BattleSystem_GetBattlerSide(battleSys, attacker)) {
             // If the original target is no longer alive, try to target their partner instead
             target = BattleSystem_RandomOpponent(battleSys, battleCtx, attacker);
             if (battleCtx->battleMons[target].curHP) {
