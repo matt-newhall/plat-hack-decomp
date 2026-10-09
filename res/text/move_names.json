@@ -2296,6 +2296,10 @@
     {
       "id": "pl_msg_00000647_00573",
       "en_US": "Pollen Puff"
+    },
+    {
+      "id": "pl_msg_00000647_00574",
+      "en_US": "Incinerate"
     }
   ]
 }

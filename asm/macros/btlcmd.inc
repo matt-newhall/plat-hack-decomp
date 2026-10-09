@@ -1382,6 +1382,12 @@
     .long BTLCMD_CALCSTRENGTHSAPHEAL
     .endm
 
+    .macro TryIncinerate jump_if_sticky_hold:req, jump_if_no_berry:req
+    .long BTLCMD_TRYINCINERATE
+    .long (\jump_if_sticky_hold-.) / 4 - 1
+    .long (\jump_if_no_berry-.) / 4 - 1
+    .endm
+
     .macro SetupEjectPack
     .long BTLCMD_SETUPEJECTPACK
     .endm

@@ -5614,6 +5614,15 @@
         "restores half its HP\n",
         "instead."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00574",
+      "en_US": [
+        "The user attacks foes\n",
+        "with fire. Any Berry\n",
+        "they hold is burnt up\n",
+        "and can’t be used."
+      ]
     }
   ]
 }

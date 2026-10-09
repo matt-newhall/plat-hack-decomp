@@ -12045,6 +12045,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Pollen Puff!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01722",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Incinerate!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01723",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Incinerate!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01724",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Incinerate!"
+      ]
     }
   ]
 }

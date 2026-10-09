@@ -358,6 +358,7 @@ static BOOL BtlCmd_PrepareFutureSight(BattleSystem *battleSys, BattleContext *ba
 static BOOL BtlCmd_FinishFutureSight(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_ShowAbilityPopupPair(BattleSystem *battleSys, BattleContext *battleCtx);
 static BOOL BtlCmd_CalcStrengthSapHeal(BattleSystem *battleSys, BattleContext *battleCtx);
+static BOOL BtlCmd_TryIncinerate(BattleSystem *battleSys, BattleContext *battleCtx);
 
 static int BattleScript_Read(BattleContext *battleCtx);
 static void BattleScript_Iter(BattleContext *battleCtx, int i);
@@ -13871,6 +13872,32 @@ static BOOL BtlCmd_CalcStrengthSapHeal(BattleSystem *battleSys, BattleContext *b
         : DEFENDING_MON.attack * 2 / (2 - stage);
 
     battleCtx->hpCalcTemp = -(heal > 0 ? heal : 1);
+
+    return FALSE;
+}
+
+/**
+ * @brief Try to burn up the defender's held Berry for Incinerate.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return FALSE
+ */
+static BOOL BtlCmd_TryIncinerate(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    BattleScript_Iter(battleCtx, 1);
+    int jumpStickyHold = BattleScript_Read(battleCtx);
+    int jumpNoBerry = BattleScript_Read(battleCtx);
+
+    if (Item_IsBerry(DEFENDING_MON.heldItem) == FALSE) {
+        BattleScript_Iter(battleCtx, jumpNoBerry);
+    } else if (Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_STICKY_HOLD) == TRUE) {
+        BattleScript_Iter(battleCtx, jumpStickyHold);
+    } else {
+        battleCtx->msgItemTemp = DEFENDING_MON.heldItem;
+        DEFENDING_MON.heldItem = ITEM_NONE;
+        BattleMon_CopyToParty(battleSys, battleCtx, battleCtx->defender);
+    }
 
     return FALSE;
 }

@@ -275,6 +275,7 @@ ScriptCommand(BTLCMD_PREPAREFUTURESIGHT,                  BtlCmd_PrepareFutureSi
 ScriptCommand(BTLCMD_FINISHFUTURESIGHT,                   BtlCmd_FinishFutureSight)
 ScriptCommand(BTLCMD_SHOWABILITYPOPUPPAIR,                 BtlCmd_ShowAbilityPopupPair)
 ScriptCommand(BTLCMD_CALCSTRENGTHSAPHEAL,                 BtlCmd_CalcStrengthSapHeal)
+ScriptCommand(BTLCMD_TRYINCINERATE,                       BtlCmd_TryIncinerate)
 
 // clang-format on
 
