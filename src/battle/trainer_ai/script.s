@@ -4123,9 +4123,28 @@ TagStrategy_PartnerWeaknessPolicy:
     // side of the field.
     IfMoveEqualTo MOVE_EXTREME_SPEED, TagStrategy_PartnerScoreMinus30
     LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo HOLD_EFFECT_ATK_UP_ON_ICE_HIT, TagStrategy_PartnerSnowball
+    IfLoadedEqualTo HOLD_EFFECT_ATK_UP_ON_ELECTRIC_HIT, TagStrategy_PartnerCellBattery
+    IfLoadedEqualTo HOLD_EFFECT_SP_ATK_UP_ON_WATER_HIT, TagStrategy_PartnerWaterHitItem
+    IfLoadedEqualTo HOLD_EFFECT_SP_DEF_UP_ON_WATER_HIT, TagStrategy_PartnerWaterHitItem
     IfLoadedNotEqualTo HOLD_EFFECT_SHARPLY_BOOST_OFFENSES, TagStrategy_PartnerScoreMinus30
     IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, TagStrategy_PartnerScorePlus12
     IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerSnowball:
+    IfMoveEqualTo MOVE_ICE_SHARD, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerCellBattery:
+    // Edge case for Galvanize + Quick Attack, maybe we could use it idk
+    IfMoveNotEqualTo MOVE_QUICK_ATTACK, TagStrategy_PartnerScoreMinus30
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_GALVANIZE, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerWaterHitItem:
+    IfMoveEqualTo MOVE_AQUA_JET, TagStrategy_PartnerScorePlus12
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerFling:
