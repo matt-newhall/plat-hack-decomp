@@ -11856,6 +11856,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Horn Leech!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01695",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Smart Strike!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01696",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Smart Strike!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01697",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Smart Strike!"
+      ]
     }
   ]
 }

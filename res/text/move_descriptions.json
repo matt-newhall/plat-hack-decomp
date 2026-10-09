@@ -5528,6 +5528,15 @@
         "HP is restored by half\n",
         "the damage dealt."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00565",
+      "en_US": [
+        "The user stabs the\n",
+        "target with a sharp\n",
+        "horn. This attack\n",
+        "never misses."
+      ]
     }
   ]
 }
