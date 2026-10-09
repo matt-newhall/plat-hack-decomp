@@ -3203,7 +3203,8 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     }
     if (Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE
         || Battler_Ability(battleCtx, attacker) == ABILITY_KEEN_EYE
-        || Battler_Ability(battleCtx, attacker) == ABILITY_ILLUMINATE) {
+        || Battler_Ability(battleCtx, attacker) == ABILITY_ILLUMINATE
+        || MOVE_DATA(move).effect == BATTLE_EFFECT_IGNORE_TARGET_STAT_CHANGES) {
         evaStages = 0;
     }
     if (MON_IS_IDENTIFIED(defender) && evaStages < 0) {

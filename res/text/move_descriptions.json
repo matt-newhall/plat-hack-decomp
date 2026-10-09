@@ -5566,6 +5566,16 @@
         "this move’s power is\n",
         "doubled."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00569",
+      "en_US": [
+        "The user attacks by\n",
+        "slicing with a long\n",
+        "horn. The target’s stat\n",
+        "changes don’t affect\n",
+        "this attack’s damage."
+      ]
     }
   ]
 }

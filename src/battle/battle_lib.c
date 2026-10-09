@@ -4368,6 +4368,7 @@ static u16 sSlicingMoves[] = {
     MOVE_NIGHT_SLASH,
     MOVE_PSYBLADE,
     MOVE_PSYCHO_CUT,
+    MOVE_SACRED_SWORD,
     MOVE_RAZOR_LEAF,
     MOVE_SHADOW_CLAW,
     MOVE_SLASH,
@@ -9382,7 +9383,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
         spAttackStage = 0;
     }
 
-    if (attackerParams.ability == ABILITY_UNAWARE) {
+    if (attackerParams.ability == ABILITY_UNAWARE
+        || MOVE_DATA(move).effect == BATTLE_EFFECT_IGNORE_TARGET_STAT_CHANGES) {
         defenseStage = 0;
         spDefenseStage = 0;
     }
