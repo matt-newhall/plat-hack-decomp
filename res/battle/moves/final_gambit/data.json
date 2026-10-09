@@ -1,0 +1,21 @@
+{
+    "name": "Final Gambit",
+    "class": "CLASS_SPECIAL",
+    "type": "TYPE_FIGHTING",
+    "power": 1,
+    "accuracy": 100,
+    "pp": 5,
+    "effect": {
+        "type": "BATTLE_EFFECT_DEAL_CURRENT_HP",
+        "chance": 0
+    },
+    "range": "RANGE_SINGLE_TARGET",
+    "priority": 0,
+    "flags": [
+        "MOVE_FLAG_CAN_PROTECT"
+    ],
+    "contest": {
+        "effect": "CONTEST_EFFECT_TWO_VOLTAGE_IN_A_ROW_ADVANTAGE",
+        "type": "CONTEST_TYPE_SMART"
+    }
+}

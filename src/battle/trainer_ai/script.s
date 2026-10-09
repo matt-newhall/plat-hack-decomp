@@ -193,6 +193,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Basic_CheckCannotLeechSeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Basic_CheckCannotDisable
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEAL_CURRENT_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Basic_CheckCannotEncore
@@ -1716,6 +1717,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Expert_StatusSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, Expert_Explosion
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEAL_CURRENT_HP, Expert_FinalGambit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Expert_StatusMoveBonus
@@ -1993,6 +1995,12 @@ Expert_Explosion_RiskyGamble:
 
 Expert_Explosion_End:
     PopOrEnd
+
+Expert_FinalGambit:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, ScorePlus6
+    IfAttackerHasMoreHP ScorePlus8
+    IfDefenderCanKO ScorePlus7
+    GoTo ScorePlus6
 
 Expert_Memento:
     // Memento keeps its own copy of the ladder rather than sharing Explosion's: it is not on the
@@ -3545,6 +3553,7 @@ EvalAttack_CheckKill:
 EvalAttack_ExcludedFromKillBonus:
     TableEntry BATTLE_EFFECT_HALVE_DEFENSE
     TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
+    TableEntry BATTLE_EFFECT_DEAL_CURRENT_HP
     TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO
     TableEntry TABLE_END
 

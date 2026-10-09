@@ -2264,6 +2264,10 @@
     {
       "id": "pl_msg_00000648_00565",
       "en_US": "SMART STRIKE"
+    },
+    {
+      "id": "pl_msg_00000648_00566",
+      "en_US": "FINAL GAMBIT"
     }
   ]
 }

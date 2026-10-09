@@ -11877,6 +11877,27 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Smart Strike!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01698",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Final Gambit!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01699",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Final Gambit!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01700",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Final Gambit!"
+      ]
     }
   ]
 }

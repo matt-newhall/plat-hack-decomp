@@ -54,6 +54,7 @@ static const u16 sAltPowerMoveEffects[] = {
     BATTLE_EFFECT_HALVE_HP,
     BATTLE_EFFECT_AVERAGE_HP,
     BATTLE_EFFECT_SET_HP_EQUAL_TO_USER,
+    BATTLE_EFFECT_DEAL_CURRENT_HP,
     0xFFFF
 };
 
@@ -64,6 +65,7 @@ static const u16 sAltPowerMoveEffects[] = {
 static const u16 sExcludedFromBestDamageMoveEffects[] = {
     BATTLE_EFFECT_HALVE_DEFENSE, // Explosion
     BATTLE_EFFECT_HALVE_SP_DEFENSE, // Self-Destruct, Misty Explosion
+    BATTLE_EFFECT_DEAL_CURRENT_HP, // Final Gambit
     BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO, // Rollout, Ice Ball
     BATTLE_EFFECT_BIND_HIT, // Wrap, Fire Spin, Clamp, Infestation, Sand Tomb, Magma Storm
 
@@ -227,6 +229,7 @@ static void AICmd_LoadBattlerAttemptedMove(BattleSystem *battleSys, BattleContex
 static void AICmd_IfMoveEffectivenessAgainst(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfMoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfTerrainMoveFails(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfAttackerHasMoreHP(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3612,6 +3615,22 @@ static void AICmd_IfTerrainMoveFails(BattleSystem *battleSys, BattleContext *bat
 }
 
 /**
+ * @brief Jump if attacker's current HP is strictly higher than defender's.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfAttackerHasMoreHP(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+
+    if (battleCtx->battleMons[AI_CONTEXT.attacker].curHP > battleCtx->battleMons[AI_CONTEXT.defender].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
  * @brief Push an address for the AI script onto the cursor stack.
  *
  * @param battleSys
@@ -3991,6 +4010,10 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     case MOVE_SEISMIC_TOSS:
     case MOVE_NIGHT_SHADE:
         damage = battleCtx->battleMons[attacker].level;
+        break;
+
+    case MOVE_FINAL_GAMBIT:
+        damage = battleCtx->battleMons[attacker].curHP;
         break;
 
     case MOVE_PSYWAVE:

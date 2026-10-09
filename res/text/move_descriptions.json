@@ -5537,6 +5537,15 @@
         "horn. This attack\n",
         "never misses."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00566",
+      "en_US": [
+        "The user risks all to\n",
+        "attack. The user faints\n",
+        "but deals damage equal\n",
+        "to its HP."
+      ]
     }
   ]
 }

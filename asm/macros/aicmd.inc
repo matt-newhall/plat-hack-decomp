@@ -676,6 +676,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfAttackerHasMoreHP jump:req
+    .long AICMD_IFATTACKERHASMOREHP
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro FlagBestDamageMove
     .long AICMD_FLAGBESTDAMAGEMOVE
     .endm

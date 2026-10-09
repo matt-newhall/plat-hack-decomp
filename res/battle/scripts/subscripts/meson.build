@@ -359,5 +359,6 @@ subscript_files = files(
     'subscript_held_item_terrain_seed.s',
     'subscript_sport_end.s',
     'subscript_healer.s',
-    'subscript_harvest.s'
+    'subscript_harvest.s',
+    'subscript_final_gambit.s'
 )

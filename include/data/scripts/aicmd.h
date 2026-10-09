@@ -145,6 +145,7 @@ ScriptCommand(AICMD_LOADBATTLERATTEMPTEDMOVE,         AICmd_LoadBattlerAttempted
 ScriptCommand(AICMD_IFMOVEEFFECTIVENESSAGAINST,       AICmd_IfMoveEffectivenessAgainst)
 ScriptCommand(AICMD_IFMOVEBLOCKEDBYTERRAIN,           AICmd_IfMoveBlockedByTerrain)
 ScriptCommand(AICMD_IFTERRAINMOVEFAILS,               AICmd_IfTerrainMoveFails)
+ScriptCommand(AICMD_IFATTACKERHASMOREHP,              AICmd_IfAttackerHasMoreHP)
 
 // clang-format on
 

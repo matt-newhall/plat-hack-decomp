@@ -1778,6 +1778,7 @@ BOOL BattleSystem_ParentalBondAppliesToMove(BattleContext *battleCtx, u16 move)
     case BATTLE_EFFECT_UPROAR:
     case BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO:
     case BATTLE_EFFECT_SET_HP_EQUAL_TO_USER:
+    case BATTLE_EFFECT_DEAL_CURRENT_HP:
 
     case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT:
     case BATTLE_EFFECT_CHARGE_TURN_HIGH_CRIT_FLINCH:
@@ -11354,6 +11355,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         damageToTarget = 40;
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, defender, BATTLEMON_LEVEL, NULL);
+                    } else if (moveEffect == BATTLE_EFFECT_DEAL_CURRENT_HP) {
+                        damageToTarget = defenderPokemonCurHP;
                     } else if (moveEffect == BATTLE_EFFECT_HALVE_HP) {
                         damageToTarget = battlerPokemonCurHP / 2;
 
@@ -11547,6 +11550,8 @@ static int PostKOSwitchIn(BattleSystem *battleSys, int battler, BOOL requireSupe
                         damageToTarget = 40;
                     } else if (moveEffect == BATTLE_EFFECT_LEVEL_DAMAGE_FLAT) {
                         damageToTarget = BattleMon_Get(battleCtx, battler, BATTLEMON_LEVEL, NULL);
+                    } else if (moveEffect == BATTLE_EFFECT_DEAL_CURRENT_HP) {
+                        damageToTarget = battlerPokemonCurHP;
                     } else if (moveEffect == BATTLE_EFFECT_HALVE_HP) {
                         damageToTarget = defenderPokemonCurHP / 2;
 
