@@ -5546,6 +5546,16 @@
         "but deals damage equal\n",
         "to its HP."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00567",
+      "en_US": [
+        "The user protects\n",
+        "itself by wrapping its\n",
+        "body in soft cotton,\n",
+        "drastically raising\n",
+        "its Defense stat."
+      ]
     }
   ]
 }

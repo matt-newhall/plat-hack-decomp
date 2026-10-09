@@ -173,6 +173,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Basic_CheckCannotConfuse
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2, Basic_CheckHighStatStage_Attack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_2, Basic_CheckHighStatStage_Defense
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Basic_CheckHighStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_UP_2, Basic_CheckHighStatStage_Speed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_2, Basic_CheckHighStatStage_SpAttack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Basic_CheckHighStatStage_SpDefense
@@ -1836,6 +1837,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHELL_SMASH, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_3, Expert_Setup
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_StatusMoveBonus
@@ -2163,6 +2165,7 @@ Expert_Setup_Classify:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_SetupSplitSpecial
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_2, Expert_SetupDefensive
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Expert_SetupDefensive
@@ -2255,6 +2258,7 @@ Expert_SetupDefensive_ScorePlus2Again:
 Expert_SetupDefensive_DefenseEffects:
     TableEntry BATTLE_EFFECT_DEF_UP
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_STOCKPILE
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
@@ -3656,6 +3660,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4240,6 +4245,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4287,6 +4293,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4340,6 +4347,7 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4398,6 +4406,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2

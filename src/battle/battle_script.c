@@ -2974,7 +2974,10 @@ static inline BOOL SimpleDoublesStatStageChange(BattleContext *battleCtx)
  */
 static void DecodeStatStageChange(BattleContext *battleCtx, int *statOffset, int *stageChange)
 {
-    if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES) {
+    if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_DEF_UP_3_STAGES) {
+        *statOffset = BATTLE_STAT_DEFENSE - BATTLE_STAT_ATTACK;
+        *stageChange = 3;
+    } else if (battleCtx->sideEffectParam >= MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES) {
         *statOffset = battleCtx->sideEffectParam - MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES;
         *stageChange = 3;
     } else if (battleCtx->sideEffectParam == MOVE_SUBSCRIPT_PTR_SP_ATTACK_UP_3_STAGES) {
