@@ -1375,7 +1375,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    if (battler1ItemEffect == HOLD_EFFECT_PINCH_PRIORITY && Battler_Ability(battleCtx, battler2) != ABILITY_UNNERVE) {
+    if (battler1ItemEffect == HOLD_EFFECT_PINCH_PRIORITY
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler1, ABILITY_UNNERVE) == 0) {
         if (Battler_Ability(battleCtx, battler1) == ABILITY_GLUTTONY) {
             battler1ItemParam /= 2;
         }
@@ -1448,7 +1449,8 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         }
     }
 
-    if (battler2ItemEffect == HOLD_EFFECT_PINCH_PRIORITY && Battler_Ability(battleCtx, battler1) != ABILITY_UNNERVE) {
+    if (battler2ItemEffect == HOLD_EFFECT_PINCH_PRIORITY
+        && BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler2, ABILITY_UNNERVE) == 0) {
         if (Battler_Ability(battleCtx, battler2) == ABILITY_GLUTTONY) {
             battler2ItemParam /= 2;
         }
@@ -10326,7 +10328,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 
     if (defenderItemEffect == HOLD_EFFECT_RECOIL_PHYSICAL
         && battleCtx->battleMons[battleCtx->attacker].curHP
-        && unnerveCount > 0
+        && unnerveCount == 0
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
         && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken
             || (DEFENDER_TURN_FLAGS.physicalDamageLastAttacker == battleCtx->attacker && battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM)))) {
@@ -10337,7 +10339,7 @@ BOOL BattleSystem_TriggerHeldItemOnPivotMove(BattleSystem *battleSys, BattleCont
 
     if (defenderItemEffect == HOLD_EFFECT_RECOIL_SPECIAL
         && battleCtx->battleMons[battleCtx->attacker].curHP
-        && unnerveCount > 0
+        && unnerveCount == 0
         && Battler_Ability(battleCtx, battleCtx->attacker) != ABILITY_MAGIC_GUARD
         && (DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
             || (DEFENDER_TURN_FLAGS.specialDamageLastAttacker == battleCtx->attacker && battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM)))) {
