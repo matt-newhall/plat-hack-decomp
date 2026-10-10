@@ -29,6 +29,10 @@ void BerryPatches_Init(BerryPatch *patches, const BerryPatchInit *initPatches, i
     BerryPatches_Clear(patches);
 
     for (int i = 0; i < MAX_BERRY_PATCHES && i < initSize; i++) {
+        if (initPatches[i].berryItemID == ITEM_NONE) {
+            continue;
+        }
+
         int berryID = initPatches[i].berryItemID - FIRST_BERRY_IDX + 1;
 
         patches[i].berryID = berryID;

@@ -91,7 +91,7 @@ BerryTree_EndLeftBerryMessage:
     GoTo BerryTree_CloseAndEnd
 
 BerryTree_ShowEmptySoilMessage:
-    Message BerryTrees_Text_SoftEarthySoilAfterHarvest
+    Message BerryTrees_Text_SoilIsDryToTheTouch
     WaitButton
     GoTo BerryTree_CloseAndEnd
 

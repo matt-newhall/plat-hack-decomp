@@ -146,8 +146,8 @@
       ]
     },
     {
-      "id": "BerryTrees_Text_SoftEarthySoilAfterHarvest",
-      "en_US": "It’s soft, earthy soil."
+      "id": "BerryTrees_Text_SoilIsDryToTheTouch",
+      "en_US": "The soil is dry to the touch."
     },
     {
       "id": "BerryTrees_Text_MulchHasBeenLaidDownAfterHarvest",

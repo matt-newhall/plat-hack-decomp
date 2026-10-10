@@ -724,11 +724,7 @@ static void UseMulchFromMenu(ItemMenuUseContext *usageContext, const ItemUseCont
 
 static enum ItemUseCheckResult CanUseMulch(const ItemUseContext *usageContext)
 {
-    if (usageContext->berryPatchFlags & BERRY_PATCH_FLAG_CAN_MULCH) {
-        return ITEM_USE_CAN_USE;
-    } else {
-        return ITEM_USE_CANNOT_USE_GENERIC;
-    }
+    return ITEM_USE_CANNOT_USE_GENERIC;
 }
 
 static void UseHoneyFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
