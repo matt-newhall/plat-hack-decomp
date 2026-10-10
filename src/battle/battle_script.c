@@ -4761,9 +4761,11 @@ static BOOL BtlCmd_TryDisable(BattleSystem *battleSys, BattleContext *battleCtx)
         && moveSlot != LEARNED_MOVES_MAX
         && DEFENDING_MON.ppCur[moveSlot]
         && DEFENDER_LAST_MOVE) {
+        BOOL hasTargetMoved = DEFENDER_ACTION[BATTLE_ACTION_PICK_COMMAND] == BATTLE_CONTROL_MOVE_END;
+
         battleCtx->msgMoveTemp = DEFENDER_LAST_MOVE;
         DEFENDING_MON.moveEffectsData.disabledMove = battleCtx->msgMoveTemp;
-        DEFENDING_MON.moveEffectsData.disabledTurns = BattleSystem_RandNext(battleSys) % 4 + 3; // range: [3-6]
+        DEFENDING_MON.moveEffectsData.disabledTurns = hasTargetMoved ? 4 : 3;
     } else {
         BattleScript_Iter(battleCtx, jumpOnFail);
     }
