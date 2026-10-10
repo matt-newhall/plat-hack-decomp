@@ -184,6 +184,7 @@ SolaceonRuinsRoom6_CounterpartLeaveFinish:
     WaitMovement
     RemoveObject LOCALID_SOLACEON_RUINS_ROOM_6_COUNTERPART
     SetFlag FLAG_BEATEN_SOLACEON_RUINS_COUNTERPART
+    Common_IncreaseLevelCap 42
     ReleaseAll
     End
 

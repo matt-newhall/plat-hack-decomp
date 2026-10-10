@@ -50,12 +50,14 @@ OreburghGym_RoarkGiveTM76:
     Message OreburghGym_Text_RoarkExplainStealthRock
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 34, 42
     ReleaseAll
     End
 
 OreburghGym_RoarkGiveTM76BagFull:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 34, 42
     ReleaseAll
     End
 

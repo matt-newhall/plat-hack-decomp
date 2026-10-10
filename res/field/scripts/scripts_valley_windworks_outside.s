@@ -190,6 +190,7 @@ ValleyWindworksOutside_OnFrameLooker:
     WaitMovement
     RemoveObject LOCALID_LOOKER
     SetVar VAR_VALLEY_WINDWORKS_LOOKER_STATE, 2
+    Common_IncreaseLevelCap 22
     ReleaseAll
     End
 

@@ -113,6 +113,7 @@ StarkMountainOutside_OnFrameLookerBuck:
     RemoveObject LOCALID_BUCK
     SetFlag FLAG_HIDE_STARK_MOUNTAIN_OUTSIDE_BUCK
     SetVar VAR_STARK_MOUNTAIN_OUTSIDE_STATE, 3
+    Common_IncreaseLevelCap 82
     ReleaseAll
     End
 

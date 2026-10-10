@@ -2549,6 +2549,7 @@ CommonScript_RocketMansionAriana:
     WaitMovement
     RemoveObject LOCALID_MANSION_BACKLOT
     RemoveObject LOCALID_MANSION_BUTLER
+    Common_IncreaseLevelCap 50
     ReleaseAll
     End
 
@@ -2614,11 +2615,16 @@ CommonScript_RocketMansion_Movement_ButlerLeave:
 CommonScript_IncreaseLevelCap:
     GoToIfSet FLAG_LEVEL_CAP_ALL_BOSSES, CommonScript_IncreaseLevelCap_Apply
     GoToIfUnset FLAG_LEVEL_CAP_GYM_LEADERS, CommonScript_IncreaseLevelCap_Skip
-    GoToIfEq VAR_0x8005, TRUE, CommonScript_IncreaseLevelCap_Apply
+    GoToIfEq VAR_0x8005, 0, CommonScript_IncreaseLevelCap_Skip
+    SetVar VAR_0x8004, VAR_0x8005
+    GoTo CommonScript_IncreaseLevelCap_Apply
+
 CommonScript_IncreaseLevelCap_Skip:
     ReturnCommonScript
+    End
 
 CommonScript_IncreaseLevelCap_Apply:
+    GoToIfLe VAR_0x8004, VAR_LEVEL_CAP, CommonScript_IncreaseLevelCap_Skip
     SetLevelCap VAR_0x8004
     BufferNumber 0, VAR_0x8004
     PlaySE SEQ_SE_DP_PINPON
@@ -2626,6 +2632,7 @@ CommonScript_IncreaseLevelCap_Apply:
     WaitButton
     CloseMessage
     ReturnCommonScript
+    End
 
 CommonScript_UseEscapeRope:
     LockAll

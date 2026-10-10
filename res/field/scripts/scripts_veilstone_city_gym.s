@@ -57,12 +57,14 @@ VeilstoneGym_MayleneTryGiveTM60:
     Message VeilstoneGym_Text_MayleneExplainTM60
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 63, 73
     ReleaseAll
     End
 
 VeilstoneGym_MayleneCannotGiveTM60:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 63, 73
     ReleaseAll
     End
 

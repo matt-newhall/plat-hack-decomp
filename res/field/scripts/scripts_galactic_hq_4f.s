@@ -54,6 +54,7 @@ GalacticHQ4F_Cyrus:
     WaitMovement
     RemoveObject LOCALID_CYRUS
     SetVar VAR_GALACTIC_HQ_4F_STATE, 1
+    Common_IncreaseLevelCap 90
     ReleaseAll
     End
 

@@ -57,12 +57,14 @@ SnowpointGym_CandiceTryGiveTM72:
     Message SnowpointGym_Text_CandiceExplainTM72
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 78, 85
     ReleaseAll
     End
 
 SnowpointGym_CandiceCannotGiveTM72:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 78, 85
     ReleaseAll
     End
 

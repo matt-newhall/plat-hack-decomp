@@ -96,12 +96,14 @@ HearthomeGym_FantinaTryGiveTM65:
     Message HearthomeGym_FantinaExplainTM65
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 44, 50
     ReleaseAll
     End
 
 HearthomeGym_FantinaCannotGiveTM65:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 44, 50
     ReleaseAll
     End
 

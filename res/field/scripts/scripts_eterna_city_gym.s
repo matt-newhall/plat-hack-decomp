@@ -127,6 +127,9 @@ EternaGym_GardeniaGiveTM86:
     CloseMessage
     ReleaseAll
     AdvanceEternaGymClock
+    LockAll
+    Common_IncreaseLevelCap 25, 31
+    ReleaseAll
     End
 
 EternaGym_GardeniaGiveTM86BagFull:
@@ -134,6 +137,9 @@ EternaGym_GardeniaGiveTM86BagFull:
     CloseMessage
     ReleaseAll
     AdvanceEternaGymClock
+    LockAll
+    Common_IncreaseLevelCap 25, 31
+    ReleaseAll
     End
 
 EternaGym_LostBattle:

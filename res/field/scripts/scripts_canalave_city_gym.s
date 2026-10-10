@@ -61,12 +61,14 @@ CanalaveGym_ByronTryGiveTM91:
     Message CanalaveGym_Text_ByronExplainTM91
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 87, 92
     ReleaseAll
     End
 
 CanalaveGym_ByronCannotGiveTM91:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 87, 92
     ReleaseAll
     End
 

@@ -63,12 +63,14 @@ SunyshoreGymRoom3_VolknerTryGiveTM57:
     Message SunyshoreGymRoom3_Text_VolknerExplainTM57
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 94, 100
     ReleaseAll
     End
 
 SunyshoreGymRoom3_VolknerCannotGiveTM57:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 94, 100
     ReleaseAll
     End
 

@@ -34,7 +34,9 @@ FuegoIronworksBuilding_FuegoBattle:
     Message FuegoIronworksBuilding_Text_FuegoDefeat
     WaitButton
     Message FuegoIronworksBuilding_Text_FuegoGrantsCut
-    GoTo FuegoIronworksBuilding_MrFuegoEnd
+    WaitButton
+    Common_IncreaseLevelCap 27
+    ReleaseAll
     End
 
 FuegoIronworksBuilding_FuegoBattleLost:

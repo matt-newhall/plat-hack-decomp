@@ -5479,9 +5479,9 @@
     CallCommonScript 0x809
     .endm
 
-    .macro Common_IncreaseLevelCap level, isGymLeader
-    SetVar VAR_0x8004, \level
-    SetVar VAR_0x8005, \isGymLeader
+    .macro Common_IncreaseLevelCap bossLevel, gymLevel=0
+    SetVar VAR_0x8004, \bossLevel
+    SetVar VAR_0x8005, \gymLevel
     CallCommonScript 0x816
     .endm
 

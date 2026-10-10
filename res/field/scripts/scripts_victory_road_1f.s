@@ -260,6 +260,7 @@ VictoryRoad_CounterpartLeave:
     RemoveObject LOCALID_COUNTERPART
     Common_FadeToDefaultMusic
     SetFlag FLAG_DEFEATED_VICTORY_ROAD_COUNTERPART
+    Common_IncreaseLevelCap 98
     ReleaseAll
     End
 

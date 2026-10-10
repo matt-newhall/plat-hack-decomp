@@ -87,6 +87,7 @@ TeamGalacticEternaBuilding4F_HandleTeamGalacticLeftEternaBuilding:
     FadeScreenIn
     WaitFadeScreen
     SetFlag FLAG_ALT_MUSIC_GALACTIC_ETERNA_BUILDING
+    Common_IncreaseLevelCap 31
     ReleaseAll
     End
 

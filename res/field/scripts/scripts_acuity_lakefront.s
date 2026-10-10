@@ -75,6 +75,7 @@ AcuityLakefront_PaulTrigger:
     RemoveObject LOCALID_PAUL
     SetFlag FLAG_DEFEATED_PAUL_ACUITY_LAKEFRONT
     Common_FadeToDefaultMusic2
+    Common_IncreaseLevelCap 73
     ReleaseAll
     End
 

@@ -543,6 +543,7 @@ FightArea_PalmerFarewell:
     RemoveObject LOCALID_PALMER
     SetFlag FLAG_HIDE_FIGHT_AREA_PALMER
     SetVar VAR_PALMER_FIGHT_AREA_EVENT, 0
+    Common_IncreaseLevelCap 85
     ReleaseAll
     End
 
