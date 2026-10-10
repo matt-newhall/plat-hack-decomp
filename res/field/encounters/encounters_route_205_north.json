@@ -3,51 +3,51 @@
     "land_encounters": [
         {
             "level": 12,
-            "species": "SPECIES_BIDOOF"
+            "species": "SPECIES_TEDDIURSA"
+        },
+        {
+            "level": 12,
+            "species": "SPECIES_CROAGUNK"
         },
         {
             "level": 12,
             "species": "SPECIES_BUDEW"
         },
         {
-            "level": 13,
-            "species": "SPECIES_WURMPLE"
+            "level": 12,
+            "species": "SPECIES_STARLY"
         },
         {
             "level": 12,
-            "species": "SPECIES_KRICKETOT"
+            "species": "SPECIES_PLUSLE"
         },
         {
-            "level": 14,
-            "species": "SPECIES_SILCOON"
+            "level": 12,
+            "species": "SPECIES_MINUN"
         },
         {
-            "level": 14,
-            "species": "SPECIES_CASCOON"
-        },
-        {
-            "level": 13,
+            "level": 12,
             "species": "SPECIES_BIDOOF"
         },
         {
-            "level": 14,
-            "species": "SPECIES_BIDOOF"
+            "level": 12,
+            "species": "SPECIES_DELIBIRD"
         },
         {
-            "level": 13,
-            "species": "SPECIES_BUDEW"
+            "level": 12,
+            "species": "SPECIES_EXEGGCUTE"
         },
         {
-            "level": 14,
-            "species": "SPECIES_BUDEW"
+            "level": 12,
+            "species": "SPECIES_MAKUHITA"
         },
         {
-            "level": 15,
-            "species": "SPECIES_BEAUTIFLY"
+            "level": 12,
+            "species": "SPECIES_TAILLOW"
         },
         {
-            "level": 15,
-            "species": "SPECIES_DUSTOX"
+            "level": 12,
+            "species": "SPECIES_YANMA"
         }
     ],
     "swarms": [

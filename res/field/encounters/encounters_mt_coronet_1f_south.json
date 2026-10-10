@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 18,
+            "level": 23,
+            "species": "SPECIES_RIOLU"
+        },
+        {
+            "level": 23,
             "species": "SPECIES_BRONZOR"
         },
         {
-            "level": 19,
-            "species": "SPECIES_GEODUDE"
+            "level": 23,
+            "species": "SPECIES_SWINUB"
         },
         {
-            "level": 18,
-            "species": "SPECIES_MEDITITE"
+            "level": 23,
+            "species": "SPECIES_CORPHISH"
         },
         {
-            "level": 17,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 23,
+            "species": "SPECIES_KRABBY"
         },
         {
-            "level": 20,
-            "species": "SPECIES_MACHOP"
+            "level": 23,
+            "species": "SPECIES_BALTOY"
         },
         {
-            "level": 20,
-            "species": "SPECIES_MEDITITE"
+            "level": 23,
+            "species": "SPECIES_ONIX"
         },
         {
-            "level": 17,
-            "species": "SPECIES_CHINGLING"
+            "level": 23,
+            "species": "SPECIES_TEDDIURSA"
         },
         {
-            "level": 18,
-            "species": "SPECIES_NOSEPASS"
+            "level": 23,
+            "species": "SPECIES_ZANGOOSE"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
+            "level": 23,
+            "species": "SPECIES_SEVIPER"
         },
         {
-            "level": 19,
-            "species": "SPECIES_CHINGLING"
+            "level": 23,
+            "species": "SPECIES_TRAPINCH"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_CHINGLING"
+            "level": 23,
+            "species": "SPECIES_PORYGON"
         }
     ],
     "swarms": [

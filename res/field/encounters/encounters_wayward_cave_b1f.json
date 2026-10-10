@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 18,
+            "level": 25,
+            "species": "SPECIES_SNORUNT"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_MIME_JR"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_GRAVELER"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_SWINUB"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_SMOOCHUM"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_SNOVER"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_RIOLU"
+        },
+        {
+            "level": 25,
             "species": "SPECIES_BRONZOR"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GEODUDE"
+            "level": 25,
+            "species": "SPECIES_DELIBIRD"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GIBLE"
+            "level": 25,
+            "species": "SPECIES_NOSEPASS"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
+            "level": 25,
+            "species": "SPECIES_MAWILE"
         },
         {
-            "level": 20,
-            "species": "SPECIES_BRONZOR"
-        },
-        {
-            "level": 20,
-            "species": "SPECIES_ONIX"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_GIBLE"
-        },
-        {
-            "level": 20,
-            "species": "SPECIES_GEODUDE"
-        },
-        {
-            "level": 20,
-            "species": "SPECIES_GIBLE"
-        },
-        {
-            "level": 18,
-            "species": "SPECIES_ONIX"
-        },
-        {
-            "level": 20,
-            "species": "SPECIES_GIBLE"
-        },
-        {
-            "level": 18,
-            "species": "SPECIES_ONIX"
+            "level": 25,
+            "species": "SPECIES_SNEASEL"
         }
     ],
     "swarms": [

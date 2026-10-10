@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 18,
-            "species": "SPECIES_BRONZOR"
+            "level": 25,
+            "species": "SPECIES_LOUDRED"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GEODUDE"
+            "level": 25,
+            "species": "SPECIES_GRANBULL"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GEODUDE"
+            "level": 25,
+            "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
+            "level": 25,
+            "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 20,
-            "species": "SPECIES_BRONZOR"
+            "level": 25,
+            "species": "SPECIES_KOFFING"
         },
         {
-            "level": 20,
-            "species": "SPECIES_ONIX"
+            "level": 25,
+            "species": "SPECIES_MAGCARGO"
         },
         {
-            "level": 19,
-            "species": "SPECIES_GEODUDE"
+            "level": 25,
+            "species": "SPECIES_MAROWAK"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GEODUDE"
+            "level": 25,
+            "species": "SPECIES_SWABLU"
         },
         {
-            "level": 17,
-            "species": "SPECIES_ZUBAT"
+            "level": 25,
+            "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 18,
-            "species": "SPECIES_ONIX"
+            "level": 25,
+            "species": "SPECIES_KANGASKHAN"
         },
         {
-            "level": 17,
-            "species": "SPECIES_ZUBAT"
+            "level": 25,
+            "species": "SPECIES_MAWILE"
         },
         {
-            "level": 18,
-            "species": "SPECIES_ONIX"
+            "level": 25,
+            "species": "SPECIES_GIBLE"
         }
     ],
     "swarms": [

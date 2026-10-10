@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 7,
-            "species": "SPECIES_MACHOP"
+            "level": 23,
+            "species": "SPECIES_RHYHORN"
         },
         {
-            "level": 5,
+            "level": 23,
+            "species": "SPECIES_PHANPY"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_NIDORINA"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_NIDORINO"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_SHELLOS"
+        },
+        {
+            "level": 23,
             "species": "SPECIES_GEODUDE"
         },
         {
-            "level": 6,
+            "level": 23,
+            "species": "SPECIES_HIPPOPOTAS"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_WOOPER"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_SWINUB"
+        },
+        {
+            "level": 23,
+            "species": "SPECIES_DIGLETT"
+        },
+        {
+            "level": 23,
             "species": "SPECIES_PONYTA"
         },
         {
-            "level": 5,
-            "species": "SPECIES_KRICKETOT"
-        },
-        {
-            "level": 5,
-            "species": "SPECIES_PONYTA"
-        },
-        {
-            "level": 6,
-            "species": "SPECIES_MACHOP"
-        },
-        {
-            "level": 8,
-            "species": "SPECIES_MACHOP"
-        },
-        {
-            "level": 6,
-            "species": "SPECIES_GEODUDE"
-        },
-        {
-            "level": 7,
-            "species": "SPECIES_PONYTA"
-        },
-        {
-            "level": 7,
-            "species": "SPECIES_GEODUDE"
-        },
-        {
-            "level": 7,
-            "species": "SPECIES_PONYTA"
-        },
-        {
-            "level": 7,
-            "species": "SPECIES_GEODUDE"
+            "level": 23,
+            "species": "SPECIES_SANDSHREW"
         }
     ],
     "swarms": [
