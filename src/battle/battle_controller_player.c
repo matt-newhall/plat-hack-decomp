@@ -3305,6 +3305,7 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
 
     if (battleCtx->turnFlags[defender].protecting
         && (MOVE_DATA(move).flags & MOVE_FLAG_CAN_PROTECT)
+        && !(battleCtx->turnFlags[defender].silkTrapping && MOVE_DATA(move).class == CLASS_STATUS)
         && (move != MOVE_CURSE || Move_IsGhostCurse(battleCtx, move, attacker) == TRUE) // Ghost-Curse can be Protected
         && (Move_IsMultiTurn(battleCtx, move) == FALSE || (battleCtx->battleStatusMask & SYSCTL_LAST_OF_MULTI_TURN))) {
         Battler_UnlockMoveChoice(battleSys, battleCtx, attacker);
