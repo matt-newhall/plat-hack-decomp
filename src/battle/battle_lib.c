@@ -6099,6 +6099,8 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
             && !(effect == BATTLE_EFFECT_FLINCH_PARALYZE_HIT)
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_SOMETIMES_FLINCH)
             && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_INNER_FOCUS) == FALSE
+            && Battler_IgnorableAbility(battleCtx, battleCtx->attacker, battleCtx->defender, ABILITY_SHIELD_DUST) == FALSE
+            && Battler_HeldItemEffect(battleCtx, battleCtx->defender) != HOLD_EFFECT_SHIELD_DUST
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && BattleSystem_RandNext(battleSys) % 100 < 10) {
@@ -6115,6 +6117,8 @@ BOOL BattleSystem_TriggerAttackerAbilityOnHit(BattleSystem *battleSys, BattleCon
             && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken
                 || battleCtx->moveStatusFlags & (MOVE_STATUS_ENDURED | MOVE_STATUS_ENDURED_ITEM))
             && !(Battler_HeldItemEffect(battleCtx, battleCtx->attacker) == HOLD_EFFECT_IGNORE_CONTACT)
+            && Battler_Ability(battleCtx, battleCtx->defender) != ABILITY_SHIELD_DUST
+            && Battler_HeldItemEffect(battleCtx, battleCtx->defender) != HOLD_EFFECT_SHIELD_DUST
             && Move_MakesContact(battleCtx, battleCtx->attacker, battleCtx->moveCur)
             && BattleSystem_RandNext(battleSys) % 10 < 3) {
             battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
