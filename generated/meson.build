@@ -109,6 +109,7 @@ metang_generators = {
     'time_of_day': { 'type': 'enum', 'tag': 'TimeOfDay' },
     'town_map_description_flag_types': { 'type': 'enum', 'tag': 'TownMapDescriptionFlagType' },
     'trainers': { 'type': 'enum', 'tag': 'TrainerID' },
+    'trainer_ability_slots': { 'type': 'enum', 'tag': 'TrainerAbilitySlot' },
     'trainer_classes': { 'type': 'enum', 'tag': 'TrainerClass' },
     'trainer_message_types': { 'type': 'enum', 'tag': 'TrainerMessageType' },
     'trainer_score_events': { 'type': 'enum', 'tag': 'TrainerScoreEvent' },

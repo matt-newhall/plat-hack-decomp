@@ -4,6 +4,8 @@
 #include "constants/pokemon.h"
 #include "generated/abilities.h"
 #include "generated/natures.h"
+#include "generated/species_data_params.h"
+#include "generated/trainer_ability_slots.h"
 #include "generated/trainer_message_types.h"
 
 #include "struct_defs/trainer.h"
@@ -24,7 +26,13 @@
 
 static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID heapID);
 static u32 TrainerData_ApplyNature(u32 personality, u16 nature);
-static void TrainerData_ApplyAbility(Pokemon *mon, u16 ability);
+static void TrainerData_ApplyAbilitySlot(Pokemon *mon, u16 abilitySlot);
+
+static const enum SpeciesDataParam sAbilitySlotParams[] = {
+    [TRAINER_ABILITY_1] = SPECIES_DATA_ABILITY_1,
+    [TRAINER_ABILITY_2] = SPECIES_DATA_ABILITY_2,
+    [TRAINER_ABILITY_HIDDEN] = SPECIES_DATA_HIDDEN_ABILITY,
+};
 
 void Trainer_Encounter(FieldBattleDTO *dto, const SaveData *saveData, enum HeapID heapID)
 {
@@ -220,7 +228,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
             Pokemon_InitWith(mon, species, trmon[i].level, ivs, TRUE, rnd, OTID_NOT_SHINY, 0);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
-            TrainerData_ApplyAbility(mon, trmon[i].ability);
+            TrainerData_ApplyAbilitySlot(mon, trmon[i].abilitySlot);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -251,7 +259,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
 
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
-            TrainerData_ApplyAbility(mon, trmon[i].ability);
+            TrainerData_ApplyAbilitySlot(mon, trmon[i].abilitySlot);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -278,7 +286,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
             Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &trmon[i].item);
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
-            TrainerData_ApplyAbility(mon, trmon[i].ability);
+            TrainerData_ApplyAbilitySlot(mon, trmon[i].abilitySlot);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -310,7 +318,7 @@ static void TrainerData_BuildParty(FieldBattleDTO *dto, int battler, enum HeapID
 
             Pokemon_SetBallSeal(trmon[i].cbSeal, mon, heapID);
             Pokemon_SetValue(mon, MON_DATA_FORM, &form);
-            TrainerData_ApplyAbility(mon, trmon[i].ability);
+            TrainerData_ApplyAbilitySlot(mon, trmon[i].abilitySlot);
             Party_AddPokemon(dto->parties[battler], mon);
         }
 
@@ -346,16 +354,22 @@ static u32 TrainerData_ApplyNature(u32 personality, u16 nature)
 }
 
 /**
- * @brief Overwrite a trainer mon's ability, if the trainer data specifies one.
+ * @brief Set a trainer mon's ability from the species ability slot chosen in the trainer data.
  *
- * @param mon     The Pokemon to modify.
- * @param ability The ability to force, or ABILITY_NONE to keep the one derived from the species.
+ * Falls back to ability 1 when the chosen slot is empty for the mon's species and form.
+ *
+ * @param mon         The Pokemon to modify; its species and form must already be set.
+ * @param abilitySlot The TRAINER_ABILITY_* slot to take the ability from.
  */
-static void TrainerData_ApplyAbility(Pokemon *mon, u16 ability)
+static void TrainerData_ApplyAbilitySlot(Pokemon *mon, u16 abilitySlot)
 {
-    u8 value = (u8)ability;
+    int species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+    int form = Pokemon_GetValue(mon, MON_DATA_FORM, NULL);
+    u8 ability = SpeciesData_GetFormValue(species, form, sAbilitySlotParams[abilitySlot]);
 
-    if (ability != ABILITY_NONE) {
-        Pokemon_SetValue(mon, MON_DATA_ABILITY, &value);
+    if (ability == ABILITY_NONE) {
+        ability = SpeciesData_GetFormValue(species, form, SPECIES_DATA_ABILITY_1);
     }
+
+    Pokemon_SetValue(mon, MON_DATA_ABILITY, &ability);
 }

@@ -18,12 +18,12 @@
 #include "constants/battle.h"
 #include "constants/moves.h"
 #include "constants/pokemon.h"
-#include "generated/abilities.h"
 #include "generated/ai_flags.h"
 #include "generated/items.h"
 #include "generated/natures.h"
 #include "generated/species.h"
 #include "generated/trainers.h"
+#include "generated/trainer_ability_slots.h"
 #include "generated/trainer_classes.h"
 #include "generated/trainer_message_types.h"
 // IWYU pragma: end_keep
@@ -174,17 +174,17 @@ Container proc_trainer(datafile_t *df, enum TrainerID trainer) {
         u16 nature = dp_hasmemb(party_member, "nature")
             ? dp_u16(dp_lookup(dp_objmemb(party_member, "nature"), "Nature"))
             : TRAINER_MON_NATURE_NONE;
-        u16 ability = dp_hasmemb(party_member, "ability")
-            ? dp_u16(dp_lookup(dp_objmemb(party_member, "ability"), "Ability"))
-            : ABILITY_NONE;
+        u16 abilitySlot = dp_hasmemb(party_member, "ability")
+            ? dp_u16(dp_lookup(dp_objmemb(party_member, "ability"), "TrainerAbilitySlot"))
+            : TRAINER_ABILITY_1;
 
         trparty.party[i] = (TrainerMonWithMovesAndItem){
-            .ivScale = MAX_IV_SCALE,
-            .level   = dp_u16(dp_objmemb(party_member, "level")),
-            .species = (u16)(species | (form << TRAINER_MON_FORM_SHIFT)),
-            .cbSeal  = dp_u16(dp_objmemb(party_member, "ball_seal")),
-            .nature  = nature,
-            .ability = ability,
+            .ivScale     = MAX_IV_SCALE,
+            .level       = dp_u16(dp_objmemb(party_member, "level")),
+            .species     = (u16)(species | (form << TRAINER_MON_FORM_SHIFT)),
+            .cbSeal      = dp_u16(dp_objmemb(party_member, "ball_seal")),
+            .nature      = nature,
+            .abilitySlot = abilitySlot,
         };
 
         if (party_has_items) trparty.party[i].item = dp_u16(dp_lookup(dp_objmemb(party_member, "item"), "Item"));
@@ -426,8 +426,8 @@ static void pack(Container *trainer) {
         memcpy(p, &trainer->party.party[i].nature, copy_size);
         p += copy_size;
 
-        copy_size = sizeof(trainer->party.party[i].ability);
-        memcpy(p, &trainer->party.party[i].ability, copy_size);
+        copy_size = sizeof(trainer->party.party[i].abilitySlot);
+        memcpy(p, &trainer->party.party[i].abilitySlot, copy_size);
         p += copy_size;
     }
 
@@ -448,12 +448,12 @@ static void pack(Container *trainer) {
 }
 
 static void pre_init(void) {
-    dp_regmetang(Ability);
     dp_regmetang(AIFlag);
     dp_regmetang(Item);
     dp_regmetang(Move);
     dp_regmetang(Nature);
     dp_regmetang(Species);
+    dp_regmetang(TrainerAbilitySlot);
     dp_regmetang(TrainerClass);
     dp_regmetang(TrainerMessageType);
 

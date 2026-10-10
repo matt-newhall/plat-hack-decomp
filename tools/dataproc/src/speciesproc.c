@@ -549,6 +549,8 @@ static SpeciesData proc_personal(datafile_t *df) {
             enum_u8(".abilities[1]", Ability),
         },
 
+        .hiddenAbility = enum_u8(".abilities[2]", Ability),
+
         .evYields = {
             .hp        = u8_maxbits(".ev_yields.hp", 2),
             .attack    = u8_maxbits(".ev_yields.attack", 2),

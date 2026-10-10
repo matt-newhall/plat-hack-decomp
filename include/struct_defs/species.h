@@ -40,7 +40,7 @@ typedef struct SpeciesData {
     SpeciesBaseStats baseStats;
     u8 types[MAX_TYPES];
     u8 catchRate;
-    u8 padding_09;
+    u8 hiddenAbility;
     SpeciesEVYields evYields;
     SpeciesWildHeldItems wildHeldItems;
     u8 genderRatio;

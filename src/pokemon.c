@@ -2253,6 +2253,9 @@ u32 SpeciesData_GetValue(SpeciesData *speciesData, enum SpeciesDataParam param)
     case SPECIES_DATA_ABILITY_2:
         result = speciesData->abilities[1];
         break;
+    case SPECIES_DATA_HIDDEN_ABILITY:
+        result = speciesData->hiddenAbility;
+        break;
     case SPECIES_DATA_SAFARI_FLEE_RATE:
         result = speciesData->safariFleeRate;
         break;
