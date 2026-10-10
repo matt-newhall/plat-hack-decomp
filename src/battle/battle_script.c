@@ -10159,6 +10159,7 @@ static BOOL BtlCmd_TryPowerOfAlchemy(BattleSystem *battleSys, BattleContext *bat
         || faintedAbility == ABILITY_FORECAST
         || faintedAbility == ABILITY_TRACE
         || faintedAbility == ABILITY_POWER_OF_ALCHEMY
+        || faintedAbility == ABILITY_NEUTRALIZING_GAS
         || faintedAbility == ABILITY_IMPOSTER) {
         BattleScript_Iter(battleCtx, jumpOnFail);
         return FALSE;
