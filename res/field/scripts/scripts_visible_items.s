@@ -20,7 +20,7 @@
     ScriptEntry VisibleItems_ValleyWindworksOutside_TM24
     ScriptEntry VisibleItems_Route205South_Brightpowder
     ScriptEntry VisibleItems_Route205South_XSpDef
-    ScriptEntry VisibleItems_EternaForest_Antidote
+    ScriptEntry VisibleItems_EternaForest_LuminousMoss
     ScriptEntry VisibleItems_EternaForest_ParlyzHeal
     ScriptEntry VisibleItems_EternaForest_NetBall
     ScriptEntry VisibleItems_EternaForest_GreenShard
@@ -72,7 +72,7 @@
     ScriptEntry VisibleItems_GreatMarsh1_PokeBall
     ScriptEntry VisibleItems_GreatMarsh2_BlueShard
     ScriptEntry VisibleItems_GreatMarsh4_PokeBall
-    ScriptEntry VisibleItems_GreatMarsh3_GreatBall
+    ScriptEntry VisibleItems_GreatMarsh3_AbsorbBulb
     ScriptEntry VisibleItems_GreatMarsh4_GreenShard
     ScriptEntry VisibleItems_GreatMarsh5_GreatBall
     ScriptEntry VisibleItems_GreatMarsh6_RedShard
@@ -165,7 +165,7 @@
     ScriptEntry VisibleItems_Route217_TM07
     ScriptEntry VisibleItems_Route217_HM08
     ScriptEntry VisibleItems_Route217_HeavyDutyBoots
-    ScriptEntry VisibleItems_AcuityLakefront_UltraBall
+    ScriptEntry VisibleItems_AcuityLakefront_Snowball
     ScriptEntry VisibleItems_GalacticHQB2F_TM26
     ScriptEntry VisibleItems_GalacticHQ1F_TM61
     ScriptEntry VisibleItems_GalacticHQ3F_TM21
@@ -254,7 +254,7 @@
     ScriptEntry VisibleItems_EternaForest_Potion
     ScriptEntry VisibleItems_AmitySquare_AmuletCoin
     ScriptEntry VisibleItems_RavagedPath_Potion
-    ScriptEntry VisibleItems_ValleyWindworksOutside_Potion
+    ScriptEntry VisibleItems_ValleyWindworksOutside_CellBattery
     ScriptEntry VisibleItems_Route205South_SuperPotion
     ScriptEntry VisibleItems_Route204North_Awakening
     ScriptEntry VisibleItems_Route203_XDefense
@@ -451,8 +451,8 @@ VisibleItems_Route205South_XSpDef:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_EternaForest_Antidote:
-    SetVar VAR_0x8008, ITEM_ANTIDOTE
+VisibleItems_EternaForest_LuminousMoss:
+    SetVar VAR_0x8008, ITEM_LUMINOUS_MOSS
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -763,8 +763,8 @@ VisibleItems_GreatMarsh4_PokeBall:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_GreatMarsh3_GreatBall:
-    SetVar VAR_0x8008, ITEM_GREAT_BALL
+VisibleItems_GreatMarsh3_AbsorbBulb:
+    SetVar VAR_0x8008, ITEM_ABSORB_BULB
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1321,8 +1321,8 @@ VisibleItems_Route217_HeavyDutyBoots:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_AcuityLakefront_UltraBall:
-    SetVar VAR_0x8008, ITEM_ULTRA_BALL
+VisibleItems_AcuityLakefront_Snowball:
+    SetVar VAR_0x8008, ITEM_SNOWBALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1855,8 +1855,8 @@ VisibleItems_RavagedPath_Potion:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_ValleyWindworksOutside_Potion:
-    SetVar VAR_0x8008, ITEM_POTION
+VisibleItems_ValleyWindworksOutside_CellBattery:
+    SetVar VAR_0x8008, ITEM_CELL_BATTERY
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

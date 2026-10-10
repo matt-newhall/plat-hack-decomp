@@ -143,11 +143,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_ANTIDOTE",
+            "id": "LOCALID_ITEM_LUMINOUS_MOSS",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ETERNA_FOREST_ANTIDOTE",
+            "hidden_flag": "FLAG_OBTAINED_ETERNA_FOREST_LUMINOUS_MOSS",
             "script": 7018,
             "initial_dir": 0,
             "data": [],
