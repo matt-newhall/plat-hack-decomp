@@ -3991,7 +3991,7 @@ BOOL Battler_IsTrappedMsg(BattleSystem *battleSys, BattleContext *battleCtx, int
         return TRUE;
     }
 
-    if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_EXCEPT_ME, battler, ABILITY_SHADOW_TAG))
+    if ((tmp = BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battler, ABILITY_SHADOW_TAG))
         && Battler_Ability(battleCtx, battler) != ABILITY_SHADOW_TAG) {
         if (msgOut == NULL) {
             return TRUE;
