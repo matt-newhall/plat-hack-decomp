@@ -2,51 +2,51 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 20,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 21,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 22,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 23,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 24,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 25,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 26,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 27,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 28,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 29,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 30,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         },
         {
-            "level": 30,
+            "level": 35,
             "species": "SPECIES_UNOWN"
         }
     ],

@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 6,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_BONSLY"
         },
         {
-            "level": 8,
+            "level": 26,
+            "species": "SPECIES_DUGTRIO"
+        },
+        {
+            "level": 26,
+            "species": "SPECIES_SHELLOS"
+        },
+        {
+            "level": 26,
             "species": "SPECIES_PSYDUCK"
         },
         {
-            "level": 7,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_SHELLDER"
         },
         {
-            "level": 9,
-            "species": "SPECIES_PSYDUCK"
+            "level": 26,
+            "species": "SPECIES_POLIWHIRL"
         },
         {
-            "level": 6,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_URSARING"
         },
         {
-            "level": 8,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_GRIMER"
         },
         {
-            "level": 10,
-            "species": "SPECIES_PSYDUCK"
+            "level": 26,
+            "species": "SPECIES_SLOWPOKE"
         },
         {
-            "level": 8,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_NIDORINA"
         },
         {
-            "level": 9,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_SUDOWOODO"
         },
         {
-            "level": 10,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 9,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 10,
-            "species": "SPECIES_GOLBAT"
+            "level": 26,
+            "species": "SPECIES_WYNAUT"
         }
     ],
     "swarms": [

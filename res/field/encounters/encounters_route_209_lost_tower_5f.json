@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 21,
-            "species": "SPECIES_GASTLY"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_GASTLY"
-        },
-        {
-            "level": 20,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 19,
-            "species": "SPECIES_GASTLY"
-        },
-        {
-            "level": 21,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 22,
+            "level": 33,
             "species": "SPECIES_GOLBAT"
         },
         {
-            "level": 22,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_STUNKY"
         },
         {
-            "level": 22,
-            "species": "SPECIES_GOLBAT"
+            "level": 33,
+            "species": "SPECIES_NOCTOWL"
         },
         {
-            "level": 22,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_GIRAFARIG"
         },
         {
-            "level": 22,
-            "species": "SPECIES_GOLBAT"
+            "level": 33,
+            "species": "SPECIES_MR_MIME"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_HYPNO"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_DRIFBLIM"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_SHUPPET"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_HOUNDOUR"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_MURKROW"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_NINETALES"
+        },
+        {
+            "level": 33,
+            "species": "SPECIES_ABSOL"
         }
     ],
     "swarms": [

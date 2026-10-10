@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 19,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_UNOWN"
         },
         {
-            "level": 18,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_EXEGGCUTE"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_MISDREAVUS"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_KECLEON"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_LUNATONE"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_SOLROCK"
         },
         {
-            "level": 20,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_GIRAFARIG"
         },
         {
-            "level": 21,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 21,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_XATU"
         },
         {
-            "level": 21,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_VULPIX"
         },
         {
-            "level": 21,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_GRUMPIG"
         },
         {
-            "level": 21,
-            "species": "SPECIES_GOLBAT"
+            "level": 33,
+            "species": "SPECIES_BELDUM"
         }
     ],
     "swarms": [

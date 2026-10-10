@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 18,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_POOCHYENA"
         },
         {
-            "level": 17,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_DRIFLOON"
         },
         {
-            "level": 19,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_MIGHTYENA"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_GLOOM"
         },
         {
-            "level": 18,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_KADABRA"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_HOUNDOUR"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_MAROWAK"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_NOCTOWL"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_DROWZEE"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_DUSKULL"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_SABLEYE"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_ARIADOS"
         }
     ],
     "swarms": [

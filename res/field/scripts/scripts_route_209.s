@@ -65,7 +65,7 @@ Route209_EncounterSpiritomb:
     Message Route209_Text_SpiritombCry
     WaitCry
     CloseMessage
-    StartWildBattle SPECIES_SPIRITOMB, 25
+    StartWildBattle SPECIES_SPIRITOMB, 70
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, Route209_BlackOut
     SetVar VAR_HALLOWED_TOWER_STATE, 0

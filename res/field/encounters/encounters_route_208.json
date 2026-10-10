@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 18,
-            "species": "SPECIES_BUDEW"
+            "level": 30,
+            "species": "SPECIES_WORMADAM"
         },
         {
-            "level": 18,
-            "species": "SPECIES_BIDOOF"
+            "level": 30,
+            "species": "SPECIES_MOTHIM"
         },
         {
-            "level": 19,
-            "species": "SPECIES_BUDEW"
+            "level": 30,
+            "species": "SPECIES_BEEDRILL"
         },
         {
-            "level": 17,
-            "species": "SPECIES_RALTS"
+            "level": 30,
+            "species": "SPECIES_BUTTERFREE"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ROSELIA"
+            "level": 30,
+            "species": "SPECIES_CASCOON"
         },
         {
-            "level": 18,
-            "species": "SPECIES_BIBAREL"
+            "level": 30,
+            "species": "SPECIES_SILCOON"
         },
         {
-            "level": 18,
-            "species": "SPECIES_RALTS"
+            "level": 30,
+            "species": "SPECIES_LEDIAN"
         },
         {
-            "level": 19,
-            "species": "SPECIES_BIBAREL"
+            "level": 30,
+            "species": "SPECIES_WEEPINBELL"
         },
         {
-            "level": 20,
-            "species": "SPECIES_ROSELIA"
+            "level": 30,
+            "species": "SPECIES_ARIADOS"
         },
         {
-            "level": 20,
-            "species": "SPECIES_BIBAREL"
+            "level": 30,
+            "species": "SPECIES_PINECO"
         },
         {
-            "level": 20,
-            "species": "SPECIES_ROSELIA"
+            "level": 30,
+            "species": "SPECIES_YANMA"
         },
         {
-            "level": 20,
-            "species": "SPECIES_BIBAREL"
+            "level": 30,
+            "species": "SPECIES_JUMPLUFF"
         }
     ],
     "swarms": [

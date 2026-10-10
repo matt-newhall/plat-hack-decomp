@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 18,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_HOUNDOUR"
         },
         {
-            "level": 17,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_KECLEON"
         },
         {
-            "level": 19,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_DRIFLOON"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_SHUPPET"
         },
         {
-            "level": 18,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_MISDREAVUS"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ZUBAT"
+            "level": 33,
+            "species": "SPECIES_MAROWAK"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_HAUNTER"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_MURKROW"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_STUNKY"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_NUZLEAF"
         },
         {
-            "level": 20,
-            "species": "SPECIES_GASTLY"
+            "level": 33,
+            "species": "SPECIES_LARVITAR"
         }
     ],
     "swarms": [
