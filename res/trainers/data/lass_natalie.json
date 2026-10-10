@@ -21,7 +21,8 @@
                 "MOVE_GROWL"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_STARLY",
@@ -34,7 +35,8 @@
                 "MOVE_DOUBLE_TEAM"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_WINGULL",
@@ -48,7 +50,8 @@
                 "MOVE_GROWL"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

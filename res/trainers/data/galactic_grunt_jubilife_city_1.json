@@ -12,11 +12,32 @@
         {
             "species": "SPECIES_STUNKY",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
+            "level": 8,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": [
+                "MOVE_POISON_GAS",
+                "MOVE_BITE",
+                "MOVE_FURY_SWIPES",
+                "MOVE_ROCK_SMASH"
+            ],
             "iv_scale": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_TENTACOOL",
+            "form": 0,
+            "level": 9,
+            "item": "ITEM_BLACK_SLUDGE",
+            "moves": [
+                "MOVE_BUBBLE_BEAM",
+                "MOVE_LIFE_DEW",
+                "MOVE_ACID",
+                "MOVE_PROTECT"
+            ],
+            "iv_scale": 0,
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

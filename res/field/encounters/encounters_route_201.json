@@ -27,11 +27,7 @@
         },
         {
             "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
-        },
-        {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "species": "SPECIES_MEOWTH"
         },
         {
             "level": 3,
@@ -39,11 +35,15 @@
         },
         {
             "level": 3,
-            "species": "SPECIES_SKITTY"
+            "species": "SPECIES_WHISMUR"
         },
         {
             "level": 3,
-            "species": "SPECIES_DODUO"
+            "species": "SPECIES_SPEAROW"
+        },
+        {
+            "level": 3,
+            "species": "SPECIES_DUNSPARCE"
         },
         {
             "level": 3,

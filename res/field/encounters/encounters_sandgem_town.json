@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 3,
-            "species": "SPECIES_STARLY"
+            "level": 5,
+            "species": "SPECIES_CYNDAQUIL"
         },
         {
-            "level": 3,
-            "species": "SPECIES_BIDOOF"
+            "level": 5,
+            "species": "SPECIES_PIPLUP"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 5,
+            "species": "SPECIES_TURTWIG"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 5,
+            "species": "SPECIES_CHIMCHAR"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SENTRET"
+            "level": 5,
+            "species": "SPECIES_SQUIRTLE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_PIDGEY"
+            "level": 5,
+            "species": "SPECIES_CHIKORITA"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 5,
+            "species": "SPECIES_TOTODILE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 5,
+            "species": "SPECIES_MUDKIP"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 5,
+            "species": "SPECIES_CHARMANDER"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 5,
+            "species": "SPECIES_BULBASAUR"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 5,
+            "species": "SPECIES_TORCHIC"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 5,
+            "species": "SPECIES_TREECKO"
         }
     ],
     "swarms": [

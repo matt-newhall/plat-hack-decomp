@@ -10,16 +10,24 @@
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_SKITTY",
+            "form": 0,
+            "level": 8,
+            "item": "ITEM_NONE",
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
             "species": "SPECIES_TURTWIG",
             "form": 0,
-            "level": 13,
-            "item": null,
-            "moves": [
-                "MOVE_ABSORB",
-                "MOVE_TACKLE"
-            ],
-            "iv_scale": 30,
-            "ball_seal": 0
+            "level": 8,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": []

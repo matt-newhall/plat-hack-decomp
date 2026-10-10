@@ -12,11 +12,32 @@
         {
             "species": "SPECIES_GLAMEOW",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
+            "level": 8,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_COVET",
+                "MOVE_CHARM",
+                "MOVE_ASSIST"
+            ],
             "iv_scale": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_CLEFAIRY",
+            "form": 0,
+            "level": 9,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": [
+                "MOVE_DISARMING_VOICE",
+                "MOVE_ENCORE",
+                "MOVE_MINIMIZE",
+                "MOVE_METRONOME"
+            ],
+            "iv_scale": 0,
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

@@ -52,7 +52,7 @@ TwinleafTownPlayerHouse2F_LevelCapAdvanced:
     Message TwinleafTownPlayerHouse2F_Text_LevelCapEnabledAllBosses
     WaitButton
     CloseMessage
-    Common_IncreaseLevelCap 14, TRUE
+    Common_IncreaseLevelCap 9, FALSE
     Return
 
 TwinleafTownPlayerHouse2F_LevelCapStandard:
@@ -60,7 +60,7 @@ TwinleafTownPlayerHouse2F_LevelCapStandard:
     Message TwinleafTownPlayerHouse2F_Text_LevelCapEnabledGymLeaders
     WaitButton
     CloseMessage
-    Common_IncreaseLevelCap 14, TRUE
+    Common_IncreaseLevelCap 25, TRUE
     Return
 
 TwinleafTownPlayerHouse2F_LevelCapNone:

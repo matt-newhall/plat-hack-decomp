@@ -21,7 +21,8 @@
                 "MOVE_POISON_STING"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_SILCOON",
@@ -34,7 +35,8 @@
                 "MOVE_SLUDGE"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_KRICKETOT",
@@ -45,7 +47,8 @@
                 "MOVE_TACKLE"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_SKORUPI",
@@ -56,7 +59,8 @@
                 "MOVE_TACKLE"
             ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

@@ -20,7 +20,8 @@
                 "MOVE_TAIL_WHIP"
             ],
             "iv_scale": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_NATU",
@@ -34,7 +35,8 @@
                 "MOVE_ATTRACT"
             ],
             "iv_scale": 0,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

@@ -985,6 +985,7 @@ JubilifeCity_CollectorJubilifeTV:
     ApplyMovement LOCALID_COLLECTOR, JubilifeCity_Movement_CollectorLeave
     WaitMovement
     RemoveObject LOCALID_COLLECTOR
+    Common_IncreaseLevelCap 14, FALSE
     ReleaseAll
     End
 
