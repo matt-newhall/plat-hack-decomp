@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 14,
+            "level": 19,
+            "species": "SPECIES_ZUBAT"
+        },
+        {
+            "level": 19,
             "species": "SPECIES_BRONZOR"
         },
         {
-            "level": 15,
-            "species": "SPECIES_GEODUDE"
-        },
-        {
-            "level": 14,
-            "species": "SPECIES_MEDITITE"
-        },
-        {
-            "level": 13,
-            "species": "SPECIES_CLEFFA"
-        },
-        {
-            "level": 16,
-            "species": "SPECIES_MACHOP"
-        },
-        {
-            "level": 16,
-            "species": "SPECIES_MEDITITE"
-        },
-        {
-            "level": 13,
+            "level": 19,
             "species": "SPECIES_CHINGLING"
         },
         {
-            "level": 14,
+            "level": 19,
+            "species": "SPECIES_RHYHORN"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_MEDITITE"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_ONIX"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_SOLROCK"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_LUNATONE"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_CLEFAIRY"
+        },
+        {
+            "level": 19,
             "species": "SPECIES_NOSEPASS"
         },
         {
-            "level": 15,
-            "species": "SPECIES_ZUBAT"
+            "level": 19,
+            "species": "SPECIES_MAGNEMITE"
         },
         {
-            "level": 15,
-            "species": "SPECIES_CHINGLING"
-        },
-        {
-            "level": 15,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 15,
-            "species": "SPECIES_CHINGLING"
+            "level": 19,
+            "species": "SPECIES_LARVITAR"
         }
     ],
     "swarms": [

@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 28,
-            "species": "SPECIES_MAGMAR"
+            "level": 15,
+            "species": "SPECIES_SLUGMA"
         },
         {
-            "level": 29,
+            "level": 15,
+            "species": "SPECIES_NUMEL"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_VULPIX"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_PHANPY"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_GROWLITHE"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_PONYTA"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_MAGBY"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_SUNKERN"
+        },
+        {
+            "level": 15,
+            "species": "SPECIES_HOUNDOUR"
+        },
+        {
+            "level": 15,
             "species": "SPECIES_MAGNEMITE"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MAGMAR"
+            "level": 15,
+            "species": "SPECIES_LICKITUNG"
         },
         {
-            "level": 29,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_GASTRODON"
-        },
-        {
-            "level": 28,
-            "species": "SPECIES_MAGNEMITE"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_MAGNEMITE"
-        },
-        {
-            "level": 31,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 31,
-            "species": "SPECIES_GASTRODON"
-        },
-        {
-            "level": 31,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 31,
-            "species": "SPECIES_GASTRODON"
+            "level": 15,
+            "species": "SPECIES_ABRA"
         }
     ],
     "swarms": [

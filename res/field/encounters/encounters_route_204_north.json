@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 9,
-            "species": "SPECIES_STARLY"
+            "level": 7,
+            "species": "SPECIES_HOPPIP"
         },
         {
-            "level": 9,
-            "species": "SPECIES_BIDOOF"
+            "level": 7,
+            "species": "SPECIES_LOTAD"
         },
         {
-            "level": 9,
-            "species": "SPECIES_WURMPLE"
+            "level": 7,
+            "species": "SPECIES_PARAS"
         },
         {
-            "level": 8,
-            "species": "SPECIES_KRICKETOT"
+            "level": 7,
+            "species": "SPECIES_SEEDOT"
         },
         {
-            "level": 9,
+            "level": 7,
+            "species": "SPECIES_BELLSPROUT"
+        },
+        {
+            "level": 7,
+            "species": "SPECIES_ODDISH"
+        },
+        {
+            "level": 7,
             "species": "SPECIES_BUDEW"
         },
         {
-            "level": 9,
-            "species": "SPECIES_SHINX"
+            "level": 7,
+            "species": "SPECIES_BURMY"
         },
         {
-            "level": 10,
-            "species": "SPECIES_BUDEW"
+            "level": 7,
+            "species": "SPECIES_CHERUBI"
         },
         {
-            "level": 10,
-            "species": "SPECIES_SHINX"
+            "level": 7,
+            "species": "SPECIES_SUNKERN"
         },
         {
-            "level": 10,
-            "species": "SPECIES_STARLY"
+            "level": 7,
+            "species": "SPECIES_CACNEA"
         },
         {
-            "level": 10,
-            "species": "SPECIES_BIDOOF"
-        },
-        {
-            "level": 11,
-            "species": "SPECIES_STARLY"
-        },
-        {
-            "level": 11,
-            "species": "SPECIES_BIDOOF"
+            "level": 7,
+            "species": "SPECIES_SHROOMISH"
         }
     ],
     "swarms": [

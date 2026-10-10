@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 9,
-            "species": "SPECIES_SHELLOS"
+            "level": 11,
+            "species": "SPECIES_ELECTRIKE"
         },
         {
-            "level": 10,
+            "level": 11,
+            "species": "SPECIES_VOLTORB"
+        },
+        {
+            "level": 11,
+            "species": "SPECIES_ELEKID"
+        },
+        {
+            "level": 11,
+            "species": "SPECIES_MAGNEMITE"
+        },
+        {
+            "level": 11,
+            "species": "SPECIES_MAREEP"
+        },
+        {
+            "level": 11,
             "species": "SPECIES_SHINX"
         },
         {
-            "level": 9,
-            "species": "SPECIES_BUIZEL"
-        },
-        {
-            "level": 10,
-            "species": "SPECIES_SHELLOS"
-        },
-        {
-            "level": 10,
-            "species": "SPECIES_BUIZEL"
-        },
-        {
-            "level": 11,
-            "species": "SPECIES_SHELLOS"
-        },
-        {
-            "level": 9,
-            "species": "SPECIES_PACHIRISU"
-        },
-        {
             "level": 11,
             "species": "SPECIES_PACHIRISU"
         },
         {
             "level": 11,
-            "species": "SPECIES_BUIZEL"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_SHELLOS"
+            "species": "SPECIES_PICHU"
         },
         {
             "level": 11,
-            "species": "SPECIES_BUIZEL"
+            "species": "SPECIES_VOLBEAT"
         },
         {
-            "level": 12,
-            "species": "SPECIES_SHELLOS"
+            "level": 11,
+            "species": "SPECIES_DRIFLOON"
+        },
+        {
+            "level": 11,
+            "species": "SPECIES_BUNEARY"
+        },
+        {
+            "level": 11,
+            "species": "SPECIES_PIKACHU"
         }
     ],
     "swarms": [

@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 11,
+            "level": 17,
+            "species": "SPECIES_MEOWTH"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_CLEFAIRY"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_JIGGLYPUFF"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_VENONAT"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_LEDYBA"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_HOOTHOOT"
+        },
+        {
+            "level": 17,
             "species": "SPECIES_BUNEARY"
         },
         {
-            "level": 10,
-            "species": "SPECIES_BUDEW"
+            "level": 17,
+            "species": "SPECIES_BURMY"
         },
         {
-            "level": 10,
-            "species": "SPECIES_WURMPLE"
+            "level": 17,
+            "species": "SPECIES_SKITTY"
         },
         {
-            "level": 12,
-            "species": "SPECIES_KRICKETOT"
+            "level": 17,
+            "species": "SPECIES_STARAVIA"
         },
         {
-            "level": 11,
-            "species": "SPECIES_BUDEW"
+            "level": 17,
+            "species": "SPECIES_CACNEA"
         },
         {
-            "level": 12,
-            "species": "SPECIES_BIDOOF"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_SILCOON"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_CASCOON"
-        },
-        {
-            "level": 13,
-            "species": "SPECIES_BUNEARY"
-        },
-        {
-            "level": 13,
-            "species": "SPECIES_GASTLY"
-        },
-        {
-            "level": 14,
-            "species": "SPECIES_BEAUTIFLY"
-        },
-        {
-            "level": 14,
-            "species": "SPECIES_DUSTOX"
+            "level": 17,
+            "species": "SPECIES_GLAMEOW"
         }
     ],
     "swarms": [

@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 13,
+            "level": 19,
+            "species": "SPECIES_TYROGUE"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_MANKEY"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_SPOINK"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_MIME_JR"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_MAKUHITA"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_MACHOP"
+        },
+        {
+            "level": 19,
             "species": "SPECIES_MEDITITE"
         },
         {
-            "level": 14,
-            "species": "SPECIES_BIDOOF"
+            "level": 19,
+            "species": "SPECIES_BALTOY"
         },
         {
-            "level": 14,
-            "species": "SPECIES_MEDITITE"
+            "level": 19,
+            "species": "SPECIES_RALTS"
         },
         {
-            "level": 15,
-            "species": "SPECIES_MEDITITE"
+            "level": 19,
+            "species": "SPECIES_ABRA"
         },
         {
-            "level": 14,
+            "level": 19,
             "species": "SPECIES_CHINGLING"
         },
         {
-            "level": 14,
-            "species": "SPECIES_MACHOP"
-        },
-        {
-            "level": 16,
-            "species": "SPECIES_CHINGLING"
-        },
-        {
-            "level": 14,
-            "species": "SPECIES_BRONZOR"
-        },
-        {
-            "level": 15,
-            "species": "SPECIES_MACHOP"
-        },
-        {
-            "level": 16,
-            "species": "SPECIES_BRONZOR"
-        },
-        {
-            "level": 15,
-            "species": "SPECIES_MACHOP"
-        },
-        {
-            "level": 16,
-            "species": "SPECIES_BRONZOR"
+            "level": 19,
+            "species": "SPECIES_NATU"
         }
     ],
     "swarms": [
