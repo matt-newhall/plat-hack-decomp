@@ -6604,9 +6604,6 @@ static BOOL BtlCmd_TryHelpingHand(BattleSystem *battleSys, BattleContext *battle
  * @brief Check if the attacker and defender can swap their items.
  *
  * This command will fail if any of the following are true:
- * - The attacker is an AI trainer outside of the Battle Frontier
- * - Either the attacker or defender have had their held items disabled by
- * Knock Off
  * - Neither the attacker nor defender are holding an item
  * - Either the attacker or defender are holding Mail
  * - The defender has Sticky Hold, and the attacker does not have Mold
@@ -6626,11 +6623,7 @@ static BOOL BtlCmd_TrySwapItems(BattleSystem *battleSys, BattleContext *battleCt
     int jumpOnFail = BattleScript_Read(battleCtx);
     int jumpStickyHold = BattleScript_Read(battleCtx);
 
-    u32 battleType = BattleSystem_GetBattleType(battleSys);
-
-    if (BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) && (battleType & BATTLE_TYPE_RESTORE_ITEMS_AFTER) == FALSE) {
-        BattleScript_Iter(battleCtx, jumpOnFail);
-    } else if ((ATTACKING_MON.heldItem == ITEM_NONE && DEFENDING_MON.heldItem == ITEM_NONE)
+    if ((ATTACKING_MON.heldItem == ITEM_NONE && DEFENDING_MON.heldItem == ITEM_NONE)
         || BattleSystem_NotHoldingMail(battleCtx, battleCtx->attacker) == FALSE
         || BattleSystem_NotHoldingMail(battleCtx, battleCtx->defender) == FALSE) {
         BattleScript_Iter(battleCtx, jumpOnFail);
