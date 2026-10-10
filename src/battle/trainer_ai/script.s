@@ -4134,6 +4134,9 @@ TagStrategy_PartnerWeaknessPolicy:
 
 TagStrategy_PartnerSnowball:
     IfMoveEqualTo MOVE_ICE_SHARD, TagStrategy_PartnerScorePlus12
+    IfMoveNotEqualTo MOVE_QUICK_ATTACK, TagStrategy_PartnerScoreMinus30
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_REFRIGERATE, TagStrategy_PartnerScorePlus12
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerCellBattery:
