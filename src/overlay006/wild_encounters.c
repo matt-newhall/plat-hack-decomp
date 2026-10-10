@@ -822,25 +822,25 @@ static u8 GetGroundEncounterSlot(void)
 
     if (roll < 20) {
         return 0;
-    } else if (roll >= 20 && roll < 40) {
+    } else if (roll >= 20 && roll < 35) {
         return 1;
-    } else if (roll >= 40 && roll < 50) {
+    } else if (roll >= 35 && roll < 45) {
         return 2;
-    } else if (roll >= 50 && roll < 60) {
+    } else if (roll >= 45 && roll < 55) {
         return 3;
-    } else if (roll >= 60 && roll < 70) {
+    } else if (roll >= 55 && roll < 65) {
         return 4;
-    } else if (roll >= 70 && roll < 80) {
+    } else if (roll >= 65 && roll < 75) {
         return 5;
-    } else if (roll >= 80 && roll < 85) {
+    } else if (roll >= 75 && roll < 80) {
         return 6;
-    } else if (roll >= 85 && roll < 90) {
+    } else if (roll >= 80 && roll < 85) {
         return 7;
-    } else if (roll >= 90 && roll < 94) {
+    } else if (roll >= 85 && roll < 90) {
         return 8;
-    } else if (roll >= 94 && roll < 98) {
+    } else if (roll >= 90 && roll < 95) {
         return 9;
-    } else if (roll == 98) {
+    } else if (roll >= 95 && roll < 99) {
         return 10;
     }
 
