@@ -186,7 +186,8 @@ void BattleSystem_InitBattleMon(BattleSystem *battleSys, BattleContext *battleCt
     battleCtx->battleMons[battler].timesDamaged = 0;
     battleCtx->battleMons[battler].trainerMessageFlags = 0;
 
-    battleCtx->battleMons[battler].moveEffectsData.canUnburden = battleCtx->battleMons[battler].heldItem ? TRUE : FALSE;
+    battleCtx->battleMons[battler].moveEffectsData.canUnburden = battleCtx->battleMons[battler].heldItem
+        && battleCtx->battleMons[battler].ability == ABILITY_UNBURDEN;
 }
 
 void BattleSystem_ReloadPokemon(BattleSystem *battleSys, BattleContext *battleCtx, int battler, int partySlot)
