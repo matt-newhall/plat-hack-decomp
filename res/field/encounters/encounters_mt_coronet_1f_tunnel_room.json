@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 37,
-            "species": "SPECIES_GRAVELER"
+            "level": 82,
+            "species": "SPECIES_CLAYDOL"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GRAVELER"
+            "level": 82,
+            "species": "SPECIES_LICKILICKY"
         },
         {
-            "level": 37,
-            "species": "SPECIES_MEDICHAM"
+            "level": 82,
+            "species": "SPECIES_GLISCOR"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 82,
+            "species": "SPECIES_DUSKNOIR"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MACHOKE"
+            "level": 82,
+            "species": "SPECIES_ALTARIA"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MEDICHAM"
+            "level": 82,
+            "species": "SPECIES_ABSOL"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CHINGLING"
+            "level": 82,
+            "species": "SPECIES_VENUSAUR"
         },
         {
-            "level": 37,
-            "species": "SPECIES_NOSEPASS"
+            "level": 82,
+            "species": "SPECIES_FERALIGATR"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
+            "level": 82,
+            "species": "SPECIES_BLAZIKEN"
         },
         {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
+            "level": 82,
+            "species": "SPECIES_XATU"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
+            "level": 82,
+            "species": "SPECIES_TYRANITAR"
         },
         {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
+            "level": 82,
+            "species": "SPECIES_RAMPARDOS"
         }
     ],
     "swarms": [

@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 37,
+            "level": 83,
+            "species": "SPECIES_MISMAGIUS"
+        },
+        {
+            "level": 83,
+            "species": "SPECIES_HERACROSS"
+        },
+        {
+            "level": 83,
+            "species": "SPECIES_PROBOPASS"
+        },
+        {
+            "level": 83,
+            "species": "SPECIES_TOGEKISS"
+        },
+        {
+            "level": 83,
+            "species": "SPECIES_MACHAMP"
+        },
+        {
+            "level": 83,
             "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GRAVELER"
+            "level": 83,
+            "species": "SPECIES_MEGANIUM"
         },
         {
-            "level": 37,
-            "species": "SPECIES_MEDICHAM"
+            "level": 83,
+            "species": "SPECIES_SWAMPERT"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 83,
+            "species": "SPECIES_CHARIZARD"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MACHOKE"
+            "level": 83,
+            "species": "SPECIES_MAGNEZONE"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MEDICHAM"
+            "level": 83,
+            "species": "SPECIES_DRAGONITE"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CHINGLING"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_NOSEPASS"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 39,
-            "species": "SPECIES_CHIMECHO"
+            "level": 83,
+            "species": "SPECIES_ARMALDO"
         }
     ],
     "swarms": [

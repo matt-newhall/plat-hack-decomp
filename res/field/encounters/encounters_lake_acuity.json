@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 38,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_SPHEAL"
         },
         {
-            "level": 39,
-            "species": "SPECIES_BIBAREL"
+            "level": 75,
+            "species": "SPECIES_SMOOCHUM"
         },
         {
-            "level": 39,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_SHELLDER"
         },
         {
-            "level": 40,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_SEALEO"
         },
         {
-            "level": 40,
-            "species": "SPECIES_GOLDUCK"
+            "level": 75,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 41,
-            "species": "SPECIES_SNEASEL"
+            "level": 75,
+            "species": "SPECIES_KADABRA"
         },
         {
-            "level": 39,
-            "species": "SPECIES_GOLDUCK"
+            "level": 75,
+            "species": "SPECIES_DELCATTY"
         },
         {
-            "level": 38,
-            "species": "SPECIES_PSYDUCK"
+            "level": 75,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 41,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_ALAKAZAM"
         },
         {
-            "level": 40,
-            "species": "SPECIES_BIBAREL"
+            "level": 75,
+            "species": "SPECIES_WALREIN"
         },
         {
-            "level": 41,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_CLOYSTER"
         },
         {
-            "level": 40,
-            "species": "SPECIES_BIBAREL"
+            "level": 75,
+            "species": "SPECIES_SNORLAX"
         }
     ],
     "swarms": [

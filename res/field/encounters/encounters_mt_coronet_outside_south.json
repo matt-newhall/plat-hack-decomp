@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 36,
-            "species": "SPECIES_SNOVER"
+            "level": 82,
+            "species": "SPECIES_PILOSWINE"
         },
         {
-            "level": 38,
-            "species": "SPECIES_ABOMASNOW"
+            "level": 82,
+            "species": "SPECIES_GLALIE"
         },
         {
-            "level": 38,
-            "species": "SPECIES_MEDICHAM"
+            "level": 82,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 39,
-            "species": "SPECIES_ABOMASNOW"
+            "level": 82,
+            "species": "SPECIES_MAMOSWINE"
         },
         {
-            "level": 40,
-            "species": "SPECIES_MACHOKE"
+            "level": 82,
+            "species": "SPECIES_CASTFORM"
         },
         {
-            "level": 40,
-            "species": "SPECIES_MEDICHAM"
+            "level": 82,
+            "species": "SPECIES_LOPUNNY"
         },
         {
-            "level": 37,
-            "species": "SPECIES_CHINGLING"
+            "level": 82,
+            "species": "SPECIES_FROSLASS"
         },
         {
-            "level": 38,
-            "species": "SPECIES_NOSEPASS"
+            "level": 82,
+            "species": "SPECIES_WEAVILE"
         },
         {
-            "level": 38,
-            "species": "SPECIES_ABSOL"
+            "level": 82,
+            "species": "SPECIES_CHATOT"
         },
         {
-            "level": 39,
-            "species": "SPECIES_CHINGLING"
+            "level": 82,
+            "species": "SPECIES_DRIFBLIM"
         },
         {
-            "level": 40,
-            "species": "SPECIES_ABSOL"
+            "level": 82,
+            "species": "SPECIES_AERODACTYL"
         },
         {
-            "level": 39,
-            "species": "SPECIES_CHINGLING"
+            "level": 82,
+            "species": "SPECIES_NOCTOWL"
         }
     ],
     "swarms": [

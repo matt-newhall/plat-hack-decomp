@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 37,
+            "level": 81,
+            "species": "SPECIES_CROBAT"
+        },
+        {
+            "level": 81,
             "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GRAVELER"
+            "level": 81,
+            "species": "SPECIES_GLISCOR"
         },
         {
-            "level": 37,
-            "species": "SPECIES_MEDICHAM"
+            "level": 81,
+            "species": "SPECIES_MACHAMP"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 81,
+            "species": "SPECIES_CLAYDOL"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MACHOKE"
+            "level": 81,
+            "species": "SPECIES_PROBOPASS"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MEDICHAM"
+            "level": 81,
+            "species": "SPECIES_AGGRON"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CHINGLING"
+            "level": 81,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 37,
-            "species": "SPECIES_NOSEPASS"
+            "level": 81,
+            "species": "SPECIES_SABLEYE"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
+            "level": 81,
+            "species": "SPECIES_MAWILE"
         },
         {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
+            "level": 81,
+            "species": "SPECIES_SHELGON"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
+            "level": 81,
+            "species": "SPECIES_GABITE"
         }
     ],
     "swarms": [

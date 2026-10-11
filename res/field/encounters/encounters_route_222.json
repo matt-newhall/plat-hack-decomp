@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 39,
-            "species": "SPECIES_ELECTABUZZ"
+            "level": 82,
+            "species": "SPECIES_PACHIRISU"
         },
         {
-            "level": 40,
-            "species": "SPECIES_FLOATZEL"
+            "level": 82,
+            "species": "SPECIES_FLAAFFY"
         },
         {
-            "level": 41,
-            "species": "SPECIES_ELECTABUZZ"
+            "level": 82,
+            "species": "SPECIES_LUXRAY"
         },
         {
-            "level": 38,
-            "species": "SPECIES_CHATOT"
-        },
-        {
-            "level": 38,
+            "level": 82,
             "species": "SPECIES_WINGULL"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MAGNEMITE"
+            "level": 82,
+            "species": "SPECIES_PIKACHU"
         },
         {
-            "level": 38,
-            "species": "SPECIES_LUXIO"
+            "level": 82,
+            "species": "SPECIES_SANDSHREW"
         },
         {
-            "level": 40,
-            "species": "SPECIES_LUXIO"
+            "level": 82,
+            "species": "SPECIES_AMPHAROS"
         },
         {
-            "level": 40,
+            "level": 82,
             "species": "SPECIES_PELIPPER"
         },
         {
-            "level": 41,
-            "species": "SPECIES_MAGNETON"
+            "level": 82,
+            "species": "SPECIES_RHYDON"
         },
         {
-            "level": 40,
-            "species": "SPECIES_PELIPPER"
+            "level": 82,
+            "species": "SPECIES_SANDSLASH"
         },
         {
-            "level": 41,
-            "species": "SPECIES_MAGNETON"
+            "level": 82,
+            "species": "SPECIES_RAICHU"
+        },
+        {
+            "level": 82,
+            "species": "SPECIES_VIBRAVA"
         }
     ],
     "swarms": [

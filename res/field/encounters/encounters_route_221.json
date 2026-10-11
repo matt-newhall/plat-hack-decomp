@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 29,
-            "species": "SPECIES_FLOATZEL"
+            "level": 80,
+            "species": "SPECIES_DODRIO"
         },
         {
-            "level": 28,
-            "species": "SPECIES_GIRAFARIG"
+            "level": 80,
+            "species": "SPECIES_SHIFTRY"
         },
         {
-            "level": 28,
-            "species": "SPECIES_ROSELIA"
+            "level": 80,
+            "species": "SPECIES_LINOONE"
         },
         {
-            "level": 29,
-            "species": "SPECIES_ROSELIA"
+            "level": 80,
+            "species": "SPECIES_TROPIUS"
         },
         {
-            "level": 31,
+            "level": 80,
+            "species": "SPECIES_NINJASK"
+        },
+        {
+            "level": 80,
+            "species": "SPECIES_TANGROWTH"
+        },
+        {
+            "level": 80,
+            "species": "SPECIES_PIDGEOT"
+        },
+        {
+            "level": 80,
             "species": "SPECIES_SUDOWOODO"
         },
         {
-            "level": 30,
-            "species": "SPECIES_SUDOWOODO"
+            "level": 80,
+            "species": "SPECIES_ROSERADE"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GIRAFARIG"
+            "level": 80,
+            "species": "SPECIES_EXEGGUTOR"
         },
         {
-            "level": 29,
-            "species": "SPECIES_SUDOWOODO"
+            "level": 80,
+            "species": "SPECIES_LUDICOLO"
         },
         {
-            "level": 31,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_ROSELIA"
-        },
-        {
-            "level": 31,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_ROSELIA"
+            "level": 80,
+            "species": "SPECIES_PARASECT"
         }
     ],
     "swarms": [

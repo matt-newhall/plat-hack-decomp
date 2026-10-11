@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 37,
+            "level": 81,
+            "species": "SPECIES_CHIMECHO"
+        },
+        {
+            "level": 81,
+            "species": "SPECIES_CLAYDOL"
+        },
+        {
+            "level": 81,
+            "species": "SPECIES_GENGAR"
+        },
+        {
+            "level": 81,
             "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GRAVELER"
+            "level": 81,
+            "species": "SPECIES_HONCHKROW"
         },
         {
-            "level": 37,
-            "species": "SPECIES_MEDICHAM"
+            "level": 81,
+            "species": "SPECIES_MISMAGIUS"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 81,
+            "species": "SPECIES_LUNATONE"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MACHOKE"
+            "level": 81,
+            "species": "SPECIES_SOLROCK"
         },
         {
-            "level": 39,
-            "species": "SPECIES_MEDICHAM"
+            "level": 81,
+            "species": "SPECIES_CROBAT"
         },
         {
-            "level": 36,
-            "species": "SPECIES_CHINGLING"
+            "level": 81,
+            "species": "SPECIES_HOUNDOOM"
         },
         {
-            "level": 37,
-            "species": "SPECIES_NOSEPASS"
+            "level": 81,
+            "species": "SPECIES_GARDEVOIR"
         },
         {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_MEDICHAM"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_CHINGLING"
+            "level": 81,
+            "species": "SPECIES_PUPITAR"
         }
     ],
     "swarms": [
