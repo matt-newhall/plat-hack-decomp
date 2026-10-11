@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 31,
-            "species": "SPECIES_GEODUDE"
+            "level": 78,
+            "species": "SPECIES_ARBOK"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_RHYDON"
         },
         {
-            "level": 30,
-            "species": "SPECIES_ZUBAT"
+            "level": 78,
+            "species": "SPECIES_DONPHAN"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_HIPPOWDON"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GEODUDE"
+            "level": 78,
+            "species": "SPECIES_FARFETCHD"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_MAROWAK"
         },
         {
-            "level": 31,
-            "species": "SPECIES_ONIX"
+            "level": 78,
+            "species": "SPECIES_STANTLER"
         },
         {
-            "level": 33,
-            "species": "SPECIES_ONIX"
+            "level": 78,
+            "species": "SPECIES_DUGTRIO"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GEODUDE"
+            "level": 78,
+            "species": "SPECIES_SANDSLASH"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_RHYPERIOR"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GEODUDE"
+            "level": 78,
+            "species": "SPECIES_GABITE"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_METANG"
         }
     ],
     "swarms": [

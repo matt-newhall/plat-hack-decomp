@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 32,
-            "species": "SPECIES_ONIX"
+            "level": 78,
+            "species": "SPECIES_MACHAMP"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_GOLEM"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_HITMONCHAN"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_KANGASKHAN"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_ARCANINE"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_KINGLER"
         },
         {
-            "level": 33,
-            "species": "SPECIES_STEELIX"
+            "level": 78,
+            "species": "SPECIES_CAMERUPT"
         },
         {
-            "level": 35,
-            "species": "SPECIES_STEELIX"
+            "level": 78,
+            "species": "SPECIES_HOUNDOOM"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_PLUSLE"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_MINUN"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_MAGMORTAR"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_DITTO"
         }
     ],
     "swarms": [

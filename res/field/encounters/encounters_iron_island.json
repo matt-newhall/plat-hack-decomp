@@ -2,52 +2,52 @@
     "land_rate": 0,
     "land_encounters": [
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_SWELLOW"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_SKARMORY"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GOLBAT"
+            "level": 77,
+            "species": "SPECIES_BUTTERFREE"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GOLBAT"
+            "level": 77,
+            "species": "SPECIES_GLISCOR"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_CRAWDAUNT"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_GASTRODON"
         },
         {
-            "level": 31,
-            "species": "SPECIES_ONIX"
+            "level": 77,
+            "species": "SPECIES_GIRAFARIG"
         },
         {
-            "level": 33,
-            "species": "SPECIES_ONIX"
+            "level": 77,
+            "species": "SPECIES_LINOONE"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_KINGLER"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_NINJASK"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 77,
+            "species": "SPECIES_KRICKETUNE"
         }
     ],
     "swarms": [

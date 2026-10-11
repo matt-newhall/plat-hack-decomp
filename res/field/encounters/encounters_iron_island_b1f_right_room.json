@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_HONCHKROW"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_DUGTRIO"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_RHYDON"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_WEEZING"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_HITMONLEE"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 31,
-            "species": "SPECIES_ONIX"
+            "level": 78,
+            "species": "SPECIES_ELECTRODE"
         },
         {
-            "level": 33,
-            "species": "SPECIES_ONIX"
+            "level": 78,
+            "species": "SPECIES_PUPITAR"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_RHYPERIOR"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_GOLEM"
         },
         {
-            "level": 30,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_DODRIO"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_TYRANITAR"
         }
     ],
     "swarms": [

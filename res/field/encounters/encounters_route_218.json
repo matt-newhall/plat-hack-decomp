@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_STARAPTOR"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_LUXRAY"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_SCYTHER"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_SLOWPOKE"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_VESPIQUEN"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_MR_MIME"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_PINSIR"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_SKUNTANK"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_TOXICROAK"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_DRAPION"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_SLOWKING"
         },
         {
-            "level": 90,
-            "species": "SPECIES_AZUMARILL"
+            "level": 75,
+            "species": "SPECIES_TOGEKISS"
         }
     ],
     "swarms": [

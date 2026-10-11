@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 32,
-            "species": "SPECIES_STEELIX"
+            "level": 78,
+            "species": "SPECIES_CLAYDOL"
         },
         {
-            "level": 33,
+            "level": 78,
+            "species": "SPECIES_PILOSWINE"
+        },
+        {
+            "level": 78,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_BUTTERFREE"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GOLBAT"
+            "level": 78,
+            "species": "SPECIES_MR_MIME"
         },
         {
-            "level": 33,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_GOLDUCK"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_LICKILICKY"
         },
         {
-            "level": 33,
-            "species": "SPECIES_STEELIX"
+            "level": 78,
+            "species": "SPECIES_ALAKAZAM"
         },
         {
-            "level": 35,
-            "species": "SPECIES_STEELIX"
+            "level": 78,
+            "species": "SPECIES_GIRAFARIG"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_GARDEVOIR"
         },
         {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_SLOWBRO"
         },
         {
-            "level": 31,
-            "species": "SPECIES_GRAVELER"
-        },
-        {
-            "level": 32,
-            "species": "SPECIES_GRAVELER"
+            "level": 78,
+            "species": "SPECIES_SLOWKING"
         }
     ],
     "swarms": [
