@@ -2,52 +2,52 @@
     "land_rate": 35,
     "land_encounters": [
         {
-            "level": 27,
-            "species": "SPECIES_WOOPER"
+            "level": 40,
+            "species": "SPECIES_GULPIN"
         },
         {
-            "level": 27,
-            "species": "SPECIES_BIBAREL"
+            "level": 40,
+            "species": "SPECIES_BELLSPROUT"
         },
         {
-            "level": 28,
-            "species": "SPECIES_BIBAREL"
+            "level": 40,
+            "species": "SPECIES_GLOOM"
         },
         {
-            "level": 27,
+            "level": 40,
+            "species": "SPECIES_NIDORINA"
+        },
+        {
+            "level": 40,
+            "species": "SPECIES_NIDORINO"
+        },
+        {
+            "level": 40,
+            "species": "SPECIES_GASTLY"
+        },
+        {
+            "level": 40,
             "species": "SPECIES_TANGELA"
         },
         {
-            "level": 28,
-            "species": "SPECIES_TANGELA"
+            "level": 40,
+            "species": "SPECIES_WEEPINBELL"
         },
         {
-            "level": 29,
-            "species": "SPECIES_QUAGSIRE"
+            "level": 40,
+            "species": "SPECIES_SWALOT"
         },
         {
-            "level": 28,
-            "species": "SPECIES_WOOPER"
+            "level": 40,
+            "species": "SPECIES_MISDREAVUS"
         },
         {
-            "level": 29,
-            "species": "SPECIES_WOOPER"
+            "level": 40,
+            "species": "SPECIES_GASTLY"
         },
         {
-            "level": 29,
-            "species": "SPECIES_YANMA"
-        },
-        {
-            "level": 29,
-            "species": "SPECIES_TANGELA"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_YANMA"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_TANGELA"
+            "level": 40,
+            "species": "SPECIES_HAUNTER"
         }
     ],
     "swarms": [

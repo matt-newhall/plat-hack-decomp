@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_ERRATIC",
     "egg_groups": [ "EGG_GROUP_BUG", "EGG_GROUP_BUG" ],
-    "abilities": [ "ABILITY_SPEED_BOOST", "ABILITY_NONE", "ABILITY_INFILTRATOR" ],
+    "abilities": [ "ABILITY_INFILTRATOR", "ABILITY_NONE", "ABILITY_SPEED_BOOST" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_YELLOW",
     "flip_sprite": false,
@@ -89,7 +89,7 @@
         ]
     },
     "evolutions": [  ],
-    "offspring": "SPECIES_NINCADA",
+    "offspring": "SPECIES_NINJASK",
     "footprint": {
         "has": true,
         "size": "FOOTPRINT_MEDIUM",

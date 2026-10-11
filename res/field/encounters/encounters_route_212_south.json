@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 23,
-            "species": "SPECIES_SHELLOS"
+            "level": 37,
+            "species": "SPECIES_ARBOK"
         },
         {
-            "level": 24,
+            "level": 37,
+            "species": "SPECIES_VENOMOTH"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_QWILFISH"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_FLOATZEL"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_BIBAREL"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_GASTRODON"
+        },
+        {
+            "level": 37,
+            "species": "SPECIES_BARBOACH"
+        },
+        {
+            "level": 37,
             "species": "SPECIES_QUAGSIRE"
         },
         {
-            "level": 25,
-            "species": "SPECIES_BUIZEL"
+            "level": 37,
+            "species": "SPECIES_ROSELIA"
         },
         {
-            "level": 24,
-            "species": "SPECIES_SHELLOS"
+            "level": 37,
+            "species": "SPECIES_WEEZING"
         },
         {
-            "level": 26,
-            "species": "SPECIES_QUAGSIRE"
+            "level": 37,
+            "species": "SPECIES_SANDSLASH"
         },
         {
-            "level": 25,
-            "species": "SPECIES_SHELLOS"
-        },
-        {
-            "level": 24,
-            "species": "SPECIES_CROAGUNK"
-        },
-        {
-            "level": 25,
-            "species": "SPECIES_CROAGUNK"
-        },
-        {
-            "level": 23,
-            "species": "SPECIES_BUIZEL"
-        },
-        {
-            "level": 26,
-            "species": "SPECIES_SHELLOS"
-        },
-        {
-            "level": 23,
-            "species": "SPECIES_BUIZEL"
-        },
-        {
-            "level": 26,
-            "species": "SPECIES_SHELLOS"
+            "level": 37,
+            "species": "SPECIES_SWALOT"
         }
     ],
     "swarms": [
