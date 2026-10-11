@@ -4,14 +4,14 @@
 
 _000:
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _wore_off
-    PrintAttackMessage 
-    Wait 
+    PrintAttackMessage
+    Wait
     Call BATTLE_SUBSCRIPT_RECOVER_HP
 
 _wore_off:
     // {0}’s stockpiled effect wore off!
     PrintMessage BattleStrings_Text_PokemonsStockpiledEffectWoreOff_Ally, TAG_NICKNAME, BTLSCR_ATTACKER
-    Wait 
+    Wait
     WaitButtonABTime 30
     UpdateMonDataFromVar OPCODE_GET, BTLSCR_ATTACKER, BATTLEMON_STOCKPILE_DEF_BOOSTS, BTLVAR_CALC_TEMP
     UpdateMonData OPCODE_SET, BTLSCR_ATTACKER, BATTLEMON_STOCKPILE_DEF_BOOSTS, 0
@@ -23,10 +23,11 @@ _defense_simple:
     UpdateVar OPCODE_MUL, BTLVAR_CALC_TEMP, 2
 
 _defense_drop:
-    UpdateMonDataFromVar OPCODE_SUB_TO_ZERO, BTLSCR_ATTACKER, BATTLEMON_DEFENSE_STAGE, BTLVAR_CALC_TEMP
     UpdateVar OPCODE_SET, BTLVAR_MSG_TEMP, BATTLE_STAT_DEFENSE
+    CheckContrary BTLSCR_ATTACKER, _defense_raise
+    UpdateMonDataFromVar OPCODE_SUB_TO_ZERO, BTLSCR_ATTACKER, BATTLEMON_DEFENSE_STAGE, BTLVAR_CALC_TEMP
     PlayBattleAnimation BTLSCR_ATTACKER, BATTLE_ANIMATION_STAT_DROP
-    Wait 
+    Wait
     CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 1, _defense_fell
     CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 2, _defense_harshly_fell
     // {0}’s {1} severely fell!
@@ -41,9 +42,33 @@ _defense_fell:
 _defense_harshly_fell:
     // {0}’s {1} harshly fell!
     PrintMessage BattleStrings_Text_PokemonsStatHarshlyFell_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
+    GoTo _defense_shown
+
+_defense_raise:
+    UpdateMonDataFromVar OPCODE_ADD, BTLSCR_ATTACKER, BATTLEMON_DEFENSE_STAGE, BTLVAR_CALC_TEMP
+    CompareMonDataToValue OPCODE_LTE, BTLSCR_ATTACKER, BATTLEMON_DEFENSE_STAGE, 12, _defense_raise_capped
+    UpdateMonData OPCODE_SET, BTLSCR_ATTACKER, BATTLEMON_DEFENSE_STAGE, 12
+
+_defense_raise_capped:
+    PlayBattleAnimation BTLSCR_ATTACKER, BATTLE_ANIMATION_STAT_BOOST
+    Wait
+    CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 1, _defense_rose
+    CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 2, _defense_sharply_rose
+    // {0}’s {1} drastically rose!
+    PrintMessage BattleStrings_Text_PokemonsStatDrasticallyRose_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
+    GoTo _defense_shown
+
+_defense_rose:
+    // {0}’s {1} rose!
+    PrintMessage BattleStrings_Text_PokemonsStatRose_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
+    GoTo _defense_shown
+
+_defense_sharply_rose:
+    // {0}’s {1} sharply rose!
+    PrintMessage BattleStrings_Text_PokemonsStatSharplyRose_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
 
 _defense_shown:
-    Wait 
+    Wait
     WaitButtonABTime 30
 
 _sp_defense:
@@ -57,10 +82,11 @@ _sp_defense_simple:
     UpdateVar OPCODE_MUL, BTLVAR_CALC_TEMP, 2
 
 _sp_defense_drop:
-    UpdateMonDataFromVar OPCODE_SUB_TO_ZERO, BTLSCR_ATTACKER, BATTLEMON_SP_DEFENSE_STAGE, BTLVAR_CALC_TEMP
     UpdateVar OPCODE_SET, BTLVAR_MSG_TEMP, BATTLE_STAT_SP_DEFENSE
+    CheckContrary BTLSCR_ATTACKER, _sp_defense_raise
+    UpdateMonDataFromVar OPCODE_SUB_TO_ZERO, BTLSCR_ATTACKER, BATTLEMON_SP_DEFENSE_STAGE, BTLVAR_CALC_TEMP
     PlayBattleAnimation BTLSCR_ATTACKER, BATTLE_ANIMATION_STAT_DROP
-    Wait 
+    Wait
     CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 1, _sp_defense_fell
     CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 2, _sp_defense_harshly_fell
     // {0}’s {1} severely fell!
@@ -75,10 +101,34 @@ _sp_defense_fell:
 _sp_defense_harshly_fell:
     // {0}’s {1} harshly fell!
     PrintMessage BattleStrings_Text_PokemonsStatHarshlyFell_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
+    GoTo _sp_defense_shown
+
+_sp_defense_raise:
+    UpdateMonDataFromVar OPCODE_ADD, BTLSCR_ATTACKER, BATTLEMON_SP_DEFENSE_STAGE, BTLVAR_CALC_TEMP
+    CompareMonDataToValue OPCODE_LTE, BTLSCR_ATTACKER, BATTLEMON_SP_DEFENSE_STAGE, 12, _sp_defense_raise_capped
+    UpdateMonData OPCODE_SET, BTLSCR_ATTACKER, BATTLEMON_SP_DEFENSE_STAGE, 12
+
+_sp_defense_raise_capped:
+    PlayBattleAnimation BTLSCR_ATTACKER, BATTLE_ANIMATION_STAT_BOOST
+    Wait
+    CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 1, _sp_defense_rose
+    CompareVarToValue OPCODE_EQU, BTLVAR_CALC_TEMP, 2, _sp_defense_sharply_rose
+    // {0}’s {1} drastically rose!
+    PrintMessage BattleStrings_Text_PokemonsStatDrasticallyRose_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
+    GoTo _sp_defense_shown
+
+_sp_defense_rose:
+    // {0}’s {1} rose!
+    PrintMessage BattleStrings_Text_PokemonsStatRose_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
+    GoTo _sp_defense_shown
+
+_sp_defense_sharply_rose:
+    // {0}’s {1} sharply rose!
+    PrintMessage BattleStrings_Text_PokemonsStatSharplyRose_Ally, TAG_NICKNAME_STAT, BTLSCR_ATTACKER, BTLSCR_MSG_TEMP
 
 _sp_defense_shown:
-    Wait 
+    Wait
     WaitButtonABTime 30
 
 _end:
-    End 
+    End
