@@ -3,11 +3,11 @@
     "land_encounters": [
         {
             "level": 41,
-            "species": "SPECIES_SPINDA"
+            "species": "SPECIES_LUXIO"
         },
         {
             "level": 41,
-            "species": "SPECIES_STANTLER"
+            "species": "SPECIES_MASQUERAIN"
         },
         {
             "level": 41,
@@ -15,35 +15,35 @@
         },
         {
             "level": 41,
-            "species": "SPECIES_VESPIQUEN"
+            "species": "SPECIES_BIBAREL"
         },
         {
             "level": 41,
-            "species": "SPECIES_SWELLOW"
+            "species": "SPECIES_LOMBRE"
         },
         {
             "level": 41,
-            "species": "SPECIES_AIPOM"
+            "species": "SPECIES_FLOATZEL"
         },
         {
             "level": 41,
-            "species": "SPECIES_GIRAFARIG"
+            "species": "SPECIES_TOGETIC"
         },
         {
             "level": 41,
-            "species": "SPECIES_MANECTRIC"
+            "species": "SPECIES_LEDIAN"
         },
         {
             "level": 41,
-            "species": "SPECIES_BRELOOM"
+            "species": "SPECIES_JUMPLUFF"
         },
         {
             "level": 41,
-            "species": "SPECIES_SUNFLORA"
+            "species": "SPECIES_EXEGGCUTE"
         },
         {
             "level": 41,
-            "species": "SPECIES_MILTANK"
+            "species": "SPECIES_PIDGEOT"
         },
         {
             "level": 41,

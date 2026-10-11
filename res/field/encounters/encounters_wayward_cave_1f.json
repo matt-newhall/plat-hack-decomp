@@ -31,19 +31,19 @@
         },
         {
             "level": 25,
-            "species": "SPECIES_SWABLU"
-        },
-        {
-            "level": 25,
             "species": "SPECIES_CHIMECHO"
         },
         {
             "level": 25,
-            "species": "SPECIES_KANGASKHAN"
+            "species": "SPECIES_SABLEYE"
         },
         {
             "level": 25,
             "species": "SPECIES_MAWILE"
+        },
+        {
+            "level": 25,
+            "species": "SPECIES_KANGASKHAN"
         },
         {
             "level": 25,

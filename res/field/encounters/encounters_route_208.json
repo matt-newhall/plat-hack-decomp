@@ -19,11 +19,11 @@
         },
         {
             "level": 30,
-            "species": "SPECIES_CASCOON"
+            "species": "SPECIES_DUSTOX"
         },
         {
             "level": 30,
-            "species": "SPECIES_SILCOON"
+            "species": "SPECIES_BEAUTIFLY"
         },
         {
             "level": 30,
@@ -31,15 +31,15 @@
         },
         {
             "level": 30,
-            "species": "SPECIES_WEEPINBELL"
+            "species": "SPECIES_SEVIPER"
+        },
+        {
+            "level": 30,
+            "species": "SPECIES_ZANGOOSE"
         },
         {
             "level": 30,
             "species": "SPECIES_ARIADOS"
-        },
-        {
-            "level": 30,
-            "species": "SPECIES_PINECO"
         },
         {
             "level": 30,

@@ -3,19 +3,19 @@
     "land_encounters": [
         {
             "level": 5,
+            "species": "SPECIES_MEOWTH"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_CUBONE"
+        },
+        {
+            "level": 5,
+            "species": "SPECIES_PSYDUCK"
+        },
+        {
+            "level": 5,
             "species": "SPECIES_CYNDAQUIL"
-        },
-        {
-            "level": 5,
-            "species": "SPECIES_PIPLUP"
-        },
-        {
-            "level": 5,
-            "species": "SPECIES_TURTWIG"
-        },
-        {
-            "level": 5,
-            "species": "SPECIES_CHIMCHAR"
         },
         {
             "level": 5,

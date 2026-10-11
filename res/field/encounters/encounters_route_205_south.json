@@ -7,11 +7,7 @@
         },
         {
             "level": 12,
-            "species": "SPECIES_CROAGUNK"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_BUDEW"
+            "species": "SPECIES_WHISMUR"
         },
         {
             "level": 12,
@@ -19,19 +15,23 @@
         },
         {
             "level": 12,
-            "species": "SPECIES_PLUSLE"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_MINUN"
-        },
-        {
-            "level": 12,
             "species": "SPECIES_BIDOOF"
         },
         {
             "level": 12,
-            "species": "SPECIES_DELIBIRD"
+            "species": "SPECIES_MAKUHITA"
+        },
+        {
+            "level": 12,
+            "species": "SPECIES_SPEAROW"
+        },
+        {
+            "level": 12,
+            "species": "SPECIES_SHINX"
+        },
+        {
+            "level": 12,
+            "species": "SPECIES_NOSEPASS"
         },
         {
             "level": 12,
@@ -39,7 +39,7 @@
         },
         {
             "level": 12,
-            "species": "SPECIES_MAKUHITA"
+            "species": "SPECIES_PIDGEY"
         },
         {
             "level": 12,

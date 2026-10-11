@@ -7,7 +7,7 @@
         },
         {
             "level": 26,
-            "species": "SPECIES_DODRIO"
+            "species": "SPECIES_DODUO"
         },
         {
             "level": 26,
@@ -47,7 +47,7 @@
         },
         {
             "level": 26,
-            "species": "SPECIES_SEVIPER"
+            "species": "SPECIES_GLIGAR"
         }
     ],
     "swarms": [

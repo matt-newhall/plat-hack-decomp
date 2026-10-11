@@ -3,10 +3,6 @@
     "land_encounters": [
         {
             "level": 9,
-            "species": "SPECIES_HIPPOPOTAS"
-        },
-        {
-            "level": 9,
             "species": "SPECIES_MACHOP"
         },
         {
@@ -24,6 +20,10 @@
         {
             "level": 9,
             "species": "SPECIES_CROAGUNK"
+        },
+        {
+            "level": 9,
+            "species": "SPECIES_HIPPOPOTAS"
         },
         {
             "level": 9,

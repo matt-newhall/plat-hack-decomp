@@ -43,11 +43,11 @@
         },
         {
             "level": 7,
-            "species": "SPECIES_CACNEA"
+            "species": "SPECIES_SHROOMISH"
         },
         {
             "level": 7,
-            "species": "SPECIES_SHROOMISH"
+            "species": "SPECIES_AIPOM"
         }
     ],
     "swarms": [

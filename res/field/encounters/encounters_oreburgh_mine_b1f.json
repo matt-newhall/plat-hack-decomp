@@ -3,15 +3,15 @@
     "land_encounters": [
         {
             "level": 26,
-            "species": "SPECIES_NUMEL"
+            "species": "SPECIES_TYROGUE"
         },
         {
             "level": 26,
-            "species": "SPECIES_KOFFING"
+            "species": "SPECIES_CHATOT"
         },
         {
             "level": 26,
-            "species": "SPECIES_GULPIN"
+            "species": "SPECIES_GEODUDE"
         },
         {
             "level": 26,
@@ -23,7 +23,7 @@
         },
         {
             "level": 26,
-            "species": "SPECIES_TYROGUE"
+            "species": "SPECIES_KOFFING"
         },
         {
             "level": 26,
