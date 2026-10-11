@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 15,
-            "species": "SPECIES_GASTLY"
+            "level": 49,
+            "species": "SPECIES_GRANBULL"
         },
         {
-            "level": 15,
-            "species": "SPECIES_BRONZOR"
+            "level": 49,
+            "species": "SPECIES_IGGLYBUFF"
         },
         {
-            "level": 16,
-            "species": "SPECIES_GASTLY"
+            "level": 49,
+            "species": "SPECIES_ROSELIA"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GOLBAT"
+            "level": 49,
+            "species": "SPECIES_AIPOM"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 49,
+            "species": "SPECIES_TANGROWTH"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GOLBAT"
+            "level": 49,
+            "species": "SPECIES_IVYSAUR"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GOLBAT"
+            "level": 49,
+            "species": "SPECIES_NIDORAN_F"
         },
         {
-            "level": 16,
-            "species": "SPECIES_CHINGLING"
+            "level": 49,
+            "species": "SPECIES_ABOMASNOW"
         },
         {
-            "level": 18,
-            "species": "SPECIES_DUSKULL"
+            "level": 49,
+            "species": "SPECIES_SKIPLOOM"
         },
         {
-            "level": 18,
-            "species": "SPECIES_CHINGLING"
+            "level": 49,
+            "species": "SPECIES_EKANS"
         },
         {
-            "level": 18,
-            "species": "SPECIES_DUSKULL"
+            "level": 49,
+            "species": "SPECIES_ELECTIVIRE"
         },
         {
-            "level": 18,
-            "species": "SPECIES_CHINGLING"
+            "level": 49,
+            "species": "SPECIES_SHUCKLE"
         }
     ],
     "swarms": [

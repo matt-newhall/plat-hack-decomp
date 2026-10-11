@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 38,
-            "species": "SPECIES_GRAVELER"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_BIBAREL"
-        },
-        {
-            "level": 39,
-            "species": "SPECIES_GRAVELER"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_STARAVIA"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_BIBAREL"
-        },
-        {
-            "level": 40,
-            "species": "SPECIES_STARAVIA"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_GRAVELER"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_CHINGLING"
-        },
-        {
-            "level": 40,
+            "level": 46,
             "species": "SPECIES_DUSCLOPS"
         },
         {
-            "level": 39,
-            "species": "SPECIES_CHINGLING"
+            "level": 46,
+            "species": "SPECIES_BANETTE"
+        },
+        {
+            "level": 46,
+            "species": "SPECIES_ABSOL"
+        },
+        {
+            "level": 30,
+            "species": "SPECIES_BAGON"
+        },
+        {
+            "level": 30,
+            "species": "SPECIES_GIBLE"
+        },
+        {
+            "level": 46,
+            "species": "SPECIES_MIGHTYENA"
+        },
+        {
+            "level": 46,
+            "species": "SPECIES_SKARMORY"
+        },
+        {
+            "level": 46,
+            "species": "SPECIES_GENGAR"
+        },
+        {
+            "level": 46,
+            "species": "SPECIES_ALAKAZAM"
+        },
+        {
+            "level": 35,
+            "species": "SPECIES_LARVITAR"
+        },
+        {
+            "level": 35,
+            "species": "SPECIES_BELDUM"
         },
         {
             "level": 40,
-            "species": "SPECIES_DUSCLOPS"
-        },
-        {
-            "level": 39,
-            "species": "SPECIES_CHINGLING"
+            "species": "SPECIES_VIBRAVA"
         }
     ],
     "swarms": [

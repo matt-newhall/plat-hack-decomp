@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 26,
-            "species": "SPECIES_GIRAFARIG"
+            "level": 44,
+            "species": "SPECIES_SPINDA"
         },
         {
-            "level": 25,
-            "species": "SPECIES_BIBAREL"
-        },
-        {
-            "level": 26,
-            "species": "SPECIES_STARAVIA"
-        },
-        {
-            "level": 27,
+            "level": 44,
             "species": "SPECIES_KRICKETUNE"
         },
         {
-            "level": 27,
-            "species": "SPECIES_STARAVIA"
+            "level": 44,
+            "species": "SPECIES_STANTLER"
         },
         {
-            "level": 28,
-            "species": "SPECIES_HOUNDOUR"
+            "level": 44,
+            "species": "SPECIES_VESPIQUEN"
         },
         {
-            "level": 28,
-            "species": "SPECIES_STARAVIA"
+            "level": 44,
+            "species": "SPECIES_SWELLOW"
         },
         {
-            "level": 26,
-            "species": "SPECIES_BIBAREL"
+            "level": 44,
+            "species": "SPECIES_AIPOM"
         },
         {
-            "level": 28,
+            "level": 44,
             "species": "SPECIES_GIRAFARIG"
         },
         {
-            "level": 27,
-            "species": "SPECIES_BIBAREL"
+            "level": 44,
+            "species": "SPECIES_MANECTRIC"
         },
         {
-            "level": 28,
-            "species": "SPECIES_GIRAFARIG"
+            "level": 44,
+            "species": "SPECIES_BRELOOM"
         },
         {
-            "level": 27,
-            "species": "SPECIES_BIBAREL"
+            "level": 44,
+            "species": "SPECIES_SUNFLORA"
+        },
+        {
+            "level": 44,
+            "species": "SPECIES_MILTANK"
+        },
+        {
+            "level": 44,
+            "species": "SPECIES_RAPIDASH"
         }
     ],
     "swarms": [

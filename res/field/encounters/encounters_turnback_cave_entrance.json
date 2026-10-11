@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 15,
+            "level": 48,
+            "species": "SPECIES_MIGHTYENA"
+        },
+        {
+            "level": 48,
             "species": "SPECIES_GASTLY"
         },
         {
-            "level": 15,
-            "species": "SPECIES_BRONZOR"
+            "level": 48,
+            "species": "SPECIES_PERSIAN"
         },
         {
-            "level": 16,
-            "species": "SPECIES_GASTLY"
+            "level": 48,
+            "species": "SPECIES_CROBAT"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GOLBAT"
+            "level": 48,
+            "species": "SPECIES_MISMAGIUS"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 48,
+            "species": "SPECIES_HYPNO"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GOLBAT"
+            "level": 48,
+            "species": "SPECIES_GENGAR"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GOLBAT"
+            "level": 48,
+            "species": "SPECIES_GARDEVOIR"
         },
         {
-            "level": 16,
-            "species": "SPECIES_CHINGLING"
+            "level": 48,
+            "species": "SPECIES_DODRIO"
         },
         {
-            "level": 18,
-            "species": "SPECIES_DUSKULL"
+            "level": 48,
+            "species": "SPECIES_PINECO"
         },
         {
-            "level": 18,
-            "species": "SPECIES_CHINGLING"
+            "level": 48,
+            "species": "SPECIES_SNEASEL"
         },
         {
-            "level": 18,
-            "species": "SPECIES_DUSKULL"
-        },
-        {
-            "level": 18,
-            "species": "SPECIES_CHINGLING"
+            "level": 48,
+            "species": "SPECIES_SHIFTRY"
         }
     ],
     "swarms": [

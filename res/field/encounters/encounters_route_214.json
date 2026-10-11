@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 23,
+            "level": 44,
+            "species": "SPECIES_RATICATE"
+        },
+        {
+            "level": 44,
+            "species": "SPECIES_BUTTERFREE"
+        },
+        {
+            "level": 44,
             "species": "SPECIES_GRAVELER"
         },
         {
-            "level": 21,
-            "species": "SPECIES_GEODUDE"
+            "level": 44,
+            "species": "SPECIES_HOUNDOOM"
         },
         {
-            "level": 22,
-            "species": "SPECIES_GRAVELER"
+            "level": 44,
+            "species": "SPECIES_CACTURNE"
         },
         {
-            "level": 22,
-            "species": "SPECIES_RHYHORN"
+            "level": 44,
+            "species": "SPECIES_KECLEON"
         },
         {
-            "level": 23,
-            "species": "SPECIES_HOUNDOUR"
+            "level": 44,
+            "species": "SPECIES_PLUSLE"
         },
         {
-            "level": 23,
-            "species": "SPECIES_RHYHORN"
+            "level": 44,
+            "species": "SPECIES_MINUN"
         },
         {
-            "level": 24,
-            "species": "SPECIES_GRAVELER"
+            "level": 44,
+            "species": "SPECIES_SCYTHER"
         },
         {
-            "level": 21,
-            "species": "SPECIES_RHYHORN"
+            "level": 44,
+            "species": "SPECIES_GRUMPIG"
         },
         {
-            "level": 24,
-            "species": "SPECIES_HOUNDOUR"
+            "level": 44,
+            "species": "SPECIES_BEEDRILL"
         },
         {
-            "level": 24,
-            "species": "SPECIES_RHYHORN"
-        },
-        {
-            "level": 24,
-            "species": "SPECIES_HOUNDOUR"
-        },
-        {
-            "level": 24,
-            "species": "SPECIES_RHYHORN"
+            "level": 44,
+            "species": "SPECIES_AMPHAROS"
         }
     ],
     "swarms": [

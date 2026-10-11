@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 15,
-            "species": "SPECIES_GASTLY"
+            "level": 49,
+            "species": "SPECIES_TENTACOOL"
         },
         {
-            "level": 15,
-            "species": "SPECIES_BRONZOR"
+            "level": 49,
+            "species": "SPECIES_HITMONLEE"
         },
         {
-            "level": 16,
-            "species": "SPECIES_GASTLY"
+            "level": 49,
+            "species": "SPECIES_EXPLOUD"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GOLBAT"
+            "level": 49,
+            "species": "SPECIES_RELICANTH"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GASTLY"
+            "level": 49,
+            "species": "SPECIES_ELECTABUZZ"
         },
         {
-            "level": 17,
-            "species": "SPECIES_GOLBAT"
+            "level": 49,
+            "species": "SPECIES_IGGLYBUFF"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GOLBAT"
+            "level": 49,
+            "species": "SPECIES_SILCOON"
         },
         {
-            "level": 16,
-            "species": "SPECIES_CHINGLING"
+            "level": 49,
+            "species": "SPECIES_NATU"
         },
         {
-            "level": 18,
-            "species": "SPECIES_DUSKULL"
+            "level": 49,
+            "species": "SPECIES_ODDISH"
         },
         {
-            "level": 18,
-            "species": "SPECIES_CHINGLING"
+            "level": 49,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 18,
-            "species": "SPECIES_DUSKULL"
+            "level": 49,
+            "species": "SPECIES_OMANYTE"
         },
         {
-            "level": 18,
-            "species": "SPECIES_CHINGLING"
+            "level": 49,
+            "species": "SPECIES_YANMEGA"
         }
     ],
     "swarms": [
@@ -94,7 +94,7 @@
         "SPECIES_NONE",
         "SPECIES_NONE"
     ],
-    "surf_rate": 10,
+    "surf_rate": 0,
     "surf_encounters": [
         {
             "level_max": 20,

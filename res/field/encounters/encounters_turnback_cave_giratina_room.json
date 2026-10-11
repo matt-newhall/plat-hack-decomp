@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 35,
-            "species": "SPECIES_HAUNTER"
-        },
-        {
-            "level": 35,
-            "species": "SPECIES_BRONZONG"
-        },
-        {
-            "level": 36,
-            "species": "SPECIES_HAUNTER"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_HAUNTER"
-        },
-        {
-            "level": 37,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 38,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 36,
-            "species": "SPECIES_CHIMECHO"
-        },
-        {
-            "level": 37,
+            "level": 48,
             "species": "SPECIES_DUSCLOPS"
         },
         {
-            "level": 37,
-            "species": "SPECIES_CHIMECHO"
+            "level": 48,
+            "species": "SPECIES_CROBAT"
         },
         {
-            "level": 37,
-            "species": "SPECIES_DUSCLOPS"
+            "level": 48,
+            "species": "SPECIES_HAUNTER"
         },
         {
-            "level": 37,
-            "species": "SPECIES_CHIMECHO"
+            "level": 48,
+            "species": "SPECIES_KADABRA"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_MISDREAVUS"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_CLAYDOL"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_DUSKULL"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_HONCHKROW"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_ALTARIA"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_WEAVILE"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_MISMAGIUS"
+        },
+        {
+            "level": 48,
+            "species": "SPECIES_PUPITAR"
         }
     ],
     "swarms": [
