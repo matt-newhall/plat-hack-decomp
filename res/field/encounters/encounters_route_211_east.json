@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 27,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_CAMERUPT"
         },
         {
-            "level": 28,
-            "species": "SPECIES_GRAVELER"
+            "level": 58,
+            "species": "SPECIES_WORMADAM"
         },
         {
-            "level": 28,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_RAPIDASH"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_VICTREEBEL"
         },
         {
-            "level": 28,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_TORKOAL"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MACHOKE"
+            "level": 58,
+            "species": "SPECIES_EXEGGUTOR"
         },
         {
-            "level": 30,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_VILEPLUME"
         },
         {
-            "level": 29,
-            "species": "SPECIES_BRONZOR"
+            "level": 58,
+            "species": "SPECIES_IVYSAUR"
         },
         {
-            "level": 30,
-            "species": "SPECIES_MACHOKE"
+            "level": 58,
+            "species": "SPECIES_MAGMAR"
         },
         {
-            "level": 29,
-            "species": "SPECIES_BRONZOR"
+            "level": 58,
+            "species": "SPECIES_SWALOT"
         },
         {
-            "level": 30,
-            "species": "SPECIES_MACHOKE"
+            "level": 58,
+            "species": "SPECIES_LOPUNNY"
         },
         {
-            "level": 29,
-            "species": "SPECIES_BRONZOR"
+            "level": 58,
+            "species": "SPECIES_BRELOOM"
         }
     ],
     "swarms": [

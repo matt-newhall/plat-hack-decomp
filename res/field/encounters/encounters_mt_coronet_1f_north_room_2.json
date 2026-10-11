@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 33,
-            "species": "SPECIES_BRONZOR"
+            "level": 58,
+            "species": "SPECIES_CROBAT"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GRAVELER"
+            "level": 58,
+            "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 33,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 32,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 58,
+            "species": "SPECIES_RHYPERIOR"
         },
         {
-            "level": 35,
-            "species": "SPECIES_MACHOKE"
+            "level": 58,
+            "species": "SPECIES_MEDICHAM"
         },
         {
-            "level": 35,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 32,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_SOLROCK"
         },
         {
-            "level": 33,
-            "species": "SPECIES_NOSEPASS"
+            "level": 58,
+            "species": "SPECIES_LUNATONE"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GOLBAT"
+            "level": 58,
+            "species": "SPECIES_CLEFABLE"
         },
         {
-            "level": 34,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_PROBOPASS"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GOLBAT"
+            "level": 58,
+            "species": "SPECIES_MAGNETON"
         },
         {
-            "level": 34,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_PUPITAR"
         }
     ],
     "swarms": [

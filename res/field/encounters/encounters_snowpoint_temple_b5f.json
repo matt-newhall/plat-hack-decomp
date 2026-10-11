@@ -2,52 +2,52 @@
     "land_rate": 5,
     "land_encounters": [
         {
-            "level": 47,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_CLAYDOL"
         },
         {
-            "level": 48,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_AGGRON"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_FROSLASS"
         },
         {
-            "level": 50,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 48,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_GOLEM"
         },
         {
-            "level": 51,
-            "species": "SPECIES_SNEASEL"
+            "level": 62,
+            "species": "SPECIES_UNOWN"
         },
         {
-            "level": 49,
-            "species": "SPECIES_JYNX"
+            "level": 62,
+            "species": "SPECIES_DUSKNOIR"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_CROBAT"
         },
         {
-            "level": 51,
-            "species": "SPECIES_JYNX"
+            "level": 62,
+            "species": "SPECIES_WEAVILE"
         },
         {
-            "level": 47,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 51,
-            "species": "SPECIES_JYNX"
+            "level": 62,
+            "species": "SPECIES_WOBBUFFET"
         },
         {
-            "level": 47,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_TYRANITAR"
         }
     ],
     "swarms": [

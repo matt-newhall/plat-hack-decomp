@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 27,
-            "species": "SPECIES_SWABLU"
+            "level": 55,
+            "species": "SPECIES_ARCANINE"
         },
         {
-            "level": 28,
-            "species": "SPECIES_BIBAREL"
+            "level": 55,
+            "species": "SPECIES_PIDGEOT"
         },
         {
-            "level": 27,
-            "species": "SPECIES_SCYTHER"
+            "level": 55,
+            "species": "SPECIES_ALTARIA"
         },
         {
-            "level": 27,
-            "species": "SPECIES_MEDITITE"
+            "level": 55,
+            "species": "SPECIES_NIDOKING"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MEDITITE"
+            "level": 55,
+            "species": "SPECIES_NIDOQUEEN"
         },
         {
-            "level": 28,
-            "species": "SPECIES_MACHOP"
+            "level": 55,
+            "species": "SPECIES_VICTREEBEL"
         },
         {
-            "level": 29,
-            "species": "SPECIES_SCYTHER"
+            "level": 55,
+            "species": "SPECIES_RAICHU"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MACHOKE"
+            "level": 55,
+            "species": "SPECIES_CHARMELEON"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MACHOP"
+            "level": 55,
+            "species": "SPECIES_BRELOOM"
         },
         {
-            "level": 30,
-            "species": "SPECIES_MACHOKE"
+            "level": 55,
+            "species": "SPECIES_SHIFTRY"
         },
         {
-            "level": 29,
-            "species": "SPECIES_MACHOP"
+            "level": 55,
+            "species": "SPECIES_MACHAMP"
         },
         {
-            "level": 30,
-            "species": "SPECIES_MACHOKE"
+            "level": 55,
+            "species": "SPECIES_AMBIPOM"
         }
     ],
     "swarms": [

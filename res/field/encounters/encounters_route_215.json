@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 19,
-            "species": "SPECIES_STARAVIA"
+            "level": 54,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 20,
-            "species": "SPECIES_MARILL"
+            "level": 54,
+            "species": "SPECIES_POLIWRATH"
         },
         {
-            "level": 22,
-            "species": "SPECIES_SCYTHER"
+            "level": 54,
+            "species": "SPECIES_LUXRAY"
         },
         {
-            "level": 21,
-            "species": "SPECIES_STARAVIA"
+            "level": 54,
+            "species": "SPECIES_PELIPPER"
         },
         {
-            "level": 20,
-            "species": "SPECIES_LICKITUNG"
+            "level": 54,
+            "species": "SPECIES_ELECTRODE"
         },
         {
-            "level": 19,
-            "species": "SPECIES_ABRA"
+            "level": 54,
+            "species": "SPECIES_POLITOED"
         },
         {
-            "level": 20,
-            "species": "SPECIES_SCYTHER"
+            "level": 54,
+            "species": "SPECIES_GASTRODON"
         },
         {
-            "level": 21,
-            "species": "SPECIES_KADABRA"
+            "level": 54,
+            "species": "SPECIES_MARSHTOMP"
         },
         {
-            "level": 22,
-            "species": "SPECIES_MARILL"
+            "level": 54,
+            "species": "SPECIES_CHERRIM"
         },
         {
-            "level": 22,
-            "species": "SPECIES_KADABRA"
+            "level": 54,
+            "species": "SPECIES_LUDICOLO"
         },
         {
-            "level": 22,
-            "species": "SPECIES_MARILL"
+            "level": 54,
+            "species": "SPECIES_AMPHAROS"
         },
         {
-            "level": 22,
-            "species": "SPECIES_KADABRA"
+            "level": 54,
+            "species": "SPECIES_MOTHIM"
         }
     ],
     "swarms": [

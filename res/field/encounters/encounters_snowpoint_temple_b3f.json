@@ -2,52 +2,52 @@
     "land_rate": 5,
     "land_encounters": [
         {
-            "level": 47,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_WIGGLYTUFF"
         },
         {
-            "level": 48,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_VULPIX"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 50,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 48,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 50,
-            "species": "SPECIES_SNEASEL"
-        },
-        {
-            "level": 48,
+            "level": 62,
             "species": "SPECIES_JYNX"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_SNORUNT"
         },
         {
-            "level": 50,
-            "species": "SPECIES_JYNX"
+            "level": 62,
+            "species": "SPECIES_SCYTHER"
         },
         {
-            "level": 47,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_MISMAGIUS"
         },
         {
-            "level": 50,
-            "species": "SPECIES_JYNX"
+            "level": 62,
+            "species": "SPECIES_NINETALES"
         },
         {
-            "level": 47,
-            "species": "SPECIES_GOLBAT"
+            "level": 62,
+            "species": "SPECIES_CLAYDOL"
+        },
+        {
+            "level": 62,
+            "species": "SPECIES_DRATINI"
+        },
+        {
+            "level": 62,
+            "species": "SPECIES_WEAVILE"
+        },
+        {
+            "level": 62,
+            "species": "SPECIES_UNOWN"
+        },
+        {
+            "level": 62,
+            "species": "SPECIES_DRAGONAIR"
         }
     ],
     "swarms": [

@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 33,
-            "species": "SPECIES_BRONZOR"
+            "level": 58,
+            "species": "SPECIES_BRONZONG"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GRAVELER"
+            "level": 58,
+            "species": "SPECIES_GOLEM"
         },
         {
-            "level": 33,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_CLEFABLE"
         },
         {
-            "level": 32,
-            "species": "SPECIES_CLEFAIRY"
+            "level": 58,
+            "species": "SPECIES_CROBAT"
         },
         {
-            "level": 35,
-            "species": "SPECIES_MACHOKE"
+            "level": 58,
+            "species": "SPECIES_LUCARIO"
         },
         {
-            "level": 35,
-            "species": "SPECIES_MEDITITE"
+            "level": 58,
+            "species": "SPECIES_EXPLOUD"
         },
         {
-            "level": 32,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_GRANBULL"
         },
         {
-            "level": 33,
-            "species": "SPECIES_NOSEPASS"
+            "level": 58,
+            "species": "SPECIES_WARTORTLE"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GOLBAT"
+            "level": 58,
+            "species": "SPECIES_ALTARIA"
         },
         {
-            "level": 34,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_CHIMECHO"
         },
         {
-            "level": 34,
-            "species": "SPECIES_GOLBAT"
+            "level": 58,
+            "species": "SPECIES_CLOYSTER"
         },
         {
-            "level": 34,
-            "species": "SPECIES_CHINGLING"
+            "level": 58,
+            "species": "SPECIES_CASTFORM"
         }
     ],
     "swarms": [

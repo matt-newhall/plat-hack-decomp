@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 19,
-            "species": "SPECIES_STARAVIA"
+            "level": 55,
+            "species": "SPECIES_DELCATTY"
         },
         {
-            "level": 18,
-            "species": "SPECIES_GEODUDE"
+            "level": 55,
+            "species": "SPECIES_STARAPTOR"
         },
         {
-            "level": 21,
-            "species": "SPECIES_SCYTHER"
+            "level": 55,
+            "species": "SPECIES_CRAWDAUNT"
         },
         {
-            "level": 20,
-            "species": "SPECIES_PONYTA"
+            "level": 55,
+            "species": "SPECIES_SWELLOW"
         },
         {
-            "level": 20,
-            "species": "SPECIES_ROSELIA"
+            "level": 55,
+            "species": "SPECIES_ZANGOOSE"
         },
         {
-            "level": 19,
-            "species": "SPECIES_PONYTA"
+            "level": 55,
+            "species": "SPECIES_SEVIPER"
         },
         {
-            "level": 19,
-            "species": "SPECIES_SCYTHER"
+            "level": 55,
+            "species": "SPECIES_FURRET"
         },
         {
-            "level": 21,
-            "species": "SPECIES_ROSELIA"
+            "level": 55,
+            "species": "SPECIES_KINGLER"
         },
         {
-            "level": 21,
-            "species": "SPECIES_PONYTA"
+            "level": 55,
+            "species": "SPECIES_MAGMAR"
         },
         {
-            "level": 19,
-            "species": "SPECIES_CHANSEY"
+            "level": 55,
+            "species": "SPECIES_ELECTABUZZ"
         },
         {
-            "level": 21,
-            "species": "SPECIES_PONYTA"
+            "level": 55,
+            "species": "SPECIES_RHYDON"
         },
         {
-            "level": 21,
-            "species": "SPECIES_CHANSEY"
+            "level": 55,
+            "species": "SPECIES_DODRIO"
         }
     ],
     "swarms": [

@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 32,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_AZUMARILL"
         },
         {
-            "level": 33,
-            "species": "SPECIES_SWINUB"
+            "level": 60,
+            "species": "SPECIES_SNORUNT"
         },
         {
-            "level": 33,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_MAMOSWINE"
         },
         {
-            "level": 33,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_FORRETRESS"
         },
         {
-            "level": 34,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_ABOMASNOW"
         },
         {
-            "level": 34,
-            "species": "SPECIES_SWINUB"
+            "level": 60,
+            "species": "SPECIES_WEAVILE"
         },
         {
-            "level": 34,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 32,
-            "species": "SPECIES_SWINUB"
+            "level": 60,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_MILTANK"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_SHELGON"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_FROSLASS"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_MUNCHLAX"
         }
     ],
     "swarms": [
