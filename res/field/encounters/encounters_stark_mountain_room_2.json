@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 53,
-            "species": "SPECIES_MAGCARGO"
-        },
-        {
-            "level": 55,
-            "species": "SPECIES_MAGCARGO"
-        },
-        {
-            "level": 53,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 52,
-            "species": "SPECIES_GRAVELER"
-        },
-        {
-            "level": 55,
-            "species": "SPECIES_RHYDON"
-        },
-        {
-            "level": 54,
+            "level": 68,
             "species": "SPECIES_WEEZING"
         },
         {
-            "level": 52,
-            "species": "SPECIES_WEEZING"
+            "level": 68,
+            "species": "SPECIES_GOLEM"
         },
         {
-            "level": 54,
-            "species": "SPECIES_GRAVELER"
+            "level": 68,
+            "species": "SPECIES_NINETALES"
         },
         {
-            "level": 53,
-            "species": "SPECIES_SLUGMA"
+            "level": 68,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 53,
-            "species": "SPECIES_KOFFING"
+            "level": 68,
+            "species": "SPECIES_GASTRODON"
         },
         {
-            "level": 53,
-            "species": "SPECIES_SLUGMA"
+            "level": 68,
+            "species": "SPECIES_ARCANINE"
         },
         {
-            "level": 53,
-            "species": "SPECIES_KOFFING"
+            "level": 68,
+            "species": "SPECIES_CLAYDOL"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_DUGTRIO"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_RAPIDASH"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_WOBBUFFET"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_MAGMORTAR"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_GARCHOMP"
         }
     ],
     "swarms": [

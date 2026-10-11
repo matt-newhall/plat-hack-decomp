@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 3,
-            "species": "SPECIES_STARLY"
+            "level": 66,
+            "species": "SPECIES_HITMONCHAN"
         },
         {
-            "level": 3,
-            "species": "SPECIES_BIDOOF"
+            "level": 66,
+            "species": "SPECIES_HITMONLEE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 66,
+            "species": "SPECIES_HARIYAMA"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 66,
+            "species": "SPECIES_PRIMEAPE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SENTRET"
+            "level": 66,
+            "species": "SPECIES_TOXICROAK"
         },
         {
-            "level": 3,
-            "species": "SPECIES_PIDGEY"
+            "level": 66,
+            "species": "SPECIES_HERACROSS"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 66,
+            "species": "SPECIES_COMBUSKEN"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 66,
+            "species": "SPECIES_POLIWRATH"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 66,
+            "species": "SPECIES_HITMONTOP"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 66,
+            "species": "SPECIES_MACHAMP"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 66,
+            "species": "SPECIES_LUCARIO"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 66,
+            "species": "SPECIES_BRELOOM"
         }
     ],
     "swarms": [

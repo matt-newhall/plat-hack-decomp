@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 48,
-            "species": "SPECIES_PELIPPER"
+            "level": 70,
+            "species": "SPECIES_LUDICOLO"
         },
         {
-            "level": 48,
+            "level": 70,
+            "species": "SPECIES_MANECTRIC"
+        },
+        {
+            "level": 70,
+            "species": "SPECIES_PINSIR"
+        },
+        {
+            "level": 70,
+            "species": "SPECIES_MEDICHAM"
+        },
+        {
+            "level": 70,
+            "species": "SPECIES_VICTREEBEL"
+        },
+        {
+            "level": 70,
             "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 47,
-            "species": "SPECIES_BELLSPROUT"
+            "level": 70,
+            "species": "SPECIES_BEEDRILL"
         },
         {
-            "level": 47,
-            "species": "SPECIES_BELLSPROUT"
+            "level": 70,
+            "species": "SPECIES_CLEFABLE"
         },
         {
-            "level": 49,
-            "species": "SPECIES_ROSELIA"
+            "level": 70,
+            "species": "SPECIES_RAICHU"
         },
         {
-            "level": 50,
-            "species": "SPECIES_PELIPPER"
+            "level": 70,
+            "species": "SPECIES_MEGANIUM"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GLOOM"
+            "level": 70,
+            "species": "SPECIES_SLOWBRO"
         },
         {
-            "level": 49,
-            "species": "SPECIES_WEEPINBELL"
-        },
-        {
-            "level": 48,
-            "species": "SPECIES_WINGULL"
-        },
-        {
-            "level": 50,
-            "species": "SPECIES_FLOATZEL"
-        },
-        {
-            "level": 48,
-            "species": "SPECIES_WINGULL"
-        },
-        {
-            "level": 50,
-            "species": "SPECIES_FLOATZEL"
+            "level": 70,
+            "species": "SPECIES_DRAGONITE"
         }
     ],
     "swarms": [

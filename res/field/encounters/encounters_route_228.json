@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 51,
+            "level": 70,
+            "species": "SPECIES_HIPPOWDON"
+        },
+        {
+            "level": 70,
             "species": "SPECIES_DUGTRIO"
         },
         {
-            "level": 52,
+            "level": 70,
+            "species": "SPECIES_DONPHAN"
+        },
+        {
+            "level": 70,
             "species": "SPECIES_CACTURNE"
         },
         {
-            "level": 50,
-            "species": "SPECIES_HIPPOWDON"
+            "level": 70,
+            "species": "SPECIES_CAMERUPT"
         },
         {
-            "level": 50,
-            "species": "SPECIES_RHYDON"
+            "level": 70,
+            "species": "SPECIES_SANDSLASH"
         },
         {
-            "level": 52,
-            "species": "SPECIES_RHYDON"
+            "level": 70,
+            "species": "SPECIES_RHYPERIOR"
         },
         {
-            "level": 51,
-            "species": "SPECIES_HIPPOWDON"
+            "level": 70,
+            "species": "SPECIES_GLISCOR"
         },
         {
-            "level": 52,
-            "species": "SPECIES_DUGTRIO"
+            "level": 70,
+            "species": "SPECIES_MAROWAK"
         },
         {
-            "level": 50,
-            "species": "SPECIES_DUGTRIO"
+            "level": 70,
+            "species": "SPECIES_GARCHOMP"
         },
         {
-            "level": 49,
-            "species": "SPECIES_DIGLETT"
+            "level": 70,
+            "species": "SPECIES_SUNFLORA"
         },
         {
-            "level": 50,
-            "species": "SPECIES_CACNEA"
-        },
-        {
-            "level": 49,
-            "species": "SPECIES_DIGLETT"
-        },
-        {
-            "level": 50,
-            "species": "SPECIES_CACNEA"
+            "level": 70,
+            "species": "SPECIES_SKARMORY"
         }
     ],
     "swarms": [

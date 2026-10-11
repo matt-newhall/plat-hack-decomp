@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 54,
-            "species": "SPECIES_MAGCARGO"
+            "level": 68,
+            "species": "SPECIES_DONPHAN"
         },
         {
-            "level": 54,
-            "species": "SPECIES_RHYDON"
+            "level": 68,
+            "species": "SPECIES_CAMERUPT"
         },
         {
-            "level": 52,
-            "species": "SPECIES_GOLBAT"
+            "level": 68,
+            "species": "SPECIES_RAPIDASH"
         },
         {
-            "level": 51,
-            "species": "SPECIES_GRAVELER"
+            "level": 68,
+            "species": "SPECIES_HERACROSS"
         },
         {
-            "level": 52,
-            "species": "SPECIES_GOLBAT"
+            "level": 68,
+            "species": "SPECIES_SKARMORY"
         },
         {
-            "level": 53,
+            "level": 68,
+            "species": "SPECIES_MAROWAK"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_MAWILE"
+        },
+        {
+            "level": 68,
+            "species": "SPECIES_SABLEYE"
+        },
+        {
+            "level": 68,
             "species": "SPECIES_WEEZING"
         },
         {
-            "level": 51,
-            "species": "SPECIES_WEEZING"
+            "level": 68,
+            "species": "SPECIES_ARCANINE"
         },
         {
-            "level": 53,
-            "species": "SPECIES_GRAVELER"
+            "level": 68,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 52,
-            "species": "SPECIES_SLUGMA"
-        },
-        {
-            "level": 52,
-            "species": "SPECIES_RHYHORN"
-        },
-        {
-            "level": 52,
-            "species": "SPECIES_SLUGMA"
-        },
-        {
-            "level": 52,
-            "species": "SPECIES_RHYHORN"
+            "level": 68,
+            "species": "SPECIES_TYRANITAR"
         }
     ],
     "swarms": [

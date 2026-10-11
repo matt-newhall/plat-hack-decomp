@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 3,
-            "species": "SPECIES_STARLY"
+            "level": 66,
+            "species": "SPECIES_LICKILICKY"
         },
         {
-            "level": 3,
-            "species": "SPECIES_BIDOOF"
+            "level": 66,
+            "species": "SPECIES_RHYPERIOR"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 66,
+            "species": "SPECIES_PROBOPASS"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 66,
+            "species": "SPECIES_MAGMORTAR"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SENTRET"
+            "level": 66,
+            "species": "SPECIES_ELECTIVIRE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_PIDGEY"
+            "level": 66,
+            "species": "SPECIES_DUSKNOIR"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 66,
+            "species": "SPECIES_TOGEKISS"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 66,
+            "species": "SPECIES_MAGNEZONE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 66,
+            "species": "SPECIES_TANGROWTH"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 66,
+            "species": "SPECIES_YANMEGA"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 66,
+            "species": "SPECIES_GALLADE"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 66,
+            "species": "SPECIES_GLISCOR"
         }
     ],
     "swarms": [

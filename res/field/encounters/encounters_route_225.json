@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 48,
-            "species": "SPECIES_MACHOKE"
+            "level": 66,
+            "species": "SPECIES_VESPIQUEN"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GRAVELER"
+            "level": 66,
+            "species": "SPECIES_MANECTRIC"
         },
         {
-            "level": 48,
-            "species": "SPECIES_FEAROW"
+            "level": 66,
+            "species": "SPECIES_CASTFORM"
         },
         {
-            "level": 50,
-            "species": "SPECIES_FEAROW"
+            "level": 66,
+            "species": "SPECIES_FLOATZEL"
         },
         {
-            "level": 49,
-            "species": "SPECIES_FEAROW"
+            "level": 66,
+            "species": "SPECIES_TAUROS"
         },
         {
-            "level": 50,
-            "species": "SPECIES_RATICATE"
+            "level": 66,
+            "species": "SPECIES_SKARMORY"
         },
         {
-            "level": 50,
-            "species": "SPECIES_MACHOKE"
+            "level": 66,
+            "species": "SPECIES_GROVYLE"
         },
         {
-            "level": 49,
-            "species": "SPECIES_RATICATE"
+            "level": 66,
+            "species": "SPECIES_BELLOSSOM"
         },
         {
-            "level": 47,
-            "species": "SPECIES_SPEAROW"
+            "level": 66,
+            "species": "SPECIES_CRAWDAUNT"
         },
         {
-            "level": 47,
-            "species": "SPECIES_RATTATA"
+            "level": 66,
+            "species": "SPECIES_CACTURNE"
         },
         {
-            "level": 47,
-            "species": "SPECIES_SPEAROW"
+            "level": 66,
+            "species": "SPECIES_LUXRAY"
         },
         {
-            "level": 47,
-            "species": "SPECIES_RATTATA"
+            "level": 66,
+            "species": "SPECIES_MEDICHAM"
         }
     ],
     "swarms": [

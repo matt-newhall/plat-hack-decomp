@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 48,
-            "species": "SPECIES_ROSELIA"
+            "level": 70,
+            "species": "SPECIES_SUNFLORA"
         },
         {
-            "level": 49,
-            "species": "SPECIES_ROSELIA"
+            "level": 70,
+            "species": "SPECIES_CARNIVINE"
         },
         {
-            "level": 50,
-            "species": "SPECIES_LEDIAN"
+            "level": 70,
+            "species": "SPECIES_GLOOM"
         },
         {
-            "level": 50,
-            "species": "SPECIES_LEDIAN"
+            "level": 70,
+            "species": "SPECIES_LUDICOLO"
         },
         {
-            "level": 49,
-            "species": "SPECIES_VOLBEAT"
+            "level": 70,
+            "species": "SPECIES_CHERRIM"
         },
         {
-            "level": 49,
-            "species": "SPECIES_ILLUMISE"
+            "level": 70,
+            "species": "SPECIES_SHIFTRY"
         },
         {
-            "level": 47,
-            "species": "SPECIES_PIDGEY"
+            "level": 70,
+            "species": "SPECIES_VILEPLUME"
         },
         {
-            "level": 50,
-            "species": "SPECIES_ROSELIA"
+            "level": 70,
+            "species": "SPECIES_BELLOSSOM"
         },
         {
-            "level": 48,
-            "species": "SPECIES_BEAUTIFLY"
+            "level": 70,
+            "species": "SPECIES_VICTREEBEL"
         },
         {
-            "level": 48,
-            "species": "SPECIES_DUSTOX"
+            "level": 70,
+            "species": "SPECIES_EXEGGUTOR"
         },
         {
-            "level": 48,
-            "species": "SPECIES_BEAUTIFLY"
+            "level": 70,
+            "species": "SPECIES_ROSERADE"
         },
         {
-            "level": 48,
-            "species": "SPECIES_DUSTOX"
+            "level": 70,
+            "species": "SPECIES_TANGROWTH"
         }
     ],
     "swarms": [
