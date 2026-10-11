@@ -452,6 +452,13 @@ static u8 TryUseItem(BattleBag *battleBag)
             return TASK_STATE_AWAITING_TEXT_FINISH;
         }
     } else if (battleBag->currentBattlePocket == ITEM_BATTLE_CATEGORY_POKE_BALLS) {
+        if (BattleSystem_GetBattleStatusMask(context->battleSys) & BATTLE_STATUS_GIRATINA) {
+            MessageLoader_GetString(battleBag->messageLoader, BattleBag_Text_CantUseBallGiratina, battleBag->string);
+            BattleBagText_DisplayMessage(battleBag);
+            battleBag->queuedState = TASK_STATE_CLEAR_ERROR_MESSAGE;
+            return TASK_STATE_AWAITING_TEXT_FINISH;
+        }
+
         if (context->hasTwoOpponents == TRUE) {
             MessageLoader_GetString(battleBag->messageLoader, BattleBag_Text_CantUseBallTwoPokemon, battleBag->string);
             BattleBagText_DisplayMessage(battleBag);

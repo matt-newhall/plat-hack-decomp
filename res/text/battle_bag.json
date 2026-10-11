@@ -229,6 +229,13 @@
         "It’s no good! It’s impossible to aim\n",
         "at a Pokémon that’s not in sight!"
       ]
+    },
+    {
+      "id": "BattleBag_Text_CantUseBallGiratina",
+      "en_US": [
+        "It’s no good! Giratina’s overwhelming\n",
+        "power won’t let a Ball near it!"
+      ]
     }
   ]
 }

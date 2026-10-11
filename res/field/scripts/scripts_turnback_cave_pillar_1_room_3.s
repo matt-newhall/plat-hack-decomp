@@ -24,6 +24,7 @@ TurnbackCavePillar1Room3_ReadBook:
     WaitButton
     CloseMessage
     PlaySE SEQ_SE_PL_SYUWA
+    SetVar VAR_TURNBACK_CAVE_PORTAL_STATE, 1
     FadeScreenOut
     WaitFadeScreen
     CheckHasCaughtSpecies SPECIES_UNOWN, VAR_RESULT
