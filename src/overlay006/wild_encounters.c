@@ -851,19 +851,22 @@ static u8 GetWaterEncounterSlot(void)
 {
     u8 roll = LCRNG_RandMod(100);
 
-    if (roll < 60) {
+    if (roll < 20) {
         return 0;
-    } else if (roll >= 60 && roll < 90) {
+    } else if (roll < 40) {
         return 1;
-    } else if (roll >= 90 && roll < 95) {
+    } else if (roll < 60) {
         return 2;
-    } else if (roll >= 95 && roll < 99) {
+    } else if (roll < 80) {
         return 3;
+    } else if (roll < 90) {
+        return 4;
     }
 
-    return 4;
+    return 5;
 }
 
+// TODO: will need to change the percentages if we ever re-add rods
 static u8 GetRodEncounterSlot(const int fishingRodType)
 {
     u8 encSlot = 0;

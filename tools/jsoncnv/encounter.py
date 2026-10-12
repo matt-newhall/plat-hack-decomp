@@ -32,7 +32,7 @@ def convert_water(encs: list) -> bytes:
             pad(2),
             as_species(encs[i]['species']),
         )
-        for i in range(5)
+        for i in range(6)
     ]))
 
 
@@ -76,7 +76,7 @@ for version, i in itertools.product(['ruby', 'sapphire', 'emerald', 'firered', '
 
 packables.extend(u32(data['surf_rate']))
 packables.extend(convert_water(data['surf_encounters']))
-packables.extend(pad(44))
+packables.extend(pad(52))
 
 for rod in ['old', 'good', 'super']:
     packables.extend(u32(data[f'{rod}_rod_rate']))

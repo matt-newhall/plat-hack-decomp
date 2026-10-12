@@ -120,6 +120,11 @@
             "level_max": 50,
             "level_min": 30,
             "species": "SPECIES_TENTACRUEL"
+        },
+        {
+            "level_max": 50,
+            "level_min": 30,
+            "species": "SPECIES_TENTACRUEL"
         }
     ],
     "old_rod_rate": 25,
@@ -141,6 +146,11 @@
         },
         {
             "level_max": 10,
+            "level_min": 5,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 15,
             "level_min": 5,
             "species": "SPECIES_MAGIKARP"
         },
@@ -176,6 +186,11 @@
             "level_max": 25,
             "level_min": 10,
             "species": "SPECIES_REMORAID"
+        },
+        {
+            "level_max": 25,
+            "level_min": 10,
+            "species": "SPECIES_REMORAID"
         }
     ],
     "super_rod_rate": 75,
@@ -194,6 +209,11 @@
             "level_max": 30,
             "level_min": 20,
             "species": "SPECIES_LUVDISC"
+        },
+        {
+            "level_max": 55,
+            "level_min": 40,
+            "species": "SPECIES_OCTILLERY"
         },
         {
             "level_max": 55,

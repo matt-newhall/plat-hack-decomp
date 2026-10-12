@@ -120,6 +120,11 @@
             "level_max": 45,
             "level_min": 35,
             "species": "SPECIES_PSYDUCK"
+        },
+        {
+            "level_max": 45,
+            "level_min": 35,
+            "species": "SPECIES_PSYDUCK"
         }
     ],
     "old_rod_rate": 25,
@@ -141,6 +146,11 @@
         },
         {
             "level_max": 10,
+            "level_min": 5,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 15,
             "level_min": 5,
             "species": "SPECIES_MAGIKARP"
         },
@@ -176,6 +186,11 @@
             "level_max": 35,
             "level_min": 25,
             "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 35,
+            "level_min": 25,
+            "species": "SPECIES_MAGIKARP"
         }
     ],
     "super_rod_rate": 75,
@@ -198,6 +213,11 @@
         {
             "level_max": 90,
             "level_min": 10,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 100,
+            "level_min": 1,
             "species": "SPECIES_MAGIKARP"
         },
         {

@@ -120,10 +120,20 @@
             "level_max": 25,
             "level_min": 20,
             "species": "SPECIES_QUAGSIRE"
+        },
+        {
+            "level_max": 25,
+            "level_min": 20,
+            "species": "SPECIES_QUAGSIRE"
         }
     ],
     "old_rod_rate": 0,
     "old_rod_encounters": [
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
+        },
         {
             "level_max": 0,
             "level_min": 0,
@@ -176,10 +186,20 @@
             "level_max": 0,
             "level_min": 0,
             "species": "SPECIES_NONE"
+        },
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
         }
     ],
     "super_rod_rate": 0,
     "super_rod_encounters": [
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
+        },
         {
             "level_max": 0,
             "level_min": 0,

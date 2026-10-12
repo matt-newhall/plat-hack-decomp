@@ -120,6 +120,11 @@
             "level_max": 40,
             "level_min": 20,
             "species": "SPECIES_PELIPPER"
+        },
+        {
+            "level_max": 40,
+            "level_min": 20,
+            "species": "SPECIES_PELIPPER"
         }
     ],
     "old_rod_rate": 25,
@@ -141,6 +146,11 @@
         },
         {
             "level_max": 10,
+            "level_min": 5,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 15,
             "level_min": 5,
             "species": "SPECIES_MAGIKARP"
         },
@@ -176,6 +186,11 @@
             "level_max": 35,
             "level_min": 25,
             "species": "SPECIES_LUMINEON"
+        },
+        {
+            "level_max": 35,
+            "level_min": 25,
+            "species": "SPECIES_LUMINEON"
         }
     ],
     "super_rod_rate": 75,
@@ -194,6 +209,11 @@
             "level_max": 55,
             "level_min": 40,
             "species": "SPECIES_GYARADOS"
+        },
+        {
+            "level_max": 55,
+            "level_min": 40,
+            "species": "SPECIES_LUMINEON"
         },
         {
             "level_max": 55,
