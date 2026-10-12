@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 48,
-            "species": "SPECIES_FLOATZEL"
+            "level": 87,
+            "species": "SPECIES_DONPHAN"
         },
         {
-            "level": 47,
-            "species": "SPECIES_AZUMARILL"
+            "level": 87,
+            "species": "SPECIES_DRAGONAIR"
         },
         {
-            "level": 47,
-            "species": "SPECIES_GRAVELER"
+            "level": 87,
+            "species": "SPECIES_VIBRAVA"
         },
         {
-            "level": 49,
-            "species": "SPECIES_AZUMARILL"
+            "level": 87,
+            "species": "SPECIES_MAGMORTAR"
         },
         {
-            "level": 48,
-            "species": "SPECIES_DEWGONG"
+            "level": 87,
+            "species": "SPECIES_MAGNEZONE"
         },
         {
-            "level": 50,
-            "species": "SPECIES_FLOATZEL"
+            "level": 87,
+            "species": "SPECIES_ALTARIA"
         },
         {
-            "level": 50,
-            "species": "SPECIES_GOLBAT"
+            "level": 87,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GRAVELER"
+            "level": 87,
+            "species": "SPECIES_HOUNDOOM"
         },
         {
-            "level": 50,
-            "species": "SPECIES_DEWGONG"
+            "level": 87,
+            "species": "SPECIES_LUNATONE"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GABITE"
+            "level": 87,
+            "species": "SPECIES_SOLROCK"
         },
         {
-            "level": 50,
-            "species": "SPECIES_DEWGONG"
+            "level": 87,
+            "species": "SPECIES_SALAMENCE"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GABITE"
+            "level": 87,
+            "species": "SPECIES_SALAMENCE"
         }
     ],
     "swarms": [

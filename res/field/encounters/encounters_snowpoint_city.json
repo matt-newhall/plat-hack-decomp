@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 3,
-            "species": "SPECIES_STARLY"
+            "level": 61,
+            "species": "SPECIES_STANTLER"
         },
         {
-            "level": 3,
-            "species": "SPECIES_BIDOOF"
+            "level": 61,
+            "species": "SPECIES_MR_MIME"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 61,
+            "species": "SPECIES_SNOVER"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 61,
+            "species": "SPECIES_MEDICHAM"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SENTRET"
+            "level": 61,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 3,
-            "species": "SPECIES_PIDGEY"
+            "level": 61,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 3,
-            "species": "SPECIES_ZIGZAGOON"
+            "level": 61,
+            "species": "SPECIES_LAIRON"
         },
         {
-            "level": 3,
-            "species": "SPECIES_RATTATA"
+            "level": 61,
+            "species": "SPECIES_PELIPPER"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 61,
+            "species": "SPECIES_ABSOL"
         },
         {
-            "level": 3,
-            "species": "SPECIES_SKITTY"
+            "level": 61,
+            "species": "SPECIES_URSARING"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 61,
+            "species": "SPECIES_ABOMASNOW"
         },
         {
-            "level": 3,
-            "species": "SPECIES_DODUO"
+            "level": 61,
+            "species": "SPECIES_SKARMORY"
         }
     ],
     "swarms": [
