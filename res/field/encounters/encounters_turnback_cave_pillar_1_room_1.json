@@ -2,51 +2,51 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_HIPPOPOTAS"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_EXPLOUD"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_LICKILICKY"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_PHANPY"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_MEOWTH"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_EXEGGCUTE"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_HORSEA"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_ELECTRIKE"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_LICKITUNG"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_PACHIRISU"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_MAWILE"
         },
         {
-            "level": 46,
+            "level": 49,
             "species": "SPECIES_ELEKID"
         }
     ],

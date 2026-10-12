@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 50,
-            "species": "SPECIES_FLOATZEL"
+            "level": 90,
+            "species": "SPECIES_LUCARIO"
         },
         {
-            "level": 50,
-            "species": "SPECIES_ROSELIA"
+            "level": 90,
+            "species": "SPECIES_FLYGON"
         },
         {
-            "level": 49,
-            "species": "SPECIES_BELLSPROUT"
+            "level": 90,
+            "species": "SPECIES_TOGEKISS"
         },
         {
-            "level": 49,
-            "species": "SPECIES_BELLSPROUT"
+            "level": 90,
+            "species": "SPECIES_SNORLAX"
         },
         {
-            "level": 51,
-            "species": "SPECIES_PELIPPER"
+            "level": 90,
+            "species": "SPECIES_ALAKAZAM"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GASTRODON"
+            "level": 90,
+            "species": "SPECIES_HERACROSS"
         },
         {
-            "level": 51,
-            "species": "SPECIES_GLOOM"
+            "level": 90,
+            "species": "SPECIES_SLOWBRO"
         },
         {
-            "level": 51,
-            "species": "SPECIES_WEEPINBELL"
+            "level": 90,
+            "species": "SPECIES_INFERNAPE"
         },
         {
-            "level": 52,
-            "species": "SPECIES_BEAUTIFLY"
+            "level": 90,
+            "species": "SPECIES_EMPOLEON"
         },
         {
-            "level": 52,
-            "species": "SPECIES_DUSTOX"
+            "level": 90,
+            "species": "SPECIES_TORTERRA"
         },
         {
-            "level": 52,
-            "species": "SPECIES_BEAUTIFLY"
+            "level": 90,
+            "species": "SPECIES_SALAMENCE"
         },
         {
-            "level": 52,
-            "species": "SPECIES_DUSTOX"
+            "level": 90,
+            "species": "SPECIES_SCIZOR"
         }
     ],
     "swarms": [

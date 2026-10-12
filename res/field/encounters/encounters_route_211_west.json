@@ -11,10 +11,6 @@
         },
         {
             "level": 19,
-            "species": "SPECIES_SPOINK"
-        },
-        {
-            "level": 19,
             "species": "SPECIES_MIME_JR"
         },
         {
@@ -36,6 +32,10 @@
         {
             "level": 19,
             "species": "SPECIES_RALTS"
+        },
+        {
+            "level": 19,
+            "species": "SPECIES_SPOINK"
         },
         {
             "level": 19,

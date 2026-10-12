@@ -94,7 +94,7 @@
         "SPECIES_NONE",
         "SPECIES_NONE"
     ],
-    "surf_rate": 0,
+    "surf_rate": 10,
     "surf_encounters": [
         {
             "level_max": 60,

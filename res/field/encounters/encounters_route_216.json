@@ -35,7 +35,7 @@
         },
         {
             "level": 60,
-            "species": "SPECIES_LOPUNNY"
+            "species": "SPECIES_GRUMPIG"
         },
         {
             "level": 60,
@@ -47,7 +47,7 @@
         },
         {
             "level": 60,
-            "species": "SPECIES_GRUMPIG"
+            "species": "SPECIES_LOPUNNY"
         }
     ],
     "swarms": [

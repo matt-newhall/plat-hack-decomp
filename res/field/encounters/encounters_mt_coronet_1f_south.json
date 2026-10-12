@@ -35,11 +35,11 @@
         },
         {
             "level": 23,
-            "species": "SPECIES_ZANGOOSE"
+            "species": "SPECIES_RHYHORN"
         },
         {
             "level": 23,
-            "species": "SPECIES_SEVIPER"
+            "species": "SPECIES_POLIWAG"
         },
         {
             "level": 23,
@@ -47,7 +47,7 @@
         },
         {
             "level": 23,
-            "species": "SPECIES_PORYGON"
+            "species": "SPECIES_SPHEAL"
         }
     ],
     "swarms": [
