@@ -65,7 +65,7 @@ Route209GateToHearthomeCity_PostRivalBattle:
     RemoveObject LOCALID_RIVAL
     WaitSE SEQ_SE_DP_KAIDAN2
     SetVar VAR_HEARTHOME_STATE, 1
-    Common_IncreaseLevelCap 40
+    Common_IncreaseLevelCap 42
     ReleaseAll
     End
 

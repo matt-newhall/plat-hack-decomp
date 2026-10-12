@@ -32,14 +32,12 @@ TurnbackCavePillar1Room3_ReadBook:
     Warp MAP_HEADER_RUIN_MANIAC_CAVE_LONG, 0, 30, 7, DIR_SOUTH
     FadeScreenIn
     WaitFadeScreen
-    Common_IncreaseLevelCap 57
     End
 
 TurnbackCavePillar1Room3_WarpTunnel:
     Warp MAP_HEADER_MANIAC_TUNNEL, 0, 45, 7, DIR_SOUTH
     FadeScreenIn
     WaitFadeScreen
-    Common_IncreaseLevelCap 57
     End
 
 TurnbackCavePillar1Room3_BookEnd:

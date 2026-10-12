@@ -35,7 +35,6 @@ FuegoIronworksBuilding_FuegoBattle:
     WaitButton
     Message FuegoIronworksBuilding_Text_FuegoGrantsCut
     WaitButton
-    Common_IncreaseLevelCap 27
     ReleaseAll
     End
 

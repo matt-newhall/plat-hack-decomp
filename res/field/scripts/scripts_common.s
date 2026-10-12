@@ -2549,7 +2549,7 @@ CommonScript_RocketMansionAriana:
     WaitMovement
     RemoveObject LOCALID_MANSION_BACKLOT
     RemoveObject LOCALID_MANSION_BUTLER
-    Common_IncreaseLevelCap 50
+    Common_IncreaseLevelCap 48
     ReleaseAll
     End
 

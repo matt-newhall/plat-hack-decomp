@@ -362,18 +362,21 @@ Route204North_IDontHaveTime:
 Route204North_JulienLeaveX170:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX170
     WaitMovement
+    Common_IncreaseLevelCap 16
     ReleaseAll
     End
 
 Route204North_JulienLeaveX171:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX171
     WaitMovement
+    Common_IncreaseLevelCap 16
     ReleaseAll
     End
 
 Route204North_JulienLeaveX172:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX172
     WaitMovement
+    Common_IncreaseLevelCap 16
     ReleaseAll
     End
 

@@ -174,6 +174,7 @@ SunyshoreCity_JasmineDefeated:
     CloseMessage
     Call SunyshoreCity_JasmineReturnToPost
     SetVar VAR_SUNYSHORE_STATE, 3
+    Common_IncreaseLevelCap 98
     ReleaseAll
     End
 

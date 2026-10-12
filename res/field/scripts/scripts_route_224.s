@@ -473,7 +473,6 @@ Route224_Jacinthe:
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, Route224_JacintheBlackOut
     SetFlag FLAG_UNLOCK_POKEMON_LEAGUE
-    Common_IncreaseLevelCap 100
     ReleaseAll
     End
 

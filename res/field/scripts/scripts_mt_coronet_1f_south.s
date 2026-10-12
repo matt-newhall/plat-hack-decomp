@@ -47,7 +47,7 @@ MtCoronet1FSouth_TriggerCyrus:
     WaitMovement
     RemoveObject LOCALID_SATURN
     SetVar VAR_MT_CORONET_1F_SOUTH_STATE, 1
-    Common_IncreaseLevelCap 37
+    Common_IncreaseLevelCap 38
     ReleaseAll
     End
 

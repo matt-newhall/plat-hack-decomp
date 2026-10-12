@@ -417,6 +417,7 @@ PastoriaCity_RivalPostBattle:
     WaitMovement
     RemoveObject LOCALID_RIVAL
     SetVar VAR_PASTORIA_STATE, 2
+    Common_IncreaseLevelCap 50
     ReleaseAll
     End
 

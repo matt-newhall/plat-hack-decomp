@@ -110,7 +110,7 @@ CelesticTownCave_BattleCyrus:
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, CelesticTownCave_Blackout
     Call CelesticTownCave_DefeatedCyrus
-    Common_IncreaseLevelCap 71
+    Common_IncreaseLevelCap 73
     ReleaseAll
     End
 
@@ -447,7 +447,7 @@ CelesticTownCave_Cyrus:
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, CelesticTownCave_Blackout
     Call CelesticTownCave_DefeatedCyrus
-    Common_IncreaseLevelCap 71
+    Common_IncreaseLevelCap 73
     ReleaseAll
     End
 

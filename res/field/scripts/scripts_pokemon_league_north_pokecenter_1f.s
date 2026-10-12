@@ -189,6 +189,7 @@ PokemonLeagueNorthPokecenter1F_RemoveRival:
     RemoveObject LOCALID_RIVAL
     WaitSE SEQ_SE_DP_KAIDAN2
     SetVar VAR_RIVAL_BEAT_SUNYSHORE_GYM, 1
+    Common_IncreaseLevelCap 100
     ReleaseAll
     End
 

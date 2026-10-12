@@ -84,14 +84,14 @@ PastoriaGym_WakeTryGiveTm55:
     Message PastoriaGym_Text_WakeExplainTM55
     WaitButton
     CloseMessage
-    Common_IncreaseLevelCap 55, 57
+    Common_IncreaseLevelCap 57, 57
     ReleaseAll
     End
 
 PastoriaGym_WakeCannotGiveTm55:
     Common_MessageBagIsFull
     CloseMessage
-    Common_IncreaseLevelCap 55, 57
+    Common_IncreaseLevelCap 57, 57
     ReleaseAll
     End
 
