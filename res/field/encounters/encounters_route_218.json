@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_AZUMARILL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_SHARPEDO"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_AZUMARILL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_SHARPEDO"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_AZUMARILL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_LUMINEON"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_AZUMARILL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_DEWGONG"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_AZUMARILL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_MANTINE"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_AZUMARILL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_STARMIE"
         }
     ],
     "old_rod_rate": 25,

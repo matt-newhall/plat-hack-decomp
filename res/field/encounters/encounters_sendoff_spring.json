@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_DRATINI"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_DRATINI"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_DRATINI"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_WAILORD"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_SEADRA"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_VIBRAVA"
         }
     ],
     "old_rod_rate": 25,

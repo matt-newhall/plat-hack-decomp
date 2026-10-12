@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_ZUBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_PHIONE"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_ZUBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_CORPHISH"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_LILEEP"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_ANORITH"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_CORPHISH"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_FEEBAS"
         }
     ],
     "old_rod_rate": 25,

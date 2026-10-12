@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_RELICANTH"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_POLIWAG"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_RELICANTH"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_DODRIO"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_MAGCARGO"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_GLIGAR"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_GASTRODON"
         }
     ],
     "old_rod_rate": 25,

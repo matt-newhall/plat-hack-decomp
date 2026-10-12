@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_SURSKIT"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_BIBAREL"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_SURSKIT"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_LUVDISC"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_SURSKIT"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_LOMBRE"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_MASQUERAIN"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_STARMIE"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_MASQUERAIN"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_LUDICOLO"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_MASQUERAIN"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_CRADILY"
         }
     ],
     "old_rod_rate": 25,

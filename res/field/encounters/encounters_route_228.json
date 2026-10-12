@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_GASTRODON"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_POLIWAG"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_ARMALDO"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_CRADILY"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_CLAMPERL"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_TOXICROAK"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_POLIWHIRL"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_YANMEGA"
         }
     ],
     "old_rod_rate": 25,

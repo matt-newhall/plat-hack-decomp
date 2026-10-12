@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_PELIPPER"
+            "level_max": 90,
+            "level_min": 90,
+            "species": "SPECIES_PIDGEOT"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_TENTACRUEL"
+            "level_max": 90,
+            "level_min": 90,
+            "species": "SPECIES_GYARADOS"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_GASTRODON"
+            "level_max": 90,
+            "level_min": 90,
+            "species": "SPECIES_POLITOED"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_GASTRODON"
+            "level_max": 90,
+            "level_min": 90,
+            "species": "SPECIES_SLOWKING"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_GASTRODON"
+            "level_max": 90,
+            "level_min": 90,
+            "species": "SPECIES_DRAGONITE"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_GASTRODON"
+            "level_max": 90,
+            "level_min": 90,
+            "species": "SPECIES_SWAMPERT"
         }
     ],
     "old_rod_rate": 25,

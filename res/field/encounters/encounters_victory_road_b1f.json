@@ -97,34 +97,34 @@
     "surf_rate": 15,
     "surf_encounters": [
         {
-            "level_max": 50,
-            "level_min": 30,
-            "species": "SPECIES_FLOATZEL"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_POLIWRATH"
         },
         {
-            "level_max": 50,
-            "level_min": 30,
-            "species": "SPECIES_FLOATZEL"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_OCTILLERY"
         },
         {
-            "level_max": 50,
-            "level_min": 30,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_POLITOED"
         },
         {
-            "level_max": 50,
-            "level_min": 30,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_TENTACRUEL"
         },
         {
-            "level_max": 50,
-            "level_min": 30,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_DRATINI"
         },
         {
-            "level_max": 50,
-            "level_min": 30,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_KABUTOPS"
         }
     ],
     "old_rod_rate": 25,

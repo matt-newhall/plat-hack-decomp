@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_DEWGONG"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_SEAKING"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_SEAKING"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_MAGIKARP"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_TENTACRUEL"
         },
         {
-            "level_max": 45,
-            "level_min": 35,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 70,
+            "level_min": 70,
+            "species": "SPECIES_OCTILLERY"
         }
     ],
     "old_rod_rate": 25,

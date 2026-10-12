@@ -97,34 +97,34 @@
     "surf_rate": 15,
     "surf_encounters": [
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_FLOATZEL"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_FERALIGATR"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_DEWGONG"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_BLASTOISE"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_DRAGONAIR"
+        },
+        {
+            "level_max": 85,
+            "level_min": 85,
             "species": "SPECIES_LAPRAS"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
+            "level_max": 85,
+            "level_min": 85,
             "species": "SPECIES_LAPRAS"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_LAPRAS"
-        },
-        {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_LAPRAS"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_OMASTAR"
         }
     ],
     "old_rod_rate": 25,

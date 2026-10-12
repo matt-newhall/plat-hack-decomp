@@ -97,34 +97,34 @@
     "surf_rate": 0,
     "surf_encounters": [
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_LEDIAN"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_FARFETCHD"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_FINNEON"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_FINNEON"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_LAPRAS"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_MANTYKE"
         }
     ],
     "old_rod_rate": 0,

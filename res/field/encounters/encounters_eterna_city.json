@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_MANTYKE"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_MANTYKE"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_SHELLOS"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_CLAMPERL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_CLAMPERL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_GRIMER"
         }
     ],
     "old_rod_rate": 25,

@@ -97,34 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 25,
+            "level_min": 25,
+            "species": "SPECIES_WINGULL"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 25,
+            "level_min": 25,
+            "species": "SPECIES_WINGULL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 25,
+            "level_min": 25,
+            "species": "SPECIES_TOTODILE"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 25,
+            "level_min": 25,
+            "species": "SPECIES_SQUIRTLE"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 25,
+            "level_min": 25,
+            "species": "SPECIES_MUDKIP"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 25,
+            "level_min": 25,
+            "species": "SPECIES_PHIONE"
         }
     ],
     "old_rod_rate": 25,
