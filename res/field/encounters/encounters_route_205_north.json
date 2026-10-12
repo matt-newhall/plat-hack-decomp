@@ -2,51 +2,51 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 12,
+            "level": 17,
+            "species": "SPECIES_LUXIO"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_STARAVIA"
+        },
+        {
+            "level": 17,
             "species": "SPECIES_TEDDIURSA"
         },
         {
-            "level": 12,
-            "species": "SPECIES_WHISMUR"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_STARLY"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_BIDOOF"
-        },
-        {
-            "level": 12,
+            "level": 17,
             "species": "SPECIES_MAKUHITA"
         },
         {
-            "level": 12,
-            "species": "SPECIES_SPEAROW"
+            "level": 17,
+            "species": "SPECIES_NUZLEAF"
         },
         {
-            "level": 12,
-            "species": "SPECIES_SHINX"
-        },
-        {
-            "level": 12,
-            "species": "SPECIES_NOSEPASS"
-        },
-        {
-            "level": 12,
+            "level": 17,
             "species": "SPECIES_EXEGGCUTE"
         },
         {
-            "level": 12,
-            "species": "SPECIES_PIDGEY"
+            "level": 17,
+            "species": "SPECIES_SHELLOS"
         },
         {
-            "level": 12,
+            "level": 17,
+            "species": "SPECIES_WHISMUR"
+        },
+        {
+            "level": 17,
+            "species": "SPECIES_BIDOOF"
+        },
+        {
+            "level": 17,
             "species": "SPECIES_TAILLOW"
         },
         {
-            "level": 12,
+            "level": 17,
+            "species": "SPECIES_NOSEPASS"
+        },
+        {
+            "level": 17,
             "species": "SPECIES_YANMA"
         }
     ],
