@@ -2352,6 +2352,26 @@
     {
       "id": "pl_msg_00000647_00587",
       "en_US": "Leaf Tornado"
+    },
+    {
+      "id": "pl_msg_00000647_00588",
+      "en_US": "Tearful Look"
+    },
+    {
+      "id": "pl_msg_00000647_00589",
+      "en_US": "Toxic Thread"
+    },
+    {
+      "id": "pl_msg_00000647_00590",
+      "en_US": "Noble Roar"
+    },
+    {
+      "id": "pl_msg_00000647_00591",
+      "en_US": "Axe Kick"
+    },
+    {
+      "id": "pl_msg_00000647_00592",
+      "en_US": "Work Up"
     }
   ]
 }

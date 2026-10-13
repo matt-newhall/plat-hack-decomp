@@ -12339,6 +12339,111 @@
         "The foe’s {STRVAR_1 1, 0, 0} used\n",
         "Leaf Tornado!"
       ]
+    },
+    {
+      "id": "pl_msg_00000000_01764",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Tearful Look!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01765",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Tearful Look!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01766",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Tearful Look!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01767",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Toxic Thread!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01768",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Toxic Thread!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01769",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Toxic Thread!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01770",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Noble Roar!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01771",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Noble Roar!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01772",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Noble Roar!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01773",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Axe Kick!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01774",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Axe Kick!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01775",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Axe Kick!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01776",
+      "en_US": [
+        "{STRVAR_1 1, 0, 0} used\n",
+        "Work Up!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01777",
+      "en_US": [
+        "The wild {STRVAR_1 1, 0, 0} used\n",
+        "Work Up!"
+      ]
+    },
+    {
+      "id": "pl_msg_00000000_01778",
+      "en_US": [
+        "The foe’s {STRVAR_1 1, 0, 0} used\n",
+        "Work Up!"
+      ]
     }
   ]
 }

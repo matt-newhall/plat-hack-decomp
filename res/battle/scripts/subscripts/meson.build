@@ -366,5 +366,7 @@ subscript_files = files(
     'subscript_scale_shot.s',
     'subscript_pollen_puff_heal.s',
     'subscript_incinerate.s',
-    'subscript_pickpocket.s'
+    'subscript_pickpocket.s',
+    'subscript_target_atk_and_spatk_down_1_stage.s',
+    'subscript_toxic_thread.s'
 )

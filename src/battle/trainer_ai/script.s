@@ -251,6 +251,8 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Basic_CheckCanRefreshStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_DOWN, Basic_CheckTearfulLook
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POISON_SPEED_DOWN, Basic_CheckToxicThread
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Basic_CheckBulkUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Basic_CheckCalmMind
@@ -1051,6 +1053,45 @@ Basic_CheckTickle_CheckStatStages:
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 0, ScoreMinus8
     PopOrEnd 
 
+Basic_CheckTearfulLook:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
+    // Defiant and Competitive answer each drop with a +2 boost, and this move lands two drops.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus20
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus20
+
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckTearfulLook_CheckStatStages
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
+
+Basic_CheckTearfulLook_CheckStatStages:
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 0, Basic_CheckTearfulLook_AttackAtMin
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 0, ScoreMinus8
+    PopOrEnd 
+
+Basic_CheckTearfulLook_AttackAtMin:
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 0, ScoreMinus10
+    GoTo ScoreMinus8
+
+Basic_CheckToxicThread:
+    // only fail if NEITHER effect works
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 0, Basic_CheckCannotPoison
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Basic_CheckCannotPoison
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckToxicThread_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Basic_CheckCannotPoison
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Basic_CheckCannotPoison
+
+Basic_CheckToxicThread_End:
+    PopOrEnd 
+
 Basic_CheckCosmicPower:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
@@ -1770,6 +1811,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_StatusPoison
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POISON_SPEED_DOWN, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BURN, Expert_StatusBurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_StatusParalyze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
@@ -1845,6 +1887,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_DOWN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_Setup
@@ -3120,6 +3163,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
     TableEntry BATTLE_EFFECT_DO_NOTHING
@@ -3702,6 +3746,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_ACC_DOWN_2
     TableEntry BATTLE_EFFECT_SET_REFLECT
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_SET_SUBSTITUTE
     TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
@@ -3716,6 +3761,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4287,6 +4333,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN
     TableEntry BATTLE_EFFECT_ACC_DOWN
@@ -4315,6 +4362,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_PREVENT_STATUS
     TableEntry BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4335,6 +4383,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN
     TableEntry BATTLE_EFFECT_ACC_DOWN
@@ -4368,6 +4417,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_MIRROR_COAT
     TableEntry BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4415,10 +4465,12 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_EVA_DOWN_2
     TableEntry BATTLE_EFFECT_ACC_DOWN_2
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_AVERAGE_HP
     TableEntry BATTLE_EFFECT_ALL_FAINT_3_TURNS
     TableEntry BATTLE_EFFECT_PREVENT_STATUS
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4474,6 +4526,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_EVA_DOWN_2
     TableEntry BATTLE_EFFECT_ACC_DOWN_2
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_AVERAGE_HP
     TableEntry BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS
@@ -4487,6 +4540,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_MIRROR_COAT
     TableEntry BATTLE_EFFECT_STATUS_BURN
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4566,6 +4620,7 @@ Harrassment_Effects:
     TableEntry BATTLE_EFFECT_SPEED_DOWN_2
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN_2
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
     TableEntry BATTLE_EFFECT_ENCORE
@@ -4582,6 +4637,7 @@ Harrassment_Effects:
     TableEntry BATTLE_EFFECT_SECRET_POWER
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_PREVENT_ITEM_USE
     TableEntry BATTLE_EFFECT_TRANSFER_STATUS
     TableEntry BATTLE_EFFECT_TOXIC_SPIKES

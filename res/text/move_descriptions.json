@@ -5746,6 +5746,53 @@
         "lower the target’s\n",
         "accuracy."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00588",
+      "en_US": [
+        "The user’s teary eyes\n",
+        "make the target lose\n",
+        "its will to fight,\n",
+        "lowering its Attack\n",
+        "and Sp. Atk."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00589",
+      "en_US": [
+        "The user shoots\n",
+        "poisonous threads to\n",
+        "poison the target and\n",
+        "lower its Speed."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00590",
+      "en_US": [
+        "The user lets out a\n",
+        "noble roar to\n",
+        "intimidate the target,\n",
+        "lowering its Attack\n",
+        "and Sp. Atk."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00591",
+      "en_US": [
+        "A heel-slam kick that\n",
+        "may confuse the\n",
+        "target. If it misses,\n",
+        "the user is hurt\n",
+        "instead."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00592",
+      "en_US": [
+        "The user is roused,\n",
+        "raising its Attack and\n",
+        "Sp. Atk stats."
+      ]
     }
   ]
 }

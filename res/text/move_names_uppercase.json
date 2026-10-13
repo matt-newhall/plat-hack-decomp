@@ -2352,6 +2352,26 @@
     {
       "id": "pl_msg_00000648_00587",
       "en_US": "LEAF TORNADO"
+    },
+    {
+      "id": "pl_msg_00000648_00588",
+      "en_US": "TEARFUL LOOK"
+    },
+    {
+      "id": "pl_msg_00000648_00589",
+      "en_US": "TOXIC THREAD"
+    },
+    {
+      "id": "pl_msg_00000648_00590",
+      "en_US": "NOBLE ROAR"
+    },
+    {
+      "id": "pl_msg_00000648_00591",
+      "en_US": "AXE KICK"
+    },
+    {
+      "id": "pl_msg_00000648_00592",
+      "en_US": "WORK UP"
     }
   ]
 }

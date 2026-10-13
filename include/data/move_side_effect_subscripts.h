@@ -168,6 +168,8 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_DEF_UP_3_STAGES]                  = subscript_update_stat_stage,
     [MOVE_SUBSCRIPT_PTR_STRENGTH_SAP]                     = subscript_strength_sap,
     [MOVE_SUBSCRIPT_PTR_POLLEN_PUFF_HEAL]                 = subscript_pollen_puff_heal,
-    [MOVE_SUBSCRIPT_PTR_INCINERATE]                       = subscript_incinerate
+    [MOVE_SUBSCRIPT_PTR_INCINERATE]                       = subscript_incinerate,
+    [MOVE_SUBSCRIPT_PTR_TARGET_ATK_AND_SPATK_DOWN_1_STAGE] = subscript_target_atk_and_spatk_down_1_stage,
+    [MOVE_SUBSCRIPT_PTR_TOXIC_THREAD]                     = subscript_toxic_thread
 };
 // clang-format on

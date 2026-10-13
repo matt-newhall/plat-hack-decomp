@@ -586,5 +586,10 @@ move_script_files = files(
     'move_script_0584.s',
     'move_script_0585.s',
     'move_script_0586.s',
-    'move_script_0587.s'
+    'move_script_0587.s',
+    'move_script_0588.s',
+    'move_script_0589.s',
+    'move_script_0590.s',
+    'move_script_0591.s',
+    'move_script_0592.s'
 )
