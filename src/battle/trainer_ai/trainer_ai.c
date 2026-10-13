@@ -4157,6 +4157,7 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
 
     case MOVE_STORED_POWER:
+    case MOVE_POWER_TRIP:
         power = 20 + 20 * TrainerAI_SumRaisedStatStages(battleCtx, attacker, BATTLE_STAT_ATTACK);
 
         if (power > 860) {

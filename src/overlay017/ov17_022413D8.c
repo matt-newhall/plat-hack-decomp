@@ -2117,6 +2117,7 @@ void ov17_022439C8(Contest *param0, int contestantID, enum Move moveID, UnkStruc
         param3->unk_07 = 1;
         break;
     case MOVE_SHADOW_FORCE:
+    case MOVE_PHANTOM_FORCE:
         param3->unk_06 = TRUE;
         param3->unk_00 = (0x40 | 0x80 | 0x40000 | 0x20000000);
         break;

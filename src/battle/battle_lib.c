@@ -4357,6 +4357,7 @@ static u16 sWindMoves[] = {
     MOVE_HEAT_WAVE,
     MOVE_HURRICANE,
     MOVE_ICY_WIND,
+    MOVE_PETAL_BLIZZARD,
     MOVE_TWISTER,
     MOVE_WHIRLWIND
 };
@@ -8949,7 +8950,8 @@ static const u16 sPunchingMoves[] = {
     MOVE_SKY_UPPERCUT,
     MOVE_COMET_PUNCH,
     MOVE_POWER_UP_PUNCH,
-    MOVE_MEGA_PUNCH
+    MOVE_MEGA_PUNCH,
+    MOVE_HEADLONG_RUSH
 };
 
 BOOL BattleSystem_IsPunchingMove(u16 move) {
@@ -10075,6 +10077,7 @@ static const u16 sCannotAssistMoves[] = {
     MOVE_DIVE,
     MOVE_BOUNCE,
     MOVE_SHADOW_FORCE,
+    MOVE_PHANTOM_FORCE,
     MOVE_WHIRLWIND,
     MOVE_ROAR,
     MOVE_DRAGON_TAIL,

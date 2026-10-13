@@ -2212,9 +2212,10 @@ Expert_SetupDefensive_TryScorePlus2:
     AddToMoveScore 2
 
 Expert_SetupDefensive_CheckPayoffMoves:
-    // Stored Power and Body Press spend the boost back as damage, so the turn is not purely
+    // Stored Power, Power Trip and Body Press spend the boost back as damage, so the turn is not purely
     // defensive when the AI is carrying one.
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_STORED_POWER, Expert_SetupDefensive_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_POWER_TRIP, Expert_SetupDefensive_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_BODY_PRESS, Expert_SetupDefensive_TryScorePlus1
     GoTo Expert_SetupDefensive_CheckDefense
 
@@ -3187,6 +3188,7 @@ Expert_LockOn:
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ZAP_CANNON, Expert_LockOn_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DYNAMIC_PUNCH, Expert_LockOn_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DARK_VOID, Expert_LockOn_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_INFERNO, Expert_LockOn_TryScorePlus1
     AddToMoveScore -2
     PopOrEnd
 
@@ -3253,10 +3255,20 @@ Expert_Protect_CheckTarget:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_ScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_ScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_Protect_ScorePlus1
-    GoTo Expert_Protect_CheckFirstTurn
+    GoTo Expert_Protect_CheckBypass
 
 Expert_Protect_ScorePlus1:
     AddToMoveScore 1
+
+Expert_Protect_CheckBypass:
+    // The shield is wasted against a target carrying a move that strikes straight through it.
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_PROTECT, Expert_Protect_ScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SHADOW_FORCE, Expert_Protect_ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_HYPER_DRILL, Expert_Protect_ScoreMinus3
+    GoTo Expert_Protect_CheckFirstTurn
+
+Expert_Protect_ScoreMinus3:
+    AddToMoveScore -3
 
 Expert_Protect_CheckFirstTurn:
     // Nothing has been set up to stall for yet on the turn the AI comes in, though in doubles

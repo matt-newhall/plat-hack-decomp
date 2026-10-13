@@ -2300,6 +2300,58 @@
     {
       "id": "pl_msg_00000647_00574",
       "en_US": "Incinerate"
+    },
+    {
+      "id": "pl_msg_00000647_00575",
+      "en_US": "Inferno"
+    },
+    {
+      "id": "pl_msg_00000647_00576",
+      "en_US": "Petal Blizzard"
+    },
+    {
+      "id": "pl_msg_00000647_00577",
+      "en_US": "Play Nice"
+    },
+    {
+      "id": "pl_msg_00000647_00578",
+      "en_US": "Leafage"
+    },
+    {
+      "id": "pl_msg_00000647_00579",
+      "en_US": "Phantom Force"
+    },
+    {
+      "id": "pl_msg_00000647_00580",
+      "en_US": "Comeuppance"
+    },
+    {
+      "id": "pl_msg_00000647_00581",
+      "en_US": "Power Trip"
+    },
+    {
+      "id": "pl_msg_00000647_00582",
+      "en_US": "Headlong Rush"
+    },
+    {
+      "id": "pl_msg_00000647_00583",
+      "en_US": "Raging Bull"
+    },
+    {
+      "id": "pl_msg_00000647_00584",
+      "en_US": "Twin Beam"
+    },
+    {
+      "id": "pl_msg_00000647_00585",
+      "en_US": "Hyper Drill"
+    },
+    {
+      "id": "pl_msg_00000647_00586",
+      "en_US": "Raging Fury"
+    },
+    {
+      "id": "pl_msg_00000647_00587",
+      "en_US": "Leaf Tornado"
     }
   ]
 }

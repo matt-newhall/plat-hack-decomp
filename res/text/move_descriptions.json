@@ -5623,6 +5623,129 @@
         "they hold is burnt up\n",
         "and can’t be used."
       ]
+    },
+    {
+      "id": "pl_msg_00000646_00575",
+      "en_US": [
+        "The user engulfs the\n",
+        "target in an intense\n",
+        "fire. This leaves the\n",
+        "target with a burn."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00576",
+      "en_US": [
+        "The user stirs up a\n",
+        "violent petal blizzard\n",
+        "and attacks\n",
+        "everything around\n",
+        "it."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00577",
+      "en_US": [
+        "The user befriends\n",
+        "the target, making it\n",
+        "lose its will to fight.\n",
+        "This lowers its\n",
+        "Attack."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00578",
+      "en_US": [
+        "The user attacks by\n",
+        "pelting the target\n",
+        "with leaves."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00579",
+      "en_US": [
+        "The user vanishes,\n",
+        "then strikes on the\n",
+        "next turn. This hits\n",
+        "even if the target\n",
+        "protects itself."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00580",
+      "en_US": [
+        "The user retaliates\n",
+        "with much greater\n",
+        "force against the foe\n",
+        "that last damaged it."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00581",
+      "en_US": [
+        "The user boasts its\n",
+        "strength. The more\n",
+        "its stats are raised,\n",
+        "the greater the\n",
+        "move’s power."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00582",
+      "en_US": [
+        "The user smashes into\n",
+        "the target. This also\n",
+        "lowers the user’s\n",
+        "Defense and Sp. Def."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00583",
+      "en_US": [
+        "The user tackles like\n",
+        "a raging bull. This\n",
+        "can also break Light\n",
+        "Screen and Reflect."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00584",
+      "en_US": [
+        "The user shoots\n",
+        "mystical beams from\n",
+        "its eyes. The target\n",
+        "is hit twice in a row."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00585",
+      "en_US": [
+        "The user pierces the\n",
+        "target with a spinning\n",
+        "drill. This hits even\n",
+        "if the target\n",
+        "protects itself."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00586",
+      "en_US": [
+        "The user rampages,\n",
+        "spewing flames for two\n",
+        "to three turns. The\n",
+        "user then becomes\n",
+        "confused."
+      ]
+    },
+    {
+      "id": "pl_msg_00000646_00587",
+      "en_US": [
+        "The user encircles\n",
+        "the target in sharp\n",
+        "leaves. This may also\n",
+        "lower the target’s\n",
+        "accuracy."
+      ]
     }
   ]
 }

@@ -2300,6 +2300,58 @@
     {
       "id": "pl_msg_00000648_00574",
       "en_US": "INCINERATE"
+    },
+    {
+      "id": "pl_msg_00000648_00575",
+      "en_US": "INFERNO"
+    },
+    {
+      "id": "pl_msg_00000648_00576",
+      "en_US": "PETAL BLIZZARD"
+    },
+    {
+      "id": "pl_msg_00000648_00577",
+      "en_US": "PLAY NICE"
+    },
+    {
+      "id": "pl_msg_00000648_00578",
+      "en_US": "LEAFAGE"
+    },
+    {
+      "id": "pl_msg_00000648_00579",
+      "en_US": "PHANTOM FORCE"
+    },
+    {
+      "id": "pl_msg_00000648_00580",
+      "en_US": "COMEUPPANCE"
+    },
+    {
+      "id": "pl_msg_00000648_00581",
+      "en_US": "POWER TRIP"
+    },
+    {
+      "id": "pl_msg_00000648_00582",
+      "en_US": "HEADLONG RUSH"
+    },
+    {
+      "id": "pl_msg_00000648_00583",
+      "en_US": "RAGING BULL"
+    },
+    {
+      "id": "pl_msg_00000648_00584",
+      "en_US": "TWIN BEAM"
+    },
+    {
+      "id": "pl_msg_00000648_00585",
+      "en_US": "HYPER DRILL"
+    },
+    {
+      "id": "pl_msg_00000648_00586",
+      "en_US": "RAGING FURY"
+    },
+    {
+      "id": "pl_msg_00000648_00587",
+      "en_US": "LEAF TORNADO"
     }
   ]
 }
