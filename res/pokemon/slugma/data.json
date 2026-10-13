@@ -34,19 +34,21 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_YAWN" ],
             [ 1, "MOVE_SMOG" ],
-            [ 8, "MOVE_EMBER" ],
-            [ 11, "MOVE_ROCK_THROW" ],
-            [ 16, "MOVE_HARDEN" ],
-            [ 23, "MOVE_RECOVER" ],
-            [ 26, "MOVE_ANCIENT_POWER" ],
-            [ 31, "MOVE_AMNESIA" ],
-            [ 38, "MOVE_LAVA_PLUME" ],
-            [ 41, "MOVE_ROCK_SLIDE" ],
-            [ 46, "MOVE_BODY_SLAM" ],
-            [ 53, "MOVE_FLAMETHROWER" ],
-            [ 56, "MOVE_EARTH_POWER" ]
+            [ 1, "MOVE_YAWN" ],
+            [ 6, "MOVE_EMBER" ],
+            [ 8, "MOVE_ROCK_THROW" ],
+            [ 13, "MOVE_HARDEN" ],
+            [ 20, "MOVE_FIRE_SPIN" ],
+            [ 22, "MOVE_ANCIENT_POWER" ],
+            [ 27, "MOVE_INCINERATE" ],
+            [ 29, "MOVE_ROCK_SLIDE" ],
+            [ 34, "MOVE_LAVA_PLUME" ],
+            [ 36, "MOVE_AMNESIA" ],
+            [ 41, "MOVE_BODY_SLAM" ],
+            [ 43, "MOVE_RECOVER" ],
+            [ 48, "MOVE_FLAMETHROWER" ],
+            [ 50, "MOVE_EARTH_POWER" ]
         ],
         "by_tm": [
             "TM06",

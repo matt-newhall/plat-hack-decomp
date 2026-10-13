@@ -34,13 +34,24 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_ICICLE_SPEAR" ],
+            [ 1, "MOVE_ICICLE_CRASH" ],
+            [ 1, "MOVE_SHELL_SMASH" ],
+            [ 1, "MOVE_ICE_SHARD" ],
             [ 1, "MOVE_TOXIC_SPIKES" ],
-            [ 1, "MOVE_WITHDRAW" ],
-            [ 1, "MOVE_SUPERSONIC" ],
-            [ 1, "MOVE_AURORA_BEAM" ],
+            [ 1, "MOVE_IRON_DEFENSE" ],
+            [ 1, "MOVE_WHIRLPOOL" ],
+            [ 1, "MOVE_SPIKES" ],
             [ 1, "MOVE_PROTECT" ],
-            [ 28, "MOVE_SPIKES" ],
-            [ 40, "MOVE_SPIKE_CANNON" ]
+            [ 1, "MOVE_WITHDRAW" ],
+            [ 1, "MOVE_AURORA_BEAM" ],
+            [ 1, "MOVE_ICE_BEAM" ],
+            [ 1, "MOVE_HYDRO_PUMP" ],
+            [ 1, "MOVE_WATER_GUN" ],
+            [ 1, "MOVE_SUPERSONIC" ],
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_TACKLE" ],
+            [ 5, "MOVE_AQUA_JET" ]
         ],
         "by_tm": [
             "TM06",

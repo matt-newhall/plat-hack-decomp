@@ -35,14 +35,21 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_QUICK_ATTACK" ],
-            [ 1, "MOVE_FORESIGHT" ],
             [ 1, "MOVE_ENDURE" ],
-            [ 6, "MOVE_COUNTER" ],
-            [ 11, "MOVE_FORCE_PALM" ],
-            [ 15, "MOVE_FEINT" ],
-            [ 19, "MOVE_REVERSAL" ],
-            [ 24, "MOVE_SCREECH" ],
-            [ 29, "MOVE_COPYCAT" ]
+            [ 4, "MOVE_FEINT" ],
+            [ 8, "MOVE_METAL_CLAW" ],
+            [ 12, "MOVE_COUNTER" ],
+            [ 16, "MOVE_WORK_UP" ],
+            [ 20, "MOVE_ROCK_SMASH" ],
+            [ 24, "MOVE_VACUUM_WAVE" ],
+            [ 28, "MOVE_SCREECH" ],
+            [ 32, "MOVE_DETECT" ],
+            [ 36, "MOVE_FORCE_PALM" ],
+            [ 40, "MOVE_SWORDS_DANCE" ],
+            [ 44, "MOVE_HELPING_HAND" ],
+            [ 48, "MOVE_COPYCAT" ],
+            [ 52, "MOVE_FINAL_GAMBIT" ],
+            [ 56, "MOVE_REVERSAL" ]
         ],
         "by_tm": [
             "TM01",

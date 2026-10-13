@@ -34,18 +34,20 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_SCARY_FACE" ],
+            [ 1, "MOVE_ANCIENT_POWER" ],
             [ 1, "MOVE_MUD_SHOT" ],
-            [ 5, "MOVE_SCARY_FACE" ],
-            [ 15, "MOVE_ANCIENT_POWER" ],
-            [ 20, "MOVE_SLASH" ],
-            [ 30, "MOVE_BULK_UP" ],
-            [ 35, "MOVE_EARTHQUAKE" ],
-            [ 45, "MOVE_FIRE_BLAST" ],
-            [ 50, "MOVE_REST" ],
-            [ 60, "MOVE_FISSURE" ],
-            [ 65, "MOVE_SOLAR_BEAM" ],
-            [ 75, "MOVE_EARTH_POWER" ],
-            [ 80, "MOVE_ERUPTION" ]
+            [ 1, "MOVE_LAVA_PLUME" ],
+            [ 1, "MOVE_HEADLONG_RUSH" ],
+            [ 9, "MOVE_EARTH_POWER" ],
+            [ 18, "MOVE_BULK_UP" ],
+            [ 27, "MOVE_EARTHQUAKE" ],
+            [ 36, "MOVE_HAMMER_ARM" ],
+            [ 45, "MOVE_FISSURE" ],
+            [ 54, "MOVE_REST" ],
+            [ 72, "MOVE_FIRE_BLAST" ],
+            [ 81, "MOVE_SOLAR_BEAM" ],
+            [ 90, "MOVE_ERUPTION" ]
         ],
         "by_tm": [
             "TM01",

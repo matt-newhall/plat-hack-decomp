@@ -34,13 +34,22 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_LEAF_BLADE" ],
+            [ 1, "MOVE_PETAL_BLIZZARD" ],
+            [ 1, "MOVE_ACID" ],
+            [ 1, "MOVE_ABSORB" ],
             [ 1, "MOVE_MEGA_DRAIN" ],
-            [ 1, "MOVE_SWEET_SCENT" ],
+            [ 1, "MOVE_GROWTH" ],
+            [ 1, "MOVE_POISON_POWDER" ],
             [ 1, "MOVE_STUN_SPORE" ],
-            [ 1, "MOVE_SUNNY_DAY" ],
-            [ 23, "MOVE_MAGICAL_LEAF" ],
-            [ 53, "MOVE_LEAF_STORM" ]
+            [ 1, "MOVE_SLEEP_POWDER" ],
+            [ 1, "MOVE_PETAL_DANCE" ],
+            [ 1, "MOVE_TOXIC" ],
+            [ 1, "MOVE_GIGA_DRAIN" ],
+            [ 1, "MOVE_SWEET_SCENT" ],
+            [ 1, "MOVE_MOONLIGHT" ],
+            [ 1, "MOVE_QUIVER_DANCE" ],
+            [ 1, "MOVE_GRASSY_TERRAIN" ],
+            [ 1, "MOVE_MOONBLAST" ]
         ],
         "by_tm": [
             "TM05",

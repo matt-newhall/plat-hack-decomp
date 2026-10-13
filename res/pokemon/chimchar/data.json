@@ -44,8 +44,9 @@
             [ 25, "MOVE_TORMENT" ],
             [ 31, "MOVE_FACADE" ],
             [ 33, "MOVE_FIRE_SPIN" ],
-            [ 39, "MOVE_SLACK_OFF" ],
-            [ 41, "MOVE_FLAMETHROWER" ]
+            [ 39, "MOVE_ACROBATICS" ],
+            [ 41, "MOVE_SLACK_OFF" ],
+            [ 47, "MOVE_FLAMETHROWER" ]
         ],
         "by_tm": [
             "TM01",

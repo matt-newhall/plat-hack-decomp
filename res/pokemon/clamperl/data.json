@@ -34,10 +34,10 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_CLAMP" ],
+            [ 1, "MOVE_IRON_DEFENSE" ],
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_WHIRLPOOL" ],
-            [ 1, "MOVE_IRON_DEFENSE" ]
+            [ 50, "MOVE_SHELL_SMASH" ]
         ],
         "by_tm": [
             "TM06",

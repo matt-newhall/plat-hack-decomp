@@ -34,18 +34,19 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SCRATCH" ],
+            [ 1, "MOVE_FURY_CUTTER" ],
             [ 1, "MOVE_HARDEN" ],
-            [ 7, "MOVE_MUD_SPORT" ],
-            [ 13, "MOVE_WATER_GUN" ],
-            [ 19, "MOVE_METAL_CLAW" ],
-            [ 25, "MOVE_PROTECT" ],
-            [ 31, "MOVE_ANCIENT_POWER" ],
-            [ 37, "MOVE_FURY_CUTTER" ],
-            [ 43, "MOVE_SLASH" ],
-            [ 49, "MOVE_ROCK_BLAST" ],
-            [ 55, "MOVE_CRUSH_CLAW" ],
-            [ 61, "MOVE_X_SCISSOR" ]
+            [ 4, "MOVE_WATER_GUN" ],
+            [ 8, "MOVE_ROCK_THROW" ],
+            [ 12, "MOVE_METAL_CLAW" ],
+            [ 16, "MOVE_ANCIENT_POWER" ],
+            [ 20, "MOVE_BUG_BITE" ],
+            [ 24, "MOVE_BRINE" ],
+            [ 28, "MOVE_SLASH" ],
+            [ 32, "MOVE_CRUSH_CLAW" ],
+            [ 36, "MOVE_ROCK_BLAST" ],
+            [ 41, "MOVE_PROTECT" ],
+            [ 44, "MOVE_X_SCISSOR" ]
         ],
         "by_tm": [
             "TM06",

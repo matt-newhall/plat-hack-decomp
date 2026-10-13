@@ -36,15 +36,17 @@
         "by_level": [
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_ASTONISH" ],
-            [ 5, "MOVE_PURSUIT" ],
+            [ 5, "MOVE_GUST" ],
             [ 11, "MOVE_HAZE" ],
             [ 15, "MOVE_WING_ATTACK" ],
             [ 21, "MOVE_NIGHT_SHADE" ],
             [ 25, "MOVE_ASSURANCE" ],
             [ 31, "MOVE_TAUNT" ],
-            [ 35, "MOVE_FAINT_ATTACK" ],
-            [ 41, "MOVE_MEAN_LOOK" ],
-            [ 45, "MOVE_SUCKER_PUNCH" ]
+            [ 35, "MOVE_MEAN_LOOK" ],
+            [ 40, "MOVE_FOUL_PLAY" ],
+            [ 50, "MOVE_SUCKER_PUNCH" ],
+            [ 55, "MOVE_TORMENT" ],
+            [ 60, "MOVE_PARTING_SHOT" ]
         ],
         "by_tm": [
             "TM06",

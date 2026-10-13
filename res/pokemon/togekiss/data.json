@@ -34,10 +34,27 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SKY_ATTACK" ],
-            [ 1, "MOVE_EXTREME_SPEED" ],
+            [ 1, "MOVE_AIR_SLASH" ],
+            [ 1, "MOVE_HELPING_HAND" ],
+            [ 1, "MOVE_ANCIENT_POWER" ],
             [ 1, "MOVE_AURA_SPHERE" ],
-            [ 1, "MOVE_AIR_SLASH" ]
+            [ 1, "MOVE_BATON_PASS" ],
+            [ 1, "MOVE_CHARM" ],
+            [ 1, "MOVE_DOUBLE_EDGE" ],
+            [ 1, "MOVE_EXTREME_SPEED" ],
+            [ 1, "MOVE_FAIRY_WIND" ],
+            [ 1, "MOVE_FOLLOW_ME" ],
+            [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_LAST_RESORT" ],
+            [ 1, "MOVE_LIFE_DEW" ],
+            [ 1, "MOVE_METRONOME" ],
+            [ 1, "MOVE_POUND" ],
+            [ 1, "MOVE_SAFEGUARD" ],
+            [ 1, "MOVE_SKY_ATTACK" ],
+            [ 1, "MOVE_SWEET_KISS" ],
+            [ 1, "MOVE_TRI_ATTACK" ],
+            [ 1, "MOVE_WISH" ],
+            [ 1, "MOVE_YAWN" ]
         ],
         "by_tm": [
             "TM01",

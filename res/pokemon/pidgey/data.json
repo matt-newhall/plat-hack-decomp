@@ -45,8 +45,9 @@
             [ 33, "MOVE_WING_ATTACK" ],
             [ 37, "MOVE_ROOST" ],
             [ 41, "MOVE_TAILWIND" ],
-            [ 45, "MOVE_MIRROR_MOVE" ],
-            [ 49, "MOVE_AIR_SLASH" ]
+            [ 45, "MOVE_AERIAL_ACE" ],
+            [ 49, "MOVE_AIR_SLASH" ],
+            [ 53, "MOVE_HURRICANE" ]
         ],
         "by_tm": [
             "TM06",

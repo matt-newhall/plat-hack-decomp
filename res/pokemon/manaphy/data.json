@@ -34,9 +34,9 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_TAIL_GLOW" ],
-            [ 1, "MOVE_BUBBLE" ],
-            [ 1, "MOVE_WATER_SPORT" ],
+            [ 1, "MOVE_HEART_SWAP" ],
             [ 9, "MOVE_CHARM" ],
             [ 16, "MOVE_SUPERSONIC" ],
             [ 24, "MOVE_BUBBLE_BEAM" ],
@@ -46,7 +46,7 @@
             [ 54, "MOVE_AQUA_RING" ],
             [ 61, "MOVE_DIVE" ],
             [ 69, "MOVE_RAIN_DANCE" ],
-            [ 76, "MOVE_HEART_SWAP" ]
+            [ 76, "MOVE_LIFE_DEW" ]
         ],
         "by_tm": [
             "TM04",

@@ -34,18 +34,20 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_TACKLE" ],
+            [ 1, "MOVE_GROWL" ],
             [ 5, "MOVE_EMBER" ],
-            [ 11, "MOVE_MAGNITUDE" ],
-            [ 15, "MOVE_FOCUS_ENERGY" ],
-            [ 21, "MOVE_TAKE_DOWN" ],
-            [ 25, "MOVE_AMNESIA" ],
-            [ 31, "MOVE_LAVA_PLUME" ],
-            [ 35, "MOVE_EARTH_POWER" ],
-            [ 41, "MOVE_EARTHQUAKE" ],
-            [ 45, "MOVE_FLAMETHROWER" ],
-            [ 51, "MOVE_DOUBLE_EDGE" ]
+            [ 8, "MOVE_FOCUS_ENERGY" ],
+            [ 12, "MOVE_BULLDOZE" ],
+            [ 15, "MOVE_INCINERATE" ],
+            [ 19, "MOVE_AMNESIA" ],
+            [ 22, "MOVE_LAVA_PLUME" ],
+            [ 26, "MOVE_EARTH_POWER" ],
+            [ 29, "MOVE_CURSE" ],
+            [ 31, "MOVE_TAKE_DOWN" ],
+            [ 40, "MOVE_EARTHQUAKE" ],
+            [ 43, "MOVE_FLAMETHROWER" ],
+            [ 47, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [
             "TM05",

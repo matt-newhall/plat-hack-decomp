@@ -34,18 +34,19 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_PECK" ],
             [ 5, "MOVE_QUICK_ATTACK" ],
-            [ 10, "MOVE_RAGE" ],
-            [ 14, "MOVE_FURY_ATTACK" ],
-            [ 19, "MOVE_PURSUIT" ],
-            [ 23, "MOVE_UPROAR" ],
-            [ 28, "MOVE_ACUPRESSURE" ],
-            [ 32, "MOVE_DOUBLE_HIT" ],
-            [ 37, "MOVE_AGILITY" ],
-            [ 41, "MOVE_DRILL_PECK" ],
-            [ 46, "MOVE_ENDEAVOR" ]
+            [ 9, "MOVE_FURY_ATTACK" ],
+            [ 14, "MOVE_PLUCK" ],
+            [ 19, "MOVE_DOUBLE_HIT" ],
+            [ 23, "MOVE_AGILITY" ],
+            [ 27, "MOVE_UPROAR" ],
+            [ 30, "MOVE_ACUPRESSURE" ],
+            [ 33, "MOVE_SWORDS_DANCE" ],
+            [ 36, "MOVE_DRILL_PECK" ],
+            [ 39, "MOVE_ENDEAVOR" ],
+            [ 43, "MOVE_THRASH" ]
         ],
         "by_tm": [
             "TM06",

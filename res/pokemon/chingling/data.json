@@ -35,11 +35,12 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_WRAP" ],
-            [ 6, "MOVE_GROWL" ],
-            [ 9, "MOVE_ASTONISH" ],
-            [ 14, "MOVE_CONFUSION" ],
-            [ 17, "MOVE_UPROAR" ],
-            [ 22, "MOVE_LAST_RESORT" ]
+            [ 4, "MOVE_GROWL" ],
+            [ 7, "MOVE_ASTONISH" ],
+            [ 10, "MOVE_CONFUSION" ],
+            [ 13, "MOVE_YAWN" ],
+            [ 16, "MOVE_LAST_RESORT" ],
+            [ 32, "MOVE_UPROAR" ]
         ],
         "by_tm": [
             "TM06",

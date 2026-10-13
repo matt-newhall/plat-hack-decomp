@@ -36,17 +36,18 @@
         "by_level": [
             [ 1, "MOVE_WRAP" ],
             [ 1, "MOVE_LEER" ],
-            [ 5, "MOVE_THUNDER_WAVE" ],
-            [ 11, "MOVE_TWISTER" ],
-            [ 15, "MOVE_DRAGON_RAGE" ],
-            [ 21, "MOVE_SLAM" ],
-            [ 25, "MOVE_AGILITY" ],
+            [ 5, "MOVE_TWISTER" ],
+            [ 10, "MOVE_THUNDER_WAVE" ],
+            [ 15, "MOVE_DRAGON_TAIL" ],
+            [ 20, "MOVE_AGILITY" ],
+            [ 25, "MOVE_SLAM" ],
             [ 31, "MOVE_AQUA_TAIL" ],
             [ 35, "MOVE_DRAGON_RUSH" ],
-            [ 41, "MOVE_SAFEGUARD" ],
-            [ 45, "MOVE_DRAGON_DANCE" ],
-            [ 51, "MOVE_OUTRAGE" ],
-            [ 55, "MOVE_HYPER_BEAM" ]
+            [ 40, "MOVE_SAFEGUARD" ],
+            [ 45, "MOVE_RAIN_DANCE" ],
+            [ 50, "MOVE_DRAGON_DANCE" ],
+            [ 55, "MOVE_OUTRAGE" ],
+            [ 60, "MOVE_HYPER_BEAM" ]
         ],
         "by_tm": [
             "TM06",

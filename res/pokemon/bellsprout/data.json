@@ -45,8 +45,9 @@
             [ 29, "MOVE_SWEET_SCENT" ],
             [ 35, "MOVE_GASTRO_ACID" ],
             [ 39, "MOVE_RAZOR_LEAF" ],
-            [ 41, "MOVE_SLAM" ],
-            [ 47, "MOVE_WRING_OUT" ]
+            [ 41, "MOVE_POISON_JAB" ],
+            [ 47, "MOVE_SLAM" ],
+            [ 52, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [
             "TM05",

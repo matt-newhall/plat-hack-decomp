@@ -34,12 +34,13 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_LUCKY_CHANT" ],
-            [ 1, "MOVE_MAGICAL_LEAF" ],
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_PSYWAVE" ],
             [ 1, "MOVE_SPITE" ],
-            [ 1, "MOVE_ASTONISH" ]
+            [ 1, "MOVE_ASTONISH" ],
+            [ 1, "MOVE_MAGICAL_LEAF" ],
+            [ 1, "MOVE_POWER_GEM" ],
+            [ 1, "MOVE_PHANTOM_FORCE" ],
+            [ 1, "MOVE_MYSTICAL_FIRE" ]
         ],
         "by_tm": [
             "TM06",

@@ -35,15 +35,17 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 3, "MOVE_SAND_ATTACK" ],
-            [ 7, "MOVE_DRAGON_RAGE" ],
-            [ 13, "MOVE_SANDSTORM" ],
-            [ 15, "MOVE_TAKE_DOWN" ],
-            [ 19, "MOVE_SAND_TOMB" ],
-            [ 25, "MOVE_SLASH" ],
-            [ 27, "MOVE_DRAGON_CLAW" ],
-            [ 31, "MOVE_DIG" ],
-            [ 37, "MOVE_DRAGON_RUSH" ]
+            [ 1, "MOVE_SAND_TOMB" ],
+            [ 6, "MOVE_SAND_ATTACK" ],
+            [ 12, "MOVE_DRAGON_BREATH" ],
+            [ 18, "MOVE_BULLDOZE" ],
+            [ 25, "MOVE_BITE" ],
+            [ 30, "MOVE_SLASH" ],
+            [ 36, "MOVE_DRAGON_CLAW" ],
+            [ 42, "MOVE_DIG" ],
+            [ 48, "MOVE_SANDSTORM" ],
+            [ 54, "MOVE_TAKE_DOWN" ],
+            [ 60, "MOVE_DRAGON_RUSH" ]
         ],
         "by_tm": [
             "TM02",

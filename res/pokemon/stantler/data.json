@@ -43,11 +43,10 @@
             [ 21, "MOVE_TAKE_DOWN" ],
             [ 23, "MOVE_CONFUSE_RAY" ],
             [ 27, "MOVE_CALM_MIND" ],
-            [ 33, "MOVE_ROLE_PLAY" ],
-            [ 38, "MOVE_ZEN_HEADBUTT" ],
-            [ 43, "MOVE_IMPRISON" ],
-            [ 49, "MOVE_CAPTIVATE" ],
-            [ 53, "MOVE_ME_FIRST" ]
+            [ 32, "MOVE_ROLE_PLAY" ],
+            [ 37, "MOVE_ZEN_HEADBUTT" ],
+            [ 49, "MOVE_IMPRISON" ],
+            [ 55, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [
             "TM05",

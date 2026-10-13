@@ -34,19 +34,19 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_TAIL_WHIP" ],
-            [ 5, "MOVE_MUD_SPORT" ],
-            [ 9, "MOVE_MUD_SHOT" ],
-            [ 15, "MOVE_SLAM" ],
-            [ 19, "MOVE_MUD_BOMB" ],
-            [ 23, "MOVE_AMNESIA" ],
-            [ 29, "MOVE_YAWN" ],
-            [ 33, "MOVE_EARTHQUAKE" ],
-            [ 37, "MOVE_RAIN_DANCE" ],
-            [ 43, "MOVE_MIST" ],
-            [ 43, "MOVE_HAZE" ],
-            [ 47, "MOVE_MUDDY_WATER" ]
+            [ 1, "MOVE_WATER_GUN" ],
+            [ 4, "MOVE_RAIN_DANCE" ],
+            [ 8, "MOVE_MUD_SHOT" ],
+            [ 12, "MOVE_MIST" ],
+            [ 12, "MOVE_HAZE" ],
+            [ 16, "MOVE_SLAM" ],
+            [ 21, "MOVE_YAWN" ],
+            [ 24, "MOVE_AQUA_TAIL" ],
+            [ 28, "MOVE_MUDDY_WATER" ],
+            [ 32, "MOVE_AMNESIA" ],
+            [ 36, "MOVE_TOXIC" ],
+            [ 40, "MOVE_EARTHQUAKE" ]
         ],
         "by_tm": [
             "TM05",

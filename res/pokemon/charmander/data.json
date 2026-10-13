@@ -36,14 +36,16 @@
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
             [ 1, "MOVE_GROWL" ],
-            [ 7, "MOVE_EMBER" ],
-            [ 10, "MOVE_SMOKE_SCREEN" ],
-            [ 16, "MOVE_DRAGON_RAGE" ],
-            [ 19, "MOVE_SCARY_FACE" ],
-            [ 25, "MOVE_FIRE_FANG" ],
-            [ 28, "MOVE_SLASH" ],
-            [ 34, "MOVE_FLAMETHROWER" ],
-            [ 37, "MOVE_FIRE_SPIN" ]
+            [ 4, "MOVE_EMBER" ],
+            [ 8, "MOVE_SMOKE_SCREEN" ],
+            [ 12, "MOVE_DRAGON_BREATH" ],
+            [ 17, "MOVE_FIRE_FANG" ],
+            [ 20, "MOVE_SLASH" ],
+            [ 24, "MOVE_FLAMETHROWER" ],
+            [ 28, "MOVE_SCARY_FACE" ],
+            [ 32, "MOVE_FIRE_SPIN" ],
+            [ 36, "MOVE_INFERNO" ],
+            [ 40, "MOVE_FLARE_BLITZ" ]
         ],
         "by_tm": [
             "TM01",

@@ -44,7 +44,8 @@
             [ 25, "MOVE_AERIAL_ACE" ],
             [ 29, "MOVE_TAKE_DOWN" ],
             [ 33, "MOVE_AGILITY" ],
-            [ 37, "MOVE_BRAVE_BIRD" ]
+            [ 37, "MOVE_BRAVE_BIRD" ],
+            [ 41, "MOVE_FINAL_GAMBIT" ]
         ],
         "by_tm": [
             "TM06",

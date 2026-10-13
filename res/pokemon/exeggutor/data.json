@@ -34,15 +34,24 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_STOMP" ],
+            [ 1, "MOVE_LEAF_STORM" ],
             [ 1, "MOVE_SEED_BOMB" ],
-            [ 1, "MOVE_BARRAGE" ],
+            [ 1, "MOVE_WORRY_SEED" ],
+            [ 1, "MOVE_BULLET_SEED" ],
+            [ 1, "MOVE_EXTRASENSORY" ],
+            [ 1, "MOVE_UPROAR" ],
+            [ 1, "MOVE_SYNTHESIS" ],
+            [ 1, "MOVE_PSYSHOCK" ],
+            [ 1, "MOVE_REFLECT" ],
             [ 1, "MOVE_HYPNOSIS" ],
             [ 1, "MOVE_CONFUSION" ],
-            [ 1, "MOVE_STOMP" ],
-            [ 17, "MOVE_STOMP" ],
-            [ 27, "MOVE_EGG_BOMB" ],
-            [ 37, "MOVE_WOOD_HAMMER" ],
-            [ 47, "MOVE_LEAF_STORM" ]
+            [ 1, "MOVE_SOLAR_BEAM" ],
+            [ 1, "MOVE_LEECH_SEED" ],
+            [ 1, "MOVE_MEGA_DRAIN" ],
+            [ 1, "MOVE_ABSORB" ],
+            [ 1, "MOVE_WOOD_HAMMER" ],
+            [ 1, "MOVE_GIGA_DRAIN" ]
         ],
         "by_tm": [
             "TM06",

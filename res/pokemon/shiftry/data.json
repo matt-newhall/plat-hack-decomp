@@ -34,11 +34,11 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_FAINT_ATTACK" ],
-            [ 1, "MOVE_WHIRLWIND" ],
-            [ 1, "MOVE_NASTY_PLOT" ],
-            [ 1, "MOVE_RAZOR_LEAF" ],
-            [ 49, "MOVE_LEAF_STORM" ]
+            [ 1, "MOVE_LEAF_BLADE" ],
+            [ 1, "MOVE_SUNNY_DAY" ],
+            [ 1, "MOVE_AIR_CUTTER" ],
+            [ 1, "MOVE_PAYBACK" ],
+            [ 1, "MOVE_HURRICANE" ]
         ],
         "by_tm": [
             "TM05",

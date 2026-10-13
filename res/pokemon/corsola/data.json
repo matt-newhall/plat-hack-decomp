@@ -34,20 +34,19 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 4, "MOVE_HARDEN" ],
-            [ 8, "MOVE_BUBBLE" ],
-            [ 13, "MOVE_RECOVER" ],
-            [ 16, "MOVE_REFRESH" ],
-            [ 20, "MOVE_ROCK_BLAST" ],
+            [ 5, "MOVE_WATER_GUN" ],
+            [ 10, "MOVE_AQUA_RING" ],
+            [ 15, "MOVE_ENDURE" ],
+            [ 20, "MOVE_ANCIENT_POWER" ],
             [ 25, "MOVE_BUBBLE_BEAM" ],
-            [ 28, "MOVE_LUCKY_CHANT" ],
-            [ 32, "MOVE_ANCIENT_POWER" ],
-            [ 37, "MOVE_AQUA_RING" ],
-            [ 40, "MOVE_SPIKE_CANNON" ],
-            [ 44, "MOVE_POWER_GEM" ],
-            [ 48, "MOVE_MIRROR_COAT" ],
-            [ 53, "MOVE_EARTH_POWER" ]
+            [ 30, "MOVE_FLAIL" ],
+            [ 35, "MOVE_LIFE_DEW" ],
+            [ 40, "MOVE_POWER_GEM" ],
+            [ 45, "MOVE_EARTH_POWER" ],
+            [ 50, "MOVE_RECOVER" ],
+            [ 55, "MOVE_MIRROR_COAT" ]
         ],
         "by_tm": [
             "TM06",

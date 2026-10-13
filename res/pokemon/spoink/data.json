@@ -35,19 +35,18 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_SPLASH" ],
-            [ 7, "MOVE_PSYWAVE" ],
-            [ 10, "MOVE_ODOR_SLEUTH" ],
+            [ 7, "MOVE_CONFUSION" ],
+            [ 10, "MOVE_GROWL" ],
             [ 14, "MOVE_PSYBEAM" ],
-            [ 15, "MOVE_PSYCH_UP" ],
-            [ 18, "MOVE_CONFUSE_RAY" ],
-            [ 21, "MOVE_MAGIC_COAT" ],
-            [ 26, "MOVE_ZEN_HEADBUTT" ],
+            [ 18, "MOVE_PSYCH_UP" ],
+            [ 22, "MOVE_CONFUSE_RAY" ],
             [ 29, "MOVE_REST" ],
-            [ 29, "MOVE_SNORE" ],
-            [ 34, "MOVE_PAYBACK" ],
-            [ 41, "MOVE_PSYCHIC" ],
-            [ 46, "MOVE_POWER_GEM" ],
-            [ 48, "MOVE_BOUNCE" ]
+            [ 29, "MOVE_POWER_GEM" ],
+            [ 33, "MOVE_SNORE" ],
+            [ 38, "MOVE_PSYSHOCK" ],
+            [ 40, "MOVE_PAYBACK" ],
+            [ 44, "MOVE_PSYCHIC" ],
+            [ 50, "MOVE_BOUNCE" ]
         ],
         "by_tm": [
             "TM05",

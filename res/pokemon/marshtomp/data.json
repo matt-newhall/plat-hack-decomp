@@ -34,21 +34,21 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_MUD_SHOT" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_MUD_SLAP" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 6, "MOVE_MUD_SLAP" ],
-            [ 10, "MOVE_WATER_GUN" ],
-            [ 15, "MOVE_BIDE" ],
-            [ 16, "MOVE_MUD_SHOT" ],
-            [ 20, "MOVE_FORESIGHT" ],
-            [ 25, "MOVE_MUD_BOMB" ],
-            [ 31, "MOVE_TAKE_DOWN" ],
-            [ 37, "MOVE_MUDDY_WATER" ],
-            [ 42, "MOVE_PROTECT" ],
-            [ 46, "MOVE_EARTHQUAKE" ],
-            [ 53, "MOVE_ENDEAVOR" ]
+            [ 9, "MOVE_ROCK_THROW" ],
+            [ 12, "MOVE_PROTECT" ],
+            [ 15, "MOVE_SUPERSONIC" ],
+            [ 20, "MOVE_WATER_PULSE" ],
+            [ 25, "MOVE_ROCK_SLIDE" ],
+            [ 30, "MOVE_TAKE_DOWN" ],
+            [ 35, "MOVE_AMNESIA" ],
+            [ 40, "MOVE_MUDDY_WATER" ],
+            [ 45, "MOVE_SCREECH" ],
+            [ 50, "MOVE_ENDEAVOR" ],
+            [ 55, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM01",

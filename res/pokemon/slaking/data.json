@@ -34,21 +34,20 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_SWAGGER" ],
             [ 1, "MOVE_SCRATCH" ],
-            [ 1, "MOVE_YAWN" ],
             [ 1, "MOVE_ENCORE" ],
+            [ 1, "MOVE_YAWN" ],
             [ 1, "MOVE_SLACK_OFF" ],
-            [ 7, "MOVE_ENCORE" ],
-            [ 13, "MOVE_SLACK_OFF" ],
-            [ 19, "MOVE_FAINT_ATTACK" ],
-            [ 25, "MOVE_AMNESIA" ],
-            [ 31, "MOVE_COVET" ],
-            [ 36, "MOVE_SWAGGER" ],
-            [ 37, "MOVE_COUNTER" ],
-            [ 43, "MOVE_FLAIL" ],
-            [ 49, "MOVE_FLING" ],
-            [ 55, "MOVE_PUNISHMENT" ],
-            [ 61, "MOVE_HAMMER_ARM" ]
+            [ 1, "MOVE_SUCKER_PUNCH" ],
+            [ 17, "MOVE_AMNESIA" ],
+            [ 23, "MOVE_COVET" ],
+            [ 27, "MOVE_PLAY_ROUGH" ],
+            [ 33, "MOVE_COUNTER" ],
+            [ 39, "MOVE_FLAIL" ],
+            [ 45, "MOVE_FLING" ],
+            [ 52, "MOVE_MEGA_KICK" ],
+            [ 63, "MOVE_HAMMER_ARM" ]
         ],
         "by_tm": [
             "TM01",

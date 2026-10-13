@@ -34,10 +34,27 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SING" ],
-            [ 1, "MOVE_DISABLE" ],
+            [ 1, "MOVE_STOCKPILE" ],
+            [ 1, "MOVE_FAIRY_WIND" ],
+            [ 1, "MOVE_UPROAR" ],
+            [ 1, "MOVE_COPYCAT" ],
+            [ 1, "MOVE_GYRO_BALL" ],
+            [ 1, "MOVE_COVET" ],
+            [ 1, "MOVE_HYPER_VOICE" ],
+            [ 1, "MOVE_SWALLOW" ],
+            [ 1, "MOVE_SPIT_UP" ],
+            [ 1, "MOVE_DISARMING_VOICE" ],
+            [ 1, "MOVE_POUND" ],
+            [ 1, "MOVE_SWEET_KISS" ],
+            [ 1, "MOVE_REST" ],
             [ 1, "MOVE_DEFENSE_CURL" ],
-            [ 1, "MOVE_DOUBLE_SLAP" ]
+            [ 1, "MOVE_MIMIC" ],
+            [ 1, "MOVE_DISABLE" ],
+            [ 1, "MOVE_SING" ],
+            [ 1, "MOVE_DOUBLE_EDGE" ],
+            [ 1, "MOVE_BODY_SLAM" ],
+            [ 1, "MOVE_CHARM" ],
+            [ 5, "MOVE_PLAY_ROUGH" ]
         ],
         "by_tm": [
             "TM01",

@@ -36,15 +36,14 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_DISABLE" ],
-            [ 1, "MOVE_FORESIGHT" ],
             [ 5, "MOVE_SUPERSONIC" ],
             [ 11, "MOVE_CONFUSION" ],
             [ 13, "MOVE_POISON_POWDER" ],
-            [ 17, "MOVE_LEECH_LIFE" ],
+            [ 17, "MOVE_PSYBEAM" ],
             [ 23, "MOVE_STUN_SPORE" ],
-            [ 25, "MOVE_PSYBEAM" ],
+            [ 25, "MOVE_BUG_BUZZ" ],
             [ 29, "MOVE_SLEEP_POWDER" ],
-            [ 35, "MOVE_SIGNAL_BEAM" ],
+            [ 35, "MOVE_LEECH_LIFE" ],
             [ 37, "MOVE_ZEN_HEADBUTT" ],
             [ 41, "MOVE_POISON_FANG" ],
             [ 47, "MOVE_PSYCHIC" ]

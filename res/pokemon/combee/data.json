@@ -34,9 +34,10 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SWEET_SCENT" ],
             [ 1, "MOVE_GUST" ],
-            [ 13, "MOVE_BUG_BITE" ]
+            [ 1, "MOVE_SWEET_SCENT" ],
+            [ 1, "MOVE_BUG_BITE" ],
+            [ 1, "MOVE_STRUGGLE_BUG" ]
         ],
         "by_tm": [
             "TM27",
