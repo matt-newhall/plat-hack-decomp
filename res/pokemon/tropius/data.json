@@ -93,15 +93,12 @@
             "MOVE_AIR_CUTTER"
         ],
         "egg_moves": [
-            "MOVE_HEADBUTT",
             "MOVE_SLAM",
-            "MOVE_METEOR_BEAM",
+            "MOVE_HEADBUTT",
             "MOVE_LEECH_SEED",
-            "MOVE_NATURE_POWER",
-            "MOVE_LEAF_STORM",
-            "MOVE_SYNTHESIS",
             "MOVE_CURSE",
-            "MOVE_LEAF_BLADE"
+            "MOVE_LEAF_BLADE",
+            "MOVE_DRAGON_DANCE"
         ]
     },
     "evolutions": [  ],

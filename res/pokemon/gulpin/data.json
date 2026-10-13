@@ -86,12 +86,12 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_DREAM_EATER",
+            "MOVE_SMOG",
             "MOVE_ACID_ARMOR",
-            "MOVE_DRAINING_KISS",
-            "MOVE_PAIN_SPLIT",
             "MOVE_CURSE",
-            "MOVE_DESTINY_BOND"
+            "MOVE_MUD_SLAP",
+            "MOVE_DESTINY_BOND",
+            "MOVE_HAZE"
         ]
     },
     "evolutions": [

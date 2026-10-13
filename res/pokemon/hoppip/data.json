@@ -84,15 +84,14 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
-            "MOVE_CONFUSION",
             "MOVE_ENCORE",
-            "MOVE_DOUBLE_EDGE",
-            "MOVE_REFLECT",
-            "MOVE_AMNESIA",
-            "MOVE_HELPING_HAND",
-            "MOVE_PSYCH_UP",
-            "MOVE_AROMATHERAPY",
-            "MOVE_ACCELEROCK"
+            "MOVE_WORRY_SEED",
+            "MOVE_SEED_BOMB",
+            "MOVE_SWITCHEROO",
+            "MOVE_RAGE_POWDER",
+            "MOVE_COTTON_GUARD",
+            "MOVE_GRASSY_TERRAIN",
+            "MOVE_STRENGTH_SAP"
         ]
     },
     "evolutions": [

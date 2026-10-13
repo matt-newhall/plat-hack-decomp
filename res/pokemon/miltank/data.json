@@ -93,18 +93,14 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_PRESENT",
-            "MOVE_REVERSAL",
-            "MOVE_SEISMIC_TOSS",
-            "MOVE_ENDURE",
-            "MOVE_PSYCH_UP",
-            "MOVE_CURSE",
-            "MOVE_HELPING_HAND",
-            "MOVE_SLEEP_TALK",
-            "MOVE_DIZZY_PUNCH",
-            "MOVE_HAMMER_ARM",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_PUNISHMENT"
+            "MOVE_SEISMIC_TOSS",
+            "MOVE_CURSE",
+            "MOVE_REVERSAL",
+            "MOVE_PRESENT",
+            "MOVE_HELPING_HAND",
+            "MOVE_HAMMER_ARM",
+            "MOVE_HEAVY_SLAM"
         ]
     },
     "evolutions": [  ],

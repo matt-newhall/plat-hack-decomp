@@ -75,13 +75,16 @@
             "MOVE_ZEN_HEADBUTT"
         ],
         "egg_moves": [
+            "MOVE_WHIRLWIND",
             "MOVE_TAKE_DOWN",
-            "MOVE_SNORE",
-            "MOVE_SWAGGER",
-            "MOVE_EXTRASENSORY",
-            "MOVE_SMELLING_SALT",
             "MOVE_SMOKE_SCREEN",
-            "MOVE_ENDEAVOR"
+            "MOVE_SNORE",
+            "MOVE_ENDEAVOR",
+            "MOVE_FAKE_TEARS",
+            "MOVE_EXTRASENSORY",
+            "MOVE_HAMMER_ARM",
+            "MOVE_VITAL_THROW",
+            "MOVE_DISARMING_VOICE"
         ]
     },
     "evolutions": [

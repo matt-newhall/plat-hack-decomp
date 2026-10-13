@@ -85,10 +85,12 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_SUBSTITUTE",
-            "MOVE_WISH",
             "MOVE_SING",
-            "MOVE_SWEET_KISS"
+            "MOVE_SWEET_KISS",
+            "MOVE_CHARM",
+            "MOVE_WISH",
+            "MOVE_FAKE_TEARS",
+            "MOVE_NUZZLE"
         ]
     },
     "evolutions": [  ],

@@ -88,13 +88,17 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_FROST_BREATH",
+            "MOVE_TAIL_WHIP",
             "MOVE_BITE",
-            "MOVE_FAKE_TEARS",
             "MOVE_DEFENSE_CURL",
+            "MOVE_FLAIL",
             "MOVE_ROLLOUT",
             "MOVE_FLATTER",
-            "MOVE_FLAIL"
+            "MOVE_FOLLOW_ME",
+            "MOVE_CHARGE",
+            "MOVE_FAKE_TEARS",
+            "MOVE_COVET",
+            "MOVE_BABY_DOLL_EYES"
         ]
     },
     "evolutions": [  ],

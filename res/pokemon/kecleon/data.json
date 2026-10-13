@@ -105,11 +105,12 @@
         ],
         "egg_moves": [
             "MOVE_DISABLE",
-            "MOVE_MAGIC_COAT",
-            "MOVE_TRICK",
+            "MOVE_RECOVER",
             "MOVE_FAKE_OUT",
-            "MOVE_NASTY_PLOT",
-            "MOVE_DIZZY_PUNCH"
+            "MOVE_TRICK",
+            "MOVE_MAGIC_COAT",
+            "MOVE_FOUL_PLAY",
+            "MOVE_POWER_UP_PUNCH"
         ]
     },
     "evolutions": [  ],

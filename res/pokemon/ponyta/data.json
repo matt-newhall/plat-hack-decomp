@@ -75,13 +75,17 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_FLAME_WHEEL",
-            "MOVE_THRASH",
             "MOVE_DOUBLE_KICK",
-            "MOVE_HYPNOSIS",
-            "MOVE_CHARM",
+            "MOVE_HORN_DRILL",
+            "MOVE_THRASH",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_FLAME_CHARGE"
+            "MOVE_LOW_KICK",
+            "MOVE_HYPNOSIS",
+            "MOVE_FLAME_WHEEL",
+            "MOVE_CHARM",
+            "MOVE_MORNING_SUN",
+            "MOVE_DISABLE",
+            "MOVE_HIGH_HORSEPOWER"
         ]
     },
     "evolutions": [

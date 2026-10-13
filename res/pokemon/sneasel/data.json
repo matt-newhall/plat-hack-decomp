@@ -94,18 +94,14 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
+            "MOVE_BITE",
             "MOVE_COUNTER",
             "MOVE_SPITE",
-            "MOVE_DRILL_RUN",
-            "MOVE_REFLECT",
-            "MOVE_BITE",
-            "MOVE_CRUSH_CLAW",
             "MOVE_FAKE_OUT",
-            "MOVE_DOUBLE_HIT",
-            "MOVE_PUNISHMENT",
-            "MOVE_PURSUIT",
+            "MOVE_FEINT",
             "MOVE_ICE_SHARD",
-            "MOVE_ICE_PUNCH"
+            "MOVE_DOUBLE_HIT",
+            "MOVE_ICICLE_CRASH"
         ]
     },
     "evolutions": [

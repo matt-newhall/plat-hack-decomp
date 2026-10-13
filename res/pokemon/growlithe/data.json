@@ -80,15 +80,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_BODY_SLAM",
-            "MOVE_SAFEGUARD",
-            "MOVE_CRUNCH",
+            "MOVE_DOUBLE_KICK",
             "MOVE_THRASH",
-            "MOVE_FIRE_SPIN",
-            "MOVE_HOWL",
-            "MOVE_HEAT_WAVE",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_FLARE_BLITZ"
+            "MOVE_MORNING_SUN",
+            "MOVE_COVET",
+            "MOVE_RAGING_FURY"
         ]
     },
     "evolutions": [

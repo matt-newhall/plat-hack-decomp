@@ -89,14 +89,11 @@
         ],
         "egg_moves": [
             "MOVE_HEADBUTT",
-            "MOVE_SCARY_FACE",
-            "MOVE_FOCUS_ENERGY",
-            "MOVE_DOUBLE_EDGE",
-            "MOVE_ROCK_BLAST",
-            "MOVE_BODY_SLAM",
+            "MOVE_COUNTER",
+            "MOVE_FISSURE",
             "MOVE_SCREECH",
-            "MOVE_CURSE",
-            "MOVE_SLUDGE_WAVE"
+            "MOVE_FOCUS_ENERGY",
+            "MOVE_GUARD_SWAP"
         ]
     },
     "evolutions": [

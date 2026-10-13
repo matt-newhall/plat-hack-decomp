@@ -77,14 +77,14 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_BATON_PASS",
-            "MOVE_SCREECH",
-            "MOVE_GIGA_DRAIN",
-            "MOVE_SIGNAL_BEAM",
             "MOVE_AGILITY",
+            "MOVE_SCREECH",
+            "MOVE_BATON_PASS",
             "MOVE_MORNING_SUN",
             "MOVE_TOXIC_SPIKES",
-            "MOVE_BUG_BITE"
+            "MOVE_BUG_BITE",
+            "MOVE_VENOSHOCK",
+            "MOVE_RAGE_POWDER"
         ]
     },
     "evolutions": [

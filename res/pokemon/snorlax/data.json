@@ -113,14 +113,11 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_LICK",
-            "MOVE_CHARM",
             "MOVE_DOUBLE_EDGE",
+            "MOVE_COUNTER",
+            "MOVE_FISSURE",
             "MOVE_CURSE",
-            "MOVE_SLUDGE_WAVE",
-            "MOVE_SUBSTITUTE",
-            "MOVE_WHIRLWIND",
-            "MOVE_PURSUIT"
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "evolutions": [  ],

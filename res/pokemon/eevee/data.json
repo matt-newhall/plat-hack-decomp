@@ -72,15 +72,14 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_CHARM",
-            "MOVE_FLAIL",
-            "MOVE_ENDURE",
+            "MOVE_DOUBLE_KICK",
             "MOVE_CURSE",
-            "MOVE_TICKLE",
+            "MOVE_FLAIL",
+            "MOVE_MUD_SLAP",
+            "MOVE_DETECT",
             "MOVE_WISH",
             "MOVE_YAWN",
-            "MOVE_FAKE_TEARS",
-            "MOVE_FROST_BREATH"
+            "MOVE_TICKLE"
         ]
     },
     "evolutions": [

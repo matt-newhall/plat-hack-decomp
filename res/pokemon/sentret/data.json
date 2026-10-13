@@ -90,17 +90,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_DOUBLE_EDGE",
-            "MOVE_PURSUIT",
-            "MOVE_SLASH",
             "MOVE_FOCUS_ENERGY",
+            "MOVE_SLASH",
             "MOVE_REVERSAL",
-            "MOVE_SUBSTITUTE",
-            "MOVE_TRICK",
-            "MOVE_ASSIST",
             "MOVE_LAST_RESORT",
-            "MOVE_CHARM",
-            "MOVE_FROST_BREATH"
+            "MOVE_BABY_DOLL_EYES",
+            "MOVE_RAPID_SPIN"
         ]
     },
     "evolutions": [

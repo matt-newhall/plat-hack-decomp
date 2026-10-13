@@ -91,13 +91,15 @@
             "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_FLAIL",
-            "MOVE_EXPLOSION",
-            "MOVE_SNARL",
             "MOVE_DEFENSE_CURL",
+            "MOVE_FLAIL",
             "MOVE_ROLLOUT",
-            "MOVE_ROCK_BLAST"
+            "MOVE_BLOCK",
+            "MOVE_ROCK_BLAST",
+            "MOVE_HEAD_SMASH",
+            "MOVE_DETECT",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_DRAGON_TAIL"
         ]
     },
     "evolutions": [

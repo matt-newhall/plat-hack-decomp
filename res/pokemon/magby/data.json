@@ -79,15 +79,13 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_KARATE_CHOP",
-            "MOVE_DUAL_WINGBEAT",
-            "MOVE_SILK_TRAP",
-            "MOVE_SCREECH",
-            "MOVE_CROSS_CHOP",
-            "MOVE_THUNDER_PUNCH",
             "MOVE_MACH_PUNCH",
+            "MOVE_BELLY_DRUM",
             "MOVE_DYNAMIC_PUNCH",
-            "MOVE_FLARE_BLITZ"
+            "MOVE_CROSS_CHOP",
+            "MOVE_FOCUS_PUNCH",
+            "MOVE_FOLLOW_ME",
+            "MOVE_WILL_O_WISP"
         ]
     },
     "evolutions": [

@@ -92,17 +92,13 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_HYPNOSIS",
             "MOVE_PSYBEAM",
-            "MOVE_DRILL_RUN",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_VOLT_SWITCH",
-            "MOVE_PSYCHIC",
-            "MOVE_CROSS_CHOP",
-            "MOVE_REFRESH",
+            "MOVE_HYPNOSIS",
             "MOVE_CONFUSE_RAY",
+            "MOVE_CROSS_CHOP",
             "MOVE_YAWN",
-            "MOVE_MUD_BOMB"
+            "MOVE_WORRY_SEED",
+            "MOVE_HAZE"
         ]
     },
     "evolutions": [

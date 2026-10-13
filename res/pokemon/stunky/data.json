@@ -89,14 +89,12 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
-            "MOVE_PURSUIT",
-            "MOVE_LEER",
-            "MOVE_DRAINING_KISS",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_CRUNCH",
-            "MOVE_SCARY_FACE",
-            "MOVE_ASTONISH",
-            "MOVE_PUNISHMENT"
+            "MOVE_LEER",
+            "MOVE_HAZE",
+            "MOVE_SMOG",
+            "MOVE_SLASH",
+            "MOVE_ASTONISH"
         ]
     },
     "evolutions": [

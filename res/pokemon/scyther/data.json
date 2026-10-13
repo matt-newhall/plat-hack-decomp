@@ -84,15 +84,10 @@
         ],
         "egg_moves": [
             "MOVE_COUNTER",
-            "MOVE_SAFEGUARD",
-            "MOVE_BATON_PASS",
-            "MOVE_METEOR_BEAM",
-            "MOVE_REVERSAL",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_ENDURE",
-            "MOVE_SILVER_WIND",
-            "MOVE_BUG_BUZZ",
-            "MOVE_NIGHT_SLASH"
+            "MOVE_FEINT",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_DEFOG",
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [

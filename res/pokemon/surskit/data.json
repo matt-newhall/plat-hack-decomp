@@ -75,13 +75,14 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_DRILL_RUN",
-            "MOVE_MUD_SHOT",
-            "MOVE_PSYBEAM",
             "MOVE_HYDRO_PUMP",
-            "MOVE_ZING_ZAP",
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_BUG_BITE"
+            "MOVE_PSYBEAM",
+            "MOVE_MUD_SHOT",
+            "MOVE_BUG_BITE",
+            "MOVE_AQUA_JET",
+            "MOVE_POWER_SWAP",
+            "MOVE_FELL_STINGER",
+            "MOVE_LUNGE"
         ]
     },
     "evolutions": [

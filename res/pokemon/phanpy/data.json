@@ -78,14 +78,18 @@
             "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
-            "MOVE_FOCUS_ENERGY",
             "MOVE_BODY_SLAM",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_SNORE",
             "MOVE_COUNTER",
-            "MOVE_SLUDGE_WAVE",
+            "MOVE_FISSURE",
+            "MOVE_FOCUS_ENERGY",
+            "MOVE_SNORE",
+            "MOVE_ANCIENT_POWER",
             "MOVE_ENDEAVOR",
-            "MOVE_ICE_SHARD"
+            "MOVE_ICE_SHARD",
+            "MOVE_HEAD_SMASH",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_PLAY_ROUGH",
+            "MOVE_HIGH_HORSEPOWER"
         ]
     },
     "evolutions": [

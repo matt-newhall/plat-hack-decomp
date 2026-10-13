@@ -81,14 +81,14 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_MUD_SLAP",
             "MOVE_HEADBUTT",
             "MOVE_FURY_SWIPES",
             "MOVE_SLASH",
-            "MOVE_ODOR_SLEUTH",
-            "MOVE_DOUBLE_SLAP",
+            "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
-            "MOVE_BATON_PASS"
+            "MOVE_BATON_PASS",
+            "MOVE_HELPING_HAND",
+            "MOVE_AQUA_RING"
         ]
     },
     "evolutions": [

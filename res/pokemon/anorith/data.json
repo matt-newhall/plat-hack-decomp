@@ -81,13 +81,14 @@
             "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [
+            "MOVE_SAND_ATTACK",
+            "MOVE_SCREECH",
+            "MOVE_CURSE",
             "MOVE_RAPID_SPIN",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWORDS_DANCE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_SCREECH",
-            "MOVE_SAND_ATTACK",
-            "MOVE_CROSS_POISON"
+            "MOVE_IRON_DEFENSE",
+            "MOVE_CROSS_POISON",
+            "MOVE_AQUA_JET"
         ]
     },
     "evolutions": [

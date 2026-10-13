@@ -80,14 +80,15 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
+            "MOVE_PSYBEAM",
+            "MOVE_AURORA_BEAM",
+            "MOVE_AGILITY",
+            "MOVE_CONFUSE_RAY",
+            "MOVE_FLAIL",
             "MOVE_SWEET_KISS",
             "MOVE_CHARM",
-            "MOVE_FLAIL",
-            "MOVE_AQUA_TAIL",
-            "MOVE_SPLASH",
-            "MOVE_PSYBEAM",
             "MOVE_TICKLE",
-            "MOVE_AGILITY"
+            "MOVE_AQUA_TAIL"
         ]
     },
     "evolutions": [

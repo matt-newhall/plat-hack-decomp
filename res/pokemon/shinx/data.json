@@ -80,12 +80,13 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_ICE_FANG",
-            "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG",
+            "MOVE_DOUBLE_KICK",
+            "MOVE_TAKE_DOWN",
             "MOVE_QUICK_ATTACK",
             "MOVE_HOWL",
-            "MOVE_TAKE_DOWN"
+            "MOVE_SHOCK_WAVE",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_BABY_DOLL_EYES"
         ]
     },
     "evolutions": [

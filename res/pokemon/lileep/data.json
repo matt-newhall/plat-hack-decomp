@@ -82,11 +82,11 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_SILK_TRAP",
+            "MOVE_BIND",
+            "MOVE_MEGA_DRAIN",
             "MOVE_RECOVER",
+            "MOVE_CURSE",
             "MOVE_MIRROR_COAT",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_STEEL_BEAM",
             "MOVE_TICKLE"
         ]
     },

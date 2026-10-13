@@ -70,11 +70,18 @@
         ],
         "egg_moves": [
             "MOVE_RAZOR_LEAF",
+            "MOVE_DEFENSE_CURL",
+            "MOVE_ROLLOUT",
             "MOVE_SWEET_SCENT",
-            "MOVE_TICKLE",
             "MOVE_NATURE_POWER",
-            "MOVE_GRASS_WHISTLE",
-            "MOVE_AROMATHERAPY"
+            "MOVE_WEATHER_BALL",
+            "MOVE_AROMATHERAPY",
+            "MOVE_TICKLE",
+            "MOVE_HEALING_WISH",
+            "MOVE_SEED_BOMB",
+            "MOVE_HEAL_BELL",
+            "MOVE_SAFEGUARD",
+            "MOVE_GRASSY_TERRAIN"
         ]
     },
     "evolutions": [

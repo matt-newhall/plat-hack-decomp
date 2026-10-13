@@ -91,11 +91,10 @@
             "MOVE_MAGNET_RISE"
         ],
         "egg_moves": [
-            "MOVE_MAGNITUDE",
-            "MOVE_ROLLOUT",
-            "MOVE_EXPLOSION",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_SNARL"
+            "MOVE_ROLLOUT",
+            "MOVE_HEAD_SMASH",
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [

@@ -63,14 +63,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_MIRROR_COAT",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_FREEZE_DRY",
-            "MOVE_HYPNOSIS",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_CONFUSE_RAY",
             "MOVE_MIST",
+            "MOVE_HYPNOSIS",
+            "MOVE_CONFUSE_RAY",
             "MOVE_HAZE",
+            "MOVE_DRAGON_BREATH",
+            "MOVE_MIRROR_COAT",
             "MOVE_TICKLE"
         ]
     },

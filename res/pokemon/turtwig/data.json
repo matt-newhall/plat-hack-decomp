@@ -81,16 +81,17 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_ACCELEROCK",
-            "MOVE_GROWTH",
-            "MOVE_TICKLE",
-            "MOVE_BODY_SLAM",
-            "MOVE_DOUBLE_EDGE",
-            "MOVE_SAND_TOMB",
-            "MOVE_SEED_BOMB",
             "MOVE_THRASH",
-            "MOVE_AMNESIA",
-            "MOVE_SUPERPOWER"
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_GROWTH",
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
+            "MOVE_SUPERPOWER",
+            "MOVE_TICKLE",
+            "MOVE_WORRY_SEED",
+            "MOVE_DETECT",
+            "MOVE_SHELL_SMASH"
         ]
     },
     "evolutions": [

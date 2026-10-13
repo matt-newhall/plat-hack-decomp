@@ -81,16 +81,19 @@
             "MOVE_SPIKE_CANNON"
         ],
         "egg_moves": [
+            "MOVE_SLAM",
+            "MOVE_BITE",
+            "MOVE_SUPERSONIC",
             "MOVE_BUBBLE_BEAM",
             "MOVE_AURORA_BEAM",
-            "MOVE_SLAM",
-            "MOVE_SUPERSONIC",
             "MOVE_HAZE",
-            "MOVE_ROCK_SLIDE",
             "MOVE_SPIKES",
+            "MOVE_WHIRLPOOL",
             "MOVE_KNOCK_OFF",
-            "MOVE_STEEL_BEAM",
-            "MOVE_TOXIC_SPIKES"
+            "MOVE_TICKLE",
+            "MOVE_MUDDY_WATER",
+            "MOVE_TOXIC_SPIKES",
+            "MOVE_PSYCHO_SHIFT"
         ]
     },
     "evolutions": [

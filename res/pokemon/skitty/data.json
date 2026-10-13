@@ -85,18 +85,18 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_HELPING_HAND",
-            "MOVE_PSYCH_UP",
-            "MOVE_UPROAR",
-            "MOVE_FAKE_TEARS",
-            "MOVE_WISH",
             "MOVE_BATON_PASS",
-            "MOVE_SUBSTITUTE",
-            "MOVE_TICKLE",
-            "MOVE_LAST_RESORT",
             "MOVE_FAKE_OUT",
+            "MOVE_UPROAR",
+            "MOVE_HELPING_HAND",
+            "MOVE_WISH",
+            "MOVE_FAKE_TEARS",
+            "MOVE_TICKLE",
+            "MOVE_COSMIC_POWER",
+            "MOVE_LAST_RESORT",
+            "MOVE_SUCKER_PUNCH",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_WORRY_SEED"
         ]
     },
     "evolutions": [

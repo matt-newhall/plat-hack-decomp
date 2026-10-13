@@ -81,16 +81,15 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_PURSUIT",
-            "MOVE_FAINT_ATTACK",
             "MOVE_GUST",
+            "MOVE_WING_ATTACK",
             "MOVE_WHIRLWIND",
-            "MOVE_CURSE",
-            "MOVE_NASTY_PLOT",
             "MOVE_HYPNOSIS",
+            "MOVE_QUICK_ATTACK",
+            "MOVE_CURSE",
+            "MOVE_BRAVE_BIRD",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_BRAVE_BIRD"
+            "MOVE_TOXIC_SPIKES"
         ]
     },
     "evolutions": [

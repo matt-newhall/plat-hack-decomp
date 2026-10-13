@@ -74,14 +74,10 @@
             "MOVE_LUNGE"
         ],
         "egg_moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_SUPERSONIC",
-            "MOVE_HAZE",
-            "MOVE_FAINT_ATTACK",
+            "MOVE_WHIRLWIND",
+            "MOVE_SKY_ATTACK",
             "MOVE_FLAIL",
-            "MOVE_ENDEAVOR",
-            "MOVE_STORED_POWER",
-            "MOVE_BRAVE_BIRD"
+            "MOVE_ASSURANCE"
         ]
     },
     "evolutions": [

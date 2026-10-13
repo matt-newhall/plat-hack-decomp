@@ -82,13 +82,9 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_IMPRISON",
-            "MOVE_DESTINY_BOND",
+            "MOVE_HAZE",
             "MOVE_PAIN_SPLIT",
-            "MOVE_BULLDOZE",
-            "MOVE_MEMENTO",
-            "MOVE_FAINT_ATTACK",
-            "MOVE_OMINOUS_WIND"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": [

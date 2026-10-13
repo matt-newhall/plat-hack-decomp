@@ -96,16 +96,10 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_SAFEGUARD",
-            "MOVE_BELLY_DRUM",
-            "MOVE_VOLT_SWITCH",
             "MOVE_STOMP",
-            "MOVE_FREEZE_DRY",
-            "MOVE_SLEEP_TALK",
-            "MOVE_SNORE",
-            "MOVE_ME_FIRST",
-            "MOVE_SNARL",
-            "MOVE_ZEN_HEADBUTT"
+            "MOVE_BELLY_DRUM",
+            "MOVE_BLOCK",
+            "MOVE_BODY_SLAM"
         ]
     },
     "evolutions": [

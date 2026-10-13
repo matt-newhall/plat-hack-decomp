@@ -91,15 +91,12 @@
             "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [
-            "MOVE_FLAIL",
-            "MOVE_SAFEGUARD",
             "MOVE_COUNTER",
-            "MOVE_RAPID_SPIN",
-            "MOVE_ROCK_SLIDE",
+            "MOVE_FLAIL",
+            "MOVE_MUD_SLAP",
             "MOVE_METAL_CLAW",
-            "MOVE_SWORDS_DANCE",
-            "MOVE_CRUSH_CLAW",
-            "MOVE_NIGHT_SLASH"
+            "MOVE_NIGHT_SLASH",
+            "MOVE_CRUSH_CLAW"
         ]
     },
     "evolutions": [

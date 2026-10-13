@@ -78,13 +78,9 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_HYDRO_PUMP",
             "MOVE_THRASH",
-            "MOVE_DRAGON_RAGE",
+            "MOVE_DEFENSE_CURL",
             "MOVE_TWISTER",
-            "MOVE_DRAGON_DANCE",
-            "MOVE_FIRE_FANG",
-            "MOVE_SHADOW_CLAW",
             "MOVE_DRAGON_RUSH"
         ]
     },

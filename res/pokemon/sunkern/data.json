@@ -74,14 +74,12 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_GRASS_WHISTLE",
-            "MOVE_ENCORE",
             "MOVE_LEECH_SEED",
-            "MOVE_NATURE_POWER",
             "MOVE_CURSE",
-            "MOVE_HELPING_HAND",
+            "MOVE_ENCORE",
+            "MOVE_MORNING_SUN",
             "MOVE_INGRAIN",
-            "MOVE_SWEET_SCENT"
+            "MOVE_GRASSY_TERRAIN"
         ]
     },
     "evolutions": [

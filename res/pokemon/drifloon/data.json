@@ -95,12 +95,12 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
-            "MOVE_MEMENTO",
-            "MOVE_BODY_SLAM",
-            "MOVE_DESTINY_BOND",
             "MOVE_DISABLE",
+            "MOVE_HYPNOSIS",
             "MOVE_HAZE",
-            "MOVE_HYPNOSIS"
+            "MOVE_MEMENTO",
+            "MOVE_DEFOG",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

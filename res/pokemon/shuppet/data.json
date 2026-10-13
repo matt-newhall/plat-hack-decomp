@@ -83,14 +83,10 @@
         ],
         "egg_moves": [
             "MOVE_DISABLE",
+            "MOVE_CONFUSE_RAY",
             "MOVE_DESTINY_BOND",
-            "MOVE_DRILL_RUN",
-            "MOVE_ASTONISH",
             "MOVE_IMPRISON",
-            "MOVE_PURSUIT",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_PAYBACK",
-            "MOVE_CONFUSE_RAY"
+            "MOVE_GUNK_SHOT"
         ]
     },
     "evolutions": [

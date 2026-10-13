@@ -81,15 +81,18 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_AURORA_BEAM",
-            "MOVE_OCTAZOOKA",
             "MOVE_SUPERSONIC",
-            "MOVE_HAZE",
+            "MOVE_AURORA_BEAM",
             "MOVE_SCREECH",
-            "MOVE_THUNDER_WAVE",
-            "MOVE_ROCK_BLAST",
+            "MOVE_HAZE",
+            "MOVE_SWIFT",
             "MOVE_SNORE",
-            "MOVE_FLAIL"
+            "MOVE_FLAIL",
+            "MOVE_OCTAZOOKA",
+            "MOVE_WATER_SPOUT",
+            "MOVE_MUD_SHOT",
+            "MOVE_ROCK_BLAST",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

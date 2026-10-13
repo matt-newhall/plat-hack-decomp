@@ -80,6 +80,10 @@
             "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
             "MOVE_SWIFT"
+        ],
+        "egg_moves": [
+            "MOVE_EXPLOSION",
+            "MOVE_ELECTROWEB"
         ]
     },
     "evolutions": [

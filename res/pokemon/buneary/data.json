@@ -83,18 +83,22 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_FAKE_TEARS",
-            "MOVE_FAKE_OUT",
-            "MOVE_ENCORE",
-            "MOVE_SWEET_KISS",
-            "MOVE_DOUBLE_HIT",
-            "MOVE_ATTRACT",
-            "MOVE_LOW_KICK",
-            "MOVE_SKY_UPPERCUT",
-            "MOVE_DRAGON_TAIL",
-            "MOVE_THUNDER_PUNCH",
+            "MOVE_FIRE_PUNCH",
             "MOVE_ICE_PUNCH",
-            "MOVE_FIRE_PUNCH"
+            "MOVE_THUNDER_PUNCH",
+            "MOVE_LOW_KICK",
+            "MOVE_FLAIL",
+            "MOVE_SWEET_KISS",
+            "MOVE_ENCORE",
+            "MOVE_FAKE_OUT",
+            "MOVE_TEETER_DANCE",
+            "MOVE_FAKE_TEARS",
+            "MOVE_COSMIC_POWER",
+            "MOVE_COPYCAT",
+            "MOVE_SWITCHEROO",
+            "MOVE_DOUBLE_HIT",
+            "MOVE_VITAL_THROW",
+            "MOVE_POWER_UP_PUNCH"
         ]
     },
     "evolutions": [

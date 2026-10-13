@@ -83,16 +83,21 @@
             "MOVE_HEAT_WAVE"
         ],
         "egg_moves": [
-            "MOVE_HOWL",
-            "MOVE_SCARY_FACE",
-            "MOVE_BODY_SLAM",
-            "MOVE_ROLLOUT",
-            "MOVE_DEFENSE_CURL",
             "MOVE_STOMP",
-            "MOVE_YAWN",
+            "MOVE_BODY_SLAM",
+            "MOVE_GROWTH",
+            "MOVE_DEFENSE_CURL",
+            "MOVE_SCARY_FACE",
+            "MOVE_ROLLOUT",
             "MOVE_ANCIENT_POWER",
-            "MOVE_MUD_BOMB",
-            "MOVE_HEAT_WAVE"
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
+            "MOVE_HEAT_WAVE",
+            "MOVE_YAWN",
+            "MOVE_HOWL",
+            "MOVE_IRON_HEAD",
+            "MOVE_HEAVY_SLAM"
         ]
     },
     "evolutions": [

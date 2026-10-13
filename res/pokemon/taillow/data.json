@@ -74,14 +74,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_PURSUIT",
-            "MOVE_SUPERSONIC",
-            "MOVE_REFRESH",
-            "MOVE_STORED_POWER",
-            "MOVE_POWDER",
-            "MOVE_SKY_ATTACK",
             "MOVE_WHIRLWIND",
-            "MOVE_BRAVE_BIRD"
+            "MOVE_SUPERSONIC",
+            "MOVE_SKY_ATTACK",
+            "MOVE_BRAVE_BIRD",
+            "MOVE_HURRICANE",
+            "MOVE_BOOMBURST"
         ]
     },
     "evolutions": [

@@ -75,14 +75,10 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_PURSUIT",
-            "MOVE_FAINT_ATTACK",
-            "MOVE_DRILL_RUN",
-            "MOVE_STEEL_WING",
+            "MOVE_UPROAR",
             "MOVE_AIR_CUTTER",
             "MOVE_AIR_SLASH",
-            "MOVE_BRAVE_BIRD",
-            "MOVE_UPROAR"
+            "MOVE_BRAVE_BIRD"
         ]
     },
     "evolutions": [

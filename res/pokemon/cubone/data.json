@@ -89,14 +89,15 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_BELLY_DRUM",
+            "MOVE_DOUBLE_KICK",
+            "MOVE_LEER",
             "MOVE_SCREECH",
             "MOVE_SKULL_BASH",
+            "MOVE_CURSE",
+            "MOVE_BELLY_DRUM",
             "MOVE_PERISH_SONG",
-            "MOVE_SWORDS_DANCE",
-            "MOVE_DOUBLE_KICK",
+            "MOVE_DETECT",
+            "MOVE_ANCIENT_POWER",
             "MOVE_IRON_HEAD"
         ]
     },

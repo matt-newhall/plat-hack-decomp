@@ -94,16 +94,14 @@
         ],
         "egg_moves": [
             "MOVE_HAZE",
-            "MOVE_MEAN_LOOK",
-            "MOVE_LICK",
-            "MOVE_IMPRISON",
             "MOVE_CURSE",
-            "MOVE_SHADOW_PUNCH",
-            "MOVE_EXPLOSION",
-            "MOVE_SHADOW_SNEAK",
+            "MOVE_MEAN_LOOK",
             "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
             "MOVE_SWALLOW",
-            "MOVE_SPIT_UP"
+            "MOVE_SHADOW_PUNCH",
+            "MOVE_SHADOW_SNEAK",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [

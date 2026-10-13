@@ -76,12 +76,10 @@
             "MOVE_BOUNCE"
         ],
         "egg_moves": [
+            "MOVE_TAKE_DOWN",
             "MOVE_THRASH",
-            "MOVE_DUAL_CHOP",
-            "MOVE_SPARK",
-            "MOVE_HYDRO_PUMP",
             "MOVE_FLAIL",
-            "MOVE_TAKE_DOWN"
+            "MOVE_SPARK"
         ]
     },
     "evolutions": [

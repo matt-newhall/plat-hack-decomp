@@ -81,15 +81,9 @@
         ],
         "egg_moves": [
             "MOVE_PRESENT",
-            "MOVE_METRONOME",
-            "MOVE_AMNESIA",
-            "MOVE_BELLY_DRUM",
-            "MOVE_SPLASH",
-            "MOVE_MIMIC",
             "MOVE_WISH",
-            "MOVE_SUBSTITUTE",
-            "MOVE_FAKE_TEARS",
-            "MOVE_FROST_BREATH"
+            "MOVE_TICKLE",
+            "MOVE_HEAL_BELL"
         ]
     },
     "evolutions": [

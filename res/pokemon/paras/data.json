@@ -78,17 +78,19 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_FALSE_SWIPE",
-            "MOVE_SCREECH",
-            "MOVE_COUNTER",
             "MOVE_PSYBEAM",
+            "MOVE_COUNTER",
+            "MOVE_LEECH_SEED",
+            "MOVE_AGILITY",
+            "MOVE_SCREECH",
             "MOVE_FLAIL",
             "MOVE_SWEET_SCENT",
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_PURSUIT",
             "MOVE_METAL_CLAW",
+            "MOVE_CROSS_POISON",
             "MOVE_BUG_BITE",
-            "MOVE_CROSS_POISON"
+            "MOVE_DETECT",
+            "MOVE_FELL_STINGER",
+            "MOVE_GRASSY_TERRAIN"
         ]
     },
     "evolutions": [

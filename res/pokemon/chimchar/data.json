@@ -94,13 +94,13 @@
             "MOVE_FIRE_PUNCH",
             "MOVE_THUNDER_PUNCH",
             "MOVE_DOUBLE_KICK",
-            "MOVE_ENCORE",
-            "MOVE_HEAT_WAVE",
+            "MOVE_COUNTER",
             "MOVE_FOCUS_ENERGY",
-            "MOVE_HELPING_HAND",
+            "MOVE_ENCORE",
             "MOVE_FAKE_OUT",
-            "MOVE_BLAZE_KICK",
-            "MOVE_COUNTER"
+            "MOVE_HEAT_WAVE",
+            "MOVE_HELPING_HAND",
+            "MOVE_SWITCHEROO"
         ]
     },
     "evolutions": [

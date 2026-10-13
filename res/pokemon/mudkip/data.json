@@ -84,18 +84,17 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_REFRESH",
-            "MOVE_UPROAR",
-            "MOVE_CURSE",
             "MOVE_STOMP",
-            "MOVE_ICE_BALL",
-            "MOVE_MIRROR_COAT",
-            "MOVE_COUNTER",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_DUAL_CHOP",
-            "MOVE_BITE",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_MUD_BOMB"
+            "MOVE_BITE",
+            "MOVE_COUNTER",
+            "MOVE_SLUDGE",
+            "MOVE_CURSE",
+            "MOVE_MUD_SLAP",
+            "MOVE_MIRROR_COAT",
+            "MOVE_ANCIENT_POWER",
+            "MOVE_YAWN",
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [

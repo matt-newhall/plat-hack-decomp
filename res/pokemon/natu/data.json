@@ -88,16 +88,14 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_HAZE",
             "MOVE_DRILL_PECK",
             "MOVE_QUICK_ATTACK",
-            "MOVE_FAINT_ATTACK",
-            "MOVE_STEEL_WING",
-            "MOVE_PSYCH_UP",
+            "MOVE_HAZE",
             "MOVE_FEATHER_DANCE",
-            "MOVE_REFRESH",
+            "MOVE_SUCKER_PUNCH",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_WORRY_SEED",
+            "MOVE_DISABLE"
         ]
     },
     "evolutions": [

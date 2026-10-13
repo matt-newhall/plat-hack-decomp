@@ -86,14 +86,13 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_PURSUIT",
             "MOVE_STOMP",
-            "MOVE_OUTRAGE",
             "MOVE_FOCUS_ENERGY",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_DRAGON_DANCE",
             "MOVE_CURSE",
+            "MOVE_OUTRAGE",
+            "MOVE_ANCIENT_POWER",
             "MOVE_IRON_DEFENSE",
+            "MOVE_DRAGON_DANCE",
             "MOVE_ASSURANCE",
             "MOVE_IRON_HEAD"
         ]

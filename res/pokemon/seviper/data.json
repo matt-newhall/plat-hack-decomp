@@ -91,13 +91,15 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_STOCKPILE",
-            "MOVE_SWALLOW",
-            "MOVE_SPIT_UP",
             "MOVE_BODY_SLAM",
             "MOVE_SCARY_FACE",
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
             "MOVE_ASSURANCE",
-            "MOVE_NIGHT_SLASH"
+            "MOVE_NIGHT_SLASH",
+            "MOVE_SWITCHEROO",
+            "MOVE_FINAL_GAMBIT"
         ]
     },
     "evolutions": [  ],

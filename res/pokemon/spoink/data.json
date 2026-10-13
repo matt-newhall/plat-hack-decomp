@@ -86,13 +86,14 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_VOLT_SWITCH",
-            "MOVE_EXTRASENSORY",
-            "MOVE_SUBSTITUTE",
-            "MOVE_TRICK",
-            "MOVE_ZEN_HEADBUTT",
+            "MOVE_WHIRLWIND",
             "MOVE_AMNESIA",
-            "MOVE_MIRROR_COAT"
+            "MOVE_MIRROR_COAT",
+            "MOVE_FUTURE_SIGHT",
+            "MOVE_TRICK",
+            "MOVE_EXTRASENSORY",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_WORRY_SEED"
         ]
     },
     "evolutions": [

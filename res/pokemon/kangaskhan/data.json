@@ -103,16 +103,15 @@
         ],
         "egg_moves": [
             "MOVE_STOMP",
-            "MOVE_DRILL_RUN",
-            "MOVE_FOCUS_ENERGY",
-            "MOVE_SAFEGUARD",
+            "MOVE_DOUBLE_EDGE",
             "MOVE_DISABLE",
             "MOVE_COUNTER",
-            "MOVE_CRUSH_CLAW",
-            "MOVE_SUBSTITUTE",
-            "MOVE_DOUBLE_EDGE",
+            "MOVE_FOCUS_ENERGY",
+            "MOVE_UPROAR",
             "MOVE_ENDEAVOR",
-            "MOVE_HAMMER_ARM"
+            "MOVE_CRUSH_CLAW",
+            "MOVE_HAMMER_ARM",
+            "MOVE_VITAL_THROW"
         ]
     },
     "evolutions": [  ],

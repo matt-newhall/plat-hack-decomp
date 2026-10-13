@@ -82,13 +82,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_MIST",
-            "MOVE_HAZE",
             "MOVE_SUPERSONIC",
+            "MOVE_MIST",
             "MOVE_DRAGON_BREATH",
-            "MOVE_DRAGON_DANCE",
-            "MOVE_DRAGON_RUSH"
+            "MOVE_EXTREME_SPEED",
+            "MOVE_WATER_PULSE",
+            "MOVE_AQUA_JET"
         ]
     },
     "evolutions": [

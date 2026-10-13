@@ -91,17 +91,20 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_PRESENT",
+            "MOVE_BODY_SLAM",
+            "MOVE_SING",
+            "MOVE_SUPERSONIC",
             "MOVE_AMNESIA",
-            "MOVE_VOLT_SWITCH",
             "MOVE_BELLY_DRUM",
             "MOVE_PERISH_SONG",
-            "MOVE_SUPERSONIC",
-            "MOVE_SUBSTITUTE",
-            "MOVE_AQUA_JET",
+            "MOVE_PRESENT",
+            "MOVE_FUTURE_SIGHT",
             "MOVE_SUPERPOWER",
-            "MOVE_REFRESH"
+            "MOVE_TICKLE",
+            "MOVE_MUDDY_WATER",
+            "MOVE_COPYCAT",
+            "MOVE_AQUA_JET",
+            "MOVE_BRINE"
         ]
     },
     "evolutions": [

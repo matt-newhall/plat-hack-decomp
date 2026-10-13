@@ -84,11 +84,13 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_DUAL_WINGBEAT",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_SNARL",
+            "MOVE_MEGA_PUNCH",
+            "MOVE_CURSE",
+            "MOVE_FLAIL",
+            "MOVE_DYNAMIC_PUNCH",
+            "MOVE_BLOCK",
             "MOVE_HAMMER_ARM",
-            "MOVE_FLAIL"
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [

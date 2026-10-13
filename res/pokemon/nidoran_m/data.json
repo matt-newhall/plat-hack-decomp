@@ -78,14 +78,19 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_COUNTER",
-            "MOVE_DISABLE",
-            "MOVE_SUPERSONIC",
+            "MOVE_HORN_DRILL",
             "MOVE_TAKE_DOWN",
-            "MOVE_AMNESIA",
+            "MOVE_THRASH",
+            "MOVE_SUPERSONIC",
+            "MOVE_DISABLE",
+            "MOVE_COUNTER",
             "MOVE_CONFUSION",
+            "MOVE_AMNESIA",
             "MOVE_BEAT_UP",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_POISON_TAIL",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_HEAD_SMASH",
+            "MOVE_VENOSHOCK"
         ]
     },
     "evolutions": [

@@ -75,14 +75,11 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_FLAIL",
-            "MOVE_AURORA_BEAM",
-            "MOVE_OCTAZOOKA",
             "MOVE_DISABLE",
+            "MOVE_AURORA_BEAM",
             "MOVE_SPLASH",
-            "MOVE_DRAGON_RAGE",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_SIGNAL_BEAM"
+            "MOVE_FLAIL",
+            "MOVE_HAZE"
         ]
     },
     "evolutions": [

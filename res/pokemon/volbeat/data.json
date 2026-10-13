@@ -89,11 +89,10 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_BATON_PASS",
-            "MOVE_SILVER_WIND",
-            "MOVE_TRICK",
-            "MOVE_ENCORE",
-            "MOVE_BUG_BUZZ"
+            "MOVE_COUNTER",
+            "MOVE_SEISMIC_TOSS",
+            "MOVE_SWAGGER",
+            "MOVE_ROOST"
         ]
     },
     "evolutions": [  ],

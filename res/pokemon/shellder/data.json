@@ -79,12 +79,9 @@
         ],
         "egg_moves": [
             "MOVE_BUBBLE_BEAM",
-            "MOVE_TAKE_DOWN",
-            "MOVE_SILK_TRAP",
-            "MOVE_RAPID_SPIN",
-            "MOVE_SCREECH",
-            "MOVE_ICICLE_SPEAR",
-            "MOVE_MUD_SHOT"
+            "MOVE_WATER_PULSE",
+            "MOVE_AQUA_RING",
+            "MOVE_LIFE_DEW"
         ]
     },
     "evolutions": [

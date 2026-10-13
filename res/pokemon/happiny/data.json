@@ -74,15 +74,10 @@
             "MOVE_LAST_RESORT"
         ],
         "egg_moves": [
-            "MOVE_PRESENT",
-            "MOVE_METRONOME",
+            "MOVE_SEISMIC_TOSS",
             "MOVE_HEAL_BELL",
-            "MOVE_AROMATHERAPY",
-            "MOVE_SUBSTITUTE",
-            "MOVE_COUNTER",
-            "MOVE_HELPING_HAND",
-            "MOVE_GRAVITY",
-            "MOVE_LAST_RESORT"
+            "MOVE_PRESENT",
+            "MOVE_GRAVITY"
         ]
     },
     "evolutions": [

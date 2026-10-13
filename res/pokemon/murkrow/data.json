@@ -92,15 +92,13 @@
         "egg_moves": [
             "MOVE_WHIRLWIND",
             "MOVE_DRILL_PECK",
-            "MOVE_STORED_POWER",
-            "MOVE_WING_ATTACK",
-            "MOVE_SKY_ATTACK",
-            "MOVE_CONFUSE_RAY",
-            "MOVE_FEATHER_DANCE",
-            "MOVE_PERISH_SONG",
-            "MOVE_PSYCHO_SHIFT",
             "MOVE_SCREECH",
-            "MOVE_FAINT_ATTACK"
+            "MOVE_CONFUSE_RAY",
+            "MOVE_SKY_ATTACK",
+            "MOVE_PERISH_SONG",
+            "MOVE_FLATTER",
+            "MOVE_FEATHER_DANCE",
+            "MOVE_BRAVE_BIRD"
         ]
     },
     "evolutions": [

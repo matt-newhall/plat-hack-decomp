@@ -83,17 +83,19 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_ENCORE",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_ASSIST",
             "MOVE_DISABLE",
+            "MOVE_ICY_WIND",
             "MOVE_BATON_PASS",
-            "MOVE_WISH",
-            "MOVE_TRICK",
-            "MOVE_SMELLING_SALT",
+            "MOVE_ENCORE",
+            "MOVE_RAPID_SPIN",
             "MOVE_FAKE_OUT",
+            "MOVE_TRICK",
             "MOVE_ROLE_PLAY",
-            "MOVE_PSYCHO_CUT"
+            "MOVE_WISH",
+            "MOVE_FAKE_TEARS",
+            "MOVE_PSYCHO_SHIFT",
+            "MOVE_PSYCHO_CUT",
+            "MOVE_GUARD_SWAP"
         ]
     },
     "evolutions": [  ],

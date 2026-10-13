@@ -85,18 +85,19 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_LIGHT_SCREEN",
-            "MOVE_MEDITATE",
-            "MOVE_ROLLING_KICK",
-            "MOVE_ENCORE",
-            "MOVE_SMELLING_SALT",
-            "MOVE_COUNTER",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_CLOSE_COMBAT",
             "MOVE_FIRE_PUNCH",
-            "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
-            "MOVE_BULLET_PUNCH"
+            "MOVE_THUNDER_PUNCH",
+            "MOVE_SUBMISSION",
+            "MOVE_COUNTER",
+            "MOVE_ENCORE",
+            "MOVE_KNOCK_OFF",
+            "MOVE_TICKLE",
+            "MOVE_CLOSE_COMBAT",
+            "MOVE_POWER_TRICK",
+            "MOVE_BULLET_PUNCH",
+            "MOVE_HEAVY_SLAM",
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [

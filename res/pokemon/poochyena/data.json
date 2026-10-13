@@ -76,16 +76,9 @@
             "MOVE_SPITE"
         ],
         "egg_moves": [
-            "MOVE_ASTONISH",
             "MOVE_POISON_FANG",
-            "MOVE_FROST_BREATH",
-            "MOVE_LEER",
-            "MOVE_YAWN",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_ICE_FANG",
-            "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG",
-            "MOVE_ME_FIRST"
+            "MOVE_ASTONISH",
+            "MOVE_COVET"
         ]
     },
     "evolutions": [

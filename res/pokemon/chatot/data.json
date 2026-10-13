@@ -78,11 +78,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_ENCORE",
-            "MOVE_NIGHT_SHADE",
+            "MOVE_SUPERSONIC",
             "MOVE_AGILITY",
-            "MOVE_NASTY_PLOT",
-            "MOVE_SUPERSONIC"
+            "MOVE_NIGHT_SHADE",
+            "MOVE_ENCORE",
+            "MOVE_AIR_CUTTER",
+            "MOVE_BOOMBURST"
         ]
     },
     "evolutions": [  ],

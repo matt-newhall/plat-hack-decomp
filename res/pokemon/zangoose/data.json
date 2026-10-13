@@ -107,16 +107,18 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_FLAIL",
             "MOVE_DOUBLE_KICK",
-            "MOVE_METEOR_BEAM",
+            "MOVE_DISABLE",
             "MOVE_COUNTER",
-            "MOVE_ROAR",
-            "MOVE_CURSE",
             "MOVE_FURY_SWIPES",
+            "MOVE_CURSE",
+            "MOVE_FLAIL",
+            "MOVE_BELLY_DRUM",
+            "MOVE_FEINT",
             "MOVE_NIGHT_SLASH",
-            "MOVE_METAL_CLAW",
-            "MOVE_DOUBLE_HIT"
+            "MOVE_DOUBLE_HIT",
+            "MOVE_PROTECT",
+            "MOVE_FINAL_GAMBIT"
         ]
     },
     "evolutions": [  ],

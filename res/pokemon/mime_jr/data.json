@@ -88,16 +88,19 @@
             "MOVE_DAZZLING_GLEAM"
         ],
         "egg_moves": [
-            "MOVE_VOLT_SWITCH",
             "MOVE_HYPNOSIS",
             "MOVE_MIMIC",
-            "MOVE_PSYCH_UP",
+            "MOVE_CONFUSE_RAY",
+            "MOVE_ICY_WIND",
+            "MOVE_CHARM",
+            "MOVE_FUTURE_SIGHT",
             "MOVE_FAKE_OUT",
             "MOVE_TRICK",
-            "MOVE_CONFUSE_RAY",
-            "MOVE_WAKE_UP_SLAP",
             "MOVE_TEETER_DANCE",
-            "MOVE_CHARM"
+            "MOVE_TICKLE",
+            "MOVE_HEALING_WISH",
+            "MOVE_POWER_SWAP",
+            "MOVE_MAGIC_COAT"
         ]
     },
     "evolutions": [

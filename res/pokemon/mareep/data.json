@@ -79,15 +79,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_TAKE_DOWN",
-            "MOVE_BODY_SLAM",
-            "MOVE_SAFEGUARD",
-            "MOVE_SCREECH",
-            "MOVE_REFLECT",
-            "MOVE_ODOR_SLEUTH",
-            "MOVE_CHARGE",
+            "MOVE_AGILITY",
             "MOVE_FLATTER",
-            "MOVE_SAND_ATTACK"
+            "MOVE_HELPING_HAND",
+            "MOVE_ELECTROWEB",
+            "MOVE_EERIE_IMPULSE",
+            "MOVE_ELECTRIC_TERRAIN"
         ]
     },
     "evolutions": [

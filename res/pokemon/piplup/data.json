@@ -82,16 +82,13 @@
             "MOVE_DRILL_PECK"
         ],
         "egg_moves": [
-            "MOVE_DOUBLE_HIT",
             "MOVE_SUPERSONIC",
-            "MOVE_YAWN",
-            "MOVE_FREEZE_DRY",
-            "MOVE_MUD_SLAP",
             "MOVE_SNORE",
-            "MOVE_FLAIL",
-            "MOVE_AGILITY",
+            "MOVE_YAWN",
+            "MOVE_FEATHER_DANCE",
+            "MOVE_ROOST",
             "MOVE_AQUA_RING",
-            "MOVE_HYDRO_PUMP"
+            "MOVE_POWER_TRIP"
         ]
     },
     "evolutions": [

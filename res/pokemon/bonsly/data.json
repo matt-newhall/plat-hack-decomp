@@ -74,12 +74,12 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_SELFDESTRUCT",
             "MOVE_HEADBUTT",
             "MOVE_HARDEN",
             "MOVE_DEFENSE_CURL",
+            "MOVE_CURSE",
             "MOVE_ROLLOUT",
-            "MOVE_SAND_TOMB"
+            "MOVE_ROCK_POLISH"
         ]
     },
     "evolutions": [

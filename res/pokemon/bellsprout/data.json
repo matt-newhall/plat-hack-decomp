@@ -80,15 +80,13 @@
             "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
-            "MOVE_SWORDS_DANCE",
-            "MOVE_ENCORE",
-            "MOVE_REFLECT",
             "MOVE_SYNTHESIS",
-            "MOVE_LEECH_LIFE",
             "MOVE_INGRAIN",
-            "MOVE_MAGICAL_LEAF",
-            "MOVE_ACCELEROCK",
-            "MOVE_TICKLE"
+            "MOVE_TICKLE",
+            "MOVE_WORRY_SEED",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_HAZE",
+            "MOVE_STRENGTH_SAP"
         ]
     },
     "evolutions": [

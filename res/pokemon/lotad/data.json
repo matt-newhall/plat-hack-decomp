@@ -76,12 +76,11 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_SYNTHESIS",
+            "MOVE_COUNTER",
             "MOVE_RAZOR_LEAF",
             "MOVE_SWEET_SCENT",
-            "MOVE_LEECH_SEED",
-            "MOVE_FLAIL",
-            "MOVE_WATER_GUN",
+            "MOVE_SYNTHESIS",
+            "MOVE_TEETER_DANCE",
             "MOVE_TICKLE"
         ]
     },

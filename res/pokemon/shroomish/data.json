@@ -73,14 +73,10 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_FAKE_TEARS",
-            "MOVE_SWAGGER",
             "MOVE_CHARM",
-            "MOVE_FALSE_SWIPE",
             "MOVE_HELPING_HAND",
-            "MOVE_ACCELEROCK",
-            "MOVE_WAKE_UP_SLAP",
-            "MOVE_SEED_BOMB"
+            "MOVE_FAKE_TEARS",
+            "MOVE_WORRY_SEED"
         ]
     },
     "evolutions": [

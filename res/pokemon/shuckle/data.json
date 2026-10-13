@@ -83,12 +83,18 @@
             "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
+            "MOVE_ACID",
+            "MOVE_DEFENSE_CURL",
+            "MOVE_MUD_SLAP",
             "MOVE_SWEET_SCENT",
-            "MOVE_KNOCK_OFF",
             "MOVE_HELPING_HAND",
-            "MOVE_LIFE_DEW",
+            "MOVE_KNOCK_OFF",
             "MOVE_SAND_TOMB",
-            "MOVE_MUD_SLAP"
+            "MOVE_COVET",
+            "MOVE_ROCK_BLAST",
+            "MOVE_ACUPRESSURE",
+            "MOVE_FINAL_GAMBIT",
+            "MOVE_INFESTATION"
         ]
     },
     "evolutions": [  ],

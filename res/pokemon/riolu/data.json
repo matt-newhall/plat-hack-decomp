@@ -90,19 +90,13 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_CROSS_CHOP",
-            "MOVE_DETECT",
             "MOVE_BITE",
-            "MOVE_ZING_ZAP",
-            "MOVE_SKY_UPPERCUT",
             "MOVE_HI_JUMP_KICK",
-            "MOVE_AGILITY",
-            "MOVE_VACUUM_WAVE",
-            "MOVE_CRUNCH",
-            "MOVE_LOW_KICK",
-            "MOVE_IRON_DEFENSE",
-            "MOVE_BLAZE_KICK",
-            "MOVE_BULLET_PUNCH"
+            "MOVE_DETECT",
+            "MOVE_CROSS_CHOP",
+            "MOVE_HOWL",
+            "MOVE_BULLET_PUNCH",
+            "MOVE_VITAL_THROW"
         ]
     },
     "evolutions": [

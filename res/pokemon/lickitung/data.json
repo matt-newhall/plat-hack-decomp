@@ -94,16 +94,16 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_BELLY_DRUM",
-            "MOVE_MAGNITUDE",
             "MOVE_BODY_SLAM",
-            "MOVE_CURSE",
-            "MOVE_SMELLING_SALT",
-            "MOVE_SLEEP_TALK",
-            "MOVE_SNORE",
-            "MOVE_SUBSTITUTE",
+            "MOVE_THRASH",
             "MOVE_AMNESIA",
-            "MOVE_HAMMER_ARM"
+            "MOVE_SNORE",
+            "MOVE_CURSE",
+            "MOVE_BELLY_DRUM",
+            "MOVE_MUDDY_WATER",
+            "MOVE_HAMMER_ARM",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_BODY_PRESS"
         ]
     },
     "evolutions": [

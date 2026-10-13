@@ -90,15 +90,14 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_SPITE",
-            "MOVE_DISABLE",
-            "MOVE_BITE",
-            "MOVE_SWAGGER",
-            "MOVE_PSYCH_UP",
-            "MOVE_EXTRASENSORY",
-            "MOVE_THRASH",
             "MOVE_DOUBLE_KICK",
-            "MOVE_ZEN_HEADBUTT"
+            "MOVE_THRASH",
+            "MOVE_BITE",
+            "MOVE_DISABLE",
+            "MOVE_SPITE",
+            "MOVE_MEGAHORN",
+            "MOVE_EXTRASENSORY",
+            "MOVE_PSYSHOCK"
         ]
     },
     "evolutions": [  ],

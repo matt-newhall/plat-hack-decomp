@@ -94,15 +94,16 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_TWISTER",
-            "MOVE_HYDRO_PUMP",
-            "MOVE_HAZE",
             "MOVE_SLAM",
-            "MOVE_FREEZE_DRY",
-            "MOVE_ROCK_SLIDE",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_CONFUSE_RAY",
+            "MOVE_HAZE",
+            "MOVE_AMNESIA",
+            "MOVE_SPLASH",
+            "MOVE_TWISTER",
             "MOVE_MIRROR_COAT",
-            "MOVE_ACID_SPRAY",
-            "MOVE_SPLASH"
+            "MOVE_TAILWIND",
+            "MOVE_PROTECT"
         ]
     },
     "evolutions": [  ],

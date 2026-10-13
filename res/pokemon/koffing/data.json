@@ -83,15 +83,12 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
-            "MOVE_SCREECH",
-            "MOVE_PSYWAVE",
-            "MOVE_PSYBEAM",
-            "MOVE_DESTINY_BOND",
-            "MOVE_PAIN_SPLIT",
-            "MOVE_WILL_O_WISP",
-            "MOVE_BULLDOZE",
+            "MOVE_CURSE",
             "MOVE_SPITE",
-            "MOVE_CURSE"
+            "MOVE_PAIN_SPLIT",
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW"
         ]
     },
     "evolutions": [

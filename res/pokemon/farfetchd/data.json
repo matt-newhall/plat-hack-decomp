@@ -87,17 +87,20 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_STEEL_WING",
-            "MOVE_DRILL_RUN",
-            "MOVE_STORED_POWER",
             "MOVE_GUST",
             "MOVE_QUICK_ATTACK",
-            "MOVE_FLAIL",
-            "MOVE_FEATHER_DANCE",
+            "MOVE_SKY_ATTACK",
             "MOVE_CURSE",
-            "MOVE_FROST_BREATH",
+            "MOVE_FLAIL",
             "MOVE_MUD_SLAP",
-            "MOVE_NIGHT_SLASH"
+            "MOVE_REVENGE",
+            "MOVE_FEATHER_DANCE",
+            "MOVE_COVET",
+            "MOVE_LEAF_BLADE",
+            "MOVE_FEINT",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_WORRY_SEED",
+            "MOVE_FINAL_GAMBIT"
         ]
     },
     "evolutions": [  ],

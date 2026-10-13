@@ -81,14 +81,11 @@
             "MOVE_LUNGE"
         ],
         "egg_moves": [
-            "MOVE_PSYBEAM",
             "MOVE_DISABLE",
-            "MOVE_SONIC_BOOM",
-            "MOVE_BATON_PASS",
-            "MOVE_PURSUIT",
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_TOXIC_SPIKES",
-            "MOVE_POISON_JAB"
+            "MOVE_MEGAHORN",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_RAGE_POWDER",
+            "MOVE_LUNGE"
         ]
     },
     "evolutions": [

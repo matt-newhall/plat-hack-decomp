@@ -79,12 +79,14 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_BITE",
-            "MOVE_TAIL_WHIP",
-            "MOVE_QUICK_ATTACK",
             "MOVE_SAND_ATTACK",
+            "MOVE_TAIL_WHIP",
+            "MOVE_BITE",
+            "MOVE_QUICK_ATTACK",
+            "MOVE_FLAIL",
             "MOVE_FAKE_TEARS",
-            "MOVE_ASSURANCE"
+            "MOVE_ASSURANCE",
+            "MOVE_LAST_RESORT"
         ]
     },
     "evolutions": [

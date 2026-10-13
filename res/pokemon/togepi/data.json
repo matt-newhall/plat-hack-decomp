@@ -90,16 +90,13 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_PRESENT",
-            "MOVE_STORED_POWER",
             "MOVE_PECK",
-            "MOVE_DRILL_RUN",
-            "MOVE_VOLT_SWITCH",
-            "MOVE_SUBSTITUTE",
-            "MOVE_PSYCH_UP",
-            "MOVE_NASTY_PLOT",
+            "MOVE_PRESENT",
+            "MOVE_MORNING_SUN",
+            "MOVE_FUTURE_SIGHT",
+            "MOVE_EXTRASENSORY",
             "MOVE_PSYCHO_SHIFT",
-            "MOVE_NUZZLE"
+            "MOVE_STORED_POWER"
         ]
     },
     "evolutions": [

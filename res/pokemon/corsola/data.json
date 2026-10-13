@@ -89,16 +89,17 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_ROCK_SLIDE",
-            "MOVE_SCREECH",
             "MOVE_MIST",
-            "MOVE_AMNESIA",
-            "MOVE_SILK_TRAP",
-            "MOVE_INGRAIN",
+            "MOVE_SCREECH",
             "MOVE_CONFUSE_RAY",
-            "MOVE_ICICLE_SPEAR",
+            "MOVE_AMNESIA",
+            "MOVE_CURSE",
             "MOVE_NATURE_POWER",
-            "MOVE_AQUA_RING"
+            "MOVE_INGRAIN",
+            "MOVE_ICICLE_SPEAR",
+            "MOVE_AQUA_RING",
+            "MOVE_HEAD_SMASH",
+            "MOVE_LIQUIDATION"
         ]
     },
     "evolutions": [  ],

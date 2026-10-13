@@ -78,14 +78,12 @@
             "MOVE_SEED_BOMB"
         ],
         "egg_moves": [
-            "MOVE_LEECH_SEED",
-            "MOVE_AMNESIA",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_METEOR_BEAM",
             "MOVE_TAKE_DOWN",
-            "MOVE_FALSE_SWIPE",
-            "MOVE_ACCELEROCK",
-            "MOVE_NASTY_PLOT"
+            "MOVE_LEECH_SEED",
+            "MOVE_QUICK_ATTACK",
+            "MOVE_WORRY_SEED",
+            "MOVE_NIGHT_SLASH",
+            "MOVE_DEFOG"
         ]
     },
     "evolutions": [

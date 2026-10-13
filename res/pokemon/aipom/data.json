@@ -94,17 +94,15 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_COUNTER",
-            "MOVE_SCREECH",
-            "MOVE_PURSUIT",
-            "MOVE_AGILITY",
-            "MOVE_SPITE",
             "MOVE_SLAM",
-            "MOVE_DOUBLE_SLAP",
+            "MOVE_COUNTER",
+            "MOVE_IRON_TAIL",
             "MOVE_BEAT_UP",
             "MOVE_FAKE_OUT",
-            "MOVE_FROST_BREATH",
-            "MOVE_BOUNCE"
+            "MOVE_BOUNCE",
+            "MOVE_COVET",
+            "MOVE_SWITCHEROO",
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [

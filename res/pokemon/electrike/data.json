@@ -78,15 +78,19 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_CRUNCH",
             "MOVE_HEADBUTT",
-            "MOVE_UPROAR",
-            "MOVE_CURSE",
             "MOVE_SWIFT",
-            "MOVE_DISCHARGE",
+            "MOVE_CURSE",
+            "MOVE_SPARK",
+            "MOVE_CRUNCH",
+            "MOVE_UPROAR",
+            "MOVE_SWITCHEROO",
+            "MOVE_THUNDER_FANG",
             "MOVE_ICE_FANG",
             "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG"
+            "MOVE_DISCHARGE",
+            "MOVE_CHARGE_BEAM",
+            "MOVE_EERIE_IMPULSE"
         ]
     },
     "evolutions": [

@@ -87,12 +87,11 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
+            "MOVE_DISABLE",
+            "MOVE_SMOKE_SCREEN",
             "MOVE_DESTINY_BOND",
             "MOVE_PAIN_SPLIT",
-            "MOVE_SMOKE_SCREEN",
-            "MOVE_IMPRISON",
-            "MOVE_BULLDOZE",
-            "MOVE_SHADOW_SNEAK"
+            "MOVE_TAUNT"
         ]
     },
     "evolutions": [  ],

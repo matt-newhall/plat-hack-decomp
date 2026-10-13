@@ -77,15 +77,15 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
+            "MOVE_HORN_DRILL",
+            "MOVE_DISABLE",
             "MOVE_LICK",
             "MOVE_PERISH_SONG",
-            "MOVE_DISABLE",
-            "MOVE_FLAME_CHARGE",
-            "MOVE_SLAM",
-            "MOVE_ENCORE",
             "MOVE_FAKE_OUT",
-            "MOVE_ICICLE_SPEAR",
-            "MOVE_SIGNAL_BEAM"
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
+            "MOVE_BODY_SLAM"
         ]
     },
     "evolutions": [

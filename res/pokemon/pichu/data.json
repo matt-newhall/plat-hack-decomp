@@ -77,16 +77,13 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_REVERSAL",
-            "MOVE_ELECTROWEB",
+            "MOVE_FLAIL",
             "MOVE_PRESENT",
-            "MOVE_ENCORE",
-            "MOVE_DOUBLE_SLAP",
-            "MOVE_WISH",
-            "MOVE_CHARGE",
             "MOVE_FAKE_OUT",
-            "MOVE_THUNDER_PUNCH",
-            "MOVE_TICKLE"
+            "MOVE_CHARGE",
+            "MOVE_WISH",
+            "MOVE_TICKLE",
+            "MOVE_DISARMING_VOICE"
         ]
     },
     "evolutions": [

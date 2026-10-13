@@ -79,13 +79,15 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_SWORDS_DANCE",
+            "MOVE_LEECH_SEED",
             "MOVE_RAZOR_LEAF",
             "MOVE_FLAIL",
             "MOVE_SYNTHESIS",
-            "MOVE_CHARM",
             "MOVE_INGRAIN",
-            "MOVE_TICKLE"
+            "MOVE_TEETER_DANCE",
+            "MOVE_TICKLE",
+            "MOVE_HELPING_HAND",
+            "MOVE_STRENGTH_SAP"
         ]
     },
     "evolutions": [

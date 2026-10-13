@@ -73,14 +73,18 @@
             "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
-            "MOVE_ENCORE",
-            "MOVE_SILK_TRAP",
-            "MOVE_KNOCK_OFF",
             "MOVE_FIRE_PUNCH",
-            "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
-            "MOVE_MOONBLAST",
-            "MOVE_AURORA_VEIL"
+            "MOVE_THUNDER_PUNCH",
+            "MOVE_CONFUSION",
+            "MOVE_ENCORE",
+            "MOVE_MAGIC_COAT",
+            "MOVE_KNOCK_OFF",
+            "MOVE_PSYCHO_SHIFT",
+            "MOVE_POWER_TRICK",
+            "MOVE_GUARD_SWAP",
+            "MOVE_SKILL_SWAP",
+            "MOVE_DISABLE"
         ]
     },
     "evolutions": [

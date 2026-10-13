@@ -94,18 +94,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_CRUNCH",
-            "MOVE_REVERSAL",
-            "MOVE_ROCK_SLIDE",
             "MOVE_COUNTER",
-            "MOVE_MAGNITUDE",
-            "MOVE_SWORDS_DANCE",
             "MOVE_CURSE",
-            "MOVE_CRUSH_CLAW",
+            "MOVE_METAL_BURST",
+            "MOVE_ROCK_POLISH",
             "MOVE_DRAGON_RUSH",
-            "MOVE_ICE_FANG",
-            "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG"
+            "MOVE_GUARD_SWAP"
         ]
     },
     "evolutions": [

@@ -76,11 +76,13 @@
             "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
-            "MOVE_FOCUS_ENERGY",
-            "MOVE_QUICK_ATTACK",
             "MOVE_GUST",
+            "MOVE_QUICK_ATTACK",
             "MOVE_FLAIL",
-            "MOVE_FURY_CUTTER"
+            "MOVE_FURY_CUTTER",
+            "MOVE_FEINT",
+            "MOVE_BUG_BITE",
+            "MOVE_FIRST_IMPRESSION"
         ]
     },
     "evolutions": [

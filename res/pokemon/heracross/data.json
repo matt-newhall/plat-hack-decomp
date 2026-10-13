@@ -87,13 +87,12 @@
             "MOVE_LUNGE"
         ],
         "egg_moves": [
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_SEISMIC_TOSS",
             "MOVE_HARDEN",
-            "MOVE_ELECTROWEB",
             "MOVE_FLAIL",
-            "MOVE_FALSE_SWIPE",
-            "MOVE_REVENGE",
-            "MOVE_PURSUIT",
-            "MOVE_DOUBLE_EDGE"
+            "MOVE_FEINT",
+            "MOVE_NIGHT_SLASH"
         ]
     },
     "evolutions": [  ],

@@ -90,15 +90,14 @@
         ],
         "egg_moves": [
             "MOVE_SCREECH",
-            "MOVE_DESTINY_BOND",
-            "MOVE_PSYCH_UP",
-            "MOVE_IMPRISON",
-            "MOVE_MEMENTO",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SHADOW_SNEAK",
             "MOVE_CURSE",
             "MOVE_SPITE",
-            "MOVE_OMINOUS_WIND"
+            "MOVE_DESTINY_BOND",
+            "MOVE_MEMENTO",
+            "MOVE_IMPRISON",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_SHADOW_SNEAK",
+            "MOVE_TRICK_ROOM"
         ]
     },
     "evolutions": [

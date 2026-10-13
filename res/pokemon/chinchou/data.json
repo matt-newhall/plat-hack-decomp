@@ -79,13 +79,11 @@
             "MOVE_BOUNCE"
         ],
         "egg_moves": [
-            "MOVE_FLAIL",
-            "MOVE_SCREECH",
-            "MOVE_AMNESIA",
+            "MOVE_MIST",
             "MOVE_PSYBEAM",
-            "MOVE_DUAL_CHOP",
-            "MOVE_AGILITY",
-            "MOVE_MIST"
+            "MOVE_WATER_PULSE",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_BRINE"
         ]
     },
     "evolutions": [

@@ -94,14 +94,9 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_METAL_CLAW",
             "MOVE_WING_ATTACK",
-            "MOVE_METEOR_BEAM",
-            "MOVE_COUNTER",
-            "MOVE_SAND_TOMB",
-            "MOVE_AGILITY",
-            "MOVE_BATON_PASS",
             "MOVE_DOUBLE_EDGE",
+            "MOVE_COUNTER",
             "MOVE_FEINT",
             "MOVE_NIGHT_SLASH",
             "MOVE_CROSS_POISON"

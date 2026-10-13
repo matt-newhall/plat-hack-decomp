@@ -79,13 +79,16 @@
         ],
         "egg_moves": [
             "MOVE_AURORA_BEAM",
+            "MOVE_COUNTER",
             "MOVE_QUICK_ATTACK",
-            "MOVE_VOLT_SWITCH",
             "MOVE_SPLASH",
+            "MOVE_DESTINY_BOND",
             "MOVE_RAPID_SPIN",
-            "MOVE_ICE_BALL",
+            "MOVE_FAKE_OUT",
+            "MOVE_MEMENTO",
             "MOVE_ICE_SHARD",
-            "MOVE_ICE_PUNCH"
+            "MOVE_FREEZE_DRY",
+            "MOVE_AURORA_VEIL"
         ]
     },
     "evolutions": [  ],

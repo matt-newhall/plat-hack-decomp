@@ -90,14 +90,13 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_FAINT_ATTACK",
-            "MOVE_SCREECH",
-            "MOVE_SAND_ATTACK",
-            "MOVE_SLASH",
-            "MOVE_CONFUSE_RAY",
             "MOVE_WHIRLWIND",
+            "MOVE_SAND_ATTACK",
             "MOVE_AGILITY",
-            "MOVE_PURSUIT",
+            "MOVE_SCREECH",
+            "MOVE_CONFUSE_RAY",
+            "MOVE_SLASH",
+            "MOVE_POISON_TAIL",
             "MOVE_NIGHT_SLASH"
         ]
     },

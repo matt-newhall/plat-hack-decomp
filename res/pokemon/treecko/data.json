@@ -90,18 +90,14 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_CRUNCH",
-            "MOVE_FREEZE_DRY",
-            "MOVE_ENDEAVOR",
-            "MOVE_LEECH_SEED",
-            "MOVE_DRAGON_BREATH",
-            "MOVE_CRUSH_CLAW",
-            "MOVE_ACCELEROCK",
             "MOVE_DOUBLE_KICK",
-            "MOVE_GRASS_WHISTLE",
+            "MOVE_ABSORB",
+            "MOVE_LEECH_SEED",
+            "MOVE_SLASH",
+            "MOVE_DRAGON_BREATH",
             "MOVE_SYNTHESIS",
-            "MOVE_MAGICAL_LEAF",
-            "MOVE_LEAF_STORM"
+            "MOVE_WORRY_SEED",
+            "MOVE_NIGHT_SLASH"
         ]
     },
     "evolutions": [

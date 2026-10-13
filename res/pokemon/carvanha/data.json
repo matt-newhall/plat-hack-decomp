@@ -81,9 +81,11 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_HYDRO_PUMP",
-            "MOVE_DOUBLE_EDGE",
             "MOVE_THRASH",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_HYDRO_PUMP",
+            "MOVE_SWIFT",
+            "MOVE_DESTINY_BOND",
             "MOVE_ANCIENT_POWER"
         ]
     },

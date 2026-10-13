@@ -62,12 +62,11 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_RAPID_SPIN",
+            "MOVE_COUNTER",
             "MOVE_HI_JUMP_KICK",
             "MOVE_MACH_PUNCH",
-            "MOVE_ZING_ZAP",
-            "MOVE_HELPING_HAND",
-            "MOVE_COUNTER",
+            "MOVE_RAPID_SPIN",
+            "MOVE_FEINT",
             "MOVE_VACUUM_WAVE",
             "MOVE_BULLET_PUNCH"
         ]

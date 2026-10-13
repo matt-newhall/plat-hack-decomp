@@ -83,12 +83,11 @@
         ],
         "egg_moves": [
             "MOVE_PSYBEAM",
-            "MOVE_ELECTROWEB",
-            "MOVE_SILVER_WIND",
-            "MOVE_BUG_BUZZ",
+            "MOVE_COUNTER",
             "MOVE_SCREECH",
             "MOVE_ENCORE",
             "MOVE_KNOCK_OFF",
+            "MOVE_TAILWIND",
             "MOVE_BUG_BITE"
         ]
     },

@@ -89,18 +89,14 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_BELLY_DRUM",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_ROCK_SLIDE",
             "MOVE_BITE",
-            "MOVE_OUTRAGE",
-            "MOVE_BEAT_UP",
-            "MOVE_SWORDS_DANCE",
-            "MOVE_DRAGON_DANCE",
-            "MOVE_CRUNCH",
-            "MOVE_DRAGON_RUSH",
+            "MOVE_COUNTER",
+            "MOVE_BELLY_DRUM",
+            "MOVE_IRON_TAIL",
             "MOVE_METAL_CLAW",
-            "MOVE_FLARE_BLITZ"
+            "MOVE_ANCIENT_POWER",
+            "MOVE_DRAGON_RUSH",
+            "MOVE_DRAGON_TAIL"
         ]
     },
     "evolutions": [

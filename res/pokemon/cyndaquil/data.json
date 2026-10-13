@@ -78,17 +78,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_FURY_SWIPES",
-            "MOVE_QUICK_ATTACK",
-            "MOVE_REVERSAL",
-            "MOVE_THRASH",
-            "MOVE_DRILL_RUN",
-            "MOVE_FROST_BREATH",
-            "MOVE_HOWL",
-            "MOVE_CRUSH_CLAW",
-            "MOVE_DOUBLE_EDGE",
             "MOVE_DOUBLE_KICK",
-            "MOVE_FLARE_BLITZ"
+            "MOVE_CURSE",
+            "MOVE_REVERSAL",
+            "MOVE_EXTRASENSORY",
+            "MOVE_HOWL",
+            "MOVE_COVET"
         ]
     },
     "evolutions": [

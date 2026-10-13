@@ -96,12 +96,11 @@
         ],
         "egg_moves": [
             "MOVE_WHIRLWIND",
-            "MOVE_PURSUIT",
-            "MOVE_DRILL_RUN",
-            "MOVE_STEEL_WING",
-            "MOVE_DRAGON_BREATH",
             "MOVE_CURSE",
-            "MOVE_ASSURANCE"
+            "MOVE_DRAGON_BREATH",
+            "MOVE_TAILWIND",
+            "MOVE_ASSURANCE",
+            "MOVE_DETECT"
         ]
     },
     "evolutions": [  ],

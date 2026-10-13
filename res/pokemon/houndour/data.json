@@ -85,18 +85,14 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_FIRE_SPIN",
-            "MOVE_POWDER",
-            "MOVE_PURSUIT",
             "MOVE_COUNTER",
-            "MOVE_SPITE",
+            "MOVE_FIRE_SPIN",
             "MOVE_REVERSAL",
-            "MOVE_BEAT_UP",
-            "MOVE_WILL_O_WISP",
-            "MOVE_FIRE_FANG",
-            "MOVE_THUNDER_FANG",
-            "MOVE_NASTY_PLOT",
-            "MOVE_PUNISHMENT"
+            "MOVE_SPITE",
+            "MOVE_DESTINY_BOND",
+            "MOVE_FEINT",
+            "MOVE_SUCKER_PUNCH",
+            "MOVE_THUNDER_FANG"
         ]
     },
     "evolutions": [

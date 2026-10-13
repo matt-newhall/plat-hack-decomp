@@ -68,12 +68,15 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_ENCORE",
             "MOVE_SING",
-            "MOVE_REFRESH",
-            "MOVE_SLAM",
+            "MOVE_SUPERSONIC",
+            "MOVE_BELLY_DRUM",
+            "MOVE_PERISH_SONG",
+            "MOVE_PRESENT",
             "MOVE_TICKLE",
-            "MOVE_FAKE_TEARS"
+            "MOVE_COPYCAT",
+            "MOVE_AQUA_JET",
+            "MOVE_BRINE"
         ]
     },
     "evolutions": [

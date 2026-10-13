@@ -94,13 +94,13 @@
         ],
         "egg_moves": [
             "MOVE_DISABLE",
-            "MOVE_WILL_O_WISP",
+            "MOVE_CONFUSE_RAY",
+            "MOVE_DESTINY_BOND",
             "MOVE_MEAN_LOOK",
             "MOVE_MEMENTO",
-            "MOVE_DESTINY_BOND",
-            "MOVE_BULLDOZE",
+            "MOVE_KNOCK_OFF",
             "MOVE_SHADOW_SNEAK",
-            "MOVE_CONFUSE_RAY"
+            "MOVE_MYSTICAL_FIRE"
         ]
     },
     "evolutions": [

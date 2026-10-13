@@ -96,16 +96,16 @@
         ],
         "egg_moves": [
             "MOVE_FIRE_PUNCH",
-            "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
-            "MOVE_DRILL_RUN",
-            "MOVE_FAKE_OUT",
-            "MOVE_BATON_PASS",
+            "MOVE_THUNDER_PUNCH",
             "MOVE_DYNAMIC_PUNCH",
-            "MOVE_SPIKY_SHIELD",
-            "MOVE_AURORA_VEIL",
+            "MOVE_BATON_PASS",
+            "MOVE_FAKE_OUT",
+            "MOVE_POWER_SWAP",
+            "MOVE_GUARD_SWAP",
+            "MOVE_BULLET_PUNCH",
             "MOVE_PSYCHO_CUT",
-            "MOVE_BULLET_PUNCH"
+            "MOVE_PROTECT"
         ]
     },
     "evolutions": [

@@ -89,13 +89,12 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_FREEZE_DRY",
-            "MOVE_ENDEAVOR",
-            "MOVE_BODY_SLAM",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_SLASH",
+            "MOVE_METAL_CLAW",
             "MOVE_ANCIENT_POWER",
-            "MOVE_KNOCK_OFF",
-            "MOVE_SUPERPOWER",
-            "MOVE_METAL_CLAW"
+            "MOVE_SWITCHEROO",
+            "MOVE_AQUA_JET"
         ]
     },
     "evolutions": [

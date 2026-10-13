@@ -87,16 +87,16 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_CRUNCH",
-            "MOVE_TAKE_DOWN",
-            "MOVE_SEISMIC_TOSS",
-            "MOVE_COUNTER",
-            "MOVE_METAL_CLAW",
-            "MOVE_FAKE_TEARS",
-            "MOVE_YAWN",
-            "MOVE_SLEEP_TALK",
-            "MOVE_CROSS_CHOP",
             "MOVE_DOUBLE_EDGE",
+            "MOVE_COUNTER",
+            "MOVE_SEISMIC_TOSS",
+            "MOVE_BELLY_DRUM",
+            "MOVE_FURY_CUTTER",
+            "MOVE_METAL_CLAW",
+            "MOVE_CROSS_CHOP",
+            "MOVE_CRUNCH",
+            "MOVE_YAWN",
+            "MOVE_FAKE_TEARS",
             "MOVE_CLOSE_COMBAT",
             "MOVE_NIGHT_SLASH"
         ]

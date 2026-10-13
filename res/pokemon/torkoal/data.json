@@ -93,12 +93,10 @@
             "MOVE_RAPID_SPIN"
         ],
         "egg_moves": [
-            "MOVE_ERUPTION",
-            "MOVE_ENDURE",
-            "MOVE_SLEEP_TALK",
-            "MOVE_YAWN",
-            "MOVE_EARTHQUAKE",
-            "MOVE_SLUDGE_WAVE"
+            "MOVE_FISSURE",
+            "MOVE_FLAIL",
+            "MOVE_ANCIENT_POWER",
+            "MOVE_YAWN"
         ]
     },
     "evolutions": [  ],

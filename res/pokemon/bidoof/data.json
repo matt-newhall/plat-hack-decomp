@@ -83,13 +83,12 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_QUICK_ATTACK",
-            "MOVE_ACID_SPRAY",
             "MOVE_DOUBLE_EDGE",
-            "MOVE_FURY_SWIPES",
+            "MOVE_QUICK_ATTACK",
             "MOVE_DEFENSE_CURL",
+            "MOVE_SKULL_BASH",
+            "MOVE_FURY_SWIPES",
             "MOVE_ROLLOUT",
-            "MOVE_ODOR_SLEUTH",
             "MOVE_AQUA_TAIL"
         ]
     },

@@ -80,14 +80,16 @@
             "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
-            "MOVE_SLEEP_POWDER",
-            "MOVE_STUN_SPORE",
-            "MOVE_RAZOR_LEAF",
             "MOVE_SLAM",
+            "MOVE_LEECH_SEED",
+            "MOVE_RAZOR_LEAF",
+            "MOVE_STUN_SPORE",
+            "MOVE_SLEEP_POWDER",
             "MOVE_SYNTHESIS",
             "MOVE_MAGICAL_LEAF",
-            "MOVE_LEECH_SEED",
-            "MOVE_ACCELEROCK"
+            "MOVE_WORRY_SEED",
+            "MOVE_RAGE_POWDER",
+            "MOVE_ACID_SPRAY"
         ]
     },
     "evolutions": [  ],

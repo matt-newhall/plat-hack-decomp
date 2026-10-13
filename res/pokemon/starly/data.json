@@ -77,13 +77,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_FEATHER_DANCE",
-            "MOVE_FURY_ATTACK",
-            "MOVE_PURSUIT",
-            "MOVE_ASTONISH",
             "MOVE_SAND_ATTACK",
-            "MOVE_DRILL_RUN",
-            "MOVE_DOUBLE_EDGE"
+            "MOVE_FURY_ATTACK",
+            "MOVE_DOUBLE_EDGE",
+            "MOVE_UPROAR",
+            "MOVE_FEATHER_DANCE",
+            "MOVE_ASTONISH"
         ]
     },
     "evolutions": [

@@ -87,15 +87,15 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_PURSUIT",
-            "MOVE_SLASH",
             "MOVE_BODY_SLAM",
+            "MOVE_SLASH",
             "MOVE_SNORE",
-            "MOVE_CRUSH_CLAW",
             "MOVE_CURSE",
-            "MOVE_SLEEP_TALK",
+            "MOVE_CRUSH_CLAW",
+            "MOVE_TICKLE",
             "MOVE_HAMMER_ARM",
-            "MOVE_NIGHT_SLASH"
+            "MOVE_NIGHT_SLASH",
+            "MOVE_HELPING_HAND"
         ]
     },
     "evolutions": [

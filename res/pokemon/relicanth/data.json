@@ -85,15 +85,14 @@
             "MOVE_BOUNCE"
         ],
         "egg_moves": [
-            "MOVE_MAGNITUDE",
             "MOVE_SKULL_BASH",
-            "MOVE_ACID_SPRAY",
             "MOVE_AMNESIA",
-            "MOVE_SLEEP_TALK",
-            "MOVE_ROCK_SLIDE",
-            "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_MUD_SLAP"
+            "MOVE_MUD_SLAP",
+            "MOVE_MUDDY_WATER",
+            "MOVE_MUD_SHOT",
+            "MOVE_AQUA_TAIL",
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "evolutions": [  ],

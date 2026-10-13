@@ -80,15 +80,15 @@
             "MOVE_SIGNAL_BEAM"
         ],
         "egg_moves": [
-            "MOVE_ACID_SPRAY",
-            "MOVE_STOCKPILE",
-            "MOVE_SWALLOW",
-            "MOVE_SPIT_UP",
-            "MOVE_YAWN",
-            "MOVE_ROCK_SLIDE",
+            "MOVE_FISSURE",
             "MOVE_CURSE",
-            "MOVE_SLUDGE_WAVE",
-            "MOVE_SIGNAL_BEAM"
+            "MOVE_BELLY_DRUM",
+            "MOVE_ROLLOUT",
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
+            "MOVE_YAWN",
+            "MOVE_AQUA_RING"
         ]
     },
     "evolutions": [

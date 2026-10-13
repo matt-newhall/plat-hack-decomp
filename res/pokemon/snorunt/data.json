@@ -73,11 +73,11 @@
             "MOVE_SPITE"
         ],
         "egg_moves": [
-            "MOVE_SNARL",
-            "MOVE_SPIKES",
-            "MOVE_ROLLOUT",
             "MOVE_DISABLE",
-            "MOVE_ELECTROWEB"
+            "MOVE_ROLLOUT",
+            "MOVE_BLOCK",
+            "MOVE_SWITCHEROO",
+            "MOVE_ICICLE_CRASH"
         ]
     },
     "evolutions": [

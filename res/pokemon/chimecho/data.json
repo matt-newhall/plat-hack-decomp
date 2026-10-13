@@ -87,11 +87,13 @@
         ],
         "egg_moves": [
             "MOVE_DISABLE",
-            "MOVE_CURSE",
             "MOVE_HYPNOSIS",
-            "MOVE_DREAM_EATER",
+            "MOVE_RECOVER",
+            "MOVE_CURSE",
             "MOVE_WISH",
-            "MOVE_VOLT_SWITCH"
+            "MOVE_RECYCLE",
+            "MOVE_COSMIC_POWER",
+            "MOVE_TAUNT"
         ]
     },
     "evolutions": [  ],

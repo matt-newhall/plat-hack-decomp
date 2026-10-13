@@ -82,14 +82,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_REFLECT",
             "MOVE_PIN_MISSILE",
-            "MOVE_FLAIL",
-            "MOVE_SWIFT",
             "MOVE_COUNTER",
+            "MOVE_SWIFT",
+            "MOVE_FLAIL",
             "MOVE_SAND_TOMB",
-            "MOVE_REVENGE",
-            "MOVE_DOUBLE_EDGE",
+            "MOVE_POWER_TRICK",
             "MOVE_TOXIC_SPIKES"
         ]
     },

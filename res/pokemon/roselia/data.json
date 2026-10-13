@@ -82,14 +82,18 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
+            "MOVE_PIN_MISSILE",
+            "MOVE_RAZOR_LEAF",
+            "MOVE_SLEEP_POWDER",
+            "MOVE_MIND_READER",
+            "MOVE_COTTON_SPORE",
             "MOVE_SPIKES",
             "MOVE_SYNTHESIS",
-            "MOVE_PIN_MISSILE",
-            "MOVE_COTTON_SPORE",
-            "MOVE_SLEEP_POWDER",
-            "MOVE_RAZOR_LEAF",
-            "MOVE_ZING_ZAP",
-            "MOVE_LEAF_STORM"
+            "MOVE_EXTRASENSORY",
+            "MOVE_SEED_BOMB",
+            "MOVE_LEAF_STORM",
+            "MOVE_POWER_WHIP",
+            "MOVE_LIFE_DEW"
         ]
     },
     "evolutions": [

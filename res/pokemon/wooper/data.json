@@ -88,17 +88,16 @@
             "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
-            "MOVE_BODY_SLAM",
-            "MOVE_ANCIENT_POWER",
-            "MOVE_SAFEGUARD",
-            "MOVE_CURSE",
-            "MOVE_FREEZE_DRY",
-            "MOVE_STOCKPILE",
-            "MOVE_SWALLOW",
-            "MOVE_SPIT_UP",
+            "MOVE_DOUBLE_KICK",
             "MOVE_COUNTER",
-            "MOVE_ENCORE",
-            "MOVE_DOUBLE_KICK"
+            "MOVE_RECOVER",
+            "MOVE_CURSE",
+            "MOVE_ANCIENT_POWER",
+            "MOVE_STOCKPILE",
+            "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
+            "MOVE_ACID_SPRAY",
+            "MOVE_HELPING_HAND"
         ]
     },
     "evolutions": [

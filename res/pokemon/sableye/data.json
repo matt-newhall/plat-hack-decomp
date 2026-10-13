@@ -111,11 +111,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_PSYCH_UP",
             "MOVE_RECOVER",
-            "MOVE_MOONLIGHT",
-            "MOVE_NASTY_PLOT",
-            "MOVE_FLATTER"
+            "MOVE_TORMENT",
+            "MOVE_FLATTER",
+            "MOVE_FEINT",
+            "MOVE_METAL_BURST",
+            "MOVE_SUCKER_PUNCH"
         ]
     },
     "evolutions": [  ],

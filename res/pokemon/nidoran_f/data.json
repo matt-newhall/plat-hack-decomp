@@ -78,14 +78,17 @@
             "MOVE_SNORE"
         ],
         "egg_moves": [
+            "MOVE_TAKE_DOWN",
             "MOVE_SUPERSONIC",
             "MOVE_DISABLE",
-            "MOVE_TAKE_DOWN",
-            "MOVE_FOCUS_ENERGY",
-            "MOVE_CHARM",
             "MOVE_COUNTER",
+            "MOVE_FOCUS_ENERGY",
+            "MOVE_SKULL_BASH",
+            "MOVE_CHARM",
             "MOVE_BEAT_UP",
-            "MOVE_PURSUIT"
+            "MOVE_POISON_FANG",
+            "MOVE_POISON_TAIL",
+            "MOVE_VENOSHOCK"
         ]
     },
     "evolutions": [

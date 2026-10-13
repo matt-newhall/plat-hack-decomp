@@ -84,12 +84,10 @@
             "MOVE_NUZZLE"
         ],
         "egg_moves": [
-            "MOVE_MEDITATE",
-            "MOVE_PSYCH_UP",
-            "MOVE_FAKE_OUT",
-            "MOVE_WISH",
             "MOVE_ICE_PUNCH",
-            "MOVE_WILD_CHARGE"
+            "MOVE_FAKE_OUT",
+            "MOVE_ROLE_PLAY",
+            "MOVE_WISH"
         ]
     },
     "evolutions": [

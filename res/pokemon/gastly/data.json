@@ -91,16 +91,14 @@
             "MOVE_KNOCK_OFF"
         ],
         "egg_moves": [
-            "MOVE_PSYWAVE",
-            "MOVE_PERISH_SONG",
+            "MOVE_DISABLE",
+            "MOVE_TOXIC",
             "MOVE_HAZE",
+            "MOVE_SMOG",
+            "MOVE_PERISH_SONG",
             "MOVE_ASTONISH",
-            "MOVE_WILL_O_WISP",
-            "MOVE_BULLDOZE",
-            "MOVE_EXPLOSION",
-            "MOVE_FIRE_PUNCH",
-            "MOVE_ICE_PUNCH",
-            "MOVE_THUNDER_PUNCH"
+            "MOVE_ACID_SPRAY",
+            "MOVE_PSYCHO_SHIFT"
         ]
     },
     "evolutions": [

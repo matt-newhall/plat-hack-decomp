@@ -81,16 +81,17 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
+            "MOVE_MIST",
             "MOVE_COUNTER",
+            "MOVE_SLUDGE",
+            "MOVE_ACID_ARMOR",
+            "MOVE_CURSE",
             "MOVE_MIRROR_COAT",
             "MOVE_STOCKPILE",
-            "MOVE_SWALLOW",
             "MOVE_SPIT_UP",
+            "MOVE_SWALLOW",
             "MOVE_YAWN",
-            "MOVE_MEMENTO",
-            "MOVE_CURSE",
-            "MOVE_AMNESIA",
-            "MOVE_SLUDGE_WAVE"
+            "MOVE_HAZE"
         ]
     },
     "evolutions": [

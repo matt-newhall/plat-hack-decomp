@@ -87,15 +87,11 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_STORED_POWER",
-            "MOVE_SUPERSONIC",
-            "MOVE_FAINT_ATTACK",
             "MOVE_WING_ATTACK",
             "MOVE_WHIRLWIND",
-            "MOVE_SKY_ATTACK",
-            "MOVE_FEATHER_DANCE",
-            "MOVE_AGILITY",
-            "MOVE_NIGHT_SHADE"
+            "MOVE_SUPERSONIC",
+            "MOVE_NIGHT_SHADE",
+            "MOVE_FEATHER_DANCE"
         ]
     },
     "evolutions": [
