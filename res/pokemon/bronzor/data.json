@@ -43,10 +43,10 @@
             [ 26, "MOVE_IRON_DEFENSE" ],
             [ 30, "MOVE_SAFEGUARD" ],
             [ 35, "MOVE_GYRO_BALL" ],
-            [ 37, "MOVE_VOLT_SWITCH" ],
+            [ 37, "MOVE_FUTURE_SIGHT" ],
             [ 41, "MOVE_FAINT_ATTACK" ],
             [ 49, "MOVE_PAYBACK" ],
-            [ 52, "MOVE_PLAY_ROUGH" ]
+            [ 52, "MOVE_HEAL_BLOCK" ]
         ],
         "by_tm": [
             "TM06",

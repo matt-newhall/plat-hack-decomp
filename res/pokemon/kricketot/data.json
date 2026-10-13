@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_ELECTROWEB" ],
+            [ 1, "MOVE_BIDE" ],
             [ 16, "MOVE_BUG_BITE" ]
         ],
         "by_tm": [  ],

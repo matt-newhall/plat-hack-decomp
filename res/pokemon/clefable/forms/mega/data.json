@@ -44,22 +44,10 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_SING"
-            ],
-            [
-                1,
-                "MOVE_DOUBLE_SLAP"
-            ],
-            [
-                1,
-                "MOVE_MINIMIZE"
-            ],
-            [
-                1,
-                "MOVE_METRONOME"
-            ]
+            [ 1, "MOVE_SING" ],
+            [ 1, "MOVE_DOUBLE_SLAP" ],
+            [ 1, "MOVE_MINIMIZE" ],
+            [ 1, "MOVE_METRONOME" ]
         ],
         "by_tm": [
             "TM01",

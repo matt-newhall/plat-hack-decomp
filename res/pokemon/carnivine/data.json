@@ -34,7 +34,7 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_FLIP_TURN" ],
+            [ 1, "MOVE_BIND" ],
             [ 1, "MOVE_GROWTH" ],
             [ 7, "MOVE_BITE" ],
             [ 11, "MOVE_VINE_WHIP" ],
@@ -45,7 +45,7 @@
             [ 31, "MOVE_SPIT_UP" ],
             [ 31, "MOVE_SWALLOW" ],
             [ 37, "MOVE_CRUNCH" ],
-            [ 41, "MOVE_STEEL_BEAM" ],
+            [ 41, "MOVE_WRING_OUT" ],
             [ 47, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [

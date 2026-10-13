@@ -43,8 +43,9 @@
             [ 28, "MOVE_ANCIENT_POWER" ],
             [ 37, "MOVE_BATON_PASS" ],
             [ 46, "MOVE_NATURAL_GIFT" ],
-            [ 55, "MOVE_PLAY_ROUGH" ],
-            [ 64, "MOVE_VOLT_SWITCH" ],
+            [ 55, "MOVE_HEAL_BLOCK" ],
+            [ 64, "MOVE_FUTURE_SIGHT" ],
+            [ 73, "MOVE_HEALING_WISH" ],
             [ 82, "MOVE_LEAF_STORM" ],
             [ 91, "MOVE_PERISH_SONG" ]
         ],

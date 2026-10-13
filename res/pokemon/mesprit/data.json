@@ -39,12 +39,13 @@
             [ 6, "MOVE_IMPRISON" ],
             [ 16, "MOVE_PROTECT" ],
             [ 21, "MOVE_SWIFT" ],
-            [ 31, "MOVE_NUZZLE" ],
-            [ 36, "MOVE_VOLT_SWITCH" ],
+            [ 31, "MOVE_LUCKY_CHANT" ],
+            [ 36, "MOVE_FUTURE_SIGHT" ],
             [ 46, "MOVE_CHARM" ],
             [ 51, "MOVE_EXTRASENSORY" ],
             [ 61, "MOVE_COPYCAT" ],
-            [ 66, "MOVE_NATURAL_GIFT" ]
+            [ 66, "MOVE_NATURAL_GIFT" ],
+            [ 76, "MOVE_HEALING_WISH" ]
         ],
         "by_tm": [
             "TM06",

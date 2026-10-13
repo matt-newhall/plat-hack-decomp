@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
-            [ 1, "MOVE_DRILL_RUN" ],
+            [ 1, "MOVE_FORESIGHT" ],
             [ 1, "MOVE_DEFENSE_CURL" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
             [ 4, "MOVE_DEFENSE_CURL" ],
@@ -48,6 +48,7 @@
             [ 36, "MOVE_SUCKER_PUNCH" ],
             [ 42, "MOVE_AMNESIA" ],
             [ 46, "MOVE_BATON_PASS" ],
+            [ 50, "MOVE_ME_FIRST" ],
             [ 56, "MOVE_HYPER_VOICE" ]
         ],
         "by_tm": [

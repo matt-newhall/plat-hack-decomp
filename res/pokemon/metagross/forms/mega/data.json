@@ -44,70 +44,22 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_MAGNET_RISE"
-            ],
-            [
-                1,
-                "MOVE_TAKE_DOWN"
-            ],
-            [
-                1,
-                "MOVE_METAL_CLAW"
-            ],
-            [
-                1,
-                "MOVE_CONFUSION"
-            ],
-            [
-                20,
-                "MOVE_METAL_CLAW"
-            ],
-            [
-                20,
-                "MOVE_CONFUSION"
-            ],
-            [
-                24,
-                "MOVE_SCARY_FACE"
-            ],
-            [
-                28,
-                "MOVE_PURSUIT"
-            ],
-            [
-                32,
-                "MOVE_BULLET_PUNCH"
-            ],
-            [
-                36,
-                "MOVE_PSYCHIC"
-            ],
-            [
-                40,
-                "MOVE_IRON_DEFENSE"
-            ],
-            [
-                44,
-                "MOVE_AGILITY"
-            ],
-            [
-                45,
-                "MOVE_HAMMER_ARM"
-            ],
-            [
-                53,
-                "MOVE_METEOR_MASH"
-            ],
-            [
-                62,
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            [
-                71,
-                "MOVE_HYPER_BEAM"
-            ]
+            [ 1, "MOVE_MAGNET_RISE" ],
+            [ 1, "MOVE_TAKE_DOWN" ],
+            [ 1, "MOVE_METAL_CLAW" ],
+            [ 1, "MOVE_CONFUSION" ],
+            [ 20, "MOVE_METAL_CLAW" ],
+            [ 20, "MOVE_CONFUSION" ],
+            [ 24, "MOVE_SCARY_FACE" ],
+            [ 28, "MOVE_PURSUIT" ],
+            [ 32, "MOVE_BULLET_PUNCH" ],
+            [ 36, "MOVE_PSYCHIC" ],
+            [ 40, "MOVE_IRON_DEFENSE" ],
+            [ 44, "MOVE_AGILITY" ],
+            [ 45, "MOVE_HAMMER_ARM" ],
+            [ 53, "MOVE_METEOR_MASH" ],
+            [ 62, "MOVE_ZEN_HEADBUTT" ],
+            [ 71, "MOVE_HYPER_BEAM" ]
         ],
         "by_tm": [
             "TM01",

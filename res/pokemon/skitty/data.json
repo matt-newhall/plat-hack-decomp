@@ -38,7 +38,7 @@
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 4, "MOVE_DRILL_RUN" ],
+            [ 4, "MOVE_FORESIGHT" ],
             [ 8, "MOVE_ATTRACT" ],
             [ 11, "MOVE_SING" ],
             [ 15, "MOVE_DOUBLE_SLAP" ],
@@ -47,7 +47,7 @@
             [ 25, "MOVE_CHARM" ],
             [ 29, "MOVE_FAINT_ATTACK" ],
             [ 32, "MOVE_WAKE_UP_SLAP" ],
-            [ 36, "MOVE_FROST_BREATH" ],
+            [ 36, "MOVE_COVET" ],
             [ 39, "MOVE_HEAL_BELL" ],
             [ 42, "MOVE_DOUBLE_EDGE" ],
             [ 46, "MOVE_CAPTIVATE" ]

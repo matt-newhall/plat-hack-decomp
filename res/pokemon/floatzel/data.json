@@ -37,7 +37,7 @@
             [ 1, "MOVE_ICE_FANG" ],
             [ 1, "MOVE_SONIC_BOOM" ],
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_ACID_SPRAY" ],
+            [ 1, "MOVE_WATER_SPORT" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
             [ 3, "MOVE_QUICK_ATTACK" ],
             [ 6, "MOVE_WATER_GUN" ],
@@ -46,8 +46,8 @@
             [ 21, "MOVE_AQUA_JET" ],
             [ 26, "MOVE_CRUNCH" ],
             [ 29, "MOVE_AGILITY" ],
-            [ 39, "MOVE_DUAL_CHOP" ],
-            [ 50, "MOVE_METEOR_BEAM" ]
+            [ 39, "MOVE_WHIRLPOOL" ],
+            [ 50, "MOVE_RAZOR_WIND" ]
         ],
         "by_tm": [
             "TM01",

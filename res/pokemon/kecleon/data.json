@@ -34,12 +34,12 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HEX" ],
+            [ 1, "MOVE_THIEF" ],
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_ASTONISH" ],
             [ 1, "MOVE_LICK" ],
             [ 1, "MOVE_SCRATCH" ],
-            [ 4, "MOVE_FLIP_TURN" ],
+            [ 4, "MOVE_BIND" ],
             [ 7, "MOVE_FAINT_ATTACK" ],
             [ 10, "MOVE_FURY_SWIPES" ],
             [ 14, "MOVE_FEINT" ],

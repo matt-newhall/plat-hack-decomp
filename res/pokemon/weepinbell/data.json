@@ -48,7 +48,7 @@
             [ 35, "MOVE_GASTRO_ACID" ],
             [ 39, "MOVE_RAZOR_LEAF" ],
             [ 41, "MOVE_SLAM" ],
-            [ 47, "MOVE_STEEL_BEAM" ]
+            [ 47, "MOVE_WRING_OUT" ]
         ],
         "by_tm": [
             "TM05",

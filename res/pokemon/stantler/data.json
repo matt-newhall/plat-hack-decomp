@@ -46,7 +46,8 @@
             [ 33, "MOVE_ROLE_PLAY" ],
             [ 38, "MOVE_ZEN_HEADBUTT" ],
             [ 43, "MOVE_IMPRISON" ],
-            [ 49, "MOVE_CAPTIVATE" ]
+            [ 49, "MOVE_CAPTIVATE" ],
+            [ 53, "MOVE_ME_FIRST" ]
         ],
         "by_tm": [
             "TM05",

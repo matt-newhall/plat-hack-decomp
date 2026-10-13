@@ -44,66 +44,21 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_POWDER_SNOW"
-            ],
-            [
-                1,
-                "MOVE_LEER"
-            ],
-            [
-                1,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                1,
-                "MOVE_ASTONISH"
-            ],
-            [
-                4,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                10,
-                "MOVE_ASTONISH"
-            ],
-            [
-                13,
-                "MOVE_ICY_WIND"
-            ],
-            [
-                19,
-                "MOVE_CONFUSE_RAY"
-            ],
-            [
-                22,
-                "MOVE_OMINOUS_WIND"
-            ],
-            [
-                28,
-                "MOVE_WAKE_UP_SLAP"
-            ],
-            [
-                31,
-                "MOVE_CAPTIVATE"
-            ],
-            [
-                37,
-                "MOVE_ICE_SHARD"
-            ],
-            [
-                40,
-                "MOVE_HAIL"
-            ],
-            [
-                51,
-                "MOVE_BLIZZARD"
-            ],
-            [
-                59,
-                "MOVE_DESTINY_BOND"
-            ]
+            [ 1, "MOVE_POWDER_SNOW" ],
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_DOUBLE_TEAM" ],
+            [ 1, "MOVE_ASTONISH" ],
+            [ 4, "MOVE_DOUBLE_TEAM" ],
+            [ 10, "MOVE_ASTONISH" ],
+            [ 13, "MOVE_ICY_WIND" ],
+            [ 19, "MOVE_CONFUSE_RAY" ],
+            [ 22, "MOVE_OMINOUS_WIND" ],
+            [ 28, "MOVE_WAKE_UP_SLAP" ],
+            [ 31, "MOVE_CAPTIVATE" ],
+            [ 37, "MOVE_ICE_SHARD" ],
+            [ 40, "MOVE_HAIL" ],
+            [ 51, "MOVE_BLIZZARD" ],
+            [ 59, "MOVE_DESTINY_BOND" ]
         ],
         "by_tm": [
             "TM06",

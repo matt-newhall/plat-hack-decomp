@@ -42,12 +42,12 @@
             [ 22, "MOVE_QUICK_ATTACK" ],
             [ 29, "MOVE_SWIFT" ],
             [ 36, "MOVE_PSYBEAM" ],
-            [ 43, "MOVE_VOLT_SWITCH" ],
+            [ 43, "MOVE_FUTURE_SIGHT" ],
             [ 50, "MOVE_LAST_RESORT" ],
             [ 57, "MOVE_PSYCH_UP" ],
             [ 64, "MOVE_PSYCHIC" ],
             [ 71, "MOVE_MORNING_SUN" ],
-            [ 78, "MOVE_SPIKY_SHIELD" ]
+            [ 78, "MOVE_POWER_SWAP" ]
         ],
         "by_tm": [
             "TM05",

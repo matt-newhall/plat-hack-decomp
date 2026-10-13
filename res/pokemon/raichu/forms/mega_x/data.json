@@ -44,22 +44,10 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_THUNDER_SHOCK"
-            ],
-            [
-                1,
-                "MOVE_TAIL_WHIP"
-            ],
-            [
-                1,
-                "MOVE_QUICK_ATTACK"
-            ],
-            [
-                1,
-                "MOVE_THUNDERBOLT"
-            ]
+            [ 1, "MOVE_THUNDER_SHOCK" ],
+            [ 1, "MOVE_TAIL_WHIP" ],
+            [ 1, "MOVE_QUICK_ATTACK" ],
+            [ 1, "MOVE_THUNDERBOLT" ]
         ],
         "by_tm": [
             "TM01",

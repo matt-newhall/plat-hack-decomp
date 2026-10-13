@@ -44,42 +44,15 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_STOCKPILE"
-            ],
-            [
-                1,
-                "MOVE_SWALLOW"
-            ],
-            [
-                1,
-                "MOVE_SPIT_UP"
-            ],
-            [
-                1,
-                "MOVE_VINE_WHIP"
-            ],
-            [
-                1,
-                "MOVE_SLEEP_POWDER"
-            ],
-            [
-                1,
-                "MOVE_SWEET_SCENT"
-            ],
-            [
-                1,
-                "MOVE_RAZOR_LEAF"
-            ],
-            [
-                47,
-                "MOVE_LEAF_STORM"
-            ],
-            [
-                47,
-                "MOVE_LEAF_BLADE"
-            ]
+            [ 1, "MOVE_STOCKPILE" ],
+            [ 1, "MOVE_SWALLOW" ],
+            [ 1, "MOVE_SPIT_UP" ],
+            [ 1, "MOVE_VINE_WHIP" ],
+            [ 1, "MOVE_SLEEP_POWDER" ],
+            [ 1, "MOVE_SWEET_SCENT" ],
+            [ 1, "MOVE_RAZOR_LEAF" ],
+            [ 47, "MOVE_LEAF_STORM" ],
+            [ 47, "MOVE_LEAF_BLADE" ]
         ],
         "by_tm": [
             "TM05",

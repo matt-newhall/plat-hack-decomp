@@ -38,12 +38,12 @@
             [ 1, "MOVE_ICE_PUNCH" ],
             [ 1, "MOVE_THUNDER_PUNCH" ],
             [ 1, "MOVE_GRAVITY" ],
-            [ 1, "MOVE_FLIP_TURN" ],
+            [ 1, "MOVE_BIND" ],
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_NIGHT_SHADE" ],
             [ 1, "MOVE_DISABLE" ],
             [ 6, "MOVE_DISABLE" ],
-            [ 9, "MOVE_DRILL_RUN" ],
+            [ 9, "MOVE_FORESIGHT" ],
             [ 14, "MOVE_ASTONISH" ],
             [ 17, "MOVE_CONFUSE_RAY" ],
             [ 22, "MOVE_SHADOW_SNEAK" ],
@@ -53,7 +53,7 @@
             [ 37, "MOVE_SHADOW_PUNCH" ],
             [ 43, "MOVE_MEAN_LOOK" ],
             [ 51, "MOVE_PAYBACK" ],
-            [ 61, "MOVE_VOLT_SWITCH" ]
+            [ 61, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
             "TM01",

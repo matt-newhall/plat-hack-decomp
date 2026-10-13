@@ -48,7 +48,7 @@
             [ 31, "MOVE_CRUNCH" ],
             [ 40, "MOVE_EARTHQUAKE" ],
             [ 50, "MOVE_DOUBLE_EDGE" ],
-            [ 60, "MOVE_SLUDGE_WAVE" ]
+            [ 60, "MOVE_FISSURE" ]
         ],
         "by_tm": [
             "TM06",

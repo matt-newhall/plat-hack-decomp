@@ -44,78 +44,24 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_BULLET_PUNCH"
-            ],
-            [
-                1,
-                "MOVE_QUICK_ATTACK"
-            ],
-            [
-                1,
-                "MOVE_LEER"
-            ],
-            [
-                5,
-                "MOVE_FOCUS_ENERGY"
-            ],
-            [
-                9,
-                "MOVE_PURSUIT"
-            ],
-            [
-                13,
-                "MOVE_FALSE_SWIPE"
-            ],
-            [
-                17,
-                "MOVE_AGILITY"
-            ],
-            [
-                21,
-                "MOVE_METAL_CLAW"
-            ],
-            [
-                25,
-                "MOVE_FURY_CUTTER"
-            ],
-            [
-                29,
-                "MOVE_SLASH"
-            ],
-            [
-                33,
-                "MOVE_METEOR_BEAM"
-            ],
-            [
-                37,
-                "MOVE_IRON_DEFENSE"
-            ],
-            [
-                41,
-                "MOVE_X_SCISSOR"
-            ],
-            [
-                45,
-                "MOVE_NIGHT_SLASH"
-            ],
-            [
-                49,
-                "MOVE_DOUBLE_HIT"
-            ],
-            [
-                53,
-                "MOVE_IRON_HEAD"
-            ],
-            [
-                57,
-                "MOVE_SWORDS_DANCE"
-            ],
-            [
-                61,
-                "MOVE_FEINT"
-            ]
+            [ 1, "MOVE_BULLET_PUNCH" ],
+            [ 1, "MOVE_QUICK_ATTACK" ],
+            [ 1, "MOVE_LEER" ],
+            [ 5, "MOVE_FOCUS_ENERGY" ],
+            [ 9, "MOVE_PURSUIT" ],
+            [ 13, "MOVE_FALSE_SWIPE" ],
+            [ 17, "MOVE_AGILITY" ],
+            [ 21, "MOVE_METAL_CLAW" ],
+            [ 25, "MOVE_FURY_CUTTER" ],
+            [ 29, "MOVE_SLASH" ],
+            [ 33, "MOVE_RAZOR_WIND" ],
+            [ 37, "MOVE_IRON_DEFENSE" ],
+            [ 41, "MOVE_X_SCISSOR" ],
+            [ 45, "MOVE_NIGHT_SLASH" ],
+            [ 49, "MOVE_DOUBLE_HIT" ],
+            [ 53, "MOVE_IRON_HEAD" ],
+            [ 57, "MOVE_SWORDS_DANCE" ],
+            [ 61, "MOVE_FEINT" ]
         ],
         "by_tm": [
             "TM05",

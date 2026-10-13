@@ -39,12 +39,12 @@
             [ 11, "MOVE_SAFEGUARD" ],
             [ 20, "MOVE_MIST" ],
             [ 29, "MOVE_AURORA_BEAM" ],
-            [ 38, "MOVE_VOLT_SWITCH" ],
+            [ 38, "MOVE_FUTURE_SIGHT" ],
             [ 47, "MOVE_SLASH" ],
             [ 57, "MOVE_MOONLIGHT" ],
             [ 66, "MOVE_PSYCHO_CUT" ],
             [ 75, "MOVE_PSYCHO_SHIFT" ],
-            [ 84, "MOVE_TAIL_SLAP" ],
+            [ 84, "MOVE_LUNAR_DANCE" ],
             [ 93, "MOVE_PSYCHIC" ]
         ],
         "by_tm": [

@@ -34,18 +34,18 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_ELECTROWEB" ],
+            [ 1, "MOVE_BIDE" ],
             [ 4, "MOVE_MEDITATE" ],
             [ 8, "MOVE_CONFUSION" ],
             [ 11, "MOVE_DETECT" ],
             [ 15, "MOVE_HIDDEN_POWER" ],
-            [ 18, "MOVE_ZING_ZAP" ],
+            [ 18, "MOVE_MIND_READER" ],
             [ 22, "MOVE_FEINT" ],
             [ 25, "MOVE_CALM_MIND" ],
             [ 29, "MOVE_FORCE_PALM" ],
             [ 32, "MOVE_HI_JUMP_KICK" ],
             [ 36, "MOVE_PSYCH_UP" ],
-            [ 39, "MOVE_MOONBLAST" ],
+            [ 39, "MOVE_POWER_TRICK" ],
             [ 43, "MOVE_REVERSAL" ],
             [ 46, "MOVE_RECOVER" ]
         ],

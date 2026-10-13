@@ -44,66 +44,21 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_GROWL"
-            ],
-            [
-                1,
-                "MOVE_TACKLE"
-            ],
-            [
-                1,
-                "MOVE_EMBER"
-            ],
-            [
-                1,
-                "MOVE_MAGNITUDE"
-            ],
-            [
-                5,
-                "MOVE_EMBER"
-            ],
-            [
-                11,
-                "MOVE_MAGNITUDE"
-            ],
-            [
-                15,
-                "MOVE_FOCUS_ENERGY"
-            ],
-            [
-                21,
-                "MOVE_TAKE_DOWN"
-            ],
-            [
-                25,
-                "MOVE_AMNESIA"
-            ],
-            [
-                31,
-                "MOVE_LAVA_PLUME"
-            ],
-            [
-                33,
-                "MOVE_ROCK_SLIDE"
-            ],
-            [
-                39,
-                "MOVE_EARTH_POWER"
-            ],
-            [
-                49,
-                "MOVE_EARTHQUAKE"
-            ],
-            [
-                57,
-                "MOVE_ERUPTION"
-            ],
-            [
-                67,
-                "MOVE_SLUDGE_WAVE"
-            ]
+            [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_TACKLE" ],
+            [ 1, "MOVE_EMBER" ],
+            [ 1, "MOVE_MAGNITUDE" ],
+            [ 5, "MOVE_EMBER" ],
+            [ 11, "MOVE_MAGNITUDE" ],
+            [ 15, "MOVE_FOCUS_ENERGY" ],
+            [ 21, "MOVE_TAKE_DOWN" ],
+            [ 25, "MOVE_AMNESIA" ],
+            [ 31, "MOVE_LAVA_PLUME" ],
+            [ 33, "MOVE_ROCK_SLIDE" ],
+            [ 39, "MOVE_EARTH_POWER" ],
+            [ 49, "MOVE_EARTHQUAKE" ],
+            [ 57, "MOVE_ERUPTION" ],
+            [ 67, "MOVE_FISSURE" ]
         ],
         "by_tm": [
             "TM05",

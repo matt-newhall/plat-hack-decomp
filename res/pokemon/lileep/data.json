@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_ASTONISH" ],
-            [ 1, "MOVE_PARABOLIC_CHARGE" ],
+            [ 1, "MOVE_CONSTRICT" ],
             [ 8, "MOVE_ACID" ],
             [ 15, "MOVE_INGRAIN" ],
             [ 22, "MOVE_CONFUSE_RAY" ],
@@ -46,7 +46,7 @@
             [ 57, "MOVE_STOCKPILE" ],
             [ 57, "MOVE_SPIT_UP" ],
             [ 57, "MOVE_SWALLOW" ],
-            [ 64, "MOVE_STEEL_BEAM" ]
+            [ 64, "MOVE_WRING_OUT" ]
         ],
         "by_tm": [
             "TM06",

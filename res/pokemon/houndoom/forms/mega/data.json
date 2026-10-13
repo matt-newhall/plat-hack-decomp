@@ -44,74 +44,23 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_THUNDER_FANG"
-            ],
-            [
-                1,
-                "MOVE_LEER"
-            ],
-            [
-                1,
-                "MOVE_EMBER"
-            ],
-            [
-                1,
-                "MOVE_HOWL"
-            ],
-            [
-                1,
-                "MOVE_DRAINING_KISS"
-            ],
-            [
-                4,
-                "MOVE_HOWL"
-            ],
-            [
-                9,
-                "MOVE_DRAINING_KISS"
-            ],
-            [
-                14,
-                "MOVE_ROAR"
-            ],
-            [
-                17,
-                "MOVE_BITE"
-            ],
-            [
-                22,
-                "MOVE_ODOR_SLEUTH"
-            ],
-            [
-                28,
-                "MOVE_BEAT_UP"
-            ],
-            [
-                32,
-                "MOVE_FIRE_FANG"
-            ],
-            [
-                38,
-                "MOVE_FAINT_ATTACK"
-            ],
-            [
-                44,
-                "MOVE_EMBARGO"
-            ],
-            [
-                48,
-                "MOVE_FLAMETHROWER"
-            ],
-            [
-                54,
-                "MOVE_CRUNCH"
-            ],
-            [
-                60,
-                "MOVE_NASTY_PLOT"
-            ]
+            [ 1, "MOVE_THUNDER_FANG" ],
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_EMBER" ],
+            [ 1, "MOVE_HOWL" ],
+            [ 1, "MOVE_SMOG" ],
+            [ 4, "MOVE_HOWL" ],
+            [ 9, "MOVE_SMOG" ],
+            [ 14, "MOVE_ROAR" ],
+            [ 17, "MOVE_BITE" ],
+            [ 22, "MOVE_ODOR_SLEUTH" ],
+            [ 28, "MOVE_BEAT_UP" ],
+            [ 32, "MOVE_FIRE_FANG" ],
+            [ 38, "MOVE_FAINT_ATTACK" ],
+            [ 44, "MOVE_EMBARGO" ],
+            [ 48, "MOVE_FLAMETHROWER" ],
+            [ 54, "MOVE_CRUNCH" ],
+            [ 60, "MOVE_NASTY_PLOT" ]
         ],
         "by_tm": [
             "TM05",

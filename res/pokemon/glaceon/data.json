@@ -47,7 +47,7 @@
             [ 57, "MOVE_MIRROR_COAT" ],
             [ 64, "MOVE_HAIL" ],
             [ 71, "MOVE_BLIZZARD" ],
-            [ 78, "MOVE_SILK_TRAP" ]
+            [ 78, "MOVE_BARRIER" ]
         ],
         "by_tm": [
             "TM06",

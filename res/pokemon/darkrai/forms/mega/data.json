@@ -44,54 +44,18 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_OMINOUS_WIND"
-            ],
-            [
-                1,
-                "MOVE_DISABLE"
-            ],
-            [
-                11,
-                "MOVE_QUICK_ATTACK"
-            ],
-            [
-                20,
-                "MOVE_HYPNOSIS"
-            ],
-            [
-                29,
-                "MOVE_FAINT_ATTACK"
-            ],
-            [
-                38,
-                "MOVE_NIGHTMARE"
-            ],
-            [
-                47,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                57,
-                "MOVE_HAZE"
-            ],
-            [
-                66,
-                "MOVE_DARK_VOID"
-            ],
-            [
-                75,
-                "MOVE_NASTY_PLOT"
-            ],
-            [
-                84,
-                "MOVE_DREAM_EATER"
-            ],
-            [
-                93,
-                "MOVE_DARK_PULSE"
-            ]
+            [ 1, "MOVE_OMINOUS_WIND" ],
+            [ 1, "MOVE_DISABLE" ],
+            [ 11, "MOVE_QUICK_ATTACK" ],
+            [ 20, "MOVE_HYPNOSIS" ],
+            [ 29, "MOVE_FAINT_ATTACK" ],
+            [ 38, "MOVE_NIGHTMARE" ],
+            [ 47, "MOVE_DOUBLE_TEAM" ],
+            [ 57, "MOVE_HAZE" ],
+            [ 66, "MOVE_DARK_VOID" ],
+            [ 75, "MOVE_NASTY_PLOT" ],
+            [ 84, "MOVE_DREAM_EATER" ],
+            [ 93, "MOVE_DARK_PULSE" ]
         ],
         "by_tm": [
             "TM01",

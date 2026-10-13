@@ -44,62 +44,20 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_LEER"
-            ],
-            [
-                1,
-                "MOVE_PECK"
-            ],
-            [
-                6,
-                "MOVE_SAND_ATTACK"
-            ],
-            [
-                9,
-                "MOVE_SWIFT"
-            ],
-            [
-                12,
-                "MOVE_AGILITY"
-            ],
-            [
-                17,
-                "MOVE_FURY_ATTACK"
-            ],
-            [
-                20,
-                "MOVE_FEINT"
-            ],
-            [
-                23,
-                "MOVE_AIR_CUTTER"
-            ],
-            [
-                28,
-                "MOVE_SPIKES"
-            ],
-            [
-                31,
-                "MOVE_METAL_SOUND"
-            ],
-            [
-                34,
-                "MOVE_STEEL_WING"
-            ],
-            [
-                39,
-                "MOVE_AIR_SLASH"
-            ],
-            [
-                42,
-                "MOVE_SLASH"
-            ],
-            [
-                45,
-                "MOVE_NIGHT_SLASH"
-            ]
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_PECK" ],
+            [ 6, "MOVE_SAND_ATTACK" ],
+            [ 9, "MOVE_SWIFT" ],
+            [ 12, "MOVE_AGILITY" ],
+            [ 17, "MOVE_FURY_ATTACK" ],
+            [ 20, "MOVE_FEINT" ],
+            [ 23, "MOVE_AIR_CUTTER" ],
+            [ 28, "MOVE_SPIKES" ],
+            [ 31, "MOVE_METAL_SOUND" ],
+            [ 34, "MOVE_STEEL_WING" ],
+            [ 39, "MOVE_AIR_SLASH" ],
+            [ 42, "MOVE_SLASH" ],
+            [ 45, "MOVE_NIGHT_SLASH" ]
         ],
         "by_tm": [
             "TM06",

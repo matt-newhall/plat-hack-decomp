@@ -44,70 +44,22 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_FIRE_PUNCH"
-            ],
-            [
-                1,
-                "MOVE_TACKLE"
-            ],
-            [
-                1,
-                "MOVE_GROWL"
-            ],
-            [
-                1,
-                "MOVE_THUNDER_SHOCK"
-            ],
-            [
-                1,
-                "MOVE_THUNDER_WAVE"
-            ],
-            [
-                5,
-                "MOVE_GROWL"
-            ],
-            [
-                10,
-                "MOVE_THUNDER_SHOCK"
-            ],
-            [
-                14,
-                "MOVE_THUNDER_WAVE"
-            ],
-            [
-                20,
-                "MOVE_COTTON_SPORE"
-            ],
-            [
-                25,
-                "MOVE_CHARGE"
-            ],
-            [
-                30,
-                "MOVE_THUNDER_PUNCH"
-            ],
-            [
-                34,
-                "MOVE_DISCHARGE"
-            ],
-            [
-                42,
-                "MOVE_SIGNAL_BEAM"
-            ],
-            [
-                51,
-                "MOVE_LIGHT_SCREEN"
-            ],
-            [
-                59,
-                "MOVE_POWER_GEM"
-            ],
-            [
-                68,
-                "MOVE_THUNDER"
-            ]
+            [ 1, "MOVE_FIRE_PUNCH" ],
+            [ 1, "MOVE_TACKLE" ],
+            [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_THUNDER_SHOCK" ],
+            [ 1, "MOVE_THUNDER_WAVE" ],
+            [ 5, "MOVE_GROWL" ],
+            [ 10, "MOVE_THUNDER_SHOCK" ],
+            [ 14, "MOVE_THUNDER_WAVE" ],
+            [ 20, "MOVE_COTTON_SPORE" ],
+            [ 25, "MOVE_CHARGE" ],
+            [ 30, "MOVE_THUNDER_PUNCH" ],
+            [ 34, "MOVE_DISCHARGE" ],
+            [ 42, "MOVE_SIGNAL_BEAM" ],
+            [ 51, "MOVE_LIGHT_SCREEN" ],
+            [ 59, "MOVE_POWER_GEM" ],
+            [ 68, "MOVE_THUNDER" ]
         ],
         "by_tm": [
             "TM01",
