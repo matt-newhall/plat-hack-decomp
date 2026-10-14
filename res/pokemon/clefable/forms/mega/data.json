@@ -44,10 +44,19 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_METRONOME" ],
-            [ 1, "MOVE_METEOR_MASH" ],
-            [ 1, "MOVE_MOONBLAST" ],
-            [ 1, "MOVE_LIFE_DEW" ]
+            [ 1, "MOVE_LIFE_DEW" ],
+            [ 4, "MOVE_STORED_POWER" ],
+            [ 8, "MOVE_ENCORE" ],
+            [ 12, "MOVE_HELPING_HAND" ],
+            [ 16, "MOVE_LIFE_DEW" ],
+            [ 20, "MOVE_METRONOME" ],
+            [ 24, "MOVE_MOONLIGHT" ],
+            [ 28, "MOVE_GRAVITY" ],
+            [ 32, "MOVE_METEOR_MASH" ],
+            [ 36, "MOVE_FOLLOW_ME" ],
+            [ 40, "MOVE_COSMIC_POWER" ],
+            [ 44, "MOVE_MOONBLAST" ],
+            [ 48, "MOVE_HEALING_WISH" ]
         ],
         "by_tm": [
             "TM01",

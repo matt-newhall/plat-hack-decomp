@@ -34,11 +34,18 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_LEAF_BLADE" ],
-            [ 1, "MOVE_SUNNY_DAY" ],
+            [ 1, "MOVE_TAILWIND" ],
             [ 1, "MOVE_AIR_CUTTER" ],
-            [ 1, "MOVE_PAYBACK" ],
-            [ 1, "MOVE_HURRICANE" ]
+            [ 1, "MOVE_HURRICANE" ],
+            [ 9, "MOVE_GROWTH" ],
+            [ 12, "MOVE_ROLLOUT" ],
+            [ 18, "MOVE_MEGA_DRAIN" ],
+            [ 24, "MOVE_PAYBACK" ],
+            [ 30, "MOVE_SYNTHESIS" ],
+            [ 36, "MOVE_SUNNY_DAY" ],
+            [ 43, "MOVE_EXTRASENSORY" ],
+            [ 50, "MOVE_SUCKER_PUNCH" ],
+            [ 57, "MOVE_LEAF_BLADE" ]
         ],
         "by_tm": [
             "TM05",

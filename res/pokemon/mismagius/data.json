@@ -35,12 +35,19 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_SPITE" ],
-            [ 1, "MOVE_ASTONISH" ],
             [ 1, "MOVE_MAGICAL_LEAF" ],
-            [ 1, "MOVE_POWER_GEM" ],
             [ 1, "MOVE_PHANTOM_FORCE" ],
-            [ 1, "MOVE_MYSTICAL_FIRE" ]
+            [ 1, "MOVE_MYSTICAL_FIRE" ],
+            [ 10, "MOVE_ASTONISH" ],
+            [ 14, "MOVE_CONFUSE_RAY" ],
+            [ 19, "MOVE_MEAN_LOOK" ],
+            [ 23, "MOVE_HEX" ],
+            [ 28, "MOVE_PSYBEAM" ],
+            [ 32, "MOVE_PAIN_SPLIT" ],
+            [ 37, "MOVE_PAYBACK" ],
+            [ 41, "MOVE_SHADOW_BALL" ],
+            [ 46, "MOVE_PERISH_SONG" ],
+            [ 50, "MOVE_POWER_GEM" ]
         ],
         "by_tm": [
             "TM06",

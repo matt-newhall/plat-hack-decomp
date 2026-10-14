@@ -36,10 +36,18 @@
         "by_level": [
             [ 1, "MOVE_LEAF_STORM" ],
             [ 1, "MOVE_VINE_WHIP" ],
-            [ 1, "MOVE_RAZOR_LEAF" ],
-            [ 1, "MOVE_SLEEP_POWDER" ],
-            [ 1, "MOVE_SWEET_SCENT" ],
-            [ 44, "MOVE_LEAF_BLADE" ]
+            [ 13, "MOVE_SLEEP_POWDER" ],
+            [ 15, "MOVE_POISON_POWDER" ],
+            [ 17, "MOVE_STUN_SPORE" ],
+            [ 24, "MOVE_ACID" ],
+            [ 29, "MOVE_KNOCK_OFF" ],
+            [ 32, "MOVE_SWEET_SCENT" ],
+            [ 39, "MOVE_GASTRO_ACID" ],
+            [ 44, "MOVE_RAZOR_LEAF" ],
+            [ 44, "MOVE_LEAF_BLADE" ],
+            [ 47, "MOVE_POISON_JAB" ],
+            [ 54, "MOVE_SLAM" ],
+            [ 58, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [
             "TM05",
