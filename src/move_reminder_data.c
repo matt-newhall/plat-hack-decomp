@@ -6,7 +6,7 @@
 #include "heap.h"
 #include "pokemon.h"
 
-#define MAX_NUMBER_REMINDER_MOVES 37
+#define MAX_NUMBER_REMINDER_MOVES 42
 
 MoveReminderData *MoveReminderData_Alloc(enum HeapID heapID)
 {
