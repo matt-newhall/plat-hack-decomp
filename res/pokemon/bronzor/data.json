@@ -86,7 +86,10 @@
         ],
         "egg_moves": [
             "MOVE_RECYCLE",
-            "MOVE_GRAVITY"
+            "MOVE_GRAVITY",
+            "MOVE_ZEN_HEADBUTT",
+            "MOVE_REFLECT",
+            "MOVE_LIGHT_SCREEN"
         ]
     },
     "evolutions": [

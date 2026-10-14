@@ -87,8 +87,7 @@
             "MOVE_ASTONISH",
             "MOVE_ROOST",
             "MOVE_TAILWIND",
-            "MOVE_DRAGON_RUSH",
-            "MOVE_DEFOG"
+            "MOVE_DRAGON_RUSH"
         ]
     },
     "evolutions": [

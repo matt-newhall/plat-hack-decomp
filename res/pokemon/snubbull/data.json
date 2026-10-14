@@ -97,7 +97,8 @@
             "MOVE_MIMIC",
             "MOVE_SNORE",
             "MOVE_PRESENT",
-            "MOVE_REVENGE"
+            "MOVE_REVENGE",
+            "MOVE_PSYCHIC_FANGS"
         ]
     },
     "evolutions": [

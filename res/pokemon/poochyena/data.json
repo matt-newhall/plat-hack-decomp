@@ -78,7 +78,10 @@
         "egg_moves": [
             "MOVE_POISON_FANG",
             "MOVE_ASTONISH",
-            "MOVE_COVET"
+            "MOVE_COVET",
+            "MOVE_FIRE_FANG",
+            "MOVE_THUNDER_FANG",
+            "MOVE_ICE_FANG"
         ]
     },
     "evolutions": [

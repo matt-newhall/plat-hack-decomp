@@ -729,6 +729,31 @@ void Egg_CreateEgg(Pokemon *egg, u16 species, u8 param2, TrainerInfo *trainerInf
     UpdateMonStatusAndTrainerInfo(egg, trainerInfo, param4, metLocation, HEAP_ID_SYSTEM);
 }
 
+/**
+ * @brief Teaches an egg distinct random moves from its species' egg move list,
+ * the same way bred egg moves are taught.
+ *
+ * @param egg   The egg to teach
+ * @param count Number of egg moves to teach
+ */
+void Egg_AddRandomEggMoves(Pokemon *egg, u8 count)
+{
+    u16 eggMoves[MAX_EGG_MOVES];
+    u8 eggMoveCount = LoadSpeciesEggMoves(egg, eggMoves);
+
+    for (u8 i = 0; i < count && i < eggMoveCount; i++) {
+        u8 pick = i + LCRNG_Next() % (eggMoveCount - i);
+        u16 move = eggMoves[pick];
+
+        eggMoves[pick] = eggMoves[i];
+        eggMoves[i] = move;
+
+        if (Pokemon_AddMove(egg, move) == LEARNSET_ALL_SLOTS_FILLED) {
+            Pokemon_ReplaceMove(egg, move);
+        }
+    }
+}
+
 static void Egg_SetInitialData(Pokemon *mon, u16 species, Daycare *daycare, u32 monOTID, u8 form)
 {
     u8 level;

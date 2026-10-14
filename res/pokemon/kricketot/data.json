@@ -44,6 +44,13 @@
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
             "MOVE_ENDEAVOR"
+        ],
+        "egg_moves": [
+            "MOVE_FURY_CUTTER",
+            "MOVE_LEECH_LIFE",
+            "MOVE_SING",
+            "MOVE_MUD_SLAP",
+            "MOVE_LUNGE"
         ]
     },
     "evolutions": [

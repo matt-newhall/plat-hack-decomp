@@ -87,7 +87,6 @@
         ],
         "egg_moves": [
             "MOVE_SMOG",
-            "MOVE_ACID_ARMOR",
             "MOVE_CURSE",
             "MOVE_MUD_SLAP",
             "MOVE_DESTINY_BOND",

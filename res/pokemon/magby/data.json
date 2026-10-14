@@ -84,7 +84,6 @@
             "MOVE_DYNAMIC_PUNCH",
             "MOVE_CROSS_CHOP",
             "MOVE_FOCUS_PUNCH",
-            "MOVE_FOLLOW_ME",
             "MOVE_WILL_O_WISP"
         ]
     },

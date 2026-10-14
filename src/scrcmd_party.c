@@ -184,6 +184,7 @@ BOOL ScrCmd_GiveEgg(ScriptContext *ctx)
 
         int specialMetLoc = SpecialMetLoc_GetId(1, eggGiver);
         Egg_CreateEgg(egg, species, 1, trainer, 3, specialMetLoc);
+        Egg_AddRandomEggMoves(egg, 2);
 
         Party_AddPokemon(party, egg);
         Heap_Free(egg);

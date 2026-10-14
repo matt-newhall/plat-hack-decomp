@@ -83,7 +83,9 @@
             "MOVE_PRESENT",
             "MOVE_WISH",
             "MOVE_TICKLE",
-            "MOVE_HEAL_BELL"
+            "MOVE_HEAL_BELL",
+            "MOVE_FAIRY_WIND",
+            "MOVE_METRONOME"
         ]
     },
     "evolutions": [

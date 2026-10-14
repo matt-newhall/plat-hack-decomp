@@ -94,7 +94,7 @@
             "MOVE_DOUBLE_EDGE",
             "MOVE_ROLLOUT",
             "MOVE_HEAD_SMASH",
-            "MOVE_DETECT"
+            "MOVE_IRON_HEAD"
         ]
     },
     "evolutions": [

@@ -85,13 +85,9 @@
             "MOVE_MEGA_DRAIN",
             "MOVE_LEECH_SEED",
             "MOVE_CONFUSION",
-            "MOVE_AMNESIA",
             "MOVE_FLAIL",
             "MOVE_NATURE_POWER",
-            "MOVE_ENDEAVOR",
-            "MOVE_POWER_SWAP",
-            "MOVE_LEAF_STORM",
-            "MOVE_RAGE_POWDER"
+            "MOVE_ENDEAVOR"
         ]
     },
     "evolutions": [

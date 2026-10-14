@@ -100,9 +100,7 @@
             "MOVE_BEAT_UP",
             "MOVE_FAKE_OUT",
             "MOVE_BOUNCE",
-            "MOVE_COVET",
-            "MOVE_SWITCHEROO",
-            "MOVE_DETECT"
+            "MOVE_COVET"
         ]
     },
     "evolutions": [

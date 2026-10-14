@@ -95,11 +95,8 @@
             "MOVE_CHARM",
             "MOVE_FUTURE_SIGHT",
             "MOVE_FAKE_OUT",
-            "MOVE_TRICK",
-            "MOVE_TEETER_DANCE",
             "MOVE_TICKLE",
             "MOVE_HEALING_WISH",
-            "MOVE_POWER_SWAP",
             "MOVE_MAGIC_COAT"
         ]
     },

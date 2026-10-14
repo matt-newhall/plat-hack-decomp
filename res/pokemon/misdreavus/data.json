@@ -96,8 +96,7 @@
             "MOVE_MEMENTO",
             "MOVE_IMPRISON",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_SHADOW_SNEAK",
-            "MOVE_TRICK_ROOM"
+            "MOVE_SHADOW_SNEAK"
         ]
     },
     "evolutions": [

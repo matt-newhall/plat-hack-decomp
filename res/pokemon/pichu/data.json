@@ -81,7 +81,6 @@
             "MOVE_PRESENT",
             "MOVE_FAKE_OUT",
             "MOVE_CHARGE",
-            "MOVE_WISH",
             "MOVE_TICKLE",
             "MOVE_DISARMING_VOICE"
         ]

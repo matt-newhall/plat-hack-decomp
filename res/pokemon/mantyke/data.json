@@ -77,11 +77,9 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_SLAM",
             "MOVE_HYDRO_PUMP",
             "MOVE_CONFUSE_RAY",
             "MOVE_HAZE",
-            "MOVE_AMNESIA",
             "MOVE_SPLASH",
             "MOVE_TWISTER",
             "MOVE_MIRROR_COAT",
