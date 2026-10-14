@@ -63,6 +63,7 @@
             "TM42",
             "TM44",
             "TM50",
+            "TM55",
             "TM58",
             "TM61",
             "TM71",
@@ -70,9 +71,12 @@
             "TM80",
             "TM82",
             "TM83",
+            "TM85",
             "TM87",
             "TM90",
-            "HM06"
+            "HM03",
+            "HM06",
+            "HM07"
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
@@ -81,7 +85,9 @@
             "MOVE_EARTH_POWER",
             "MOVE_IRON_DEFENSE",
             "MOVE_HEAT_WAVE",
-            "MOVE_MEMENTO"
+            "MOVE_MEMENTO",
+            "MOVE_DIVE",
+            "MOVE_AQUA_TAIL"
         ],
         "egg_moves": [
             "MOVE_SMOKE_SCREEN",

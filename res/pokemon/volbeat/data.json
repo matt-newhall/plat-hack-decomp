@@ -66,10 +66,13 @@
             "TM40",
             "TM42",
             "TM44",
+            "TM56",
+            "TM57",
             "TM58",
             "TM62",
             "TM70",
             "TM73",
+            "TM75",
             "TM82",
             "TM83",
             "TM87",
@@ -86,7 +89,8 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_SWIFT",
-            "MOVE_BRICK_BREAK"
+            "MOVE_BRICK_BREAK",
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_COUNTER",

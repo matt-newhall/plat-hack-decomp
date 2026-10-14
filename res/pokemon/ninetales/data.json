@@ -39,6 +39,7 @@
             [ 1, "MOVE_TAIL_WHIP" ]
         ],
         "by_tm": [
+            "TM04",
             "TM06",
             "TM07",
             "TM10",
@@ -54,6 +55,7 @@
             "TM38",
             "TM42",
             "TM44",
+            "TM45",
             "TM46",
             "TM50",
             "TM51",
@@ -74,7 +76,8 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO"
+            "MOVE_MEMENTO",
+            "MOVE_DAZZLING_GLEAM"
         ]
     },
     "evolutions": [  ],

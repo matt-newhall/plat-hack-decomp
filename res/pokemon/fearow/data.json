@@ -53,6 +53,7 @@
         ],
         "by_tm": [
             "TM06",
+            "TM07",
             "TM10",
             "TM15",
             "TM40",
@@ -60,6 +61,7 @@
             "TM44",
             "TM47",
             "TM54",
+            "TM66",
             "TM68",
             "TM82",
             "TM83",
@@ -77,7 +79,8 @@
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
             "MOVE_DRILL_PECK",
-            "MOVE_DRILL_RUN"
+            "MOVE_DRILL_RUN",
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [  ],

@@ -54,6 +54,7 @@
             "TM02",
             "TM05",
             "TM06",
+            "TM07",
             "TM10",
             "TM13",
             "TM14",
@@ -65,6 +66,8 @@
             "TM44",
             "TM58",
             "TM65",
+            "TM66",
+            "TM79",
             "TM80",
             "TM82",
             "TM83",
@@ -85,7 +88,8 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_BRICK_BREAK"
+            "MOVE_BRICK_BREAK",
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [

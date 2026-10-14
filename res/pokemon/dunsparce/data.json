@@ -95,7 +95,8 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_DRILL_RUN"
+            "MOVE_DRILL_RUN",
+            "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
             "MOVE_HEADBUTT",

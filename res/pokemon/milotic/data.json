@@ -55,6 +55,7 @@
             [ 52, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
+            "TM03",
             "TM04",
             "TM06",
             "TM10",
@@ -67,6 +68,7 @@
             "TM37",
             "TM42",
             "TM44",
+            "TM45",
             "TM51",
             "TM55",
             "TM58",
@@ -88,7 +90,8 @@
             "MOVE_IRON_HEAD",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_DAZZLING_GLEAM"
         ]
     },
     "evolutions": [  ],

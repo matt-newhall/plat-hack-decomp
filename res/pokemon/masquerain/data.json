@@ -65,6 +65,7 @@
             "TM42",
             "TM44",
             "TM53",
+            "TM55",
             "TM58",
             "TM62",
             "TM68",
@@ -86,7 +87,8 @@
             "MOVE_AIR_CUTTER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_SWIFT",
-            "MOVE_DRILL_RUN"
+            "MOVE_DRILL_RUN",
+            "MOVE_DIVE"
         ]
     },
     "evolutions": [  ],

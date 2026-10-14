@@ -49,6 +49,7 @@
             [ 57, "MOVE_FINAL_GAMBIT" ]
         ],
         "by_tm": [
+            "TM01",
             "TM06",
             "TM08",
             "TM10",
@@ -59,15 +60,19 @@
             "TM42",
             "TM44",
             "TM47",
+            "TM52",
             "TM58",
+            "TM60",
             "TM68",
+            "TM78",
             "TM82",
             "TM83",
             "TM87",
             "TM88",
             "TM89",
             "HM02",
-            "HM05"
+            "HM05",
+            "HM06"
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
@@ -77,7 +82,8 @@
             "MOVE_ENDEAVOR",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_DRILL_RUN"
+            "MOVE_DRILL_RUN",
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

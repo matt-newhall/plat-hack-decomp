@@ -52,6 +52,8 @@
             [ 1, "MOVE_MOONBLAST" ]
         ],
         "by_tm": [
+            "TM03",
+            "TM04",
             "TM05",
             "TM06",
             "TM09",
@@ -82,7 +84,8 @@
             "MOVE_GASTRO_ACID",
             "MOVE_SNORE",
             "MOVE_SEED_BOMB",
-            "MOVE_NUZZLE"
+            "MOVE_NUZZLE",
+            "MOVE_DAZZLING_GLEAM"
         ]
     },
     "evolutions": [  ],

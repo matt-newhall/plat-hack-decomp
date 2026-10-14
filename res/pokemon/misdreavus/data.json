@@ -86,7 +86,8 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO"
+            "MOVE_MEMENTO",
+            "MOVE_ZEN_HEADBUTT"
         ],
         "egg_moves": [
             "MOVE_SCREECH",

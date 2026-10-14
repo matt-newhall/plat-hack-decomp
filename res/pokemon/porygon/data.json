@@ -66,11 +66,13 @@
             "TM40",
             "TM42",
             "TM44",
+            "TM56",
             "TM58",
             "TM67",
             "TM68",
             "TM70",
             "TM73",
+            "TM75",
             "TM82",
             "TM83",
             "TM87"
@@ -81,7 +83,9 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_THUNDER_PUNCH",
+            "MOVE_MAGNET_RISE"
         ]
     },
     "evolutions": [

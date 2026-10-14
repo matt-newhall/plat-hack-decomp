@@ -54,6 +54,7 @@
             "TM01",
             "TM05",
             "TM06",
+            "TM07",
             "TM10",
             "TM12",
             "TM15",
@@ -72,11 +73,13 @@
             "TM52",
             "TM58",
             "TM60",
+            "TM66",
             "TM67",
             "TM68",
             "TM70",
             "TM73",
             "TM78",
+            "TM79",
             "TM82",
             "TM83",
             "TM86",
@@ -88,7 +91,8 @@
             "MOVE_ICE_PUNCH",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_BRICK_BREAK"
+            "MOVE_BRICK_BREAK",
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [  ],

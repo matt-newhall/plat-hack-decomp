@@ -56,9 +56,13 @@
             "TM16",
             "TM19",
             "TM22",
+            "TM32",
+            "TM35",
             "TM36",
+            "TM38",
             "TM42",
             "TM44",
+            "TM50",
             "TM53",
             "TM58",
             "TM70",
@@ -71,7 +75,8 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
-            "MOVE_SEED_BOMB"
+            "MOVE_SEED_BOMB",
+            "MOVE_HEAT_WAVE"
         ],
         "egg_moves": [
             "MOVE_LEECH_SEED",

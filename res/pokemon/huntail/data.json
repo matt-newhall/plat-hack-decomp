@@ -55,6 +55,7 @@
         ],
         "by_tm": [
             "TM06",
+            "TM07",
             "TM10",
             "TM13",
             "TM14",
@@ -64,7 +65,9 @@
             "TM42",
             "TM44",
             "TM55",
+            "TM66",
             "TM68",
+            "TM79",
             "TM82",
             "TM83",
             "TM87",
@@ -78,7 +81,8 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_BOUNCE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_KNOCK_OFF"
         ]
     },
     "evolutions": [  ],

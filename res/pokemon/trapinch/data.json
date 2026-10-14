@@ -55,6 +55,7 @@
             "TM19",
             "TM22",
             "TM28",
+            "TM31",
             "TM39",
             "TM42",
             "TM44",
@@ -73,7 +74,9 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
-            "MOVE_EARTH_POWER"
+            "MOVE_EARTH_POWER",
+            "MOVE_SIGNAL_BEAM",
+            "MOVE_LUNGE"
         ],
         "egg_moves": [
             "MOVE_GUST",
