@@ -45,9 +45,9 @@
             [ 22, "MOVE_MUD_BOMB" ],
             [ 25, "MOVE_MUD_SPORT" ],
             [ 28, "MOVE_BODY_SLAM" ],
+            [ 32, "MOVE_MEMENTO" ],
             [ 35, "MOVE_EARTH_POWER" ],
             [ 37, "MOVE_MUDDY_WATER" ],
-            [ 45, "MOVE_MEMENTO" ],
             [ 47, "MOVE_SCALD" ],
             [ 49, "MOVE_HYDRO_PUMP" ]
         ],

@@ -48,10 +48,10 @@
             [ 25, "MOVE_ELECTROWEB" ],
             [ 27, "MOVE_DISCHARGE" ],
             [ 29, "MOVE_FOUL_PLAY" ],
-            [ 32, "MOVE_SELFDESTRUCT" ],
+            [ 31, "MOVE_METAL_SOUND" ],
+            [ 33, "MOVE_SELFDESTRUCT" ],
             [ 35, "MOVE_LIGHT_SCREEN" ],
             [ 37, "MOVE_MAGNET_RISE" ],
-            [ 40, "MOVE_METAL_SOUND" ],
             [ 46, "MOVE_GYRO_BALL" ],
             [ 48, "MOVE_EXPLOSION" ],
             [ 50, "MOVE_MIRROR_COAT" ]

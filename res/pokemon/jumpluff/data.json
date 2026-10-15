@@ -52,11 +52,11 @@
             [ 35, "MOVE_COTTON_SPORE" ],
             [ 38, "MOVE_GRASSY_GLIDE" ],
             [ 40, "MOVE_U_TURN" ],
-            [ 43, "MOVE_GIGA_DRAIN" ],
+            [ 42, "MOVE_MEMENTO" ],
+            [ 44, "MOVE_GIGA_DRAIN" ],
             [ 49, "MOVE_BOUNCE" ],
             [ 53, "MOVE_POLLEN_PUFF" ],
-            [ 55, "MOVE_LEAF_STORM" ],
-            [ 58, "MOVE_MEMENTO" ]
+            [ 55, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [
             "TM05",

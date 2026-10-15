@@ -43,10 +43,10 @@
             [ 21, "MOVE_MUD_BOMB" ],
             [ 26, "MOVE_TOXIC" ],
             [ 33, "MOVE_SLUDGE_BOMB" ],
+            [ 35, "MOVE_MEMENTO" ],
             [ 37, "MOVE_SCREECH" ],
             [ 39, "MOVE_SLUDGE_WAVE" ],
             [ 41, "MOVE_POISON_JAB" ],
-            [ 48, "MOVE_MEMENTO" ],
             [ 51, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [

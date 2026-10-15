@@ -47,13 +47,13 @@
             [ 28, "MOVE_SAFEGUARD" ],
             [ 30, "MOVE_GRAVITY" ],
             [ 32, "MOVE_EXTRASENSORY" ],
-            [ 34, "MOVE_ICE_SPINNER" ],
-            [ 36, "MOVE_HEAVY_SLAM" ],
-            [ 38, "MOVE_POWER_GEM" ],
-            [ 41, "MOVE_EXPANDING_FORCE" ],
-            [ 43, "MOVE_STEEL_BEAM" ],
-            [ 45, "MOVE_METAL_SOUND" ],
-            [ 47, "MOVE_FUTURE_SIGHT" ]
+            [ 34, "MOVE_METAL_SOUND" ],
+            [ 37, "MOVE_ICE_SPINNER" ],
+            [ 39, "MOVE_HEAVY_SLAM" ],
+            [ 41, "MOVE_POWER_GEM" ],
+            [ 44, "MOVE_EXPANDING_FORCE" ],
+            [ 46, "MOVE_STEEL_BEAM" ],
+            [ 48, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
             "TM06",

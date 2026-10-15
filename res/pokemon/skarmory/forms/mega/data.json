@@ -56,9 +56,9 @@
             [ 26, "MOVE_SAND_TOMB" ],
             [ 28, "MOVE_STEEL_WING" ],
             [ 30, "MOVE_AIR_SLASH" ],
-            [ 32, "MOVE_SCALE_SHOT" ],
-            [ 36, "MOVE_DRILL_PECK" ],
-            [ 40, "MOVE_METAL_SOUND" ],
+            [ 32, "MOVE_METAL_SOUND" ],
+            [ 35, "MOVE_SCALE_SHOT" ],
+            [ 37, "MOVE_DRILL_PECK" ],
             [ 44, "MOVE_SPIKES" ],
             [ 46, "MOVE_STEEL_BEAM" ],
             [ 52, "MOVE_BRAVE_BIRD" ]

@@ -43,7 +43,8 @@
             [ 8, "MOVE_INFESTATION" ],
             [ 12, "MOVE_SCARY_FACE" ],
             [ 15, "MOVE_NIGHT_SHADE" ],
-            [ 19, "MOVE_SHADOW_SNEAK" ],
+            [ 18, "MOVE_TOXIC_THREAD" ],
+            [ 20, "MOVE_SHADOW_SNEAK" ],
             [ 22, "MOVE_STRUGGLE_BUG" ],
             [ 25, "MOVE_TWINEEDLE" ],
             [ 27, "MOVE_SPIDER_WEB" ],
@@ -61,8 +62,7 @@
             [ 57, "MOVE_CROSS_POISON" ],
             [ 59, "MOVE_PSYCHIC" ],
             [ 61, "MOVE_SLUDGE_WAVE" ],
-            [ 63, "MOVE_STICKY_WEB" ],
-            [ 65, "MOVE_TOXIC_THREAD" ]
+            [ 63, "MOVE_STICKY_WEB" ]
         ],
         "by_tm": [
             "TM05",

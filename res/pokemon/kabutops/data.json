@@ -44,12 +44,12 @@
             [ 20, "MOVE_LEER" ],
             [ 25, "MOVE_MUD_SHOT" ],
             [ 30, "MOVE_ANCIENT_POWER" ],
+            [ 33, "MOVE_METAL_SOUND" ],
             [ 35, "MOVE_BRINE" ],
             [ 39, "MOVE_ACCELEROCK" ],
             [ 43, "MOVE_PROTECT" ],
             [ 49, "MOVE_LEECH_LIFE" ],
             [ 56, "MOVE_LIQUIDATION" ],
-            [ 63, "MOVE_METAL_SOUND" ],
             [ 65, "MOVE_SUPERPOWER" ],
             [ 70, "MOVE_STONE_EDGE" ]
         ],
