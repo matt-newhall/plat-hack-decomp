@@ -9760,7 +9760,8 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     }
 
     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MINIMIZE)
-        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH || move == MOVE_HEAVY_SLAM || move == MOVE_HEAT_CRASH)) {
+        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH || move == MOVE_HEAVY_SLAM || move == MOVE_HEAT_CRASH
+            || move == MOVE_SHADOW_FORCE || move == MOVE_PHANTOM_FORCE)) {
         damage *= 2;
     }
 

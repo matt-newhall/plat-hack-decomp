@@ -3175,7 +3175,8 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     }
 
     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MINIMIZE)
-        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH || move == MOVE_HEAVY_SLAM || move == MOVE_HEAT_CRASH)) {
+        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH || move == MOVE_HEAVY_SLAM || move == MOVE_HEAT_CRASH
+            || move == MOVE_SHADOW_FORCE || move == MOVE_PHANTOM_FORCE)) {
         return 0;
     }
 
@@ -3763,7 +3764,7 @@ static void BattleControllerPlayer_UpdateHP(BattleSystem *battleSys, BattleConte
 
         if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
             && battleCtx->damage < 0
-            && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+            && !(BattleSystem_IsSoundMove(battleCtx->moveTemp) || battleCtx->moveTemp == MOVE_PLAY_NICE || battleCtx->moveTemp == MOVE_TEARFUL_LOOK)
             && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR)) {
             if (DEFENDING_MON.moveEffectsData.substituteHP + battleCtx->damage <= 0) {
                 ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt += DEFENDING_MON.moveEffectsData.substituteHP * -1;

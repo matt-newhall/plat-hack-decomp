@@ -3134,7 +3134,7 @@ static BOOL BtlCmd_ChangeStatStage(BattleSystem *battleSys, BattleContext *battl
                     && battleCtx->sideEffectType == SIDE_EFFECT_TYPE_INDIRECT) {
                     result = 1;
                 } else if (battleCtx->battleMons[battleCtx->sideEffectMon].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE
-                    && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+                    && !(BattleSystem_IsSoundMove(battleCtx->moveTemp) || battleCtx->moveTemp == MOVE_PLAY_NICE || battleCtx->moveTemp == MOVE_TEARFUL_LOOK)
                     && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR)) {
                     result = 2;
                 }
@@ -10342,7 +10342,7 @@ static BOOL BtlCmd_CheckSubstitute(BattleSystem *battleSys, BattleContext *battl
     int battler = BattleScript_Battler(battleSys, battleCtx, inBattler);
     if (((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
         || (battleCtx->selfTurnFlags[battler].statusFlags & SELF_TURN_FLAG_SUBSTITUTE_HIT))
-        && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+        && !(BattleSystem_IsSoundMove(battleCtx->moveTemp) || battleCtx->moveTemp == MOVE_PLAY_NICE || battleCtx->moveTemp == MOVE_TEARFUL_LOOK)
         && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR && battleCtx->moveCur != MOVE_TRANSFORM)) {
         BattleScript_Iter(battleCtx, jumpSubActive);
     }
