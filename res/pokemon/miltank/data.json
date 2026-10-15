@@ -37,16 +37,19 @@
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_ROLLOUT" ],
-            [ 10, "MOVE_DEFENSE_CURL" ],
+            [ 10, "MOVE_WAKE_UP_SLAP" ],
             [ 15, "MOVE_STOMP" ],
             [ 20, "MOVE_HEAL_BELL" ],
-            [ 25, "MOVE_HEADBUTT" ],
-            [ 30, "MOVE_ZEN_HEADBUTT" ],
+            [ 25, "MOVE_PUNISHMENT" ],
+            [ 28, "MOVE_HEADBUTT" ],
+            [ 30, "MOVE_DIZZY_PUNCH" ],
+            [ 33, "MOVE_ZEN_HEADBUTT" ],
             [ 35, "MOVE_MILK_DRINK" ],
             [ 40, "MOVE_BODY_SLAM" ],
             [ 45, "MOVE_PLAY_ROUGH" ],
             [ 50, "MOVE_CHARM" ],
-            [ 55, "MOVE_HIGH_HORSEPOWER" ]
+            [ 55, "MOVE_HIGH_HORSEPOWER" ],
+            [ 58, "MOVE_STEEL_ROLLER" ]
         ],
         "by_tm": [
             "TM01",
@@ -95,7 +98,6 @@
         "egg_moves": [
             "MOVE_DOUBLE_EDGE",
             "MOVE_SEISMIC_TOSS",
-            "MOVE_CURSE",
             "MOVE_REVERSAL",
             "MOVE_PRESENT",
             "MOVE_HELPING_HAND",

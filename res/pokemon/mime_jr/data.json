@@ -38,7 +38,8 @@
             [ 1, "MOVE_POUND" ],
             [ 4, "MOVE_BATON_PASS" ],
             [ 8, "MOVE_ENCORE" ],
-            [ 12, "MOVE_CONFUSION" ],
+            [ 11, "MOVE_DOUBLE_SLAP" ],
+            [ 13, "MOVE_CONFUSION" ],
             [ 16, "MOVE_ROLE_PLAY" ],
             [ 20, "MOVE_PROTECT" ],
             [ 24, "MOVE_RECYCLE" ],
@@ -46,11 +47,13 @@
             [ 32, "MOVE_MIMIC" ],
             [ 36, "MOVE_LIGHT_SCREEN" ],
             [ 36, "MOVE_REFLECT" ],
-            [ 36, "MOVE_SAFEGUARD" ],
-            [ 40, "MOVE_SUCKER_PUNCH" ],
+            [ 39, "MOVE_SAFEGUARD" ],
+            [ 41, "MOVE_SUCKER_PUNCH" ],
             [ 44, "MOVE_DAZZLING_GLEAM" ],
-            [ 48, "MOVE_PSYCHIC" ],
-            [ 52, "MOVE_TEETER_DANCE" ]
+            [ 47, "MOVE_FIRST_IMPRESSION" ],
+            [ 49, "MOVE_PSYCHIC" ],
+            [ 51, "MOVE_TRIPLE_AXEL" ],
+            [ 53, "MOVE_TEETER_DANCE" ]
         ],
         "by_tm": [
             "TM01",

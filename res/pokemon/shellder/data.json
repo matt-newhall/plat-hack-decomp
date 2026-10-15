@@ -36,18 +36,21 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 4, "MOVE_WITHDRAW" ],
+            [ 4, "MOVE_CLAMP" ],
             [ 8, "MOVE_ICE_SHARD" ],
             [ 12, "MOVE_LEER" ],
             [ 16, "MOVE_WHIRLPOOL" ],
+            [ 18, "MOVE_WATER_PULSE" ],
             [ 20, "MOVE_SUPERSONIC" ],
-            [ 24, "MOVE_AURORA_BEAM" ],
+            [ 23, "MOVE_ROCK_BLAST" ],
+            [ 25, "MOVE_AURORA_BEAM" ],
             [ 28, "MOVE_PROTECT" ],
             [ 32, "MOVE_ICICLE_SPEAR" ],
-            [ 36, "MOVE_IRON_DEFENSE" ],
-            [ 40, "MOVE_ICE_BEAM" ],
-            [ 44, "MOVE_SHELL_SMASH" ],
-            [ 48, "MOVE_HYDRO_PUMP" ]
+            [ 35, "MOVE_TRI_ATTACK" ],
+            [ 37, "MOVE_ICE_SPINNER" ],
+            [ 44, "MOVE_ICICLE_CRASH" ],
+            [ 48, "MOVE_ICE_BEAM" ],
+            [ 57, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM06",
@@ -73,7 +76,6 @@
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_IRON_DEFENSE",
             "MOVE_SWIFT",
             "MOVE_RAPID_SPIN"
         ],

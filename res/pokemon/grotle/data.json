@@ -36,16 +36,19 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_ABSORB" ],
-            [ 1, "MOVE_WITHDRAW" ],
             [ 13, "MOVE_RAZOR_LEAF" ],
-            [ 17, "MOVE_CURSE" ],
+            [ 16, "MOVE_SAND_TOMB" ],
+            [ 18, "MOVE_TRAILBLAZE" ],
+            [ 20, "MOVE_MAGICAL_LEAF" ],
             [ 22, "MOVE_BITE" ],
             [ 27, "MOVE_MEGA_DRAIN" ],
-            [ 32, "MOVE_LEECH_SEED" ],
+            [ 30, "MOVE_NATURE_POWER" ],
+            [ 33, "MOVE_GRASSY_GLIDE" ],
+            [ 35, "MOVE_LEECH_SEED" ],
             [ 37, "MOVE_SYNTHESIS" ],
             [ 42, "MOVE_CRUNCH" ],
             [ 47, "MOVE_GIGA_DRAIN" ],
-            [ 52, "MOVE_LEAF_STORM" ]
+            [ 54, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [
             "TM05",

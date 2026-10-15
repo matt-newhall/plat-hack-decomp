@@ -46,21 +46,21 @@
         "by_level": [
             [ 1, "MOVE_FURY_ATTACK" ],
             [ 1, "MOVE_BUG_BITE" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_POISON_STING" ],
             [ 1, "MOVE_STRING_SHOT" ],
+            [ 1, "MOVE_PURSUIT" ],
             [ 11, "MOVE_FURY_CUTTER" ],
             [ 14, "MOVE_PLUCK" ],
             [ 17, "MOVE_POISON_STING" ],
-            [ 20, "MOVE_FOCUS_ENERGY" ],
+            [ 19, "MOVE_TWINEEDLE" ],
+            [ 21, "MOVE_FOCUS_ENERGY" ],
             [ 23, "MOVE_VENOSHOCK" ],
             [ 26, "MOVE_ASSURANCE" ],
             [ 29, "MOVE_TOXIC_SPIKES" ],
             [ 32, "MOVE_PIN_MISSILE" ],
-            [ 35, "MOVE_POISON_JAB" ],
-            [ 38, "MOVE_AGILITY" ],
-            [ 41, "MOVE_ENDEAVOR" ],
-            [ 44, "MOVE_FELL_STINGER" ]
+            [ 35, "MOVE_FELL_STINGER" ],
+            [ 38, "MOVE_POISON_JAB" ],
+            [ 41, "MOVE_ENDEAVOR" ]
         ],
         "by_tm": [
             "TM06",

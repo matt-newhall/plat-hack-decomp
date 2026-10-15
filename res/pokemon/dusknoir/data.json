@@ -46,14 +46,19 @@
             [ 1, "MOVE_ASTONISH" ],
             [ 12, "MOVE_CONFUSE_RAY" ],
             [ 16, "MOVE_NIGHT_SHADE" ],
+            [ 18, "MOVE_PURSUIT" ],
             [ 20, "MOVE_PAYBACK" ],
             [ 24, "MOVE_WILL_O_WISP" ],
             [ 28, "MOVE_MEAN_LOOK" ],
-            [ 32, "MOVE_HEX" ],
+            [ 31, "MOVE_NIGHTMARE" ],
+            [ 33, "MOVE_HEX" ],
             [ 36, "MOVE_CURSE" ],
             [ 42, "MOVE_SHADOW_BALL" ],
-            [ 48, "MOVE_FUTURE_SIGHT" ],
-            [ 54, "MOVE_DESTINY_BOND" ]
+            [ 46, "MOVE_LEECH_LIFE" ],
+            [ 50, "MOVE_PHANTOM_FORCE" ],
+            [ 52, "MOVE_FUTURE_SIGHT" ],
+            [ 54, "MOVE_POLTERGEIST" ],
+            [ 56, "MOVE_DESTINY_BOND" ]
         ],
         "by_tm": [
             "TM01",

@@ -36,18 +36,23 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_TAIL_WHIP" ],
-            [ 5, "MOVE_WORK_UP" ],
+            [ 5, "MOVE_RAGE" ],
             [ 10, "MOVE_PAYBACK" ],
             [ 15, "MOVE_ASSURANCE" ],
             [ 20, "MOVE_HORN_ATTACK" ],
+            [ 22, "MOVE_SMART_STRIKE" ],
             [ 25, "MOVE_SCARY_FACE" ],
             [ 30, "MOVE_ZEN_HEADBUTT" ],
             [ 35, "MOVE_RAGING_BULL" ],
             [ 40, "MOVE_REST" ],
+            [ 43, "MOVE_HIGH_HORSEPOWER" ],
             [ 45, "MOVE_SWAGGER" ],
             [ 50, "MOVE_THRASH" ],
-            [ 55, "MOVE_DOUBLE_EDGE" ],
-            [ 60, "MOVE_GIGA_IMPACT" ]
+            [ 53, "MOVE_MEGAHORN" ],
+            [ 56, "MOVE_CLOSE_COMBAT" ],
+            [ 58, "MOVE_DOUBLE_EDGE" ],
+            [ 60, "MOVE_OUTRAGE" ],
+            [ 63, "MOVE_GIGA_IMPACT" ]
         ],
         "by_tm": [
             "TM05",
@@ -92,7 +97,6 @@
             "MOVE_ZEN_HEADBUTT"
         ],
         "egg_moves": [
-            "MOVE_CURSE",
             "MOVE_ENDEAVOR"
         ]
     },

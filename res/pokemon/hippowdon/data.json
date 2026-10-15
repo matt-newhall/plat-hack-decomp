@@ -44,13 +44,15 @@
             [ 12, "MOVE_SAND_TOMB" ],
             [ 16, "MOVE_DIG" ],
             [ 20, "MOVE_CRUNCH" ],
-            [ 24, "MOVE_SANDSTORM" ],
             [ 28, "MOVE_TAKE_DOWN" ],
+            [ 30, "MOVE_STOMPING_TANTRUM" ],
             [ 32, "MOVE_ROAR" ],
             [ 38, "MOVE_REST" ],
-            [ 44, "MOVE_EARTHQUAKE" ],
+            [ 40, "MOVE_HIGH_HORSEPOWER" ],
+            [ 47, "MOVE_EARTHQUAKE" ],
             [ 50, "MOVE_DOUBLE_EDGE" ],
-            [ 56, "MOVE_FISSURE" ],
+            [ 53, "MOVE_SUPERPOWER" ],
+            [ 56, "MOVE_HEADLONG_RUSH" ],
             [ 62, "MOVE_SLACK_OFF" ]
         ],
         "by_tm": [

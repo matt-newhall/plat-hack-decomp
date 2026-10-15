@@ -39,15 +39,18 @@
             [ 4, "MOVE_SAND_ATTACK" ],
             [ 8, "MOVE_FURY_ATTACK" ],
             [ 12, "MOVE_METAL_CLAW" ],
-            [ 16, "MOVE_AGILITY" ],
-            [ 20, "MOVE_WING_ATTACK" ],
+            [ 16, "MOVE_PAYBACK" ],
+            [ 19, "MOVE_SMART_STRIKE" ],
+            [ 21, "MOVE_WING_ATTACK" ],
             [ 24, "MOVE_SLASH" ],
+            [ 26, "MOVE_SAND_TOMB" ],
             [ 28, "MOVE_STEEL_WING" ],
-            [ 32, "MOVE_PAYBACK" ],
+            [ 30, "MOVE_AIR_SLASH" ],
+            [ 32, "MOVE_SCALE_SHOT" ],
             [ 36, "MOVE_DRILL_PECK" ],
             [ 40, "MOVE_METAL_SOUND" ],
             [ 44, "MOVE_SPIKES" ],
-            [ 48, "MOVE_IRON_DEFENSE" ],
+            [ 46, "MOVE_STEEL_BEAM" ],
             [ 52, "MOVE_BRAVE_BIRD" ]
         ],
         "by_tm": [
@@ -88,7 +91,6 @@
             "MOVE_OMINOUS_WIND",
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_SWIFT",
             "MOVE_DRILL_PECK",
             "MOVE_DRILL_RUN"
@@ -96,7 +98,6 @@
         "egg_moves": [
             "MOVE_WHIRLWIND",
             "MOVE_SKY_ATTACK",
-            "MOVE_CURSE",
             "MOVE_AIR_CUTTER",
             "MOVE_ROOST",
             "MOVE_FEINT",

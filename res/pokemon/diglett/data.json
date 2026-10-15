@@ -39,14 +39,16 @@
             [ 4, "MOVE_GROWL" ],
             [ 8, "MOVE_ASTONISH" ],
             [ 12, "MOVE_MUD_SLAP" ],
-            [ 16, "MOVE_BULLDOZE" ],
-            [ 20, "MOVE_SUCKER_PUNCH" ],
-            [ 24, "MOVE_SLASH" ],
-            [ 28, "MOVE_SANDSTORM" ],
+            [ 14, "MOVE_ROCK_BLAST" ],
+            [ 17, "MOVE_SAND_TOMB" ],
+            [ 19, "MOVE_BULLDOZE" ],
+            [ 22, "MOVE_CHARM" ],
+            [ 24, "MOVE_SUCKER_PUNCH" ],
+            [ 27, "MOVE_SLASH" ],
+            [ 29, "MOVE_MUD_BOMB" ],
             [ 32, "MOVE_DIG" ],
             [ 36, "MOVE_EARTH_POWER" ],
-            [ 40, "MOVE_EARTHQUAKE" ],
-            [ 44, "MOVE_FISSURE" ]
+            [ 44, "MOVE_EARTHQUAKE" ]
         ],
         "by_tm": [
             "TM06",

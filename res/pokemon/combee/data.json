@@ -37,7 +37,8 @@
             [ 1, "MOVE_GUST" ],
             [ 1, "MOVE_SWEET_SCENT" ],
             [ 1, "MOVE_BUG_BITE" ],
-            [ 1, "MOVE_STRUGGLE_BUG" ]
+            [ 1, "MOVE_STRUGGLE_BUG" ],
+            [ 34, "MOVE_BUG_BUZZ" ]
         ],
         "by_tm": [
             "TM27",

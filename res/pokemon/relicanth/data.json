@@ -34,19 +34,21 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_WATER_GUN" ],
             [ 10, "MOVE_ANCIENT_POWER" ],
             [ 15, "MOVE_YAWN" ],
             [ 20, "MOVE_DIVE" ],
-            [ 25, "MOVE_TAKE_DOWN" ],
-            [ 30, "MOVE_AQUA_TAIL" ],
+            [ 31, "MOVE_TAKE_DOWN" ],
+            [ 33, "MOVE_SCALE_SHOT" ],
             [ 35, "MOVE_REST" ],
             [ 40, "MOVE_FLAIL" ],
-            [ 45, "MOVE_HYDRO_PUMP" ],
-            [ 50, "MOVE_DOUBLE_EDGE" ],
-            [ 55, "MOVE_HEAD_SMASH" ]
+            [ 48, "MOVE_AQUA_TAIL" ],
+            [ 50, "MOVE_HYDRO_PUMP" ],
+            [ 53, "MOVE_DOUBLE_EDGE" ],
+            [ 55, "MOVE_SKULL_BASH" ],
+            [ 57, "MOVE_METEOR_BEAM" ],
+            [ 64, "MOVE_HEAD_SMASH" ]
         ],
         "by_tm": [
             "TM06",
@@ -60,7 +62,6 @@
             "TM55",
             "TM58",
             "TM68",
-            "TM69",
             "TM71",
             "TM76",
             "TM78",
@@ -86,7 +87,6 @@
         ],
         "egg_moves": [
             "MOVE_SKULL_BASH",
-            "MOVE_AMNESIA",
             "MOVE_SNORE",
             "MOVE_MUD_SLAP",
             "MOVE_MUDDY_WATER",

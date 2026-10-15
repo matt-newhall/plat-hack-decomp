@@ -35,7 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_CURSE" ],
+            [ 1, "MOVE_PSYBEAM" ],
             [ 3, "MOVE_GROWL" ],
             [ 6, "MOVE_WATER_GUN" ],
             [ 9, "MOVE_YAWN" ],
@@ -43,14 +43,15 @@
             [ 15, "MOVE_DISABLE" ],
             [ 18, "MOVE_WATER_PULSE" ],
             [ 21, "MOVE_HEADBUTT" ],
-            [ 24, "MOVE_ZEN_HEADBUTT" ],
-            [ 27, "MOVE_AMNESIA" ],
-            [ 30, "MOVE_SURF" ],
-            [ 33, "MOVE_SLACK_OFF" ],
-            [ 36, "MOVE_PSYCHIC" ],
-            [ 39, "MOVE_PSYCH_UP" ],
-            [ 42, "MOVE_RAIN_DANCE" ],
-            [ 45, "MOVE_HEAL_BELL" ]
+            [ 27, "MOVE_ME_FIRST" ],
+            [ 29, "MOVE_ZEN_HEADBUTT" ],
+            [ 31, "MOVE_TRI_ATTACK" ],
+            [ 36, "MOVE_SLACK_OFF" ],
+            [ 42, "MOVE_PSYCH_UP" ],
+            [ 44, "MOVE_SURF" ],
+            [ 46, "MOVE_HEAL_BELL" ],
+            [ 48, "MOVE_PSYCHIC" ],
+            [ 50, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM06",
@@ -97,7 +98,6 @@
         ],
         "egg_moves": [
             "MOVE_STOMP",
-            "MOVE_BELLY_DRUM",
             "MOVE_BLOCK",
             "MOVE_BODY_SLAM"
         ]

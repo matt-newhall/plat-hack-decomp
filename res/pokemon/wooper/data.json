@@ -36,17 +36,20 @@
         "by_level": [
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 4, "MOVE_RAIN_DANCE" ],
+            [ 4, "MOVE_MUD_BOMB" ],
             [ 8, "MOVE_MUD_SHOT" ],
             [ 12, "MOVE_MIST" ],
-            [ 12, "MOVE_HAZE" ],
-            [ 16, "MOVE_SLAM" ],
-            [ 21, "MOVE_YAWN" ],
-            [ 24, "MOVE_AQUA_TAIL" ],
-            [ 28, "MOVE_MUDDY_WATER" ],
-            [ 32, "MOVE_AMNESIA" ],
-            [ 36, "MOVE_TOXIC" ],
-            [ 40, "MOVE_EARTHQUAKE" ]
+            [ 15, "MOVE_WATER_PULSE" ],
+            [ 18, "MOVE_HAZE" ],
+            [ 20, "MOVE_SLAM" ],
+            [ 22, "MOVE_YAWN" ],
+            [ 24, "MOVE_STOMPING_TANTRUM" ],
+            [ 31, "MOVE_AQUA_TAIL" ],
+            [ 33, "MOVE_MUD_SPORT" ],
+            [ 36, "MOVE_MUDDY_WATER" ],
+            [ 38, "MOVE_TOXIC" ],
+            [ 41, "MOVE_SLUDGE_WAVE" ],
+            [ 44, "MOVE_EARTHQUAKE" ]
         ],
         "by_tm": [
             "TM05",
@@ -91,11 +94,7 @@
             "MOVE_DOUBLE_KICK",
             "MOVE_COUNTER",
             "MOVE_RECOVER",
-            "MOVE_CURSE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_STOCKPILE",
-            "MOVE_SPIT_UP",
-            "MOVE_SWALLOW",
             "MOVE_ACID_SPRAY",
             "MOVE_HELPING_HAND"
         ]

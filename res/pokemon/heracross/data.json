@@ -39,16 +39,22 @@
             [ 1, "MOVE_ARM_THRUST" ],
             [ 5, "MOVE_FURY_ATTACK" ],
             [ 10, "MOVE_ENDURE" ],
+            [ 13, "MOVE_BUG_BITE" ],
             [ 15, "MOVE_AERIAL_ACE" ],
+            [ 18, "MOVE_STRUGGLE_BUG" ],
             [ 20, "MOVE_HORN_ATTACK" ],
-            [ 25, "MOVE_COUNTER" ],
-            [ 30, "MOVE_BRICK_BREAK" ],
-            [ 35, "MOVE_PIN_MISSILE" ],
-            [ 40, "MOVE_PLAY_ROUGH" ],
-            [ 45, "MOVE_THRASH" ],
-            [ 50, "MOVE_SWORDS_DANCE" ],
-            [ 55, "MOVE_MEGAHORN" ],
-            [ 60, "MOVE_CLOSE_COMBAT" ]
+            [ 22, "MOVE_PIN_MISSILE" ],
+            [ 24, "MOVE_ROCK_BLAST" ],
+            [ 27, "MOVE_SMART_STRIKE" ],
+            [ 29, "MOVE_COUNTER" ],
+            [ 31, "MOVE_VACUUM_WAVE" ],
+            [ 33, "MOVE_BRICK_BREAK" ],
+            [ 42, "MOVE_HIGH_HORSEPOWER" ],
+            [ 44, "MOVE_PLAY_ROUGH" ],
+            [ 46, "MOVE_BUG_BUZZ" ],
+            [ 48, "MOVE_THRASH" ],
+            [ 64, "MOVE_CLOSE_COMBAT" ],
+            [ 66, "MOVE_MEGAHORN" ]
         ],
         "by_tm": [
             "TM01",
@@ -81,7 +87,6 @@
         "by_tutor": [
             "MOVE_FURY_CUTTER",
             "MOVE_SNORE",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK",
             "MOVE_LUNGE"
@@ -89,7 +94,6 @@
         "egg_moves": [
             "MOVE_DOUBLE_EDGE",
             "MOVE_SEISMIC_TOSS",
-            "MOVE_HARDEN",
             "MOVE_FLAIL",
             "MOVE_FEINT",
             "MOVE_NIGHT_SLASH"

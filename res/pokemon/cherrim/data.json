@@ -34,9 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SUNNY_DAY" ],
             [ 1, "MOVE_WEATHER_BALL" ],
-            [ 1, "MOVE_GROWTH" ],
             [ 1, "MOVE_LEAFAGE" ],
             [ 1, "MOVE_MORNING_SUN" ],
             [ 1, "MOVE_TACKLE" ],
@@ -45,8 +43,10 @@
             [ 28, "MOVE_LEECH_SEED" ],
             [ 34, "MOVE_TAKE_DOWN" ],
             [ 41, "MOVE_PETAL_BLIZZARD" ],
+            [ 46, "MOVE_PLAY_ROUGH" ],
             [ 48, "MOVE_WORRY_SEED" ],
-            [ 55, "MOVE_SOLAR_BEAM" ],
+            [ 55, "MOVE_POLLEN_PUFF" ],
+            [ 58, "MOVE_SOLAR_BEAM" ],
             [ 62, "MOVE_PETAL_DANCE" ]
         ],
         "by_tm": [

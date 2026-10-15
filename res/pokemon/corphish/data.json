@@ -35,20 +35,21 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_WATER_GUN" ],
-            [ 1, "MOVE_HARDEN" ],
+            [ 1, "MOVE_FAINT_ATTACK" ],
+            [ 1, "MOVE_BUBBLE" ],
             [ 4, "MOVE_LEER" ],
             [ 8, "MOVE_TAUNT" ],
-            [ 12, "MOVE_BUBBLE_BEAM" ],
+            [ 11, "MOVE_METAL_CLAW" ],
+            [ 13, "MOVE_BUBBLE_BEAM" ],
             [ 16, "MOVE_KNOCK_OFF" ],
             [ 20, "MOVE_DOUBLE_HIT" ],
             [ 24, "MOVE_PROTECT" ],
             [ 28, "MOVE_NIGHT_SLASH" ],
             [ 32, "MOVE_X_SCISSOR" ],
-            [ 36, "MOVE_SWORDS_DANCE" ],
             [ 40, "MOVE_CRUNCH" ],
-            [ 44, "MOVE_CRABHAMMER" ],
-            [ 48, "MOVE_ENDEAVOR" ],
-            [ 52, "MOVE_GUILLOTINE" ]
+            [ 47, "MOVE_SUPERPOWER" ],
+            [ 49, "MOVE_ENDEAVOR" ],
+            [ 51, "MOVE_CRABHAMMER" ]
         ],
         "by_tm": [
             "TM06",
@@ -84,7 +85,6 @@
             "MOVE_SPITE",
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK"
         ],
@@ -93,7 +93,6 @@
             "MOVE_SLASH",
             "MOVE_METAL_CLAW",
             "MOVE_ANCIENT_POWER",
-            "MOVE_SWITCHEROO",
             "MOVE_AQUA_JET"
         ]
     },

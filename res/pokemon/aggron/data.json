@@ -34,7 +34,6 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_METAL_CLAW" ],
             [ 1, "MOVE_ROCK_TOMB" ],
             [ 1, "MOVE_TACKLE" ],
@@ -42,13 +41,20 @@
             [ 16, "MOVE_HEADBUTT" ],
             [ 20, "MOVE_PROTECT" ],
             [ 24, "MOVE_ROCK_SLIDE" ],
+            [ 26, "MOVE_SMART_STRIKE" ],
             [ 28, "MOVE_IRON_HEAD" ],
             [ 35, "MOVE_METAL_SOUND" ],
             [ 40, "MOVE_TAKE_DOWN" ],
-            [ 48, "MOVE_DOUBLE_EDGE" ],
-            [ 56, "MOVE_IRON_TAIL" ],
-            [ 64, "MOVE_IRON_DEFENSE" ],
-            [ 72, "MOVE_HEAVY_SLAM" ],
+            [ 47, "MOVE_HEAT_CRASH" ],
+            [ 49, "MOVE_CRUNCH" ],
+            [ 52, "MOVE_IRON_TAIL" ],
+            [ 54, "MOVE_HIGH_HORSEPOWER" ],
+            [ 57, "MOVE_EARTHQUAKE" ],
+            [ 59, "MOVE_DOUBLE_EDGE" ],
+            [ 61, "MOVE_METEOR_BEAM" ],
+            [ 71, "MOVE_SUPERPOWER" ],
+            [ 73, "MOVE_HEAVY_SLAM" ],
+            [ 79, "MOVE_OUTRAGE" ],
             [ 88, "MOVE_METAL_BURST" ]
         ],
         "by_tm": [
@@ -78,7 +84,6 @@
             "TM65",
             "TM66",
             "TM68",
-            "TM69",
             "TM71",
             "TM72",
             "TM73",
@@ -112,7 +117,6 @@
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
             "MOVE_BRICK_BREAK"
         ]

@@ -40,11 +40,13 @@
             [ 10, "MOVE_SUPERSONIC" ],
             [ 15, "MOVE_WING_ATTACK" ],
             [ 20, "MOVE_WATER_PULSE" ],
-            [ 26, "MOVE_AGILITY" ],
+            [ 28, "MOVE_FEATHER_DANCE" ],
             [ 30, "MOVE_AIR_SLASH" ],
+            [ 33, "MOVE_SCALD" ],
             [ 35, "MOVE_MIST" ],
             [ 40, "MOVE_ROOST" ],
-            [ 45, "MOVE_HURRICANE" ]
+            [ 46, "MOVE_BRAVE_BIRD" ],
+            [ 49, "MOVE_HURRICANE" ]
         ],
         "by_tm": [
             "TM06",

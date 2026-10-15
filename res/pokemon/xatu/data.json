@@ -42,12 +42,15 @@
             [ 1, "MOVE_TELEPORT" ],
             [ 15, "MOVE_CONFUSE_RAY" ],
             [ 20, "MOVE_NIGHT_SHADE" ],
+            [ 23, "MOVE_HEAL_BLOCK" ],
+            [ 26, "MOVE_MIRACLE_EYE" ],
             [ 28, "MOVE_PSYCHO_SHIFT" ],
             [ 34, "MOVE_GUARD_SWAP" ],
             [ 34, "MOVE_POWER_SWAP" ],
-            [ 41, "MOVE_PSYCHIC" ],
+            [ 40, "MOVE_ME_FIRST" ],
+            [ 42, "MOVE_PSYCHIC" ],
             [ 48, "MOVE_WISH" ],
-            [ 55, "MOVE_FUTURE_SIGHT" ]
+            [ 62, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
             "TM06",

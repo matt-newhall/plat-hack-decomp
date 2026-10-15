@@ -39,13 +39,16 @@
             [ 5, "MOVE_SUPERSONIC" ],
             [ 11, "MOVE_CONFUSION" ],
             [ 13, "MOVE_POISON_POWDER" ],
-            [ 17, "MOVE_PSYBEAM" ],
-            [ 23, "MOVE_STUN_SPORE" ],
-            [ 25, "MOVE_BUG_BUZZ" ],
-            [ 29, "MOVE_SLEEP_POWDER" ],
-            [ 35, "MOVE_LEECH_LIFE" ],
-            [ 37, "MOVE_ZEN_HEADBUTT" ],
-            [ 41, "MOVE_POISON_FANG" ],
+            [ 15, "MOVE_STRUGGLE_BUG" ],
+            [ 17, "MOVE_BUG_BITE" ],
+            [ 20, "MOVE_POISON_FANG" ],
+            [ 23, "MOVE_PSYBEAM" ],
+            [ 25, "MOVE_SECRET_POWER" ],
+            [ 27, "MOVE_STUN_SPORE" ],
+            [ 32, "MOVE_SLEEP_POWDER" ],
+            [ 34, "MOVE_BUG_BUZZ" ],
+            [ 36, "MOVE_LEECH_LIFE" ],
+            [ 38, "MOVE_ZEN_HEADBUTT" ],
             [ 47, "MOVE_PSYCHIC" ]
         ],
         "by_tm": [
@@ -77,7 +80,6 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_AGILITY",
             "MOVE_SCREECH",
             "MOVE_BATON_PASS",
             "MOVE_MORNING_SUN",

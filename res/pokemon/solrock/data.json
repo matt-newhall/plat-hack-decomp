@@ -36,20 +36,18 @@
         "by_level": [
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_FLARE_BLITZ" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_MORNING_SUN" ],
             [ 1, "MOVE_ROCK_THROW" ],
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_HYPNOSIS" ],
-            [ 10, "MOVE_ROCK_POLISH" ],
             [ 15, "MOVE_ROCK_SLIDE" ],
             [ 20, "MOVE_ZEN_HEADBUTT" ],
-            [ 25, "MOVE_COSMIC_POWER" ],
-            [ 30, "MOVE_PSYCHIC" ],
-            [ 35, "MOVE_STONE_EDGE" ],
-            [ 40, "MOVE_SOLAR_BEAM" ],
+            [ 36, "MOVE_PSYCHIC" ],
+            [ 38, "MOVE_METEOR_BEAM" ],
+            [ 41, "MOVE_STONE_EDGE" ],
             [ 45, "MOVE_STORED_POWER" ],
-            [ 50, "MOVE_EXPLOSION" ]
+            [ 47, "MOVE_SOLAR_BEAM" ],
+            [ 53, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [
             "TM06",
@@ -75,7 +73,6 @@
             "TM64",
             "TM67",
             "TM68",
-            "TM69",
             "TM70",
             "TM71",
             "TM74",
@@ -94,7 +91,6 @@
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_SWIFT"
         ]
     },

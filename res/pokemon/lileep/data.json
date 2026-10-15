@@ -42,13 +42,13 @@
             [ 16, "MOVE_ANCIENT_POWER" ],
             [ 20, "MOVE_MEGA_DRAIN" ],
             [ 24, "MOVE_BRINE" ],
-            [ 28, "MOVE_AMNESIA" ],
+            [ 28, "MOVE_WRING_OUT" ],
             [ 32, "MOVE_GASTRO_ACID" ],
             [ 36, "MOVE_GIGA_DRAIN" ],
-            [ 41, "MOVE_SPIT_UP" ],
-            [ 41, "MOVE_STOCKPILE" ],
-            [ 41, "MOVE_SWALLOW" ],
-            [ 44, "MOVE_ENERGY_BALL" ]
+            [ 41, "MOVE_ROCK_SLIDE" ],
+            [ 44, "MOVE_SLUDGE_BOMB" ],
+            [ 46, "MOVE_ENERGY_BALL" ],
+            [ 49, "MOVE_METEOR_BEAM" ]
         ],
         "by_tm": [
             "TM06",
@@ -64,7 +64,6 @@
             "TM53",
             "TM55",
             "TM58",
-            "TM69",
             "TM70",
             "TM76",
             "TM80",
@@ -85,7 +84,6 @@
             "MOVE_BIND",
             "MOVE_MEGA_DRAIN",
             "MOVE_RECOVER",
-            "MOVE_CURSE",
             "MOVE_MIRROR_COAT",
             "MOVE_TICKLE"
         ]

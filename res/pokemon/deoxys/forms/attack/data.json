@@ -40,11 +40,10 @@
             [ 13, "MOVE_TELEPORT" ],
             [ 19, "MOVE_TAUNT" ],
             [ 25, "MOVE_PSYSHOCK" ],
-            [ 31, "MOVE_PSYCHIC" ],
-            [ 37, "MOVE_SUPERPOWER" ],
+            [ 39, "MOVE_PSYCHIC" ],
             [ 43, "MOVE_SKILL_SWAP" ],
             [ 49, "MOVE_ZEN_HEADBUTT" ],
-            [ 55, "MOVE_COSMIC_POWER" ],
+            [ 56, "MOVE_SUPERPOWER" ],
             [ 61, "MOVE_ZAP_CANNON" ],
             [ 67, "MOVE_PSYCHO_BOOST" ],
             [ 73, "MOVE_HYPER_BEAM" ]

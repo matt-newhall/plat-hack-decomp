@@ -41,13 +41,15 @@
             [ 21, "MOVE_PSYBEAM" ],
             [ 28, "MOVE_IMPRISON" ],
             [ 35, "MOVE_EXTRASENSORY" ],
-            [ 42, "MOVE_NASTY_PLOT" ],
-            [ 49, "MOVE_PSYCHIC" ],
-            [ 56, "MOVE_UPROAR" ],
-            [ 63, "MOVE_FUTURE_SIGHT" ],
+            [ 49, "MOVE_TRI_ATTACK" ],
+            [ 55, "MOVE_PSYCHIC" ],
+            [ 57, "MOVE_UPROAR" ],
+            [ 59, "MOVE_PLAY_ROUGH" ],
+            [ 63, "MOVE_MYSTICAL_FIRE" ],
+            [ 66, "MOVE_FUTURE_SIGHT" ],
+            [ 68, "MOVE_EXPANDING_FORCE" ],
             [ 70, "MOVE_LAST_RESORT" ],
-            [ 77, "MOVE_EXPLOSION" ],
-            [ 84, "MOVE_MYSTICAL_FIRE" ]
+            [ 77, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [
             "TM06",

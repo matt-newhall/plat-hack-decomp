@@ -34,7 +34,10 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TELEPORT" ]
+            [ 1, "MOVE_TELEPORT" ],
+            [ 6, "MOVE_HEAL_BLOCK" ],
+            [ 9, "MOVE_MIRACLE_EYE" ],
+            [ 22, "MOVE_TRI_ATTACK" ]
         ],
         "by_tm": [
             "TM01",

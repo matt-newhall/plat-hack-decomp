@@ -34,8 +34,8 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_DEFENSE_CURL" ],
             [ 1, "MOVE_ROLLOUT" ],
+            [ 1, "MOVE_ICE_BALL" ],
             [ 4, "MOVE_GROWL" ],
             [ 8, "MOVE_WATER_GUN" ],
             [ 12, "MOVE_POWDER_SNOW" ],
@@ -45,10 +45,8 @@
             [ 28, "MOVE_AURORA_BEAM" ],
             [ 33, "MOVE_ENCORE" ],
             [ 36, "MOVE_BODY_SLAM" ],
-            [ 40, "MOVE_SURF" ],
-            [ 44, "MOVE_BLIZZARD" ],
-            [ 48, "MOVE_HAIL" ],
-            [ 52, "MOVE_SHEER_COLD" ]
+            [ 45, "MOVE_SURF" ],
+            [ 49, "MOVE_BLIZZARD" ]
         ],
         "by_tm": [
             "TM06",
@@ -80,13 +78,7 @@
             "MOVE_SIGNAL_BEAM"
         ],
         "egg_moves": [
-            "MOVE_FISSURE",
-            "MOVE_CURSE",
-            "MOVE_BELLY_DRUM",
             "MOVE_ROLLOUT",
-            "MOVE_STOCKPILE",
-            "MOVE_SPIT_UP",
-            "MOVE_SWALLOW",
             "MOVE_YAWN",
             "MOVE_AQUA_RING"
         ]

@@ -36,6 +36,7 @@
         "by_level": [
             [ 1, "MOVE_STRING_SHOT" ],
             [ 1, "MOVE_TACKLE" ],
+            [ 6, "MOVE_ELECTROWEB" ],
             [ 9, "MOVE_BUG_BITE" ]
         ],
         "by_tm": [  ],

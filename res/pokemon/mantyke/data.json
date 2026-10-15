@@ -40,14 +40,13 @@
             [ 8, "MOVE_WING_ATTACK" ],
             [ 12, "MOVE_WATER_PULSE" ],
             [ 16, "MOVE_TAILWIND" ],
-            [ 20, "MOVE_AGILITY" ],
             [ 24, "MOVE_BUBBLE_BEAM" ],
             [ 28, "MOVE_HEADBUTT" ],
             [ 32, "MOVE_AIR_SLASH" ],
             [ 36, "MOVE_AQUA_RING" ],
             [ 40, "MOVE_BOUNCE" ],
             [ 44, "MOVE_TAKE_DOWN" ],
-            [ 48, "MOVE_HYDRO_PUMP" ]
+            [ 52, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM06",

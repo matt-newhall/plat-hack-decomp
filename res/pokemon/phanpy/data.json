@@ -36,16 +36,23 @@
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
-            [ 1, "MOVE_DEFENSE_CURL" ],
+            [ 1, "MOVE_ODOR_SLEUTH" ],
             [ 6, "MOVE_FLAIL" ],
             [ 10, "MOVE_ROLLOUT" ],
-            [ 15, "MOVE_BULLDOZE" ],
-            [ 19, "MOVE_ENDURE" ],
+            [ 15, "MOVE_SAND_TOMB" ],
+            [ 18, "MOVE_BULLDOZE" ],
+            [ 20, "MOVE_ENDURE" ],
             [ 24, "MOVE_SLAM" ],
-            [ 28, "MOVE_TAKE_DOWN" ],
-            [ 33, "MOVE_CHARM" ],
-            [ 37, "MOVE_LAST_RESORT" ],
-            [ 42, "MOVE_DOUBLE_EDGE" ]
+            [ 27, "MOVE_ICE_SPINNER" ],
+            [ 29, "MOVE_TAKE_DOWN" ],
+            [ 35, "MOVE_MAGNITUDE" ],
+            [ 38, "MOVE_HIGH_HORSEPOWER" ],
+            [ 40, "MOVE_CHARM" ],
+            [ 42, "MOVE_PLAY_ROUGH" ],
+            [ 44, "MOVE_DOUBLE_EDGE" ],
+            [ 46, "MOVE_EARTHQUAKE" ],
+            [ 50, "MOVE_GUNK_SHOT" ],
+            [ 52, "MOVE_LAST_RESORT" ]
         ],
         "by_tm": [
             "TM05",
@@ -80,7 +87,6 @@
         "egg_moves": [
             "MOVE_BODY_SLAM",
             "MOVE_COUNTER",
-            "MOVE_FISSURE",
             "MOVE_FOCUS_ENERGY",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",

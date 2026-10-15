@@ -37,7 +37,6 @@
             [ 1, "MOVE_SLASH" ],
             [ 1, "MOVE_ABSORB" ],
             [ 1, "MOVE_FEINT" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_NIGHT_SLASH" ],
             [ 1, "MOVE_SAND_ATTACK" ],
             [ 1, "MOVE_SCRATCH" ],
@@ -46,10 +45,12 @@
             [ 25, "MOVE_MUD_SHOT" ],
             [ 30, "MOVE_ANCIENT_POWER" ],
             [ 35, "MOVE_BRINE" ],
+            [ 39, "MOVE_ACCELEROCK" ],
             [ 43, "MOVE_PROTECT" ],
             [ 49, "MOVE_LEECH_LIFE" ],
             [ 56, "MOVE_LIQUIDATION" ],
             [ 63, "MOVE_METAL_SOUND" ],
+            [ 65, "MOVE_SUPERPOWER" ],
             [ 70, "MOVE_STONE_EDGE" ]
         ],
         "by_tm": [
@@ -67,7 +68,6 @@
             "TM55",
             "TM58",
             "TM68",
-            "TM69",
             "TM71",
             "TM76",
             "TM80",
@@ -91,7 +91,6 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK",
             "MOVE_RAPID_SPIN"

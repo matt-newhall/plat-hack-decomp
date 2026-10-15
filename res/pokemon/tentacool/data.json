@@ -36,18 +36,21 @@
         "by_level": [
             [ 1, "MOVE_POISON_STING" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 4, "MOVE_ACID" ],
-            [ 8, "MOVE_WRAP" ],
+            [ 4, "MOVE_WRAP" ],
+            [ 7, "MOVE_ACID" ],
+            [ 10, "MOVE_CONSTRICT" ],
             [ 12, "MOVE_SUPERSONIC" ],
             [ 16, "MOVE_WATER_PULSE" ],
             [ 20, "MOVE_SCREECH" ],
             [ 24, "MOVE_BUBBLE_BEAM" ],
             [ 28, "MOVE_HEX" ],
-            [ 32, "MOVE_ACID_ARMOR" ],
+            [ 32, "MOVE_WRING_OUT" ],
             [ 36, "MOVE_POISON_JAB" ],
+            [ 38, "MOVE_SCALD" ],
             [ 40, "MOVE_SURF" ],
-            [ 44, "MOVE_SLUDGE_WAVE" ],
-            [ 48, "MOVE_HYDRO_PUMP" ]
+            [ 47, "MOVE_SLUDGE_WAVE" ],
+            [ 49, "MOVE_HYDRO_PUMP" ],
+            [ 51, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
             "TM06",
@@ -89,7 +92,6 @@
             "MOVE_MIRROR_COAT",
             "MOVE_KNOCK_OFF",
             "MOVE_TICKLE",
-            "MOVE_ACUPRESSURE",
             "MOVE_AQUA_RING"
         ]
     },

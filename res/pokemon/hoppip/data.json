@@ -44,14 +44,19 @@
             [ 10, "MOVE_SLEEP_POWDER" ],
             [ 12, "MOVE_BULLET_SEED" ],
             [ 15, "MOVE_SYNTHESIS" ],
-            [ 19, "MOVE_LEECH_SEED" ],
-            [ 22, "MOVE_MEGA_DRAIN" ],
-            [ 24, "MOVE_ACROBATICS" ],
-            [ 27, "MOVE_COTTON_SPORE" ],
-            [ 29, "MOVE_U_TURN" ],
-            [ 32, "MOVE_GIGA_DRAIN" ],
-            [ 35, "MOVE_BOUNCE" ],
-            [ 38, "MOVE_MEMENTO" ]
+            [ 17, "MOVE_MAGICAL_LEAF" ],
+            [ 19, "MOVE_CHARM" ],
+            [ 22, "MOVE_LEECH_SEED" ],
+            [ 25, "MOVE_MEGA_DRAIN" ],
+            [ 27, "MOVE_ACROBATICS" ],
+            [ 30, "MOVE_COTTON_SPORE" ],
+            [ 33, "MOVE_GRASSY_GLIDE" ],
+            [ 35, "MOVE_U_TURN" ],
+            [ 38, "MOVE_GIGA_DRAIN" ],
+            [ 41, "MOVE_BOUNCE" ],
+            [ 47, "MOVE_MEMENTO" ],
+            [ 49, "MOVE_POLLEN_PUFF" ],
+            [ 51, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [
             "TM05",
@@ -87,11 +92,8 @@
             "MOVE_ENCORE",
             "MOVE_WORRY_SEED",
             "MOVE_SEED_BOMB",
-            "MOVE_SWITCHEROO",
             "MOVE_RAGE_POWDER",
-            "MOVE_COTTON_GUARD",
-            "MOVE_GRASSY_TERRAIN",
-            "MOVE_STRENGTH_SAP"
+            "MOVE_GRASSY_TERRAIN"
         ]
     },
     "evolutions": [

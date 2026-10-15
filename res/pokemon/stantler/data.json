@@ -39,14 +39,17 @@
             [ 7, "MOVE_ASTONISH" ],
             [ 10, "MOVE_HYPNOSIS" ],
             [ 13, "MOVE_STOMP" ],
-            [ 16, "MOVE_SAND_ATTACK" ],
-            [ 21, "MOVE_TAKE_DOWN" ],
+            [ 15, "MOVE_PSYBEAM" ],
+            [ 17, "MOVE_SAND_ATTACK" ],
             [ 23, "MOVE_CONFUSE_RAY" ],
-            [ 27, "MOVE_CALM_MIND" ],
-            [ 32, "MOVE_ROLE_PLAY" ],
+            [ 26, "MOVE_TAKE_DOWN" ],
+            [ 28, "MOVE_ME_FIRST" ],
+            [ 31, "MOVE_GRAVITY" ],
+            [ 33, "MOVE_ROLE_PLAY" ],
             [ 37, "MOVE_ZEN_HEADBUTT" ],
+            [ 39, "MOVE_JUMP_KICK" ],
             [ 49, "MOVE_IMPRISON" ],
-            [ 55, "MOVE_DOUBLE_EDGE" ]
+            [ 60, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [
             "TM05",

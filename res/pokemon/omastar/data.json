@@ -38,16 +38,17 @@
             [ 1, "MOVE_BIND" ],
             [ 1, "MOVE_ROLLOUT" ],
             [ 1, "MOVE_SAND_ATTACK" ],
-            [ 1, "MOVE_WITHDRAW" ],
-            [ 15, "MOVE_WATER_GUN" ],
+            [ 15, "MOVE_CONSTRICT" ],
+            [ 18, "MOVE_WATER_GUN" ],
             [ 20, "MOVE_LEER" ],
             [ 25, "MOVE_MUD_SHOT" ],
             [ 30, "MOVE_ANCIENT_POWER" ],
             [ 35, "MOVE_BRINE" ],
             [ 43, "MOVE_PROTECT" ],
             [ 49, "MOVE_ROCK_BLAST" ],
-            [ 56, "MOVE_SURF" ],
-            [ 63, "MOVE_SHELL_SMASH" ],
+            [ 55, "MOVE_SCALD" ],
+            [ 57, "MOVE_SURF" ],
+            [ 63, "MOVE_METEOR_BEAM" ],
             [ 70, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
@@ -62,7 +63,6 @@
             "TM55",
             "TM58",
             "TM68",
-            "TM69",
             "TM71",
             "TM74",
             "TM76",
@@ -82,7 +82,6 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_SPIKE_CANNON"
         ]

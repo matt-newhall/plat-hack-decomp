@@ -35,7 +35,15 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_PRESENT" ],
-            [ 25, "MOVE_DRILL_PECK" ]
+            [ 11, "MOVE_ICE_BALL" ],
+            [ 17, "MOVE_ICICLE_SPEAR" ],
+            [ 20, "MOVE_FEATHER_DANCE" ],
+            [ 22, "MOVE_AIR_SLASH" ],
+            [ 24, "MOVE_TRIPLE_AXEL" ],
+            [ 26, "MOVE_DRILL_PECK" ],
+            [ 28, "MOVE_ICE_SPINNER" ],
+            [ 41, "MOVE_BRAVE_BIRD" ],
+            [ 45, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
             "TM01",

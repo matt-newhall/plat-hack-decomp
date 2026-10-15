@@ -36,18 +36,20 @@
         "by_level": [
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_SPLASH" ],
-            [ 4, "MOVE_DEFENSE_CURL" ],
             [ 8, "MOVE_BABY_DOLL_EYES" ],
             [ 12, "MOVE_COPYCAT" ],
             [ 16, "MOVE_QUICK_ATTACK" ],
             [ 20, "MOVE_DOUBLE_KICK" ],
             [ 24, "MOVE_CHARM" ],
             [ 28, "MOVE_BATON_PASS" ],
-            [ 32, "MOVE_HEADBUTT" ],
-            [ 36, "MOVE_AGILITY" ],
+            [ 31, "MOVE_DIZZY_PUNCH" ],
+            [ 33, "MOVE_HEADBUTT" ],
+            [ 36, "MOVE_JUMP_KICK" ],
             [ 44, "MOVE_FLATTER" ],
-            [ 48, "MOVE_BOUNCE" ],
-            [ 52, "MOVE_HEALING_WISH" ]
+            [ 47, "MOVE_PLAY_ROUGH" ],
+            [ 49, "MOVE_BOUNCE" ],
+            [ 52, "MOVE_HEALING_WISH" ],
+            [ 55, "MOVE_SKY_UPPERCUT" ]
         ],
         "by_tm": [
             "TM01",
@@ -93,12 +95,9 @@
             "MOVE_FAKE_OUT",
             "MOVE_TEETER_DANCE",
             "MOVE_FAKE_TEARS",
-            "MOVE_COSMIC_POWER",
             "MOVE_COPYCAT",
-            "MOVE_SWITCHEROO",
             "MOVE_DOUBLE_HIT",
-            "MOVE_VITAL_THROW",
-            "MOVE_POWER_UP_PUNCH"
+            "MOVE_VITAL_THROW"
         ]
     },
     "evolutions": [

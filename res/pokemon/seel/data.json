@@ -41,15 +41,20 @@
             [ 13, "MOVE_ENCORE" ],
             [ 17, "MOVE_ICE_SHARD" ],
             [ 21, "MOVE_REST" ],
-            [ 23, "MOVE_AQUA_RING" ],
-            [ 27, "MOVE_AURORA_BEAM" ],
-            [ 31, "MOVE_AQUA_JET" ],
-            [ 33, "MOVE_BRINE" ],
+            [ 24, "MOVE_SMART_STRIKE" ],
+            [ 26, "MOVE_ICICLE_SPEAR" ],
+            [ 28, "MOVE_AQUA_RING" ],
+            [ 30, "MOVE_AURORA_BEAM" ],
+            [ 32, "MOVE_AQUA_JET" ],
+            [ 34, "MOVE_BRINE" ],
             [ 37, "MOVE_TAKE_DOWN" ],
-            [ 41, "MOVE_DIVE" ],
-            [ 43, "MOVE_AQUA_TAIL" ],
-            [ 47, "MOVE_ICE_BEAM" ],
-            [ 51, "MOVE_SAFEGUARD" ]
+            [ 39, "MOVE_ICE_BEAM" ],
+            [ 44, "MOVE_DIVE" ],
+            [ 46, "MOVE_ICE_SPINNER" ],
+            [ 51, "MOVE_AQUA_TAIL" ],
+            [ 54, "MOVE_TRIPLE_AXEL" ],
+            [ 56, "MOVE_HYDRO_PUMP" ],
+            [ 58, "MOVE_SAFEGUARD" ]
         ],
         "by_tm": [
             "TM06",
@@ -77,14 +82,9 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_HORN_DRILL",
             "MOVE_DISABLE",
             "MOVE_LICK",
-            "MOVE_PERISH_SONG",
             "MOVE_FAKE_OUT",
-            "MOVE_STOCKPILE",
-            "MOVE_SPIT_UP",
-            "MOVE_SWALLOW",
             "MOVE_BODY_SLAM"
         ]
     },

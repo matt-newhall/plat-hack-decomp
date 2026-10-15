@@ -40,13 +40,16 @@
             [ 1, "MOVE_POISON_STING" ],
             [ 15, "MOVE_FURY_ATTACK" ],
             [ 22, "MOVE_TOXIC_SPIKES" ],
+            [ 24, "MOVE_POISON_TAIL" ],
             [ 29, "MOVE_DOUBLE_KICK" ],
+            [ 32, "MOVE_SMART_STRIKE" ],
             [ 36, "MOVE_HORN_ATTACK" ],
             [ 43, "MOVE_HELPING_HAND" ],
             [ 50, "MOVE_TOXIC" ],
             [ 57, "MOVE_FLATTER" ],
             [ 64, "MOVE_POISON_JAB" ],
-            [ 71, "MOVE_EARTH_POWER" ]
+            [ 71, "MOVE_EARTH_POWER" ],
+            [ 74, "MOVE_SKULL_BASH" ]
         ],
         "by_tm": [
             "TM06",

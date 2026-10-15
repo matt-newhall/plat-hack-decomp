@@ -35,17 +35,17 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_FURY_CUTTER" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_ROCK_TOMB" ],
             [ 1, "MOVE_WATER_GUN" ],
             [ 12, "MOVE_METAL_CLAW" ],
             [ 16, "MOVE_ANCIENT_POWER" ],
             [ 20, "MOVE_BUG_BITE" ],
             [ 24, "MOVE_BRINE" ],
-            [ 28, "MOVE_SLASH" ],
             [ 32, "MOVE_CRUSH_CLAW" ],
             [ 36, "MOVE_ROCK_BLAST" ],
+            [ 39, "MOVE_SLASH" ],
             [ 43, "MOVE_PROTECT" ],
+            [ 45, "MOVE_SUPERPOWER" ],
             [ 48, "MOVE_X_SCISSOR" ]
         ],
         "by_tm": [
@@ -63,7 +63,6 @@
             "TM58",
             "TM65",
             "TM68",
-            "TM69",
             "TM71",
             "TM76",
             "TM80",
@@ -85,7 +84,6 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK",
             "MOVE_RAPID_SPIN"

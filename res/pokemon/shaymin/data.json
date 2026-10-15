@@ -34,13 +34,14 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_GROWTH" ],
             [ 10, "MOVE_MAGICAL_LEAF" ],
             [ 19, "MOVE_LEECH_SEED" ],
             [ 28, "MOVE_SYNTHESIS" ],
             [ 37, "MOVE_SWEET_SCENT" ],
-            [ 46, "MOVE_PLAY_ROUGH" ],
+            [ 49, "MOVE_PETAL_BLIZZARD" ],
+            [ 52, "MOVE_AIR_SLASH" ],
             [ 55, "MOVE_WORRY_SEED" ],
+            [ 57, "MOVE_PLAY_ROUGH" ],
             [ 64, "MOVE_GRASSY_TERRAIN" ],
             [ 73, "MOVE_ENERGY_BALL" ],
             [ 82, "MOVE_SWEET_KISS" ],

@@ -45,7 +45,6 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_PETAL_BLIZZARD" ],
-            [ 1, "MOVE_GROWTH" ],
             [ 1, "MOVE_PETAL_DANCE" ],
             [ 1, "MOVE_VINE_WHIP" ],
             [ 1, "MOVE_TACKLE" ],
@@ -54,12 +53,18 @@
             [ 12, "MOVE_RAZOR_LEAF" ],
             [ 15, "MOVE_SLEEP_POWDER" ],
             [ 15, "MOVE_POISON_POWDER" ],
-            [ 20, "MOVE_SEED_BOMB" ],
-            [ 25, "MOVE_TAKE_DOWN" ],
+            [ 17, "MOVE_MAGICAL_LEAF" ],
+            [ 20, "MOVE_GRASSY_GLIDE" ],
+            [ 25, "MOVE_CHARM" ],
+            [ 28, "MOVE_TAKE_DOWN" ],
             [ 30, "MOVE_SWEET_SCENT" ],
-            [ 37, "MOVE_SYNTHESIS" ],
+            [ 33, "MOVE_STOMPING_TANTRUM" ],
+            [ 36, "MOVE_NATURE_POWER" ],
+            [ 38, "MOVE_SYNTHESIS" ],
+            [ 42, "MOVE_SEED_BOMB" ],
             [ 44, "MOVE_WORRY_SEED" ],
-            [ 51, "MOVE_POWER_WHIP" ],
+            [ 54, "MOVE_POWER_WHIP" ],
+            [ 56, "MOVE_LEAF_STORM" ],
             [ 58, "MOVE_SOLAR_BEAM" ]
         ],
         "by_tm": [

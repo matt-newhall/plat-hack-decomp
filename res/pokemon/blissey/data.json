@@ -40,7 +40,7 @@
             [ 1, "MOVE_DISARMING_VOICE" ],
             [ 1, "MOVE_SWEET_KISS" ],
             [ 1, "MOVE_POUND" ],
-            [ 1, "MOVE_DEFENSE_CURL" ],
+            [ 1, "MOVE_DOUBLE_SLAP" ],
             [ 4, "MOVE_TAIL_WHIP" ],
             [ 8, "MOVE_FAIRY_WIND" ],
             [ 12, "MOVE_LIFE_DEW" ],
@@ -49,11 +49,14 @@
             [ 24, "MOVE_TAKE_DOWN" ],
             [ 28, "MOVE_HEAL_BELL" ],
             [ 32, "MOVE_HELPING_HAND" ],
-            [ 36, "MOVE_LIGHT_SCREEN" ],
-            [ 40, "MOVE_DOUBLE_EDGE" ],
-            [ 44, "MOVE_SOFTBOILED" ],
-            [ 48, "MOVE_LAST_RESORT" ],
-            [ 52, "MOVE_HEALING_WISH" ]
+            [ 35, "MOVE_GRAVITY" ],
+            [ 37, "MOVE_TRI_ATTACK" ],
+            [ 39, "MOVE_HYPER_VOICE" ],
+            [ 41, "MOVE_LIGHT_SCREEN" ],
+            [ 43, "MOVE_DOUBLE_EDGE" ],
+            [ 45, "MOVE_SOFTBOILED" ],
+            [ 52, "MOVE_HEALING_WISH" ],
+            [ 55, "MOVE_LAST_RESORT" ]
         ],
         "by_tm": [
             "TM01",

@@ -35,7 +35,6 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_BABY_DOLL_EYES" ],
-            [ 1, "MOVE_DEFENSE_CURL" ],
             [ 1, "MOVE_MAGIC_COAT" ],
             [ 1, "MOVE_MIRROR_COAT" ],
             [ 1, "MOVE_POUND" ],
@@ -44,13 +43,18 @@
             [ 16, "MOVE_QUICK_ATTACK" ],
             [ 20, "MOVE_DOUBLE_KICK" ],
             [ 24, "MOVE_CHARM" ],
-            [ 28, "MOVE_BATON_PASS" ],
+            [ 27, "MOVE_DIZZY_PUNCH" ],
+            [ 29, "MOVE_BATON_PASS" ],
             [ 32, "MOVE_HEADBUTT" ],
-            [ 36, "MOVE_AGILITY" ],
-            [ 44, "MOVE_FLATTER" ],
-            [ 48, "MOVE_BOUNCE" ],
-            [ 52, "MOVE_HEALING_WISH" ],
-            [ 56, "MOVE_HI_JUMP_KICK" ]
+            [ 36, "MOVE_JUMP_KICK" ],
+            [ 41, "MOVE_AURA_SPHERE" ],
+            [ 43, "MOVE_BOUNCE" ],
+            [ 46, "MOVE_PLAY_ROUGH" ],
+            [ 49, "MOVE_TRIPLE_AXEL" ],
+            [ 51, "MOVE_FLATTER" ],
+            [ 53, "MOVE_HEALING_WISH" ],
+            [ 56, "MOVE_CLOSE_COMBAT" ],
+            [ 59, "MOVE_HI_JUMP_KICK" ]
         ],
         "by_tm": [
             "TM01",

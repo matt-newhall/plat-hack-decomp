@@ -37,11 +37,14 @@
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_SING" ],
             [ 1, "MOVE_COPYCAT" ],
-            [ 4, "MOVE_DEFENSE_CURL" ],
-            [ 8, "MOVE_SWEET_KISS" ],
+            [ 4, "MOVE_DOUBLE_SLAP" ],
+            [ 7, "MOVE_FAKE_TEARS" ],
+            [ 9, "MOVE_SWEET_KISS" ],
             [ 12, "MOVE_DISARMING_VOICE" ],
-            [ 16, "MOVE_DISABLE" ],
-            [ 20, "MOVE_CHARM" ]
+            [ 17, "MOVE_GRAVITY" ],
+            [ 19, "MOVE_DISABLE" ],
+            [ 21, "MOVE_CHARM" ],
+            [ 35, "MOVE_PLAY_ROUGH" ]
         ],
         "by_tm": [
             "TM04",
@@ -80,7 +83,6 @@
             "MOVE_BRICK_BREAK"
         ],
         "egg_moves": [
-            "MOVE_PERISH_SONG",
             "MOVE_ROLLOUT",
             "MOVE_PRESENT",
             "MOVE_WISH",

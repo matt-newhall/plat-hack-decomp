@@ -44,7 +44,9 @@
             [ 30, "MOVE_BITE" ],
             [ 35, "MOVE_HAZE" ],
             [ 40, "MOVE_VENOSHOCK" ],
+            [ 43, "MOVE_CRUNCH" ],
             [ 45, "MOVE_CONFUSE_RAY" ],
+            [ 48, "MOVE_BRAVE_BIRD" ],
             [ 50, "MOVE_AIR_SLASH" ],
             [ 55, "MOVE_LEECH_LIFE" ]
         ],
@@ -86,7 +88,6 @@
             "MOVE_WHIRLWIND",
             "MOVE_HYPNOSIS",
             "MOVE_QUICK_ATTACK",
-            "MOVE_CURSE",
             "MOVE_BRAVE_BIRD",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_TOXIC_SPIKES"

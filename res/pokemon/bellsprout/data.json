@@ -35,19 +35,23 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_VINE_WHIP" ],
-            [ 7, "MOVE_GROWTH" ],
             [ 11, "MOVE_WRAP" ],
             [ 13, "MOVE_SLEEP_POWDER" ],
             [ 15, "MOVE_POISON_POWDER" ],
             [ 17, "MOVE_STUN_SPORE" ],
+            [ 21, "MOVE_MAGICAL_LEAF" ],
             [ 23, "MOVE_ACID" ],
             [ 27, "MOVE_KNOCK_OFF" ],
             [ 29, "MOVE_SWEET_SCENT" ],
             [ 35, "MOVE_GASTRO_ACID" ],
             [ 39, "MOVE_RAZOR_LEAF" ],
-            [ 41, "MOVE_POISON_JAB" ],
-            [ 47, "MOVE_SLAM" ],
-            [ 52, "MOVE_POWER_WHIP" ]
+            [ 42, "MOVE_GRASSY_GLIDE" ],
+            [ 44, "MOVE_POISON_JAB" ],
+            [ 46, "MOVE_LEECH_LIFE" ],
+            [ 49, "MOVE_WRING_OUT" ],
+            [ 51, "MOVE_SLUDGE_WAVE" ],
+            [ 53, "MOVE_SLAM" ],
+            [ 55, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [
             "TM05",
@@ -85,8 +89,7 @@
             "MOVE_TICKLE",
             "MOVE_WORRY_SEED",
             "MOVE_SUCKER_PUNCH",
-            "MOVE_HAZE",
-            "MOVE_STRENGTH_SAP"
+            "MOVE_HAZE"
         ]
     },
     "evolutions": [

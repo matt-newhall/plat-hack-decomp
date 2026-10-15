@@ -39,16 +39,19 @@
             [ 5, "MOVE_SWEET_SCENT" ],
             [ 9, "MOVE_CHARM" ],
             [ 12, "MOVE_QUICK_ATTACK" ],
-            [ 15, "MOVE_STRUGGLE_BUG" ],
-            [ 19, "MOVE_MOONLIGHT" ],
-            [ 22, "MOVE_WISH" ],
-            [ 26, "MOVE_ENCORE" ],
-            [ 29, "MOVE_FLATTER" ],
-            [ 33, "MOVE_ZEN_HEADBUTT" ],
-            [ 36, "MOVE_HELPING_HAND" ],
-            [ 40, "MOVE_BUG_BUZZ" ],
-            [ 43, "MOVE_PLAY_ROUGH" ],
-            [ 47, "MOVE_INFESTATION" ]
+            [ 15, "MOVE_BUG_BITE" ],
+            [ 18, "MOVE_FAKE_TEARS" ],
+            [ 20, "MOVE_INFESTATION" ],
+            [ 22, "MOVE_STRUGGLE_BUG" ],
+            [ 24, "MOVE_MOONLIGHT" ],
+            [ 26, "MOVE_WISH" ],
+            [ 29, "MOVE_ENCORE" ],
+            [ 32, "MOVE_FLATTER" ],
+            [ 34, "MOVE_AIR_SLASH" ],
+            [ 36, "MOVE_ZEN_HEADBUTT" ],
+            [ 39, "MOVE_HELPING_HAND" ],
+            [ 41, "MOVE_BUG_BUZZ" ],
+            [ 43, "MOVE_PLAY_ROUGH" ]
         ],
         "by_tm": [
             "TM01",
@@ -93,8 +96,6 @@
             "MOVE_DAZZLING_GLEAM"
         ],
         "egg_moves": [
-            "MOVE_GROWTH",
-            "MOVE_ATTRACT",
             "MOVE_ROOST"
         ]
     },

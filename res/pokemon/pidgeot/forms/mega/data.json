@@ -55,12 +55,13 @@
             [ 17, "MOVE_WHIRLWIND" ],
             [ 22, "MOVE_TWISTER" ],
             [ 27, "MOVE_FEATHER_DANCE" ],
-            [ 32, "MOVE_AGILITY" ],
+            [ 32, "MOVE_MIRROR_MOVE" ],
             [ 38, "MOVE_WING_ATTACK" ],
             [ 44, "MOVE_ROOST" ],
             [ 50, "MOVE_TAILWIND" ],
             [ 56, "MOVE_AERIAL_ACE" ],
             [ 62, "MOVE_AIR_SLASH" ],
+            [ 65, "MOVE_RAZOR_WIND" ],
             [ 68, "MOVE_HURRICANE" ]
         ],
         "by_tm": [

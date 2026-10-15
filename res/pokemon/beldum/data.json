@@ -34,13 +34,16 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TACKLE" ]
+            [ 1, "MOVE_TACKLE" ],
+            [ 8, "MOVE_PURSUIT" ],
+            [ 10, "MOVE_MIRACLE_EYE" ],
+            [ 15, "MOVE_SMART_STRIKE" ],
+            [ 39, "MOVE_STEEL_BEAM" ]
         ],
         "by_tm": [  ],
         "by_tutor": [
             "MOVE_IRON_HEAD",
-            "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "evolutions": [

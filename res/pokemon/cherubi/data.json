@@ -37,14 +37,14 @@
             [ 1, "MOVE_MORNING_SUN" ],
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_LEAFAGE" ],
-            [ 10, "MOVE_GROWTH" ],
             [ 15, "MOVE_HELPING_HAND" ],
             [ 20, "MOVE_MAGICAL_LEAF" ],
             [ 26, "MOVE_LEECH_SEED" ],
             [ 30, "MOVE_TAKE_DOWN" ],
             [ 35, "MOVE_PETAL_BLIZZARD" ],
             [ 40, "MOVE_WORRY_SEED" ],
-            [ 45, "MOVE_SOLAR_BEAM" ]
+            [ 48, "MOVE_POLLEN_PUFF" ],
+            [ 50, "MOVE_SOLAR_BEAM" ]
         ],
         "by_tm": [
             "TM06",
@@ -70,7 +70,6 @@
         ],
         "egg_moves": [
             "MOVE_RAZOR_LEAF",
-            "MOVE_DEFENSE_CURL",
             "MOVE_ROLLOUT",
             "MOVE_SWEET_SCENT",
             "MOVE_NATURE_POWER",

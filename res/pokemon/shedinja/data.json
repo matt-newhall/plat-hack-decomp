@@ -37,7 +37,6 @@
             [ 1, "MOVE_DIG" ],
             [ 1, "MOVE_FALSE_SWIPE" ],
             [ 1, "MOVE_GRUDGE" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_METAL_CLAW" ],
             [ 1, "MOVE_MUD_SLAP" ],
             [ 1, "MOVE_SAND_ATTACK" ],
@@ -49,7 +48,9 @@
             [ 36, "MOVE_FURY_SWIPES" ],
             [ 43, "MOVE_MIND_READER" ],
             [ 50, "MOVE_SHADOW_BALL" ],
-            [ 57, "MOVE_SPITE" ],
+            [ 54, "MOVE_LEECH_LIFE" ],
+            [ 56, "MOVE_BUG_BUZZ" ],
+            [ 58, "MOVE_SPITE" ],
             [ 64, "MOVE_PHANTOM_FORCE" ]
         ],
         "by_tm": [

@@ -39,14 +39,12 @@
             [ 5, "MOVE_FOCUS_ENERGY" ],
             [ 9, "MOVE_QUICK_ATTACK" ],
             [ 13, "MOVE_WING_ATTACK" ],
-            [ 17, "MOVE_DOUBLE_TEAM" ],
             [ 21, "MOVE_AERIAL_ACE" ],
             [ 25, "MOVE_FEINT" ],
-            [ 29, "MOVE_AGILITY" ],
             [ 33, "MOVE_AIR_SLASH" ],
             [ 37, "MOVE_ENDEAVOR" ],
-            [ 41, "MOVE_BRAVE_BIRD" ],
-            [ 45, "MOVE_REVERSAL" ]
+            [ 45, "MOVE_REVERSAL" ],
+            [ 48, "MOVE_BRAVE_BIRD" ]
         ],
         "by_tm": [
             "TM06",

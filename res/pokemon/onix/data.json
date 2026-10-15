@@ -35,23 +35,25 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_BIND" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_ROCK_THROW" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 4, "MOVE_ROCK_TOMB" ],
-            [ 8, "MOVE_ROCK_POLISH" ],
+            [ 1, "MOVE_BREAKING_SWIPE" ],
+            [ 4, "MOVE_SAND_TOMB" ],
+            [ 7, "MOVE_ROCK_TOMB" ],
             [ 12, "MOVE_DRAGON_BREATH" ],
-            [ 16, "MOVE_CURSE" ],
-            [ 20, "MOVE_ROCK_SLIDE" ],
+            [ 16, "MOVE_ROCK_BLAST" ],
+            [ 19, "MOVE_SMART_STRIKE" ],
             [ 24, "MOVE_SCREECH" ],
-            [ 28, "MOVE_SAND_TOMB" ],
+            [ 29, "MOVE_ROCK_SLIDE" ],
             [ 32, "MOVE_STEALTH_ROCK" ],
             [ 36, "MOVE_SLAM" ],
-            [ 40, "MOVE_SANDSTORM" ],
             [ 44, "MOVE_DIG" ],
+            [ 46, "MOVE_HIGH_HORSEPOWER" ],
             [ 48, "MOVE_IRON_TAIL" ],
             [ 52, "MOVE_STONE_EDGE" ],
-            [ 56, "MOVE_DOUBLE_EDGE" ]
+            [ 56, "MOVE_DOUBLE_EDGE" ],
+            [ 58, "MOVE_EARTHQUAKE" ],
+            [ 60, "MOVE_METEOR_BEAM" ]
         ],
         "by_tm": [
             "TM06",
@@ -67,7 +69,6 @@
             "TM59",
             "TM64",
             "TM66",
-            "TM69",
             "TM71",
             "TM74",
             "TM76",
@@ -91,7 +92,6 @@
             "MOVE_EARTH_POWER"
         ],
         "egg_moves": [
-            "MOVE_DEFENSE_CURL",
             "MOVE_FLAIL",
             "MOVE_ROLLOUT",
             "MOVE_BLOCK",

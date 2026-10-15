@@ -36,18 +36,19 @@
         "by_level": [
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_DISABLE" ],
-            [ 1, "MOVE_KINESIS" ],
             [ 1, "MOVE_TELEPORT" ],
+            [ 1, "MOVE_HEAL_BLOCK" ],
             [ 5, "MOVE_PSYBEAM" ],
             [ 10, "MOVE_REFLECT" ],
             [ 15, "MOVE_TAUNT" ],
             [ 20, "MOVE_PSYCHO_CUT" ],
-            [ 25, "MOVE_RECOVER" ],
-            [ 30, "MOVE_PSYSHOCK" ],
-            [ 35, "MOVE_PSYCHIC" ],
+            [ 24, "MOVE_MIRACLE_EYE" ],
+            [ 26, "MOVE_RECOVER" ],
+            [ 32, "MOVE_TRI_ATTACK" ],
+            [ 35, "MOVE_PSYSHOCK" ],
             [ 40, "MOVE_ROLE_PLAY" ],
-            [ 45, "MOVE_FUTURE_SIGHT" ],
-            [ 50, "MOVE_CALM_MIND" ]
+            [ 44, "MOVE_PSYCHIC" ],
+            [ 46, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
             "TM01",

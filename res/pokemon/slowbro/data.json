@@ -34,24 +34,24 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_WITHDRAW" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 1, "MOVE_CURSE" ],
+            [ 1, "MOVE_PSYBEAM" ],
             [ 9, "MOVE_YAWN" ],
             [ 12, "MOVE_CONFUSION" ],
             [ 15, "MOVE_DISABLE" ],
             [ 18, "MOVE_WATER_PULSE" ],
             [ 21, "MOVE_HEADBUTT" ],
-            [ 24, "MOVE_ZEN_HEADBUTT" ],
-            [ 27, "MOVE_AMNESIA" ],
-            [ 30, "MOVE_SURF" ],
-            [ 33, "MOVE_SLACK_OFF" ],
-            [ 36, "MOVE_PSYCHIC" ],
+            [ 27, "MOVE_ME_FIRST" ],
+            [ 29, "MOVE_ZEN_HEADBUTT" ],
+            [ 32, "MOVE_TRI_ATTACK" ],
+            [ 34, "MOVE_SLACK_OFF" ],
             [ 41, "MOVE_PSYCH_UP" ],
-            [ 46, "MOVE_RAIN_DANCE" ],
-            [ 51, "MOVE_HEAL_BELL" ]
+            [ 43, "MOVE_SURF" ],
+            [ 48, "MOVE_PSYCHIC" ],
+            [ 50, "MOVE_HYDRO_PUMP" ],
+            [ 52, "MOVE_HEAL_BELL" ]
         ],
         "by_tm": [
             "TM01",
@@ -104,7 +104,6 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE",
             "MOVE_SWIFT",
             "MOVE_BRICK_BREAK"
         ]

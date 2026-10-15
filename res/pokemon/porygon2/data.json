@@ -35,20 +35,21 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_DEFENSE_CURL" ],
             [ 1, "MOVE_CONVERSION" ],
             [ 1, "MOVE_RECYCLE" ],
             [ 1, "MOVE_MAGNET_RISE" ],
             [ 15, "MOVE_THUNDER_SHOCK" ],
             [ 20, "MOVE_PSYBEAM" ],
             [ 25, "MOVE_CONVERSION_2" ],
-            [ 30, "MOVE_AGILITY" ],
+            [ 28, "MOVE_EERIE_IMPULSE" ],
+            [ 30, "MOVE_ELECTROWEB" ],
             [ 35, "MOVE_RECOVER" ],
-            [ 40, "MOVE_DISCHARGE" ],
+            [ 39, "MOVE_GRAVITY" ],
+            [ 41, "MOVE_DISCHARGE" ],
             [ 45, "MOVE_TRI_ATTACK" ],
             [ 50, "MOVE_LOCK_ON" ],
             [ 55, "MOVE_ZAP_CANNON" ],
-            [ 60, "MOVE_HYPER_BEAM" ]
+            [ 64, "MOVE_HYPER_BEAM" ]
         ],
         "by_tm": [
             "TM06",
@@ -73,7 +74,6 @@
             "TM68",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM87"

@@ -34,7 +34,6 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SHEER_COLD" ],
             [ 1, "MOVE_HEADBUTT" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_ICY_WIND" ],
@@ -42,13 +41,20 @@
             [ 17, "MOVE_ICE_SHARD" ],
             [ 21, "MOVE_REST" ],
             [ 23, "MOVE_AQUA_RING" ],
-            [ 27, "MOVE_AURORA_BEAM" ],
-            [ 31, "MOVE_AQUA_JET" ],
-            [ 33, "MOVE_BRINE" ],
+            [ 25, "MOVE_SMART_STRIKE" ],
+            [ 28, "MOVE_ICICLE_SPEAR" ],
+            [ 30, "MOVE_CHARM" ],
+            [ 33, "MOVE_AURORA_BEAM" ],
+            [ 35, "MOVE_AQUA_JET" ],
+            [ 37, "MOVE_BRINE" ],
             [ 39, "MOVE_TAKE_DOWN" ],
             [ 45, "MOVE_DIVE" ],
-            [ 49, "MOVE_AQUA_TAIL" ],
-            [ 55, "MOVE_ICE_BEAM" ],
+            [ 47, "MOVE_PLAY_ROUGH" ],
+            [ 49, "MOVE_ICE_SPINNER" ],
+            [ 51, "MOVE_ICE_BEAM" ],
+            [ 53, "MOVE_TRIPLE_AXEL" ],
+            [ 56, "MOVE_HYDRO_PUMP" ],
+            [ 58, "MOVE_AQUA_TAIL" ],
             [ 61, "MOVE_SAFEGUARD" ]
         ],
         "by_tm": [

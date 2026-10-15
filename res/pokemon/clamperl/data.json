@@ -34,10 +34,11 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_IRON_DEFENSE" ],
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_WHIRLPOOL" ],
-            [ 50, "MOVE_SHELL_SMASH" ]
+            [ 1, "MOVE_CLAMP" ],
+            [ 6, "MOVE_REFRESH" ],
+            [ 12, "MOVE_FAINT_ATTACK" ]
         ],
         "by_tm": [
             "TM06",
@@ -57,8 +58,7 @@
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_SNORE",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_SNORE"
         ],
         "egg_moves": [
             "MOVE_BODY_SLAM",

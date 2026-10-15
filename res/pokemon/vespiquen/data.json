@@ -50,9 +50,10 @@
             [ 28, "MOVE_AIR_SLASH" ],
             [ 32, "MOVE_POWER_GEM" ],
             [ 36, "MOVE_TOXIC" ],
-            [ 40, "MOVE_ATTACK_ORDER" ],
-            [ 40, "MOVE_DEFEND_ORDER" ],
-            [ 44, "MOVE_DESTINY_BOND" ]
+            [ 41, "MOVE_BUG_BUZZ" ],
+            [ 45, "MOVE_DESTINY_BOND" ],
+            [ 47, "MOVE_ATTACK_ORDER" ],
+            [ 49, "MOVE_POLLEN_PUFF" ]
         ],
         "by_tm": [
             "TM06",

@@ -35,21 +35,20 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_CONFUSION" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_MOONBLAST" ],
             [ 1, "MOVE_MOONLIGHT" ],
             [ 1, "MOVE_ROCK_THROW" ],
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_HYPNOSIS" ],
-            [ 10, "MOVE_ROCK_POLISH" ],
             [ 15, "MOVE_ROCK_SLIDE" ],
             [ 20, "MOVE_PSYSHOCK" ],
-            [ 25, "MOVE_COSMIC_POWER" ],
-            [ 30, "MOVE_PSYCHIC" ],
-            [ 35, "MOVE_STONE_EDGE" ],
-            [ 40, "MOVE_FUTURE_SIGHT" ],
-            [ 45, "MOVE_STORED_POWER" ],
-            [ 50, "MOVE_EXPLOSION" ]
+            [ 34, "MOVE_POWER_GEM" ],
+            [ 36, "MOVE_PSYCHIC" ],
+            [ 38, "MOVE_METEOR_BEAM" ],
+            [ 42, "MOVE_STONE_EDGE" ],
+            [ 44, "MOVE_FUTURE_SIGHT" ],
+            [ 46, "MOVE_STORED_POWER" ],
+            [ 53, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [
             "TM06",
@@ -73,7 +72,6 @@
             "TM64",
             "TM67",
             "TM68",
-            "TM69",
             "TM70",
             "TM71",
             "TM74",

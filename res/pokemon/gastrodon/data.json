@@ -39,15 +39,20 @@
         "by_level": [
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_RECOVER" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_MUD_SLAP" ],
-            [ 15, "MOVE_WATER_PULSE" ],
-            [ 20, "MOVE_ANCIENT_POWER" ],
-            [ 25, "MOVE_BODY_SLAM" ],
-            [ 33, "MOVE_MUDDY_WATER" ],
+            [ 15, "MOVE_SAND_TOMB" ],
+            [ 18, "MOVE_WATER_PULSE" ],
+            [ 21, "MOVE_ROCK_BLAST" ],
+            [ 23, "MOVE_ANCIENT_POWER" ],
+            [ 25, "MOVE_MUD_BOMB" ],
+            [ 28, "MOVE_BODY_SLAM" ],
             [ 39, "MOVE_EARTH_POWER" ],
-            [ 46, "MOVE_RAIN_DANCE" ],
-            [ 53, "MOVE_MEMENTO" ]
+            [ 41, "MOVE_MUDDY_WATER" ],
+            [ 46, "MOVE_MUD_SPORT" ],
+            [ 48, "MOVE_SLUDGE_WAVE" ],
+            [ 51, "MOVE_SCALD" ],
+            [ 53, "MOVE_HYDRO_PUMP" ],
+            [ 56, "MOVE_MEMENTO" ]
         ],
         "by_tm": [
             "TM06",

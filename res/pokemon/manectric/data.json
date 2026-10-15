@@ -35,17 +35,18 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_FIRE_FANG" ],
-            [ 1, "MOVE_HOWL" ],
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_THUNDER_WAVE" ],
+            [ 1, "MOVE_ODOR_SLEUTH" ],
             [ 12, "MOVE_QUICK_ATTACK" ],
             [ 16, "MOVE_SHOCK_WAVE" ],
             [ 20, "MOVE_BITE" ],
             [ 24, "MOVE_THUNDER_FANG" ],
             [ 30, "MOVE_ROAR" ],
+            [ 34, "MOVE_PSYCHIC_FANGS" ],
             [ 36, "MOVE_DISCHARGE" ],
-            [ 42, "MOVE_CHARGE" ],
+            [ 43, "MOVE_CRUNCH" ],
             [ 48, "MOVE_WILD_CHARGE" ],
             [ 54, "MOVE_THUNDER" ],
             [ 60, "MOVE_ELECTRIC_TERRAIN" ]
@@ -69,7 +70,6 @@
             "TM68",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM87",

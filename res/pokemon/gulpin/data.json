@@ -37,19 +37,18 @@
             [ 1, "MOVE_POUND" ],
             [ 5, "MOVE_YAWN" ],
             [ 8, "MOVE_POISON_GAS" ],
-            [ 10, "MOVE_SLUDGE" ],
-            [ 12, "MOVE_AMNESIA" ],
-            [ 17, "MOVE_ACID_SPRAY" ],
+            [ 10, "MOVE_ACID_SPRAY" ],
+            [ 13, "MOVE_SLUDGE" ],
             [ 20, "MOVE_ENCORE" ],
             [ 25, "MOVE_TOXIC" ],
-            [ 28, "MOVE_STOCKPILE" ],
-            [ 28, "MOVE_SPIT_UP" ],
-            [ 28, "MOVE_SWALLOW" ],
-            [ 33, "MOVE_SLUDGE_BOMB" ],
-            [ 36, "MOVE_GASTRO_ACID" ],
-            [ 41, "MOVE_SLUDGE_WAVE" ],
+            [ 28, "MOVE_WRING_OUT" ],
+            [ 31, "MOVE_MUD_SHOT" ],
+            [ 33, "MOVE_POISON_JAB" ],
+            [ 36, "MOVE_SLUDGE_BOMB" ],
+            [ 39, "MOVE_GASTRO_ACID" ],
             [ 44, "MOVE_PAIN_SPLIT" ],
-            [ 49, "MOVE_GUNK_SHOT" ]
+            [ 46, "MOVE_SLUDGE_WAVE" ],
+            [ 52, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
             "TM06",
@@ -87,7 +86,7 @@
         ],
         "egg_moves": [
             "MOVE_SMOG",
-            "MOVE_CURSE",
+            "MOVE_VENOSHOCK",
             "MOVE_MUD_SLAP",
             "MOVE_DESTINY_BOND",
             "MOVE_HAZE"

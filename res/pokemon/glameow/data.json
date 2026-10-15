@@ -45,7 +45,7 @@
             [ 32, "MOVE_REVENGE" ],
             [ 37, "MOVE_SLASH" ],
             [ 41, "MOVE_SUCKER_PUNCH" ],
-            [ 44, "MOVE_ATTRACT" ],
+            [ 44, "MOVE_CAPTIVATE" ],
             [ 48, "MOVE_KNOCK_OFF" ],
             [ 50, "MOVE_PLAY_ROUGH" ]
         ],

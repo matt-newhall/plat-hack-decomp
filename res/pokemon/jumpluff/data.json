@@ -45,13 +45,18 @@
             [ 12, "MOVE_SLEEP_POWDER" ],
             [ 15, "MOVE_BULLET_SEED" ],
             [ 20, "MOVE_LEECH_SEED" ],
+            [ 22, "MOVE_MAGICAL_LEAF" ],
             [ 24, "MOVE_MEGA_DRAIN" ],
+            [ 26, "MOVE_CHARM" ],
             [ 30, "MOVE_ACROBATICS" ],
             [ 35, "MOVE_COTTON_SPORE" ],
-            [ 39, "MOVE_U_TURN" ],
+            [ 38, "MOVE_GRASSY_GLIDE" ],
+            [ 40, "MOVE_U_TURN" ],
             [ 43, "MOVE_GIGA_DRAIN" ],
             [ 49, "MOVE_BOUNCE" ],
-            [ 55, "MOVE_MEMENTO" ]
+            [ 53, "MOVE_POLLEN_PUFF" ],
+            [ 55, "MOVE_LEAF_STORM" ],
+            [ 58, "MOVE_MEMENTO" ]
         ],
         "by_tm": [
             "TM05",

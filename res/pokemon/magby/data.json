@@ -38,16 +38,18 @@
             [ 1, "MOVE_SMOG" ],
             [ 4, "MOVE_EMBER" ],
             [ 8, "MOVE_SMOKE_SCREEN" ],
-            [ 12, "MOVE_FIRE_SPIN" ],
-            [ 16, "MOVE_FLAME_WHEEL" ],
-            [ 20, "MOVE_CONFUSE_RAY" ],
+            [ 11, "MOVE_KARATE_CHOP" ],
+            [ 13, "MOVE_FOCUS_ENERGY" ],
+            [ 16, "MOVE_FIRE_SPIN" ],
+            [ 19, "MOVE_FLAME_WHEEL" ],
+            [ 21, "MOVE_CONFUSE_RAY" ],
             [ 24, "MOVE_SCARY_FACE" ],
             [ 28, "MOVE_FIRE_PUNCH" ],
-            [ 32, "MOVE_LAVA_PLUME" ],
+            [ 33, "MOVE_LAVA_PLUME" ],
             [ 36, "MOVE_LOW_KICK" ],
             [ 40, "MOVE_FLAMETHROWER" ],
-            [ 44, "MOVE_SUNNY_DAY" ],
-            [ 48, "MOVE_FIRE_BLAST" ]
+            [ 48, "MOVE_FIRE_BLAST" ],
+            [ 50, "MOVE_FLARE_BLITZ" ]
         ],
         "by_tm": [
             "TM01",
@@ -80,7 +82,6 @@
         ],
         "egg_moves": [
             "MOVE_MACH_PUNCH",
-            "MOVE_BELLY_DRUM",
             "MOVE_DYNAMIC_PUNCH",
             "MOVE_CROSS_CHOP",
             "MOVE_FOCUS_PUNCH",

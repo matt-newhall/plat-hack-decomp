@@ -35,9 +35,10 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_ABSORB" ],
-            [ 1, "MOVE_GROWTH" ],
             [ 1, "MOVE_STUN_SPORE" ],
-            [ 1, "MOVE_WORRY_SEED" ]
+            [ 1, "MOVE_WORRY_SEED" ],
+            [ 19, "MOVE_GRASS_WHISTLE" ],
+            [ 42, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [
             "TM06",

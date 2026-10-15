@@ -35,18 +35,21 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_HARDEN" ],
+            [ 1, "MOVE_BIDE" ],
             [ 3, "MOVE_ABSORB" ],
             [ 6, "MOVE_ASTONISH" ],
-            [ 9, "MOVE_GROWTH" ],
+            [ 9, "MOVE_FAINT_ATTACK" ],
             [ 12, "MOVE_ROLLOUT" ],
-            [ 15, "MOVE_MEGA_DRAIN" ],
-            [ 18, "MOVE_PAYBACK" ],
-            [ 21, "MOVE_HEADBUTT" ],
-            [ 24, "MOVE_SUNNY_DAY" ],
-            [ 27, "MOVE_SYNTHESIS" ],
-            [ 30, "MOVE_SUCKER_PUNCH" ],
-            [ 33, "MOVE_EXPLOSION" ]
+            [ 15, "MOVE_MAGICAL_LEAF" ],
+            [ 17, "MOVE_NATURE_POWER" ],
+            [ 19, "MOVE_MEGA_DRAIN" ],
+            [ 21, "MOVE_PAYBACK" ],
+            [ 24, "MOVE_HEADBUTT" ],
+            [ 27, "MOVE_RAZOR_WIND" ],
+            [ 30, "MOVE_SYNTHESIS" ],
+            [ 33, "MOVE_SUCKER_PUNCH" ],
+            [ 36, "MOVE_LEAF_STORM" ],
+            [ 39, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [
             "TM05",

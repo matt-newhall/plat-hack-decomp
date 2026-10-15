@@ -64,7 +64,8 @@
     ],
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HIDDEN_POWER" ]
+            [ 1, "MOVE_HIDDEN_POWER" ],
+            [ 26, "MOVE_EXPANDING_FORCE" ]
         ],
         "by_tm": [
             "TM10"

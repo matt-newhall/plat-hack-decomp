@@ -38,7 +38,9 @@
             [ 1, "MOVE_POISON_STING" ],
             [ 5, "MOVE_SCRATCH" ],
             [ 10, "MOVE_TAIL_WHIP" ],
-            [ 15, "MOVE_FURY_SWIPES" ],
+            [ 13, "MOVE_POISON_TAIL" ],
+            [ 15, "MOVE_FOCUS_ENERGY" ],
+            [ 18, "MOVE_FURY_SWIPES" ],
             [ 20, "MOVE_TOXIC_SPIKES" ],
             [ 25, "MOVE_DOUBLE_KICK" ],
             [ 30, "MOVE_BITE" ],
@@ -46,7 +48,8 @@
             [ 40, "MOVE_TOXIC" ],
             [ 45, "MOVE_FLATTER" ],
             [ 50, "MOVE_CRUNCH" ],
-            [ 55, "MOVE_EARTH_POWER" ]
+            [ 55, "MOVE_EARTH_POWER" ],
+            [ 58, "MOVE_SKULL_BASH" ]
         ],
         "by_tm": [
             "TM06",

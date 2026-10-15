@@ -35,19 +35,21 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_DEFENSE_CURL" ],
-            [ 1, "MOVE_ROCK_POLISH" ],
             [ 10, "MOVE_ROLLOUT" ],
             [ 12, "MOVE_BULLDOZE" ],
             [ 16, "MOVE_ROCK_THROW" ],
-            [ 18, "MOVE_ROCK_TOMB" ],
-            [ 24, "MOVE_SELFDESTRUCT" ],
+            [ 18, "MOVE_MAGNITUDE" ],
+            [ 21, "MOVE_ROCK_TOMB" ],
+            [ 23, "MOVE_ROCK_BLAST" ],
+            [ 26, "MOVE_STOMPING_TANTRUM" ],
             [ 30, "MOVE_STEALTH_ROCK" ],
-            [ 34, "MOVE_ROCK_BLAST" ],
-            [ 40, "MOVE_EARTHQUAKE" ],
-            [ 44, "MOVE_EXPLOSION" ],
+            [ 32, "MOVE_HEAT_CRASH" ],
+            [ 38, "MOVE_HIGH_HORSEPOWER" ],
+            [ 44, "MOVE_EARTHQUAKE" ],
+            [ 47, "MOVE_STONE_EDGE" ],
             [ 50, "MOVE_DOUBLE_EDGE" ],
-            [ 54, "MOVE_STONE_EDGE" ]
+            [ 52, "MOVE_SELFDESTRUCT" ],
+            [ 54, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [
             "TM01",
@@ -63,7 +65,6 @@
             "TM52",
             "TM58",
             "TM64",
-            "TM69",
             "TM71",
             "TM74",
             "TM76",

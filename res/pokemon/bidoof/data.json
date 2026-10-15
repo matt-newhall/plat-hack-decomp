@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 5, "MOVE_DEFENSE_CURL" ],
             [ 9, "MOVE_ROLLOUT" ],
             [ 13, "MOVE_HEADBUTT" ],
             [ 17, "MOVE_TAUNT" ],
@@ -44,10 +43,10 @@
             [ 25, "MOVE_CRUNCH" ],
             [ 29, "MOVE_TAKE_DOWN" ],
             [ 33, "MOVE_SUPER_FANG" ],
-            [ 37, "MOVE_SWORDS_DANCE" ],
-            [ 41, "MOVE_AMNESIA" ],
+            [ 37, "MOVE_HYPER_FANG" ],
+            [ 41, "MOVE_SKULL_BASH" ],
             [ 45, "MOVE_SUPERPOWER" ],
-            [ 49, "MOVE_CURSE" ]
+            [ 49, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [
             "TM06",
@@ -85,7 +84,6 @@
         "egg_moves": [
             "MOVE_DOUBLE_EDGE",
             "MOVE_QUICK_ATTACK",
-            "MOVE_DEFENSE_CURL",
             "MOVE_SKULL_BASH",
             "MOVE_FURY_SWIPES",
             "MOVE_ROLLOUT",

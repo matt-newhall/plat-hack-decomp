@@ -49,9 +49,9 @@
             [ 29, "MOVE_TAUNT" ],
             [ 32, "MOVE_REVENGE" ],
             [ 37, "MOVE_SLASH" ],
-            [ 45, "MOVE_BODY_SLAM" ],
-            [ 52, "MOVE_ATTRACT" ],
-            [ 60, "MOVE_KNOCK_OFF" ]
+            [ 45, "MOVE_KNOCK_OFF" ],
+            [ 48, "MOVE_BODY_SLAM" ],
+            [ 52, "MOVE_CAPTIVATE" ]
         ],
         "by_tm": [
             "TM06",

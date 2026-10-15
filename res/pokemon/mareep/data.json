@@ -39,16 +39,16 @@
             [ 4, "MOVE_THUNDER_WAVE" ],
             [ 8, "MOVE_THUNDER_SHOCK" ],
             [ 11, "MOVE_COTTON_SPORE" ],
-            [ 15, "MOVE_CHARGE" ],
-            [ 18, "MOVE_TAKE_DOWN" ],
-            [ 22, "MOVE_CHARGE_BEAM" ],
+            [ 17, "MOVE_EERIE_IMPULSE" ],
+            [ 19, "MOVE_ELECTROWEB" ],
+            [ 21, "MOVE_TAKE_DOWN" ],
+            [ 23, "MOVE_CHARGE_BEAM" ],
             [ 25, "MOVE_CONFUSE_RAY" ],
-            [ 29, "MOVE_POWER_GEM" ],
             [ 32, "MOVE_DISCHARGE" ],
-            [ 36, "MOVE_COTTON_GUARD" ],
-            [ 39, "MOVE_DAZZLING_GLEAM" ],
+            [ 38, "MOVE_POWER_GEM" ],
+            [ 40, "MOVE_DAZZLING_GLEAM" ],
             [ 43, "MOVE_LIGHT_SCREEN" ],
-            [ 46, "MOVE_THUNDER" ]
+            [ 50, "MOVE_THUNDER" ]
         ],
         "by_tm": [
             "TM05",
@@ -67,7 +67,6 @@
             "TM58",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM87"
@@ -79,7 +78,6 @@
             "MOVE_SWIFT"
         ],
         "egg_moves": [
-            "MOVE_AGILITY",
             "MOVE_FLATTER",
             "MOVE_HELPING_HAND",
             "MOVE_ELECTROWEB",

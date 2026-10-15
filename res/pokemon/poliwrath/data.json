@@ -36,12 +36,19 @@
         "by_level": [
             [ 1, "MOVE_DYNAMIC_PUNCH" ],
             [ 1, "MOVE_HYPNOSIS" ],
+            [ 15, "MOVE_DOUBLE_SLAP" ],
             [ 18, "MOVE_BUBBLE_BEAM" ],
-            [ 24, "MOVE_RAIN_DANCE" ],
+            [ 24, "MOVE_MUD_BOMB" ],
+            [ 30, "MOVE_SUBMISSION" ],
             [ 32, "MOVE_BODY_SLAM" ],
+            [ 38, "MOVE_VACUUM_WAVE" ],
             [ 40, "MOVE_EARTH_POWER" ],
-            [ 48, "MOVE_HYDRO_PUMP" ],
-            [ 56, "MOVE_BELLY_DRUM" ],
+            [ 44, "MOVE_SCALD" ],
+            [ 46, "MOVE_HIGH_HORSEPOWER" ],
+            [ 48, "MOVE_DUAL_CHOP" ],
+            [ 56, "MOVE_HYDRO_PUMP" ],
+            [ 61, "MOVE_SUPERPOWER" ],
+            [ 63, "MOVE_CLOSE_COMBAT" ],
             [ 66, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [

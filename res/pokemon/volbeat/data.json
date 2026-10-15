@@ -35,19 +35,20 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 5, "MOVE_DOUBLE_TEAM" ],
             [ 8, "MOVE_CONFUSE_RAY" ],
             [ 12, "MOVE_QUICK_ATTACK" ],
-            [ 15, "MOVE_STRUGGLE_BUG" ],
-            [ 19, "MOVE_MOONLIGHT" ],
-            [ 22, "MOVE_TAIL_GLOW" ],
-            [ 26, "MOVE_PROTECT" ],
+            [ 15, "MOVE_BUG_BITE" ],
+            [ 18, "MOVE_INFESTATION" ],
+            [ 21, "MOVE_STRUGGLE_BUG" ],
+            [ 23, "MOVE_MOONLIGHT" ],
+            [ 25, "MOVE_TAIL_GLOW" ],
+            [ 27, "MOVE_PROTECT" ],
             [ 29, "MOVE_ZEN_HEADBUTT" ],
+            [ 31, "MOVE_AIR_SLASH" ],
             [ 33, "MOVE_HELPING_HAND" ],
-            [ 36, "MOVE_BUG_BUZZ" ],
-            [ 40, "MOVE_PLAY_ROUGH" ],
-            [ 43, "MOVE_DOUBLE_EDGE" ],
-            [ 47, "MOVE_INFESTATION" ]
+            [ 39, "MOVE_BUG_BUZZ" ],
+            [ 43, "MOVE_PLAY_ROUGH" ],
+            [ 46, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [
             "TM01",
@@ -72,7 +73,6 @@
             "TM62",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM87",

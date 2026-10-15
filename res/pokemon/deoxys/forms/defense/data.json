@@ -40,16 +40,14 @@
             [ 13, "MOVE_TELEPORT" ],
             [ 19, "MOVE_KNOCK_OFF" ],
             [ 25, "MOVE_SPIKES" ],
-            [ 31, "MOVE_PSYCHIC" ],
             [ 37, "MOVE_PROTECT" ],
+            [ 40, "MOVE_PSYCHIC" ],
             [ 43, "MOVE_SKILL_SWAP" ],
             [ 49, "MOVE_ZEN_HEADBUTT" ],
-            [ 55, "MOVE_AMNESIA" ],
-            [ 55, "MOVE_IRON_DEFENSE" ],
             [ 61, "MOVE_RECOVER" ],
-            [ 67, "MOVE_PSYCHO_BOOST" ],
+            [ 70, "MOVE_PSYCHO_BOOST" ],
             [ 73, "MOVE_COUNTER" ],
-            [ 73, "MOVE_MIRROR_COAT" ]
+            [ 76, "MOVE_MIRROR_COAT" ]
         ],
         "by_tm": [
             "TM01",
@@ -100,7 +98,6 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK"
         ]

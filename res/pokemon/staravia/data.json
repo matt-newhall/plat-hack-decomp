@@ -38,13 +38,13 @@
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
             [ 9, "MOVE_WING_ATTACK" ],
-            [ 13, "MOVE_DOUBLE_TEAM" ],
             [ 18, "MOVE_ENDEAVOR" ],
             [ 23, "MOVE_WHIRLWIND" ],
-            [ 28, "MOVE_AERIAL_ACE" ],
+            [ 25, "MOVE_AIR_SLASH" ],
+            [ 28, "MOVE_FEATHER_DANCE" ],
+            [ 31, "MOVE_AERIAL_ACE" ],
             [ 33, "MOVE_TAKE_DOWN" ],
-            [ 38, "MOVE_AGILITY" ],
-            [ 43, "MOVE_BRAVE_BIRD" ],
+            [ 46, "MOVE_BRAVE_BIRD" ],
             [ 48, "MOVE_FINAL_GAMBIT" ]
         ],
         "by_tm": [

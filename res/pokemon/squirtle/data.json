@@ -37,17 +37,17 @@
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 3, "MOVE_WATER_GUN" ],
-            [ 6, "MOVE_WITHDRAW" ],
             [ 9, "MOVE_RAPID_SPIN" ],
             [ 12, "MOVE_BITE" ],
             [ 15, "MOVE_WATER_PULSE" ],
             [ 18, "MOVE_PROTECT" ],
-            [ 21, "MOVE_RAIN_DANCE" ],
-            [ 24, "MOVE_AQUA_TAIL" ],
-            [ 27, "MOVE_SHELL_SMASH" ],
-            [ 30, "MOVE_IRON_DEFENSE" ],
-            [ 33, "MOVE_HYDRO_PUMP" ],
-            [ 36, "MOVE_WAVE_CRASH" ]
+            [ 21, "MOVE_ICE_SPINNER" ],
+            [ 24, "MOVE_AURA_SPHERE" ],
+            [ 30, "MOVE_SCALD" ],
+            [ 32, "MOVE_AQUA_TAIL" ],
+            [ 39, "MOVE_WAVE_CRASH" ],
+            [ 47, "MOVE_HYDRO_PUMP" ],
+            [ 50, "MOVE_SKULL_BASH" ]
         ],
         "by_tm": [
             "TM01",
@@ -83,7 +83,6 @@
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE",
             "MOVE_BRICK_BREAK",
             "MOVE_RAPID_SPIN",
             "MOVE_DRILL_RUN"

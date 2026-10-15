@@ -36,17 +36,25 @@
         "by_level": [
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_EMBER" ],
-            [ 5, "MOVE_BITE" ],
-            [ 10, "MOVE_DRAGON_BREATH" ],
-            [ 15, "MOVE_HEADBUTT" ],
+            [ 5, "MOVE_RAGE" ],
+            [ 8, "MOVE_FIRE_SPIN" ],
+            [ 11, "MOVE_BITE" ],
+            [ 13, "MOVE_DRAGON_BREATH" ],
+            [ 15, "MOVE_FIRE_FANG" ],
+            [ 18, "MOVE_HEADBUTT" ],
             [ 20, "MOVE_SCARY_FACE" ],
+            [ 22, "MOVE_BREAKING_SWIPE" ],
             [ 25, "MOVE_CRUNCH" ],
-            [ 31, "MOVE_DRAGON_CLAW" ],
+            [ 27, "MOVE_THUNDER_FANG" ],
             [ 35, "MOVE_ZEN_HEADBUTT" ],
             [ 40, "MOVE_FOCUS_ENERGY" ],
-            [ 45, "MOVE_FLAMETHROWER" ],
-            [ 50, "MOVE_OUTRAGE" ],
-            [ 55, "MOVE_DOUBLE_EDGE" ]
+            [ 43, "MOVE_DRAGON_CLAW" ],
+            [ 45, "MOVE_HYPER_VOICE" ],
+            [ 48, "MOVE_FLAMETHROWER" ],
+            [ 53, "MOVE_HYDRO_PUMP" ],
+            [ 56, "MOVE_DRACO_METEOR" ],
+            [ 62, "MOVE_OUTRAGE" ],
+            [ 64, "MOVE_DOUBLE_EDGE" ]
         ],
         "by_tm": [
             "TM02",
@@ -79,7 +87,6 @@
         ],
         "egg_moves": [
             "MOVE_THRASH",
-            "MOVE_DEFENSE_CURL",
             "MOVE_TWISTER",
             "MOVE_DRAGON_RUSH"
         ]

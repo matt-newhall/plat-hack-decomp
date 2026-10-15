@@ -39,8 +39,11 @@
             [ 7, "MOVE_ASTONISH" ],
             [ 10, "MOVE_CONFUSION" ],
             [ 13, "MOVE_YAWN" ],
-            [ 16, "MOVE_LAST_RESORT" ],
-            [ 32, "MOVE_UPROAR" ]
+            [ 15, "MOVE_SMART_STRIKE" ],
+            [ 17, "MOVE_GRAVITY" ],
+            [ 28, "MOVE_UPROAR" ],
+            [ 32, "MOVE_LAST_RESORT" ],
+            [ 35, "MOVE_HYPER_VOICE" ]
         ],
         "by_tm": [
             "TM06",
@@ -78,7 +81,7 @@
             "MOVE_DISABLE",
             "MOVE_HYPNOSIS",
             "MOVE_RECOVER",
-            "MOVE_CURSE",
+            "MOVE_CHARGE_BEAM",
             "MOVE_WISH",
             "MOVE_RECYCLE",
             "MOVE_TAUNT"

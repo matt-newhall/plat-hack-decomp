@@ -40,14 +40,16 @@
             [ 8, "MOVE_SMOKE_SCREEN" ],
             [ 12, "MOVE_ACID_SPRAY" ],
             [ 16, "MOVE_ASSURANCE" ],
+            [ 18, "MOVE_PSYBEAM" ],
             [ 20, "MOVE_SLUDGE" ],
             [ 24, "MOVE_HAZE" ],
-            [ 28, "MOVE_SELFDESTRUCT" ],
-            [ 32, "MOVE_SLUDGE_BOMB" ],
+            [ 34, "MOVE_SELFDESTRUCT" ],
             [ 36, "MOVE_TOXIC" ],
-            [ 40, "MOVE_SLUDGE_WAVE" ],
-            [ 44, "MOVE_EXPLOSION" ],
-            [ 48, "MOVE_MEMENTO" ],
+            [ 39, "MOVE_SLUDGE_WAVE" ],
+            [ 41, "MOVE_GUNK_SHOT" ],
+            [ 43, "MOVE_SLUDGE_BOMB" ],
+            [ 47, "MOVE_EXPLOSION" ],
+            [ 49, "MOVE_MEMENTO" ],
             [ 52, "MOVE_DESTINY_BOND" ]
         ],
         "by_tm": [
@@ -83,12 +85,8 @@
             "MOVE_MEMENTO"
         ],
         "egg_moves": [
-            "MOVE_CURSE",
             "MOVE_SPITE",
-            "MOVE_PAIN_SPLIT",
-            "MOVE_STOCKPILE",
-            "MOVE_SPIT_UP",
-            "MOVE_SWALLOW"
+            "MOVE_PAIN_SPLIT"
         ]
     },
     "evolutions": [

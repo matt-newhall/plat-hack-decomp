@@ -43,13 +43,20 @@
             [ 12, "MOVE_SYNTHESIS" ],
             [ 18, "MOVE_REFLECT" ],
             [ 22, "MOVE_MAGICAL_LEAF" ],
-            [ 26, "MOVE_LEECH_SEED" ],
+            [ 25, "MOVE_FAKE_TEARS" ],
+            [ 27, "MOVE_LEECH_SEED" ],
+            [ 32, "MOVE_CHARM" ],
             [ 34, "MOVE_SWEET_SCENT" ],
+            [ 37, "MOVE_NATURE_POWER" ],
             [ 40, "MOVE_LIGHT_SCREEN" ],
+            [ 43, "MOVE_GRASSY_GLIDE" ],
             [ 46, "MOVE_BODY_SLAM" ],
+            [ 48, "MOVE_GRASS_WHISTLE" ],
             [ 54, "MOVE_SAFEGUARD" ],
             [ 60, "MOVE_GIGA_DRAIN" ],
-            [ 65, "MOVE_SOLAR_BEAM" ]
+            [ 62, "MOVE_LEAF_STORM" ],
+            [ 65, "MOVE_SOLAR_BEAM" ],
+            [ 68, "MOVE_OUTRAGE" ]
         ],
         "by_tm": [
             "TM05",

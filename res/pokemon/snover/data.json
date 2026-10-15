@@ -39,13 +39,18 @@
             [ 5, "MOVE_LEAFAGE" ],
             [ 10, "MOVE_MIST" ],
             [ 15, "MOVE_ICE_SHARD" ],
-            [ 20, "MOVE_RAZOR_LEAF" ],
-            [ 25, "MOVE_ICY_WIND" ],
-            [ 30, "MOVE_SWAGGER" ],
+            [ 18, "MOVE_ICICLE_SPEAR" ],
+            [ 20, "MOVE_GRASS_WHISTLE" ],
+            [ 23, "MOVE_MAGICAL_LEAF" ],
+            [ 26, "MOVE_RAZOR_LEAF" ],
+            [ 28, "MOVE_ICE_SPINNER" ],
+            [ 31, "MOVE_ICY_WIND" ],
+            [ 33, "MOVE_SWAGGER" ],
             [ 35, "MOVE_INGRAIN" ],
-            [ 41, "MOVE_WOOD_HAMMER" ],
-            [ 45, "MOVE_BLIZZARD" ],
-            [ 50, "MOVE_SHEER_COLD" ]
+            [ 45, "MOVE_WOOD_HAMMER" ],
+            [ 49, "MOVE_BLIZZARD" ],
+            [ 51, "MOVE_SKULL_BASH" ],
+            [ 53, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [
             "TM05",
@@ -81,7 +86,6 @@
             "MOVE_STOMP",
             "MOVE_DOUBLE_EDGE",
             "MOVE_LEECH_SEED",
-            "MOVE_GROWTH",
             "MOVE_WEATHER_BALL"
         ]
     },

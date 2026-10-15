@@ -35,16 +35,15 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_FURY_CUTTER" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 4, "MOVE_WATER_GUN" ],
             [ 8, "MOVE_ROCK_THROW" ],
             [ 12, "MOVE_METAL_CLAW" ],
             [ 16, "MOVE_ANCIENT_POWER" ],
             [ 20, "MOVE_BUG_BITE" ],
             [ 24, "MOVE_BRINE" ],
-            [ 28, "MOVE_SLASH" ],
             [ 32, "MOVE_CRUSH_CLAW" ],
             [ 36, "MOVE_ROCK_BLAST" ],
+            [ 39, "MOVE_SLASH" ],
             [ 41, "MOVE_PROTECT" ],
             [ 44, "MOVE_X_SCISSOR" ]
         ],
@@ -59,7 +58,6 @@
             "TM54",
             "TM55",
             "TM58",
-            "TM69",
             "TM76",
             "TM80",
             "TM81",
@@ -75,7 +73,6 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_BRICK_BREAK",
             "MOVE_RAPID_SPIN"
@@ -83,10 +80,8 @@
         "egg_moves": [
             "MOVE_SAND_ATTACK",
             "MOVE_SCREECH",
-            "MOVE_CURSE",
             "MOVE_RAPID_SPIN",
             "MOVE_KNOCK_OFF",
-            "MOVE_IRON_DEFENSE",
             "MOVE_CROSS_POISON",
             "MOVE_AQUA_JET"
         ]

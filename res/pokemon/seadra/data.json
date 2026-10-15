@@ -38,15 +38,17 @@
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_SMOKE_SCREEN" ],
             [ 1, "MOVE_TWISTER" ],
+            [ 1, "MOVE_BUBBLE" ],
             [ 15, "MOVE_FOCUS_ENERGY" ],
+            [ 17, "MOVE_BREAKING_SWIPE" ],
             [ 20, "MOVE_DRAGON_BREATH" ],
             [ 25, "MOVE_BUBBLE_BEAM" ],
-            [ 30, "MOVE_AGILITY" ],
-            [ 37, "MOVE_WATER_PULSE" ],
+            [ 36, "MOVE_OCTAZOOKA" ],
+            [ 38, "MOVE_WATER_PULSE" ],
+            [ 40, "MOVE_SCALE_SHOT" ],
+            [ 42, "MOVE_SCALD" ],
             [ 44, "MOVE_DRAGON_PULSE" ],
-            [ 51, "MOVE_HYDRO_PUMP" ],
-            [ 58, "MOVE_DRAGON_DANCE" ],
-            [ 65, "MOVE_RAIN_DANCE" ]
+            [ 58, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM06",

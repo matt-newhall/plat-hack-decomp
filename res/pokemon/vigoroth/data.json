@@ -39,12 +39,14 @@
             [ 1, "MOVE_ENCORE" ],
             [ 1, "MOVE_UPROAR" ],
             [ 14, "MOVE_FURY_SWIPES" ],
-            [ 17, "MOVE_ENDURE" ],
+            [ 17, "MOVE_METAL_CLAW" ],
+            [ 20, "MOVE_ENDURE" ],
             [ 23, "MOVE_SLASH" ],
-            [ 27, "MOVE_PLAY_ROUGH" ],
             [ 33, "MOVE_COUNTER" ],
+            [ 35, "MOVE_PLAY_ROUGH" ],
             [ 37, "MOVE_FOCUS_PUNCH" ],
-            [ 43, "MOVE_REVERSAL" ]
+            [ 43, "MOVE_REVERSAL" ],
+            [ 46, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
             "TM01",

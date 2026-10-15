@@ -34,18 +34,19 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_DOUBLE_TEAM" ],
             [ 1, "MOVE_ASTONISH" ],
             [ 5, "MOVE_THUNDER_SHOCK" ],
             [ 10, "MOVE_CONFUSE_RAY" ],
-            [ 15, "MOVE_CHARGE" ],
             [ 20, "MOVE_VOLT_SWITCH" ],
+            [ 23, "MOVE_EERIE_IMPULSE" ],
             [ 25, "MOVE_THUNDER_WAVE" ],
             [ 30, "MOVE_SHOCK_WAVE" ],
+            [ 32, "MOVE_ELECTROWEB" ],
             [ 35, "MOVE_HEX" ],
             [ 40, "MOVE_SUBSTITUTE" ],
-            [ 45, "MOVE_TRICK" ],
+            [ 45, "MOVE_WILL_O_WISP" ],
             [ 50, "MOVE_DISCHARGE" ],
+            [ 52, "MOVE_POLTERGEIST" ],
             [ 55, "MOVE_UPROAR" ]
         ],
         "by_tm": [
@@ -65,7 +66,6 @@
             "TM61",
             "TM70",
             "TM73",
-            "TM75",
             "TM79",
             "TM82",
             "TM83",

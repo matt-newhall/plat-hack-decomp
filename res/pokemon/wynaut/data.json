@@ -34,7 +34,6 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_AMNESIA" ],
             [ 1, "MOVE_CHARM" ],
             [ 1, "MOVE_COUNTER" ],
             [ 1, "MOVE_DESTINY_BOND" ],

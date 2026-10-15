@@ -39,16 +39,18 @@
             [ 5, "MOVE_SING" ],
             [ 10, "MOVE_MIST" ],
             [ 15, "MOVE_LIFE_DEW" ],
+            [ 18, "MOVE_REFRESH" ],
             [ 20, "MOVE_ICE_SHARD" ],
-            [ 25, "MOVE_CONFUSE_RAY" ],
-            [ 30, "MOVE_WATER_PULSE" ],
+            [ 24, "MOVE_CHARM" ],
+            [ 27, "MOVE_ICICLE_SPEAR" ],
+            [ 29, "MOVE_CONFUSE_RAY" ],
+            [ 31, "MOVE_SMART_STRIKE" ],
+            [ 33, "MOVE_WATER_PULSE" ],
             [ 35, "MOVE_BRINE" ],
             [ 40, "MOVE_BODY_SLAM" ],
             [ 45, "MOVE_ICE_BEAM" ],
-            [ 50, "MOVE_RAIN_DANCE" ],
-            [ 55, "MOVE_HYDRO_PUMP" ],
-            [ 60, "MOVE_PERISH_SONG" ],
-            [ 65, "MOVE_SHEER_COLD" ]
+            [ 52, "MOVE_MEGAHORN" ],
+            [ 55, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM04",
@@ -96,9 +98,6 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_HORN_DRILL",
-            "MOVE_FISSURE",
-            "MOVE_CURSE",
             "MOVE_ANCIENT_POWER",
             "MOVE_TICKLE",
             "MOVE_FREEZE_DRY",

@@ -39,14 +39,18 @@
             [ 7, "MOVE_EMBER" ],
             [ 9, "MOVE_TAUNT" ],
             [ 15, "MOVE_FURY_SWIPES" ],
-            [ 17, "MOVE_FLAME_WHEEL" ],
-            [ 23, "MOVE_NASTY_PLOT" ],
-            [ 25, "MOVE_TORMENT" ],
+            [ 17, "MOVE_FAKE_TEARS" ],
+            [ 20, "MOVE_VACUUM_WAVE" ],
+            [ 22, "MOVE_FIRE_SPIN" ],
+            [ 24, "MOVE_FLAME_WHEEL" ],
+            [ 26, "MOVE_PUNISHMENT" ],
+            [ 28, "MOVE_TORMENT" ],
             [ 31, "MOVE_FACADE" ],
-            [ 33, "MOVE_FIRE_SPIN" ],
             [ 39, "MOVE_ACROBATICS" ],
             [ 41, "MOVE_SLACK_OFF" ],
-            [ 47, "MOVE_FLAMETHROWER" ]
+            [ 43, "MOVE_FLARE_BLITZ" ],
+            [ 47, "MOVE_FLAMETHROWER" ],
+            [ 53, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
             "TM01",
@@ -99,8 +103,7 @@
             "MOVE_ENCORE",
             "MOVE_FAKE_OUT",
             "MOVE_HEAT_WAVE",
-            "MOVE_HELPING_HAND",
-            "MOVE_SWITCHEROO"
+            "MOVE_HELPING_HAND"
         ]
     },
     "evolutions": [

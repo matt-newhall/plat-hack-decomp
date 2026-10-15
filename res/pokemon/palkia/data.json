@@ -38,14 +38,19 @@
             [ 1, "MOVE_WATER_PULSE" ],
             [ 8, "MOVE_DRAGON_BREATH" ],
             [ 16, "MOVE_ANCIENT_POWER" ],
+            [ 19, "MOVE_BREAKING_SWIPE" ],
             [ 24, "MOVE_SLASH" ],
             [ 32, "MOVE_AQUA_RING" ],
             [ 48, "MOVE_AURA_SPHERE" ],
+            [ 52, "MOVE_SCALE_SHOT" ],
             [ 56, "MOVE_POWER_GEM" ],
+            [ 58, "MOVE_GRAVITY" ],
             [ 64, "MOVE_AQUA_TAIL" ],
+            [ 66, "MOVE_HYPER_VOICE" ],
             [ 72, "MOVE_EARTH_POWER" ],
             [ 80, "MOVE_SPACIAL_REND" ],
-            [ 88, "MOVE_HYDRO_PUMP" ]
+            [ 88, "MOVE_HYDRO_PUMP" ],
+            [ 91, "MOVE_DRACO_METEOR" ]
         ],
         "by_tm": [
             "TM01",

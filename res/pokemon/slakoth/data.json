@@ -38,13 +38,14 @@
             [ 1, "MOVE_YAWN" ],
             [ 6, "MOVE_ENCORE" ],
             [ 9, "MOVE_SLACK_OFF" ],
-            [ 14, "MOVE_HEADBUTT" ],
-            [ 17, "MOVE_AMNESIA" ],
+            [ 13, "MOVE_METAL_CLAW" ],
+            [ 15, "MOVE_HEADBUTT" ],
             [ 22, "MOVE_COVET" ],
-            [ 25, "MOVE_PLAY_ROUGH" ],
             [ 30, "MOVE_COUNTER" ],
-            [ 33, "MOVE_FLAIL" ],
-            [ 38, "MOVE_PLAY_ROUGH" ]
+            [ 32, "MOVE_PLAY_ROUGH" ],
+            [ 34, "MOVE_FLAIL" ],
+            [ 42, "MOVE_PLAY_ROUGH" ],
+            [ 45, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
             "TM01",
@@ -90,7 +91,6 @@
             "MOVE_BODY_SLAM",
             "MOVE_SLASH",
             "MOVE_SNORE",
-            "MOVE_CURSE",
             "MOVE_CRUSH_CLAW",
             "MOVE_TICKLE",
             "MOVE_HAMMER_ARM",

@@ -43,14 +43,20 @@
             [ 12, "MOVE_CHARGE_BEAM" ],
             [ 16, "MOVE_GYRO_BALL" ],
             [ 20, "MOVE_SPARK" ],
-            [ 24, "MOVE_SCREECH" ],
-            [ 28, "MOVE_MAGNET_RISE" ],
-            [ 34, "MOVE_FLASH_CANNON" ],
+            [ 22, "MOVE_SMART_STRIKE" ],
+            [ 24, "MOVE_EERIE_IMPULSE" ],
+            [ 27, "MOVE_SCREECH" ],
+            [ 29, "MOVE_MAGNET_RISE" ],
+            [ 31, "MOVE_ELECTROWEB" ],
+            [ 33, "MOVE_MIRROR_SHOT" ],
+            [ 38, "MOVE_GRAVITY" ],
             [ 40, "MOVE_DISCHARGE" ],
+            [ 44, "MOVE_FLASH_CANNON" ],
             [ 46, "MOVE_METAL_SOUND" ],
             [ 52, "MOVE_LIGHT_SCREEN" ],
-            [ 58, "MOVE_LOCK_ON" ],
-            [ 64, "MOVE_ZAP_CANNON" ]
+            [ 55, "MOVE_ZAP_CANNON" ],
+            [ 58, "MOVE_STEEL_BEAM" ],
+            [ 61, "MOVE_LOCK_ON" ]
         ],
         "by_tm": [
             "TM06",
@@ -72,7 +78,6 @@
             "TM70",
             "TM73",
             "TM74",
-            "TM75",
             "TM82",
             "TM83",
             "TM87",
@@ -81,7 +86,6 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
-            "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
             "MOVE_SWIFT"
         ]

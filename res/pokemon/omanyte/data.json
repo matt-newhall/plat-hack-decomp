@@ -35,18 +35,19 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_BIND" ],
-            [ 1, "MOVE_WITHDRAW" ],
             [ 5, "MOVE_ROLLOUT" ],
             [ 10, "MOVE_SAND_ATTACK" ],
-            [ 15, "MOVE_WATER_GUN" ],
+            [ 15, "MOVE_CONSTRICT" ],
+            [ 18, "MOVE_WATER_GUN" ],
             [ 20, "MOVE_LEER" ],
             [ 25, "MOVE_MUD_SHOT" ],
             [ 30, "MOVE_ANCIENT_POWER" ],
             [ 35, "MOVE_BRINE" ],
             [ 41, "MOVE_PROTECT" ],
             [ 45, "MOVE_ROCK_BLAST" ],
+            [ 48, "MOVE_SCALD" ],
             [ 50, "MOVE_SURF" ],
-            [ 55, "MOVE_SHELL_SMASH" ],
+            [ 55, "MOVE_METEOR_BEAM" ],
             [ 60, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
@@ -59,7 +60,6 @@
             "TM44",
             "TM55",
             "TM58",
-            "TM69",
             "TM74",
             "TM76",
             "TM80",
@@ -76,7 +76,6 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_SPIKE_CANNON"
         ],

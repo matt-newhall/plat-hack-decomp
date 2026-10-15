@@ -39,8 +39,10 @@
             [ 4, "MOVE_PLAY_NICE" ],
             [ 8, "MOVE_SWEET_KISS" ],
             [ 12, "MOVE_NUZZLE" ],
-            [ 16, "MOVE_NASTY_PLOT" ],
-            [ 20, "MOVE_CHARM" ]
+            [ 16, "MOVE_ELECTROWEB" ],
+            [ 20, "MOVE_CHARM" ],
+            [ 22, "MOVE_ZING_ZAP" ],
+            [ 35, "MOVE_PLAY_ROUGH" ]
         ],
         "by_tm": [
             "TM04",
@@ -60,7 +62,6 @@
             "TM58",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM86",
@@ -80,7 +81,6 @@
             "MOVE_FLAIL",
             "MOVE_PRESENT",
             "MOVE_FAKE_OUT",
-            "MOVE_CHARGE",
             "MOVE_TICKLE",
             "MOVE_DISARMING_VOICE"
         ]

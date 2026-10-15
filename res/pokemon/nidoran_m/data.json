@@ -38,15 +38,18 @@
             [ 1, "MOVE_POISON_STING" ],
             [ 5, "MOVE_PECK" ],
             [ 10, "MOVE_FOCUS_ENERGY" ],
-            [ 15, "MOVE_FURY_ATTACK" ],
+            [ 13, "MOVE_FURY_ATTACK" ],
+            [ 15, "MOVE_POISON_TAIL" ],
             [ 20, "MOVE_TOXIC_SPIKES" ],
-            [ 25, "MOVE_DOUBLE_KICK" ],
+            [ 24, "MOVE_SMART_STRIKE" ],
+            [ 26, "MOVE_DOUBLE_KICK" ],
             [ 30, "MOVE_HORN_ATTACK" ],
             [ 35, "MOVE_HELPING_HAND" ],
             [ 40, "MOVE_TOXIC" ],
             [ 45, "MOVE_FLATTER" ],
             [ 50, "MOVE_POISON_JAB" ],
-            [ 55, "MOVE_EARTH_POWER" ]
+            [ 55, "MOVE_EARTH_POWER" ],
+            [ 58, "MOVE_SKULL_BASH" ]
         ],
         "by_tm": [
             "TM06",
@@ -78,14 +81,12 @@
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [
-            "MOVE_HORN_DRILL",
             "MOVE_TAKE_DOWN",
             "MOVE_THRASH",
             "MOVE_SUPERSONIC",
             "MOVE_DISABLE",
             "MOVE_COUNTER",
             "MOVE_CONFUSION",
-            "MOVE_AMNESIA",
             "MOVE_BEAT_UP",
             "MOVE_POISON_TAIL",
             "MOVE_SUCKER_PUNCH",

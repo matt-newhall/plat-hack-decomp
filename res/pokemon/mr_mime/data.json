@@ -42,7 +42,8 @@
             [ 1, "MOVE_POWER_SWAP" ],
             [ 1, "MOVE_DETECT" ],
             [ 1, "MOVE_MISTY_TERRAIN" ],
-            [ 12, "MOVE_CONFUSION" ],
+            [ 11, "MOVE_DOUBLE_SLAP" ],
+            [ 13, "MOVE_CONFUSION" ],
             [ 16, "MOVE_ROLE_PLAY" ],
             [ 20, "MOVE_PROTECT" ],
             [ 24, "MOVE_RECYCLE" ],
@@ -50,11 +51,13 @@
             [ 32, "MOVE_MIMIC" ],
             [ 36, "MOVE_LIGHT_SCREEN" ],
             [ 36, "MOVE_REFLECT" ],
-            [ 36, "MOVE_SAFEGUARD" ],
-            [ 40, "MOVE_SUCKER_PUNCH" ],
+            [ 39, "MOVE_SAFEGUARD" ],
+            [ 41, "MOVE_SUCKER_PUNCH" ],
             [ 44, "MOVE_DAZZLING_GLEAM" ],
-            [ 48, "MOVE_PSYCHIC" ],
-            [ 52, "MOVE_TEETER_DANCE" ]
+            [ 47, "MOVE_FIRST_IMPRESSION" ],
+            [ 49, "MOVE_PSYCHIC" ],
+            [ 51, "MOVE_TRIPLE_AXEL" ],
+            [ 53, "MOVE_TEETER_DANCE" ]
         ],
         "by_tm": [
             "TM01",
@@ -98,7 +101,6 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE",
             "MOVE_BRICK_BREAK",
             "MOVE_DAZZLING_GLEAM"
         ],
@@ -109,7 +111,6 @@
             "MOVE_ICY_WIND",
             "MOVE_FUTURE_SIGHT",
             "MOVE_FAKE_OUT",
-            "MOVE_TRICK",
             "MOVE_TEETER_DANCE",
             "MOVE_TICKLE",
             "MOVE_SKILL_SWAP",

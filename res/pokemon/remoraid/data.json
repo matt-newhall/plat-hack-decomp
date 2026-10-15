@@ -43,10 +43,11 @@
             [ 20, "MOVE_BUBBLE_BEAM" ],
             [ 24, "MOVE_LOCK_ON" ],
             [ 28, "MOVE_BULLET_SEED" ],
-            [ 32, "MOVE_ICE_BEAM" ],
-            [ 36, "MOVE_HYDRO_PUMP" ],
+            [ 38, "MOVE_ICE_BEAM" ],
             [ 40, "MOVE_BRINE" ],
-            [ 44, "MOVE_HYPER_BEAM" ]
+            [ 42, "MOVE_HYDRO_PUMP" ],
+            [ 47, "MOVE_GUNK_SHOT" ],
+            [ 49, "MOVE_HYPER_BEAM" ]
         ],
         "by_tm": [
             "TM06",

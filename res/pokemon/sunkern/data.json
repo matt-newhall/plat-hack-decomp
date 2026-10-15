@@ -35,18 +35,18 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_GROWTH" ],
             [ 7, "MOVE_ABSORB" ],
             [ 10, "MOVE_MEGA_DRAIN" ],
+            [ 12, "MOVE_MAGICAL_LEAF" ],
             [ 16, "MOVE_RAZOR_LEAF" ],
             [ 19, "MOVE_WORRY_SEED" ],
-            [ 22, "MOVE_GIGA_DRAIN" ],
-            [ 25, "MOVE_ENDEAVOR" ],
-            [ 28, "MOVE_SYNTHESIS" ],
-            [ 31, "MOVE_SOLAR_BEAM" ],
-            [ 34, "MOVE_DOUBLE_EDGE" ],
-            [ 36, "MOVE_SUNNY_DAY" ],
-            [ 39, "MOVE_SEED_BOMB" ]
+            [ 22, "MOVE_GRASSY_GLIDE" ],
+            [ 25, "MOVE_GIGA_DRAIN" ],
+            [ 28, "MOVE_ENDEAVOR" ],
+            [ 31, "MOVE_SYNTHESIS" ],
+            [ 34, "MOVE_SEED_BOMB" ],
+            [ 42, "MOVE_DOUBLE_EDGE" ],
+            [ 44, "MOVE_SOLAR_BEAM" ]
         ],
         "by_tm": [
             "TM05",
@@ -80,7 +80,6 @@
         ],
         "egg_moves": [
             "MOVE_LEECH_SEED",
-            "MOVE_CURSE",
             "MOVE_ENCORE",
             "MOVE_MORNING_SUN",
             "MOVE_INGRAIN",

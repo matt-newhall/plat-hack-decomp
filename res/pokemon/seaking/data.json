@@ -39,13 +39,14 @@
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_WATER_PULSE" ],
             [ 15, "MOVE_HORN_ATTACK" ],
-            [ 20, "MOVE_AGILITY" ],
+            [ 20, "MOVE_SMART_STRIKE" ],
             [ 25, "MOVE_AQUA_RING" ],
             [ 30, "MOVE_FLAIL" ],
             [ 37, "MOVE_WATERFALL" ],
-            [ 44, "MOVE_BRINE" ],
-            [ 51, "MOVE_MEGAHORN" ],
-            [ 58, "MOVE_HORN_DRILL" ]
+            [ 41, "MOVE_SKULL_BASH" ],
+            [ 43, "MOVE_SCALE_SHOT" ],
+            [ 45, "MOVE_BRINE" ],
+            [ 51, "MOVE_MEGAHORN" ]
         ],
         "by_tm": [
             "TM06",

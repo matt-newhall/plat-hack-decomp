@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_POISON_STING" ],
             [ 1, "MOVE_ABSORB" ],
-            [ 1, "MOVE_GROWTH" ],
             [ 1, "MOVE_STUN_SPORE" ],
             [ 1, "MOVE_WORRY_SEED" ],
             [ 5, "MOVE_MEGA_DRAIN" ],
@@ -44,13 +43,16 @@
             [ 15, "MOVE_MAGICAL_LEAF" ],
             [ 20, "MOVE_TOXIC_SPIKES" ],
             [ 25, "MOVE_SWEET_SCENT" ],
+            [ 28, "MOVE_GRASS_WHISTLE" ],
             [ 30, "MOVE_GIGA_DRAIN" ],
             [ 35, "MOVE_SYNTHESIS" ],
             [ 40, "MOVE_TOXIC" ],
             [ 45, "MOVE_PETAL_BLIZZARD" ],
             [ 50, "MOVE_AROMATHERAPY" ],
             [ 55, "MOVE_INGRAIN" ],
-            [ 60, "MOVE_PETAL_DANCE" ]
+            [ 60, "MOVE_PETAL_DANCE" ],
+            [ 63, "MOVE_POWER_WHIP" ],
+            [ 65, "MOVE_LEAF_STORM" ]
         ],
         "by_tm": [
             "TM06",

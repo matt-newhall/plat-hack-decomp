@@ -34,10 +34,10 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HARDEN" ]
+            [ 1, "MOVE_ELECTROWEB" ]
         ],
         "by_tm": [  ],
-        "by_tutor": [ "MOVE_IRON_DEFENSE" ]
+        "by_tutor": [  ]
     },
     "evolutions": [
         [

@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_GUST" ],
             [ 1, "MOVE_BUG_BITE" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_POISON_STING" ],
             [ 1, "MOVE_STRING_SHOT" ],
             [ 1, "MOVE_TACKLE" ],
@@ -49,9 +48,10 @@
             [ 27, "MOVE_LIGHT_SCREEN" ],
             [ 30, "MOVE_WHIRLWIND" ],
             [ 32, "MOVE_TOXIC" ],
-            [ 35, "MOVE_BUG_BUZZ" ],
-            [ 37, "MOVE_PROTECT" ],
-            [ 40, "MOVE_QUIVER_DANCE" ]
+            [ 34, "MOVE_POWDER" ],
+            [ 38, "MOVE_PROTECT" ],
+            [ 40, "MOVE_BUG_BUZZ" ],
+            [ 46, "MOVE_POLLEN_PUFF" ]
         ],
         "by_tm": [
             "TM06",

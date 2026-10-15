@@ -34,23 +34,24 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SWALLOW" ],
-            [ 1, "MOVE_SPIT_UP" ],
-            [ 1, "MOVE_STOCKPILE" ],
+            [ 1, "MOVE_WATER_PULSE" ],
+            [ 1, "MOVE_ELECTROWEB" ],
             [ 1, "MOVE_EERIE_IMPULSE" ],
             [ 1, "MOVE_SUPERSONIC" ],
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_THUNDER_WAVE" ],
             [ 1, "MOVE_CHARGE_BEAM" ],
+            [ 1, "MOVE_BUBBLE" ],
             [ 12, "MOVE_BUBBLE_BEAM" ],
+            [ 14, "MOVE_PSYBEAM" ],
             [ 16, "MOVE_CONFUSE_RAY" ],
             [ 20, "MOVE_SPARK" ],
-            [ 24, "MOVE_CHARGE" ],
-            [ 30, "MOVE_DISCHARGE" ],
+            [ 34, "MOVE_DISCHARGE" ],
             [ 36, "MOVE_AQUA_RING" ],
+            [ 38, "MOVE_SCALD" ],
             [ 42, "MOVE_FLAIL" ],
             [ 48, "MOVE_TAKE_DOWN" ],
-            [ 54, "MOVE_HYDRO_PUMP" ]
+            [ 57, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
             "TM06",
@@ -69,7 +70,6 @@
             "TM68",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM85",

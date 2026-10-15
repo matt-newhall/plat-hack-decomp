@@ -35,13 +35,13 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_ABSORB" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 5, "MOVE_SCRATCH" ],
             [ 10, "MOVE_SAND_ATTACK" ],
             [ 15, "MOVE_AQUA_JET" ],
             [ 20, "MOVE_LEER" ],
             [ 25, "MOVE_MUD_SHOT" ],
-            [ 30, "MOVE_ANCIENT_POWER" ],
+            [ 30, "MOVE_ACCELEROCK" ],
+            [ 33, "MOVE_ANCIENT_POWER" ],
             [ 35, "MOVE_BRINE" ],
             [ 41, "MOVE_PROTECT" ],
             [ 45, "MOVE_LEECH_LIFE" ],
@@ -62,7 +62,6 @@
             "TM44",
             "TM55",
             "TM58",
-            "TM69",
             "TM71",
             "TM76",
             "TM80",
@@ -80,7 +79,6 @@
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_KNOCK_OFF",
             "MOVE_RAPID_SPIN"
         ],

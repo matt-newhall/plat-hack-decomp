@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_GUST" ],
             [ 1, "MOVE_BUG_BITE" ],
-            [ 1, "MOVE_HARDEN" ],
             [ 1, "MOVE_STRING_SHOT" ],
             [ 1, "MOVE_TACKLE" ],
             [ 4, "MOVE_SUPERSONIC" ],
@@ -48,10 +47,10 @@
             [ 20, "MOVE_WHIRLWIND" ],
             [ 24, "MOVE_AIR_SLASH" ],
             [ 28, "MOVE_SAFEGUARD" ],
-            [ 32, "MOVE_BUG_BUZZ" ],
             [ 36, "MOVE_TAILWIND" ],
+            [ 38, "MOVE_BUG_BUZZ" ],
             [ 40, "MOVE_RAGE_POWDER" ],
-            [ 44, "MOVE_QUIVER_DANCE" ]
+            [ 49, "MOVE_POLLEN_PUFF" ]
         ],
         "by_tm": [
             "TM06",

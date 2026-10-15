@@ -34,22 +34,21 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_WITHDRAW" ],
             [ 1, "MOVE_WRAP" ],
             [ 5, "MOVE_ROLLOUT" ],
-            [ 10, "MOVE_STRUGGLE_BUG" ],
+            [ 10, "MOVE_INFESTATION" ],
+            [ 13, "MOVE_STRUGGLE_BUG" ],
             [ 15, "MOVE_ROCK_THROW" ],
             [ 20, "MOVE_SAFEGUARD" ],
             [ 25, "MOVE_REST" ],
             [ 30, "MOVE_BUG_BITE" ],
-            [ 35, "MOVE_INFESTATION" ],
             [ 35, "MOVE_KNOCK_OFF" ],
             [ 40, "MOVE_ROCK_SLIDE" ],
             [ 45, "MOVE_GASTRO_ACID" ],
             [ 50, "MOVE_STICKY_WEB" ],
             [ 55, "MOVE_POWER_TRICK" ],
-            [ 60, "MOVE_STONE_EDGE" ],
-            [ 65, "MOVE_SHELL_SMASH" ]
+            [ 57, "MOVE_SLUDGE_WAVE" ],
+            [ 60, "MOVE_STONE_EDGE" ]
         ],
         "by_tm": [
             "TM06",
@@ -61,7 +60,6 @@
             "TM42",
             "TM44",
             "TM58",
-            "TM69",
             "TM70",
             "TM71",
             "TM74",
@@ -84,7 +82,6 @@
         ],
         "egg_moves": [
             "MOVE_ACID",
-            "MOVE_DEFENSE_CURL",
             "MOVE_MUD_SLAP",
             "MOVE_SWEET_SCENT",
             "MOVE_HELPING_HAND",
@@ -92,7 +89,6 @@
             "MOVE_SAND_TOMB",
             "MOVE_COVET",
             "MOVE_ROCK_BLAST",
-            "MOVE_ACUPRESSURE",
             "MOVE_FINAL_GAMBIT",
             "MOVE_INFESTATION"
         ]

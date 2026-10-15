@@ -35,7 +35,6 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_NUZZLE" ],
-            [ 1, "MOVE_NASTY_PLOT" ],
             [ 1, "MOVE_CHARM" ],
             [ 1, "MOVE_SWEET_KISS" ],
             [ 1, "MOVE_PLAY_NICE" ],
@@ -44,16 +43,19 @@
             [ 1, "MOVE_THUNDER_SHOCK" ],
             [ 1, "MOVE_GROWL" ],
             [ 4, "MOVE_THUNDER_WAVE" ],
-            [ 8, "MOVE_DOUBLE_TEAM" ],
             [ 12, "MOVE_CHARGE_BEAM" ],
             [ 16, "MOVE_FEINT" ],
-            [ 20, "MOVE_SPARK" ],
-            [ 24, "MOVE_AGILITY" ],
-            [ 28, "MOVE_IRON_TAIL" ],
+            [ 20, "MOVE_EERIE_IMPULSE" ],
+            [ 23, "MOVE_FAKE_TEARS" ],
+            [ 25, "MOVE_SPARK" ],
+            [ 27, "MOVE_ELECTROWEB" ],
             [ 32, "MOVE_DISCHARGE" ],
-            [ 36, "MOVE_THUNDERBOLT" ],
             [ 40, "MOVE_LIGHT_SCREEN" ],
-            [ 44, "MOVE_THUNDER" ]
+            [ 42, "MOVE_THUNDERBOLT" ],
+            [ 45, "MOVE_PLAY_ROUGH" ],
+            [ 47, "MOVE_ZING_ZAP" ],
+            [ 49, "MOVE_IRON_TAIL" ],
+            [ 51, "MOVE_THUNDER" ]
         ],
         "by_tm": [
             "TM01",
@@ -76,7 +78,6 @@
             "TM58",
             "TM70",
             "TM73",
-            "TM75",
             "TM82",
             "TM83",
             "TM86",

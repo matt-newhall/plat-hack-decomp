@@ -37,18 +37,22 @@
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_GROWL" ],
             [ 3, "MOVE_VINE_WHIP" ],
-            [ 6, "MOVE_GROWTH" ],
+            [ 6, "MOVE_NATURE_POWER" ],
             [ 9, "MOVE_LEECH_SEED" ],
             [ 12, "MOVE_RAZOR_LEAF" ],
-            [ 15, "MOVE_POISON_POWDER" ],
-            [ 15, "MOVE_SLEEP_POWDER" ],
-            [ 18, "MOVE_SEED_BOMB" ],
-            [ 21, "MOVE_TAKE_DOWN" ],
-            [ 24, "MOVE_SWEET_SCENT" ],
-            [ 27, "MOVE_SYNTHESIS" ],
-            [ 30, "MOVE_WORRY_SEED" ],
-            [ 33, "MOVE_POWER_WHIP" ],
-            [ 36, "MOVE_SOLAR_BEAM" ]
+            [ 14, "MOVE_MAGICAL_LEAF" ],
+            [ 16, "MOVE_POISON_POWDER" ],
+            [ 18, "MOVE_SLEEP_POWDER" ],
+            [ 20, "MOVE_CHARM" ],
+            [ 26, "MOVE_TAKE_DOWN" ],
+            [ 28, "MOVE_GRASSY_GLIDE" ],
+            [ 30, "MOVE_SWEET_SCENT" ],
+            [ 32, "MOVE_SYNTHESIS" ],
+            [ 34, "MOVE_WORRY_SEED" ],
+            [ 36, "MOVE_SEED_BOMB" ],
+            [ 43, "MOVE_POWER_WHIP" ],
+            [ 45, "MOVE_LEAF_STORM" ],
+            [ 47, "MOVE_SOLAR_BEAM" ]
         ],
         "by_tm": [
             "TM05",
@@ -85,7 +89,6 @@
         "egg_moves": [
             "MOVE_PETAL_DANCE",
             "MOVE_TOXIC",
-            "MOVE_CURSE",
             "MOVE_INGRAIN"
         ]
     },
