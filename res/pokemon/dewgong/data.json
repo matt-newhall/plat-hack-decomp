@@ -59,12 +59,15 @@
             [ 61, "MOVE_SAFEGUARD" ]
         ],
         "by_tm": [
+            "TM06",
             "TM10",
             "TM13",
             "TM14",
             "TM15",
             "TM23",
+            "TM33",
             "TM42",
+            "TM43",
             "TM44",
             "TM55",
             "TM68",

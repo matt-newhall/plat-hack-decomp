@@ -55,6 +55,7 @@
             [ 57, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
+            "TM06",
             "TM07",
             "TM10",
             "TM13",

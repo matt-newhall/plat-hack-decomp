@@ -58,8 +58,10 @@
             [ 59, "MOVE_RAGING_FURY" ]
         ],
         "by_tm": [
+            "TM06",
             "TM07",
             "TM10",
+            "TM16",
             "TM23",
             "TM28",
             "TM32",

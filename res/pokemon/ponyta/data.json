@@ -51,6 +51,7 @@
             [ 55, "MOVE_FLARE_BLITZ" ]
         ],
         "by_tm": [
+            "TM06",
             "TM10",
             "TM17",
             "TM22",

@@ -55,6 +55,7 @@
             [ 54, "MOVE_GUNK_SHOT" ]
         ],
         "by_tm": [
+            "TM06",
             "TM10",
             "TM13",
             "TM14",
