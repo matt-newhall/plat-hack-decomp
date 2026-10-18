@@ -129,8 +129,7 @@
             "MOVE_SWIFT",
             "MOVE_BRICK_BREAK",
             "MOVE_MEMENTO",
-            "MOVE_NUZZLE",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_NUZZLE"
         ]
     },
     "evolutions": [  ],

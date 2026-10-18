@@ -216,14 +216,6 @@
         "location": "TUTOR_LOCATION_SURVIVAL_AREA"
     },
     {
-        "move": "MOVE_EARTH_POWER",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_SURVIVAL_AREA"
-    },
-    {
         "move": "MOVE_SEED_BOMB",
         "redCost": 0,
         "blueCost": 0,
@@ -248,14 +240,6 @@
         "location": "TUTOR_LOCATION_SURVIVAL_AREA"
     },
     {
-        "move": "MOVE_IRON_DEFENSE",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_SURVIVAL_AREA"
-    },
-    {
         "move": "MOVE_ENDEAVOR",
         "redCost": 0,
         "blueCost": 0,
@@ -273,14 +257,6 @@
     },
     {
         "move": "MOVE_RAPID_SPIN",
-        "redCost": 0,
-        "blueCost": 0,
-        "yellowCost": 0,
-        "greenCost": 0,
-        "location": "TUTOR_LOCATION_SURVIVAL_AREA"
-    },
-    {
-        "move": "MOVE_DAZZLING_GLEAM",
         "redCost": 0,
         "blueCost": 0,
         "yellowCost": 0,

@@ -157,7 +157,6 @@
             "MOVE_ANCIENT_POWER",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_EARTH_POWER",
             "MOVE_SEED_BOMB",
             "MOVE_MAGNET_RISE",
             "MOVE_LAST_RESORT",
@@ -166,7 +165,6 @@
             "MOVE_KNOCK_OFF",
             "MOVE_SWIFT",
             "MOVE_BRICK_BREAK",
-            "MOVE_DAZZLING_GLEAM",
             "MOVE_DRILL_RUN"
         ]
     },

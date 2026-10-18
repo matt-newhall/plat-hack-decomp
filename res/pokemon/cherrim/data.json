@@ -73,8 +73,7 @@
         "by_tutor": [
             "MOVE_SNORE",
             "MOVE_SEED_BOMB",
-            "MOVE_NUZZLE",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_NUZZLE"
         ]
     },
     "evolutions": [  ],

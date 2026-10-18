@@ -73,8 +73,7 @@
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
-            "MOVE_SNORE",
-            "MOVE_EARTH_POWER"
+            "MOVE_SNORE"
         ],
         "egg_moves": [
             "MOVE_WHIRLWIND",

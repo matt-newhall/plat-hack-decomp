@@ -89,8 +89,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_HEAT_WAVE",
             "MOVE_SWIFT",
-            "MOVE_MEMENTO",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": [  ],

@@ -94,8 +94,7 @@
             "MOVE_ZEN_HEADBUTT",
             "MOVE_LAST_RESORT",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": [  ],

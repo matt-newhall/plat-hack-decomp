@@ -72,8 +72,7 @@
             "MOVE_MUD_SLAP",
             "MOVE_SNORE",
             "MOVE_ENDEAVOR",
-            "MOVE_SIGNAL_BEAM",
-            "MOVE_EARTH_POWER"
+            "MOVE_SIGNAL_BEAM"
         ]
     },
     "evolutions": [  ]

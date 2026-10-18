@@ -75,7 +75,6 @@
             "MOVE_SWIFT",
             "MOVE_DRILL_PECK",
             "MOVE_LUNGE",
-            "MOVE_EARTH_POWER",
             "MOVE_DRILL_RUN"
         ],
         "egg_moves": [

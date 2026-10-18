@@ -111,8 +111,7 @@
             "MOVE_LAST_RESORT",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_BRICK_BREAK",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": [  ],

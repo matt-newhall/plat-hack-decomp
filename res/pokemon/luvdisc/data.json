@@ -75,8 +75,7 @@
             "MOVE_SNORE",
             "MOVE_BOUNCE",
             "MOVE_SWIFT",
-            "MOVE_NUZZLE",
-            "MOVE_DAZZLING_GLEAM"
+            "MOVE_NUZZLE"
         ],
         "egg_moves": [
             "MOVE_SUPERSONIC",

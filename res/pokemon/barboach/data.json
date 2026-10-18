@@ -71,7 +71,6 @@
             "MOVE_ICY_WIND",
             "MOVE_AQUA_TAIL",
             "MOVE_SNORE",
-            "MOVE_EARTH_POWER",
             "MOVE_BOUNCE"
         ],
         "egg_moves": [
