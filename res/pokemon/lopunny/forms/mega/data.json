@@ -89,6 +89,7 @@
             "TM66",
             "TM68",
             "TM73",
+            "TM78",
             "TM82",
             "TM83",
             "TM86",
@@ -109,7 +110,8 @@
             "MOVE_LAST_RESORT",
             "MOVE_BOUNCE",
             "MOVE_SWIFT",
-            "MOVE_DRILL_RUN"
+            "MOVE_DRILL_RUN",
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": []

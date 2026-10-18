@@ -87,7 +87,6 @@
             "TM64",
             "TM65",
             "TM68",
-            "TM69",
             "TM70",
             "TM71",
             "TM74",
@@ -114,7 +113,6 @@
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
             "MOVE_SWIFT",
             "MOVE_BRICK_BREAK"

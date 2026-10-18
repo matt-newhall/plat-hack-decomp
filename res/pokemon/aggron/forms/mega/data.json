@@ -94,7 +94,6 @@
             "TM65",
             "TM66",
             "TM68",
-            "TM69",
             "TM71",
             "TM72",
             "TM73",
@@ -128,7 +127,6 @@
             "MOVE_ENDEAVOR",
             "MOVE_ANCIENT_POWER",
             "MOVE_EARTH_POWER",
-            "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
             "MOVE_BRICK_BREAK"
         ]
