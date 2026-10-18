@@ -46,11 +46,10 @@
             [ 40, "MOVE_MIRROR_MOVE" ],
             [ 42, "MOVE_ROOST" ],
             [ 45, "MOVE_UPROAR" ],
-            [ 47, "MOVE_HYPER_VOICE" ],
             [ 50, "MOVE_HYPER_VOICE" ],
-            [ 54, "MOVE_PARTING_SHOT" ],
             [ 57, "MOVE_BOOMBURST" ],
-            [ 59, "MOVE_FEATHER_DANCE" ]
+            [ 59, "MOVE_FEATHER_DANCE" ],
+            [ 64, "MOVE_PARTING_SHOT" ]
         ],
         "by_tm": [
             "TM10",
