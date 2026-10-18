@@ -52,25 +52,20 @@
         ],
         "by_tm": [
             "TM01",
-            "TM06",
             "TM08",
             "TM10",
-            "TM16",
             "TM19",
             "TM22",
             "TM31",
-            "TM33",
             "TM40",
             "TM42",
             "TM44",
-            "TM58",
             "TM60",
             "TM62",
             "TM70",
             "TM82",
             "TM83",
-            "TM87",
-            "TM89"
+            "TM87"
         ],
         "by_tutor": [
             "MOVE_THUNDER_PUNCH",

@@ -51,10 +51,8 @@
             [ 66, "MOVE_X_SCISSOR" ]
         ],
         "by_tm": [
-            "TM06",
             "TM10",
             "TM15",
-            "TM16",
             "TM19",
             "TM22",
             "TM36",

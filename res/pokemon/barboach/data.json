@@ -49,16 +49,13 @@
             [ 45, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
-            "TM06",
             "TM10",
             "TM13",
             "TM14",
             "TM39",
             "TM42",
             "TM44",
-            "TM58",
             "TM71",
-            "TM76",
             "TM80",
             "TM82",
             "TM83",

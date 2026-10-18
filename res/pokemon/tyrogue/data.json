@@ -42,11 +42,9 @@
             [ 22, "MOVE_SUBMISSION" ]
         ],
         "by_tm": [
-            "TM06",
             "TM10",
             "TM42",
             "TM44",
-            "TM58",
             "TM80",
             "TM82",
             "TM83",

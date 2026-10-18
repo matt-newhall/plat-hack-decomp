@@ -53,7 +53,6 @@
             [ 46, "MOVE_POLLEN_PUFF" ]
         ],
         "by_tm": [
-            "TM06",
             "TM08",
             "TM10",
             "TM15",
@@ -73,7 +72,6 @@
             "TM82",
             "TM83",
             "TM87",
-            "TM89",
             "HM05"
         ],
         "by_tutor": [

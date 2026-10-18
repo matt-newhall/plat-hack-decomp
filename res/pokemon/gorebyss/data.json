@@ -52,7 +52,6 @@
             [ 50, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
-            "TM06",
             "TM10",
             "TM13",
             "TM14",

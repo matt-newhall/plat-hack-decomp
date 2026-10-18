@@ -52,11 +52,9 @@
             [ 77, "MOVE_MEMENTO" ]
         ],
         "by_tm": [
-            "TM06",
             "TM08",
             "TM10",
             "TM15",
-            "TM16",
             "TM19",
             "TM21",
             "TM22",
@@ -66,25 +64,21 @@
             "TM26",
             "TM29",
             "TM30",
-            "TM33",
             "TM34",
             "TM42",
             "TM44",
             "TM48",
             "TM51",
             "TM53",
-            "TM58",
             "TM60",
             "TM67",
             "TM68",
             "TM70",
             "TM73",
-            "TM76",
             "TM82",
             "TM83",
             "TM86",
-            "TM87",
-            "TM89"
+            "TM87"
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
