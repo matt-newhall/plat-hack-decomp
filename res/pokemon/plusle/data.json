@@ -40,7 +40,6 @@
             [ 1, "MOVE_THUNDER_WAVE" ],
             [ 4, "MOVE_HELPING_HAND" ],
             [ 7, "MOVE_SPARK" ],
-            [ 10, "MOVE_ENCORE" ],
             [ 13, "MOVE_FAKE_TEARS" ],
             [ 16, "MOVE_EERIE_IMPULSE" ],
             [ 19, "MOVE_SWIFT" ],
@@ -50,11 +49,11 @@
             [ 29, "MOVE_ELECTROWEB" ],
             [ 31, "MOVE_SUPER_FANG" ],
             [ 34, "MOVE_DISCHARGE" ],
-            [ 37, "MOVE_BATON_PASS" ],
             [ 42, "MOVE_PLAY_ROUGH" ],
             [ 47, "MOVE_LAST_RESORT" ],
             [ 49, "MOVE_THUNDER" ],
-            [ 52, "MOVE_VOLT_SWITCH" ]
+            [ 52, "MOVE_VOLT_SWITCH" ],
+            [ 55, "MOVE_ENCORE" ]
         ],
         "by_tm": [
             "TM05",

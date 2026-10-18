@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_SWAGGER" ],
             [ 1, "MOVE_SCRATCH" ],
-            [ 1, "MOVE_ENCORE" ],
             [ 1, "MOVE_YAWN" ],
             [ 1, "MOVE_SLACK_OFF" ],
             [ 1, "MOVE_SUCKER_PUNCH" ],

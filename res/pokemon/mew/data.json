@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_PSYCHO_SHIFT" ],
-            [ 20, "MOVE_BATON_PASS" ],
             [ 30, "MOVE_ANCIENT_POWER" ],
             [ 34, "MOVE_ICICLE_SPEAR" ],
             [ 37, "MOVE_SMART_STRIKE" ],

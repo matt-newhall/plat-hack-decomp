@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_BATON_PASS" ],
             [ 1, "MOVE_COPYCAT" ],
-            [ 1, "MOVE_ENCORE" ],
             [ 1, "MOVE_GUARD_SWAP" ],
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_POWER_SWAP" ],
@@ -45,6 +44,7 @@
             [ 11, "MOVE_DOUBLE_SLAP" ],
             [ 13, "MOVE_CONFUSION" ],
             [ 16, "MOVE_ROLE_PLAY" ],
+            [ 18, "MOVE_TELEPORT" ],
             [ 20, "MOVE_PROTECT" ],
             [ 24, "MOVE_RECYCLE" ],
             [ 28, "MOVE_PSYBEAM" ],

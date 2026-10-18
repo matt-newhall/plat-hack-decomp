@@ -44,7 +44,6 @@
             [ 1, "MOVE_SWIFT" ],
             [ 1, "MOVE_COPYCAT" ],
             [ 1, "MOVE_COVET" ],
-            [ 1, "MOVE_BATON_PASS" ],
             [ 1, "MOVE_HELPING_HAND" ],
             [ 5, "MOVE_SAND_ATTACK" ],
             [ 10, "MOVE_QUICK_ATTACK" ],

@@ -47,7 +47,8 @@
             [ 35, "MOVE_FEATHER_DANCE" ],
             [ 37, "MOVE_AIR_SLASH" ],
             [ 49, "MOVE_BRAVE_BIRD" ],
-            [ 57, "MOVE_FINAL_GAMBIT" ]
+            [ 57, "MOVE_FINAL_GAMBIT" ],
+            [ 62, "MOVE_TAILWIND" ]
         ],
         "by_tm": [
             "TM01",

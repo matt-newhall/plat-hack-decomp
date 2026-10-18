@@ -39,6 +39,7 @@
             [ 16, "MOVE_SUPERSONIC" ],
             [ 24, "MOVE_WHIRLPOOL" ],
             [ 27, "MOVE_BUBBLE_BEAM" ],
+            [ 40, "MOVE_FLIP_TURN" ],
             [ 46, "MOVE_WATER_PULSE" ],
             [ 54, "MOVE_AQUA_RING" ],
             [ 59, "MOVE_SCALD" ],

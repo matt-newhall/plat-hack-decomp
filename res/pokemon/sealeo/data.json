@@ -34,6 +34,7 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_ENCORE" ],
             [ 1, "MOVE_SWAGGER" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_ROLLOUT" ],
@@ -45,7 +46,6 @@
             [ 23, "MOVE_ICICLE_SPEAR" ],
             [ 25, "MOVE_BRINE" ],
             [ 28, "MOVE_AURORA_BEAM" ],
-            [ 35, "MOVE_ENCORE" ],
             [ 40, "MOVE_BODY_SLAM" ],
             [ 49, "MOVE_SURF" ],
             [ 54, "MOVE_BLIZZARD" ],

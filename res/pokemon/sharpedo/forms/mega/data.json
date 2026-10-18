@@ -60,6 +60,7 @@
             [ 34, "MOVE_CRUNCH" ],
             [ 36, "MOVE_PSYCHIC_FANGS" ],
             [ 38, "MOVE_SCALE_SHOT" ],
+            [ 48, "MOVE_FLIP_TURN" ],
             [ 52, "MOVE_TAKE_DOWN" ],
             [ 54, "MOVE_LIQUIDATION" ],
             [ 56, "MOVE_CLOSE_COMBAT" ],

@@ -48,12 +48,12 @@
             [ 23, "MOVE_POWER_TRIP" ],
             [ 25, "MOVE_INGRAIN" ],
             [ 27, "MOVE_PAYBACK" ],
-            [ 30, "MOVE_SPIKES" ],
             [ 35, "MOVE_SUCKER_PUNCH" ],
             [ 38, "MOVE_PIN_MISSILE" ],
             [ 41, "MOVE_FOUL_PLAY" ],
             [ 44, "MOVE_ENERGY_BALL" ],
-            [ 49, "MOVE_COTTON_SPORE" ]
+            [ 49, "MOVE_COTTON_SPORE" ],
+            [ 52, "MOVE_SPIKES" ]
         ],
         "by_tm": [
             "TM01",

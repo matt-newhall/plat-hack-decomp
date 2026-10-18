@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
             [ 1, "MOVE_FOCUS_ENERGY" ],
-            [ 1, "MOVE_ENCORE" ],
             [ 1, "MOVE_UPROAR" ],
             [ 14, "MOVE_FURY_SWIPES" ],
             [ 17, "MOVE_METAL_CLAW" ],

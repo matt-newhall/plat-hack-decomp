@@ -45,7 +45,6 @@
             [ 1, "MOVE_COVET" ],
             [ 1, "MOVE_HELPING_HAND" ],
             [ 1, "MOVE_SWIFT" ],
-            [ 1, "MOVE_BATON_PASS" ],
             [ 1, "MOVE_CHARM" ],
             [ 5, "MOVE_SAND_ATTACK" ],
             [ 10, "MOVE_QUICK_ATTACK" ],
@@ -60,7 +59,8 @@
             [ 40, "MOVE_MUDDY_WATER" ],
             [ 42, "MOVE_SCALD" ],
             [ 53, "MOVE_HYDRO_PUMP" ],
-            [ 55, "MOVE_LAST_RESORT" ]
+            [ 55, "MOVE_LAST_RESORT" ],
+            [ 70, "MOVE_FLIP_TURN" ]
         ],
         "by_tm": [
             "TM05",

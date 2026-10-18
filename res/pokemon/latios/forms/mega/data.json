@@ -44,11 +44,11 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_TAILWIND" ],
             [ 1, "MOVE_STORED_POWER" ],
             [ 5, "MOVE_HELPING_HAND" ],
             [ 10, "MOVE_RECOVER" ],
             [ 15, "MOVE_CONFUSION" ],
-            [ 20, "MOVE_TAILWIND" ],
             [ 22, "MOVE_PSYWAVE" ],
             [ 24, "MOVE_BREAKING_SWIPE" ],
             [ 26, "MOVE_DRAGON_BREATH" ],

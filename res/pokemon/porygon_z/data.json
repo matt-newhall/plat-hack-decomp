@@ -37,7 +37,6 @@
             [ 1, "MOVE_CONVERSION" ],
             [ 1, "MOVE_MAGNET_RISE" ],
             [ 1, "MOVE_RECYCLE" ],
-            [ 1, "MOVE_TRICK_ROOM" ],
             [ 1, "MOVE_TACKLE" ],
             [ 15, "MOVE_THUNDER_SHOCK" ],
             [ 20, "MOVE_PSYBEAM" ],

@@ -45,7 +45,6 @@
             [ 1, "MOVE_COVET" ],
             [ 1, "MOVE_HELPING_HAND" ],
             [ 1, "MOVE_CHARM" ],
-            [ 1, "MOVE_BATON_PASS" ],
             [ 5, "MOVE_SAND_ATTACK" ],
             [ 10, "MOVE_QUICK_ATTACK" ],
             [ 14, "MOVE_FOCUS_ENERGY" ],

@@ -48,6 +48,7 @@
             [ 30, "MOVE_PSYCHIC_FANGS" ],
             [ 32, "MOVE_CRUNCH" ],
             [ 36, "MOVE_SCALE_SHOT" ],
+            [ 38, "MOVE_FLIP_TURN" ],
             [ 40, "MOVE_LIQUIDATION" ],
             [ 44, "MOVE_TAKE_DOWN" ]
         ],

@@ -38,6 +38,7 @@
             [ 1, "MOVE_HYPNOSIS" ],
             [ 5, "MOVE_DISABLE" ],
             [ 9, "MOVE_CONFUSION" ],
+            [ 11, "MOVE_TELEPORT" ],
             [ 13, "MOVE_HEADBUTT" ],
             [ 15, "MOVE_FAINT_ATTACK" ],
             [ 17, "MOVE_SECRET_POWER" ],

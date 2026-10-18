@@ -45,7 +45,6 @@
     "learnset": {
         "by_level": [
             [ 4, "MOVE_STORED_POWER" ],
-            [ 8, "MOVE_ENCORE" ],
             [ 10, "MOVE_LIFE_DEW" ],
             [ 13, "MOVE_LIFE_DEW" ],
             [ 15, "MOVE_DOUBLE_SLAP" ],
@@ -64,8 +63,10 @@
             [ 43, "MOVE_PLAY_ROUGH" ],
             [ 45, "MOVE_METEOR_MASH" ],
             [ 49, "MOVE_HEALING_WISH" ],
+            [ 50, "MOVE_ENCORE" ],
             [ 56, "MOVE_MOONBLAST" ],
-            [ 59, "MOVE_METEOR_BEAM" ]
+            [ 59, "MOVE_METEOR_BEAM" ],
+            [ 62, "MOVE_TELEPORT" ]
         ],
         "by_tm": [
             "TM01",

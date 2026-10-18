@@ -53,6 +53,7 @@
             [ 41, "MOVE_ICE_SPINNER" ],
             [ 43, "MOVE_LIQUIDATION" ],
             [ 45, "MOVE_HYDRO_PUMP" ],
+            [ 47, "MOVE_FLIP_TURN" ],
             [ 49, "MOVE_WAVE_CRASH" ]
         ],
         "by_tm": [

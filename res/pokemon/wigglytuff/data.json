@@ -47,6 +47,7 @@
             [ 14, "MOVE_WATER_PULSE" ],
             [ 16, "MOVE_FAKE_TEARS" ],
             [ 18, "MOVE_MAGICAL_LEAF" ],
+            [ 19, "MOVE_TELEPORT" ],
             [ 20, "MOVE_UPROAR" ],
             [ 22, "MOVE_PLAY_ROUGH" ],
             [ 24, "MOVE_REST" ],

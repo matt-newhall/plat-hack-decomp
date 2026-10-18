@@ -46,12 +46,12 @@
             [ 22, "MOVE_NEEDLE_ARM" ],
             [ 25, "MOVE_INGRAIN" ],
             [ 27, "MOVE_PAYBACK" ],
-            [ 30, "MOVE_SPIKES" ],
             [ 34, "MOVE_SUCKER_PUNCH" ],
             [ 38, "MOVE_PIN_MISSILE" ],
             [ 42, "MOVE_ENERGY_BALL" ],
             [ 44, "MOVE_FOUL_PLAY" ],
             [ 46, "MOVE_COTTON_SPORE" ],
+            [ 52, "MOVE_SPIKES" ],
             [ 54, "MOVE_DESTINY_BOND" ]
         ],
         "by_tm": [

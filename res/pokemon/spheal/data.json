@@ -43,8 +43,8 @@
             [ 20, "MOVE_SNORE" ],
             [ 24, "MOVE_BRINE" ],
             [ 28, "MOVE_AURORA_BEAM" ],
-            [ 33, "MOVE_ENCORE" ],
             [ 36, "MOVE_BODY_SLAM" ],
+            [ 38, "MOVE_ENCORE" ],
             [ 45, "MOVE_SURF" ],
             [ 49, "MOVE_BLIZZARD" ],
             [ 55, "MOVE_FREEZE_DRY" ]

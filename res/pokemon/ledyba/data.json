@@ -44,8 +44,8 @@
             [ 19, "MOVE_MACH_PUNCH" ],
             [ 22, "MOVE_ROOST" ],
             [ 25, "MOVE_STRUGGLE_BUG" ],
-            [ 27, "MOVE_BATON_PASS" ],
             [ 29, "MOVE_DIZZY_PUNCH" ],
+            [ 31, "MOVE_ENCORE" ],
             [ 36, "MOVE_AIR_SLASH" ],
             [ 38, "MOVE_BUG_BUZZ" ],
             [ 43, "MOVE_DOUBLE_EDGE" ]

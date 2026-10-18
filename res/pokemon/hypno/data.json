@@ -39,6 +39,7 @@
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_HYPNOSIS" ],
             [ 1, "MOVE_TICKLE" ],
+            [ 11, "MOVE_TELEPORT" ],
             [ 13, "MOVE_HEADBUTT" ],
             [ 15, "MOVE_FAINT_ATTACK" ],
             [ 17, "MOVE_POISON_GAS" ],

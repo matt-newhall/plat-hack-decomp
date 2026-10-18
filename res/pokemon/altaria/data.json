@@ -34,6 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_TAILWIND" ],
             [ 1, "MOVE_DRAGON_PULSE" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_MIST" ],

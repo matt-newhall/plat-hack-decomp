@@ -34,6 +34,7 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_TAILWIND" ],
             [ 1, "MOVE_WING_ATTACK" ],
             [ 1, "MOVE_HAZE" ],
             [ 1, "MOVE_ASTONISH" ],

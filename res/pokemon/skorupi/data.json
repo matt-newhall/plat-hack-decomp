@@ -43,7 +43,6 @@
             [ 13, "MOVE_PURSUIT" ],
             [ 15, "MOVE_BITE" ],
             [ 17, "MOVE_FAINT_ATTACK" ],
-            [ 19, "MOVE_TOXIC_SPIKES" ],
             [ 21, "MOVE_TWINEEDLE" ],
             [ 23, "MOVE_BUG_BITE" ],
             [ 25, "MOVE_VENOSHOCK" ],
@@ -55,7 +54,8 @@
             [ 41, "MOVE_BUG_BUZZ" ],
             [ 43, "MOVE_CROSS_POISON" ],
             [ 45, "MOVE_X_SCISSOR" ],
-            [ 48, "MOVE_CRUNCH" ]
+            [ 48, "MOVE_CRUNCH" ],
+            [ 56, "MOVE_TOXIC_SPIKES" ]
         ],
         "by_tm": [
             "TM10",

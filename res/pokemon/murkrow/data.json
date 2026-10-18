@@ -54,6 +54,7 @@
             [ 54, "MOVE_BRAVE_BIRD" ],
             [ 56, "MOVE_TORMENT" ],
             [ 60, "MOVE_U_TURN" ],
+            [ 70, "MOVE_TAILWIND" ],
             [ 80, "MOVE_PARTING_SHOT" ]
         ],
         "by_tm": [

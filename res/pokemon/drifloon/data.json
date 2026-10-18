@@ -43,10 +43,9 @@
             [ 27, "MOVE_PSYBEAM" ],
             [ 32, "MOVE_DESTINY_BOND" ],
             [ 34, "MOVE_SHADOW_BALL" ],
-            [ 36, "MOVE_BATON_PASS" ],
             [ 39, "MOVE_PHANTOM_FORCE" ],
             [ 41, "MOVE_SELFDESTRUCT" ],
-            [ 43, "MOVE_TAILWIND" ],
+            [ 53, "MOVE_TAILWIND" ],
             [ 55, "MOVE_EXPLOSION" ]
         ],
         "by_tm": [

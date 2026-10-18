@@ -42,7 +42,6 @@
             [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_WING_ATTACK" ],
             [ 12, "MOVE_WATER_PULSE" ],
-            [ 16, "MOVE_TAILWIND" ],
             [ 24, "MOVE_BUBBLE_BEAM" ],
             [ 28, "MOVE_HEADBUTT" ],
             [ 32, "MOVE_AIR_SLASH" ],

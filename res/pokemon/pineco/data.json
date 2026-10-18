@@ -34,6 +34,7 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_SPIKES" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_PROTECT" ],
             [ 9, "MOVE_SAND_TOMB" ],
@@ -48,7 +49,6 @@
             [ 30, "MOVE_ROLLOUT" ],
             [ 32, "MOVE_ICE_SPINNER" ],
             [ 34, "MOVE_GRAVITY" ],
-            [ 36, "MOVE_SPIKES" ],
             [ 40, "MOVE_BUG_BUZZ" ],
             [ 43, "MOVE_SELFDESTRUCT" ],
             [ 45, "MOVE_DOUBLE_EDGE" ],

@@ -47,7 +47,6 @@
             [ 39, "MOVE_SUPER_FANG" ],
             [ 41, "MOVE_REVERSAL" ],
             [ 43, "MOVE_ME_FIRST" ],
-            [ 46, "MOVE_BATON_PASS" ],
             [ 49, "MOVE_PLAY_ROUGH" ],
             [ 51, "MOVE_HYPER_VOICE" ],
             [ 53, "MOVE_DOUBLE_EDGE" ]

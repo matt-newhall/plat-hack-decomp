@@ -35,7 +35,6 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_THUNDER_SHOCK" ],
-            [ 1, "MOVE_BATON_PASS" ],
             [ 1, "MOVE_SWIFT" ],
             [ 1, "MOVE_HELPING_HAND" ],
             [ 1, "MOVE_COVET" ],

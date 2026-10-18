@@ -47,7 +47,6 @@
             [ 15, "MOVE_DIRE_CLAW" ],
             [ 17, "MOVE_FAINT_ATTACK" ],
             [ 19, "MOVE_PURSUIT" ],
-            [ 21, "MOVE_TOXIC_SPIKES" ],
             [ 23, "MOVE_TWINEEDLE" ],
             [ 25, "MOVE_BUG_BITE" ],
             [ 27, "MOVE_VENOSHOCK" ],

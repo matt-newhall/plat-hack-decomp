@@ -40,6 +40,7 @@
             [ 9, "MOVE_FAINT_ATTACK" ],
             [ 11, "MOVE_DRAINING_KISS" ],
             [ 14, "MOVE_WATER_PULSE" ],
+            [ 16, "MOVE_FLIP_TURN" ],
             [ 19, "MOVE_AQUA_RING" ],
             [ 21, "MOVE_SCALD" ],
             [ 23, "MOVE_SAFEGUARD" ],

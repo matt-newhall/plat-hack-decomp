@@ -34,9 +34,9 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_SPIKES" ],
             [ 1, "MOVE_HEAVY_SLAM" ],
             [ 1, "MOVE_MAGNET_RISE" ],
-            [ 1, "MOVE_TOXIC_SPIKES" ],
             [ 1, "MOVE_BUG_BITE" ],
             [ 1, "MOVE_PROTECT" ],
             [ 1, "MOVE_ZAP_CANNON" ],
@@ -52,7 +52,6 @@
             [ 29, "MOVE_ROLLOUT" ],
             [ 31, "MOVE_ICE_SPINNER" ],
             [ 33, "MOVE_ROCK_SLIDE" ],
-            [ 35, "MOVE_SPIKES" ],
             [ 37, "MOVE_GRAVITY" ],
             [ 39, "MOVE_METAL_SOUND" ],
             [ 42, "MOVE_BUG_BUZZ" ],

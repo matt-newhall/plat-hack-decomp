@@ -46,6 +46,7 @@
             [ 25, "MOVE_SWAGGER" ],
             [ 27, "MOVE_FEATHER_DANCE" ],
             [ 29, "MOVE_BRINE" ],
+            [ 32, "MOVE_FLIP_TURN" ],
             [ 35, "MOVE_SCALD" ],
             [ 37, "MOVE_MIST" ],
             [ 40, "MOVE_TRIPLE_AXEL" ],

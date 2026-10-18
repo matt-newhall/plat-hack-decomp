@@ -39,6 +39,7 @@
             [ 4, "MOVE_SAND_ATTACK" ],
             [ 8, "MOVE_FURY_ATTACK" ],
             [ 12, "MOVE_METAL_CLAW" ],
+            [ 13, "MOVE_SPIKES" ],
             [ 16, "MOVE_PAYBACK" ],
             [ 19, "MOVE_SMART_STRIKE" ],
             [ 21, "MOVE_WING_ATTACK" ],
@@ -49,7 +50,6 @@
             [ 32, "MOVE_METAL_SOUND" ],
             [ 35, "MOVE_SCALE_SHOT" ],
             [ 37, "MOVE_DRILL_PECK" ],
-            [ 44, "MOVE_SPIKES" ],
             [ 46, "MOVE_STEEL_BEAM" ],
             [ 52, "MOVE_BRAVE_BIRD" ]
         ],

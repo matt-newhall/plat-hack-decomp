@@ -39,7 +39,6 @@
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_POISON_STING" ],
             [ 15, "MOVE_FURY_ATTACK" ],
-            [ 22, "MOVE_TOXIC_SPIKES" ],
             [ 24, "MOVE_POISON_TAIL" ],
             [ 29, "MOVE_DOUBLE_KICK" ],
             [ 32, "MOVE_SMART_STRIKE" ],
@@ -49,7 +48,8 @@
             [ 57, "MOVE_FLATTER" ],
             [ 64, "MOVE_POISON_JAB" ],
             [ 71, "MOVE_EARTH_POWER" ],
-            [ 74, "MOVE_SKULL_BASH" ]
+            [ 74, "MOVE_SKULL_BASH" ],
+            [ 80, "MOVE_TOXIC_SPIKES" ]
         ],
         "by_tm": [
             "TM10",

@@ -45,6 +45,7 @@
             [ 32, "MOVE_AURA_SPHERE" ],
             [ 34, "MOVE_AQUA_TAIL" ],
             [ 36, "MOVE_SCALD" ],
+            [ 42, "MOVE_FLIP_TURN" ],
             [ 50, "MOVE_WAVE_CRASH" ],
             [ 55, "MOVE_HYDRO_PUMP" ],
             [ 58, "MOVE_SKULL_BASH" ]

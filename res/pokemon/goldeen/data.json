@@ -43,6 +43,7 @@
             [ 25, "MOVE_AQUA_RING" ],
             [ 30, "MOVE_FLAIL" ],
             [ 35, "MOVE_WATERFALL" ],
+            [ 38, "MOVE_FLIP_TURN" ],
             [ 40, "MOVE_BRINE" ],
             [ 43, "MOVE_SCALE_SHOT" ],
             [ 48, "MOVE_MEGAHORN" ]

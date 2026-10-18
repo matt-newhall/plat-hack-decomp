@@ -47,9 +47,9 @@
             [ 20, "MOVE_WHIRLWIND" ],
             [ 24, "MOVE_AIR_SLASH" ],
             [ 28, "MOVE_SAFEGUARD" ],
-            [ 36, "MOVE_TAILWIND" ],
             [ 38, "MOVE_BUG_BUZZ" ],
             [ 40, "MOVE_RAGE_POWDER" ],
+            [ 45, "MOVE_TAILWIND" ],
             [ 49, "MOVE_POLLEN_PUFF" ]
         ],
         "by_tm": [

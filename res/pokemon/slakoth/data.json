@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
             [ 1, "MOVE_YAWN" ],
-            [ 6, "MOVE_ENCORE" ],
             [ 9, "MOVE_SLACK_OFF" ],
             [ 13, "MOVE_METAL_CLAW" ],
             [ 15, "MOVE_HEADBUTT" ],

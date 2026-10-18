@@ -40,7 +40,6 @@
             [ 10, "MOVE_FOCUS_ENERGY" ],
             [ 13, "MOVE_FURY_ATTACK" ],
             [ 15, "MOVE_POISON_TAIL" ],
-            [ 20, "MOVE_TOXIC_SPIKES" ],
             [ 24, "MOVE_SMART_STRIKE" ],
             [ 26, "MOVE_DOUBLE_KICK" ],
             [ 30, "MOVE_HORN_ATTACK" ],
@@ -49,7 +48,8 @@
             [ 45, "MOVE_FLATTER" ],
             [ 50, "MOVE_POISON_JAB" ],
             [ 55, "MOVE_EARTH_POWER" ],
-            [ 58, "MOVE_SKULL_BASH" ]
+            [ 58, "MOVE_SKULL_BASH" ],
+            [ 60, "MOVE_TOXIC_SPIKES" ]
         ],
         "by_tm": [
             "TM10",

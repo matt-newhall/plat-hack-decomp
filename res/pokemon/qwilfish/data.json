@@ -39,11 +39,9 @@
             [ 8, "MOVE_WATER_GUN" ],
             [ 12, "MOVE_FELL_STINGER" ],
             [ 14, "MOVE_POISON_TAIL" ],
-            [ 20, "MOVE_SPIKES" ],
             [ 24, "MOVE_BRINE" ],
             [ 28, "MOVE_POISON_JAB" ],
             [ 32, "MOVE_PIN_MISSILE" ],
-            [ 36, "MOVE_TOXIC_SPIKES" ],
             [ 38, "MOVE_SCALD" ],
             [ 40, "MOVE_CRUNCH" ],
             [ 43, "MOVE_SCALE_SHOT" ],
@@ -52,7 +50,8 @@
             [ 51, "MOVE_SLUDGE_WAVE" ],
             [ 53, "MOVE_STEEL_ROLLER" ],
             [ 56, "MOVE_DESTINY_BOND" ],
-            [ 62, "MOVE_GUNK_SHOT" ]
+            [ 62, "MOVE_GUNK_SHOT" ],
+            [ 70, "MOVE_SPIKES" ]
         ],
         "by_tm": [
             "TM10",

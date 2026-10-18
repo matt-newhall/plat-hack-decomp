@@ -51,6 +51,7 @@
             [ 37, "MOVE_METAL_SOUND" ],
             [ 40, "MOVE_AIR_SLASH" ],
             [ 42, "MOVE_FEATHER_DANCE" ],
+            [ 44, "MOVE_FLIP_TURN" ],
             [ 46, "MOVE_MIST" ],
             [ 54, "MOVE_SCALD" ],
             [ 56, "MOVE_DRILL_PECK" ],

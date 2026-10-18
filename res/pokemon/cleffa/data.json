@@ -50,7 +50,8 @@
             [ 26, "MOVE_GRAVITY" ],
             [ 35, "MOVE_PLAY_ROUGH" ],
             [ 38, "MOVE_HYPER_VOICE" ],
-            [ 40, "MOVE_METEOR_BEAM" ]
+            [ 40, "MOVE_METEOR_BEAM" ],
+            [ 45, "MOVE_TELEPORT" ]
         ],
         "by_tm": [
             "TM04",

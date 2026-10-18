@@ -46,7 +46,6 @@
             [ 21, "MOVE_FOCUS_ENERGY" ],
             [ 23, "MOVE_VENOSHOCK" ],
             [ 26, "MOVE_ASSURANCE" ],
-            [ 29, "MOVE_TOXIC_SPIKES" ],
             [ 32, "MOVE_PIN_MISSILE" ],
             [ 35, "MOVE_FELL_STINGER" ],
             [ 36, "MOVE_U_TURN" ],

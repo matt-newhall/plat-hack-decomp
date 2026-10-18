@@ -51,7 +51,8 @@
             [ 44, "MOVE_SURF" ],
             [ 46, "MOVE_HEAL_BELL" ],
             [ 48, "MOVE_PSYCHIC" ],
-            [ 50, "MOVE_HYDRO_PUMP" ]
+            [ 50, "MOVE_HYDRO_PUMP" ],
+            [ 55, "MOVE_TELEPORT" ]
         ],
         "by_tm": [
             "TM10",

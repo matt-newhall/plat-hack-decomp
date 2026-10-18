@@ -41,6 +41,7 @@
             [ 7, "MOVE_FAKE_TEARS" ],
             [ 9, "MOVE_SWEET_KISS" ],
             [ 12, "MOVE_DISARMING_VOICE" ],
+            [ 15, "MOVE_TELEPORT" ],
             [ 17, "MOVE_GRAVITY" ],
             [ 19, "MOVE_DISABLE" ],
             [ 21, "MOVE_CHARM" ],

@@ -49,7 +49,6 @@
             [ 25, "MOVE_BITE" ],
             [ 30, "MOVE_COPYCAT" ],
             [ 33, "MOVE_TRUMP_CARD" ],
-            [ 35, "MOVE_BATON_PASS" ],
             [ 40, "MOVE_TAKE_DOWN" ],
             [ 43, "MOVE_HYPER_VOICE" ],
             [ 45, "MOVE_CHARM" ],

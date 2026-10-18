@@ -34,7 +34,6 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TAILWIND" ],
             [ 1, "MOVE_AIR_CUTTER" ],
             [ 1, "MOVE_HURRICANE" ],
             [ 9, "MOVE_BIDE" ],

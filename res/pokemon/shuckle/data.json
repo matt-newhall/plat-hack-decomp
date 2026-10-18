@@ -45,7 +45,6 @@
             [ 35, "MOVE_KNOCK_OFF" ],
             [ 40, "MOVE_ROCK_SLIDE" ],
             [ 45, "MOVE_GASTRO_ACID" ],
-            [ 50, "MOVE_STICKY_WEB" ],
             [ 55, "MOVE_POWER_TRICK" ],
             [ 57, "MOVE_SLUDGE_WAVE" ],
             [ 60, "MOVE_STONE_EDGE" ]
