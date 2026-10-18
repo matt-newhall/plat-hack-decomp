@@ -40,7 +40,9 @@
             [ 15, "MOVE_SMART_STRIKE" ],
             [ 39, "MOVE_STEEL_BEAM" ]
         ],
-        "by_tm": [  ],
+        "by_tm": [
+            "TM33"
+        ],
         "by_tutor": [
             "MOVE_IRON_HEAD",
             "MOVE_ZEN_HEADBUTT"

@@ -50,6 +50,7 @@
             [ 50, "MOVE_PLAY_ROUGH" ]
         ],
         "by_tm": [
+            "TM06",
             "TM10",
             "TM23",
             "TM24",

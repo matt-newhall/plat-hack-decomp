@@ -39,7 +39,9 @@
             [ 6, "MOVE_ELECTROWEB" ],
             [ 9, "MOVE_BUG_BITE" ]
         ],
-        "by_tm": [  ],
+        "by_tm": [
+            "TM75"
+        ],
         "by_tutor": [  ]
     },
     "evolutions": [

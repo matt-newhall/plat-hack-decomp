@@ -54,6 +54,7 @@
             [ 52, "MOVE_CAPTIVATE" ]
         ],
         "by_tm": [
+            "TM06",
             "TM10",
             "TM15",
             "TM23",

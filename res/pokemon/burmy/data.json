@@ -45,7 +45,8 @@
             [ 20, "MOVE_STRING_SHOT" ]
         ],
         "by_tm": [
-            "TM10"
+            "TM10",
+            "TM75"
         ],
         "by_tutor": [ "MOVE_SNORE" ]
     },
