@@ -53,7 +53,6 @@
             [ 31, "MOVE_BULLET_SEED" ],
             [ 33, "MOVE_STOMPING_TANTRUM" ],
             [ 35, "MOVE_GRAVITY" ],
-            [ 38, "MOVE_GIGA_DRAIN" ],
             [ 40, "MOVE_EXTRASENSORY" ],
             [ 45, "MOVE_UPROAR" ],
             [ 48, "MOVE_EGG_BOMB" ],

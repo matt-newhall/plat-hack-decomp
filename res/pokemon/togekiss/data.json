@@ -47,7 +47,6 @@
             [ 12, "MOVE_CHARM" ],
             [ 16, "MOVE_ANCIENT_POWER" ],
             [ 18, "MOVE_SMART_STRIKE" ],
-            [ 20, "MOVE_YAWN" ],
             [ 24, "MOVE_METRONOME" ],
             [ 28, "MOVE_HELPING_HAND" ],
             [ 36, "MOVE_SAFEGUARD" ],

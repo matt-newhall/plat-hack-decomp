@@ -45,7 +45,6 @@
     "learnset": {
         "by_level": [
             [ 4, "MOVE_STORED_POWER" ],
-            [ 10, "MOVE_LIFE_DEW" ],
             [ 13, "MOVE_LIFE_DEW" ],
             [ 15, "MOVE_DOUBLE_SLAP" ],
             [ 17, "MOVE_HELPING_HAND" ],

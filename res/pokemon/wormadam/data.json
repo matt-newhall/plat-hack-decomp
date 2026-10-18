@@ -34,8 +34,6 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_BUG_BITE" ],
-            [ 1, "MOVE_PROTECT" ],
             [ 1, "MOVE_SUCKER_PUNCH" ],
             [ 1, "MOVE_TACKLE" ],
             [ 10, "MOVE_PROTECT" ],

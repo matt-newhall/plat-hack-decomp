@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_SCRATCH" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
-            [ 1, "MOVE_SLAM" ],
             [ 13, "MOVE_FURY_SWIPES" ],
             [ 17, "MOVE_HELPING_HAND" ],
             [ 21, "MOVE_FOLLOW_ME" ],

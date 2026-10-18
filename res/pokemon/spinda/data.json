@@ -42,7 +42,6 @@
             [ 23, "MOVE_BODY_SLAM" ],
             [ 27, "MOVE_DIZZY_PUNCH" ],
             [ 29, "MOVE_SUCKER_PUNCH" ],
-            [ 32, "MOVE_TEETER_DANCE" ],
             [ 37, "MOVE_UPROAR" ],
             [ 41, "MOVE_PSYCH_UP" ],
             [ 46, "MOVE_DOUBLE_EDGE" ],

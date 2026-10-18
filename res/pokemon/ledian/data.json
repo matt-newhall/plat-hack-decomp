@@ -34,8 +34,6 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SUPERSONIC" ],
-            [ 1, "MOVE_SWIFT" ],
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_SUPERSONIC" ],
             [ 8, "MOVE_COMET_PUNCH" ],

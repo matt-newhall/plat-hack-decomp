@@ -36,7 +36,6 @@
         "by_level": [
             [ 1, "MOVE_FLIP_TURN" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_WATER_GUN" ],
             [ 4, "MOVE_WATER_GUN" ],
             [ 8, "MOVE_CONFUSE_RAY" ],
             [ 12, "MOVE_RAPID_SPIN" ],

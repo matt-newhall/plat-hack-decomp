@@ -51,7 +51,6 @@
             [ 1, "MOVE_PURSUIT" ],
             [ 11, "MOVE_FURY_CUTTER" ],
             [ 14, "MOVE_PLUCK" ],
-            [ 17, "MOVE_POISON_STING" ],
             [ 19, "MOVE_TWINEEDLE" ],
             [ 21, "MOVE_FOCUS_ENERGY" ],
             [ 23, "MOVE_VENOSHOCK" ],

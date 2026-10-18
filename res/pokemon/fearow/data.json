@@ -34,12 +34,10 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_DRILL_RUN" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_PLUCK" ],
-            [ 4, "MOVE_LEER" ],
             [ 8, "MOVE_ASSURANCE" ],
             [ 11, "MOVE_FURY_ATTACK" ],
             [ 14, "MOVE_PURSUIT" ],

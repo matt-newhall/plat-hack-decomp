@@ -46,7 +46,6 @@
             [ 30, "MOVE_SHADOW_BALL" ],
             [ 34, "MOVE_ROLE_PLAY" ],
             [ 38, "MOVE_SUCKER_PUNCH" ],
-            [ 42, "MOVE_WILL_O_WISP" ],
             [ 45, "MOVE_FOUL_PLAY" ],
             [ 48, "MOVE_PHANTOM_FORCE" ],
             [ 51, "MOVE_POLTERGEIST" ],

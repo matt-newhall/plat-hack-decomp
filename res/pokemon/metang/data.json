@@ -38,7 +38,6 @@
             [ 1, "MOVE_METAL_CLAW" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_BULLET_PUNCH" ],
-            [ 1, "MOVE_ZEN_HEADBUTT" ],
             [ 6, "MOVE_PURSUIT" ],
             [ 12, "MOVE_MAGNET_RISE" ],
             [ 18, "MOVE_SMART_STRIKE" ],

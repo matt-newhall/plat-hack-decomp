@@ -43,7 +43,6 @@
             [ 1, "MOVE_TOXIC_SPIKES" ],
             [ 15, "MOVE_FURY_SWIPES" ],
             [ 20, "MOVE_FOCUS_ENERGY" ],
-            [ 22, "MOVE_TOXIC_SPIKES" ],
             [ 24, "MOVE_POISON_TAIL" ],
             [ 29, "MOVE_DOUBLE_KICK" ],
             [ 36, "MOVE_BITE" ],

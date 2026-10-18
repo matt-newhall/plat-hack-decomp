@@ -35,12 +35,10 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_SCARY_FACE" ],
-            [ 1, "MOVE_FOCUS_ENERGY" ],
             [ 1, "MOVE_QUICK_ATTACK" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_PURSUIT" ],
-            [ 4, "MOVE_QUICK_ATTACK" ],
             [ 7, "MOVE_FOCUS_ENERGY" ],
             [ 10, "MOVE_BITE" ],
             [ 13, "MOVE_SNARL" ],

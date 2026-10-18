@@ -48,7 +48,6 @@
             [ 20, "MOVE_EERIE_IMPULSE" ],
             [ 23, "MOVE_SPARK" ],
             [ 25, "MOVE_ELECTROWEB" ],
-            [ 27, "MOVE_THUNDERBOLT" ],
             [ 32, "MOVE_DISCHARGE" ],
             [ 35, "MOVE_PLAY_ROUGH" ],
             [ 42, "MOVE_THUNDERBOLT" ],

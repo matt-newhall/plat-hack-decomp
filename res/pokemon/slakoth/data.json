@@ -41,7 +41,6 @@
             [ 15, "MOVE_HEADBUTT" ],
             [ 22, "MOVE_COVET" ],
             [ 30, "MOVE_COUNTER" ],
-            [ 32, "MOVE_PLAY_ROUGH" ],
             [ 34, "MOVE_FLAIL" ],
             [ 42, "MOVE_PLAY_ROUGH" ],
             [ 45, "MOVE_GUNK_SHOT" ]

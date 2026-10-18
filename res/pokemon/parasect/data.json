@@ -34,13 +34,10 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_ABSORB" ],
             [ 1, "MOVE_CROSS_POISON" ],
             [ 1, "MOVE_POISON_POWDER" ],
             [ 1, "MOVE_SCRATCH" ],
             [ 1, "MOVE_STUN_SPORE" ],
-            [ 6, "MOVE_POISON_POWDER" ],
-            [ 6, "MOVE_STUN_SPORE" ],
             [ 11, "MOVE_ABSORB" ],
             [ 17, "MOVE_FURY_CUTTER" ],
             [ 22, "MOVE_SPORE" ],

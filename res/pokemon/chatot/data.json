@@ -39,7 +39,6 @@
             [ 9, "MOVE_GROWL" ],
             [ 13, "MOVE_SING" ],
             [ 17, "MOVE_FURY_ATTACK" ],
-            [ 25, "MOVE_TAUNT" ],
             [ 29, "MOVE_DISARMING_VOICE" ],
             [ 34, "MOVE_MIMIC" ],
             [ 37, "MOVE_BUG_BUZZ" ],
