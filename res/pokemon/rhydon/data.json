@@ -60,7 +60,8 @@
             [ 63, "MOVE_SUPERPOWER" ],
             [ 65, "MOVE_MEGAHORN" ],
             [ 67, "MOVE_OUTRAGE" ],
-            [ 69, "MOVE_METEOR_BEAM" ]
+            [ 69, "MOVE_METEOR_BEAM" ],
+            [ 85, "MOVE_STEALTH_ROCK" ]
         ],
         "by_tm": [
             "TM01",

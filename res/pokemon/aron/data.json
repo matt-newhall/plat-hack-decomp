@@ -51,7 +51,8 @@
             [ 51, "MOVE_SUPERPOWER" ],
             [ 53, "MOVE_EARTHQUAKE" ],
             [ 55, "MOVE_HEAVY_SLAM" ],
-            [ 60, "MOVE_METAL_BURST" ]
+            [ 60, "MOVE_METAL_BURST" ],
+            [ 80, "MOVE_STEALTH_ROCK" ]
         ],
         "by_tm": [
             "TM10",

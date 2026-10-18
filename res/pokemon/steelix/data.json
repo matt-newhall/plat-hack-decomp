@@ -50,7 +50,6 @@
             [ 22, "MOVE_SMART_STRIKE" ],
             [ 24, "MOVE_SCREECH" ],
             [ 29, "MOVE_ROCK_SLIDE" ],
-            [ 32, "MOVE_STEALTH_ROCK" ],
             [ 35, "MOVE_PSYCHIC_FANGS" ],
             [ 37, "MOVE_SLAM" ],
             [ 44, "MOVE_DIG" ],

@@ -58,7 +58,8 @@
             [ 58, "MOVE_EARTHQUAKE" ],
             [ 60, "MOVE_SKULL_BASH" ],
             [ 62, "MOVE_MEGAHORN" ],
-            [ 64, "MOVE_METEOR_BEAM" ]
+            [ 64, "MOVE_METEOR_BEAM" ],
+            [ 65, "MOVE_STEALTH_ROCK" ]
         ],
         "by_tm": [
             "TM10",

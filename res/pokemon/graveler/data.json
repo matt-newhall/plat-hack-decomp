@@ -42,14 +42,14 @@
             [ 21, "MOVE_ROCK_TOMB" ],
             [ 23, "MOVE_ROCK_BLAST" ],
             [ 26, "MOVE_STOMPING_TANTRUM" ],
-            [ 30, "MOVE_STEALTH_ROCK" ],
             [ 32, "MOVE_HEAT_CRASH" ],
             [ 38, "MOVE_HIGH_HORSEPOWER" ],
             [ 44, "MOVE_EARTHQUAKE" ],
             [ 47, "MOVE_STONE_EDGE" ],
             [ 50, "MOVE_DOUBLE_EDGE" ],
             [ 52, "MOVE_SELFDESTRUCT" ],
-            [ 54, "MOVE_EXPLOSION" ]
+            [ 54, "MOVE_EXPLOSION" ],
+            [ 75, "MOVE_STEALTH_ROCK" ]
         ],
         "by_tm": [
             "TM01",

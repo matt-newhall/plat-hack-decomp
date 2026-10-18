@@ -52,7 +52,8 @@
             [ 45, "MOVE_STEEL_BEAM" ],
             [ 47, "MOVE_METEOR_BEAM" ],
             [ 49, "MOVE_METAL_BURST" ],
-            [ 51, "MOVE_HEAVY_SLAM" ]
+            [ 51, "MOVE_HEAVY_SLAM" ],
+            [ 62, "MOVE_STEALTH_ROCK" ]
         ],
         "by_tm": [
             "TM05",

@@ -42,7 +42,6 @@
             [ 22, "MOVE_BULLDOZE" ],
             [ 25, "MOVE_ROCK_BLAST" ],
             [ 28, "MOVE_STOMPING_TANTRUM" ],
-            [ 30, "MOVE_STEALTH_ROCK" ],
             [ 33, "MOVE_HEAT_CRASH" ],
             [ 38, "MOVE_HIGH_HORSEPOWER" ],
             [ 44, "MOVE_EARTHQUAKE" ],
