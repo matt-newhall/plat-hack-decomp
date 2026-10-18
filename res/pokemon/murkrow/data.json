@@ -53,7 +53,8 @@
             [ 51, "MOVE_SUCKER_PUNCH" ],
             [ 54, "MOVE_BRAVE_BIRD" ],
             [ 56, "MOVE_TORMENT" ],
-            [ 60, "MOVE_PARTING_SHOT" ]
+            [ 60, "MOVE_U_TURN" ],
+            [ 80, "MOVE_PARTING_SHOT" ]
         ],
         "by_tm": [
             "TM07",

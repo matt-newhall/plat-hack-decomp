@@ -46,6 +46,7 @@
             [ 41, "MOVE_HAZE" ],
             [ 48, "MOVE_VENOSHOCK" ],
             [ 54, "MOVE_CRUNCH" ],
+            [ 55, "MOVE_U_TURN" ],
             [ 56, "MOVE_CONFUSE_RAY" ],
             [ 58, "MOVE_BRAVE_BIRD" ],
             [ 62, "MOVE_AIR_SLASH" ],

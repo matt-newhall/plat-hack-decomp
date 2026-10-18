@@ -49,6 +49,7 @@
             [ 34, "MOVE_BUG_BUZZ" ],
             [ 36, "MOVE_LEECH_LIFE" ],
             [ 38, "MOVE_ZEN_HEADBUTT" ],
+            [ 40, "MOVE_U_TURN" ],
             [ 47, "MOVE_PSYCHIC" ]
         ],
         "by_tm": [

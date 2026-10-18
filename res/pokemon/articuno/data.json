@@ -49,6 +49,7 @@
             [ 45, "MOVE_AIR_SLASH" ],
             [ 48, "MOVE_ICE_BEAM" ],
             [ 50, "MOVE_TRIPLE_AXEL" ],
+            [ 52, "MOVE_U_TURN" ],
             [ 55, "MOVE_HURRICANE" ],
             [ 58, "MOVE_BRAVE_BIRD" ],
             [ 60, "MOVE_HAZE" ],

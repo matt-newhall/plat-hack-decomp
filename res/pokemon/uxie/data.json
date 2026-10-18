@@ -41,6 +41,7 @@
             [ 28, "MOVE_IMPRISON" ],
             [ 35, "MOVE_EXTRASENSORY" ],
             [ 49, "MOVE_TRI_ATTACK" ],
+            [ 52, "MOVE_U_TURN" ],
             [ 55, "MOVE_PSYCHIC" ],
             [ 57, "MOVE_YAWN" ],
             [ 59, "MOVE_PLAY_ROUGH" ],

@@ -48,6 +48,7 @@
             [ 29, "MOVE_FURY_SWIPES" ],
             [ 32, "MOVE_BUG_BITE" ],
             [ 43, "MOVE_MIND_READER" ],
+            [ 46, "MOVE_U_TURN" ],
             [ 50, "MOVE_SLASH" ],
             [ 55, "MOVE_BUG_BUZZ" ],
             [ 59, "MOVE_LEECH_LIFE" ],

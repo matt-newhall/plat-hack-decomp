@@ -48,6 +48,7 @@
             [ 31, "MOVE_BODY_SLAM" ],
             [ 34, "MOVE_FLING" ],
             [ 36, "MOVE_FEATHER_DANCE" ],
+            [ 38, "MOVE_U_TURN" ],
             [ 41, "MOVE_MIST" ],
             [ 43, "MOVE_SCALD" ],
             [ 48, "MOVE_ROOST" ],

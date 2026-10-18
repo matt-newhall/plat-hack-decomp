@@ -49,6 +49,7 @@
             [ 29, "MOVE_TOXIC_SPIKES" ],
             [ 32, "MOVE_PIN_MISSILE" ],
             [ 35, "MOVE_FELL_STINGER" ],
+            [ 36, "MOVE_U_TURN" ],
             [ 38, "MOVE_POISON_JAB" ],
             [ 41, "MOVE_ENDEAVOR" ]
         ],

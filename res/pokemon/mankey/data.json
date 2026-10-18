@@ -50,6 +50,7 @@
             [ 29, "MOVE_ASSURANCE" ],
             [ 31, "MOVE_REVERSAL" ],
             [ 33, "MOVE_CROSS_CHOP" ],
+            [ 35, "MOVE_U_TURN" ],
             [ 36, "MOVE_THRASH" ],
             [ 38, "MOVE_SKULL_BASH" ],
             [ 40, "MOVE_SCREECH" ],

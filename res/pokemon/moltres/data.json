@@ -45,6 +45,7 @@
             [ 35, "MOVE_AIR_SLASH" ],
             [ 40, "MOVE_ROOST" ],
             [ 48, "MOVE_HEAT_WAVE" ],
+            [ 54, "MOVE_U_TURN" ],
             [ 59, "MOVE_HURRICANE" ],
             [ 63, "MOVE_BRAVE_BIRD" ],
             [ 65, "MOVE_FLARE_BLITZ" ],

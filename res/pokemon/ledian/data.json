@@ -50,7 +50,8 @@
             [ 33, "MOVE_DIZZY_PUNCH" ],
             [ 42, "MOVE_AIR_SLASH" ],
             [ 45, "MOVE_BUG_BUZZ" ],
-            [ 47, "MOVE_DOUBLE_EDGE" ]
+            [ 47, "MOVE_DOUBLE_EDGE" ],
+            [ 52, "MOVE_U_TURN" ]
         ],
         "by_tm": [
             "TM01",

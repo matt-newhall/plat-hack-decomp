@@ -56,7 +56,8 @@
             [ 43, "MOVE_X_SCISSOR" ],
             [ 45, "MOVE_STEEL_BEAM" ],
             [ 47, "MOVE_CLOSE_COMBAT" ],
-            [ 49, "MOVE_SUPERPOWER" ]
+            [ 49, "MOVE_SUPERPOWER" ],
+            [ 60, "MOVE_U_TURN" ]
         ],
         "by_tm": [
             "TM05",

@@ -50,7 +50,6 @@
             [ 31, "MOVE_ACROBATICS" ],
             [ 33, "MOVE_THUNDER_FANG" ],
             [ 35, "MOVE_SLASH" ],
-            [ 37, "MOVE_U_TURN" ],
             [ 39, "MOVE_SCALE_SHOT" ],
             [ 41, "MOVE_PSYCHIC_FANGS" ],
             [ 43, "MOVE_CRUNCH" ],
@@ -58,6 +57,7 @@
             [ 47, "MOVE_HIGH_HORSEPOWER" ],
             [ 49, "MOVE_SCREECH" ],
             [ 51, "MOVE_X_SCISSOR" ],
+            [ 52, "MOVE_U_TURN" ],
             [ 53, "MOVE_CRABHAMMER" ],
             [ 55, "MOVE_EARTHQUAKE" ],
             [ 57, "MOVE_GUNK_SHOT" ]

@@ -52,7 +52,8 @@
             [ 41, "MOVE_BUG_BUZZ" ],
             [ 45, "MOVE_RAZOR_WIND" ],
             [ 47, "MOVE_CLOSE_COMBAT" ],
-            [ 49, "MOVE_X_SCISSOR" ]
+            [ 49, "MOVE_X_SCISSOR" ],
+            [ 60, "MOVE_U_TURN" ]
         ],
         "by_tm": [
             "TM05",

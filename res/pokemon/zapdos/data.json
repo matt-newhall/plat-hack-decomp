@@ -45,6 +45,7 @@
             [ 40, "MOVE_ROOST" ],
             [ 45, "MOVE_DISCHARGE" ],
             [ 50, "MOVE_METAL_SOUND" ],
+            [ 55, "MOVE_U_TURN" ],
             [ 60, "MOVE_DETECT" ],
             [ 63, "MOVE_THUNDER" ],
             [ 65, "MOVE_TAILWIND" ],

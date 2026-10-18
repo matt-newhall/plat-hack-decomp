@@ -45,6 +45,7 @@
             [ 21, "MOVE_WING_ATTACK" ],
             [ 23, "MOVE_TAKE_DOWN" ],
             [ 25, "MOVE_MIRROR_MOVE" ],
+            [ 27, "MOVE_U_TURN" ],
             [ 29, "MOVE_FOCUS_ENERGY" ],
             [ 32, "MOVE_ROOST" ],
             [ 36, "MOVE_DRILL_PECK" ]

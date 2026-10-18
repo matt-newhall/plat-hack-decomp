@@ -50,6 +50,7 @@
             [ 40, "MOVE_ME_FIRST" ],
             [ 42, "MOVE_PSYCHIC" ],
             [ 48, "MOVE_WISH" ],
+            [ 52, "MOVE_U_TURN" ],
             [ 62, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [

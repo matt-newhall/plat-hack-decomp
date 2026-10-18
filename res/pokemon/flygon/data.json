@@ -60,7 +60,8 @@
             [ 60, "MOVE_DRAGON_RUSH" ],
             [ 63, "MOVE_SUPERPOWER" ],
             [ 68, "MOVE_BOOMBURST" ],
-            [ 70, "MOVE_DRACO_METEOR" ]
+            [ 70, "MOVE_DRACO_METEOR" ],
+            [ 74, "MOVE_U_TURN" ]
         ],
         "by_tm": [
             "TM02",

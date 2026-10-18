@@ -52,6 +52,7 @@
             [ 46, "MOVE_FOUL_PLAY" ],
             [ 62, "MOVE_GUNK_SHOT" ],
             [ 64, "MOVE_LAST_RESORT" ],
+            [ 66, "MOVE_U_TURN" ],
             [ 68, "MOVE_TAIL_SLAP" ]
         ],
         "by_tm": [

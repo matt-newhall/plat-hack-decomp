@@ -53,6 +53,7 @@
             [ 50, "MOVE_UPROAR" ],
             [ 54, "MOVE_EARTHQUAKE" ],
             [ 56, "MOVE_DRAGON_RUSH" ],
+            [ 58, "MOVE_U_TURN" ],
             [ 59, "MOVE_SUPERPOWER" ],
             [ 62, "MOVE_DRACO_METEOR" ],
             [ 68, "MOVE_BOOMBURST" ]

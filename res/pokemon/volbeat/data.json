@@ -48,7 +48,8 @@
             [ 33, "MOVE_HELPING_HAND" ],
             [ 39, "MOVE_BUG_BUZZ" ],
             [ 43, "MOVE_PLAY_ROUGH" ],
-            [ 46, "MOVE_DOUBLE_EDGE" ]
+            [ 46, "MOVE_DOUBLE_EDGE" ],
+            [ 48, "MOVE_U_TURN" ]
         ],
         "by_tm": [
             "TM01",

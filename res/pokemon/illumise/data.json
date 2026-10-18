@@ -51,7 +51,8 @@
             [ 36, "MOVE_ZEN_HEADBUTT" ],
             [ 39, "MOVE_HELPING_HAND" ],
             [ 41, "MOVE_BUG_BUZZ" ],
-            [ 43, "MOVE_PLAY_ROUGH" ]
+            [ 43, "MOVE_PLAY_ROUGH" ],
+            [ 46, "MOVE_U_TURN" ]
         ],
         "by_tm": [
             "TM01",

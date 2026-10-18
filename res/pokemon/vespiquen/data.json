@@ -49,6 +49,7 @@
             [ 24, "MOVE_ROOST" ],
             [ 28, "MOVE_AIR_SLASH" ],
             [ 32, "MOVE_POWER_GEM" ],
+            [ 38, "MOVE_U_TURN" ],
             [ 41, "MOVE_BUG_BUZZ" ],
             [ 45, "MOVE_DESTINY_BOND" ],
             [ 47, "MOVE_ATTACK_ORDER" ],

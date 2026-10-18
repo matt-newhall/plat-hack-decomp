@@ -49,6 +49,7 @@
             [ 30, "MOVE_PUNISHMENT" ],
             [ 32, "MOVE_SUBMISSION" ],
             [ 34, "MOVE_DUAL_CHOP" ],
+            [ 36, "MOVE_U_TURN" ],
             [ 37, "MOVE_CROSS_CHOP" ],
             [ 39, "MOVE_ASSURANCE" ],
             [ 41, "MOVE_RAGING_BULL" ],

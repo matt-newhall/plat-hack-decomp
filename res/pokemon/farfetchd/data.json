@@ -44,6 +44,7 @@
             [ 23, "MOVE_AERIAL_ACE" ],
             [ 25, "MOVE_AIR_CUTTER" ],
             [ 30, "MOVE_KNOCK_OFF" ],
+            [ 35, "MOVE_U_TURN" ],
             [ 40, "MOVE_SLASH" ],
             [ 50, "MOVE_AIR_SLASH" ],
             [ 55, "MOVE_LEAF_BLADE" ],

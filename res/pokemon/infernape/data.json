@@ -39,6 +39,7 @@
             [ 1, "MOVE_LEER" ],
             [ 1, "MOVE_EMBER" ],
             [ 1, "MOVE_MACH_PUNCH" ],
+            [ 1, "MOVE_U_TURN" ],
             [ 16, "MOVE_FURY_SWIPES" ],
             [ 19, "MOVE_FIRE_SPIN" ],
             [ 21, "MOVE_FAKE_TEARS" ],
