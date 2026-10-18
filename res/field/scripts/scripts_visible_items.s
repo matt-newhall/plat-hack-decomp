@@ -166,7 +166,7 @@
     ScriptEntry VisibleItems_Route217_HM08
     ScriptEntry VisibleItems_Route217_HeavyDutyBoots
     ScriptEntry VisibleItems_AcuityLakefront_Snowball
-    ScriptEntry VisibleItems_GalacticHQB2F_TM26
+    ScriptEntry VisibleItems_GalacticHQB2F_TM76
     ScriptEntry VisibleItems_GalacticHQ1F_TM61
     ScriptEntry VisibleItems_GalacticHQ3F_TM21
     ScriptEntry VisibleItems_GalacticHQ2F_Revive
@@ -192,7 +192,7 @@
     ScriptEntry VisibleItems_VictoryRoad2F_FullRestore
     ScriptEntry VisibleItems_VictoryRoad2F_TM03
     ScriptEntry VisibleItems_VictoryRoad2F_TM71
-    ScriptEntry VisibleItems_VictoryRoadB1F_TM76
+    ScriptEntry VisibleItems_VictoryRoadB1F_TM26
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_FullRestore
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_DuskStone
     ScriptEntry VisibleItems_VictoryRoad1FRoom2_Charizardite_X
@@ -1327,8 +1327,8 @@ VisibleItems_AcuityLakefront_Snowball:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_GalacticHQB2F_TM26:
-    SetVar VAR_0x8008, ITEM_TM26
+VisibleItems_GalacticHQB2F_TM76:
+    SetVar VAR_0x8008, ITEM_TM76
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1483,8 +1483,8 @@ VisibleItems_VictoryRoad2F_TM71:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_VictoryRoadB1F_TM76:
-    SetVar VAR_0x8008, ITEM_TM76
+VisibleItems_VictoryRoadB1F_TM26:
+    SetVar VAR_0x8008, ITEM_TM26
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
