@@ -59,7 +59,8 @@
             [ 45, "MOVE_STEEL_BEAM" ],
             [ 47, "MOVE_DOUBLE_EDGE" ],
             [ 49, "MOVE_GYRO_BALL" ],
-            [ 52, "MOVE_EXPLOSION" ]
+            [ 52, "MOVE_EXPLOSION" ],
+            [ 55, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM10",

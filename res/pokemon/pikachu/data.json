@@ -55,7 +55,8 @@
             [ 45, "MOVE_PLAY_ROUGH" ],
             [ 47, "MOVE_ZING_ZAP" ],
             [ 49, "MOVE_IRON_TAIL" ],
-            [ 51, "MOVE_THUNDER" ]
+            [ 51, "MOVE_THUNDER" ],
+            [ 58, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM01",

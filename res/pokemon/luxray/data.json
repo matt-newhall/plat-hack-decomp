@@ -45,7 +45,7 @@
             [ 25, "MOVE_ROAR" ],
             [ 32, "MOVE_FAKE_TEARS" ],
             [ 34, "MOVE_EERIE_IMPULSE" ],
-            [ 36, "MOVE_VOLT_SWITCH" ],
+            [ 36, "MOVE_DISCHARGE" ],
             [ 38, "MOVE_ELECTROWEB" ],
             [ 40, "MOVE_SCARY_FACE" ],
             [ 42, "MOVE_THUNDER_FANG" ],
@@ -54,7 +54,7 @@
             [ 55, "MOVE_ZING_ZAP" ],
             [ 57, "MOVE_CRUNCH" ],
             [ 59, "MOVE_PLAY_ROUGH" ],
-            [ 64, "MOVE_DISCHARGE" ],
+            [ 64, "MOVE_VOLT_SWITCH" ],
             [ 72, "MOVE_SWAGGER" ],
             [ 74, "MOVE_SUPERPOWER" ],
             [ 80, "MOVE_WILD_CHARGE" ]

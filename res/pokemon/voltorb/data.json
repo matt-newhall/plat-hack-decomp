@@ -44,7 +44,6 @@
             [ 16, "MOVE_CHARGE_BEAM" ],
             [ 18, "MOVE_SONIC_BOOM" ],
             [ 20, "MOVE_SWIFT" ],
-            [ 22, "MOVE_VOLT_SWITCH" ],
             [ 25, "MOVE_ELECTROWEB" ],
             [ 27, "MOVE_DISCHARGE" ],
             [ 29, "MOVE_FOUL_PLAY" ],

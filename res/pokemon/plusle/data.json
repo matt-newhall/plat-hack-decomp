@@ -53,7 +53,8 @@
             [ 37, "MOVE_BATON_PASS" ],
             [ 42, "MOVE_PLAY_ROUGH" ],
             [ 47, "MOVE_LAST_RESORT" ],
-            [ 49, "MOVE_THUNDER" ]
+            [ 49, "MOVE_THUNDER" ],
+            [ 52, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM05",

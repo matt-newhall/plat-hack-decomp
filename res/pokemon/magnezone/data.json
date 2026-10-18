@@ -58,7 +58,8 @@
             [ 51, "MOVE_FLASH_CANNON" ],
             [ 53, "MOVE_LIGHT_SCREEN" ],
             [ 55, "MOVE_ZAP_CANNON" ],
-            [ 58, "MOVE_STEEL_BEAM" ]
+            [ 58, "MOVE_STEEL_BEAM" ],
+            [ 64, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM10",

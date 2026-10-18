@@ -36,6 +36,7 @@
         "by_level": [
             [ 1, "MOVE_PECK" ],
             [ 1, "MOVE_THUNDER_WAVE" ],
+            [ 1, "MOVE_VOLT_SWITCH" ],
             [ 5, "MOVE_THUNDER_SHOCK" ],
             [ 10, "MOVE_LIGHT_SCREEN" ],
             [ 15, "MOVE_PLUCK" ],

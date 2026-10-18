@@ -41,6 +41,7 @@
             [ 15, "MOVE_THUNDER_SHOCK" ],
             [ 20, "MOVE_PSYBEAM" ],
             [ 23, "MOVE_EERIE_IMPULSE" ],
+            [ 24, "MOVE_VOLT_SWITCH" ],
             [ 25, "MOVE_CONVERSION_2" ],
             [ 28, "MOVE_LOCK_ON" ],
             [ 30, "MOVE_ELECTROWEB" ],

@@ -55,7 +55,7 @@
             [ 47, "MOVE_PLAY_ROUGH" ],
             [ 50, "MOVE_LAST_RESORT" ],
             [ 52, "MOVE_THUNDER" ],
-            [ 54, "MOVE_GUNK_SHOT" ]
+            [ 54, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM05",

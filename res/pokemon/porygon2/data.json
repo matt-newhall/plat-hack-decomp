@@ -48,6 +48,7 @@
             [ 39, "MOVE_GRAVITY" ],
             [ 41, "MOVE_DISCHARGE" ],
             [ 45, "MOVE_TRI_ATTACK" ],
+            [ 48, "MOVE_VOLT_SWITCH" ],
             [ 55, "MOVE_ZAP_CANNON" ],
             [ 64, "MOVE_HYPER_BEAM" ]
         ],

@@ -51,7 +51,8 @@
             [ 36, "MOVE_SCALD" ],
             [ 38, "MOVE_FLAIL" ],
             [ 40, "MOVE_TAKE_DOWN" ],
-            [ 50, "MOVE_HYDRO_PUMP" ]
+            [ 50, "MOVE_HYDRO_PUMP" ],
+            [ 55, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM10",

@@ -57,7 +57,8 @@
             [ 52, "MOVE_POWER_GEM" ],
             [ 54, "MOVE_METEOR_BEAM" ],
             [ 56, "MOVE_STEEL_BEAM" ],
-            [ 59, "MOVE_ZAP_CANNON" ]
+            [ 59, "MOVE_ZAP_CANNON" ],
+            [ 62, "MOVE_VOLT_SWITCH" ]
         ],
         "by_tm": [
             "TM10",
