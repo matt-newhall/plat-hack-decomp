@@ -37,7 +37,6 @@
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_REST" ],
             [ 7, "MOVE_SWIFT" ],
-            [ 14, "MOVE_ENDURE" ],
             [ 21, "MOVE_PSYBEAM" ],
             [ 28, "MOVE_IMPRISON" ],
             [ 35, "MOVE_EXTRASENSORY" ],

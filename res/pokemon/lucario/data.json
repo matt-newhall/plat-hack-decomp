@@ -35,6 +35,7 @@
     "learnset": {
         "by_level": [
             [ 1, "MOVE_AURA_SPHERE" ],
+            [ 1, "MOVE_ENDURE" ],
             [ 1, "MOVE_COPYCAT" ],
             [ 1, "MOVE_FEINT" ],
             [ 1, "MOVE_HELPING_HAND" ],

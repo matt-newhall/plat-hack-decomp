@@ -57,8 +57,8 @@
             [ 31, "MOVE_DUAL_CHOP" ],
             [ 33, "MOVE_DOUBLE_HIT" ],
             [ 36, "MOVE_CRUNCH" ],
-            [ 40, "MOVE_ENDURE" ],
-            [ 45, "MOVE_REVERSAL" ],
+            [ 40, "MOVE_REVERSAL" ],
+            [ 45, "MOVE_ENDURE" ],
             [ 47, "MOVE_EARTHQUAKE" ],
             [ 57, "MOVE_OUTRAGE" ],
             [ 62, "MOVE_LAST_RESORT" ]

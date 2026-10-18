@@ -49,7 +49,6 @@
             [ 38, "MOVE_IRON_HEAD" ],
             [ 41, "MOVE_METEOR_BEAM" ],
             [ 43, "MOVE_STEEL_BEAM" ],
-            [ 45, "MOVE_ENDURE" ],
             [ 47, "MOVE_POWER_GEM" ],
             [ 49, "MOVE_METAL_BURST" ],
             [ 51, "MOVE_EARTHQUAKE" ],

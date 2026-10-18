@@ -37,7 +37,6 @@
             [ 1, "MOVE_TACKLE" ],
             [ 5, "MOVE_WATER_GUN" ],
             [ 10, "MOVE_AQUA_RING" ],
-            [ 15, "MOVE_ENDURE" ],
             [ 18, "MOVE_REFRESH" ],
             [ 20, "MOVE_ICICLE_SPEAR" ],
             [ 23, "MOVE_ANCIENT_POWER" ],
