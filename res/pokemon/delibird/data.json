@@ -42,6 +42,7 @@
             [ 24, "MOVE_TRIPLE_AXEL" ],
             [ 26, "MOVE_DRILL_PECK" ],
             [ 28, "MOVE_ICE_SPINNER" ],
+            [ 34, "MOVE_FREEZE_DRY" ],
             [ 41, "MOVE_BRAVE_BIRD" ],
             [ 45, "MOVE_GUNK_SHOT" ]
         ],
@@ -90,8 +91,7 @@
             "MOVE_RAPID_SPIN",
             "MOVE_FAKE_OUT",
             "MOVE_MEMENTO",
-            "MOVE_ICE_SHARD",
-            "MOVE_FREEZE_DRY"
+            "MOVE_ICE_SHARD"
         ]
     },
     "evolutions": [  ],

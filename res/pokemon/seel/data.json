@@ -49,6 +49,7 @@
             [ 34, "MOVE_BRINE" ],
             [ 37, "MOVE_TAKE_DOWN" ],
             [ 39, "MOVE_ICE_BEAM" ],
+            [ 42, "MOVE_FREEZE_DRY" ],
             [ 44, "MOVE_DIVE" ],
             [ 46, "MOVE_ICE_SPINNER" ],
             [ 51, "MOVE_AQUA_TAIL" ],

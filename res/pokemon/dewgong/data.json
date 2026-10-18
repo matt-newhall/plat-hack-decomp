@@ -37,6 +37,7 @@
             [ 1, "MOVE_HEADBUTT" ],
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_ICY_WIND" ],
+            [ 1, "MOVE_FREEZE_DRY" ],
             [ 13, "MOVE_ENCORE" ],
             [ 17, "MOVE_ICE_SHARD" ],
             [ 21, "MOVE_REST" ],

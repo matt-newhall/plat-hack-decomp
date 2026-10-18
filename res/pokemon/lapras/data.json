@@ -48,6 +48,7 @@
             [ 33, "MOVE_WATER_PULSE" ],
             [ 35, "MOVE_BRINE" ],
             [ 40, "MOVE_BODY_SLAM" ],
+            [ 42, "MOVE_FREEZE_DRY" ],
             [ 45, "MOVE_ICE_BEAM" ],
             [ 52, "MOVE_MEGAHORN" ],
             [ 55, "MOVE_HYDRO_PUMP" ]
@@ -96,7 +97,6 @@
         "egg_moves": [
             "MOVE_ANCIENT_POWER",
             "MOVE_TICKLE",
-            "MOVE_FREEZE_DRY",
             "MOVE_HYPER_VOICE"
         ]
     },
