@@ -49,6 +49,7 @@
             [ 28, "MOVE_TAKE_DOWN" ],
             [ 30, "MOVE_SWEET_SCENT" ],
             [ 33, "MOVE_STOMPING_TANTRUM" ],
+            [ 34, "MOVE_TOXIC" ],
             [ 36, "MOVE_NATURE_POWER" ],
             [ 38, "MOVE_SYNTHESIS" ],
             [ 42, "MOVE_SEED_BOMB" ],

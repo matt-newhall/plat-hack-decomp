@@ -48,6 +48,7 @@
             [ 32, "MOVE_MEMENTO" ],
             [ 35, "MOVE_EARTH_POWER" ],
             [ 37, "MOVE_MUDDY_WATER" ],
+            [ 44, "MOVE_TOXIC" ],
             [ 47, "MOVE_SCALD" ],
             [ 49, "MOVE_HYDRO_PUMP" ]
         ],

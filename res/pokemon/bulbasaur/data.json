@@ -46,10 +46,11 @@
             [ 20, "MOVE_CHARM" ],
             [ 26, "MOVE_TAKE_DOWN" ],
             [ 28, "MOVE_GRASSY_GLIDE" ],
-            [ 30, "MOVE_SWEET_SCENT" ],
-            [ 32, "MOVE_SYNTHESIS" ],
-            [ 34, "MOVE_WORRY_SEED" ],
-            [ 36, "MOVE_SEED_BOMB" ],
+            [ 30, "MOVE_TOXIC" ],
+            [ 32, "MOVE_SWEET_SCENT" ],
+            [ 35, "MOVE_SYNTHESIS" ],
+            [ 37, "MOVE_WORRY_SEED" ],
+            [ 39, "MOVE_SEED_BOMB" ],
             [ 43, "MOVE_POWER_WHIP" ],
             [ 45, "MOVE_LEAF_STORM" ],
             [ 47, "MOVE_SOLAR_BEAM" ]
@@ -85,7 +86,6 @@
         ],
         "egg_moves": [
             "MOVE_PETAL_DANCE",
-            "MOVE_TOXIC",
             "MOVE_INGRAIN"
         ]
     },

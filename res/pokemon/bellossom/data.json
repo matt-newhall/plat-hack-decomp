@@ -45,7 +45,6 @@
             [ 19, "MOVE_MAGICAL_LEAF" ],
             [ 21, "MOVE_SLEEP_POWDER" ],
             [ 26, "MOVE_CHARM" ],
-            [ 29, "MOVE_TOXIC" ],
             [ 31, "MOVE_GIGA_DRAIN" ],
             [ 34, "MOVE_LUCKY_CHANT" ],
             [ 38, "MOVE_LEAF_BLADE" ],

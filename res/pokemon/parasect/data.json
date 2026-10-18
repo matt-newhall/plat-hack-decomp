@@ -45,6 +45,7 @@
             [ 17, "MOVE_FURY_CUTTER" ],
             [ 22, "MOVE_SPORE" ],
             [ 29, "MOVE_SLASH" ],
+            [ 38, "MOVE_TOXIC" ],
             [ 44, "MOVE_GIGA_DRAIN" ],
             [ 51, "MOVE_AROMATHERAPY" ],
             [ 59, "MOVE_RAGE_POWDER" ],

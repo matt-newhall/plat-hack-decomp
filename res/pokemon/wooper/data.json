@@ -47,7 +47,6 @@
             [ 31, "MOVE_AQUA_TAIL" ],
             [ 33, "MOVE_MUD_SPORT" ],
             [ 36, "MOVE_MUDDY_WATER" ],
-            [ 38, "MOVE_TOXIC" ],
             [ 41, "MOVE_SLUDGE_WAVE" ],
             [ 44, "MOVE_EARTHQUAKE" ]
         ],

@@ -48,6 +48,7 @@
             [ 30, "MOVE_SUPER_FANG" ],
             [ 33, "MOVE_SLASH" ],
             [ 36, "MOVE_DIG" ],
+            [ 38, "MOVE_TOXIC" ],
             [ 39, "MOVE_GYRO_BALL" ],
             [ 41, "MOVE_HIGH_HORSEPOWER" ],
             [ 43, "MOVE_LEECH_LIFE" ],

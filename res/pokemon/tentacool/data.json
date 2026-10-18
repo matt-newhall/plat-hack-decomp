@@ -48,6 +48,7 @@
             [ 36, "MOVE_POISON_JAB" ],
             [ 38, "MOVE_SCALD" ],
             [ 40, "MOVE_SURF" ],
+            [ 44, "MOVE_TOXIC" ],
             [ 47, "MOVE_SLUDGE_WAVE" ],
             [ 49, "MOVE_HYDRO_PUMP" ],
             [ 51, "MOVE_GUNK_SHOT" ]
