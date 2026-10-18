@@ -52,7 +52,6 @@
             [ 40, "MOVE_DISCHARGE" ],
             [ 47, "MOVE_POWER_GEM" ],
             [ 51, "MOVE_DAZZLING_GLEAM" ],
-            [ 57, "MOVE_LIGHT_SCREEN" ],
             [ 60, "MOVE_VOLT_SWITCH" ],
             [ 62, "MOVE_THUNDER" ],
             [ 65, "MOVE_METEOR_BEAM" ]

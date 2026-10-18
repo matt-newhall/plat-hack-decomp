@@ -54,7 +54,6 @@
             [ 20, "MOVE_SWIFT" ],
             [ 24, "MOVE_PSYBEAM" ],
             [ 28, "MOVE_BRINE" ],
-            [ 32, "MOVE_LIGHT_SCREEN" ],
             [ 39, "MOVE_TRI_ATTACK" ],
             [ 41, "MOVE_POWER_GEM" ],
             [ 44, "MOVE_SCALD" ],

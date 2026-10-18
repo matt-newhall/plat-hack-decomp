@@ -39,7 +39,6 @@
             [ 3, "MOVE_TACKLE" ],
             [ 6, "MOVE_FORESIGHT" ],
             [ 9, "MOVE_CONFUSION" ],
-            [ 12, "MOVE_REFLECT" ],
             [ 14, "MOVE_PSYBEAM" ],
             [ 16, "MOVE_DEFOG" ],
             [ 18, "MOVE_AIR_SLASH" ],

@@ -45,7 +45,6 @@
             [ 20, "MOVE_VENOSHOCK" ],
             [ 22, "MOVE_PSYBEAM" ],
             [ 25, "MOVE_LEECH_LIFE" ],
-            [ 27, "MOVE_LIGHT_SCREEN" ],
             [ 30, "MOVE_WHIRLWIND" ],
             [ 32, "MOVE_TOXIC" ],
             [ 34, "MOVE_POWDER" ],

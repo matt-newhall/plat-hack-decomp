@@ -51,7 +51,6 @@
             [ 38, "MOVE_DISCHARGE" ],
             [ 40, "MOVE_LOW_KICK" ],
             [ 47, "MOVE_THUNDERBOLT" ],
-            [ 52, "MOVE_LIGHT_SCREEN" ],
             [ 58, "MOVE_THUNDER" ],
             [ 64, "MOVE_GIGA_IMPACT" ]
         ],

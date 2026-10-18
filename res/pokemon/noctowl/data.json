@@ -40,7 +40,6 @@
             [ 1, "MOVE_SKY_ATTACK" ],
             [ 1, "MOVE_FORESIGHT" ],
             [ 9, "MOVE_CONFUSION" ],
-            [ 12, "MOVE_REFLECT" ],
             [ 16, "MOVE_PSYBEAM" ],
             [ 18, "MOVE_AIR_SLASH" ],
             [ 23, "MOVE_EXTRASENSORY" ],

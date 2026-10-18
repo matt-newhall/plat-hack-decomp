@@ -51,7 +51,6 @@
             [ 37, "MOVE_LOW_KICK" ],
             [ 40, "MOVE_THUNDERBOLT" ],
             [ 42, "MOVE_VOLT_SWITCH" ],
-            [ 44, "MOVE_LIGHT_SCREEN" ],
             [ 48, "MOVE_THUNDER" ]
         ],
         "by_tm": [

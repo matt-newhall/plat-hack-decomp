@@ -47,7 +47,6 @@
             [ 32, "MOVE_DISCHARGE" ],
             [ 38, "MOVE_POWER_GEM" ],
             [ 40, "MOVE_DAZZLING_GLEAM" ],
-            [ 43, "MOVE_LIGHT_SCREEN" ],
             [ 50, "MOVE_THUNDER" ]
         ],
         "by_tm": [

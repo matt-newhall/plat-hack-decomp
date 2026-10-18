@@ -61,7 +61,6 @@
             [ 27, "MOVE_THUNDERBOLT" ],
             [ 32, "MOVE_DISCHARGE" ],
             [ 35, "MOVE_PLAY_ROUGH" ],
-            [ 40, "MOVE_LIGHT_SCREEN" ],
             [ 42, "MOVE_THUNDERBOLT" ],
             [ 44, "MOVE_ZING_ZAP" ],
             [ 46, "MOVE_IRON_TAIL" ],

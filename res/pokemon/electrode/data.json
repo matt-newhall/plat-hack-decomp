@@ -51,7 +51,6 @@
             [ 35, "MOVE_DISCHARGE" ],
             [ 37, "MOVE_FOUL_PLAY" ],
             [ 40, "MOVE_SELFDESTRUCT" ],
-            [ 42, "MOVE_LIGHT_SCREEN" ],
             [ 45, "MOVE_MAGNET_RISE" ],
             [ 51, "MOVE_EXPLOSION" ],
             [ 54, "MOVE_GYRO_BALL" ],

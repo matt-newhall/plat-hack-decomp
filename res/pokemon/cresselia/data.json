@@ -39,6 +39,8 @@
             [ 12, "MOVE_AURORA_BEAM" ],
             [ 18, "MOVE_PSYBEAM" ],
             [ 24, "MOVE_DISABLE" ],
+            [ 25, "MOVE_REFLECT" ],
+            [ 25, "MOVE_LIGHT_SCREEN" ],
             [ 26, "MOVE_GRAVITY" ],
             [ 30, "MOVE_SLASH" ],
             [ 36, "MOVE_PSYCHO_CUT" ],

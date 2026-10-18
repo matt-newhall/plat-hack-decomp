@@ -50,6 +50,7 @@
             [ 1, "MOVE_HEAL_BLOCK" ],
             [ 5, "MOVE_PSYBEAM" ],
             [ 10, "MOVE_REFLECT" ],
+            [ 10, "MOVE_LIGHT_SCREEN" ],
             [ 15, "MOVE_TAUNT" ],
             [ 20, "MOVE_PSYCHO_CUT" ],
             [ 24, "MOVE_MIRACLE_EYE" ],

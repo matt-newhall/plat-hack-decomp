@@ -52,7 +52,6 @@
             [ 35, "MOVE_GRAVITY" ],
             [ 37, "MOVE_TRI_ATTACK" ],
             [ 39, "MOVE_HYPER_VOICE" ],
-            [ 41, "MOVE_LIGHT_SCREEN" ],
             [ 43, "MOVE_DOUBLE_EDGE" ],
             [ 45, "MOVE_SOFTBOILED" ],
             [ 52, "MOVE_HEALING_WISH" ],

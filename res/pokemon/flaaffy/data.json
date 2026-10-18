@@ -48,7 +48,6 @@
             [ 45, "MOVE_POWER_GEM" ],
             [ 47, "MOVE_DAZZLING_GLEAM" ],
             [ 50, "MOVE_VOLT_SWITCH" ],
-            [ 52, "MOVE_LIGHT_SCREEN" ],
             [ 56, "MOVE_THUNDER" ]
         ],
         "by_tm": [

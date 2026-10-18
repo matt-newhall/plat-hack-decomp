@@ -38,7 +38,6 @@
             [ 1, "MOVE_THUNDER_WAVE" ],
             [ 1, "MOVE_VOLT_SWITCH" ],
             [ 5, "MOVE_THUNDER_SHOCK" ],
-            [ 10, "MOVE_LIGHT_SCREEN" ],
             [ 15, "MOVE_PLUCK" ],
             [ 25, "MOVE_ANCIENT_POWER" ],
             [ 27, "MOVE_EERIE_IMPULSE" ],

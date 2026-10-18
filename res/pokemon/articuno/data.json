@@ -37,7 +37,6 @@
             [ 1, "MOVE_GUST" ],
             [ 1, "MOVE_MIST" ],
             [ 5, "MOVE_POWDER_SNOW" ],
-            [ 10, "MOVE_REFLECT" ],
             [ 15, "MOVE_ICE_SHARD" ],
             [ 20, "MOVE_ICICLE_SPEAR" ],
             [ 22, "MOVE_WATER_PULSE" ],

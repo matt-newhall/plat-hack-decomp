@@ -50,7 +50,6 @@
             [ 25, "MOVE_SPARK" ],
             [ 27, "MOVE_ELECTROWEB" ],
             [ 32, "MOVE_DISCHARGE" ],
-            [ 40, "MOVE_LIGHT_SCREEN" ],
             [ 42, "MOVE_THUNDERBOLT" ],
             [ 45, "MOVE_PLAY_ROUGH" ],
             [ 47, "MOVE_ZING_ZAP" ],
