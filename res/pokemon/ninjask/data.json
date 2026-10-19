@@ -88,7 +88,7 @@
         ]
     },
     "evolutions": [  ],
-    "offspring": "SPECIES_NINJASK",
+    "offspring": "SPECIES_NINCADA",
     "footprint": {
         "has": true,
         "size": "FOOTPRINT_MEDIUM",
