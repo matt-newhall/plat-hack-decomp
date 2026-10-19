@@ -63,7 +63,8 @@
             [ 45, "MOVE_POWER_GEM" ],
             [ 48, "MOVE_PSYCH_UP" ],
             [ 50, "MOVE_FUTURE_SIGHT" ],
-            [ 55, "MOVE_LAST_RESORT" ]
+            [ 55, "MOVE_LAST_RESORT" ],
+            [ 70, "MOVE_EXPANDING_FORCE" ]
         ],
         "by_tm": [
             "TM05",

@@ -51,7 +51,6 @@
             [ 44, "MOVE_MOONLIGHT" ],
             [ 47, "MOVE_PLAY_ROUGH" ],
             [ 49, "MOVE_MOONBLAST" ],
-            [ 51, "MOVE_TRIPLE_AXEL" ],
             [ 53, "MOVE_PETAL_DANCE" ]
         ],
         "by_tm": [

@@ -89,13 +89,7 @@
             "MOVE_MAGNET_RISE"
         ]
     },
-    "evolutions": [
-        [
-            "EVO_USE_ITEM",
-            "ITEM_DUBIOUS_DISC",
-            "SPECIES_PORYGON_Z"
-        ]
-    ],
+    "evolutions": [  ],
     "offspring": "SPECIES_PORYGON",
     "footprint": {
         "has": true,

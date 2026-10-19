@@ -57,7 +57,6 @@
             [ 50, "MOVE_PSYCHIC" ],
             [ 56, "MOVE_DREAM_EATER" ],
             [ 58, "MOVE_MOONBLAST" ],
-            [ 61, "MOVE_TRIPLE_AXEL" ],
             [ 63, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [

@@ -59,7 +59,8 @@
             [ 45, "MOVE_SCARY_FACE" ],
             [ 49, "MOVE_SUPERPOWER" ],
             [ 51, "MOVE_FLARE_BLITZ" ],
-            [ 55, "MOVE_LAST_RESORT" ]
+            [ 55, "MOVE_LAST_RESORT" ],
+            [ 70, "MOVE_EXTREME_SPEED" ]
         ],
         "by_tm": [
             "TM05",

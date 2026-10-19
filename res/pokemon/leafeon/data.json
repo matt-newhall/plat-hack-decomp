@@ -56,8 +56,9 @@
             [ 25, "MOVE_MAGICAL_LEAF" ],
             [ 30, "MOVE_SYNTHESIS" ],
             [ 40, "MOVE_GIGA_DRAIN" ],
-            [ 50, "MOVE_LEAF_BLADE" ],
-            [ 55, "MOVE_LAST_RESORT" ]
+            [ 50, "MOVE_SACRED_SWORD" ],
+            [ 55, "MOVE_LAST_RESORT" ],
+            [ 70, "MOVE_LEAF_BLADE" ]
         ],
         "by_tm": [
             "TM05",
