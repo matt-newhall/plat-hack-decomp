@@ -42,7 +42,6 @@
             [ 52, "MOVE_AIR_SLASH" ],
             [ 55, "MOVE_WORRY_SEED" ],
             [ 57, "MOVE_PLAY_ROUGH" ],
-            [ 64, "MOVE_GRASSY_TERRAIN" ],
             [ 73, "MOVE_ENERGY_BALL" ],
             [ 82, "MOVE_SWEET_KISS" ],
             [ 91, "MOVE_HEALING_WISH" ],

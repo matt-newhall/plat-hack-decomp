@@ -85,8 +85,7 @@
             "MOVE_CROSS_POISON",
             "MOVE_BUG_BITE",
             "MOVE_DETECT",
-            "MOVE_FELL_STINGER",
-            "MOVE_GRASSY_TERRAIN"
+            "MOVE_FELL_STINGER"
         ]
     },
     "evolutions": [

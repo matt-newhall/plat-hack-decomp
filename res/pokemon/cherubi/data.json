@@ -78,8 +78,7 @@
             "MOVE_HEALING_WISH",
             "MOVE_SEED_BOMB",
             "MOVE_HEAL_BELL",
-            "MOVE_SAFEGUARD",
-            "MOVE_GRASSY_TERRAIN"
+            "MOVE_SAFEGUARD"
         ]
     },
     "evolutions": [

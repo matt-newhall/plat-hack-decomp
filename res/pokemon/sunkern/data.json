@@ -80,8 +80,7 @@
             "MOVE_LEECH_SEED",
             "MOVE_ENCORE",
             "MOVE_MORNING_SUN",
-            "MOVE_INGRAIN",
-            "MOVE_GRASSY_TERRAIN"
+            "MOVE_INGRAIN"
         ]
     },
     "evolutions": [

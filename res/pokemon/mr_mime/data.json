@@ -40,7 +40,6 @@
             [ 1, "MOVE_POUND" ],
             [ 1, "MOVE_POWER_SWAP" ],
             [ 1, "MOVE_DETECT" ],
-            [ 1, "MOVE_MISTY_TERRAIN" ],
             [ 11, "MOVE_DOUBLE_SLAP" ],
             [ 13, "MOVE_CONFUSION" ],
             [ 16, "MOVE_ROLE_PLAY" ],

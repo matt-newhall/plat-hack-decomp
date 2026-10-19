@@ -38,7 +38,6 @@
             [ 1, "MOVE_GROWL" ],
             [ 1, "MOVE_CONFUSION" ],
             [ 1, "MOVE_MYSTICAL_FIRE" ],
-            [ 1, "MOVE_MISTY_TERRAIN" ],
             [ 1, "MOVE_CHARM" ],
             [ 1, "MOVE_DISARMING_VOICE" ],
             [ 1, "MOVE_HEALING_WISH" ],

@@ -79,8 +79,7 @@
             "MOVE_FLATTER",
             "MOVE_HELPING_HAND",
             "MOVE_ELECTROWEB",
-            "MOVE_EERIE_IMPULSE",
-            "MOVE_ELECTRIC_TERRAIN"
+            "MOVE_EERIE_IMPULSE"
         ]
     },
     "evolutions": [

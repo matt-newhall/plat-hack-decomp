@@ -110,8 +110,7 @@
             "MOVE_SUCKER_PUNCH",
             "MOVE_THUNDER_FANG",
             "MOVE_ICE_FANG",
-            "MOVE_FIRE_FANG",
-            "MOVE_MISTY_TERRAIN"
+            "MOVE_FIRE_FANG"
         ]
     },
     "evolutions": [  ],

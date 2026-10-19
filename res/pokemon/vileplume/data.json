@@ -48,7 +48,6 @@
             [ 31, "MOVE_GIGA_DRAIN" ],
             [ 32, "MOVE_TOXIC" ],
             [ 34, "MOVE_LUCKY_CHANT" ],
-            [ 38, "MOVE_GRASSY_TERRAIN" ],
             [ 44, "MOVE_MOONLIGHT" ],
             [ 46, "MOVE_MOONBLAST" ],
             [ 48, "MOVE_SLUDGE_WAVE" ],

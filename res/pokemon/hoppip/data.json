@@ -88,8 +88,7 @@
             "MOVE_ENCORE",
             "MOVE_WORRY_SEED",
             "MOVE_SEED_BOMB",
-            "MOVE_RAGE_POWDER",
-            "MOVE_GRASSY_TERRAIN"
+            "MOVE_RAGE_POWDER"
         ]
     },
     "evolutions": [
