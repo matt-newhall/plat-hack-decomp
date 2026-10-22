@@ -52,7 +52,8 @@
             [ 42, "MOVE_PSYCHIC" ],
             [ 46, "MOVE_MEAN_LOOK" ],
             [ 52, "MOVE_TRIPLE_AXEL" ],
-            [ 58, "MOVE_BLIZZARD" ]
+            [ 58, "MOVE_BLIZZARD" ],
+            [ 66, "MOVE_AURORA_VEIL" ]
         ],
         "by_tm": [
             "TM01",
