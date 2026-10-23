@@ -3,8 +3,8 @@
         "hp": 65,
         "attack": 50,
         "defense": 35,
-        "speed": 95,
-        "special_attack": 115,
+        "speed": 105,
+        "special_attack": 125,
         "special_defense": 95
     },
     "types": [ "TYPE_ICE", "TYPE_PSYCHIC" ],

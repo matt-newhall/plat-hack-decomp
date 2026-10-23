@@ -1,11 +1,11 @@
 {
     "base_stats": {
-        "hp": 52,
+        "hp": 62,
         "attack": 90,
-        "defense": 55,
-        "speed": 60,
-        "special_attack": 58,
-        "special_defense": 62
+        "defense": 95,
+        "speed": 65,
+        "special_attack": 68,
+        "special_defense": 82
     },
     "types": [ "TYPE_FIGHTING", "TYPE_FLYING" ],
     "catch_rate": 45,

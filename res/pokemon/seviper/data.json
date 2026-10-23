@@ -3,8 +3,8 @@
         "hp": 73,
         "attack": 100,
         "defense": 60,
-        "speed": 65,
-        "special_attack": 100,
+        "speed": 85,
+        "special_attack": 80,
         "special_defense": 60
     },
     "types": [ "TYPE_POISON", "TYPE_POISON" ],

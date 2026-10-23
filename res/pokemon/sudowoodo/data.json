@@ -1,11 +1,11 @@
 {
     "base_stats": {
         "hp": 70,
-        "attack": 100,
-        "defense": 115,
+        "attack": 120,
+        "defense": 125,
         "speed": 30,
         "special_attack": 30,
-        "special_defense": 65
+        "special_defense": 75
     },
     "types": [ "TYPE_ROCK", "TYPE_ROCK" ],
     "catch_rate": 65,

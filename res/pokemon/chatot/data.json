@@ -2,10 +2,10 @@
     "base_stats": {
         "hp": 76,
         "attack": 65,
-        "defense": 45,
-        "speed": 91,
+        "defense": 65,
+        "speed": 101,
         "special_attack": 92,
-        "special_defense": 42
+        "special_defense": 62
     },
     "types": [ "TYPE_NORMAL", "TYPE_FLYING" ],
     "catch_rate": 30,

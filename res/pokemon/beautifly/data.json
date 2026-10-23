@@ -3,9 +3,9 @@
         "hp": 60,
         "attack": 70,
         "defense": 50,
-        "speed": 65,
-        "special_attack": 100,
-        "special_defense": 50
+        "speed": 85,
+        "special_attack": 110,
+        "special_defense": 70
     },
     "types": [ "TYPE_BUG", "TYPE_FLYING" ],
     "catch_rate": 45,
