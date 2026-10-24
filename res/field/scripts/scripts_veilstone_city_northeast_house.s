@@ -54,12 +54,19 @@ VeilstoneCityNortheastHouse_AcceptPorygon:
     Message VeilstoneCityNortheastHouse_Text_PlayerAcceptedThePorygon
     WaitFanfare
     GivePokemon VAR_MAP_LOCAL_2, 32, ITEM_NONE, VAR_RESULT
+    CallIfEq VAR_MAP_LOCAL_2, SPECIES_PORYGON, VeilstoneCityNortheastHouse_TeachPorygonSketch
     SetFlag FLAG_RECEIVED_VEILSTONE_CITY_NORTHEAST_HOUSE_PORYGON
     Message VeilstoneCityNortheastHouse_Text_AskNicknamePorygon
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_YES, VeilstoneCityNortheastHouse_NicknamePorygon
     GoToIfEq VAR_RESULT, MENU_NO, VeilstoneCityNortheastHouse_DontNicknamePorygon
     End
+
+VeilstoneCityNortheastHouse_TeachPorygonSketch:
+    GetPartyCount VAR_MAP_LOCAL_0
+    SubVar VAR_MAP_LOCAL_0, 1
+    ResetMoveSlot VAR_MAP_LOCAL_0, MOVE_SKETCH, 2
+    Return
 
 VeilstoneCityNortheastHouse_NicknamePorygon:
     CloseMessage
