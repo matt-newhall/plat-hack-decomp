@@ -8,7 +8,7 @@
         "special_defense": 140
     },
     "types": [ "TYPE_WATER", "TYPE_WATER" ],
-    "catch_rate": 5,
+    "catch_rate": 3,
     "base_exp_reward": 302,
     "ev_yields": {
         "hp": 0,
