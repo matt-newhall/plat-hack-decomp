@@ -45,6 +45,7 @@
             [ 1, "MOVE_SAND_ATTACK" ],
             [ 1, "MOVE_SCRATCH" ],
             [ 23, "MOVE_ABSORB" ],
+            [ 26, "MOVE_DUAL_WINGBEAT" ],
             [ 29, "MOVE_FURY_SWIPES" ],
             [ 32, "MOVE_BUG_BITE" ],
             [ 43, "MOVE_MIND_READER" ],

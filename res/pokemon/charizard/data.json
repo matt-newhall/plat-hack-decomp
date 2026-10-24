@@ -51,6 +51,7 @@
             [ 38, "MOVE_DRAGON_RAGE" ],
             [ 40, "MOVE_HEAT_CRASH" ],
             [ 42, "MOVE_CRUNCH" ],
+            [ 43, "MOVE_DUAL_WINGBEAT" ],
             [ 44, "MOVE_SCARY_FACE" ],
             [ 47, "MOVE_FLAMETHROWER" ],
             [ 50, "MOVE_DUAL_CHOP" ],

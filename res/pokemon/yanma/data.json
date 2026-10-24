@@ -42,6 +42,7 @@
             [ 20, "MOVE_DETECT" ],
             [ 22, "MOVE_SONIC_BOOM" ],
             [ 24, "MOVE_SUPERSONIC" ],
+            [ 28, "MOVE_DUAL_WINGBEAT" ],
             [ 30, "MOVE_BUG_BITE" ],
             [ 32, "MOVE_SECRET_POWER" ],
             [ 34, "MOVE_ANCIENT_POWER" ],

@@ -51,6 +51,7 @@
             [ 32, "MOVE_POWER_GEM" ],
             [ 38, "MOVE_U_TURN" ],
             [ 41, "MOVE_BUG_BUZZ" ],
+            [ 43, "MOVE_DUAL_WINGBEAT" ],
             [ 45, "MOVE_DESTINY_BOND" ],
             [ 47, "MOVE_ATTACK_ORDER" ],
             [ 49, "MOVE_POLLEN_PUFF" ]

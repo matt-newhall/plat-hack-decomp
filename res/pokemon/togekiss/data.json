@@ -49,6 +49,7 @@
             [ 18, "MOVE_SMART_STRIKE" ],
             [ 24, "MOVE_METRONOME" ],
             [ 28, "MOVE_HELPING_HAND" ],
+            [ 35, "MOVE_DUAL_WINGBEAT" ],
             [ 36, "MOVE_SAFEGUARD" ],
             [ 38, "MOVE_DOUBLE_EDGE" ],
             [ 40, "MOVE_PLAY_ROUGH" ],

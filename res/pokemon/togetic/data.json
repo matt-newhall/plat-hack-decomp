@@ -46,6 +46,7 @@
             [ 24, "MOVE_METRONOME" ],
             [ 28, "MOVE_HELPING_HAND" ],
             [ 31, "MOVE_TRI_ATTACK" ],
+            [ 35, "MOVE_DUAL_WINGBEAT" ],
             [ 37, "MOVE_SAFEGUARD" ],
             [ 39, "MOVE_DOUBLE_EDGE" ],
             [ 41, "MOVE_FOLLOW_ME" ],

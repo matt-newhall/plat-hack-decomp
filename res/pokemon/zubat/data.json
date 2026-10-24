@@ -42,6 +42,7 @@
             [ 20, "MOVE_QUICK_ATTACK" ],
             [ 25, "MOVE_AIR_CUTTER" ],
             [ 30, "MOVE_BITE" ],
+            [ 31, "MOVE_DUAL_WINGBEAT" ],
             [ 35, "MOVE_HAZE" ],
             [ 40, "MOVE_VENOSHOCK" ],
             [ 43, "MOVE_CRUNCH" ],

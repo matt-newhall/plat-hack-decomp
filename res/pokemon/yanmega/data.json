@@ -45,6 +45,7 @@
             [ 21, "MOVE_SONIC_BOOM" ],
             [ 23, "MOVE_SUPERSONIC" ],
             [ 27, "MOVE_UPROAR" ],
+            [ 29, "MOVE_DUAL_WINGBEAT" ],
             [ 30, "MOVE_BUG_BITE" ],
             [ 33, "MOVE_CRUNCH" ],
             [ 36, "MOVE_ANCIENT_POWER" ],

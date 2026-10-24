@@ -43,6 +43,7 @@
             [ 22, "MOVE_STRUGGLE_BUG" ],
             [ 24, "MOVE_WHIRLWIND" ],
             [ 28, "MOVE_AERIAL_ACE" ],
+            [ 29, "MOVE_DUAL_WINGBEAT" ],
             [ 33, "MOVE_TAKE_DOWN" ],
             [ 35, "MOVE_FEATHER_DANCE" ],
             [ 37, "MOVE_AIR_SLASH" ],

@@ -50,6 +50,7 @@
             [ 26, "MOVE_FIRE_SPIN" ],
             [ 28, "MOVE_SAFEGUARD" ],
             [ 31, "MOVE_SING" ],
+            [ 32, "MOVE_DUAL_WINGBEAT" ],
             [ 33, "MOVE_MIRROR_MOVE" ],
             [ 38, "MOVE_FEATHER_DANCE" ],
             [ 41, "MOVE_TAKE_DOWN" ],

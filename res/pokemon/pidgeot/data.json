@@ -44,6 +44,7 @@
             [ 22, "MOVE_TWISTER" ],
             [ 27, "MOVE_FEATHER_DANCE" ],
             [ 32, "MOVE_MIRROR_MOVE" ],
+            [ 35, "MOVE_DUAL_WINGBEAT" ],
             [ 38, "MOVE_WING_ATTACK" ],
             [ 44, "MOVE_ROOST" ],
             [ 56, "MOVE_AERIAL_ACE" ],

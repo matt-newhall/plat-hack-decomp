@@ -49,6 +49,7 @@
             [ 20, "MOVE_VACUUM_WAVE" ],
             [ 23, "MOVE_DOUBLE_HIT" ],
             [ 25, "MOVE_SLASH" ],
+            [ 27, "MOVE_DUAL_WINGBEAT" ],
             [ 28, "MOVE_FOCUS_ENERGY" ],
             [ 33, "MOVE_RAZOR_WIND" ],
             [ 36, "MOVE_BUG_BUZZ" ],

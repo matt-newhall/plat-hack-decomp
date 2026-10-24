@@ -43,6 +43,7 @@
             [ 25, "MOVE_FEATHER_DANCE" ],
             [ 29, "MOVE_MIRROR_MOVE" ],
             [ 33, "MOVE_WING_ATTACK" ],
+            [ 34, "MOVE_DUAL_WINGBEAT" ],
             [ 37, "MOVE_ROOST" ],
             [ 43, "MOVE_TAILWIND" ],
             [ 45, "MOVE_AERIAL_ACE" ],

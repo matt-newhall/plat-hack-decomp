@@ -40,6 +40,7 @@
             [ 9, "MOVE_WING_ATTACK" ],
             [ 17, "MOVE_ENDEAVOR" ],
             [ 21, "MOVE_WHIRLWIND" ],
+            [ 22, "MOVE_DUAL_WINGBEAT" ],
             [ 23, "MOVE_AIR_SLASH" ],
             [ 25, "MOVE_FEATHER_DANCE" ],
             [ 28, "MOVE_AERIAL_ACE" ],

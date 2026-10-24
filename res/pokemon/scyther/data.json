@@ -46,6 +46,7 @@
             [ 22, "MOVE_BUG_BITE" ],
             [ 24, "MOVE_DOUBLE_HIT" ],
             [ 27, "MOVE_SLASH" ],
+            [ 28, "MOVE_DUAL_WINGBEAT" ],
             [ 29, "MOVE_FOCUS_ENERGY" ],
             [ 32, "MOVE_DUAL_CHOP" ],
             [ 36, "MOVE_AIR_SLASH" ],

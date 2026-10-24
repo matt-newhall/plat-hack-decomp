@@ -46,6 +46,7 @@
             [ 38, "MOVE_IRON_HEAD" ],
             [ 40, "MOVE_TAKE_DOWN" ],
             [ 50, "MOVE_STONE_EDGE" ],
+            [ 52, "MOVE_DUAL_WINGBEAT" ],
             [ 53, "MOVE_METEOR_BEAM" ],
             [ 55, "MOVE_EARTHQUAKE" ],
             [ 58, "MOVE_HYPER_BEAM" ],
