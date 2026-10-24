@@ -38,7 +38,7 @@ BOOL ScrCmd_GivePokemon(ScriptContext *ctx)
     u16 *success = ScriptContext_GetVarPointer(ctx);
 
     Party *unused = SaveData_GetParty(fieldSystem->saveData);
-    *success = Pokemon_GiveMonFromScript(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, heldItem, metLocation, metTerrain);
+    *success = Pokemon_GiveMonFromScript(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, 0, heldItem, metLocation, metTerrain);
 
     return FALSE;
 }
@@ -52,7 +52,22 @@ BOOL ScrCmd_GivePokemonAtLocation(ScriptContext *ctx)
     int metLocation = ScriptContext_GetVar(ctx);
     u16 *success = ScriptContext_GetVarPointer(ctx);
 
-    *success = Pokemon_GiveMonFromScript(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, heldItem, metLocation, TERRAIN_MAX);
+    *success = Pokemon_GiveMonFromScript(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, 0, heldItem, metLocation, TERRAIN_MAX);
+
+    return FALSE;
+}
+
+BOOL ScrCmd_GivePokemonWithForm(ScriptContext *ctx)
+{
+    int metLocation = MapHeader_GetMapLabelTextID(ctx->fieldSystem->location->mapId);
+    FieldSystem *fieldSystem = ctx->fieldSystem;
+    u16 species = ScriptContext_GetVar(ctx);
+    u16 level = ScriptContext_GetVar(ctx);
+    u16 form = ScriptContext_GetVar(ctx);
+    u16 heldItem = ScriptContext_GetVar(ctx);
+    u16 *success = ScriptContext_GetVarPointer(ctx);
+
+    *success = Pokemon_GiveMonFromScript(HEAP_ID_FIELD2, fieldSystem->saveData, species, level, form, heldItem, metLocation, TERRAIN_MAX);
 
     return FALSE;
 }

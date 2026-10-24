@@ -2828,11 +2828,11 @@
     .short \recordID
     .endm
 
-    .macro ScrCmd_Unused_1E6 arg0, arg1, arg2
-    .short SCRCMD_UNUSED_1E6
-    .short \arg0
-    .short \arg1
-    .short \arg2
+    .macro GetGameRecord recordID, destVarHigh, destVarLow
+    .short SCRCMD_GETGAMERECORD
+    .short \recordID
+    .short \destVarHigh
+    .short \destVarLow
     .endm
 
     .macro ScrCmd_Unused_1E7 arg0, arg1, arg2, arg3
@@ -5051,6 +5051,15 @@
 
     .macro UseEscapeRope
     .short SCRCMD_USEESCAPEROPE
+    .endm
+
+    .macro GivePokemonWithForm species, level, form, heldItem, successVar
+    .short SCRCMD_GIVEPOKEMONWITHFORM
+    .short \species
+    .short \level
+    .short \form
+    .short \heldItem
+    .short \successVar
     .endm
 
     .macro GetFollowerPartySlot destVarID
