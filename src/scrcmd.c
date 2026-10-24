@@ -586,7 +586,7 @@ static BOOL ScrCmd_AddTrophyGardenMon(ScriptContext *ctx);
 static BOOL ScrCmd_GetTrophyGardenSlot1Species(ScriptContext *ctx);
 static BOOL ScrCmd_Unused_1EF(ScriptContext *ctx);
 static BOOL ScrCmd_IncrementGameRecord(ScriptContext *ctx);
-static BOOL ScrCmd_Unused_1E6(ScriptContext *ctx);
+static BOOL ScrCmd_GetGameRecord(ScriptContext *ctx);
 static BOOL ScrCmd_Unused_1E7(ScriptContext *ctx);
 static BOOL ScrCmd_AddToGameRecord(ScriptContext *ctx);
 static BOOL ScrCmd_AddToGameRecordBigValue(ScriptContext *ctx);
@@ -5539,7 +5539,7 @@ static BOOL ScrCmd_IncrementGameRecord(ScriptContext *ctx)
     return FALSE;
 }
 
-static BOOL ScrCmd_Unused_1E6(ScriptContext *ctx)
+static BOOL ScrCmd_GetGameRecord(ScriptContext *ctx)
 {
     u16 v3 = ScriptContext_ReadHalfWord(ctx);
     u16 v4 = ScriptContext_ReadHalfWord(ctx);

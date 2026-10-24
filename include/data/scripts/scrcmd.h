@@ -491,7 +491,7 @@ ScriptCommand(SCRCMD_1E2,                                                  ScrCm
 ScriptCommand(SCRCMD_1E3,                                                  ScrCmd_1E3)
 ScriptCommand(SCRCMD_1E4,                                                  ScrCmd_1E4)
 ScriptCommand(SCRCMD_INCREMENTGAMERECORD,                                  ScrCmd_IncrementGameRecord)
-ScriptCommand(SCRCMD_UNUSED_1E6,                                           ScrCmd_Unused_1E6)
+ScriptCommand(SCRCMD_GETGAMERECORD,                                        ScrCmd_GetGameRecord)
 ScriptCommand(SCRCMD_UNUSED_1E7,                                           ScrCmd_Unused_1E7)
 ScriptCommand(SCRCMD_CHECKLOCALDEXCOMPLETED,                               ScrCmd_CheckLocalDexCompleted)
 ScriptCommand(SCRCMD_CHECKNATIONALDEXCOMPLETED,                            ScrCmd_CheckNationalDexCompleted)
@@ -867,6 +867,7 @@ ScriptCommand(SCRCMD_SETPARTYMONNATURE,                                    ScrCm
 ScriptCommand(SCRCMD_FOLLOWPOKEPLACEBEHINDPLAYER,                          ScrCmd_FollowPokePlaceBehindPlayer)
 ScriptCommand(SCRCMD_FOLLOWPOKEPLACEATSIDE,                                ScrCmd_FollowPokePlaceAtSide)
 ScriptCommand(SCRCMD_USEESCAPEROPE,                                        ScrCmd_UseEscapeRope)
+ScriptCommand(SCRCMD_GIVEPOKEMONWITHFORM,                                  ScrCmd_GivePokemonWithForm)
 
 // clang-format on
 
