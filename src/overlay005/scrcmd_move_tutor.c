@@ -107,10 +107,10 @@ BOOL ScrCmd_CheckHasLearnableTutorMoves(ScriptContext *ctx)
 BOOL ScrCmd_ResetMoveSlot(ScriptContext *ctx)
 {
     u16 partySlot = ScriptContext_GetVar(ctx);
-    u16 moveID = ScriptContext_GetVar(ctx);
     u16 moveSlot = ScriptContext_GetVar(ctx);
+    u16 moveID = ScriptContext_GetVar(ctx);
 
-    Party_ResetMonMoveSlot(SaveData_GetParty(ctx->fieldSystem->saveData), partySlot, moveID, moveSlot);
+    Party_ResetMonMoveSlot(SaveData_GetParty(ctx->fieldSystem->saveData), partySlot, moveSlot, moveID);
     return FALSE;
 }
 

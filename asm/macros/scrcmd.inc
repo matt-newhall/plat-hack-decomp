@@ -4463,11 +4463,11 @@
     .short \destVar
     .endm
 
-    .macro ResetMoveSlot partySlot, moveID, moveSlot
+    .macro ResetMoveSlot partySlot, moveSlot, moveID
     .short SCRCMD_RESETMOVESLOT
     .short \partySlot
-    .short \moveID
     .short \moveSlot
+    .short \moveID
     .endm
 
     // destVarID will be set to TRUE if the move is available at a shards move tutor and the player can afford it
