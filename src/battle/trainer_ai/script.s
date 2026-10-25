@@ -295,6 +295,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Basic_CheckSteelBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Basic_CheckEndure
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Basic_CheckTerrainMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_HIT, Basic_CheckContrarySpeedDrop
     PopOrEnd
 
 Basic_CheckCannotSleep:
@@ -379,7 +380,17 @@ Basic_CheckHighStatStage_Speed:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
-    PopOrEnd 
+    PopOrEnd
+
+Basic_CheckContrarySpeedDrop:
+    // Contrary turns the Speed drop into a boost, so it is judged as Flame Charge would be.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_CONTRARY, Basic_CheckContrarySpeedDrop_End
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
+
+Basic_CheckContrarySpeedDrop_End:
+    PopOrEnd
 
 Basic_CheckHighStatStage_SpAttack:
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -2633,6 +2644,8 @@ Expert_SpeedBoostOnHit:
     // earns no Speed bonus at all.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedBoostOnHit_ScoreMinus5
+
+Expert_SpeedBoostOnHit_CheckSpeed:
     IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedBoostOnHit_ScorePlus5
     AddToMoveScore 6
     PopOrEnd
@@ -2710,7 +2723,7 @@ Expert_ContrarySelfDrop:
     // These moves pay for their damage by lowering the user's own stats, so Contrary turns the
     // drawback into a free boost and the move buys an attack and a setup turn in one slot. It
     // is scored as the setup move it imitates: Overheat reads as Nasty Plot, Superpower as Bulk
-    // Up, Close Combat as Cosmic Power.
+    // Up, Close Combat as Cosmic Power, and Hammer Arm as Flame Charge.
     //
     // A hit which is already the best damage available, or which kills outright, is doing its
     // job as an attack and is left to the ordinary damage scoring.
@@ -2727,10 +2740,9 @@ Expert_ContrarySelfDrop:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_SetupSplitPhysical
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_SetupDefensive
 
-    // Under Trick Room the extra Speed is a liability rather than a reward, and there is nothing
-    // to buy when the AI is already the faster of the two.
+    // Under Trick Room the extra Speed is a liability rather than a reward.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_ContrarySelfDrop_End
-    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, Expert_SetupSpeed
+    GoTo Expert_SpeedBoostOnHit_CheckSpeed
 
 Expert_ContrarySelfDrop_End:
     PopOrEnd
