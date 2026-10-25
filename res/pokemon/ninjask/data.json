@@ -34,9 +34,9 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_FIRST_IMPRESSION" ],
             [ 1, "MOVE_FURY_CUTTER" ],
             [ 1, "MOVE_SCREECH" ],
-            [ 1, "MOVE_AERIAL_ACE" ],
             [ 1, "MOVE_BATON_PASS" ],
             [ 1, "MOVE_DIG" ],
             [ 1, "MOVE_FALSE_SWIPE" ],
@@ -44,15 +44,15 @@
             [ 1, "MOVE_MUD_SLAP" ],
             [ 1, "MOVE_SAND_ATTACK" ],
             [ 1, "MOVE_SCRATCH" ],
-            [ 23, "MOVE_ABSORB" ],
-            [ 26, "MOVE_DUAL_WINGBEAT" ],
-            [ 29, "MOVE_FURY_SWIPES" ],
-            [ 32, "MOVE_BUG_BITE" ],
-            [ 43, "MOVE_MIND_READER" ],
+            [ 1, "MOVE_BUG_BITE" ],
+            [ 20, "MOVE_AERIAL_ACE" ],
+            [ 23, "MOVE_DUAL_WINGBEAT" ],
+            [ 26, "MOVE_NIGHT_SLASH" ],
+            [ 29, "MOVE_LEECH_LIFE" ],
+            [ 32, "MOVE_ACROBATICS" ],
             [ 46, "MOVE_U_TURN" ],
             [ 50, "MOVE_SLASH" ],
             [ 55, "MOVE_BUG_BUZZ" ],
-            [ 59, "MOVE_LEECH_LIFE" ],
             [ 64, "MOVE_X_SCISSOR" ]
         ],
         "by_tm": [
