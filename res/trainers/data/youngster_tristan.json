@@ -21,6 +21,7 @@
             ],
             "iv_scale": 0,
             "ball_seal": 0,
+            "nature": "NATURE_HARDY",
             "ability": "TRAINER_ABILITY_1"
         },
         {
@@ -36,6 +37,7 @@
             ],
             "iv_scale": 0,
             "ball_seal": 0,
+            "nature": "NATURE_LAX",
             "ability": "TRAINER_ABILITY_1"
         }
     ],

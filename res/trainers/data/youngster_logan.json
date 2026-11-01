@@ -22,6 +22,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
             "ability": "TRAINER_ABILITY_2"
         },
         {
@@ -36,6 +37,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
             "ability": "TRAINER_ABILITY_1"
         },
         {
@@ -44,10 +46,13 @@
             "level": 7,
             "item": null,
             "moves": [
-                "MOVE_TACKLE"
+                "MOVE_TACKLE",
+                "MOVE_GROWL",
+                "MOVE_STRUGGLE_BUG"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
+            "nature": "NATURE_GENTLE",
             "ability": "TRAINER_ABILITY_1"
         },
         {
@@ -56,10 +61,14 @@
             "level": 6,
             "item": null,
             "moves": [
-                "MOVE_TACKLE"
+                "MOVE_LEER",
+                "MOVE_POISON_STING",
+                "MOVE_METAL_CLAW",
+                "MOVE_FELL_STINGER"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
+            "nature": "NATURE_SASSY",
             "ability": "TRAINER_ABILITY_1"
         }
     ],
