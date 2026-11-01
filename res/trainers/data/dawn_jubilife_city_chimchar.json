@@ -12,7 +12,17 @@
         {
             "species": "SPECIES_SKITTY",
             "form": 0,
-            "level": 8,
+            "level": 9,
+            "item": "ITEM_NONE",
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_PSYDUCK",
+            "form": 0,
+            "level": 9,
             "item": "ITEM_NONE",
             "moves": null,
             "iv_scale": 255,
@@ -22,7 +32,7 @@
         {
             "species": "SPECIES_TURTWIG",
             "form": 0,
-            "level": 8,
+            "level": 10,
             "item": "ITEM_ORAN_BERRY",
             "moves": null,
             "iv_scale": 255,

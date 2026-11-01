@@ -39,8 +39,8 @@
         "Well, according to the Town Map,\n",
         "I guess Floaroma Town is where\f",
         "I should be going next.\r",
-        "There’s a Gym, so it’d be perfect for\n",
-        "raising the Pokémon I just caught.\r",
+        "There’s a Gym in Eterna City, so it\n",
+        "would be fastest to head north.\r",
         "Well, I’m on the road to becoming\n",
         "the greatest Trainer of all time!\r",
         "See you around!\r"
@@ -64,9 +64,10 @@
       "en_US": [
         "We learned about Pokémon types\n",
         "today. Umm...\r",
-        "Grass is weak to Fire,\r",
-        "Fire is weak to Water,\r",
-        "and Water is weak to Grass!"
+        "Dark and Ghost are neutral\n",
+        "against Steel,\r",
+        "and Dragon, Dark and Fighting\n",
+        "are weak to Fairy!"
       ]
     },
     {
@@ -166,8 +167,8 @@
       "en_US": [
         "I wonder if we could have done better\n",
         "against you?\r",
-        "Like if I used Potions right when we\n",
-        "needed to."
+        "Like if I had my Pokemon hold\n",
+        "Oran Berries."
       ]
     },
     {

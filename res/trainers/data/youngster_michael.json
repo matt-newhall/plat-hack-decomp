@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GEODUDE",
             "form": 0,
-            "level": 7,
+            "level": 8,
             "item": null,
             "moves": [
                 "MOVE_ROCK_BLAST",
@@ -27,7 +27,7 @@
         {
             "species": "SPECIES_ZUBAT",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": [
                 "MOVE_CONFUSE_RAY",
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_LOMBRE",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": [
                 "MOVE_MEGA_DRAIN",

@@ -2048,6 +2048,15 @@ _SimplePC_VolatileStatus_Submenu:
     .balign 4, 0
 
 CommonScript_Drifloon_Fly:
+    GoToIfSet FLAG_DRIFLOON_TALKED_TO, CommonScript_Drifloon_DoTheFly
+    Message CommonStrings_Text_DrifloonFly_Postcard
+    WaitButton
+    CloseMessage
+    SetFlag FLAG_DRIFLOON_TALKED_TO
+    ReturnCommonScript
+    End
+
+CommonScript_Drifloon_DoTheFly:
     PlayCry SPECIES_DRIFLOON
     Message CommonStrings_Text_DrifloonFly_Intro
     InitGlobalTextListMenu 1, 1, 0, VAR_RESULT

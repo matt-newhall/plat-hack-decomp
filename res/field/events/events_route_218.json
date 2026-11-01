@@ -267,7 +267,7 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_X_ACCURACY",
+            "id": "LOCALID_ITEM_NET_BALL",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",

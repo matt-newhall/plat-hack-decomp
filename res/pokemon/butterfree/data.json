@@ -40,6 +40,7 @@
             [ 1, "MOVE_TACKLE" ],
             [ 4, "MOVE_SUPERSONIC" ],
             [ 8, "MOVE_CONFUSION" ],
+            [ 10, "MOVE_GUST" ],
             [ 12, "MOVE_POISON_POWDER" ],
             [ 12, "MOVE_SLEEP_POWDER" ],
             [ 12, "MOVE_STUN_SPORE" ],

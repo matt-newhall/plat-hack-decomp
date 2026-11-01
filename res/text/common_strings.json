@@ -1159,6 +1159,22 @@
     {
       "id": "CommonStrings_Text_PlayerUsedTheEscapeRope",
       "en_US": "{STRVAR_1 3, 0, 0} used the Escape Rope."
+    },
+    {
+      "id": "CommonStrings_Text_DrifloonFly_Postcard",
+      "en_US": [
+        "(Hmm, what’s this?)\r",
+        "(Drifloon seems to be holding a card.)\r",
+        "(You open the card.)\r",
+        "‘Hi trainer!\n",
+        "Thank you for signing up for the\f",
+        "Drifloon hot air balloon service!’\r",
+        "‘Drifloon around the region will\n",
+        "help you fly to any city that\f",
+        "you have already visited.’\r",
+        "‘We hope you have a safe and\n",
+        "wonderful flight!’"
+      ]
     }
   ]
 }

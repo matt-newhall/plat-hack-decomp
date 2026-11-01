@@ -264,7 +264,7 @@ JubilifeCity_YouClaimToNotKnowIt:
 
 JubilifeCity_LookerGiveVSRecorderAndLeave:
     Message JubilifeCity_Text_PerhapsYouCanMakeUseOfThis
-    SetVar VAR_0x8004, ITEM_VS_RECORDER
+    SetVar VAR_0x8004, ITEM_CANDY_BAG
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     Message JubilifeCity_Text_ThatVsRecorderItIsANiftyDeviceForRecordingAMatch
@@ -948,9 +948,6 @@ JubilifeCity_CounterpartAndProfRowanLeave:
 
 JubilifeCity_RowanGiveGifts:
     Message JubilifeCity_Text_RowanBeforeIGiveYouThese
-    SetVar VAR_0x8004, ITEM_CANDY_BAG
-    SetVar VAR_0x8005, 1
-    Common_GiveItemQuantity
     SetVar VAR_0x8004, ITEM_INFINITE_REPEL
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity

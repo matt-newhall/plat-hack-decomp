@@ -1880,7 +1880,7 @@ VisibleItems_Route203_XDefense:
     End
 
 VisibleItems_Route218_XAccuracy:
-    SetVar VAR_0x8008, ITEM_X_ACCURACY
+    SetVar VAR_0x8008, ITEM_NET_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -1892,8 +1892,8 @@ VisibleItems_JubilifeCity_Potion:
     End
 
 VisibleItems_TrainersSchool_XAttack:
-    SetVar VAR_0x8008, ITEM_X_ATTACK
-    SetVar VAR_0x8009, 1
+    SetVar VAR_0x8008, ITEM_ORAN_BERRY
+    SetVar VAR_0x8009, 3
     GoTo VisibleItems_TryGiveItem
     End
 

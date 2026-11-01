@@ -34,7 +34,8 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_ELECTROWEB" ]
+            [ 1, "MOVE_ELECTROWEB" ],
+            [ 1, "MOVE_TACKLE" ]
         ],
         "by_tm": [
             "TM75"
