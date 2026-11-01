@@ -64,6 +64,9 @@ def from_gender(s: str) -> int:
 def from_bg_event_dir(s: str) -> int:
     return bg_event_dirs.BgEventDir[s].value
 
+def from_face_dir(v: int | str) -> int:
+    return v if isinstance(v, int) else ["FACE_UP", "FACE_DOWN", "FACE_LEFT", "FACE_RIGHT"].index(v)
+
 def from_object_event_gfx(s: str) -> int:
     return object_events_gfx.ObjectEventGfx[s].value
 
