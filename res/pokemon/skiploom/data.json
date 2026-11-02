@@ -49,7 +49,6 @@
             [ 24, "MOVE_CHARM" ],
             [ 27, "MOVE_MEGA_DRAIN" ],
             [ 29, "MOVE_ACROBATICS" ],
-            [ 31, "MOVE_GRASSY_GLIDE" ],
             [ 33, "MOVE_COTTON_SPORE" ],
             [ 35, "MOVE_MEMENTO" ],
             [ 38, "MOVE_U_TURN" ],
