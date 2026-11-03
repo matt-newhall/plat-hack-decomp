@@ -1251,7 +1251,7 @@ void CreateWildMon_HoneyTree(FieldSystem *fieldSystem, FieldBattleDTO *battlePar
     WildEncounters_FieldParams encounterFieldParams;
     InitEncounterFieldParams(fieldSystem, firstPartyMon, NULL, &encounterFieldParams);
 
-    u8 levelVariance = 15 - 5 + 1;
+    u8 levelVariance = 12 - 5 + 1;
 
     u8 level = 5 + LCRNG_RandMod(levelVariance);
 
