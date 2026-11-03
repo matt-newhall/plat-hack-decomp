@@ -12,11 +12,50 @@
         {
             "species": "SPECIES_MAGIKARP",
             "form": 0,
-            "level": 8,
-            "item": null,
-            "moves": null,
-            "iv_scale": 10,
-            "ball_seal": 0
+            "level": 10,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_FLAIL",
+                "MOVE_TACKLE",
+                "MOVE_BOUNCE",
+                "MOVE_SPLASH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAIVE",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_MAGNEMITE",
+            "form": 0,
+            "level": 10,
+            "item": "ITEM_SHUCA_BERRY",
+            "moves": [
+                "MOVE_MAGNET_BOMB",
+                "MOVE_THUNDER_SHOCK",
+                "MOVE_NATURAL_GIFT",
+                "MOVE_THUNDER_WAVE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_QUIET",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_BEAUTIFLY",
+            "form": 0,
+            "level": 11,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_GUST",
+                "MOVE_MORNING_SUN",
+                "MOVE_STRUGGLE_BUG",
+                "MOVE_MEGA_DRAIN"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
