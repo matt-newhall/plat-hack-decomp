@@ -4794,7 +4794,7 @@ static BOOL BtlCmd_Counter(BattleSystem *battleSys, BattleContext *battleCtx)
     int attackingSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
     int defendingSide = BattleSystem_GetBattlerSide(battleSys, lastAttacker);
 
-    if (lastAttacker != BATTLER_NONE
+    if ((ATTACKER_TURN_FLAGS.physicalDamageAttackerMask & FlagIndex(lastAttacker))
         && attackingSide != defendingSide
         && battleCtx->battleMons[lastAttacker].curHP) {
         int lastDamage = ATTACKER_TURN_FLAGS.physicalDamageTakenFrom[lastAttacker];
@@ -4872,7 +4872,7 @@ static BOOL BtlCmd_MirrorCoat(BattleSystem *battleSys, BattleContext *battleCtx)
     int attackingSide = BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker);
     int defendingSide = BattleSystem_GetBattlerSide(battleSys, lastAttacker);
 
-    if (lastAttacker != BATTLER_NONE
+    if ((ATTACKER_TURN_FLAGS.specialDamageAttackerMask & FlagIndex(lastAttacker))
         && attackingSide != defendingSide
         && battleCtx->battleMons[lastAttacker].curHP) {
         int lastDamage = ATTACKER_TURN_FLAGS.specialDamageTakenFrom[lastAttacker];
