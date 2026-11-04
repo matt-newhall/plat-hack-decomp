@@ -2404,7 +2404,13 @@ VisibleItems_CheckPlateOrItemPocket:
     CheckItemIsPlate VAR_0x8004, VAR_RESULT
     CallIfEq VAR_RESULT, TRUE, VisibleItems_MessageObtainedPlate
     BufferPlayerName 0
+    GoToIfGt VAR_0x8005, 1, VisibleItems_BufferItemNamePlural
     BufferItemName 1, VAR_0x8004
+    GoTo VisibleItems_BufferPocketName
+
+VisibleItems_BufferItemNamePlural:
+    BufferItemNamePlural 1, VAR_0x8004
+VisibleItems_BufferPocketName:
     GetItemPocket VAR_0x8004, VAR_RESULT
     SetVar VAR_0x8008, VAR_RESULT
     GoToIfEq VAR_0x8008, POCKET_KEY_ITEMS, VisibleItems_BufferPocketNameKeyItems
@@ -2483,13 +2489,27 @@ VisibleItems_MessagePlayerFoundTM:
 
 VisibleItems_MessagePlayerFoundItem:
     BufferPlayerName 0
+    GoToIfGt VAR_0x8005, 1, VisibleItems_MessagePlayerFoundItemsPlural
     BufferItemNameWithArticle 1, VAR_0x8004
     Message VisibleItems_Text_PlayerFoundItem
     GoTo VisibleItems_CheckPlateOrItemPocket
     End
 
+VisibleItems_MessagePlayerFoundItemsPlural:
+    BufferItemNamePlural 1, VAR_0x8004
+    BufferNumber 2, VAR_0x8005
+    Message VisibleItems_Text_PlayerFoundItemsPlural
+    GoTo VisibleItems_CheckPlateOrItemPocket
+    End
+
 VisibleItems_BagIsFull:
+    GoToIfGt VAR_0x8005, 1, VisibleItems_BagIsFullPlural
     BufferItemName 0, VAR_0x8004
+    GoTo VisibleItems_MessageBagIsFull
+
+VisibleItems_BagIsFullPlural:
+    BufferItemNamePlural 0, VAR_0x8004
+VisibleItems_MessageBagIsFull:
     Message VisibleItems_Text_ObtainedTheItemTooBadTheBagIsFull
     WaitButton
     SetVar VAR_RESULT, FALSE

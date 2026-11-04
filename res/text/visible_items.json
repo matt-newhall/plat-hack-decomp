@@ -68,6 +68,13 @@
         "{STRVAR_1 3, 0, 0} put the {STRVAR_1 8, 1, 0}\n",
         "in the {COLOR 2}{STRVAR_1 31, 2, 0}{COLOR 0} Pocket."
       ]
+    },
+    {
+      "id": "VisibleItems_Text_PlayerFoundItemsPlural",
+      "en_US": [
+        "{STRVAR_1 3, 0, 0} found\n",
+        "{STRVAR_1 51, 2, 0} {STRVAR_1 8, 1, 0}!"
+      ]
     }
   ]
 }
