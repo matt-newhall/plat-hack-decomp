@@ -681,6 +681,11 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfPranksterBlockedByDark jump:req
+    .long AICMD_IFPRANKSTERBLOCKEDBYDARK
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro FlagBestDamageMove
     .long AICMD_FLAGBESTDAMAGEMOVE
     .endm

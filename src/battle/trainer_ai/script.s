@@ -138,6 +138,14 @@ Basic_ScoreMoveEffect:
     // If the active terrain will stop this move doing anything, e.g. sleep in Electric Terrain,
     // status in Misty Terrain or priority into a grounded foe in Psychic Terrain, score -30.
     IfMoveBlockedByTerrain ScoreMinus30
+
+    // Dark-types are immune to status moves w/ Prankster, and Grass-types, Overcoat and
+    // Safety Goggles to powder moves. Either way score -30.
+    IfPranksterBlockedByDark ScoreMinus30
+    LoadCurrentMove
+    IfLoadedInTable Basic_StatusPowderMoves, Basic_CheckStatusPowder
+
+Basic_ScoreMoveEffectByEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Basic_CheckPowder
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Basic_CheckCannotExplode
@@ -653,19 +661,31 @@ Basic_CheckMagnitude:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus10
 
+Basic_CheckStatusPowder:
+    PushAndGoTo Basic_CheckPowder
+    GoTo Basic_ScoreMoveEffectByEffect
+
+Basic_StatusPowderMoves:
+    TableEntry MOVE_COTTON_SPORE
+    TableEntry MOVE_POISON_POWDER
+    TableEntry MOVE_SLEEP_POWDER
+    TableEntry MOVE_SPORE
+    TableEntry MOVE_STUN_SPORE
+    TableEntry TABLE_END
+
 Basic_CheckPowder:
-    // Powder does nothing to a Grass-type, nor to a target behind Safety Goggles or Overcoat.
+    // Powder moves do nothing to a Grass-type, nor to a target behind Safety Goggles or Overcoat.
     // Mold Breaker ignores the ability, but neither the typing nor the item.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus30
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus30
     LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_OVERCOAT, ScoreMinus10
+    IfLoadedEqualTo HOLD_EFFECT_OVERCOAT, ScoreMinus30
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckPowder_Terminate
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_OVERCOAT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_OVERCOAT, ScoreMinus30
 
 Basic_CheckPowder_Terminate:
     PopOrEnd
@@ -711,7 +731,12 @@ Basic_CheckAlreadyUnderReflect:
     PopOrEnd 
 
 Basic_CheckCannotParalyze:
-    // If the target cannot be paralyzed for any reason, score -10.
+    // If the target cannot be paralyzed for any reason, score -10. Electric-types cannot be
+    // paralyzed at all, regardless of Mold Breaker, so they score -30.
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus30
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus30
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
@@ -790,7 +815,12 @@ Basic_CheckLockOn_NoGuard:
     PopOrEnd 
 
 Basic_CheckMeanLook:
+    // Ghost-types cannot be trapped, so the move does nothing to them: score -30.
     // If the target is already under the effect of Mean Look, score -10.
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, ScoreMinus30
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, ScoreMinus30
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_MEAN_LOOK, ScoreMinus10
     PopOrEnd 
 

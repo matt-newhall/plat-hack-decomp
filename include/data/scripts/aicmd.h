@@ -146,6 +146,7 @@ ScriptCommand(AICMD_IFMOVEEFFECTIVENESSAGAINST,       AICmd_IfMoveEffectivenessA
 ScriptCommand(AICMD_IFMOVEBLOCKEDBYTERRAIN,           AICmd_IfMoveBlockedByTerrain)
 ScriptCommand(AICMD_IFTERRAINMOVEFAILS,               AICmd_IfTerrainMoveFails)
 ScriptCommand(AICMD_IFATTACKERHASMOREHP,              AICmd_IfAttackerHasMoreHP)
+ScriptCommand(AICMD_IFPRANKSTERBLOCKEDBYDARK,         AICmd_IfPranksterBlockedByDark)
 
 // clang-format on
 

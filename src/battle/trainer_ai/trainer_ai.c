@@ -230,6 +230,7 @@ static void AICmd_IfMoveEffectivenessAgainst(BattleSystem *battleSys, BattleCont
 static void AICmd_IfMoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfTerrainMoveFails(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAttackerHasMoreHP(BattleSystem *battleSys, BattleContext *battleCtx);
+static void AICmd_IfPranksterBlockedByDark(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfBattlersShareMove(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfTrainerAIFlagNotSet(BattleSystem *battleSys, BattleContext *battleCtx);
 static void AICmd_IfAnyOpponentOutspeedsSide(BattleSystem *battleSys, BattleContext *battleCtx);
@@ -3626,6 +3627,29 @@ static void AICmd_IfAttackerHasMoreHP(BattleSystem *battleSys, BattleContext *ba
     int jump = AIScript_Read(battleCtx);
 
     if (battleCtx->battleMons[AI_CONTEXT.attacker].curHP > battleCtx->battleMons[AI_CONTEXT.defender].curHP) {
+        AIScript_Iter(battleCtx, jump);
+    }
+}
+
+/**
+ * @brief Jump if the current move is a Prankster-boosted status move aimed at a
+ * Dark-type target, which the Dark type is immune to.
+ *
+ * @param battleSys
+ * @param battleCtx
+ */
+static void AICmd_IfPranksterBlockedByDark(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    AIScript_Iter(battleCtx, 1);
+    int jump = AIScript_Read(battleCtx);
+    u16 range = MOVE_DATA(AI_CONTEXT.move).range;
+    BOOL hitsTarget = range == RANGE_SINGLE_TARGET
+        || (range & (RANGE_RANDOM_OPPONENT | RANGE_ADJACENT_OPPONENTS | RANGE_ALL_ADJACENT | RANGE_SINGLE_TARGET_ME_FIRST));
+
+    if (Battler_Ability(battleCtx, AI_CONTEXT.attacker) == ABILITY_PRANKSTER
+        && MOVE_DATA(AI_CONTEXT.move).class == CLASS_STATUS
+        && hitsTarget
+        && MON_HAS_TYPE(AI_CONTEXT.defender, TYPE_DARK)) {
         AIScript_Iter(battleCtx, jump);
     }
 }
