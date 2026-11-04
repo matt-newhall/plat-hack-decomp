@@ -7,8 +7,8 @@
         "special_attack": 49,
         "special_defense": 65
     },
-    "types": [ "TYPE_GRASS", "TYPE_GRASS" ],
-    "catch_rate": 45,
+    "types": ["TYPE_GRASS", "TYPE_GRASS"],
+    "catch_rate": 100,
     "base_exp_reward": 64,
     "ev_yields": {
         "hp": 0,
@@ -26,35 +26,35 @@
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
-    "egg_groups": [ "EGG_GROUP_MONSTER", "EGG_GROUP_GRASS" ],
-    "abilities": [ "ABILITY_OVERGROW", "ABILITY_LEAF_GUARD", "ABILITY_MEGA_SOL" ],
+    "egg_groups": ["EGG_GROUP_MONSTER", "EGG_GROUP_GRASS"],
+    "abilities": ["ABILITY_OVERGROW", "ABILITY_LEAF_GUARD", "ABILITY_MEGA_SOL"],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GREEN",
     "flip_sprite": false,
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_GROWL" ],
-            [ 6, "MOVE_RAZOR_LEAF" ],
-            [ 9, "MOVE_POISON_POWDER" ],
-            [ 12, "MOVE_BULLET_SEED" ],
-            [ 17, "MOVE_SYNTHESIS" ],
-            [ 19, "MOVE_FAKE_TEARS" ],
-            [ 21, "MOVE_MAGICAL_LEAF" ],
-            [ 23, "MOVE_CHARM" ],
-            [ 26, "MOVE_LEECH_SEED" ],
-            [ 28, "MOVE_GRASSY_GLIDE" ],
-            [ 30, "MOVE_NATURE_POWER" ],
-            [ 32, "MOVE_SWEET_SCENT" ],
-            [ 34, "MOVE_REFLECT" ],
-            [ 34, "MOVE_LIGHT_SCREEN" ],
-            [ 37, "MOVE_BODY_SLAM" ],
-            [ 39, "MOVE_SAFEGUARD" ],
-            [ 42, "MOVE_GRASS_WHISTLE" ],
-            [ 45, "MOVE_GIGA_DRAIN" ],
-            [ 51, "MOVE_LEAF_STORM" ],
-            [ 53, "MOVE_SOLAR_BEAM" ]
+            [1, "MOVE_TACKLE"],
+            [1, "MOVE_GROWL"],
+            [6, "MOVE_RAZOR_LEAF"],
+            [9, "MOVE_POISON_POWDER"],
+            [12, "MOVE_BULLET_SEED"],
+            [17, "MOVE_SYNTHESIS"],
+            [19, "MOVE_FAKE_TEARS"],
+            [21, "MOVE_MAGICAL_LEAF"],
+            [23, "MOVE_CHARM"],
+            [26, "MOVE_LEECH_SEED"],
+            [28, "MOVE_GRASSY_GLIDE"],
+            [30, "MOVE_NATURE_POWER"],
+            [32, "MOVE_SWEET_SCENT"],
+            [34, "MOVE_REFLECT"],
+            [34, "MOVE_LIGHT_SCREEN"],
+            [37, "MOVE_BODY_SLAM"],
+            [39, "MOVE_SAFEGUARD"],
+            [42, "MOVE_GRASS_WHISTLE"],
+            [45, "MOVE_GIGA_DRAIN"],
+            [51, "MOVE_LEAF_STORM"],
+            [53, "MOVE_SOLAR_BEAM"]
         ],
         "by_tm": [
             "TM05",
@@ -90,13 +90,7 @@
             "MOVE_HEAL_BELL"
         ]
     },
-    "evolutions": [
-        [
-            "EVO_LEVEL",
-            16,
-            "SPECIES_BAYLEEF"
-        ]
-    ],
+    "evolutions": [["EVO_LEVEL", 16, "SPECIES_BAYLEEF"]],
     "offspring": "SPECIES_CHIKORITA",
     "footprint": {
         "has": true,

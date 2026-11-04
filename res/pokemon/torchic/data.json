@@ -7,8 +7,8 @@
         "special_attack": 70,
         "special_defense": 50
     },
-    "types": [ "TYPE_FIRE", "TYPE_FIRE" ],
-    "catch_rate": 45,
+    "types": ["TYPE_FIRE", "TYPE_FIRE"],
+    "catch_rate": 100,
     "base_exp_reward": 62,
     "ev_yields": {
         "hp": 0,
@@ -26,32 +26,36 @@
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
-    "egg_groups": [ "EGG_GROUP_FIELD", "EGG_GROUP_FIELD" ],
-    "abilities": [ "ABILITY_BLAZE", "ABILITY_SHEER_FORCE", "ABILITY_SPEED_BOOST" ],
+    "egg_groups": ["EGG_GROUP_FIELD", "EGG_GROUP_FIELD"],
+    "abilities": [
+        "ABILITY_BLAZE",
+        "ABILITY_SHEER_FORCE",
+        "ABILITY_SPEED_BOOST"
+    ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_RED",
     "flip_sprite": false,
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SCRATCH" ],
-            [ 1, "MOVE_GROWL" ],
-            [ 3, "MOVE_EMBER" ],
-            [ 6, "MOVE_QUICK_ATTACK" ],
-            [ 9, "MOVE_FLAME_CHARGE" ],
-            [ 12, "MOVE_DETECT" ],
-            [ 15, "MOVE_SAND_ATTACK" ],
-            [ 17, "MOVE_FIRE_SPIN" ],
-            [ 19, "MOVE_AERIAL_ACE" ],
-            [ 21, "MOVE_SLASH" ],
-            [ 23, "MOVE_HEAT_CRASH" ],
-            [ 28, "MOVE_BOUNCE" ],
-            [ 31, "MOVE_SKY_UPPERCUT" ],
-            [ 33, "MOVE_FOCUS_ENERGY" ],
-            [ 36, "MOVE_FLAMETHROWER" ],
-            [ 39, "MOVE_FEATHER_DANCE" ],
-            [ 42, "MOVE_REVERSAL" ],
-            [ 45, "MOVE_FLARE_BLITZ" ]
+            [1, "MOVE_SCRATCH"],
+            [1, "MOVE_GROWL"],
+            [3, "MOVE_EMBER"],
+            [6, "MOVE_QUICK_ATTACK"],
+            [9, "MOVE_FLAME_CHARGE"],
+            [12, "MOVE_DETECT"],
+            [15, "MOVE_SAND_ATTACK"],
+            [17, "MOVE_FIRE_SPIN"],
+            [19, "MOVE_AERIAL_ACE"],
+            [21, "MOVE_SLASH"],
+            [23, "MOVE_HEAT_CRASH"],
+            [28, "MOVE_BOUNCE"],
+            [31, "MOVE_SKY_UPPERCUT"],
+            [33, "MOVE_FOCUS_ENERGY"],
+            [36, "MOVE_FLAMETHROWER"],
+            [39, "MOVE_FEATHER_DANCE"],
+            [42, "MOVE_REVERSAL"],
+            [45, "MOVE_FLARE_BLITZ"]
         ],
         "by_tm": [
             "TM10",
@@ -92,13 +96,7 @@
             "MOVE_NIGHT_SLASH"
         ]
     },
-    "evolutions": [
-        [
-            "EVO_LEVEL",
-            16,
-            "SPECIES_COMBUSKEN"
-        ]
-    ],
+    "evolutions": [["EVO_LEVEL", 16, "SPECIES_COMBUSKEN"]],
     "offspring": "SPECIES_TORCHIC",
     "footprint": {
         "has": true,

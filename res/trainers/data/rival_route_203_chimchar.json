@@ -2,11 +2,7 @@
     "name": "Cedric",
     "class": "TRAINER_CLASS_RIVAL",
     "items": [],
-    "ai_flags": [
-        "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
-    ],
+    "ai_flags": ["AI_FLAG_BASIC", "AI_FLAG_EVAL_ATTACK", "AI_FLAG_EXPERT"],
     "double_battle": false,
     "party": [
         {
@@ -15,7 +11,7 @@
             "level": 11,
             "item": "ITEM_SILK_SCARF",
             "moves": [
-                "MOVE_RAGE",
+                "MOVE_QUICK_ATTACK",
                 "MOVE_MUD_SLAP",
                 "MOVE_PURSUIT",
                 "MOVE_WORK_UP"
@@ -46,7 +42,7 @@
             "level": 11,
             "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_SCRATCH",
+                "MOVE_SWIFT",
                 "MOVE_ASTONISH",
                 "MOVE_GROWL",
                 "MOVE_ROCK_SMASH"
@@ -92,10 +88,7 @@
     "messages": [
         {
             "type": "TRMSG_FIRST_DAMAGE",
-            "en_US": [
-                "Don’t get cocky!\n",
-                "This isn’t over yet!\n"
-            ]
+            "en_US": ["Don’t get cocky!\n", "This isn’t over yet!\n"]
         },
         {
             "type": "TRMSG_LAST_BATTLER_HALF_HP",
@@ -106,10 +99,7 @@
         },
         {
             "type": "TRMSG_DEFEAT",
-            "en_US": [
-                "What just happened?\n",
-                "I lost?!\n"
-            ]
+            "en_US": ["What just happened?\n", "I lost?!\n"]
         }
     ]
 }

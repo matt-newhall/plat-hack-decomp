@@ -7,8 +7,8 @@
         "special_attack": 60,
         "special_defense": 50
     },
-    "types": [ "TYPE_FIRE", "TYPE_FIRE" ],
-    "catch_rate": 45,
+    "types": ["TYPE_FIRE", "TYPE_FIRE"],
+    "catch_rate": 100,
     "base_exp_reward": 62,
     "ev_yields": {
         "hp": 0,
@@ -26,32 +26,32 @@
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
-    "egg_groups": [ "EGG_GROUP_MONSTER", "EGG_GROUP_DRAGON" ],
-    "abilities": [ "ABILITY_BLAZE", "ABILITY_NONE", "ABILITY_SOLAR_POWER" ],
+    "egg_groups": ["EGG_GROUP_MONSTER", "EGG_GROUP_DRAGON"],
+    "abilities": ["ABILITY_BLAZE", "ABILITY_NONE", "ABILITY_SOLAR_POWER"],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_RED",
     "flip_sprite": false,
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_SCRATCH" ],
-            [ 1, "MOVE_GROWL" ],
-            [ 4, "MOVE_EMBER" ],
-            [ 7, "MOVE_METAL_CLAW" ],
-            [ 9, "MOVE_SMOKE_SCREEN" ],
-            [ 12, "MOVE_FIRE_SPIN" ],
-            [ 15, "MOVE_DRAGON_BREATH" ],
-            [ 17, "MOVE_BREAKING_SWIPE" ],
-            [ 20, "MOVE_WEATHER_BALL" ],
-            [ 23, "MOVE_FIRE_FANG" ],
-            [ 26, "MOVE_SLASH" ],
-            [ 28, "MOVE_CRUNCH" ],
-            [ 32, "MOVE_DRAGON_RAGE" ],
-            [ 34, "MOVE_SCARY_FACE" ],
-            [ 39, "MOVE_FLAMETHROWER" ],
-            [ 43, "MOVE_INFERNO" ],
-            [ 45, "MOVE_FLARE_BLITZ" ],
-            [ 48, "MOVE_OUTRAGE" ]
+            [1, "MOVE_SCRATCH"],
+            [1, "MOVE_GROWL"],
+            [4, "MOVE_EMBER"],
+            [7, "MOVE_METAL_CLAW"],
+            [9, "MOVE_SMOKE_SCREEN"],
+            [12, "MOVE_FIRE_SPIN"],
+            [15, "MOVE_DRAGON_BREATH"],
+            [17, "MOVE_BREAKING_SWIPE"],
+            [20, "MOVE_WEATHER_BALL"],
+            [23, "MOVE_FIRE_FANG"],
+            [26, "MOVE_SLASH"],
+            [28, "MOVE_CRUNCH"],
+            [32, "MOVE_DRAGON_RAGE"],
+            [34, "MOVE_SCARY_FACE"],
+            [39, "MOVE_FLAMETHROWER"],
+            [43, "MOVE_INFERNO"],
+            [45, "MOVE_FLARE_BLITZ"],
+            [48, "MOVE_OUTRAGE"]
         ],
         "by_tm": [
             "TM01",
@@ -103,13 +103,7 @@
             "MOVE_DRAGON_TAIL"
         ]
     },
-    "evolutions": [
-        [
-            "EVO_LEVEL",
-            16,
-            "SPECIES_CHARMELEON"
-        ]
-    ],
+    "evolutions": [["EVO_LEVEL", 16, "SPECIES_CHARMELEON"]],
     "offspring": "SPECIES_CHARMANDER",
     "footprint": {
         "has": true,

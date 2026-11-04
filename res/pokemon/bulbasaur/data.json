@@ -7,8 +7,8 @@
         "special_attack": 65,
         "special_defense": 65
     },
-    "types": [ "TYPE_GRASS", "TYPE_POISON" ],
-    "catch_rate": 45,
+    "types": ["TYPE_GRASS", "TYPE_POISON"],
+    "catch_rate": 100,
     "base_exp_reward": 64,
     "ev_yields": {
         "hp": 0,
@@ -26,34 +26,38 @@
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
-    "egg_groups": [ "EGG_GROUP_MONSTER", "EGG_GROUP_GRASS" ],
-    "abilities": [ "ABILITY_OVERGROW", "ABILITY_CHLOROPHYLL", "ABILITY_THICK_FAT" ],
+    "egg_groups": ["EGG_GROUP_MONSTER", "EGG_GROUP_GRASS"],
+    "abilities": [
+        "ABILITY_OVERGROW",
+        "ABILITY_CHLOROPHYLL",
+        "ABILITY_THICK_FAT"
+    ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GREEN",
     "flip_sprite": false,
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_GROWL" ],
-            [ 3, "MOVE_VINE_WHIP" ],
-            [ 6, "MOVE_NATURE_POWER" ],
-            [ 9, "MOVE_LEECH_SEED" ],
-            [ 12, "MOVE_RAZOR_LEAF" ],
-            [ 14, "MOVE_MAGICAL_LEAF" ],
-            [ 16, "MOVE_POISON_POWDER" ],
-            [ 18, "MOVE_SLEEP_POWDER" ],
-            [ 20, "MOVE_CHARM" ],
-            [ 26, "MOVE_TAKE_DOWN" ],
-            [ 28, "MOVE_GRASSY_GLIDE" ],
-            [ 30, "MOVE_TOXIC" ],
-            [ 32, "MOVE_SWEET_SCENT" ],
-            [ 35, "MOVE_SYNTHESIS" ],
-            [ 37, "MOVE_WORRY_SEED" ],
-            [ 39, "MOVE_SEED_BOMB" ],
-            [ 43, "MOVE_POWER_WHIP" ],
-            [ 45, "MOVE_LEAF_STORM" ],
-            [ 47, "MOVE_SOLAR_BEAM" ]
+            [1, "MOVE_TACKLE"],
+            [1, "MOVE_GROWL"],
+            [3, "MOVE_VINE_WHIP"],
+            [6, "MOVE_NATURE_POWER"],
+            [9, "MOVE_LEECH_SEED"],
+            [12, "MOVE_RAZOR_LEAF"],
+            [14, "MOVE_MAGICAL_LEAF"],
+            [16, "MOVE_POISON_POWDER"],
+            [18, "MOVE_SLEEP_POWDER"],
+            [20, "MOVE_CHARM"],
+            [26, "MOVE_TAKE_DOWN"],
+            [28, "MOVE_GRASSY_GLIDE"],
+            [30, "MOVE_TOXIC"],
+            [32, "MOVE_SWEET_SCENT"],
+            [35, "MOVE_SYNTHESIS"],
+            [37, "MOVE_WORRY_SEED"],
+            [39, "MOVE_SEED_BOMB"],
+            [43, "MOVE_POWER_WHIP"],
+            [45, "MOVE_LEAF_STORM"],
+            [47, "MOVE_SOLAR_BEAM"]
         ],
         "by_tm": [
             "TM05",
@@ -84,18 +88,9 @@
             "MOVE_SEED_BOMB",
             "MOVE_KNOCK_OFF"
         ],
-        "egg_moves": [
-            "MOVE_PETAL_DANCE",
-            "MOVE_INGRAIN"
-        ]
+        "egg_moves": ["MOVE_PETAL_DANCE", "MOVE_INGRAIN"]
     },
-    "evolutions": [
-        [
-            "EVO_LEVEL",
-            16,
-            "SPECIES_IVYSAUR"
-        ]
-    ],
+    "evolutions": [["EVO_LEVEL", 16, "SPECIES_IVYSAUR"]],
     "offspring": "SPECIES_BULBASAUR",
     "footprint": {
         "has": true,

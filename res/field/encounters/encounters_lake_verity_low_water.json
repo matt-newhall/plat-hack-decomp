@@ -2,66 +2,57 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_WINGULL"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_PSYDUCK"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_BUIZEL"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_SHELLOS"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_LOTAD"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_SEEDOT"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_HOPPIP"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_BIDOOF"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_SURSKIT"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_WOOPER"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_AZURILL"
         },
         {
-            "level": 3,
+            "level": 5,
             "species": "SPECIES_SLOWPOKE"
         }
     ],
-    "swarms": [
-        "SPECIES_NONE",
-        "SPECIES_NONE"
-    ],
-    "day": [
-        "SPECIES_STARLY",
-        "SPECIES_BIDOOF"
-    ],
-    "night": [
-        "SPECIES_BIDOOF",
-        "SPECIES_BIDOOF"
-    ],
+    "swarms": ["SPECIES_NONE", "SPECIES_NONE"],
+    "day": ["SPECIES_STARLY", "SPECIES_BIDOOF"],
+    "night": ["SPECIES_BIDOOF", "SPECIES_BIDOOF"],
     "radar": [
         "SPECIES_WOBBUFFET",
         "SPECIES_WOBBUFFET",
@@ -74,26 +65,11 @@
     "rate_form3": 0,
     "rate_form4": 0,
     "unown_table": 0,
-    "ruby": [
-        "SPECIES_NONE",
-        "SPECIES_NONE"
-    ],
-    "sapphire": [
-        "SPECIES_NONE",
-        "SPECIES_NONE"
-    ],
-    "emerald": [
-        "SPECIES_NONE",
-        "SPECIES_NONE"
-    ],
-    "firered": [
-        "SPECIES_NONE",
-        "SPECIES_NONE"
-    ],
-    "leafgreen": [
-        "SPECIES_NONE",
-        "SPECIES_NONE"
-    ],
+    "ruby": ["SPECIES_NONE", "SPECIES_NONE"],
+    "sapphire": ["SPECIES_NONE", "SPECIES_NONE"],
+    "emerald": ["SPECIES_NONE", "SPECIES_NONE"],
+    "firered": ["SPECIES_NONE", "SPECIES_NONE"],
+    "leafgreen": ["SPECIES_NONE", "SPECIES_NONE"],
     "surf_rate": 10,
     "surf_encounters": [
         {

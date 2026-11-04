@@ -7,8 +7,8 @@
         "special_attack": 50,
         "special_defense": 64
     },
-    "types": [ "TYPE_WATER", "TYPE_WATER" ],
-    "catch_rate": 45,
+    "types": ["TYPE_WATER", "TYPE_WATER"],
+    "catch_rate": 100,
     "base_exp_reward": 63,
     "ev_yields": {
         "hp": 0,
@@ -26,29 +26,29 @@
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
-    "egg_groups": [ "EGG_GROUP_MONSTER", "EGG_GROUP_WATER_1" ],
-    "abilities": [ "ABILITY_TORRENT", "ABILITY_NONE", "ABILITY_RAIN_DISH" ],
+    "egg_groups": ["EGG_GROUP_MONSTER", "EGG_GROUP_WATER_1"],
+    "abilities": ["ABILITY_TORRENT", "ABILITY_NONE", "ABILITY_RAIN_DISH"],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLUE",
     "flip_sprite": false,
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_TAIL_WHIP" ],
-            [ 3, "MOVE_WATER_GUN" ],
-            [ 9, "MOVE_RAPID_SPIN" ],
-            [ 12, "MOVE_BITE" ],
-            [ 15, "MOVE_WATER_PULSE" ],
-            [ 18, "MOVE_PROTECT" ],
-            [ 21, "MOVE_ICE_SPINNER" ],
-            [ 24, "MOVE_AURA_SPHERE" ],
-            [ 30, "MOVE_SCALD" ],
-            [ 32, "MOVE_AQUA_TAIL" ],
-            [ 35, "MOVE_FLIP_TURN" ],
-            [ 39, "MOVE_WAVE_CRASH" ],
-            [ 47, "MOVE_HYDRO_PUMP" ],
-            [ 50, "MOVE_SKULL_BASH" ]
+            [1, "MOVE_TACKLE"],
+            [1, "MOVE_TAIL_WHIP"],
+            [3, "MOVE_WATER_GUN"],
+            [9, "MOVE_RAPID_SPIN"],
+            [12, "MOVE_BITE"],
+            [15, "MOVE_WATER_PULSE"],
+            [18, "MOVE_PROTECT"],
+            [21, "MOVE_ICE_SPINNER"],
+            [24, "MOVE_AURA_SPHERE"],
+            [30, "MOVE_SCALD"],
+            [32, "MOVE_AQUA_TAIL"],
+            [35, "MOVE_FLIP_TURN"],
+            [39, "MOVE_WAVE_CRASH"],
+            [47, "MOVE_HYDRO_PUMP"],
+            [50, "MOVE_SKULL_BASH"]
         ],
         "by_tm": [
             "TM01",
@@ -98,13 +98,7 @@
             "MOVE_LIFE_DEW"
         ]
     },
-    "evolutions": [
-        [
-            "EVO_LEVEL",
-            16,
-            "SPECIES_WARTORTLE"
-        ]
-    ],
+    "evolutions": [["EVO_LEVEL", 16, "SPECIES_WARTORTLE"]],
     "offspring": "SPECIES_SQUIRTLE",
     "footprint": {
         "has": true,

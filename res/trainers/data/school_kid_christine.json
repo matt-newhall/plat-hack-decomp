@@ -2,17 +2,13 @@
     "name": "Christine",
     "class": "TRAINER_CLASS_SCHOOL_KID_FEMALE",
     "items": [],
-    "ai_flags": [
-        "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
-    ],
+    "ai_flags": ["AI_FLAG_BASIC", "AI_FLAG_EVAL_ATTACK", "AI_FLAG_EXPERT"],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_IGGLYBUFF",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": null,
             "iv_scale": 255,
@@ -22,7 +18,7 @@
         {
             "species": "SPECIES_CLEFFA",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": null,
             "iv_scale": 255,
@@ -32,7 +28,7 @@
         {
             "species": "SPECIES_PICHU",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": null,
             "iv_scale": 255,

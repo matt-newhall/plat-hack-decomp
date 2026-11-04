@@ -2,17 +2,13 @@
     "name": "Harrison",
     "class": "TRAINER_CLASS_SCHOOL_KID_MALE",
     "items": [],
-    "ai_flags": [
-        "AI_FLAG_BASIC",
-        "AI_FLAG_EVAL_ATTACK",
-        "AI_FLAG_EXPERT"
-    ],
+    "ai_flags": ["AI_FLAG_BASIC", "AI_FLAG_EVAL_ATTACK", "AI_FLAG_EXPERT"],
     "double_battle": false,
     "party": [
         {
             "species": "SPECIES_MIME_JR",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": [
                 "MOVE_COPYCAT",
@@ -27,7 +23,7 @@
         {
             "species": "SPECIES_BONSLY",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": [
                 "MOVE_FAKE_TEARS",
@@ -42,7 +38,7 @@
         {
             "species": "SPECIES_HAPPINY",
             "form": 0,
-            "level": 8,
+            "level": 9,
             "item": null,
             "moves": [
                 "MOVE_POUND",
@@ -58,10 +54,7 @@
     "messages": [
         {
             "type": "TRMSG_DEFEAT",
-            "en_US": [
-                "Ugh...\n",
-                "I didn’t use items effectively.\n"
-            ]
+            "en_US": ["Ugh...\n", "I didn’t use items effectively.\n"]
         }
     ]
 }

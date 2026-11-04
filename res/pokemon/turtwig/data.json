@@ -7,7 +7,7 @@
         "special_attack": 45,
         "special_defense": 55
     },
-    "types": [ "TYPE_GRASS", "TYPE_GRASS" ],
+    "types": ["TYPE_GRASS", "TYPE_GRASS"],
     "catch_rate": 45,
     "base_exp_reward": 64,
     "ev_yields": {
@@ -26,29 +26,35 @@
     "hatch_cycles": 1,
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
-    "egg_groups": [ "EGG_GROUP_MONSTER", "EGG_GROUP_GRASS" ],
-    "abilities": [ "ABILITY_OVERGROW", "ABILITY_SHELL_ARMOR", "ABILITY_ROCK_HEAD" ],
+    "egg_groups": ["EGG_GROUP_MONSTER", "EGG_GROUP_GRASS"],
+    "abilities": [
+        "ABILITY_OVERGROW",
+        "ABILITY_SHELL_ARMOR",
+        "ABILITY_ROCK_HEAD"
+    ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GREEN",
     "flip_sprite": false,
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TACKLE" ],
-            [ 9, "MOVE_ABSORB" ],
-            [ 13, "MOVE_RAZOR_LEAF" ],
-            [ 16, "MOVE_SAND_TOMB" ],
-            [ 18, "MOVE_TRAILBLAZE" ],
-            [ 21, "MOVE_MAGICAL_LEAF" ],
-            [ 24, "MOVE_BITE" ],
-            [ 26, "MOVE_MEGA_DRAIN" ],
-            [ 28, "MOVE_GRASSY_GLIDE" ],
-            [ 30, "MOVE_NATURE_POWER" ],
-            [ 32, "MOVE_LEECH_SEED" ],
-            [ 34, "MOVE_SYNTHESIS" ],
-            [ 41, "MOVE_CRUNCH" ],
-            [ 45, "MOVE_GIGA_DRAIN" ],
-            [ 50, "MOVE_LEAF_STORM" ]
+            [1, "MOVE_TACKLE"],
+            [5, "MOVE_GROWL"],
+            [7, "MOVE_LEAFAGE"],
+            [9, "MOVE_ABSORB"],
+            [13, "MOVE_RAZOR_LEAF"],
+            [16, "MOVE_SAND_TOMB"],
+            [18, "MOVE_TRAILBLAZE"],
+            [21, "MOVE_MAGICAL_LEAF"],
+            [24, "MOVE_BITE"],
+            [26, "MOVE_MEGA_DRAIN"],
+            [28, "MOVE_GRASSY_GLIDE"],
+            [30, "MOVE_NATURE_POWER"],
+            [32, "MOVE_LEECH_SEED"],
+            [34, "MOVE_SYNTHESIS"],
+            [41, "MOVE_CRUNCH"],
+            [45, "MOVE_GIGA_DRAIN"],
+            [50, "MOVE_LEAF_STORM"]
         ],
         "by_tm": [
             "TM05",
@@ -73,11 +79,7 @@
             "HM06",
             "HM08"
         ],
-        "by_tutor": [
-            "MOVE_MUD_SLAP",
-            "MOVE_SNORE",
-            "MOVE_SEED_BOMB"
-        ],
+        "by_tutor": ["MOVE_MUD_SLAP", "MOVE_SNORE", "MOVE_SEED_BOMB"],
         "egg_moves": [
             "MOVE_THRASH",
             "MOVE_DOUBLE_EDGE",
@@ -87,13 +89,7 @@
             "MOVE_DETECT"
         ]
     },
-    "evolutions": [
-        [
-            "EVO_LEVEL",
-            16,
-            "SPECIES_GROTLE"
-        ]
-    ],
+    "evolutions": [["EVO_LEVEL", 16, "SPECIES_GROTLE"]],
     "offspring": "SPECIES_TURTWIG",
     "footprint": {
         "has": true,
