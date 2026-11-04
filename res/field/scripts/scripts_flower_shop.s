@@ -11,8 +11,8 @@ FlowerShop_PokemonBreederF:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_OBTAINED_FLOWER_SHOP_BERRY, FlowerShop_PleasePlantThatBerryInSoftEarthySoil
-    Message FlowerShop_Text_ASingleBerryWillGrowIntoAPlantThatMakesSeveralBerries
+    GoToIfSet FLAG_OBTAINED_FLOWER_SHOP_BERRY, FlowerShop_LetYourPokemonHoldThatBerry
+    Message FlowerShop_Text_BerriesAreRareNowPleaseTakeThisOne
     SetVar VAR_0x8004, ITEM_ORAN_BERRY
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, FlowerShop_BagIsFull
@@ -22,8 +22,8 @@ FlowerShop_PokemonBreederF:
     ReleaseAll
     End
 
-FlowerShop_PleasePlantThatBerryInSoftEarthySoil:
-    Message FlowerShop_Text_PleasePlantThatBerryInSoftEarthySoil
+FlowerShop_LetYourPokemonHoldThatBerry:
+    Message FlowerShop_Text_LetYourPokemonHoldThatBerry
     WaitButton
     CloseMessage
     ReleaseAll
@@ -39,18 +39,7 @@ FlowerShop_Lass:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_RECEIVED_FLOWER_SHOP_SPRAYDUCK, FlowerShop_UseThatSprayduckToWaterTheSoilWhereYouvePlantedBerries
-    Message FlowerShop_Text_TrainerPleaseWaterBerriesUsingThisSprayduckWateringCan
-    SetVar VAR_0x8004, ITEM_SPRAYDUCK
-    SetVar VAR_0x8005, 1
-    SetFlag FLAG_RECEIVED_FLOWER_SHOP_SPRAYDUCK
-    Common_GiveItemQuantityNoLineFeed
-    CloseMessage
-    ReleaseAll
-    End
-
-FlowerShop_UseThatSprayduckToWaterTheSoilWhereYouvePlantedBerries:
-    Message FlowerShop_Text_UseThatSprayduckToWaterTheSoilWhereYouvePlantedBerries
+    Message FlowerShop_Text_TheSoilInSinnohIsTooDryToPlantNewBerries
     WaitButton
     CloseMessage
     ReleaseAll

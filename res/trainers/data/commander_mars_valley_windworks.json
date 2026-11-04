@@ -10,30 +10,100 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_ARIADOS",
             "form": 0,
             "level": 15,
-            "item": "ITEM_NONE",
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_BITE",
-                "MOVE_LEECH_LIFE",
-                "MOVE_TOXIC"
+                "MOVE_STICKY_WEB",
+                "MOVE_BUG_BITE",
+                "MOVE_SHADOW_SNEAK",
+                "MOVE_TOXIC_THREAD"
             ],
-            "iv_scale": 100,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_HOUNDOUR",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_ASSAULT_VEST",
+            "moves": [
+                "MOVE_INCINERATE",
+                "MOVE_BITE",
+                "MOVE_THUNDER_FANG",
+                "MOVE_SMOG"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MILD",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_BAYLEEF",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_COVERT_CLOAK",
+            "moves": [
+                "MOVE_MAGICAL_LEAF",
+                "MOVE_LEECH_SEED",
+                "MOVE_CHARM",
+                "MOVE_NATURE_POWER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_MAGMAR",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_PASSHO_BERRY",
+            "moves": [
+                "MOVE_FLAME_CHARGE",
+                "MOVE_LOW_KICK",
+                "MOVE_WILL_O_WISP",
+                "MOVE_SMOG"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAIVE",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_BRONZOR",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_PAYBACK",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_STEEL_BEAM",
+                "MOVE_IRON_DEFENSE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_RELAXED",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_PURUGLY",
             "form": 0,
-            "level": 17,
-            "item": "ITEM_ORAN_BERRY",
+            "level": 16,
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_FAINT_ATTACK",
-                "MOVE_SCRATCH",
-                "MOVE_FAKE_OUT"
+                "MOVE_COVET",
+                "MOVE_SHADOW_CLAW",
+                "MOVE_FAKE_OUT",
+                "MOVE_HYPNOSIS"
             ],
-            "iv_scale": 100,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

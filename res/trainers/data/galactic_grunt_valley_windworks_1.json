@@ -10,13 +10,68 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_DRIFLOON",
             "form": 0,
-            "level": 13,
-            "item": null,
-            "moves": null,
-            "iv_scale": 30,
-            "ball_seal": 0
+            "level": 14,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_ACROBATICS",
+                "MOVE_DESTINY_BOND",
+                "MOVE_HEX",
+                "MOVE_HYPNOSIS"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_HARDY",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_SLUGMA",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_ROCKY_HELMET",
+            "moves": [
+                "MOVE_FIRE_SPIN",
+                "MOVE_INCINERATE",
+                "MOVE_BUBBLE_BEAM",
+                "MOVE_ROLLOUT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_QUIET",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_CUBONE",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_THICK_CLUB",
+            "moves": [
+                "MOVE_BONE_RUSH",
+                "MOVE_HEADBUTT",
+                "MOVE_REVENGE",
+                "MOVE_FIRE_PUNCH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_GOLBAT",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_ORAN_BERRY",
+            "moves": [
+                "MOVE_AIR_CUTTER",
+                "MOVE_BITE",
+                "MOVE_MEAN_LOOK",
+                "MOVE_U_TURN"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_RASH",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
