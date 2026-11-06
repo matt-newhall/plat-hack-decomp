@@ -6,6 +6,15 @@
 
 #define ENCOUNTERS_NONE 0xFFFF
 
+/**
+ * @brief Whether a map lets the player's following Pokemon out of its ball.
+ */
+enum MapFollowMode {
+    MAP_FOLLOW_MODE_ALLOW = 0,
+    MAP_FOLLOW_MODE_HEIGHT_RESTRICT,
+    MAP_FOLLOW_MODE_PREVENT
+};
+
 typedef struct {
     u8 areaDataArchiveID;
     u8 unk_01;
@@ -21,7 +30,8 @@ typedef struct {
     u16 mapLabelWindowID : 8;
     u8 weather;
     u8 cameraType;
-    u16 mapType : 7;
+    u16 mapType : 5;
+    u16 followMode : 2;
     u16 battleBG : 5;
     u16 isBikeAllowed : 1;
     u16 isRunningAllowed : 1;
@@ -50,6 +60,14 @@ BOOL MapHeader_IsEscapeRopeAllowed(u32 headerID);
 BOOL MapHeader_IsFlyAllowed(u32 headerID);
 BOOL MapHeader_IsBikeAllowed(u32 headerID);
 u32 MapHeader_GetMapType(u32 headerID);
+
+/**
+ * @brief Gets how a map treats the player's following Pokemon.
+ *
+ * @param headerID
+ * @return One of enum MapFollowMode
+ */
+u8 MapHeader_GetFollowMode(u32 headerID);
 BOOL MapHeader_IsTeleportAllowed(u32 headerID);
 BOOL MapHeader_IsOnMainMatrix(u32 headerID);
 BOOL MapHeader_IsPokemonCenter(u32 headerID);

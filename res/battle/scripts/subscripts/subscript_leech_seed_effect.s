@@ -21,6 +21,7 @@ _050:
     UpdateVarFromVar OPCODE_SET, BTLVAR_MSG_BATTLER_TEMP, BTLVAR_MSG_ATTACKER
     UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
     CheckAbility CHECK_HAVE, BTLSCR_MSG_DEFENDER, ABILITY_LIQUID_OOZE, _096
+    CompareMonDataToValue OPCODE_NEQ, BTLSCR_MSG_TEMP, BATTLEMON_HEAL_BLOCK_TURNS, 0, _heal_blocked
     UpdateVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, -1
     Call BATTLE_SUBSCRIPT_UPDATE_HP
     // {0}’s health is sapped by Leech Seed!
@@ -47,6 +48,14 @@ _110:
     WaitButtonABTime 30
     // {0}’s {1} suppressed {2}’s {3}!
     PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_MSG_ATTACKER, BTLSCR_MSG_ATTACKER, BTLSCR_MSG_DEFENDER, BTLSCR_MSG_DEFENDER
+    Wait 
+    WaitButtonABTime 30
+    End 
+
+_heal_blocked:
+    UpdateVar OPCODE_SET, BTLVAR_MSG_MOVE_TEMP, MOVE_HEAL_BLOCK
+    // {0} was prevented from healing due to {1}!
+    PrintMessage BattleStrings_Text_PokemonWasPreventedFromHealingDueToMove_Ally, TAG_NICKNAME_MOVE, BTLSCR_MSG_TEMP, BTLSCR_MSG_TEMP
     Wait 
     WaitButtonABTime 30
     End 

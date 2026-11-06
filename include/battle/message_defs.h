@@ -89,7 +89,7 @@ typedef struct MonShowMessage {
 
 typedef struct MonReturnMessage {
     u8 command;
-    u8 yOffset;
+    s8 yOffset;
     u16 capturedBall;
     int isSubstitute;
     u16 battleMonSpecies[MAX_BATTLERS];
@@ -303,7 +303,6 @@ typedef struct UpdatePartyMonMessage {
     u8 mimickedMoveSlot : 4;
     s16 curHP;
     u32 status;
-    u32 knockedOffItemsMask;
     u16 heldItem;
     u16 moves[LEARNED_MOVES_MAX];
     u8 ppCur[LEARNED_MOVES_MAX];
@@ -351,6 +350,12 @@ typedef struct MonEntryAnimMessage {
     u16 species;
     enum PokemonCryMod cryModulation;
 } MonEntryAnimMessage;
+
+typedef struct TerrainBackgroundMessage {
+    u8 command;
+    u8 padding_01[3];
+    u32 terrain;
+} TerrainBackgroundMessage;
 
 typedef struct RecordIncrementMessage {
     u8 command;

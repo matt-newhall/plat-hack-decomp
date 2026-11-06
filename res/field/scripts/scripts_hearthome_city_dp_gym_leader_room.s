@@ -70,11 +70,11 @@ _0096:
     GoTo _012B
 
 _012B:
-    SetVar VAR_0x8004, ITEM_TM65
+    SetVar VAR_0x8004, ITEM_TM46
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, _0169
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_FANTINA_TM65
+    SetFlag FLAG_OBTAINED_FANTINA_TM46
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message 4
@@ -90,7 +90,7 @@ _0169:
     End
 
 _0173:
-    GoToIfUnset FLAG_OBTAINED_FANTINA_TM65, _012B
+    GoToIfUnset FLAG_OBTAINED_FANTINA_TM46, _012B
     Message 5
     WaitButton
     CloseMessage

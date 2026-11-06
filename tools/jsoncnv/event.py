@@ -5,6 +5,7 @@ import sys
 
 from convert import (
     from_bg_event_dir,
+    from_face_dir,
     from_movement_type,
     from_object_event_gfx,
     from_map_header,
@@ -62,7 +63,7 @@ def parse_object_event(obj: dict, i: int) -> bytes:
             u16(from_trainer_type(obj["trainer_type"])),
             u16(from_var_flag_or_map_header(obj["hidden_flag"])),
             u16(from_script(str(obj["script"]), obj.get("double_battle_id", 1))),
-            u16(obj["initial_dir"]),
+            u16(from_face_dir(obj["initial_dir"])),
             u16(obj_data[0]),
             u16(obj_data[1]),
             u16(obj_data[2]),

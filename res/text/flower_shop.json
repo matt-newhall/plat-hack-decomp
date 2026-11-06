@@ -2,39 +2,29 @@
   "key": 1030,
   "messages": [
     {
-      "id": "FlowerShop_Text_ASingleBerryWillGrowIntoAPlantThatMakesSeveralBerries",
+      "id": "FlowerShop_Text_BerriesAreRareNowPleaseTakeThisOne",
       "en_US": [
-        "A single Berry will grow into a plant\n",
-        "that makes several Berries.\r",
-        "By planting one, there will be more\n",
-        "and more Berries in the world.\r",
-        "I hope you will help us spread more\n",
-        "Berries everywhere!\r"
+        "With the soil drying up, Berries\n",
+        "have become quite precious.\r",
+        "We still have a few left over from\n",
+        "the old harvests, though.\r",
+        "Here, please take this one!\r"
       ]
     },
     {
-      "id": "FlowerShop_Text_PleasePlantThatBerryInSoftEarthySoil",
+      "id": "FlowerShop_Text_LetYourPokemonHoldThatBerry",
       "en_US": [
-        "Please plant that Berry in soft,\n",
-        "earthy soil.\r",
-        "If you come by again tomorrow,\n",
-        "I’ll have a different Berry for you."
+        "Let one of your Pokémon hold that\n",
+        "Berry. It might help in a pinch!"
       ]
     },
     {
-      "id": "FlowerShop_Text_TrainerPleaseWaterBerriesUsingThisSprayduckWateringCan",
+      "id": "FlowerShop_Text_TheSoilInSinnohIsTooDryToPlantNewBerries",
       "en_US": [
-        "Trainer, please water Berries using\n",
-        "this Sprayduck watering can.\r"
-      ]
-    },
-    {
-      "id": "FlowerShop_Text_UseThatSprayduckToWaterTheSoilWhereYouvePlantedBerries",
-      "en_US": [
-        "Use that Sprayduck to water the soil\n",
-        "where you’ve planted Berries.\r",
-        "You should also water Berry plants\n",
-        "while they are growing."
+        "The soil around Sinnoh has become\n",
+        "awfully dry lately.\r",
+        "It’s gotten so hard to get new\n",
+        "Berries to take root anywhere."
       ]
     },
     {

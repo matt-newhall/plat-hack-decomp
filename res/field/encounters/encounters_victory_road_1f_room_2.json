@@ -2,52 +2,52 @@
     "land_rate": 15,
     "land_encounters": [
         {
-            "level": 48,
-            "species": "SPECIES_FLOATZEL"
+            "level": 87,
+            "species": "SPECIES_DONPHAN"
         },
         {
-            "level": 47,
-            "species": "SPECIES_AZUMARILL"
+            "level": 87,
+            "species": "SPECIES_DRAGONAIR"
         },
         {
-            "level": 47,
-            "species": "SPECIES_GRAVELER"
+            "level": 87,
+            "species": "SPECIES_VIBRAVA"
         },
         {
-            "level": 49,
-            "species": "SPECIES_AZUMARILL"
+            "level": 87,
+            "species": "SPECIES_MAGMORTAR"
         },
         {
-            "level": 48,
-            "species": "SPECIES_DEWGONG"
+            "level": 87,
+            "species": "SPECIES_MAGNEZONE"
         },
         {
-            "level": 50,
-            "species": "SPECIES_FLOATZEL"
+            "level": 87,
+            "species": "SPECIES_ALTARIA"
         },
         {
-            "level": 50,
-            "species": "SPECIES_GOLBAT"
+            "level": 87,
+            "species": "SPECIES_STEELIX"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GRAVELER"
+            "level": 87,
+            "species": "SPECIES_HOUNDOOM"
         },
         {
-            "level": 50,
-            "species": "SPECIES_DEWGONG"
+            "level": 87,
+            "species": "SPECIES_LUNATONE"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GABITE"
+            "level": 87,
+            "species": "SPECIES_SOLROCK"
         },
         {
-            "level": 50,
-            "species": "SPECIES_DEWGONG"
+            "level": 87,
+            "species": "SPECIES_SALAMENCE"
         },
         {
-            "level": 49,
-            "species": "SPECIES_GABITE"
+            "level": 87,
+            "species": "SPECIES_SALAMENCE"
         }
     ],
     "swarms": [
@@ -97,29 +97,34 @@
     "surf_rate": 15,
     "surf_encounters": [
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_FLOATZEL"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_FERALIGATR"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_DEWGONG"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_BLASTOISE"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_DRAGONAIR"
+        },
+        {
+            "level_max": 85,
+            "level_min": 85,
             "species": "SPECIES_LAPRAS"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
+            "level_max": 85,
+            "level_min": 85,
             "species": "SPECIES_LAPRAS"
         },
         {
-            "level_max": 55,
-            "level_min": 35,
-            "species": "SPECIES_LAPRAS"
+            "level_max": 85,
+            "level_min": 85,
+            "species": "SPECIES_OMASTAR"
         }
     ],
     "old_rod_rate": 25,
@@ -141,6 +146,11 @@
         },
         {
             "level_max": 10,
+            "level_min": 5,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 15,
             "level_min": 5,
             "species": "SPECIES_MAGIKARP"
         },
@@ -176,6 +186,11 @@
             "level_max": 25,
             "level_min": 10,
             "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 25,
+            "level_min": 10,
+            "species": "SPECIES_MAGIKARP"
         }
     ],
     "super_rod_rate": 75,
@@ -188,6 +203,11 @@
         {
             "level_max": 40,
             "level_min": 30,
+            "species": "SPECIES_GYARADOS"
+        },
+        {
+            "level_max": 55,
+            "level_min": 40,
             "species": "SPECIES_GYARADOS"
         },
         {

@@ -10,22 +10,50 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_PHANPY",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 13,
+            "item": "ITEM_SALAC_BERRY",
+            "moves": [
+                "MOVE_STEALTH_ROCK",
+                "MOVE_BULLDOZE",
+                "MOVE_SLAM",
+                "MOVE_ICE_SPINNER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH"
         },
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_ELEKID",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 13,
+            "item": "ITEM_BERRY_JUICE",
+            "moves": [
+                "MOVE_ROLLING_KICK",
+                "MOVE_SPARK",
+                "MOVE_SCREECH",
+                "MOVE_FEINT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MILD"
+        },
+        {
+            "species": "SPECIES_LILEEP",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_ANCIENT_POWER",
+                "MOVE_MEGA_DRAIN",
+                "MOVE_SLUDGE_BOMB",
+                "MOVE_MIRROR_COAT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

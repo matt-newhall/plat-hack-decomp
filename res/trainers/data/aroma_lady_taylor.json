@@ -10,22 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUDEW",
+            "species": "SPECIES_SKIPLOOM",
             "form": 0,
-            "level": 9,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 13,
+            "item": "ITEM_TERRAIN_EXTENDER",
+            "moves": [
+                "MOVE_GRASSY_TERRAIN",
+                "MOVE_MEGA_DRAIN",
+                "MOVE_LEECH_SEED",
+                "MOVE_U_TURN"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BOLD",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_CHERUBI",
+            "species": "SPECIES_NUZLEAF",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 14,
+            "item": "ITEM_MIRACLE_SEED",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_GRASSY_GLIDE",
+                "MOVE_FAINT_ATTACK",
+                "MOVE_TORMENT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_TEDDIURSA",
+            "form": 0,
+            "level": 13,
+            "item": "ITEM_EVIOLITE",
+            "moves": [
+                "MOVE_ROCK_TOMB",
+                "MOVE_BABY_DOLL_EYES",
+                "MOVE_FURY_SWIPES",
+                "MOVE_METAL_CLAW"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

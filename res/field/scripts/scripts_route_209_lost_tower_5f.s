@@ -13,7 +13,7 @@ Route209LostTower5F_OldWoman1:
     GoToIfUnset FLAG_USED_DEFOG_IN_ROUTE_209_LOST_TOWER_5F, Route209LostTower5F_ThisFogObscuresEverything
     GoToIfSet FLAG_RECEIVED_ROUTE_209_LOST_TOWER_5F_SPELL_TAG, Route209LostTower5F_FantinaIsARegularVisitor
     Message Route209LostTower5F_Text_DontBeShyTakeIt
-    SetVar VAR_0x8004, ITEM_SPELL_TAG
+    SetVar VAR_0x8004, ITEM_ULTRA_BALL
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route209LostTower5F_BagIsFull
     Common_GiveItemQuantity

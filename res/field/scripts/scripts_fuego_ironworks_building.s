@@ -34,7 +34,8 @@ FuegoIronworksBuilding_FuegoBattle:
     Message FuegoIronworksBuilding_Text_FuegoDefeat
     WaitButton
     Message FuegoIronworksBuilding_Text_FuegoGrantsCut
-    GoTo FuegoIronworksBuilding_MrFuegoEnd
+    WaitButton
+    ReleaseAll
     End
 
 FuegoIronworksBuilding_FuegoBattleLost:

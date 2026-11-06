@@ -981,13 +981,13 @@ VeilstoneCity_Roughneck2:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_RECEIVED_VEILSTONE_CITY_TM63, VeilstoneCity_EmbargoMakesItemsUnusable
+    GoToIfSet FLAG_RECEIVED_VEILSTONE_CITY_TM36, VeilstoneCity_EmbargoMakesItemsUnusable
     Message VeilstoneCity_Text_VeilstoneIsTheCityOfStone
-    SetVar VAR_0x8004, ITEM_TM63
+    SetVar VAR_0x8004, ITEM_TM36
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, VeilstoneCity_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_VEILSTONE_CITY_TM63
+    SetFlag FLAG_RECEIVED_VEILSTONE_CITY_TM36
     GoTo VeilstoneCity_EmbargoMakesItemsUnusable
 
 VeilstoneCity_EmbargoMakesItemsUnusable:
@@ -1112,6 +1112,7 @@ VeilstoneCity_GruntMStorageKeyLeaveNorth:
     ApplyMovement LOCALID_PLAYER, VeilstoneCity_Movement_PlayerWatchGruntMStorageKeyLeaveNorth
     ApplyMovement LOCALID_GRUNT_M_STORAGE_KEY, VeilstoneCity_Movement_GruntMStorageKeyLeaveNorthSouthEast
     WaitMovement
+    FollowPokePlaceAtSide DIR_WEST, DIR_EAST
     Common_SetLookerBGM
     ApplyMovement LOCALID_LOOKER, VeilstoneCity_Movement_LookerEnterNorth
     WaitMovement
@@ -1131,6 +1132,7 @@ VeilstoneCity_GruntMStorageKeyLeaveEast:
     ApplyMovement LOCALID_PLAYER, VeilstoneCity_Movement_PlayerWatchGruntMStorageKeyLeaveEast
     ApplyMovement LOCALID_GRUNT_M_STORAGE_KEY, VeilstoneCity_Movement_GruntMStorageKeyLeaveNorthSouthEast
     WaitMovement
+    FollowPokePlaceAtSide DIR_WEST, DIR_EAST
     Common_SetLookerBGM
     ApplyMovement LOCALID_LOOKER, VeilstoneCity_Movement_LookerEnterEast
     WaitMovement
@@ -1141,6 +1143,7 @@ VeilstoneCity_GruntMStorageKeyLeaveWest:
     ApplyMovement LOCALID_PLAYER, VeilstoneCity_Movement_PlayerWatchGruntMStorageKeyLeaveWest
     ApplyMovement LOCALID_GRUNT_M_STORAGE_KEY, VeilstoneCity_Movement_GruntMStorageKeyLeaveWest
     WaitMovement
+    FollowPokePlaceAtSide DIR_WEST, DIR_EAST
     Common_SetLookerBGM
     ApplyMovement LOCALID_LOOKER, VeilstoneCity_Movement_LookerEnterWest
     WaitMovement

@@ -33,6 +33,7 @@ BOOL ov12_0223782C(BallRotation *param0, int param1);
 void ov12_0223783C(BallRotation *param0);
 void ov12_0223786C(BallRotation *param0, int param1);
 int ov12_02237890(BallRotation *param0);
+void BallRotation_SetCriticalCapture(BallRotation *ballRotation, BOOL criticalCapture);
 void ov12_02237E0C(BallRotation *param0, int param1);
 void ov12_02237E18(BallRotation *param0, s16 param1, s16 param2);
 void ov12_02237E24(BallRotation *param0, u16 param1);

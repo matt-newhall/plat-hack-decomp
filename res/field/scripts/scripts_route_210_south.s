@@ -466,6 +466,7 @@ Route210South_ExhibitionVictory:
     SetFlag FLAG_HIDE_JOHTO_LEADER_BATTLE_SOLACEON_TOWN
     SetVar VAR_ROUTE_210_SOUTH_STATE, 1
     RestoreCamera
+    Common_IncreaseLevelCap 67
     ReleaseAll
     End
 

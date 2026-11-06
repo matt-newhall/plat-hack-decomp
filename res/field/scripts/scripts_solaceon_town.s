@@ -137,7 +137,14 @@ SolaceonTown_TriggerRival:
     WaitMovement
     Message SolaceonTown_Text_CheckOutTheRuins
     CloseMessage
-    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeave
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 557, SolaceonTown_RivalLeaveFromX557
+    CallIfEq VAR_0x8004, 558, SolaceonTown_RivalLeaveFromX558
+    CallIfEq VAR_0x8004, 559, SolaceonTown_RivalLeaveFromX559
+    CallIfEq VAR_0x8004, 560, SolaceonTown_RivalLeaveFromX560
+    CallIfEq VAR_0x8004, 561, SolaceonTown_RivalLeaveFromX561
+    CallIfEq VAR_0x8004, 562, SolaceonTown_RivalLeaveFromX562
+    CallIfEq VAR_0x8004, 563, SolaceonTown_RivalLeaveFromX563
     WaitMovement
     RemoveObject LOCALID_RIVAL
     Common_FadeToDefaultMusic2
@@ -164,9 +171,73 @@ SolaceonTown_Movement_RivalExclamationMark:
     EmoteExclamationMark
     EndMovement
 
+SolaceonTown_RivalLeaveFromX557:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX557
+    Return
+
+SolaceonTown_RivalLeaveFromX558:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX558
+    Return
+
+SolaceonTown_RivalLeaveFromX559:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX559
+    Return
+
+SolaceonTown_RivalLeaveFromX560:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX560
+    Return
+
+SolaceonTown_RivalLeaveFromX561:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX561
+    Return
+
+SolaceonTown_RivalLeaveFromX562:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX562
+    Return
+
+SolaceonTown_RivalLeaveFromX563:
+    ApplyMovement LOCALID_RIVAL, SolaceonTown_Movement_RivalLeaveFromX563
+    Return
+
     .balign 4, 0
-SolaceonTown_Movement_RivalLeave:
-    WalkFastNorth 7
+SolaceonTown_Movement_RivalLeaveFromX557:
+    WalkFastEast 3
+    WalkFastSouth 9
+    EndMovement
+
+    .balign 4, 0
+SolaceonTown_Movement_RivalLeaveFromX558:
+    WalkFastEast 2
+    WalkFastSouth 9
+    EndMovement
+
+    .balign 4, 0
+SolaceonTown_Movement_RivalLeaveFromX559:
+    WalkFastEast 1
+    WalkFastSouth 9
+    EndMovement
+
+    .balign 4, 0
+SolaceonTown_Movement_RivalLeaveFromX560:
+    WalkFastSouth 9
+    EndMovement
+
+    .balign 4, 0
+SolaceonTown_Movement_RivalLeaveFromX561:
+    WalkFastWest 1
+    WalkFastSouth 9
+    EndMovement
+
+    .balign 4, 0
+SolaceonTown_Movement_RivalLeaveFromX562:
+    WalkFastWest 2
+    WalkFastSouth 9
+    EndMovement
+
+    .balign 4, 0
+SolaceonTown_Movement_RivalLeaveFromX563:
+    WalkFastWest 3
+    WalkFastSouth 9
     EndMovement
 
     .balign 4, 0

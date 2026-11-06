@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 5,
+            "level": 26,
+            "species": "SPECIES_TYROGUE"
+        },
+        {
+            "level": 26,
+            "species": "SPECIES_CHATOT"
+        },
+        {
+            "level": 26,
             "species": "SPECIES_GEODUDE"
         },
         {
-            "level": 6,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_RIOLU"
         },
         {
-            "level": 5,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_TEDDIURSA"
         },
         {
-            "level": 6,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_KOFFING"
         },
         {
-            "level": 4,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_ARON"
         },
         {
-            "level": 7,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_PHANPY"
         },
         {
-            "level": 6,
-            "species": "SPECIES_ONIX"
+            "level": 26,
+            "species": "SPECIES_TORKOAL"
         },
         {
-            "level": 8,
-            "species": "SPECIES_ONIX"
+            "level": 26,
+            "species": "SPECIES_KIRLIA"
         },
         {
-            "level": 8,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_DONPHAN"
         },
         {
-            "level": 7,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 8,
-            "species": "SPECIES_GEODUDE"
-        },
-        {
-            "level": 7,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_BAGON"
         }
     ],
     "swarms": [
@@ -120,10 +120,20 @@
             "level_max": 0,
             "level_min": 0,
             "species": "SPECIES_NONE"
+        },
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
         }
     ],
     "old_rod_rate": 0,
     "old_rod_encounters": [
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
+        },
         {
             "level_max": 0,
             "level_min": 0,
@@ -176,10 +186,20 @@
             "level_max": 0,
             "level_min": 0,
             "species": "SPECIES_NONE"
+        },
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
         }
     ],
     "super_rod_rate": 0,
     "super_rod_encounters": [
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
+        },
         {
             "level_max": 0,
             "level_min": 0,

@@ -9,7 +9,7 @@ typedef struct MoveEffectsData {
     u32 disabledTurns : 3;
     u32 encoredTurns : 3;
     u32 tauntedTurns : 3;
-    u32 protectSuccessTurns : 2;
+    u32 protectSuccessTurns : 4;
     u32 perishSongTurns : 2;
     u32 rolloutCount : 3;
     u32 furyCutterCount : 3;

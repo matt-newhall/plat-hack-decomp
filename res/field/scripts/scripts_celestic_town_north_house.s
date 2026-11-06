@@ -40,9 +40,7 @@ CelesticTownNorthHouse_Elder:
     LockAll
     FacePlayer
     GoToIfSet FLAG_GAME_COMPLETED, CelesticTownNorthHouse_IDidSomeResearch
-    GoToIfSet FLAG_FIRST_ARRIVAL_CANALAVE_CITY, CelesticTownNorthHouse_CelesticOldestTown
-    Message CelesticTownNorthHouse_Text_UsingSurfGoPlaces
-    GoTo CelesticTownNorthHouse_ElderEnd
+    GoTo CelesticTownNorthHouse_CelesticOldestTown
     End
 
 CelesticTownNorthHouse_IDidSomeResearch:

@@ -12,6 +12,7 @@
 #include "overlay005/field_effect_manager.h"
 #include "overlay005/ov5_021F3D00.h"
 
+#include "follower_mon.h"
 #include "map_object.h"
 #include "map_object_move.h"
 #include "map_tile_behavior.h"
@@ -64,7 +65,7 @@ static void sub_02069CD4(MapObject *mapObj, UnkStruct_02069CA8 *param1);
 static int sub_02069CFC(MapObject *mapObj, UnkStruct_02069CA8 *param1);
 static void sub_02069D30(MapObject *mapObj, UnkStruct_02069CA8 *param1);
 static u32 sub_02069D50(MapObject *mapObj);
-static int sub_02069D8C(MapObject *mapObj);
+static int sub_02069D8C(MapObject *mapObj, UnkStruct_02069CA8 *param1);
 static int sub_02069F48(MapObject *mapObj, UnkStruct_02069F48 *param1);
 static void sub_02069FC4(MapObject *mapObj, UnkStruct_02069F48 *param1, MapObject *param2);
 static int sub_02069FE8(MapObject *mapObj, UnkStruct_02069F48 *param1);
@@ -82,7 +83,7 @@ void sub_02069BE0(MapObject *mapObj)
     sub_02069CA8(mapObj, v0);
     sub_02062A0C(mapObj, 0x0);
     sub_02062D10(mapObj);
-    sub_02062D80(mapObj, 0);
+    sub_02062D80(mapObj, FollowerMon_IsFollowerObject(mapObj));
 }
 
 void sub_02069C0C(MapObject *mapObj)
@@ -93,7 +94,7 @@ void sub_02069C0C(MapObject *mapObj)
         return;
     }
 
-    sub_02062D80(mapObj, 0);
+    sub_02062D80(mapObj, FollowerMon_IsFollowerObject(mapObj));
 
     while (Unk_020EF8D4[v0->unk_00](mapObj, v0) == 1) {
         (void)0;
@@ -113,7 +114,7 @@ static int sub_02069C48(MapObject *mapObj, UnkStruct_02069CA8 *param1)
     if (sub_02069CFC(mapObj, param1) == 1) {
         sub_02069D30(mapObj, param1);
 
-        if (sub_02069D8C(mapObj) == 1) {
+        if (sub_02069D8C(mapObj, param1) == 1) {
             sub_02062D04(mapObj);
             param1->unk_00++;
             return 1;
@@ -215,10 +216,14 @@ static u32 sub_02069D50(MapObject *mapObj)
         break;
     }
 
+    if (FollowerMon_IsFollowerObject(mapObj) == TRUE && FollowerMon_IsWalkingAction(v0) == FALSE) {
+        v0 = MOVEMENT_ACTION_WALK_FAST_NORTH;
+    }
+
     return v0;
 }
 
-static int sub_02069D8C(MapObject *mapObj)
+static int sub_02069D8C(MapObject *mapObj, UnkStruct_02069CA8 *param1)
 {
     FieldSystem *fieldSystem = MapObject_FieldSystem(mapObj);
     PlayerAvatar *playerAvatar = FieldSystem_GetPlayerAvatar(fieldSystem);
@@ -230,6 +235,10 @@ static int sub_02069D8C(MapObject *mapObj)
     if ((v2 != v4) || (v3 != v5)) {
         u32 v6 = sub_02069D50(mapObj);
         int v7 = sub_02064488(v2, v3, v4, v5);
+
+        if (FollowerMon_IsFollowerObject(mapObj) == TRUE) {
+            v6 = FollowerMon_ResolveStepAction(v6, v7, &param1->unk_06);
+        }
 
         // never step onto the player's tile
         if ((v2 + MapObject_GetDxFromDir(v7) == Player_GetXPos(playerAvatar))

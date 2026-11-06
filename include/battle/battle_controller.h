@@ -64,6 +64,7 @@ void BattleController_EmitForgetMove(BattleSystem *battleSys, int battler, int m
 void BattleController_EmitSetMosaic(BattleSystem *battleSys, int battler, int param2, int wait);
 void BattleController_EmitChangeWeatherForm(BattleSystem *battleSys, int battler);
 void BattleController_EmitUpdateBG(BattleSystem *battleSys, int battler);
+void BattleController_EmitSetTerrainBackground(BattleSystem *battleSys, int battler, u32 terrain);
 void BattleController_EmitClearTouchScreen(BattleSystem *battleSys, int battler);
 
 /**

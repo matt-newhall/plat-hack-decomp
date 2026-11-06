@@ -7,13 +7,20 @@
 #include "generated/movement_actions.h"
 
 #include "field/field_system.h"
+#include "overlay005/follower_ball_effect.h"
+#include "overlay005/ov5_021EB1A0.h"
+#include "billboard.h"
 #include "generated/genders.h"
 #include "generated/movement_types.h"
 #include "generated/object_events_gfx.h"
 #include "follower_mon_gfx.h"
 #include "heap.h"
 #include "location.h"
+#include "constants/field/dynamic_map_features.h"
+#include "follower_mon_params.h"
+#include "map_header.h"
 #include "map_header_data.h"
+#include "persisted_map_features_init.h"
 #include "map_object.h"
 #include "script_manager.h"
 #include "map_object_move.h"
@@ -21,6 +28,7 @@
 #include "player_avatar.h"
 #include "pokemon.h"
 #include "savedata.h"
+#include "sound_playback.h"
 #include "system_flags.h"
 #include "terrain_collision_manager.h"
 #include "unk_020655F4.h"
@@ -28,6 +36,21 @@
 // i initially had this on 0xFD but that was an ID collision with
 // some dynamic objects like Veilstone Gym tires
 #define FOLLOWER_LOCAL_ID LOCALID_FOLLOWER
+
+static BOOL FollowerMon_IsDelayAction(u16 action);
+static BOOL FollowerMon_IsStationaryAction(u16 action, int dir);
+
+#define FOLLOWER_RECALL_TURN_DELAY   11
+#define FOLLOWER_RECALL_SHRINK_FRAMES 6
+#define FOLLOWER_RECALL_BALL_FRAMES   10
+#define FOLLOWER_RECALL_MIN_SCALE     (FX32_ONE / 4)
+
+enum FollowerRecallState {
+    FOLLOWER_RECALL_STATE_TURN = 0,
+    FOLLOWER_RECALL_STATE_HOLD,
+    FOLLOWER_RECALL_STATE_SHRINK,
+    FOLLOWER_RECALL_STATE_BALL
+};
 
 static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *gender)
 {
@@ -56,6 +79,26 @@ static u16 FollowerMon_GetLeadGfxID(FieldSystem *fieldSystem, u16 *species, u8 *
         (u8)Pokemon_GetValue(lead, MON_DATA_FORM, NULL),
         *gender == GENDER_FEMALE,
         (BOOL)Pokemon_IsShiny(lead));
+}
+
+static BOOL FollowerMon_IsAllowedOnMap(FieldSystem *fieldSystem, u16 species)
+{
+    if (PersistedMapFeatures_IsCurrentDynamicMap(fieldSystem, DYNAMIC_MAP_FEATURES_DISTORTION_WORLD) == TRUE) {
+        return FALSE;
+    }
+
+    switch (MapHeader_GetFollowMode(fieldSystem->location->mapId)) {
+    case MAP_FOLLOW_MODE_PREVENT:
+        return FALSE;
+    case MAP_FOLLOW_MODE_HEIGHT_RESTRICT:
+        return FollowerMon_IsLargeSpecies(species) == FALSE;
+    }
+
+    if (MapHeader_IsBuilding(fieldSystem->location->mapId) == TRUE) {
+        return FollowerMon_IsLargeSpecies(species) == FALSE;
+    }
+
+    return TRUE;
 }
 
 static void FollowerMon_StorePosition(FieldSystem *fieldSystem, MapObject *follower, u16 species, u8 gender)
@@ -97,6 +140,8 @@ static MapObject *FollowerMon_Spawn(FieldSystem *fieldSystem, u16 gfxID, int x, 
     }
 
     MapObject_SetStatusFlagOn(follower, MAP_OBJ_STATUS_PERSISTENT);
+    MapObject_SetMovementRangeX(follower, -1);
+    MapObject_SetMovementRangeZ(follower, -1);
     MapObject_RecalculateObjectHeight(follower);
 
     return follower;
@@ -144,6 +189,10 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
         return;
     }
 
+    if (FollowerMon_IsAllowedOnMap(fieldSystem, species) == FALSE) {
+        return;
+    }
+
     if (FollowerMon_FindAndReuse(fieldSystem, gfxID, species, gender) != NULL) {
         return;
     }
@@ -170,6 +219,7 @@ void FollowerMon_UpdateFollower(FieldSystem *fieldSystem)
     }
 
     FollowerMon_StorePosition(fieldSystem, follower, species, gender);
+    FollowerBallEffect_Start(follower);
 }
 
 void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
@@ -191,6 +241,10 @@ void FollowerMon_RestoreFollower(FieldSystem *fieldSystem)
     gfxID = FollowerMon_GetLeadGfxID(fieldSystem, &species, &gender);
 
     if (gfxID == OBJ_EVENT_GFX_INVISIBLE) {
+        return;
+    }
+
+    if (FollowerMon_IsAllowedOnMap(fieldSystem, species) == FALSE) {
         return;
     }
 
@@ -350,16 +404,10 @@ MapObjectAnimCmd *FollowerMon_BuildTrailingAnim(FieldSystem *fieldSystem, const 
         for (int step = 0; step < count; step++) {
             int pnx = px + MapObject_GetDxFromDir(dir);
             int pnz = pz + MapObject_GetDzFromDir(dir);
-            int fStepDir;
+            int fStepDir = FollowerMon_DirFromDelta(px - fx, pz - fz);
 
-            if (pnx == fx && pnz == fz) {
+            if (fStepDir == DIR_NONE) {
                 fStepDir = dir;
-            } else {
-                fStepDir = FollowerMon_DirFromDelta(px - fx, pz - fz);
-
-                if (fStepDir == DIR_NONE) {
-                    fStepDir = dir;
-                }
             }
 
             FollowerMon_PushAnim(result, &out, MovementAction_TurnActionTowardsDir(fStepDir, action), 1);
@@ -381,6 +429,189 @@ MapObjectAnimCmd *FollowerMon_BuildTrailingAnim(FieldSystem *fieldSystem, const 
     result[out].count = 0;
 
     return result;
+}
+
+static MapObject *FollowerMon_GetObject(FieldSystem *fieldSystem)
+{
+    MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
+
+    if (follower != NULL && MapObject_GetLocalID(follower) == FOLLOWER_LOCAL_ID) {
+        return follower;
+    }
+
+    return NULL;
+}
+
+static void FollowerMon_ShrinkIntoBall(MapObject *follower, int frame)
+{
+    Billboard *billboard = ov5_021EB1A0(follower);
+    VecFx32 scale;
+    fx32 progress;
+
+    if (billboard == NULL) {
+        return;
+    }
+
+    if (frame > FOLLOWER_RECALL_SHRINK_FRAMES) {
+        frame = FOLLOWER_RECALL_SHRINK_FRAMES;
+    }
+
+    progress = (FX32_ONE - FOLLOWER_RECALL_MIN_SCALE) * frame / FOLLOWER_RECALL_SHRINK_FRAMES;
+    scale.x = FX32_ONE - progress;
+    scale.y = scale.x;
+    scale.z = scale.x;
+
+    Billboard_SetScale(billboard, &scale);
+
+}
+
+static void FollowerMon_FadeBall(MapObject *follower, int frame)
+{
+    Billboard *billboard = ov5_021EB1A0(follower);
+    NNSG3dResMdl *model;
+    int alpha;
+
+    if (billboard == NULL) {
+        return;
+    }
+
+    alpha = 31 - ((31 * frame) / FOLLOWER_RECALL_BALL_FRAMES);
+
+    if (alpha < 0) {
+        alpha = 0;
+    }
+
+    model = Billboard_GetModel(billboard);
+
+    NNS_G3dMdlUseMdlAlpha(model);
+    NNS_G3dMdlSetMdlAlphaAll(model, alpha);
+}
+
+BOOL FollowerMon_StartRecall(FieldSystem *fieldSystem)
+{
+    if (FollowerMon_GetObject(fieldSystem) == NULL) {
+        return FALSE;
+    }
+
+    fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_TURN;
+    fieldSystem->followMon.recallTimer = 0;
+
+    return TRUE;
+}
+
+BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
+{
+    MapObject *follower = FollowerMon_GetObject(fieldSystem);
+    int dir;
+
+    if (follower == NULL) {
+        return TRUE;
+    }
+
+    switch (fieldSystem->followMon.recallState) {
+    case FOLLOWER_RECALL_STATE_TURN:
+        dir = sub_02064488(MapObject_GetX(follower),
+            MapObject_GetZ(follower),
+            Player_GetXPos(fieldSystem->playerAvatar),
+            Player_GetZPos(fieldSystem->playerAvatar));
+
+        ov5_021ECDFC(follower, dir);
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_HOLD;
+        break;
+
+    case FOLLOWER_RECALL_STATE_HOLD:
+        fieldSystem->followMon.recallTimer++;
+
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_TURN_DELAY) {
+            break;
+        }
+
+        Sound_PlayEffect(SEQ_SE_DP_BOWA2);
+
+        fieldSystem->followMon.recallTimer = 0;
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_SHRINK;
+        break;
+
+    case FOLLOWER_RECALL_STATE_SHRINK:
+        fieldSystem->followMon.recallTimer++;
+        FollowerMon_ShrinkIntoBall(follower, fieldSystem->followMon.recallTimer);
+
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_SHRINK_FRAMES) {
+            break;
+        }
+
+        sub_02061AD4(follower, OBJ_EVENT_GFX_POKEBALL);
+
+        fieldSystem->followMon.recallTimer = 0;
+        fieldSystem->followMon.recallState = FOLLOWER_RECALL_STATE_BALL;
+        break;
+
+    case FOLLOWER_RECALL_STATE_BALL:
+        fieldSystem->followMon.recallTimer++;
+        FollowerMon_FadeBall(follower, fieldSystem->followMon.recallTimer);
+
+        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_BALL_FRAMES) {
+            break;
+        }
+
+        FollowerMon_FadeBall(follower, 0);
+        FollowerMon_Despawn(fieldSystem);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+BOOL FollowerMon_IsFollowerObject(const MapObject *mapObj)
+{
+    return MapObject_GetLocalID(mapObj) == FOLLOWER_LOCAL_ID;
+}
+
+BOOL FollowerMon_IsWalkingAction(u16 action)
+{
+    int dir = MovementAction_GetDirFromAction(action);
+
+    if (dir == DIR_NONE || FollowerMon_IsDelayAction(action) == TRUE) {
+        return FALSE;
+    }
+
+    return FollowerMon_IsStationaryAction(action, dir) == FALSE;
+}
+
+static BOOL FollowerMon_IsMultiTileJump(u16 action)
+{
+    switch (action) {
+    case MOVEMENT_ACTION_JUMP_FAR_NORTH:
+    case MOVEMENT_ACTION_JUMP_FAR_SOUTH:
+    case MOVEMENT_ACTION_JUMP_FAR_WEST:
+    case MOVEMENT_ACTION_JUMP_FAR_EAST:
+    case MOVEMENT_ACTION_JUMP_FARTHER_WEST:
+    case MOVEMENT_ACTION_JUMP_FARTHER_EAST:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_NORTH:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_SOUTH:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_WEST:
+    case MOVEMENT_ACTION_JUMP_DISTORTION_WORLD_EAST:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+u16 FollowerMon_ResolveStepAction(u16 playerAction, int stepDir, u16 *lastJumpAction)
+{
+    if (FollowerMon_IsMultiTileJump(playerAction) == FALSE) {
+        *lastJumpAction = MOVEMENT_ACTION_NONE;
+        return playerAction;
+    }
+
+    BOOL jumpJustStarted = *lastJumpAction != playerAction;
+    *lastJumpAction = playerAction;
+
+    if (jumpJustStarted == TRUE && MovementAction_GetDirFromAction(playerAction) == stepDir) {
+        return playerAction;
+    }
+
+    return MOVEMENT_ACTION_WALK_FAST_NORTH;
 }
 
 void FollowerMon_Despawn(FieldSystem *fieldSystem)

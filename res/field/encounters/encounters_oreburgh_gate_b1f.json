@@ -2,52 +2,52 @@
     "land_rate": 10,
     "land_encounters": [
         {
-            "level": 6,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_BONSLY"
         },
         {
-            "level": 8,
+            "level": 26,
+            "species": "SPECIES_DUGTRIO"
+        },
+        {
+            "level": 26,
+            "species": "SPECIES_SHELLOS"
+        },
+        {
+            "level": 26,
             "species": "SPECIES_PSYDUCK"
         },
         {
-            "level": 7,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_SHELLDER"
         },
         {
-            "level": 9,
-            "species": "SPECIES_PSYDUCK"
+            "level": 26,
+            "species": "SPECIES_POLIWHIRL"
         },
         {
-            "level": 6,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_URSARING"
         },
         {
-            "level": 8,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_GRIMER"
         },
         {
-            "level": 10,
-            "species": "SPECIES_PSYDUCK"
+            "level": 26,
+            "species": "SPECIES_SLOWPOKE"
         },
         {
-            "level": 8,
-            "species": "SPECIES_GEODUDE"
+            "level": 26,
+            "species": "SPECIES_NIDORINA"
         },
         {
-            "level": 9,
-            "species": "SPECIES_ZUBAT"
+            "level": 26,
+            "species": "SPECIES_SUDOWOODO"
         },
         {
-            "level": 10,
-            "species": "SPECIES_GOLBAT"
-        },
-        {
-            "level": 9,
-            "species": "SPECIES_ZUBAT"
-        },
-        {
-            "level": 10,
-            "species": "SPECIES_GOLBAT"
+            "level": 26,
+            "species": "SPECIES_WYNAUT"
         }
     ],
     "swarms": [
@@ -97,29 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_CLAMPERL"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_ZUBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_LUVDISC"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_RELICANTH"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_RELICANTH"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLBAT"
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_FEEBAS"
+        },
+        {
+            "level_max": 50,
+            "level_min": 50,
+            "species": "SPECIES_LAPRAS"
         }
     ],
     "old_rod_rate": 25,
@@ -141,6 +146,11 @@
         },
         {
             "level_max": 10,
+            "level_min": 5,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 15,
             "level_min": 5,
             "species": "SPECIES_MAGIKARP"
         },
@@ -176,6 +186,11 @@
             "level_max": 25,
             "level_min": 10,
             "species": "SPECIES_BARBOACH"
+        },
+        {
+            "level_max": 25,
+            "level_min": 10,
+            "species": "SPECIES_BARBOACH"
         }
     ],
     "super_rod_rate": 75,
@@ -194,6 +209,11 @@
             "level_max": 55,
             "level_min": 40,
             "species": "SPECIES_GYARADOS"
+        },
+        {
+            "level_max": 55,
+            "level_min": 40,
+            "species": "SPECIES_WHISCASH"
         },
         {
             "level_max": 55,

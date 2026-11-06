@@ -104,6 +104,7 @@ typedef struct BallRotation {
     PaletteFadeContext *unk_D4;
     UnkStruct_ov12_02223764 *unk_D8;
     int unk_DC;
+    BOOL criticalCapture;
 } BallRotation;
 
 static void ov12_022363CC(SysTask *param0, void *param1);
@@ -1226,8 +1227,33 @@ static BOOL ov12_02236A6C(BallRotation *param0)
     return 1;
 }
 
+static const s8 sCriticalCaptureWobble[] = {
+    -1, -1, 1, 1, 1, 1, -1, -1,
+    -1, -1, 1, 1, 1, 1, -1, -1,
+    0, 0, 0, 0, 0, 0
+};
+
+/**
+ * @brief Hold the ball in mid-air between absorbing the Pokemon and dropping
+ * to the ground, wobbling it side to side first on a critical capture.
+ *
+ * @param param0
+ * @return 1
+ */
 static BOOL ov12_02236B14(BallRotation *param0)
 {
+    if (param0->criticalCapture && param0->unk_0C < NELEMS(sCriticalCaptureWobble)) {
+        s16 offset = sCriticalCaptureWobble[param0->unk_0C++];
+
+        ManagedSprite_OffsetPositionXY(param0->unk_30, offset, 0);
+        ManagedSprite_OffsetAffineZRotation(param0->unk_30, ((offset * 2) * 0xffff) / 360);
+        return 1;
+    }
+
+    if (param0->criticalCapture) {
+        ManagedSprite_SetAffineZRotation(param0->unk_30, 0);
+    }
+
     ov12_022368E4(param0, 11);
     return 1;
 }
@@ -2077,6 +2103,20 @@ int ov12_02237890(BallRotation *param0)
     GF_ASSERT(param0 != NULL);
 
     return param0->unk_90.mode;
+}
+
+/**
+ * @brief Flag the throw as a critical capture, so the ball wobbles in mid-air
+ * before dropping to the ground.
+ *
+ * @param ballRotation
+ * @param criticalCapture
+ */
+void BallRotation_SetCriticalCapture(BallRotation *ballRotation, BOOL criticalCapture)
+{
+    GF_ASSERT(ballRotation != NULL);
+
+    ballRotation->criticalCapture = criticalCapture;
 }
 
 static void ov12_022378A0(BallRotation *param0)

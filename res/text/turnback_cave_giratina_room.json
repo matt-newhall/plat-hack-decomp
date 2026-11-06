@@ -46,6 +46,23 @@
         "final line...\r",
         "Everything goes dark."
       ]
+    },
+    {
+      "id": "TurnbackCaveGiratinaRoom_Text_PortalInert",
+      "en_US": [
+        "The portal shimmers faintly...\r",
+        "But it seems to have lost its pull.\n",
+        "Nothing happens."
+      ]
+    },
+    {
+      "id": "TurnbackCaveGiratinaRoom_Text_GoToDistortionWorld",
+      "en_US": [
+        "It’s a portal leading to the\n",
+        "Distortion World...\r",
+        "Would you like to leap into the portal\n",
+        "and go to the Distortion World?"
+      ]
     }
   ]
 }

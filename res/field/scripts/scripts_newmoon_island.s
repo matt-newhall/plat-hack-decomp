@@ -34,6 +34,7 @@ NewmoonIsland_Sailor:
 NewmoonIsland_TakeShipToCanalave:
     Message NewmoonIsland_Text_AnchorsAweigh
     CloseMessage
+    SendBackFollowingPoke
     Call NewmoonIsland_SailorEnterShip
     CallIfEq VAR_0x8004, DIR_SOUTH, NewmoonIsland_PlayerEnterShipSouth
     CallIfEq VAR_0x8004, DIR_WEST, NewmoonIsland_PlayerEnterShipWest

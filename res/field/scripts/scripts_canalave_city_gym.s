@@ -20,6 +20,7 @@ CanalaveGym_Byron:
     GoToIfBadgeAcquired BADGE_ID_MINE, CanalaveGym_ByronAfterBadge
     CreateJournalEvent LOCATION_EVENT_GYM_WAS_TOO_TOUGH, 35, 0, 0, 0
     Message CanalaveGym_Text_ByronIntro
+    WaitButton
     CloseMessage
     StartTrainerBattle TRAINER_LEADER_BYRON
     CheckWonBattle VAR_RESULT
@@ -50,27 +51,29 @@ CanalaveGym_Byron:
     GoTo CanalaveGym_ByronTryGiveTM91
 
 CanalaveGym_ByronTryGiveTM91:
-    SetVar VAR_0x8004, ITEM_TM91
+    SetVar VAR_0x8004, ITEM_TM20
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, CanalaveGym_ByronCannotGiveTM91
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_BYRON_TM91
+    SetFlag FLAG_OBTAINED_BYRON_TM20
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message CanalaveGym_Text_ByronExplainTM91
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 87, 92
     ReleaseAll
     End
 
 CanalaveGym_ByronCannotGiveTM91:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 87, 92
     ReleaseAll
     End
 
 CanalaveGym_ByronAfterBadge:
-    GoToIfUnset FLAG_OBTAINED_BYRON_TM91, CanalaveGym_ByronTryGiveTM91
+    GoToIfUnset FLAG_OBTAINED_BYRON_TM20, CanalaveGym_ByronTryGiveTM91
     BufferRivalName 1
     Message CanalaveGym_Text_ByronAfterBadge
     WaitButton

@@ -4,7 +4,7 @@
     {
       "id": "ValorCavern_Text_SaturnMissionIsProceeding",
       "en_US": [
-        "The mission is proceeding without\n",
+        "Saturn: The mission is proceeding without\n",
         "a hitch. The boss should be pleased.\r",
         "Everything is for everyone, and\n",
         "for the good of Team Galactic!"
@@ -13,7 +13,7 @@
     {
       "id": "ValorCavern_Text_SaturnBattleIntro",
       "en_US": [
-        "I recognize your face!\r",
+        "Saturn: I recognize your face!\r",
         "You’re the child who raided the Team\n",
         "Galactic building in Eterna!\r",
         "Humph! Jupiter should be ashamed of\n",
@@ -27,8 +27,8 @@
     {
       "id": "ValorCavern_Text_SaturnPostBattle",
       "en_US": [
-        "Gah! Even I, a Commander, only\n",
-        "managed to buy us time?\r",
+        "Saturn: Gah! Even I, a Commander,\n",
+        "only managed to buy us time?\r",
         "But that’s fine.\r",
         "A child like you will never be able to\n",
         "stem the flow of time!\r",
@@ -43,7 +43,7 @@
     {
       "id": "ValorCavern_Text_PaulTeamUp",
       "en_US": [
-        "Two of them. Figures.\r",
+        "Paul: Two of them. Figures.\r",
         "We finish this together. Don’t\n",
         "hold back now."
       ]
@@ -51,7 +51,7 @@
     {
       "id": "ValorCavern_Text_PaulFarewell",
       "en_US": [
-        "That’s that.\r",
+        "Paul: That’s that.\r",
         "To think that Team Galactic would\n",
         "destroy a whole lake just to capture\f",
         "a single Pokémon.\r",

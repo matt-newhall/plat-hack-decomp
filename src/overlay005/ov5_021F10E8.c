@@ -3,6 +3,8 @@
 #include <nitro.h>
 #include <string.h>
 
+#include "generated/object_events_gfx.h"
+
 #include "struct_decls/map_object.h"
 
 #include "overlay005/field_effect_manager.h"
@@ -58,6 +60,7 @@ static const UnkStruct_ov5_02200230 Unk_ov5_02200230[] = {
     { 0x5f, 0x49 },
     { 0x60, 0x4A },
     { 0xB7, 0x4F },
+    { OBJ_EVENT_GFX_FLOOR_BOOK, 0x4F },
     { 0xD1, 0x6E },
     { 0x106, 0x95 }
 };

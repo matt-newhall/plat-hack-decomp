@@ -11,18 +11,18 @@
 Route211East_AceTrainerM:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    GoToIfSet FLAG_RECEIVED_ROUTE_211_EAST_TM77, Route211East_ExplainPsychUp
+    GoToIfSet FLAG_RECEIVED_ROUTE_211_EAST_TM62, Route211East_ExplainPsychUp
     Message Route211East_Text_ImStrong
     CloseMessage
     FacePlayer
     ApplyMovement VAR_LAST_TALKED, Route211East_Movement_ExclamationMark
     WaitMovement
     Message Route211East_Text_YouStartledMe
-    SetVar VAR_0x8004, ITEM_TM77
+    SetVar VAR_0x8004, ITEM_TM62
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route211East_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_ROUTE_211_EAST_TM77
+    SetFlag FLAG_RECEIVED_ROUTE_211_EAST_TM62
     GoTo Route211East_ExplainPsychUp
 
 Route211East_ExplainPsychUp:

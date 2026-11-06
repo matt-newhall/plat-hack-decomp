@@ -2,7 +2,6 @@
 
 
 _000:
-    ShowAbilityPopupAutoForEffectHolder
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DISOBEDIENCE, _147
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_MOVE_EFFECT, _055
     CheckSleepAbilityImmunity BTLSCR_SIDE_EFFECT_MON, _202
@@ -12,6 +11,7 @@ _031:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_UPROAR, _292
 
 _047:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_ELECTRIC_TERRAIN|FIELD_CONDITION_MISTY_TERRAIN, _337
     CompareMonDataToValue OPCODE_NEQ, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, MON_CONDITION_NONE, _237
     GoTo _147
 
@@ -45,6 +45,8 @@ _118:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _237
 
 _120:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_ELECTRIC_TERRAIN, _electric_terrain
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _122
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _130
 
@@ -58,11 +60,14 @@ _125:
     Wait
 
 _130:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_ELECTRIC_TERRAIN, _electric_terrain
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _147
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _147
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_CONDITIONS_EFFECT_MON, SIDE_CONDITION_SAFEGUARD, _319
 
 _147:
+    ShowAbilityPopupAutoForEffectHolder
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_ASLEEP
     Wait
     Random 2, 2
@@ -168,6 +173,20 @@ _319:
     WaitButtonABTime 30
     // {0} is protected by Safeguard!
     PrintMessage BattleStrings_Text_PokemonIsProtectedBySafeguard_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    GoTo _330
+
+_electric_terrain:
+    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _337
+    WaitButtonABTime 30
+    // {0} surrounds itself with electrified terrain!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithElectrifiedTerrain_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    GoTo _330
+
+_misty_terrain:
+    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _337
+    WaitButtonABTime 30
+    // {0} surrounds itself with a protective mist!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _330
 
 _329:

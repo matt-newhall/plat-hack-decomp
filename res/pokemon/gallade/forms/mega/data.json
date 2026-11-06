@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_INNER_FOCUS",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,136 +44,86 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_LEAF_BLADE"
-            ],
-            [
-                1,
-                "MOVE_NIGHT_SLASH"
-            ],
-            [
-                1,
-                "MOVE_LEER"
-            ],
-            [
-                1,
-                "MOVE_CONFUSION"
-            ],
-            [
-                1,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                1,
-                "MOVE_TELEPORT"
-            ],
-            [
-                6,
-                "MOVE_CONFUSION"
-            ],
-            [
-                10,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                12,
-                "MOVE_TELEPORT"
-            ],
-            [
-                17,
-                "MOVE_FURY_CUTTER"
-            ],
-            [
-                22,
-                "MOVE_SLASH"
-            ],
-            [
-                25,
-                "MOVE_SWORDS_DANCE"
-            ],
-            [
-                31,
-                "MOVE_PSYCHO_CUT"
-            ],
-            [
-                36,
-                "MOVE_HELPING_HAND"
-            ],
-            [
-                39,
-                "MOVE_FEINT"
-            ],
-            [
-                45,
-                "MOVE_FALSE_SWIPE"
-            ],
-            [
-                50,
-                "MOVE_PROTECT"
-            ],
-            [
-                53,
-                "MOVE_CLOSE_COMBAT"
-            ]
+            [ 1, "MOVE_SLASH" ],
+            [ 1, "MOVE_NIGHT_SLASH" ],
+            [ 1, "MOVE_IMPRISON" ],
+            [ 1, "MOVE_LIFE_DEW" ],
+            [ 1, "MOVE_FUTURE_SIGHT" ],
+            [ 1, "MOVE_FURY_CUTTER" ],
+            [ 1, "MOVE_SACRED_SWORD" ],
+            [ 1, "MOVE_CHARM" ],
+            [ 1, "MOVE_DISARMING_VOICE" ],
+            [ 1, "MOVE_LEAF_BLADE" ],
+            [ 1, "MOVE_DRAINING_KISS" ],
+            [ 1, "MOVE_HYPNOSIS" ],
+            [ 1, "MOVE_PSYCHIC" ],
+            [ 1, "MOVE_CONFUSION" ],
+            [ 1, "MOVE_PSYBEAM" ],
+            [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_DREAM_EATER" ],
+            [ 9, "MOVE_HELPING_HAND" ],
+            [ 12, "MOVE_FEINT" ],
+            [ 15, "MOVE_TELEPORT" ],
+            [ 18, "MOVE_FALSE_SWIPE" ],
+            [ 21, "MOVE_AERIAL_ACE" ],
+            [ 23, "MOVE_MAGICAL_LEAF" ],
+            [ 26, "MOVE_VACUUM_WAVE" ],
+            [ 28, "MOVE_PROTECT" ],
+            [ 35, "MOVE_LUCKY_CHANT" ],
+            [ 42, "MOVE_PSYCHO_CUT" ],
+            [ 44, "MOVE_AIR_SLASH" ],
+            [ 46, "MOVE_TRIPLE_AXEL" ],
+            [ 49, "MOVE_AURA_SPHERE" ],
+            [ 51, "MOVE_HYPER_VOICE" ],
+            [ 53, "MOVE_X_SCISSOR" ],
+            [ 55, "MOVE_PSYBLADE" ],
+            [ 57, "MOVE_DETECT" ],
+            [ 63, "MOVE_CLOSE_COMBAT" ]
         ],
         "by_tm": [
             "TM01",
             "TM04",
-            "TM06",
-            "TM08",
             "TM10",
-            "TM11",
             "TM12",
             "TM15",
-            "TM16",
             "TM17",
-            "TM18",
-            "TM20",
             "TM21",
             "TM24",
             "TM26",
-            "TM27",
             "TM29",
             "TM30",
-            "TM31",
-            "TM32",
-            "TM33",
             "TM34",
+            "TM37",
             "TM39",
             "TM40",
             "TM41",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
             "TM46",
             "TM48",
             "TM49",
+            "TM51",
             "TM52",
+            "TM53",
             "TM54",
-            "TM56",
-            "TM57",
-            "TM58",
             "TM60",
+            "TM61",
+            "TM65",
             "TM67",
             "TM68",
             "TM70",
             "TM71",
             "TM73",
-            "TM75",
-            "TM77",
-            "TM78",
+            "TM76",
             "TM80",
             "TM81",
             "TM82",
             "TM83",
             "TM84",
-            "TM85",
             "TM86",
             "TM87",
             "TM90",
-            "TM92",
             "HM01",
             "HM04",
             "HM06"
@@ -184,13 +135,13 @@
             "MOVE_FIRE_PUNCH",
             "MOVE_ICE_PUNCH",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_VACUUM_WAVE",
-            "MOVE_TRICK",
             "MOVE_KNOCK_OFF",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK",
+            "MOVE_MEMENTO",
+            "MOVE_NUZZLE"
         ]
     },
     "evolutions": []

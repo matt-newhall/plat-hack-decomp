@@ -61,3 +61,22 @@ A quick list of all the abilities added to the game for Pokemon Tempered Platinu
 - Sharpness
 - Aura Guard
 - Cursed Body
+- Triage
+- Ice Scales
+- Analytic
+- Wonder Skin
+- Long Reach
+- Imposter
+- Grass Pelt
+- Surge Surfer
+- Electric Surge
+- Grassy Surge
+- Misty Surge
+- Psychic Surge
+- Heavy Metal
+- Toxic Boost
+- Flare Boost
+- Rattled
+- Healer
+- Moxie
+- Harvest

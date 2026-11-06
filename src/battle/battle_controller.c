@@ -1603,6 +1603,23 @@ void BattleController_EmitPlayEntryAnimation(BattleSystem *battleSys, int battle
 }
 
 /**
+ * @brief Emits a message to fade the battle BG to a terrain's backdrop.
+ *
+ * @param battleSys
+ * @param battler
+ * @param terrain   One FIELD_CONDITION_*_TERRAIN flag, or 0 for the battle's own BG.
+ */
+void BattleController_EmitSetTerrainBackground(BattleSystem *battleSys, int battler, u32 terrain)
+{
+    TerrainBackgroundMessage message;
+
+    message.command = BATTLE_COMMAND_SET_TERRAIN_BACKGROUND;
+    message.terrain = terrain;
+
+    SendMessage(battleSys, COMM_RECIPIENT_CLIENT, battler, &message, sizeof(TerrainBackgroundMessage));
+}
+
+/**
  * @brief Emits a message to update the BG layer
  *
  * @param battleSys
@@ -2029,6 +2046,20 @@ BOOL BattleController_RecvCommMessage(BattleSystem *battleSys, void *data)
 }
 
 /**
+ * @brief The animation Secret Power borrows while each terrain is active, in
+ * place of the map-terrain animation the battle animation system picks.
+ */
+static const struct {
+    u32 fieldCondition;
+    u16 move;
+} sTerrainSecretPowerAnimation[] = {
+    { FIELD_CONDITION_ELECTRIC_TERRAIN, MOVE_THUNDER_SHOCK },
+    { FIELD_CONDITION_GRASSY_TERRAIN, MOVE_VINE_WHIP },
+    { FIELD_CONDITION_MISTY_TERRAIN, MOVE_DISARMING_VOICE },
+    { FIELD_CONDITION_PSYCHIC_TERRAIN, MOVE_CONFUSION },
+};
+
+/**
  * @brief Initializes MoveAnimation structs, output to the animation parameter
  *
  * @param battleSys
@@ -2051,6 +2082,15 @@ void BattleController_SetMoveAnimation(BattleSystem *battleSys, BattleContext *b
     animation->unk_4C = param3;
     animation->unk_50 = param4;
     animation->terrain = BattleSystem_GetTerrain(battleSys);
+
+    if (battleCtx != NULL && move == MOVE_SECRET_POWER) {
+        for (i = 0; i < NELEMS(sTerrainSecretPowerAnimation); i++) {
+            if (battleCtx->fieldConditionsMask & sTerrainSecretPowerAnimation[i].fieldCondition) {
+                animation->move = sTerrainSecretPowerAnimation[i].move;
+                break;
+            }
+        }
+    }
 
     if (battleCtx != NULL) {
         animation->damage = battleCtx->damage;

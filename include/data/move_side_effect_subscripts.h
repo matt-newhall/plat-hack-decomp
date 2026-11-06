@@ -161,6 +161,15 @@ static const int sSideEffectSubscripts[] = {
     [MOVE_SUBSCRIPT_PTR_DRAIN_THREE_QUARTER_DAMAGE_DEALT] = subscript_drain_three_quarter_damage_dealt,
     [MOVE_SUBSCRIPT_PTR_SET_POWDER_FLAG]                  = subscript_set_powder_flag,
     [MOVE_SUBSCRIPT_PTR_ATTACK_THEN_CHECK_KO]             = subscript_attack_then_check_ko,
-    [MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES]               = subscript_update_stat_stage
+    [MOVE_SUBSCRIPT_PTR_ATTACK_UP_3_STAGES]               = subscript_update_stat_stage,
+    [MOVE_SUBSCRIPT_PTR_TERRAIN_START]                    = subscript_terrain_start,
+    [MOVE_SUBSCRIPT_PTR_REMOVE_TERRAIN]                   = subscript_terrain_end,
+    [MOVE_SUBSCRIPT_PTR_FINAL_GAMBIT]                     = subscript_final_gambit,
+    [MOVE_SUBSCRIPT_PTR_DEF_UP_3_STAGES]                  = subscript_update_stat_stage,
+    [MOVE_SUBSCRIPT_PTR_STRENGTH_SAP]                     = subscript_strength_sap,
+    [MOVE_SUBSCRIPT_PTR_POLLEN_PUFF_HEAL]                 = subscript_pollen_puff_heal,
+    [MOVE_SUBSCRIPT_PTR_INCINERATE]                       = subscript_incinerate,
+    [MOVE_SUBSCRIPT_PTR_TARGET_ATK_AND_SPATK_DOWN_1_STAGE] = subscript_target_atk_and_spatk_down_1_stage,
+    [MOVE_SUBSCRIPT_PTR_TOXIC_THREAD]                     = subscript_toxic_thread
 };
 // clang-format on

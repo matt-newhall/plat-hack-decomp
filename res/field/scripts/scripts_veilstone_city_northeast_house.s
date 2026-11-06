@@ -11,13 +11,30 @@ VeilstoneCityNortheastHouse_PokefanM:
     LockAll
     FacePlayer
     GoToIfSet FLAG_RECEIVED_VEILSTONE_CITY_NORTHEAST_HOUSE_PORYGON, VeilstoneCityNortheastHouse_GalacticsBuildingBugsMe
-    GoToIfSet FLAG_TALKED_TO_VEILSTONE_CITY_NORTHEAST_HOUSE_POKEFAN_M, VeilstoneCityNortheastHouse_CanYouTakePoryon
+    Call VeilstoneCityNortheastHouse_ChooseRandomPorygon
+    GoToIfSet FLAG_TALKED_TO_VEILSTONE_CITY_NORTHEAST_HOUSE_POKEFAN_M, VeilstoneCityNortheastHouse_CanYouTakePorygon
     SetFlag FLAG_TALKED_TO_VEILSTONE_CITY_NORTHEAST_HOUSE_POKEFAN_M
     Message VeilstoneCityNortheastHouse_Text_ImNoTrainerTakePorygon
     GoTo VeilstoneCityNortheastHouse_AcceptPorygonYesNo
     End
 
-VeilstoneCityNortheastHouse_CanYouTakePoryon:
+VeilstoneCityNortheastHouse_ChooseRandomPorygon:
+    GetRandom VAR_MAP_LOCAL_1, 3
+    SetVar VAR_MAP_LOCAL_2, SPECIES_PORYGON
+    CallIfEq VAR_MAP_LOCAL_1, 1, VeilstoneCityNortheastHouse_ChoosePorygon2
+    CallIfEq VAR_MAP_LOCAL_1, 2, VeilstoneCityNortheastHouse_ChoosePorygonZ
+    BufferSpeciesNameFromVar 1, VAR_MAP_LOCAL_2, 0, 0
+    Return
+
+VeilstoneCityNortheastHouse_ChoosePorygon2:
+    SetVar VAR_MAP_LOCAL_2, SPECIES_PORYGON2
+    Return
+
+VeilstoneCityNortheastHouse_ChoosePorygonZ:
+    SetVar VAR_MAP_LOCAL_2, SPECIES_PORYGON_Z
+    Return
+
+VeilstoneCityNortheastHouse_CanYouTakePorygon:
     Message VeilstoneCityNortheastHouse_Text_CanYouTakePorygon
     GoTo VeilstoneCityNortheastHouse_AcceptPorygonYesNo
     End
@@ -36,13 +53,20 @@ VeilstoneCityNortheastHouse_AcceptPorygon:
     BufferPlayerName 0
     Message VeilstoneCityNortheastHouse_Text_PlayerAcceptedThePorygon
     WaitFanfare
-    GivePokemon SPECIES_PORYGON, 25, ITEM_NONE, VAR_RESULT
+    GivePokemon VAR_MAP_LOCAL_2, 32, ITEM_NONE, VAR_RESULT
+    CallIfEq VAR_MAP_LOCAL_2, SPECIES_PORYGON, VeilstoneCityNortheastHouse_TeachPorygonSketch
     SetFlag FLAG_RECEIVED_VEILSTONE_CITY_NORTHEAST_HOUSE_PORYGON
     Message VeilstoneCityNortheastHouse_Text_AskNicknamePorygon
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_YES, VeilstoneCityNortheastHouse_NicknamePorygon
     GoToIfEq VAR_RESULT, MENU_NO, VeilstoneCityNortheastHouse_DontNicknamePorygon
     End
+
+VeilstoneCityNortheastHouse_TeachPorygonSketch:
+    GetPartyCount VAR_MAP_LOCAL_0
+    SubVar VAR_MAP_LOCAL_0, 1
+    ResetMoveSlot VAR_MAP_LOCAL_0, 0, MOVE_SKETCH
+    Return
 
 VeilstoneCityNortheastHouse_NicknamePorygon:
     CloseMessage

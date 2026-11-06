@@ -18,10 +18,10 @@ OldChateauBackMiddleWestRoom_TV:
     BufferPlayerName 0
     Message OldChateauBackMiddleWestRoom_Text_PlayerThumpedTheTVSet
     CloseMessage
-    PlayCry SPECIES_DUSKULL
+    PlayCry SPECIES_MISDREAVUS
     WaitCry
     SetFlag FLAG_BATTLED_OLD_CHATEAU_ROTOM
-    StartWildBattle SPECIES_DUSKULL, 20
+    StartWildBattle SPECIES_MISDREAVUS, 20
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, OldChateauBackMiddleWestRoom_BlackOut
     CheckDidNotCapture VAR_RESULT

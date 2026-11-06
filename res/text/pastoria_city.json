@@ -360,8 +360,9 @@
     {
       "id": "PastoriaCity_Text_ICantUseSurf",
       "en_US": [
-        "I can’t use the hidden move Surf until\n",
-        "I beat the local Gym Leader."
+        "I can’t use the hidden move Surf...\r",
+        "Crasher Wake’s Lapras is nowhere\n",
+        "to be found!"
       ]
     },
     {

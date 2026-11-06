@@ -125,3 +125,6 @@ compile_commands.json
 *.mch
 
 knarc/
+
+# my local rubbish
+/tools/local/

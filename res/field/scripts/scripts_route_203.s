@@ -40,10 +40,31 @@ Route203_HariyamaWaitSmash:
     Message Route203_Text_HariyamaLearnedRockSmash
     WaitButton
     CloseMessage
+    GoTo Route203_HariyamaGiveHM06
+
+Route203_HariyamaGiveHM06:
+    Message Route203_Text_HariyamaOffersDisk
+    WaitButton
+    CloseMessage
+    SetVar VAR_0x8004, ITEM_HM06
+    SetVar VAR_0x8005, 1
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route203_HariyamaBagIsFull
+    Common_GiveItemQuantity
+    SetFlag FLAG_RECEIVED_HM06
+    Message Route203_Text_HariyamaFlavour
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+Route203_HariyamaBagIsFull:
+    Common_MessageBagIsFull
+    CloseMessage
     ReleaseAll
     End
 
 Route203_HariyamaFlavour:
+    GoToIfUnset FLAG_RECEIVED_HM06, Route203_HariyamaGiveHM06
     Message Route203_Text_HariyamaFlavour
     WaitButton
     CloseMessage
@@ -74,6 +95,10 @@ Route203_PaulTrigger:
     WaitMovement
     Common_SetRivalBGM
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 215, Route203_FollowPokeStandEast
+    CallIfEq VAR_0x8004, 216, Route203_FollowPokeStandWest
+    CallIfEq VAR_0x8004, 217, Route203_FollowPokeStandWest
+    CallIfEq VAR_0x8004, 218, Route203_FollowPokeStandNorth
     GoToIfEq VAR_0x8004, 215, Route203_PaulApproachX215
     GoToIfEq VAR_0x8004, 216, Route203_PaulApproachX216
     GoToIfEq VAR_0x8004, 217, Route203_PaulApproachX217
@@ -161,6 +186,18 @@ Route203_PaulRemove:
     SetVar VAR_ROUTE_203_PAUL_STATE, 1
     ReleaseAll
     End
+
+Route203_FollowPokeStandEast:
+    FollowPokePlaceAtSide DIR_EAST, DIR_SOUTH
+    Return
+
+Route203_FollowPokeStandWest:
+    FollowPokePlaceAtSide DIR_WEST, DIR_SOUTH
+    Return
+
+Route203_FollowPokeStandNorth:
+    FollowPokePlaceAtSide DIR_NORTH, DIR_SOUTH
+    Return
 
 Route203_BlackOutPaulBattle:
     SetFlag FLAG_HIDE_ROUTE_204_RIVAL

@@ -5,6 +5,7 @@
 
 BOOL ScrCmd_GivePokemon(ScriptContext *ctx);
 BOOL ScrCmd_GivePokemonAtLocation(ScriptContext *ctx);
+BOOL ScrCmd_GivePokemonWithForm(ScriptContext *ctx);
 BOOL ScrCmd_GetPartyMonIV(ScriptContext *ctx);
 BOOL ScrCmd_MaximizePartyMonIV(ScriptContext *ctx);
 BOOL ScrCmd_SetPartyMonNature(ScriptContext *ctx);

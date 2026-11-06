@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_STEEL", "TYPE_PSYCHIC" ],
     "catch_rate": 3,
-    "base_exp_reward": 103,
+    "base_exp_reward": 60,
     "ev_yields": {
         "hp": 0,
         "attack": 0,
@@ -27,20 +27,25 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_SLOW",
     "egg_groups": [ "EGG_GROUP_MINERAL", "EGG_GROUP_MINERAL" ],
-    "abilities": [ "ABILITY_CLEAR_BODY", "ABILITY_LIGHT_METAL" ],
+    "abilities": [ "ABILITY_CLEAR_BODY", "ABILITY_LIGHT_METAL", "ABILITY_CLEAR_BODY" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLUE",
     "flip_sprite": false,
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TAKE_DOWN" ]
+            [ 1, "MOVE_TACKLE" ],
+            [ 8, "MOVE_PURSUIT" ],
+            [ 10, "MOVE_MIRACLE_EYE" ],
+            [ 15, "MOVE_SMART_STRIKE" ],
+            [ 39, "MOVE_STEEL_BEAM" ]
         ],
-        "by_tm": [  ],
+        "by_tm": [
+            "TM33"
+        ],
         "by_tutor": [
             "MOVE_IRON_HEAD",
-            "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_ZEN_HEADBUTT"
         ]
     },
     "evolutions": [

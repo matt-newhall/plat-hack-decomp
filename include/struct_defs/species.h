@@ -7,7 +7,7 @@
 
 #define MAX_EVOLUTIONS 7
 
-#define MAX_LEARNSET_ENTRIES        20
+#define MAX_LEARNSET_ENTRIES        40
 #define LEARNSET_NO_MOVE_TO_LEARN   0
 #define LEARNSET_MOVE_ALREADY_KNOWN 0xFFFE
 #define LEARNSET_ALL_SLOTS_FILLED   0xFFFF
@@ -40,7 +40,7 @@ typedef struct SpeciesData {
     SpeciesBaseStats baseStats;
     u8 types[MAX_TYPES];
     u8 catchRate;
-    u8 baseExpReward;
+    u8 hiddenAbility;
     SpeciesEVYields evYields;
     SpeciesWildHeldItems wildHeldItems;
     u8 genderRatio;
@@ -52,7 +52,7 @@ typedef struct SpeciesData {
     u8 safariFleeRate;
     u8 bodyColor : 7;
     u8 flipSprite : 1;
-    // u16 padding;
+    u16 baseExpReward;
 
     u32 tmLearnsetMasks[4]; // Bitflags for whether this pokemon can learn a TM
 } SpeciesData;
@@ -64,8 +64,8 @@ typedef struct SpeciesEvolution {
 } SpeciesEvolution;
 
 typedef struct SpeciesLearnsetEntry {
-    u16 move : 9;
-    u16 level : 7;
+    u16 move;
+    u16 level;
 } SpeciesLearnsetEntry;
 
 // This struct is not explicitly used; it is provided to document and enforce the size of

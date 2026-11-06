@@ -2084,6 +2084,46 @@
     {
       "id": "pl_msg_00000394_00520",
       "en_US": "Chimechites"
+    },
+    {
+      "id": "pl_msg_00000394_00521",
+      "en_US": "Terrain Extenders"
+    },
+    {
+      "id": "pl_msg_00000394_00522",
+      "en_US": "Electric Seeds"
+    },
+    {
+      "id": "pl_msg_00000394_00523",
+      "en_US": "Grassy Seeds"
+    },
+    {
+      "id": "pl_msg_00000394_00524",
+      "en_US": "Misty Seeds"
+    },
+    {
+      "id": "pl_msg_00000394_00525",
+      "en_US": "Psychic Seeds"
+    },
+    {
+      "id": "pl_msg_00000394_00526",
+      "en_US": "Punching Gloves"
+    },
+    {
+      "id": "pl_msg_00000394_00527",
+      "en_US": "Absorb Bulbs"
+    },
+    {
+      "id": "pl_msg_00000394_00528",
+      "en_US": "Cell Batteries"
+    },
+    {
+      "id": "pl_msg_00000394_00529",
+      "en_US": "Luminous Moss"
+    },
+    {
+      "id": "pl_msg_00000394_00530",
+      "en_US": "Snowballs"
     }
   ]
 }

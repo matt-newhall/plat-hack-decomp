@@ -13,6 +13,12 @@ Route228SouthHouse_Gentleman:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
+    GoToIfBadgeAcquired BADGE_ID_BEACON, Route228SouthHouse_LendAnEar
+    Message Route228SouthHouse_Text_MyGrandson
+    GoTo Route228SouthHouse_GentlemanEnd
+    End
+
+Route228SouthHouse_LendAnEar:
     Message Route228SouthHouse_Text_LendAnEar
     ShowYesNoMenu VAR_RESULT
     GoToIfEq VAR_RESULT, MENU_YES, Route228SouthHouse_ShouldntBurdenYou

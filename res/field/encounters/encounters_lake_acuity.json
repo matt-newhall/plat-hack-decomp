@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 38,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_SPHEAL"
         },
         {
-            "level": 39,
-            "species": "SPECIES_BIBAREL"
+            "level": 75,
+            "species": "SPECIES_SMOOCHUM"
         },
         {
-            "level": 39,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_SHELLDER"
         },
         {
-            "level": 40,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_SEALEO"
         },
         {
-            "level": 40,
-            "species": "SPECIES_GOLDUCK"
+            "level": 75,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 41,
-            "species": "SPECIES_SNEASEL"
+            "level": 75,
+            "species": "SPECIES_KADABRA"
         },
         {
-            "level": 39,
-            "species": "SPECIES_GOLDUCK"
+            "level": 75,
+            "species": "SPECIES_DELCATTY"
         },
         {
-            "level": 38,
-            "species": "SPECIES_PSYDUCK"
+            "level": 75,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 41,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_ALAKAZAM"
         },
         {
-            "level": 40,
-            "species": "SPECIES_BIBAREL"
+            "level": 75,
+            "species": "SPECIES_WALREIN"
         },
         {
-            "level": 41,
-            "species": "SPECIES_SNOVER"
+            "level": 75,
+            "species": "SPECIES_CLOYSTER"
         },
         {
-            "level": 40,
-            "species": "SPECIES_BIBAREL"
+            "level": 75,
+            "species": "SPECIES_SNORLAX"
         }
     ],
     "swarms": [
@@ -97,29 +97,34 @@
     "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 75,
+            "level_min": 75,
+            "species": "SPECIES_DEWGONG"
         },
         {
-            "level_max": 30,
-            "level_min": 20,
-            "species": "SPECIES_PSYDUCK"
+            "level_max": 75,
+            "level_min": 75,
+            "species": "SPECIES_WALREIN"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 75,
+            "level_min": 75,
+            "species": "SPECIES_FLOATZEL"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 75,
+            "level_min": 75,
+            "species": "SPECIES_ALTARIA"
         },
         {
-            "level_max": 40,
-            "level_min": 20,
-            "species": "SPECIES_GOLDUCK"
+            "level_max": 75,
+            "level_min": 75,
+            "species": "SPECIES_LAPRAS"
+        },
+        {
+            "level_max": 75,
+            "level_min": 75,
+            "species": "SPECIES_MANTYKE"
         }
     ],
     "old_rod_rate": 25,
@@ -141,6 +146,11 @@
         },
         {
             "level_max": 10,
+            "level_min": 5,
+            "species": "SPECIES_MAGIKARP"
+        },
+        {
+            "level_max": 15,
             "level_min": 5,
             "species": "SPECIES_MAGIKARP"
         },
@@ -176,6 +186,11 @@
             "level_max": 35,
             "level_min": 25,
             "species": "SPECIES_SEAKING"
+        },
+        {
+            "level_max": 35,
+            "level_min": 25,
+            "species": "SPECIES_SEAKING"
         }
     ],
     "super_rod_rate": 75,
@@ -194,6 +209,11 @@
             "level_max": 55,
             "level_min": 40,
             "species": "SPECIES_GYARADOS"
+        },
+        {
+            "level_max": 55,
+            "level_min": 40,
+            "species": "SPECIES_SEAKING"
         },
         {
             "level_max": 55,

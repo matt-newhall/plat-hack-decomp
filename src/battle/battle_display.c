@@ -240,7 +240,7 @@ void BattleDisplay_InitTaskSetEncounter(BattleSystem *battleSys, BattlerData *ba
     SpriteAnimFrame animFrames[MAX_ANIMATION_FRAMES];
     MonEncounterData *monEncounterData;
     int battleType = BattleSystem_GetBattleType(battleSys);
-    u8 yOffset;
+    s8 yOffset;
     s8 height;
     s8 shadowXOffset;
     u8 shadowSize;
@@ -337,7 +337,7 @@ typedef struct MonShowData {
     u8 battlerType;
     u8 state;
     u8 face;
-    u8 yOffset;
+    s8 yOffset;
     u16 species;
     enum PokemonCryMod cryMod;
     u8 selectedPartySlot;
@@ -463,7 +463,7 @@ typedef struct MonReturnData {
     u8 battler;
     u8 battlerType;
     u8 state;
-    u8 yOffset;
+    s8 yOffset;
     u8 unused;
     u16 capturedBall;
     int isSubstitute;
@@ -1848,6 +1848,77 @@ void BattleDisplay_InitTaskPlayEntryAnimation(BattleSystem *battleSys, BattlerDa
     entryAnimData->face = (battlerData->battlerType & BATTLER_THEM) ? FACE_FRONT : FACE_BACK;
 
     SysTask_Start(Task_PlayEntryAnimation, entryAnimData, 0);
+}
+
+#define TERRAIN_BG_FADE_PALETTES (0xFFFF & ~((1 << 10) | (1 << 11)))
+#define TERRAIN_BG_FADE_WAIT     1
+
+typedef struct TerrainBackgroundData {
+    BattleSystem *battleSys;
+    u32 terrain;
+    u8 command;
+    u8 battler;
+    u8 state;
+    u8 padding_0B;
+} TerrainBackgroundData;
+
+enum TerrainBackgroundState {
+    TERRAIN_BG_STATE_FADE_OUT = 0,
+    TERRAIN_BG_STATE_SWAP,
+    TERRAIN_BG_STATE_FADE_IN,
+    TERRAIN_BG_STATE_DONE,
+};
+
+/**
+ * @brief Fade the battle BG to white, swap in the new backdrop, and fade back.
+ *
+ * The message box and font palettes (rows 10 and 11) are left out of the fade
+ * so the text window stays readable.
+ *
+ * @param task
+ * @param data The task's TerrainBackgroundData.
+ */
+static void Task_SetTerrainBackground(SysTask *task, void *data)
+{
+    TerrainBackgroundData *bgData = data;
+    PaletteData *paletteData = BattleSystem_GetPaletteData(bgData->battleSys);
+
+    if (PaletteData_GetSelectedBuffersMask(paletteData) & PLTTBUF_MAIN_BG_F) {
+        return;
+    }
+
+    switch (bgData->state) {
+    case TERRAIN_BG_STATE_FADE_OUT:
+        PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F, TERRAIN_BG_FADE_PALETTES, TERRAIN_BG_FADE_WAIT, 0, 16, BATTLE_COLOR_WHITE);
+        bgData->state++;
+        break;
+    case TERRAIN_BG_STATE_SWAP:
+        BattleSystem_LoadTerrainBackground(bgData->battleSys, bgData->terrain);
+        bgData->state++;
+        break;
+    case TERRAIN_BG_STATE_FADE_IN:
+        PaletteData_StartFade(paletteData, PLTTBUF_MAIN_BG_F, TERRAIN_BG_FADE_PALETTES, TERRAIN_BG_FADE_WAIT, 16, 0, BATTLE_COLOR_WHITE);
+        bgData->state++;
+        break;
+    default:
+        BattleController_EmitClearCommand(bgData->battleSys, bgData->battler, bgData->command);
+        Heap_Free(data);
+        SysTask_Done(task);
+        break;
+    }
+}
+
+void BattleDisplay_InitTaskSetTerrainBackground(BattleSystem *battleSys, BattlerData *battlerData, TerrainBackgroundMessage *message)
+{
+    TerrainBackgroundData *bgData = Heap_Alloc(HEAP_ID_BATTLE, sizeof(TerrainBackgroundData));
+
+    bgData->battleSys = battleSys;
+    bgData->terrain = message->terrain;
+    bgData->command = message->command;
+    bgData->battler = battlerData->battler;
+    bgData->state = TERRAIN_BG_STATE_FADE_OUT;
+
+    SysTask_Start(Task_SetTerrainBackground, bgData, 0);
 }
 
 void BattleDisplay_FlyMoveHitSoundEffect(BattleSystem *battleSys, BattlerData *battlerData, MoveHitSoundMessage *message)
@@ -5234,6 +5305,11 @@ static void Task_PlayFaintingSequence(SysTask *task, void *data)
     case 8:
         height = LoadPokemonSpriteYOffset(faintingSequenceData->species, faintingSequenceData->gender, faintingSequenceData->face, faintingSequenceData->form, faintingSequenceData->personality);
         height = MON_SPRITE_FRAME_HEIGHT - height;
+
+        if (height > MON_SPRITE_FRAME_HEIGHT) {
+            height = MON_SPRITE_FRAME_HEIGHT;
+        }
+
         PokemonSprite_SetPartialDraw(faintingSequenceData->monSprite, 0, 0, MON_SPRITE_FRAME_WIDTH, height);
         faintingSequenceData->state++;
         break;

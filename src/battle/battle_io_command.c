@@ -110,6 +110,7 @@ static void BtlIOCmd_PlayMusic(BattleSystem *battleSys, BattlerData *battlerData
 static void BtlIOCmd_SubmitResult(BattleSystem *battleSys, BattlerData *battlerData);
 static void BtlIOCmd_ClearMessageBox(BattleSystem *battleSys, BattlerData *battlerData);
 static void BtlIOCmd_PlayEntryAnimation(BattleSystem *battleSys, BattlerData *battlerData);
+static void BtlIOCmd_SetTerrainBackground(BattleSystem *battleSys, BattlerData *battlerData);
 static void ZeroDataBuffer(BattlerData *battlerData);
 
 extern const u8 sBallThrowTypes[];
@@ -227,6 +228,7 @@ static const BattleCommandPtr sBattleCommands[] = {
     [BATTLE_COMMAND_SUBMIT_RESULT] = BtlIOCmd_SubmitResult,
     [BATTLE_COMMAND_CLEAR_MESSAGE_BOX] = BtlIOCmd_ClearMessageBox,
     [BATTLE_COMMAND_PLAY_ENTRY_ANIMATION] = BtlIOCmd_PlayEntryAnimation,
+    [BATTLE_COMMAND_SET_TERRAIN_BACKGROUND] = BtlIOCmd_SetTerrainBackground,
 };
 
 void BattleSystem_ExecuteBattlerCommand(BattleSystem *battleSys, BattlerData *battlerData)
@@ -590,9 +592,7 @@ static void BtlIOCmd_UpdatePartyMon(BattleSystem *battleSys, BattlerData *battle
         }
     }
 
-    if ((message->knockedOffItemsMask & FlagIndex(message->partySlot)) == FALSE) {
-        Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, (u8 *)&message->heldItem);
-    }
+    Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, (u8 *)&message->heldItem);
 
     Pokemon_SetValue(mon, MON_DATA_HP, (u8 *)&message->curHP);
     Pokemon_SetValue(mon, MON_DATA_STATUS, (u8 *)&message->status);
@@ -724,6 +724,14 @@ static void BtlIOCmd_PlayEntryAnimation(BattleSystem *battleSys, BattlerData *ba
     MonEntryAnimMessage *message = (MonEntryAnimMessage *)&battlerData->data[0];
 
     BattleDisplay_InitTaskPlayEntryAnimation(battleSys, battlerData, message);
+    ZeroDataBuffer(battlerData);
+}
+
+static void BtlIOCmd_SetTerrainBackground(BattleSystem *battleSys, BattlerData *battlerData)
+{
+    TerrainBackgroundMessage *message = (TerrainBackgroundMessage *)&battlerData->data[0];
+
+    BattleDisplay_InitTaskSetTerrainBackground(battleSys, battlerData, message);
     ZeroDataBuffer(battlerData);
 }
 

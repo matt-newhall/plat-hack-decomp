@@ -799,6 +799,7 @@ enum PreMoveActionState {
     PRE_MOVE_ACTION_START = 0,
 
     PRE_MOVE_ACTION_STATE_TIGHTEN_FOCUS = PRE_MOVE_ACTION_START,
+    PRE_MOVE_ACTION_STATE_CHECK_RAGE_FLAG,
     PRE_MOVE_ACTION_STATE_SPEED_RNG,
 
     PRE_MOVE_ACTION_END
@@ -839,6 +840,17 @@ static void BattleControllerPlayer_CheckPreMoveActions(BattleSystem *battleSys, 
             }
 
             battleCtx->turnStartCheckTemp = 0;
+            battleCtx->turnStartCheckState++;
+            break;
+
+        case PRE_MOVE_ACTION_STATE_CHECK_RAGE_FLAG:
+            for (battler = 0; battler < maxBattlers; battler++) {
+                if ((battleCtx->battleMons[battler].statusVolatile & VOLATILE_CONDITION_RAGE)
+                    && Battler_SelectedMove(battleCtx, battler) != MOVE_RAGE) {
+                    battleCtx->battleMons[battler].statusVolatile &= ~VOLATILE_CONDITION_RAGE;
+                }
+            }
+
             battleCtx->turnStartCheckState++;
             break;
 
@@ -976,8 +988,11 @@ enum FieldCondCheckState {
     FIELD_COND_CHECK_STATE_SUNNY,
     FIELD_COND_CHECK_STATE_HAILING,
     FIELD_COND_CHECK_STATE_DEEP_FOG,
+    FIELD_COND_CHECK_STATE_WATER_SPORT,
+    FIELD_COND_CHECK_STATE_MUD_SPORT,
     FIELD_COND_CHECK_STATE_GRAVITY,
     FIELD_COND_CHECK_STATE_MAGMA_STORM,
+    FIELD_COND_CHECK_STATE_TERRAIN,
 
     FIELD_COND_CHECK_END
 };
@@ -1312,6 +1327,26 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
             battleCtx->fieldConditionCheckState++;
             break;
 
+        case FIELD_COND_CHECK_STATE_WATER_SPORT:
+            if (battleCtx->fieldConditions.waterSportTurns && --battleCtx->fieldConditions.waterSportTurns == 0) {
+                PrepareSubroutineSequence(battleCtx, subscript_sport_end);
+                battleCtx->scriptTemp = TYPE_FIRE;
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_MUD_SPORT:
+            if (battleCtx->fieldConditions.mudSportTurns && --battleCtx->fieldConditions.mudSportTurns == 0) {
+                PrepareSubroutineSequence(battleCtx, subscript_sport_end);
+                battleCtx->scriptTemp = TYPE_ELECTRIC;
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
         case FIELD_COND_CHECK_STATE_GRAVITY:
             if (battleCtx->fieldConditionsMask & FIELD_CONDITION_GRAVITY) {
                 battleCtx->fieldConditionsMask -= (1 << FIELD_CONDITION_GRAVITY_SHIFT);
@@ -1330,6 +1365,17 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
                 PrepareSubroutineSequence(battleCtx, subscript_weather_continues);
 
                 battleCtx->scriptTemp = BATTLE_ANIMATION_DAMAGE_MAGMA_STORM;
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->fieldConditionCheckState++;
+            break;
+
+        case FIELD_COND_CHECK_STATE_TERRAIN:
+            if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN)
+                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM) == FALSE
+                && --battleCtx->fieldConditions.terrainTurns == 0) {
+                PrepareSubroutineSequence(battleCtx, subscript_terrain_end);
                 state = STATE_BREAK_OUT;
             }
 
@@ -1355,7 +1401,8 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
 enum MonCondCheckState {
     MON_COND_CHECK_START = 0,
 
-    MON_COND_CHECK_STATE_INGRAIN = MON_COND_CHECK_START,
+    MON_COND_CHECK_STATE_GRASSY_TERRAIN = MON_COND_CHECK_START,
+    MON_COND_CHECK_STATE_INGRAIN,
     MON_COND_CHECK_STATE_AQUA_RING,
     MON_COND_CHECK_STATE_ABILITY,
     MON_COND_CHECK_STATE_USE_ITEM,
@@ -1406,6 +1453,21 @@ static void BattleControllerPlayer_CheckMonConditions(BattleSystem *battleSys, B
         }
 
         switch (battleCtx->monConditionCheckState) {
+        case MON_COND_CHECK_STATE_GRASSY_TERRAIN:
+            if (Battler_IsAffectedByTerrain(battleCtx, battler, FIELD_CONDITION_GRASSY_TERRAIN)
+                && battleCtx->battleMons[battler].curHP
+                && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
+                && battleCtx->battleMons[battler].moveEffectsData.healBlockTurns == 0) {
+                battleCtx->msgBattlerTemp = battler;
+                battleCtx->hpCalcTemp = BattleSystem_Divide(battleCtx->battleMons[battler].maxHP, 16);
+
+                PrepareSubroutineSequence(battleCtx, subscript_grassy_terrain_heal);
+                state = STATE_BREAK_OUT;
+            }
+
+            battleCtx->monConditionCheckState++;
+            break;
+
         case MON_COND_CHECK_STATE_INGRAIN:
             if ((battleCtx->battleMons[battler].moveEffectsMask & MOVE_EFFECT_INGRAIN)
                 && battleCtx->battleMons[battler].curHP != battleCtx->battleMons[battler].maxHP
@@ -1852,9 +1914,15 @@ static void BattleControllerPlayer_CheckSideConditions(BattleSystem *battleSys, 
 
             battleCtx->sideConditionCheckTemp++;
             if (battleCtx->fieldConditions.futureSightTurns[battler]
-                && --battleCtx->fieldConditions.futureSightTurns[battler] == FALSE
-                && battleCtx->battleMons[battler].curHP) {
+                && --battleCtx->fieldConditions.futureSightTurns[battler] == FALSE) {
+                int user = battleCtx->fieldConditions.futureSightAttacker[battler];
                 battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] &= ~SIDE_CONDITION_FUTURE_SIGHT;
+
+                if (battleCtx->battleMons[battler].curHP == 0
+                    || (BattleSystem_GetBattlerSide(battleSys, battler) == BattleSystem_GetBattlerSide(battleSys, user)
+                        && battleCtx->selectedPartySlot[battler] == battleCtx->fieldConditions.futureSightPartySlot[battler])) {
+                    continue;
+                }
 
                 battleCtx->msgBuffer.id = 475;
                 battleCtx->msgBuffer.tags = TAG_NICKNAME_MOVE;
@@ -1864,7 +1932,6 @@ static void BattleControllerPlayer_CheckSideConditions(BattleSystem *battleSys, 
                 battleCtx->msgBattlerTemp = battler;
                 battleCtx->msgAttacker = battleCtx->fieldConditions.futureSightAttacker[battler];
                 battleCtx->msgMoveTemp = battleCtx->fieldConditions.futureSightMove[battler];
-                battleCtx->hpCalcTemp = battleCtx->fieldConditions.futureSightDamage[battler];
 
                 PrepareSubroutineSequence(battleCtx, subscript_future_sight_damage);
                 return;
@@ -1987,6 +2054,8 @@ static void BattleControllerPlayer_FightCommand(BattleSystem *battleSys, BattleC
     battleCtx->moveCur = battleCtx->moveTemp;
     battleCtx->command = BATTLE_CONTROL_BEFORE_MOVE;
     battleCtx->spreadHitMask = 0;
+    battleCtx->moveTargetsResolved = 0;
+    battleCtx->moveTargetsAffected = 0;
     battleCtx->defender = BattleSystem_Defender(battleSys, battleCtx, battleCtx->attacker, battleCtx->moveTemp, randomizeTarget, 0);
 
     BattleController_EmitClearMessageBox(battleSys);
@@ -2253,6 +2322,9 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
     if (Battler_CanPickCommand(battleCtx, battleCtx->attacker) == FALSE) {
         return OBEY_CHECK_SUCCESS;
     }
+    if (battleCtx->moveCur == MOVE_BIDE && (battleCtx->battleStatusMask & SYSCTL_LAST_OF_MULTI_TURN)) {
+        return OBEY_CHECK_SUCCESS;
+    }
     if (TrainerInfo_BadgeCount(trInfo) >= 8) {
         return OBEY_CHECK_SUCCESS;
     }
@@ -2261,10 +2333,10 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
     if (TrainerInfo_BadgeCount(trInfo) >= 2) {
         maxLevel = 30;
     }
-    if (TrainerInfo_BadgeCount(trInfo) >= 4) {
+    if (TrainerInfo_BadgeCount(trInfo) >= 5) {
         maxLevel = 50;
     }
-    if (TrainerInfo_BadgeCount(trInfo) >= 6) {
+    if (TrainerInfo_BadgeCount(trInfo) >= 7) {
         maxLevel = 70;
     }
 
@@ -2275,6 +2347,10 @@ static int BattleControllerPlayer_CheckObedience(BattleSystem *battleSys, Battle
     rand1 = ((BattleSystem_RandNext(battleSys) & 0xFF) * (ATTACKING_MON.level + maxLevel)) >> 8;
     if (rand1 < maxLevel) {
         return OBEY_CHECK_SUCCESS;
+    }
+
+    if (battleCtx->moveCur == MOVE_RAGE) {
+        ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RAGE;
     }
 
     if ((ATTACKING_MON.status & MON_CONDITION_SLEEP)
@@ -2365,7 +2441,7 @@ static BOOL BattleControllerPlayer_DecrementPP(BattleSystem *battleSys, BattleCo
         if (battleCtx->moveTemp == MOVE_IMPRISON || battleCtx->moveTemp == MOVE_SNATCH) {
             ppCost += BattleSystem_CountAbility(battleSys, battleCtx, COUNT_ALIVE_BATTLERS_THEIR_SIDE, battleCtx->attacker, ABILITY_PRESSURE);
         } else {
-            switch (battleCtx->aiContext.moveTable[battleCtx->moveTemp].range) {
+            switch (Battler_MoveRange(battleCtx, battleCtx->attacker, battleCtx->moveTemp)) {
             case RANGE_ALL_ADJACENT:
             case RANGE_FIELD:
             case RANGE_ADJACENT_OPPONENTS:
@@ -2653,6 +2729,7 @@ static BOOL BattleControllerPlayer_CheckStatusDisruption(BattleSystem *battleSys
         case CHECK_STATUS_STATE_RECHARGING:
             if (ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_RECHARGING) {
                 ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RECHARGING;
+                ATTACKER_TURN_FLAGS.recharging = TRUE;
 
                 LOAD_SUBSEQ(subscript_recharging);
                 battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -2995,6 +3072,32 @@ static BOOL BattleControllerPlayer_TriggerPranksterImmunity(BattleSystem *battle
 }
 
 /**
+ * @brief Block an opponent's priority move against a grounded target in
+ * Psychic Terrain.
+ *
+ * Moves aimed at the user, its own side, the whole field or the foe's side
+ * are not blocked, and neither are moves from an ally.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if the move was blocked and the protection message queued.
+ */
+static BOOL BattleControllerPlayer_CheckPsychicTerrain(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    if (BattleSystem_PsychicTerrainBlocksMove(battleSys, battleCtx, battleCtx->attacker, battleCtx->defender, battleCtx->moveTemp) == FALSE) {
+        return FALSE;
+    }
+
+    battleCtx->moveFailFlags[battleCtx->attacker].noEffect = TRUE;
+    battleCtx->moveStatusFlags |= MOVE_STATUS_NO_MORE_WORK;
+    LOAD_SUBSEQ(subscript_psychic_terrain_protected);
+    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+    battleCtx->commandNext = BATTLE_CONTROL_LOOP_FAINTED;
+
+    return TRUE;
+}
+
+/**
  * @brief Load the Quick Claw effect subroutine sequence.
  *
  * Activation checks are all handled within the loaded subroutine sequence.
@@ -3014,56 +3117,6 @@ static BOOL BattleControllerPlayer_LoadQuickClawCheck(BattleSystem *battleSys, B
 }
 
 #include "data/hit_rate_stages.h"
-
-static inline int CalcMoveType(BattleContext *battleCtx, int attacker, int move)
-{
-    if (Battler_Ability(battleCtx, attacker) == ABILITY_NORMALIZE
-        && move != MOVE_JUDGMENT
-        && move != MOVE_HIDDEN_POWER
-        && move != MOVE_WEATHER_BALL
-        && move != MOVE_NATURAL_GIFT) {
-        return TYPE_NORMAL;
-    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_AERILATE
-        && MOVE_DATA(move).type == TYPE_NORMAL
-        && move != MOVE_JUDGMENT
-        && move != MOVE_HIDDEN_POWER
-        && move != MOVE_WEATHER_BALL
-        && move != MOVE_NATURAL_GIFT) {
-        return TYPE_FLYING;
-    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_REFRIGERATE
-        && MOVE_DATA(move).type == TYPE_NORMAL
-        && move != MOVE_JUDGMENT
-        && move != MOVE_HIDDEN_POWER
-        && move != MOVE_WEATHER_BALL
-        && move != MOVE_NATURAL_GIFT) {
-        return TYPE_ICE;
-    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_PIXILATE
-        && MOVE_DATA(move).type == TYPE_NORMAL
-        && move != MOVE_JUDGMENT
-        && move != MOVE_HIDDEN_POWER
-        && move != MOVE_WEATHER_BALL
-        && move != MOVE_NATURAL_GIFT) {
-        return TYPE_FAIRY;
-    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_DRAGONIZE
-        && MOVE_DATA(move).type == TYPE_NORMAL
-        && move != MOVE_JUDGMENT
-        && move != MOVE_HIDDEN_POWER
-        && move != MOVE_WEATHER_BALL
-        && move != MOVE_NATURAL_GIFT) {
-        return TYPE_DRAGON;
-    } else if (Battler_Ability(battleCtx, attacker) == ABILITY_GALVANIZE
-        && MOVE_DATA(move).type == TYPE_NORMAL
-        && move != MOVE_JUDGMENT
-        && move != MOVE_HIDDEN_POWER
-        && move != MOVE_WEATHER_BALL
-        && move != MOVE_NATURAL_GIFT) {
-        return TYPE_ELECTRIC;
-    } else if (battleCtx->moveType) {
-        return battleCtx->moveType;
-    }
-
-    return MOVE_DATA(move).type;
-}
 
 /**
  * @brief Check if an attacker's specified move will hit a defender.
@@ -3090,7 +3143,7 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
         return 0;
     }
 
-    u8 moveType = CalcMoveType(battleCtx, attacker, move);
+    u8 moveType = Battler_MoveType(battleCtx, attacker, move);
     u8 moveClass = MOVE_DATA(move).class;
     s8 accStages = battleCtx->battleMons[attacker].statBoosts[BATTLE_STAT_ACCURACY] - 6;
     s8 evaStages = 6 - battleCtx->battleMons[defender].statBoosts[BATTLE_STAT_EVASION];
@@ -3100,7 +3153,8 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     }
     if (Battler_Ability(battleCtx, attacker) == ABILITY_UNAWARE
         || Battler_Ability(battleCtx, attacker) == ABILITY_KEEN_EYE
-        || Battler_Ability(battleCtx, attacker) == ABILITY_ILLUMINATE) {
+        || Battler_Ability(battleCtx, attacker) == ABILITY_ILLUMINATE
+        || MOVE_DATA(move).effect == BATTLE_EFFECT_IGNORE_TARGET_STAT_CHANGES) {
         evaStages = 0;
     }
     if (MON_IS_IDENTIFIED(defender) && evaStages < 0) {
@@ -3121,7 +3175,8 @@ static int BattleControllerPlayer_CheckMoveHitAccuracy(BattleSystem *battleSys, 
     }
 
     if ((battleCtx->battleMons[defender].moveEffectsMask & MOVE_EFFECT_MINIMIZE)
-        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH || move == MOVE_HEAVY_SLAM)) {
+        && (move == MOVE_STOMP || move == MOVE_BODY_SLAM || move == MOVE_DRAGON_RUSH || move == MOVE_HEAVY_SLAM || move == MOVE_HEAT_CRASH
+            || move == MOVE_SHADOW_FORCE || move == MOVE_PHANTOM_FORCE)) {
         return 0;
     }
 
@@ -3251,6 +3306,7 @@ static int BattleControllerPlayer_CheckMoveHitOverrides(BattleSystem *battleSys,
 
     if (battleCtx->turnFlags[defender].protecting
         && (MOVE_DATA(move).flags & MOVE_FLAG_CAN_PROTECT)
+        && !(battleCtx->turnFlags[defender].silkTrapping && MOVE_DATA(move).class == CLASS_STATUS)
         && (move != MOVE_CURSE || Move_IsGhostCurse(battleCtx, move, attacker) == TRUE) // Ghost-Curse can be Protected
         && (Move_IsMultiTurn(battleCtx, move) == FALSE || (battleCtx->battleStatusMask & SYSCTL_LAST_OF_MULTI_TURN))) {
         Battler_UnlockMoveChoice(battleSys, battleCtx, attacker);
@@ -3479,7 +3535,7 @@ static void BattleControllerPlayer_BeforeMove(BattleSystem *battleSys, BattleCon
         battleCtx->beforeMoveCheckState++;
 
         if (ATTACKER_TURN_FLAGS.powdered && (
-                CalcCurrentMoveType(battleCtx) == TYPE_FIRE
+                Battler_MoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur) == TYPE_FIRE
                 || (battleCtx->moveCur == MOVE_NATURAL_GIFT && Battler_NaturalGiftType(battleCtx, battleCtx->attacker) == TYPE_FIRE)
         )) {
             ATTACKER_TURN_FLAGS.powdered = 0;
@@ -3537,6 +3593,7 @@ enum TryMoveState {
     TRY_MOVE_STATE_CHECK_MOVE_HIT_OVERRIDES,
     TRY_MOVE_STATE_TRIGGER_IMMUNITY_ABILITIES,
     TRY_MOVE_STATE_PRANKSTER_IMMUNITY,
+    TRY_MOVE_STATE_PSYCHIC_TERRAIN,
     TRY_MOVE_STATE_CHECK_TYPE_CHART,
     TRY_MOVE_CHOICE_MULTI_TURN_CONFLICT,
 
@@ -3592,6 +3649,15 @@ static void BattleControllerPlayer_TryMove(BattleSystem *battleSys, BattleContex
     case TRY_MOVE_STATE_PRANKSTER_IMMUNITY:
         if (battleCtx->defender != BATTLER_NONE
             && BattleControllerPlayer_TriggerPranksterImmunity(battleSys, battleCtx) == 1) {
+            return;
+        }
+
+        battleCtx->tryMoveCheckState++;
+
+    case TRY_MOVE_STATE_PSYCHIC_TERRAIN:
+        if (battleCtx->defender != BATTLER_NONE
+            && BattleControllerPlayer_CheckPsychicTerrain(battleSys, battleCtx) == TRUE) {
+            battleCtx->tryMoveCheckState = TRY_MOVE_STATE_CHECK_MOVE_HITS;
             return;
         }
 
@@ -3668,7 +3734,12 @@ static void BattleControllerPlayer_CheckMoveFailure(BattleSystem *battleSys, Bat
 
 static void BattleControllerPlayer_UseMove(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    LOAD_SUBSEQ(subscript_use_move);
+    if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_POLTERGEIST) {
+        LOAD_SUBSEQ(subscript_poltergeist);
+    } else {
+        LOAD_SUBSEQ(subscript_use_move);
+    }
+
     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
     battleCtx->commandNext = BATTLE_CONTROL_UPDATE_HP;
 }
@@ -3693,7 +3764,7 @@ static void BattleControllerPlayer_UpdateHP(BattleSystem *battleSys, BattleConte
 
         if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_SUBSTITUTE)
             && battleCtx->damage < 0
-            && !(BattleSystem_IsSoundMove(battleCtx->moveTemp))
+            && !(BattleSystem_IsSoundMove(battleCtx->moveTemp) || battleCtx->moveTemp == MOVE_PLAY_NICE || battleCtx->moveTemp == MOVE_TEARFUL_LOOK)
             && !(Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_INFILTRATOR)) {
             if (DEFENDING_MON.moveEffectsData.substituteHP + battleCtx->damage <= 0) {
                 ATTACKER_SELF_TURN_FLAGS.shellBellDamageDealt += DEFENDING_MON.moveEffectsData.substituteHP * -1;
@@ -3811,6 +3882,36 @@ static void BattleControllerPlayer_UpdateHP(BattleSystem *battleSys, BattleConte
     }
 }
 
+/**
+ * @brief Load the Rage Is Building subroutine sequence, if applicable.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @return TRUE if the subroutine was loaded for execution; FALSE otherwise.
+ */
+static BOOL BattleController_RageBuilding(BattleSystem *battleSys, BattleContext *battleCtx)
+{
+    if (battleCtx->defender == BATTLER_NONE) {
+        return FALSE;
+    }
+
+    if ((DEFENDING_MON.statusVolatile & VOLATILE_CONDITION_RAGE)
+        && (battleCtx->moveStatusFlags & MOVE_STATUS_MULTI_HIT_DISRUPTED) == FALSE
+        && battleCtx->defender != battleCtx->attacker
+        && DEFENDING_MON.curHP
+        && (DEFENDER_SELF_TURN_FLAGS.physicalDamageTaken || DEFENDER_SELF_TURN_FLAGS.specialDamageTaken)
+        && DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK] < 12) {
+        DEFENDING_MON.statBoosts[BATTLE_STAT_ATTACK]++;
+
+        LOAD_SUBSEQ(subscript_rage_is_building);
+        battleCtx->commandNext = battleCtx->command;
+        battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
 enum AfterMoveMessageState {
     AFTER_MOVE_MESSAGE_START = 0,
 
@@ -3818,6 +3919,7 @@ enum AfterMoveMessageState {
     ONE_HIT_STATUS,
     ONE_HIT_TRIGGER_SECONDARY,
     ONE_HIT_FORM_CHANGE,
+    ONE_HIT_RAGE,
     ONE_HIT_TRIGGER_ABILITY,
     ONE_HIT_TRIGGER_ATTACKER_ABILITY,
     ONE_HIT_EXTRA_FLINCH,
@@ -3825,6 +3927,7 @@ enum AfterMoveMessageState {
     MULTI_HIT_CRITICAL = 0,
     MULTI_HIT_TRIGGER_SECONDARY,
     MULTI_HIT_FORM_CHANGE,
+    MULTI_HIT_RAGE,
     MULTI_HIT_TRIGGER_ABILITY,
     MULTI_HIT_TRIGGER_ATTACKER_ABILITY,
     MULTI_HIT_STATUS,
@@ -3870,6 +3973,12 @@ static void BattleControllerPlayer_AfterMoveMessage(BattleSystem *battleSys, Bat
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
 
             return;
+
+        case ONE_HIT_RAGE:
+            battleCtx->afterMoveMessageState++;
+            if (BattleController_RageBuilding(battleSys, battleCtx) == TRUE) {
+                return;
+            }
 
         case ONE_HIT_TRIGGER_ABILITY:
             int defenderAbilitySeq;
@@ -3937,6 +4046,12 @@ static void BattleControllerPlayer_AfterMoveMessage(BattleSystem *battleSys, Bat
 
             return;
 
+        case MULTI_HIT_RAGE:
+            battleCtx->afterMoveMessageState++;
+            if (BattleController_RageBuilding(battleSys, battleCtx) == TRUE) {
+                return;
+            }
+
         case MULTI_HIT_TRIGGER_ABILITY:
             int defenderAbilitySeq;
 
@@ -3988,50 +4103,39 @@ static void BattleControllerPlayer_LeftoverState29(BattleSystem *battleSys, Batt
     return;
 }
 
-static inline int CalcCurrentMoveType(BattleContext *battleCtx)
+/**
+ * @brief Get the subscript for a move effect which must wait until the user has
+ * survived the target's contact punishment.
+ *
+ * Rapid Spin and Dragon Tail fail if the user faints to Rough Skin, Iron Barbs
+ * or Rocky Helmet, so they resolve after those instead of as regular on-hit
+ * side effects. A Life Orb faint comes later still and does not stop them.
+ *
+ * @param battleCtx
+ * @return The subscript to run, or 0 if there is none.
+ */
+static int BattleControllerPlayer_DeferredOnHitSubscript(BattleContext *battleCtx)
 {
-    if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE) {
-        return TYPE_NORMAL;
-    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_AERILATE
-        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-        && battleCtx->moveCur != MOVE_JUDGMENT
-        && battleCtx->moveCur != MOVE_NATURAL_GIFT
-        && battleCtx->moveCur != MOVE_WEATHER_BALL
-        && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-        return TYPE_FLYING;
-    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_REFRIGERATE
-        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-        && battleCtx->moveCur != MOVE_JUDGMENT
-        && battleCtx->moveCur != MOVE_HIDDEN_POWER
-        && battleCtx->moveCur != MOVE_WEATHER_BALL
-        && battleCtx->moveCur != MOVE_NATURAL_GIFT) {
-        return TYPE_ICE;
-    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PIXILATE
-        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-        && battleCtx->moveCur != MOVE_JUDGMENT
-        && battleCtx->moveCur != MOVE_HIDDEN_POWER
-        && battleCtx->moveCur != MOVE_WEATHER_BALL
-        && battleCtx->moveCur != MOVE_NATURAL_GIFT) {
-        return TYPE_FAIRY;
-    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_DRAGONIZE
-        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-        && battleCtx->moveCur != MOVE_JUDGMENT
-        && battleCtx->moveCur != MOVE_HIDDEN_POWER
-        && battleCtx->moveCur != MOVE_WEATHER_BALL
-        && battleCtx->moveCur != MOVE_NATURAL_GIFT) {
-        return TYPE_DRAGON;
-    } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_GALVANIZE
-        && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-        && battleCtx->moveCur != MOVE_JUDGMENT
-        && battleCtx->moveCur != MOVE_HIDDEN_POWER
-        && battleCtx->moveCur != MOVE_WEATHER_BALL
-        && battleCtx->moveCur != MOVE_NATURAL_GIFT) {
-        return TYPE_ELECTRIC;
-    } else if (battleCtx->moveType) {
-        return battleCtx->moveType;
+    if (ATTACKING_MON.curHP == 0
+        || battleCtx->defender == BATTLER_NONE
+        || (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS)) {
+        return 0;
     }
 
-    return CURRENT_MOVE_DATA.type;
+    switch (CURRENT_MOVE_DATA.effect) {
+    case BATTLE_EFFECT_REMOVE_HAZARDS_AND_BINDING:
+        if (BattleSystem_SheerForceBoostsMove(battleCtx, battleCtx->attacker, battleCtx->moveCur)) {
+            return 0;
+        }
+
+        return subscript_rapid_spin;
+
+    case BATTLE_EFFECT_DRAGON_TAIL:
+        return subscript_force_target_to_switch_or_flee;
+
+    default:
+        return 0;
+    }
 }
 
 enum AfterMoveEffectState {
@@ -4042,15 +4146,17 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_TRIGGER_SWITCH_IN_EFFECTS,
     AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN,
     AFTER_MOVE_EFFECT_TAILWIND,
-    AFTER_MOVE_EFFECT_KNOCK_OFF,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_ROOM_SERVICE,
+    AFTER_MOVE_EFFECT_TERRAIN_SEED,
     AFTER_MOVE_EFFECT_THROAT_SPRAY,
     AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT,
     AFTER_MOVE_EFFECT_THAW_DEFENDER,
     AFTER_MOVE_EFFECT_ANGER_SHELL,
     AFTER_MOVE_EFFECT_HELD_ITEM_STATUS,
+    AFTER_MOVE_EFFECT_KNOCK_OFF,
+    AFTER_MOVE_EFFECT_DEFERRED_ON_HIT,
 
     AFTER_MOVE_EFFECT_END
 };
@@ -4213,6 +4319,34 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
             battleCtx->afterMoveEffectState++;
         }
 
+    case AFTER_MOVE_EFFECT_TERRAIN_SEED:
+        if (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN) {
+            int battler, stat;
+
+            while (battleCtx->afterMoveEffectTemp < BattleSystem_GetMaxBattlers(battleSys)) {
+                battler = battleCtx->monSpeedOrder[battleCtx->afterMoveEffectTemp];
+                battleCtx->afterMoveEffectTemp++;
+
+                if ((battleCtx->battlersSwitchingMask & FlagIndex(battler)) == FALSE
+                    && Battler_TerrainSeedActivates(battleCtx, battler, &stat)) {
+                    battleCtx->sideEffectMon = battler;
+                    battleCtx->msgBattlerTemp = battler;
+                    battleCtx->msgItemTemp = Battler_HeldItem(battleCtx, battler);
+                    battleCtx->msgTemp = stat;
+                    LOAD_SUBSEQ(subscript_held_item_terrain_seed);
+                    battleCtx->commandNext = battleCtx->command;
+                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                    return;
+                }
+            }
+
+            battleCtx->afterMoveEffectState++;
+            battleCtx->afterMoveEffectTemp = 0;
+        } else {
+            battleCtx->afterMoveEffectState++;
+        }
+
     case AFTER_MOVE_EFFECT_THROAT_SPRAY:
         battleCtx->afterMoveEffectState++;
 
@@ -4221,11 +4355,10 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
         }
 
     case AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT: {
-        BOOL isReentry = battleCtx->afterMoveEffectState == AFTER_MOVE_EFFECT_TRIGGER_ITEMS_ON_HIT;
         battleCtx->afterMoveEffectState++;
 
         int itemSeq;
-        if (!isReentry && BattleSystem_TriggerHeldItemOnHit(battleSys, battleCtx, &itemSeq) == TRUE) {
+        if (BattleSystem_TriggerHeldItemOnHit(battleSys, battleCtx, &itemSeq) == TRUE) {
             LOAD_SUBSEQ(itemSeq);
             battleCtx->commandNext = battleCtx->command;
             battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -4235,7 +4368,7 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
     }
 
     case AFTER_MOVE_EFFECT_THAW_DEFENDER:
-        int moveType = CalcCurrentMoveType(battleCtx);
+        int moveType = Battler_MoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur);
         battleCtx->afterMoveEffectState++;
 
         if (battleCtx->defender != BATTLER_NONE
@@ -4316,6 +4449,23 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
 
             return;
         }
+
+    case AFTER_MOVE_EFFECT_DEFERRED_ON_HIT: {
+        battleCtx->afterMoveEffectState++;
+
+        int deferredSeq = BattleControllerPlayer_DeferredOnHitSubscript(battleCtx);
+        if (deferredSeq) {
+            battleCtx->sideEffectMon = battleCtx->attacker;
+            battleCtx->sideEffectType = SIDE_EFFECT_TYPE_INDIRECT;
+            battleCtx->sideEffectFlags = MOVE_SIDE_EFFECT_ON_HIT;
+
+            LOAD_SUBSEQ(deferredSeq);
+            battleCtx->commandNext = battleCtx->command;
+            battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+            return;
+        }
+    }
 
     default:
         break;
@@ -4398,7 +4548,15 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
 
     BattleControllerPlayer_UpdateFlagsWhenHit(battleSys, battleCtx);
 
-    if (CURRENT_MOVE_DATA.range == RANGE_ADJACENT_OPPONENTS
+    battleCtx->moveTargetsResolved++;
+
+    if ((battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
+        battleCtx->moveTargetsAffected++;
+    }
+
+    int range = Battler_MoveRange(battleCtx, battleCtx->attacker, battleCtx->moveCur);
+
+    if (range == RANGE_ADJACENT_OPPONENTS
         && (battleCtx->battleStatusMask & SYSCTL_CHECK_LOOP_ONLY_ONCE) == FALSE
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
@@ -4429,7 +4587,7 @@ static void BattleControllerPlayer_LoopSpreadMoves(BattleSystem *battleSys, Batt
         } while (battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys));
 
         BattleController_EmitClearMessageBox(battleSys);
-    } else if (CURRENT_MOVE_DATA.range == RANGE_ALL_ADJACENT
+    } else if (range == RANGE_ALL_ADJACENT
         && (battleCtx->battleStatusMask & SYSCTL_CHECK_LOOP_ONLY_ONCE) == FALSE
         && battleCtx->battlerCounter < BattleSystem_GetMaxBattlers(battleSys)) {
         battleCtx->multiHitCheckFlags = SYSCTL_HIT_MULTIPLE_TARGETS;
@@ -4524,6 +4682,31 @@ static void BattleControllerPlayer_LeftoverState37(BattleSystem *battleSys, Batt
     return;
 }
 
+/**
+ * @brief Check whether the attacker's action this turn counts as a failed move
+ * for Stomping Tantrum.
+ *
+ * @param battleCtx
+ * @return TRUE if the move counts as failed, FALSE otherwise
+ */
+static BOOL BattleControllerPlayer_MoveFailedThisTurn(BattleContext *battleCtx)
+{
+    if (ATTACKER_TURN_FLAGS.recharging) {
+        return FALSE;
+    }
+
+    if ((battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN) == FALSE) {
+        return TRUE;
+    }
+
+    if (battleCtx->moveTargetsResolved > 1) {
+        return battleCtx->moveTargetsAffected == 0;
+    }
+
+    return (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS)
+        && (battleCtx->moveStatusFlags & MOVE_STATUS_PROTECTED) == FALSE;
+}
+
 static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, BattleContext *battleCtx)
 {
     u8 itemEffect = Battler_HeldItemEffect(battleCtx, battleCtx->attacker);
@@ -4567,6 +4750,8 @@ static void BattleControllerPlayer_UpdateMoveBuffers(BattleSystem *battleSys, Ba
     if (battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN) {
         battleCtx->moveSketched[battleCtx->attacker] = Move_IsInvoker(battleCtx->moveTemp) ? battleCtx->moveCur : battleCtx->moveTemp;
     }
+
+    battleCtx->moveFailedTurn[battleCtx->attacker] = BattleControllerPlayer_MoveFailedThisTurn(battleCtx) ? battleCtx->totalTurns + 1 : 0;
 
     BattleControllerPlayer_UpdateFlagsWhenHit(battleSys, battleCtx);
     BattleSystem_VerifyMetronomeCount(battleSys, battleCtx);
@@ -4915,6 +5100,7 @@ static BOOL BattleControllerPlayer_CheckBattleOver(BattleSystem *battleSys, Batt
         case TRAINER_CLASS_LEADER_CANDICE:
         case TRAINER_CLASS_LEADER_BYRON:
         case TRAINER_CLASS_LEADER_VOLKNER:
+        case TRAINER_CLASS_SBC_LEADER:
             Sound_PlayBGM(SEQ_VICTORY_GYM_LEADER);
             break;
 
@@ -5130,7 +5316,7 @@ static BOOL BattleControllerPlayer_AnyExpPayout(BattleContext *battleCtx, int ne
  */
 static void BattleControllerPlayer_UpdateFlagsWhenHit(BattleSystem *battleSys, BattleContext *battleCtx)
 {
-    int moveType = CalcCurrentMoveType(battleCtx);
+    int moveType = Battler_MoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur);
     if ((MOVE_DATA(battleCtx->moveTemp).flags & MOVE_FLAG_CAN_MIRROR_MOVE)
         && (battleCtx->battleStatusMask & SYSCTL_REUSE_LAST_MOVE) == FALSE
         && battleCtx->defender != BATTLER_NONE
@@ -5160,33 +5346,13 @@ static void BattleControllerPlayer_UpdateFlagsWhenHit(BattleSystem *battleSys, B
                 battleCtx->moveHitBattler[battleCtx->defender] = BATTLER_NONE;
                 battleCtx->moveHitType[battleCtx->defender] = TYPE_NORMAL;
             }
-
-            if ((battleCtx->battleStatusMask2 & SYSCTL_MOVE_SUCCEEDED)
-                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
-                switch (CURRENT_MOVE_DATA.range) {
-                case RANGE_USER:
-                case RANGE_USER_SIDE:
-                case RANGE_FIELD:
-                case RANGE_OPPONENT_SIDE:
-                case RANGE_ALLY:
-                case RANGE_USER_OR_ALLY:
-                    battleCtx->conversion2Move[battleCtx->defender] = MOVE_NONE;
-                    battleCtx->conversion2Battler[battleCtx->defender] = BATTLER_NONE;
-                    battleCtx->conversion2Type[battleCtx->defender] = TYPE_NORMAL;
-                    break;
-
-                default:
-                    battleCtx->conversion2Move[battleCtx->defender] = battleCtx->moveCur;
-                    battleCtx->conversion2Battler[battleCtx->defender] = battleCtx->attacker;
-                    battleCtx->conversion2Type[battleCtx->defender] = moveType;
-                    break;
-                }
-            } else {
-                battleCtx->conversion2Move[battleCtx->defender] = MOVE_NONE;
-                battleCtx->conversion2Battler[battleCtx->defender] = BATTLER_NONE;
-                battleCtx->conversion2Type[battleCtx->defender] = TYPE_NORMAL;
-            }
         }
+    }
+
+    if ((battleCtx->battleStatusMask & SYSCTL_REUSE_LAST_MOVE) == FALSE
+        && (battleCtx->battleStatusMask2 & SYSCTL_ATTACK_MESSAGE_SHOWN)) {
+        battleCtx->conversion2Move[battleCtx->attacker] = battleCtx->moveCur;
+        battleCtx->conversion2Type[battleCtx->attacker] = moveType;
     }
 }
 
@@ -5325,14 +5491,58 @@ static BOOL BattleControllerPlayer_ToggleSemiInvulnMons(BattleSystem *battleSys,
     return result;
 }
 
+/**
+ * @brief Find the battler whose Pickpocket steals the attacker's item after the
+ * current move.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param sheerForce Whether the attacker's Sheer Force boosted the move
+ * @return The stealing battler, or BATTLER_NONE if Pickpocket does not activate.
+ */
+static int BattleControllerPlayer_PickpocketThief(BattleSystem *battleSys, BattleContext *battleCtx, BOOL sheerForce)
+{
+    int attacker = battleCtx->attacker;
+
+    if (attacker == BATTLER_NONE
+        || sheerForce
+        || (battleCtx->battleStatusMask2 & (SYSCTL_RED_CARD_SWITCHED | SYSCTL_UTURN_ACTIVE))
+        || Move_MakesContact(battleCtx, attacker, battleCtx->moveCur) == FALSE) {
+        return BATTLER_NONE;
+    }
+
+    int maxBattlers = BattleSystem_GetMaxBattlers(battleSys);
+
+    for (int i = 0; i < maxBattlers; i++) {
+        int battler = battleCtx->monSpeedOrder[i];
+        SelfTurnFlags *flags = &battleCtx->selfTurnFlags[battler];
+
+        if (battler != attacker
+            && battleCtx->battleMons[battler].curHP
+            && Battler_Ability(battleCtx, battler) == ABILITY_PICKPOCKET
+            && Battler_SubstituteWasHit(battleCtx, battler) == FALSE
+            && ((flags->physicalDamageTaken && flags->physicalDamageLastAttacker == attacker)
+                || (flags->specialDamageTaken && flags->specialDamageLastAttacker == attacker))
+            && Battler_CanTakeItem(battleSys, battleCtx, battler, attacker) == TAKE_ITEM_ALLOWED) {
+            return battler;
+        }
+    }
+
+    return BATTLER_NONE;
+}
+
 enum AfterMoveHitState {
     AFTER_MOVE_HIT_START = 0,
 
-    AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE = AFTER_MOVE_HIT_START,
+    AFTER_MOVE_HIT_STATE_RAGE = AFTER_MOVE_HIT_START,
+    AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE,
     AFTER_MOVE_HIT_STATE_RED_CARD,
     AFTER_MOVE_HIT_STATE_EJECT_ITEMS,
     AFTER_MOVE_HIT_STATE_SHELL_BELL,
     AFTER_MOVE_HIT_STATE_LIFE_ORB,
+    AFTER_MOVE_HIT_STATE_PICKPOCKET,
+    AFTER_MOVE_HIT_STATE_ICE_SPINNER,
+    AFTER_MOVE_HIT_STATE_SCALE_SHOT,
     AFTER_MOVE_HIT_STATE_UPROAR,
     AFTER_MOVE_HIT_STATE_ANGER_SHELL,
     AFTER_MOVE_HIT_STATE_SWITCH_HIT,
@@ -5346,6 +5556,8 @@ enum AfterMoveHitState {
  * This handles:
  * - granting Shell Bell HP restoration
  * - deducting HP due to Life Orb
+ * - Ice Spinner removing terrain, once the user has survived Life Orb and was
+ *   not forced out by Red Card
  *
  * @param battleSys
  * @param battleCtx
@@ -5366,56 +5578,17 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
     do {
         switch (battleCtx->afterMoveHitCheckState) {
 
+        case AFTER_MOVE_HIT_STATE_RAGE:
+            if ((ATTACKING_MON.statusVolatile & VOLATILE_CONDITION_RAGE) && battleCtx->moveCur != MOVE_RAGE) {
+                ATTACKING_MON.statusVolatile &= ~VOLATILE_CONDITION_RAGE;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
         case AFTER_MOVE_HIT_STATE_MULTI_HIT_COLOR_CHANGE:
             if (sheerForce == FALSE && Battler_Ability(battleCtx, battleCtx->defender) == ABILITY_COLOR_CHANGE) {
-                u8 moveType;
-
-                if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_NORMALIZE
-                    && battleCtx->moveCur != MOVE_JUDGMENT
-                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
-                    && battleCtx->moveCur != MOVE_WEATHER_BALL
-                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-                    moveType = TYPE_NORMAL;
-                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_AERILATE
-                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-                    && battleCtx->moveCur != MOVE_JUDGMENT
-                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
-                    && battleCtx->moveCur != MOVE_WEATHER_BALL
-                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-                    moveType = TYPE_FLYING;
-                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_REFRIGERATE
-                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-                    && battleCtx->moveCur != MOVE_JUDGMENT
-                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
-                    && battleCtx->moveCur != MOVE_WEATHER_BALL
-                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-                    moveType = TYPE_ICE;
-                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_PIXILATE
-                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-                    && battleCtx->moveCur != MOVE_JUDGMENT
-                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
-                    && battleCtx->moveCur != MOVE_WEATHER_BALL
-                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-                    moveType = TYPE_FAIRY;
-                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_DRAGONIZE
-                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-                    && battleCtx->moveCur != MOVE_JUDGMENT
-                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
-                    && battleCtx->moveCur != MOVE_WEATHER_BALL
-                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-                    moveType = TYPE_DRAGON;
-                } else if (Battler_Ability(battleCtx, battleCtx->attacker) == ABILITY_GALVANIZE
-                    && MOVE_DATA(battleCtx->moveCur).type == TYPE_NORMAL
-                    && battleCtx->moveCur != MOVE_JUDGMENT
-                    && battleCtx->moveCur != MOVE_NATURAL_GIFT
-                    && battleCtx->moveCur != MOVE_WEATHER_BALL
-                    && battleCtx->moveCur != MOVE_HIDDEN_POWER) {
-                    moveType = TYPE_ELECTRIC;
-                } else if (battleCtx->moveType) {
-                    moveType = battleCtx->moveType;
-                } else {
-                    moveType = CURRENT_MOVE_DATA.type;
-                }
+                u8 moveType = Battler_MoveType(battleCtx, battleCtx->attacker, battleCtx->moveCur);
 
                 if (DEFENDING_MON.curHP
                     && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
@@ -5506,6 +5679,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
                         battleCtx->switchedPartySlot[battleCtx->attacker] = i;
                         battleCtx->afterMoveHitCheckTemp = 1;
+                        battleCtx->battleStatusMask2 |= SYSCTL_RED_CARD_SWITCHED;
                         LOAD_SUBSEQ(subscript_red_card_force_switch);
                         battleCtx->commandNext = battleCtx->command;
                         battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -5513,6 +5687,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
                     }
                 } else if ((battleCtx->attacker & 1) == BATTLE_SIDE_PLAYER) {
                     battleCtx->afterMoveHitCheckTemp = 1;
+                    battleCtx->battleStatusMask2 |= SYSCTL_RED_CARD_SWITCHED;
                     LOAD_SUBSEQ(subscript_red_card_force_switch);
                     battleCtx->commandNext = battleCtx->command;
                     battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
@@ -5716,6 +5891,57 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
             battleCtx->afterMoveHitCheckState++;
             break;
 
+        case AFTER_MOVE_HIT_STATE_PICKPOCKET: {
+            int thief = BattleControllerPlayer_PickpocketThief(battleSys, battleCtx, sheerForce);
+
+            if (thief != BATTLER_NONE) {
+                battleCtx->msgBattlerTemp = thief;
+
+                LOAD_SUBSEQ(subscript_pickpocket);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+        }
+
+        case AFTER_MOVE_HIT_STATE_ICE_SPINNER:
+            if (CURRENT_MOVE_DATA.effect == BATTLE_EFFECT_REMOVE_TERRAIN_HIT
+                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+                && (battleCtx->battleStatusMask2 & SYSCTL_RED_CARD_SWITCHED) == FALSE
+                && battleCtx->attacker != BATTLER_NONE
+                && ATTACKING_MON.curHP
+                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN)
+                && (battleCtx->fieldConditionsMask & FIELD_CONDITION_TERRAIN_PERM) == FALSE) {
+                LOAD_SUBSEQ(subscript_terrain_end);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
+        case AFTER_MOVE_HIT_STATE_SCALE_SHOT:
+            if (battleCtx->moveCur == MOVE_SCALE_SHOT
+                && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE
+                && (battleCtx->battleStatusMask2 & SYSCTL_RED_CARD_SWITCHED) == FALSE
+                && battleCtx->attacker != BATTLER_NONE
+                && ATTACKING_MON.curHP) {
+                LOAD_SUBSEQ(subscript_scale_shot);
+                battleCtx->commandNext = battleCtx->command;
+                battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
+
+                machineState = STATE_BREAK_OUT;
+            }
+
+            battleCtx->afterMoveHitCheckState++;
+            break;
+
         case AFTER_MOVE_HIT_STATE_UPROAR:
             if (battleCtx->afterMoveHitCheckTemp == 0
                 && battleCtx->battleMons[battleCtx->attacker].statusVolatile & VOLATILE_CONDITION_UPROAR) {
@@ -5737,6 +5963,7 @@ static BOOL BattleControllerPlayer_TriggerAfterMoveHitEffects(BattleSystem *batt
 
         case AFTER_MOVE_HIT_STATE_ANGER_SHELL:
             if (DEFENDER_SELF_TURN_FLAGS.angerShellActivated == TRUE) {
+                battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
                 battleCtx->sideEffectMon = battleCtx->defender;
                 battleCtx->msgBattlerTemp = battleCtx->defender;
 

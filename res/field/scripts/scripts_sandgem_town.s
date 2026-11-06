@@ -450,7 +450,7 @@ SandgemTown_OnFrameExitLab:
     ApplyMovement LOCALID_COUNTERPART, SandgemTown_Movement_CounterpartNoticeProfRowan
     WaitMovement
     Message SandgemTown_Text_YouShouldTakeThisAsWell
-    SetVar VAR_0x8004, ITEM_TM27
+    SetVar VAR_0x8004, ITEM_TM10
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     Message SandgemTown_Text_ThatContainsTheMoveReturn

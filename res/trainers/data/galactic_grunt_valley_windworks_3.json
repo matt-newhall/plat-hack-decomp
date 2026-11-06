@@ -10,22 +10,68 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_GLIGAR",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 14,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_BREAKING_SWIPE",
+                "MOVE_METAL_CLAW",
+                "MOVE_FIRE_FANG",
+                "MOVE_QUICK_ATTACK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_MAWILE",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 14,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_SMART_STRIKE",
+                "MOVE_FIRE_FANG",
+                "MOVE_ICE_FANG",
+                "MOVE_BITE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_LOMBRE",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_BERSERK_GENE",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_ASTONISH",
+                "MOVE_BULLET_SEED",
+                "MOVE_FLAIL"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_CORPHISH",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_MYSTIC_WATER",
+            "moves": [
+                "MOVE_CRABHAMMER",
+                "MOVE_FAINT_ATTACK",
+                "MOVE_DOUBLE_HIT",
+                "MOVE_PROTECT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

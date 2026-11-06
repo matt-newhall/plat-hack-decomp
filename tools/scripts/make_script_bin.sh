@@ -11,6 +11,7 @@ help() {
     echo "  -o | --objcopy      path to the objcopy executable for data extraction"
     echo "  -d | --out-dir      directory for output files (default: current directory)"
     echo "  -M | --depfile      output a compiler-generated depfile for the source"
+    echo "  -s | --max-size     fail if an output binary is this many bytes or larger"
     echo "  -P | --parent-dir   use the parent directory name of each input script to avoid name collisions"
 }
 
@@ -22,6 +23,7 @@ LD="arm-none-eabi-ld"
 OUTDIR="."
 MD=""
 USE_PARENT_DIR=0
+MAX_SIZE=0
 
 while [[ $# -gt 0 ]] ; do
     case $1 in 
@@ -49,8 +51,18 @@ while [[ $# -gt 0 ]] ; do
             shift
             shift
             ;;
+        -s|--max-size)
+            MAX_SIZE="$2"
+            shift
+            shift
+            ;;
         -M|--depfile)
             MD="-MD"
+            shift
+            ;;
+        -s|--max-size)
+            MAX_SIZE="$2"
+            shift
             shift
             ;;
         -P|--parent-dir)
@@ -82,4 +94,15 @@ for script_file in "${SCRIPT_FILES[@]}" ; do
     $OBJCOPY -O binary --file-alignment 4 "$script_obj" "$script_bin"
     $LD "$script_obj" -o "$script_obj.dummy"
     rm "$script_obj" "$script_obj.dummy"
+
+    # these binaries are read into a fixed-size buffer with no runtime bounds
+    # check in release builds, so anything at or over the limit is rejected here.
+    if [[ $MAX_SIZE -gt 0 ]]; then
+        script_size=$(wc -c < "$script_bin")
+        if [[ $script_size -ge $MAX_SIZE ]]; then
+            echo "$script_file: $script_size bytes exceeds the $MAX_SIZE byte limit" >&2
+            rm -f "$script_bin"
+            exit 1
+        fi
+    fi
 done

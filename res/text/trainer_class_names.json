@@ -464,6 +464,10 @@
     {
       "id": "pl_msg_00000619_00115",
       "en_US": "Leader"
+    },
+    {
+      "id": "pl_msg_00000619_00116",
+      "en_US": "SBC Leader"
     }
   ]
 }

@@ -10,13 +10,65 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_MEOWTH",
             "form": 0,
-            "level": 13,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 14,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_SLASH",
+                "MOVE_PUNISHMENT",
+                "MOVE_WORK_UP"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT"
+        },
+        {
+            "species": "SPECIES_SMOOCHUM",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_POWDER_SNOW",
+                "MOVE_FAKE_OUT",
+                "MOVE_DRAINING_KISS",
+                "MOVE_ZEN_HEADBUTT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_DIGLETT",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_SOFT_SAND",
+            "moves": [
+                "MOVE_BULLDOZE",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_LONELY",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_POLIWHIRL",
+            "form": 0,
+            "level": 15,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_SCALD",
+                "MOVE_BODY_SLAM",
+                "MOVE_ICY_WIND",
+                "MOVE_MUD_SHOT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [

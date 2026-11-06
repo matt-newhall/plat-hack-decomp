@@ -1,0 +1,44 @@
+#include "macros/btlcmd.inc"
+
+
+_000:
+    CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _failed
+    CheckSubstitute BTLSCR_DEFENDER, _failed
+    CompareMonDataToValue OPCODE_EQU, BTLSCR_DEFENDER, BATTLEMON_ATTACK_STAGE, 0, _failed
+    CalcStrengthSapHeal
+    UpdateVarFromVar OPCODE_SET, BTLVAR_SIDE_EFFECT_MON, BTLVAR_DEFENDER
+    UpdateVar OPCODE_SET, BTLVAR_SIDE_EFFECT_PARAM, MOVE_SUBSCRIPT_PTR_ATTACK_DOWN_1_STAGE
+    Call BATTLE_SUBSCRIPT_UPDATE_STAT_STAGE
+    CheckItemHoldEffect CHECK_NOT_HAVE, BTLSCR_ATTACKER, HOLD_EFFECT_LEECH_BOOST, _heal
+    GetItemEffectParam BTLSCR_ATTACKER, BTLVAR_CALC_TEMP
+    UpdateVar OPCODE_ADD, BTLVAR_CALC_TEMP, 0x00000064
+    UpdateVarFromVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, BTLVAR_CALC_TEMP
+    UpdateVar OPCODE_DIV, BTLVAR_HP_CALC_TEMP, 100
+
+_heal:
+    UpdateVarFromVar OPCODE_SET, BTLVAR_MSG_BATTLER_TEMP, BTLVAR_ATTACKER
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_BATTLE_CTX_STATUS, SYSCTL_SKIP_SPRITE_BLINK
+    CheckAbility CHECK_HAVE, BTLSCR_DEFENDER, ABILITY_LIQUID_OOZE, _liquid_ooze
+    UpdateVar OPCODE_MUL, BTLVAR_HP_CALC_TEMP, -1
+    Call BATTLE_SUBSCRIPT_UPDATE_HP
+    // {0} had its energy drained!
+    PrintMessage BattleStrings_Text_PokemonHadItsEnergyDrained_Ally, TAG_NICKNAME, BTLSCR_DEFENDER
+    Wait
+    WaitButtonABTime 30
+    End
+
+_liquid_ooze:
+    ShowAbilityPopupAuto BTLSCR_DEFENDER
+    CheckAbility CHECK_HAVE, BTLSCR_ATTACKER, ABILITY_MAGIC_GUARD, _end
+    Call BATTLE_SUBSCRIPT_UPDATE_HP
+    // It sucked up the liquid ooze!
+    PrintMessage BattleStrings_Text_ItSuckedUpTheLiquidOoze, TAG_NONE
+    Wait
+    WaitButtonABTime 30
+
+_end:
+    End
+
+_failed:
+    UpdateVar OPCODE_FLAG_ON, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_FAILED
+    End

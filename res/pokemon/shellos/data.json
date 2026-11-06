@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_WATER" ],
     "catch_rate": 190,
-    "base_exp_reward": 73,
+    "base_exp_reward": 65,
     "ev_yields": {
         "hp": 1,
         "attack": 0,
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_WATER_1", "EGG_GROUP_AMORPHOUS" ],
-    "abilities": [ "ABILITY_STICKY_HOLD", "ABILITY_STORM_DRAIN" ],
+    "abilities": [ "ABILITY_STICKY_HOLD", "ABILITY_STORM_DRAIN", "ABILITY_SAND_FORCE" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_PURPLE",
     "flip_sprite": false,
@@ -37,41 +37,40 @@
     ],
     "learnset": {
         "by_level": [
+            [ 1, "MOVE_WATER_GUN" ],
             [ 1, "MOVE_MUD_SLAP" ],
-            [ 2, "MOVE_FREEZE_DRY" ],
-            [ 4, "MOVE_HARDEN" ],
-            [ 7, "MOVE_WATER_PULSE" ],
-            [ 11, "MOVE_MUD_BOMB" ],
-            [ 16, "MOVE_HIDDEN_POWER" ],
-            [ 22, "MOVE_RAIN_DANCE" ],
-            [ 29, "MOVE_BODY_SLAM" ],
+            [ 10, "MOVE_RECOVER" ],
+            [ 15, "MOVE_WATER_PULSE" ],
+            [ 20, "MOVE_ANCIENT_POWER" ],
+            [ 22, "MOVE_MUD_BOMB" ],
+            [ 25, "MOVE_MUD_SPORT" ],
+            [ 28, "MOVE_BODY_SLAM" ],
+            [ 32, "MOVE_MEMENTO" ],
+            [ 35, "MOVE_EARTH_POWER" ],
             [ 37, "MOVE_MUDDY_WATER" ],
-            [ 46, "MOVE_RECOVER" ]
+            [ 44, "MOVE_TOXIC" ],
+            [ 47, "MOVE_SCALD" ],
+            [ 49, "MOVE_HYDRO_PUMP" ]
         ],
         "by_tm": [
-            "TM03",
-            "TM06",
-            "TM07",
             "TM10",
             "TM13",
             "TM14",
-            "TM17",
-            "TM18",
-            "TM21",
-            "TM27",
-            "TM32",
+            "TM31",
+            "TM39",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
             "TM55",
-            "TM58",
-            "TM78",
+            "TM71",
+            "TM80",
             "TM82",
             "TM83",
+            "TM85",
             "TM87",
+            "TM89",
             "TM90",
-            "HM03"
+            "HM03",
+            "HM07"
         ],
         "by_tutor": [
             "MOVE_DIVE",
@@ -79,19 +78,15 @@
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
             "MOVE_ANCIENT_POWER",
-            "MOVE_EARTH_POWER"
+            "MOVE_MEMENTO"
         ],
         "egg_moves": [
+            "MOVE_MIST",
             "MOVE_COUNTER",
+            "MOVE_SLUDGE",
             "MOVE_MIRROR_COAT",
-            "MOVE_STOCKPILE",
-            "MOVE_SWALLOW",
-            "MOVE_SPIT_UP",
             "MOVE_YAWN",
-            "MOVE_MEMENTO",
-            "MOVE_CURSE",
-            "MOVE_AMNESIA",
-            "MOVE_SLUDGE_WAVE"
+            "MOVE_HAZE"
         ]
     },
     "evolutions": [

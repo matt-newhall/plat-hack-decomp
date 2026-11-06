@@ -8,7 +8,7 @@ static const u16 sCommonPickupItems[] = {
     ITEM_SUPER_POTION,
     ITEM_GREAT_BALL,
     ITEM_REPEL,
-    ITEM_ESCAPE_ROPE,
+    ITEM_SUPER_REPEL,
     ITEM_FULL_HEAL,
     ITEM_HYPER_POTION,
     ITEM_ULTRA_BALL,

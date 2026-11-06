@@ -141,6 +141,12 @@ ScriptCommand(AICMD_IFPARTNERDECLAREDMOVECLASS,       AICmd_IfPartnerDeclaredMov
 ScriptCommand(AICMD_LOADPARTNERDECLAREDMOVEEFFECT,    AICmd_LoadPartnerDeclaredMoveEffect)
 ScriptCommand(AICMD_IFPARTNERMOVESFIRST,              AICmd_IfPartnerMovesFirst)
 ScriptCommand(AICMD_IFBATTLERKNOWSMOVEOFTYPE,          AICmd_IfBattlerKnowsMoveOfType)
+ScriptCommand(AICMD_LOADBATTLERATTEMPTEDMOVE,         AICmd_LoadBattlerAttemptedMove)
+ScriptCommand(AICMD_IFMOVEEFFECTIVENESSAGAINST,       AICmd_IfMoveEffectivenessAgainst)
+ScriptCommand(AICMD_IFMOVEBLOCKEDBYTERRAIN,           AICmd_IfMoveBlockedByTerrain)
+ScriptCommand(AICMD_IFTERRAINMOVEFAILS,               AICmd_IfTerrainMoveFails)
+ScriptCommand(AICMD_IFATTACKERHASMOREHP,              AICmd_IfAttackerHasMoreHP)
+ScriptCommand(AICMD_IFPRANKSTERBLOCKEDBYDARK,         AICmd_IfPranksterBlockedByDark)
 
 // clang-format on
 

@@ -1,15 +1,15 @@
 {
     "base_stats": {
-        "hp": 48,
+        "hp": 72,
         "attack": 72,
-        "defense": 48,
-        "speed": 48,
+        "defense": 72,
+        "speed": 72,
         "special_attack": 72,
-        "special_defense": 48
+        "special_defense": 72
     },
     "types": [ "TYPE_PSYCHIC", "TYPE_PSYCHIC" ],
     "catch_rate": 225,
-    "base_exp_reward": 61,
+    "base_exp_reward": 118,
     "ev_yields": {
         "hp": 0,
         "attack": 1,
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_UNDISCOVERED", "EGG_GROUP_UNDISCOVERED" ],
-    "abilities": [ "ABILITY_LEVITATE", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_LEVITATE", "ABILITY_NONE", "ABILITY_NONE" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLACK",
     "flip_sprite": true,
@@ -64,9 +64,12 @@
     ],
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_HIDDEN_POWER" ]
+            [ 1, "MOVE_HIDDEN_POWER" ],
+            [ 26, "MOVE_EXPANDING_FORCE" ]
         ],
-        "by_tm": [  ],
+        "by_tm": [
+            "TM10"
+        ],
         "by_tutor": [  ]
     },
     "evolutions": [  ],

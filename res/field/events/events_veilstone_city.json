@@ -345,18 +345,18 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_FULL_INCENSE",
+            "id": "LOCALID_ITEM_IRON_PLATE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_VEILSTONE_CITY_FULL_INCENSE",
+            "hidden_flag": "FLAG_OBTAINED_VEILSTONE_CITY_IRON_PLATE",
             "script": 7109,
             "initial_dir": 0,
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 690,
-            "z": 613,
+            "x": 693,
+            "z": 584,
             "y": 0
         },
         {
@@ -490,8 +490,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 693,
-            "z": 584,
+            "x": 690,
+            "z": 613,
             "y": 0
         },
         {

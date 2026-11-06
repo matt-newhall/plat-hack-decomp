@@ -7,7 +7,6 @@
 #include "constants/battle/trainer_ai.h"
 #include "generated/abilities.h"
 #include "generated/ai_flags.h"
-#include "generated/genders.h"
 #include "generated/pokemon_types.h"
 #include "macros/aicmd.inc"
 
@@ -136,6 +135,17 @@ Basic_CheckSoundproof:
     IfCurrentMoveIsSound ScoreMinus10
 
 Basic_ScoreMoveEffect:
+    // If the active terrain will stop this move doing anything, e.g. sleep in Electric Terrain,
+    // status in Misty Terrain or priority into a grounded foe in Psychic Terrain, score -30.
+    IfMoveBlockedByTerrain ScoreMinus30
+
+    // Dark-types are immune to status moves w/ Prankster, and Grass-types, Overcoat and
+    // Safety Goggles to powder moves. Either way score -30.
+    IfPranksterBlockedByDark ScoreMinus30
+    LoadCurrentMove
+    IfLoadedInTable Basic_StatusPowderMoves, Basic_CheckStatusPowder
+
+Basic_ScoreMoveEffectByEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Basic_CheckCannotSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWDER, Basic_CheckPowder
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Basic_CheckCannotExplode
@@ -160,6 +170,8 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_BIDE, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Basic_CheckCanForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Basic_CheckCanRecoverHP
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STRENGTH_SAP, Basic_CheckStrengthSap
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POLTERGEIST, Basic_CheckPoltergeist
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Basic_CheckLifeDew
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Basic_CheckCannotPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Basic_CheckAlreadyUnderLightScreen
@@ -171,6 +183,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Basic_CheckCannotConfuse
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2, Basic_CheckHighStatStage_Attack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_2, Basic_CheckHighStatStage_Defense
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Basic_CheckHighStatStage_Defense
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_UP_2, Basic_CheckHighStatStage_Speed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_2, Basic_CheckHighStatStage_SpAttack
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Basic_CheckHighStatStage_SpDefense
@@ -191,6 +204,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_LEECH_SEED, Basic_CheckCannotLeechSeed
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DISABLE, Basic_CheckCannotDisable
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LEVEL_DAMAGE_FLAT, Basic_CheckNonStandardDamageOrChargeTurn
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEAL_CURRENT_HP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_DAMAGE_1_TO_150_LEVEL, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COUNTER, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ENCORE, Basic_CheckCannotEncore
@@ -207,9 +221,7 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SANDSTORM, Basic_CheckSandstorm
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION, Basic_CheckCannotConfuse
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INFATUATE, Basic_CheckCannotAttract
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_FRIENDSHIP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL, Basic_CheckNonStandardDamageOrChargeTurn
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POWER_BASED_ON_LOW_FRIENDSHIP, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STATUS, Basic_CheckAlreadyUnderSafeguard
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PSYWAVE, Basic_CheckMagnitude
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PASS_STATS_AND_STATUS, Basic_CheckBatonPass
@@ -247,6 +259,8 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_STATUS, Basic_CheckCanRefreshStatus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INCREASE_POWER_WITH_WEIGHT, Basic_CheckNonStandardDamageOrChargeTurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Basic_CheckTickle
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_DOWN, Basic_CheckTearfulLook
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POISON_SPEED_DOWN, Basic_CheckToxicThread
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Basic_CheckCosmicPower
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Basic_CheckBulkUp
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Basic_CheckCalmMind
@@ -288,6 +302,8 @@ Basic_ScoreMoveEffect:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_IN_3_TURNS, Basic_CheckWish
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEEL_BEAM, Basic_CheckSteelBeam
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SURVIVE_WITH_1_HP, Basic_CheckEndure
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Basic_CheckTerrainMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_HIT, Basic_CheckContrarySpeedDrop
     PopOrEnd
 
 Basic_CheckCannotSleep:
@@ -308,22 +324,23 @@ Basic_CheckCannotSleep_Terminate:
     PopOrEnd
 
 Basic_CheckCannotExplode:
-    // If the target is immune, score -10.
-    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+    // The move does nothing at all in these cases, so the penalty has to outweigh every bonus
+    // Expert can hand the same move back: a self-KO which cannot even hit is never worth a turn.
+    IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus30
 
-    // If the target has Damp and we do not have Mold Breaker, score -10.
+    // If the target has Damp and we do not have Mold Breaker, the move fails outright.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckLastMon
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_DAMP, ScoreMinus10
+    IfLoadedEqualTo ABILITY_DAMP, ScoreMinus30
 
 Basic_CheckLastMon:
-    // If we are on our last Pokemon and the target is not also on their last Pokemon,
-    // score -10.
+    // Fainting the last Pokemon while the target still has some in reserve loses the battle on
+    // the spot, so it is ruled out as hard as a move which simply fails.
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo 0, Basic_Explode_Terminate
     CountAlivePartyBattlers AI_BATTLER_DEFENDER
-    IfLoadedNotEqualTo 0, ScoreMinus10
+    IfLoadedNotEqualTo 0, ScoreMinus30
 
     // If the target is also on their last Pokemon, score -1 instead of -10.
     GoTo ScoreMinus1
@@ -371,7 +388,17 @@ Basic_CheckHighStatStage_Speed:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
     IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
-    PopOrEnd 
+    PopOrEnd
+
+Basic_CheckContrarySpeedDrop:
+    // Contrary turns the Speed drop into a boost, so it is judged as Flame Charge would be.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_CONTRARY, Basic_CheckContrarySpeedDrop_End
+    IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, ScoreMinus10
+    IfStatStageEqualTo AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, ScoreMinus10
+
+Basic_CheckContrarySpeedDrop_End:
+    PopOrEnd
 
 Basic_CheckHighStatStage_SpAttack:
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -459,6 +486,14 @@ Basic_CheckClearBodyEffect:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
 
+    // Defiant and Competitive do not waste the drop, they answer it with a +2 boost, so the
+    // move is worse than doing nothing at all. Neither blocks the drop, so unlike the three
+    // below they are not suppressed by Mold Breaker. The penalty has to clear the flat +6
+    // Expert_StatusMoveBonus hands every status move afterwards.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus20
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus20
+
     // Mold Breaker suppresses all three of these when the drop comes from its user's move.
     // Contrary does not waste the drop, it inverts it, so the move hands the target a boost.
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -534,6 +569,18 @@ Basic_CheckCanRecoverHP:
 Basic_CheckCanRecoverHP_Terminate:
     PopOrEnd 
 
+Basic_CheckStrengthSap:
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedNotEqualTo ABILITY_LIQUID_OOZE, Basic_CheckCanRecoverHP
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedNotEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    GoTo Basic_CheckCanRecoverHP
+
+Basic_CheckPoltergeist:
+    LoadHeldItem AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ITEM_NONE, ScoreMinus10
+    PopOrEnd
+
 Basic_CheckCannotPoison:
     // If the target is immune to the usual effects of Poison for any reason, score -10.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
@@ -590,6 +637,15 @@ Basic_CheckAuroraVeil_CheckReflect:
 Basic_CheckOHKOWouldFail:
     // If the OHKO move would always fail for any reason, score -10.
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
+
+    // Ice-types are immune to Sheer Cold, regardless of Mold Breaker.
+    IfMoveNotEqualTo MOVE_SHEER_COLD, Basic_CheckOHKOWouldFail_Sturdy
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ICE, ScoreMinus10
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_ICE, ScoreMinus10
+
+Basic_CheckOHKOWouldFail_Sturdy:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckOHKOWouldFail_Levels
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -605,19 +661,31 @@ Basic_CheckMagnitude:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LEVITATE, ScoreMinus10
 
+Basic_CheckStatusPowder:
+    PushAndGoTo Basic_CheckPowder
+    GoTo Basic_ScoreMoveEffectByEffect
+
+Basic_StatusPowderMoves:
+    TableEntry MOVE_COTTON_SPORE
+    TableEntry MOVE_POISON_POWDER
+    TableEntry MOVE_SLEEP_POWDER
+    TableEntry MOVE_SPORE
+    TableEntry MOVE_STUN_SPORE
+    TableEntry TABLE_END
+
 Basic_CheckPowder:
-    // Powder does nothing to a Grass-type, nor to a target behind Safety Goggles or Overcoat.
+    // Powder moves do nothing to a Grass-type, nor to a target behind Safety Goggles or Overcoat.
     // Mold Breaker ignores the ability, but neither the typing nor the item.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus30
     LoadTypeFrom LOAD_DEFENDER_TYPE_2
-    IfLoadedEqualTo TYPE_GRASS, ScoreMinus10
+    IfLoadedEqualTo TYPE_GRASS, ScoreMinus30
     LoadHeldItemEffect AI_BATTLER_DEFENDER
-    IfLoadedEqualTo HOLD_EFFECT_OVERCOAT, ScoreMinus10
+    IfLoadedEqualTo HOLD_EFFECT_OVERCOAT, ScoreMinus30
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckPowder_Terminate
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_OVERCOAT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_OVERCOAT, ScoreMinus30
 
 Basic_CheckPowder_Terminate:
     PopOrEnd
@@ -663,7 +731,12 @@ Basic_CheckAlreadyUnderReflect:
     PopOrEnd 
 
 Basic_CheckCannotParalyze:
-    // If the target cannot be paralyzed for any reason, score -10.
+    // If the target cannot be paralyzed for any reason, score -10. Electric-types cannot be
+    // paralyzed at all, regardless of Mold Breaker, so they score -30.
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus30
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus30
     IfMoveEffectivenessEquals TYPE_MULTI_IMMUNE, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
@@ -742,7 +815,12 @@ Basic_CheckLockOn_NoGuard:
     PopOrEnd 
 
 Basic_CheckMeanLook:
+    // Ghost-types cannot be trapped, so the move does nothing to them: score -30.
     // If the target is already under the effect of Mean Look, score -10.
+    LoadTypeFrom LOAD_DEFENDER_TYPE_1
+    IfLoadedEqualTo TYPE_GHOST, ScoreMinus30
+    LoadTypeFrom LOAD_DEFENDER_TYPE_2
+    IfLoadedEqualTo TYPE_GHOST, ScoreMinus30
     IfVolatileStatus AI_BATTLER_DEFENDER, VOLATILE_CONDITION_MEAN_LOOK, ScoreMinus10
     PopOrEnd 
 
@@ -813,6 +891,19 @@ Basic_CheckAlreadyUnderSafeguard:
     PopOrEnd 
 
 Basic_CheckMemento:
+    // Memento spends the user's life on the drop, so an ability which turns that drop into a
+    // boost is the worst outcome available: the target ends the turn stronger and the user is
+    // gone. None of the three blocks the drop, so Mold Breaker does not suppress them.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus30
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus30
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus30
+
+    // A Clear Amulet blanks the drop the same way Clear Body does, but is an item and so is
+    // not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
     // If the target's ability blocks the stat drop and the attacker does not have Mold Breaker,
     // score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
@@ -1003,6 +1094,45 @@ Basic_CheckTickle_CheckStatStages:
     IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_DEFENSE, 0, ScoreMinus8
     PopOrEnd 
 
+Basic_CheckTearfulLook:
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, ScoreMinus10
+
+    // Defiant and Competitive answer each drop with a +2 boost, and this move lands two drops.
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus20
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus20
+
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckTearfulLook_CheckStatStages
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
+
+Basic_CheckTearfulLook_CheckStatStages:
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_ATTACK, 0, Basic_CheckTearfulLook_AttackAtMin
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 0, ScoreMinus8
+    PopOrEnd 
+
+Basic_CheckTearfulLook_AttackAtMin:
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SP_ATTACK, 0, ScoreMinus10
+    GoTo ScoreMinus8
+
+Basic_CheckToxicThread:
+    // only fail if NEITHER effect works
+    IfStatStageEqualTo AI_BATTLER_DEFENDER, BATTLE_STAT_SPEED, 0, Basic_CheckCannotPoison
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Basic_CheckCannotPoison
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckToxicThread_End
+    LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Basic_CheckCannotPoison
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Basic_CheckCannotPoison
+
+Basic_CheckToxicThread_End:
+    PopOrEnd 
+
 Basic_CheckCosmicPower:
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
@@ -1069,6 +1199,12 @@ Basic_CheckShellSmash:
     GoTo ScoreMinus10
 
 Basic_CheckShellSmash_End:
+    PopOrEnd
+
+Basic_CheckTerrainMove:
+    // If this terrain is already up, or a permanent terrain from the map is in place, the move
+    // fails, so score -10.
+    IfTerrainMoveFails ScoreMinus10
     PopOrEnd
 
 Basic_CheckGravityActive:
@@ -1251,6 +1387,7 @@ Basic_FlingPoison_AttackerChecks:
     IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus5
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus5
     IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
+    IfLoadedEqualTo ABILITY_TOXIC_BOOST, ScoreMinus5
     AddToMoveScore 3
     PopOrEnd 
 
@@ -1280,6 +1417,7 @@ Basic_FlingBurn_AttackerChecks:
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus5
     IfLoadedEqualTo ABILITY_WATER_BUBBLE, ScoreMinus5
     IfLoadedEqualTo ABILITY_GUTS, ScoreMinus5
+    IfLoadedEqualTo ABILITY_FLARE_BOOST, ScoreMinus5
     AddToMoveScore 3
     PopOrEnd 
 
@@ -1484,29 +1622,12 @@ Basic_CheckCaptivate:
     // If the target's ability is any of Oblivious, Clear Body, White Smoke or Contrary and the
     // attacker's ability is not Mold Breaker, score -10.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckGender
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCaptivate_CheckStatStage
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_OBLIVIOUS, ScoreMinus10
     IfLoadedEqualTo ABILITY_CLEAR_BODY, ScoreMinus10
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, ScoreMinus10
     IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
-
-Basic_CheckCaptivate_CheckGender:
-    // If the target and the attacker share gender or the target has no gender, score -10.
-    LoadGender AI_BATTLER_ATTACKER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCaptivate_CheckMale
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCaptivate_CheckFemale
-    GoTo ScoreMinus10
-
-Basic_CheckCaptivate_CheckMale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_FEMALE, Basic_CheckCaptivate_CheckStatStage
-    GoTo ScoreMinus10
-
-Basic_CheckCaptivate_CheckFemale:
-    LoadGender AI_BATTLER_DEFENDER
-    IfLoadedEqualTo GENDER_MALE, Basic_CheckCaptivate_CheckStatStage
-    GoTo ScoreMinus10
 
 Basic_CheckCaptivate_CheckStatStage:
     // If the target is already at -6, score -10.
@@ -1693,6 +1814,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Expert_StatusSleep
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_DEFENSE, Expert_Explosion
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HALVE_SP_DEFENSE, Expert_Explosion
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEAL_CURRENT_HP, Expert_FinalGambit
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_UP, Expert_StatusMoveBonus
@@ -1703,6 +1825,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESET_STAT_CHANGES, Expert_Haze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FORCE_SWITCH, Expert_ForceSwitch
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RESTORE_HALF_HP, Expert_Recovery
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STRENGTH_SAP, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_ALLIES_QUARTER, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BADLY_POISON, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_LIGHT_SCREEN, Expert_Screen
@@ -1724,10 +1847,12 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SPEED_DOWN_2, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_EVA_DOWN_2, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_REFLECT, Expert_Screen
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, Expert_StatusPoison
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_POISON_SPEED_DOWN, Expert_StatusPoison
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_BURN, Expert_StatusBurn
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_PARALYZE, Expert_StatusParalyze
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PARALYZE_HIT, Expert_StatusParalyzeHit
@@ -1803,6 +1928,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STEAL_STATUS_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TAUNT, Expert_Taunt
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_DOWN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_DOWN, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_DEF_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_Setup
@@ -1810,9 +1936,11 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SHELL_SMASH, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_3, Expert_Setup
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ATK_SP_ATK_UP, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_REMOVE_FLYING_TYPE, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_GRAVITY, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SET_TERRAIN, Expert_TerrainMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DOUBLE_SPEED_3_TURNS, Expert_Tailwind
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_METAL_BURST, Expert_MetalBurst
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_ITEM_USE, Expert_StatusMoveBonus
@@ -1848,6 +1976,11 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Expert_StatusMoveBonus
 
+    // Present has power 1, so the damage scoring skips it entirely and it would otherwise be
+    // judged as a 0-damage move. Its power is random and one roll in five heals the target, so
+    // there is nothing worth estimating; it is paid a flat middling attack score instead.
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_RANDOM_POWER_MAYBE_HEAL, ScorePlus6
+
     // All other moves have no additional logic.
     PopOrEnd 
 
@@ -1870,8 +2003,10 @@ Expert_MagnetRise_ScorePlus3:
     PopOrEnd
 
 Expert_Powder:
+    // The move does nothing at all to a target with no Fire move to punish, so it is left at
+    // the base score rather than being paid for as a status move.
     IfBattlerKnowsMoveOfType AI_BATTLER_DEFENDER, TYPE_FIRE, Expert_Powder_TargetKnowsFireMove
-    GoTo Expert_StatusMoveBonus
+    PopOrEnd
 
 Expert_Powder_TargetKnowsFireMove:
     IfRandomLessThan 128, Expert_StatusMoveBonus
@@ -1882,6 +2017,17 @@ Expert_StatusMoveBonus:
     // +6 puts them level with the bonus EvalAttack hands the best damaging move 80% of the time,
     // so they compete with attacking rather than being crowded out by it.
     AddToMoveScore 6
+    PopOrEnd
+
+Expert_TerrainMove:
+    // A terrain move that would fail keeps only the Basic penalty. Otherwise +9 if the
+    // attacker holds a Terrain Extender, which stretches the terrain to 8 turns, else +8.
+    IfTerrainMoveFails Expert_TerrainMove_End
+    LoadHeldItemEffect AI_BATTLER_ATTACKER
+    IfLoadedEqualTo HOLD_EFFECT_EXTEND_TERRAIN, ScorePlus9
+    GoTo ScorePlus8
+
+Expert_TerrainMove_End:
     PopOrEnd
 
 Expert_StatusSleep:
@@ -1951,11 +2097,19 @@ Expert_Explosion_RiskyGamble:
 Expert_Explosion_End:
     PopOrEnd
 
+Expert_FinalGambit:
+    IfSpeedCompareEqualTo COMPARE_SPEED_SLOWER, ScorePlus6
+    IfAttackerHasMoreHP ScorePlus8
+    IfDefenderCanKO ScorePlus7
+    GoTo ScorePlus6
+
 Expert_Memento:
     // Memento keeps its own copy of the ladder rather than sharing Explosion's: it is not on the
     // Risky list, so its rolls must not fall into the gamble above.
+    // Fainting with nothing to bring in behind the drops throws the battle rather than setting
+    // one up, so the move is ruled out rather than merely left unrewarded.
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
-    IfLoadedEqualTo 0, Expert_Memento_End
+    IfLoadedEqualTo 0, ScoreMinus20
     AddToMoveScore 6
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 10, ScorePlus10
     IfHPPercentLessThan AI_BATTLER_ATTACKER, 33, Expert_Memento_TryScorePlus8
@@ -1987,8 +2141,9 @@ Expert_Rollout:
 
 Expert_SuckerPunch:
     // A repeated Sucker Punch is the easiest thing in the game to play around, so back off from
-    // using it twice running whether or not the first one landed.
-    LoadBattlerPreviousMove AI_BATTLER_ATTACKER
+    // using it twice running whether or not the first one landed, or was blocked before it
+    // could land.
+    LoadBattlerAttemptedMove AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo MOVE_SUCKER_PUNCH, Expert_SuckerPunch_End
     IfRandomLessThan 128, Expert_SuckerPunch_End
     AddToMoveScore -20
@@ -2109,6 +2264,7 @@ Expert_Setup_Classify:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_SetupSplitSpecial
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_2, Expert_SetupDefensive
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STOCKPILE, Expert_SetupDefensive
@@ -2116,30 +2272,81 @@ Expert_Setup_Classify:
 Expert_SetupOffensive:
     // +6 puts setup level with the bonus EvalAttack hands the best damaging move 80% of the
     // time, so it competes with attacking rather than being crowded out by it. A target which
-    // cannot act this turn is a free one.
+    // cannot act this turn is a free one; short of that, a target which needs more than three
+    // turns to finish the AI is leaving the turn free anyway, and moving first buys another.
     AddToMoveScore 6
     IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupOffensive_ScorePlus3
-    GoTo Expert_Setup_CheckSlowAndFragile
+    IfDefenderCanKOInHits 3, Expert_SetupOffensive_CheckStages
+    AddToMoveScore 1
+    IfDoesNotMoveFirst Expert_SetupOffensive_CheckStages
+    AddToMoveScore 1
+    GoTo Expert_SetupOffensive_CheckStages
 
 Expert_SetupOffensive_ScorePlus3:
     AddToMoveScore 3
-    GoTo Expert_Setup_CheckSlowAndFragile
+    GoTo Expert_SetupOffensive_CheckStages
 
 Expert_SetupDefensive:
     AddToMoveScore 6
-    IfRandomLessThan 13, Expert_Setup_CheckSlowAndFragile
-    IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupDefensive_ScorePlus2
-    GoTo Expert_SetupDefensive_CheckBothDefenses
+    IfBattlerIncapacitated AI_BATTLER_DEFENDER, Expert_SetupDefensive_TryScorePlus2
+    GoTo Expert_SetupDefensive_CheckPayoffMoves
 
-Expert_SetupDefensive_ScorePlus2:
+Expert_SetupDefensive_TryScorePlus2:
+    IfRandomLessThan 13, Expert_SetupDefensive_CheckPayoffMoves
     AddToMoveScore 2
 
-Expert_SetupDefensive_CheckBothDefenses:
-    // A move covering both defenses is worth more while neither of them is invested in yet.
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_UP, Expert_SetupDefensive_CheckDefenseStages
-    IfCurrentMoveEffectNotEqualTo BATTLE_EFFECT_STOCKPILE, Expert_Setup_CheckSlowAndFragile
+Expert_SetupDefensive_CheckPayoffMoves:
+    // Stored Power, Power Trip and Body Press spend the boost back as damage, so the turn is not purely
+    // defensive when the AI is carrying one.
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_STORED_POWER, Expert_SetupDefensive_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_POWER_TRIP, Expert_SetupDefensive_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_BODY_PRESS, Expert_SetupDefensive_TryScorePlus1
+    GoTo Expert_SetupDefensive_CheckDefense
 
-Expert_SetupDefensive_CheckDefenseStages:
+Expert_SetupDefensive_TryScorePlus1:
+    IfRandomLessThan 128, Expert_SetupDefensive_CheckDefense
+    AddToMoveScore 1
+
+Expert_SetupDefensive_CheckDefense:
+    // The boost is worth most against a target which can only attack down the half being
+    // raised, and least once that half is already at +2.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupDefensive_DefenseEffects, Expert_SetupDefensive_CheckSpDefense
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupDefensive_CheckDefenseStage
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupDefensive_PhysicalOnlyTarget
+    GoTo Expert_SetupDefensive_CheckDefenseStage
+
+Expert_SetupDefensive_PhysicalOnlyTarget:
+    AddToMoveScore 1
+
+Expert_SetupDefensive_CheckDefenseStage:
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 7, Expert_SetupDefensive_DefenseSaturated
+    GoTo Expert_SetupDefensive_CheckSpDefense
+
+Expert_SetupDefensive_DefenseSaturated:
+    AddToMoveScore -1
+
+Expert_SetupDefensive_CheckSpDefense:
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupDefensive_SpDefenseEffects, Expert_SetupDefensive_CheckBothDefenses
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_SetupDefensive_CheckSpDefenseStage
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupDefensive_SpecialOnlyTarget
+    GoTo Expert_SetupDefensive_CheckSpDefenseStage
+
+Expert_SetupDefensive_SpecialOnlyTarget:
+    AddToMoveScore 1
+
+Expert_SetupDefensive_CheckSpDefenseStage:
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 7, Expert_SetupDefensive_SpDefenseSaturated
+    GoTo Expert_SetupDefensive_CheckBothDefenses
+
+Expert_SetupDefensive_SpDefenseSaturated:
+    AddToMoveScore -1
+
+Expert_SetupDefensive_CheckBothDefenses:
+    // A move covering both defenses is worth more while either of them is still uninvested.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupDefensive_BothDefenseEffects, Expert_Setup_CheckSlowAndFragile
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 8, Expert_SetupDefensive_ScorePlus2Again
     IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 8, Expert_SetupDefensive_ScorePlus2Again
     GoTo Expert_Setup_CheckSlowAndFragile
@@ -2147,6 +2354,33 @@ Expert_SetupDefensive_CheckDefenseStages:
 Expert_SetupDefensive_ScorePlus2Again:
     AddToMoveScore 2
     GoTo Expert_Setup_CheckSlowAndFragile
+
+Expert_SetupDefensive_DefenseEffects:
+    TableEntry BATTLE_EFFECT_DEF_UP
+    TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_STOCKPILE
+    TableEntry BATTLE_EFFECT_ATK_DEF_UP
+    TableEntry BATTLE_EFFECT_CURSE
+    TableEntry BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry TABLE_END
+
+Expert_SetupDefensive_SpDefenseEffects:
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_STOCKPILE
+    TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry TABLE_END
+
+Expert_SetupDefensive_BothDefenseEffects:
+    TableEntry BATTLE_EFFECT_DEF_SPD_UP
+    TableEntry BATTLE_EFFECT_STOCKPILE
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry TABLE_END
 
 Expert_SetupSplitPhysical:
     IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_SetupOffensive
@@ -2179,9 +2413,49 @@ Expert_SetupSpecialSweeper_CheckSpAttackStage:
 Expert_SetupSpecialSweeper_ScoreMinus1:
     AddToMoveScore -1
 
+Expert_SetupOffensive_CheckStages:
+    // A stat already sitting at +2 has most of its damage banked, so another boost of it buys
+    // less than the turn costs. A move raising both offences is charged for each half.
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupOffensive_AttackEffects, Expert_SetupOffensive_CheckSpAttack
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 7, Expert_SetupOffensive_AttackSaturated
+    GoTo Expert_SetupOffensive_CheckSpAttack
+
+Expert_SetupOffensive_AttackSaturated:
+    AddToMoveScore -1
+
+Expert_SetupOffensive_CheckSpAttack:
+    LoadCurrentMoveEffect
+    IfLoadedNotInTable Expert_SetupOffensive_SpAttackEffects, Expert_Setup_CheckSlowAndFragile
+    IfStatStageGreaterThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 7, Expert_SetupOffensive_SpAttackSaturated
+    GoTo Expert_Setup_CheckSlowAndFragile
+
+Expert_SetupOffensive_SpAttackSaturated:
+    AddToMoveScore -1
+    GoTo Expert_Setup_CheckSlowAndFragile
+
+Expert_SetupOffensive_AttackEffects:
+    TableEntry BATTLE_EFFECT_ATK_UP
+    TableEntry BATTLE_EFFECT_ATK_UP_2
+    TableEntry BATTLE_EFFECT_ATK_SPD_UP
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_UP
+    TableEntry BATTLE_EFFECT_ATK_DEF_UP
+    TableEntry BATTLE_EFFECT_CURSE
+    TableEntry BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF
+    TableEntry TABLE_END
+
+Expert_SetupOffensive_SpAttackEffects:
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_UP
+    TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
+    TableEntry BATTLE_EFFECT_QUIVER_DANCE
+    TableEntry TABLE_END
+
 Expert_Setup_CheckSlowAndFragile:
     // Boosting is a losing trade against something which both moves first and only needs two
-    // turns to finish the job.
+    // turns to finish the job - unless the boost came attached to an attack, which loses the AI
+    // nothing for having been used.
+    LoadCurrentMoveEffect
+    IfLoadedInTable Expert_ContrarySelfDropEffects, Expert_Setup_End
     IfMovesFirst Expert_Setup_End
     IfDefenderCanKOInHits 2, ScoreMinus5
 
@@ -2315,6 +2589,8 @@ Expert_AttackDropOnHit:
     IfMoveEqualTo MOVE_LUNGE, Expert_AttackDropOnHit_CheckBestDamage
     IfMoveEqualTo MOVE_SNARL, Expert_AttackDropOnHit_CheckBestDamage
     IfMoveEqualTo MOVE_STRUGGLE_BUG, Expert_AttackDropOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_MYSTICAL_FIRE, Expert_AttackDropOnHit_CheckBestDamage
+    IfMoveEqualTo MOVE_BREAKING_SWIPE, Expert_AttackDropOnHit_CheckBestDamage
     PopOrEnd
 
 Expert_AttackDropOnHit_CheckBestDamage:
@@ -2327,17 +2603,18 @@ Expert_AttackDropOnHit_CheckBestDamage:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
 
+    // Mold Breaker suppresses every ability below, leaving the drop to land as normal.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_AttackDropOnHit_CheckClass
+
     // Contrary, Defiant and Competitive do not waste the drop, they turn it into a boost for
     // the target, so the move is worse than an attack which earns no drop bonus at all.
-    // Only Contrary is suppressed by Mold Breaker.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_DEFIANT, Expert_AttackDropOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_AttackDropOnHit_ScoreMinus5
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AttackDropOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AttackDropOnHit_ScorePlus5
-    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_AttackDropOnHit_CheckClass
-    LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_AttackDropOnHit_ScoreMinus5
 
 Expert_AttackDropOnHit_CheckClass:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_ATTACK_HIT, Expert_AttackDropOnHit_CheckPhysical
@@ -2364,6 +2641,7 @@ Expert_AttackDropOnHit_CheckDoubles:
     IfLoadedNotMask BATTLE_TYPE_DOUBLES, Expert_AttackDropOnHit_End
     IfMoveEqualTo MOVE_SNARL, Expert_AttackDropOnHit_ScorePlus1
     IfMoveEqualTo MOVE_STRUGGLE_BUG, Expert_AttackDropOnHit_ScorePlus1
+    IfMoveEqualTo MOVE_BREAKING_SWIPE, Expert_AttackDropOnHit_ScorePlus1
     PopOrEnd
 
 Expert_AttackDropOnHit_ScorePlus1:
@@ -2373,28 +2651,37 @@ Expert_AttackDropOnHit_End:
     PopOrEnd
 
 Expert_RapidSpin:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_RapidSpin_ClearsHazards
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_RapidSpin_ClearsHazards
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_RapidSpin_ClearsHazards
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_RapidSpin_ClearsHazards
+    // A move EvalAttack already picked as the best hit has been paid for once and is not paid
+    // for again, for the clear or for the Speed. Sweeping the AI's own side settles the score on
+    // its own; with nothing to clear the spin is worth what its Speed boost is worth.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_RapidSpin_End
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, ScorePlus7
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, ScorePlus7
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, ScorePlus7
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, ScorePlus7
     GoTo Expert_SpeedBoostOnHit
 
-Expert_RapidSpin_ClearsHazards:
-    IfRandomLessThan 128, Expert_RapidSpin_ScorePlus6
-    AddToMoveScore 7
-    GoTo Expert_SpeedBoostOnHit
-
-Expert_RapidSpin_ScorePlus6:
-    AddToMoveScore 6
+Expert_RapidSpin_End:
+    PopOrEnd
 
 Expert_SpeedBoostOnHit:
     FlagBestDamageMove
     IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_SpeedBoostOnHit_End
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_SpeedBoostOnHit_End
+
+    // Contrary inverts the boost into a Speed drop, so the move is worse than an attack which
+    // earns no Speed bonus at all.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedBoostOnHit_ScorePlus5
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedBoostOnHit_ScoreMinus5
+
+Expert_SpeedBoostOnHit_CheckSpeed:
     IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedBoostOnHit_ScorePlus5
     AddToMoveScore 6
+    PopOrEnd
+
+Expert_SpeedBoostOnHit_ScoreMinus5:
+    AddToMoveScore -5
     PopOrEnd
 
 Expert_SpeedBoostOnHit_ScorePlus5:
@@ -2425,26 +2712,25 @@ Expert_SpeedDownOnHit_CheckBestDamage:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
 
-    // Contrary, Defiant and Competitive do not waste the drop, they turn it into a boost for
-    // the target, so the move is worse than an attack which earns no drop bonus at all.
-    // Only Contrary is suppressed by Mold Breaker.
+    // Contrary, Defiant and Competitive turn the drop into a boost for the target, so the drop
+    // is worth no more than it is against a target which simply ignores it.
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_DEFIANT, Expert_SpeedDownOnHit_ScoreMinus5
-    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_SpeedDownOnHit_ScoreMinus5
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_SpeedDownOnHit_ScorePlus5
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_SpeedDownOnHit_ScorePlus5
-    IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_CheckSpeed
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_SpeedDownOnHit_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_SpeedDownOnHit_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_SpeedDownOnHit_CheckMoldBreaker
+    GoTo Expert_SpeedDownOnHit_CheckSpeed
+
+Expert_SpeedDownOnHit_CheckMoldBreaker:
+    // Mold Breaker suppresses the ability, so the drop lands as it would on any other target.
     LoadBattlerAbility AI_BATTLER_ATTACKER
-    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_SpeedDownOnHit_ScoreMinus5
+    IfLoadedNotEqualTo ABILITY_MOLD_BREAKER, Expert_SpeedDownOnHit_ScorePlus5
 
 Expert_SpeedDownOnHit_CheckSpeed:
     IfSpeedCompareNotEqualTo COMPARE_SPEED_SLOWER, Expert_SpeedDownOnHit_ScorePlus5
     AddToMoveScore 6
     GoTo Expert_SpeedDownOnHit_CheckDoubles
-
-Expert_SpeedDownOnHit_ScoreMinus5:
-    AddToMoveScore -5
-    PopOrEnd
 
 Expert_SpeedDownOnHit_ScorePlus5:
     AddToMoveScore 5
@@ -2465,40 +2751,38 @@ Expert_SpeedDownOnHit_End:
 
 Expert_ContrarySelfDrop:
     // These moves pay for their damage by lowering the user's own stats, so Contrary turns the
-    // drawback into a free boost and the move buys an attack and a setup turn in one slot.
-    // Only pay for it while the stats it would raise still have room to move.
+    // drawback into a free boost and the move buys an attack and a setup turn in one slot. It
+    // is scored as the setup move it imitates: Overheat reads as Nasty Plot, Superpower as Bulk
+    // Up, Close Combat as Cosmic Power, and Hammer Arm as Flame Charge.
+    //
+    // A hit which is already the best damage available, or which kills outright, is doing its
+    // job as an attack and is left to the ordinary damage scoring.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo ABILITY_CONTRARY, Expert_ContrarySelfDrop_End
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_ContrarySelfDrop_SpAttack
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_ContrarySelfDrop_AttackDefense
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_ContrarySelfDrop_DefenseSpDefense
-    GoTo Expert_ContrarySelfDrop_Speed
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_ContrarySelfDrop_End
+    IfCurrentMoveKills ROLL_FOR_DAMAGE, Expert_ContrarySelfDrop_End
 
-Expert_ContrarySelfDrop_SpAttack:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_ATTACK, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
+    // The guards on Expert_Setup are entered past deliberately. Unaware reading through the
+    // boost, or a target which can knock the AI out, both cost a pure setup move its whole
+    // turn; these moves still land their damage either way.
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USER_SP_ATK_DOWN_2, Expert_SetupSpecialSweeper
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF, Expert_SetupSplitPhysical
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_SPD_DOWN_HIT, Expert_SetupDefensive
 
-Expert_ContrarySelfDrop_AttackDefense:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_ATTACK, 12, Expert_ContrarySelfDrop_ScorePlus2
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
-
-Expert_ContrarySelfDrop_DefenseSpDefense:
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SP_DEFENSE, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
-
-Expert_ContrarySelfDrop_Speed:
     // Under Trick Room the extra Speed is a liability rather than a reward.
     IfFieldConditionsMask FIELD_CONDITION_TRICK_ROOM, Expert_ContrarySelfDrop_End
-    IfStatStageLessThan AI_BATTLER_ATTACKER, BATTLE_STAT_SPEED, 12, Expert_ContrarySelfDrop_ScorePlus2
-    PopOrEnd
-
-Expert_ContrarySelfDrop_ScorePlus2:
-    AddToMoveScore 2
+    GoTo Expert_SpeedBoostOnHit_CheckSpeed
 
 Expert_ContrarySelfDrop_End:
     PopOrEnd
+
+Expert_ContrarySelfDropEffects:
+    TableEntry BATTLE_EFFECT_USER_SP_ATK_DOWN_2
+    TableEntry BATTLE_EFFECT_LOWER_OWN_ATK_AND_DEF
+    TableEntry BATTLE_EFFECT_DEF_SPD_DOWN_HIT
+    TableEntry BATTLE_EFFECT_SPEED_DOWN_HIT
+    TableEntry TABLE_END
 
 
 Expert_Haze:
@@ -2657,13 +2941,21 @@ Expert_StatusPoison_CheckRain:
     IfLoadedEqualTo AI_WEATHER_RAINING, Expert_StatusPoison_End
 
 Expert_StatusPoison_CheckPayoff:
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusPoison_CheckTargetIsHarmless
-    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_VENOSHOCK, Expert_StatusPoison_CheckTargetIsHarmless
-    GoTo Expert_StatusPoison_End
+    // A target with nothing but status moves has no way to outrace the chip damage, so the
+    // poison is worth a little more than it is against something which can hit back.
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_CheckFollowUp
+    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_CheckFollowUp
+    AddToMoveScore 1
 
-Expert_StatusPoison_CheckTargetIsHarmless:
-    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_StatusPoison_End
-    IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_SPECIAL, Expert_StatusPoison_End
+Expert_StatusPoison_CheckFollowUp:
+    // Hex and Venoshock double off the status, so landing it sets up the next turn as well as
+    // starting the chip. Poison is worth the turn either way.
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_HEX, Expert_StatusPoison_ScorePlus2
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_VENOSHOCK, Expert_StatusPoison_ScorePlus2
+    AddToMoveScore 1
+    PopOrEnd
+
+Expert_StatusPoison_ScorePlus2:
     AddToMoveScore 2
 
 Expert_StatusPoison_End:
@@ -2842,18 +3134,19 @@ Expert_AcidSpray:
     LoadHeldItemEffect AI_BATTLER_DEFENDER
     IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_AcidSpray_End
 
-    // Mold Breaker suppresses all three of the abilities below, leaving the drop to land as
-    // normal.
+    // Mold Breaker suppresses every ability below, leaving the drop to land as normal.
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_AcidSpray_ScorePlus6
 
     // Clear Body and White Smoke blank the drop, so the move earns nothing beyond its damage.
-    // Contrary inverts it into a +2 Sp. Def boost for the target, which is the opposite of what
-    // the bonus is paying for.
+    // Contrary, Defiant and Competitive answer it with a boost instead, which is the opposite of
+    // what the bonus is paying for.
     LoadBattlerAbility AI_BATTLER_DEFENDER
+    IfLoadedEqualTo ABILITY_DEFIANT, ScoreMinus10
+    IfLoadedEqualTo ABILITY_COMPETITIVE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
     IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_AcidSpray_End
     IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_AcidSpray_End
-    IfLoadedEqualTo ABILITY_CONTRARY, ScoreMinus10
 
 Expert_AcidSpray_ScorePlus6:
     AddToMoveScore 6
@@ -2882,13 +3175,13 @@ Expert_Encore:
     LoadIsFirstTurnInBattle AI_BATTLER_DEFENDER
     IfLoadedNotEqualTo FALSE, ScoreMinus20
 
-    // Moving first is what makes Encore worth it, but only against a move worth locking the
-    // target into. Anything else and the turn is better spent elsewhere.
-    IfDoesNotMoveFirst Expert_Encore_WhenSlower
+    // There has to be a move worth locking the target into; anything else and the turn is
+    // better spent elsewhere. Past that, moving first is what makes Encore worth the most.
     LoadBattlerPreviousMove AI_BATTLER_DEFENDER
     LoadEffectOfLoadedMove 
-    IfLoadedinTable Expert_Encore_EncouragedMoveEffects, ScorePlus7
-    PopOrEnd
+    IfLoadedNotInTable Expert_Encore_EncouragedMoveEffects, ScoreMinus10
+    IfDoesNotMoveFirst Expert_Encore_WhenSlower
+    GoTo ScorePlus7
 
 Expert_Encore_WhenSlower:
     IfRandomLessThan 128, ScorePlus5
@@ -2912,6 +3205,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
     TableEntry BATTLE_EFFECT_DO_NOTHING
@@ -2930,6 +3224,7 @@ Expert_Encore_EncouragedMoveEffects:
     TableEntry BATTLE_EFFECT_WEATHER_SANDSTORM
     TableEntry BATTLE_EFFECT_SURVIVE_WITH_1_HP
     TableEntry BATTLE_EFFECT_ATK_UP_2_STATUS_CONFUSION
+    TableEntry BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION
     TableEntry BATTLE_EFFECT_INFATUATE
     TableEntry BATTLE_EFFECT_PREVENT_STATUS
     TableEntry BATTLE_EFFECT_WEATHER_RAIN
@@ -2979,6 +3274,7 @@ Expert_LockOn:
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_ZAP_CANNON, Expert_LockOn_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DYNAMIC_PUNCH, Expert_LockOn_TryScorePlus1
     IfMoveKnown AI_BATTLER_ATTACKER, MOVE_DARK_VOID, Expert_LockOn_TryScorePlus1
+    IfMoveKnown AI_BATTLER_ATTACKER, MOVE_INFERNO, Expert_LockOn_TryScorePlus1
     AddToMoveScore -2
     PopOrEnd
 
@@ -3045,10 +3341,20 @@ Expert_Protect_CheckTarget:
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_PERISH_SONG, Expert_Protect_ScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_LEECH_SEED, Expert_Protect_ScorePlus1
     IfMoveEffect AI_BATTLER_DEFENDER, MOVE_EFFECT_YAWN, Expert_Protect_ScorePlus1
-    GoTo Expert_Protect_CheckFirstTurn
+    GoTo Expert_Protect_CheckBypass
 
 Expert_Protect_ScorePlus1:
     AddToMoveScore 1
+
+Expert_Protect_CheckBypass:
+    // The shield is wasted against a target carrying a move that strikes straight through it.
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_REMOVE_PROTECT, Expert_Protect_ScoreMinus3
+    IfMoveEffectKnown AI_BATTLER_DEFENDER, BATTLE_EFFECT_SHADOW_FORCE, Expert_Protect_ScoreMinus3
+    IfMoveKnown AI_BATTLER_DEFENDER, MOVE_HYPER_DRILL, Expert_Protect_ScoreMinus3
+    GoTo Expert_Protect_CheckFirstTurn
+
+Expert_Protect_ScoreMinus3:
+    AddToMoveScore -3
 
 Expert_Protect_CheckFirstTurn:
     // Nothing has been set up to stall for yet on the turn the AI comes in, though in doubles
@@ -3124,8 +3430,10 @@ Expert_PartingShot:
     GoTo Expert_PartingShot_CheckAttacker
 
 Expert_PartingShot_CheckSpeed:
+    // Getting out ahead of a hit which would have KO'd is what the move is for, but it is worth
+    // a few points on top of the base rather than a score of its own.
     IfDoesNotMoveFirst Expert_PartingShot_CheckAttacker
-    AddToMoveScore 7
+    AddToMoveScore 3
 
 Expert_PartingShot_CheckAttacker:
     IfBattlerHasMoveOfClass AI_BATTLER_DEFENDER, CLASS_PHYSICAL, Expert_PartingShot_TryScorePlus1
@@ -3143,14 +3451,27 @@ Expert_PartingShot_CheckParty:
     AddToMoveScore -1
 
 Expert_PartingShot_CheckAbility:
+    // Half the move is the drop, so a target which blanks it or turns it into a boost leaves
+    // only the pivot behind. A Clear Amulet blanks it the same way Clear Body does, but is an
+    // item and so is not suppressed by Mold Breaker.
+    LoadHeldItemEffect AI_BATTLER_DEFENDER
+    IfLoadedEqualTo HOLD_EFFECT_WHITE_SMOKE, Expert_PartingShot_ScoreMinus5
+
     LoadBattlerAbility AI_BATTLER_DEFENDER
-    IfLoadedEqualTo ABILITY_CONTRARY, Expert_PartingShot_ScoreMinus2
-    IfLoadedEqualTo ABILITY_DEFIANT, Expert_PartingShot_ScoreMinus2
-    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_PartingShot_ScoreMinus2
+    IfLoadedEqualTo ABILITY_CLEAR_BODY, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_WHITE_SMOKE, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_CONTRARY, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_DEFIANT, Expert_PartingShot_CheckMoldBreaker
+    IfLoadedEqualTo ABILITY_COMPETITIVE, Expert_PartingShot_CheckMoldBreaker
     GoTo Expert_PivotRegenerator
 
-Expert_PartingShot_ScoreMinus2:
-    AddToMoveScore -2
+Expert_PartingShot_CheckMoldBreaker:
+    // Mold Breaker suppresses the ability, so the drops land as they would on anything else.
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_MOLD_BREAKER, Expert_PivotRegenerator
+
+Expert_PartingShot_ScoreMinus5:
+    AddToMoveScore -5
     GoTo Expert_PivotRegenerator
 
 Expert_Wish:
@@ -3250,9 +3571,15 @@ Expert_SkillSwap_ScoreAbilityTrade:
     PopOrEnd
 
 Expert_BrickBreak:
+    // A move EvalAttack already picked as the best hit has been paid for once; breaking the
+    // screen is a reason to reach for this attack over another, not a bonus on top of it.
+    FlagBestDamageMove
+    IfLoadedEqualTo AI_MOVE_IS_HIGHEST_DAMAGE, Expert_BrickBreak_End
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_REFLECT, Expert_BrickBreak_ScreenIsUp
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_LIGHT_SCREEN, Expert_BrickBreak_ScreenIsUp
     IfSideCondition AI_BATTLER_DEFENDER, SIDE_CONDITION_AURORA_VEIL, Expert_BrickBreak_ScreenIsUp
+
+Expert_BrickBreak_End:
     PopOrEnd
 
 Expert_BrickBreak_ScreenIsUp:
@@ -3300,14 +3627,14 @@ Expert_Defog_ScorePlus2:
     AddToMoveScore 2
 
 Expert_Defog_CheckOurHazards:
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScorePlus4
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_ScorePlus4
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScorePlus4
-    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_ScorePlus4
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STEALTH_ROCK, Expert_Defog_ScorePlus3
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_SPIKES, Expert_Defog_ScorePlus3
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_TOXIC_SPIKES, Expert_Defog_ScorePlus3
+    IfSideCondition AI_BATTLER_ATTACKER, SIDE_CONDITION_STICKY_WEB, Expert_Defog_ScorePlus3
     PopOrEnd
 
-Expert_Defog_ScorePlus4:
-    AddToMoveScore 4
+Expert_Defog_ScorePlus3:
+    AddToMoveScore 3
     PopOrEnd
 
 
@@ -3332,8 +3659,20 @@ EvalAttack_ScoreBestDamage_Plus6:
     AddToMoveScore 6
 
 EvalAttack_CheckKill:
+    // A self-KO buys the knockout with the AI's own Pokemon, and Rollout only reaches one several
+    // turns into a lock-in it cannot break out of. Neither is taking the KO in the sense this
+    // bonus pays for, so both are left to whatever their own routines make of them.
+    LoadCurrentMoveEffect
+    IfLoadedInTable EvalAttack_ExcludedFromKillBonus, EvalAttack_CheckLastDitchPriority
     IfCurrentMoveKills ROLL_FOR_DAMAGE, EvalAttack_ApplyKillBonuses
     GoTo EvalAttack_CheckLastDitchPriority
+
+EvalAttack_ExcludedFromKillBonus:
+    TableEntry BATTLE_EFFECT_HALVE_DEFENSE
+    TableEntry BATTLE_EFFECT_HALVE_SP_DEFENSE
+    TableEntry BATTLE_EFFECT_DEAL_CURRENT_HP
+    TableEntry BATTLE_EFFECT_DOUBLE_POWER_EACH_TURN_LOCK_INTO
+    TableEntry TABLE_END
 
 EvalAttack_ApplyKillBonuses:
     // Taking the KO first is worth far more than taking it second, so the bonus depends on
@@ -3434,6 +3773,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -3448,6 +3788,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_ACC_DOWN_2
     TableEntry BATTLE_EFFECT_SET_REFLECT
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_SET_SUBSTITUTE
     TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
@@ -3462,6 +3803,7 @@ SetupFirstTurn_SetupEffects:
     TableEntry BATTLE_EFFECT_GROUND_TRAP_USER_CONTINUOUS_HEAL
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -3501,6 +3843,7 @@ Risky_Main:
     // Expert_Explosion, which is the only place that knows whether it passed on the self-KO.
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_KO_MON_THAT_DEFEATED_USER, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP, Risky_CoinFlipScorePlus1
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_SLEEP_NEXT_TURN, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_CONFUSE, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Risky_CoinFlipScorePlus1
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHATTER, Risky_CoinFlipScorePlus1
@@ -3744,16 +4087,11 @@ TagStrategy_SpreadGroundMove_CheckAbilities:
     IfLoadedEqualTo AI_HAVE, TagStrategy_SpreadGroundMove_PartnerSafe
 
 TagStrategy_SpreadGroundMove_PartnerHit:
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ROCK
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_FIRE
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_ELECTRIC
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_STEEL
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
-    FlagBattlerIsType AI_BATTLER_ATTACKER_PARTNER, TYPE_POISON
-    IfLoadedEqualTo AI_HAVE, ScoreMinus10
+    // The blast is judged against the partner's full typing rather than against a list of the
+    // types Ground beats, so a partner which halves it straight back - Scizor, Roserade,
+    // Forretress - is only charged the ordinary friendly-fire penalty.
+    IfMoveEffectivenessAgainst AI_BATTLER_ATTACKER_PARTNER, TYPE_MULTI_DOUBLE_DAMAGE, ScoreMinus10
+    IfMoveEffectivenessAgainst AI_BATTLER_ATTACKER_PARTNER, TYPE_MULTI_QUADRUPLE_DAMAGE, ScoreMinus10
     AddToMoveScore -3
     PopOrEnd
 
@@ -3768,6 +4106,7 @@ TagStrategy_Partner:
 
     // Fling is technically 1 power so we need this handler
     IfMoveEqualTo MOVE_FLING, TagStrategy_PartnerFling
+    IfMoveEqualTo MOVE_POLLEN_PUFF, TagStrategy_PartnerPollenPuff
 
     FlagMoveDamageScore USE_MAX_DAMAGE
     IfLoadedEqualTo AI_NO_COMPARISON_MADE, TagStrategy_PartnerStatusMove
@@ -3776,6 +4115,10 @@ TagStrategy_Partner:
 TagStrategy_ScoreMinus30:
     GoTo ScoreMinus30
 
+TagStrategy_PartnerPollenPuff:
+    IfHPPercentLessThan AI_BATTLER_ATTACKER_PARTNER, 90, ScorePlus6
+    GoTo ScorePlus5
+
 TagStrategy_PartnerStatusMove:
     IfMoveEqualTo MOVE_SKILL_SWAP, TagStrategy_PartnerSkillSwap
     IfMoveEqualTo MOVE_WILL_O_WISP, TagStrategy_PartnerWillOWisp
@@ -3783,6 +4126,7 @@ TagStrategy_PartnerStatusMove:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_STATUS_POISON, TagStrategy_PartnerPoisonStatus
     IfMoveEqualTo MOVE_HELPING_HAND, TagStrategy_PartnerUsingHelpingHand
     IfMoveEqualTo MOVE_SWAGGER, TagStrategy_PartnerSwagger
+    IfMoveEqualTo MOVE_FLATTER, TagStrategy_PartnerSwagger
     IfMoveEqualTo MOVE_ROLE_PLAY, TagStrategy_PartnerRolePlay
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_COPY_STAT_CHANGES, TagStrategy_PartnerPsychUp
     IfMoveEqualTo MOVE_GASTRO_ACID, TagStrategy_PartnerGastroAcid
@@ -3846,7 +4190,7 @@ TagStrategy_NeverDoubleUpOn:
     TableEntry TABLE_END
 
 TagStrategy_PartnerSwagger:
-    // Swagger hands the partner +2 Attack along with the confusion, and a Persim or Lum Berry
+    // Swagger/Flatter hands the partner +2 Attack along with the confusion, and a Persim or Lum Berry
     // throws the confusion straight back out. Once the berry has been eaten it is gone from the
     // partner's held item, so this stops applying rather than being offered a second time.
     IfHeldItemEqualTo AI_BATTLER_ATTACKER_PARTNER, ITEM_PERSIM_BERRY, ScorePlus9
@@ -3879,9 +4223,31 @@ TagStrategy_PartnerWeaknessPolicy:
     // side of the field.
     IfMoveEqualTo MOVE_EXTREME_SPEED, TagStrategy_PartnerScoreMinus30
     LoadHeldItemEffect AI_BATTLER_ATTACKER_PARTNER
+    IfLoadedEqualTo HOLD_EFFECT_ATK_UP_ON_ICE_HIT, TagStrategy_PartnerSnowball
+    IfLoadedEqualTo HOLD_EFFECT_ATK_UP_ON_ELECTRIC_HIT, TagStrategy_PartnerCellBattery
+    IfLoadedEqualTo HOLD_EFFECT_SP_ATK_UP_ON_WATER_HIT, TagStrategy_PartnerWaterHitItem
+    IfLoadedEqualTo HOLD_EFFECT_SP_DEF_UP_ON_WATER_HIT, TagStrategy_PartnerWaterHitItem
     IfLoadedNotEqualTo HOLD_EFFECT_SHARPLY_BOOST_OFFENSES, TagStrategy_PartnerScoreMinus30
     IfMoveEffectivenessEquals TYPE_MULTI_DOUBLE_DAMAGE, TagStrategy_PartnerScorePlus12
     IfMoveEffectivenessEquals TYPE_MULTI_QUADRUPLE_DAMAGE, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerSnowball:
+    IfMoveEqualTo MOVE_ICE_SHARD, TagStrategy_PartnerScorePlus12
+    IfMoveNotEqualTo MOVE_QUICK_ATTACK, TagStrategy_PartnerScoreMinus30
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_REFRIGERATE, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerCellBattery:
+    // Edge case for Galvanize + Quick Attack, maybe we could use it idk
+    IfMoveNotEqualTo MOVE_QUICK_ATTACK, TagStrategy_PartnerScoreMinus30
+    LoadBattlerAbility AI_BATTLER_ATTACKER
+    IfLoadedEqualTo ABILITY_GALVANIZE, TagStrategy_PartnerScorePlus12
+    GoTo TagStrategy_PartnerScoreMinus30
+
+TagStrategy_PartnerWaterHitItem:
+    IfMoveEqualTo MOVE_AQUA_JET, TagStrategy_PartnerScorePlus12
     GoTo TagStrategy_PartnerScoreMinus30
 
 TagStrategy_PartnerFling:
@@ -4009,6 +4375,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN
     TableEntry BATTLE_EFFECT_ACC_DOWN
@@ -4021,6 +4388,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4036,6 +4404,7 @@ CheckHP_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_PREVENT_STATUS
     TableEntry BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4056,6 +4425,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_SWITCH_LOWER_ATKS
     TableEntry BATTLE_EFFECT_DEF_DOWN
     TableEntry BATTLE_EFFECT_SPEED_DOWN
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN
     TableEntry BATTLE_EFFECT_ACC_DOWN
@@ -4068,6 +4438,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4088,6 +4459,7 @@ CheckHP_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_MIRROR_COAT
     TableEntry BATTLE_EFFECT_DECREASE_POWER_WITH_LESS_USER_HP
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4121,6 +4493,7 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_CRIT_UP_2
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4134,10 +4507,12 @@ CheckHP_Target_DiscourageAtMediumHP:
     TableEntry BATTLE_EFFECT_EVA_DOWN_2
     TableEntry BATTLE_EFFECT_ACC_DOWN_2
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_AVERAGE_HP
     TableEntry BATTLE_EFFECT_ALL_FAINT_3_TURNS
     TableEntry BATTLE_EFFECT_PREVENT_STATUS
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4179,6 +4554,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_STATUS_CONFUSE
     TableEntry BATTLE_EFFECT_ATK_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_2
+    TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_SPEED_UP_2
     TableEntry BATTLE_EFFECT_SP_ATK_UP_2
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
@@ -4192,6 +4568,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_EVA_DOWN_2
     TableEntry BATTLE_EFFECT_ACC_DOWN_2
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_AVERAGE_HP
     TableEntry BATTLE_EFFECT_NEXT_ATTACK_ALWAYS_HITS
@@ -4205,6 +4582,7 @@ CheckHP_Target_DiscourageAtLowHP:
     TableEntry BATTLE_EFFECT_MIRROR_COAT
     TableEntry BATTLE_EFFECT_STATUS_BURN
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_ATK_DEF_UP
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
@@ -4284,6 +4662,7 @@ Harrassment_Effects:
     TableEntry BATTLE_EFFECT_SPEED_DOWN_2
     TableEntry BATTLE_EFFECT_SP_DEF_DOWN_2
     TableEntry BATTLE_EFFECT_STATUS_POISON
+    TableEntry BATTLE_EFFECT_POISON_SPEED_DOWN
     TableEntry BATTLE_EFFECT_STATUS_PARALYZE
     TableEntry BATTLE_EFFECT_STATUS_LEECH_SEED
     TableEntry BATTLE_EFFECT_ENCORE
@@ -4300,6 +4679,7 @@ Harrassment_Effects:
     TableEntry BATTLE_EFFECT_SECRET_POWER
     TableEntry BATTLE_EFFECT_CONFUSE_ALL
     TableEntry BATTLE_EFFECT_ATK_DEF_DOWN
+    TableEntry BATTLE_EFFECT_ATK_SP_ATK_DOWN
     TableEntry BATTLE_EFFECT_PREVENT_ITEM_USE
     TableEntry BATTLE_EFFECT_TRANSFER_STATUS
     TableEntry BATTLE_EFFECT_TOXIC_SPIKES

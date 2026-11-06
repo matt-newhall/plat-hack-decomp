@@ -264,7 +264,7 @@ JubilifeCity_YouClaimToNotKnowIt:
 
 JubilifeCity_LookerGiveVSRecorderAndLeave:
     Message JubilifeCity_Text_PerhapsYouCanMakeUseOfThis
-    SetVar VAR_0x8004, ITEM_VS_RECORDER
+    SetVar VAR_0x8004, ITEM_CANDY_BAG
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     Message JubilifeCity_Text_ThatVsRecorderItIsANiftyDeviceForRecordingAMatch
@@ -938,6 +938,7 @@ JubilifeCity_CounterpartAndProfRowanLeave:
     BufferPlayerName 0
     Message JubilifeCity_Text_WhyDontYouCollectAllTheGymBadgesOfSinnoh
     CloseMessage
+    FollowPokePlaceBehindPlayer
     ApplyMovement LOCALID_COUNTERPART, JubilifeCity_Movement_CounterpartLeaveAfterGalacticBattle
     ApplyMovement LOCALID_PROF_ROWAN, JubilifeCity_Movement_ProfRowanLeave
     ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWatchCounterpartAndProfRowanLeave
@@ -947,10 +948,10 @@ JubilifeCity_CounterpartAndProfRowanLeave:
 
 JubilifeCity_RowanGiveGifts:
     Message JubilifeCity_Text_RowanBeforeIGiveYouThese
-    SetVar VAR_0x8004, ITEM_CANDY_BAG
+    SetVar VAR_0x8004, ITEM_INFINITE_REPEL
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
-    SetVar VAR_0x8004, ITEM_INFINITE_REPEL
+    SetVar VAR_0x8004, ITEM_ESCAPE_ROPE
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
     Message JubilifeCity_Text_RowanExplainGifts
@@ -970,6 +971,8 @@ JubilifeCity_CollectorJubilifeTV:
     AddObject LOCALID_COLLECTOR
     LockObject LOCALID_COLLECTOR
     ApplyMovement LOCALID_COLLECTOR, JubilifeCity_Movement_CollectorWalkToPlayer
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, JubilifeCity_Movement_PlayerWalkSouthToCollector
     WaitMovement
     Message JubilifeCity_Text_OhThatWasVeryGood
     Call JubilifeCity_GiveFashionCaseAndAccessories
@@ -1033,12 +1036,17 @@ JubilifeCity_BlackOut:
 
     .balign 4, 0
 JubilifeCity_Movement_CollectorWalkToPlayer:
-    WalkNormalNorth 8
+    WalkNormalNorth 7
+    EndMovement
+
+    .balign 4, 0
+JubilifeCity_Movement_PlayerWalkSouthToCollector:
+    WalkNormalSouth
     EndMovement
 
     .balign 4, 0
 JubilifeCity_Movement_CollectorLeave:
-    WalkNormalSouth 8
+    WalkNormalSouth 7
     EndMovement
 
     .balign 4, 0

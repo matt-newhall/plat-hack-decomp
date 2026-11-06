@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_SOLAR_POWER",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,87 +44,37 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_THUNDER_FANG"
-            ],
-            [
-                1,
-                "MOVE_LEER"
-            ],
-            [
-                1,
-                "MOVE_EMBER"
-            ],
-            [
-                1,
-                "MOVE_HOWL"
-            ],
-            [
-                1,
-                "MOVE_DRAINING_KISS"
-            ],
-            [
-                4,
-                "MOVE_HOWL"
-            ],
-            [
-                9,
-                "MOVE_DRAINING_KISS"
-            ],
-            [
-                14,
-                "MOVE_ROAR"
-            ],
-            [
-                17,
-                "MOVE_BITE"
-            ],
-            [
-                22,
-                "MOVE_ODOR_SLEUTH"
-            ],
-            [
-                28,
-                "MOVE_BEAT_UP"
-            ],
-            [
-                32,
-                "MOVE_FIRE_FANG"
-            ],
-            [
-                38,
-                "MOVE_FAINT_ATTACK"
-            ],
-            [
-                44,
-                "MOVE_EMBARGO"
-            ],
-            [
-                48,
-                "MOVE_FLAMETHROWER"
-            ],
-            [
-                54,
-                "MOVE_CRUNCH"
-            ],
-            [
-                60,
-                "MOVE_NASTY_PLOT"
-            ]
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_EMBER" ],
+            [ 1, "MOVE_SMOG" ],
+            [ 1, "MOVE_THUNDER_FANG" ],
+            [ 1, "MOVE_FAINT_ATTACK" ],
+            [ 13, "MOVE_ROAR" ],
+            [ 16, "MOVE_BEAT_UP" ],
+            [ 19, "MOVE_BITE" ],
+            [ 21, "MOVE_FIRE_SPIN" ],
+            [ 23, "MOVE_ODOR_SLEUTH" ],
+            [ 25, "MOVE_INCINERATE" ],
+            [ 27, "MOVE_PUNISHMENT" ],
+            [ 30, "MOVE_FIRE_FANG" ],
+            [ 35, "MOVE_TORMENT" ],
+            [ 40, "MOVE_SUPER_FANG" ],
+            [ 43, "MOVE_PSYCHIC_FANGS" ],
+            [ 45, "MOVE_COMEUPPANCE" ],
+            [ 48, "MOVE_FOUL_PLAY" ],
+            [ 50, "MOVE_FLAMETHROWER" ],
+            [ 56, "MOVE_CRUNCH" ],
+            [ 59, "MOVE_FLARE_BLITZ" ],
+            [ 62, "MOVE_INFERNO" ]
         ],
         "by_tm": [
             "TM05",
-            "TM06",
+            "TM07",
             "TM10",
-            "TM11",
-            "TM12",
             "TM15",
-            "TM17",
-            "TM21",
+            "TM16",
             "TM22",
             "TM23",
-            "TM27",
             "TM30",
             "TM32",
             "TM35",
@@ -131,24 +82,16 @@
             "TM38",
             "TM41",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
-            "TM46",
-            "TM49",
             "TM50",
-            "TM58",
             "TM61",
             "TM63",
             "TM66",
             "TM68",
-            "TM78",
             "TM79",
             "TM82",
             "TM83",
-            "TM85",
             "TM87",
-            "TM90",
             "HM04",
             "HM06"
         ],
@@ -157,9 +100,7 @@
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_HEAT_WAVE",
-            "MOVE_SUCKER_PUNCH",
-            "MOVE_SWIFT",
-            "MOVE_UPROAR"
+            "MOVE_SWIFT"
         ]
     },
     "evolutions": []

@@ -96,16 +96,7 @@ void BerryPatchManager_Free(BerryPatchManager *manager)
 
 void BerryPatches_ElapseTime(FieldSystem *fieldSystem, int minutes)
 {
-    if (fieldSystem->unk_04 == NULL) {
-        BerryGrowthData *growthData = BerryGrowthData_Init(HEAP_ID_FIELD2);
-        BerryPatch *berryPatches = MiscSaveBlock_GetBerryPatches(fieldSystem->saveData);
-        BerryPatches_ElapseMinutes(berryPatches, growthData, minutes);
-        Heap_Free(growthData);
-    } else {
-        BerryGrowthData *growthData = fieldSystem->unk_04->berryPatchManager->growthData;
-        BerryPatch *berryPatches = MiscSaveBlock_GetBerryPatches(fieldSystem->saveData);
-        BerryPatches_ElapseMinutes(berryPatches, growthData, minutes);
-    }
+    // berries are one-time now, no replanting, dead function
 }
 
 static void BerryPatchManager_Init3DRendering(FieldSystem *fieldSystem, BerryPatchManager *manager)

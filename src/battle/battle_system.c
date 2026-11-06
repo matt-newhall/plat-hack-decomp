@@ -45,6 +45,7 @@
 #include "font_special_chars.h"
 #include "game_options.h"
 #include "game_records.h"
+#include "graphics.h"
 #include "heap.h"
 #include "item.h"
 #include "math_util.h"
@@ -72,6 +73,8 @@
 #include "tv_segment.h"
 #include "unk_02014A84.h"
 #include "unk_0202F1D4.h"
+
+#include "res/graphics/battle/sprites.naix"
 
 static void BattleMessage_CheckSide(BattleSystem *battleSys, BattleMessage *battleMsg);
 static void BattleMessage_FillFormatBuffers(BattleSystem *battleSys, BattleMessage *battleMsg);
@@ -1034,21 +1037,20 @@ void BattleSystem_InitCaptureAttempt(BattleSystem *battleSys, Pokemon *mon)
     CaptureAttempt_Init(battleSys->captureAttempt, mon, battleSys->resultMask, battleSys->ballsThrown, HEAP_ID_BATTLE);
 }
 
-void ov16_0223EF8C(BattleSystem *battleSys)
+/**
+ * @brief Draw both battle platforms into the 8bpp battle BG tiles, using palette row 7.
+ *
+ * The character data is laid out as the platform sprites hold it in OBJ VRAM, which is
+ * the same order as their NCGR files.
+ *
+ * @param bgTiles     The 0x10000-byte battle BG tile buffer to draw into.
+ * @param enemyChars  The enemy platform's 4bpp character data.
+ * @param playerChars The player platform's 4bpp character data.
+ */
+static void StampPlatforms(u8 *bgTiles, const u8 *enemyChars, const u8 *playerChars)
 {
-    NNSG2dImageProxy *v0;
     int v1, v2, v3, v4, v5, v6;
-    u8 *v7;
-
-    battleSys->unk_21C = Heap_Alloc(HEAP_ID_BATTLE, 0x10000);
-    battleSys->unk_220 = Heap_Alloc(HEAP_ID_BATTLE, 0x200);
-
-    MI_CpuCopy32((void *)(HW_BG_VRAM + 0x10000), battleSys->unk_21C, 0x10000);
-    MI_CpuCopy32(PaletteData_GetUnfadedBuffer(battleSys->paletteData, 0), battleSys->unk_220, HW_BG_PLTT_SIZE);
-
-    v7 = G2_GetOBJCharPtr();
-    v0 = Sprite_GetImageProxy(battleSys->unk_17C[1].unk_00->sprite);
-    v7 += v0->vramLocation.baseAddrOfVram[NNS_G2D_VRAM_TYPE_2DMAIN];
+    const u8 *v7 = enemyChars;
 
     for (v2 = 20; v2 < 20 + 8; v2++) {
         for (v1 = 16; v1 < 32; v1++) {
@@ -1071,15 +1073,13 @@ void ov16_0223EF8C(BattleSystem *battleSys)
                 }
 
                 if (v5) {
-                    battleSys->unk_21C[v2 * 0x800 + v1 * 0x40 + v6] = v5 + 0x70;
+                    bgTiles[v2 * 0x800 + v1 * 0x40 + v6] = v5 + 0x70;
                 }
             }
         }
     }
 
-    v7 = G2_GetOBJCharPtr();
-    v0 = Sprite_GetImageProxy(battleSys->unk_17C[0].unk_00->sprite);
-    v7 += v0->vramLocation.baseAddrOfVram[NNS_G2D_VRAM_TYPE_2DMAIN];
+    v7 = playerChars;
 
     for (v6 = 0; v6 < 0x40 * 32; v6++) {
         if (v6 & 1) {
@@ -1089,7 +1089,7 @@ void ov16_0223EF8C(BattleSystem *battleSys)
         }
 
         if (v5) {
-            battleSys->unk_21C[19 * 0x800 + v6] = v5 + 0x70;
+            bgTiles[19 * 0x800 + v6] = v5 + 0x70;
         }
     }
 
@@ -1106,16 +1106,136 @@ void ov16_0223EF8C(BattleSystem *battleSys)
                 }
 
                 if (v5) {
-                    battleSys->unk_21C[v2 * 0x800 + v1 * 0x40 + v6] = v5 + 0x70;
+                    bgTiles[v2 * 0x800 + v1 * 0x40 + v6] = v5 + 0x70;
                 }
             }
         }
     }
+}
+
+void ov16_0223EF8C(BattleSystem *battleSys)
+{
+    battleSys->unk_21C = Heap_Alloc(HEAP_ID_BATTLE, 0x10000);
+    battleSys->unk_220 = Heap_Alloc(HEAP_ID_BATTLE, 0x200);
+
+    MI_CpuCopy32((void *)(HW_BG_VRAM + 0x10000), battleSys->unk_21C, 0x10000);
+    MI_CpuCopy32(PaletteData_GetUnfadedBuffer(battleSys->paletteData, 0), battleSys->unk_220, HW_BG_PLTT_SIZE);
+
+    u8 *objChars = G2_GetOBJCharPtr();
+    NNSG2dImageProxy *enemyProxy = Sprite_GetImageProxy(battleSys->unk_17C[1].unk_00->sprite);
+    NNSG2dImageProxy *playerProxy = Sprite_GetImageProxy(battleSys->unk_17C[0].unk_00->sprite);
+
+    StampPlatforms(battleSys->unk_21C,
+        objChars + enemyProxy->vramLocation.baseAddrOfVram[NNS_G2D_VRAM_TYPE_2DMAIN],
+        objChars + playerProxy->vramLocation.baseAddrOfVram[NNS_G2D_VRAM_TYPE_2DMAIN]);
 
     Bg_LoadTiles(battleSys->bgConfig, 3, battleSys->unk_21C, 0x10000, 0);
 
     ov16_02268700(&battleSys->unk_17C[0]);
     ov16_02268700(&battleSys->unk_17C[1]);
+}
+
+typedef struct TerrainBackground {
+    u32 fieldCondition;
+    u16 tilesMember;
+    u16 paletteMember;
+    u16 enemyPlatformMember;
+    u16 playerPlatformMember;
+    u16 platformPaletteMember;
+} TerrainBackground;
+
+/**
+ * @brief Graphics for each terrain. The backdrops are pl_batt_bg members appended by
+ * tools/patch_terrain_bg.py and share the vanilla battle BG tilemap; the platforms are
+ * pl_batt_obj sets laid out like the vanilla ones.
+ */
+static const TerrainBackground sTerrainBackgrounds[] = {
+    { FIELD_CONDITION_ELECTRIC_TERRAIN, 342, 343, terrain_electric_terrain_enemy_NCGR_lz, terrain_electric_terrain_player_NCGR_lz, terrain_electric_terrain_all_NCLR },
+    { FIELD_CONDITION_GRASSY_TERRAIN, 344, 345, terrain_grassy_terrain_enemy_NCGR_lz, terrain_grassy_terrain_player_NCGR_lz, terrain_grassy_terrain_all_NCLR },
+    { FIELD_CONDITION_MISTY_TERRAIN, 346, 347, terrain_misty_terrain_enemy_NCGR_lz, terrain_misty_terrain_player_NCGR_lz, terrain_misty_terrain_all_NCLR },
+    { FIELD_CONDITION_PSYCHIC_TERRAIN, 348, 349, terrain_psychic_terrain_enemy_NCGR_lz, terrain_psychic_terrain_player_NCGR_lz, terrain_psychic_terrain_all_NCLR },
+};
+
+/**
+ * @brief Redraw the battle platforms from their graphics files into the BG tile buffer,
+ * and load their 16 colours into palette row 7.
+ *
+ * The platform sprites are freed once the intro bakes them into the BG, so this reads
+ * the character data straight from pl_batt_obj instead.
+ *
+ * @param battleSys
+ * @param enemyMember   pl_batt_obj member of the enemy platform's tiles.
+ * @param playerMember  pl_batt_obj member of the player platform's tiles.
+ * @param paletteMember pl_batt_obj member of the platforms' palette.
+ */
+static void StampPlatformsFromFiles(BattleSystem *battleSys, u16 enemyMember, u16 playerMember, u16 paletteMember)
+{
+    NNSG2dCharacterData *enemyChars, *playerChars;
+    void *enemyBuffer = Graphics_GetCharData(NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_OBJ, enemyMember, TRUE, &enemyChars, HEAP_ID_BATTLE);
+    void *playerBuffer = Graphics_GetCharData(NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_OBJ, playerMember, TRUE, &playerChars, HEAP_ID_BATTLE);
+
+    StampPlatforms(battleSys->unk_21C, enemyChars->pRawData, playerChars->pRawData);
+
+    Heap_Free(enemyBuffer);
+    Heap_Free(playerBuffer);
+
+    NNSG2dPaletteData *plttData;
+    void *paletteBuffer = Graphics_GetPlttData(NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_OBJ, paletteMember, &plttData, HEAP_ID_BATTLE);
+
+    MI_CpuCopy16(plttData->pRawData, battleSys->unk_220 + 7 * PALETTE_SIZE, PALETTE_SIZE_BYTES);
+    Heap_Free(paletteBuffer);
+}
+
+/**
+ * @brief Swap the battle BG to a terrain's backdrop, or back to the battle's own BG.
+ *
+ * Rewrites the baked BG tiles and palette copies that move animations restore the BG
+ * from, then uploads the tiles. The palette only goes to the unfaded buffer, so the
+ * caller's fade decides when it becomes visible.
+ *
+ * @param battleSys
+ * @param terrain   One FIELD_CONDITION_*_TERRAIN flag, or 0 for the battle's own BG.
+ */
+void BattleSystem_LoadTerrainBackground(BattleSystem *battleSys, u32 terrain)
+{
+    if (battleSys->unk_21C == NULL) {
+        return;
+    }
+
+    int timeOffset = BattleSystem_GetBackgroundTimeOffset(battleSys);
+    int platforms = BattleSystem_GetTerrain(battleSys);
+    TerrainBackground graphics = {
+        .fieldCondition = 0,
+        .tilesMember = 3 + battleSys->background,
+        .paletteMember = 172 + battleSys->background * 3 + timeOffset,
+        .enemyPlatformMember = BattleTerrain_GetPlatformTilesMember(platforms, TRUE),
+        .playerPlatformMember = BattleTerrain_GetPlatformTilesMember(platforms, FALSE),
+        .platformPaletteMember = BattleTerrain_GetPlatformPaletteMember(platforms, timeOffset),
+    };
+
+    for (int i = 0; i < NELEMS(sTerrainBackgrounds); i++) {
+        if (sTerrainBackgrounds[i].fieldCondition == terrain) {
+            graphics = sTerrainBackgrounds[i];
+            break;
+        }
+    }
+
+    NNSG2dCharacterData *charData;
+    void *tilesBuffer = Graphics_GetCharData(NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_BG, graphics.tilesMember, TRUE, &charData, HEAP_ID_BATTLE);
+    MI_CpuCopy32(charData->pRawData, battleSys->unk_21C, 0x10000);
+    Heap_Free(tilesBuffer);
+
+    NNSG2dPaletteData *plttData;
+    void *paletteBuffer = Graphics_GetPlttData(NARC_INDEX_BATTLE__GRAPHIC__PL_BATT_BG, graphics.paletteMember, &plttData, HEAP_ID_BATTLE);
+    u16 *bgColours = plttData->pRawData;
+    MI_CpuCopy16(bgColours, battleSys->unk_220, 10 * PALETTE_SIZE_BYTES);
+    MI_CpuCopy16(bgColours + 12 * PALETTE_SIZE, battleSys->unk_220 + 12 * PALETTE_SIZE, 4 * PALETTE_SIZE_BYTES);
+    Heap_Free(paletteBuffer);
+
+    StampPlatformsFromFiles(battleSys, graphics.enemyPlatformMember, graphics.playerPlatformMember, graphics.platformPaletteMember);
+
+    Bg_LoadTiles(battleSys->bgConfig, BG_LAYER_MAIN_3, battleSys->unk_21C, 0x10000, 0);
+    MI_CpuCopy16(battleSys->unk_220, PaletteData_GetUnfadedBuffer(battleSys->paletteData, PLTTBUF_MAIN_BG), HW_BG_PLTT_SIZE);
 }
 
 u8 *ov16_0223F1E8(BattleSystem *battleSys)

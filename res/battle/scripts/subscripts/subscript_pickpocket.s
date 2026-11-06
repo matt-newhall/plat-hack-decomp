@@ -1,0 +1,13 @@
+#include "macros/btlcmd.inc"
+
+
+_000:
+    ShowAbilityPopupAuto BTLSCR_MSG_BATTLER_TEMP
+    // {0} stole {1}’s {2}!
+    PrintMessage BattleStrings_Text_PokemonStolePokemonsItem_AllyAlly, TAG_NICKNAME_NICKNAME_ITEM, BTLSCR_MSG_BATTLER_TEMP, BTLSCR_ATTACKER, BTLSCR_ATTACKER
+    Wait
+    WaitButtonABTime 30
+    UpdateMonDataFromVar OPCODE_GET, BTLSCR_ATTACKER, BATTLEMON_HELD_ITEM, BTLVAR_SCRIPT_TEMP
+    UpdateMonDataFromVar OPCODE_SET, BTLSCR_MSG_BATTLER_TEMP, BATTLEMON_HELD_ITEM, BTLVAR_SCRIPT_TEMP
+    UpdateMonData OPCODE_SET, BTLSCR_ATTACKER, BATTLEMON_HELD_ITEM, ITEM_NONE
+    End

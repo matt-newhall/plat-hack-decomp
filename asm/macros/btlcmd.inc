@@ -1372,6 +1372,22 @@
     .long BTLCMD_SHOWABILITYPOPUPAUTOFOREFFECTHOLDER
     .endm
 
+    .macro ShowAbilityPopupPair battler_1, battler_2
+    .long BTLCMD_SHOWABILITYPOPUPPAIR
+    .long \battler_1
+    .long \battler_2
+    .endm
+
+    .macro CalcStrengthSapHeal
+    .long BTLCMD_CALCSTRENGTHSAPHEAL
+    .endm
+
+    .macro TryIncinerate jump_if_sticky_hold:req, jump_if_no_berry:req
+    .long BTLCMD_TRYINCINERATE
+    .long (\jump_if_sticky_hold-.) / 4 - 1
+    .long (\jump_if_no_berry-.) / 4 - 1
+    .endm
+
     .macro SetupEjectPack
     .long BTLCMD_SETUPEJECTPACK
     .endm
@@ -1406,6 +1422,54 @@
     .macro PlayEntryAnimation battler:req
     .long BTLCMD_PLAYENTRYANIMATION
     .long \battler
+    .endm
+
+    .macro GoToIfStatStageChangeUnblocked jump_if_unblocked:req
+    .long BTLCMD_GOTOIFSTATSTAGECHANGEUNBLOCKED
+    .long (\jump_if_unblocked-.) / 4 - 1
+    .endm
+
+    .macro SetTerrainBackground
+    .long BTLCMD_SETTERRAINBACKGROUND
+    .endm
+
+    .macro CheckTerrainProtection battler:req, terrain:req, jump_if_protected:req
+    .long BTLCMD_CHECKTERRAINPROTECTION
+    .long \battler
+    .long \terrain
+    .long (\jump_if_protected-.) / 4 - 1
+    .endm
+
+    .macro TrySetTerrain jump_if_fail:req
+    .long BTLCMD_TRYSETTERRAIN
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
+    .macro RecordPayDayUse
+    .long BTLCMD_RECORDPAYDAYUSE
+    .endm
+
+    .macro TrySetSport jump_if_fail:req
+    .long BTLCMD_TRYSETSPORT
+    .long (\jump_if_fail-.) / 4 - 1
+    .endm
+
+    .macro SetHealingWishPending isLunarDance:req
+    .long BTLCMD_SETHEALINGWISHPENDING
+    .long \isLunarDance
+    .endm
+
+    .macro TryPendingHealingWish jump_if_none:req
+    .long BTLCMD_TRYPENDINGHEALINGWISH
+    .long (\jump_if_none-.) / 4 - 1
+    .endm
+
+    .macro PrepareFutureSight
+    .long BTLCMD_PREPAREFUTURESIGHT
+    .endm
+
+    .macro FinishFutureSight
+    .long BTLCMD_FINISHFUTURESIGHT
     .endm
 
     .text

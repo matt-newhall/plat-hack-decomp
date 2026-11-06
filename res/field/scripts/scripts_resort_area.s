@@ -445,6 +445,8 @@ ResortArea_DarachInteract:
     LockAll
     FacePlayer
     GoToIfUnset FLAG_DEFEATED_DARACH_CAITLYN_RESORT_AREA, ResortArea_DarachUnfought
+    CheckItem ITEM_HM03, 1, VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, ResortArea_DarachGiveHM03
     Message ResortArea_Text_AlreadyBeatenDarach
     WaitButton
     CloseMessage
@@ -455,6 +457,8 @@ ResortArea_DarachUnfought:
     Message ResortArea_Text_DarachTalk
     WaitButton
     CloseMessage
+    CheckHasTwoAliveMons VAR_RESULT
+    GoToIfEq VAR_RESULT, FALSE, ResortArea_DarachNeedTwoMons
     StartTrainerBattle TRAINER_CASTLE_VALET_DARACH_RESORT_AREA
     CheckWonBattle VAR_RESULT
     GoToIfEq VAR_RESULT, FALSE, ResortArea_BlackOut
@@ -468,6 +472,29 @@ ResortArea_DarachUnfought:
     ClearFlag FLAG_HIDE_ROUTE_229_BLOCK_DESERT
     SetBlackOutWarpId 18
     GetTrainerCardLevel VAR_RESULT
+    GoTo ResortArea_DarachGiveHM03
+
+ResortArea_DarachGiveHM03:
+    SetVar VAR_0x8004, ITEM_HM03
+    SetVar VAR_0x8005, 1
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, ResortArea_DarachBagIsFull
+    Common_GiveItemQuantity
+    Message ResortArea_Text_DarachGiveHM03
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+ResortArea_DarachBagIsFull:
+    Common_MessageBagIsFull
+    CloseMessage
+    ReleaseAll
+    End
+
+ResortArea_DarachNeedTwoMons:
+    Message ResortArea_Text_DarachNeedTwoMons
+    WaitButton
+    CloseMessage
     ReleaseAll
     End
 

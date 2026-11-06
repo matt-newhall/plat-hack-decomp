@@ -110,6 +110,8 @@ PokemonLeagueNorthPokecenter1F_RivalTrigger:
     ClearFlag FLAG_HIDE_POKEMON_LEAGUE_NORTH_POKECENTER_1F_RIVAL
     AddObject LOCALID_RIVAL
     Common_SetRivalBGM
+    PlaySE SEQ_SE_DP_DANSA
+    FollowPokePlaceAtSide DIR_EAST, DIR_SOUTH
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 10, PokemonLeagueNorthPokecenter1F_RivalEnterWest
     GoToIfEq VAR_0x8004, 11, PokemonLeagueNorthPokecenter1F_RivalEnterNorth
@@ -187,6 +189,7 @@ PokemonLeagueNorthPokecenter1F_RemoveRival:
     RemoveObject LOCALID_RIVAL
     WaitSE SEQ_SE_DP_KAIDAN2
     SetVar VAR_RIVAL_BEAT_SUNYSHORE_GYM, 1
+    Common_IncreaseLevelCap 100
     ReleaseAll
     End
 

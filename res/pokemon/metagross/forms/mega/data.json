@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_TOUGH_CLAWS",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,102 +44,52 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_MAGNET_RISE"
-            ],
-            [
-                1,
-                "MOVE_TAKE_DOWN"
-            ],
-            [
-                1,
-                "MOVE_METAL_CLAW"
-            ],
-            [
-                1,
-                "MOVE_CONFUSION"
-            ],
-            [
-                20,
-                "MOVE_METAL_CLAW"
-            ],
-            [
-                20,
-                "MOVE_CONFUSION"
-            ],
-            [
-                24,
-                "MOVE_SCARY_FACE"
-            ],
-            [
-                28,
-                "MOVE_PURSUIT"
-            ],
-            [
-                32,
-                "MOVE_BULLET_PUNCH"
-            ],
-            [
-                36,
-                "MOVE_PSYCHIC"
-            ],
-            [
-                40,
-                "MOVE_IRON_DEFENSE"
-            ],
-            [
-                44,
-                "MOVE_AGILITY"
-            ],
-            [
-                45,
-                "MOVE_HAMMER_ARM"
-            ],
-            [
-                53,
-                "MOVE_METEOR_MASH"
-            ],
-            [
-                62,
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            [
-                71,
-                "MOVE_HYPER_BEAM"
-            ]
+            [ 1, "MOVE_HAMMER_ARM" ],
+            [ 1, "MOVE_TACKLE" ],
+            [ 1, "MOVE_CONFUSION" ],
+            [ 1, "MOVE_METAL_CLAW" ],
+            [ 1, "MOVE_BULLET_PUNCH" ],
+            [ 6, "MOVE_PURSUIT" ],
+            [ 12, "MOVE_MAGNET_RISE" ],
+            [ 16, "MOVE_FLASH_CANNON" ],
+            [ 18, "MOVE_SMART_STRIKE" ],
+            [ 22, "MOVE_MIRACLE_EYE" ],
+            [ 26, "MOVE_TAKE_DOWN" ],
+            [ 31, "MOVE_PSYCHIC_FANGS" ],
+            [ 34, "MOVE_STOMPING_TANTRUM" ],
+            [ 37, "MOVE_PSYCHIC" ],
+            [ 39, "MOVE_ZEN_HEADBUTT" ],
+            [ 42, "MOVE_SCARY_FACE" ],
+            [ 44, "MOVE_GRAVITY" ],
+            [ 67, "MOVE_METEOR_MASH" ],
+            [ 70, "MOVE_METEOR_BEAM" ],
+            [ 73, "MOVE_STEEL_BEAM" ],
+            [ 82, "MOVE_HYPER_BEAM" ]
         ],
         "by_tm": [
-            "TM06",
+            "TM01",
+            "TM05",
             "TM10",
-            "TM11",
             "TM15",
             "TM16",
-            "TM17",
-            "TM18",
-            "TM21",
+            "TM20",
             "TM26",
-            "TM27",
             "TM29",
             "TM30",
-            "TM31",
-            "TM32",
             "TM33",
             "TM36",
-            "TM37",
             "TM39",
             "TM40",
             "TM42",
-            "TM43",
             "TM44",
-            "TM58",
             "TM64",
+            "TM65",
             "TM68",
-            "TM69",
             "TM70",
+            "TM71",
             "TM74",
             "TM76",
-            "TM77",
+            "TM78",
             "TM80",
             "TM82",
             "TM83",
@@ -154,17 +105,15 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
-            "MOVE_ROLLOUT",
             "MOVE_THUNDER_PUNCH",
             "MOVE_ICE_PUNCH",
             "MOVE_IRON_HEAD",
             "MOVE_SNORE",
             "MOVE_SIGNAL_BEAM",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_IRON_DEFENSE",
             "MOVE_MAGNET_RISE",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": []

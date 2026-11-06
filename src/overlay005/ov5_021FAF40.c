@@ -32,6 +32,8 @@
 #include "overlay005/struct_ov5_021FB97C.h"
 
 #include "berry_patch_graphics.h"
+#include "field/field_system.h"
+#include "follower_mon_params.h"
 
 static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FB0F0 = {
     ov5_021EBA0C,
@@ -105,6 +107,41 @@ static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FAFD8 = {
     ov5_021EB354
 };
 
+#define FOLLOWER_BOUNCE_HEIGHT     (FX32_ONE * 2)
+#define FOLLOWER_BOUNCE_PHASE_FAST 4
+#define FOLLOWER_BOUNCE_PHASE_SLOW 8
+
+/**
+ * @brief Places the follower's billboard, lifting it on alternating stretches of
+ * its walk animation so that it bobs.
+ *
+ * @param mapObj
+ * @param billboard
+ */
+static void FollowerMon_SetBillboardPos(MapObject *mapObj, Billboard *billboard)
+{
+    FieldSystem *fieldSystem = MapObject_FieldSystem(mapObj);
+    VecFx32 pos;
+    u32 frame, phase;
+
+    ov5_021ECDA0(mapObj, &pos);
+    pos.z += (FX32_ONE * 6);
+
+    frame = Billboard_GetAnimFrameNum(billboard) / FX32_ONE;
+    phase = FOLLOWER_BOUNCE_PHASE_FAST;
+
+    if (fieldSystem != NULL
+        && FollowerMon_GetBounceSpeed(fieldSystem->followMon.species) == FOLLOWER_BOUNCE_SLOW) {
+        phase = FOLLOWER_BOUNCE_PHASE_SLOW;
+    }
+
+    if ((frame & phase) != 0) {
+        pos.y += FOLLOWER_BOUNCE_HEIGHT;
+    }
+
+    Billboard_SetPos(billboard, &pos);
+}
+
 static void FollowerMon_AnimCallback(MapObject *mapObj)
 {
     Billboard *billboard;
@@ -127,7 +164,7 @@ static void FollowerMon_AnimCallback(MapObject *mapObj)
 
     Billboard_AdvanceAnim(billboard, FX32_ONE);
 
-    ov5_021EDEB4(mapObj, billboard);
+    FollowerMon_SetBillboardPos(mapObj, billboard);
 
     draw = 1;
     if (MapObject_CheckStatusFlag(mapObj, MAP_OBJ_STATUS_HIDE)) {
@@ -1609,6 +1646,8 @@ const UnkStruct_ov5_021FB97C Unk_ov5_021FB97C[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_RANGER_MALE, &Unk_ov5_021FAFD8 },
     { OBJ_EVENT_GFX_VETERAN, &Unk_ov5_021FAFD8 },
+    { OBJ_EVENT_GFX_FLOOR_BOOK, &Unk_ov5_021FB000 },
+    { OBJ_EVENT_GFX_JACINTHE, &Unk_ov5_021FAFD8 },
     { 0xffff, NULL }
 };
 
@@ -3144,6 +3183,7 @@ const UnkStruct_ov5_021ED2D0 Unk_ov5_021FC9B4[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, 0x619 },  // mmodel_00001591
     { OBJ_EVENT_GFX_RANGER_MALE, 0x61A },  // mmodel_00001592
     { OBJ_EVENT_GFX_VETERAN, 0x61B },  // mmodel_00001593
+    { OBJ_EVENT_GFX_JACINTHE, 0x61C },  // mmodel_00001594
     { 0xffff, 0x0 }
 };
 
@@ -4896,6 +4936,7 @@ const UnkStruct_ov5_021EDD04 Unk_ov5_021FD77C[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_RANGER_MALE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { OBJ_EVENT_GFX_VETERAN, 0x0, 0x0, Unk_ov5_021FB2C0 },
+    { OBJ_EVENT_GFX_JACINTHE, 0x0, 0x0, Unk_ov5_021FB2C0 },
     { 0xffff, 0xffff, 0xffff, NULL }
 };
 
@@ -6255,6 +6296,8 @@ const UnkStruct_ov5_021ECD10 Unk_ov5_021FC194[] = {
     { OBJ_EVENT_GFX_RANGER_FEMALE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_RANGER_MALE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { OBJ_EVENT_GFX_VETERAN, 0x1, 0x1, 0x1, 0x1, 0x0 },
+    { OBJ_EVENT_GFX_FLOOR_BOOK, 0x2, 0x0, 0x0, 0x0, 0x0 },
+    { OBJ_EVENT_GFX_JACINTHE, 0x1, 0x1, 0x1, 0x1, 0x0 },
     { 0xffff, 0x0, 0x0, 0x0, 0x0, 0x0 }
 };
 
@@ -6396,6 +6439,14 @@ const UnkStruct_ov5_021EC700 Unk_ov5_021FB51C[] = {
             0x0,
             0x0,
             (FX32_ONE * 6) - (FX32_ONE * 6),
+        },
+    },
+    {
+        OBJ_EVENT_GFX_FLOOR_BOOK,
+        {
+            0x0,
+            -(FX32_ONE * 13),
+            0x0,
         },
     },
     {

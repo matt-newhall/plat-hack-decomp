@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_WATER", "TYPE_WATER" ],
     "catch_rate": 255,
-    "base_exp_reward": 142,
+    "base_exp_reward": 69,
     "ev_yields": {
         "hp": 0,
         "attack": 0,
@@ -27,57 +27,42 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_ERRATIC",
     "egg_groups": [ "EGG_GROUP_WATER_1", "EGG_GROUP_WATER_1" ],
-    "abilities": [ "ABILITY_SHELL_ARMOR", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_SHELL_ARMOR", "ABILITY_NONE", "ABILITY_RATTLED" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_BLUE",
     "flip_sprite": false,
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_CLAMP" ],
             [ 1, "MOVE_WATER_GUN" ],
-            [ 1, "MOVE_DUAL_CHOP" ],
-            [ 1, "MOVE_IRON_DEFENSE" ]
+            [ 1, "MOVE_WHIRLPOOL" ],
+            [ 1, "MOVE_CLAMP" ],
+            [ 6, "MOVE_REFRESH" ],
+            [ 12, "MOVE_FAINT_ATTACK" ]
         ],
         "by_tm": [
-            "TM03",
-            "TM06",
-            "TM07",
             "TM10",
             "TM13",
             "TM14",
-            "TM17",
-            "TM18",
-            "TM21",
-            "TM27",
-            "TM32",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
             "TM55",
-            "TM58",
-            "TM78",
             "TM82",
             "TM83",
             "TM87",
-            "TM90",
             "HM03",
             "HM07"
         ],
         "by_tutor": [
             "MOVE_DIVE",
             "MOVE_ICY_WIND",
-            "MOVE_SNORE",
-            "MOVE_IRON_DEFENSE"
+            "MOVE_SNORE"
         ],
         "egg_moves": [
-            "MOVE_REFRESH",
-            "MOVE_FREEZE_DRY",
             "MOVE_BODY_SLAM",
             "MOVE_SUPERSONIC",
-            "MOVE_SILK_TRAP",
             "MOVE_CONFUSE_RAY",
+            "MOVE_MUDDY_WATER",
             "MOVE_AQUA_RING"
         ]
     },

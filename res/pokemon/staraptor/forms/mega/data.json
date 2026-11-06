@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_CONTRARY",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,92 +44,44 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_TACKLE"
-            ],
-            [
-                1,
-                "MOVE_GROWL"
-            ],
-            [
-                1,
-                "MOVE_QUICK_ATTACK"
-            ],
-            [
-                1,
-                "MOVE_WING_ATTACK"
-            ],
-            [
-                5,
-                "MOVE_QUICK_ATTACK"
-            ],
-            [
-                9,
-                "MOVE_WING_ATTACK"
-            ],
-            [
-                13,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                18,
-                "MOVE_ENDEAVOR"
-            ],
-            [
-                23,
-                "MOVE_WHIRLWIND"
-            ],
-            [
-                28,
-                "MOVE_AERIAL_ACE"
-            ],
-            [
-                33,
-                "MOVE_TAKE_DOWN"
-            ],
-            [
-                34,
-                "MOVE_CLOSE_COMBAT"
-            ],
-            [
-                41,
-                "MOVE_AGILITY"
-            ],
-            [
-                49,
-                "MOVE_BRAVE_BIRD"
-            ]
+            [ 1, "MOVE_CLOSE_COMBAT" ],
+            [ 1, "MOVE_WING_ATTACK" ],
+            [ 1, "MOVE_TACKLE" ],
+            [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_QUICK_ATTACK" ],
+            [ 18, "MOVE_ENDEAVOR" ],
+            [ 22, "MOVE_STRUGGLE_BUG" ],
+            [ 24, "MOVE_WHIRLWIND" ],
+            [ 28, "MOVE_AERIAL_ACE" ],
+            [ 33, "MOVE_TAKE_DOWN" ],
+            [ 35, "MOVE_FEATHER_DANCE" ],
+            [ 37, "MOVE_AIR_SLASH" ],
+            [ 49, "MOVE_BRAVE_BIRD" ],
+            [ 57, "MOVE_FINAL_GAMBIT" ],
+            [ 62, "MOVE_TAILWIND" ]
         ],
         "by_tm": [
-            "TM06",
+            "TM01",
+            "TM08",
             "TM10",
-            "TM11",
             "TM15",
-            "TM17",
             "TM18",
-            "TM21",
             "TM27",
-            "TM32",
             "TM40",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
-            "TM46",
             "TM47",
-            "TM51",
-            "TM58",
+            "TM52",
+            "TM60",
             "TM68",
             "TM78",
             "TM82",
             "TM83",
             "TM87",
             "TM88",
-            "TM89",
-            "TM90",
             "HM02",
-            "HM05"
+            "HM05",
+            "HM06"
         ],
         "by_tutor": [
             "MOVE_MUD_SLAP",
@@ -136,9 +89,10 @@
             "MOVE_SNORE",
             "MOVE_AIR_CUTTER",
             "MOVE_ENDEAVOR",
-            "MOVE_TWISTER",
             "MOVE_HEAT_WAVE",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_DRILL_RUN",
+            "MOVE_BRICK_BREAK"
         ]
     },
     "evolutions": []

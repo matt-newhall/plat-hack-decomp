@@ -196,11 +196,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM13",
+            "id": "LOCALID_ITEM_TM14",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_216_TM13",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_216_TM14",
             "script": 7157,
             "initial_dir": 0,
             "data": [],
@@ -226,26 +226,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_MENTAL_HERB",
+            "id": "LOCALID_ITEM_FULL_RESTORE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_216_MENTAL_HERB",
-            "script": 7158,
-            "initial_dir": 0,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 358,
-            "z": 389,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_ITEM_HP_UP",
-            "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
-            "movement_type": "MOVEMENT_TYPE_NONE",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_216_HP_UP",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_216_FULL_RESTORE",
             "script": 7246,
             "initial_dir": 0,
             "data": [],

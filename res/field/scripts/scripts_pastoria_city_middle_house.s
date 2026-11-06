@@ -26,8 +26,8 @@ PastoriaCityMiddleHouse_HandlePartyCombeeGenderCount:
     GoToIfEq VAR_RESULT, 0, PastoriaCityMiddleHouse_NotASingleCombee
     GoToIfEq VAR_RESULT, 1, PastoriaCityMiddleHouse_ThatsACombee
     Message PastoriaCityMiddleHouse_Text_BothGendersCombee
-    SetVar VAR_0x8004, ITEM_MACHO_BRACE
-    SetVar VAR_0x8005, 1
+    SetVar VAR_0x8004, ITEM_HONEY
+    SetVar VAR_0x8005, 10
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, PastoriaCityMiddleHouse_BagIsFull
     SetFlag FLAG_RECEIVED_PASTORIA_CITY_MIDDLE_HOUSE_MACHO_BRACE
     Common_GiveItemQuantity

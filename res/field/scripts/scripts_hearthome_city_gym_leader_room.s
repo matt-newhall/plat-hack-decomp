@@ -86,27 +86,29 @@ HearthomeGym_FantinaMain:
     GoTo HearthomeGym_FantinaTryGiveTM65
 
 HearthomeGym_FantinaTryGiveTM65:
-    SetVar VAR_0x8004, ITEM_TM65
+    SetVar VAR_0x8004, ITEM_TM46
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, HearthomeGym_FantinaCannotGiveTM65
     Common_GiveItemQuantity
-    SetFlag FLAG_OBTAINED_FANTINA_TM65
+    SetFlag FLAG_OBTAINED_FANTINA_TM46
     BufferItemName 0, VAR_0x8004
     BufferTMHMMoveName 1, VAR_0x8004
     Message HearthomeGym_FantinaExplainTM65
     WaitButton
     CloseMessage
+    Common_IncreaseLevelCap 44, 50
     ReleaseAll
     End
 
 HearthomeGym_FantinaCannotGiveTM65:
     Common_MessageBagIsFull
     CloseMessage
+    Common_IncreaseLevelCap 44, 50
     ReleaseAll
     End
 
 HearthomeGym_FantinaAfterBadge:
-    GoToIfUnset FLAG_OBTAINED_FANTINA_TM65, HearthomeGym_FantinaTryGiveTM65
+    GoToIfUnset FLAG_OBTAINED_FANTINA_TM46, HearthomeGym_FantinaTryGiveTM65
     Message HearthomeGym_Text_FantinaAfterBadge
     WaitButton
     CloseMessage

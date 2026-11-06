@@ -2,7 +2,6 @@
 
 
 _000:
-    ShowAbilityPopupAutoForEffectHolder
     CheckIgnorableAbility CHECK_HAVE, BTLSCR_SIDE_EFFECT_MON, ABILITY_LIMBER, _170
     CheckIgnoreWeather _016
     CompareVarToValue OPCODE_FLAG_NOT, BTLVAR_FIELD_CONDITIONS, FIELD_CONDITION_SUNNY, _016
@@ -34,6 +33,7 @@ _046:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _123
 
 _056:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _058
     CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _070
 
@@ -47,11 +47,13 @@ _066:
     Wait
 
 _070:
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _076
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _076
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_SIDE_CONDITIONS_EFFECT_MON, SIDE_CONDITION_SAFEGUARD, _218
 
 _076:
+    ShowAbilityPopupAutoForEffectHolder
     PlayBattleAnimation BTLSCR_SIDE_EFFECT_MON, BATTLE_ANIMATION_PARALYZED
     Wait
     UpdateMonData OPCODE_FLAG_ON, BTLSCR_SIDE_EFFECT_MON, BATTLEMON_STATUS, MON_CONDITION_PARALYSIS
@@ -92,6 +94,7 @@ _overcoat_popup:
 
 _140:
     CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_INDIRECT, _218
+    CompareVarToValue OPCODE_EQU, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_ABILITY, _218
     WaitButtonABTime 30
     // It doesn't affect {0}...
     PrintMessage BattleStrings_Text_ItDoesntAffectPokemon_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
@@ -109,6 +112,13 @@ _170:
     GoTo _211
     // {0}'s {1} suppressed {2}'s {3}!
     PrintMessage BattleStrings_Text_PokemonsAbilitySuppressedPokemonsAbility_AllyAlly, TAG_NICKNAME_ABILITY_NICKNAME_ABILITY, BTLSCR_SIDE_EFFECT_MON, BTLSCR_SIDE_EFFECT_MON, BTLSCR_MSG_TEMP, BTLSCR_MSG_BATTLER_TEMP
+    GoTo _211
+
+_misty_terrain:
+    CompareVarToValue OPCODE_NEQ, BTLVAR_SIDE_EFFECT_TYPE, SIDE_EFFECT_TYPE_DIRECT, _218
+    WaitButtonABTime 30
+    // {0} surrounds itself with a protective mist!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
     GoTo _211
 
 _200:

@@ -30,7 +30,7 @@ BOOL Pokemon_CanBattle(Pokemon *mon)
     return !Pokemon_GetValue(mon, MON_DATA_IS_EGG, NULL);
 }
 
-BOOL Pokemon_GiveMonFromScript(enum HeapID heapID, SaveData *saveData, u16 species, u8 level, u16 heldItem, int metLocation, int metTerrain)
+BOOL Pokemon_GiveMonFromScript(enum HeapID heapID, SaveData *saveData, u16 species, u8 level, u8 form, u16 heldItem, int metLocation, int metTerrain)
 {
     BOOL result;
     Pokemon *mon;
@@ -47,6 +47,7 @@ BOOL Pokemon_GiveMonFromScript(enum HeapID heapID, SaveData *saveData, u16 speci
 
     item = heldItem;
     Pokemon_SetValue(mon, MON_DATA_HELD_ITEM, &item);
+    Pokemon_SetValue(mon, MON_DATA_FORM, &form);
 
     u8 slots[6] = {0, 1, 2, 3, 4, 5};
     u32 iv31 = 31;

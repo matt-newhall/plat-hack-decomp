@@ -3,6 +3,7 @@
 #include <nitro.h>
 #include <string.h>
 
+#include "constants/scrcmd.h"
 #include "generated/movement_types.h"
 #include "generated/object_events_gfx.h"
 
@@ -1661,7 +1662,9 @@ void MapObjectMan_PauseAllMovement(MapObjectManager *mapObjMan)
     MapObject *mapObj = MapObjectMan_GetMapObject(mapObjMan);
 
     do {
-        if (sub_02062CF8(mapObj)) {
+        // don't pause the follower - we want to keep them moving so they stay behind you
+        // like when you see a trainer
+        if (sub_02062CF8(mapObj) && MapObject_GetLocalID(mapObj) != LOCALID_FOLLOWER) {
             MapObject_SetPauseMovementOn(mapObj);
         }
 

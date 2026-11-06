@@ -25,6 +25,7 @@ Encore ✅
 - A Pokémon affected by Encore can now select the target of its moves.
 - If a Pokémon is forced to use Focus Punch on a turn it chose another move, the charging message does not appear and it can be executed regardless of whether the Pokémon took damage that turn.
 - Encore once again fails if the target's last move was a move that calls other moves.
+- If a Pokémon is forced to use Acupressure on a turn it chose another move, it will always target the user, not an ally.
 
 Fire Fang ✅
 - Fire Fang no longer bypasses Wonder Guard.
@@ -158,15 +159,26 @@ Feint ✅
 - Feint can now inflict damage even if the target has not used Protect or Detect.
 - Feint can now be copied by Mirror Move.
 
+Future Sight, Doom Desire ✅
+- Future Sight now calculates its damage when it hits rather than when it is selected. Future Sight uses the user's Special Attack and the hit Pokémon's Special Defense at the time damage is dealt.
+- It now inflicts damage as a Psychic-type move; therefore, it is affected by type effectiveness (so cannot affect Dark-type Pokémon), can receive STAB, and will not necessarily hit through Wonder Guard. If the user is on the field and has Normalize when Future Sight hits, it hits as a Normal-type move.
+- Future Sight can now land a critical hit.
+- If the user is not on the field when Future Sight hits, its Ability and held item are not applied.
+- A Pokémon can now endure Future Sight with Endure or Sturdy, in addition to the Focus Sash and Focus Band. Future Sight disappears with no message if it would hit the Pokémon that used the move.
+
 Gust, Twister ✅
 - Twister can now hit a Pokémon during the semi-invulnerable turns of Fly, Bounce and Sky Drop, and if it does, will deal double the damage.
 - If the user is hit by Gust or Twister during the semi-invulnerable turn, the damage dealt will be doubled rather than the move's power (resulting in virtually the same effect).
 
-Ingrain ✅
-- Ghost-type Pokémon under the effects of Ingrain are now able to switch out. However, they still cannot be forced to switch by moves that switch the target out.
-
 Heal Bell ✅
 - Heal Bell now always affects the user, even if it has Soundproof; however, other active Pokémon with Soundproof are still unaffected by it.
+
+Healing Wish, Lunar Dance ✅
+- The receiving Pokémon is now sent out at the end of the turn rather than immediately sending it out.
+- If the Pokémon sent out to replace the user already has full health and no status condition, Healing Wish's effect will not activate until a Pokémon is placed in that position. A pending Healing Wish will not activate if a Pokémon already in that position loses HP or gains a status condition; it will only activate when a new Pokémon is placed in that position. Each position can only have a single instance of Healing Wish pending (using it multiple times does not stack). Healing Wish can stack with Lunar Dance.
+
+Ingrain ✅
+- Ghost-type Pokémon under the effects of Ingrain are now able to switch out. However, they still cannot be forced to switch by moves that switch the target out.
 
 Light Screen, Reflect ✅
 - Removed from a Pokémon's side of the field if it is hit by Brick Break or Defog. Is not removed if the target is immune to the move (e.g. a Ghost-type Pokémon targeted by Brick Break).

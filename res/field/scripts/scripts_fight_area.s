@@ -370,6 +370,7 @@ FightArea_YoudRatherFly:
 FightArea_SailToSnowpointCity:
     Message FightArea_Text_AnchorsAweigh
     CloseMessage
+    SendBackFollowingPoke
     Call FightArea_SailorEnterShip
     CallIfEq VAR_0x8004, DIR_SOUTH, FightArea_PlayerEnterShipSouth
     CallIfEq VAR_0x8004, DIR_EAST, FightArea_PlayerEnterShipEast
@@ -525,14 +526,14 @@ FightArea_PalmerFarewell:
     LockAll
     ApplyMovement LOCALID_PALMER, FightArea_Movement_PalmerFaceSouth
     WaitMovement
-    BufferRivalName 0
-    BufferPlayerName 1
     Message FightArea_Text_PalmerFarewell
     WaitButton
     CloseMessage
     SetVar VAR_0x8004, ITEM_ASSAULT_VEST
     SetVar VAR_0x8005, 1
     Common_GiveItemQuantity
+    BufferRivalName 0
+    BufferPlayerName 1
     Message FightArea_Text_PalmerAssaultVest
     WaitButton
     CloseMessage
@@ -542,6 +543,7 @@ FightArea_PalmerFarewell:
     RemoveObject LOCALID_PALMER
     SetFlag FLAG_HIDE_FIGHT_AREA_PALMER
     SetVar VAR_PALMER_FIGHT_AREA_EVENT, 0
+    Common_IncreaseLevelCap 85
     ReleaseAll
     End
 

@@ -24,8 +24,12 @@ typedef struct FieldConditions {
     u16 futureSightMove[MAX_BATTLERS];
     int futureSightAttacker[MAX_BATTLERS];
     s32 futureSightDamage[MAX_BATTLERS];
+    u8 futureSightPartySlot[MAX_BATTLERS];
     u8 wishTarget[MAX_BATTLERS];
     s32 wishHealing[MAX_BATTLERS];
+    u8 terrainTurns;
+    u8 mudSportTurns;
+    u8 waterSportTurns;
 } FieldConditions;
 
 typedef struct SideConditions {
@@ -63,7 +67,8 @@ typedef struct TurnFlags {
     u32 spikyShielding : 1;
     u32 silkTrapping : 1;
     u32 powdered : 1;
-    u32 padding00_0B : 19;
+    u32 recharging : 1;
+    u32 padding00_0C : 18;
 
     int physicalDamageTakenFrom[MAX_BATTLERS];
     int physicalDamageLastAttacker;
@@ -125,6 +130,7 @@ typedef struct BattleScriptTaskData {
     int ball;
     int tmpData[8];
     void *tmpPtr[2];
+    struct BattleScriptTaskData *parentTaskData;
 } BattleScriptTaskData;
 
 struct BattleContext {
@@ -200,7 +206,11 @@ struct BattleContext {
     int scriptTemp;
 
     u32 battlerStatusFlags[MAX_BATTLERS];
-    u32 payDayCount;
+    u8 payDayUses[MAX_BATTLERS][MAX_PARTY_SIZE];
+    u8 healingWishPending;
+    u8 lunarDancePending;
+    BattleMon futureSightSavedMon;
+    BOOL futureSightStandIn;
     int totalTurns;
     int totalFainted[MAX_BATTLERS];
     int totalDamage[MAX_BATTLERS];
@@ -249,6 +259,8 @@ struct BattleContext {
     u8 battlerCounter;
     u8 savedBattlerCounter;
     u32 spreadHitMask;
+    u8 moveTargetsResolved;
+    u8 moveTargetsAffected;
     u8 beatUpCounter;
 
     BOOL moveIsStolen;
@@ -287,6 +299,7 @@ struct BattleContext {
     u16 moveHitBattler[MAX_BATTLERS];
     u16 moveHitType[MAX_BATTLERS];
     u16 movePrevByBattler[MAX_BATTLERS];
+    u16 moveFailedTurn[MAX_BATTLERS];
     u16 moveCopied[MAX_BATTLERS];
     u16 moveCopiedHit[MAX_BATTLERS][MAX_BATTLERS];
     u16 moveSketched[MAX_BATTLERS];

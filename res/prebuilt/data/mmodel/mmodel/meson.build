@@ -1563,6 +1563,7 @@ mmodel_files = files(
     'mmodel_00001591.bin',
     'mmodel_00001592.bin',
     'mmodel_00001593.bin',
+    'mmodel_00001594.bin',
 )
 
 mmodel_files_targets = []

@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_LEVITATE",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,82 +44,33 @@
     "icon_palette": 2,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_PSYWAVE"
-            ],
-            [
-                5,
-                "MOVE_PLAY_ROUGH"
-            ],
-            [
-                10,
-                "MOVE_HELPING_HAND"
-            ],
-            [
-                15,
-                "MOVE_SAFEGUARD"
-            ],
-            [
-                20,
-                "MOVE_DRAGON_BREATH"
-            ],
-            [
-                25,
-                "MOVE_PROTECT"
-            ],
-            [
-                30,
-                "MOVE_REFRESH"
-            ],
-            [
-                35,
-                "MOVE_LUSTER_PURGE"
-            ],
-            [
-                40,
-                "MOVE_ZEN_HEADBUTT"
-            ],
-            [
-                45,
-                "MOVE_RECOVER"
-            ],
-            [
-                50,
-                "MOVE_PSYCHO_SHIFT"
-            ],
-            [
-                55,
-                "MOVE_DRAGON_DANCE"
-            ],
-            [
-                60,
-                "MOVE_MEMENTO"
-            ],
-            [
-                65,
-                "MOVE_PSYCHIC"
-            ],
-            [
-                70,
-                "MOVE_DRAGON_PULSE"
-            ]
+            [ 1, "MOVE_TAILWIND" ],
+            [ 1, "MOVE_STORED_POWER" ],
+            [ 5, "MOVE_HELPING_HAND" ],
+            [ 10, "MOVE_RECOVER" ],
+            [ 15, "MOVE_CONFUSION" ],
+            [ 22, "MOVE_PSYWAVE" ],
+            [ 24, "MOVE_BREAKING_SWIPE" ],
+            [ 26, "MOVE_DRAGON_BREATH" ],
+            [ 29, "MOVE_SCALE_SHOT" ],
+            [ 31, "MOVE_DISABLE" ],
+            [ 35, "MOVE_AIR_SLASH" ],
+            [ 38, "MOVE_LUSTER_PURGE" ],
+            [ 47, "MOVE_ZEN_HEADBUTT" ],
+            [ 50, "MOVE_TRI_ATTACK" ],
+            [ 53, "MOVE_WISH" ],
+            [ 55, "MOVE_ROAR" ],
+            [ 57, "MOVE_DRAGON_PULSE" ],
+            [ 70, "MOVE_MEMENTO" ],
+            [ 73, "MOVE_AURA_SPHERE" ],
+            [ 75, "MOVE_PSYCHIC" ],
+            [ 81, "MOVE_DRACO_METEOR" ]
         ],
         "by_tm": [
             "TM02",
-            "TM03",
-            "TM04",
-            "TM05",
-            "TM06",
             "TM10",
-            "TM11",
             "TM13",
             "TM15",
-            "TM16",
-            "TM17",
-            "TM18",
-            "TM20",
-            "TM21",
             "TM22",
             "TM24",
             "TM25",
@@ -126,27 +78,19 @@
             "TM27",
             "TM29",
             "TM30",
-            "TM32",
-            "TM33",
             "TM34",
-            "TM37",
             "TM40",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
             "TM47",
-            "TM51",
             "TM53",
-            "TM57",
-            "TM58",
             "TM59",
             "TM65",
             "TM68",
+            "TM69",
             "TM70",
             "TM73",
-            "TM77",
-            "TM78",
+            "TM76",
             "TM82",
             "TM83",
             "TM85",
@@ -165,13 +109,10 @@
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
             "MOVE_SNORE",
-            "MOVE_HELPING_HAND",
-            "MOVE_OUTRAGE",
             "MOVE_ZEN_HEADBUTT",
-            "MOVE_TWISTER",
             "MOVE_LAST_RESORT",
-            "MOVE_TRICK",
-            "MOVE_SWIFT"
+            "MOVE_SWIFT",
+            "MOVE_MEMENTO"
         ]
     },
     "evolutions": []

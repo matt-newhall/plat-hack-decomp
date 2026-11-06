@@ -2,52 +2,52 @@
     "land_rate": 30,
     "land_encounters": [
         {
-            "level": 32,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_AZUMARILL"
         },
         {
-            "level": 33,
-            "species": "SPECIES_SWINUB"
+            "level": 60,
+            "species": "SPECIES_SNORUNT"
         },
         {
-            "level": 33,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_MAMOSWINE"
         },
         {
-            "level": 33,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_FORRETRESS"
         },
         {
-            "level": 34,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_ABOMASNOW"
         },
         {
-            "level": 34,
-            "species": "SPECIES_SWINUB"
+            "level": 60,
+            "species": "SPECIES_WEAVILE"
         },
         {
-            "level": 34,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_PURUGLY"
         },
         {
-            "level": 32,
-            "species": "SPECIES_SWINUB"
+            "level": 60,
+            "species": "SPECIES_JYNX"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_MILTANK"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_SHELGON"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNEASEL"
+            "level": 60,
+            "species": "SPECIES_FROSLASS"
         },
         {
-            "level": 35,
-            "species": "SPECIES_SNOVER"
+            "level": 60,
+            "species": "SPECIES_MUNCHLAX"
         }
     ],
     "swarms": [
@@ -94,36 +94,46 @@
         "SPECIES_NONE",
         "SPECIES_NONE"
     ],
-    "surf_rate": 0,
+    "surf_rate": 10,
     "surf_encounters": [
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_SEALEO"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_MANTYKE"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_LUVDISC"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_MAGCARGO"
         },
         {
-            "level_max": 0,
-            "level_min": 0,
-            "species": "SPECIES_NONE"
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_LAPRAS"
+        },
+        {
+            "level_max": 60,
+            "level_min": 60,
+            "species": "SPECIES_WALREIN"
         }
     ],
     "old_rod_rate": 0,
     "old_rod_encounters": [
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
+        },
         {
             "level_max": 0,
             "level_min": 0,
@@ -176,10 +186,20 @@
             "level_max": 0,
             "level_min": 0,
             "species": "SPECIES_NONE"
+        },
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
         }
     ],
     "super_rod_rate": 0,
     "super_rod_encounters": [
+        {
+            "level_max": 0,
+            "level_min": 0,
+            "species": "SPECIES_NONE"
+        },
         {
             "level_max": 0,
             "level_min": 0,

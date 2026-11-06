@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_SHARPNESS",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,111 +44,47 @@
     "icon_palette": 0,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_SCRATCH"
-            ],
-            [
-                1,
-                "MOVE_FEINT"
-            ],
-            [
-                4,
-                "MOVE_LEER"
-            ],
-            [
-                9,
-                "MOVE_TAUNT"
-            ],
-            [
-                12,
-                "MOVE_QUICK_ATTACK"
-            ],
-            [
-                17,
-                "MOVE_METEOR_BEAM"
-            ],
-            [
-                20,
-                "MOVE_PURSUIT"
-            ],
-            [
-                25,
-                "MOVE_SWORDS_DANCE"
-            ],
-            [
-                28,
-                "MOVE_BITE"
-            ],
-            [
-                33,
-                "MOVE_DOUBLE_TEAM"
-            ],
-            [
-                36,
-                "MOVE_SLASH"
-            ],
-            [
-                41,
-                "MOVE_VOLT_SWITCH"
-            ],
-            [
-                44,
-                "MOVE_SUCKER_PUNCH"
-            ],
-            [
-                49,
-                "MOVE_DETECT"
-            ],
-            [
-                52,
-                "MOVE_NIGHT_SLASH"
-            ],
-            [
-                60,
-                "MOVE_PSYCHO_CUT"
-            ],
-            [
-                65,
-                "MOVE_PERISH_SONG"
-            ]
+            [ 1, "MOVE_LEER" ],
+            [ 1, "MOVE_QUICK_ATTACK" ],
+            [ 5, "MOVE_FAINT_ATTACK" ],
+            [ 10, "MOVE_KNOCK_OFF" ],
+            [ 15, "MOVE_DETECT" ],
+            [ 20, "MOVE_TAUNT" ],
+            [ 23, "MOVE_PUNISHMENT" ],
+            [ 25, "MOVE_SLASH" ],
+            [ 28, "MOVE_RAZOR_WIND" ],
+            [ 31, "MOVE_FOUL_PLAY" ],
+            [ 33, "MOVE_NIGHT_SLASH" ],
+            [ 35, "MOVE_FOCUS_ENERGY" ],
+            [ 40, "MOVE_SUCKER_PUNCH" ],
+            [ 45, "MOVE_ME_FIRST" ],
+            [ 47, "MOVE_PLAY_ROUGH" ],
+            [ 50, "MOVE_SUPERPOWER" ],
+            [ 53, "MOVE_MEGAHORN" ],
+            [ 55, "MOVE_CLOSE_COMBAT" ],
+            [ 57, "MOVE_FUTURE_SIGHT" ]
         ],
         "by_tm": [
-            "TM03",
-            "TM04",
             "TM06",
             "TM07",
             "TM10",
-            "TM11",
-            "TM12",
             "TM13",
             "TM14",
             "TM15",
-            "TM17",
-            "TM18",
-            "TM21",
             "TM23",
             "TM24",
             "TM25",
-            "TM27",
             "TM30",
-            "TM32",
             "TM34",
             "TM35",
-            "TM37",
             "TM38",
             "TM39",
             "TM40",
             "TM41",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
             "TM46",
-            "TM49",
             "TM54",
-            "TM57",
-            "TM58",
             "TM61",
             "TM65",
             "TM66",
@@ -155,17 +92,12 @@
             "TM70",
             "TM71",
             "TM73",
-            "TM75",
-            "TM77",
-            "TM78",
             "TM79",
             "TM80",
             "TM81",
             "TM82",
             "TM83",
-            "TM85",
             "TM87",
-            "TM90",
             "HM01",
             "HM04",
             "HM06"
@@ -174,13 +106,11 @@
             "MOVE_MUD_SLAP",
             "MOVE_FURY_CUTTER",
             "MOVE_ICY_WIND",
-            "MOVE_SUPERPOWER",
             "MOVE_SNORE",
             "MOVE_SPITE",
             "MOVE_ZEN_HEADBUTT",
             "MOVE_BOUNCE",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH",
             "MOVE_SWIFT"
         ]
     },

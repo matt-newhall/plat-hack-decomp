@@ -1748,7 +1748,7 @@ static u32 sub_02060C24(PlayerAvatar *playerAvatar, MapObject *mapObj, int param
         v1 |= (1 << 1);
     }
 
-    if (sub_02063F00(mapObj, x, y, z) == 1) {
+    if (MapObject_IsTileOccupied(mapObj, x, y, z, TRUE) == 1) {
         v1 |= (1 << 2);
     }
 
@@ -1997,7 +1997,7 @@ static int sub_02061100(PlayerAvatar *playerAvatar, MapObject *mapObj, int param
 
         y = y * 2;
 
-        if (sub_02063F00(mapObj, x, y, z) == 1) {
+        if (MapObject_IsTileOccupied(mapObj, x, y, z, TRUE) == 1) {
             v0 |= (1 << 2);
         }
     }

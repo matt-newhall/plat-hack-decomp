@@ -178,7 +178,9 @@ VictoryRoad_CounterpartTrigger:
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     CallIfEq VAR_0x8004, 14, VictoryRoad_PlayerX14
     CallIfEq VAR_0x8004, 16, VictoryRoad_PlayerX16
-    ApplyMovement LOCALID_COUNTERPART, VictoryRoad_Movement_Counterpart8North
+    ApplyMovement LOCALID_COUNTERPART, VictoryRoad_Movement_Counterpart7North
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, VictoryRoad_Movement_PlayerWalkSouthToCounterpart
     WaitMovement
     GetPlayerGender VAR_0x8000
     CallIfEq VAR_0x8000, GENDER_MALE, VictoryRoad_DawnPreBattle
@@ -332,8 +334,13 @@ VictoryRoad_Movement_CounterpartRight:
     EndMovement
 
     .balign 4, 0
-VictoryRoad_Movement_Counterpart8North:
-    WalkNormalNorth 8
+VictoryRoad_Movement_Counterpart7North:
+    WalkNormalNorth 7
+    EndMovement
+
+    .balign 4, 0
+VictoryRoad_Movement_PlayerWalkSouthToCounterpart:
+    WalkNormalSouth
     EndMovement
 
     .balign 4, 0

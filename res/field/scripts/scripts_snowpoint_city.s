@@ -207,6 +207,7 @@ SnowpointCity_TakeShipToBattleZone:
     CallIfUnset FLAG_SAILED_TO_BATTLE_ZONE, SnowpointCity_Cynthia
     Message SnowpointCity_Text_LetsSetSail
     CloseMessage
+    SendBackFollowingPoke
     Call SnowpointCity_SailorEnterShip
     Call SnowpointCity_PlayerEnterShip
     TakeShipFromSnowpoint DIR_EAST, MAP_HEADER_FIGHT_AREA, 623, 434
@@ -218,6 +219,7 @@ SnowpointCity_Cynthia:
     AddObject LOCALID_CYNTHIA
     LockObject LOCALID_CYNTHIA
     CloseMessage
+    FollowPokePlaceAtSide DIR_WEST
     ApplyMovement LOCALID_CYNTHIA, SnowpointCity_Movement_CynthiaEnter
     WaitMovement
     Message SnowpointCity_Text_ImGladIWaited

@@ -31,9 +31,7 @@ Route217_TriggerMaylene:
     BufferPlayerName 0
     Message Route217_Text_OhPlayer
     CloseMessage
-    ApplyMovement LOCALID_PLAYER, Route217_Movement_PlayerWalkOnSpotSouth
-    WaitMovement
-    ApplyMovement LOCALID_MAYLENE, Route217_Movement_MayleneWalkNorth
+    ApplyMovement LOCALID_PLAYER, Route217_Movement_PlayerWalkSouthToMaylene
     WaitMovement
     Message Route217_Text_GoingToSnowpointCity
     CloseMessage
@@ -69,8 +67,8 @@ Route217_MayleneLeaveX303:
     Return
 
     .balign 4, 0
-Route217_Movement_PlayerWalkOnSpotSouth:
-    WalkOnSpotNormalSouth
+Route217_Movement_PlayerWalkSouthToMaylene:
+    WalkNormalSouth
     EndMovement
 
     .balign 4, 0

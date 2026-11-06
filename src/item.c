@@ -2008,7 +2008,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM03] = {
         .dataID = 0x134,
         .iconID = tm_NCGR,
-        .paletteID = tm_water_NCLR,
+        .paletteID = tm_psychic_NCLR,
         .gen3ID = GBA_ITEM_TM03,
     },
     [ITEM_TM04] = {
@@ -2020,7 +2020,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM05] = {
         .dataID = 0x136,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_grass_NCLR,
         .gen3ID = GBA_ITEM_TM05,
     },
     [ITEM_TM06] = {
@@ -2032,13 +2032,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM07] = {
         .dataID = 0x138,
         .iconID = tm_NCGR,
-        .paletteID = tm_ice_NCLR,
+        .paletteID = tm_dark_NCLR,
         .gen3ID = GBA_ITEM_TM07,
     },
     [ITEM_TM08] = {
         .dataID = 0x139,
         .iconID = tm_NCGR,
-        .paletteID = tm_fighting_NCLR,
+        .paletteID = tm_flying_NCLR,
         .gen3ID = GBA_ITEM_TM08,
     },
     [ITEM_TM09] = {
@@ -2056,13 +2056,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM11] = {
         .dataID = 0x13C,
         .iconID = tm_NCGR,
-        .paletteID = tm_fire_NCLR,
+        .paletteID = tm_poison_NCLR,
         .gen3ID = GBA_ITEM_TM11,
     },
     [ITEM_TM12] = {
         .dataID = 0x13D,
         .iconID = tm_NCGR,
-        .paletteID = tm_dark_NCLR,
+        .paletteID = tm_ghost_NCLR,
         .gen3ID = GBA_ITEM_TM12,
     },
     [ITEM_TM13] = {
@@ -2092,13 +2092,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM17] = {
         .dataID = 0x142,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_grass_NCLR,
         .gen3ID = GBA_ITEM_TM17,
     },
     [ITEM_TM18] = {
         .dataID = 0x143,
         .iconID = tm_NCGR,
-        .paletteID = tm_water_NCLR,
+        .paletteID = tm_flying_NCLR,
         .gen3ID = GBA_ITEM_TM18,
     },
     [ITEM_TM19] = {
@@ -2110,13 +2110,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM20] = {
         .dataID = 0x145,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_steel_NCLR,
         .gen3ID = GBA_ITEM_TM20,
     },
     [ITEM_TM21] = {
         .dataID = 0x146,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_psychic_NCLR,
         .gen3ID = GBA_ITEM_TM21,
     },
     [ITEM_TM22] = {
@@ -2146,13 +2146,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM26] = {
         .dataID = 0x14B,
         .iconID = tm_NCGR,
-        .paletteID = tm_ground_NCLR,
+        .paletteID = tm_psychic_NCLR,
         .gen3ID = GBA_ITEM_TM26,
     },
     [ITEM_TM27] = {
         .dataID = 0x14C,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_flying_NCLR,
         .gen3ID = GBA_ITEM_TM27,
     },
     [ITEM_TM28] = {
@@ -2176,13 +2176,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM31] = {
         .dataID = 0x150,
         .iconID = tm_NCGR,
-        .paletteID = tm_fighting_NCLR,
+        .paletteID = tm_bug_NCLR,
         .gen3ID = GBA_ITEM_TM31,
     },
     [ITEM_TM32] = {
         .dataID = 0x151,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_fire_NCLR,
         .gen3ID = GBA_ITEM_TM32,
     },
     [ITEM_TM33] = {
@@ -2212,7 +2212,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM37] = {
         .dataID = 0x156,
         .iconID = tm_NCGR,
-        .paletteID = tm_rock_NCLR,
+        .paletteID = tm_water_NCLR,
         .gen3ID = GBA_ITEM_TM37,
     },
     [ITEM_TM38] = {
@@ -2248,7 +2248,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM43] = {
         .dataID = 0x15C,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_ice_NCLR,
         .gen3ID = GBA_ITEM_TM43,
     },
     [ITEM_TM44] = {
@@ -2260,13 +2260,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM45] = {
         .dataID = 0x15E,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_psychic_NCLR,
         .gen3ID = GBA_ITEM_TM45,
     },
     [ITEM_TM46] = {
         .dataID = 0x15F,
         .iconID = tm_NCGR,
-        .paletteID = tm_dark_NCLR,
+        .paletteID = tm_ghost_NCLR,
         .gen3ID = GBA_ITEM_TM46,
     },
     [ITEM_TM47] = {
@@ -2284,7 +2284,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM49] = {
         .dataID = 0x162,
         .iconID = tm_NCGR,
-        .paletteID = tm_dark_NCLR,
+        .paletteID = tm_ice_NCLR,
         .gen3ID = GBA_ITEM_TM49,
     },
     [ITEM_TM50] = {
@@ -2296,7 +2296,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM51] = {
         .dataID = 0x164,
         .iconID = tm_NCGR,
-        .paletteID = tm_flying_NCLR,
+        .paletteID = tm_psychic_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM52] = {
@@ -2326,7 +2326,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM56] = {
         .dataID = 0x169,
         .iconID = tm_NCGR,
-        .paletteID = tm_dark_NCLR,
+        .paletteID = tm_electric_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM57] = {
@@ -2440,7 +2440,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM75] = {
         .dataID = 0x17C,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_electric_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM76] = {
@@ -2452,13 +2452,13 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM77] = {
         .dataID = 0x17E,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_poison_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM78] = {
         .dataID = 0x17F,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_fighting_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM79] = {
@@ -2500,7 +2500,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM85] = {
         .dataID = 0x186,
         .iconID = tm_NCGR,
-        .paletteID = tm_psychic_NCLR,
+        .paletteID = tm_water_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM86] = {
@@ -2530,7 +2530,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM90] = {
         .dataID = 0x18B,
         .iconID = tm_NCGR,
-        .paletteID = tm_normal_NCLR,
+        .paletteID = tm_ground_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_TM91] = {
@@ -2542,7 +2542,7 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
     [ITEM_TM92] = {
         .dataID = 0x18D,
         .iconID = tm_NCGR,
-        .paletteID = tm_psychic_NCLR,
+        .paletteID = tm_dragon_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
     [ITEM_HM01] = {
@@ -3151,67 +3151,127 @@ const ItemArchiveIDs sItemArchiveIDs[] = {
         .paletteID = chimechite_NCLR,
         .gen3ID = GBA_ITEM_NONE,
     },
+    [ITEM_TERRAIN_EXTENDER] = {
+        .dataID = 0x217,
+        .iconID = terrain_extender_NCGR,
+        .paletteID = terrain_extender_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_ELECTRIC_SEED] = {
+        .dataID = 0x218,
+        .iconID = electric_seed_NCGR,
+        .paletteID = electric_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_GRASSY_SEED] = {
+        .dataID = 0x219,
+        .iconID = grassy_seed_NCGR,
+        .paletteID = grassy_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_MISTY_SEED] = {
+        .dataID = 0x21A,
+        .iconID = misty_seed_NCGR,
+        .paletteID = misty_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_PSYCHIC_SEED] = {
+        .dataID = 0x21B,
+        .iconID = psychic_seed_NCGR,
+        .paletteID = psychic_seed_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_PUNCHING_GLOVE] = {
+        .dataID = 0x21C,
+        .iconID = punching_glove_NCGR,
+        .paletteID = punching_glove_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_ABSORB_BULB] = {
+        .dataID = 0x21D,
+        .iconID = absorb_bulb_NCGR,
+        .paletteID = absorb_bulb_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_CELL_BATTERY] = {
+        .dataID = 0x21E,
+        .iconID = cell_battery_NCGR,
+        .paletteID = cell_battery_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_LUMINOUS_MOSS] = {
+        .dataID = 0x21F,
+        .iconID = luminous_moss_NCGR,
+        .paletteID = luminous_moss_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
+    [ITEM_SNOWBALL] = {
+        .dataID = 0x220,
+        .iconID = snowball_NCGR,
+        .paletteID = snowball_NCLR,
+        .gen3ID = GBA_ITEM_NONE,
+    },
 };
 
 static const u16 sTMHMMoves[] = {
     [TMHM_ID(TM01)] = MOVE_FOCUS_PUNCH,
     [TMHM_ID(TM02)] = MOVE_DRAGON_CLAW,
-    [TMHM_ID(TM03)] = MOVE_WATER_PULSE,
+    [TMHM_ID(TM03)] = MOVE_MISTY_EXPLOSION,
     [TMHM_ID(TM04)] = MOVE_DISARMING_VOICE,
     [TMHM_ID(TM05)] = MOVE_TRAILBLAZE,
-    [TMHM_ID(TM06)] = MOVE_TOXIC,
+    [TMHM_ID(TM06)] = MOVE_PLAY_ROUGH,
     [TMHM_ID(TM07)] = MOVE_SNARL,
     [TMHM_ID(TM08)] = MOVE_ACROBATICS,
     [TMHM_ID(TM09)] = MOVE_BULLET_SEED,
     [TMHM_ID(TM10)] = MOVE_HIDDEN_POWER,
     [TMHM_ID(TM11)] = MOVE_ACID_SPRAY,
-    [TMHM_ID(TM12)] = MOVE_TAUNT,
+    [TMHM_ID(TM12)] = MOVE_NIGHT_SHADE,
     [TMHM_ID(TM13)] = MOVE_ICE_BEAM,
     [TMHM_ID(TM14)] = MOVE_BLIZZARD,
     [TMHM_ID(TM15)] = MOVE_HYPER_BEAM,
-    [TMHM_ID(TM16)] = MOVE_LIGHT_SCREEN,
+    [TMHM_ID(TM16)] = MOVE_PSYCHIC_FANGS,
     [TMHM_ID(TM17)] = MOVE_SOLAR_BLADE,
     [TMHM_ID(TM18)] = MOVE_HURRICANE,
     [TMHM_ID(TM19)] = MOVE_GIGA_DRAIN,
     [TMHM_ID(TM20)] = MOVE_HEAVY_SLAM,
-    [TMHM_ID(TM21)] = MOVE_DISARMING_VOICE,
+    [TMHM_ID(TM21)] = MOVE_DRAINING_KISS,
     [TMHM_ID(TM22)] = MOVE_SOLAR_BEAM,
     [TMHM_ID(TM23)] = MOVE_IRON_TAIL,
     [TMHM_ID(TM24)] = MOVE_THUNDERBOLT,
     [TMHM_ID(TM25)] = MOVE_THUNDER,
-    [TMHM_ID(TM26)] = MOVE_PSYSHOCK,
-    [TMHM_ID(TM27)] = MOVE_RETURN,
+    [TMHM_ID(TM26)] = MOVE_EARTHQUAKE,
+    [TMHM_ID(TM27)] = MOVE_DUAL_WINGBEAT,
     [TMHM_ID(TM28)] = MOVE_DIG,
     [TMHM_ID(TM29)] = MOVE_PSYCHIC,
     [TMHM_ID(TM30)] = MOVE_SHADOW_BALL,
-    [TMHM_ID(TM31)] = MOVE_BRICK_BREAK,
+    [TMHM_ID(TM31)] = MOVE_INFESTATION,
     [TMHM_ID(TM32)] = MOVE_FLAME_CHARGE,
-    [TMHM_ID(TM33)] = MOVE_REFLECT,
+    [TMHM_ID(TM33)] = MOVE_SMART_STRIKE,
     [TMHM_ID(TM34)] = MOVE_SHOCK_WAVE,
     [TMHM_ID(TM35)] = MOVE_FLAMETHROWER,
     [TMHM_ID(TM36)] = MOVE_SLUDGE_BOMB,
-    [TMHM_ID(TM37)] = MOVE_STRUGGLE_BUG,
+    [TMHM_ID(TM37)] = MOVE_LIFE_DEW,
     [TMHM_ID(TM38)] = MOVE_FIRE_BLAST,
     [TMHM_ID(TM39)] = MOVE_ROCK_TOMB,
     [TMHM_ID(TM40)] = MOVE_AERIAL_ACE,
     [TMHM_ID(TM41)] = MOVE_TORMENT,
     [TMHM_ID(TM42)] = MOVE_FACADE,
-    [TMHM_ID(TM43)] = MOVE_AURORA_VEIL,
+    [TMHM_ID(TM43)] = MOVE_FROST_BREATH,
     [TMHM_ID(TM44)] = MOVE_REST,
     [TMHM_ID(TM45)] = MOVE_MOONBLAST,
     [TMHM_ID(TM46)] = MOVE_HEX,
     [TMHM_ID(TM47)] = MOVE_STEEL_WING,
     [TMHM_ID(TM48)] = MOVE_SKILL_SWAP,
-    [TMHM_ID(TM49)] = MOVE_FREEZE_DRY,
+    [TMHM_ID(TM49)] = MOVE_DAZZLING_GLEAM,
     [TMHM_ID(TM50)] = MOVE_OVERHEAT,
-    [TMHM_ID(TM51)] = MOVE_ROOST,
+    [TMHM_ID(TM51)] = MOVE_IMPRISON,
     [TMHM_ID(TM52)] = MOVE_FOCUS_BLAST,
     [TMHM_ID(TM53)] = MOVE_ENERGY_BALL,
     [TMHM_ID(TM54)] = MOVE_FALSE_SWIPE,
     [TMHM_ID(TM55)] = MOVE_BRINE,
     [TMHM_ID(TM56)] = MOVE_WILD_CHARGE,
-    [TMHM_ID(TM57)] = MOVE_CHARGE_BEAM,
-    [TMHM_ID(TM58)] = MOVE_ENDURE,
+    [TMHM_ID(TM57)] = MOVE_VOLT_TACKLE,
+    [TMHM_ID(TM58)] = MOVE_FLATTER,
     [TMHM_ID(TM59)] = MOVE_DRAGON_PULSE,
     [TMHM_ID(TM60)] = MOVE_DRAIN_PUNCH,
     [TMHM_ID(TM61)] = MOVE_WILL_O_WISP,
@@ -3222,14 +3282,14 @@ static const u16 sTMHMMoves[] = {
     [TMHM_ID(TM66)] = MOVE_PAYBACK,
     [TMHM_ID(TM67)] = MOVE_RECYCLE,
     [TMHM_ID(TM68)] = MOVE_GIGA_IMPACT,
-    [TMHM_ID(TM69)] = MOVE_ROCK_POLISH,
+    [TMHM_ID(TM69)] = MOVE_BREAKING_SWIPE,
     [TMHM_ID(TM70)] = MOVE_FLASH,
     [TMHM_ID(TM71)] = MOVE_STONE_EDGE,
     [TMHM_ID(TM72)] = MOVE_AVALANCHE,
     [TMHM_ID(TM73)] = MOVE_THUNDER_WAVE,
     [TMHM_ID(TM74)] = MOVE_GYRO_BALL,
-    [TMHM_ID(TM75)] = MOVE_VOLT_SWITCH,
-    [TMHM_ID(TM76)] = MOVE_STEALTH_ROCK,
+    [TMHM_ID(TM75)] = MOVE_ELECTROWEB,
+    [TMHM_ID(TM76)] = MOVE_PSYSHOCK,
     [TMHM_ID(TM77)] = MOVE_VENOSHOCK,
     [TMHM_ID(TM78)] = MOVE_BODY_PRESS,
     [TMHM_ID(TM79)] = MOVE_DARK_PULSE,
@@ -3242,7 +3302,7 @@ static const u16 sTMHMMoves[] = {
     [TMHM_ID(TM86)] = MOVE_GRASS_KNOT,
     [TMHM_ID(TM87)] = MOVE_SWAGGER,
     [TMHM_ID(TM88)] = MOVE_PLUCK,
-    [TMHM_ID(TM89)] = MOVE_U_TURN,
+    [TMHM_ID(TM89)] = MOVE_EARTH_POWER,
     [TMHM_ID(TM90)] = MOVE_BULLDOZE,
     [TMHM_ID(TM91)] = MOVE_FLASH_CANNON,
     [TMHM_ID(TM92)] = MOVE_DRAGON_TAIL,

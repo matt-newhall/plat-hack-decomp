@@ -173,11 +173,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM81",
+            "id": "LOCALID_ITEM_TM60",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_221_TM81",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_221_TM60",
             "script": 7131,
             "initial_dir": 0,
             "data": [],
@@ -254,6 +254,21 @@
             "y": 0
         },
         {
+            "id": "LOCALID_ITEM_SCEPTILITE",
+            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_221_SCEPTILITE",
+            "script": 7101,
+            "initial_dir": 0,
+            "data": [],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 250,
+            "z": 902,
+            "y": 0
+        },
+        {
             "id": "LOCALID_BERRY_SOIL_4",
             "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
             "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
@@ -268,21 +283,6 @@
             "movement_range_z": 0,
             "x": 281,
             "z": 918,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_ITEM_SCEPTILITE",
-            "graphics_id": "OBJ_EVENT_GFX_ITEM_MEGA_STONE",
-            "movement_type": "MOVEMENT_TYPE_NONE",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_221_SCEPTILITE",
-            "script": 7101,
-            "initial_dir": 0,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 250,
-            "z": 902,
             "y": 0
         }
     ],

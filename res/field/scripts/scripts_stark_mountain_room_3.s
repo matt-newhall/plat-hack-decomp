@@ -105,6 +105,7 @@ StarkMountainRoom3_HeatranDisappeared:
 
 StarkMountainRoom3_LostBattle:
     SetVar VAR_STARK_MOUNTAIN_ROOM_3_STATE, 1
+    SetVar VAR_STARK_MOUNTAIN_ROOM_2_FOLLOWER_BUCK_STATE, 2
     BlackOutFromBattle
     ReleaseAll
     End
@@ -257,6 +258,8 @@ StarkMountainRoom3_CharonDefeated:
     CloseMessage
     SetVar VAR_STARK_MOUNTAIN_ROOM_3_STATE, 1
     SetVar VAR_STARK_MOUNTAIN_OUTSIDE_STATE, 2
+    SetVar VAR_STARK_MOUNTAIN_ROOM_2_FOLLOWER_BUCK_STATE, 2
+    ClearHasPartner
     ClearFlag FLAG_HIDE_STARK_MOUNTAIN_OUTSIDE_BUCK
     FadeScreenOut
     WaitFadeScreen

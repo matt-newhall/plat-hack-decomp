@@ -10,22 +10,67 @@
     "double_battle": true,
     "party": [
         {
-            "species": "SPECIES_PACHIRISU",
+            "species": "SPECIES_PLUSLE",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 13,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_DISCHARGE",
+                "MOVE_HELPING_HAND",
+                "MOVE_ELECTROWEB",
+                "MOVE_EERIE_IMPULSE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAUGHTY",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_PACHIRISU",
+            "species": "SPECIES_MINUN",
             "form": 0,
-            "level": 11,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 13,
+            "item": "ITEM_SHUCA_BERRY",
+            "moves": [
+                "MOVE_CHARGE_BEAM",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_GROWL",
+                "MOVE_HELPING_HAND"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_CLEFAIRY",
+            "form": 0,
+            "level": 14,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_HELPING_HAND",
+                "MOVE_FOLLOW_ME",
+                "MOVE_LIFE_DEW"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CALM",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_KIRLIA",
+            "form": 0,
+            "level": 13,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_DISARMING_VOICE",
+                "MOVE_HYPNOSIS",
+                "MOVE_DRAINING_KISS"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_HARDY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [

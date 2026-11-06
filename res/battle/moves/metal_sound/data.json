@@ -3,8 +3,8 @@
     "class": "CLASS_STATUS",
     "type": "TYPE_STEEL",
     "power": 0,
-    "accuracy": 85,
-    "pp": 40,
+    "accuracy": 100,
+    "pp": 5,
     "effect": {
         "type": "BATTLE_EFFECT_SP_DEF_DOWN_2",
         "chance": 0

@@ -118,5 +118,6 @@ static u8 sTrainerClassPrizeMul[] = {
     [TRAINER_CLASS_LEADER_MORTY]            = 30,
     [TRAINER_CLASS_LEADER_PRYCE]            = 30,
     [TRAINER_CLASS_LEADER_CLAIRE]           = 30,
+    [TRAINER_CLASS_SBC_LEADER]              = 30,
 };
 // clang-format on

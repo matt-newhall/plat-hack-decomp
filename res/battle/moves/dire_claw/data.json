@@ -2,7 +2,7 @@
     "name": "Dire Claw",
     "class": "CLASS_PHYSICAL",
     "type": "TYPE_POISON",
-    "power": 80,
+    "power": 60,
     "accuracy": 100,
     "pp": 15,
     "effect": {

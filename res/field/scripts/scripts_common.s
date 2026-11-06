@@ -81,6 +81,8 @@
     ScriptEntry CommonScript_RocketMansionAriana @ 0x813
     ScriptEntry CommonScript_RocketMansionBacklot @ 0x814
     ScriptEntry CommonScript_RocketMansionButler @ 0x815
+    ScriptEntry CommonScript_IncreaseLevelCap @ 0x816
+    ScriptEntry CommonScript_UseEscapeRope @ 0x817
     ScriptEntryEnd
 
 CommonScript_EmptyScript1:
@@ -1865,33 +1867,26 @@ _1624:
 _1636:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    SetVar VAR_0x8004, TUTOR_LOCATION_ROUTE_212
     GoTo _1672
     End
 
 _164A:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    SetVar VAR_0x8004, TUTOR_LOCATION_SURVIVAL_AREA
     GoTo _1672
     End
 
 _165E:
     PlaySE SEQ_SE_CONFIRM
     LockAll
-    SetVar VAR_0x8004, TUTOR_LOCATION_SNOWPOINT_CITY
     GoTo _1672
     End
 
 _1672:
     Message pl_msg_00000213_00129
-    ShowMoveTutorMoveSelectionMenu 0xFF, VAR_0x8004, VAR_RESULT
-    SetVar VAR_0x8003, VAR_RESULT
-    GoToIfEq VAR_0x8003, -2, _16A4
-    ShowShardCost 21, 1, VAR_0x8003, VAR_RESULT
-    WaitABPress
-    CloseShardCostWindow
-    GoTo _16A4
+    WaitButton
+    CloseMessage
+    ReleaseAll
     End
 
 _16A4:
@@ -2053,6 +2048,15 @@ _SimplePC_VolatileStatus_Submenu:
     .balign 4, 0
 
 CommonScript_Drifloon_Fly:
+    GoToIfSet FLAG_DRIFLOON_TALKED_TO, CommonScript_Drifloon_DoTheFly
+    Message CommonStrings_Text_DrifloonFly_Postcard
+    WaitButton
+    CloseMessage
+    SetFlag FLAG_DRIFLOON_TALKED_TO
+    ReturnCommonScript
+    End
+
+CommonScript_Drifloon_DoTheFly:
     PlayCry SPECIES_DRIFLOON
     Message CommonStrings_Text_DrifloonFly_Intro
     InitGlobalTextListMenu 1, 1, 0, VAR_RESULT
@@ -2554,6 +2558,7 @@ CommonScript_RocketMansionAriana:
     WaitMovement
     RemoveObject LOCALID_MANSION_BACKLOT
     RemoveObject LOCALID_MANSION_BUTLER
+    Common_IncreaseLevelCap 48
     ReleaseAll
     End
 
@@ -2615,3 +2620,35 @@ CommonScript_RocketMansion_Movement_ButlerLeave:
     EndMovement
 
     .balign 4, 0
+
+CommonScript_IncreaseLevelCap:
+    GoToIfSet FLAG_LEVEL_CAP_ALL_BOSSES, CommonScript_IncreaseLevelCap_Apply
+    GoToIfUnset FLAG_LEVEL_CAP_GYM_LEADERS, CommonScript_IncreaseLevelCap_Skip
+    GoToIfEq VAR_0x8005, 0, CommonScript_IncreaseLevelCap_Skip
+    SetVar VAR_0x8004, VAR_0x8005
+    GoTo CommonScript_IncreaseLevelCap_Apply
+
+CommonScript_IncreaseLevelCap_Skip:
+    ReturnCommonScript
+    End
+
+CommonScript_IncreaseLevelCap_Apply:
+    GoToIfLe VAR_0x8004, VAR_LEVEL_CAP, CommonScript_IncreaseLevelCap_Skip
+    SetLevelCap VAR_0x8004
+    BufferNumber 0, VAR_0x8004
+    PlaySE SEQ_SE_DP_PINPON
+    Message CommonStrings_Text_LevelCapIncreased
+    WaitButton
+    CloseMessage
+    ReturnCommonScript
+    End
+
+CommonScript_UseEscapeRope:
+    LockAll
+    BufferPlayerName 0
+    Message CommonStrings_Text_PlayerUsedTheEscapeRope
+    WaitButton
+    CloseMessage
+    UseEscapeRope
+    ReleaseAll
+    End

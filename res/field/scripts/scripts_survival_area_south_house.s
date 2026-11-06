@@ -18,14 +18,14 @@ SurvivalAreaSouthHouse_BlackBelt:
     End
 
 SurvivalAreaSouthHouse_BlackBelt_GiveFacade:
-    GoToIfSet FLAG_RECEIVED_SURVIVAL_AREA_SOUTH_HOUSE_TM42, SurvivalAreaSouthHouse_ExplainFacade
+    GoToIfSet FLAG_RECEIVED_SURVIVAL_AREA_SOUTH_HOUSE_TM81, SurvivalAreaSouthHouse_ExplainFacade
     Message SurvivalAreaSouthHouse_Text_YouWantTM
     WaitButton
-    SetVar VAR_0x8004, ITEM_TM42
+    SetVar VAR_0x8004, ITEM_TM81
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, SurvivalAreaSouthHouse_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_SURVIVAL_AREA_SOUTH_HOUSE_TM42
+    SetFlag FLAG_RECEIVED_SURVIVAL_AREA_SOUTH_HOUSE_TM81
     GoTo SurvivalAreaSouthHouse_ExplainFacade
 
 SurvivalAreaSouthHouse_ExplainFacade:

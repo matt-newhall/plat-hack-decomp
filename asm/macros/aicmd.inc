@@ -666,6 +666,26 @@
     .long (\jump-.) / 4 - 1
     .endm
 
+    .macro IfMoveBlockedByTerrain jump:req
+    .long AICMD_IFMOVEBLOCKEDBYTERRAIN
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfTerrainMoveFails jump:req
+    .long AICMD_IFTERRAINMOVEFAILS
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfAttackerHasMoreHP jump:req
+    .long AICMD_IFATTACKERHASMOREHP
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro IfPranksterBlockedByDark jump:req
+    .long AICMD_IFPRANKSTERBLOCKEDBYDARK
+    .long (\jump-.) / 4 - 1
+    .endm
+
     .macro FlagBestDamageMove
     .long AICMD_FLAGBESTDAMAGEMOVE
     .endm
@@ -772,6 +792,18 @@
     .long AICMD_IFBATTLERKNOWSMOVEOFTYPE
     .long \battler
     .long \type
+    .long (\jump-.) / 4 - 1
+    .endm
+
+    .macro LoadBattlerAttemptedMove battler:req
+    .long AICMD_LOADBATTLERATTEMPTEDMOVE
+    .long \battler
+    .endm
+
+    .macro IfMoveEffectivenessAgainst battler:req, effectiveness:req, jump:req
+    .long AICMD_IFMOVEEFFECTIVENESSAGAINST
+    .long \battler
+    .long \effectiveness
     .long (\jump-.) / 4 - 1
     .endm
 

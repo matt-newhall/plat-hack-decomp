@@ -756,6 +756,62 @@
     {
       "id": "pl_msg_00000610_00188",
       "en_US": "Imposter"
+    },
+    {
+      "id": "pl_msg_00000610_00189",
+      "en_US": "Grass Pelt"
+    },
+    {
+      "id": "pl_msg_00000610_00190",
+      "en_US": "Surge Surfer"
+    },
+    {
+      "id": "pl_msg_00000610_00191",
+      "en_US": "Electric Surge"
+    },
+    {
+      "id": "pl_msg_00000610_00192",
+      "en_US": "Grassy Surge"
+    },
+    {
+      "id": "pl_msg_00000610_00193",
+      "en_US": "Misty Surge"
+    },
+    {
+      "id": "pl_msg_00000610_00194",
+      "en_US": "Psychic Surge"
+    },
+    {
+      "id": "pl_msg_00000610_00195",
+      "en_US": "Heavy Metal"
+    },
+    {
+      "id": "pl_msg_00000610_00196",
+      "en_US": "Toxic Boost"
+    },
+    {
+      "id": "pl_msg_00000610_00197",
+      "en_US": "Flare Boost"
+    },
+    {
+      "id": "pl_msg_00000610_00198",
+      "en_US": "Rattled"
+    },
+    {
+      "id": "pl_msg_00000610_00199",
+      "en_US": "Healer"
+    },
+    {
+      "id": "pl_msg_00000610_00200",
+      "en_US": "Moxie"
+    },
+    {
+      "id": "pl_msg_00000610_00201",
+      "en_US": "Harvest"
+    },
+    {
+      "id": "pl_msg_00000610_00202",
+      "en_US": "Pickpocket"
     }
   ]
 }

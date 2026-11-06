@@ -174,6 +174,7 @@ SunyshoreCity_JasmineDefeated:
     CloseMessage
     Call SunyshoreCity_JasmineReturnToPost
     SetVar VAR_SUNYSHORE_STATE, 3
+    Common_IncreaseLevelCap 98
     ReleaseAll
     End
 
@@ -224,7 +225,7 @@ SunyshoreCity_RivalFacePlayerX854:
     Return
 
 SunyshoreCity_RivalFacePlayerX855:
-    ApplyMovement LOCALID_RIVAL, SunyshoreCity_Movement_RivalWalkOnSpotNorth
+    ApplyMovement LOCALID_RIVAL, SunyshoreCity_Movement_RivalWalkOnSpotEast
     WaitMovement
     Return
 
@@ -408,7 +409,9 @@ SunyshoreCity_Movement_RivalEnterX854:
     .balign 4, 0
 SunyshoreCity_Movement_RivalEnterX855:
     Delay8
-    WalkFastNorth 3
+    WalkFastWest
+    WalkFastNorth 4
+    WalkOnSpotFastEast
     EndMovement
 
     .balign 4, 0
@@ -485,7 +488,7 @@ SunyshoreCity_Movement_PlayerWatchRivalEnterWest:
 
     .balign 4, 0
 SunyshoreCity_Movement_PlayerWatchRivalEnterX855:
-    WalkOnSpotNormalSouth
+    WalkOnSpotNormalWest
     EndMovement
 
     .balign 4, 0
@@ -568,10 +571,14 @@ SunyshoreCity_OnFrameFlint:
 SunyshoreCity_FlintWalkToPlayerZ790:
     ApplyMovement LOCALID_FLINT, SunyshoreCity_Movement_FlintWalkToPlayerZ790
     WaitMovement
+    ApplyMovement LOCALID_PLAYER, SunyshoreCity_Movement_PlayerWalkEastToFlint
+    WaitMovement
     GoTo SunyshoreCity_GiveVolknerHotBattle
 
 SunyshoreCity_FlintWalkToPlayerZ791:
     ApplyMovement LOCALID_FLINT, SunyshoreCity_Movement_FlintWalkToPlayerZ791
+    WaitMovement
+    ApplyMovement LOCALID_PLAYER, SunyshoreCity_Movement_PlayerWalkEastToFlint
     WaitMovement
     GoTo SunyshoreCity_GiveVolknerHotBattle
 
@@ -600,11 +607,16 @@ SunyshoreCity_GiveVolknerHotBattle:
     End
 
     .balign 4, 0
+SunyshoreCity_Movement_PlayerWalkEastToFlint:
+    WalkNormalEast
+    EndMovement
+
+    .balign 4, 0
 SunyshoreCity_Movement_FlintWalkToPlayerZ790:
     WalkNormalWest 3
     WalkOnSpotNormalWest
     EmoteExclamationMark
-    WalkNormalWest 5
+    WalkNormalWest 4
     EndMovement
 
     .balign 4, 0
@@ -613,7 +625,7 @@ SunyshoreCity_Movement_FlintWalkToPlayerZ791:
     WalkNormalWest 3
     WalkOnSpotNormalWest
     EmoteExclamationMark
-    WalkNormalWest 5
+    WalkNormalWest 4
     EndMovement
 
     .balign 4, 0
@@ -754,6 +766,7 @@ SunyshoreCity_VolknerFinallyCameBack:
     End
 
 SunyshoreCity_FlintLeaveNorth:
+    FollowPokePlaceAtSide DIR_WEST
     ApplyMovement LOCALID_FLINT, SunyshoreCity_Movement_FlintLeaveNorth
     ApplyMovement LOCALID_PLAYER, SunyshoreCity_Movement_PlayerWatchFlintLeaveNorthEast
     WaitMovement

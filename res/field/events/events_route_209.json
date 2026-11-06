@@ -270,11 +270,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_GREAT_BALL",
+            "id": "LOCALID_ITEM_MENTAL_HERB",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_209_GREAT_BALL",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_209_MENTAL_HERB",
             "script": 7086,
             "initial_dir": 0,
             "data": [],
@@ -315,11 +315,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_CALCIUM",
+            "id": "LOCALID_ITEM_PUNCHING_GLOVE",
             "graphics_id": "OBJ_EVENT_GFX_POKEBALL",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_209_CALCIUM",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_209_PUNCHING_GLOVE",
             "script": 7088,
             "initial_dir": 0,
             "data": [],
@@ -376,40 +376,6 @@
             "movement_range_z": 0,
             "x": 531,
             "z": 712,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_BERRY_SOIL_3",
-            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
-            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "0",
-            "script": 2800,
-            "initial_dir": 0,
-            "data": [
-                32
-            ],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 566,
-            "z": 697,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_BERRY_SOIL_4",
-            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
-            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "0",
-            "script": 2800,
-            "initial_dir": 0,
-            "data": [
-                33
-            ],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 567,
-            "z": 697,
             "y": 0
         },
         {
@@ -581,6 +547,40 @@
             "movement_range_z": 0,
             "x": 515,
             "z": 725,
+            "y":  0
+        },
+        {
+            "id": "LOCALID_BERRY_SOIL_3",
+            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
+            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "0",
+            "script": 2800,
+            "initial_dir": 0,
+            "data": [
+                32
+            ],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 566,
+            "z": 697,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_BERRY_SOIL_4",
+            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
+            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "0",
+            "script": 2800,
+            "initial_dir": 0,
+            "data": [
+                33
+            ],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 567,
+            "z": 697,
             "y": 0
         }
     ],

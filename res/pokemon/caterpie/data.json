@@ -9,7 +9,7 @@
     },
     "types": [ "TYPE_BUG", "TYPE_BUG" ],
     "catch_rate": 255,
-    "base_exp_reward": 53,
+    "base_exp_reward": 39,
     "ev_yields": {
         "hp": 1,
         "attack": 0,
@@ -27,18 +27,21 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_FAST",
     "egg_groups": [ "EGG_GROUP_BUG", "EGG_GROUP_BUG" ],
-    "abilities": [ "ABILITY_SHIELD_DUST", "ABILITY_RUN_AWAY" ],
+    "abilities": [ "ABILITY_SHIELD_DUST", "ABILITY_RUN_AWAY", "ABILITY_SHIELD_DUST" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GREEN",
     "flip_sprite": false,
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_STRING_SHOT" ],
-            [ 15, "MOVE_BUG_BITE" ]
+            [ 1, "MOVE_TACKLE" ],
+            [ 6, "MOVE_ELECTROWEB" ],
+            [ 9, "MOVE_BUG_BITE" ]
         ],
-        "by_tm": [  ],
+        "by_tm": [
+            "TM75"
+        ],
         "by_tutor": [ "MOVE_SNORE" ]
     },
     "evolutions": [

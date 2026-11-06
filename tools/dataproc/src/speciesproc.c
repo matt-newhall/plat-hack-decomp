@@ -549,6 +549,8 @@ static SpeciesData proc_personal(datafile_t *df) {
             enum_u8(".abilities[1]", Ability),
         },
 
+        .hiddenAbility = enum_u8(".abilities[2]", Ability),
+
         .evYields = {
             .hp        = u8_maxbits(".ev_yields.hp", 2),
             .attack    = u8_maxbits(".ev_yields.attack", 2),
@@ -568,7 +570,7 @@ static SpeciesData proc_personal(datafile_t *df) {
             enum_u8(".egg_groups[1]", EggGroup),
         },
 
-        .baseExpReward  = u8(".base_exp_reward"),
+        .baseExpReward  = u16(".base_exp_reward"),
         .baseFriendship = u8(".base_friendship"),
         .bodyColor      = (u8)(enum_u8(".body_color", PokemonColor) & maxbit(7)),
         .catchRate      = u8(".catch_rate"),
@@ -716,13 +718,13 @@ static SpeciesLearnsetSized proc_lvlearnset(datafile_t *df) {
         datanode_t level = dp_arrelem(entry, 0);
         datanode_t move  = dp_arrelem(entry, 1);
 
-        result.data.entries[result.size].move  = (u16)(dp_u16(dp_lookup(move, "Move")) & maxbit(9));
-        result.data.entries[result.size].level = (u16)(dp_u8(level) & maxbit(7));
+        result.data.entries[result.size].move  = dp_u16(dp_lookup(move, "Move"));
+        result.data.entries[result.size].level = dp_u8(level);
         result.size++;
     }
 
-    result.data.entries[result.size].move  = (u16)UINT16_MAX & maxbit(9);
-    result.data.entries[result.size].level = (u16)UINT16_MAX & maxbit(7);
+    result.data.entries[result.size].move  = LEARNSET_SENTINEL_ENTRY;
+    result.data.entries[result.size].level = LEARNSET_SENTINEL_ENTRY;
     result.size++;
 
     result.size *= sizeof(SpeciesLearnsetEntry);

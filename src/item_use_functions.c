@@ -113,6 +113,7 @@ static BOOL UseExplorerKitInField(ItemFieldUseContext *usageContext);
 static BOOL UsePokeRadarInField(ItemFieldUseContext *usageContext);
 static BOOL UseSprayDuckInField(ItemFieldUseContext *usageContext);
 static BOOL UseVsSeekerInField(ItemFieldUseContext *usageContext);
+static BOOL UseEscapeRopeInField(ItemFieldUseContext *usageContext);
 static BOOL UseAzureFluteInField(ItemFieldUseContext *usageContext);
 static BOOL UseVsRecorderInField(ItemFieldUseContext *usageContext);
 static BOOL UseGracideaInField(ItemFieldUseContext *usageContext);
@@ -132,12 +133,23 @@ static enum ItemUseCheckResult CanUseVsSeeker(const ItemUseContext *usageContext
 static enum ItemUseCheckResult CanUseFishingRod(const ItemUseContext *usageContext);
 static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageContext);
 static enum ItemUseCheckResult CanUseAzureFlute(const ItemUseContext *usageContext);
+static void MountBicycle(FieldSystem *fieldSystem)
+{
+    FieldBGM_SetOverride(fieldSystem, SEQ_BICYCLE);
+    FieldBGM_TryFadeOut(fieldSystem, SEQ_BICYCLE, 1);
+    MapObject_SetPauseMovementOff(Player_MapObject(fieldSystem->playerAvatar));
+
+    PlayerAvatar_SetTransitionState(fieldSystem->playerAvatar, PLAYER_TRANSITION_CYCLING);
+    PlayerAvatar_RequestChangeState(fieldSystem->playerAvatar);
+
+    RadarChain_Clear(fieldSystem->chain);
+}
+
 static BOOL MountOrUnmountBicycle(FieldTask *task);
 static BOOL ExitPcToField(FieldTask *task);
 static BOOL PrintRegisteredKeyItemUseMessage(FieldTask *task);
 static void RegisteredItem_CreateGoToAppTask(ItemFieldUseContext *usageContext, void *param1);
 static BOOL RegisteredItem_GoToApp(FieldTask *task);
-static BOOL WarpWithEscapeRope(FieldTask *task);
 static BOOL sub_020685AC(FieldTask *task);
 static void PrintRegisteredKeyItemError(ItemFieldUseContext *usageContext, u32 param1);
 static BOOL UseHealingKeyItemInField(ItemFieldUseContext *usageContext);
@@ -167,7 +179,7 @@ static const ItemUseFuncDat sItemUseFuncs[] = {
     [ITEM_USE_FUNC_SUPER_ROD]    = { UseSuperRodFromMenu,    UseSuperRodInField,    CanUseFishingRod  },
     [ITEM_USE_FUNC_BAG_MESSAGE]  = { NULL,                   UseBagMessageItem,     NULL              },
     [ITEM_USE_FUNC_EVO_STONE]    = { UseEvoStoneFromMenu,    NULL,                  NULL              },
-    [ITEM_USE_FUNC_ESCAPE_ROPE]  = { UseEscapeRopeFromMenu,  NULL,                  CanUseEscapeRope  },
+    [ITEM_USE_FUNC_ESCAPE_ROPE]  = { UseEscapeRopeFromMenu,  UseEscapeRopeInField,  CanUseEscapeRope  },
     [ITEM_USE_FUNC_AZURE_FLUTE]  = { UseAzureFluteFromMenu,  UseAzureFluteInField,  CanUseAzureFlute  },
     [ITEM_USE_FUNC_VS_RECORDER]  = { UseVsRecorderFromMenu,  UseVsRecorderInField,  NULL              },
     [ITEM_USE_FUNC_GRACIDEA]     = { UseGracideaFromMenu,    UseGracideaInField,    NULL              },
@@ -451,20 +463,17 @@ static BOOL MountOrUnmountBicycle(FieldTask *task)
 
             FieldBGM_SetOverride(fieldSystem, SEQ_NONE);
             FieldBGM_TryFadeOut(fieldSystem, FieldBGM_GetEffective(fieldSystem, fieldSystem->location->mapId), 1);
+            (*state) = 2;
         } else {
-            FollowerMon_Despawn(fieldSystem);
+            if (FollowerMon_StartRecall(fieldSystem) == TRUE) {
+                (*state) = 4;
+            } else {
+                (*state) = 2;
+            }
 
-            FieldBGM_SetOverride(fieldSystem, SEQ_BICYCLE);
-            FieldBGM_TryFadeOut(fieldSystem, SEQ_BICYCLE, 1);
-            MapObject_SetPauseMovementOff(Player_MapObject(fieldSystem->playerAvatar));
-
-            PlayerAvatar_SetTransitionState(fieldSystem->playerAvatar, PLAYER_TRANSITION_CYCLING);
-            PlayerAvatar_RequestChangeState(fieldSystem->playerAvatar);
-
-            RadarChain_Clear(fieldSystem->chain);
+            MountBicycle(fieldSystem);
         }
 
-        (*state)++;
         break;
     case 2:
         (*state)++;
@@ -472,6 +481,12 @@ static BOOL MountOrUnmountBicycle(FieldTask *task)
     case 3:
         MapObjectMan_UnpauseAllMovement(fieldSystem->mapObjMan);
         return TRUE;
+    case 4:
+        if (FollowerMon_UpdateRecall(fieldSystem) == TRUE) {
+            (*state) = 2;
+        }
+
+        break;
     }
 
     return FALSE;
@@ -581,18 +596,8 @@ static enum ItemUseCheckResult CanUseBerry(const ItemUseContext *usageContext)
 
 static void UseBerryFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
 {
-    FieldSystem *fieldSystem;
-    StartMenu *v1;
-    MapObject *v2;
-
-    fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
-    v1 = FieldTask_GetEnv(usageContext->fieldTask);
-
-    if (additionalContext->berryPatchFlags & BERRY_PATCH_FLAG_EMPTY) {
-        sub_02068540(usageContext, additionalContext, 2801);
-    } else {
-        UseHealingItemFromMenu(usageContext, additionalContext);
-    }
+    // berries can never be planted
+    UseHealingItemFromMenu(usageContext, additionalContext);
 }
 
 BOOL BerryPatch_IsEmpty(const ItemUseContext *usageContext)
@@ -719,11 +724,7 @@ static void UseMulchFromMenu(ItemMenuUseContext *usageContext, const ItemUseCont
 
 static enum ItemUseCheckResult CanUseMulch(const ItemUseContext *usageContext)
 {
-    if (usageContext->berryPatchFlags & BERRY_PATCH_FLAG_CAN_MULCH) {
-        return ITEM_USE_CAN_USE;
-    } else {
-        return ITEM_USE_CANNOT_USE_GENERIC;
-    }
+    return ITEM_USE_CANNOT_USE_GENERIC;
 }
 
 static void UseHoneyFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
@@ -1015,16 +1016,19 @@ static BOOL ExitPcToField(FieldTask *task)
 
 static void UseEscapeRopeFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)
 {
-    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(usageContext->fieldTask);
-    StartMenu *menu = FieldTask_GetEnv(usageContext->fieldTask);
+    sub_02068540(usageContext, additionalContext, SCRIPT_ID(COMMON_SCRIPTS, 71));
+}
 
-    FieldSystem_StartFieldMap(fieldSystem);
-
-    menu->callback = WarpWithEscapeRope;
-    menu->taskData = NULL;
-    menu->state = START_MENU_STATE_NEW_TASK;
-
-    Bag_TryRemoveItem(SaveData_GetBag(fieldSystem->saveData), usageContext->item, 1, HEAP_ID_FIELD2);
+/**
+ * @brief Warp out of the current cave with the registered Escape Rope.
+ *
+ * @param usageContext
+ * @return FALSE, as the warp task owns everything it needs.
+ */
+static BOOL UseEscapeRopeInField(ItemFieldUseContext *usageContext)
+{
+    sub_02068584(usageContext, SCRIPT_ID(COMMON_SCRIPTS, 71));
+    return FALSE;
 }
 
 static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageContext)
@@ -1038,15 +1042,6 @@ static enum ItemUseCheckResult CanUseEscapeRope(const ItemUseContext *usageConte
     }
 
     return ITEM_USE_CANNOT_USE_GENERIC;
-}
-
-static BOOL WarpWithEscapeRope(FieldTask *task)
-{
-    FieldSystem *fieldSystem = FieldTask_GetFieldSystem(task);
-    FieldWarp *fieldWarp = FieldWarp_InitEscapeRope(fieldSystem, HEAP_ID_FIELD2);
-
-    FieldTask_InitJump(task, FieldWarp_EscapeRopeFadeOut, fieldWarp);
-    return FALSE;
 }
 
 static void UseAzureFluteFromMenu(ItemMenuUseContext *usageContext, const ItemUseContext *additionalContext)

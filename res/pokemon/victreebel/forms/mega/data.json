@@ -35,6 +35,7 @@
     ],
     "abilities": [
         "ABILITY_INNARDS_OUT",
+        "ABILITY_NONE",
         "ABILITY_NONE"
     ],
     "safari_flee_rate": 0,
@@ -43,81 +44,56 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [
-                1,
-                "MOVE_STOCKPILE"
-            ],
-            [
-                1,
-                "MOVE_SWALLOW"
-            ],
-            [
-                1,
-                "MOVE_SPIT_UP"
-            ],
-            [
-                1,
-                "MOVE_VINE_WHIP"
-            ],
-            [
-                1,
-                "MOVE_SLEEP_POWDER"
-            ],
-            [
-                1,
-                "MOVE_SWEET_SCENT"
-            ],
-            [
-                1,
-                "MOVE_RAZOR_LEAF"
-            ],
-            [
-                47,
-                "MOVE_LEAF_STORM"
-            ],
-            [
-                47,
-                "MOVE_LEAF_BLADE"
-            ]
+            [ 1, "MOVE_LEAF_STORM" ],
+            [ 1, "MOVE_VINE_WHIP" ],
+            [ 13, "MOVE_SLEEP_POWDER" ],
+            [ 15, "MOVE_POISON_POWDER" ],
+            [ 17, "MOVE_STUN_SPORE" ],
+            [ 24, "MOVE_ACID" ],
+            [ 27, "MOVE_BUG_BITE" ],
+            [ 30, "MOVE_MAGICAL_LEAF" ],
+            [ 32, "MOVE_KNOCK_OFF" ],
+            [ 35, "MOVE_SWEET_SCENT" ],
+            [ 39, "MOVE_GASTRO_ACID" ],
+            [ 44, "MOVE_RAZOR_LEAF" ],
+            [ 47, "MOVE_GRASSY_GLIDE" ],
+            [ 51, "MOVE_POISON_JAB" ],
+            [ 53, "MOVE_LEECH_LIFE" ],
+            [ 56, "MOVE_LEAF_BLADE" ],
+            [ 59, "MOVE_SLUDGE_WAVE" ],
+            [ 61, "MOVE_WRING_OUT" ],
+            [ 63, "MOVE_SLAM" ],
+            [ 65, "MOVE_POWER_WHIP" ]
         ],
         "by_tm": [
-            "TM06",
+            "TM05",
             "TM09",
             "TM10",
             "TM11",
             "TM15",
-            "TM17",
             "TM19",
-            "TM21",
             "TM22",
-            "TM27",
-            "TM32",
+            "TM31",
             "TM36",
             "TM42",
-            "TM43",
             "TM44",
-            "TM45",
-            "TM46",
             "TM53",
-            "TM58",
             "TM68",
             "TM70",
-            "TM75",
-            "TM78",
+            "TM77",
             "TM82",
             "TM83",
+            "TM84",
             "TM86",
             "TM87",
-            "TM90",
             "HM01"
         ],
         "by_tutor": [
             "MOVE_GASTRO_ACID",
             "MOVE_SNORE",
-            "MOVE_SYNTHESIS",
             "MOVE_SEED_BOMB",
             "MOVE_KNOCK_OFF",
-            "MOVE_SUCKER_PUNCH"
+            "MOVE_LUNGE"
         ]
     },
     "evolutions": []

@@ -2828,11 +2828,11 @@
     .short \recordID
     .endm
 
-    .macro ScrCmd_Unused_1E6 arg0, arg1, arg2
-    .short SCRCMD_UNUSED_1E6
-    .short \arg0
-    .short \arg1
-    .short \arg2
+    .macro GetGameRecord recordID, destVarHigh, destVarLow
+    .short SCRCMD_GETGAMERECORD
+    .short \recordID
+    .short \destVarHigh
+    .short \destVarLow
     .endm
 
     .macro ScrCmd_Unused_1E7 arg0, arg1, arg2, arg3
@@ -4463,11 +4463,11 @@
     .short \destVar
     .endm
 
-    .macro ResetMoveSlot partySlot, moveID, moveSlot
+    .macro ResetMoveSlot partySlot, moveSlot, moveID
     .short SCRCMD_RESETMOVESLOT
     .short \partySlot
-    .short \moveID
     .short \moveSlot
+    .short \moveID
     .endm
 
     // destVarID will be set to TRUE if the move is available at a shards move tutor and the player can afford it
@@ -5039,6 +5039,29 @@
     .short SCRCMD_FOLLOWPOKEFACEPLAYER
     .endm
 
+    .macro FollowPokePlaceBehindPlayer
+    .short SCRCMD_FOLLOWPOKEPLACEBEHINDPLAYER
+    .endm
+
+    .macro FollowPokePlaceAtSide dir, facing=MAX_DIR
+    .short SCRCMD_FOLLOWPOKEPLACEATSIDE
+    .short \dir
+    .short \facing
+    .endm
+
+    .macro UseEscapeRope
+    .short SCRCMD_USEESCAPEROPE
+    .endm
+
+    .macro GivePokemonWithForm species, level, form, heldItem, successVar
+    .short SCRCMD_GIVEPOKEMONWITHFORM
+    .short \species
+    .short \level
+    .short \form
+    .short \heldItem
+    .short \successVar
+    .endm
+
     .macro GetFollowerPartySlot destVarID
     .short SCRCMD_GETFOLLOWERPARTYSLOT
     .short \destVarID
@@ -5463,6 +5486,12 @@
 
     .macro Common_GriseousOrbCouldNotBeRemoved
     CallCommonScript 0x809
+    .endm
+
+    .macro Common_IncreaseLevelCap bossLevel, gymLevel=0
+    SetVar VAR_0x8004, \bossLevel
+    SetVar VAR_0x8005, \gymLevel
+    CallCommonScript 0x816
     .endm
 
     .text

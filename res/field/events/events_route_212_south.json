@@ -396,11 +396,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM84",
+            "id": "LOCALID_ITEM_TM74",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM84",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM74",
             "script": 7060,
             "initial_dir": 0,
             "data": [],
@@ -411,11 +411,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM62",
+            "id": "LOCALID_ITEM_TM84",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM62",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM84",
             "script": 7061,
             "initial_dir": 0,
             "data": [],
@@ -456,11 +456,11 @@
             "y": 0
         },
         {
-            "id": "LOCALID_ITEM_TM06",
+            "id": "LOCALID_ITEM_TM77",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM06",
+            "hidden_flag": "FLAG_OBTAINED_ROUTE_212_SOUTH_TM77",
             "script": 7064,
             "initial_dir": 0,
             "data": [],
@@ -537,23 +537,6 @@
             "y": 0
         },
         {
-            "id": "LOCALID_BERRY_SOIL_4",
-            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
-            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "0",
-            "script": 2800,
-            "initial_dir": 0,
-            "data": [
-                57
-            ],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 562,
-            "z": 854,
-            "y": 0
-        },
-        {
             "id": "LOCALID_SCIENTIST_SHAUN",
             "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_M",
             "movement_type": "MOVEMENT_TYPE_LOOK_NORTH_AND_EAST",
@@ -606,7 +589,7 @@
         },
         {
             "id": "LOCALID_VENT_ROUTE_212_NORTH_1",
-            "clone_id": 19,
+            "clone_id": 17,
             "graphics_id": "OBJ_EVENT_GFX_VENT",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -622,7 +605,7 @@
         },
         {
             "id": "LOCALID_VENT_ROUTE_212_NORTH_2",
-            "clone_id": 20,
+            "clone_id": 18,
             "graphics_id": "OBJ_EVENT_GFX_VENT",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -638,7 +621,7 @@
         },
         {
             "id": "LOCALID_VENT_ROUTE_212_NORTH_3",
-            "clone_id": 21,
+            "clone_id": 19,
             "graphics_id": "OBJ_EVENT_GFX_VENT",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -755,6 +738,23 @@
             "movement_range_z": 0,
             "x": 471,
             "z": 844,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_BERRY_SOIL_4",
+            "graphics_id": "OBJ_EVENT_GFX_BERRY_SOIL",
+            "movement_type": "MOVEMENT_TYPE_BERRY_SOIL",
+            "trainer_type": "TRAINER_TYPE_NONE",
+            "hidden_flag": "0",
+            "script": 2800,
+            "initial_dir": 0,
+            "data": [
+                57
+            ],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 562,
+            "z": 854,
             "y": 0
         }
     ],

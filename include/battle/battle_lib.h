@@ -744,6 +744,24 @@ BOOL Move_IsGhostCurse(BattleContext *battleCtx, u16 move, int battler);
  */
 BOOL BattleSystem_CanStealItem(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
 
+enum TakeItemResult {
+    TAKE_ITEM_ALLOWED = 0,
+    TAKE_ITEM_FAILED,
+    TAKE_ITEM_STICKY_HOLD,
+};
+
+/**
+ * @brief Determine if one battler can take another battler's held item.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param thief     The battler taking the item
+ * @param victim    The battler losing the item
+ * @return TAKE_ITEM_ALLOWED, TAKE_ITEM_FAILED, or TAKE_ITEM_STICKY_HOLD if the
+ * victim holds an item but its Sticky Hold keeps it.
+ */
+enum TakeItemResult Battler_CanTakeItem(BattleSystem *battleSys, BattleContext *battleCtx, int thief, int victim);
+
 /**
  * @brief Check if a battler is *not* holding Mail.
  *
@@ -794,6 +812,16 @@ u8 Battler_Ability(BattleContext *battleCtx, int battler);
  * FALSE if the ability is ignored, or if the defender does not have it.
  */
 BOOL Battler_IgnorableAbility(BattleContext *battleCtx, int attacker, int defender, int ability);
+
+/**
+ * @brief Get a battler's weight for a weight-based move.
+ *
+ * @param battleCtx
+ * @param attacker  The battler using the weight-based move
+ * @param battler   The battler whose weight is needed
+ * @return The battler's weight, in tenths of a kilogram
+ */
+int Battler_Weight(BattleContext *battleCtx, int attacker, int battler);
 
 /**
  * @brief Check if a battler still has room for a stat stage to be raised.
@@ -978,6 +1006,42 @@ BOOL BattleSystem_IsSoundMove(u16 move);
  * @return A boolean denoting if the move is a wind-based move.
  */
 BOOL BattleSystem_IsWindMove(u16 move);
+
+/**
+ * @brief Checks if selected move is a punching move.
+ *
+ * @param move
+ * @return A boolean denoting if the move is a punching move.
+ */
+BOOL BattleSystem_IsPunchingMove(u16 move);
+
+/**
+ * @brief Check whether an ability changes a move's type.
+ *
+ * Handles Normalize and the -ate abilities, but ignroes Judgment, Natural Gift,
+ * Weather Ball and Hidden Power.
+ *
+ * @param battleCtx
+ * @param ability The attacker's ability
+ * @param move
+ * @param outType Out; the converted type, only written when the ability applies
+ * @return TRUE if the ability changes the move's type.
+ */
+BOOL Move_TryConvertType(BattleContext *battleCtx, int ability, u16 move, int *outType);
+
+/**
+ * @brief Get the type a battler's move hits as.
+ *
+ * An ability conversion (see Move_TryConvertType) wins; otherwise this is the type
+ * the current move's effect script decided (Weather Ball, Hidden Power, etc.), or
+ * the move's own type.
+ *
+ * @param battleCtx
+ * @param attacker
+ * @param move
+ * @return The move's effective type.
+ */
+int Battler_MoveType(BattleContext *battleCtx, int attacker, u16 move);
 
 /**
  * @brief Trigger an end-of-turn ability for the battler.
@@ -1263,6 +1327,125 @@ s32 Battler_ItemFlingPower(BattleContext *battleCtx, int battler);
  * @return TRUE if the battler is trapped, FALSE if not.
  */
 BOOL Battler_IsTrapped(BattleSystem *battleSys, BattleContext *battleCtx, int battler);
+
+/**
+ * @brief Check if a battler is on the ground, and so affected by terrain,
+ * Spikes and Arena Trap.
+ *
+ * @param battleCtx
+ * @param battler
+ * @return TRUE if the battler is grounded, FALSE if not.
+ */
+BOOL Battler_IsGrounded(BattleContext *battleCtx, int battler);
+
+/**
+ * @brief Get the priority a battler's move acts at, after Gale Wings, Triage,
+ * Prankster and Grassy Glide on Grassy Terrain.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param move
+ * @return The move's effective priority bracket.
+ */
+int Battler_MovePriority(BattleContext *battleCtx, int battler, int move);
+
+/**
+ * @brief Get the range a battler's move resolves with, which differs from its
+ * listed range for Expanding Force on Psychic Terrain (it hits both foes).
+ *
+ * Target selection still uses the listed range, so the player picks a single
+ * target as usual.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param move
+ * @return The move's effective range.
+ */
+int Battler_MoveRange(BattleContext *battleCtx, int battler, int move);
+
+/**
+ * @brief Check if one of the given terrains is active and the battler is
+ * grounded, so the terrain applies to it.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param terrain   Mask of FIELD_CONDITION_*_TERRAIN flags to test for.
+ * @return TRUE if any of the terrains applies to the battler, FALSE if not.
+ */
+BOOL Battler_IsAffectedByTerrain(BattleContext *battleCtx, int battler, u32 terrain);
+
+/**
+ * @brief Replace the active terrain.
+ *
+ * A permanent terrain from the map cannot be replaced by a timed one.
+ *
+ * @param battleCtx
+ * @param terrain   The FIELD_CONDITION_*_TERRAIN flag to set.
+ * @param permanent TRUE for a terrain that never ends, e.g. from map weather;
+ *                  FALSE for one that lasts TERRAIN_DURATION turns.
+ * @param setter    The battler whose move or Ability set the terrain, so its
+ *                  Terrain Extender can lengthen it; BATTLER_NONE if none.
+ * @return TRUE if the terrain was set, FALSE if a permanent terrain blocked it.
+ */
+BOOL BattleContext_SetTerrain(BattleContext *battleCtx, u32 terrain, BOOL permanent, int setter);
+
+/**
+ * @brief Get the terrain a terrain-setting move creates.
+ *
+ * @param move
+ * @return The move's FIELD_CONDITION_*_TERRAIN flag, or 0 if it sets none.
+ */
+u32 Move_Terrain(int move);
+
+/**
+ * @brief Check if a terrain-setting move would fail: its terrain is already
+ * active, or a permanent terrain from the map is in place.
+ *
+ * @param battleCtx
+ * @param move
+ * @return TRUE if the move would fail, FALSE if it would set its terrain.
+ */
+BOOL BattleContext_TerrainMoveFails(BattleContext *battleCtx, int move);
+
+/**
+ * @brief Check if a battler's held terrain Seed should be used now: its terrain
+ * is active and the stat it raises (or lowers, under Contrary) can still move.
+ *
+ * @param battleCtx
+ * @param battler
+ * @param[out] stat The BATTLE_STAT_* the Seed changes, set when it activates.
+ * @return TRUE if the Seed activates, FALSE if not.
+ */
+BOOL Battler_TerrainSeedActivates(BattleContext *battleCtx, int battler, int *stat);
+
+/**
+ * @brief Check if Psychic Terrain stops a priority move reaching a grounded
+ * opponent. Moves aimed at the user, its side, the field or the foe's side
+ * are exempt.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param defender
+ * @param move
+ * @return TRUE if the move is blocked, FALSE if not.
+ */
+BOOL BattleSystem_PsychicTerrainBlocksMove(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int move);
+
+/**
+ * @brief Check if the active terrain will stop a move doing anything: sleep
+ * and Rest under Electric or Misty Terrain, status and confusion under Misty
+ * Terrain, and priority moves under Psychic Terrain. Steel Roller also counts
+ * as blocked when there is no terrain for it to destroy.
+ *
+ * @param battleSys
+ * @param battleCtx
+ * @param attacker
+ * @param defender
+ * @param move
+ * @return TRUE if the move is blocked, FALSE if not.
+ */
+BOOL BattleSystem_MoveBlockedByTerrain(BattleSystem *battleSys, BattleContext *battleCtx, int attacker, int defender, int move);
 
 /**
  * @brief Try to Pluck the given battler's berry.

@@ -11,7 +11,7 @@
         "But that’s no surprise.\n",
         "He still has much to learn.\r",
         "In place of my son Roark, I, Byron,\n",
-        "will take your challenge!\r"
+        "will take your challenge!"
       ]
     },
     {
@@ -33,7 +33,7 @@
     {
       "id": "CanalaveGym_Text_ByronExplainMineBadge",
       "en_US": [
-        "A Badge alone is a poor prize for\f",
+        "A Badge alone is a poor prize for\n",
         "power like that!\r",
         "See my Aggron over there?\n",
         "It has hauled rock at my side since\f",
@@ -43,7 +43,7 @@
         "When a boulder blocks your path,\n",
         "give a whistle--Aggron will shove it\f",
         "aside with Strength!\r",
-        "And you now have six Gym Badges.\r",
+        "And you now have seven Gym Badges.\r",
         "That means all Pokémon up to Lv. 70\n",
         "will obey you without question.\r",
         "Here!\n",
@@ -55,8 +55,8 @@
       "en_US": [
         "That {STRVAR_1 8, 0, 0} contains the move\n",
         "{STRVAR_1 6, 1, 0}.\r",
-        "If it hits, it may also lower the\n",
-        "target’s Special Defense."
+        "It deals more damage the heavier\n",
+        "the user is."
       ]
     },
     {

@@ -25,6 +25,8 @@ _036:
 
 _040:
     CompareVarToValue OPCODE_FLAG_SET, BTLVAR_MOVE_STATUS_FLAGS, MOVE_STATUS_MISSED|MOVE_STATUS_SEMI_INVULNERABLE, _077
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_ELECTRIC_TERRAIN, _electric_terrain
+    CheckTerrainProtection BTLSCR_SIDE_EFFECT_MON, FIELD_CONDITION_MISTY_TERRAIN, _misty_terrain
     TryYawn _077
     PlayMoveAnimation BTLSCR_ATTACKER
     Wait 
@@ -55,6 +57,18 @@ _077:
     WaitButtonABTime 30
     Call BATTLE_SUBSCRIPT_BUT_IT_FAILED
     GoTo _096
+
+_electric_terrain:
+    WaitButtonABTime 30
+    // {0} surrounds itself with electrified terrain!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithElectrifiedTerrain_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    GoTo _089
+
+_misty_terrain:
+    WaitButtonABTime 30
+    // {0} surrounds itself with a protective mist!
+    PrintMessage BattleStrings_Text_PokemonSurroundsItselfWithAProtectiveMist_Ally, TAG_NICKNAME, BTLSCR_SIDE_EFFECT_MON
+    GoTo _089
 
 _083:
     WaitButtonABTime 30

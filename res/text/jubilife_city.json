@@ -185,8 +185,8 @@
     {
       "id": "JubilifeCity_Text_ThatVsRecorderItIsANiftyDeviceForRecordingAMatch",
       "en_US": [
-        "That Vs. Recorder, it is a nifty device\n",
-        "for recording a match.\r",
+        "That Candy Bag, it is a nifty tool\n",
+        "for training Pokémon.\r",
         "I obtained it because it is quite popular\n",
         "these days.\r",
         "But myself, I do not do Pokémon\n",
@@ -594,12 +594,8 @@
       "en_US": [
         "Rowan: Ah, {STRVAR_1 3, 0, 0}.\n",
         "Well? How is the Pokédex progressing?\r",
-        "Hm!\n",
-        "That’s Oreburgh’s Gym Badge, I see.\r",
-        "But hadn’t I given you your first\n",
-        "Pokémon only recently...?\r",
-        "Perhaps being a Trainer is like second\n",
-        "nature to you.\r"
+        "Hm! Off on your journey already.\n",
+        "You waste no time at all.\r"
       ]
     },
     {
@@ -759,8 +755,8 @@
     {
       "id": "JubilifeCity_Text_RowanExplainGifts",
       "en_US": [
-        "Rowan: The Candy Bag holds an endless\n",
-        "supply of treats to raise a Pokémon’s level.\r",
+        "Rowan: The Escape Rope will lead you out\n",
+        "of any cave, as often as you need it.\r",
         "And the Infinite Repel wards off weaker\n",
         "Pokémon. It never runs out.\r",
         "Use them well! I expect great things\n",

@@ -218,8 +218,8 @@
     {
       "id": "pl_msg_00000612_00031",
       "en_US": [
-        "The Pokémon draws in all\n",
-        "Electric-type moves."
+        "Draws in Electric-type\n",
+        "moves to up Sp. Attack."
       ]
     },
     {
@@ -1319,6 +1319,104 @@
       "en_US": [
         "Transforms into the foe\n",
         "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00189",
+      "en_US": [
+        "Boosts Defense on\n",
+        "Grassy Terrain."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00190",
+      "en_US": [
+        "Doubles Speed on\n",
+        "Electric Terrain."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00191",
+      "en_US": [
+        "Sets Electric Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00192",
+      "en_US": [
+        "Sets Grassy Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00193",
+      "en_US": [
+        "Sets Misty Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00194",
+      "en_US": [
+        "Sets Psychic Terrain\n",
+        "upon entering battle."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00195",
+      "en_US": [
+        "Doubles the Pokémon’s\n",
+        "weight."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00196",
+      "en_US": [
+        "Powers up physical\n",
+        "moves when poisoned."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00197",
+      "en_US": [
+        "Powers up special\n",
+        "moves when burned."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00198",
+      "en_US": [
+        "Raises Speed when hit\n",
+        "by Bug, Dark or Ghost."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00199",
+      "en_US": [
+        "May heal an ally’s\n",
+        "status conditions."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00200",
+      "en_US": [
+        "Boosts Attack after\n",
+        "knocking out any Pokémon."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00201",
+      "en_US": [
+        "May create another\n",
+        "Berry after one is used."
+      ]
+    },
+    {
+      "id": "pl_msg_00000612_00202",
+      "en_US": [
+        "Steals an item when hit\n",
+        "by another Pokémon."
       ]
     }
   ]

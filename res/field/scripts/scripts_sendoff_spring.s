@@ -48,6 +48,7 @@ SendoffSpring_OnFrameCynthia:
     ClearFlag FLAG_HIDE_GALACTIC_HQ_1F_SATURN
     SetFlag FLAG_GALACTIC_LEFT_LAKE_VALOR
     SetFlag FLAG_HIDE_MT_CORONET_1F_NORTH_ROOM_1_GRUNT_F
+    Common_IncreaseLevelCap 92
     ReleaseAll
     End
 

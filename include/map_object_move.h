@@ -13,6 +13,18 @@ u32 sub_02063E18(const MapObject *mapObj, const VecFx32 *pos, int x, int y, int 
 u32 sub_02063E94(const MapObject *mapObj, int x, int y, int z, int dir);
 u32 sub_02063EBC(const MapObject *mapObj, int dir);
 int sub_02063F00(const MapObject *mapObj, int x, int y, int z);
+
+/**
+ * @brief Checks whether any solid map object stands on a tile.
+ *
+ * @param mapObj The object doing the asking; it never blocks itself
+ * @param x
+ * @param y Elevation; objects more than one level away do not block
+ * @param z
+ * @param ignoreFollower TRUE to walk through the player's following Pokemon
+ * @return TRUE if the tile is occupied
+ */
+int MapObject_IsTileOccupied(const MapObject *mapObj, int x, int y, int z, BOOL ignoreFollower);
 int MapObject_IsOutOfRange(const MapObject *mapObj, int x, int y, int z);
 int sub_02064004(const MapObject *mapObj, int x, int z, int dir);
 int MapObject_IsOnWater(MapObject *mapObj, u32 tileBehavior);

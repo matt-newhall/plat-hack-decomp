@@ -19,13 +19,13 @@ Route204North_AceTrainerF:
     PlaySE SEQ_SE_CONFIRM
     LockAll
     FacePlayer
-    GoToIfSet FLAG_RECEIVED_ROUTE_204_NORTH_TM78, Route204North_CaptivateOnlyWorksAgainstTheOppositeGender
+    GoToIfSet FLAG_RECEIVED_ROUTE_204_NORTH_TM63, Route204North_CaptivateOnlyWorksAgainstTheOppositeGender
     Message Route204North_Text_IdLikeYouToHaveThisTM
-    SetVar VAR_0x8004, ITEM_TM78
+    SetVar VAR_0x8004, ITEM_TM63
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, Route204North_BagIsFull
     Common_GiveItemQuantity
-    SetFlag FLAG_RECEIVED_ROUTE_204_NORTH_TM78
+    SetFlag FLAG_RECEIVED_ROUTE_204_NORTH_TM63
     GoTo Route204North_CaptivateOnlyWorksAgainstTheOppositeGender
 
 Route204North_CaptivateOnlyWorksAgainstTheOppositeGender:
@@ -156,6 +156,9 @@ Route204North_ArrowSignpostFloaromaTown:
 
 Route204North_RivalTrigger:
     LockAll
+    GetPlayerMapPos VAR_0x8004, VAR_0x8005
+    CallIfEq VAR_0x8004, 170, Route204North_FollowPokeStandEast
+    CallIfNe VAR_0x8004, 170, Route204North_FollowPokeStandWest
     ClearFlag FLAG_HIDE_ROUTE_204_RIVAL
     AddObject LOCALID_RIVAL
     ApplyMovement LOCALID_RIVAL, Route204North_Movement_RivalNoticePlayer
@@ -242,6 +245,14 @@ Route204North_RemoveRival:
     SetVar VAR_ROUTE_204_RIVAL_STATE, 1
     GoTo Route204North_JulienApproachPlayer
     End
+
+Route204North_FollowPokeStandEast:
+    FollowPokePlaceAtSide DIR_EAST
+    Return
+
+Route204North_FollowPokeStandWest:
+    FollowPokePlaceAtSide DIR_WEST
+    Return
 
 Route204North_BlackOutRivalBattle:
     SetFlag FLAG_HIDE_ROUTE_204_RIVAL
@@ -351,20 +362,23 @@ Route204North_IDontHaveTime:
 Route204North_JulienLeaveX170:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX170
     WaitMovement
+    Common_IncreaseLevelCap 16
     ReleaseAll
-    EndMovement
+    End
 
 Route204North_JulienLeaveX171:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX171
     WaitMovement
+    Common_IncreaseLevelCap 16
     ReleaseAll
-    EndMovement
+    End
 
 Route204North_JulienLeaveX172:
     ApplyMovement LOCALID_JULIEN, Route204North_Movement_JulienLeaveX172
     WaitMovement
+    Common_IncreaseLevelCap 16
     ReleaseAll
-    EndMovement
+    End
 
     .balign 4, 0
 Route204North_Movement_JulienLeaveX170:
@@ -404,7 +418,7 @@ Route204North_Movement_JulienFaceWest:
 
     .balign 4, 0
 Route204North_Movement_RivalLeaveX170:
-    WalkFastEast 1
+    WalkFastEast 2
     WalkFastNorth 4
     WalkFastEast 10
     EndMovement
@@ -418,7 +432,7 @@ Route204North_Movement_RivalLeaveX171:
 
     .balign 4, 0
 Route204North_Movement_RivalLeaveX172:
-    WalkFastWest 1
+    WalkFastWest 2
     WalkFastNorth 4
     WalkFastEast 10
     EndMovement

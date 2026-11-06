@@ -123,20 +123,25 @@ BOOL ScrCmd_CheckHasPartner(ScriptContext *ctx)
     return FALSE;
 }
 
+static BOOL ScrCmd_SetHasPartner_WaitRecall(ScriptContext *ctx)
+{
+    if (FollowerMon_UpdateRecall(ctx->fieldSystem) == FALSE) {
+        return FALSE;
+    }
+
+    SystemFlag_SetHasPartner(SaveData_GetVarsFlags(ctx->fieldSystem->saveData));
+    return TRUE;
+}
+
 BOOL ScrCmd_SetHasPartner(ScriptContext *ctx)
 {
     FieldSystem *fieldSystem = ctx->fieldSystem;
     VarsFlags *varsFlags = SaveData_GetVarsFlags(fieldSystem->saveData);
 
-    if (SystemFlag_CheckHasPartner(varsFlags) == FALSE) {
-        MapObject *follower = MapObjMan_GetLocalMapObjByMovementType(
-            fieldSystem->mapObjMan, MOVEMENT_TYPE_FOLLOW_PLAYER);
-
-        if (follower != NULL) {
-            MapObject_Delete(follower);
-        }
-
-        fieldSystem->followMon.active = FALSE;
+    if (SystemFlag_CheckHasPartner(varsFlags) == FALSE
+        && FollowerMon_StartRecall(fieldSystem) == TRUE) {
+        ScriptContext_Pause(ctx, ScrCmd_SetHasPartner_WaitRecall);
+        return TRUE;
     }
 
     SystemFlag_SetHasPartner(varsFlags);
@@ -265,10 +270,19 @@ BOOL ScrCmd_SendOutFollowingPoke(ScriptContext *ctx)
     return FALSE;
 }
 
+static BOOL ScrCmd_SendBackFollowingPoke_WaitRecall(ScriptContext *ctx)
+{
+    return FollowerMon_UpdateRecall(ctx->fieldSystem);
+}
+
 BOOL ScrCmd_SendBackFollowingPoke(ScriptContext *ctx)
 {
-    FollowerMon_Despawn(ctx->fieldSystem);
-    return FALSE;
+    if (FollowerMon_StartRecall(ctx->fieldSystem) == FALSE) {
+        return FALSE;
+    }
+
+    ScriptContext_Pause(ctx, ScrCmd_SendBackFollowingPoke_WaitRecall);
+    return TRUE;
 }
 
 BOOL ScrCmd_CheckHasFollower(ScriptContext *ctx)

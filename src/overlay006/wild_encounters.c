@@ -822,25 +822,25 @@ static u8 GetGroundEncounterSlot(void)
 
     if (roll < 20) {
         return 0;
-    } else if (roll >= 20 && roll < 40) {
+    } else if (roll >= 20 && roll < 35) {
         return 1;
-    } else if (roll >= 40 && roll < 50) {
+    } else if (roll >= 35 && roll < 45) {
         return 2;
-    } else if (roll >= 50 && roll < 60) {
+    } else if (roll >= 45 && roll < 55) {
         return 3;
-    } else if (roll >= 60 && roll < 70) {
+    } else if (roll >= 55 && roll < 65) {
         return 4;
-    } else if (roll >= 70 && roll < 80) {
+    } else if (roll >= 65 && roll < 75) {
         return 5;
-    } else if (roll >= 80 && roll < 85) {
+    } else if (roll >= 75 && roll < 80) {
         return 6;
-    } else if (roll >= 85 && roll < 90) {
+    } else if (roll >= 80 && roll < 85) {
         return 7;
-    } else if (roll >= 90 && roll < 94) {
+    } else if (roll >= 85 && roll < 90) {
         return 8;
-    } else if (roll >= 94 && roll < 98) {
+    } else if (roll >= 90 && roll < 95) {
         return 9;
-    } else if (roll == 98) {
+    } else if (roll >= 95 && roll < 99) {
         return 10;
     }
 
@@ -851,19 +851,22 @@ static u8 GetWaterEncounterSlot(void)
 {
     u8 roll = LCRNG_RandMod(100);
 
-    if (roll < 60) {
+    if (roll < 20) {
         return 0;
-    } else if (roll >= 60 && roll < 90) {
+    } else if (roll < 40) {
         return 1;
-    } else if (roll >= 90 && roll < 95) {
+    } else if (roll < 60) {
         return 2;
-    } else if (roll >= 95 && roll < 99) {
+    } else if (roll < 80) {
         return 3;
+    } else if (roll < 90) {
+        return 4;
     }
 
-    return 4;
+    return 5;
 }
 
+// TODO: will need to change the percentages if we ever re-add rods
 static u8 GetRodEncounterSlot(const int fishingRodType)
 {
     u8 encSlot = 0;
@@ -965,7 +968,7 @@ static void ModifyEncounterRateWithFlute(FieldSystem *fieldSystem, u8 *encounter
 // checks Synchronize, returns a random nature otherwise.
 static u8 GetNatureForWildMon(Pokemon *firstMon, const WildEncounters_FieldParams *encounterFieldParams)
 {
-    if (!encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE) {
+    if (!encounterFieldParams->isFirstMonEgg && encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE && LCRNG_RandMod(2) == 0) {
         u32 leadPersonality = Pokemon_GetValue(firstMon, MON_DATA_PERSONALITY, NULL);
         return (u8)(leadPersonality % 25);
     }
@@ -1021,8 +1024,10 @@ static void CreateWildMonShinyWithGenderOrNature(const u16 species, const u8 lev
                 }
             }
         } else if (encounterFieldParams->firstMonAbility == ABILITY_SYNCHRONIZE) {
-            firstMonNature = Pokemon_GetNature(firstPartyMon);
-            abilityInEffect = TRUE;
+            if (LCRNG_RandMod(2) == 0) {
+                firstMonNature = Pokemon_GetNature(firstPartyMon);
+                abilityInEffect = TRUE;
+            }
         }
     }
 
@@ -1246,7 +1251,7 @@ void CreateWildMon_HoneyTree(FieldSystem *fieldSystem, FieldBattleDTO *battlePar
     WildEncounters_FieldParams encounterFieldParams;
     InitEncounterFieldParams(fieldSystem, firstPartyMon, NULL, &encounterFieldParams);
 
-    u8 levelVariance = 15 - 5 + 1;
+    u8 levelVariance = 12 - 5 + 1;
 
     u8 level = 5 + LCRNG_RandMod(levelVariance);
 
