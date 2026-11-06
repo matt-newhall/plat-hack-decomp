@@ -40,9 +40,9 @@
         "by_level": [
             [1, "MOVE_SCRATCH"],
             [1, "MOVE_GROWL"],
-            [3, "MOVE_EMBER"],
-            [6, "MOVE_QUICK_ATTACK"],
-            [9, "MOVE_FLAME_CHARGE"],
+            [6, "MOVE_EMBER"],
+            [8, "MOVE_QUICK_ATTACK"],
+            [10, "MOVE_FLAME_CHARGE"],
             [12, "MOVE_DETECT"],
             [15, "MOVE_SAND_ATTACK"],
             [17, "MOVE_FIRE_SPIN"],

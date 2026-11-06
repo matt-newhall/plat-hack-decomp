@@ -36,8 +36,8 @@
         "by_level": [
             [1, "MOVE_TACKLE"],
             [1, "MOVE_LEER"],
-            [6, "MOVE_SMOKE_SCREEN"],
-            [10, "MOVE_EMBER"],
+            [6, "MOVE_EMBER" ],
+            [10, "MOVE_SMOKE_SCREEN"],
             [13, "MOVE_QUICK_ATTACK"],
             [19, "MOVE_FIRE_SPIN"],
             [22, "MOVE_FLAME_WHEEL"],

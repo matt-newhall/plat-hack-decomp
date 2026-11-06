@@ -40,9 +40,9 @@
         "by_level": [
             [1, "MOVE_TACKLE"],
             [1, "MOVE_GROWL"],
-            [3, "MOVE_VINE_WHIP"],
-            [6, "MOVE_NATURE_POWER"],
-            [9, "MOVE_LEECH_SEED"],
+            [6, "MOVE_VINE_WHIP"],
+            [8, "MOVE_NATURE_POWER"],
+            [10, "MOVE_LEECH_SEED"],
             [12, "MOVE_RAZOR_LEAF"],
             [14, "MOVE_MAGICAL_LEAF"],
             [16, "MOVE_POISON_POWDER"],
