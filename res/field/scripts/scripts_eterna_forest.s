@@ -1,6 +1,7 @@
 #include "macros/scrcmd.inc"
 #include "res/text/bank/eterna_forest.h"
 #include "res/field/events/events_eterna_forest.h"
+#include "res/text/bank/menu_entries.h"
 
     ScriptEntry EternaForest_TriggerStartFollowingCheryl
     ScriptEntry EternaForest_TriggerPlayerLeaveCheryl
@@ -14,6 +15,7 @@
     ScriptEntry EternaForest_MossRock
     ScriptEntry EternaForest_OnTransition
     ScriptEntry EternaForest_OnFrameCherylOldChateauCutscene
+    ScriptEntry EternaForest_JulienTrainerCount
     ScriptEntryEnd
 
 EternaForest_OnTransition:
@@ -27,6 +29,7 @@ EternaForest_ResetFollowerCherylState:
 EternaForest_TriggerStartFollowingCheryl:
     LockAll
     SetPlayerBike FALSE
+    SetFlag FLAG_HIDE_ROUTE_205_RIVALS
     GetPlayerMapPos VAR_0x8004, VAR_0x8005
     GoToIfEq VAR_0x8004, 28, EternaForest_CherylNoticeAndWalkToPlayerX28
     GoToIfEq VAR_0x8004, 29, EternaForest_CherylNoticeAndWalkToPlayerX29
@@ -211,6 +214,134 @@ EternaForest_CherylLeave:
     WaitSE SEQ_SE_DP_KAIDAN2
     SetFlag FLAG_TRAVELED_WITH_CHERYL
     SetVar VAR_ETERNA_FOREST_FOLLOWER_CHERYL_STATE, 2
+    ReleaseAll
+    End
+
+EternaForest_JulienTrainerCount:
+    PlaySE SEQ_SE_CONFIRM
+    LockAll
+    FacePlayer
+    GoToIfSet FLAG_ETERNA_FOREST_PROMOTIONAL_ITEM_RECIEVED, EternaForest_PromotionalItemRecieved
+    SetVar VAR_JULIEN_TRAINERS_REMAINING 8
+    SetVar VAR_PROMOTIONAL_TRAINERS_COUNTED 0
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CountTrainers:
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 0, EternaForest_CheckPsychicRachael
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 1, EternaForest_CheckPsychicElijah
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 2, EternaForest_CheckBugCatcherDonald
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 3, EternaForest_CheckLassBriana
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 4, EternaForest_CheckPsychicLindsey
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 5, EternaForest_CheckPsychicKody
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 6, EternaForest_CheckBugCatcherPhillip
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 7, EternaForest_CheckBugCatcherJack
+    GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 1, EternaForest_JulienTrainerCountSingular
+    GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 0, EternaForest_WonPromotional
+    BufferNumber 0, VAR_JULIEN_TRAINERS_REMAINING
+    Message EternaForest_Text_JulienTrainerCount
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+EternaForest_JulienTrainerCountSingular:
+    BufferNumber 0, VAR_JULIEN_TRAINERS_REMAINING
+    Message EternaForest_Text_JulienTrainerCountSingular
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+EternaForest_PromotionalTrainerDefeated:
+    SubVar VAR_JULIEN_TRAINERS_REMAINING 1
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_WonPromotional:
+    Message EternaForest_Text_PromotionalRouteCongrats
+    InitGlobalTextListMenu 30, 13, 0, VAR_RESULT, NO_EXIT_ON_B
+    SetMenuXOriginToRight
+    AddListMenuEntry MenuEntries_Text_Julien_BigRoot, 0
+    AddListMenuEntry MenuEntries_Text_Julien_Rindo, 1
+    ShowListMenu
+    GoToIfEq VAR_RESULT, 0, EternaForest_GiveBigRoot
+    GoToIfEq VAR_RESULT, 1, EternaForest_GiveRindo
+    End
+
+EternaForest_GiveBigRoot:
+    SetVar VAR_0x8004, ITEM_BIG_ROOT
+    SetVar VAR_0x8005, 1
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, EternaForest_BagIsFull
+    Common_GiveItemQuantity
+    SetFlag FLAG_ETERNA_FOREST_PROMOTIONAL_ITEM_RECIEVED
+    GoTo EternaForest_PromotionalItemRecieved
+
+EternaForest_GiveRindo:
+    SetVar VAR_0x8004, ITEM_RINDO_BERRY
+    SetVar VAR_0x8005, 5
+    GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, EternaForest_BagIsFull
+    Common_GiveItemQuantity
+    SetFlag FLAG_ETERNA_FOREST_PROMOTIONAL_ITEM_RECIEVED
+    GoTo EternaForest_PromotionalItemRecieved
+
+EternaForest_PromotionalItemRecieved:
+    Message EternaForest_Text_WatchOutForMorePromotions
+    WaitButton
+    CloseMessage
+    ReleaseAll
+    End
+
+EternaForest_CheckPsychicRachael:
+    CheckTrainerFlag TRAINER_PSYCHIC_RACHAEL
+    GoToIfDefeated TRAINER_PSYCHIC_RACHAEL, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckPsychicElijah:
+    CheckTrainerFlag TRAINER_PSYCHIC_ELIJAH
+    GoToIfDefeated TRAINER_PSYCHIC_ELIJAH, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckBugCatcherDonald:
+    CheckTrainerFlag TRAINER_BUG_CATCHER_DONALD
+    GoToIfDefeated TRAINER_BUG_CATCHER_DONALD, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckLassBriana:
+    CheckTrainerFlag TRAINER_LASS_BRIANA
+    GoToIfDefeated TRAINER_LASS_BRIANA, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckPsychicLindsey:
+    CheckTrainerFlag TRAINER_PSYCHIC_LINDSEY
+    GoToIfDefeated TRAINER_PSYCHIC_LINDSEY, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckPsychicKody:
+    CheckTrainerFlag TRAINER_PSYCHIC_KODY
+    GoToIfDefeated TRAINER_PSYCHIC_KODY, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckBugCatcherPhillip:
+    CheckTrainerFlag TRAINER_BUG_CATCHER_PHILLIP
+    GoToIfDefeated TRAINER_BUG_CATCHER_PHILLIP, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckBugCatcherJack:
+    CheckTrainerFlag TRAINER_BUG_CATCHER_JACK
+    GoToIfDefeated TRAINER_BUG_CATCHER_JACK, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_BagIsFull:
+    Common_MessageBagIsFull
+    CloseMessage
     ReleaseAll
     End
 

@@ -13,7 +13,7 @@
             "species": "SPECIES_GLIGAR",
             "form": 0,
             "level": 14,
-            "item": "ITEM_TOXIC_ORB",
+            "item": "ITEM_PROTECTIVE_PADS",
             "moves": [
                 "MOVE_BREAKING_SWIPE",
                 "MOVE_METAL_CLAW",

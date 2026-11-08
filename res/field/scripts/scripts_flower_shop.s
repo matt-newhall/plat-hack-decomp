@@ -13,7 +13,7 @@ FlowerShop_PokemonBreederF:
     FacePlayer
     GoToIfSet FLAG_OBTAINED_FLOWER_SHOP_BERRY, FlowerShop_LetYourPokemonHoldThatBerry
     Message FlowerShop_Text_BerriesAreRareNowPleaseTakeThisOne
-    SetVar VAR_0x8004, ITEM_ORAN_BERRY
+    SetVar VAR_0x8004, ITEM_CHESTO_BERRY
     SetVar VAR_0x8005, 1
     GoToIfCannotFitItem VAR_0x8004, VAR_0x8005, VAR_RESULT, FlowerShop_BagIsFull
     SetFlag FLAG_OBTAINED_FLOWER_SHOP_BERRY

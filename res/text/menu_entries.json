@@ -1282,12 +1282,36 @@
             "en_US": "Chilan Berries"
         },
         {
+            "id": "MenuEntries_Text_Julien_BigRoot",
+            "en_US": "Big Root"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_Rindo",
+            "en_US": "Rindo Berries"
+        },
+        {
             "id": "MenuEntries_Text_Julien_WideLens",
             "en_US": "Wide Lens"
         },
         {
             "id": "MenuEntries_Text_Julien_Charti",
             "en_US": "Charti Berries"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_ProtectivePads",
+            "en_US": "Protective Pads"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_Kasib",
+            "en_US": "Kasib Berries"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_LoadedDice",
+            "en_US": "Loaded Dice"
+        },
+        {
+            "id": "MenuEntries_Text_Julien_Passho",
+            "en_US": "Passho Berries"
         },
         {
             "id": "MenuEntries_Text_Nature_Adamant",

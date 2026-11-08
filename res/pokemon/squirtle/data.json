@@ -36,7 +36,7 @@
         "by_level": [
             [1, "MOVE_TACKLE"],
             [1, "MOVE_TAIL_WHIP"],
-            [3, "MOVE_WATER_GUN"],
+            [6, "MOVE_WATER_GUN"],
             [9, "MOVE_RAPID_SPIN"],
             [12, "MOVE_BITE"],
             [15, "MOVE_WATER_PULSE"],

@@ -1,66 +1,118 @@
 {
   "key": 37243,
-  "messages": [
-    {
-      "id": "Route212South_Text_CrossLogsOnBike",
-      "en_US": [
-        "You can zip across fallen logs like\n",
-        "bridges on your Bike."
-      ]
-    },
-    {
-      "id": "Route212South_Text_ImNotStuck",
-      "en_US": [
-        "...Am I stuck in the bog?\r",
-        "Of course not. How silly!\n",
-        "This is a full-body mud pack.\r",
-        "If it weren’t, I would be squirming\n",
-        "and struggling to get out!"
-      ]
-    },
-    {
-      "id": "Route212South_Text_HowAboutPokemonMansion",
-      "en_US": [
-        "You’ve been to the Great Marsh?\n",
-        "How about the Pokémon Mansion?\r",
-        "Wherever I go, I get to meet new and\n",
-        "different Pokémon.\r",
-        "I feel so privileged and happy about\n",
-        "that."
-      ]
-    },
-    {
-      "id": "Route212South_Text_ConstantPatrol",
-      "en_US": [
-        "We’re on constant patrol.\n",
-        "It’s safe here, even at night."
-      ]
-    },
-    {
-      "id": "Route212South_Text_SignPastoriaCity",
-      "en_US": [
-        "Rt. 212\n",
-        "Pastoria City"
-      ]
-    },
-    {
-      "id": "Route212South_Text_SignShardsWanted",
-      "en_US": [
-        "Shards Wanted\n",
-        "Pokémon Moves Taught"
-      ]
-    },
-    {
-      "id": "Route212South_Text_TrainerTipsBog",
-      "en_US": [
-        "Trainer Tips\r",
-        "If you get stuck in the bog, you can\n",
-        "count on being there a while.\r",
-        "There’s no need to panic.\n",
-        "Just struggle and squirm for a bit.\r",
-        "Bicycles cannot be ridden on marshy\n",
-        "ground, incidentally."
-      ]
-    }
-  ]
+    "messages": [
+        {
+            "id": "Route212South_Text_CrossLogsOnBike",
+            "en_US": [
+                "You can zip across fallen logs like\n",
+                "bridges on your Bike."
+            ]
+        },
+        {
+            "id": "Route212South_Text_ImNotStuck",
+            "en_US": [
+                "...Am I stuck in the bog?\r",
+                "Of course not. How silly!\n",
+                "This is a full-body mud pack.\r",
+                "If it weren’t, I would be squirming\n",
+                "and struggling to get out!"
+            ]
+        },
+        {
+            "id": "Route212South_Text_HowAboutPokemonMansion",
+            "en_US": [
+                "You’ve been to the Great Marsh?\n",
+                "How about the Pokémon Mansion?\r",
+                "Wherever I go, I get to meet new and\n",
+                "different Pokémon.\r",
+                "I feel so privileged and happy about\n",
+                "that."
+            ]
+        },
+        {
+            "id": "Route212South_Text_ConstantPatrol",
+            "en_US": [
+                "We’re on constant patrol.\n",
+                "It’s safe here, even at night."
+            ]
+        },
+        {
+            "id": "Route212South_Text_SignPastoriaCity",
+            "en_US": [
+                "Rt. 212\n",
+                "Pastoria City"
+            ]
+        },
+        {
+            "id": "Route212South_Text_SignShardsWanted",
+            "en_US": [
+                "Shards Wanted\n",
+                "Pokémon Moves Taught"
+            ]
+        },
+        {
+            "id": "Route212South_Text_TrainerTipsBog",
+            "en_US": [
+                "Trainer Tips\r",
+                "If you get stuck in the bog, you can\n",
+                "count on being there a while.\r",
+                "There’s no need to panic.\n",
+                "Just struggle and squirm for a bit.\r",
+                "Bicycles cannot be ridden on marshy\n",
+                "ground, incidentally."
+            ]
+        },
+        {
+            "id": "Route212South_Text_PromotionalRouteCongrats",
+            "en_US": [
+                "Chapeau! It seems that you have\n",
+                "beaten every trainer on Route 212!\f",
+                "Here is your reward as promised.\r",
+                "Would you like the Loaded Dice or\n",
+                "5 Passho Berries?"
+            ]
+        },
+        {
+            "id": "Route212South_Text_WatchOutForMorePromotions",
+            "en_US": [
+                "We’re getting more and more trainers\n",
+                "battling with these promotions.\f",
+                "Lady Jacinthe will be pleased.\r",
+                "I wonder if she’ll come visit if we\n",
+                "keep this up.\r",
+                "Anyway, my next stop is Route 214.\n",
+                "See you there, Champ."
+            ]
+        },
+        {
+            "id": "Route212South_Text_JulienTrainerCount",
+            "en_US": [
+                "Bonjour, Champ.\n",
+                "Route 212 is our next promotional area.\r",
+                "Only the trainers in the south part\n",
+                "of the Route where it rains are\f",
+                "required for this prize.\r",
+                "This time the rewards are either\n",
+                "Loaded Dice, or 5 Passho Berries.\r",
+                "There are {STRVAR_1 0, 0, 0} Trainers left to\n",
+                "face.\r",
+                "Come see me when you’ve defeated them.\n"
+            ]
+        },
+        {
+            "id": "Route212South_Text_JulienTrainerCountSingular",
+            "en_US": [
+                "Bonjour, Champ.\n",
+                "Route 212 is our next promotional area.\r",
+                "Only the trainers in the south part\n",
+                "of the Route where it rains are\n",
+                "required for this prize.\r",
+                "This time the rewards are either\f",
+                "Loaded Dice, or 5 Passho Berries.\r",
+                "There is {STRVAR_1 0, 0, 0} Trainer left to\n",
+                "face.\r",
+                "Come see me when you’ve defeated them.\n"
+            ]
+        }
+    ]
 }

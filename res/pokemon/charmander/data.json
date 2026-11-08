@@ -36,9 +36,9 @@
         "by_level": [
             [1, "MOVE_SCRATCH"],
             [1, "MOVE_GROWL"],
-            [4, "MOVE_EMBER"],
-            [7, "MOVE_METAL_CLAW"],
-            [9, "MOVE_SMOKE_SCREEN"],
+            [6, "MOVE_EMBER"],
+            [8, "MOVE_METAL_CLAW"],
+            [10, "MOVE_SMOKE_SCREEN"],
             [12, "MOVE_FIRE_SPIN"],
             [15, "MOVE_DRAGON_BREATH"],
             [17, "MOVE_BREAKING_SWIPE"],
