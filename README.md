@@ -6,7 +6,7 @@ More accurately, this repository is an update to Pokémon Platinum to update all
 
 In addition, this repository also contains a number of additional features, such as new weather conditions that were required for Pokémon Tempered Platinum. Again, if you wish to maintain this project (or update it - I'm sure there are some much better ways to update some of these mechanics, but I'm not a C programmer!), I would advise forking the repository and removing these commits. Feel free to reach out to me on Discord (@stitchmatt) and I'll be happy to answer any questions.
 
-## Setup
+## Set Up
 
 For instructions on how to set up the repository, please read [`INSTALL.md`](INSTALL.md).
 
