@@ -12,8 +12,8 @@
         {
             "species": "SPECIES_GEODUDE",
             "form": 0,
-            "level": 8,
-            "item": null,
+            "level": 9,
+            "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_ROCK_BLAST",
                 "MOVE_TACKLE",
@@ -28,8 +28,8 @@
         {
             "species": "SPECIES_ZUBAT",
             "form": 0,
-            "level": 9,
-            "item": null,
+            "level": 10,
+            "item": "ITEM_BIG_ROOT",
             "moves": [
                 "MOVE_CONFUSE_RAY",
                 "MOVE_WING_ATTACK",
@@ -42,19 +42,19 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_LOMBRE",
+            "species": "SPECIES_MAKUHITA",
             "form": 0,
-            "level": 9,
-            "item": null,
+            "level": 10,
+            "item": "ITEM_ORAN_BERRY",
             "moves": [
-                "MOVE_MEGA_DRAIN",
-                "MOVE_WATER_GUN",
                 "MOVE_FAKE_OUT",
-                "MOVE_TRAILBLAZE"
+                "MOVE_POWER_UP_PUNCH",
+                "MOVE_KNOCK_OFF",
+                "MOVE_ROCK_TOMB"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_GENTLE",
+            "nature": "NATURE_QUIET",
             "ability": "TRAINER_ABILITY_1"
         }
     ],

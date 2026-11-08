@@ -10,6 +10,22 @@
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_KOFFING",
+            "form": 0,
+            "level": 13,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_SLUDGE",
+                "MOVE_SELFDESTRUCT",
+                "MOVE_SMOKE_SCREEN",
+                "MOVE_HP_WATER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CALM",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
             "species": "SPECIES_GROWLITHE",
             "form": 0,
             "level": 13,
@@ -23,22 +39,6 @@
             "iv_scale": 255,
             "ball_seal": 0,
             "nature": "NATURE_DOCILE"
-        },
-        {
-            "species": "SPECIES_GRIMER",
-            "form": 0,
-            "level": 13,
-            "item": "ITEM_BRIGHTPOWDER",
-            "moves": [
-                "MOVE_SLUDGE",
-                "MOVE_TOXIC",
-                "MOVE_MEMENTO",
-                "MOVE_SHADOW_SNEAK"
-            ],
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_CAREFUL",
-            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

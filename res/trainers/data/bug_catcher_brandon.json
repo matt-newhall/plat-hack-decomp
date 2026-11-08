@@ -10,15 +10,15 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SKORUPI",
+            "species": "SPECIES_NIDORAN_F",
             "form": 0,
             "level": 13,
             "item": "ITEM_EVIOLITE",
             "moves": [
                 "MOVE_TOXIC_SPIKES",
                 "MOVE_TOXIC_THREAD",
-                "MOVE_POISON_TAIL",
-                "MOVE_FELL_STINGER"
+                "MOVE_BITE",
+                "MOVE_POISON_TAIL"
             ],
             "iv_scale": 255,
             "ball_seal": 0,

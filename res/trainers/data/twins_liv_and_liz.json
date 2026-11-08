@@ -42,14 +42,14 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_CLEFAIRY",
+            "species": "SPECIES_FURRET",
             "form": 0,
             "level": 14,
-            "item": "ITEM_SITRUS_BERRY",
+            "item": "ITEM_LEFTOVERS",
             "moves": [
-                "MOVE_HELPING_HAND",
                 "MOVE_FOLLOW_ME",
-                "MOVE_LIFE_DEW"
+                "MOVE_HELPING_HAND",
+                "MOVE_SUPER_FANG"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
