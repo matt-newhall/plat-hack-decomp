@@ -13,7 +13,7 @@
         {
             "id": "LOCALID_HIKER_DANIEL",
             "graphics_id": "OBJ_EVENT_GFX_HIKER",
-            "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH_AND_WEST",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_HIKER_DANIEL",
@@ -30,47 +30,47 @@
         {
             "id": "LOCALID_AROMA_LADY_ELIZABETH",
             "graphics_id": "OBJ_EVENT_GFX_POKEMON_BREEDER_F",
-            "movement_type": "MOVEMENT_TYPE_ROTATE_COUNTERCLOCKWISE",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_AROMA_LADY_ELIZABETH",
-            "initial_dir": 2,
+            "initial_dir": 3,
             "data": [
-                3
+                5
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 215,
-            "z": 633,
+            "x": 202,
+            "z": 597,
             "y": 5
         },
         {
             "id": "LOCALID_CAMPER_JACOB",
             "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-            "movement_type": "MOVEMENT_TYPE_LOOK_NORTH_SOUTH_AND_EAST",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_CAMPER_JACOB",
             "initial_dir": 3,
             "data": [
-                4
+                2
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 215,
-            "z": 646,
+            "x": 206,
+            "z": 642,
             "y": 6
         },
         {
             "id": "LOCALID_PICNICKER_SIENA",
             "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
-            "movement_type": "MOVEMENT_TYPE_WANDER_AROUND",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_PICNICKER_SIENA",
             "initial_dir": 2,
             "data": [
-                2
+                3
             ],
             "movement_range_x": 1,
             "movement_range_z": 1,
@@ -81,35 +81,35 @@
         {
             "id": "LOCALID_HIKER_NICHOLAS",
             "graphics_id": "OBJ_EVENT_GFX_HIKER",
-            "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH_AND_EAST",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_HIKER_NICHOLAS",
             "initial_dir": 1,
             "data": [
-                2
+                3
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
             "x": 208,
-            "z": 610,
+            "z": 608,
             "y": 7
         },
         {
             "id": "LOCALID_BATTLE_GIRL_KELSEY",
             "graphics_id": "OBJ_EVENT_GFX_BATTLE_GIRL",
-            "movement_type": "MOVEMENT_TYPE_WALK_WEST_SOUTH_EAST_NORTH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_BATTLE_GIRL_KELSEY",
-            "initial_dir": 1,
+            "initial_dir": 2,
             "data": [
-                2
+                5
             ],
             "movement_range_x": 2,
             "movement_range_z": 5,
-            "x": 207,
-            "z": 598,
+            "x": 208,
+            "z": 597,
             "y": 7
         },
         {
@@ -306,30 +306,30 @@
         {
             "id": "LOCALID_PICNICKER_KARINA",
             "graphics_id": "OBJ_EVENT_GFX_PICNICKER",
-            "movement_type": "MOVEMENT_TYPE_LOOK_NORTH_AND_SOUTH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_PICNICKER_KARINA",
             "initial_dir": 1,
             "data": [
-                3
+                4
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 208,
-            "z": 595,
+            "x": 194,
+            "z": 587,
             "y": 7
         },
         {
             "id": "LOCALID_CAMPER_ZACKARY",
             "graphics_id": "OBJ_EVENT_GFX_CAMPER",
-            "movement_type": "MOVEMENT_TYPE_WALK_EAST_SOUTH_WEST_NORTH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_CAMPER_ZACKARY",
             "initial_dir": 3,
             "data": [
-                2
+                3
             ],
             "movement_range_x": 3,
             "movement_range_z": 3,
@@ -423,8 +423,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 220,
-            "z": 600,
+            "x": 208,
+            "z": 598,
             "y": 0
         },
         {
