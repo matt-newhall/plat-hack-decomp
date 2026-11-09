@@ -446,7 +446,7 @@ VisibleItems_Route205South_Brightpowder:
     End
 
 VisibleItems_Route205South_XSpDef:
-    SetVar VAR_0x8008, ITEM_X_SP_DEF
+    SetVar VAR_0x8008, ITEM_LUXURY_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
