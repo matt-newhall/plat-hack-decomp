@@ -10,22 +10,67 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BIDOOF",
-            "form": 0,
-            "level": 12,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
-        },
-        {
             "species": "SPECIES_PACHIRISU",
             "form": 0,
-            "level": 12,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 18,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_NUZZLE",
+                "MOVE_SUPER_FANG",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_TRAILBLAZE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_NIDORINO",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_WEAKNESS_POLICY",
+            "moves": [
+                "MOVE_TOXIC",
+                "MOVE_POISON_TAIL",
+                "MOVE_DOUBLE_KICK",
+                "MOVE_SMART_STRIKE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT"
+        },
+        {
+            "species": "SPECIES_CHATOT",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_CHATTER",
+                "MOVE_SING",
+                "MOVE_PARTING_SHOT",
+                "MOVE_FURY_ATTACK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_MISDREAVUS",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_SPELL_TAG",
+            "moves": [
+                "MOVE_CONFUSION",
+                "MOVE_MEAN_LOOK",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_PSYBEAM"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
