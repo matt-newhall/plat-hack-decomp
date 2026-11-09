@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_SANDSLASH",
             "form": 0,
-            "level": 17,
+            "level": 16,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_STEALTH_ROCK",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_SHUCKLE",
             "form": 0,
-            "level": 17,
+            "level": 16,
             "item": "ITEM_RED_CARD",
             "moves": [
                 "MOVE_SAND_TOMB",

@@ -12,9 +12,10 @@
         {
             "species": "SPECIES_EEVEE",
             "form": 0,
-            "level": 18,
-            "item": "ITEM_CHOICE_BAND",
+            "level": 17,
+            "item": "ITEM_SILK_SCARF",
             "moves": [
+                "MOVE_QUICK_ATTACK",
                 "MOVE_LAST_RESORT"
             ],
             "iv_scale": 255,
@@ -25,7 +26,7 @@
         {
             "species": "SPECIES_PIKACHU",
             "form": 0,
-            "level": 18,
+            "level": 17,
             "item": "ITEM_LIGHT_BALL",
             "moves": [
                 "MOVE_THUNDERBOLT",

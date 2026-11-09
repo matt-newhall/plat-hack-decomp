@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_PACHIRISU",
             "form": 0,
-            "level": 18,
+            "level": 16,
             "item": "ITEM_LUM_BERRY",
             "moves": [
                 "MOVE_NUZZLE",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_NIDORINO",
             "form": 0,
-            "level": 18,
+            "level": 17,
             "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
                 "MOVE_TOXIC",
@@ -43,13 +43,13 @@
         {
             "species": "SPECIES_CHATOT",
             "form": 0,
-            "level": 18,
+            "level": 16,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
                 "MOVE_CHATTER",
                 "MOVE_SING",
                 "MOVE_PARTING_SHOT",
-                "MOVE_FURY_ATTACK"
+                "MOVE_ROOST"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -59,7 +59,7 @@
         {
             "species": "SPECIES_MISDREAVUS",
             "form": 0,
-            "level": 18,
+            "level": 17,
             "item": "ITEM_SPELL_TAG",
             "moves": [
                 "MOVE_CONFUSION",

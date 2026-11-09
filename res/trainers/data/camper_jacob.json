@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_VIGOROTH",
             "form": 0,
-            "level": 17,
+            "level": 16,
             "item": "ITEM_SALAC_BERRY",
             "moves": [
                 "MOVE_SLASH",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_PONYTA",
             "form": 0,
-            "level": 17,
+            "level": 16,
             "item": "ITEM_LIFE_ORB",
             "moves": [
                 "MOVE_FLAME_CHARGE",
@@ -44,7 +44,7 @@
         {
             "species": "SPECIES_MARILL",
             "form": 0,
-            "level": 17,
+            "level": 16,
             "item": "ITEM_CHOICE_BAND",
             "moves": [
                 "MOVE_LIQUIDATION",
@@ -60,7 +60,7 @@
         {
             "species": "SPECIES_SPINDA",
             "form": 0,
-            "level": 17,
+            "level": 16,
             "item": "ITEM_BLACK_BELT",
             "moves": [
                 "MOVE_DIZZY_PUNCH",
