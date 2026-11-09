@@ -38,7 +38,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT"
+            "nature": "NATURE_JOLLY"
         },
         {
             "species": "SPECIES_CHATOT",
@@ -53,7 +53,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_TIMID",
+            "nature": "NATURE_HARDY",
             "ability": "TRAINER_ABILITY_1"
         },
         {
@@ -62,7 +62,7 @@
             "level": 17,
             "item": "ITEM_SPELL_TAG",
             "moves": [
-                "MOVE_CONFUSION",
+                "MOVE_HEX",
                 "MOVE_MEAN_LOOK",
                 "MOVE_CONFUSE_RAY",
                 "MOVE_PSYBEAM"

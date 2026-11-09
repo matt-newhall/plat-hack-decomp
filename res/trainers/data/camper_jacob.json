@@ -22,7 +22,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_HARDY",
             "ability": "TRAINER_ABILITY_1"
         },
         {
@@ -70,7 +70,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_DOCILE",
             "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],

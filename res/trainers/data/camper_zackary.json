@@ -13,14 +13,14 @@
             "species": "SPECIES_EEVEE",
             "form": 0,
             "level": 17,
-            "item": "ITEM_SILK_SCARF",
+            "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_QUICK_ATTACK",
+                "MOVE_FOCUS_ENERGY",
                 "MOVE_LAST_RESORT"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_JOLLY",
             "ability": "TRAINER_ABILITY_2"
         },
         {
@@ -42,7 +42,7 @@
         {
             "species": "SPECIES_IVYSAUR",
             "form": 0,
-            "level": 18,
+            "level": 17,
             "item": "ITEM_BIG_ROOT",
             "moves": [
                 "MOVE_GIGA_DRAIN",
@@ -52,13 +52,13 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_MODEST",
+            "nature": "NATURE_CALM",
             "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_CHARMELEON",
             "form": 0,
-            "level": 18,
+            "level": 17,
             "item": "ITEM_CHARCOAL",
             "moves": [
                 "MOVE_FIRE_FANG",
@@ -74,17 +74,17 @@
         {
             "species": "SPECIES_WARTORTLE",
             "form": 0,
-            "level": 18,
+            "level": 17,
             "item": "ITEM_SITRUS_BERRY",
             "moves": [
-                "MOVE_LIQUIDATION",
+                "MOVE_SCALD",
                 "MOVE_RAPID_SPIN",
                 "MOVE_ICE_SPINNER",
                 "MOVE_FLIP_TURN"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_HARDY",
             "ability": "TRAINER_ABILITY_1"
         }
     ],
