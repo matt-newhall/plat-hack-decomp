@@ -341,6 +341,7 @@
     ScriptEntry VisibleItems_TrophyGarden_Chimechite
     ScriptEntry VisibleItems_SendoffSpring_DracoPlate
     ScriptEntry VisibleItems_Route211East_SkyPlate
+    ScriptEntry VisibleItems_Route211West_Eviolite
     ScriptEntryEnd
 
 VisibleItems_Route202_TM04:
@@ -1940,7 +1941,7 @@ VisibleItems_TeamGalacticEternaBuilding4F_SecretKey:
     End
 
 VisibleItems_OldChateauDiningArea_Eviolite:
-    SetVar VAR_0x8008, ITEM_EVIOLITE
+    SetVar VAR_0x8008, ITEM_CLEANSE_TAG
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -2379,6 +2380,12 @@ VisibleItems_SendoffSpring_DracoPlate:
 
 VisibleItems_Route211East_SkyPlate:
     SetVar VAR_0x8008, ITEM_SKY_PLATE
+    SetVar VAR_0x8009, 1
+    GoTo VisibleItems_TryGiveItem
+    End
+
+VisibleItems_Route211West_Eviolite:
+    SetVar VAR_0x8008, ITEM_EVIOLITE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
