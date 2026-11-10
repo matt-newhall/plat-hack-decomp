@@ -873,9 +873,9 @@ Basic_CheckPerishSong:
     PopOrEnd 
 
 Basic_CheckSandstorm:
-    // If the current weather is Sand, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SANDSTORM, ScoreMinus8
+    // If the current weather is Sand, the move fails: score -30.
+    LoadCurrentWeather
+    IfLoadedEqualTo AI_WEATHER_SANDSTORM, ScoreMinus30
     PopOrEnd 
 
 Basic_CheckCannotAttract:
@@ -948,9 +948,9 @@ Basic_CheckRainDance:
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus8
 
 Basic_CheckCurrentWeatherIsRain:
-    // If the weather is currently Rain, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_RAINING, ScoreMinus8
+    // If the weather is currently Rain, the move fails: score -30.
+    LoadCurrentWeather
+    IfLoadedEqualTo AI_WEATHER_RAINING, ScoreMinus30
     PopOrEnd 
 
 Basic_CheckSunnyDay:
@@ -968,9 +968,9 @@ Basic_CheckSunnyDay:
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
 
 Basic_CheckCurrentWeatherIsSun:
-    // If the weather is currently Sun, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus8
+    // If the weather is currently Sun, the move fails: score -30.
+    LoadCurrentWeather
+    IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus30
     PopOrEnd 
 
 Basic_CheckFirstTurnInBattle:
@@ -1003,9 +1003,9 @@ Basic_CheckCanSpitUpOrSwallow:
     PopOrEnd 
 
 Basic_CheckHail:
-    // If the current weather is Hail, score -8.
-    LoadCurrentWeather 
-    IfLoadedEqualTo AI_WEATHER_HAILING, ScoreMinus8
+    // If the current weather is Hail, the move fails: score -30.
+    LoadCurrentWeather
+    IfLoadedEqualTo AI_WEATHER_HAILING, ScoreMinus30
 
     // If any opposing battler's ability is Ice Body, score -8.
     LoadBattlerAbility AI_BATTLER_DEFENDER
@@ -1899,9 +1899,9 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HEAL_HALF_MORE_IN_SUN, Expert_Synthesis
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_133, Expert_Synthesis
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_134, Expert_Synthesis
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SANDSTORM, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SANDSTORM, Expert_WeatherMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_RAIN, Expert_WeatherMove
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_SUN, Expert_WeatherMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MAX_ATK_LOSE_HALF_MAX_HP, Expert_BellyDrum
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_MIRROR_COAT, Expert_CounterMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CHARGE_TURN_DEF_UP, Expert_ChargeTurn
@@ -1909,7 +1909,7 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_UNUSED_157, Expert_Recovery
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_ALWAYS_FLINCH_FIRST_TURN_ONLY, Expert_FakeOut
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SWALLOW, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_WEATHER_HAIL, Expert_WeatherMove
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_UP_CAUSE_CONFUSION, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_FAINT_AND_ATK_SP_ATK_DOWN_2, Expert_Memento
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_HIT_LAST_WHIFF_IF_HIT, Expert_SlowMove
@@ -2018,6 +2018,11 @@ Expert_StatusMoveBonus:
     // so they compete with attacking rather than being crowded out by it.
     AddToMoveScore 6
     PopOrEnd
+
+Expert_WeatherMove:
+    LoadCurrentWeather
+    IfLoadedEqualTo AI_WEATHER_CLEAR, ScorePlus7
+    GoTo ScorePlus8
 
 Expert_TerrainMove:
     // A terrain move that would fail keeps only the Basic penalty. Otherwise +9 if the
