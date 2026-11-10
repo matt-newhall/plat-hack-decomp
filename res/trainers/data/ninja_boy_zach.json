@@ -10,38 +10,89 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_MURKROW",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 20,
+            "item": "ITEM_BLACKGLASSES",
+            "moves": [
+                "MOVE_FOUL_PLAY",
+                "MOVE_PLUCK",
+                "MOVE_PARTING_SHOT",
+                "MOVE_THUNDER_WAVE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CAREFUL"
         },
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_PORYGON2",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 20,
+            "item": "ITEM_IAPAPA_BERRY",
+            "moves": [
+                "MOVE_FACADE",
+                "MOVE_ELECTROWEB",
+                "MOVE_EERIE_IMPULSE",
+                "MOVE_RECYCLE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
         },
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_CHANSEY",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 20,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_COUNTER",
+                "MOVE_SOFTBOILED",
+                "MOVE_BODY_SLAM",
+                "MOVE_METRONOME"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_DUSCLOPS",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_ROCKY_HELMET",
+            "moves": [
+                "MOVE_SHADOW_PUNCH",
+                "MOVE_THUNDER_PUNCH",
+                "MOVE_ICE_PUNCH",
+                "MOVE_WILL_O_WISP"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_RELAXED",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_NINCADA",
+            "form": 0,
+            "level": 21,
+            "item": "ITEM_EVIOLITE",
+            "moves": [
+                "MOVE_LEECH_LIFE",
+                "MOVE_BIDE",
+                "MOVE_DOUBLE_TEAM",
+                "MOVE_SECRET_POWER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
         {
             "type": "TRMSG_PRE_BATTLE",
             "en_US": [
-                "ZUBAT! Doesn’t that sound like a\n",
+                "NINCADA! Doesn’t that sound like a\n",
                 "ninja bursting from cover?\r"
             ]
         },
@@ -49,7 +100,7 @@
             "type": "TRMSG_DEFEAT",
             "en_US": [
                 "Oh!\n",
-                "My ZUBAT tristars...\n"
+                "My Nincada ace...\n"
             ]
         },
         {

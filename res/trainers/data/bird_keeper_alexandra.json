@@ -10,22 +10,68 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_STARLY",
+            "species": "SPECIES_COMBUSKEN",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "iv_scale": 20,
-            "ball_seal": 0
+            "level": 20,
+            "item": "ITEM_KINGS_ROCK",
+            "moves": [
+                "MOVE_DETECT",
+                "MOVE_BLAZE_KICK",
+                "MOVE_DOUBLE_KICK",
+                "MOVE_BOUNCE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
-            "species": "SPECIES_HOOTHOOT",
+            "species": "SPECIES_FARFETCHD",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "iv_scale": 20,
-            "ball_seal": 0
+            "level": 20,
+            "item": "ITEM_STICK",
+            "moves": [
+                "MOVE_AERIAL_ACE",
+                "MOVE_BRICK_BREAK",
+                "MOVE_FOCUS_ENERGY",
+                "MOVE_LEAF_BLADE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_QUIRKY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_FEAROW",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_CLEAR_AMULET",
+            "moves": [
+                "MOVE_FAINT_ATTACK",
+                "MOVE_AERIAL_ACE",
+                "MOVE_U_TURN",
+                "MOVE_AGILITY"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAUGHTY",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_GOLDUCK",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_AIR_BALLOON",
+            "moves": [
+                "MOVE_WATERFALL",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_AERIAL_ACE",
+                "MOVE_DISABLE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_HARDY",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
