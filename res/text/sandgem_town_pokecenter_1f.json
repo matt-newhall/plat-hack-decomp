@@ -1,32 +1,91 @@
 {
   "key": 11795,
-  "messages": [
-    {
-      "id": "SandgemTownPokecenter1F_Text_ThatLadyAtTheCounterWillHealYourPokemon",
-      "en_US": [
-        "Talk to that nice lady at the counter\n",
-        "and hand her your Pokémon.\r",
-        "She’ll heal your Pokémon to perfect\n",
-        "health in no time at all!"
-      ]
-    },
-    {
-      "id": "SandgemTownPokecenter1F_Text_DoYouSeeThatPCOverThere",
-      "en_US": [
-        "Do you see that PC over there?\n",
-        "That fancy blue one?\r",
-        "If you’ve got Pokémon with you,\n",
-        "it’s free to use."
-      ]
-    },
-    {
-      "id": "SandgemTownPokecenter1F_Text_TheTopFloorIsTheCommunicationClub",
-      "en_US": [
-        "The top floor of any Pokémon Center\n",
-        "is the Pokémon Communication Club.\r",
-        "There, you can have all sorts of fun\n",
-        "with your friends."
-      ]
-    }
-  ]
+    "messages": [
+        {
+            "id": "SandgemTownPokecenter1F_Text_ThatLadyAtTheCounterWillHealYourPokemon",
+            "en_US": [
+                "Talk to that nice lady at the counter\n",
+                "and hand her your Pokémon.\r",
+                "She’ll heal your Pokémon to perfect\n",
+                "health in no time at all!"
+            ]
+        },
+        {
+            "id": "SandgemTownPokecenter1F_Text_DoYouSeeThatPCOverThere",
+            "en_US": [
+                "Do you see that PC over there?\n",
+                "That fancy blue one?\r",
+                "If you’ve got Pokémon with you,\n",
+                "it’s free to use."
+            ]
+        },
+        {
+            "id": "SandgemTownPokecenter1F_Text_TheTopFloorIsTheCommunicationClub",
+            "en_US": [
+                "The top floor of any Pokémon Center\n",
+                "is the Pokémon Communication Club.\r",
+                "There, you can have all sorts of fun\n",
+                "with your friends."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_ICanTellHiddenPowerTypes",
+            "en_US": [
+                "I woke up and realized my potential!\r",
+                "So, what potential was woken in me?\n",
+                "What’s my hidden power, you ask?\r",
+                "It’s a power that lets me see the\n",
+                "Hidden Power of a Pokémon.\r",
+                "When they learn that move, I can tell\n",
+                "what type the move will be.\r",
+                "So, want me to use my hidden power?\r",
+                "I’ll tell you what type your Pokémon’s\n",
+                "Hidden Power will be."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_IllTellHiddenPowerTypes",
+            "en_US": [
+                "I’ll tell you what type your Pokémon’s\n",
+                "Hidden Power will be.\r",
+                "My own hidden power lets me do that."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_PokemonsHiddenPowerWouldBeType",
+            "en_US": [
+                "If this Pokémon were to learn\n",
+                "Hidden Power, the move’s type\f",
+                "would be {STRVAR_1 15, 0, 0}."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_PokemonsHiddenPowerIsType",
+            "en_US": [
+                "This Pokémon’s Hidden Power is the\n",
+                "{STRVAR_1 15, 0, 0} type."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_IfYouWantAskMe",
+            "en_US": [
+                "If you want to know, ask me, and I’ll\n",
+                "activate my hidden power for you."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_EggsCantLearnMoves",
+            "en_US": [
+                "A move that an Egg can learn?!\n",
+                "That’s flat-out impossible."
+            ]
+        },
+        {
+            "id": "SandgemTown_Text_PokemonCantLearnHiddenPower",
+            "en_US": [
+                "Oh, no. This Pokémon can’t learn the\n",
+                "move Hidden Power in the first place."
+            ]
+        }
+    ]
 }
