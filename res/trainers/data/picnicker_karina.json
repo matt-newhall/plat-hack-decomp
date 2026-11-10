@@ -10,16 +10,68 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PIPLUP",
+            "species": "SPECIES_SKARMORY",
             "form": 0,
-            "level": 14,
-            "item": null,
+            "level": 20,
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_BUBBLE",
-                "MOVE_PECK"
+                "MOVE_SPIKES",
+                "MOVE_PAYBACK",
+                "MOVE_SMART_STRIKE",
+                "MOVE_WING_ATTACK"
             ],
-            "iv_scale": 0,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_RELAXED",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_SEADRA",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_SCOPE_LENS",
+            "moves": [
+                "MOVE_FOCUS_ENERGY",
+                "MOVE_WATER_PULSE",
+                "MOVE_AURORA_BEAM",
+                "MOVE_DRAGON_BREATH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MILD",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_HAUNTER",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_EVIOLITE",
+            "moves": [
+                "MOVE_HEX",
+                "MOVE_SUCKER_PUNCH",
+                "MOVE_DARK_PULSE",
+                "MOVE_WILL_O_WISP"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_HASTY",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_LOPUNNY",
+            "form": 0,
+            "level": 21,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_U_TURN",
+                "MOVE_HI_JUMP_KICK",
+                "MOVE_MIRROR_COAT",
+                "MOVE_DIZZY_PUNCH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

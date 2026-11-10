@@ -10,13 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_SUNFLORA",
             "form": 0,
-            "level": 15,
-            "item": null,
-            "moves": null,
-            "iv_scale": 20,
-            "ball_seal": 0
+            "level": 18,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_MYSTICAL_FIRE",
+                "MOVE_GIGA_DRAIN",
+                "MOVE_GROWTH",
+                "MOVE_LEECH_SEED"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_RHYDON",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_EVIOLITE",
+            "moves": [
+                "MOVE_TAKE_DOWN",
+                "MOVE_BREAKING_SWIPE",
+                "MOVE_STOMPING_TANTRUM",
+                "MOVE_ROCK_TOMB"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_STANTLER",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_TAKE_DOWN",
+                "MOVE_JUMP_KICK",
+                "MOVE_PSYBEAM",
+                "MOVE_AGILITY"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAUGHTY",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

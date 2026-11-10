@@ -10,13 +10,67 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_VIBRAVA",
             "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 18,
+            "item": "ITEM_YACHE_BERRY",
+            "moves": [
+                "MOVE_LEECH_LIFE",
+                "MOVE_DUAL_WINGBEAT",
+                "MOVE_DIG",
+                "MOVE_DRAGON_TAIL"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH"
+        },
+        {
+            "species": "SPECIES_MACHOKE",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_SHED_SHELL",
+            "moves": [
+                "MOVE_ROLLING_KICK",
+                "MOVE_KNOCK_OFF",
+                "MOVE_PROTECT",
+                "MOVE_DUAL_CHOP"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_NUMEL",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_PASSHO_BERRY",
+            "moves": [
+                "MOVE_CURSE",
+                "MOVE_BULLDOZE",
+                "MOVE_HEAT_CRASH",
+                "MOVE_BODY_PRESS"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_OMANYTE",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_MUD_SHOT",
+                "MOVE_ANCIENT_POWER",
+                "MOVE_BRINE",
+                "MOVE_AURORA_BEAM"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
