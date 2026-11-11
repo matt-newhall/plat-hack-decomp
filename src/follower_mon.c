@@ -40,10 +40,8 @@
 static BOOL FollowerMon_IsDelayAction(u16 action);
 static BOOL FollowerMon_IsStationaryAction(u16 action, int dir);
 
-#define FOLLOWER_RECALL_TURN_DELAY   11
 #define FOLLOWER_RECALL_SHRINK_FRAMES 6
 #define FOLLOWER_RECALL_BALL_FRAMES   10
-#define FOLLOWER_RECALL_MIN_SCALE     (FX32_ONE / 4)
 
 enum FollowerRecallState {
     FOLLOWER_RECALL_STATE_TURN = 0,
@@ -457,7 +455,8 @@ static void FollowerMon_ShrinkIntoBall(MapObject *follower, int frame)
         frame = FOLLOWER_RECALL_SHRINK_FRAMES;
     }
 
-    progress = (FX32_ONE - FOLLOWER_RECALL_MIN_SCALE) * frame / FOLLOWER_RECALL_SHRINK_FRAMES;
+    // shrinks down to a quarter of its size
+    progress = (FX32_ONE - FX32_ONE / 4) * frame / FOLLOWER_RECALL_SHRINK_FRAMES;
     scale.x = FX32_ONE - progress;
     scale.y = scale.x;
     scale.z = scale.x;
@@ -523,7 +522,8 @@ BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
     case FOLLOWER_RECALL_STATE_HOLD:
         fieldSystem->followMon.recallTimer++;
 
-        if (fieldSystem->followMon.recallTimer < FOLLOWER_RECALL_TURN_DELAY) {
+        // hold for a sec before the ball
+        if (fieldSystem->followMon.recallTimer < 11) {
             break;
         }
 

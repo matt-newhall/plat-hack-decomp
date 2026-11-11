@@ -10194,8 +10194,6 @@ int BattleSystem_SideToBattler(BattleSystem *battleSys, BattleContext *battleCtx
     return battler;
 }
 
-#define TURN_START_PRIORITY_NO_MOVE 9
-
 /**
  * @brief Record each battler's Speed and the base priority of the move it chose for
  * the turn, and clear the record of who fainted before acting.
@@ -10224,7 +10222,8 @@ void BattleSystem_RecordTurnStartSpeeds(BattleSystem *battleSys, BattleContext *
         }
 
         if (battleCtx->battlerActions[i][BATTLE_ACTION_SELECTED_COMMAND] != PLAYER_INPUT_FIGHT) {
-            battleCtx->turnStartPriority[i] = TURN_START_PRIORITY_NO_MOVE;
+            // switches and items go before any move, so beat the highest priority
+            battleCtx->turnStartPriority[i] = 9;
             continue;
         }
 

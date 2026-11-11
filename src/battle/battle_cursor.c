@@ -566,18 +566,13 @@ __attribute__((aligned(4))) static const u8 sMoveMenuButtonLayout[3][2] = {
 };
 
 #define BAR_TILE_HFLIP 0x400
-#define BAR_TILE_EMPTY 0x2FF
 
-#define BAR_ROW_FIRST 0x13
 #define BAR_ROW_PRESS 0x12
 
 #define CANCEL_BUTTON_COL_LEFT  0x1
 #define CANCEL_BUTTON_COL_RIGHT 0x17
 #define MEGA_BUTTON_COL_LEFT    0x19
 #define MEGA_BUTTON_COL_RIGHT   0x1E
-
-#define CANCEL_BUTTON_LABEL_X 100
-#define BAR_LABEL_Y           178
 
 #define MEGA_BUTTON_X 224
 #define MEGA_BUTTON_Y 176
@@ -1013,10 +1008,12 @@ static void BuildMegaMenuTilemap(u16 *dest, const u16 *src)
     MI_CpuCopy32(src, dest, 0x800);
 
     for (i = 0; i < NELEMS(sBarRowTiles); i++) {
-        int row = BAR_ROW_FIRST + i;
+        // bottom bar starts on row 0x13
+        int row = 0x13 + i;
 
+        // blank the bar out before stamping both buttons onto it
         for (col = CANCEL_BUTTON_COL_LEFT; col <= MEGA_BUTTON_COL_RIGHT; col++) {
-            dest[row * 32 + col] = BAR_TILE_EMPTY;
+            dest[row * 32 + col] = 0x2FF;
         }
 
         StampBarButton(dest, row, sBarRowTiles[i], CANCEL_BUTTON_COL_LEFT, CANCEL_BUTTON_COL_RIGHT, BAR_BUTTON_PLTT_SLOT);
@@ -1162,8 +1159,6 @@ void BattleSystem_HideMegaButton(UnkStruct_ov16_02268A14 *param0)
 
 #define BALL_HUD_THEIRS_X(i)    (246 + -12 * (i))
 #define BALL_HUD_THEIRS_Y       9
-#define BALL_HUD_THEIRS_ROW_1_Y 6
-#define BALL_HUD_THEIRS_ROW_2_Y 16
 
 static const SpriteTemplate Unk_ov16_02270414 = {
     0xC,
@@ -1702,7 +1697,8 @@ void ov16_02268D40(NARC *param0, UnkStruct_ov16_02268A14 *param1)
         Sprite_SetPositionXYWithSubscreenOffset(param1->unk_5D4[i]->sprite, BALL_HUD_THEIRS_X(i), BALL_HUD_THEIRS_Y, (192 + 80) << FX32_SHIFT);
 
         param1->ballsTheirsRow2[i] = SpriteSystem_NewSprite(v1, v2, &Unk_ov16_02270448);
-        Sprite_SetPositionXYWithSubscreenOffset(param1->ballsTheirsRow2[i]->sprite, BALL_HUD_THEIRS_X(i), BALL_HUD_THEIRS_ROW_2_Y, (192 + 80) << FX32_SHIFT);
+        // second row of their balls sits just under the first
+        Sprite_SetPositionXYWithSubscreenOffset(param1->ballsTheirsRow2[i]->sprite, BALL_HUD_THEIRS_X(i), 16, (192 + 80) << FX32_SHIFT);
     }
 
     ov16_02269218(param1);
@@ -1864,7 +1860,8 @@ void ov16_02269168(UnkStruct_ov16_02268A14 *param0, u8 param1[], u8 param2[], u8
         }
     }
 
-    int theirsRow1Y = param0->ballsTheirsRow2Used ? BALL_HUD_THEIRS_ROW_1_Y : BALL_HUD_THEIRS_Y;
+    // nudge their first row up a bit when the second row is showing
+    int theirsRow1Y = param0->ballsTheirsRow2Used ? 6 : BALL_HUD_THEIRS_Y;
 
     for (i = 0; i < 6; i++) {
         v1 = ov16_0226A934(param1[i]);
@@ -2274,7 +2271,8 @@ static void ov16_022699AC(UnkStruct_ov16_02268A14 *param0, int param1, int param
         BOOL megaMenu = param0->unk_66B == MENU_MOVE_SELECT_MEGA;
 
         v5 = MessageLoader_GetNewString(messageLoader, 929);
-        ov16_0226A98C(param0, &param0->unk_4CC[4], v5, FONT_SUBSCREEN, TEXT_COLOR(10, 11, 12), 2, 20023, megaMenu ? CANCEL_BUTTON_LABEL_X : 128, BAR_LABEL_Y, 1, NULL);
+        // cancel label shifts left to make room for the mega button
+        ov16_0226A98C(param0, &param0->unk_4CC[4], v5, FONT_SUBSCREEN, TEXT_COLOR(10, 11, 12), 2, 20023, megaMenu ? 100 : 128, 178, 1, NULL);
         String_Free(v5);
 
         if (megaMenu) {

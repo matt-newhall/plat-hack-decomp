@@ -107,10 +107,6 @@ static const UnkStruct_ov5_021FB0F0 Unk_ov5_021FAFD8 = {
     ov5_021EB354
 };
 
-#define FOLLOWER_BOUNCE_HEIGHT     (FX32_ONE * 2)
-#define FOLLOWER_BOUNCE_PHASE_FAST 4
-#define FOLLOWER_BOUNCE_PHASE_SLOW 8
-
 /**
  * @brief Places the follower's billboard, lifting it on alternating stretches of
  * its walk animation so that it bobs.
@@ -128,15 +124,17 @@ static void FollowerMon_SetBillboardPos(MapObject *mapObj, Billboard *billboard)
     pos.z += (FX32_ONE * 6);
 
     frame = Billboard_GetAnimFrameNum(billboard) / FX32_ONE;
-    phase = FOLLOWER_BOUNCE_PHASE_FAST;
+    // bob every 4 anim frames, or every 8 for slow bouncers
+    phase = 4;
 
     if (fieldSystem != NULL
         && FollowerMon_GetBounceSpeed(fieldSystem->followMon.species) == FOLLOWER_BOUNCE_SLOW) {
-        phase = FOLLOWER_BOUNCE_PHASE_SLOW;
+        phase = 8;
     }
 
+    // height of the bob
     if ((frame & phase) != 0) {
-        pos.y += FOLLOWER_BOUNCE_HEIGHT;
+        pos.y += (FX32_ONE * 2);
     }
 
     Billboard_SetPos(billboard, &pos);
