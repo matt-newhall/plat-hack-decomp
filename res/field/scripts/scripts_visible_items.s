@@ -29,7 +29,7 @@
     ScriptEntry VisibleItems_EternaCity_TM41
     ScriptEntry VisibleItems_ValorLakefront_Clefablite
     ScriptEntry VisibleItems_EternaCity_SuperPotion
-    ScriptEntry VisibleItems_Route211West_TM12
+    ScriptEntry VisibleItems_Route211West_TM40
     ScriptEntry VisibleItems_EternaForestOutside_TM87
     ScriptEntry VisibleItems_EternaForestOutside_Victreebelite
     ScriptEntry VisibleItems_Route206_HeartScale
@@ -40,7 +40,7 @@
     ScriptEntry VisibleItems_WaywardCave1F_FlamePlate
     ScriptEntry VisibleItems_WaywardCave1F_Stardust
     ScriptEntry VisibleItems_MtCoronet4FRooms1And2_AdamantOrb
-    ScriptEntry VisibleItems_WaywardCave1F_TM40
+    ScriptEntry VisibleItems_WaywardCave1F_TM12
     ScriptEntry VisibleItems_MtCoronet4FRooms1And2_LustrousOrb
     ScriptEntry VisibleItems_WaywardCaveB1F_MaxEther
     ScriptEntry VisibleItems_WaywardCaveB1F_Steelixite
@@ -506,8 +506,8 @@ VisibleItems_EternaCity_SuperPotion:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_Route211West_TM12:
-    SetVar VAR_0x8008, ITEM_TM12
+VisibleItems_Route211West_TM40:
+    SetVar VAR_0x8008, ITEM_TM40
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
@@ -572,8 +572,8 @@ VisibleItems_MtCoronet4FRooms1And2_AdamantOrb:
     GoTo VisibleItems_TryGiveItem
     End
 
-VisibleItems_WaywardCave1F_TM40:
-    SetVar VAR_0x8008, ITEM_TM40
+VisibleItems_WaywardCave1F_TM12:
+    SetVar VAR_0x8008, ITEM_TM12
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

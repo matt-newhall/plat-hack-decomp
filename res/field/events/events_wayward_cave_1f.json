@@ -51,7 +51,7 @@
     ],
     "object_events": [
         {
-            "id": "LOCALID_ITEM_TM40",
+            "id": "LOCALID_ITEM_TM12",
             "graphics_id": "OBJ_EVENT_GFX_ITEM_TM",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
