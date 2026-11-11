@@ -13,11 +13,6 @@
 #include "overworld_anim_manager.h"
 #include "simple3d.h"
 
-#define FLDEFF_MEMBER_BALL_BURST      202
-#define FLDEFF_MEMBER_BALL_BURST_ANIM 203
-
-#define BALL_EFFECT_HEIGHT (FX32_ONE * 6)
-
 typedef struct FollowerBallEffectResources {
     FieldEffectManager *fieldEffMan;
     Simple3DModel burstModel;
@@ -60,8 +55,8 @@ void FollowerBallEffect_Free(void *context)
 
 static void FollowerBallEffectResources_Init(FollowerBallEffectResources *resources)
 {
-    FieldEffectManager_LoadModel(resources->fieldEffMan, &resources->burstModel, 0, FLDEFF_MEMBER_BALL_BURST, FALSE);
-    FieldEffectManager_LoadAnimation(resources->fieldEffMan, &resources->burstAnim, 0, FLDEFF_MEMBER_BALL_BURST_ANIM, FALSE);
+    FieldEffectManager_LoadModel(resources->fieldEffMan, &resources->burstModel, 0, 202, FALSE);
+    FieldEffectManager_LoadAnimation(resources->fieldEffMan, &resources->burstAnim, 0, 203, FALSE);
 }
 
 static void FollowerBallEffectResources_Free(FollowerBallEffectResources *resources)
@@ -77,12 +72,15 @@ OverworldAnimManager *FollowerBallEffect_Start(MapObject *mapObj)
     VecFx32 pos;
     int taskPriority;
 
+    FieldEffectManager_InitRenderer(fieldEffMan, FIELD_EFFECT_RENDERER_FOLLOWER_BALL);
+
     userData.fieldEffMan = fieldEffMan;
     userData.resources = FieldEffectManager_GetRendererContext(fieldEffMan, FIELD_EFFECT_RENDERER_FOLLOWER_BALL);
     userData.mapObj = mapObj;
 
     MapObject_GetPosPtr(mapObj, &pos);
-    pos.y += BALL_EFFECT_HEIGHT;
+    // height of the throw
+    pos.y += (FX32_ONE * 6);
 
     taskPriority = MapObject_CalculateTaskPriority(mapObj, 2);
 
