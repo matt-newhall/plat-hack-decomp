@@ -45,11 +45,12 @@
             "species": "SPECIES_FURRET",
             "form": 0,
             "level": 14,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_CHERI_BERRY",
             "moves": [
                 "MOVE_FOLLOW_ME",
                 "MOVE_HELPING_HAND",
-                "MOVE_SUPER_FANG"
+                "MOVE_SUPER_FANG",
+                "MOVE_QUICK_ATTACK"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
