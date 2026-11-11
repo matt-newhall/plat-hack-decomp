@@ -15,7 +15,7 @@
             "level": 20,
             "item": "ITEM_BLACKGLASSES",
             "moves": [
-                "MOVE_FOUL_PLAY",
+                "MOVE_ASSURANCE",
                 "MOVE_PLUCK",
                 "MOVE_PARTING_SHOT",
                 "MOVE_THUNDER_WAVE"
@@ -62,7 +62,7 @@
             "item": "ITEM_ROCKY_HELMET",
             "moves": [
                 "MOVE_SHADOW_PUNCH",
-                "MOVE_THUNDER_PUNCH",
+                "MOVE_FIRE_PUNCH",
                 "MOVE_ICE_PUNCH",
                 "MOVE_WILL_O_WISP"
             ],

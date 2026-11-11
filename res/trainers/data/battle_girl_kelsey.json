@@ -10,52 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SUNFLORA",
+            "species": "SPECIES_NUZLEAF",
             "form": 0,
             "level": 18,
-            "item": "ITEM_EXPERT_BELT",
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_MYSTICAL_FIRE",
-                "MOVE_GIGA_DRAIN",
-                "MOVE_GROWTH",
-                "MOVE_LEECH_SEED"
+                "MOVE_FAKE_OUT",
+                "MOVE_TRAILBLAZE",
+                "MOVE_FAINT_ATTACK",
+                "MOVE_SUCKER_PUNCH"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_TIMID",
-            "ability": "TRAINER_ABILITY_2"
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_RHYDON",
+            "species": "SPECIES_SNUBBULL",
             "form": 0,
             "level": 18,
             "item": "ITEM_EVIOLITE",
             "moves": [
-                "MOVE_TAKE_DOWN",
-                "MOVE_BREAKING_SWIPE",
-                "MOVE_STOMPING_TANTRUM",
-                "MOVE_ROCK_TOMB"
+                "MOVE_THUNDER_FANG",
+                "MOVE_ICE_FANG",
+                "MOVE_FIRE_FANG",
+                "MOVE_PSYCHIC_FANGS"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SASSY",
-            "ability": "TRAINER_ABILITY_2"
+            "nature": "NATURE_BRAVE",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_STANTLER",
+            "species": "SPECIES_TOGETIC",
             "form": 0,
             "level": 18,
-            "item": "ITEM_WIDE_LENS",
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_TAKE_DOWN",
-                "MOVE_JUMP_KICK",
-                "MOVE_PSYBEAM",
-                "MOVE_AGILITY"
+                "MOVE_ANCIENT_POWER",
+                "MOVE_DUAL_WINGBEAT",
+                "MOVE_FOLLOW_ME",
+                "MOVE_MORNING_SUN"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_NAUGHTY",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_QUIET",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

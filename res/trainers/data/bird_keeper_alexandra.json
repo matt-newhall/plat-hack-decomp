@@ -32,14 +32,14 @@
             "item": "ITEM_STICK",
             "moves": [
                 "MOVE_AERIAL_ACE",
-                "MOVE_BRICK_BREAK",
+                "MOVE_ROCK_SMASH",
                 "MOVE_FOCUS_ENERGY",
-                "MOVE_LEAF_BLADE"
+                "MOVE_FURY_CUTTER"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
             "nature": "NATURE_QUIRKY",
-            "ability": "TRAINER_ABILITY_HIDDEN"
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_FEAROW",
@@ -54,7 +54,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_NAUGHTY",
+            "nature": "NATURE_HASTY",
             "ability": "TRAINER_ABILITY_1"
         },
         {
