@@ -13,7 +13,7 @@ void ov5_021ECC78(MapObjectManager *param0);
 void MapObject_Draw(MapObject *param0);
 const UnkStruct_ov5_021ECD10 *ov5_021ECD04(const MapObject *param0);
 int ov5_021ECD38(const MapObject *param0);
-void *ov5_021ECD68(const MapObjectManager *param0, u32 param1, int param2);
+void *ov5_021ECD68(const MapObjectManager *param0, u32 param1, int param2, int gfxID);
 void ov5_021ECDA0(const MapObject *param0, VecFx32 *param1);
 void ov5_021ECDFC(MapObject *param0, int param1);
 void ov5_021ECE18(MapObject *param0);

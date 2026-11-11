@@ -378,7 +378,8 @@ MapObjectAnimCmd *FollowerMon_BuildTrailingAnim(FieldSystem *fieldSystem, const 
         cmdCount++;
     }
 
-    result = Heap_Alloc(HEAP_ID_FIELD1, sizeof(MapObjectAnimCmd) * (totalCount + cmdCount + 1));
+    u32 size = sizeof(MapObjectAnimCmd) * (totalCount + cmdCount + 1);
+    result = Heap_Alloc(FollowerMon_PickHeap(size), size);
 
     if (result == NULL) {
         return NULL;
@@ -565,6 +566,17 @@ BOOL FollowerMon_UpdateRecall(FieldSystem *fieldSystem)
 BOOL FollowerMon_IsFollowerObject(const MapObject *mapObj)
 {
     return MapObject_GetLocalID(mapObj) == FOLLOWER_LOCAL_ID;
+}
+
+BOOL FollowerMon_IsMonGfxID(int gfxID)
+{
+    return (gfxID >= OBJ_EVENT_GFX_PKMN_BULBASAUR && gfxID < OBJ_EVENT_GFX_FALKNER)
+        || (gfxID >= OBJ_EVENT_GFX_PKMN_MEGANIUM && gfxID <= OBJ_EVENT_GFX_PKMN_YANMEGA_SHINY);
+}
+
+enum HeapID FollowerMon_PickHeap(u32 size)
+{
+    return Heap_CanAlloc(HEAP_ID_FOLLOWER, size) ? HEAP_ID_FOLLOWER : HEAP_ID_FIELD1;
 }
 
 BOOL FollowerMon_IsWalkingAction(u16 action)

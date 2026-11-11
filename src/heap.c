@@ -1,6 +1,7 @@
 #include "heap.h"
 
 #include <nitro.h>
+#include <stdarg.h>
 #include <string.h>
 
 #include "error_message_reset.h"
@@ -302,6 +303,60 @@ u32 HeapExp_FndGetTotalFreeSize(u32 heapID)
 
     GF_ASSERT(FALSE);
     return 0;
+}
+
+static void HeapDebug_DesmumeLog(char *s)
+{
+    asm("swi 0xFC");
+}
+
+void HeapDebug_Log(const char *fmt, ...)
+{
+    char s[256];
+    va_list va;
+
+    va_start(va, fmt);
+    OS_VSNPrintf(s, sizeof(s), fmt, va);
+    va_end(va);
+
+    HeapDebug_DesmumeLog(s);
+}
+
+static u32 sField1Low;
+static u32 sFollowerLow;
+
+void HeapDebug_ResetFieldLows(void)
+{
+    sField1Low = 0xFFFFFFFF;
+    sFollowerLow = 0xFFFFFFFF;
+    HeapDebug_Log("[heap] field load: APPLICATION free %u\n", HeapExp_FndGetTotalFreeSize(HEAP_ID_APPLICATION));
+}
+
+void HeapDebug_LogFieldLows(void)
+{
+    u32 field1 = HeapExp_FndGetTotalFreeSize(HEAP_ID_FIELD1);
+    u32 follower = HeapExp_FndGetTotalFreeSize(HEAP_ID_FOLLOWER);
+
+    if (field1 < sField1Low || follower < sFollowerLow) {
+        sField1Low = field1 < sField1Low ? field1 : sField1Low;
+        sFollowerLow = follower < sFollowerLow ? follower : sFollowerLow;
+        HeapDebug_Log("[heap] new low: FIELD1 free %u (low %u) | FOLLOWER free %u (low %u)\n", field1, sField1Low, follower, sFollowerLow);
+    }
+}
+
+BOOL Heap_CanAlloc(u32 heapID, u32 size)
+{
+    if ((u32)heapID >= sHeapInfo.totalNumHeaps) {
+        return FALSE;
+    }
+
+    NNSFndHeapHandle heap = sHeapInfo.heapHandles[sHeapInfo.heapIdxs[heapID]];
+
+    if (heap == NNS_FND_HEAP_INVALID_HANDLE) {
+        return FALSE;
+    }
+
+    return NNS_FndGetAllocatableSizeForExpHeapEx(heap, 4) >= size + sizeof(MemoryBlock);
 }
 
 void HeapExp_FndInitAllocator(NNSFndAllocator *pAllocator, u32 heapID, int alignment)

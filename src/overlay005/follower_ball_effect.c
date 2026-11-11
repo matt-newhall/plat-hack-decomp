@@ -9,7 +9,9 @@
 
 #include "overlay005/field_effect_manager.h"
 
+#include "heap.h"
 #include "map_object.h"
+#include "narc.h"
 #include "overworld_anim_manager.h"
 #include "simple3d.h"
 
@@ -38,7 +40,9 @@ static const OverworldAnimManagerFuncs sFollowerBallEffectAnimFuncs;
 
 void *FollowerBallEffect_New(FieldEffectManager *fieldEffMan)
 {
-    FollowerBallEffectResources *resources = FieldEffectManager_HeapAllocInit(fieldEffMan, sizeof(FollowerBallEffectResources), FALSE, 0);
+    FollowerBallEffectResources *resources = Heap_Alloc(HEAP_ID_FOLLOWER, sizeof(FollowerBallEffectResources));
+
+    memset(resources, 0, sizeof(FollowerBallEffectResources));
     resources->fieldEffMan = fieldEffMan;
 
     FollowerBallEffectResources_Init(resources);
@@ -55,8 +59,11 @@ void FollowerBallEffect_Free(void *context)
 
 static void FollowerBallEffectResources_Init(FollowerBallEffectResources *resources)
 {
-    FieldEffectManager_LoadModel(resources->fieldEffMan, &resources->burstModel, 0, 202, FALSE);
-    FieldEffectManager_LoadAnimation(resources->fieldEffMan, &resources->burstAnim, 0, 203, FALSE);
+    NARC *narc = resources->fieldEffMan->fldEffNARC;
+
+    Simple3D_LoadModelFromSet(&resources->burstModel, 0, narc, 202, HEAP_ID_FOLLOWER, FALSE);
+    Simple3D_ScheduleBindModelTexture(&resources->burstModel);
+    Simple3D_LoadAnimFromOpenNARC(&resources->burstAnim, 0, narc, 203, HEAP_ID_FOLLOWER, FALSE);
 }
 
 static void FollowerBallEffectResources_Free(FollowerBallEffectResources *resources)
@@ -71,8 +78,6 @@ OverworldAnimManager *FollowerBallEffect_Start(MapObject *mapObj)
     FollowerBallEffectUserData userData;
     VecFx32 pos;
     int taskPriority;
-
-    FieldEffectManager_InitRenderer(fieldEffMan, FIELD_EFFECT_RENDERER_FOLLOWER_BALL);
 
     userData.fieldEffMan = fieldEffMan;
     userData.resources = FieldEffectManager_GetRendererContext(fieldEffMan, FIELD_EFFECT_RENDERER_FOLLOWER_BALL);
@@ -94,11 +99,11 @@ static BOOL FollowerBallEffect_AnimInit(OverworldAnimManager *animMan, void *con
 
     renderer->userData = *userData;
 
-    FieldEffectManager_ApplyAnimCopyToModel(renderer->userData.fieldEffMan,
-        &renderer->burstAnim,
+    Simple3D_ApplyAnimCopyToModel(&renderer->burstAnim,
         &renderer->userData.resources->burstModel,
         &renderer->userData.resources->burstAnim,
-        0);
+        0,
+        HEAP_ID_FOLLOWER);
 
     Simple3D_CreateRenderObjectWithAnim(&renderer->burstRenderObj,
         &renderer->userData.resources->burstModel,

@@ -11,6 +11,7 @@
 #include "overlay005/struct_ov5_021ECD10.h"
 #include "overlay005/struct_ov5_021ED0A4.h"
 
+#include "follower_mon.h"
 #include "heap.h"
 #include "map_object.h"
 #include "narc.h"
@@ -115,19 +116,27 @@ int ov5_021ECD38(const MapObject *param0)
     return 0;
 }
 
-void *ov5_021ECD68(const MapObjectManager *param0, u32 param1, int param2)
+void *ov5_021ECD68(const MapObjectManager *param0, u32 param1, int param2, int gfxID)
 {
     void *v0;
     NARC *v1 = MapObjectMan_GetNARC(param0);
     u32 v2 = NARC_GetMemberSize(v1, param1);
+    enum HeapID heapID = FollowerMon_IsMonGfxID(gfxID) ? FollowerMon_PickHeap(v2) : HEAP_ID_FIELD1;
+
+    if (!Heap_CanAlloc(heapID, v2)) {
+        HeapDebug_Log("[heap] sprite load DEFERRED: gfx %d size %u heap %d\n", gfxID, v2, heapID);
+        return NULL;
+    }
 
     if (param2 == 1) {
-        v0 = Heap_Alloc(HEAP_ID_FIELD1, v2);
+        v0 = Heap_Alloc(heapID, v2);
     } else {
-        v0 = Heap_AllocAtEnd(HEAP_ID_FIELD1, v2);
+        v0 = Heap_AllocAtEnd(heapID, v2);
     }
 
     NARC_ReadWholeMember(v1, param1, v0);
+    HeapDebug_Log("[heap] sprite load: gfx %d size %u heap %d\n", gfxID, v2, heapID);
+    HeapDebug_LogFieldLows();
 
     return v0;
 }

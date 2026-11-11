@@ -1,6 +1,7 @@
 #ifndef POKEPLATINUM_FOLLOWER_MON_H
 #define POKEPLATINUM_FOLLOWER_MON_H
 
+#include "constants/heap.h"
 #include "struct_decls/map_object.h"
 
 #include "field/field_system_decl.h"
@@ -20,6 +21,29 @@ void FollowerMon_Despawn(FieldSystem *fieldSystem);
  * @return TRUE if the object is the follower
  */
 BOOL FollowerMon_IsFollowerObject(const MapObject *mapObj);
+
+/**
+ * @brief Checks whether an overworld graphics ID is a Pokemon sprite.
+ *
+ * Covers the follower and any NPC partner Pokemon, which share the same
+ * sprite set and so share the follower heap.
+ *
+ * @param gfxID
+ * @return TRUE for any OBJ_EVENT_GFX_PKMN_* ID
+ */
+BOOL FollowerMon_IsMonGfxID(int gfxID);
+
+/**
+ * @brief Picks the heap a follower allocation should come from.
+ *
+ * Prefers the dedicated follower heap and only spills into FIELD1 when the
+ * block does not fit, so follower memory never competes with vanilla objects
+ * unless the follower budget is exhausted.
+ *
+ * @param size Allocation size in bytes
+ * @return HEAP_ID_FOLLOWER if the block fits there, otherwise HEAP_ID_FIELD1
+ */
+enum HeapID FollowerMon_PickHeap(u32 size);
 
 /**
  * @brief Checks whether a movement action carries its object onto a new tile.

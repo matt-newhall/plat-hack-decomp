@@ -194,6 +194,8 @@ static BOOL FieldMap_Init(ApplicationManager *appMan, int *state)
         }
 
         Heap_Create(HEAP_ID_APPLICATION, HEAP_ID_FIELD1, fieldSystem->mapLoadMode->unk_04);
+        Heap_Create(HEAP_ID_APPLICATION, HEAP_ID_FOLLOWER, HEAP_SIZE_FOLLOWER);
+        HeapDebug_ResetFieldLows();
         GF_ASSERT(fieldSystem->unk_04 == NULL);
 
         fieldSystem->unk_04 = Heap_Alloc(HEAP_ID_FIELD1, sizeof(FieldSystem_sub2));
@@ -257,6 +259,7 @@ static BOOL FieldMap_Init(ApplicationManager *appMan, int *state)
         break;
     }
 
+    HeapDebug_LogFieldLows();
     (*state)++;
     return ret;
 }
@@ -274,6 +277,7 @@ static BOOL FieldMap_Main(ApplicationManager *appMan, int *param1)
     }
 
     ov5_021D134C(fieldSystem, fieldSystem->unk_C0);
+    HeapDebug_LogFieldLows();
 
     if (fieldSystem->runningFieldMap) {
         return FALSE;
@@ -361,6 +365,7 @@ static BOOL FieldMap_Exit(ApplicationManager *appMan, int *param1)
 
             fieldSystem->unk_04 = NULL;
 
+            Heap_Destroy(HEAP_ID_FOLLOWER);
             Heap_Destroy(HEAP_ID_FIELD1);
 
             if (fieldSystem->mapLoadMode->loadExtOverlay) {

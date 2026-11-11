@@ -136,7 +136,7 @@ static void ov5_021EDCE4(UnkStruct_ov5_021ED0A4 *param0, int param1);
 static int ov5_021EDCE8(const UnkStruct_ov5_021ED0A4 *param0);
 static void ov5_021EDCEC(UnkStruct_ov5_021ED0A4 *param0, int param1);
 static int ov5_021EDCF0(const UnkStruct_ov5_021ED0A4 *param0);
-static void *ov5_021EDCF4(UnkStruct_ov5_021ED0A4 *param0, u32 param1, int param2);
+static void *ov5_021EDCF4(UnkStruct_ov5_021ED0A4 *param0, u32 param1, int param2, int gfxID);
 static const UnkStruct_ov5_021EDD04 *ov5_021EDD04(int param0);
 static int ov5_021EDD2C(int param0);
 static int ov5_021EDD38(int param0);
@@ -1277,9 +1277,9 @@ static int ov5_021EDCF0(const UnkStruct_ov5_021ED0A4 *param0)
     return param0->unk_1C;
 }
 
-static void *ov5_021EDCF4(UnkStruct_ov5_021ED0A4 *param0, u32 param1, int param2)
+static void *ov5_021EDCF4(UnkStruct_ov5_021ED0A4 *param0, u32 param1, int param2, int gfxID)
 {
-    return ov5_021ECD68(param0->unk_104, param1, param2);
+    return ov5_021ECD68(param0->unk_104, param1, param2, gfxID);
 }
 
 static const UnkStruct_ov5_021EDD04 *ov5_021EDD04(int param0)
@@ -1488,8 +1488,13 @@ int ov5_021EDF30(int param0)
 static int ov5_021EDF3C(UnkStruct_ov5_021ED0A4 *param0, int param1, u32 param2, int param3)
 {
     UnkStruct_ov5_021EDF3C *v0 = param0->unk_100;
+    void *v3 = NULL;
 
-    if ((v0->unk_04 >= v0->unk_02) || (BillboardList_IsRedrawing(param0->unk_E0) == 1)) {
+    if ((v0->unk_04 < v0->unk_02) && (BillboardList_IsRedrawing(param0->unk_E0) != 1)) {
+        v3 = ov5_021EDCF4(param0, param2, 0, param1);
+    }
+
+    if (v3 == NULL) {
         int v1 = 0;
         UnkStruct_ov5_021EDFBC *v2 = v0->unk_0C;
 
@@ -1510,13 +1515,9 @@ static int ov5_021EDF3C(UnkStruct_ov5_021ED0A4 *param0, int param1, u32 param2, 
         return 0;
     }
 
-    {
-        void *v3 = ov5_021EDCF4(param0, param2, 0);
-
-        ov5_021EE0E8(param0, param1, v3, param3);
-        v0->unk_04++;
-        return 1;
-    }
+    ov5_021EE0E8(param0, param1, v3, param3);
+    v0->unk_04++;
+    return 1;
 }
 
 static void ov5_021EDFBC(UnkStruct_ov5_021ED0A4 *param0, int param1)
@@ -1573,11 +1574,13 @@ static void ov5_021EE030(SysTask *param0, void *param1)
 
     while ((v2->unk_04 < v2->unk_02) && v0 < v2->unk_00) {
         if (v3->unk_0C != NULL) {
-            void *v4 = ov5_021EDCF4(v1, v3->unk_00, 0);
+            void *v4 = ov5_021EDCF4(v1, v3->unk_00, 0, v3->unk_04);
 
-            ov5_021EE0E8(v1, v3->unk_04, v4, v3->unk_08);
-            v3->unk_0C = NULL;
-            v2->unk_04++;
+            if (v4 != NULL) {
+                ov5_021EE0E8(v1, v3->unk_04, v4, v3->unk_08);
+                v3->unk_0C = NULL;
+                v2->unk_04++;
+            }
         }
 
         v3++;
@@ -1897,7 +1900,7 @@ static Billboard *ov5_021EE454(MapObject *param0, int param1, UnkFuncPtr_ov5_021
         } while (v7->unk_00 != 0xffff);
 
         GF_ASSERT(v7->unk_00 != 0xffff);
-        v11->unk_08 = ov5_021EDCF4(v8, v7->unk_04, 0);
+        v11->unk_08 = ov5_021EDCF4(v8, v7->unk_04, 0, v2);
     }
 
     {
@@ -1915,7 +1918,7 @@ static Billboard *ov5_021EE454(MapObject *param0, int param1, UnkFuncPtr_ov5_021
         } while (v7->unk_00 != 0xffff);
 
         GF_ASSERT(v7->unk_00 != 0xffff);
-        v11->unk_0C = ov5_021EDCF4(v8, v7->unk_04, 0);
+        v11->unk_0C = ov5_021EDCF4(v8, v7->unk_04, 0, v2);
         BillboardGfxSequence_SetData(v11->unk_0C, &v11->unk_14);
     }
 
@@ -1934,7 +1937,7 @@ static Billboard *ov5_021EE454(MapObject *param0, int param1, UnkFuncPtr_ov5_021
         } while (v7->unk_00 != 0xffff);
 
         GF_ASSERT(v7->unk_00 != 0xffff);
-        v11->unk_10 = ov5_021EDCF4(v8, v7->unk_04, 0);
+        v11->unk_10 = ov5_021EDCF4(v8, v7->unk_04, 0, v2);
     }
 
     BillboardResources_SetWithoutKeys(&v11->unk_28, v11->unk_08, NNS_G3dGetTex(v11->unk_10), ov5_021EDD44(v2), &v11->unk_14);
