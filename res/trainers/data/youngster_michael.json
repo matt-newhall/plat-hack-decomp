@@ -50,7 +50,7 @@
                 "MOVE_FAKE_OUT",
                 "MOVE_POWER_UP_PUNCH",
                 "MOVE_KNOCK_OFF",
-                "MOVE_ROCK_TOMB"
+                "MOVE_SMELLING_SALT"
             ],
             "iv_scale": 255,
             "ball_seal": 0,

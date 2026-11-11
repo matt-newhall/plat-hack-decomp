@@ -36,7 +36,7 @@
         "by_level": [
             [ 1, "MOVE_METAL_CLAW" ],
             [ 1, "MOVE_TACKLE" ],
-            [ 1, "MOVE_GROWL" ],
+            [ 1, "MOVE_TAIL_WHIP" ],
             [ 1, "MOVE_WATER_GUN" ],
             [ 15, "MOVE_PECK" ],
             [ 18, "MOVE_FURY_ATTACK" ],
