@@ -7,7 +7,7 @@
         "special_attack": 100,
         "special_defense": 100
     },
-    "types": [ "TYPE_GRASS", "TYPE_GRASS" ],
+    "types": [ "TYPE_GRASS", "TYPE_FAIRY" ],
     "catch_rate": 45,
     "base_exp_reward": 270,
     "ev_yields": {
@@ -27,7 +27,7 @@
     "base_friendship": 255,
     "exp_rate": "EXP_RATE_MEDIUM_SLOW",
     "egg_groups": [ "EGG_GROUP_UNDISCOVERED", "EGG_GROUP_UNDISCOVERED" ],
-    "abilities": [ "ABILITY_NATURAL_CURE", "ABILITY_NONE", "ABILITY_NONE" ],
+    "abilities": [ "ABILITY_NATURAL_CURE", "ABILITY_NONE", "ABILITY_GRASSY_SURGE" ],
     "safari_flee_rate": 0,
     "body_color": "MON_COLOR_GREEN",
     "flip_sprite": false,
