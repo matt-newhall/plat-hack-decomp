@@ -10,13 +10,68 @@
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_STARYU",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_WISE_GLASSES",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_BRINE",
+                "MOVE_CONFUSE_RAY",
+                "MOVE_RECOVER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_CORSOLA",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_ANCIENT_POWER",
+                "MOVE_LIFE_DEW",
+                "MOVE_BUBBLE_BEAM",
+                "MOVE_ROCK_POLISH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
             "species": "SPECIES_GOLDEEN",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 19,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_HORN_ATTACK",
+                "MOVE_SMART_STRIKE",
+                "MOVE_FLIP_TURN",
+                "MOVE_DIVE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_CLAMPERL",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_DEEPSEATOOTH",
+            "moves": [
+                "MOVE_CLAMP",
+                "MOVE_FAINT_ATTACK",
+                "MOVE_SHELL_SMASH",
+                "MOVE_ICY_WIND"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

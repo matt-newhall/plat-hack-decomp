@@ -10,58 +10,51 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGIKARP",
+            "species": "SPECIES_SEEL",
             "form": 0,
-            "level": 8,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 19,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_AURORA_BEAM",
+                "MOVE_FLIP_TURN",
+                "MOVE_ENCORE",
+                "MOVE_AQUA_JET"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_MAGIKARP",
+            "species": "SPECIES_WARTORTLE",
             "form": 0,
-            "level": 10,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 19,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_ICE_SPINNER",
+                "MOVE_WATER_PULSE",
+                "MOVE_FLIP_TURN",
+                "MOVE_BRICK_BREAK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
         },
         {
-            "species": "SPECIES_MAGIKARP",
+            "species": "SPECIES_BEEDRILL",
             "form": 0,
-            "level": 12,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MAGIKARP",
-            "form": 0,
-            "level": 12,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MAGIKARP",
-            "form": 0,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
-        },
-        {
-            "species": "SPECIES_MAGIKARP",
-            "form": 0,
-            "level": 16,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 19,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_PURSUIT",
+                "MOVE_U_TURN",
+                "MOVE_FELL_STINGER",
+                "MOVE_PLUCK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [
