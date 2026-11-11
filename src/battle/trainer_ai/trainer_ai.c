@@ -4298,7 +4298,9 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
         break;
     }
 
-    if (damage == 0) {
+    const BOOL fixedDamage = damage != 0;
+
+    if (!fixedDamage) {
         int criticalMul = 1;
 
         if (BattleSystem_MoveAlwaysCrits(battleSys, battleCtx, attacker, AI_CONTEXT.defender, move, ability, heldItem)) {
@@ -4349,7 +4351,10 @@ static s32 TrainerAI_CalcDamage(BattleSystem *battleSys, BattleContext *battleCt
     if (effectivenessFlags & MOVE_STATUS_IMMUNE) {
         damage = 0;
     } else {
-        damage = BattleSystem_Divide(damage * variance, 100);
+        if (!fixedDamage) {
+            damage = BattleSystem_Divide(damage * variance, 100);
+        }
+
         damage = BattleSystem_Divide(damage * TrainerAI_HitCountMultiplier(battleSys, battleCtx, move, attacker, ability, heldItem), 100);
     }
 
