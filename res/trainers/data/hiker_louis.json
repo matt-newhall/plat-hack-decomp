@@ -26,15 +26,15 @@
             "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
-            "species": "SPECIES_PILOSWINE",
+            "species": "SPECIES_SWINUB",
             "form": 0,
             "level": 20,
-            "item": "ITEM_LEFTOVERS",
+            "item": "ITEM_EVIOLITE",
             "moves": [
                 "MOVE_STOMPING_TANTRUM",
-                "MOVE_ICICLE_CRASH",
-                "MOVE_AMNESIA",
-                "MOVE_FREEZE_DRY"
+                "MOVE_ICICLE_SPEAR",
+                "MOVE_FREEZE_DRY",
+                "MOVE_AMNESIA"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -42,20 +42,36 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_FLAREON",
+            "species": "SPECIES_WORMADAM",
+            "form": 2,
+            "level": 20,
+            "item": "ITEM_GRIP_CLAW",
+            "moves": [
+                "MOVE_PROTECT",
+                "MOVE_INFESTATION",
+                "MOVE_ELECTROWEB",
+                "MOVE_CAPTIVATE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_QUILAVA",
             "form": 0,
             "level": 20,
             "item": "ITEM_SAFETY_GOGGLES",
             "moves": [
-                "MOVE_LAVA_PLUME",
-                "MOVE_HP_ROCK",
-                "MOVE_TRAILBLAZE",
-                "MOVE_FAKE_TEARS"
+                "MOVE_FLAME_WHEEL",
+                "MOVE_LEER",
+                "MOVE_HP_GROUND",
+                "MOVE_REVERSAL"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_DOCILE",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [
