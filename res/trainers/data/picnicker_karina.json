@@ -10,15 +10,15 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_SKARMORY",
+            "species": "SPECIES_RHYHORN",
             "form": 0,
             "level": 20,
-            "item": "ITEM_LUM_BERRY",
+            "item": "ITEM_EVIOLITE",
             "moves": [
-                "MOVE_SPIKES",
-                "MOVE_PAYBACK",
-                "MOVE_SMART_STRIKE",
-                "MOVE_WING_ATTACK"
+                "MOVE_STEALTH_ROCK",
+                "MOVE_BREAKING_SWIPE",
+                "MOVE_BULLDOZE",
+                "MOVE_FIRE_FANG"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -26,51 +26,67 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_SEADRA",
+            "species": "SPECIES_FLAAFFY",
             "form": 0,
             "level": 20,
-            "item": "ITEM_SCOPE_LENS",
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_FOCUS_ENERGY",
-                "MOVE_WATER_PULSE",
-                "MOVE_AURORA_BEAM",
-                "MOVE_DRAGON_BREATH"
+                "MOVE_FIRE_PUNCH",
+                "MOVE_EERIE_IMPULSE",
+                "MOVE_VOLT_SWITCH",
+                "MOVE_BRICK_BREAK"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_MILD",
+            "nature": "NATURE_BASHFUL",
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_HAUNTER",
+            "species": "SPECIES_GLOOM",
             "form": 0,
             "level": 20,
-            "item": "ITEM_EVIOLITE",
+            "item": "ITEM_BLACK_SLUDGE",
             "moves": [
-                "MOVE_HEX",
-                "MOVE_SUCKER_PUNCH",
-                "MOVE_DARK_PULSE",
-                "MOVE_WILL_O_WISP"
+                "MOVE_MAGICAL_LEAF",
+                "MOVE_MOONLIGHT",
+                "MOVE_ACID_SPRAY",
+                "MOVE_TOXIC"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
             "nature": "NATURE_HASTY",
-            "ability": "TRAINER_ABILITY_1"
+            "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_LOPUNNY",
+            "species": "SPECIES_ANORITH",
             "form": 0,
-            "level": 21,
-            "item": "ITEM_SITRUS_BERRY",
+            "level": 20,
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_U_TURN",
-                "MOVE_HI_JUMP_KICK",
-                "MOVE_MIRROR_COAT",
-                "MOVE_DIZZY_PUNCH"
+                "MOVE_ROCK_TOMB",
+                "MOVE_BUG_BITE",
+                "MOVE_METAL_CLAW",
+                "MOVE_AQUA_JET"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_QUIRKY",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_NIDORINA",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_NONE",
+            "moves": [
+                "MOVE_POISON_TAIL",
+                "MOVE_TOXIC",
+                "MOVE_STRENGTH",
+                "MOVE_DOUBLE_KICK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
             "ability": "TRAINER_ABILITY_2"
         }
     ],
