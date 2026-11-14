@@ -596,6 +596,11 @@ Basic_CheckCannotPoison:
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
     IfLoadedEqualTo ABILITY_POISON_HEAL, ScoreMinus10
 
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus10
+    IfLoadedEqualTo ABILITY_TOXIC_BOOST, ScoreMinus10
+    IfLoadedEqualTo ABILITY_MARVEL_SCALE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus10
+
     IfLoadedNotEqualTo ABILITY_LEAF_GUARD, Basic_CheckCannotPoison_Hydration
     LoadCurrentWeather 
     IfLoadedEqualTo AI_WEATHER_SUNNY, ScoreMinus10
@@ -731,7 +736,8 @@ Basic_CheckAlreadyUnderReflect:
     PopOrEnd 
 
 Basic_CheckCannotParalyze:
-    // If the target cannot be paralyzed for any reason, score -10. Electric-types cannot be
+    // If the target cannot be paralyzed for any reason, or the paralysis would only help it,
+    // score -10. Electric-types cannot be
     // paralyzed at all, regardless of Mold Breaker, so they score -30.
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_ELECTRIC, ScoreMinus30
@@ -741,6 +747,9 @@ Basic_CheckCannotParalyze:
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_LIMBER, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus10
+    IfLoadedEqualTo ABILITY_MARVEL_SCALE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus10
     LoadBattlerAbility AI_BATTLER_ATTACKER
     IfLoadedEqualTo ABILITY_MOLD_BREAKER, Basic_CheckCannotParalyze_ImmuneToStatus
     IfMoveEqualTo MOVE_THUNDER_WAVE, Basic_CheckCannotParalyze_ThunderWave
@@ -1029,11 +1038,15 @@ Basic_CheckTorment:
     PopOrEnd 
 
 Basic_CheckCannotBurn:
-    // If the target cannot be burned for any reason, score -10.
+    // If the target cannot be burned for any reason, or the burn would only help it, score -10.
     LoadBattlerAbility AI_BATTLER_DEFENDER
     IfLoadedEqualTo ABILITY_WATER_VEIL, ScoreMinus10
     IfLoadedEqualTo ABILITY_WATER_BUBBLE, ScoreMinus10
     IfLoadedEqualTo ABILITY_MAGIC_GUARD, ScoreMinus10
+    IfLoadedEqualTo ABILITY_GUTS, ScoreMinus10
+    IfLoadedEqualTo ABILITY_FLARE_BOOST, ScoreMinus10
+    IfLoadedEqualTo ABILITY_MARVEL_SCALE, ScoreMinus10
+    IfLoadedEqualTo ABILITY_QUICK_FEET, ScoreMinus10
     IfStatus AI_BATTLER_DEFENDER, MON_CONDITION_ANY, ScoreMinus10
     LoadTypeFrom LOAD_DEFENDER_TYPE_1
     IfLoadedEqualTo TYPE_FIRE, ScoreMinus10
