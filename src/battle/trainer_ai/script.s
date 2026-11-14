@@ -3450,7 +3450,10 @@ Expert_PartingShot:
 Expert_PartingShot_CheckSpeed:
     // Getting out ahead of a hit which would have KO'd is what the move is for, but it is worth
     // a few points on top of the base rather than a score of its own.
+    CountAlivePartyBattlers AI_BATTLER_ATTACKER
+    IfLoadedEqualTo 0, Expert_PartingShot_CheckAttacker
     IfDoesNotMoveFirst Expert_PartingShot_CheckAttacker
+    IfRandomLessThan 64, Expert_PartingShot_CheckAttacker
     AddToMoveScore 3
 
 Expert_PartingShot_CheckAttacker:
@@ -3466,7 +3469,7 @@ Expert_PartingShot_CheckParty:
     CountAlivePartyBattlers AI_BATTLER_ATTACKER
     IfLoadedNotEqualTo 0, Expert_PartingShot_CheckAbility
     IfRandomGreaterThan 170, Expert_PartingShot_CheckAbility
-    AddToMoveScore -1
+    AddToMoveScore -10
 
 Expert_PartingShot_CheckAbility:
     // Half the move is the drop, so a target which blanks it or turns it into a boost leaves
