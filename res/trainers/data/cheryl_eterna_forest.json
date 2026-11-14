@@ -13,14 +13,16 @@
             "species": "SPECIES_CHANSEY",
             "form": 0,
             "level": 20,
-            "item": null,
+            "item": "ITEM_LUCKY_PUNCH",
             "moves": [
                 "MOVE_EGG_BOMB",
                 "MOVE_SOFTBOILED",
                 "MOVE_REFRESH"
             ],
-            "iv_scale": 30,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_QUIRKY",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": []
