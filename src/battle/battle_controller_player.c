@@ -1143,6 +1143,14 @@ static void BattleControllerPlayer_CheckFieldConditions(BattleSystem *battleSys,
                     TickDownTailwind(battleCtx, side);
 
                     if ((battleCtx->sideConditionsMask[side] & SIDE_CONDITION_TAILWIND) == FALSE) {
+                        if ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) == FALSE || side != BATTLER_THEM) {
+                            for (int i = 0; i < maxBattlers; i++) {
+                                if (BattleSystem_GetBattlerSide(battleSys, i) == side) {
+                                    battleCtx->battleMons[i].windRiderTailwindBoosted = FALSE;
+                                }
+                            }
+                        }
+
                         PrepareSubroutineSequence(battleCtx, subscript_tailwind_end);
                         battleCtx->msgBattlerTemp = BattleSystem_SideToBattler(battleSys, battleCtx, side);
                         state = STATE_BREAK_OUT;
@@ -4145,7 +4153,6 @@ enum AfterMoveEffectState {
     AFTER_MOVE_EFFECT_SYNCHRONIZE_STATUS,
     AFTER_MOVE_EFFECT_TRIGGER_SWITCH_IN_EFFECTS,
     AFTER_MOVE_EFFECT_UPROAR_FIRST_TURN,
-    AFTER_MOVE_EFFECT_TAILWIND,
     AFTER_MOVE_EFFECT_ATTACKER_ITEM,
     AFTER_MOVE_EFFECT_DEFENDER_ITEM,
     AFTER_MOVE_EFFECT_ROOM_SERVICE,
@@ -4236,39 +4243,6 @@ static void BattleControllerPlayer_AfterMoveEffects(BattleSystem *battleSys, Bat
         }
 
         battleCtx->afterMoveEffectState++;
-
-    case AFTER_MOVE_EFFECT_TAILWIND:
-        if (battleCtx->moveCur == MOVE_TAILWIND && (battleCtx->moveStatusFlags & MOVE_STATUS_NO_EFFECTS) == FALSE) {
-            int battler;
-            BOOL result = FALSE;
-
-            while (battleCtx->afterMoveEffectTemp < BattleSystem_GetMaxBattlers(battleSys)) {
-                battler = battleCtx->monSpeedOrder[battleCtx->afterMoveEffectTemp];
-
-                if (battleCtx->battlersSwitchingMask & FlagIndex(battler)) {
-                    battleCtx->afterMoveEffectTemp++;
-                    continue;
-                }
-
-                battleCtx->afterMoveEffectTemp++;
-
-                if (Battler_Ability(battleCtx, battler) == ABILITY_WIND_RIDER
-                    && BattleSystem_GetBattlerSide(battleSys, battleCtx->attacker) == BattleSystem_GetBattlerSide(battleSys, battler)) {
-                    battleCtx->sideEffectMon = battler;
-
-                    LOAD_SUBSEQ(subscript_wind_rider);
-                    battleCtx->commandNext = battleCtx->command;
-                    battleCtx->command = BATTLE_CONTROL_EXEC_SCRIPT;
-
-                    return;
-                }
-            }
-
-            battleCtx->afterMoveEffectState++;
-            battleCtx->afterMoveEffectTemp = 0;
-        } else {
-            battleCtx->afterMoveEffectState++;
-        }
 
     case AFTER_MOVE_EFFECT_ATTACKER_ITEM:
         battleCtx->afterMoveEffectState++;

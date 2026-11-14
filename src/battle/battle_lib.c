@@ -5485,12 +5485,7 @@ int BattleSystem_TriggerEffectOnSwitch(BattleSystem *battleSys, BattleContext *b
                 BOOL tailwindUp = (battleCtx->sideConditionsMask[BattleSystem_GetBattlerSide(battleSys, battler)] & SIDE_CONDITION_TAILWIND)
                     || ((battleCtx->fieldConditionsMask & FIELD_CONDITION_TAILWIND_PERM) && BattleSystem_GetBattlerSide(battleSys, battler) == BATTLER_THEM);
 
-                if (tailwindUp == FALSE) {
-                    battleCtx->battleMons[battler].windRiderTailwindBoosted = FALSE;
-                    continue;
-                }
-
-                if (battleCtx->battleMons[battler].windRiderTailwindBoosted == FALSE) {
+                if (tailwindUp && battleCtx->battleMons[battler].windRiderTailwindBoosted == FALSE) {
                     battleCtx->battleMons[battler].windRiderTailwindBoosted = TRUE;
                     battleCtx->sideEffectType = SIDE_EFFECT_TYPE_ABILITY;
                     battleCtx->sideEffectMon = battler;

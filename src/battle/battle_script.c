@@ -7687,7 +7687,7 @@ static BOOL BtlCmd_SwapAbilities(BattleSystem *battleSys, BattleContext *battleC
     battleCtx->battleMons[battleCtx->attacker].frisksAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].moldBreakerAnnounced = FALSE;
     battleCtx->battleMons[battleCtx->attacker].pressureAnnounced = FALSE;
-    battleCtx->battleMons[battleCtx->defender].windRiderTailwindBoosted = FALSE;
+    battleCtx->battleMons[battleCtx->attacker].windRiderTailwindBoosted = FALSE;
 
     int ability = battleCtx->battleMons[battleCtx->attacker].ability;
 
