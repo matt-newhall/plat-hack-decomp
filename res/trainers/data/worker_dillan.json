@@ -10,22 +10,67 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_PRIMEAPE",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 23,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_DUAL_CHOP",
+                "MOVE_SUBMISSION",
+                "MOVE_RAGING_BULL",
+                "MOVE_LOW_KICK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST"
         },
         {
             "species": "SPECIES_MACHOKE",
             "form": 0,
-            "level": 33,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 23,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_ROLLING_KICK",
+                "MOVE_STRENGTH",
+                "MOVE_DUAL_CHOP",
+                "MOVE_PROTECT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_GLIGAR",
+            "form": 0,
+            "level": 23,
+            "item": "ITEM_TOXIC_ORB",
+            "moves": [
+                "MOVE_KNOCK_OFF",
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_ICE_FANG",
+                "MOVE_PROTECT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_LAIRON",
+            "form": 0,
+            "level": 23,
+            "item": "ITEM_CUSTAP_BERRY",
+            "moves": [
+                "MOVE_ROCK_SLIDE",
+                "MOVE_SMART_STRIKE",
+                "MOVE_METAL_BURST",
+                "MOVE_BODY_PRESS"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

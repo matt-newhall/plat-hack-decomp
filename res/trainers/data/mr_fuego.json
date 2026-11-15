@@ -10,31 +10,83 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MACHOP",
+            "species": "SPECIES_SANDSLASH",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_ASSAULT_VEST",
+            "moves": [
+                "MOVE_SUPER_FANG",
+                "MOVE_CRUSH_CLAW",
+                "MOVE_HIGH_HORSEPOWER",
+                "MOVE_AERIAL_ACE"
+            ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_GEODUDE",
+            "species": "SPECIES_TORKOAL",
             "form": 0,
-            "level": 20,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_BODY_SLAM",
+                "MOVE_LAVA_PLUME",
+                "MOVE_BODY_PRESS",
+                "MOVE_WILL_O_WISP"
+            ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "nature": "NATURE_RELAXED",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_ONIX",
+            "species": "SPECIES_ROTOM",
             "form": 0,
-            "level": 22,
-            "item": null,
-            "moves": null,
+            "level": 24,
+            "item": "ITEM_SPELL_TAG",
+            "moves": [
+                "MOVE_THUNDERBOLT",
+                "MOVE_SUBSTITUTE",
+                "MOVE_HEX",
+                "MOVE_WILL_O_WISP"
+            ],
             "iv_scale": 255,
-            "ball_seal": 0
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID"
+        },
+        {
+            "species": "SPECIES_METANG",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_ROCKY_HELMET",
+            "moves": [
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_METEOR_MASH",
+                "MOVE_BULLET_PUNCH",
+                "MOVE_MAGNET_RISE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_SCYTHER",
+            "form": 0,
+            "level": 25,
+            "item": "ITEM_CHARTI_BERRY",
+            "moves": [
+                "MOVE_MACH_PUNCH",
+                "MOVE_WING_ATTACK",
+                "MOVE_BRICK_BREAK",
+                "MOVE_LUNGE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": []

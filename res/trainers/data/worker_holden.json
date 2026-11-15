@@ -10,31 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_HIPPOPOTAS",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 23,
+            "item": "ITEM_EVIOLITE",
+            "moves": [
+                "MOVE_STOMPING_TANTRUM",
+                "MOVE_FIRE_FANG",
+                "MOVE_STEALTH_ROCK",
+                "MOVE_SLACK_OFF"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_MAGNETON",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 23,
+            "item": "ITEM_SHUCA_BERRY",
+            "moves": [
+                "MOVE_CHARGE_BEAM",
+                "MOVE_MIRROR_SHOT",
+                "MOVE_SHOCK_WAVE",
+                "MOVE_EXPLOSION"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_QUIET",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
-            "species": "SPECIES_MAGNEMITE",
+            "species": "SPECIES_CAMERUPT",
             "form": 0,
-            "level": 32,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 24,
+            "item": "ITEM_PASSHO_BERRY",
+            "moves": [
+                "MOVE_LAVA_PLUME",
+                "MOVE_BULLDOZE",
+                "MOVE_YAWN",
+                "MOVE_FLASH_CANNON"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BRAVE",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
