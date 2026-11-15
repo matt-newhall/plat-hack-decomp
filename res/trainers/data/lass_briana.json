@@ -10,13 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PACHIRISU",
+            "species": "SPECIES_ELECTRIKE",
             "form": 0,
-            "level": 16,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 18,
+            "item": "ITEM_MAGNET",
+            "moves": [
+                "MOVE_THUNDER_FANG",
+                "MOVE_HOWL",
+                "MOVE_QUICK_ATTACK",
+                "MOVE_BITE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAUGHTY",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_BUNEARY",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_MUSCLE_BAND",
+            "moves": [
+                "MOVE_DOUBLE_HIT",
+                "MOVE_ENCORE",
+                "MOVE_CHARM",
+                "MOVE_FOCUS_PUNCH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_RELAXED",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_PIDGEOTTO",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_SHARP_BEAK",
+            "moves": [
+                "MOVE_AIR_CUTTER",
+                "MOVE_WING_ATTACK",
+                "MOVE_STEEL_WING",
+                "MOVE_ROOST"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

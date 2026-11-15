@@ -13,16 +13,48 @@
             "species": "SPECIES_CHANSEY",
             "form": 0,
             "level": 20,
-            "item": "ITEM_LUCKY_PUNCH",
+            "item": "ITEM_ROCKY_HELMET",
             "moves": [
-                "MOVE_EGG_BOMB",
-                "MOVE_SOFTBOILED",
-                "MOVE_REFRESH"
+                "MOVE_DISARMING_VOICE",
+                "MOVE_COPYCAT",
+                "MOVE_HELPING_HAND",
+                "MOVE_LIFE_DEW"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_QUIRKY",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_MODEST",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_WORMADAM",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_COBA_BERRY",
+            "moves": [
+                "MOVE_BUG_BITE",
+                "MOVE_RAZOR_LEAF",
+                "MOVE_PROTECT",
+                "MOVE_CAPTIVATE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_WAILMER",
+            "form": 0,
+            "level": 20,
+            "item": "ITEM_CHESTO_BERRY",
+            "moves": [
+                "MOVE_WATER_PULSE",
+                "MOVE_BODY_SLAM",
+                "MOVE_ICY_WIND",
+                "MOVE_REST"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BOLD"
         }
     ],
     "messages": []

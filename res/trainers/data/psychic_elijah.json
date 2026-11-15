@@ -10,15 +10,51 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ABRA",
+            "species": "SPECIES_SLOWPOKE",
             "form": 0,
-            "level": 17,
-            "item": null,
+            "level": 19,
+            "item": "ITEM_WISE_GLASSES",
             "moves": [
-                "MOVE_HIDDEN_POWER"
+                "MOVE_WATER_PULSE",
+                "MOVE_PSYBEAM",
+                "MOVE_GRASS_KNOT",
+                "MOVE_YAWN"
             ],
-            "iv_scale": 20,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MODEST",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_KADABRA",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_TWISTEDSPOON",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_DISABLE",
+                "MOVE_FUTURE_SIGHT",
+                "MOVE_DAZZLING_GLEAM"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL"
+        },
+        {
+            "species": "SPECIES_STANTLER",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_CLEAR_AMULET",
+            "moves": [
+                "MOVE_STOMP",
+                "MOVE_PSYBEAM",
+                "MOVE_THUNDER_WAVE",
+                "MOVE_DOUBLE_KICK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAIVE",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

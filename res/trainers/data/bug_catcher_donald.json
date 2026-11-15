@@ -10,22 +10,34 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BURMY",
-            "form": 1,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 10,
-            "ball_seal": 0
+            "species": "SPECIES_MOTHIM",
+            "form": 0,
+            "level": 18,
+            "item": "ITEM_CHARTI_BERRY",
+            "moves": [
+                "MOVE_AIR_SLASH",
+                "MOVE_STRUGGLE_BUG",
+                "MOVE_ELECTROWEB",
+                "MOVE_ROOST"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY"
         },
         {
-            "species": "SPECIES_BURMY",
-            "form": 2,
-            "level": 14,
-            "item": null,
-            "moves": null,
-            "iv_scale": 10,
-            "ball_seal": 0
+            "species": "SPECIES_MASQUERAIN",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_MYSTIC_WATER",
+            "moves": [
+                "MOVE_STRUGGLE_BUG",
+                "MOVE_BRINE",
+                "MOVE_WHIRLWIND",
+                "MOVE_ICY_WIND"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BOLD"
         }
     ],
     "messages": [
