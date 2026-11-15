@@ -10,43 +10,67 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUDEW",
+            "species": "SPECIES_BELLOSSOM",
             "form": 0,
-            "level": 15,
-            "item": null,
+            "level": 20,
+            "item": "ITEM_TERRAIN_EXTENDER",
             "moves": [
-                "MOVE_ABSORB",
-                "MOVE_STUN_SPORE",
-                "MOVE_ACID_SPRAY"
+                "MOVE_MAGICAL_LEAF",
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_ACID_SPRAY",
+                "MOVE_GROWTH"
             ],
-            "iv_scale": 20,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
         },
         {
-            "species": "SPECIES_BUDEW",
+            "species": "SPECIES_LICKITUNG",
             "form": 0,
-            "level": 16,
-            "item": null,
+            "level": 20,
+            "item": "ITEM_MISTY_SEED",
             "moves": [
-                "MOVE_ABSORB",
-                "MOVE_STUN_SPORE",
-                "MOVE_ACID_SPRAY"
+                "MOVE_STOMP",
+                "MOVE_BODY_PRESS",
+                "MOVE_DEFENSE_CURL",
+                "MOVE_LICK"
             ],
-            "iv_scale": 20,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
-            "species": "SPECIES_BUDEW",
+            "species": "SPECIES_PARASECT",
             "form": 0,
-            "level": 17,
-            "item": null,
+            "level": 21,
+            "item": "ITEM_COBA_BERRY",
             "moves": [
-                "MOVE_ABSORB",
-                "MOVE_STUN_SPORE",
-                "MOVE_ACID_SPRAY"
+                "MOVE_GIGA_DRAIN",
+                "MOVE_NATURAL_GIFT",
+                "MOVE_X_SCISSOR",
+                "MOVE_NATURE_POWER"
             ],
-            "iv_scale": 20,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_RASH",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_VULPIX",
+            "form": 0,
+            "level": 21,
+            "item": "ITEM_FAIRY_FEATHER",
+            "moves": [
+                "MOVE_HEAT_WAVE",
+                "MOVE_SECRET_POWER",
+                "MOVE_FIRE_SPIN",
+                "MOVE_HP_WATER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

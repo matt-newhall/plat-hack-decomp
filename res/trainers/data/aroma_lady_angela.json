@@ -10,17 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ROSELIA",
+            "species": "SPECIES_JUMPLUFF",
             "form": 0,
-            "level": 19,
-            "item": null,
+            "level": 21,
+            "item": "ITEM_HEAT_ROCK",
             "moves": [
-                "MOVE_MEGA_DRAIN",
-                "MOVE_POISON_STING",
-                "MOVE_STUN_SPORE"
+                "MOVE_SUNNY_DAY",
+                "MOVE_MEMENTO",
+                "MOVE_U_TURN",
+                "MOVE_MEGA_DRAIN"
             ],
-            "iv_scale": 20,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_TIMID",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_SUNFLORA",
+            "form": 0,
+            "level": 21,
+            "item": "ITEM_SHELL_BELL",
+            "moves": [
+                "MOVE_MAGICAL_LEAF",
+                "MOVE_FIRE_PUNCH",
+                "MOVE_GROWTH",
+                "MOVE_DAZZLING_GLEAM"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_HASTY",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_TROPIUS",
+            "form": 0,
+            "level": 21,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_RAZOR_LEAF",
+                "MOVE_DRAGON_TAIL",
+                "MOVE_AERIAL_ACE",
+                "MOVE_SUBSTITUTE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [
