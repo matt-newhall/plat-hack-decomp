@@ -13,17 +13,6 @@
     ScriptEntryEnd
 
 Route222_OnTransition:
-    GetTimeOfDay VAR_MAP_LOCAL_0
-    GoToIfInRange VAR_MAP_LOCAL_0, TIMEOFDAY_MORNING, TIMEOFDAY_TWILIGHT, Route222_SetPolicemanThomasNoBattle
-    GoToIfInRange VAR_MAP_LOCAL_0, TIMEOFDAY_NIGHT, TIMEOFDAY_LATE_NIGHT, Route222_SetPolicemanThomasBattle
-    End
-
-Route222_SetPolicemanThomasNoBattle:
-    ClearFlag FLAG_HIDE_ROUTE_222_POLICEMAN_THOMAS_NO_BATTLE
-    SetFlag FLAG_HIDE_ROUTE_222_POLICEMAN_THOMAS
-    End
-
-Route222_SetPolicemanThomasBattle:
     ClearFlag FLAG_HIDE_ROUTE_222_POLICEMAN_THOMAS
     SetFlag FLAG_HIDE_ROUTE_222_POLICEMAN_THOMAS_NO_BATTLE
     End

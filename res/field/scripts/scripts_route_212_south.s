@@ -15,17 +15,6 @@
     ScriptEntryEnd
 
 Route212South_OnTransition:
-    GetTimeOfDay VAR_MAP_LOCAL_0
-    GoToIfInRange VAR_MAP_LOCAL_0, TIMEOFDAY_MORNING, TIMEOFDAY_TWILIGHT, Route212South_SetPolicemanNoBattle
-    GoToIfInRange VAR_MAP_LOCAL_0, TIMEOFDAY_NIGHT, TIMEOFDAY_LATE_NIGHT, Route212South_SetPolicemanBattle
-    End
-
-Route212South_SetPolicemanNoBattle:
-    ClearFlag FLAG_HIDE_ROUTE_212_SOUTH_POLICEMAN_DANNY_NO_BATTLE
-    SetFlag FLAG_HIDE_ROUTE_212_SOUTH_POLICEMAN_DANNY
-    End
-
-Route212South_SetPolicemanBattle:
     ClearFlag FLAG_HIDE_ROUTE_212_SOUTH_POLICEMAN_DANNY
     SetFlag FLAG_HIDE_ROUTE_212_SOUTH_POLICEMAN_DANNY_NO_BATTLE
     End
