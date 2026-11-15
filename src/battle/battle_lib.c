@@ -9872,7 +9872,7 @@ int BattleSystem_ApplyFinalDamageModifiers(BattleSystem *battleSys, BattleContex
     }
 
     if (heldItemEffect == HOLD_EFFECT_BOOST_REPEATED) {
-        damage = damage * (100 + heldItemPower * battleCtx->battleMons[attacker].moveEffectsData.metronomeTurns) / 100;
+        damage = damage * (100 + heldItemPower * (int)battleCtx->battleMons[attacker].moveEffectsData.metronomeTurns) / 100;
     }
 
     if (battleCtx->battleMons[attacker].moveEffectsData.meFirst) {
