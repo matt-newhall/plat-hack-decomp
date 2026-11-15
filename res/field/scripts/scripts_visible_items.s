@@ -1875,7 +1875,7 @@ VisibleItems_Route204North_Awakening:
     End
 
 VisibleItems_Route203_XDefense:
-    SetVar VAR_0x8008, ITEM_X_DEFENSE
+    SetVar VAR_0x8008, ITEM_NUGGET
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End
