@@ -222,7 +222,7 @@ EternaForest_JulienTrainerCount:
     LockAll
     FacePlayer
     GoToIfSet FLAG_ETERNA_FOREST_PROMOTIONAL_ITEM_RECIEVED, EternaForest_PromotionalItemRecieved
-    SetVar VAR_JULIEN_TRAINERS_REMAINING 8
+    SetVar VAR_JULIEN_TRAINERS_REMAINING 9
     SetVar VAR_PROMOTIONAL_TRAINERS_COUNTED 0
     GoTo EternaForest_CountTrainers
 
@@ -235,6 +235,7 @@ EternaForest_CountTrainers:
     GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 5, EternaForest_CheckPsychicKody
     GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 6, EternaForest_CheckBugCatcherPhillip
     GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 7, EternaForest_CheckBugCatcherJack
+    GoToIfEq VAR_PROMOTIONAL_TRAINERS_COUNTED, 8, EternaForest_CheckYoungsterSheldon
     GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 1, EternaForest_JulienTrainerCountSingular
     GoToIfEq VAR_JULIEN_TRAINERS_REMAINING, 0, EternaForest_WonPromotional
     BufferNumber 0, VAR_JULIEN_TRAINERS_REMAINING
@@ -336,6 +337,12 @@ EternaForest_CheckBugCatcherPhillip:
 EternaForest_CheckBugCatcherJack:
     CheckTrainerFlag TRAINER_BUG_CATCHER_JACK
     GoToIfDefeated TRAINER_BUG_CATCHER_JACK, EternaForest_PromotionalTrainerDefeated
+    AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
+    GoTo EternaForest_CountTrainers
+
+EternaForest_CheckYoungsterSheldon:
+    CheckTrainerFlag TRAINER_YOUNGSTER_SHELDON
+    GoToIfDefeated TRAINER_YOUNGSTER_SHELDON, EternaForest_PromotionalTrainerDefeated
     AddVar VAR_PROMOTIONAL_TRAINERS_COUNTED 1
     GoTo EternaForest_CountTrainers
 

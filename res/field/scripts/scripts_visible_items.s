@@ -1839,7 +1839,7 @@ VisibleItems_OldChateauBackEastRoom_TM65:
     End
 
 VisibleItems_EternaForest_Potion:
-    SetVar VAR_0x8008, ITEM_POTION
+    SetVar VAR_0x8008, ITEM_ABILITY_CAPSULE
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

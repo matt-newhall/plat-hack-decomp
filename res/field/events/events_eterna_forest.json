@@ -81,31 +81,31 @@
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_PSYCHIC_KODY",
-            "initial_dir": 1,
+            "initial_dir": 0,
             "data": [
-                6
+                7
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
             "x": 84,
-            "z": 57,
+            "z": 65,
             "y": 0
         },
         {
             "id": "LOCALID_PSYCHIC_LINDSEY",
             "graphics_id": "OBJ_EVENT_GFX_PSYCHIC",
-            "movement_type": "MOVEMENT_TYPE_LOOK_SOUTH",
+            "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_PSYCHIC_LINDSEY",
-            "initial_dir": 1,
+            "initial_dir": 2,
             "data": [
-                2
+                8
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 84,
-            "z": 83,
+            "x": 57,
+            "z": 78,
             "y": 0
         },
         {
@@ -153,8 +153,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 15,
-            "z": 81,
+            "x": 66,
+            "z": 86,
             "y": 0
         },
         {
@@ -168,8 +168,8 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 41,
-            "z": 59,
+            "x": 15,
+            "z": 81,
             "y": 0
         },
         {
@@ -235,18 +235,18 @@
         {
             "id": "LOCALID_PSYCHIC_ELIJAH",
             "graphics_id": "OBJ_EVENT_GFX_PSYCHIC",
-            "movement_type": "MOVEMENT_TYPE_LOOK_NORTH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_PSYCHIC_ELIJAH",
-            "initial_dir": 0,
+            "initial_dir": 1,
             "data": [
-                2
+                6
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
             "x": 84,
-            "z": 86,
+            "z": 57,
             "y": 0
         },
         {
@@ -256,14 +256,31 @@
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "0",
             "script": "TRAINER_PSYCHIC_RACHAEL",
-            "initial_dir": 0,
+            "initial_dir": 3,
             "data": [
-                6
+                3
             ],
             "movement_range_x": 0,
             "movement_range_z": 0,
             "x": 84,
-            "z": 64,
+            "z": 70,
+            "y": 0
+        },
+        {
+            "id": "LOCALID_YOUNGSTER_SHELDON",
+            "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+            "movement_type": "MOVEMENT_TYPE_NONE",
+            "trainer_type": "TRAINER_TYPE_NORMAL",
+            "hidden_flag": "0",
+            "script": "TRAINER_YOUNGSTER_SHELDON",
+            "initial_dir": 1,
+            "data": [
+                3
+            ],
+            "movement_range_x": 0,
+            "movement_range_z": 0,
+            "x": 84,
+            "z": 82,
             "y": 0
         },
         {
@@ -367,7 +384,7 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 36,
+            "x": 35,
             "z": 64,
             "y": 0
         },
@@ -382,7 +399,7 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 36,
+            "x": 35,
             "z": 65,
             "y": 0
         },
@@ -408,46 +425,16 @@
             "trainer_type": "TRAINER_TYPE_NONE",
             "hidden_flag": "FLAG_HIDE_FUEGO_IRONWORKS_INTERVIEWERS",
             "script": 13,
-            "initial_dir": 2,
+            "initial_dir": 1,
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
             "x": 85,
-            "z": 35,
+            "z": 46,
             "y": 0
         },
         {
             "id": "LOCALID_CUT_TREE_6",
-            "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-            "movement_type": "MOVEMENT_TYPE_NONE",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_OBSTACLE_6",
-            "script": 10000,
-            "initial_dir": 0,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 86,
-            "z": 66,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_CUT_TREE_7",
-            "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
-            "movement_type": "MOVEMENT_TYPE_NONE",
-            "trainer_type": "TRAINER_TYPE_NONE",
-            "hidden_flag": "FLAG_HIDE_OBSTACLE_7",
-            "script": 10000,
-            "initial_dir": 0,
-            "data": [],
-            "movement_range_x": 0,
-            "movement_range_z": 0,
-            "x": 87,
-            "z": 67,
-            "y": 0
-        },
-        {
-            "id": "LOCALID_CUT_TREE_8",
             "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -462,7 +449,7 @@
             "y": 0
         },
         {
-            "id": "LOCALID_CUT_TREE_9",
+            "id": "LOCALID_CUT_TREE_7",
             "graphics_id": "OBJ_EVENT_GFX_CUT_TREE",
             "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NONE",
@@ -472,7 +459,7 @@
             "data": [],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 74,
+            "x": 73,
             "z": 63,
             "y": 0
         }
