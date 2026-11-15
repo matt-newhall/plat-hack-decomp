@@ -1983,9 +1983,9 @@ Expert_Main:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CALL_RANDOM_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_INFATUATE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_PREVENT_STATUS, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_TORMENT, Expert_StatusMoveBonus
-    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER, Expert_StatusMoveBonus
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER, Expert_Setup
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_USE_RANDOM_ALLY_MOVE, Expert_StatusMoveBonus
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_CONFUSE_ALL, Expert_StatusMoveBonus
 
@@ -2281,6 +2281,8 @@ Expert_Setup_Classify:
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_ATK_SP_DEF_UP, Expert_SetupSplitSpecial
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_QUIVER_DANCE, Expert_SetupSplitSpecial
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP, Expert_SetupDefensive
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER, Expert_SetupDefensive
+    IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_2, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_DEF_UP_3, Expert_SetupDefensive
     IfCurrentMoveEffectEqualTo BATTLE_EFFECT_SP_DEF_UP_2, Expert_SetupDefensive
@@ -2375,6 +2377,7 @@ Expert_SetupDefensive_ScorePlus2Again:
 
 Expert_SetupDefensive_DefenseEffects:
     TableEntry BATTLE_EFFECT_DEF_UP
+    TableEntry BATTLE_EFFECT_DEF_UP_DOUBLE_ROLLOUT_POWER
     TableEntry BATTLE_EFFECT_DEF_UP_2
     TableEntry BATTLE_EFFECT_DEF_UP_3
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
@@ -2387,6 +2390,7 @@ Expert_SetupDefensive_DefenseEffects:
 
 Expert_SetupDefensive_SpDefenseEffects:
     TableEntry BATTLE_EFFECT_SP_DEF_UP_2
+    TableEntry BATTLE_EFFECT_SP_DEF_UP_DOUBLE_ELECTRIC_POWER
     TableEntry BATTLE_EFFECT_DEF_SPD_UP
     TableEntry BATTLE_EFFECT_STOCKPILE
     TableEntry BATTLE_EFFECT_SP_ATK_SP_DEF_UP
