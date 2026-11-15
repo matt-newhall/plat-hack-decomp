@@ -34,7 +34,7 @@
     "icon_palette": 1,
     "learnset": {
         "by_level": [
-            [ 1, "MOVE_MACH_PUNCH" ],
+            [ 1, "MOVE_COUNTER" ],
             [ 1, "MOVE_STUN_SPORE" ],
             [ 1, "MOVE_TACKLE" ],
             [ 1, "MOVE_ABSORB" ],
@@ -45,7 +45,7 @@
             [ 15, "MOVE_HEADBUTT" ],
             [ 19, "MOVE_FEINT" ],
             [ 21, "MOVE_FAKE_TEARS" ],
-            [ 23, "MOVE_COUNTER" ],
+            [ 23, "MOVE_MACH_PUNCH" ],
             [ 25, "MOVE_MAGICAL_LEAF" ],
             [ 27, "MOVE_CHARM" ],
             [ 29, "MOVE_FORCE_PALM" ],
