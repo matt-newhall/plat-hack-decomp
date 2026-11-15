@@ -61,21 +61,21 @@
         {
             "type": "TRMSG_PRE_BATTLE",
             "en_US": [
-                "I don't need help getting out of here.\n",
-                "I'm a child prodigy, I can do it.\r"
+                "I don’t need help getting out of here.\n",
+                "I’m a child prodigy, I can do it.\r"
             ]
         },
         {
             "type": "TRMSG_DEFEAT",
             "en_US": [
-                "I'm not giving up,\n",
-                "I'm strategically surrendering."
+                "I’m not giving up,\n",
+                "I’m strategically surrendering."
             ]
         },
         {
             "type": "TRMSG_POST_BATTLE",
             "en_US": [
-                "Guess I'll just stay here forever.\n",
+                "Guess I’ll just stay here forever.\n",
                 "At least I have some brisket to eat."
             ]
         }
