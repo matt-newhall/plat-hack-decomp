@@ -15,14 +15,14 @@
             "level": 20,
             "item": "ITEM_ROCKY_HELMET",
             "moves": [
-                "MOVE_DISARMING_VOICE",
+                "MOVE_EGG_BOMB",
                 "MOVE_COPYCAT",
                 "MOVE_HELPING_HAND",
                 "MOVE_LIFE_DEW"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_MODEST",
+            "nature": "NATURE_ADAMANT",
             "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
@@ -38,7 +38,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_BRAVE",
             "ability": "TRAINER_ABILITY_2"
         },
         {
