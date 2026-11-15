@@ -92,7 +92,7 @@
     "evolutions": [
         [
             "EVO_LEVEL",
-            35,
+            33,
             "SPECIES_VIBRAVA"
         ]
     ],

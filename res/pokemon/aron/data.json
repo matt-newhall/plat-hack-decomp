@@ -104,7 +104,7 @@
     "evolutions": [
         [
             "EVO_LEVEL",
-            32,
+            28,
             "SPECIES_LAIRON"
         ]
     ],

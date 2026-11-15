@@ -83,7 +83,7 @@
     "evolutions": [
         [
             "EVO_LEVEL",
-            42,
+            30,
             "SPECIES_GLALIE"
         ],
         [

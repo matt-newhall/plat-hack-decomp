@@ -89,7 +89,7 @@
     "evolutions": [
         [
             "EVO_LEVEL",
-            40,
+            28,
             "SPECIES_RAPIDASH"
         ]
     ],

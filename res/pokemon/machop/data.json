@@ -106,7 +106,7 @@
     "evolutions": [
         [
             "EVO_LEVEL",
-            28,
+            25,
             "SPECIES_MACHOKE"
         ]
     ],
