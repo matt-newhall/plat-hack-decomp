@@ -26,15 +26,15 @@
             "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_WARTORTLE",
+            "species": "SPECIES_MARSHTOMP",
             "form": 0,
             "level": 19,
             "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_ICE_SPINNER",
                 "MOVE_WATER_PULSE",
-                "MOVE_FLIP_TURN",
-                "MOVE_BRICK_BREAK"
+                "MOVE_MUD_SHOT",
+                "MOVE_ICE_PUNCH",
+                "MOVE_REST"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
