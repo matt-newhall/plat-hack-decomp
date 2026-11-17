@@ -47,27 +47,31 @@
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "FLAG_HIDE_ETERNA_CITY_GALACTIC_GRUNTS",
             "script": "TRAINER_GALACTIC_GRUNT_TEAM_GALACTIC_ETERNA_BUILDING_2F_2",
-            "initial_dir": 2,
-            "data": [],
+            "initial_dir": 1,
+            "data": [
+                2
+            ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 13,
-            "z": 8,
+            "x": 14,
+            "z": 10,
             "y": 0
         },
         {
             "id": "LOCALID_GALACTIC_GRUNT_1",
             "graphics_id": "OBJ_EVENT_GFX_GRUNT_M",
-            "movement_type": "MOVEMENT_TYPE_LOOK_NORTH",
+            "movement_type": "MOVEMENT_TYPE_NONE",
             "trainer_type": "TRAINER_TYPE_NORMAL",
             "hidden_flag": "FLAG_HIDE_ETERNA_CITY_GALACTIC_GRUNTS",
             "script": "TRAINER_GALACTIC_GRUNT_TEAM_GALACTIC_ETERNA_BUILDING_2F_1",
-            "initial_dir": 0,
-            "data": [],
+            "initial_dir": 3,
+            "data": [
+                2
+            ],
             "movement_range_x": 0,
             "movement_range_z": 0,
-            "x": 3,
-            "z": 6,
+            "x": 6,
+            "z": 12,
             "y": 0
         },
         {
