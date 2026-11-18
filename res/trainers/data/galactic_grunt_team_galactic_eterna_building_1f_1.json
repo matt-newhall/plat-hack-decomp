@@ -10,22 +10,52 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_PERSIAN",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 24,
+            "item": "ITEM_KINGS_ROCK",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_FURY_SWIPES",
+                "MOVE_METAL_CLAW",
+                "MOVE_TRAILBLAZE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_STUNKY",
+            "species": "SPECIES_DELCATTY",
             "form": 0,
-            "level": 17,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 24,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_GIGA_IMPACT",
+                "MOVE_SING",
+                "MOVE_BABY_DOLL_EYES",
+                "MOVE_WORK_UP"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_ESPEON",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_PETAYA_BERRY",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_FUTURE_SIGHT",
+                "MOVE_SIGNAL_BEAM",
+                "MOVE_HELPING_HAND"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_HASTY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [

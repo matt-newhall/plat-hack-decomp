@@ -10,22 +10,50 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_ZUBAT",
+            "species": "SPECIES_GRANBULL",
             "form": 0,
-            "level": 16,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 24,
+            "item": "ITEM_ASSAULT_VEST",
+            "moves": [
+                "MOVE_PLAY_ROUGH",
+                "MOVE_ICE_FANG",
+                "MOVE_FIRE_FANG",
+                "MOVE_THUNDER_FANG"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH"
         },
         {
-            "species": "SPECIES_GLAMEOW",
+            "species": "SPECIES_MIGHTYENA",
             "form": 0,
-            "level": 18,
-            "item": null,
-            "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "level": 24,
+            "item": "ITEM_MUSCLE_BAND",
+            "moves": [
+                "MOVE_BITE",
+                "MOVE_HOWL",
+                "MOVE_SUPER_FANG",
+                "MOVE_PSYCHIC_FANGS"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
+        },
+        {
+            "species": "SPECIES_UMBREON",
+            "form": 0,
+            "level": 24,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_FAINT_ATTACK",
+                "MOVE_CURSE",
+                "MOVE_SUBSTITUTE",
+                "MOVE_MOONLIGHT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [
