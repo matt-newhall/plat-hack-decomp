@@ -12,7 +12,7 @@
         {
             "species": "SPECIES_GABITE",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_ROCKY_HELMET",
             "moves": [
                 "MOVE_BREAKING_SWIPE",
@@ -28,7 +28,7 @@
         {
             "species": "SPECIES_CROAGUNK",
             "form": 0,
-            "level": 24,
+            "level": 25,
             "item": "ITEM_PAYAPA_BERRY",
             "moves": [
                 "MOVE_POISON_JAB",

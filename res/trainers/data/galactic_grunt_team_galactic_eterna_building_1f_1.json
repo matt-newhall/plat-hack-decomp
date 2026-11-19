@@ -15,10 +15,10 @@
             "level": 24,
             "item": "ITEM_KINGS_ROCK",
             "moves": [
-                "MOVE_FAKE_OUT",
+                "MOVE_FAINT_ATTACK",
                 "MOVE_FURY_SWIPES",
                 "MOVE_METAL_CLAW",
-                "MOVE_TRAILBLAZE"
+                "MOVE_CUT"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
