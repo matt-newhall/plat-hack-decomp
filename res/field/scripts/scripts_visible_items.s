@@ -1917,7 +1917,7 @@ VisibleItems_MtCoronet1FNorthRoom1_IceHeal:
     End
 
 VisibleItems_TeamGalacticEternaBuilding2F_XSpeed:
-    SetVar VAR_0x8008, ITEM_X_SPEED
+    SetVar VAR_0x8008, ITEM_ULTRA_BALL
     SetVar VAR_0x8009, 1
     GoTo VisibleItems_TryGiveItem
     End

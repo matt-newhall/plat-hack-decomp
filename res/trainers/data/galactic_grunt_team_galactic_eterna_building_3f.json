@@ -13,7 +13,7 @@
             "species": "SPECIES_MR_MIME",
             "form": 0,
             "level": 25,
-            "item": "ITEM_FOCUS_SASH",
+            "item": "ITEM_IRON_BALL",
             "moves": [
                 "MOVE_DAZZLING_GLEAM",
                 "MOVE_TRICK_ROOM",
@@ -22,7 +22,7 @@
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_BOLD",
+            "nature": "NATURE_RELAXED",
             "ability": "TRAINER_ABILITY_2"
         },
         {
