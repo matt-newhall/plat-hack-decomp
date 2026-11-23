@@ -60,7 +60,7 @@
             "moves": [
                 "MOVE_MEGA_DRAIN",
                 "MOVE_QUICK_ATTACK",
-                "MOVE_PECK",
+                "MOVE_FURY_CUTTER",
                 "MOVE_LEECH_SEED"
             ],
             "iv_scale": 255,
