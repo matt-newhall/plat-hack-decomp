@@ -43,5 +43,20 @@
             "ability": "TRAINER_ABILITY_1"
         }
     ],
-    "messages": []
+    "messages": [
+        {
+            "type": "TRMSG_FIRST_DAMAGE",
+            "en_US": [
+                "Looks like you know what you’re doing.\n",
+                "But we’re just getting warmed up!"
+            ]
+        },
+        {
+            "type": "TRMSG_DEFEAT",
+            "en_US": [
+                "Oh...\n",
+                "I lost?\n"
+            ]
+        }
+    ]
 }
