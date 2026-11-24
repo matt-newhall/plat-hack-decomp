@@ -15,10 +15,10 @@
             "level": 24,
             "item": "ITEM_ASSAULT_VEST",
             "moves": [
-                "MOVE_SUPER_FANG",
-                "MOVE_CRUSH_CLAW",
+                "MOVE_POISON_JAB",
+                "MOVE_AERIAL_ACE",
                 "MOVE_HIGH_HORSEPOWER",
-                "MOVE_AERIAL_ACE"
+                "MOVE_SUPER_FANG"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -32,25 +32,25 @@
             "item": "ITEM_LEFTOVERS",
             "moves": [
                 "MOVE_BODY_SLAM",
-                "MOVE_LAVA_PLUME",
+                "MOVE_FIRE_SPIN",
                 "MOVE_BODY_PRESS",
                 "MOVE_WILL_O_WISP"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_RELAXED",
+            "nature": "NATURE_DOCILE",
             "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_ROTOM",
             "form": 0,
             "level": 24,
-            "item": "ITEM_SPELL_TAG",
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_THUNDERBOLT",
-                "MOVE_SUBSTITUTE",
+                "MOVE_SHOCK_WAVE",
+                "MOVE_THUNDER_WAVE",
                 "MOVE_HEX",
-                "MOVE_WILL_O_WISP"
+                "MOVE_EERIE_IMPULSE"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -63,13 +63,13 @@
             "item": "ITEM_ROCKY_HELMET",
             "moves": [
                 "MOVE_ZEN_HEADBUTT",
-                "MOVE_METEOR_MASH",
+                "MOVE_SMART_STRIKE",
                 "MOVE_BULLET_PUNCH",
                 "MOVE_MAGNET_RISE"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_SERIOUS",
             "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
@@ -78,7 +78,7 @@
             "level": 25,
             "item": "ITEM_CHARTI_BERRY",
             "moves": [
-                "MOVE_MACH_PUNCH",
+                "MOVE_NIGHT_SLASH",
                 "MOVE_WING_ATTACK",
                 "MOVE_BRICK_BREAK",
                 "MOVE_LUNGE"
