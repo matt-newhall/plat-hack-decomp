@@ -1407,6 +1407,7 @@ static void PrintPokemonAttackStat(BattleParty *battleParty, u32 partyIndex)
     String *formattedString;
     u8 stringWidth;
     u8 xOffset;
+    s8 affinity = Pokemon_GetStatAffinityOf(Pokemon_GetNature(pokemon->mon), STAT_ATTACK);
 
     Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_ATTACK_LABEL], FONT_SYSTEM, string, 0, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(15, 14, 0), NULL);
     String_Free(string);
@@ -1420,7 +1421,7 @@ static void PrintPokemonAttackStat(BattleParty *battleParty, u32 partyIndex)
     stringWidth = Font_CalcStringWidth(FONT_SYSTEM, formattedString, 0);
     xOffset = Window_GetWidth(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_ATTACK + windowIndexOffset]) * TILE_WIDTH_PIXELS - stringWidth;
 
-    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_ATTACK + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
+    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_ATTACK + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, affinity > 0 ? TEXT_COLOR(3, 4, 0) : affinity < 0 ? TEXT_COLOR(7, 8, 0) : TEXT_COLOR(1, 2, 0), NULL);
     String_Free(string);
     String_Free(formattedString);
     Window_ScheduleCopyToVRAM(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_ATTACK_LABEL]);
@@ -1435,6 +1436,7 @@ static void PrintPokemonDefenseStat(BattleParty *battleParty, u32 partyIndex)
     String *formattedString;
     u8 stringWidth;
     u8 xOffset;
+    s8 affinity = Pokemon_GetStatAffinityOf(Pokemon_GetNature(pokemon->mon), STAT_DEFENSE);
 
     Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_DEFENSE_LABEL], FONT_SYSTEM, string, 0, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(15, 14, 0), NULL);
     String_Free(string);
@@ -1448,7 +1450,7 @@ static void PrintPokemonDefenseStat(BattleParty *battleParty, u32 partyIndex)
     stringWidth = Font_CalcStringWidth(FONT_SYSTEM, formattedString, 0);
     xOffset = Window_GetWidth(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_DEFENSE + windowIndexOffset]) * TILE_WIDTH_PIXELS - stringWidth;
 
-    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_DEFENSE + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
+    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_DEFENSE + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, affinity > 0 ? TEXT_COLOR(3, 4, 0) : affinity < 0 ? TEXT_COLOR(7, 8, 0) : TEXT_COLOR(1, 2, 0), NULL);
     String_Free(string);
     String_Free(formattedString);
     Window_ScheduleCopyToVRAM(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_DEFENSE_LABEL]);
@@ -1463,6 +1465,7 @@ static void PrintPokemonSpeedStat(BattleParty *battleParty, u32 partyIndex)
     String *formattedString;
     u8 stringWidth;
     u8 xOffset;
+    s8 affinity = Pokemon_GetStatAffinityOf(Pokemon_GetNature(pokemon->mon), STAT_SPEED);
 
     Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SPEED_LABEL], FONT_SYSTEM, string, 0, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(15, 14, 0), NULL);
     String_Free(string);
@@ -1476,7 +1479,7 @@ static void PrintPokemonSpeedStat(BattleParty *battleParty, u32 partyIndex)
     stringWidth = Font_CalcStringWidth(FONT_SYSTEM, formattedString, 0);
     xOffset = Window_GetWidth(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SPEED + windowIndexOffset]) * TILE_WIDTH_PIXELS - stringWidth;
 
-    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SPEED + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
+    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SPEED + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, affinity > 0 ? TEXT_COLOR(3, 4, 0) : affinity < 0 ? TEXT_COLOR(7, 8, 0) : TEXT_COLOR(1, 2, 0), NULL);
     String_Free(string);
     String_Free(formattedString);
     Window_ScheduleCopyToVRAM(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SPEED_LABEL]);
@@ -1491,6 +1494,7 @@ static void PrintPokemonSpAtkStat(BattleParty *battleParty, u32 partyIndex)
     String *formattedString;
     u8 stringWidth;
     u8 xOffset;
+    s8 affinity = Pokemon_GetStatAffinityOf(Pokemon_GetNature(pokemon->mon), STAT_SPECIAL_ATTACK);
 
     Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_ATK_LABEL], FONT_SYSTEM, string, 0, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(15, 14, 0), NULL);
     String_Free(string);
@@ -1504,7 +1508,7 @@ static void PrintPokemonSpAtkStat(BattleParty *battleParty, u32 partyIndex)
     stringWidth = Font_CalcStringWidth(FONT_SYSTEM, formattedString, 0);
     xOffset = Window_GetWidth(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_ATK + windowIndexOffset]) * TILE_WIDTH_PIXELS - stringWidth;
 
-    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_ATK + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
+    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_ATK + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, affinity > 0 ? TEXT_COLOR(3, 4, 0) : affinity < 0 ? TEXT_COLOR(7, 8, 0) : TEXT_COLOR(1, 2, 0), NULL);
     String_Free(string);
     String_Free(formattedString);
     Window_ScheduleCopyToVRAM(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_ATK_LABEL]);
@@ -1519,6 +1523,7 @@ static void PrintPokemonSpDefStat(BattleParty *battleParty, u32 partyIndex)
     String *formattedString;
     u8 stringWidth;
     u8 xOffset;
+    s8 affinity = Pokemon_GetStatAffinityOf(Pokemon_GetNature(pokemon->mon), STAT_SPECIAL_DEFENSE);
 
     Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_DEF_LABEL], FONT_SYSTEM, string, 0, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(15, 14, 0), NULL);
     String_Free(string);
@@ -1532,7 +1537,7 @@ static void PrintPokemonSpDefStat(BattleParty *battleParty, u32 partyIndex)
     stringWidth = Font_CalcStringWidth(FONT_SYSTEM, formattedString, 0);
     xOffset = Window_GetWidth(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_DEF + windowIndexOffset]) * TILE_WIDTH_PIXELS - stringWidth;
 
-    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_DEF + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, TEXT_COLOR(1, 2, 0), NULL);
+    Text_AddPrinterWithParamsAndColor(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_DEF + windowIndexOffset], FONT_SYSTEM, formattedString, xOffset, 0, TEXT_SPEED_NO_TRANSFER, affinity > 0 ? TEXT_COLOR(3, 4, 0) : affinity < 0 ? TEXT_COLOR(7, 8, 0) : TEXT_COLOR(1, 2, 0), NULL);
     String_Free(string);
     String_Free(formattedString);
     Window_ScheduleCopyToVRAM(&battleParty->windows[BATTLE_POKEMON_SUMMARY_SCREEN_WINDOW_SP_DEF_LABEL]);
