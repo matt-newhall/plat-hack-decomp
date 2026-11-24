@@ -947,9 +947,9 @@ static const ChoiceInfo sYesNoChoiceInfos[] = {
 };
 
 static const ChoiceInfo sInfoChoiceInfos[] = {
+    { .textID = RowanIntro_Text_ChoiceNoInfo, .choiceIndex = 3 },
     { .textID = RowanIntro_Text_ChoiceControlInfo, .choiceIndex = 1 },
-    { .textID = RowanIntro_Text_ChoiceAdventureInfo, .choiceIndex = 2 },
-    { .textID = RowanIntro_Text_ChoiceNoInfo, .choiceIndex = 3 }
+    { .textID = RowanIntro_Text_ChoiceAdventureInfo, .choiceIndex = 2 }
 };
 
 static const ChoiceInfo sRivalNameChoiceInfos[] = {
