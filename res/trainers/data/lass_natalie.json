@@ -10,9 +10,24 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BIDOOF",
+            "species": "SPECIES_STARLY",
             "form": 0,
             "level": 5,
+            "item": null,
+            "moves": [
+                "MOVE_WING_ATTACK",
+                "MOVE_SAND_ATTACK",
+                "MOVE_DOUBLE_TEAM"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_NAIVE",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_BIDOOF",
+            "form": 0,
+            "level": 6,
             "item": null,
             "moves": [
                 "MOVE_TACKLE",
@@ -26,28 +41,13 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_STARLY",
-            "form": 0,
-            "level": 6,
-            "item": null,
-            "moves": [
-                "MOVE_WING_ATTACK",
-                "MOVE_SAND_ATTACK",
-                "MOVE_DOUBLE_TEAM"
-            ],
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_NAIVE",
-            "ability": "TRAINER_ABILITY_1"
-        },
-        {
             "species": "SPECIES_WINGULL",
             "form": 0,
             "level": 7,
             "item": null,
             "moves": [
                 "MOVE_WATER_GUN",
-                "MOVE_ROCK_SMASH",
+                "MOVE_QUICK_ATTACK",
                 "MOVE_TAIL_WHIP",
                 "MOVE_GROWL"
             ],

@@ -15,7 +15,7 @@
             "level": 10,
             "item": "ITEM_MUSCLE_BAND",
             "moves": [
-                "MOVE_ARM_THRUST",
+                "MOVE_FORCE_PALM",
                 "MOVE_FAKE_OUT",
                 "MOVE_ROCK_THROW",
                 "MOVE_DETECT"

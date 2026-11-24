@@ -31,9 +31,9 @@
             "level": 6,
             "item": null,
             "moves": [
-                "MOVE_PIN_MISSILE",
+                "MOVE_BUG_BITE",
                 "MOVE_IRON_DEFENSE",
-                "MOVE_SLUDGE"
+                "MOVE_ELECTROWEB"
             ],
             "iv_scale": 255,
             "ball_seal": 0,

@@ -29,12 +29,12 @@
             "species": "SPECIES_KECLEON",
             "form": 0,
             "level": 18,
-            "item": "ITEM_KINGS_ROCK",
+            "item": "ITEM_SILK_SCARF",
             "moves": [
-                "MOVE_FURY_SWIPES",
+                "MOVE_SLASH",
                 "MOVE_CAMOUFLAGE",
                 "MOVE_FAKE_OUT",
-                "MOVE_SHADOW_SNEAK"
+                "MOVE_GRASS_KNOT"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -55,6 +55,22 @@
             "iv_scale": 255,
             "ball_seal": 0,
             "nature": "NATURE_RASH",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_ILLUMISE",
+            "form": 0,
+            "level": 19,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_OMINOUS_WIND",
+                "MOVE_MOONLIGHT",
+                "MOVE_FAKE_TEARS"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SASSY",
             "ability": "TRAINER_ABILITY_2"
         }
     ],

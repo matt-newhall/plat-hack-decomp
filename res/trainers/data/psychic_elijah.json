@@ -17,7 +17,7 @@
             "moves": [
                 "MOVE_WATER_PULSE",
                 "MOVE_PSYBEAM",
-                "MOVE_GRASS_KNOT",
+                "MOVE_ME_FIRST",
                 "MOVE_YAWN"
             ],
             "iv_scale": 255,
@@ -31,9 +31,9 @@
             "level": 19,
             "item": "ITEM_TWISTEDSPOON",
             "moves": [
-                "MOVE_PSYBEAM",
+                "MOVE_CONFUSION",
                 "MOVE_DISABLE",
-                "MOVE_FUTURE_SIGHT",
+                "MOVE_ENERGY_BALL",
                 "MOVE_DAZZLING_GLEAM"
             ],
             "iv_scale": 255,

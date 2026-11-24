@@ -15,10 +15,10 @@
             "level": 20,
             "item": "ITEM_FOCUS_SASH",
             "moves": [
-                "MOVE_CONFUSE_RAY",
+                "MOVE_SLUDGE_WAVE",
                 "MOVE_SHADOW_BALL",
                 "MOVE_FOUL_PLAY",
-                "MOVE_SLUDGE_WAVE"
+                "MOVE_NASTY_PLOT"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -33,7 +33,7 @@
                 "MOVE_POISON_TAIL",
                 "MOVE_SCREECH",
                 "MOVE_PSYCHIC_FANGS",
-                "MOVE_BITE"
+                "MOVE_LEECH_LIFE"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -44,12 +44,12 @@
             "species": "SPECIES_SHUPPET",
             "form": 0,
             "level": 20,
-            "item": "ITEM_EVIOLITE",
+            "item": "ITEM_BERRY_JUICE",
             "moves": [
                 "MOVE_OMINOUS_WIND",
-                "MOVE_SUCKER_PUNCH",
-                "MOVE_ICY_WIND",
-                "MOVE_NASTY_PLOT"
+                "MOVE_HYPER_VOICE",
+                "MOVE_CURSE",
+                "MOVE_MEAN_LOOK"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -62,9 +62,9 @@
             "level": 19,
             "item": "ITEM_METAL_COAT",
             "moves": [
-                "MOVE_PSYBEAM",
+                "MOVE_EXTRASENSORY",
                 "MOVE_SMART_STRIKE",
-                "MOVE_SIGNAL_BEAM",
+                "MOVE_SHOCK_WAVE",
                 "MOVE_FAKE_TEARS"
             ],
             "iv_scale": 255,
