@@ -6706,7 +6706,9 @@ static BOOL BtlCmd_TryAssist(BattleSystem *battleSys, BattleContext *battleCtx)
             && Pokemon_GetValue(mon, MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG) {
             activeBattler = -1;
             for (b = 0; b < maxBattlers; b++) {
-                if (battleCtx->selectedPartySlot[b] == i && battleCtx->battleMons[b].curHP > 0) {
+                if (BattleSystem_GetParty(battleSys, b) == BattleSystem_GetParty(battleSys, battleCtx->attacker)
+                    && battleCtx->selectedPartySlot[b] == i
+                    && battleCtx->battleMons[b].curHP > 0) {
                     activeBattler = b;
                     break;
                 }
