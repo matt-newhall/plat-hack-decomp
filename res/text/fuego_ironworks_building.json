@@ -4,19 +4,32 @@
     {
       "id": "FuegoIronworksBuilding_Text_FuegoChallenge",
       "en_US": [
-        "Mr. Fuego: Challenge dialogue"
+        "Mr. Fuego: Hmm?\n",
+        "A trainer, in my Ironworks?\r",
+        "Well thanks for stopping by!\r",
+        "I see that Gardenia’s gone and given\n",
+        "you the Forest Badge.\r",
+        "Oh? She said you could partner up\n",
+        "with Scyther over here?\r",
+        "All good with us. We’ve just finished\n",
+        "with the last haul of firewood for\f",
+        "the month, so you’re good to go!\r",
+        "But before that, I’d love to blaze\n",
+        "these Ironworks alive with a battle!"
       ]
     },
     {
       "id": "FuegoIronworksBuilding_Text_FuegoAccept",
       "en_US": [
-        "Mr. Fuego: Start fight dialogue"
+        "Mr. Fuego: That’s the spirit! Let’s\n",
+        "see if you can handle the heat!"
       ]
     },
     {
       "id": "FuegoIronworksBuilding_Text_FuegoDefeat",
       "en_US": [
-        "Mr. Fuego: Defeat dialogue"
+        "Mr. Fuego: Gwahaha! Burned out by a\n",
+        "youngster... What a battle!"
       ]
     },
     {
@@ -25,20 +38,24 @@
         "Mr. Fuego: Scyther is yours to call\n",
         "on out in the field.\r",
         "Whenever a tree blocks your path, just\n",
-        "give a whistle--it’ll come running to\f",
+        "give a whistle.\r",
+        "It’ll come running to\n",
         "Cut it down for you!"
       ]
     },
     {
       "id": "FuegoIronworksBuilding_Text_FuegoDecline",
       "en_US": [
-        "Mr. Fuego: Decline dialogue"
+        "Mr. Fuego: Not ready? No shame\n",
+        "in that.\r",
+        "Come back when you’ve warmed up."
       ]
     },
     {
       "id": "FuegoIronworksBuilding_Text_AlreadyBeaten",
       "en_US": [
-        "Mr. Fuego: Already beaten dialogue"
+        "Mr. Fuego: You’d better be treating\n",
+        "Scyther well out there!"
       ]
     },
     {
