@@ -4997,7 +4997,7 @@ static BOOL AI_HasAbsorbAbilityInParty(BattleSystem *battleSys, BattleContext *b
             for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                 move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-                if (move) {
+                if (move && MOVE_DATA(move).power) {
                     moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
                     effectiveness = 0;
@@ -5100,7 +5100,7 @@ static BOOL AI_HasPartyMemberWithSuperEffectiveMove(BattleSystem *battleSys, Bat
                 for (j = 0; j < LEARNED_MOVES_MAX; j++) {
                     move = Pokemon_GetValue(mon, MON_DATA_MOVE1 + j, NULL);
 
-                    if (move) {
+                    if (move && MOVE_DATA(move).power) {
                         moveType = Move_CalcVariableType(battleSys, battleCtx, mon, move);
 
                         effectiveness = 0;

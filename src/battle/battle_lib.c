@@ -1335,9 +1335,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler1Speed = battler1Speed * 15 / 10;
     }
 
-    if (battler1ItemEffect == HOLD_EFFECT_DITTO_SPEED_UP
-        && battleCtx->battleMons[battler1].species == SPECIES_DITTO) {
-        battler1Speed *= 2;
+    if (battler1ItemEffect == HOLD_EFFECT_DITTO_SPEED_UP) {
+        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler1, battleCtx->selectedPartySlot[battler1]);
+        u16 species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+
+        if (species == SPECIES_DITTO) {
+            battler1Speed *= 2;
+        }
     }
 
     if (battler1Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler1].status & MON_CONDITION_ANY)) {
@@ -1409,9 +1413,13 @@ u8 BattleSystem_CompareBattlerSpeed(BattleSystem *battleSys, BattleContext *batt
         battler2Speed = battler2Speed * 15 / 10;
     }
 
-    if (battler2ItemEffect == HOLD_EFFECT_DITTO_SPEED_UP
-        && battleCtx->battleMons[battler2].species == SPECIES_DITTO) {
-        battler2Speed *= 2;
+    if (battler2ItemEffect == HOLD_EFFECT_DITTO_SPEED_UP) {
+        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler2, battleCtx->selectedPartySlot[battler2]);
+        u16 species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+
+        if (species == SPECIES_DITTO) {
+            battler2Speed *= 2;
+        }
     }
 
     if (battler2Ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler2].status & MON_CONDITION_ANY)) {
@@ -9324,9 +9332,13 @@ int BattleSystem_CalcMoveDamage(BattleSystem *battleSys,
     if (defenderParams.heldItemEffect == HOLD_EFFECT_RAISE_SP_DEF_ONLY_STATUS_MOVES) {
         spDefenseStat = spDefenseStat * (100 + defenderParams.heldItemPower) / 100;
     }
-    if (defenderParams.heldItemEffect == HOLD_EFFECT_DITTO_DEF_UP
-        && defenderParams.species == SPECIES_DITTO) {
-        defenseStat *= 2;
+    if (defenderParams.heldItemEffect == HOLD_EFFECT_DITTO_DEF_UP) {
+        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, defender, battleCtx->selectedPartySlot[defender]);
+        u16 species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+
+        if (species == SPECIES_DITTO || defenderParams.species == SPECIES_DITTO) {
+            defenseStat *= 2;
+        }
     }
     if (attackerParams.heldItemEffect == HOLD_EFFECT_CUBONE_ATK_UP
         && (attackerParams.species == SPECIES_CUBONE || attackerParams.species == SPECIES_MAROWAK)) {
@@ -11092,9 +11104,13 @@ static u32 BattleAI_CalcEffectiveSpeed(BattleSystem *battleSys, BattleContext *b
         speed = speed * 15 / 10;
     }
 
-    if (itemEffect == HOLD_EFFECT_DITTO_SPEED_UP
-        && battleCtx->battleMons[battler].species == SPECIES_DITTO) {
-        speed *= 2;
+    if (itemEffect == HOLD_EFFECT_DITTO_SPEED_UP) {
+        Pokemon *mon = BattleSystem_GetPartyPokemon(battleSys, battler, battleCtx->selectedPartySlot[battler]);
+        u16 species = Pokemon_GetValue(mon, MON_DATA_SPECIES, NULL);
+
+        if (species == SPECIES_DITTO || battleCtx->battleMons[battler].species == SPECIES_DITTO) {
+            speed *= 2;
+        }
     }
 
     if (ability == ABILITY_QUICK_FEET && (battleCtx->battleMons[battler].status & MON_CONDITION_ANY)) {

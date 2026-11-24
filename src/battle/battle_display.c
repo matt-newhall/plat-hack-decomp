@@ -3493,9 +3493,7 @@ static void Task_PlayerSetCommandSelection(SysTask *task, void *data)
         if (battlerData->unk_193) {
             ov16_0226BCCC(v2, 1);
 
-            if (BattleSystem_GetBattleStatusMask(commandSetData->battleSys) & BATTLE_STATUS_FIRST_BATTLE) {
-                ov16_02268C04(bgNarc, objNarc, v2, 6, 0, &v11);
-            } else if (BattleSystem_GetBattleType(commandSetData->battleSys) & BATTLE_TYPE_PAL_PARK) {
+            if (BattleSystem_GetBattleType(commandSetData->battleSys) & BATTLE_TYPE_PAL_PARK) {
                 ov16_02268C04(bgNarc, objNarc, v2, 10, 0, &v11);
             } else if (BattleSystem_GetBattleType(commandSetData->battleSys) & BATTLE_TYPE_SAFARI) {
                 ov16_02268C04(bgNarc, objNarc, v2, 8, 0, &v11);
@@ -3507,9 +3505,7 @@ static void Task_PlayerSetCommandSelection(SysTask *task, void *data)
 
             BattleSystem_SetCommandSelectionFlags(commandSetData->battleSys, 1);
         } else {
-            if (BattleSystem_GetBattleStatusMask(commandSetData->battleSys) & BATTLE_STATUS_FIRST_BATTLE) {
-                ov16_02268C04(bgNarc, objNarc, v2, 5, 0, &v11);
-            } else if (BattleSystem_GetBattleType(commandSetData->battleSys) & BATTLE_TYPE_PAL_PARK) {
+            if (BattleSystem_GetBattleType(commandSetData->battleSys) & BATTLE_TYPE_PAL_PARK) {
                 ov16_02268C04(bgNarc, objNarc, v2, 9, 0, &v11);
             } else if (BattleSystem_GetBattleType(commandSetData->battleSys) & BATTLE_TYPE_SAFARI) {
                 ov16_02268C04(bgNarc, objNarc, v2, 7, 0, &v11);

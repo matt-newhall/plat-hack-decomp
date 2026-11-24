@@ -462,6 +462,10 @@ static BOOL RowanIntro_WasPokeballOpened(void)
     BOOL wasTouched = FALSE;
     u16 xOffset, yOffset;
 
+    if (gSystem.pressedKeys & PAD_BUTTON_A) {
+        wasTouched = TRUE;
+    }
+
     if (gSystem.touchPressed) {
         if ((gSystem.touchX < 256) && (gSystem.touchY < 192)) {
             if (gSystem.touchX < 128) {
@@ -947,9 +951,9 @@ static const ChoiceInfo sYesNoChoiceInfos[] = {
 };
 
 static const ChoiceInfo sInfoChoiceInfos[] = {
+    { .textID = RowanIntro_Text_ChoiceNoInfo, .choiceIndex = 3 },
     { .textID = RowanIntro_Text_ChoiceControlInfo, .choiceIndex = 1 },
-    { .textID = RowanIntro_Text_ChoiceAdventureInfo, .choiceIndex = 2 },
-    { .textID = RowanIntro_Text_ChoiceNoInfo, .choiceIndex = 3 }
+    { .textID = RowanIntro_Text_ChoiceAdventureInfo, .choiceIndex = 2 }
 };
 
 static const ChoiceInfo sRivalNameChoiceInfos[] = {
