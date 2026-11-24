@@ -17,12 +17,12 @@
             "moves": [
                 "MOVE_AIR_SLASH",
                 "MOVE_U_TURN",
-                "MOVE_GIGA_DRAIN",
+                "MOVE_CUT",
                 "MOVE_POWER_GEM"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_LONELY",
+            "nature": "NATURE_QUIRKY",
             "ability": "TRAINER_ABILITY_1"
         },
         {
@@ -31,15 +31,15 @@
             "level": 26,
             "item": "ITEM_NEVERMELTICE",
             "moves": [
-                "MOVE_FROST_BREATH",
-                "MOVE_PSYSHOCK",
+                "MOVE_ICY_WIND",
+                "MOVE_PSYBEAM",
                 "MOVE_LOVELY_KISS",
                 "MOVE_DRAINING_KISS"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_HIDDEN"
+            "nature": "NATURE_QUIET",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_MAWILE",
@@ -47,10 +47,10 @@
             "level": 26,
             "item": "ITEM_WEAKNESS_POLICY",
             "moves": [
-                "MOVE_DRAINING_KISS",
+                "MOVE_PLAY_ROUGH",
                 "MOVE_SMART_STRIKE",
                 "MOVE_BATON_PASS",
-                "MOVE_SWORDS_DANCE"
+                "MOVE_STOCKPILE"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -61,12 +61,12 @@
             "species": "SPECIES_CROCONAW",
             "form": 0,
             "level": 26,
-            "item": "ITEM_LIFE_ORB",
+            "item": "ITEM_LUM_BERRY",
             "moves": [
-                "MOVE_WATERFALL",
-                "MOVE_CRUNCH",
+                "MOVE_AQUA_TAIL",
+                "MOVE_BITE",
                 "MOVE_ICE_FANG",
-                "MOVE_PSYCHIC_FANGS"
+                "MOVE_SCREECH"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
@@ -93,16 +93,16 @@
             "species": "SPECIES_SKUNTANK",
             "form": 0,
             "level": 27,
-            "item": "ITEM_ASSAULT_VEST",
+            "item": "ITEM_LOADED_DICE",
             "moves": [
-                "MOVE_DIRE_CLAW",
-                "MOVE_SUCKER_PUNCH",
+                "MOVE_POISON_JAB",
                 "MOVE_PLAY_ROUGH",
-                "MOVE_EXPLOSION"
+                "MOVE_TAIL_SLAP",
+                "MOVE_SUCKER_PUNCH"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_JOLLY",
+            "nature": "NATURE_NAIVE",
             "ability": "TRAINER_ABILITY_1"
         }
     ],
