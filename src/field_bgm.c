@@ -66,6 +66,7 @@ const static u16 sTrainerEncounterBGMs[][2] = {
     { TRAINER_CLASS_LASS,                    SEQ_EYE_GIRL },
     { TRAINER_CLASS_BUG_CATCHER,             SEQ_EYE_BOY },
     { TRAINER_CLASS_HIKER,                   SEQ_EYE_MOUNT },
+    { TRAINER_CLASS_FOREMAN,                 SEQ_EYE_MOUNT },
     { TRAINER_CLASS_YOUNG_COUPLE,            SEQ_EYE_FUN },
     { TRAINER_CLASS_CYCLIST_MALE,            SEQ_EYE_SPORT },
     { TRAINER_CLASS_CYCLIST_FEMALE,          SEQ_EYE_SPORT },

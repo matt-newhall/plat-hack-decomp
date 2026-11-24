@@ -1,6 +1,6 @@
 {
     "name": "Fuego",
-    "class": "TRAINER_CLASS_HIKER",
+    "class": "TRAINER_CLASS_FOREMAN",
     "items": [],
     "ai_flags": [
         "AI_FLAG_BASIC",

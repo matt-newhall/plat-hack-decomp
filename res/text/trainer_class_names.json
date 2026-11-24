@@ -468,6 +468,10 @@
     {
       "id": "pl_msg_00000619_00116",
       "en_US": "SBC Leader"
+    },
+    {
+      "id": "pl_msg_00000619_00117",
+      "en_US": "Foreman"
     }
   ]
 }
