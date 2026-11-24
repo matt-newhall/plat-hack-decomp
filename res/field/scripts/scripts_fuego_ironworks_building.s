@@ -33,8 +33,7 @@ FuegoIronworksBuilding_FuegoBattle:
     SetFlag FLAG_CUT_UNLOCKED
     Message FuegoIronworksBuilding_Text_FuegoDefeat
     WaitButton
-    Message FuegoIronworksBuilding_Text_FuegoGrantsCut
-    WaitButton
+    CloseMessage
     ReleaseAll
     End
 
