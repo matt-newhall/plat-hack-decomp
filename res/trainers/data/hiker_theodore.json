@@ -26,6 +26,38 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
+            "species": "SPECIES_KANGASKHAN",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_SILK_SCARF",
+            "moves": [
+                "MOVE_FAKE_OUT",
+                "MOVE_DOUBLE_EDGE",
+                "MOVE_DUAL_CHOP",
+                "MOVE_SUCKER_PUNCH"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_VENOMOTH",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_FOCUS_BAND",
+            "moves": [
+                "MOVE_BUG_BUZZ",
+                "MOVE_SLUDGE_WAVE",
+                "MOVE_POWDER",
+                "MOVE_SLEEP_POWDER"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_BASHFUL",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
             "species": "SPECIES_QUAGSIRE",
             "form": 0,
             "level": 28,
@@ -42,19 +74,19 @@
             "ability": "TRAINER_ABILITY_2"
         },
         {
-            "species": "SPECIES_KANGASKHAN",
+            "species": "SPECIES_HARIYAMA",
             "form": 0,
             "level": 28,
-            "item": "ITEM_SILK_SCARF",
+            "item": "ITEM_LOADED_DICE",
             "moves": [
                 "MOVE_FAKE_OUT",
-                "MOVE_DOUBLE_EDGE",
-                "MOVE_DUAL_CHOP",
-                "MOVE_SUCKER_PUNCH"
+                "MOVE_ARM_THRUST",
+                "MOVE_POISON_JAB",
+                "MOVE_WHIRLWIND"
             ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_ADAMANT",
+            "nature": "NATURE_IMPISH",
             "ability": "TRAINER_ABILITY_1"
         }
     ],
