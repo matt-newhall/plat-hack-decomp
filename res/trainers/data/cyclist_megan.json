@@ -13,33 +13,49 @@
             "species": "SPECIES_STARAVIA",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_BRIGHTPOWDER",
+            "moves": [
+                "MOVE_TAKE_DOWN",
+                "MOVE_BRAVE_BIRD",
+                "MOVE_ENDEAVOR",
+                "MOVE_QUICK_ATTACK"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
-        },
-        {
-            "species": "SPECIES_AZUMARILL",
-            "form": 0,
-            "level": 26,
-            "item": null,
-            "moves": null,
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_DOCILE",
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_ELECTRODE",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_AIR_BALLOON",
+            "moves": [
+                "MOVE_VOLT_SWITCH",
+                "MOVE_HP_GRASS",
+                "MOVE_METAL_SOUND",
+                "MOVE_EXPLOSION"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
             "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_AZUMARILL",
+            "form": 0,
+            "level": 26,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_AQUA_JET",
+                "MOVE_PLAY_ROUGH",
+                "MOVE_ROLLOUT",
+                "MOVE_DEFENSE_CURL"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

@@ -10,11 +10,32 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_DODRIO",
+            "species": "SPECIES_PELIPPER",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_WACAN_BERRY",
+            "moves": [
+                "MOVE_WATER_PULSE",
+                "MOVE_AIR_SLASH",
+                "MOVE_FEATHER_DANCE",
+                "MOVE_SEED_BOMB"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_MILD",
+            "ability": "TRAINER_ABILITY_HIDDEN"
+        },
+        {
+            "species": "SPECIES_FLOATZEL",
+            "form": 0,
+            "level": 27,
+            "item": "ITEM_MYSTIC_WATER",
+            "moves": [
+                "MOVE_AQUA_JET",
+                "MOVE_FLIP_TURN",
+                "MOVE_ICE_FANG",
+                "MOVE_ROCK_SMASH"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
             "nature": "NATURE_SERIOUS"
@@ -23,21 +44,17 @@
             "species": "SPECIES_MILTANK",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_LEFTOVERS",
+            "moves": [
+                "MOVE_STOMP",
+                "MOVE_ROLLOUT",
+                "MOVE_ICE_PUNCH",
+                "MOVE_MILK_DRINK"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
-        },
-        {
-            "species": "SPECIES_FLOATZEL",
-            "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
+            "nature": "NATURE_JOLLY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [

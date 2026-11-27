@@ -10,46 +10,68 @@
     "double_battle": false,
     "party": [
         {
+            "species": "SPECIES_MANTINE",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_LOADED_DICE",
+            "moves": [
+                "MOVE_WING_ATTACK",
+                "MOVE_BULLET_SEED",
+                "MOVE_FLIP_TURN",
+                "MOVE_TAILWIND"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
             "species": "SPECIES_RATICATE",
             "form": 0,
             "level": 28,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_HYPER_FANG",
+                "MOVE_QUICK_ATTACK",
+                "MOVE_SUPER_FANG",
+                "MOVE_CRUNCH"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
+            "nature": "NATURE_DOCILE",
+            "ability": "TRAINER_ABILITY_2"
+        },
+        {
+            "species": "SPECIES_SHIFTRY",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_TANGA_BERRY",
+            "moves": [
+                "MOVE_TRAILBLAZE",
+                "MOVE_KNOCK_OFF",
+                "MOVE_NATURE_POWER",
+                "MOVE_BRICK_BREAK"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_IMPISH",
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_NINJASK",
             "form": 0,
             "level": 28,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_FOCUS_SASH",
+            "moves": [
+                "MOVE_NIGHT_SLASH",
+                "MOVE_AERIAL_ACE",
+                "MOVE_FIRST_IMPRESSION",
+                "MOVE_SWORDS_DANCE"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
-        },
-        {
-            "species": "SPECIES_EXEGGUTOR",
-            "form": 0,
-            "level": 28,
-            "item": null,
-            "moves": null,
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
-        },
-        {
-            "species": "SPECIES_BIBAREL",
-            "form": 0,
-            "level": 28,
-            "item": null,
-            "moves": null,
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_SASSY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [

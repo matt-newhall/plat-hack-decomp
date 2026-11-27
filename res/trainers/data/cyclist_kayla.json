@@ -13,33 +13,65 @@
             "species": "SPECIES_STARMIE",
             "form": 0,
             "level": 28,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_LIGHT_CLAY",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_BRINE",
+                "MOVE_TRI_ATTACK",
+                "MOVE_LIGHT_SCREEN"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
+            "nature": "NATURE_CALM",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
-            "species": "SPECIES_HITMONLEE",
+            "species": "SPECIES_EXEGGUTOR",
             "form": 0,
             "level": 28,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_IAPAPA_BERRY",
+            "moves": [
+                "MOVE_PSYBEAM",
+                "MOVE_ENERGY_BALL",
+                "MOVE_REFLECT",
+                "MOVE_LEECH_SEED"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_BOLD",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
             "species": "SPECIES_AMPHAROS",
             "form": 0,
             "level": 28,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_MAGNET",
+            "moves": [
+                "MOVE_CHARGE_BEAM",
+                "MOVE_POWER_GEM",
+                "MOVE_DAZZLING_GLEAM",
+                "MOVE_CONFUSE_RAY"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
+            "nature": "NATURE_QUIET",
             "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_BIBAREL",
+            "form": 0,
+            "level": 28,
+            "item": "ITEM_SITRUS_BERRY",
+            "moves": [
+                "MOVE_HEADBUTT",
+                "MOVE_SCALD",
+                "MOVE_YAWN",
+                "MOVE_PROTECT"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_QUIRKY",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         }
     ],
     "messages": [

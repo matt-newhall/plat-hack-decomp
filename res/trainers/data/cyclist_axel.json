@@ -13,33 +13,48 @@
             "species": "SPECIES_RAICHU",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_MUSCLE_BAND",
+            "moves": [
+                "MOVE_ZING_ZAP",
+                "MOVE_PLAY_ROUGH",
+                "MOVE_BRICK_BREAK",
+                "MOVE_QUICK_ATTACK"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
+            "nature": "NATURE_NAUGHTY"
         },
         {
             "species": "SPECIES_MONFERNO",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_SHELL_BELL",
+            "moves": [
+                "MOVE_DRAIN_PUNCH",
+                "MOVE_FLAME_WHEEL",
+                "MOVE_BULK_UP",
+                "MOVE_MACH_PUNCH"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
             "species": "SPECIES_DELIBIRD",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_LIFE_ORB",
+            "moves": [
+                "MOVE_TRIPLE_AXEL",
+                "MOVE_DRILL_PECK",
+                "MOVE_FAKE_OUT",
+                "MOVE_PRESENT"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_ADAMANT",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

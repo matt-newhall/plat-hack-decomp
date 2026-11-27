@@ -13,22 +13,33 @@
             "species": "SPECIES_LUXRAY",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_EXPERT_BELT",
+            "moves": [
+                "MOVE_THUNDER_FANG",
+                "MOVE_ICE_FANG",
+                "MOVE_FIRE_FANG",
+                "MOVE_PSYCHIC_FANGS"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
+            "nature": "NATURE_CAREFUL",
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_ALTARIA",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_DUAL_WINGBEAT",
+                "MOVE_DRAGON_CLAW",
+                "MOVE_DRAGON_DANCE",
+                "MOVE_STEEL_WING"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_NAIVE",
+            "ability": "TRAINER_ABILITY_2"
         }
     ],
     "messages": [

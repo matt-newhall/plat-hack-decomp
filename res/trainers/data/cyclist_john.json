@@ -10,34 +10,50 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_PELIPPER",
-            "form": 0,
-            "level": 27,
-            "item": null,
-            "moves": null,
-            "iv_scale": 255,
-            "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
-        },
-        {
             "species": "SPECIES_TAUROS",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_LUM_BERRY",
+            "moves": [
+                "MOVE_RAGING_BULL",
+                "MOVE_ZEN_HEADBUTT",
+                "MOVE_REST",
+                "MOVE_SLEEP_TALK"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_DOCILE"
+            "nature": "NATURE_IMPISH"
+        },
+        {
+            "species": "SPECIES_DODRIO",
+            "form": 0,
+            "level": 27,
+            "item": "ITEM_RED_CARD",
+            "moves": [
+                "MOVE_BULLDOZE",
+                "MOVE_ACROBATICS",
+                "MOVE_PURSUIT",
+                "MOVE_MIRROR_MOVE"
+            ],
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_MAROWAK",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_THICK_CLUB",
+            "moves": [
+                "MOVE_BONE_RUSH",
+                "MOVE_SHADOW_PUNCH",
+                "MOVE_SWORDS_DANCE",
+                "MOVE_THUNDER_PUNCH"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
+            "nature": "NATURE_SASSY",
             "ability": "TRAINER_ABILITY_1"
         }
     ],

@@ -13,43 +13,64 @@
             "species": "SPECIES_SWELLOW",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_FLAME_ORB",
+            "moves": [
+                "MOVE_FACADE",
+                "MOVE_WING_ATTACK",
+                "MOVE_QUICK_ATTACK",
+                "MOVE_PROTECT"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS"
+            "nature": "NATURE_NAIVE",
+            "ability": "TRAINER_ABILITY_1"
         },
         {
             "species": "SPECIES_HITMONCHAN",
             "form": 0,
             "level": 26,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_CLEAR_AMULET",
+            "moves": [
+                "MOVE_MACH_PUNCH",
+                "MOVE_BULLET_PUNCH",
+                "MOVE_FAKE_OUT",
+                "MOVE_COUNTER"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_BRAVE",
+            "ability": "TRAINER_ABILITY_2"
         },
         {
             "species": "SPECIES_SHARPEDO",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_SCOPE_LENS",
+            "moves": [
+                "MOVE_CRUNCH",
+                "MOVE_PSYCHIC_FANGS",
+                "MOVE_ICE_FANG",
+                "MOVE_FOCUS_ENERGY"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
-            "ability": "TRAINER_ABILITY_1"
+            "nature": "NATURE_LAX",
+            "ability": "TRAINER_ABILITY_HIDDEN"
         },
         {
             "species": "SPECIES_BUTTERFREE",
             "form": 0,
             "level": 27,
-            "item": null,
-            "moves": null,
+            "item": "ITEM_WIDE_LENS",
+            "moves": [
+                "MOVE_BUG_BUZZ",
+                "MOVE_SLEEP_POWDER",
+                "MOVE_QUIVER_DANCE",
+                "MOVE_PSYBEAM"
+            ],
             "iv_scale": 255,
             "ball_seal": 0,
-            "nature": "NATURE_SERIOUS",
+            "nature": "NATURE_QUIRKY",
             "ability": "TRAINER_ABILITY_1"
         }
     ],
