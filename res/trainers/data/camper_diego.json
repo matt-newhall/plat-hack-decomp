@@ -10,13 +10,14 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_AIPOM",
+            "species": "SPECIES_NIDOKING",
             "form": 0,
-            "level": 22,
+            "level": 28,
             "item": null,
             "moves": null,
-            "iv_scale": 0,
-            "ball_seal": 0
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
         }
     ],
     "messages": [

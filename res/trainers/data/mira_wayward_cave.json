@@ -12,16 +12,45 @@
         {
             "species": "SPECIES_KADABRA",
             "form": 0,
-            "level": 26,
+            "level": 29,
             "item": null,
-            "moves": [
-                "MOVE_CONFUSION",
-                "MOVE_SHOCK_WAVE",
-                "MOVE_FLASH",
-                "MOVE_BABY_DOLL_EYES"
-            ],
-            "iv_scale": 30,
-            "ball_seal": 0
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
+        },
+        {
+            "species": "SPECIES_HAUNTER",
+            "form": 0,
+            "level": 29,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_GLACEON",
+            "form": 0,
+            "level": 29,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_GARDEVOIR",
+            "form": 0,
+            "level": 30,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [

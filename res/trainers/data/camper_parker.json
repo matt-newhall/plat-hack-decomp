@@ -10,29 +10,36 @@
     "double_battle": false,
     "party": [
         {
-            "species": "SPECIES_BUIZEL",
+            "species": "SPECIES_PINSIR",
             "form": 0,
-            "level": 20,
+            "level": 28,
             "item": null,
-            "moves": [
-                "MOVE_WATER_GUN",
-                "MOVE_SWIFT",
-                "MOVE_QUICK_ATTACK"
-            ],
-            "iv_scale": 0,
-            "ball_seal": 0
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS"
         },
         {
-            "species": "SPECIES_SHINX",
+            "species": "SPECIES_PRINPLUP",
             "form": 0,
-            "level": 20,
+            "level": 28,
             "item": null,
-            "moves": [
-                "MOVE_SPARK",
-                "MOVE_BITE"
-            ],
-            "iv_scale": 0,
-            "ball_seal": 0
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
+        },
+        {
+            "species": "SPECIES_URSARING",
+            "form": 0,
+            "level": 28,
+            "item": null,
+            "moves": null,
+            "iv_scale": 255,
+            "ball_seal": 0,
+            "nature": "NATURE_SERIOUS",
+            "ability": "TRAINER_ABILITY_1"
         }
     ],
     "messages": [
